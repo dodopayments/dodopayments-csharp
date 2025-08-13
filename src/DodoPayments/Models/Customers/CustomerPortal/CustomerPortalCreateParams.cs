@@ -1,0 +1,52 @@
+using System;
+using System.Net.Http;
+using System.Text.Json;
+using DodoPayments = DodoPayments;
+
+namespace DodoPayments.Models.Customers.CustomerPortal;
+
+public sealed record class CustomerPortalCreateParams : DodoPayments::ParamsBase
+{
+    public required string CustomerID;
+
+    /// <summary>
+    /// If true, will send link to user.
+    /// </summary>
+    public bool? SendEmail
+    {
+        get
+        {
+            if (!this.QueryProperties.TryGetValue("send_email", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(
+                element,
+                DodoPayments::ModelBase.SerializerOptions
+            );
+        }
+        set { this.QueryProperties["send_email"] = JsonSerializer.SerializeToElement(value); }
+    }
+
+    public override Uri Url(DodoPayments::IDodoPaymentsClient client)
+    {
+        return new UriBuilder(
+            client.BaseUrl.ToString().TrimEnd('/')
+                + string.Format("/customers/{0}/customer-portal/session", this.CustomerID)
+        )
+        {
+            Query = this.QueryString(client),
+        }.Uri;
+    }
+
+    public void AddHeadersToRequest(
+        HttpRequestMessage request,
+        DodoPayments::IDodoPaymentsClient client
+    )
+    {
+        DodoPayments::ParamsBase.AddDefaultHeaders(request, client);
+        foreach (var item in this.HeaderProperties)
+        {
+            DodoPayments::ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
+        }
+    }
+}
