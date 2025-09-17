@@ -1,0 +1,33 @@
+using System;
+using System.Net.Http;
+using Client = DodoPayments.Client;
+
+namespace DodoPayments.Client.Models.Webhooks;
+
+/// <summary>
+/// Get webhook secret by id
+/// </summary>
+public sealed record class WebhookRetrieveSecretParams : Client::ParamsBase
+{
+    public required string WebhookID;
+
+    public override Uri Url(Client::IDodoPaymentsClient client)
+    {
+        return new UriBuilder(
+            client.BaseUrl.ToString().TrimEnd('/')
+                + string.Format("/webhooks/{0}/secret", this.WebhookID)
+        )
+        {
+            Query = this.QueryString(client),
+        }.Uri;
+    }
+
+    public void AddHeadersToRequest(HttpRequestMessage request, Client::IDodoPaymentsClient client)
+    {
+        Client::ParamsBase.AddDefaultHeaders(request, client);
+        foreach (var item in this.HeaderProperties)
+        {
+            Client::ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
+        }
+    }
+}

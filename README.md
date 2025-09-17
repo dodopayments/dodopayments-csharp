@@ -16,7 +16,7 @@ The REST API documentation can be found on [docs.dodopayments.com](https://docs.
 ## Installation
 
 ```bash
-dotnet add package Dodopayments
+dotnet add package DodoPayments.Client
 ```
 
 ## Requirements
@@ -31,8 +31,8 @@ This library requires .NET 8 or later.
 See the [`examples`](examples) directory for complete and runnable examples.
 
 ```csharp
-using Dodopayments;
-using Dodopayments.Models.CheckoutSessions;
+using DodoPayments.Client;
+using DodoPayments.Client.Models.CheckoutSessions;
 using System;
 
 // Configured using the DODO_PAYMENTS_API_KEY and DODO_PAYMENTS_BASE_URL environment variables
@@ -60,7 +60,7 @@ Console.WriteLine(checkoutSessionResponse);
 Configure the client using environment variables:
 
 ```csharp
-using Dodopayments;
+using DodoPayments.Client;
 
 // Configured using the DODO_PAYMENTS_API_KEY and DODO_PAYMENTS_BASE_URL environment variables
 DodoPaymentsClient client = new();
@@ -69,7 +69,7 @@ DodoPaymentsClient client = new();
 Or manually:
 
 ```csharp
-using Dodopayments;
+using DodoPayments.Client;
 
 DodoPaymentsClient client = new() { BearerToken = "My Bearer Token" };
 ```
