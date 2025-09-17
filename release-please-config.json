@@ -64,7 +64,7 @@
     "README.md",
     {
       "type": "xml",
-      "path": "src/Dodopayments/Dodopayments.csproj",
+      "path": "src/DodoPayments.Client/DodoPayments.Client.csproj",
       "xpath": "//Project/PropertyGroup/VersionPrefix"
     }
   ]
