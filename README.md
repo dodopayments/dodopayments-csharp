@@ -7,16 +7,16 @@
 >
 > **We'd love your feedback!** Please share any suggestions, bug reports, feature requests, or general thoughts by [filing an issue](https://www.github.com/dodopayments/dodopayments-csharp/issues/new).
 
-The Dodo Payments C# SDK provides convenient access to the [Dodo Payments REST API](https://docs.dodopayments.com) from applications written in C#.
+The Dodo Payments C# SDK provides convenient access to the [Dodo Payments REST API](https://docs.dodopayments.com/api-reference/introduction) from applications written in C#.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
-The REST API documentation can be found on [docs.dodopayments.com](https://docs.dodopayments.com).
+The REST API documentation can be found on [docs.dodopayments.com](https://docs.dodopayments.com/api-reference/introduction).
 
 ## Installation
 
 ```bash
-dotnet add package DodoPayments
+dotnet add package Dodopayments
 ```
 
 ## Requirements
@@ -31,25 +31,15 @@ This library requires .NET 8 or later.
 See the [`examples`](examples) directory for complete and runnable examples.
 
 ```csharp
-using DodoPayments;
-using DodoPayments.Models.Misc;
-using DodoPayments.Models.Payments;
+using Dodopayments;
+using Dodopayments.Models.CheckoutSessions;
 using System;
 
 // Configured using the DODO_PAYMENTS_API_KEY and DODO_PAYMENTS_BASE_URL environment variables
 DodoPaymentsClient client = new();
 
-PaymentCreateParams parameters = new()
+CheckoutSessionCreateParams parameters = new()
 {
-    Billing = new()
-    {
-        City = "city",
-        Country = CountryCode.Af,
-        State = "state",
-        Street = "street",
-        Zipcode = "zipcode",
-    },
-    Customer = new AttachExistingCustomer("customer_id"),
     ProductCart =
     [
         new()
@@ -60,9 +50,9 @@ PaymentCreateParams parameters = new()
     ],
 };
 
-var payment = await client.Payments.Create(parameters);
+var checkoutSessionResponse = await client.CheckoutSessions.Create(parameters);
 
-Console.WriteLine(payment);
+Console.WriteLine(checkoutSessionResponse);
 ```
 
 ## Client Configuration
@@ -70,7 +60,7 @@ Console.WriteLine(payment);
 Configure the client using environment variables:
 
 ```csharp
-using DodoPayments;
+using Dodopayments;
 
 // Configured using the DODO_PAYMENTS_API_KEY and DODO_PAYMENTS_BASE_URL environment variables
 DodoPaymentsClient client = new();
@@ -79,7 +69,7 @@ DodoPaymentsClient client = new();
 Or manually:
 
 ```csharp
-using DodoPayments;
+using Dodopayments;
 
 DodoPaymentsClient client = new() { BearerToken = "My Bearer Token" };
 ```
@@ -97,7 +87,7 @@ See this table for the available options:
 
 To send a request to the Dodo Payments API, build an instance of some `Params` class and pass it to the corresponding client method. When the response is received, it will be deserialized into an instance of a C# class.
 
-For example, `client.Payments.Create` should be called with an instance of `PaymentCreateParams`, and it will return an instance of `Task<PaymentCreateResponse>`.
+For example, `client.CheckoutSessions.Create` should be called with an instance of `CheckoutSessionCreateParams`, and it will return an instance of `Task<CheckoutSessionResponse>`.
 
 ## Semantic versioning
 
