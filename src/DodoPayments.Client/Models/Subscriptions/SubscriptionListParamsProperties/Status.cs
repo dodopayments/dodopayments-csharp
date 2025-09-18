@@ -1,0 +1,58 @@
+using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace DodoPayments.Client.Models.Subscriptions.SubscriptionListParamsProperties;
+
+/// <summary>
+/// Filter by status
+/// </summary>
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Pending,
+    Active,
+    OnHold,
+    Cancelled,
+    Failed,
+    Expired,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "pending" => Status.Pending,
+            "active" => Status.Active,
+            "on_hold" => Status.OnHold,
+            "cancelled" => Status.Cancelled,
+            "failed" => Status.Failed,
+            "expired" => Status.Expired,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Pending => "pending",
+                Status.Active => "active",
+                Status.OnHold => "on_hold",
+                Status.Cancelled => "cancelled",
+                Status.Failed => "failed",
+                Status.Expired => "expired",
+                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+            },
+            options
+        );
+    }
+}
