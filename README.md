@@ -31,9 +31,9 @@ This library requires .NET 8 or later.
 See the [`examples`](examples) directory for complete and runnable examples.
 
 ```csharp
+using System;
 using DodoPayments.Client;
 using DodoPayments.Client.Models.CheckoutSessions;
-using System;
 
 // Configured using the DODO_PAYMENTS_API_KEY and DODO_PAYMENTS_BASE_URL environment variables
 DodoPaymentsClient client = new();
