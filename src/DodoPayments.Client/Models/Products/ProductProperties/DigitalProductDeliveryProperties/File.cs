@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Products.ProductProperties.DigitalProductDeliveryProperties;
 
@@ -14,10 +16,16 @@ public sealed record class File : ModelBase, IFromRaw<File>
         get
         {
             if (!this.Properties.TryGetValue("file_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("file_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'file_id' cannot be null",
+                    new ArgumentOutOfRangeException("file_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("file_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'file_id' cannot be null",
+                    new ArgumentNullException("file_id")
+                );
         }
         set
         {
@@ -33,10 +41,16 @@ public sealed record class File : ModelBase, IFromRaw<File>
         get
         {
             if (!this.Properties.TryGetValue("file_name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("file_name", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'file_name' cannot be null",
+                    new ArgumentOutOfRangeException("file_name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("file_name");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'file_name' cannot be null",
+                    new ArgumentNullException("file_name")
+                );
         }
         set
         {
@@ -52,10 +66,16 @@ public sealed record class File : ModelBase, IFromRaw<File>
         get
         {
             if (!this.Properties.TryGetValue("url", out JsonElement element))
-                throw new ArgumentOutOfRangeException("url", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'url' cannot be null",
+                    new ArgumentOutOfRangeException("url", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("url");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'url' cannot be null",
+                    new ArgumentNullException("url")
+                );
         }
         set
         {

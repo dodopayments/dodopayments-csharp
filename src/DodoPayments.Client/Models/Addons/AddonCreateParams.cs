@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Addons;
@@ -19,7 +21,10 @@ public sealed record class AddonCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("currency", out JsonElement element))
-                throw new ArgumentOutOfRangeException("currency", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentOutOfRangeException("currency", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
                 element,
@@ -43,10 +48,16 @@ public sealed record class AddonCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("name", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentOutOfRangeException("name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("name");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentNullException("name")
+                );
         }
         set
         {
@@ -65,7 +76,10 @@ public sealed record class AddonCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("price", out JsonElement element))
-                throw new ArgumentOutOfRangeException("price", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'price' cannot be null",
+                    new ArgumentOutOfRangeException("price", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
@@ -86,7 +100,10 @@ public sealed record class AddonCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("tax_category", out JsonElement element))
-                throw new ArgumentOutOfRangeException("tax_category", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'tax_category' cannot be null",
+                    new ArgumentOutOfRangeException("tax_category", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>>(
                 element,
@@ -131,7 +148,7 @@ public sealed record class AddonCreateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -140,7 +157,10 @@ public sealed record class AddonCreateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

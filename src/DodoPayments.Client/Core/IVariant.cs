@@ -1,4 +1,4 @@
-namespace DodoPayments.Client;
+namespace DodoPayments.Client.Core;
 
 interface IVariant<TVariant, TValue>
     where TVariant : IVariant<TVariant, TValue>

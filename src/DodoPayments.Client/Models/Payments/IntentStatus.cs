@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -66,7 +67,9 @@ sealed class IntentStatusConverter : JsonConverter<IntentStatus>
                 IntentStatus.RequiresCapture => "requires_capture",
                 IntentStatus.PartiallyCaptured => "partially_captured",
                 IntentStatus.PartiallyCapturedAndCapturable => "partially_captured_and_capturable",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

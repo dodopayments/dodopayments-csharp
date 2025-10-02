@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 
@@ -20,10 +22,16 @@ public sealed record class SubscriptionCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("billing", out JsonElement element))
-                throw new ArgumentOutOfRangeException("billing", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'billing' cannot be null",
+                    new ArgumentOutOfRangeException("billing", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<BillingAddress>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("billing");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'billing' cannot be null",
+                    new ArgumentNullException("billing")
+                );
         }
         set
         {
@@ -42,10 +50,16 @@ public sealed record class SubscriptionCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("customer", out JsonElement element))
-                throw new ArgumentOutOfRangeException("customer", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'customer' cannot be null",
+                    new ArgumentOutOfRangeException("customer", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<CustomerRequest>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("customer");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'customer' cannot be null",
+                    new ArgumentNullException("customer")
+                );
         }
         set
         {
@@ -64,10 +78,16 @@ public sealed record class SubscriptionCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("product_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("product_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'product_id' cannot be null",
+                    new ArgumentOutOfRangeException("product_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("product_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'product_id' cannot be null",
+                    new ArgumentNullException("product_id")
+                );
         }
         set
         {
@@ -86,7 +106,10 @@ public sealed record class SubscriptionCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("quantity", out JsonElement element))
-                throw new ArgumentOutOfRangeException("quantity", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'quantity' cannot be null",
+                    new ArgumentOutOfRangeException("quantity", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
@@ -367,7 +390,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -376,7 +399,10 @@ public sealed record class SubscriptionCreateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using Web = System.Web;
 
-namespace DodoPayments.Client;
+namespace DodoPayments.Client.Core;
 
 public abstract record class ParamsBase
 {
@@ -145,6 +145,16 @@ public abstract record class ParamsBase
             }
         }
         return sb.ToString();
+    }
+
+    internal abstract void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    );
+
+    internal virtual StringContent? BodyContent()
+    {
+        return null;
     }
 
     protected static void AddDefaultHeaders(HttpRequestMessage request, IDodoPaymentsClient client)

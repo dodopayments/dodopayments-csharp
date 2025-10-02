@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payouts.PayoutListPageResponseProperties.ItemProperties;
 
@@ -19,7 +21,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("amount", out JsonElement element))
-                throw new ArgumentOutOfRangeException("amount", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'amount' cannot be null",
+                    new ArgumentOutOfRangeException("amount", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
         }
@@ -40,10 +45,16 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("business_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("business_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'business_id' cannot be null",
+                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("business_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'business_id' cannot be null",
+                    new ArgumentNullException("business_id")
+                );
         }
         set
         {
@@ -62,7 +73,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("chargebacks", out JsonElement element))
-                throw new ArgumentOutOfRangeException("chargebacks", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'chargebacks' cannot be null",
+                    new ArgumentOutOfRangeException("chargebacks", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
         }
@@ -83,7 +97,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("created_at", out JsonElement element))
-                throw new ArgumentOutOfRangeException("created_at", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'created_at' cannot be null",
+                    new ArgumentOutOfRangeException("created_at", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
@@ -104,7 +121,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("currency", out JsonElement element))
-                throw new ArgumentOutOfRangeException("currency", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentOutOfRangeException("currency", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
                 element,
@@ -128,7 +148,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("fee", out JsonElement element))
-                throw new ArgumentOutOfRangeException("fee", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'fee' cannot be null",
+                    new ArgumentOutOfRangeException("fee", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
         }
@@ -149,13 +172,16 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("payment_method", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "payment_method",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'payment_method' cannot be null",
+                    new ArgumentOutOfRangeException("payment_method", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("payment_method");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payment_method' cannot be null",
+                    new ArgumentNullException("payment_method")
+                );
         }
         set
         {
@@ -174,10 +200,16 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("payout_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("payout_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'payout_id' cannot be null",
+                    new ArgumentOutOfRangeException("payout_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("payout_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payout_id' cannot be null",
+                    new ArgumentNullException("payout_id")
+                );
         }
         set
         {
@@ -196,7 +228,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("refunds", out JsonElement element))
-                throw new ArgumentOutOfRangeException("refunds", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'refunds' cannot be null",
+                    new ArgumentOutOfRangeException("refunds", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
         }
@@ -217,7 +252,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("status", out JsonElement element))
-                throw new ArgumentOutOfRangeException("status", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'status' cannot be null",
+                    new ArgumentOutOfRangeException("status", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Status>>(
                 element,
@@ -241,7 +279,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("tax", out JsonElement element))
-                throw new ArgumentOutOfRangeException("tax", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'tax' cannot be null",
+                    new ArgumentOutOfRangeException("tax", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
         }
@@ -262,7 +303,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         get
         {
             if (!this.Properties.TryGetValue("updated_at", out JsonElement element))
-                throw new ArgumentOutOfRangeException("updated_at", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'updated_at' cannot be null",
+                    new ArgumentOutOfRangeException("updated_at", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }

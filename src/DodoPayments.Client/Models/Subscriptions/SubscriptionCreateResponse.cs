@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
@@ -20,12 +22,19 @@ public sealed record class SubscriptionCreateResponse
         get
         {
             if (!this.Properties.TryGetValue("addons", out JsonElement element))
-                throw new ArgumentOutOfRangeException("addons", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'addons' cannot be null",
+                    new ArgumentOutOfRangeException("addons", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<List<AddonCartResponseItem>>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("addons");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'addons' cannot be null",
+                    new ArgumentNullException("addons")
+                );
         }
         set
         {
@@ -44,12 +53,19 @@ public sealed record class SubscriptionCreateResponse
         get
         {
             if (!this.Properties.TryGetValue("customer", out JsonElement element))
-                throw new ArgumentOutOfRangeException("customer", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'customer' cannot be null",
+                    new ArgumentOutOfRangeException("customer", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<CustomerLimitedDetails>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("customer");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'customer' cannot be null",
+                    new ArgumentNullException("customer")
+                );
         }
         set
         {
@@ -68,12 +84,19 @@ public sealed record class SubscriptionCreateResponse
         get
         {
             if (!this.Properties.TryGetValue("metadata", out JsonElement element))
-                throw new ArgumentOutOfRangeException("metadata", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'metadata' cannot be null",
+                    new ArgumentOutOfRangeException("metadata", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<Dictionary<string, string>>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("metadata");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'metadata' cannot be null",
+                    new ArgumentNullException("metadata")
+                );
         }
         set
         {
@@ -92,10 +115,16 @@ public sealed record class SubscriptionCreateResponse
         get
         {
             if (!this.Properties.TryGetValue("payment_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("payment_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'payment_id' cannot be null",
+                    new ArgumentOutOfRangeException("payment_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("payment_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payment_id' cannot be null",
+                    new ArgumentNullException("payment_id")
+                );
         }
         set
         {
@@ -114,9 +143,12 @@ public sealed record class SubscriptionCreateResponse
         get
         {
             if (!this.Properties.TryGetValue("recurring_pre_tax_amount", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "recurring_pre_tax_amount",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'recurring_pre_tax_amount' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "recurring_pre_tax_amount",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
@@ -138,13 +170,16 @@ public sealed record class SubscriptionCreateResponse
         get
         {
             if (!this.Properties.TryGetValue("subscription_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "subscription_id",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'subscription_id' cannot be null",
+                    new ArgumentOutOfRangeException("subscription_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("subscription_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'subscription_id' cannot be null",
+                    new ArgumentNullException("subscription_id")
+                );
         }
         set
         {

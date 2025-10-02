@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.WebhookEvents;
 
 namespace DodoPayments.Client.Models.Webhooks;
@@ -22,10 +24,16 @@ public sealed record class WebhookCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("url", out JsonElement element))
-                throw new ArgumentOutOfRangeException("url", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'url' cannot be null",
+                    new ArgumentOutOfRangeException("url", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("url");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'url' cannot be null",
+                    new ArgumentNullException("url")
+                );
         }
         set
         {
@@ -198,7 +206,7 @@ public sealed record class WebhookCreateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -207,7 +215,10 @@ public sealed record class WebhookCreateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

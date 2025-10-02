@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -14,10 +16,16 @@ public sealed record class AttachAddon : ModelBase, IFromRaw<AttachAddon>
         get
         {
             if (!this.Properties.TryGetValue("addon_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("addon_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'addon_id' cannot be null",
+                    new ArgumentOutOfRangeException("addon_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("addon_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'addon_id' cannot be null",
+                    new ArgumentNullException("addon_id")
+                );
         }
         set
         {
@@ -33,7 +41,10 @@ public sealed record class AttachAddon : ModelBase, IFromRaw<AttachAddon>
         get
         {
             if (!this.Properties.TryGetValue("quantity", out JsonElement element))
-                throw new ArgumentOutOfRangeException("quantity", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'quantity' cannot be null",
+                    new ArgumentOutOfRangeException("quantity", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Licenses.LicenseActivateResponseProperties;
 using DodoPayments.Client.Models.Payments;
 
@@ -19,10 +21,16 @@ public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<License
         get
         {
             if (!this.Properties.TryGetValue("id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'id' cannot be null",
+                    new ArgumentOutOfRangeException("id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'id' cannot be null",
+                    new ArgumentNullException("id")
+                );
         }
         set
         {
@@ -41,10 +49,16 @@ public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<License
         get
         {
             if (!this.Properties.TryGetValue("business_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("business_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'business_id' cannot be null",
+                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("business_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'business_id' cannot be null",
+                    new ArgumentNullException("business_id")
+                );
         }
         set
         {
@@ -63,7 +77,10 @@ public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<License
         get
         {
             if (!this.Properties.TryGetValue("created_at", out JsonElement element))
-                throw new ArgumentOutOfRangeException("created_at", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'created_at' cannot be null",
+                    new ArgumentOutOfRangeException("created_at", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
@@ -84,12 +101,19 @@ public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<License
         get
         {
             if (!this.Properties.TryGetValue("customer", out JsonElement element))
-                throw new ArgumentOutOfRangeException("customer", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'customer' cannot be null",
+                    new ArgumentOutOfRangeException("customer", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<CustomerLimitedDetails>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("customer");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'customer' cannot be null",
+                    new ArgumentNullException("customer")
+                );
         }
         set
         {
@@ -108,13 +132,16 @@ public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<License
         get
         {
             if (!this.Properties.TryGetValue("license_key_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "license_key_id",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'license_key_id' cannot be null",
+                    new ArgumentOutOfRangeException("license_key_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("license_key_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'license_key_id' cannot be null",
+                    new ArgumentNullException("license_key_id")
+                );
         }
         set
         {
@@ -133,10 +160,16 @@ public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<License
         get
         {
             if (!this.Properties.TryGetValue("name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("name", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentOutOfRangeException("name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("name");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentNullException("name")
+                );
         }
         set
         {
@@ -155,10 +188,16 @@ public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<License
         get
         {
             if (!this.Properties.TryGetValue("product", out JsonElement element))
-                throw new ArgumentOutOfRangeException("product", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'product' cannot be null",
+                    new ArgumentOutOfRangeException("product", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<Product>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("product");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'product' cannot be null",
+                    new ArgumentNullException("product")
+                );
         }
         set
         {

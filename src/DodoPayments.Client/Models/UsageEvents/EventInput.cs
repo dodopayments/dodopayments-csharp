@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.UsageEvents.EventInputProperties.MetadataProperties;
 
 namespace DodoPayments.Client.Models.UsageEvents;
@@ -18,10 +20,16 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
         get
         {
             if (!this.Properties.TryGetValue("customer_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("customer_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'customer_id' cannot be null",
+                    new ArgumentOutOfRangeException("customer_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("customer_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'customer_id' cannot be null",
+                    new ArgumentNullException("customer_id")
+                );
         }
         set
         {
@@ -41,10 +49,16 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
         get
         {
             if (!this.Properties.TryGetValue("event_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("event_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'event_id' cannot be null",
+                    new ArgumentOutOfRangeException("event_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("event_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'event_id' cannot be null",
+                    new ArgumentNullException("event_id")
+                );
         }
         set
         {
@@ -63,10 +77,16 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
         get
         {
             if (!this.Properties.TryGetValue("event_name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("event_name", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'event_name' cannot be null",
+                    new ArgumentOutOfRangeException("event_name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("event_name");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'event_name' cannot be null",
+                    new ArgumentNullException("event_name")
+                );
         }
         set
         {

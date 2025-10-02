@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Webhooks.Headers;
 
@@ -22,12 +24,19 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
         get
         {
             if (!this.Properties.TryGetValue("headers", out JsonElement element))
-                throw new ArgumentOutOfRangeException("headers", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'headers' cannot be null",
+                    new ArgumentOutOfRangeException("headers", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<Dictionary<string, string>>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("headers");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'headers' cannot be null",
+                    new ArgumentNullException("headers")
+                );
         }
         set
         {
@@ -46,10 +55,16 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
         get
         {
             if (!this.Properties.TryGetValue("sensitive", out JsonElement element))
-                throw new ArgumentOutOfRangeException("sensitive", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'sensitive' cannot be null",
+                    new ArgumentOutOfRangeException("sensitive", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<List<string>>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("sensitive");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'sensitive' cannot be null",
+                    new ArgumentNullException("sensitive")
+                );
         }
         set
         {

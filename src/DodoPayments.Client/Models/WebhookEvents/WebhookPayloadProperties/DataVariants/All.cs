@@ -1,3 +1,4 @@
+using DodoPayments.Client.Core;
 using DataProperties = DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties;
 
 namespace DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataVariants;

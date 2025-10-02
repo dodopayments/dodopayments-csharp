@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Meters;
 
@@ -18,12 +20,19 @@ public sealed record class MeterCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("aggregation", out JsonElement element))
-                throw new ArgumentOutOfRangeException("aggregation", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'aggregation' cannot be null",
+                    new ArgumentOutOfRangeException("aggregation", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<MeterAggregation>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("aggregation");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'aggregation' cannot be null",
+                    new ArgumentNullException("aggregation")
+                );
         }
         set
         {
@@ -42,10 +51,16 @@ public sealed record class MeterCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("event_name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("event_name", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'event_name' cannot be null",
+                    new ArgumentOutOfRangeException("event_name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("event_name");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'event_name' cannot be null",
+                    new ArgumentNullException("event_name")
+                );
         }
         set
         {
@@ -64,13 +79,16 @@ public sealed record class MeterCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("measurement_unit", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "measurement_unit",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'measurement_unit' cannot be null",
+                    new ArgumentOutOfRangeException("measurement_unit", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("measurement_unit");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'measurement_unit' cannot be null",
+                    new ArgumentNullException("measurement_unit")
+                );
         }
         set
         {
@@ -89,10 +107,16 @@ public sealed record class MeterCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("name", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentOutOfRangeException("name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("name");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentNullException("name")
+                );
         }
         set
         {
@@ -153,7 +177,7 @@ public sealed record class MeterCreateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -162,7 +186,10 @@ public sealed record class MeterCreateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

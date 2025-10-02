@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesVariants;
 using ClausesProperties = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties;
 
@@ -52,7 +53,9 @@ public abstract record class Clauses
                 level2NestedFilters(inner);
                 break;
             default:
-                throw new InvalidOperationException();
+                throw new DodoPaymentsInvalidDataException(
+                    "Data did not match any variant of Clauses"
+                );
         }
     }
 
@@ -65,7 +68,9 @@ public abstract record class Clauses
         {
             Level2FilterConditions inner => level2FilterConditions(inner),
             Level2NestedFilters inner => level2NestedFilters(inner),
-            _ => throw new InvalidOperationException(),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Clauses"
+            ),
         };
     }
 
@@ -80,7 +85,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
         JsonSerializerOptions options
     )
     {
-        List<JsonException> exceptions = [];
+        List<DodoPaymentsInvalidDataException> exceptions = [];
 
         try
         {
@@ -94,7 +99,12 @@ sealed class ClausesConverter : JsonConverter<Clauses>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant Level2FilterConditions",
+                    e
+                )
+            );
         }
 
         try
@@ -110,7 +120,12 @@ sealed class ClausesConverter : JsonConverter<Clauses>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant Level2NestedFilters",
+                    e
+                )
+            );
         }
 
         throw new AggregateException(exceptions);
@@ -122,7 +137,9 @@ sealed class ClausesConverter : JsonConverter<Clauses>
         {
             Level2FilterConditions(var level2FilterConditions) => level2FilterConditions,
             Level2NestedFilters(var level2NestedFilters) => level2NestedFilters,
-            _ => throw new ArgumentOutOfRangeException(nameof(value)),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Clauses"
+            ),
         };
         JsonSerializer.Serialize(writer, variant, options);
     }

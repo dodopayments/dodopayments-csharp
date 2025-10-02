@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 using CustomerRequestVariants = DodoPayments.Client.Models.Payments.CustomerRequestVariants;
 
 namespace DodoPayments.Client.Models.Payments;
@@ -44,7 +45,9 @@ public abstract record class CustomerRequest
                 newCustomer(inner);
                 break;
             default:
-                throw new InvalidOperationException();
+                throw new DodoPaymentsInvalidDataException(
+                    "Data did not match any variant of CustomerRequest"
+                );
         }
     }
 
@@ -57,7 +60,9 @@ public abstract record class CustomerRequest
         {
             CustomerRequestVariants::AttachExistingCustomer inner => attachExistingCustomer(inner),
             CustomerRequestVariants::NewCustomer inner => newCustomer(inner),
-            _ => throw new InvalidOperationException(),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of CustomerRequest"
+            ),
         };
     }
 
@@ -72,7 +77,7 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
         JsonSerializerOptions options
     )
     {
-        List<JsonException> exceptions = [];
+        List<DodoPaymentsInvalidDataException> exceptions = [];
 
         try
         {
@@ -87,7 +92,12 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant CustomerRequestVariants::AttachExistingCustomer",
+                    e
+                )
+            );
         }
 
         try
@@ -100,7 +110,12 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant CustomerRequestVariants::NewCustomer",
+                    e
+                )
+            );
         }
 
         throw new AggregateException(exceptions);
@@ -117,7 +132,9 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
             CustomerRequestVariants::AttachExistingCustomer(var attachExistingCustomer) =>
                 attachExistingCustomer,
             CustomerRequestVariants::NewCustomer(var newCustomer) => newCustomer,
-            _ => throw new ArgumentOutOfRangeException(nameof(value)),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of CustomerRequest"
+            ),
         };
         JsonSerializer.Serialize(writer, variant, options);
     }

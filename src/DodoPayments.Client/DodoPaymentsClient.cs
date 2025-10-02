@@ -1,5 +1,8 @@
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Services.Addons;
 using DodoPayments.Client.Services.Brands;
 using DodoPayments.Client.Services.CheckoutSessions;
@@ -41,7 +44,10 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
 
     Lazy<string> _bearerToken = new(() =>
         Environment.GetEnvironmentVariable("DODO_PAYMENTS_API_KEY")
-        ?? throw new ArgumentNullException(nameof(BearerToken))
+        ?? throw new DodoPaymentsInvalidDataException(
+            string.Format("{0} cannot be null", nameof(BearerToken)),
+            new ArgumentNullException(nameof(BearerToken))
+        )
     );
     public string BearerToken
     {
@@ -167,6 +173,46 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
     public IMeterService Meters
     {
         get { return _meters.Value; }
+    }
+
+    public async Task<HttpResponse> Execute<T>(HttpRequest<T> request)
+        where T : ParamsBase
+    {
+        using HttpRequestMessage requestMessage = new(request.Method, request.Params.Url(this))
+        {
+            Content = request.Params.BodyContent(),
+        };
+        request.Params.AddHeadersToRequest(requestMessage, this);
+        HttpResponseMessage responseMessage;
+        try
+        {
+            responseMessage = await this
+                .HttpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
+        }
+        catch (HttpRequestException e1)
+        {
+            throw new DodoPaymentsIOException("I/O exception", e1);
+        }
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            try
+            {
+                throw DodoPaymentsExceptionFactory.CreateApiException(
+                    responseMessage.StatusCode,
+                    await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false)
+                );
+            }
+            catch (HttpRequestException e)
+            {
+                throw new DodoPaymentsIOException("I/O Exception", e);
+            }
+            finally
+            {
+                responseMessage.Dispose();
+            }
+        }
+        return new() { Message = responseMessage };
     }
 
     public DodoPaymentsClient()

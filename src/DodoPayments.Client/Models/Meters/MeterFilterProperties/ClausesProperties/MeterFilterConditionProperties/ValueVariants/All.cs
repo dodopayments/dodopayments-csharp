@@ -1,3 +1,5 @@
+using DodoPayments.Client.Core;
+
 namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterConditionProperties.ValueVariants;
 
 public sealed record class String(string Value) : Value, IVariant<String, string>

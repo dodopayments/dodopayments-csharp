@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Models.CheckoutSessions.CheckoutSessionCreateParamsProperties;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 using MetadataVariants = DodoPayments.Client.Models.UsageEvents.EventProperties.MetadataProperties.MetadataVariants;
 
 namespace DodoPayments.Client.Models.UsageEvents.EventProperties.MetadataProperties;
@@ -57,7 +58,9 @@ public abstract record class Metadata
                 @boolean(inner);
                 break;
             default:
-                throw new InvalidOperationException();
+                throw new DodoPaymentsInvalidDataException(
+                    "Data did not match any variant of Metadata"
+                );
         }
     }
 
@@ -72,7 +75,9 @@ public abstract record class Metadata
             MetadataVariants::String inner => @string(inner),
             MetadataVariants::Number inner => @number(inner),
             MetadataVariants::Boolean inner => @boolean(inner),
-            _ => throw new InvalidOperationException(),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Metadata"
+            ),
         };
     }
 
@@ -87,7 +92,7 @@ sealed class MetadataConverter : JsonConverter<Metadata>
         JsonSerializerOptions options
     )
     {
-        List<JsonException> exceptions = [];
+        List<DodoPaymentsInvalidDataException> exceptions = [];
 
         try
         {
@@ -99,7 +104,12 @@ sealed class MetadataConverter : JsonConverter<Metadata>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant MetadataVariants::String",
+                    e
+                )
+            );
         }
 
         try
@@ -110,7 +120,12 @@ sealed class MetadataConverter : JsonConverter<Metadata>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant MetadataVariants::Number",
+                    e
+                )
+            );
         }
 
         try
@@ -121,7 +136,12 @@ sealed class MetadataConverter : JsonConverter<Metadata>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant MetadataVariants::Boolean",
+                    e
+                )
+            );
         }
 
         throw new AggregateException(exceptions);
@@ -134,7 +154,9 @@ sealed class MetadataConverter : JsonConverter<Metadata>
             MetadataVariants::String(var @string) => @string,
             MetadataVariants::Number(var @number) => @number,
             MetadataVariants::Boolean(var @boolean) => @boolean,
-            _ => throw new ArgumentOutOfRangeException(nameof(value)),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Metadata"
+            ),
         };
         JsonSerializer.Serialize(writer, variant, options);
     }

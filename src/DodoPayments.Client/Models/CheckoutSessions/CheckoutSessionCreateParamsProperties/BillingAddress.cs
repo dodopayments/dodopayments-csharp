@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.CheckoutSessions.CheckoutSessionCreateParamsProperties;
@@ -21,7 +23,10 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         get
         {
             if (!this.Properties.TryGetValue("country", out JsonElement element))
-                throw new ArgumentOutOfRangeException("country", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'country' cannot be null",
+                    new ArgumentOutOfRangeException("country", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, CountryCode>>(
                 element,
