@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CheckoutSessions.CheckoutSessionCreateParamsProperties;
 using DodoPayments.Client.Models.Misc;
 using Payments = DodoPayments.Client.Models.Payments;
@@ -18,12 +20,19 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("product_cart", out JsonElement element))
-                throw new ArgumentOutOfRangeException("product_cart", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'product_cart' cannot be null",
+                    new ArgumentOutOfRangeException("product_cart", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<List<ProductCart>>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("product_cart");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'product_cart' cannot be null",
+                    new ArgumentNullException("product_cart")
+                );
         }
         set
         {
@@ -319,7 +328,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -328,7 +337,10 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

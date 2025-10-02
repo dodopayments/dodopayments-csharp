@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries.CustomerWalletTransactionProperties;
 
@@ -54,7 +55,9 @@ sealed class EventTypeConverter : JsonConverter<EventType>
                 EventType.Dispute => "dispute",
                 EventType.DisputeReversal => "dispute_reversal",
                 EventType.MerchantAdjustment => "merchant_adjustment",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

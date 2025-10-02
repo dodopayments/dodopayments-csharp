@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Products.PriceProperties;
 using PriceVariants = DodoPayments.Client.Models.Products.PriceVariants;
 
@@ -61,7 +62,9 @@ public abstract record class Price
                 usageBased(inner);
                 break;
             default:
-                throw new InvalidOperationException();
+                throw new DodoPaymentsInvalidDataException(
+                    "Data did not match any variant of Price"
+                );
         }
     }
 
@@ -76,7 +79,9 @@ public abstract record class Price
             PriceVariants::OneTimePrice inner => oneTime(inner),
             PriceVariants::RecurringPrice inner => recurring(inner),
             PriceVariants::UsageBasedPrice inner => usageBased(inner),
-            _ => throw new InvalidOperationException(),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Price"
+            ),
         };
     }
 
@@ -91,7 +96,7 @@ sealed class PriceConverter : JsonConverter<Price>
         JsonSerializerOptions options
     )
     {
-        List<JsonException> exceptions = [];
+        List<DodoPaymentsInvalidDataException> exceptions = [];
 
         try
         {
@@ -103,7 +108,12 @@ sealed class PriceConverter : JsonConverter<Price>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant PriceVariants::OneTimePrice",
+                    e
+                )
+            );
         }
 
         try
@@ -116,7 +126,12 @@ sealed class PriceConverter : JsonConverter<Price>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant PriceVariants::RecurringPrice",
+                    e
+                )
+            );
         }
 
         try
@@ -129,7 +144,12 @@ sealed class PriceConverter : JsonConverter<Price>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant PriceVariants::UsageBasedPrice",
+                    e
+                )
+            );
         }
 
         throw new AggregateException(exceptions);
@@ -142,7 +162,9 @@ sealed class PriceConverter : JsonConverter<Price>
             PriceVariants::OneTimePrice(var oneTime) => oneTime,
             PriceVariants::RecurringPrice(var recurring) => recurring,
             PriceVariants::UsageBasedPrice(var usageBased) => usageBased,
-            _ => throw new ArgumentOutOfRangeException(nameof(value)),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Price"
+            ),
         };
         JsonSerializer.Serialize(writer, variant, options);
     }

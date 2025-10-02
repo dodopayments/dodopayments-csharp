@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.LicenseKeys;
 
@@ -42,7 +43,9 @@ sealed class LicenseKeyStatusConverter : JsonConverter<LicenseKeyStatus>
                 LicenseKeyStatus.Active => "active",
                 LicenseKeyStatus.Expired => "expired",
                 LicenseKeyStatus.Disabled => "disabled",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

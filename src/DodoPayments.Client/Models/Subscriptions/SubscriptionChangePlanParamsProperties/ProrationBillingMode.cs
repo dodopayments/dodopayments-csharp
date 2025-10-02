@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Subscriptions.SubscriptionChangePlanParamsProperties;
 
@@ -45,7 +46,9 @@ sealed class ProrationBillingModeConverter : JsonConverter<ProrationBillingMode>
                 ProrationBillingMode.ProratedImmediately => "prorated_immediately",
                 ProrationBillingMode.FullImmediately => "full_immediately",
                 ProrationBillingMode.DifferenceImmediately => "difference_immediately",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

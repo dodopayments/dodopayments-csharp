@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions.SubscriptionChargeParamsProperties;
 
@@ -23,7 +25,10 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("product_price", out JsonElement element))
-                throw new ArgumentOutOfRangeException("product_price", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'product_price' cannot be null",
+                    new ArgumentOutOfRangeException("product_price", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
@@ -171,7 +176,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -180,7 +185,10 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

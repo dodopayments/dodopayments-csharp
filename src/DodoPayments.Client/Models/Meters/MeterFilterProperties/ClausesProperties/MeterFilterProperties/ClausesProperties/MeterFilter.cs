@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using MeterFilterProperties = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties;
 
 namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties;
@@ -21,12 +23,19 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
         get
         {
             if (!this.Properties.TryGetValue("clauses", out JsonElement element))
-                throw new ArgumentOutOfRangeException("clauses", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'clauses' cannot be null",
+                    new ArgumentOutOfRangeException("clauses", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<MeterFilterProperties::Clauses>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("clauses");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'clauses' cannot be null",
+                    new ArgumentNullException("clauses")
+                );
         }
         set
         {
@@ -42,7 +51,10 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
         get
         {
             if (!this.Properties.TryGetValue("conjunction", out JsonElement element))
-                throw new ArgumentOutOfRangeException("conjunction", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'conjunction' cannot be null",
+                    new ArgumentOutOfRangeException("conjunction", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterProperties::Conjunction>>(
                 element,

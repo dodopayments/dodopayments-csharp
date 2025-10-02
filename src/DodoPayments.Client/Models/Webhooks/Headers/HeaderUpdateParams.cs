@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Webhooks.Headers;
 
@@ -23,12 +25,19 @@ public sealed record class HeaderUpdateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("headers", out JsonElement element))
-                throw new ArgumentOutOfRangeException("headers", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'headers' cannot be null",
+                    new ArgumentOutOfRangeException("headers", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<Dictionary<string, string>>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("headers");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'headers' cannot be null",
+                    new ArgumentNullException("headers")
+                );
         }
         set
         {
@@ -50,7 +59,7 @@ public sealed record class HeaderUpdateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -59,7 +68,10 @@ public sealed record class HeaderUpdateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

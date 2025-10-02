@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CheckoutSessions.CheckoutSessionRequestProperties;
 using DodoPayments.Client.Models.Misc;
 using Payments = DodoPayments.Client.Models.Payments;
@@ -17,12 +19,19 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
         get
         {
             if (!this.Properties.TryGetValue("product_cart", out JsonElement element))
-                throw new ArgumentOutOfRangeException("product_cart", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'product_cart' cannot be null",
+                    new ArgumentOutOfRangeException("product_cart", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<List<ProductCart>>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("product_cart");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'product_cart' cannot be null",
+                    new ArgumentNullException("product_cart")
+                );
         }
         set
         {

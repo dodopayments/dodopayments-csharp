@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products.ProductCreateParamsProperties;
 
@@ -20,10 +22,16 @@ public sealed record class ProductCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("price", out JsonElement element))
-                throw new ArgumentOutOfRangeException("price", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'price' cannot be null",
+                    new ArgumentOutOfRangeException("price", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<Price>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("price");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'price' cannot be null",
+                    new ArgumentNullException("price")
+                );
         }
         set
         {
@@ -42,7 +50,10 @@ public sealed record class ProductCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("tax_category", out JsonElement element))
-                throw new ArgumentOutOfRangeException("tax_category", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'tax_category' cannot be null",
+                    new ArgumentOutOfRangeException("tax_category", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>>(
                 element,
@@ -298,7 +309,7 @@ public sealed record class ProductCreateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -307,7 +318,10 @@ public sealed record class ProductCreateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

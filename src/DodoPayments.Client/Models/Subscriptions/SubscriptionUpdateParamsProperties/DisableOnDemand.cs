@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Subscriptions.SubscriptionUpdateParamsProperties;
 
@@ -14,9 +16,12 @@ public sealed record class DisableOnDemand : ModelBase, IFromRaw<DisableOnDemand
         get
         {
             if (!this.Properties.TryGetValue("next_billing_date", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "next_billing_date",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'next_billing_date' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "next_billing_date",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);

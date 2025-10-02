@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments.PaymentRetrieveLineItemsResponseProperties;
 
@@ -18,7 +20,10 @@ public sealed record class PaymentRetrieveLineItemsResponse
         get
         {
             if (!this.Properties.TryGetValue("currency", out JsonElement element))
-                throw new ArgumentOutOfRangeException("currency", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentOutOfRangeException("currency", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
                 element,
@@ -39,10 +44,16 @@ public sealed record class PaymentRetrieveLineItemsResponse
         get
         {
             if (!this.Properties.TryGetValue("items", out JsonElement element))
-                throw new ArgumentOutOfRangeException("items", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'items' cannot be null",
+                    new ArgumentOutOfRangeException("items", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<List<Item>>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("items");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'items' cannot be null",
+                    new ArgumentNullException("items")
+                );
         }
         set
         {

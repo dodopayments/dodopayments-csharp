@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 using UsageBasedPriceProperties = DodoPayments.Client.Models.Products.PriceProperties.UsageBasedPriceProperties;
@@ -23,7 +25,10 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         get
         {
             if (!this.Properties.TryGetValue("currency", out JsonElement element))
-                throw new ArgumentOutOfRangeException("currency", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentOutOfRangeException("currency", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
                 element,
@@ -47,7 +52,10 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         get
         {
             if (!this.Properties.TryGetValue("discount", out JsonElement element))
-                throw new ArgumentOutOfRangeException("discount", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'discount' cannot be null",
+                    new ArgumentOutOfRangeException("discount", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
         }
@@ -69,7 +77,10 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         get
         {
             if (!this.Properties.TryGetValue("fixed_price", out JsonElement element))
-                throw new ArgumentOutOfRangeException("fixed_price", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'fixed_price' cannot be null",
+                    new ArgumentOutOfRangeException("fixed_price", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
@@ -91,9 +102,12 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         get
         {
             if (!this.Properties.TryGetValue("payment_frequency_count", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "payment_frequency_count",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'payment_frequency_count' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "payment_frequency_count",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
@@ -115,9 +129,12 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         get
         {
             if (!this.Properties.TryGetValue("payment_frequency_interval", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "payment_frequency_interval",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'payment_frequency_interval' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "payment_frequency_interval",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
@@ -143,9 +160,12 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         get
         {
             if (!this.Properties.TryGetValue("purchasing_power_parity", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "purchasing_power_parity",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'purchasing_power_parity' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "purchasing_power_parity",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
@@ -168,9 +188,12 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         get
         {
             if (!this.Properties.TryGetValue("subscription_period_count", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "subscription_period_count",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'subscription_period_count' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "subscription_period_count",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
@@ -197,9 +220,12 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
                     out JsonElement element
                 )
             )
-                throw new ArgumentOutOfRangeException(
-                    "subscription_period_interval",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'subscription_period_interval' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "subscription_period_interval",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
@@ -221,7 +247,10 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         get
         {
             if (!this.Properties.TryGetValue("type", out JsonElement element))
-                throw new ArgumentOutOfRangeException("type", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new ArgumentOutOfRangeException("type", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, UsageBasedPriceProperties::Type>>(
                 element,

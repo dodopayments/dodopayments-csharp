@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties.PaymentProperties.IntersectionMember1Properties;
 
 namespace DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties.PaymentProperties;
@@ -15,7 +17,10 @@ public sealed record class IntersectionMember1 : ModelBase, IFromRaw<Intersectio
         get
         {
             if (!this.Properties.TryGetValue("payload_type", out JsonElement element))
-                throw new ArgumentOutOfRangeException("payload_type", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentOutOfRangeException("payload_type", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
                 element,

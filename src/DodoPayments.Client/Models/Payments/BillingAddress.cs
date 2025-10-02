@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
@@ -18,10 +20,16 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         get
         {
             if (!this.Properties.TryGetValue("city", out JsonElement element))
-                throw new ArgumentOutOfRangeException("city", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'city' cannot be null",
+                    new ArgumentOutOfRangeException("city", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("city");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'city' cannot be null",
+                    new ArgumentNullException("city")
+                );
         }
         set
         {
@@ -40,7 +48,10 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         get
         {
             if (!this.Properties.TryGetValue("country", out JsonElement element))
-                throw new ArgumentOutOfRangeException("country", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'country' cannot be null",
+                    new ArgumentOutOfRangeException("country", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, CountryCode>>(
                 element,
@@ -64,10 +75,16 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         get
         {
             if (!this.Properties.TryGetValue("state", out JsonElement element))
-                throw new ArgumentOutOfRangeException("state", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'state' cannot be null",
+                    new ArgumentOutOfRangeException("state", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("state");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'state' cannot be null",
+                    new ArgumentNullException("state")
+                );
         }
         set
         {
@@ -86,10 +103,16 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         get
         {
             if (!this.Properties.TryGetValue("street", out JsonElement element))
-                throw new ArgumentOutOfRangeException("street", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'street' cannot be null",
+                    new ArgumentOutOfRangeException("street", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("street");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'street' cannot be null",
+                    new ArgumentNullException("street")
+                );
         }
         set
         {
@@ -108,10 +131,16 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         get
         {
             if (!this.Properties.TryGetValue("zipcode", out JsonElement element))
-                throw new ArgumentOutOfRangeException("zipcode", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'zipcode' cannot be null",
+                    new ArgumentOutOfRangeException("zipcode", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("zipcode");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'zipcode' cannot be null",
+                    new ArgumentNullException("zipcode")
+                );
         }
         set
         {

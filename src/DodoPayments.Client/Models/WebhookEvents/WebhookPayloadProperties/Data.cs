@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties;
 using DataVariants = DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataVariants;
 
@@ -83,7 +84,9 @@ public abstract record class Data
                 licenseKey(inner);
                 break;
             default:
-                throw new InvalidOperationException();
+                throw new DodoPaymentsInvalidDataException(
+                    "Data did not match any variant of Data"
+                );
         }
     }
 
@@ -102,7 +105,9 @@ public abstract record class Data
             DataVariants::Refund inner => refund(inner),
             DataVariants::Dispute inner => dispute(inner),
             DataVariants::LicenseKey inner => licenseKey(inner),
-            _ => throw new InvalidOperationException(),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Data"
+            ),
         };
     }
 
@@ -117,7 +122,7 @@ sealed class DataConverter : JsonConverter<Data>
         JsonSerializerOptions options
     )
     {
-        List<JsonException> exceptions = [];
+        List<DodoPaymentsInvalidDataException> exceptions = [];
 
         try
         {
@@ -129,7 +134,12 @@ sealed class DataConverter : JsonConverter<Data>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant DataVariants::Payment",
+                    e
+                )
+            );
         }
 
         try
@@ -142,7 +152,12 @@ sealed class DataConverter : JsonConverter<Data>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant DataVariants::Subscription",
+                    e
+                )
+            );
         }
 
         try
@@ -155,7 +170,12 @@ sealed class DataConverter : JsonConverter<Data>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant DataVariants::Refund",
+                    e
+                )
+            );
         }
 
         try
@@ -168,7 +188,12 @@ sealed class DataConverter : JsonConverter<Data>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant DataVariants::Dispute",
+                    e
+                )
+            );
         }
 
         try
@@ -181,7 +206,12 @@ sealed class DataConverter : JsonConverter<Data>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant DataVariants::LicenseKey",
+                    e
+                )
+            );
         }
 
         throw new AggregateException(exceptions);
@@ -196,7 +226,9 @@ sealed class DataConverter : JsonConverter<Data>
             DataVariants::Refund(var refund) => refund,
             DataVariants::Dispute(var dispute) => dispute,
             DataVariants::LicenseKey(var licenseKey) => licenseKey,
-            _ => throw new ArgumentOutOfRangeException(nameof(value)),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Data"
+            ),
         };
         JsonSerializer.Serialize(writer, variant, options);
     }

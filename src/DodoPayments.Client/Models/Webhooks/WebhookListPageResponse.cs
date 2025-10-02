@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -17,12 +19,19 @@ public sealed record class WebhookListPageResponse : ModelBase, IFromRaw<Webhook
         get
         {
             if (!this.Properties.TryGetValue("data", out JsonElement element))
-                throw new ArgumentOutOfRangeException("data", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'data' cannot be null",
+                    new ArgumentOutOfRangeException("data", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<List<WebhookDetails>>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("data");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'data' cannot be null",
+                    new ArgumentNullException("data")
+                );
         }
         set
         {
@@ -41,7 +50,10 @@ public sealed record class WebhookListPageResponse : ModelBase, IFromRaw<Webhook
         get
         {
             if (!this.Properties.TryGetValue("done", out JsonElement element))
-                throw new ArgumentOutOfRangeException("done", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'done' cannot be null",
+                    new ArgumentOutOfRangeException("done", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
         }

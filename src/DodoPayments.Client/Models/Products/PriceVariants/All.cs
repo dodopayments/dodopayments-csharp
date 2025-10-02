@@ -1,3 +1,4 @@
+using DodoPayments.Client.Core;
 using PriceProperties = DodoPayments.Client.Models.Products.PriceProperties;
 
 namespace DodoPayments.Client.Models.Products.PriceVariants;

@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Invoices.Payments;
 
@@ -18,7 +19,10 @@ public sealed record class PaymentRetrieveRefundParams : ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

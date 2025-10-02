@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DodoPayments.Client.Core;
 using ClausesProperties = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties;
 
 namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesVariants;

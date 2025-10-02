@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Licenses;
 
@@ -15,10 +17,16 @@ public sealed record class LicenseActivateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("license_key", out JsonElement element))
-                throw new ArgumentOutOfRangeException("license_key", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'license_key' cannot be null",
+                    new ArgumentOutOfRangeException("license_key", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("license_key");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'license_key' cannot be null",
+                    new ArgumentNullException("license_key")
+                );
         }
         set
         {
@@ -34,10 +42,16 @@ public sealed record class LicenseActivateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("name", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentOutOfRangeException("name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("name");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentNullException("name")
+                );
         }
         set
         {
@@ -56,7 +70,7 @@ public sealed record class LicenseActivateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -65,7 +79,10 @@ public sealed record class LicenseActivateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

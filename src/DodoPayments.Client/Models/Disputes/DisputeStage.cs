@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Disputes;
 
@@ -42,7 +43,9 @@ sealed class DisputeStageConverter : JsonConverter<DisputeStage>
                 DisputeStage.PreDispute => "pre_dispute",
                 DisputeStage.Dispute => "dispute",
                 DisputeStage.PreArbitration => "pre_arbitration",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

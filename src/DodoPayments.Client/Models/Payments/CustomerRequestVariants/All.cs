@@ -1,3 +1,4 @@
+using DodoPayments.Client.Core;
 using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Payments.CustomerRequestVariants;

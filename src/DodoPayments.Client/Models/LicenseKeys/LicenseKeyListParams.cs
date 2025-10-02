@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Text.Json;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.LicenseKeys.LicenseKeyListParamsProperties;
 
 namespace DodoPayments.Client.Models.LicenseKeys;
@@ -123,7 +124,10 @@ public sealed record class LicenseKeyListParams : ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

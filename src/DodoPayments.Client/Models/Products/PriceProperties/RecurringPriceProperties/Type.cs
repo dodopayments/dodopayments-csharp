@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 using System = System;
 
 namespace DodoPayments.Client.Models.Products.PriceProperties.RecurringPriceProperties;
@@ -32,7 +33,9 @@ sealed class TypeConverter : JsonConverter<Type>
             value switch
             {
                 RecurringPriceProperties.Type.RecurringPrice => "recurring_price",
-                _ => throw new System::ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

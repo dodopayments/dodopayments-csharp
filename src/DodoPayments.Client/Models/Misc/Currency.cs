@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Misc;
 
@@ -464,7 +465,9 @@ sealed class CurrencyConverter : JsonConverter<Currency>
                 Currency.Yer => "YER",
                 Currency.Zar => "ZAR",
                 Currency.Zmw => "ZMW",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterConditionProperties;
 
 namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties;
@@ -21,10 +23,16 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
         get
         {
             if (!this.Properties.TryGetValue("key", out JsonElement element))
-                throw new ArgumentOutOfRangeException("key", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'key' cannot be null",
+                    new ArgumentOutOfRangeException("key", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("key");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'key' cannot be null",
+                    new ArgumentNullException("key")
+                );
         }
         set
         {
@@ -40,7 +48,10 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
         get
         {
             if (!this.Properties.TryGetValue("operator", out JsonElement element))
-                throw new ArgumentOutOfRangeException("operator", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'operator' cannot be null",
+                    new ArgumentOutOfRangeException("operator", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Operator>>(
                 element,
@@ -64,10 +75,16 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
         get
         {
             if (!this.Properties.TryGetValue("value", out JsonElement element))
-                throw new ArgumentOutOfRangeException("value", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'value' cannot be null",
+                    new ArgumentOutOfRangeException("value", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<Value>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("value");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'value' cannot be null",
+                    new ArgumentNullException("value")
+                );
         }
         set
         {

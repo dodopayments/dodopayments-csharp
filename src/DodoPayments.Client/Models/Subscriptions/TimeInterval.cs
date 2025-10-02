@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -45,7 +46,9 @@ sealed class TimeIntervalConverter : JsonConverter<TimeInterval>
                 TimeInterval.Week => "Week",
                 TimeInterval.Month => "Month",
                 TimeInterval.Year => "Year",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

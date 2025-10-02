@@ -89,6 +89,33 @@ To send a request to the Dodo Payments API, build an instance of some `Params` c
 
 For example, `client.CheckoutSessions.Create` should be called with an instance of `CheckoutSessionCreateParams`, and it will return an instance of `Task<CheckoutSessionResponse>`.
 
+## Error handling
+
+The SDK throws custom unchecked exception types:
+
+- `DodoPaymentsApiException`: Base class for API errors. See this table for which exception subclass is thrown for each HTTP status code:
+
+| Status | Exception                                   |
+| ------ | ------------------------------------------- |
+| 400    | `DodoPaymentsBadRequestException`           |
+| 401    | `DodoPaymentsUnauthorizedException`         |
+| 403    | `DodoPaymentsForbiddenException`            |
+| 404    | `DodoPaymentsNotFoundException`             |
+| 422    | `DodoPaymentsUnprocessableEntityException`  |
+| 429    | `DodoPaymentsRateLimitException`            |
+| 5xx    | `DodoPayments5xxException`                  |
+| others | `DodoPaymentsUnexpectedStatusCodeException` |
+
+Additionally, all 4xx errors inherit from `DodoPayments4xxException`.
+
+false
+
+- `DodoPaymentsIOException`: I/O networking errors.
+
+- `DodoPaymentsInvalidDataException`: Failure to interpret successfully parsed data. For example, when accessing a property that's supposed to be required, but the API unexpectedly omitted it from the response.
+
+- `DodoPaymentsException`: Base class for all exceptions.
+
 ## Semantic versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:

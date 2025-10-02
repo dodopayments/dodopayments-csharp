@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
 
@@ -17,10 +19,16 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
         get
         {
             if (!this.Properties.TryGetValue("checkout_url", out JsonElement element))
-                throw new ArgumentOutOfRangeException("checkout_url", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'checkout_url' cannot be null",
+                    new ArgumentOutOfRangeException("checkout_url", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("checkout_url");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'checkout_url' cannot be null",
+                    new ArgumentNullException("checkout_url")
+                );
         }
         set
         {
@@ -39,10 +47,16 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
         get
         {
             if (!this.Properties.TryGetValue("session_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("session_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'session_id' cannot be null",
+                    new ArgumentOutOfRangeException("session_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("session_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'session_id' cannot be null",
+                    new ArgumentNullException("session_id")
+                );
         }
         set
         {

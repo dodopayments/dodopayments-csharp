@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -17,10 +19,16 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("file_name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("file_name", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'file_name' cannot be null",
+                    new ArgumentOutOfRangeException("file_name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("file_name");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'file_name' cannot be null",
+                    new ArgumentNullException("file_name")
+                );
         }
         set
         {
@@ -41,7 +49,7 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -50,7 +58,10 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)
