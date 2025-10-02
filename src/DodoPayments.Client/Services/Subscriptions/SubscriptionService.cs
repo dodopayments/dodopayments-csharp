@@ -1,7 +1,6 @@
-using System;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Services.Subscriptions;
@@ -17,159 +16,84 @@ public sealed class SubscriptionService : ISubscriptionService
 
     public async Task<SubscriptionCreateResponse> Create(SubscriptionCreateParams parameters)
     {
-        using HttpRequestMessage request = new(HttpMethod.Post, parameters.Url(this._client))
+        HttpRequest<SubscriptionCreateParams> request = new()
         {
-            Content = parameters.BodyContent(),
+            Method = HttpMethod.Post,
+            Params = parameters,
         };
-        parameters.AddHeadersToRequest(request, this._client);
-        using HttpResponseMessage response = await this
-            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new HttpException(
-                response.StatusCode,
-                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-            );
-        }
-
-        return JsonSerializer.Deserialize<SubscriptionCreateResponse>(
-                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
-            ) ?? throw new NullReferenceException();
+        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        return await response.Deserialize<SubscriptionCreateResponse>().ConfigureAwait(false);
     }
 
     public async Task<Subscription> Retrieve(SubscriptionRetrieveParams parameters)
     {
-        using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
-        parameters.AddHeadersToRequest(request, this._client);
-        using HttpResponseMessage response = await this
-            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
+        HttpRequest<SubscriptionRetrieveParams> request = new()
         {
-            throw new HttpException(
-                response.StatusCode,
-                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-            );
-        }
-
-        return JsonSerializer.Deserialize<Subscription>(
-                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
-            ) ?? throw new NullReferenceException();
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        return await response.Deserialize<Subscription>().ConfigureAwait(false);
     }
 
     public async Task<Subscription> Update(SubscriptionUpdateParams parameters)
     {
-        using HttpRequestMessage request = new(HttpMethod.Patch, parameters.Url(this._client))
+        HttpRequest<SubscriptionUpdateParams> request = new()
         {
-            Content = parameters.BodyContent(),
+            Method = HttpMethod.Patch,
+            Params = parameters,
         };
-        parameters.AddHeadersToRequest(request, this._client);
-        using HttpResponseMessage response = await this
-            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new HttpException(
-                response.StatusCode,
-                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-            );
-        }
-
-        return JsonSerializer.Deserialize<Subscription>(
-                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
-            ) ?? throw new NullReferenceException();
+        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        return await response.Deserialize<Subscription>().ConfigureAwait(false);
     }
 
     public async Task<SubscriptionListPageResponse> List(SubscriptionListParams? parameters = null)
     {
         parameters ??= new();
 
-        using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
-        parameters.AddHeadersToRequest(request, this._client);
-        using HttpResponseMessage response = await this
-            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
+        HttpRequest<SubscriptionListParams> request = new()
         {
-            throw new HttpException(
-                response.StatusCode,
-                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-            );
-        }
-
-        return JsonSerializer.Deserialize<SubscriptionListPageResponse>(
-                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
-            ) ?? throw new NullReferenceException();
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        return await response.Deserialize<SubscriptionListPageResponse>().ConfigureAwait(false);
     }
 
     public async Task ChangePlan(SubscriptionChangePlanParams parameters)
     {
-        using HttpRequestMessage request = new(HttpMethod.Post, parameters.Url(this._client))
+        HttpRequest<SubscriptionChangePlanParams> request = new()
         {
-            Content = parameters.BodyContent(),
+            Method = HttpMethod.Post,
+            Params = parameters,
         };
-        parameters.AddHeadersToRequest(request, this._client);
-        using HttpResponseMessage response = await this
-            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new HttpException(
-                response.StatusCode,
-                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-            );
-        }
+        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        return;
     }
 
     public async Task<SubscriptionChargeResponse> Charge(SubscriptionChargeParams parameters)
     {
-        using HttpRequestMessage request = new(HttpMethod.Post, parameters.Url(this._client))
+        HttpRequest<SubscriptionChargeParams> request = new()
         {
-            Content = parameters.BodyContent(),
+            Method = HttpMethod.Post,
+            Params = parameters,
         };
-        parameters.AddHeadersToRequest(request, this._client);
-        using HttpResponseMessage response = await this
-            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new HttpException(
-                response.StatusCode,
-                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-            );
-        }
-
-        return JsonSerializer.Deserialize<SubscriptionChargeResponse>(
-                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
-            ) ?? throw new NullReferenceException();
+        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        return await response.Deserialize<SubscriptionChargeResponse>().ConfigureAwait(false);
     }
 
     public async Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
         SubscriptionRetrieveUsageHistoryParams parameters
     )
     {
-        using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
-        parameters.AddHeadersToRequest(request, this._client);
-        using HttpResponseMessage response = await this
-            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
+        HttpRequest<SubscriptionRetrieveUsageHistoryParams> request = new()
         {
-            throw new HttpException(
-                response.StatusCode,
-                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-            );
-        }
-
-        return JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryPageResponse>(
-                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
-            ) ?? throw new NullReferenceException();
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        return await response
+            .Deserialize<SubscriptionRetrieveUsageHistoryPageResponse>()
+            .ConfigureAwait(false);
     }
 }

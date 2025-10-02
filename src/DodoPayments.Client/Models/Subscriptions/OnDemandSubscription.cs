@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Subscriptions;
@@ -19,7 +21,10 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
         get
         {
             if (!this.Properties.TryGetValue("mandate_only", out JsonElement element))
-                throw new ArgumentOutOfRangeException("mandate_only", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'mandate_only' cannot be null",
+                    new ArgumentOutOfRangeException("mandate_only", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products.ProductProperties;
 
@@ -16,10 +18,16 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("brand_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("brand_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'brand_id' cannot be null",
+                    new ArgumentOutOfRangeException("brand_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("brand_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'brand_id' cannot be null",
+                    new ArgumentNullException("brand_id")
+                );
         }
         set
         {
@@ -38,10 +46,16 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("business_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("business_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'business_id' cannot be null",
+                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("business_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'business_id' cannot be null",
+                    new ArgumentNullException("business_id")
+                );
         }
         set
         {
@@ -60,7 +74,10 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("created_at", out JsonElement element))
-                throw new ArgumentOutOfRangeException("created_at", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'created_at' cannot be null",
+                    new ArgumentOutOfRangeException("created_at", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
@@ -81,7 +98,10 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("is_recurring", out JsonElement element))
-                throw new ArgumentOutOfRangeException("is_recurring", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'is_recurring' cannot be null",
+                    new ArgumentOutOfRangeException("is_recurring", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
         }
@@ -102,9 +122,12 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("license_key_enabled", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "license_key_enabled",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'license_key_enabled' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "license_key_enabled",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
@@ -126,12 +149,19 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("metadata", out JsonElement element))
-                throw new ArgumentOutOfRangeException("metadata", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'metadata' cannot be null",
+                    new ArgumentOutOfRangeException("metadata", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<Dictionary<string, string>>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("metadata");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'metadata' cannot be null",
+                    new ArgumentNullException("metadata")
+                );
         }
         set
         {
@@ -150,10 +180,16 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("price", out JsonElement element))
-                throw new ArgumentOutOfRangeException("price", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'price' cannot be null",
+                    new ArgumentOutOfRangeException("price", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<Price>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("price");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'price' cannot be null",
+                    new ArgumentNullException("price")
+                );
         }
         set
         {
@@ -172,10 +208,16 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("product_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("product_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'product_id' cannot be null",
+                    new ArgumentOutOfRangeException("product_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("product_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'product_id' cannot be null",
+                    new ArgumentNullException("product_id")
+                );
         }
         set
         {
@@ -194,7 +236,10 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("tax_category", out JsonElement element))
-                throw new ArgumentOutOfRangeException("tax_category", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'tax_category' cannot be null",
+                    new ArgumentOutOfRangeException("tax_category", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>>(
                 element,
@@ -218,7 +263,10 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("updated_at", out JsonElement element))
-                throw new ArgumentOutOfRangeException("updated_at", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'updated_at' cannot be null",
+                    new ArgumentOutOfRangeException("updated_at", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }

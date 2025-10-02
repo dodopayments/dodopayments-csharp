@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Payouts.PayoutListPageResponseProperties;
 
 namespace DodoPayments.Client.Models.Payouts;
@@ -15,10 +17,16 @@ public sealed record class PayoutListPageResponse : ModelBase, IFromRaw<PayoutLi
         get
         {
             if (!this.Properties.TryGetValue("items", out JsonElement element))
-                throw new ArgumentOutOfRangeException("items", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'items' cannot be null",
+                    new ArgumentOutOfRangeException("items", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<List<Item>>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("items");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'items' cannot be null",
+                    new ArgumentNullException("items")
+                );
         }
         set
         {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Brands.BrandProperties;
 
 namespace DodoPayments.Client.Models.Brands;
@@ -15,10 +17,16 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         get
         {
             if (!this.Properties.TryGetValue("brand_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("brand_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'brand_id' cannot be null",
+                    new ArgumentOutOfRangeException("brand_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("brand_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'brand_id' cannot be null",
+                    new ArgumentNullException("brand_id")
+                );
         }
         set
         {
@@ -34,10 +42,16 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         get
         {
             if (!this.Properties.TryGetValue("business_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("business_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'business_id' cannot be null",
+                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("business_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'business_id' cannot be null",
+                    new ArgumentNullException("business_id")
+                );
         }
         set
         {
@@ -53,7 +67,10 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         get
         {
             if (!this.Properties.TryGetValue("enabled", out JsonElement element))
-                throw new ArgumentOutOfRangeException("enabled", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'enabled' cannot be null",
+                    new ArgumentOutOfRangeException("enabled", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
         }
@@ -71,13 +88,19 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         get
         {
             if (!this.Properties.TryGetValue("statement_descriptor", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "statement_descriptor",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'statement_descriptor' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "statement_descriptor",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("statement_descriptor");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'statement_descriptor' cannot be null",
+                    new ArgumentNullException("statement_descriptor")
+                );
         }
         set
         {
@@ -93,9 +116,12 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         get
         {
             if (!this.Properties.TryGetValue("verification_enabled", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "verification_enabled",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'verification_enabled' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "verification_enabled",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
@@ -114,9 +140,12 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         get
         {
             if (!this.Properties.TryGetValue("verification_status", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "verification_status",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'verification_status' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "verification_status",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, VerificationStatus>>(

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -16,10 +18,16 @@ public sealed record class SubscriptionChargeResponse
         get
         {
             if (!this.Properties.TryGetValue("payment_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("payment_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'payment_id' cannot be null",
+                    new ArgumentOutOfRangeException("payment_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("payment_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payment_id' cannot be null",
+                    new ArgumentNullException("payment_id")
+                );
         }
         set
         {

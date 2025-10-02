@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties;
 
 namespace DodoPayments.Client.Models.WebhookEvents;
@@ -15,10 +17,16 @@ public sealed record class WebhookPayload : ModelBase, IFromRaw<WebhookPayload>
         get
         {
             if (!this.Properties.TryGetValue("business_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("business_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'business_id' cannot be null",
+                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("business_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'business_id' cannot be null",
+                    new ArgumentNullException("business_id")
+                );
         }
         set
         {
@@ -37,10 +45,16 @@ public sealed record class WebhookPayload : ModelBase, IFromRaw<WebhookPayload>
         get
         {
             if (!this.Properties.TryGetValue("data", out JsonElement element))
-                throw new ArgumentOutOfRangeException("data", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'data' cannot be null",
+                    new ArgumentOutOfRangeException("data", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("data");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'data' cannot be null",
+                    new ArgumentNullException("data")
+                );
         }
         set
         {
@@ -60,7 +74,10 @@ public sealed record class WebhookPayload : ModelBase, IFromRaw<WebhookPayload>
         get
         {
             if (!this.Properties.TryGetValue("timestamp", out JsonElement element))
-                throw new ArgumentOutOfRangeException("timestamp", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'timestamp' cannot be null",
+                    new ArgumentOutOfRangeException("timestamp", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
@@ -81,7 +98,10 @@ public sealed record class WebhookPayload : ModelBase, IFromRaw<WebhookPayload>
         get
         {
             if (!this.Properties.TryGetValue("type", out JsonElement element))
-                throw new ArgumentOutOfRangeException("type", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new ArgumentOutOfRangeException("type", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, WebhookEventType>>(
                 element,

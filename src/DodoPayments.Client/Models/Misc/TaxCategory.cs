@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Misc;
 
@@ -49,7 +50,9 @@ sealed class TaxCategoryConverter : JsonConverter<TaxCategory>
                 TaxCategory.Saas => "saas",
                 TaxCategory.EBook => "e_book",
                 TaxCategory.Edtech => "edtech",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

@@ -1,3 +1,5 @@
+using DodoPayments.Client.Core;
+
 namespace DodoPayments.Client.Models.UsageEvents.EventInputProperties.MetadataProperties.MetadataVariants;
 
 public sealed record class String(string Value) : Metadata, IVariant<String, string>

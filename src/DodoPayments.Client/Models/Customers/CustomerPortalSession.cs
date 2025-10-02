@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Customers;
 
@@ -14,10 +16,16 @@ public sealed record class CustomerPortalSession : ModelBase, IFromRaw<CustomerP
         get
         {
             if (!this.Properties.TryGetValue("link", out JsonElement element))
-                throw new ArgumentOutOfRangeException("link", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'link' cannot be null",
+                    new ArgumentOutOfRangeException("link", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("link");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'link' cannot be null",
+                    new ArgumentNullException("link")
+                );
         }
         set
         {

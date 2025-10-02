@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Licenses;
 
@@ -14,7 +16,10 @@ public sealed record class LicenseValidateResponse : ModelBase, IFromRaw<License
         get
         {
             if (!this.Properties.TryGetValue("valid", out JsonElement element))
-                throw new ArgumentOutOfRangeException("valid", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'valid' cannot be null",
+                    new ArgumentOutOfRangeException("valid", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
         }

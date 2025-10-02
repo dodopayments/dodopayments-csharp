@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Refunds;
 
@@ -45,7 +46,9 @@ sealed class RefundStatusConverter : JsonConverter<RefundStatus>
                 RefundStatus.Failed => "failed",
                 RefundStatus.Pending => "pending",
                 RefundStatus.Review => "review",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

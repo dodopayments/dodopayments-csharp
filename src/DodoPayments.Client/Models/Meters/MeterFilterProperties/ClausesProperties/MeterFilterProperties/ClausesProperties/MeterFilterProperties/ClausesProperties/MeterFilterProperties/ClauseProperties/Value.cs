@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 using ValueVariants = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClauseProperties.ValueVariants;
 
 namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClauseProperties;
@@ -57,7 +58,9 @@ public abstract record class Value
                 @bool(inner);
                 break;
             default:
-                throw new InvalidOperationException();
+                throw new DodoPaymentsInvalidDataException(
+                    "Data did not match any variant of Value"
+                );
         }
     }
 
@@ -72,7 +75,9 @@ public abstract record class Value
             ValueVariants::String inner => @string(inner),
             ValueVariants::Double inner => @double(inner),
             ValueVariants::Bool inner => @bool(inner),
-            _ => throw new InvalidOperationException(),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Value"
+            ),
         };
     }
 
@@ -87,7 +92,7 @@ sealed class ValueConverter : JsonConverter<Value>
         JsonSerializerOptions options
     )
     {
-        List<JsonException> exceptions = [];
+        List<DodoPaymentsInvalidDataException> exceptions = [];
 
         try
         {
@@ -99,7 +104,12 @@ sealed class ValueConverter : JsonConverter<Value>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant ValueVariants::String",
+                    e
+                )
+            );
         }
 
         try
@@ -110,7 +120,12 @@ sealed class ValueConverter : JsonConverter<Value>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant ValueVariants::Double",
+                    e
+                )
+            );
         }
 
         try
@@ -119,7 +134,12 @@ sealed class ValueConverter : JsonConverter<Value>
         }
         catch (JsonException e)
         {
-            exceptions.Add(e);
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant ValueVariants::Bool",
+                    e
+                )
+            );
         }
 
         throw new AggregateException(exceptions);
@@ -132,7 +152,9 @@ sealed class ValueConverter : JsonConverter<Value>
             ValueVariants::String(var @string) => @string,
             ValueVariants::Double(var @double) => @double,
             ValueVariants::Bool(var @bool) => @bool,
-            _ => throw new ArgumentOutOfRangeException(nameof(value)),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Value"
+            ),
         };
         JsonSerializer.Serialize(writer, variant, options);
     }

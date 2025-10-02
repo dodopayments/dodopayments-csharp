@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -51,7 +52,9 @@ sealed class SubscriptionStatusConverter : JsonConverter<SubscriptionStatus>
                 SubscriptionStatus.Cancelled => "cancelled",
                 SubscriptionStatus.Failed => "failed",
                 SubscriptionStatus.Expired => "expired",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

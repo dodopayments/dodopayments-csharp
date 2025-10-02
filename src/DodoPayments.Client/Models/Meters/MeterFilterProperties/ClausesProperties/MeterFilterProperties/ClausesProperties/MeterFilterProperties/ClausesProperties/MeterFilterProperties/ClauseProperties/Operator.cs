@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClauseProperties;
 
@@ -53,7 +54,9 @@ sealed class OperatorConverter : JsonConverter<Operator>
                 Operator.LessThanOrEquals => "less_than_or_equals",
                 Operator.Contains => "contains",
                 Operator.DoesNotContain => "does_not_contain",
-                _ => throw new ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

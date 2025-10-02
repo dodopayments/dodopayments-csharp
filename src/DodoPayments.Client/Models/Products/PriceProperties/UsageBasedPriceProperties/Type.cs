@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 using System = System;
 
 namespace DodoPayments.Client.Models.Products.PriceProperties.UsageBasedPriceProperties;
@@ -32,7 +33,9 @@ sealed class TypeConverter : JsonConverter<Type>
             value switch
             {
                 UsageBasedPriceProperties.Type.UsageBasedPrice => "usage_based_price",
-                _ => throw new System::ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

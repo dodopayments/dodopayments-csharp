@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.LicenseKeyInstances;
 
@@ -17,10 +19,16 @@ public sealed record class LicenseKeyInstanceUpdateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("name", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentOutOfRangeException("name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("name");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentNullException("name")
+                );
         }
         set
         {
@@ -42,7 +50,7 @@ public sealed record class LicenseKeyInstanceUpdateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -51,7 +59,10 @@ public sealed record class LicenseKeyInstanceUpdateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Customers.Wallets;
 
@@ -14,12 +16,19 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
         get
         {
             if (!this.Properties.TryGetValue("items", out JsonElement element))
-                throw new ArgumentOutOfRangeException("items", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'items' cannot be null",
+                    new ArgumentOutOfRangeException("items", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<List<CustomerWallet>>(
                     element,
                     ModelBase.SerializerOptions
-                ) ?? throw new ArgumentNullException("items");
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'items' cannot be null",
+                    new ArgumentNullException("items")
+                );
         }
         set
         {
@@ -38,9 +47,12 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
         get
         {
             if (!this.Properties.TryGetValue("total_balance_usd", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "total_balance_usd",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'total_balance_usd' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "total_balance_usd",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);

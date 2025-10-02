@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Subscriptions.SubscriptionChangePlanParamsProperties;
 
 namespace DodoPayments.Client.Models.Subscriptions;
@@ -21,10 +23,16 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("product_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("product_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'product_id' cannot be null",
+                    new ArgumentOutOfRangeException("product_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("product_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'product_id' cannot be null",
+                    new ArgumentNullException("product_id")
+                );
         }
         set
         {
@@ -43,9 +51,12 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("proration_billing_mode", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "proration_billing_mode",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'proration_billing_mode' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "proration_billing_mode",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, ProrationBillingMode>>(
@@ -70,7 +81,10 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("quantity", out JsonElement element))
-                throw new ArgumentOutOfRangeException("quantity", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'quantity' cannot be null",
+                    new ArgumentOutOfRangeException("quantity", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
@@ -118,7 +132,7 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -127,7 +141,10 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

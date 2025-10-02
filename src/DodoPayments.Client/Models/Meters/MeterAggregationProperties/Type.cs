@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Exceptions;
 using System = System;
 
 namespace DodoPayments.Client.Models.Meters.MeterAggregationProperties;
@@ -44,7 +45,9 @@ sealed class TypeConverter : JsonConverter<Type>
                 MeterAggregationProperties.Type.Sum => "sum",
                 MeterAggregationProperties.Type.Max => "max",
                 MeterAggregationProperties.Type.Last => "last",
-                _ => throw new System::ArgumentOutOfRangeException(nameof(value)),
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
             },
             options
         );

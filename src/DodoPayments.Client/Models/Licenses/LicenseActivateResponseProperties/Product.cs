@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Licenses.LicenseActivateResponseProperties;
 
@@ -20,10 +22,16 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (!this.Properties.TryGetValue("product_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("product_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'product_id' cannot be null",
+                    new ArgumentOutOfRangeException("product_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("product_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'product_id' cannot be null",
+                    new ArgumentNullException("product_id")
+                );
         }
         set
         {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using MeterAggregationProperties = DodoPayments.Client.Models.Meters.MeterAggregationProperties;
 
 namespace DodoPayments.Client.Models.Meters;
@@ -18,7 +20,10 @@ public sealed record class MeterAggregation : ModelBase, IFromRaw<MeterAggregati
         get
         {
             if (!this.Properties.TryGetValue("type", out JsonElement element))
-                throw new ArgumentOutOfRangeException("type", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new ArgumentOutOfRangeException("type", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, MeterAggregationProperties::Type>>(
                 element,

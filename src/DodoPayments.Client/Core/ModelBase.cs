@@ -32,7 +32,7 @@ using RefundListParamsProperties = DodoPayments.Client.Models.Refunds.RefundList
 using SubscriptionListParamsProperties = DodoPayments.Client.Models.Subscriptions.SubscriptionListParamsProperties;
 using UsageBasedPriceProperties = DodoPayments.Client.Models.Products.PriceProperties.UsageBasedPriceProperties;
 
-namespace DodoPayments.Client;
+namespace DodoPayments.Client.Core;
 
 public abstract record class ModelBase
 {

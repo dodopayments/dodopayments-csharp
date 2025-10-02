@@ -1,7 +1,6 @@
-using System;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers.Wallets;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
@@ -18,46 +17,23 @@ public sealed class LedgerEntryService : ILedgerEntryService
 
     public async Task<CustomerWallet> Create(LedgerEntryCreateParams parameters)
     {
-        using HttpRequestMessage request = new(HttpMethod.Post, parameters.Url(this._client))
+        HttpRequest<LedgerEntryCreateParams> request = new()
         {
-            Content = parameters.BodyContent(),
+            Method = HttpMethod.Post,
+            Params = parameters,
         };
-        parameters.AddHeadersToRequest(request, this._client);
-        using HttpResponseMessage response = await this
-            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new HttpException(
-                response.StatusCode,
-                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-            );
-        }
-
-        return JsonSerializer.Deserialize<CustomerWallet>(
-                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
-            ) ?? throw new NullReferenceException();
+        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        return await response.Deserialize<CustomerWallet>().ConfigureAwait(false);
     }
 
     public async Task<LedgerEntryListPageResponse> List(LedgerEntryListParams parameters)
     {
-        using HttpRequestMessage request = new(HttpMethod.Get, parameters.Url(this._client));
-        parameters.AddHeadersToRequest(request, this._client);
-        using HttpResponseMessage response = await this
-            ._client.HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
+        HttpRequest<LedgerEntryListParams> request = new()
         {
-            throw new HttpException(
-                response.StatusCode,
-                await response.Content.ReadAsStringAsync().ConfigureAwait(false)
-            );
-        }
-
-        return JsonSerializer.Deserialize<LedgerEntryListPageResponse>(
-                await response.Content.ReadAsStreamAsync().ConfigureAwait(false),
-                ModelBase.SerializerOptions
-            ) ?? throw new NullReferenceException();
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        return await response.Deserialize<LedgerEntryListPageResponse>().ConfigureAwait(false);
     }
 }

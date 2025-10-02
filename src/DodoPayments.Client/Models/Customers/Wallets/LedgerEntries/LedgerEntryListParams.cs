@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Text.Json;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
@@ -80,7 +81,10 @@ public sealed record class LedgerEntryListParams : ParamsBase
         }.Uri;
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)

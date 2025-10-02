@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Subscriptions.SubscriptionProperties;
@@ -18,7 +20,10 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
         get
         {
             if (!this.Properties.TryGetValue("currency", out JsonElement element))
-                throw new ArgumentOutOfRangeException("currency", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentOutOfRangeException("currency", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
                 element,
@@ -39,9 +44,9 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
         get
         {
             if (!this.Properties.TryGetValue("free_threshold", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "free_threshold",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'free_threshold' cannot be null",
+                    new ArgumentOutOfRangeException("free_threshold", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
@@ -60,13 +65,16 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
         get
         {
             if (!this.Properties.TryGetValue("measurement_unit", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "measurement_unit",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'measurement_unit' cannot be null",
+                    new ArgumentOutOfRangeException("measurement_unit", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("measurement_unit");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'measurement_unit' cannot be null",
+                    new ArgumentNullException("measurement_unit")
+                );
         }
         set
         {
@@ -82,10 +90,16 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
         get
         {
             if (!this.Properties.TryGetValue("meter_id", out JsonElement element))
-                throw new ArgumentOutOfRangeException("meter_id", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'meter_id' cannot be null",
+                    new ArgumentOutOfRangeException("meter_id", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("meter_id");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'meter_id' cannot be null",
+                    new ArgumentNullException("meter_id")
+                );
         }
         set
         {
@@ -101,10 +115,16 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
         get
         {
             if (!this.Properties.TryGetValue("name", out JsonElement element))
-                throw new ArgumentOutOfRangeException("name", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentOutOfRangeException("name", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("name");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentNullException("name")
+                );
         }
         set
         {
@@ -120,13 +140,16 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
         get
         {
             if (!this.Properties.TryGetValue("price_per_unit", out JsonElement element))
-                throw new ArgumentOutOfRangeException(
-                    "price_per_unit",
-                    "Missing required argument"
+                throw new DodoPaymentsInvalidDataException(
+                    "'price_per_unit' cannot be null",
+                    new ArgumentOutOfRangeException("price_per_unit", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new ArgumentNullException("price_per_unit");
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'price_per_unit' cannot be null",
+                    new ArgumentNullException("price_per_unit")
+                );
         }
         set
         {

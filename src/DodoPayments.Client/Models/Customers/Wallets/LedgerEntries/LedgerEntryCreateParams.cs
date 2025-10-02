@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries.LedgerEntryCreateParamsProperties;
 using DodoPayments.Client.Models.Misc;
 
@@ -19,7 +21,10 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("amount", out JsonElement element))
-                throw new ArgumentOutOfRangeException("amount", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'amount' cannot be null",
+                    new ArgumentOutOfRangeException("amount", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
         }
@@ -40,7 +45,10 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("currency", out JsonElement element))
-                throw new ArgumentOutOfRangeException("currency", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentOutOfRangeException("currency", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
                 element,
@@ -64,7 +72,10 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         get
         {
             if (!this.BodyProperties.TryGetValue("entry_type", out JsonElement element))
-                throw new ArgumentOutOfRangeException("entry_type", "Missing required argument");
+                throw new DodoPaymentsInvalidDataException(
+                    "'entry_type' cannot be null",
+                    new ArgumentOutOfRangeException("entry_type", "Missing required argument")
+                );
 
             return JsonSerializer.Deserialize<ApiEnum<string, EntryType>>(
                 element,
@@ -130,7 +141,7 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         }.Uri;
     }
 
-    public StringContent BodyContent()
+    internal override StringContent? BodyContent()
     {
         return new(
             JsonSerializer.Serialize(this.BodyProperties),
@@ -139,7 +150,10 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         );
     }
 
-    public void AddHeadersToRequest(HttpRequestMessage request, IDodoPaymentsClient client)
+    internal override void AddHeadersToRequest(
+        HttpRequestMessage request,
+        IDodoPaymentsClient client
+    )
     {
         ParamsBase.AddDefaultHeaders(request, client);
         foreach (var item in this.HeaderProperties)
