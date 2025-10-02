@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.54.0 (2025-10-02)
+
+Full Changelog: [v1.53.3...v1.54.0](https://github.com/dodopayments/dodopayments-csharp/compare/v1.53.3...v1.54.0)
+
+### Features
+
+* **client:** refactor exceptions ([0402f73](https://github.com/dodopayments/dodopayments-csharp/commit/0402f73af868dda1fd24581a591bf1feb1e6ce38))
+
 ## 1.53.3 (2025-09-23)
 
 Full Changelog: [v1.53.2...v1.53.3](https://github.com/dodopayments/dodopayments-csharp/compare/v1.53.2...v1.53.3)
