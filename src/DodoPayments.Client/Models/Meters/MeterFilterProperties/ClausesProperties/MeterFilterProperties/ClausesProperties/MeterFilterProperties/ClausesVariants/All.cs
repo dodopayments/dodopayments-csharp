@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DodoPayments.Client.Core;
 using ClausesProperties = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties;
+using MeterFilterProperties = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties;
 
 namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesVariants;
 
@@ -9,7 +10,9 @@ namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesPropert
 /// </summary>
 public sealed record class Level2FilterConditions(
     List<ClausesProperties::MeterFilterCondition> Value
-) : Clauses, IVariant<Level2FilterConditions, List<ClausesProperties::MeterFilterCondition>>
+)
+    : MeterFilterProperties::Clauses,
+        IVariant<Level2FilterConditions, List<ClausesProperties::MeterFilterCondition>>
 {
     public static Level2FilterConditions From(List<ClausesProperties::MeterFilterCondition> value)
     {
@@ -23,7 +26,7 @@ public sealed record class Level2FilterConditions(
 /// Array of level 3 nested filters (final level)
 /// </summary>
 public sealed record class Level2NestedFilters(List<ClausesProperties::MeterFilter> Value)
-    : Clauses,
+    : MeterFilterProperties::Clauses,
         IVariant<Level2NestedFilters, List<ClausesProperties::MeterFilter>>
 {
     public static Level2NestedFilters From(List<ClausesProperties::MeterFilter> value)
