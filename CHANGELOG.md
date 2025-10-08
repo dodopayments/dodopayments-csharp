@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.55.0 (2025-10-08)
+
+Full Changelog: [v1.54.0...v1.55.0](https://github.com/dodopayments/dodopayments-csharp/compare/v1.54.0...v1.55.0)
+
+### Features
+
+* **client:** refactor unions ([d446524](https://github.com/dodopayments/dodopayments-csharp/commit/d44652418967544a0ac12b04d46ca7f805ad6ee6))
+* **internal:** add dev container ([5031f27](https://github.com/dodopayments/dodopayments-csharp/commit/5031f2786d3bbe930b66c903526e41e2e8fbc495))
+
+
+### Chores
+
+* **internal:** restructure some imports ([79c36a8](https://github.com/dodopayments/dodopayments-csharp/commit/79c36a80f5e403d22d0483847c471b147f8168f7))
+
 ## 1.54.0 (2025-10-02)
 
 Full Changelog: [v1.53.3...v1.54.0](https://github.com/dodopayments/dodopayments-csharp/compare/v1.53.3...v1.54.0)
