@@ -5,37 +5,37 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
 
-namespace DodoPayments.Client.Models.UsageEvents.EventInputProperties.MetadataProperties;
+namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterConditionProperties;
 
 /// <summary>
-/// Metadata value can be a string, integer, number, or boolean
+/// Filter value - can be string, number, or boolean
 /// </summary>
-[JsonConverter(typeof(MetadataConverter))]
-public record class Metadata
+[JsonConverter(typeof(ValueModelConverter))]
+public record class ValueModel
 {
     public object Value { get; private init; }
 
-    public Metadata(string value)
+    public ValueModel(string value)
     {
         Value = value;
     }
 
-    public Metadata(double value)
+    public ValueModel(double value)
     {
         Value = value;
     }
 
-    public Metadata(bool value)
+    public ValueModel(bool value)
     {
         Value = value;
     }
 
-    Metadata(UnknownVariant value)
+    ValueModel(UnknownVariant value)
     {
         Value = value;
     }
 
-    public static Metadata CreateUnknownVariant(JsonElement value)
+    public static ValueModel CreateUnknownVariant(JsonElement value)
     {
         return new(new UnknownVariant(value));
     }
@@ -46,19 +46,19 @@ public record class Metadata
         return value != null;
     }
 
-    public bool TryPickNumber([NotNullWhen(true)] out double? value)
+    public bool TryPickDouble([NotNullWhen(true)] out double? value)
     {
         value = this.Value as double?;
         return value != null;
     }
 
-    public bool TryPickBoolean([NotNullWhen(true)] out bool? value)
+    public bool TryPickBool([NotNullWhen(true)] out bool? value)
     {
         value = this.Value as bool?;
         return value != null;
     }
 
-    public void Switch(Action<string> @string, Action<double> @number, Action<bool> @boolean)
+    public void Switch(Action<string> @string, Action<double> @double, Action<bool> @bool)
     {
         switch (this.Value)
         {
@@ -66,27 +66,27 @@ public record class Metadata
                 @string(value);
                 break;
             case double value:
-                @number(value);
+                @double(value);
                 break;
             case bool value:
-                @boolean(value);
+                @bool(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of Metadata"
+                    "Data did not match any variant of ValueModel"
                 );
         }
     }
 
-    public T Match<T>(Func<string, T> @string, Func<double, T> @number, Func<bool, T> @boolean)
+    public T Match<T>(Func<string, T> @string, Func<double, T> @double, Func<bool, T> @bool)
     {
         return this.Value switch
         {
             string value => @string(value),
-            double value => @number(value),
-            bool value => @boolean(value),
+            double value => @double(value),
+            bool value => @bool(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Metadata"
+                "Data did not match any variant of ValueModel"
             ),
         };
     }
@@ -96,7 +96,7 @@ public record class Metadata
         if (this.Value is not UnknownVariant)
         {
             throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Metadata"
+                "Data did not match any variant of ValueModel"
             );
         }
     }
@@ -104,9 +104,9 @@ public record class Metadata
     private record struct UnknownVariant(JsonElement value);
 }
 
-sealed class MetadataConverter : JsonConverter<Metadata>
+sealed class ValueModelConverter : JsonConverter<ValueModel>
 {
-    public override Metadata? Read(
+    public override ValueModel? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -119,7 +119,7 @@ sealed class MetadataConverter : JsonConverter<Metadata>
             var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
             if (deserialized != null)
             {
-                return new Metadata(deserialized);
+                return new ValueModel(deserialized);
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -134,7 +134,7 @@ sealed class MetadataConverter : JsonConverter<Metadata>
 
         try
         {
-            return new Metadata(JsonSerializer.Deserialize<double>(ref reader, options));
+            return new ValueModel(JsonSerializer.Deserialize<double>(ref reader, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
@@ -148,7 +148,7 @@ sealed class MetadataConverter : JsonConverter<Metadata>
 
         try
         {
-            return new Metadata(JsonSerializer.Deserialize<bool>(ref reader, options));
+            return new ValueModel(JsonSerializer.Deserialize<bool>(ref reader, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
@@ -160,7 +160,11 @@ sealed class MetadataConverter : JsonConverter<Metadata>
         throw new AggregateException(exceptions);
     }
 
-    public override void Write(Utf8JsonWriter writer, Metadata value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        ValueModel value,
+        JsonSerializerOptions options
+    )
     {
         object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);

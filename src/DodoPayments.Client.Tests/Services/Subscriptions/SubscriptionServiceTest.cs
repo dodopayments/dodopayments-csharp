@@ -21,7 +21,7 @@ public class SubscriptionServiceTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
-                Customer = new AttachExistingCustomer("customer_id"),
+                Customer = new(new AttachExistingCustomer("customer_id")),
                 ProductID = "product_id",
                 Quantity = 0,
             }

@@ -4,45 +4,58 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
-using CustomerRequestVariants = DodoPayments.Client.Models.Payments.CustomerRequestVariants;
 
 namespace DodoPayments.Client.Models.Payments;
 
 [JsonConverter(typeof(CustomerRequestConverter))]
-public abstract record class CustomerRequest
+public record class CustomerRequest
 {
-    internal CustomerRequest() { }
+    public object Value { get; private init; }
 
-    public static implicit operator CustomerRequest(AttachExistingCustomer value) =>
-        new CustomerRequestVariants::AttachExistingCustomer(value);
+    public CustomerRequest(AttachExistingCustomer value)
+    {
+        Value = value;
+    }
 
-    public static implicit operator CustomerRequest(NewCustomer value) =>
-        new CustomerRequestVariants::NewCustomer(value);
+    public CustomerRequest(NewCustomer value)
+    {
+        Value = value;
+    }
+
+    CustomerRequest(UnknownVariant value)
+    {
+        Value = value;
+    }
+
+    public static CustomerRequest CreateUnknownVariant(JsonElement value)
+    {
+        return new(new UnknownVariant(value));
+    }
 
     public bool TryPickAttachExistingCustomer([NotNullWhen(true)] out AttachExistingCustomer? value)
     {
-        value = (this as CustomerRequestVariants::AttachExistingCustomer)?.Value;
+        value = this.Value as AttachExistingCustomer;
         return value != null;
     }
 
     public bool TryPickNewCustomer([NotNullWhen(true)] out NewCustomer? value)
     {
-        value = (this as CustomerRequestVariants::NewCustomer)?.Value;
+        value = this.Value as NewCustomer;
         return value != null;
     }
 
     public void Switch(
-        Action<CustomerRequestVariants::AttachExistingCustomer> attachExistingCustomer,
-        Action<CustomerRequestVariants::NewCustomer> newCustomer
+        Action<AttachExistingCustomer> attachExistingCustomer,
+        Action<NewCustomer> newCustomer
     )
     {
-        switch (this)
+        switch (this.Value)
         {
-            case CustomerRequestVariants::AttachExistingCustomer inner:
-                attachExistingCustomer(inner);
+            case AttachExistingCustomer value:
+                attachExistingCustomer(value);
                 break;
-            case CustomerRequestVariants::NewCustomer inner:
-                newCustomer(inner);
+            case NewCustomer value:
+                newCustomer(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -52,21 +65,31 @@ public abstract record class CustomerRequest
     }
 
     public T Match<T>(
-        Func<CustomerRequestVariants::AttachExistingCustomer, T> attachExistingCustomer,
-        Func<CustomerRequestVariants::NewCustomer, T> newCustomer
+        Func<AttachExistingCustomer, T> attachExistingCustomer,
+        Func<NewCustomer, T> newCustomer
     )
     {
-        return this switch
+        return this.Value switch
         {
-            CustomerRequestVariants::AttachExistingCustomer inner => attachExistingCustomer(inner),
-            CustomerRequestVariants::NewCustomer inner => newCustomer(inner),
+            AttachExistingCustomer value => attachExistingCustomer(value),
+            NewCustomer value => newCustomer(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of CustomerRequest"
             ),
         };
     }
 
-    public abstract void Validate();
+    public void Validate()
+    {
+        if (this.Value is not UnknownVariant)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of CustomerRequest"
+            );
+        }
+    }
+
+    private record struct UnknownVariant(JsonElement value);
 }
 
 sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
@@ -87,14 +110,15 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
             );
             if (deserialized != null)
             {
-                return new CustomerRequestVariants::AttachExistingCustomer(deserialized);
+                deserialized.Validate();
+                return new CustomerRequest(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant CustomerRequestVariants::AttachExistingCustomer",
+                    "Data does not match union variant 'AttachExistingCustomer'",
                     e
                 )
             );
@@ -105,14 +129,15 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
             var deserialized = JsonSerializer.Deserialize<NewCustomer>(ref reader, options);
             if (deserialized != null)
             {
-                return new CustomerRequestVariants::NewCustomer(deserialized);
+                deserialized.Validate();
+                return new CustomerRequest(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant CustomerRequestVariants::NewCustomer",
+                    "Data does not match union variant 'NewCustomer'",
                     e
                 )
             );
@@ -127,15 +152,7 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
         JsonSerializerOptions options
     )
     {
-        object variant = value switch
-        {
-            CustomerRequestVariants::AttachExistingCustomer(var attachExistingCustomer) =>
-                attachExistingCustomer,
-            CustomerRequestVariants::NewCustomer(var newCustomer) => newCustomer,
-            _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of CustomerRequest"
-            ),
-        };
+        object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);
     }
 }

@@ -70,7 +70,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
     /// <summary>
     /// Filter value - can be string, number, or boolean
     /// </summary>
-    public required Value Value
+    public required ValueModel Value
     {
         get
         {
@@ -80,7 +80,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
                     new ArgumentOutOfRangeException("value", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Value>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<ValueModel>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'value' cannot be null",
                     new ArgumentNullException("value")
