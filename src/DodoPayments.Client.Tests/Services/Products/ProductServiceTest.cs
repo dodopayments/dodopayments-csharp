@@ -13,17 +13,19 @@ public class ProductServiceTest : TestBase
         var product = await this.client.Products.Create(
             new()
             {
-                Price = new OneTimePrice()
-                {
-                    Currency = Currency.Aed,
-                    Discount = 0,
-                    Price = 0,
-                    PurchasingPowerParity = true,
-                    Type = Type.OneTimePrice,
-                    PayWhatYouWant = true,
-                    SuggestedPrice = 0,
-                    TaxInclusive = true,
-                },
+                Price = new(
+                    new OneTimePrice()
+                    {
+                        Currency = Currency.Aed,
+                        Discount = 0,
+                        Price = 0,
+                        PurchasingPowerParity = true,
+                        Type = Type.OneTimePrice,
+                        PayWhatYouWant = true,
+                        SuggestedPrice = 0,
+                        TaxInclusive = true,
+                    }
+                ),
                 TaxCategory = TaxCategory.DigitalProducts,
             }
         );

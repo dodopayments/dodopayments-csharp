@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesVariants;
 using ClausesProperties = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties;
 
 namespace DodoPayments.Client.Models.Meters.MeterFilterProperties;
@@ -13,21 +12,35 @@ namespace DodoPayments.Client.Models.Meters.MeterFilterProperties;
 /// Filter clauses - can be direct conditions or nested filters (up to 3 levels deep)
 /// </summary>
 [JsonConverter(typeof(ClausesConverter))]
-public abstract record class Clauses
+public record class Clauses
 {
-    internal Clauses() { }
+    public object Value { get; private init; }
 
-    public static implicit operator Clauses(List<ClausesProperties::MeterFilterCondition> value) =>
-        new DirectFilterConditions(value);
+    public Clauses(List<ClausesProperties::MeterFilterCondition> value)
+    {
+        Value = value;
+    }
 
-    public static implicit operator Clauses(List<ClausesProperties::MeterFilter> value) =>
-        new NestedMeterFilters(value);
+    public Clauses(List<ClausesProperties::MeterFilter> value)
+    {
+        Value = value;
+    }
+
+    Clauses(UnknownVariant value)
+    {
+        Value = value;
+    }
+
+    public static Clauses CreateUnknownVariant(JsonElement value)
+    {
+        return new(new UnknownVariant(value));
+    }
 
     public bool TryPickDirectFilterConditions(
         [NotNullWhen(true)] out List<ClausesProperties::MeterFilterCondition>? value
     )
     {
-        value = (this as DirectFilterConditions)?.Value;
+        value = this.Value as List<ClausesProperties::MeterFilterCondition>;
         return value != null;
     }
 
@@ -35,22 +48,22 @@ public abstract record class Clauses
         [NotNullWhen(true)] out List<ClausesProperties::MeterFilter>? value
     )
     {
-        value = (this as NestedMeterFilters)?.Value;
+        value = this.Value as List<ClausesProperties::MeterFilter>;
         return value != null;
     }
 
     public void Switch(
-        Action<DirectFilterConditions> directFilterConditions,
-        Action<NestedMeterFilters> nestedMeterFilters
+        Action<List<ClausesProperties::MeterFilterCondition>> directFilterConditions,
+        Action<List<ClausesProperties::MeterFilter>> nestedMeterFilters
     )
     {
-        switch (this)
+        switch (this.Value)
         {
-            case DirectFilterConditions inner:
-                directFilterConditions(inner);
+            case List<ClausesProperties::MeterFilterCondition> value:
+                directFilterConditions(value);
                 break;
-            case NestedMeterFilters inner:
-                nestedMeterFilters(inner);
+            case List<ClausesProperties::MeterFilter> value:
+                nestedMeterFilters(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -60,21 +73,29 @@ public abstract record class Clauses
     }
 
     public T Match<T>(
-        Func<DirectFilterConditions, T> directFilterConditions,
-        Func<NestedMeterFilters, T> nestedMeterFilters
+        Func<List<ClausesProperties::MeterFilterCondition>, T> directFilterConditions,
+        Func<List<ClausesProperties::MeterFilter>, T> nestedMeterFilters
     )
     {
-        return this switch
+        return this.Value switch
         {
-            DirectFilterConditions inner => directFilterConditions(inner),
-            NestedMeterFilters inner => nestedMeterFilters(inner),
+            List<ClausesProperties::MeterFilterCondition> value => directFilterConditions(value),
+            List<ClausesProperties::MeterFilter> value => nestedMeterFilters(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Clauses"
             ),
         };
     }
 
-    public abstract void Validate();
+    public void Validate()
+    {
+        if (this.Value is not UnknownVariant)
+        {
+            throw new DodoPaymentsInvalidDataException("Data did not match any variant of Clauses");
+        }
+    }
+
+    private record struct UnknownVariant(JsonElement value);
 }
 
 sealed class ClausesConverter : JsonConverter<Clauses>
@@ -94,14 +115,14 @@ sealed class ClausesConverter : JsonConverter<Clauses>
             >(ref reader, options);
             if (deserialized != null)
             {
-                return new DirectFilterConditions(deserialized);
+                return new Clauses(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant DirectFilterConditions",
+                    "Data does not match union variant 'List<ClausesProperties::MeterFilterCondition>'",
                     e
                 )
             );
@@ -115,14 +136,14 @@ sealed class ClausesConverter : JsonConverter<Clauses>
             );
             if (deserialized != null)
             {
-                return new NestedMeterFilters(deserialized);
+                return new Clauses(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant NestedMeterFilters",
+                    "Data does not match union variant 'List<ClausesProperties::MeterFilter>'",
                     e
                 )
             );
@@ -133,14 +154,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
 
     public override void Write(Utf8JsonWriter writer, Clauses value, JsonSerializerOptions options)
     {
-        object variant = value switch
-        {
-            DirectFilterConditions(var directFilterConditions) => directFilterConditions,
-            NestedMeterFilters(var nestedMeterFilters) => nestedMeterFilters,
-            _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Clauses"
-            ),
-        };
+        object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);
     }
 }
