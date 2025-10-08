@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesVariants;
 using ClausesProperties = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties;
 
 namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties;
@@ -13,21 +12,35 @@ namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesPropert
 /// Level 2: Can be conditions or nested filters (1 more level allowed)
 /// </summary>
 [JsonConverter(typeof(ClausesConverter))]
-public abstract record class Clauses
+public record class Clauses
 {
-    internal Clauses() { }
+    public object Value { get; private init; }
 
-    public static implicit operator Clauses(List<ClausesProperties::MeterFilterCondition> value) =>
-        new Level2FilterConditions(value);
+    public Clauses(List<ClausesProperties::MeterFilterCondition> value)
+    {
+        Value = value;
+    }
 
-    public static implicit operator Clauses(List<ClausesProperties::MeterFilter> value) =>
-        new Level2NestedFilters(value);
+    public Clauses(List<ClausesProperties::MeterFilter> value)
+    {
+        Value = value;
+    }
+
+    Clauses(UnknownVariant value)
+    {
+        Value = value;
+    }
+
+    public static Clauses CreateUnknownVariant(JsonElement value)
+    {
+        return new(new UnknownVariant(value));
+    }
 
     public bool TryPickLevel2FilterConditions(
         [NotNullWhen(true)] out List<ClausesProperties::MeterFilterCondition>? value
     )
     {
-        value = (this as Level2FilterConditions)?.Value;
+        value = this.Value as List<ClausesProperties::MeterFilterCondition>;
         return value != null;
     }
 
@@ -35,22 +48,22 @@ public abstract record class Clauses
         [NotNullWhen(true)] out List<ClausesProperties::MeterFilter>? value
     )
     {
-        value = (this as Level2NestedFilters)?.Value;
+        value = this.Value as List<ClausesProperties::MeterFilter>;
         return value != null;
     }
 
     public void Switch(
-        Action<Level2FilterConditions> level2FilterConditions,
-        Action<Level2NestedFilters> level2NestedFilters
+        Action<List<ClausesProperties::MeterFilterCondition>> level2FilterConditions,
+        Action<List<ClausesProperties::MeterFilter>> level2NestedFilters
     )
     {
-        switch (this)
+        switch (this.Value)
         {
-            case Level2FilterConditions inner:
-                level2FilterConditions(inner);
+            case List<ClausesProperties::MeterFilterCondition> value:
+                level2FilterConditions(value);
                 break;
-            case Level2NestedFilters inner:
-                level2NestedFilters(inner);
+            case List<ClausesProperties::MeterFilter> value:
+                level2NestedFilters(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -60,21 +73,29 @@ public abstract record class Clauses
     }
 
     public T Match<T>(
-        Func<Level2FilterConditions, T> level2FilterConditions,
-        Func<Level2NestedFilters, T> level2NestedFilters
+        Func<List<ClausesProperties::MeterFilterCondition>, T> level2FilterConditions,
+        Func<List<ClausesProperties::MeterFilter>, T> level2NestedFilters
     )
     {
-        return this switch
+        return this.Value switch
         {
-            Level2FilterConditions inner => level2FilterConditions(inner),
-            Level2NestedFilters inner => level2NestedFilters(inner),
+            List<ClausesProperties::MeterFilterCondition> value => level2FilterConditions(value),
+            List<ClausesProperties::MeterFilter> value => level2NestedFilters(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Clauses"
             ),
         };
     }
 
-    public abstract void Validate();
+    public void Validate()
+    {
+        if (this.Value is not UnknownVariant)
+        {
+            throw new DodoPaymentsInvalidDataException("Data did not match any variant of Clauses");
+        }
+    }
+
+    private record struct UnknownVariant(JsonElement value);
 }
 
 sealed class ClausesConverter : JsonConverter<Clauses>
@@ -94,14 +115,14 @@ sealed class ClausesConverter : JsonConverter<Clauses>
             >(ref reader, options);
             if (deserialized != null)
             {
-                return new Level2FilterConditions(deserialized);
+                return new Clauses(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant Level2FilterConditions",
+                    "Data does not match union variant 'List<ClausesProperties::MeterFilterCondition>'",
                     e
                 )
             );
@@ -115,14 +136,14 @@ sealed class ClausesConverter : JsonConverter<Clauses>
             );
             if (deserialized != null)
             {
-                return new Level2NestedFilters(deserialized);
+                return new Clauses(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant Level2NestedFilters",
+                    "Data does not match union variant 'List<ClausesProperties::MeterFilter>'",
                     e
                 )
             );
@@ -133,14 +154,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
 
     public override void Write(Utf8JsonWriter writer, Clauses value, JsonSerializerOptions options)
     {
-        object variant = value switch
-        {
-            Level2FilterConditions(var level2FilterConditions) => level2FilterConditions,
-            Level2NestedFilters(var level2NestedFilters) => level2NestedFilters,
-            _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Clauses"
-            ),
-        };
+        object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);
     }
 }

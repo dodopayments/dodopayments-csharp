@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
-using MetadataVariants = DodoPayments.Client.Models.UsageEvents.EventProperties.MetadataProperties.MetadataVariants;
 
 namespace DodoPayments.Client.Models.UsageEvents.EventProperties.MetadataProperties;
 
@@ -12,50 +11,65 @@ namespace DodoPayments.Client.Models.UsageEvents.EventProperties.MetadataPropert
 /// Metadata value can be a string, integer, number, or boolean
 /// </summary>
 [JsonConverter(typeof(MetadataConverter))]
-public abstract record class Metadata
+public record class Metadata
 {
-    internal Metadata() { }
+    public object Value { get; private init; }
 
-    public static implicit operator Metadata(string value) => new MetadataVariants::String(value);
+    public Metadata(string value)
+    {
+        Value = value;
+    }
 
-    public static implicit operator Metadata(double value) => new MetadataVariants::Number(value);
+    public Metadata(double value)
+    {
+        Value = value;
+    }
 
-    public static implicit operator Metadata(bool value) => new MetadataVariants::Boolean(value);
+    public Metadata(bool value)
+    {
+        Value = value;
+    }
+
+    Metadata(UnknownVariant value)
+    {
+        Value = value;
+    }
+
+    public static Metadata CreateUnknownVariant(JsonElement value)
+    {
+        return new(new UnknownVariant(value));
+    }
 
     public bool TryPickString([NotNullWhen(true)] out string? value)
     {
-        value = (this as MetadataVariants::String)?.Value;
+        value = this.Value as string;
         return value != null;
     }
 
     public bool TryPickNumber([NotNullWhen(true)] out double? value)
     {
-        value = (this as MetadataVariants::Number)?.Value;
+        value = this.Value as double?;
         return value != null;
     }
 
     public bool TryPickBoolean([NotNullWhen(true)] out bool? value)
     {
-        value = (this as MetadataVariants::Boolean)?.Value;
+        value = this.Value as bool?;
         return value != null;
     }
 
-    public void Switch(
-        Action<MetadataVariants::String> @string,
-        Action<MetadataVariants::Number> @number,
-        Action<MetadataVariants::Boolean> @boolean
-    )
+    public void Switch(Action<string> @string, Action<double> @number, Action<bool> @boolean)
     {
-        switch (this)
+        switch (this.Value)
         {
-            case MetadataVariants::String inner:
-                @string(inner);
+            case string value:
+                @string(value);
                 break;
-            case MetadataVariants::Number inner:
-                @number(inner);
+            case double value:
+                @number(value);
                 break;
-            case MetadataVariants::Boolean inner:
-                @boolean(inner);
+            case bool value:
+                @boolean(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -64,24 +78,30 @@ public abstract record class Metadata
         }
     }
 
-    public T Match<T>(
-        Func<MetadataVariants::String, T> @string,
-        Func<MetadataVariants::Number, T> @number,
-        Func<MetadataVariants::Boolean, T> @boolean
-    )
+    public T Match<T>(Func<string, T> @string, Func<double, T> @number, Func<bool, T> @boolean)
     {
-        return this switch
+        return this.Value switch
         {
-            MetadataVariants::String inner => @string(inner),
-            MetadataVariants::Number inner => @number(inner),
-            MetadataVariants::Boolean inner => @boolean(inner),
+            string value => @string(value),
+            double value => @number(value),
+            bool value => @boolean(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Metadata"
             ),
         };
     }
 
-    public abstract void Validate();
+    public void Validate()
+    {
+        if (this.Value is not UnknownVariant)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of Metadata"
+            );
+        }
+    }
+
+    private record struct UnknownVariant(JsonElement value);
 }
 
 sealed class MetadataConverter : JsonConverter<Metadata>
@@ -99,14 +119,14 @@ sealed class MetadataConverter : JsonConverter<Metadata>
             var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
             if (deserialized != null)
             {
-                return new MetadataVariants::String(deserialized);
+                return new Metadata(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant MetadataVariants::String",
+                    "Data does not match union variant 'string'",
                     e
                 )
             );
@@ -114,15 +134,13 @@ sealed class MetadataConverter : JsonConverter<Metadata>
 
         try
         {
-            return new MetadataVariants::Number(
-                JsonSerializer.Deserialize<double>(ref reader, options)
-            );
+            return new Metadata(JsonSerializer.Deserialize<double>(ref reader, options));
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant MetadataVariants::Number",
+                    "Data does not match union variant 'double'",
                     e
                 )
             );
@@ -130,17 +148,12 @@ sealed class MetadataConverter : JsonConverter<Metadata>
 
         try
         {
-            return new MetadataVariants::Boolean(
-                JsonSerializer.Deserialize<bool>(ref reader, options)
-            );
+            return new Metadata(JsonSerializer.Deserialize<bool>(ref reader, options));
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant MetadataVariants::Boolean",
-                    e
-                )
+                new DodoPaymentsInvalidDataException("Data does not match union variant 'bool'", e)
             );
         }
 
@@ -149,15 +162,7 @@ sealed class MetadataConverter : JsonConverter<Metadata>
 
     public override void Write(Utf8JsonWriter writer, Metadata value, JsonSerializerOptions options)
     {
-        object variant = value switch
-        {
-            MetadataVariants::String(var @string) => @string,
-            MetadataVariants::Number(var @number) => @number,
-            MetadataVariants::Boolean(var @boolean) => @boolean,
-            _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Metadata"
-            ),
-        };
+        object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);
     }
 }

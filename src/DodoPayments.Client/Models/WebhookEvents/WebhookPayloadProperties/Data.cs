@@ -4,8 +4,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties;
-using DataVariants = DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataVariants;
+using DodoPayments.Client.Models.Payments;
+using DataProperties = DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties;
 
 namespace DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties;
 
@@ -13,75 +13,239 @@ namespace DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties;
 /// The latest data at the time of delivery attempt
 /// </summary>
 [JsonConverter(typeof(DataConverter))]
-public abstract record class Data
+public record class Data
 {
-    internal Data() { }
+    public object Value { get; private init; }
 
-    public static implicit operator Data(Payment value) => new DataVariants::Payment(value);
-
-    public static implicit operator Data(Subscription value) =>
-        new DataVariants::Subscription(value);
-
-    public static implicit operator Data(Refund value) => new DataVariants::Refund(value);
-
-    public static implicit operator Data(Dispute value) => new DataVariants::Dispute(value);
-
-    public static implicit operator Data(LicenseKey value) => new DataVariants::LicenseKey(value);
-
-    public bool TryPickPayment([NotNullWhen(true)] out Payment? value)
+    public BillingAddress? Billing
     {
-        value = (this as DataVariants::Payment)?.Value;
+        get
+        {
+            return Match<BillingAddress?>(
+                payment: (x) => x.Billing,
+                subscription: (x) => x.Billing,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null
+            );
+        }
+    }
+
+    public string? BusinessID
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (x) => x.BusinessID,
+                subscription: (_) => null,
+                refund: (x) => x.BusinessID,
+                dispute: (x) => x.BusinessID,
+                licenseKey: (x) => x.BusinessID
+            );
+        }
+    }
+
+    public DateTime CreatedAt
+    {
+        get
+        {
+            return Match(
+                payment: (x) => x.CreatedAt,
+                subscription: (x) => x.CreatedAt,
+                refund: (x) => x.CreatedAt,
+                dispute: (x) => x.CreatedAt,
+                licenseKey: (x) => x.CreatedAt
+            );
+        }
+    }
+
+    public CustomerLimitedDetails? Customer
+    {
+        get
+        {
+            return Match<CustomerLimitedDetails?>(
+                payment: (x) => x.Customer,
+                subscription: (x) => x.Customer,
+                refund: (x) => x.Customer,
+                dispute: (x) => x.Customer,
+                licenseKey: (_) => null
+            );
+        }
+    }
+
+    public string? PaymentID
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (x) => x.PaymentID,
+                subscription: (_) => null,
+                refund: (x) => x.PaymentID,
+                dispute: (x) => x.PaymentID,
+                licenseKey: (x) => x.PaymentID
+            );
+        }
+    }
+
+    public string? DiscountID
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (x) => x.DiscountID,
+                subscription: (x) => x.DiscountID,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null
+            );
+        }
+    }
+
+    public string? SubscriptionID
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (x) => x.SubscriptionID,
+                subscription: (x) => x.SubscriptionID,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (x) => x.SubscriptionID
+            );
+        }
+    }
+
+    public string? ProductID
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (_) => null,
+                subscription: (x) => x.ProductID,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (x) => x.ProductID
+            );
+        }
+    }
+
+    public DateTime? ExpiresAt
+    {
+        get
+        {
+            return Match<DateTime?>(
+                payment: (_) => null,
+                subscription: (x) => x.ExpiresAt,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (x) => x.ExpiresAt
+            );
+        }
+    }
+
+    public string? Reason
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (_) => null,
+                subscription: (_) => null,
+                refund: (x) => x.Reason,
+                dispute: (x) => x.Reason,
+                licenseKey: (_) => null
+            );
+        }
+    }
+
+    public Data(DataProperties::Payment value)
+    {
+        Value = value;
+    }
+
+    public Data(DataProperties::Subscription value)
+    {
+        Value = value;
+    }
+
+    public Data(DataProperties::Refund value)
+    {
+        Value = value;
+    }
+
+    public Data(DataProperties::Dispute value)
+    {
+        Value = value;
+    }
+
+    public Data(DataProperties::LicenseKey value)
+    {
+        Value = value;
+    }
+
+    Data(UnknownVariant value)
+    {
+        Value = value;
+    }
+
+    public static Data CreateUnknownVariant(JsonElement value)
+    {
+        return new(new UnknownVariant(value));
+    }
+
+    public bool TryPickPayment([NotNullWhen(true)] out DataProperties::Payment? value)
+    {
+        value = this.Value as DataProperties::Payment;
         return value != null;
     }
 
-    public bool TryPickSubscription([NotNullWhen(true)] out Subscription? value)
+    public bool TryPickSubscription([NotNullWhen(true)] out DataProperties::Subscription? value)
     {
-        value = (this as DataVariants::Subscription)?.Value;
+        value = this.Value as DataProperties::Subscription;
         return value != null;
     }
 
-    public bool TryPickRefund([NotNullWhen(true)] out Refund? value)
+    public bool TryPickRefund([NotNullWhen(true)] out DataProperties::Refund? value)
     {
-        value = (this as DataVariants::Refund)?.Value;
+        value = this.Value as DataProperties::Refund;
         return value != null;
     }
 
-    public bool TryPickDispute([NotNullWhen(true)] out Dispute? value)
+    public bool TryPickDispute([NotNullWhen(true)] out DataProperties::Dispute? value)
     {
-        value = (this as DataVariants::Dispute)?.Value;
+        value = this.Value as DataProperties::Dispute;
         return value != null;
     }
 
-    public bool TryPickLicenseKey([NotNullWhen(true)] out LicenseKey? value)
+    public bool TryPickLicenseKey([NotNullWhen(true)] out DataProperties::LicenseKey? value)
     {
-        value = (this as DataVariants::LicenseKey)?.Value;
+        value = this.Value as DataProperties::LicenseKey;
         return value != null;
     }
 
     public void Switch(
-        Action<DataVariants::Payment> payment,
-        Action<DataVariants::Subscription> subscription,
-        Action<DataVariants::Refund> refund,
-        Action<DataVariants::Dispute> dispute,
-        Action<DataVariants::LicenseKey> licenseKey
+        Action<DataProperties::Payment> payment,
+        Action<DataProperties::Subscription> subscription,
+        Action<DataProperties::Refund> refund,
+        Action<DataProperties::Dispute> dispute,
+        Action<DataProperties::LicenseKey> licenseKey
     )
     {
-        switch (this)
+        switch (this.Value)
         {
-            case DataVariants::Payment inner:
-                payment(inner);
+            case DataProperties::Payment value:
+                payment(value);
                 break;
-            case DataVariants::Subscription inner:
-                subscription(inner);
+            case DataProperties::Subscription value:
+                subscription(value);
                 break;
-            case DataVariants::Refund inner:
-                refund(inner);
+            case DataProperties::Refund value:
+                refund(value);
                 break;
-            case DataVariants::Dispute inner:
-                dispute(inner);
+            case DataProperties::Dispute value:
+                dispute(value);
                 break;
-            case DataVariants::LicenseKey inner:
-                licenseKey(inner);
+            case DataProperties::LicenseKey value:
+                licenseKey(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -91,27 +255,35 @@ public abstract record class Data
     }
 
     public T Match<T>(
-        Func<DataVariants::Payment, T> payment,
-        Func<DataVariants::Subscription, T> subscription,
-        Func<DataVariants::Refund, T> refund,
-        Func<DataVariants::Dispute, T> dispute,
-        Func<DataVariants::LicenseKey, T> licenseKey
+        Func<DataProperties::Payment, T> payment,
+        Func<DataProperties::Subscription, T> subscription,
+        Func<DataProperties::Refund, T> refund,
+        Func<DataProperties::Dispute, T> dispute,
+        Func<DataProperties::LicenseKey, T> licenseKey
     )
     {
-        return this switch
+        return this.Value switch
         {
-            DataVariants::Payment inner => payment(inner),
-            DataVariants::Subscription inner => subscription(inner),
-            DataVariants::Refund inner => refund(inner),
-            DataVariants::Dispute inner => dispute(inner),
-            DataVariants::LicenseKey inner => licenseKey(inner),
+            DataProperties::Payment value => payment(value),
+            DataProperties::Subscription value => subscription(value),
+            DataProperties::Refund value => refund(value),
+            DataProperties::Dispute value => dispute(value),
+            DataProperties::LicenseKey value => licenseKey(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Data"
             ),
         };
     }
 
-    public abstract void Validate();
+    public void Validate()
+    {
+        if (this.Value is not UnknownVariant)
+        {
+            throw new DodoPaymentsInvalidDataException("Data did not match any variant of Data");
+        }
+    }
+
+    private record struct UnknownVariant(JsonElement value);
 }
 
 sealed class DataConverter : JsonConverter<Data>
@@ -126,17 +298,21 @@ sealed class DataConverter : JsonConverter<Data>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Payment>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<DataProperties::Payment>(
+                ref reader,
+                options
+            );
             if (deserialized != null)
             {
-                return new DataVariants::Payment(deserialized);
+                deserialized.Validate();
+                return new Data(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant DataVariants::Payment",
+                    "Data does not match union variant 'DataProperties::Payment'",
                     e
                 )
             );
@@ -144,17 +320,21 @@ sealed class DataConverter : JsonConverter<Data>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Subscription>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<DataProperties::Subscription>(
+                ref reader,
+                options
+            );
             if (deserialized != null)
             {
-                return new DataVariants::Subscription(deserialized);
+                deserialized.Validate();
+                return new Data(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant DataVariants::Subscription",
+                    "Data does not match union variant 'DataProperties::Subscription'",
                     e
                 )
             );
@@ -162,17 +342,21 @@ sealed class DataConverter : JsonConverter<Data>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Refund>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<DataProperties::Refund>(
+                ref reader,
+                options
+            );
             if (deserialized != null)
             {
-                return new DataVariants::Refund(deserialized);
+                deserialized.Validate();
+                return new Data(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant DataVariants::Refund",
+                    "Data does not match union variant 'DataProperties::Refund'",
                     e
                 )
             );
@@ -180,17 +364,21 @@ sealed class DataConverter : JsonConverter<Data>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Dispute>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<DataProperties::Dispute>(
+                ref reader,
+                options
+            );
             if (deserialized != null)
             {
-                return new DataVariants::Dispute(deserialized);
+                deserialized.Validate();
+                return new Data(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant DataVariants::Dispute",
+                    "Data does not match union variant 'DataProperties::Dispute'",
                     e
                 )
             );
@@ -198,17 +386,21 @@ sealed class DataConverter : JsonConverter<Data>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<LicenseKey>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<DataProperties::LicenseKey>(
+                ref reader,
+                options
+            );
             if (deserialized != null)
             {
-                return new DataVariants::LicenseKey(deserialized);
+                deserialized.Validate();
+                return new Data(deserialized);
             }
         }
-        catch (JsonException e)
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant DataVariants::LicenseKey",
+                    "Data does not match union variant 'DataProperties::LicenseKey'",
                     e
                 )
             );
@@ -219,17 +411,7 @@ sealed class DataConverter : JsonConverter<Data>
 
     public override void Write(Utf8JsonWriter writer, Data value, JsonSerializerOptions options)
     {
-        object variant = value switch
-        {
-            DataVariants::Payment(var payment) => payment,
-            DataVariants::Subscription(var subscription) => subscription,
-            DataVariants::Refund(var refund) => refund,
-            DataVariants::Dispute(var dispute) => dispute,
-            DataVariants::LicenseKey(var licenseKey) => licenseKey,
-            _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Data"
-            ),
-        };
+        object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);
     }
 }
