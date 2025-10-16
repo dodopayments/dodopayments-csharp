@@ -95,11 +95,33 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
         }
     }
 
+    /// <summary>
+    /// Phone number of the customer
+    /// </summary>
+    public string? PhoneNumber
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("phone_number", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["phone_number"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
     public override void Validate()
     {
         _ = this.CustomerID;
         _ = this.Email;
         _ = this.Name;
+        _ = this.PhoneNumber;
     }
 
     public CustomerLimitedDetails() { }
