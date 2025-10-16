@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.55.3 (2025-10-16)
+
+Full Changelog: [v1.55.0...v1.55.3](https://github.com/dodopayments/dodopayments-csharp/compare/v1.55.0...v1.55.3)
+
+### Features
+
+* **api:** updated openapi spec to v1.55.0 ([9ea3e6d](https://github.com/dodopayments/dodopayments-csharp/commit/9ea3e6d650931f45bb09c04cf60f8c45c418c072))
+
 ## 1.55.0 (2025-10-08)
 
 Full Changelog: [v1.54.0...v1.55.0](https://github.com/dodopayments/dodopayments-csharp/compare/v1.54.0...v1.55.0)
