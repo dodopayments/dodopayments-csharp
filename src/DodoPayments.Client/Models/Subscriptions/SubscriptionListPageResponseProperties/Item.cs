@@ -632,6 +632,27 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         }
     }
 
+    /// <summary>
+    /// Tax identifier provided for this subscription (if applicable)
+    /// </summary>
+    public string? TaxID
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("tax_id", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["tax_id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
     public override void Validate()
     {
         this.Billing.Validate();
@@ -660,6 +681,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         _ = this.CancelledAt;
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;
+        _ = this.TaxID;
     }
 
     public Item() { }
