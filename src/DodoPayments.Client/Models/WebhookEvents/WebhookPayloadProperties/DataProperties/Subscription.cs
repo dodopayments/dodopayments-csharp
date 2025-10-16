@@ -700,6 +700,27 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
         }
     }
 
+    /// <summary>
+    /// Tax identifier provided for this subscription (if applicable)
+    /// </summary>
+    public string? TaxID
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("tax_id", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["tax_id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
     public required ApiEnum<string, PayloadType> PayloadType
     {
         get
@@ -753,6 +774,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
             DiscountCyclesRemaining = subscription.DiscountCyclesRemaining,
             DiscountID = subscription.DiscountID,
             ExpiresAt = subscription.ExpiresAt,
+            TaxID = subscription.TaxID,
         };
 
     public override void Validate()
@@ -792,6 +814,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;
         _ = this.ExpiresAt;
+        _ = this.TaxID;
         this.PayloadType.Validate();
     }
 

@@ -14,6 +14,27 @@ namespace DodoPayments.Client.Models.CheckoutSessions.CheckoutSessionCreateParam
 public sealed record class Customization : ModelBase, IFromRaw<Customization>
 {
     /// <summary>
+    /// Force the checkout interface to render in a specific language (e.g. `en`, `es`)
+    /// </summary>
+    public string? ForceLanguage
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("force_language", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["force_language"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Show on demand tag
     ///
     /// Default is true
@@ -87,6 +108,7 @@ public sealed record class Customization : ModelBase, IFromRaw<Customization>
 
     public override void Validate()
     {
+        _ = this.ForceLanguage;
         _ = this.ShowOnDemandTag;
         _ = this.ShowOrderDetails;
         this.Theme?.Validate();

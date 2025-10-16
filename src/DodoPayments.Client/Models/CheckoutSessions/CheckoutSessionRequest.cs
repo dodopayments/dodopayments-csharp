@@ -228,6 +228,27 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     }
 
     /// <summary>
+    /// Override merchant default 3DS behaviour for this session
+    /// </summary>
+    public bool? Force3DS
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("force_3ds", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["force_3ds"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Additional metadata associated with the payment. Defaults to empty if not provided.
     /// </summary>
     public Dictionary<string, string>? Metadata
@@ -331,6 +352,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
         this.Customization?.Validate();
         _ = this.DiscountCode;
         this.FeatureFlags?.Validate();
+        _ = this.Force3DS;
         if (this.Metadata != null)
         {
             foreach (var item in this.Metadata.Values)

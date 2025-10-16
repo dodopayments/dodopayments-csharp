@@ -226,6 +226,27 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Override merchant default 3DS behaviour for this subscription
+    /// </summary>
+    public bool? Force3DS
+    {
+        get
+        {
+            if (!this.BodyProperties.TryGetValue("force_3ds", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.BodyProperties["force_3ds"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Additional metadata for the subscription Defaults to empty if not specified
     /// </summary>
     public Dictionary<string, string>? Metadata

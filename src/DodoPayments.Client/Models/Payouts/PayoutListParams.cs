@@ -8,6 +8,48 @@ namespace DodoPayments.Client.Models.Payouts;
 public sealed record class PayoutListParams : ParamsBase
 {
     /// <summary>
+    /// Get payouts created after this time (inclusive)
+    /// </summary>
+    public DateTime? CreatedAtGte
+    {
+        get
+        {
+            if (!this.QueryProperties.TryGetValue("created_at_gte", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.QueryProperties["created_at_gte"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Get payouts created before this time (inclusive)
+    /// </summary>
+    public DateTime? CreatedAtLte
+    {
+        get
+        {
+            if (!this.QueryProperties.TryGetValue("created_at_lte", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.QueryProperties["created_at_lte"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Page number default is 0
     /// </summary>
     public int? PageNumber
