@@ -11,6 +11,9 @@ namespace DodoPayments.Client.Models.Payments;
 [JsonConverter(typeof(ModelConverter<NewCustomer>))]
 public sealed record class NewCustomer : ModelBase, IFromRaw<NewCustomer>
 {
+    /// <summary>
+    /// Email is required for creating a new customer
+    /// </summary>
     public required string Email
     {
         get
@@ -36,21 +39,19 @@ public sealed record class NewCustomer : ModelBase, IFromRaw<NewCustomer>
         }
     }
 
-    public required string Name
+    /// <summary>
+    /// Optional full name of the customer. If provided during session creation,
+    /// it is persisted and becomes immutable for the session. If omitted here, it
+    /// can be provided later via the confirm API.
+    /// </summary>
+    public string? Name
     {
         get
         {
             if (!this.Properties.TryGetValue("name", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'name' cannot be null",
-                    new ArgumentOutOfRangeException("name", "Missing required argument")
-                );
+                return null;
 
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'name' cannot be null",
-                    new ArgumentNullException("name")
-                );
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         set
         {
@@ -99,5 +100,12 @@ public sealed record class NewCustomer : ModelBase, IFromRaw<NewCustomer>
     public static NewCustomer FromRawUnchecked(Dictionary<string, JsonElement> properties)
     {
         return new(properties);
+    }
+
+    [SetsRequiredMembers]
+    public NewCustomer(string email)
+        : this()
+    {
+        this.Email = email;
     }
 }
