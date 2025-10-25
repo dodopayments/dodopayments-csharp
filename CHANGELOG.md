@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.56.0 (2025-10-25)
+
+Full Changelog: [v1.55.7...v1.56.0](https://github.com/dodopayments/dodopayments-csharp/compare/v1.55.7...v1.56.0)
+
+### Features
+
+* **api:** added unwrap functions for webhooks ([b1396e8](https://github.com/dodopayments/dodopayments-csharp/commit/b1396e8a57f690da8e69408938f4fee1b54396bc))
+
 ## 1.55.7 (2025-10-17)
 
 Full Changelog: [v1.55.3...v1.55.7](https://github.com/dodopayments/dodopayments-csharp/compare/v1.55.3...v1.55.7)
