@@ -36,6 +36,8 @@ public interface IDodoPaymentsClient
     /// </summary>
     string BearerToken { get; init; }
 
+    string? WebhookKey { get; init; }
+
     ICheckoutSessionService CheckoutSessions { get; }
 
     IPaymentService Payments { get; }
@@ -58,8 +60,6 @@ public interface IDodoPaymentsClient
 
     IPayoutService Payouts { get; }
 
-    IWebhookEventService WebhookEvents { get; }
-
     IProductService Products { get; }
 
     IMiscService Misc { get; }
@@ -71,6 +71,8 @@ public interface IDodoPaymentsClient
     IBrandService Brands { get; }
 
     IWebhookService Webhooks { get; }
+
+    IWebhookEventService WebhookEvents { get; }
 
     IUsageEventService UsageEvents { get; }
 
