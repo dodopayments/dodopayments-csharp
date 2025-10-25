@@ -55,6 +55,15 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         init { _bearerToken = new(() => value); }
     }
 
+    Lazy<string?> _webhookKey = new(() =>
+        Environment.GetEnvironmentVariable("DODO_PAYMENTS_WEBHOOK_KEY")
+    );
+    public string? WebhookKey
+    {
+        get { return _webhookKey.Value; }
+        init { _webhookKey = new(() => value); }
+    }
+
     readonly Lazy<ICheckoutSessionService> _checkoutSessions;
     public ICheckoutSessionService CheckoutSessions
     {
@@ -121,12 +130,6 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         get { return _payouts.Value; }
     }
 
-    readonly Lazy<IWebhookEventService> _webhookEvents;
-    public IWebhookEventService WebhookEvents
-    {
-        get { return _webhookEvents.Value; }
-    }
-
     readonly Lazy<IProductService> _products;
     public IProductService Products
     {
@@ -161,6 +164,12 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
     public IWebhookService Webhooks
     {
         get { return _webhooks.Value; }
+    }
+
+    readonly Lazy<IWebhookEventService> _webhookEvents;
+    public IWebhookEventService WebhookEvents
+    {
+        get { return _webhookEvents.Value; }
     }
 
     readonly Lazy<IUsageEventService> _usageEvents;
@@ -228,13 +237,13 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         _refunds = new(() => new RefundService(this));
         _disputes = new(() => new DisputeService(this));
         _payouts = new(() => new PayoutService(this));
-        _webhookEvents = new(() => new WebhookEventService(this));
         _products = new(() => new ProductService(this));
         _misc = new(() => new MiscService(this));
         _discounts = new(() => new DiscountService(this));
         _addons = new(() => new AddonService(this));
         _brands = new(() => new BrandService(this));
         _webhooks = new(() => new WebhookService(this));
+        _webhookEvents = new(() => new WebhookEventService(this));
         _usageEvents = new(() => new UsageEventService(this));
         _meters = new(() => new MeterService(this));
     }

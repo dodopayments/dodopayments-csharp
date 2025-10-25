@@ -35,7 +35,7 @@ using System;
 using DodoPayments.Client;
 using DodoPayments.Client.Models.CheckoutSessions;
 
-// Configured using the DODO_PAYMENTS_API_KEY and DODO_PAYMENTS_BASE_URL environment variables
+// Configured using the DODO_PAYMENTS_API_KEY, DODO_PAYMENTS_WEBHOOK_KEY and DODO_PAYMENTS_BASE_URL environment variables
 DodoPaymentsClient client = new();
 
 CheckoutSessionCreateParams parameters = new()
@@ -62,7 +62,7 @@ Configure the client using environment variables:
 ```csharp
 using DodoPayments.Client;
 
-// Configured using the DODO_PAYMENTS_API_KEY and DODO_PAYMENTS_BASE_URL environment variables
+// Configured using the DODO_PAYMENTS_API_KEY, DODO_PAYMENTS_WEBHOOK_KEY and DODO_PAYMENTS_BASE_URL environment variables
 DodoPaymentsClient client = new();
 ```
 
@@ -78,10 +78,11 @@ Or using a combination of the two approaches.
 
 See this table for the available options:
 
-| Property      | Environment variable     | Required | Default value                     |
-| ------------- | ------------------------ | -------- | --------------------------------- |
-| `BearerToken` | `DODO_PAYMENTS_API_KEY`  | true     | -                                 |
-| `BaseUrl`     | `DODO_PAYMENTS_BASE_URL` | true     | `"https://live.dodopayments.com"` |
+| Property      | Environment variable        | Required | Default value                     |
+| ------------- | --------------------------- | -------- | --------------------------------- |
+| `BearerToken` | `DODO_PAYMENTS_API_KEY`     | true     | -                                 |
+| `WebhookKey`  | `DODO_PAYMENTS_WEBHOOK_KEY` | false    | -                                 |
+| `BaseUrl`     | `DODO_PAYMENTS_BASE_URL`    | true     | `"https://live.dodopayments.com"` |
 
 ## Requests and responses
 
