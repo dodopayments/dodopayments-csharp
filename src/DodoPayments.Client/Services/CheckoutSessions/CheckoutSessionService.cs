@@ -24,4 +24,15 @@ public sealed class CheckoutSessionService : ICheckoutSessionService
         using var response = await this._client.Execute(request).ConfigureAwait(false);
         return await response.Deserialize<CheckoutSessionResponse>().ConfigureAwait(false);
     }
+
+    public async Task<CheckoutSessionStatus> Retrieve(CheckoutSessionRetrieveParams parameters)
+    {
+        HttpRequest<CheckoutSessionRetrieveParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        return await response.Deserialize<CheckoutSessionStatus>().ConfigureAwait(false);
+    }
 }
