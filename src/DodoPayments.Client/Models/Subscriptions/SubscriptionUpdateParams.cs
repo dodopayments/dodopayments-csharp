@@ -62,6 +62,24 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
+    public string? CustomerName
+    {
+        get
+        {
+            if (!this.BodyProperties.TryGetValue("customer_name", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.BodyProperties["customer_name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
     public DisableOnDemand? DisableOnDemand
     {
         get
