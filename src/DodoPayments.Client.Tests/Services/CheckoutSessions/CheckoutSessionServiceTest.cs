@@ -24,4 +24,13 @@ public class CheckoutSessionServiceTest : TestBase
         );
         checkoutSessionResponse.Validate();
     }
+
+    [Fact]
+    public async Task Retrieve_Works()
+    {
+        var checkoutSessionStatus = await this.client.CheckoutSessions.Retrieve(
+            new() { ID = "id" }
+        );
+        checkoutSessionStatus.Validate();
+    }
 }
