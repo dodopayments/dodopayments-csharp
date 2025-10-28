@@ -213,7 +213,7 @@ public record class Price
 
     public void Validate()
     {
-        if (this.Value is not UnknownVariant)
+        if (this.Value is UnknownVariant)
         {
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Price");
         }
