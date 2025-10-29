@@ -63,6 +63,30 @@ public sealed record class RefundCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Additional metadata associated with the refund.
+    /// </summary>
+    public Dictionary<string, string>? Metadata
+    {
+        get
+        {
+            if (!this.BodyProperties.TryGetValue("metadata", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        }
+        set
+        {
+            this.BodyProperties["metadata"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// The reason for the refund, if any. Maximum length is 3000 characters. Optional.
     /// </summary>
     public string? Reason
