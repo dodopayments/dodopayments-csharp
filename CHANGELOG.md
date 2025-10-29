@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.56.3 (2025-10-29)
+
+Full Changelog: [v1.56.2...v1.56.3](https://github.com/dodopayments/dodopayments-csharp/compare/v1.56.2...v1.56.3)
+
+### Features
+
+* **api:** updated openapi spec to v1.56.3 ([52b3c00](https://github.com/dodopayments/dodopayments-csharp/commit/52b3c0063f0c2217103417244905a435442d49cd))
+
+
+### Bug Fixes
+
+* **internal:** minor bug fixes on model instantiation and union validation ([f6abc5c](https://github.com/dodopayments/dodopayments-csharp/commit/f6abc5c7889f657ce5020ceca60645778c91ed42))
+
 ## 1.56.2 (2025-10-27)
 
 Full Changelog: [v1.56.0...v1.56.2](https://github.com/dodopayments/dodopayments-csharp/compare/v1.56.0...v1.56.2)
