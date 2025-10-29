@@ -120,6 +120,37 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
     }
 
     /// <summary>
+    /// Additional metadata stored with the refund.
+    /// </summary>
+    public required Dictionary<string, string> Metadata
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("metadata", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'metadata' cannot be null",
+                    new ArgumentOutOfRangeException("metadata", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<Dictionary<string, string>>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'metadata' cannot be null",
+                    new ArgumentNullException("metadata")
+                );
+        }
+        set
+        {
+            this.Properties["metadata"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// The unique identifier of the payment associated with the refund.
     /// </summary>
     public required string PaymentID
@@ -293,6 +324,7 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
             CreatedAt = refund.CreatedAt,
             Customer = refund.Customer,
             IsPartial = refund.IsPartial,
+            Metadata = refund.Metadata,
             PaymentID = refund.PaymentID,
             RefundID = refund.RefundID,
             Status = refund.Status,
@@ -307,6 +339,10 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
         _ = this.CreatedAt;
         this.Customer.Validate();
         _ = this.IsPartial;
+        foreach (var item in this.Metadata.Values)
+        {
+            _ = item;
+        }
         _ = this.PaymentID;
         _ = this.RefundID;
         this.Status.Validate();

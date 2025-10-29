@@ -135,6 +135,37 @@ public sealed record class DataModel : ModelBase, IFromRaw<DataModel>
     }
 
     /// <summary>
+    /// Additional metadata stored with the refund.
+    /// </summary>
+    public required Dictionary<string, string> Metadata
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("metadata", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'metadata' cannot be null",
+                    new System::ArgumentOutOfRangeException("metadata", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<Dictionary<string, string>>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'metadata' cannot be null",
+                    new System::ArgumentNullException("metadata")
+                );
+        }
+        set
+        {
+            this.Properties["metadata"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// The unique identifier of the payment associated with the refund.
     /// </summary>
     public required string PaymentID
@@ -314,6 +345,7 @@ public sealed record class DataModel : ModelBase, IFromRaw<DataModel>
             CreatedAt = dataModel.CreatedAt,
             Customer = dataModel.Customer,
             IsPartial = dataModel.IsPartial,
+            Metadata = dataModel.Metadata,
             PaymentID = dataModel.PaymentID,
             RefundID = dataModel.RefundID,
             Status = dataModel.Status,
@@ -328,6 +360,10 @@ public sealed record class DataModel : ModelBase, IFromRaw<DataModel>
         _ = this.CreatedAt;
         this.Customer.Validate();
         _ = this.IsPartial;
+        foreach (var item in this.Metadata.Values)
+        {
+            _ = item;
+        }
         _ = this.PaymentID;
         _ = this.RefundID;
         this.Status.Validate();
