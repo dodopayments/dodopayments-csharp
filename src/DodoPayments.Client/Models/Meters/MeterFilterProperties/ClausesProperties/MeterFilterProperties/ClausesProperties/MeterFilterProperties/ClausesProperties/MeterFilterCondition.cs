@@ -12,8 +12,12 @@ namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesPropert
 /// <summary>
 /// Filter condition with key, operator, and value
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilterCondition>))]
-public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilterCondition>
+[JsonConverter(
+    typeof(ModelConverter<global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterCondition>)
+)]
+public sealed record class MeterFilterCondition
+    : ModelBase,
+        IFromRaw<global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterCondition>
 {
     /// <summary>
     /// Filter key to apply
@@ -112,7 +116,9 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
     }
 #pragma warning restore CS8618
 
-    public static MeterFilterCondition FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterCondition FromRawUnchecked(
+        Dictionary<string, JsonElement> properties
+    )
     {
         return new(properties);
     }

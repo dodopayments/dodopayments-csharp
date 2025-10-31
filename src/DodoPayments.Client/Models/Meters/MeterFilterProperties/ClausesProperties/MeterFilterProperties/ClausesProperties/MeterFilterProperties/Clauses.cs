@@ -11,7 +11,9 @@ namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesPropert
 /// <summary>
 /// Level 2: Can be conditions or nested filters (1 more level allowed)
 /// </summary>
-[JsonConverter(typeof(ClausesConverter))]
+[JsonConverter(
+    typeof(global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesConverter)
+)]
 public record class Clauses
 {
     public object Value { get; private init; }
@@ -31,7 +33,9 @@ public record class Clauses
         Value = value;
     }
 
-    public static Clauses CreateUnknownVariant(JsonElement value)
+    public static global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Clauses CreateUnknownVariant(
+        JsonElement value
+    )
     {
         return new(new UnknownVariant(value));
     }
@@ -98,9 +102,10 @@ public record class Clauses
     private record struct UnknownVariant(JsonElement value);
 }
 
-sealed class ClausesConverter : JsonConverter<Clauses>
+sealed class ClausesConverter
+    : JsonConverter<global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Clauses>
 {
-    public override Clauses? Read(
+    public override global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Clauses? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -115,7 +120,9 @@ sealed class ClausesConverter : JsonConverter<Clauses>
             >(ref reader, options);
             if (deserialized != null)
             {
-                return new Clauses(deserialized);
+                return new global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Clauses(
+                    deserialized
+                );
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -136,7 +143,9 @@ sealed class ClausesConverter : JsonConverter<Clauses>
             );
             if (deserialized != null)
             {
-                return new Clauses(deserialized);
+                return new global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Clauses(
+                    deserialized
+                );
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -152,7 +161,11 @@ sealed class ClausesConverter : JsonConverter<Clauses>
         throw new AggregateException(exceptions);
     }
 
-    public override void Write(Utf8JsonWriter writer, Clauses value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Clauses value,
+        JsonSerializerOptions options
+    )
     {
         object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);
