@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.56.4 (2025-10-31)
+
+Full Changelog: [v1.56.3...v1.56.4](https://github.com/dodopayments/dodopayments-csharp/compare/v1.56.3...v1.56.4)
+
+### Chores
+
+* **internal:** full qualify some references ([3a41f8c](https://github.com/dodopayments/dodopayments-csharp/commit/3a41f8c1515eec97d411a05ebae8a48d9143f870))
+
 ## 1.56.3 (2025-10-29)
 
 Full Changelog: [v1.56.2...v1.56.3](https://github.com/dodopayments/dodopayments-csharp/compare/v1.56.2...v1.56.3)
