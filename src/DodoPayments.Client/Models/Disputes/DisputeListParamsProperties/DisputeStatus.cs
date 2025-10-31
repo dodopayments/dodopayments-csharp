@@ -8,7 +8,9 @@ namespace DodoPayments.Client.Models.Disputes.DisputeListParamsProperties;
 /// <summary>
 /// Filter by dispute status
 /// </summary>
-[JsonConverter(typeof(DisputeStatusConverter))]
+[JsonConverter(
+    typeof(global::DodoPayments.Client.Models.Disputes.DisputeListParamsProperties.DisputeStatusConverter)
+)]
 public enum DisputeStatus
 {
     DisputeOpened,
@@ -20,9 +22,10 @@ public enum DisputeStatus
     DisputeLost,
 }
 
-sealed class DisputeStatusConverter : JsonConverter<DisputeStatus>
+sealed class DisputeStatusConverter
+    : JsonConverter<global::DodoPayments.Client.Models.Disputes.DisputeListParamsProperties.DisputeStatus>
 {
-    public override DisputeStatus Read(
+    public override global::DodoPayments.Client.Models.Disputes.DisputeListParamsProperties.DisputeStatus Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -37,13 +40,16 @@ sealed class DisputeStatusConverter : JsonConverter<DisputeStatus>
             "dispute_challenged" => DisputeStatus.DisputeChallenged,
             "dispute_won" => DisputeStatus.DisputeWon,
             "dispute_lost" => DisputeStatus.DisputeLost,
-            _ => (DisputeStatus)(-1),
+            _ =>
+                (global::DodoPayments.Client.Models.Disputes.DisputeListParamsProperties.DisputeStatus)(
+                    -1
+                ),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        DisputeStatus value,
+        global::DodoPayments.Client.Models.Disputes.DisputeListParamsProperties.DisputeStatus value,
         JsonSerializerOptions options
     )
     {
