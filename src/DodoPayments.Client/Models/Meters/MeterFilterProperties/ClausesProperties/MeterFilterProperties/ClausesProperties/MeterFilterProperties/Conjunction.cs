@@ -5,16 +5,19 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties;
 
-[JsonConverter(typeof(ConjunctionConverter))]
+[JsonConverter(
+    typeof(global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ConjunctionConverter)
+)]
 public enum Conjunction
 {
     And,
     Or,
 }
 
-sealed class ConjunctionConverter : JsonConverter<Conjunction>
+sealed class ConjunctionConverter
+    : JsonConverter<global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Conjunction>
 {
-    public override Conjunction Read(
+    public override global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Conjunction Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -24,13 +27,16 @@ sealed class ConjunctionConverter : JsonConverter<Conjunction>
         {
             "and" => Conjunction.And,
             "or" => Conjunction.Or,
-            _ => (Conjunction)(-1),
+            _ =>
+                (global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Conjunction)(
+                    -1
+                ),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        Conjunction value,
+        global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Conjunction value,
         JsonSerializerOptions options
     )
     {

@@ -12,8 +12,12 @@ namespace DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesPropert
 /// <summary>
 /// Level 1 nested filter - can contain Level 2 filters
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilter>))]
-public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
+[JsonConverter(
+    typeof(ModelConverter<global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilter>)
+)]
+public sealed record class MeterFilter
+    : ModelBase,
+        IFromRaw<global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilter>
 {
     /// <summary>
     /// Level 1: Can be conditions or nested filters (2 more levels allowed)
@@ -86,7 +90,9 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
     }
 #pragma warning restore CS8618
 
-    public static MeterFilter FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilter FromRawUnchecked(
+        Dictionary<string, JsonElement> properties
+    )
     {
         return new(properties);
     }

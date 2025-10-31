@@ -8,7 +8,9 @@ namespace DodoPayments.Client.Models.Disputes.DisputeListParamsProperties;
 /// <summary>
 /// Filter by dispute stage
 /// </summary>
-[JsonConverter(typeof(DisputeStageConverter))]
+[JsonConverter(
+    typeof(global::DodoPayments.Client.Models.Disputes.DisputeListParamsProperties.DisputeStageConverter)
+)]
 public enum DisputeStage
 {
     PreDispute,
@@ -16,9 +18,10 @@ public enum DisputeStage
     PreArbitration,
 }
 
-sealed class DisputeStageConverter : JsonConverter<DisputeStage>
+sealed class DisputeStageConverter
+    : JsonConverter<global::DodoPayments.Client.Models.Disputes.DisputeListParamsProperties.DisputeStage>
 {
-    public override DisputeStage Read(
+    public override global::DodoPayments.Client.Models.Disputes.DisputeListParamsProperties.DisputeStage Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -29,13 +32,16 @@ sealed class DisputeStageConverter : JsonConverter<DisputeStage>
             "pre_dispute" => DisputeStage.PreDispute,
             "dispute" => DisputeStage.Dispute,
             "pre_arbitration" => DisputeStage.PreArbitration,
-            _ => (DisputeStage)(-1),
+            _ =>
+                (global::DodoPayments.Client.Models.Disputes.DisputeListParamsProperties.DisputeStage)(
+                    -1
+                ),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        DisputeStage value,
+        global::DodoPayments.Client.Models.Disputes.DisputeListParamsProperties.DisputeStage value,
         JsonSerializerOptions options
     )
     {
