@@ -31,6 +31,8 @@ public interface IDodoPaymentsClient
 
     Uri BaseUrl { get; init; }
 
+    TimeSpan Timeout { get; init; }
+
     /// <summary>
     /// Bearer Token for API authentication
     /// </summary>

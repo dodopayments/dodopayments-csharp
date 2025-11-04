@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
@@ -40,6 +41,12 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
     {
         get { return this._options.BaseUrl; }
         init { this._options.BaseUrl = value; }
+    }
+
+    public TimeSpan Timeout
+    {
+        get { return this._options.Timeout; }
+        init { this._options.Timeout = value; }
     }
 
     public string BearerToken
@@ -182,11 +189,16 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
             Content = request.Params.BodyContent(),
         };
         request.Params.AddHeadersToRequest(requestMessage, this);
+        using CancellationTokenSource cts = new(this.Timeout);
         HttpResponseMessage responseMessage;
         try
         {
             responseMessage = await this
-                .HttpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead)
+                .HttpClient.SendAsync(
+                    requestMessage,
+                    HttpCompletionOption.ResponseHeadersRead,
+                    cts.Token
+                )
                 .ConfigureAwait(false);
         }
         catch (HttpRequestException e1)

@@ -20,6 +20,8 @@ public struct ClientOptions()
         set { _baseUrl = new(() => value); }
     }
 
+    public TimeSpan Timeout { get; set; } = TimeSpan.FromMinutes(1);
+
     /// <summary>
     /// Bearer Token for API authentication
     /// </summary>
