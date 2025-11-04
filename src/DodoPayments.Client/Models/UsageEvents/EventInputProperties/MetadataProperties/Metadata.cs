@@ -101,7 +101,7 @@ public record class Metadata
         }
     }
 
-    private record struct UnknownVariant(JsonElement value);
+    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class MetadataConverter : JsonConverter<Metadata>

@@ -28,40 +28,30 @@ namespace DodoPayments.Client;
 
 public sealed class DodoPaymentsClient : IDodoPaymentsClient
 {
-    public HttpClient HttpClient { get; init; } = new();
+    readonly ClientOptions _options = new();
 
-    Lazy<Uri> _baseUrl = new(() =>
-        new Uri(
-            Environment.GetEnvironmentVariable("DODO_PAYMENTS_BASE_URL")
-                ?? "https://live.dodopayments.com"
-        )
-    );
+    public HttpClient HttpClient
+    {
+        get { return this._options.HttpClient; }
+        init { this._options.HttpClient = value; }
+    }
+
     public Uri BaseUrl
     {
-        get { return _baseUrl.Value; }
-        init { _baseUrl = new(() => value); }
+        get { return this._options.BaseUrl; }
+        init { this._options.BaseUrl = value; }
     }
 
-    Lazy<string> _bearerToken = new(() =>
-        Environment.GetEnvironmentVariable("DODO_PAYMENTS_API_KEY")
-        ?? throw new DodoPaymentsInvalidDataException(
-            string.Format("{0} cannot be null", nameof(BearerToken)),
-            new ArgumentNullException(nameof(BearerToken))
-        )
-    );
     public string BearerToken
     {
-        get { return _bearerToken.Value; }
-        init { _bearerToken = new(() => value); }
+        get { return this._options.BearerToken; }
+        init { this._options.BearerToken = value; }
     }
 
-    Lazy<string?> _webhookKey = new(() =>
-        Environment.GetEnvironmentVariable("DODO_PAYMENTS_WEBHOOK_KEY")
-    );
     public string? WebhookKey
     {
-        get { return _webhookKey.Value; }
-        init { _webhookKey = new(() => value); }
+        get { return this._options.WebhookKey; }
+        init { this._options.WebhookKey = value; }
     }
 
     readonly Lazy<ICheckoutSessionService> _checkoutSessions;

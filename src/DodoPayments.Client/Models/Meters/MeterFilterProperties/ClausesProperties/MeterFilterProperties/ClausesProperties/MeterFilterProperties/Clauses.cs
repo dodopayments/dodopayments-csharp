@@ -99,7 +99,7 @@ public record class Clauses
         }
     }
 
-    private record struct UnknownVariant(JsonElement value);
+    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class ClausesConverter
