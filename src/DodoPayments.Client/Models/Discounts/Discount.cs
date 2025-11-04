@@ -318,10 +318,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
         _ = this.Code;
         _ = this.CreatedAt;
         _ = this.DiscountID;
-        foreach (var item in this.RestrictedTo)
-        {
-            _ = item;
-        }
+        _ = this.RestrictedTo;
         _ = this.TimesUsed;
         this.Type.Validate();
         _ = this.ExpiresAt;

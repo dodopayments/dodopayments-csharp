@@ -23,7 +23,12 @@ public sealed class LedgerEntryService : ILedgerEntryService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<CustomerWallet>().ConfigureAwait(false);
+        var customerWallet = await response.Deserialize<CustomerWallet>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            customerWallet.Validate();
+        }
+        return customerWallet;
     }
 
     public async Task<LedgerEntryListPageResponse> List(LedgerEntryListParams parameters)
@@ -34,6 +39,11 @@ public sealed class LedgerEntryService : ILedgerEntryService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<LedgerEntryListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<LedgerEntryListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 }

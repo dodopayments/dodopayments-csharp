@@ -360,10 +360,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         _ = this.BusinessID;
         _ = this.CreatedAt;
         _ = this.IsRecurring;
-        foreach (var item in this.Metadata.Values)
-        {
-            _ = item;
-        }
+        _ = this.Metadata;
         _ = this.ProductID;
         this.TaxCategory.Validate();
         _ = this.UpdatedAt;

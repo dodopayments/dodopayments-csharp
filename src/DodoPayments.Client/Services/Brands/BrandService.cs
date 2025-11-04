@@ -24,7 +24,12 @@ public sealed class BrandService : IBrandService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Brand>().ConfigureAwait(false);
+        var brand = await response.Deserialize<Brand>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            brand.Validate();
+        }
+        return brand;
     }
 
     public async Task<Brand> Retrieve(BrandRetrieveParams parameters)
@@ -35,7 +40,12 @@ public sealed class BrandService : IBrandService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Brand>().ConfigureAwait(false);
+        var brand = await response.Deserialize<Brand>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            brand.Validate();
+        }
+        return brand;
     }
 
     public async Task<Brand> Update(BrandUpdateParams parameters)
@@ -46,7 +56,12 @@ public sealed class BrandService : IBrandService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Brand>().ConfigureAwait(false);
+        var brand = await response.Deserialize<Brand>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            brand.Validate();
+        }
+        return brand;
     }
 
     public async Task<BrandListResponse> List(BrandListParams? parameters = null)
@@ -59,7 +74,12 @@ public sealed class BrandService : IBrandService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<BrandListResponse>().ConfigureAwait(false);
+        var brands = await response.Deserialize<BrandListResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            brands.Validate();
+        }
+        return brands;
     }
 
     public async Task<BrandUpdateImagesResponse> UpdateImages(BrandUpdateImagesParams parameters)
@@ -70,6 +90,13 @@ public sealed class BrandService : IBrandService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<BrandUpdateImagesResponse>().ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<BrandUpdateImagesResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
     }
 }

@@ -22,7 +22,12 @@ public sealed class UsageEventService : IUsageEventService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Event>().ConfigureAwait(false);
+        var deserializedResponse = await response.Deserialize<Event>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
     }
 
     public async Task<UsageEventListPageResponse> List(UsageEventListParams? parameters = null)
@@ -35,7 +40,12 @@ public sealed class UsageEventService : IUsageEventService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<UsageEventListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<UsageEventListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 
     public async Task<UsageEventIngestResponse> Ingest(UsageEventIngestParams parameters)
@@ -46,6 +56,13 @@ public sealed class UsageEventService : IUsageEventService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<UsageEventIngestResponse>().ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<UsageEventIngestResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
     }
 }

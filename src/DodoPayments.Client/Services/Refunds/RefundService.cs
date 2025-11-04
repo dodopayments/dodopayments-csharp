@@ -22,7 +22,12 @@ public sealed class RefundService : IRefundService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Refund>().ConfigureAwait(false);
+        var refund = await response.Deserialize<Refund>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            refund.Validate();
+        }
+        return refund;
     }
 
     public async Task<Refund> Retrieve(RefundRetrieveParams parameters)
@@ -33,7 +38,12 @@ public sealed class RefundService : IRefundService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Refund>().ConfigureAwait(false);
+        var refund = await response.Deserialize<Refund>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            refund.Validate();
+        }
+        return refund;
     }
 
     public async Task<RefundListPageResponse> List(RefundListParams? parameters = null)
@@ -46,6 +56,11 @@ public sealed class RefundService : IRefundService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<RefundListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<RefundListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 }

@@ -22,7 +22,12 @@ public sealed class MeterService : IMeterService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Meter>().ConfigureAwait(false);
+        var meter = await response.Deserialize<Meter>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            meter.Validate();
+        }
+        return meter;
     }
 
     public async Task<Meter> Retrieve(MeterRetrieveParams parameters)
@@ -33,7 +38,12 @@ public sealed class MeterService : IMeterService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Meter>().ConfigureAwait(false);
+        var meter = await response.Deserialize<Meter>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            meter.Validate();
+        }
+        return meter;
     }
 
     public async Task<MeterListPageResponse> List(MeterListParams? parameters = null)
@@ -46,7 +56,12 @@ public sealed class MeterService : IMeterService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<MeterListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<MeterListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 
     public async Task Archive(MeterArchiveParams parameters)
@@ -57,7 +72,6 @@ public sealed class MeterService : IMeterService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 
     public async Task Unarchive(MeterUnarchiveParams parameters)
@@ -68,6 +82,5 @@ public sealed class MeterService : IMeterService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 }

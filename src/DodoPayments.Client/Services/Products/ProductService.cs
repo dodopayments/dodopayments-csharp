@@ -31,7 +31,12 @@ public sealed class ProductService : IProductService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Product>().ConfigureAwait(false);
+        var product = await response.Deserialize<Product>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            product.Validate();
+        }
+        return product;
     }
 
     public async Task<Product> Retrieve(ProductRetrieveParams parameters)
@@ -42,7 +47,12 @@ public sealed class ProductService : IProductService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Product>().ConfigureAwait(false);
+        var product = await response.Deserialize<Product>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            product.Validate();
+        }
+        return product;
     }
 
     public async Task Update(ProductUpdateParams parameters)
@@ -53,7 +63,6 @@ public sealed class ProductService : IProductService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 
     public async Task<ProductListPageResponse> List(ProductListParams? parameters = null)
@@ -66,7 +75,12 @@ public sealed class ProductService : IProductService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<ProductListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<ProductListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 
     public async Task Archive(ProductArchiveParams parameters)
@@ -77,7 +91,6 @@ public sealed class ProductService : IProductService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 
     public async Task Unarchive(ProductUnarchiveParams parameters)
@@ -88,7 +101,6 @@ public sealed class ProductService : IProductService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 
     public async Task<ProductUpdateFilesResponse> UpdateFiles(ProductUpdateFilesParams parameters)
@@ -99,6 +111,13 @@ public sealed class ProductService : IProductService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<ProductUpdateFilesResponse>().ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<ProductUpdateFilesResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
     }
 }

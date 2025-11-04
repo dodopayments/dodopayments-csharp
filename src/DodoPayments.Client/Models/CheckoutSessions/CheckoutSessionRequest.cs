@@ -353,13 +353,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
         _ = this.DiscountCode;
         this.FeatureFlags?.Validate();
         _ = this.Force3DS;
-        if (this.Metadata != null)
-        {
-            foreach (var item in this.Metadata.Values)
-            {
-                _ = item;
-            }
-        }
+        _ = this.Metadata;
         _ = this.ReturnURL;
         _ = this.ShowSavedPaymentMethods;
         this.SubscriptionData?.Validate();

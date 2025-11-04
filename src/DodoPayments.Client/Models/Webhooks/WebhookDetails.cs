@@ -254,17 +254,11 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
         _ = this.ID;
         _ = this.CreatedAt;
         _ = this.Description;
-        foreach (var item in this.Metadata.Values)
-        {
-            _ = item;
-        }
+        _ = this.Metadata;
         _ = this.UpdatedAt;
         _ = this.URL;
         _ = this.Disabled;
-        foreach (var item in this.FilterTypes ?? [])
-        {
-            _ = item;
-        }
+        _ = this.FilterTypes;
         _ = this.RateLimit;
     }
 
