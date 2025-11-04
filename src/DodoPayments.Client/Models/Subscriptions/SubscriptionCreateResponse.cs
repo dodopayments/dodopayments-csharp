@@ -282,10 +282,7 @@ public sealed record class SubscriptionCreateResponse
             item.Validate();
         }
         this.Customer.Validate();
-        foreach (var item in this.Metadata.Values)
-        {
-            _ = item;
-        }
+        _ = this.Metadata;
         _ = this.PaymentID;
         _ = this.RecurringPreTaxAmount;
         _ = this.SubscriptionID;

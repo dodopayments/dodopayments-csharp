@@ -22,7 +22,14 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<LicenseKeyInstance>().ConfigureAwait(false);
+        var licenseKeyInstance = await response
+            .Deserialize<LicenseKeyInstance>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            licenseKeyInstance.Validate();
+        }
+        return licenseKeyInstance;
     }
 
     public async Task<LicenseKeyInstance> Update(LicenseKeyInstanceUpdateParams parameters)
@@ -33,7 +40,14 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<LicenseKeyInstance>().ConfigureAwait(false);
+        var licenseKeyInstance = await response
+            .Deserialize<LicenseKeyInstance>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            licenseKeyInstance.Validate();
+        }
+        return licenseKeyInstance;
     }
 
     public async Task<LicenseKeyInstanceListPageResponse> List(
@@ -48,8 +62,13 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response
+        var page = await response
             .Deserialize<LicenseKeyInstanceListPageResponse>()
             .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 }

@@ -22,7 +22,12 @@ public sealed class DisputeService : IDisputeService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<GetDispute>().ConfigureAwait(false);
+        var getDispute = await response.Deserialize<GetDispute>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            getDispute.Validate();
+        }
+        return getDispute;
     }
 
     public async Task<DisputeListPageResponse> List(DisputeListParams? parameters = null)
@@ -35,6 +40,11 @@ public sealed class DisputeService : IDisputeService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<DisputeListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<DisputeListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 }

@@ -31,6 +31,11 @@ public sealed class WalletService : IWalletService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<WalletListResponse>().ConfigureAwait(false);
+        var wallets = await response.Deserialize<WalletListResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            wallets.Validate();
+        }
+        return wallets;
     }
 }

@@ -467,18 +467,12 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         _ = this.CreatedAt;
         _ = this.IsRecurring;
         _ = this.LicenseKeyEnabled;
-        foreach (var item in this.Metadata.Values)
-        {
-            _ = item;
-        }
+        _ = this.Metadata;
         this.Price.Validate();
         _ = this.ProductID;
         this.TaxCategory.Validate();
         _ = this.UpdatedAt;
-        foreach (var item in this.Addons ?? [])
-        {
-            _ = item;
-        }
+        _ = this.Addons;
         _ = this.Description;
         this.DigitalProductDelivery?.Validate();
         _ = this.Image;

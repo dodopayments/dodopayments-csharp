@@ -23,6 +23,13 @@ public sealed class CustomerPortalService : ICustomerPortalService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<CustomerPortalSession>().ConfigureAwait(false);
+        var customerPortalSession = await response
+            .Deserialize<CustomerPortalSession>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            customerPortalSession.Validate();
+        }
+        return customerPortalSession;
     }
 }

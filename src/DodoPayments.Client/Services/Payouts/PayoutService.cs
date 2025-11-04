@@ -24,6 +24,11 @@ public sealed class PayoutService : IPayoutService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<PayoutListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<PayoutListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 }

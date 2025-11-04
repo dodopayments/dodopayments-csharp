@@ -77,14 +77,8 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
 
     public override void Validate()
     {
-        foreach (var item in this.Headers.Values)
-        {
-            _ = item;
-        }
-        foreach (var item in this.Sensitive)
-        {
-            _ = item;
-        }
+        _ = this.Headers;
+        _ = this.Sensitive;
     }
 
     public HeaderRetrieveResponse() { }

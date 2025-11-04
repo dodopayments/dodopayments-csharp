@@ -22,7 +22,12 @@ public sealed class AddonService : IAddonService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<AddonResponse>().ConfigureAwait(false);
+        var addonResponse = await response.Deserialize<AddonResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            addonResponse.Validate();
+        }
+        return addonResponse;
     }
 
     public async Task<AddonResponse> Retrieve(AddonRetrieveParams parameters)
@@ -33,7 +38,12 @@ public sealed class AddonService : IAddonService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<AddonResponse>().ConfigureAwait(false);
+        var addonResponse = await response.Deserialize<AddonResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            addonResponse.Validate();
+        }
+        return addonResponse;
     }
 
     public async Task<AddonResponse> Update(AddonUpdateParams parameters)
@@ -44,7 +54,12 @@ public sealed class AddonService : IAddonService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<AddonResponse>().ConfigureAwait(false);
+        var addonResponse = await response.Deserialize<AddonResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            addonResponse.Validate();
+        }
+        return addonResponse;
     }
 
     public async Task<AddonListPageResponse> List(AddonListParams? parameters = null)
@@ -57,7 +72,12 @@ public sealed class AddonService : IAddonService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<AddonListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<AddonListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 
     public async Task<AddonUpdateImagesResponse> UpdateImages(AddonUpdateImagesParams parameters)
@@ -68,6 +88,13 @@ public sealed class AddonService : IAddonService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<AddonUpdateImagesResponse>().ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<AddonUpdateImagesResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
     }
 }

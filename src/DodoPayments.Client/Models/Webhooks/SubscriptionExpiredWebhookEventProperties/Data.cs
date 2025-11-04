@@ -815,10 +815,7 @@ public sealed record class Data : ModelBase, IFromRaw<Data>
         _ = this.CreatedAt;
         this.Currency.Validate();
         this.Customer.Validate();
-        foreach (var item in this.Metadata.Values)
-        {
-            _ = item;
-        }
+        _ = this.Metadata;
         foreach (var item in this.Meters)
         {
             item.Validate();

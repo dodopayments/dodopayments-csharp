@@ -22,7 +22,14 @@ public sealed class CheckoutSessionService : ICheckoutSessionService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<CheckoutSessionResponse>().ConfigureAwait(false);
+        var checkoutSessionResponse = await response
+            .Deserialize<CheckoutSessionResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            checkoutSessionResponse.Validate();
+        }
+        return checkoutSessionResponse;
     }
 
     public async Task<CheckoutSessionStatus> Retrieve(CheckoutSessionRetrieveParams parameters)
@@ -33,6 +40,13 @@ public sealed class CheckoutSessionService : ICheckoutSessionService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<CheckoutSessionStatus>().ConfigureAwait(false);
+        var checkoutSessionStatus = await response
+            .Deserialize<CheckoutSessionStatus>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            checkoutSessionStatus.Validate();
+        }
+        return checkoutSessionStatus;
     }
 }

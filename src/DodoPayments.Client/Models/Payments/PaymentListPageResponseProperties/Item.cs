@@ -290,10 +290,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         this.Currency.Validate();
         this.Customer.Validate();
         _ = this.DigitalProductsDelivered;
-        foreach (var item in this.Metadata.Values)
-        {
-            _ = item;
-        }
+        _ = this.Metadata;
         _ = this.PaymentID;
         _ = this.TotalAmount;
         _ = this.PaymentMethod;

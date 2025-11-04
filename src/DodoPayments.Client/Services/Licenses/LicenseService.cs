@@ -22,7 +22,14 @@ public sealed class LicenseService : ILicenseService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<LicenseActivateResponse>().ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<LicenseActivateResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
     }
 
     public async Task Deactivate(LicenseDeactivateParams parameters)
@@ -33,7 +40,6 @@ public sealed class LicenseService : ILicenseService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 
     public async Task<LicenseValidateResponse> Validate(LicenseValidateParams parameters)
@@ -44,6 +50,13 @@ public sealed class LicenseService : ILicenseService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<LicenseValidateResponse>().ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<LicenseValidateResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
     }
 }

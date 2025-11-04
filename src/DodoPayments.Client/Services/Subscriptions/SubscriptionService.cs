@@ -22,7 +22,14 @@ public sealed class SubscriptionService : ISubscriptionService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<SubscriptionCreateResponse>().ConfigureAwait(false);
+        var subscription = await response
+            .Deserialize<SubscriptionCreateResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            subscription.Validate();
+        }
+        return subscription;
     }
 
     public async Task<Subscription> Retrieve(SubscriptionRetrieveParams parameters)
@@ -33,7 +40,12 @@ public sealed class SubscriptionService : ISubscriptionService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Subscription>().ConfigureAwait(false);
+        var subscription = await response.Deserialize<Subscription>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            subscription.Validate();
+        }
+        return subscription;
     }
 
     public async Task<Subscription> Update(SubscriptionUpdateParams parameters)
@@ -44,7 +56,12 @@ public sealed class SubscriptionService : ISubscriptionService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Subscription>().ConfigureAwait(false);
+        var subscription = await response.Deserialize<Subscription>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            subscription.Validate();
+        }
+        return subscription;
     }
 
     public async Task<SubscriptionListPageResponse> List(SubscriptionListParams? parameters = null)
@@ -57,7 +74,12 @@ public sealed class SubscriptionService : ISubscriptionService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<SubscriptionListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<SubscriptionListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 
     public async Task ChangePlan(SubscriptionChangePlanParams parameters)
@@ -68,7 +90,6 @@ public sealed class SubscriptionService : ISubscriptionService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 
     public async Task<SubscriptionChargeResponse> Charge(SubscriptionChargeParams parameters)
@@ -79,7 +100,14 @@ public sealed class SubscriptionService : ISubscriptionService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<SubscriptionChargeResponse>().ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<SubscriptionChargeResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
     }
 
     public async Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
@@ -92,8 +120,13 @@ public sealed class SubscriptionService : ISubscriptionService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response
+        var page = await response
             .Deserialize<SubscriptionRetrieveUsageHistoryPageResponse>()
             .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 }

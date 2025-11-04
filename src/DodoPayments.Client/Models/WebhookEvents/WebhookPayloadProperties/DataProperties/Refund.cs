@@ -339,10 +339,7 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
         _ = this.CreatedAt;
         this.Customer.Validate();
         _ = this.IsPartial;
-        foreach (var item in this.Metadata.Values)
-        {
-            _ = item;
-        }
+        _ = this.Metadata;
         _ = this.PaymentID;
         _ = this.RefundID;
         this.Status.Validate();

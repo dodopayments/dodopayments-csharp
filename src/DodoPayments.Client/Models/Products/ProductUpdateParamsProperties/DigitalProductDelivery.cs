@@ -78,10 +78,7 @@ public sealed record class DigitalProductDelivery : ModelBase, IFromRaw<DigitalP
     public override void Validate()
     {
         _ = this.ExternalURL;
-        foreach (var item in this.Files ?? [])
-        {
-            _ = item;
-        }
+        _ = this.Files;
         _ = this.Instructions;
     }
 

@@ -22,7 +22,12 @@ public sealed class LicenseKeyService : ILicenseKeyService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<LicenseKey>().ConfigureAwait(false);
+        var licenseKey = await response.Deserialize<LicenseKey>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            licenseKey.Validate();
+        }
+        return licenseKey;
     }
 
     public async Task<LicenseKey> Update(LicenseKeyUpdateParams parameters)
@@ -33,7 +38,12 @@ public sealed class LicenseKeyService : ILicenseKeyService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<LicenseKey>().ConfigureAwait(false);
+        var licenseKey = await response.Deserialize<LicenseKey>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            licenseKey.Validate();
+        }
+        return licenseKey;
     }
 
     public async Task<LicenseKeyListPageResponse> List(LicenseKeyListParams? parameters = null)
@@ -46,6 +56,11 @@ public sealed class LicenseKeyService : ILicenseKeyService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<LicenseKeyListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<LicenseKeyListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 }
