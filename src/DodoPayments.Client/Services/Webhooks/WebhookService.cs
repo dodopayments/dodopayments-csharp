@@ -31,7 +31,12 @@ public sealed class WebhookService : IWebhookService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<WebhookDetails>().ConfigureAwait(false);
+        var webhookDetails = await response.Deserialize<WebhookDetails>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            webhookDetails.Validate();
+        }
+        return webhookDetails;
     }
 
     public async Task<WebhookDetails> Retrieve(WebhookRetrieveParams parameters)
@@ -42,7 +47,12 @@ public sealed class WebhookService : IWebhookService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<WebhookDetails>().ConfigureAwait(false);
+        var webhookDetails = await response.Deserialize<WebhookDetails>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            webhookDetails.Validate();
+        }
+        return webhookDetails;
     }
 
     public async Task<WebhookDetails> Update(WebhookUpdateParams parameters)
@@ -53,7 +63,12 @@ public sealed class WebhookService : IWebhookService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<WebhookDetails>().ConfigureAwait(false);
+        var webhookDetails = await response.Deserialize<WebhookDetails>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            webhookDetails.Validate();
+        }
+        return webhookDetails;
     }
 
     public async Task<WebhookListPageResponse> List(WebhookListParams? parameters = null)
@@ -66,7 +81,12 @@ public sealed class WebhookService : IWebhookService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<WebhookListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<WebhookListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 
     public async Task Delete(WebhookDeleteParams parameters)
@@ -77,7 +97,6 @@ public sealed class WebhookService : IWebhookService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 
     public async Task<WebhookRetrieveSecretResponse> RetrieveSecret(
@@ -90,6 +109,13 @@ public sealed class WebhookService : IWebhookService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<WebhookRetrieveSecretResponse>().ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<WebhookRetrieveSecretResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
     }
 }

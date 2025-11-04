@@ -22,7 +22,12 @@ public sealed class HeaderService : IHeaderService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<HeaderRetrieveResponse>().ConfigureAwait(false);
+        var header = await response.Deserialize<HeaderRetrieveResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            header.Validate();
+        }
+        return header;
     }
 
     public async Task Update(HeaderUpdateParams parameters)
@@ -33,6 +38,5 @@ public sealed class HeaderService : IHeaderService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 }

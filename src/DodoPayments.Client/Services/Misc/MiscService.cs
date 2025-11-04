@@ -27,8 +27,16 @@ public sealed class MiscService : IMiscService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response
+        var countryCodes = await response
             .Deserialize<List<ApiEnum<string, CountryCode>>>()
             .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            foreach (var item in countryCodes)
+            {
+                item.Validate();
+            }
+        }
+        return countryCodes;
     }
 }

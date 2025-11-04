@@ -22,6 +22,11 @@ public sealed class ImageService : IImageService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<ImageUpdateResponse>().ConfigureAwait(false);
+        var image = await response.Deserialize<ImageUpdateResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            image.Validate();
+        }
+        return image;
     }
 }

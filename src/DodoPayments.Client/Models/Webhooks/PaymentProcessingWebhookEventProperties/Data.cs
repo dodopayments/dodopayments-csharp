@@ -856,10 +856,7 @@ public sealed record class Data : ModelBase, IFromRaw<Data>
         {
             item.Validate();
         }
-        foreach (var item in this.Metadata.Values)
-        {
-            _ = item;
-        }
+        _ = this.Metadata;
         _ = this.PaymentID;
         foreach (var item in this.Refunds)
         {

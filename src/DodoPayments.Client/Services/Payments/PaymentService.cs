@@ -22,7 +22,12 @@ public sealed class PaymentService : IPaymentService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<PaymentCreateResponse>().ConfigureAwait(false);
+        var payment = await response.Deserialize<PaymentCreateResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            payment.Validate();
+        }
+        return payment;
     }
 
     public async Task<Payment> Retrieve(PaymentRetrieveParams parameters)
@@ -33,7 +38,12 @@ public sealed class PaymentService : IPaymentService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Payment>().ConfigureAwait(false);
+        var payment = await response.Deserialize<Payment>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            payment.Validate();
+        }
+        return payment;
     }
 
     public async Task<PaymentListPageResponse> List(PaymentListParams? parameters = null)
@@ -46,7 +56,12 @@ public sealed class PaymentService : IPaymentService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<PaymentListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<PaymentListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 
     public async Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
@@ -59,6 +74,13 @@ public sealed class PaymentService : IPaymentService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<PaymentRetrieveLineItemsResponse>().ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<PaymentRetrieveLineItemsResponse>()
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
     }
 }

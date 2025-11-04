@@ -22,7 +22,12 @@ public sealed class DiscountService : IDiscountService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Discount>().ConfigureAwait(false);
+        var discount = await response.Deserialize<Discount>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            discount.Validate();
+        }
+        return discount;
     }
 
     public async Task<Discount> Retrieve(DiscountRetrieveParams parameters)
@@ -33,7 +38,12 @@ public sealed class DiscountService : IDiscountService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Discount>().ConfigureAwait(false);
+        var discount = await response.Deserialize<Discount>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            discount.Validate();
+        }
+        return discount;
     }
 
     public async Task<Discount> Update(DiscountUpdateParams parameters)
@@ -44,7 +54,12 @@ public sealed class DiscountService : IDiscountService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<Discount>().ConfigureAwait(false);
+        var discount = await response.Deserialize<Discount>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            discount.Validate();
+        }
+        return discount;
     }
 
     public async Task<DiscountListPageResponse> List(DiscountListParams? parameters = null)
@@ -57,7 +72,12 @@ public sealed class DiscountService : IDiscountService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return await response.Deserialize<DiscountListPageResponse>().ConfigureAwait(false);
+        var page = await response.Deserialize<DiscountListPageResponse>().ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            page.Validate();
+        }
+        return page;
     }
 
     public async Task Delete(DiscountDeleteParams parameters)
@@ -68,6 +88,5 @@ public sealed class DiscountService : IDiscountService
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        return;
     }
 }

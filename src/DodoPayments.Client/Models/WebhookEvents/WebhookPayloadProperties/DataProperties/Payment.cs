@@ -844,10 +844,7 @@ public sealed record class Payment : ModelBase, IFromRaw<Payment>
         {
             item.Validate();
         }
-        foreach (var item in this.Metadata.Values)
-        {
-            _ = item;
-        }
+        _ = this.Metadata;
         _ = this.PaymentID;
         foreach (var item in this.Refunds)
         {
