@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -7,6 +8,11 @@ namespace DodoPayments.Client.Services.Refunds;
 
 public sealed class RefundService : IRefundService
 {
+    public IRefundService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new RefundService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public RefundService(IDodoPaymentsClient client)

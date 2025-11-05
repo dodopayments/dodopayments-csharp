@@ -1,10 +1,14 @@
+using System;
 using System.Threading.Tasks;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Services.Subscriptions;
 
 public interface ISubscriptionService
 {
+    ISubscriptionService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     Task<SubscriptionCreateResponse> Create(SubscriptionCreateParams parameters);
 
     Task<Subscription> Retrieve(SubscriptionRetrieveParams parameters);

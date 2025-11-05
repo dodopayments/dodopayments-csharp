@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -8,6 +9,11 @@ namespace DodoPayments.Client.Services.Invoices.Payments;
 
 public sealed class PaymentService : IPaymentService
 {
+    public IPaymentService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new PaymentService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public PaymentService(IDodoPaymentsClient client)

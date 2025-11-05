@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -8,6 +9,11 @@ namespace DodoPayments.Client.Services.Customers.CustomerPortal;
 
 public sealed class CustomerPortalService : ICustomerPortalService
 {
+    public ICustomerPortalService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new CustomerPortalService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public CustomerPortalService(IDodoPaymentsClient client)

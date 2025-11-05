@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -7,6 +8,11 @@ namespace DodoPayments.Client.Services.LicenseKeyInstances;
 
 public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
 {
+    public ILicenseKeyInstanceService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new LicenseKeyInstanceService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public LicenseKeyInstanceService(IDodoPaymentsClient client)

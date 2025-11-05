@@ -42,6 +42,8 @@ public interface IDodoPaymentsClient
 
     string? WebhookKey { get; init; }
 
+    IDodoPaymentsClient WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     ICheckoutSessionService CheckoutSessions { get; }
 
     IPaymentService Payments { get; }

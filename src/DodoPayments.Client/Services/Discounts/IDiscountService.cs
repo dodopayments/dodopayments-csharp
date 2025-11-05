@@ -1,10 +1,14 @@
+using System;
 using System.Threading.Tasks;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Discounts;
 
 namespace DodoPayments.Client.Services.Discounts;
 
 public interface IDiscountService
 {
+    IDiscountService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     /// <summary>
     /// POST /discounts If `code` is omitted or empty, a random 16-char uppercase
     /// code is generated.

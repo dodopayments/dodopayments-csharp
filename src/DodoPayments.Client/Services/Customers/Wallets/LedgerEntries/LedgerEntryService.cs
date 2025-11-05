@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -8,6 +9,11 @@ namespace DodoPayments.Client.Services.Customers.Wallets.LedgerEntries;
 
 public sealed class LedgerEntryService : ILedgerEntryService
 {
+    public ILedgerEntryService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new LedgerEntryService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public LedgerEntryService(IDodoPaymentsClient client)
