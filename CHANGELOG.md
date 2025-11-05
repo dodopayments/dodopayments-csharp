@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.56.5 (2025-11-05)
+
+Full Changelog: [v1.56.4...v1.56.5](https://github.com/dodopayments/dodopayments-csharp/compare/v1.56.4...v1.56.5)
+
+### Features
+
+* **client:** add response validation option ([e957c47](https://github.com/dodopayments/dodopayments-csharp/commit/e957c47f373a266473384cf28ed2b891e51dbcc6))
+* **client:** add support for option modification ([fe0779d](https://github.com/dodopayments/dodopayments-csharp/commit/fe0779d19e448cf5e9692b6528730e1b66c8be2b))
+* **client:** support request timeout ([aa371e2](https://github.com/dodopayments/dodopayments-csharp/commit/aa371e2dcd0fbb3d73ee3ddfcea3968b45194f53))
+
+
+### Chores
+
+* **client:** simplify field validations ([e957c47](https://github.com/dodopayments/dodopayments-csharp/commit/e957c47f373a266473384cf28ed2b891e51dbcc6))
+* **internal:** extract `ClientOptions` struct ([84175d2](https://github.com/dodopayments/dodopayments-csharp/commit/84175d29efc473f90cfd6f7f5794fb5d31a76fd0))
+
+
+### Documentation
+
+* **client:** document `WithOptions` ([73b8ad4](https://github.com/dodopayments/dodopayments-csharp/commit/73b8ad484616bb79e4311d508476ea1644b51345))
+* **client:** document timeout option ([0016a5e](https://github.com/dodopayments/dodopayments-csharp/commit/0016a5e4e2949b1b2c833e1a6704a1ab3d72072f))
+
 ## 1.56.4 (2025-10-31)
 
 Full Changelog: [v1.56.3...v1.56.4](https://github.com/dodopayments/dodopayments-csharp/compare/v1.56.3...v1.56.4)
