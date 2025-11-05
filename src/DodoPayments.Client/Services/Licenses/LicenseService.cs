@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -7,6 +8,11 @@ namespace DodoPayments.Client.Services.Licenses;
 
 public sealed class LicenseService : ILicenseService
 {
+    public ILicenseService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new LicenseService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public LicenseService(IDodoPaymentsClient client)

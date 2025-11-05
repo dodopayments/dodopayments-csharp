@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -7,6 +8,11 @@ namespace DodoPayments.Client.Services.UsageEvents;
 
 public sealed class UsageEventService : IUsageEventService
 {
+    public IUsageEventService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new UsageEventService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public UsageEventService(IDodoPaymentsClient client)

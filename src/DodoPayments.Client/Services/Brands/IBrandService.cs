@@ -1,10 +1,14 @@
+using System;
 using System.Threading.Tasks;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Brands;
 
 namespace DodoPayments.Client.Services.Brands;
 
 public interface IBrandService
 {
+    IBrandService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     Task<Brand> Create(BrandCreateParams? parameters = null);
 
     /// <summary>

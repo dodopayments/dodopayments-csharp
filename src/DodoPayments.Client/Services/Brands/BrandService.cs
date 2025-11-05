@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -7,6 +8,11 @@ namespace DodoPayments.Client.Services.Brands;
 
 public sealed class BrandService : IBrandService
 {
+    public IBrandService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new BrandService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public BrandService(IDodoPaymentsClient client)

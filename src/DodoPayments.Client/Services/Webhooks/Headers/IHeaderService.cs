@@ -1,10 +1,14 @@
+using System;
 using System.Threading.Tasks;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Webhooks.Headers;
 
 namespace DodoPayments.Client.Services.Webhooks.Headers;
 
 public interface IHeaderService
 {
+    IHeaderService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     /// <summary>
     /// Get a webhook by id
     /// </summary>

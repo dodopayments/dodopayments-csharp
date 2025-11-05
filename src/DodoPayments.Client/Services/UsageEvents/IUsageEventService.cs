@@ -1,10 +1,14 @@
+using System;
 using System.Threading.Tasks;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.UsageEvents;
 
 namespace DodoPayments.Client.Services.UsageEvents;
 
 public interface IUsageEventService
 {
+    IUsageEventService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
     /// <summary>
     /// Fetch detailed information about a single event using its unique event ID.
     /// This endpoint is useful for: - Debugging specific event ingestion issues

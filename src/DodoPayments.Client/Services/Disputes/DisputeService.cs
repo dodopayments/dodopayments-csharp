@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -7,6 +8,11 @@ namespace DodoPayments.Client.Services.Disputes;
 
 public sealed class DisputeService : IDisputeService
 {
+    public IDisputeService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new DisputeService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public DisputeService(IDodoPaymentsClient client)
