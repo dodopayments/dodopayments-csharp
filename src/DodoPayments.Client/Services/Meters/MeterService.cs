@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -7,6 +8,11 @@ namespace DodoPayments.Client.Services.Meters;
 
 public sealed class MeterService : IMeterService
 {
+    public IMeterService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new MeterService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public MeterService(IDodoPaymentsClient client)

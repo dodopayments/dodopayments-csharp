@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,6 +9,11 @@ namespace DodoPayments.Client.Services.Misc;
 
 public sealed class MiscService : IMiscService
 {
+    public IMiscService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new MiscService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public MiscService(IDodoPaymentsClient client)

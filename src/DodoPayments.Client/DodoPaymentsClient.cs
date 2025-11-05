@@ -29,7 +29,7 @@ namespace DodoPayments.Client;
 
 public sealed class DodoPaymentsClient : IDodoPaymentsClient
 {
-    readonly ClientOptions _options = new();
+    readonly ClientOptions _options;
 
     public HttpClient HttpClient
     {
@@ -65,6 +65,11 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
     {
         get { return this._options.WebhookKey; }
         init { this._options.WebhookKey = value; }
+    }
+
+    public IDodoPaymentsClient WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new DodoPaymentsClient(modifier(this._options));
     }
 
     readonly Lazy<ICheckoutSessionService> _checkoutSessions;
@@ -234,6 +239,8 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
 
     public DodoPaymentsClient()
     {
+        _options = new();
+
         _checkoutSessions = new(() => new CheckoutSessionService(this));
         _payments = new(() => new PaymentService(this));
         _subscriptions = new(() => new SubscriptionService(this));
@@ -254,5 +261,11 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         _webhookEvents = new(() => new WebhookEventService(this));
         _usageEvents = new(() => new UsageEventService(this));
         _meters = new(() => new MeterService(this));
+    }
+
+    public DodoPaymentsClient(ClientOptions options)
+        : this()
+    {
+        _options = options;
     }
 }

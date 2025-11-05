@@ -9,6 +9,11 @@ namespace DodoPayments.Client.Services.Customers.Wallets;
 
 public sealed class WalletService : IWalletService
 {
+    public IWalletService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new WalletService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public WalletService(IDodoPaymentsClient client)

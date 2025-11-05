@@ -9,6 +9,11 @@ namespace DodoPayments.Client.Services.Webhooks;
 
 public sealed class WebhookService : IWebhookService
 {
+    public IWebhookService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new WebhookService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public WebhookService(IDodoPaymentsClient client)

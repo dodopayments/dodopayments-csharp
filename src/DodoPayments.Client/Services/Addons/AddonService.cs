@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -7,6 +8,11 @@ namespace DodoPayments.Client.Services.Addons;
 
 public sealed class AddonService : IAddonService
 {
+    public IAddonService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new AddonService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public AddonService(IDodoPaymentsClient client)

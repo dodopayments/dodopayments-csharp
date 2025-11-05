@@ -10,6 +10,11 @@ namespace DodoPayments.Client.Services.Customers;
 
 public sealed class CustomerService : ICustomerService
 {
+    public ICustomerService WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new CustomerService(this._client.WithOptions(modifier));
+    }
+
     readonly IDodoPaymentsClient _client;
 
     public CustomerService(IDodoPaymentsClient client)
