@@ -172,6 +172,48 @@ var checkoutSessionResponse = await client
 Console.WriteLine(checkoutSessionResponse);
 ```
 
+## Undocumented API functionality
+
+The SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.
+
+### Response validation
+
+In rare cases, the API may return a response that doesn't match the expected type. For example, the SDK may expect a property to contain a `string`, but the API could return something else.
+
+By default, the SDK will not throw an exception in this case. It will throw `DodoPaymentsInvalidDataException` only if you directly access the property.
+
+If you would prefer to check that the response is completely well-typed upfront, then either call `Validate`:
+
+```csharp
+var checkoutSessionResponse = client.CheckoutSessions.Create(parameters);
+checkoutSessionResponse.Validate();
+```
+
+Or configure the client using the `ResponseValidation` option:
+
+```csharp
+using DodoPayments.Client;
+
+DodoPaymentsClient client = new() { ResponseValidation = true };
+```
+
+Or configure a single method call using [`WithOptions`](#modifying-configuration):
+
+```csharp
+using System;
+
+var checkoutSessionResponse = await client
+    .WithOptions(options =>
+        options with
+        {
+            ResponseValidation = true
+        }
+    )
+    .CheckoutSessions.Create(parameters);
+
+Console.WriteLine(checkoutSessionResponse);
+```
+
 ## Semantic versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
