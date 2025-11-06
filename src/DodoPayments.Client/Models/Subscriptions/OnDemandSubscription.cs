@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -20,7 +21,7 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
     {
         get
         {
-            if (!this.Properties.TryGetValue("mandate_only", out JsonElement element))
+            if (!this._properties.TryGetValue("mandate_only", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'mandate_only' cannot be null",
                     new ArgumentOutOfRangeException("mandate_only", "Missing required argument")
@@ -28,9 +29,9 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["mandate_only"] = JsonSerializer.SerializeToElement(
+            this._properties["mandate_only"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -47,7 +48,7 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
         get
         {
             if (
-                !this.Properties.TryGetValue(
+                !this._properties.TryGetValue(
                     "adaptive_currency_fees_inclusive",
                     out JsonElement element
                 )
@@ -56,12 +57,10 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["adaptive_currency_fees_inclusive"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            this._properties["adaptive_currency_fees_inclusive"] =
+                JsonSerializer.SerializeToElement(value, ModelBase.SerializerOptions);
         }
     }
 
@@ -73,7 +72,7 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
     {
         get
         {
-            if (!this.Properties.TryGetValue("product_currency", out JsonElement element))
+            if (!this._properties.TryGetValue("product_currency", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>?>(
@@ -81,9 +80,9 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["product_currency"] = JsonSerializer.SerializeToElement(
+            this._properties["product_currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -98,14 +97,14 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
     {
         get
         {
-            if (!this.Properties.TryGetValue("product_description", out JsonElement element))
+            if (!this._properties.TryGetValue("product_description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["product_description"] = JsonSerializer.SerializeToElement(
+            this._properties["product_description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -121,14 +120,14 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
     {
         get
         {
-            if (!this.Properties.TryGetValue("product_price", out JsonElement element))
+            if (!this._properties.TryGetValue("product_price", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["product_price"] = JsonSerializer.SerializeToElement(
+            this._properties["product_price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -146,17 +145,24 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
 
     public OnDemandSubscription() { }
 
+    public OnDemandSubscription(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    OnDemandSubscription(Dictionary<string, JsonElement> properties)
+    OnDemandSubscription(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static OnDemandSubscription FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static OnDemandSubscription FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]

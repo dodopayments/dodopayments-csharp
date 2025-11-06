@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -21,7 +22,7 @@ public sealed record class SubscriptionCreateResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("addons", out JsonElement element))
+            if (!this._properties.TryGetValue("addons", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'addons' cannot be null",
                     new ArgumentOutOfRangeException("addons", "Missing required argument")
@@ -36,9 +37,9 @@ public sealed record class SubscriptionCreateResponse
                     new ArgumentNullException("addons")
                 );
         }
-        set
+        init
         {
-            this.Properties["addons"] = JsonSerializer.SerializeToElement(
+            this._properties["addons"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -52,7 +53,7 @@ public sealed record class SubscriptionCreateResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("customer", out JsonElement element))
+            if (!this._properties.TryGetValue("customer", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'customer' cannot be null",
                     new ArgumentOutOfRangeException("customer", "Missing required argument")
@@ -67,9 +68,9 @@ public sealed record class SubscriptionCreateResponse
                     new ArgumentNullException("customer")
                 );
         }
-        set
+        init
         {
-            this.Properties["customer"] = JsonSerializer.SerializeToElement(
+            this._properties["customer"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -83,7 +84,7 @@ public sealed record class SubscriptionCreateResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._properties.TryGetValue("metadata", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'metadata' cannot be null",
                     new ArgumentOutOfRangeException("metadata", "Missing required argument")
@@ -98,9 +99,9 @@ public sealed record class SubscriptionCreateResponse
                     new ArgumentNullException("metadata")
                 );
         }
-        set
+        init
         {
-            this.Properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._properties["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -114,7 +115,7 @@ public sealed record class SubscriptionCreateResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("payment_id", out JsonElement element))
+            if (!this._properties.TryGetValue("payment_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'payment_id' cannot be null",
                     new ArgumentOutOfRangeException("payment_id", "Missing required argument")
@@ -126,9 +127,9 @@ public sealed record class SubscriptionCreateResponse
                     new ArgumentNullException("payment_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["payment_id"] = JsonSerializer.SerializeToElement(
+            this._properties["payment_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -142,7 +143,7 @@ public sealed record class SubscriptionCreateResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("recurring_pre_tax_amount", out JsonElement element))
+            if (!this._properties.TryGetValue("recurring_pre_tax_amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'recurring_pre_tax_amount' cannot be null",
                     new ArgumentOutOfRangeException(
@@ -153,9 +154,9 @@ public sealed record class SubscriptionCreateResponse
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["recurring_pre_tax_amount"] = JsonSerializer.SerializeToElement(
+            this._properties["recurring_pre_tax_amount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -169,7 +170,7 @@ public sealed record class SubscriptionCreateResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("subscription_id", out JsonElement element))
+            if (!this._properties.TryGetValue("subscription_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'subscription_id' cannot be null",
                     new ArgumentOutOfRangeException("subscription_id", "Missing required argument")
@@ -181,9 +182,9 @@ public sealed record class SubscriptionCreateResponse
                     new ArgumentNullException("subscription_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["subscription_id"] = JsonSerializer.SerializeToElement(
+            this._properties["subscription_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -198,14 +199,14 @@ public sealed record class SubscriptionCreateResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("client_secret", out JsonElement element))
+            if (!this._properties.TryGetValue("client_secret", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["client_secret"] = JsonSerializer.SerializeToElement(
+            this._properties["client_secret"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -219,14 +220,14 @@ public sealed record class SubscriptionCreateResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("discount_id", out JsonElement element))
+            if (!this._properties.TryGetValue("discount_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["discount_id"] = JsonSerializer.SerializeToElement(
+            this._properties["discount_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -240,14 +241,14 @@ public sealed record class SubscriptionCreateResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("expires_on", out JsonElement element))
+            if (!this._properties.TryGetValue("expires_on", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["expires_on"] = JsonSerializer.SerializeToElement(
+            this._properties["expires_on"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -261,14 +262,14 @@ public sealed record class SubscriptionCreateResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("payment_link", out JsonElement element))
+            if (!this._properties.TryGetValue("payment_link", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["payment_link"] = JsonSerializer.SerializeToElement(
+            this._properties["payment_link"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -294,18 +295,23 @@ public sealed record class SubscriptionCreateResponse
 
     public SubscriptionCreateResponse() { }
 
+    public SubscriptionCreateResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionCreateResponse(Dictionary<string, JsonElement> properties)
+    SubscriptionCreateResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static SubscriptionCreateResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

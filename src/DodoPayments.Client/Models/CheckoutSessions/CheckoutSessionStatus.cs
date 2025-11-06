@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -19,7 +20,7 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
     {
         get
         {
-            if (!this.Properties.TryGetValue("id", out JsonElement element))
+            if (!this._properties.TryGetValue("id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
                     new ArgumentOutOfRangeException("id", "Missing required argument")
@@ -31,9 +32,9 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
                     new ArgumentNullException("id")
                 );
         }
-        set
+        init
         {
-            this.Properties["id"] = JsonSerializer.SerializeToElement(
+            this._properties["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -47,7 +48,7 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
     {
         get
         {
-            if (!this.Properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._properties.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
@@ -55,9 +56,9 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._properties["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -71,14 +72,14 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
     {
         get
         {
-            if (!this.Properties.TryGetValue("customer_email", out JsonElement element))
+            if (!this._properties.TryGetValue("customer_email", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["customer_email"] = JsonSerializer.SerializeToElement(
+            this._properties["customer_email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -92,14 +93,14 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
     {
         get
         {
-            if (!this.Properties.TryGetValue("customer_name", out JsonElement element))
+            if (!this._properties.TryGetValue("customer_name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["customer_name"] = JsonSerializer.SerializeToElement(
+            this._properties["customer_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -115,14 +116,14 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
     {
         get
         {
-            if (!this.Properties.TryGetValue("payment_id", out JsonElement element))
+            if (!this._properties.TryGetValue("payment_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["payment_id"] = JsonSerializer.SerializeToElement(
+            this._properties["payment_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -138,7 +139,7 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
     {
         get
         {
-            if (!this.Properties.TryGetValue("payment_status", out JsonElement element))
+            if (!this._properties.TryGetValue("payment_status", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Payments::IntentStatus>?>(
@@ -146,9 +147,9 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["payment_status"] = JsonSerializer.SerializeToElement(
+            this._properties["payment_status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -167,16 +168,23 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
 
     public CheckoutSessionStatus() { }
 
+    public CheckoutSessionStatus(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CheckoutSessionStatus(Dictionary<string, JsonElement> properties)
+    CheckoutSessionStatus(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static CheckoutSessionStatus FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static CheckoutSessionStatus FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

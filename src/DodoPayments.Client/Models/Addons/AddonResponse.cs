@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -19,7 +20,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         get
         {
-            if (!this.Properties.TryGetValue("id", out JsonElement element))
+            if (!this._properties.TryGetValue("id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
                     new ArgumentOutOfRangeException("id", "Missing required argument")
@@ -31,9 +32,9 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
                     new ArgumentNullException("id")
                 );
         }
-        set
+        init
         {
-            this.Properties["id"] = JsonSerializer.SerializeToElement(
+            this._properties["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -47,7 +48,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         get
         {
-            if (!this.Properties.TryGetValue("business_id", out JsonElement element))
+            if (!this._properties.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
                     new ArgumentOutOfRangeException("business_id", "Missing required argument")
@@ -59,9 +60,9 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
                     new ArgumentNullException("business_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["business_id"] = JsonSerializer.SerializeToElement(
+            this._properties["business_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -75,7 +76,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         get
         {
-            if (!this.Properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._properties.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
@@ -83,9 +84,9 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._properties["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -99,7 +100,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         get
         {
-            if (!this.Properties.TryGetValue("currency", out JsonElement element))
+            if (!this._properties.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
                     new ArgumentOutOfRangeException("currency", "Missing required argument")
@@ -110,9 +111,9 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["currency"] = JsonSerializer.SerializeToElement(
+            this._properties["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -126,7 +127,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'name' cannot be null",
                     new ArgumentOutOfRangeException("name", "Missing required argument")
@@ -138,9 +139,9 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
                     new ArgumentNullException("name")
                 );
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -154,7 +155,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         get
         {
-            if (!this.Properties.TryGetValue("price", out JsonElement element))
+            if (!this._properties.TryGetValue("price", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
                     new ArgumentOutOfRangeException("price", "Missing required argument")
@@ -162,9 +163,9 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["price"] = JsonSerializer.SerializeToElement(
+            this._properties["price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -178,7 +179,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         get
         {
-            if (!this.Properties.TryGetValue("tax_category", out JsonElement element))
+            if (!this._properties.TryGetValue("tax_category", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'tax_category' cannot be null",
                     new ArgumentOutOfRangeException("tax_category", "Missing required argument")
@@ -189,9 +190,9 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["tax_category"] = JsonSerializer.SerializeToElement(
+            this._properties["tax_category"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -205,7 +206,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         get
         {
-            if (!this.Properties.TryGetValue("updated_at", out JsonElement element))
+            if (!this._properties.TryGetValue("updated_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'updated_at' cannot be null",
                     new ArgumentOutOfRangeException("updated_at", "Missing required argument")
@@ -213,9 +214,9 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["updated_at"] = JsonSerializer.SerializeToElement(
+            this._properties["updated_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -229,14 +230,14 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         get
         {
-            if (!this.Properties.TryGetValue("description", out JsonElement element))
+            if (!this._properties.TryGetValue("description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["description"] = JsonSerializer.SerializeToElement(
+            this._properties["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -250,14 +251,14 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         get
         {
-            if (!this.Properties.TryGetValue("image", out JsonElement element))
+            if (!this._properties.TryGetValue("image", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["image"] = JsonSerializer.SerializeToElement(
+            this._properties["image"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -280,16 +281,23 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
 
     public AddonResponse() { }
 
+    public AddonResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    AddonResponse(Dictionary<string, JsonElement> properties)
+    AddonResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static AddonResponse FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static AddonResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

@@ -1,3 +1,6 @@
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
@@ -17,14 +20,14 @@ public sealed record class WebhookListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("iterator", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("iterator", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["iterator"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["iterator"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -38,18 +41,52 @@ public sealed record class WebhookListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("limit", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("limit", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["limit"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["limit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public WebhookListParams() { }
+
+    public WebhookListParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    WebhookListParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+#pragma warning restore CS8618
+
+    public static WebhookListParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties)
+        );
     }
 
     public override System::Uri Url(IDodoPaymentsClient client)

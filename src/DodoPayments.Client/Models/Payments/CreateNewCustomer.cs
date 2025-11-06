@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -15,7 +16,7 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
     {
         get
         {
-            if (!this.Properties.TryGetValue("email", out JsonElement element))
+            if (!this._properties.TryGetValue("email", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'email' cannot be null",
                     new ArgumentOutOfRangeException("email", "Missing required argument")
@@ -27,9 +28,9 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
                     new ArgumentNullException("email")
                 );
         }
-        set
+        init
         {
-            this.Properties["email"] = JsonSerializer.SerializeToElement(
+            this._properties["email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -40,7 +41,7 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'name' cannot be null",
                     new ArgumentOutOfRangeException("name", "Missing required argument")
@@ -52,9 +53,9 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
                     new ArgumentNullException("name")
                 );
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -70,14 +71,14 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
     {
         get
         {
-            if (!this.Properties.TryGetValue("create_new_customer", out JsonElement element))
+            if (!this._properties.TryGetValue("create_new_customer", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["create_new_customer"] = JsonSerializer.SerializeToElement(
+            this._properties["create_new_customer"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -88,14 +89,14 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
     {
         get
         {
-            if (!this.Properties.TryGetValue("phone_number", out JsonElement element))
+            if (!this._properties.TryGetValue("phone_number", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["phone_number"] = JsonSerializer.SerializeToElement(
+            this._properties["phone_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -112,16 +113,23 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
 
     public CreateNewCustomer() { }
 
+    public CreateNewCustomer(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CreateNewCustomer(Dictionary<string, JsonElement> properties)
+    CreateNewCustomer(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static CreateNewCustomer FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static CreateNewCustomer FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

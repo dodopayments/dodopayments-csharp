@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -15,7 +16,7 @@ public sealed record class UsageEventIngestResponse : ModelBase, IFromRaw<UsageE
     {
         get
         {
-            if (!this.Properties.TryGetValue("ingested_count", out JsonElement element))
+            if (!this._properties.TryGetValue("ingested_count", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'ingested_count' cannot be null",
                     new ArgumentOutOfRangeException("ingested_count", "Missing required argument")
@@ -23,9 +24,9 @@ public sealed record class UsageEventIngestResponse : ModelBase, IFromRaw<UsageE
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["ingested_count"] = JsonSerializer.SerializeToElement(
+            this._properties["ingested_count"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -39,19 +40,24 @@ public sealed record class UsageEventIngestResponse : ModelBase, IFromRaw<UsageE
 
     public UsageEventIngestResponse() { }
 
+    public UsageEventIngestResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UsageEventIngestResponse(Dictionary<string, JsonElement> properties)
+    UsageEventIngestResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static UsageEventIngestResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]

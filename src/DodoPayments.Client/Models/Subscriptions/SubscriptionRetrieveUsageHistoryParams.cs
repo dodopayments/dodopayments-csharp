@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
@@ -36,7 +39,7 @@ namespace DodoPayments.Client.Models.Subscriptions;
 /// </summary>
 public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
 {
-    public required string SubscriptionID;
+    public required string SubscriptionID { get; init; }
 
     /// <summary>
     /// Filter by end date (inclusive)
@@ -45,14 +48,14 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("end_date", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("end_date", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["end_date"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["end_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -66,14 +69,14 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("meter_id", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("meter_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["meter_id"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["meter_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -87,14 +90,14 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("page_number", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("page_number", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["page_number"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["page_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -108,14 +111,14 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("page_size", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("page_size", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["page_size"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["page_size"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -129,18 +132,52 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("start_date", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("start_date", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["start_date"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["start_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public SubscriptionRetrieveUsageHistoryParams() { }
+
+    public SubscriptionRetrieveUsageHistoryParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionRetrieveUsageHistoryParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+#pragma warning restore CS8618
+
+    public static SubscriptionRetrieveUsageHistoryParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties)
+        );
     }
 
     public override Uri Url(IDodoPaymentsClient client)

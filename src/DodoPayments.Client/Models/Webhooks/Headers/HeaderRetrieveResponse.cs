@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -23,7 +24,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
     {
         get
         {
-            if (!this.Properties.TryGetValue("headers", out JsonElement element))
+            if (!this._properties.TryGetValue("headers", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'headers' cannot be null",
                     new ArgumentOutOfRangeException("headers", "Missing required argument")
@@ -38,9 +39,9 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
                     new ArgumentNullException("headers")
                 );
         }
-        set
+        init
         {
-            this.Properties["headers"] = JsonSerializer.SerializeToElement(
+            this._properties["headers"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -54,7 +55,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
     {
         get
         {
-            if (!this.Properties.TryGetValue("sensitive", out JsonElement element))
+            if (!this._properties.TryGetValue("sensitive", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'sensitive' cannot be null",
                     new ArgumentOutOfRangeException("sensitive", "Missing required argument")
@@ -66,9 +67,9 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
                     new ArgumentNullException("sensitive")
                 );
         }
-        set
+        init
         {
-            this.Properties["sensitive"] = JsonSerializer.SerializeToElement(
+            this._properties["sensitive"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -83,18 +84,23 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
 
     public HeaderRetrieveResponse() { }
 
+    public HeaderRetrieveResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    HeaderRetrieveResponse(Dictionary<string, JsonElement> properties)
+    HeaderRetrieveResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static HeaderRetrieveResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

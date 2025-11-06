@@ -1,5 +1,9 @@
 using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
+using System.Text.Json;
 using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.UsageEvents;
@@ -22,7 +26,41 @@ namespace DodoPayments.Client.Models.UsageEvents;
 /// </summary>
 public sealed record class UsageEventRetrieveParams : ParamsBase
 {
-    public required string EventID;
+    public required string EventID { get; init; }
+
+    public UsageEventRetrieveParams() { }
+
+    public UsageEventRetrieveParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    UsageEventRetrieveParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+#pragma warning restore CS8618
+
+    public static UsageEventRetrieveParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties)
+        );
+    }
 
     public override Uri Url(IDodoPaymentsClient client)
     {

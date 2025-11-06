@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -13,9 +15,13 @@ namespace DodoPayments.Client.Models.Webhooks.Headers;
 /// </summary>
 public sealed record class HeaderUpdateParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
-    public required string WebhookID;
+    public required string WebhookID { get; init; }
 
     /// <summary>
     /// Object of header-value pair to update or add
@@ -24,7 +30,7 @@ public sealed record class HeaderUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("headers", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("headers", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'headers' cannot be null",
                     new ArgumentOutOfRangeException("headers", "Missing required argument")
@@ -39,13 +45,53 @@ public sealed record class HeaderUpdateParams : ParamsBase
                     new ArgumentNullException("headers")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["headers"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["headers"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public HeaderUpdateParams() { }
+
+    public HeaderUpdateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    HeaderUpdateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static HeaderUpdateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override Uri Url(IDodoPaymentsClient client)
