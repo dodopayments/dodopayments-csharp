@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -16,7 +17,7 @@ public sealed record class ProductListPageResponse : ModelBase, IFromRaw<Product
     {
         get
         {
-            if (!this.Properties.TryGetValue("items", out JsonElement element))
+            if (!this._properties.TryGetValue("items", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'items' cannot be null",
                     new System::ArgumentOutOfRangeException("items", "Missing required argument")
@@ -28,9 +29,9 @@ public sealed record class ProductListPageResponse : ModelBase, IFromRaw<Product
                     new System::ArgumentNullException("items")
                 );
         }
-        set
+        init
         {
-            this.Properties["items"] = JsonSerializer.SerializeToElement(
+            this._properties["items"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -47,19 +48,24 @@ public sealed record class ProductListPageResponse : ModelBase, IFromRaw<Product
 
     public ProductListPageResponse() { }
 
+    public ProductListPageResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ProductListPageResponse(Dictionary<string, JsonElement> properties)
+    ProductListPageResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static ProductListPageResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]
@@ -80,7 +86,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("business_id", out JsonElement element))
+            if (!this._properties.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -95,9 +101,9 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
                     new System::ArgumentNullException("business_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["business_id"] = JsonSerializer.SerializeToElement(
+            this._properties["business_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -111,7 +117,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._properties.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -125,9 +131,9 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._properties["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -141,7 +147,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("is_recurring", out JsonElement element))
+            if (!this._properties.TryGetValue("is_recurring", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'is_recurring' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -152,9 +158,9 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["is_recurring"] = JsonSerializer.SerializeToElement(
+            this._properties["is_recurring"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -168,7 +174,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._properties.TryGetValue("metadata", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'metadata' cannot be null",
                     new System::ArgumentOutOfRangeException("metadata", "Missing required argument")
@@ -183,9 +189,9 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
                     new System::ArgumentNullException("metadata")
                 );
         }
-        set
+        init
         {
-            this.Properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._properties["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -199,7 +205,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("product_id", out JsonElement element))
+            if (!this._properties.TryGetValue("product_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -214,9 +220,9 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
                     new System::ArgumentNullException("product_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["product_id"] = JsonSerializer.SerializeToElement(
+            this._properties["product_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -230,7 +236,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("tax_category", out JsonElement element))
+            if (!this._properties.TryGetValue("tax_category", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'tax_category' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -244,9 +250,9 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["tax_category"] = JsonSerializer.SerializeToElement(
+            this._properties["tax_category"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -260,7 +266,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("updated_at", out JsonElement element))
+            if (!this._properties.TryGetValue("updated_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'updated_at' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -274,9 +280,9 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["updated_at"] = JsonSerializer.SerializeToElement(
+            this._properties["updated_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -290,7 +296,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("currency", out JsonElement element))
+            if (!this._properties.TryGetValue("currency", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>?>(
@@ -298,9 +304,9 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["currency"] = JsonSerializer.SerializeToElement(
+            this._properties["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -314,14 +320,14 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("description", out JsonElement element))
+            if (!this._properties.TryGetValue("description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["description"] = JsonSerializer.SerializeToElement(
+            this._properties["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -335,14 +341,14 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("image", out JsonElement element))
+            if (!this._properties.TryGetValue("image", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["image"] = JsonSerializer.SerializeToElement(
+            this._properties["image"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -356,14 +362,14 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -384,14 +390,14 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("price", out JsonElement element))
+            if (!this._properties.TryGetValue("price", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["price"] = JsonSerializer.SerializeToElement(
+            this._properties["price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -405,14 +411,14 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("price_detail", out JsonElement element))
+            if (!this._properties.TryGetValue("price_detail", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Price?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["price_detail"] = JsonSerializer.SerializeToElement(
+            this._properties["price_detail"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -426,14 +432,14 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this.Properties.TryGetValue("tax_inclusive", out JsonElement element))
+            if (!this._properties.TryGetValue("tax_inclusive", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["tax_inclusive"] = JsonSerializer.SerializeToElement(
+            this._properties["tax_inclusive"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -460,16 +466,21 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
 
     public Item() { }
 
+    public Item(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Item(Dictionary<string, JsonElement> properties)
+    Item(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Item FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

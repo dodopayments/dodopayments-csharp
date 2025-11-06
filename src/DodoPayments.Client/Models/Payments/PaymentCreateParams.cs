@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -11,7 +13,11 @@ namespace DodoPayments.Client.Models.Payments;
 
 public sealed record class PaymentCreateParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
     /// <summary>
     /// Billing address details for the payment
@@ -20,7 +26,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("billing", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("billing", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'billing' cannot be null",
                     new ArgumentOutOfRangeException("billing", "Missing required argument")
@@ -32,9 +38,9 @@ public sealed record class PaymentCreateParams : ParamsBase
                     new ArgumentNullException("billing")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["billing"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["billing"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -48,7 +54,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("customer", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("customer", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'customer' cannot be null",
                     new ArgumentOutOfRangeException("customer", "Missing required argument")
@@ -60,9 +66,9 @@ public sealed record class PaymentCreateParams : ParamsBase
                     new ArgumentNullException("customer")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["customer"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["customer"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -76,7 +82,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("product_cart", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("product_cart", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_cart' cannot be null",
                     new ArgumentOutOfRangeException("product_cart", "Missing required argument")
@@ -91,9 +97,9 @@ public sealed record class PaymentCreateParams : ParamsBase
                     new ArgumentNullException("product_cart")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["product_cart"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["product_cart"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -112,7 +118,7 @@ public sealed record class PaymentCreateParams : ParamsBase
         get
         {
             if (
-                !this.BodyProperties.TryGetValue(
+                !this._bodyProperties.TryGetValue(
                     "allowed_payment_method_types",
                     out JsonElement element
                 )
@@ -124,12 +130,10 @@ public sealed record class PaymentCreateParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["allowed_payment_method_types"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            this._bodyProperties["allowed_payment_method_types"] =
+                JsonSerializer.SerializeToElement(value, ModelBase.SerializerOptions);
         }
     }
 
@@ -141,7 +145,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("billing_currency", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("billing_currency", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>?>(
@@ -149,9 +153,9 @@ public sealed record class PaymentCreateParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["billing_currency"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["billing_currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -165,14 +169,14 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("discount_code", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("discount_code", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["discount_code"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["discount_code"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -186,14 +190,14 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("force_3ds", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("force_3ds", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["force_3ds"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["force_3ds"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -207,7 +211,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("metadata", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("metadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Dictionary<string, string>?>(
@@ -215,9 +219,9 @@ public sealed record class PaymentCreateParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["metadata"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -231,14 +235,14 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("payment_link", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("payment_link", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["payment_link"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["payment_link"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -253,14 +257,14 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("return_url", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("return_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["return_url"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["return_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -275,7 +279,7 @@ public sealed record class PaymentCreateParams : ParamsBase
         get
         {
             if (
-                !this.BodyProperties.TryGetValue(
+                !this._bodyProperties.TryGetValue(
                     "show_saved_payment_methods",
                     out JsonElement element
                 )
@@ -284,9 +288,9 @@ public sealed record class PaymentCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["show_saved_payment_methods"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["show_saved_payment_methods"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -301,18 +305,58 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("tax_id", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("tax_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["tax_id"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["tax_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public PaymentCreateParams() { }
+
+    public PaymentCreateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    PaymentCreateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static PaymentCreateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override Uri Url(IDodoPaymentsClient client)

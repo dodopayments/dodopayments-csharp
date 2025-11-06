@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -18,7 +19,7 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
     {
         get
         {
-            if (!this.Properties.TryGetValue("checkout_url", out JsonElement element))
+            if (!this._properties.TryGetValue("checkout_url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'checkout_url' cannot be null",
                     new ArgumentOutOfRangeException("checkout_url", "Missing required argument")
@@ -30,9 +31,9 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
                     new ArgumentNullException("checkout_url")
                 );
         }
-        set
+        init
         {
-            this.Properties["checkout_url"] = JsonSerializer.SerializeToElement(
+            this._properties["checkout_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -46,7 +47,7 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
     {
         get
         {
-            if (!this.Properties.TryGetValue("session_id", out JsonElement element))
+            if (!this._properties.TryGetValue("session_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'session_id' cannot be null",
                     new ArgumentOutOfRangeException("session_id", "Missing required argument")
@@ -58,9 +59,9 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
                     new ArgumentNullException("session_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["session_id"] = JsonSerializer.SerializeToElement(
+            this._properties["session_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -75,18 +76,23 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
 
     public CheckoutSessionResponse() { }
 
+    public CheckoutSessionResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CheckoutSessionResponse(Dictionary<string, JsonElement> properties)
+    CheckoutSessionResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static CheckoutSessionResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

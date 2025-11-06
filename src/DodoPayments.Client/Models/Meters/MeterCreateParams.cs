@@ -1,4 +1,6 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -10,7 +12,11 @@ namespace DodoPayments.Client.Models.Meters;
 
 public sealed record class MeterCreateParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
     /// <summary>
     /// Aggregation configuration for the meter
@@ -19,7 +25,7 @@ public sealed record class MeterCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("aggregation", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("aggregation", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'aggregation' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -37,9 +43,9 @@ public sealed record class MeterCreateParams : ParamsBase
                     new System::ArgumentNullException("aggregation")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["aggregation"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["aggregation"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -53,7 +59,7 @@ public sealed record class MeterCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("event_name", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("event_name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'event_name' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -68,9 +74,9 @@ public sealed record class MeterCreateParams : ParamsBase
                     new System::ArgumentNullException("event_name")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["event_name"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["event_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -84,7 +90,7 @@ public sealed record class MeterCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("measurement_unit", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("measurement_unit", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'measurement_unit' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -99,9 +105,9 @@ public sealed record class MeterCreateParams : ParamsBase
                     new System::ArgumentNullException("measurement_unit")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["measurement_unit"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["measurement_unit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -115,7 +121,7 @@ public sealed record class MeterCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("name", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'name' cannot be null",
                     new System::ArgumentOutOfRangeException("name", "Missing required argument")
@@ -127,9 +133,9 @@ public sealed record class MeterCreateParams : ParamsBase
                     new System::ArgumentNullException("name")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["name"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -143,14 +149,14 @@ public sealed record class MeterCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("description", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["description"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -164,18 +170,58 @@ public sealed record class MeterCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("filter", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("filter", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<MeterFilter?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["filter"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["filter"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public MeterCreateParams() { }
+
+    public MeterCreateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    MeterCreateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static MeterCreateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override System::Uri Url(IDodoPaymentsClient client)

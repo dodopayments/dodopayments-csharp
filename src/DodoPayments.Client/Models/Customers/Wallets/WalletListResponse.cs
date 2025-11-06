@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -15,7 +16,7 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
     {
         get
         {
-            if (!this.Properties.TryGetValue("items", out JsonElement element))
+            if (!this._properties.TryGetValue("items", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'items' cannot be null",
                     new ArgumentOutOfRangeException("items", "Missing required argument")
@@ -30,9 +31,9 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
                     new ArgumentNullException("items")
                 );
         }
-        set
+        init
         {
-            this.Properties["items"] = JsonSerializer.SerializeToElement(
+            this._properties["items"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -46,7 +47,7 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
     {
         get
         {
-            if (!this.Properties.TryGetValue("total_balance_usd", out JsonElement element))
+            if (!this._properties.TryGetValue("total_balance_usd", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'total_balance_usd' cannot be null",
                     new ArgumentOutOfRangeException(
@@ -57,9 +58,9 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["total_balance_usd"] = JsonSerializer.SerializeToElement(
+            this._properties["total_balance_usd"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -77,16 +78,23 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
 
     public WalletListResponse() { }
 
+    public WalletListResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    WalletListResponse(Dictionary<string, JsonElement> properties)
+    WalletListResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static WalletListResponse FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static WalletListResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

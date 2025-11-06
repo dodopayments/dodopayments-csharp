@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -18,7 +19,7 @@ public sealed record class PaymentRetrieveLineItemsResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("currency", out JsonElement element))
+            if (!this._properties.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
                     new ArgumentOutOfRangeException("currency", "Missing required argument")
@@ -29,9 +30,9 @@ public sealed record class PaymentRetrieveLineItemsResponse
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["currency"] = JsonSerializer.SerializeToElement(
+            this._properties["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -42,7 +43,7 @@ public sealed record class PaymentRetrieveLineItemsResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("items", out JsonElement element))
+            if (!this._properties.TryGetValue("items", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'items' cannot be null",
                     new ArgumentOutOfRangeException("items", "Missing required argument")
@@ -54,9 +55,9 @@ public sealed record class PaymentRetrieveLineItemsResponse
                     new ArgumentNullException("items")
                 );
         }
-        set
+        init
         {
-            this.Properties["items"] = JsonSerializer.SerializeToElement(
+            this._properties["items"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -74,19 +75,24 @@ public sealed record class PaymentRetrieveLineItemsResponse
 
     public PaymentRetrieveLineItemsResponse() { }
 
+    public PaymentRetrieveLineItemsResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    PaymentRetrieveLineItemsResponse(Dictionary<string, JsonElement> properties)
+    PaymentRetrieveLineItemsResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static PaymentRetrieveLineItemsResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
@@ -97,7 +103,7 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
     {
         get
         {
-            if (!this.Properties.TryGetValue("amount", out JsonElement element))
+            if (!this._properties.TryGetValue("amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'amount' cannot be null",
                     new ArgumentOutOfRangeException("amount", "Missing required argument")
@@ -105,9 +111,9 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["amount"] = JsonSerializer.SerializeToElement(
+            this._properties["amount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -118,7 +124,7 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
     {
         get
         {
-            if (!this.Properties.TryGetValue("items_id", out JsonElement element))
+            if (!this._properties.TryGetValue("items_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'items_id' cannot be null",
                     new ArgumentOutOfRangeException("items_id", "Missing required argument")
@@ -130,9 +136,9 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
                     new ArgumentNullException("items_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["items_id"] = JsonSerializer.SerializeToElement(
+            this._properties["items_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -143,7 +149,7 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
     {
         get
         {
-            if (!this.Properties.TryGetValue("refundable_amount", out JsonElement element))
+            if (!this._properties.TryGetValue("refundable_amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'refundable_amount' cannot be null",
                     new ArgumentOutOfRangeException(
@@ -154,9 +160,9 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["refundable_amount"] = JsonSerializer.SerializeToElement(
+            this._properties["refundable_amount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -167,7 +173,7 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
     {
         get
         {
-            if (!this.Properties.TryGetValue("tax", out JsonElement element))
+            if (!this._properties.TryGetValue("tax", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'tax' cannot be null",
                     new ArgumentOutOfRangeException("tax", "Missing required argument")
@@ -175,9 +181,9 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["tax"] = JsonSerializer.SerializeToElement(
+            this._properties["tax"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -188,14 +194,14 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
     {
         get
         {
-            if (!this.Properties.TryGetValue("description", out JsonElement element))
+            if (!this._properties.TryGetValue("description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["description"] = JsonSerializer.SerializeToElement(
+            this._properties["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -206,14 +212,14 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -232,16 +238,21 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
 
     public ItemModel() { }
 
+    public ItemModel(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ItemModel(Dictionary<string, JsonElement> properties)
+    ItemModel(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static ItemModel FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static ItemModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

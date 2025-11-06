@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
@@ -7,7 +10,7 @@ namespace DodoPayments.Client.Models.Customers.CustomerPortal;
 
 public sealed record class CustomerPortalCreateParams : ParamsBase
 {
-    public required string CustomerID;
+    public required string CustomerID { get; init; }
 
     /// <summary>
     /// If true, will send link to user.
@@ -16,18 +19,52 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("send_email", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("send_email", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["send_email"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["send_email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public CustomerPortalCreateParams() { }
+
+    public CustomerPortalCreateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CustomerPortalCreateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+#pragma warning restore CS8618
+
+    public static CustomerPortalCreateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties)
+        );
     }
 
     public override Uri Url(IDodoPaymentsClient client)

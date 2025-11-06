@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
@@ -14,14 +17,14 @@ public sealed record class PayoutListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("created_at_gte", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("created_at_gte", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["created_at_gte"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["created_at_gte"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -35,14 +38,14 @@ public sealed record class PayoutListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("created_at_lte", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("created_at_lte", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["created_at_lte"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["created_at_lte"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -56,14 +59,14 @@ public sealed record class PayoutListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("page_number", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("page_number", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["page_number"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["page_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -77,18 +80,52 @@ public sealed record class PayoutListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("page_size", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("page_size", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["page_size"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["page_size"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public PayoutListParams() { }
+
+    public PayoutListParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    PayoutListParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+#pragma warning restore CS8618
+
+    public static PayoutListParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties)
+        );
     }
 
     public override Uri Url(IDodoPaymentsClient client)

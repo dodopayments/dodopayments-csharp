@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
@@ -12,9 +13,13 @@ namespace DodoPayments.Client.Models.Products;
 
 public sealed record class ProductUpdateParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
-    public required string ID;
+    public required string ID { get; init; }
 
     /// <summary>
     /// Available Addons for subscription products
@@ -23,14 +28,14 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("addons", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("addons", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["addons"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["addons"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -41,14 +46,14 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("brand_id", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("brand_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["brand_id"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["brand_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -62,14 +67,14 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("description", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["description"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -84,7 +89,7 @@ public sealed record class ProductUpdateParams : ParamsBase
         get
         {
             if (
-                !this.BodyProperties.TryGetValue(
+                !this._bodyProperties.TryGetValue(
                     "digital_product_delivery",
                     out JsonElement element
                 )
@@ -96,9 +101,9 @@ public sealed record class ProductUpdateParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["digital_product_delivery"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["digital_product_delivery"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -112,14 +117,14 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("image_id", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("image_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["image_id"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["image_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -137,7 +142,7 @@ public sealed record class ProductUpdateParams : ParamsBase
         get
         {
             if (
-                !this.BodyProperties.TryGetValue(
+                !this._bodyProperties.TryGetValue(
                     "license_key_activation_message",
                     out JsonElement element
                 )
@@ -146,9 +151,9 @@ public sealed record class ProductUpdateParams : ParamsBase
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["license_key_activation_message"] =
+            this._bodyProperties["license_key_activation_message"] =
                 JsonSerializer.SerializeToElement(value, ModelBase.SerializerOptions);
         }
     }
@@ -164,7 +169,7 @@ public sealed record class ProductUpdateParams : ParamsBase
         get
         {
             if (
-                !this.BodyProperties.TryGetValue(
+                !this._bodyProperties.TryGetValue(
                     "license_key_activations_limit",
                     out JsonElement element
                 )
@@ -173,9 +178,9 @@ public sealed record class ProductUpdateParams : ParamsBase
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["license_key_activations_limit"] =
+            this._bodyProperties["license_key_activations_limit"] =
                 JsonSerializer.SerializeToElement(value, ModelBase.SerializerOptions);
         }
     }
@@ -190,7 +195,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("license_key_duration", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("license_key_duration", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<LicenseKeyDuration?>(
@@ -198,9 +203,9 @@ public sealed record class ProductUpdateParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["license_key_duration"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["license_key_duration"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -217,14 +222,14 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("license_key_enabled", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("license_key_enabled", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["license_key_enabled"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["license_key_enabled"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -238,7 +243,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("metadata", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("metadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Dictionary<string, string>?>(
@@ -246,9 +251,9 @@ public sealed record class ProductUpdateParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["metadata"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -262,14 +267,14 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("name", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["name"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -283,14 +288,14 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("price", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("price", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Price?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["price"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -304,7 +309,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("tax_category", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("tax_category", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>?>(
@@ -312,13 +317,53 @@ public sealed record class ProductUpdateParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["tax_category"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["tax_category"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public ProductUpdateParams() { }
+
+    public ProductUpdateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    ProductUpdateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static ProductUpdateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override System::Uri Url(IDodoPaymentsClient client)
@@ -368,14 +413,14 @@ public sealed record class DigitalProductDeliveryModel
     {
         get
         {
-            if (!this.Properties.TryGetValue("external_url", out JsonElement element))
+            if (!this._properties.TryGetValue("external_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["external_url"] = JsonSerializer.SerializeToElement(
+            this._properties["external_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -389,14 +434,14 @@ public sealed record class DigitalProductDeliveryModel
     {
         get
         {
-            if (!this.Properties.TryGetValue("files", out JsonElement element))
+            if (!this._properties.TryGetValue("files", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["files"] = JsonSerializer.SerializeToElement(
+            this._properties["files"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -410,14 +455,14 @@ public sealed record class DigitalProductDeliveryModel
     {
         get
         {
-            if (!this.Properties.TryGetValue("instructions", out JsonElement element))
+            if (!this._properties.TryGetValue("instructions", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["instructions"] = JsonSerializer.SerializeToElement(
+            this._properties["instructions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -433,18 +478,23 @@ public sealed record class DigitalProductDeliveryModel
 
     public DigitalProductDeliveryModel() { }
 
+    public DigitalProductDeliveryModel(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DigitalProductDeliveryModel(Dictionary<string, JsonElement> properties)
+    DigitalProductDeliveryModel(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static DigitalProductDeliveryModel FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
