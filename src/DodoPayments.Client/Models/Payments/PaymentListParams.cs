@@ -1,8 +1,9 @@
-using System;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Payments.PaymentListParamsProperties;
+using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -32,14 +33,17 @@ public sealed record class PaymentListParams : ParamsBase
     /// <summary>
     /// Get events after this created time
     /// </summary>
-    public DateTime? CreatedAtGte
+    public System::DateTime? CreatedAtGte
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("created_at_gte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -53,14 +57,17 @@ public sealed record class PaymentListParams : ParamsBase
     /// <summary>
     /// Get events created before this time
     /// </summary>
-    public DateTime? CreatedAtLte
+    public System::DateTime? CreatedAtLte
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("created_at_lte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -179,9 +186,9 @@ public sealed record class PaymentListParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/payments")
+        return new System::UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/payments")
         {
             Query = this.QueryString(client),
         }.Uri;
@@ -197,5 +204,75 @@ public sealed record class PaymentListParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+/// <summary>
+/// Filter by status
+/// </summary>
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Succeeded,
+    Failed,
+    Cancelled,
+    Processing,
+    RequiresCustomerAction,
+    RequiresMerchantAction,
+    RequiresPaymentMethod,
+    RequiresConfirmation,
+    RequiresCapture,
+    PartiallyCaptured,
+    PartiallyCapturedAndCapturable,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "succeeded" => Status.Succeeded,
+            "failed" => Status.Failed,
+            "cancelled" => Status.Cancelled,
+            "processing" => Status.Processing,
+            "requires_customer_action" => Status.RequiresCustomerAction,
+            "requires_merchant_action" => Status.RequiresMerchantAction,
+            "requires_payment_method" => Status.RequiresPaymentMethod,
+            "requires_confirmation" => Status.RequiresConfirmation,
+            "requires_capture" => Status.RequiresCapture,
+            "partially_captured" => Status.PartiallyCaptured,
+            "partially_captured_and_capturable" => Status.PartiallyCapturedAndCapturable,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Succeeded => "succeeded",
+                Status.Failed => "failed",
+                Status.Cancelled => "cancelled",
+                Status.Processing => "processing",
+                Status.RequiresCustomerAction => "requires_customer_action",
+                Status.RequiresMerchantAction => "requires_merchant_action",
+                Status.RequiresPaymentMethod => "requires_payment_method",
+                Status.RequiresConfirmation => "requires_confirmation",
+                Status.RequiresCapture => "requires_capture",
+                Status.PartiallyCaptured => "partially_captured",
+                Status.PartiallyCapturedAndCapturable => "partially_captured_and_capturable",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

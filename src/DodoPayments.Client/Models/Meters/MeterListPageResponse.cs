@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Meters;
 
@@ -18,13 +18,13 @@ public sealed record class MeterListPageResponse : ModelBase, IFromRaw<MeterList
             if (!this.Properties.TryGetValue("items", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'items' cannot be null",
-                    new ArgumentOutOfRangeException("items", "Missing required argument")
+                    new System::ArgumentOutOfRangeException("items", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<List<Meter>>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'items' cannot be null",
-                    new ArgumentNullException("items")
+                    new System::ArgumentNullException("items")
                 );
         }
         set

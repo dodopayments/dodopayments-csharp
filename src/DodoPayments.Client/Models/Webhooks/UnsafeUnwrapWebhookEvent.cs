@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -42,7 +42,7 @@ public record class UnsafeUnwrapWebhookEvent
         }
     }
 
-    public DateTime Timestamp
+    public System::DateTime Timestamp
     {
         get
         {
@@ -334,27 +334,27 @@ public record class UnsafeUnwrapWebhookEvent
     }
 
     public void Switch(
-        Action<DisputeAcceptedWebhookEvent> disputeAccepted,
-        Action<DisputeCancelledWebhookEvent> disputeCancelled,
-        Action<DisputeChallengedWebhookEvent> disputeChallenged,
-        Action<DisputeExpiredWebhookEvent> disputeExpired,
-        Action<DisputeLostWebhookEvent> disputeLost,
-        Action<DisputeOpenedWebhookEvent> disputeOpened,
-        Action<DisputeWonWebhookEvent> disputeWon,
-        Action<LicenseKeyCreatedWebhookEvent> licenseKeyCreated,
-        Action<PaymentCancelledWebhookEvent> paymentCancelled,
-        Action<PaymentFailedWebhookEvent> paymentFailed,
-        Action<PaymentProcessingWebhookEvent> paymentProcessing,
-        Action<PaymentSucceededWebhookEvent> paymentSucceeded,
-        Action<RefundFailedWebhookEvent> refundFailed,
-        Action<RefundSucceededWebhookEvent> refundSucceeded,
-        Action<SubscriptionActiveWebhookEvent> subscriptionActive,
-        Action<SubscriptionCancelledWebhookEvent> subscriptionCancelled,
-        Action<SubscriptionExpiredWebhookEvent> subscriptionExpired,
-        Action<SubscriptionFailedWebhookEvent> subscriptionFailed,
-        Action<SubscriptionOnHoldWebhookEvent> subscriptionOnHold,
-        Action<SubscriptionPlanChangedWebhookEvent> subscriptionPlanChanged,
-        Action<SubscriptionRenewedWebhookEvent> subscriptionRenewed
+        System::Action<DisputeAcceptedWebhookEvent> disputeAccepted,
+        System::Action<DisputeCancelledWebhookEvent> disputeCancelled,
+        System::Action<DisputeChallengedWebhookEvent> disputeChallenged,
+        System::Action<DisputeExpiredWebhookEvent> disputeExpired,
+        System::Action<DisputeLostWebhookEvent> disputeLost,
+        System::Action<DisputeOpenedWebhookEvent> disputeOpened,
+        System::Action<DisputeWonWebhookEvent> disputeWon,
+        System::Action<LicenseKeyCreatedWebhookEvent> licenseKeyCreated,
+        System::Action<PaymentCancelledWebhookEvent> paymentCancelled,
+        System::Action<PaymentFailedWebhookEvent> paymentFailed,
+        System::Action<PaymentProcessingWebhookEvent> paymentProcessing,
+        System::Action<PaymentSucceededWebhookEvent> paymentSucceeded,
+        System::Action<RefundFailedWebhookEvent> refundFailed,
+        System::Action<RefundSucceededWebhookEvent> refundSucceeded,
+        System::Action<SubscriptionActiveWebhookEvent> subscriptionActive,
+        System::Action<SubscriptionCancelledWebhookEvent> subscriptionCancelled,
+        System::Action<SubscriptionExpiredWebhookEvent> subscriptionExpired,
+        System::Action<SubscriptionFailedWebhookEvent> subscriptionFailed,
+        System::Action<SubscriptionOnHoldWebhookEvent> subscriptionOnHold,
+        System::Action<SubscriptionPlanChangedWebhookEvent> subscriptionPlanChanged,
+        System::Action<SubscriptionRenewedWebhookEvent> subscriptionRenewed
     )
     {
         switch (this.Value)
@@ -430,27 +430,27 @@ public record class UnsafeUnwrapWebhookEvent
     }
 
     public T Match<T>(
-        Func<DisputeAcceptedWebhookEvent, T> disputeAccepted,
-        Func<DisputeCancelledWebhookEvent, T> disputeCancelled,
-        Func<DisputeChallengedWebhookEvent, T> disputeChallenged,
-        Func<DisputeExpiredWebhookEvent, T> disputeExpired,
-        Func<DisputeLostWebhookEvent, T> disputeLost,
-        Func<DisputeOpenedWebhookEvent, T> disputeOpened,
-        Func<DisputeWonWebhookEvent, T> disputeWon,
-        Func<LicenseKeyCreatedWebhookEvent, T> licenseKeyCreated,
-        Func<PaymentCancelledWebhookEvent, T> paymentCancelled,
-        Func<PaymentFailedWebhookEvent, T> paymentFailed,
-        Func<PaymentProcessingWebhookEvent, T> paymentProcessing,
-        Func<PaymentSucceededWebhookEvent, T> paymentSucceeded,
-        Func<RefundFailedWebhookEvent, T> refundFailed,
-        Func<RefundSucceededWebhookEvent, T> refundSucceeded,
-        Func<SubscriptionActiveWebhookEvent, T> subscriptionActive,
-        Func<SubscriptionCancelledWebhookEvent, T> subscriptionCancelled,
-        Func<SubscriptionExpiredWebhookEvent, T> subscriptionExpired,
-        Func<SubscriptionFailedWebhookEvent, T> subscriptionFailed,
-        Func<SubscriptionOnHoldWebhookEvent, T> subscriptionOnHold,
-        Func<SubscriptionPlanChangedWebhookEvent, T> subscriptionPlanChanged,
-        Func<SubscriptionRenewedWebhookEvent, T> subscriptionRenewed
+        System::Func<DisputeAcceptedWebhookEvent, T> disputeAccepted,
+        System::Func<DisputeCancelledWebhookEvent, T> disputeCancelled,
+        System::Func<DisputeChallengedWebhookEvent, T> disputeChallenged,
+        System::Func<DisputeExpiredWebhookEvent, T> disputeExpired,
+        System::Func<DisputeLostWebhookEvent, T> disputeLost,
+        System::Func<DisputeOpenedWebhookEvent, T> disputeOpened,
+        System::Func<DisputeWonWebhookEvent, T> disputeWon,
+        System::Func<LicenseKeyCreatedWebhookEvent, T> licenseKeyCreated,
+        System::Func<PaymentCancelledWebhookEvent, T> paymentCancelled,
+        System::Func<PaymentFailedWebhookEvent, T> paymentFailed,
+        System::Func<PaymentProcessingWebhookEvent, T> paymentProcessing,
+        System::Func<PaymentSucceededWebhookEvent, T> paymentSucceeded,
+        System::Func<RefundFailedWebhookEvent, T> refundFailed,
+        System::Func<RefundSucceededWebhookEvent, T> refundSucceeded,
+        System::Func<SubscriptionActiveWebhookEvent, T> subscriptionActive,
+        System::Func<SubscriptionCancelledWebhookEvent, T> subscriptionCancelled,
+        System::Func<SubscriptionExpiredWebhookEvent, T> subscriptionExpired,
+        System::Func<SubscriptionFailedWebhookEvent, T> subscriptionFailed,
+        System::Func<SubscriptionOnHoldWebhookEvent, T> subscriptionOnHold,
+        System::Func<SubscriptionPlanChangedWebhookEvent, T> subscriptionPlanChanged,
+        System::Func<SubscriptionRenewedWebhookEvent, T> subscriptionRenewed
     )
     {
         return this.Value switch
@@ -499,7 +499,7 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
 {
     public override UnsafeUnwrapWebhookEvent? Read(
         ref Utf8JsonReader reader,
-        Type typeToConvert,
+        System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -517,7 +517,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -539,7 +540,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -561,7 +563,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -583,7 +586,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -605,7 +609,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -627,7 +632,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -649,7 +655,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -671,7 +678,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -693,7 +701,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -715,7 +724,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -737,7 +747,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -759,7 +770,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -781,7 +793,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -803,7 +816,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -825,7 +839,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -847,7 +862,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -869,7 +885,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -891,7 +908,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -913,7 +931,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -935,7 +954,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -957,7 +977,8 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
                 return new UnsafeUnwrapWebhookEvent(deserialized);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
@@ -967,7 +988,7 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
             );
         }
 
-        throw new AggregateException(exceptions);
+        throw new System::AggregateException(exceptions);
     }
 
     public override void Write(

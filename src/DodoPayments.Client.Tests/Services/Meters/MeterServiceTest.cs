@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DodoPayments.Client.Models.Meters.MeterAggregationProperties;
+using DodoPayments.Client.Models.Meters;
 
 namespace DodoPayments.Client.Tests.Services.Meters;
 

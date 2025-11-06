@@ -1,12 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries.CustomerWalletTransactionProperties;
 using DodoPayments.Client.Models.Misc;
+using System = System;
 
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
@@ -22,13 +21,13 @@ public sealed record class CustomerWalletTransaction
             if (!this.Properties.TryGetValue("id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
-                    new ArgumentOutOfRangeException("id", "Missing required argument")
+                    new System::ArgumentOutOfRangeException("id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
-                    new ArgumentNullException("id")
+                    new System::ArgumentNullException("id")
                 );
         }
         set
@@ -47,7 +46,10 @@ public sealed record class CustomerWalletTransaction
             if (!this.Properties.TryGetValue("after_balance", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'after_balance' cannot be null",
-                    new ArgumentOutOfRangeException("after_balance", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "after_balance",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
@@ -68,7 +70,7 @@ public sealed record class CustomerWalletTransaction
             if (!this.Properties.TryGetValue("amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'amount' cannot be null",
-                    new ArgumentOutOfRangeException("amount", "Missing required argument")
+                    new System::ArgumentOutOfRangeException("amount", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
@@ -89,7 +91,10 @@ public sealed record class CustomerWalletTransaction
             if (!this.Properties.TryGetValue("before_balance", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'before_balance' cannot be null",
-                    new ArgumentOutOfRangeException("before_balance", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "before_balance",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
@@ -110,13 +115,16 @@ public sealed record class CustomerWalletTransaction
             if (!this.Properties.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
-                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "business_id",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
-                    new ArgumentNullException("business_id")
+                    new System::ArgumentNullException("business_id")
                 );
         }
         set
@@ -128,17 +136,23 @@ public sealed record class CustomerWalletTransaction
         }
     }
 
-    public required DateTime CreatedAt
+    public required System::DateTime CreatedAt
     {
         get
         {
             if (!this.Properties.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
-                    new ArgumentOutOfRangeException("created_at", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "created_at",
+                        "Missing required argument"
+                    )
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -156,7 +170,7 @@ public sealed record class CustomerWalletTransaction
             if (!this.Properties.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
-                    new ArgumentOutOfRangeException("currency", "Missing required argument")
+                    new System::ArgumentOutOfRangeException("currency", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
@@ -180,13 +194,16 @@ public sealed record class CustomerWalletTransaction
             if (!this.Properties.TryGetValue("customer_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'customer_id' cannot be null",
-                    new ArgumentOutOfRangeException("customer_id", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "customer_id",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'customer_id' cannot be null",
-                    new ArgumentNullException("customer_id")
+                    new System::ArgumentNullException("customer_id")
                 );
         }
         set
@@ -205,7 +222,10 @@ public sealed record class CustomerWalletTransaction
             if (!this.Properties.TryGetValue("event_type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'event_type' cannot be null",
-                    new ArgumentOutOfRangeException("event_type", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "event_type",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, EventType>>(
@@ -229,7 +249,10 @@ public sealed record class CustomerWalletTransaction
             if (!this.Properties.TryGetValue("is_credit", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'is_credit' cannot be null",
-                    new ArgumentOutOfRangeException("is_credit", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "is_credit",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
@@ -310,5 +333,64 @@ public sealed record class CustomerWalletTransaction
     )
     {
         return new(properties);
+    }
+}
+
+[JsonConverter(typeof(EventTypeConverter))]
+public enum EventType
+{
+    Payment,
+    PaymentReversal,
+    Refund,
+    RefundReversal,
+    Dispute,
+    DisputeReversal,
+    MerchantAdjustment,
+}
+
+sealed class EventTypeConverter : JsonConverter<EventType>
+{
+    public override EventType Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "payment" => EventType.Payment,
+            "payment_reversal" => EventType.PaymentReversal,
+            "refund" => EventType.Refund,
+            "refund_reversal" => EventType.RefundReversal,
+            "dispute" => EventType.Dispute,
+            "dispute_reversal" => EventType.DisputeReversal,
+            "merchant_adjustment" => EventType.MerchantAdjustment,
+            _ => (EventType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        EventType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                EventType.Payment => "payment",
+                EventType.PaymentReversal => "payment_reversal",
+                EventType.Refund => "refund",
+                EventType.RefundReversal => "refund_reversal",
+                EventType.Dispute => "dispute",
+                EventType.DisputeReversal => "dispute_reversal",
+                EventType.MerchantAdjustment => "merchant_adjustment",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

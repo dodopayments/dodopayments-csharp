@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -20,13 +20,13 @@ public sealed record class ProductUpdateFilesResponse
             if (!this.Properties.TryGetValue("file_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'file_id' cannot be null",
-                    new ArgumentOutOfRangeException("file_id", "Missing required argument")
+                    new System::ArgumentOutOfRangeException("file_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'file_id' cannot be null",
-                    new ArgumentNullException("file_id")
+                    new System::ArgumentNullException("file_id")
                 );
         }
         set
@@ -45,13 +45,13 @@ public sealed record class ProductUpdateFilesResponse
             if (!this.Properties.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
-                    new ArgumentOutOfRangeException("url", "Missing required argument")
+                    new System::ArgumentOutOfRangeException("url", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
-                    new ArgumentNullException("url")
+                    new System::ArgumentNullException("url")
                 );
         }
         set

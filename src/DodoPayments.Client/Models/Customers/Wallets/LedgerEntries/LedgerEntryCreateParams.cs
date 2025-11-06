@@ -1,12 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries.LedgerEntryCreateParamsProperties;
 using DodoPayments.Client.Models.Misc;
+using System = System;
 
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
@@ -23,7 +23,7 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'amount' cannot be null",
-                    new ArgumentOutOfRangeException("amount", "Missing required argument")
+                    new System::ArgumentOutOfRangeException("amount", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
@@ -47,7 +47,7 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
-                    new ArgumentOutOfRangeException("currency", "Missing required argument")
+                    new System::ArgumentOutOfRangeException("currency", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
@@ -74,7 +74,10 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("entry_type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'entry_type' cannot be null",
-                    new ArgumentOutOfRangeException("entry_type", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "entry_type",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, EntryType>>(
@@ -130,9 +133,9 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/customers/{0}/wallets/ledger-entries", this.CustomerID)
         )
@@ -160,5 +163,52 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+/// <summary>
+/// Type of ledger entry - credit or debit
+/// </summary>
+[JsonConverter(typeof(EntryTypeConverter))]
+public enum EntryType
+{
+    Credit,
+    Debit,
+}
+
+sealed class EntryTypeConverter : JsonConverter<EntryType>
+{
+    public override EntryType Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "credit" => EntryType.Credit,
+            "debit" => EntryType.Debit,
+            _ => (EntryType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        EntryType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                EntryType.Credit => "credit",
+                EntryType.Debit => "debit",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

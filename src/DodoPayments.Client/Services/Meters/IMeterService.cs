@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Meters;
+using Meters = DodoPayments.Client.Models.Meters;
 
 namespace DodoPayments.Client.Services.Meters;
 
@@ -9,13 +9,13 @@ public interface IMeterService
 {
     IMeterService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    Task<Meter> Create(MeterCreateParams parameters);
+    Task<Meters::Meter> Create(Meters::MeterCreateParams parameters);
 
-    Task<Meter> Retrieve(MeterRetrieveParams parameters);
+    Task<Meters::Meter> Retrieve(Meters::MeterRetrieveParams parameters);
 
-    Task<MeterListPageResponse> List(MeterListParams? parameters = null);
+    Task<Meters::MeterListPageResponse> List(Meters::MeterListParams? parameters = null);
 
-    Task Archive(MeterArchiveParams parameters);
+    Task Archive(Meters::MeterArchiveParams parameters);
 
-    Task Unarchive(MeterUnarchiveParams parameters);
+    Task Unarchive(Meters::MeterUnarchiveParams parameters);
 }

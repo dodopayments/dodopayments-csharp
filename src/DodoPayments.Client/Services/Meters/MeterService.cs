@@ -2,7 +2,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Meters;
+using Meters = DodoPayments.Client.Models.Meters;
 
 namespace DodoPayments.Client.Services.Meters;
 
@@ -20,15 +20,15 @@ public sealed class MeterService : IMeterService
         _client = client;
     }
 
-    public async Task<Meter> Create(MeterCreateParams parameters)
+    public async Task<Meters::Meter> Create(Meters::MeterCreateParams parameters)
     {
-        HttpRequest<MeterCreateParams> request = new()
+        HttpRequest<Meters::MeterCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var meter = await response.Deserialize<Meter>().ConfigureAwait(false);
+        var meter = await response.Deserialize<Meters::Meter>().ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             meter.Validate();
@@ -36,15 +36,15 @@ public sealed class MeterService : IMeterService
         return meter;
     }
 
-    public async Task<Meter> Retrieve(MeterRetrieveParams parameters)
+    public async Task<Meters::Meter> Retrieve(Meters::MeterRetrieveParams parameters)
     {
-        HttpRequest<MeterRetrieveParams> request = new()
+        HttpRequest<Meters::MeterRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var meter = await response.Deserialize<Meter>().ConfigureAwait(false);
+        var meter = await response.Deserialize<Meters::Meter>().ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             meter.Validate();
@@ -52,17 +52,21 @@ public sealed class MeterService : IMeterService
         return meter;
     }
 
-    public async Task<MeterListPageResponse> List(MeterListParams? parameters = null)
+    public async Task<Meters::MeterListPageResponse> List(
+        Meters::MeterListParams? parameters = null
+    )
     {
         parameters ??= new();
 
-        HttpRequest<MeterListParams> request = new()
+        HttpRequest<Meters::MeterListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var page = await response.Deserialize<MeterListPageResponse>().ConfigureAwait(false);
+        var page = await response
+            .Deserialize<Meters::MeterListPageResponse>()
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             page.Validate();
@@ -70,9 +74,9 @@ public sealed class MeterService : IMeterService
         return page;
     }
 
-    public async Task Archive(MeterArchiveParams parameters)
+    public async Task Archive(Meters::MeterArchiveParams parameters)
     {
-        HttpRequest<MeterArchiveParams> request = new()
+        HttpRequest<Meters::MeterArchiveParams> request = new()
         {
             Method = HttpMethod.Delete,
             Params = parameters,
@@ -80,9 +84,9 @@ public sealed class MeterService : IMeterService
         using var response = await this._client.Execute(request).ConfigureAwait(false);
     }
 
-    public async Task Unarchive(MeterUnarchiveParams parameters)
+    public async Task Unarchive(Meters::MeterUnarchiveParams parameters)
     {
-        HttpRequest<MeterUnarchiveParams> request = new()
+        HttpRequest<Meters::MeterUnarchiveParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,

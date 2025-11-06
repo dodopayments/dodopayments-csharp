@@ -6,8 +6,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
-using DodoPayments.Client.Models.Subscriptions.SubscriptionProperties;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -51,7 +50,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     /// <summary>
     /// Billing address details for payments
     /// </summary>
-    public required BillingAddress Billing
+    public required Payments::BillingAddress Billing
     {
         get
         {
@@ -61,7 +60,10 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
                     new ArgumentOutOfRangeException("billing", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<BillingAddress>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<Payments::BillingAddress>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'billing' cannot be null",
                     new ArgumentNullException("billing")
@@ -159,7 +161,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     /// <summary>
     /// Customer details associated with the subscription
     /// </summary>
-    public required CustomerLimitedDetails Customer
+    public required Payments::CustomerLimitedDetails Customer
     {
         get
         {
@@ -169,7 +171,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
                     new ArgumentOutOfRangeException("customer", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<CustomerLimitedDetails>(
+            return JsonSerializer.Deserialize<Payments::CustomerLimitedDetails>(
                     element,
                     ModelBase.SerializerOptions
                 )
@@ -782,6 +784,202 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
 #pragma warning restore CS8618
 
     public static Subscription FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    {
+        return new(properties);
+    }
+}
+
+/// <summary>
+/// Response struct representing usage-based meter cart details for a subscription
+/// </summary>
+[JsonConverter(typeof(ModelConverter<Meter>))]
+public sealed record class Meter : ModelBase, IFromRaw<Meter>
+{
+    public required ApiEnum<string, Currency> Currency
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("currency", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentOutOfRangeException("currency", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        }
+        set
+        {
+            this.Properties["currency"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public required long FreeThreshold
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("free_threshold", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'free_threshold' cannot be null",
+                    new ArgumentOutOfRangeException("free_threshold", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["free_threshold"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public required string MeasurementUnit
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("measurement_unit", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'measurement_unit' cannot be null",
+                    new ArgumentOutOfRangeException("measurement_unit", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'measurement_unit' cannot be null",
+                    new ArgumentNullException("measurement_unit")
+                );
+        }
+        set
+        {
+            this.Properties["measurement_unit"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public required string MeterID
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("meter_id", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'meter_id' cannot be null",
+                    new ArgumentOutOfRangeException("meter_id", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'meter_id' cannot be null",
+                    new ArgumentNullException("meter_id")
+                );
+        }
+        set
+        {
+            this.Properties["meter_id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public required string Name
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("name", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentOutOfRangeException("name", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentNullException("name")
+                );
+        }
+        set
+        {
+            this.Properties["name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public required string PricePerUnit
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("price_per_unit", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'price_per_unit' cannot be null",
+                    new ArgumentOutOfRangeException("price_per_unit", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'price_per_unit' cannot be null",
+                    new ArgumentNullException("price_per_unit")
+                );
+        }
+        set
+        {
+            this.Properties["price_per_unit"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public string? Description
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("description", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["description"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public override void Validate()
+    {
+        this.Currency.Validate();
+        _ = this.FreeThreshold;
+        _ = this.MeasurementUnit;
+        _ = this.MeterID;
+        _ = this.Name;
+        _ = this.PricePerUnit;
+        _ = this.Description;
+    }
+
+    public Meter() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Meter(Dictionary<string, JsonElement> properties)
+    {
+        Properties = properties;
+    }
+#pragma warning restore CS8618
+
+    public static Meter FromRawUnchecked(Dictionary<string, JsonElement> properties)
     {
         return new(properties);
     }

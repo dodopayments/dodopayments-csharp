@@ -6,7 +6,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -17,7 +17,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// <summary>
     /// Billing address information for the subscription
     /// </summary>
-    public required BillingAddress Billing
+    public required Payments::BillingAddress Billing
     {
         get
         {
@@ -27,7 +27,10 @@ public sealed record class SubscriptionCreateParams : ParamsBase
                     new ArgumentOutOfRangeException("billing", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<BillingAddress>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<Payments::BillingAddress>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'billing' cannot be null",
                     new ArgumentNullException("billing")
@@ -45,7 +48,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// <summary>
     /// Customer details for the subscription
     /// </summary>
-    public required CustomerRequest Customer
+    public required Payments::CustomerRequest Customer
     {
         get
         {
@@ -55,7 +58,10 @@ public sealed record class SubscriptionCreateParams : ParamsBase
                     new ArgumentOutOfRangeException("customer", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<CustomerRequest>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<Payments::CustomerRequest>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'customer' cannot be null",
                     new ArgumentNullException("customer")
@@ -153,7 +159,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// However, adding a method here **does not guarantee** customers will see it.
     /// Availability still depends on other factors (e.g., customer location, merchant settings).
     /// </summary>
-    public List<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
+    public List<ApiEnum<string, Payments::PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
         get
         {
@@ -165,7 +171,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
             )
                 return null;
 
-            return JsonSerializer.Deserialize<List<ApiEnum<string, PaymentMethodTypes>>?>(
+            return JsonSerializer.Deserialize<List<ApiEnum<string, Payments::PaymentMethodTypes>>?>(
                 element,
                 ModelBase.SerializerOptions
             );
