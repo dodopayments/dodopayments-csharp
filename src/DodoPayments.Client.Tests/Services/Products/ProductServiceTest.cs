@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Products.PriceProperties;
-using DodoPayments.Client.Models.Products.PriceProperties.OneTimePriceProperties;
+using DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Tests.Services.Products;
 

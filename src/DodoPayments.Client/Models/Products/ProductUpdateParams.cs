@@ -1,11 +1,12 @@
-using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Products.ProductUpdateParamsProperties;
+using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -78,7 +79,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// <summary>
     /// Choose how you would like you digital product delivered
     /// </summary>
-    public DigitalProductDelivery? DigitalProductDelivery
+    public DigitalProductDeliveryModel? DigitalProductDelivery
     {
         get
         {
@@ -90,7 +91,7 @@ public sealed record class ProductUpdateParams : ParamsBase
             )
                 return null;
 
-            return JsonSerializer.Deserialize<DigitalProductDelivery?>(
+            return JsonSerializer.Deserialize<DigitalProductDeliveryModel?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -320,9 +321,9 @@ public sealed record class ProductUpdateParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/') + string.Format("/products/{0}", this.ID)
         )
         {
@@ -349,5 +350,101 @@ public sealed record class ProductUpdateParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+/// <summary>
+/// Choose how you would like you digital product delivered
+/// </summary>
+[JsonConverter(typeof(ModelConverter<DigitalProductDeliveryModel>))]
+public sealed record class DigitalProductDeliveryModel
+    : ModelBase,
+        IFromRaw<DigitalProductDeliveryModel>
+{
+    /// <summary>
+    /// External URL to digital product
+    /// </summary>
+    public string? ExternalURL
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("external_url", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["external_url"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Uploaded files ids of digital product
+    /// </summary>
+    public List<string>? Files
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("files", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["files"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Instructions to download and use the digital product
+    /// </summary>
+    public string? Instructions
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("instructions", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["instructions"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public override void Validate()
+    {
+        _ = this.ExternalURL;
+        _ = this.Files;
+        _ = this.Instructions;
+    }
+
+    public DigitalProductDeliveryModel() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DigitalProductDeliveryModel(Dictionary<string, JsonElement> properties)
+    {
+        Properties = properties;
+    }
+#pragma warning restore CS8618
+
+    public static DigitalProductDeliveryModel FromRawUnchecked(
+        Dictionary<string, JsonElement> properties
+    )
+    {
+        return new(properties);
     }
 }

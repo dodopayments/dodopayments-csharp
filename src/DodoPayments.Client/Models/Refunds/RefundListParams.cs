@@ -1,8 +1,9 @@
-using System;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Refunds.RefundListParamsProperties;
+using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Refunds;
 
@@ -11,14 +12,17 @@ public sealed record class RefundListParams : ParamsBase
     /// <summary>
     /// Get events after this created time
     /// </summary>
-    public DateTime? CreatedAtGte
+    public System::DateTime? CreatedAtGte
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("created_at_gte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -32,14 +36,17 @@ public sealed record class RefundListParams : ParamsBase
     /// <summary>
     /// Get events created before this time
     /// </summary>
-    public DateTime? CreatedAtLte
+    public System::DateTime? CreatedAtLte
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("created_at_lte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -137,9 +144,9 @@ public sealed record class RefundListParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/refunds")
+        return new System::UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/refunds")
         {
             Query = this.QueryString(client),
         }.Uri;
@@ -155,5 +162,54 @@ public sealed record class RefundListParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+/// <summary>
+/// Filter by status
+/// </summary>
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Succeeded,
+    Failed,
+    Pending,
+    Review,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "succeeded" => Status.Succeeded,
+            "failed" => Status.Failed,
+            "pending" => Status.Pending,
+            "review" => Status.Review,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Succeeded => "succeeded",
+                Status.Failed => "failed",
+                Status.Pending => "pending",
+                Status.Review => "review",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

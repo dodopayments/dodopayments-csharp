@@ -5,7 +5,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Models.UsageEvents.EventInputProperties.MetadataProperties;
 
 namespace DodoPayments.Client.Models.UsageEvents;
 
@@ -101,14 +100,14 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
     /// Custom metadata. Only key value pairs are accepted, objects or arrays submitted
     /// will be rejected.
     /// </summary>
-    public Dictionary<string, Metadata>? Metadata
+    public Dictionary<string, MetadataModel>? Metadata
     {
         get
         {
             if (!this.Properties.TryGetValue("metadata", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Dictionary<string, Metadata>?>(
+            return JsonSerializer.Deserialize<Dictionary<string, MetadataModel>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -172,5 +171,169 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
     public static EventInput FromRawUnchecked(Dictionary<string, JsonElement> properties)
     {
         return new(properties);
+    }
+}
+
+/// <summary>
+/// Metadata value can be a string, integer, number, or boolean
+/// </summary>
+[JsonConverter(typeof(MetadataModelConverter))]
+public record class MetadataModel
+{
+    public object Value { get; private init; }
+
+    public MetadataModel(string value)
+    {
+        Value = value;
+    }
+
+    public MetadataModel(double value)
+    {
+        Value = value;
+    }
+
+    public MetadataModel(bool value)
+    {
+        Value = value;
+    }
+
+    MetadataModel(UnknownVariant value)
+    {
+        Value = value;
+    }
+
+    public static MetadataModel CreateUnknownVariant(JsonElement value)
+    {
+        return new(new UnknownVariant(value));
+    }
+
+    public bool TryPickString([NotNullWhen(true)] out string? value)
+    {
+        value = this.Value as string;
+        return value != null;
+    }
+
+    public bool TryPickNumber([NotNullWhen(true)] out double? value)
+    {
+        value = this.Value as double?;
+        return value != null;
+    }
+
+    public bool TryPickBoolean([NotNullWhen(true)] out bool? value)
+    {
+        value = this.Value as bool?;
+        return value != null;
+    }
+
+    public void Switch(Action<string> @string, Action<double> @number, Action<bool> @boolean)
+    {
+        switch (this.Value)
+        {
+            case string value:
+                @string(value);
+                break;
+            case double value:
+                @number(value);
+                break;
+            case bool value:
+                @boolean(value);
+                break;
+            default:
+                throw new DodoPaymentsInvalidDataException(
+                    "Data did not match any variant of MetadataModel"
+                );
+        }
+    }
+
+    public T Match<T>(Func<string, T> @string, Func<double, T> @number, Func<bool, T> @boolean)
+    {
+        return this.Value switch
+        {
+            string value => @string(value),
+            double value => @number(value),
+            bool value => @boolean(value),
+            _ => throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of MetadataModel"
+            ),
+        };
+    }
+
+    public void Validate()
+    {
+        if (this.Value is UnknownVariant)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of MetadataModel"
+            );
+        }
+    }
+
+    record struct UnknownVariant(JsonElement value);
+}
+
+sealed class MetadataModelConverter : JsonConverter<MetadataModel>
+{
+    public override MetadataModel? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        List<DodoPaymentsInvalidDataException> exceptions = [];
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
+            if (deserialized != null)
+            {
+                return new MetadataModel(deserialized);
+            }
+        }
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant 'string'",
+                    e
+                )
+            );
+        }
+
+        try
+        {
+            return new MetadataModel(JsonSerializer.Deserialize<double>(ref reader, options));
+        }
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException(
+                    "Data does not match union variant 'double'",
+                    e
+                )
+            );
+        }
+
+        try
+        {
+            return new MetadataModel(JsonSerializer.Deserialize<bool>(ref reader, options));
+        }
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            exceptions.Add(
+                new DodoPaymentsInvalidDataException("Data does not match union variant 'bool'", e)
+            );
+        }
+
+        throw new AggregateException(exceptions);
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        MetadataModel value,
+        JsonSerializerOptions options
+    )
+    {
+        object variant = value.Value;
+        JsonSerializer.Serialize(writer, variant, options);
     }
 }

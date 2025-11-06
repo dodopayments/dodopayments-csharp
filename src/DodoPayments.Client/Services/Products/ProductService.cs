@@ -2,8 +2,8 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Services.Products.Images;
+using Products = DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Services.Products;
 
@@ -28,15 +28,15 @@ public sealed class ProductService : IProductService
         get { return _images.Value; }
     }
 
-    public async Task<Product> Create(ProductCreateParams parameters)
+    public async Task<Products::Product> Create(Products::ProductCreateParams parameters)
     {
-        HttpRequest<ProductCreateParams> request = new()
+        HttpRequest<Products::ProductCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var product = await response.Deserialize<Product>().ConfigureAwait(false);
+        var product = await response.Deserialize<Products::Product>().ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             product.Validate();
@@ -44,15 +44,15 @@ public sealed class ProductService : IProductService
         return product;
     }
 
-    public async Task<Product> Retrieve(ProductRetrieveParams parameters)
+    public async Task<Products::Product> Retrieve(Products::ProductRetrieveParams parameters)
     {
-        HttpRequest<ProductRetrieveParams> request = new()
+        HttpRequest<Products::ProductRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var product = await response.Deserialize<Product>().ConfigureAwait(false);
+        var product = await response.Deserialize<Products::Product>().ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             product.Validate();
@@ -60,9 +60,9 @@ public sealed class ProductService : IProductService
         return product;
     }
 
-    public async Task Update(ProductUpdateParams parameters)
+    public async Task Update(Products::ProductUpdateParams parameters)
     {
-        HttpRequest<ProductUpdateParams> request = new()
+        HttpRequest<Products::ProductUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
             Params = parameters,
@@ -70,17 +70,21 @@ public sealed class ProductService : IProductService
         using var response = await this._client.Execute(request).ConfigureAwait(false);
     }
 
-    public async Task<ProductListPageResponse> List(ProductListParams? parameters = null)
+    public async Task<Products::ProductListPageResponse> List(
+        Products::ProductListParams? parameters = null
+    )
     {
         parameters ??= new();
 
-        HttpRequest<ProductListParams> request = new()
+        HttpRequest<Products::ProductListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var page = await response.Deserialize<ProductListPageResponse>().ConfigureAwait(false);
+        var page = await response
+            .Deserialize<Products::ProductListPageResponse>()
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             page.Validate();
@@ -88,9 +92,9 @@ public sealed class ProductService : IProductService
         return page;
     }
 
-    public async Task Archive(ProductArchiveParams parameters)
+    public async Task Archive(Products::ProductArchiveParams parameters)
     {
-        HttpRequest<ProductArchiveParams> request = new()
+        HttpRequest<Products::ProductArchiveParams> request = new()
         {
             Method = HttpMethod.Delete,
             Params = parameters,
@@ -98,9 +102,9 @@ public sealed class ProductService : IProductService
         using var response = await this._client.Execute(request).ConfigureAwait(false);
     }
 
-    public async Task Unarchive(ProductUnarchiveParams parameters)
+    public async Task Unarchive(Products::ProductUnarchiveParams parameters)
     {
-        HttpRequest<ProductUnarchiveParams> request = new()
+        HttpRequest<Products::ProductUnarchiveParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
@@ -108,16 +112,18 @@ public sealed class ProductService : IProductService
         using var response = await this._client.Execute(request).ConfigureAwait(false);
     }
 
-    public async Task<ProductUpdateFilesResponse> UpdateFiles(ProductUpdateFilesParams parameters)
+    public async Task<Products::ProductUpdateFilesResponse> UpdateFiles(
+        Products::ProductUpdateFilesParams parameters
+    )
     {
-        HttpRequest<ProductUpdateFilesParams> request = new()
+        HttpRequest<Products::ProductUpdateFilesParams> request = new()
         {
             Method = HttpMethod.Put,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
         var deserializedResponse = await response
-            .Deserialize<ProductUpdateFilesResponse>()
+            .Deserialize<Products::ProductUpdateFilesResponse>()
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {

@@ -1,11 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Models.Subscriptions.SubscriptionChangePlanParamsProperties;
+using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -25,13 +25,16 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("product_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
-                    new ArgumentOutOfRangeException("product_id", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "product_id",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
-                    new ArgumentNullException("product_id")
+                    new System::ArgumentNullException("product_id")
                 );
         }
         set
@@ -53,7 +56,7 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("proration_billing_mode", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'proration_billing_mode' cannot be null",
-                    new ArgumentOutOfRangeException(
+                    new System::ArgumentOutOfRangeException(
                         "proration_billing_mode",
                         "Missing required argument"
                     )
@@ -83,7 +86,7 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("quantity", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'quantity' cannot be null",
-                    new ArgumentOutOfRangeException("quantity", "Missing required argument")
+                    new System::ArgumentOutOfRangeException("quantity", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
@@ -121,9 +124,9 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/subscriptions/{0}/change-plan", this.SubscriptionID)
         )
@@ -151,5 +154,55 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+/// <summary>
+/// Proration Billing Mode
+/// </summary>
+[JsonConverter(typeof(ProrationBillingModeConverter))]
+public enum ProrationBillingMode
+{
+    ProratedImmediately,
+    FullImmediately,
+    DifferenceImmediately,
+}
+
+sealed class ProrationBillingModeConverter : JsonConverter<ProrationBillingMode>
+{
+    public override ProrationBillingMode Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "prorated_immediately" => ProrationBillingMode.ProratedImmediately,
+            "full_immediately" => ProrationBillingMode.FullImmediately,
+            "difference_immediately" => ProrationBillingMode.DifferenceImmediately,
+            _ => (ProrationBillingMode)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        ProrationBillingMode value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                ProrationBillingMode.ProratedImmediately => "prorated_immediately",
+                ProrationBillingMode.FullImmediately => "full_immediately",
+                ProrationBillingMode.DifferenceImmediately => "difference_immediately",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

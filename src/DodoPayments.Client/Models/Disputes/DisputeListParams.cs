@@ -1,8 +1,9 @@
-using System;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DisputeListParamsProperties = DodoPayments.Client.Models.Disputes.DisputeListParamsProperties;
+using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Disputes;
 
@@ -11,14 +12,17 @@ public sealed record class DisputeListParams : ParamsBase
     /// <summary>
     /// Get events after this created time
     /// </summary>
-    public DateTime? CreatedAtGte
+    public System::DateTime? CreatedAtGte
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("created_at_gte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -32,14 +36,17 @@ public sealed record class DisputeListParams : ParamsBase
     /// <summary>
     /// Get events created before this time
     /// </summary>
-    public DateTime? CreatedAtLte
+    public System::DateTime? CreatedAtLte
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("created_at_lte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -74,17 +81,17 @@ public sealed record class DisputeListParams : ParamsBase
     /// <summary>
     /// Filter by dispute stage
     /// </summary>
-    public ApiEnum<string, DisputeListParamsProperties::DisputeStage>? DisputeStage
+    public ApiEnum<string, DisputeStage>? DisputeStage
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("dispute_stage", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<
-                string,
-                DisputeListParamsProperties::DisputeStage
-            >?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStage>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -98,17 +105,17 @@ public sealed record class DisputeListParams : ParamsBase
     /// <summary>
     /// Filter by dispute status
     /// </summary>
-    public ApiEnum<string, DisputeListParamsProperties::DisputeStatus>? DisputeStatus
+    public ApiEnum<string, DisputeStatus>? DisputeStatus
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("dispute_status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<
-                string,
-                DisputeListParamsProperties::DisputeStatus
-            >?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStatus>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -161,9 +168,9 @@ public sealed record class DisputeListParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/disputes")
+        return new System::UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/disputes")
         {
             Query = this.QueryString(client),
         }.Uri;
@@ -179,5 +186,117 @@ public sealed record class DisputeListParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+/// <summary>
+/// Filter by dispute stage
+/// </summary>
+[JsonConverter(typeof(DisputeStageConverter))]
+public enum DisputeStage
+{
+    PreDispute,
+    Dispute,
+    PreArbitration,
+}
+
+sealed class DisputeStageConverter : JsonConverter<DisputeStage>
+{
+    public override DisputeStage Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "pre_dispute" => DisputeStage.PreDispute,
+            "dispute" => DisputeStage.Dispute,
+            "pre_arbitration" => DisputeStage.PreArbitration,
+            _ => (DisputeStage)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DisputeStage value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DisputeStage.PreDispute => "pre_dispute",
+                DisputeStage.Dispute => "dispute",
+                DisputeStage.PreArbitration => "pre_arbitration",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Filter by dispute status
+/// </summary>
+[JsonConverter(typeof(DisputeStatusConverter))]
+public enum DisputeStatus
+{
+    DisputeOpened,
+    DisputeExpired,
+    DisputeAccepted,
+    DisputeCancelled,
+    DisputeChallenged,
+    DisputeWon,
+    DisputeLost,
+}
+
+sealed class DisputeStatusConverter : JsonConverter<DisputeStatus>
+{
+    public override DisputeStatus Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "dispute_opened" => DisputeStatus.DisputeOpened,
+            "dispute_expired" => DisputeStatus.DisputeExpired,
+            "dispute_accepted" => DisputeStatus.DisputeAccepted,
+            "dispute_cancelled" => DisputeStatus.DisputeCancelled,
+            "dispute_challenged" => DisputeStatus.DisputeChallenged,
+            "dispute_won" => DisputeStatus.DisputeWon,
+            "dispute_lost" => DisputeStatus.DisputeLost,
+            _ => (DisputeStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DisputeStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DisputeStatus.DisputeOpened => "dispute_opened",
+                DisputeStatus.DisputeExpired => "dispute_expired",
+                DisputeStatus.DisputeAccepted => "dispute_accepted",
+                DisputeStatus.DisputeCancelled => "dispute_cancelled",
+                DisputeStatus.DisputeChallenged => "dispute_challenged",
+                DisputeStatus.DisputeWon => "dispute_won",
+                DisputeStatus.DisputeLost => "dispute_lost",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

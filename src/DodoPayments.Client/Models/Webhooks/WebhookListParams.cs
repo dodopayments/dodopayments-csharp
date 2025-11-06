@@ -1,7 +1,7 @@
-using System;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -52,9 +52,9 @@ public sealed record class WebhookListParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/webhooks")
+        return new System::UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/webhooks")
         {
             Query = this.QueryString(client),
         }.Uri;

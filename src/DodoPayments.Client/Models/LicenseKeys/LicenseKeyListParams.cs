@@ -1,8 +1,9 @@
-using System;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.LicenseKeys.LicenseKeyListParamsProperties;
+using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.LicenseKeys;
 
@@ -116,9 +117,9 @@ public sealed record class LicenseKeyListParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/license_keys")
+        return new System::UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/license_keys")
         {
             Query = this.QueryString(client),
         }.Uri;
@@ -134,5 +135,51 @@ public sealed record class LicenseKeyListParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+/// <summary>
+/// Filter by license key status
+/// </summary>
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Active,
+    Expired,
+    Disabled,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "active" => Status.Active,
+            "expired" => Status.Expired,
+            "disabled" => Status.Disabled,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Active => "active",
+                Status.Expired => "expired",
+                Status.Disabled => "disabled",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

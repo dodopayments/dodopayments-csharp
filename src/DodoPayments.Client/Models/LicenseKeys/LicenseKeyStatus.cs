@@ -1,7 +1,7 @@
-using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.LicenseKeys;
 
@@ -17,7 +17,7 @@ sealed class LicenseKeyStatusConverter : JsonConverter<LicenseKeyStatus>
 {
     public override LicenseKeyStatus Read(
         ref Utf8JsonReader reader,
-        Type typeToConvert,
+        System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {

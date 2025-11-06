@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Models.Payments;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Disputes;
 
@@ -123,7 +123,7 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
     /// <summary>
     /// The customer who filed the dispute
     /// </summary>
-    public required CustomerLimitedDetails Customer
+    public required Payments::CustomerLimitedDetails Customer
     {
         get
         {
@@ -133,7 +133,7 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
                     new ArgumentOutOfRangeException("customer", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<CustomerLimitedDetails>(
+            return JsonSerializer.Deserialize<Payments::CustomerLimitedDetails>(
                     element,
                     ModelBase.SerializerOptions
                 )
@@ -182,7 +182,7 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
     /// <summary>
     /// The current stage of the dispute process.
     /// </summary>
-    public required ApiEnum<string, DisputeStage> DisputeStage
+    public required ApiEnum<string, DisputeStageModel> DisputeStage
     {
         get
         {
@@ -192,7 +192,7 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
                     new ArgumentOutOfRangeException("dispute_stage", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStage>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStageModel>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -209,7 +209,7 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
     /// <summary>
     /// The current status of the dispute.
     /// </summary>
-    public required ApiEnum<string, DisputeStatus> DisputeStatus
+    public required ApiEnum<string, DisputeStatusModel> DisputeStatus
     {
         get
         {
@@ -219,7 +219,7 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
                     new ArgumentOutOfRangeException("dispute_status", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStatus>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStatusModel>>(
                 element,
                 ModelBase.SerializerOptions
             );

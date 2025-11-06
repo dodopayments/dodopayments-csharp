@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Services.Products.Images;
+using Products = DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Services.Products;
 
@@ -12,17 +12,19 @@ public interface IProductService
 
     IImageService Images { get; }
 
-    Task<Product> Create(ProductCreateParams parameters);
+    Task<Products::Product> Create(Products::ProductCreateParams parameters);
 
-    Task<Product> Retrieve(ProductRetrieveParams parameters);
+    Task<Products::Product> Retrieve(Products::ProductRetrieveParams parameters);
 
-    Task Update(ProductUpdateParams parameters);
+    Task Update(Products::ProductUpdateParams parameters);
 
-    Task<ProductListPageResponse> List(ProductListParams? parameters = null);
+    Task<Products::ProductListPageResponse> List(Products::ProductListParams? parameters = null);
 
-    Task Archive(ProductArchiveParams parameters);
+    Task Archive(Products::ProductArchiveParams parameters);
 
-    Task Unarchive(ProductUnarchiveParams parameters);
+    Task Unarchive(Products::ProductUnarchiveParams parameters);
 
-    Task<ProductUpdateFilesResponse> UpdateFiles(ProductUpdateFilesParams parameters);
+    Task<Products::ProductUpdateFilesResponse> UpdateFiles(
+        Products::ProductUpdateFilesParams parameters
+    );
 }

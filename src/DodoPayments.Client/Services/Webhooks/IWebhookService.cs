@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Webhooks;
 using DodoPayments.Client.Services.Webhooks.Headers;
+using Webhooks = DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Services.Webhooks;
 
@@ -15,30 +15,32 @@ public interface IWebhookService
     /// <summary>
     /// Create a new webhook
     /// </summary>
-    Task<WebhookDetails> Create(WebhookCreateParams parameters);
+    Task<Webhooks::WebhookDetails> Create(Webhooks::WebhookCreateParams parameters);
 
     /// <summary>
     /// Get a webhook by id
     /// </summary>
-    Task<WebhookDetails> Retrieve(WebhookRetrieveParams parameters);
+    Task<Webhooks::WebhookDetails> Retrieve(Webhooks::WebhookRetrieveParams parameters);
 
     /// <summary>
     /// Patch a webhook by id
     /// </summary>
-    Task<WebhookDetails> Update(WebhookUpdateParams parameters);
+    Task<Webhooks::WebhookDetails> Update(Webhooks::WebhookUpdateParams parameters);
 
     /// <summary>
     /// List all webhooks
     /// </summary>
-    Task<WebhookListPageResponse> List(WebhookListParams? parameters = null);
+    Task<Webhooks::WebhookListPageResponse> List(Webhooks::WebhookListParams? parameters = null);
 
     /// <summary>
     /// Delete a webhook by id
     /// </summary>
-    Task Delete(WebhookDeleteParams parameters);
+    Task Delete(Webhooks::WebhookDeleteParams parameters);
 
     /// <summary>
     /// Get webhook secret by id
     /// </summary>
-    Task<WebhookRetrieveSecretResponse> RetrieveSecret(WebhookRetrieveSecretParams parameters);
+    Task<Webhooks::WebhookRetrieveSecretResponse> RetrieveSecret(
+        Webhooks::WebhookRetrieveSecretParams parameters
+    );
 }

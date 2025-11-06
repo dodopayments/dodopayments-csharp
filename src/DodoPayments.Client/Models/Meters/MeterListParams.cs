@@ -1,7 +1,7 @@
-using System;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using System = System;
 
 namespace DodoPayments.Client.Models.Meters;
 
@@ -70,9 +70,9 @@ public sealed record class MeterListParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/meters")
+        return new System::UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/meters")
         {
             Query = this.QueryString(client),
         }.Uri;

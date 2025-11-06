@@ -1,57 +1,20 @@
 using System.Collections.Generic;
 using System.Text.Json;
-using DodoPayments.Client.Models.Brands.BrandProperties;
-using DodoPayments.Client.Models.CheckoutSessions.CheckoutSessionRequestProperties.CustomizationProperties;
-using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries.CustomerWalletTransactionProperties;
-using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries.LedgerEntryCreateParamsProperties;
+using DodoPayments.Client.Models.Brands;
+using DodoPayments.Client.Models.CheckoutSessions;
+using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.LicenseKeys;
-using DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterConditionProperties;
-using DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
-using DodoPayments.Client.Models.Payments.PaymentListParamsProperties;
-using DodoPayments.Client.Models.Products.PriceProperties.OneTimePriceProperties;
-using DodoPayments.Client.Models.Refunds;
-using DodoPayments.Client.Models.Subscriptions;
-using DodoPayments.Client.Models.Subscriptions.SubscriptionChangePlanParamsProperties;
-using DodoPayments.Client.Models.WebhookEvents;
-using DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties.PaymentProperties.IntersectionMember1Properties;
-using ClauseProperties = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClauseProperties;
-using CustomizationProperties = DodoPayments.Client.Models.CheckoutSessions.CheckoutSessionCreateParamsProperties.CustomizationProperties;
-using DisputeAcceptedWebhookEventProperties = DodoPayments.Client.Models.Webhooks.DisputeAcceptedWebhookEventProperties;
-using DisputeCancelledWebhookEventProperties = DodoPayments.Client.Models.Webhooks.DisputeCancelledWebhookEventProperties;
-using DisputeChallengedWebhookEventProperties = DodoPayments.Client.Models.Webhooks.DisputeChallengedWebhookEventProperties;
-using DisputeExpiredWebhookEventProperties = DodoPayments.Client.Models.Webhooks.DisputeExpiredWebhookEventProperties;
-using DisputeListParamsProperties = DodoPayments.Client.Models.Disputes.DisputeListParamsProperties;
-using DisputeLostWebhookEventProperties = DodoPayments.Client.Models.Webhooks.DisputeLostWebhookEventProperties;
-using DisputeOpenedWebhookEventProperties = DodoPayments.Client.Models.Webhooks.DisputeOpenedWebhookEventProperties;
-using DisputeWonWebhookEventProperties = DodoPayments.Client.Models.Webhooks.DisputeWonWebhookEventProperties;
-using IntersectionMember1Properties = DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties.SubscriptionProperties.IntersectionMember1Properties;
-using ItemProperties = DodoPayments.Client.Models.Payouts.PayoutListPageResponseProperties.ItemProperties;
-using LicenseKeyCreatedWebhookEventProperties = DodoPayments.Client.Models.Webhooks.LicenseKeyCreatedWebhookEventProperties;
-using LicenseKeyListParamsProperties = DodoPayments.Client.Models.LicenseKeys.LicenseKeyListParamsProperties;
-using MeterAggregationProperties = DodoPayments.Client.Models.Meters.MeterAggregationProperties;
-using MeterFilterConditionProperties = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterConditionProperties;
-using MeterFilterProperties = DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties;
-using PaymentCancelledWebhookEventProperties = DodoPayments.Client.Models.Webhooks.PaymentCancelledWebhookEventProperties;
-using PaymentFailedWebhookEventProperties = DodoPayments.Client.Models.Webhooks.PaymentFailedWebhookEventProperties;
-using PaymentProcessingWebhookEventProperties = DodoPayments.Client.Models.Webhooks.PaymentProcessingWebhookEventProperties;
-using PaymentSucceededWebhookEventProperties = DodoPayments.Client.Models.Webhooks.PaymentSucceededWebhookEventProperties;
-using RecurringPriceProperties = DodoPayments.Client.Models.Products.PriceProperties.RecurringPriceProperties;
-using RefundFailedWebhookEventProperties = DodoPayments.Client.Models.Webhooks.RefundFailedWebhookEventProperties;
-using RefundListParamsProperties = DodoPayments.Client.Models.Refunds.RefundListParamsProperties;
-using RefundSucceededWebhookEventProperties = DodoPayments.Client.Models.Webhooks.RefundSucceededWebhookEventProperties;
-using SubscriptionActiveWebhookEventProperties = DodoPayments.Client.Models.Webhooks.SubscriptionActiveWebhookEventProperties;
-using SubscriptionCancelledWebhookEventProperties = DodoPayments.Client.Models.Webhooks.SubscriptionCancelledWebhookEventProperties;
-using SubscriptionExpiredWebhookEventProperties = DodoPayments.Client.Models.Webhooks.SubscriptionExpiredWebhookEventProperties;
-using SubscriptionFailedWebhookEventProperties = DodoPayments.Client.Models.Webhooks.SubscriptionFailedWebhookEventProperties;
-using SubscriptionListParamsProperties = DodoPayments.Client.Models.Subscriptions.SubscriptionListParamsProperties;
-using SubscriptionOnHoldWebhookEventProperties = DodoPayments.Client.Models.Webhooks.SubscriptionOnHoldWebhookEventProperties;
-using SubscriptionPlanChangedWebhookEventProperties = DodoPayments.Client.Models.Webhooks.SubscriptionPlanChangedWebhookEventProperties;
-using SubscriptionRenewedWebhookEventProperties = DodoPayments.Client.Models.Webhooks.SubscriptionRenewedWebhookEventProperties;
-using UsageBasedPriceProperties = DodoPayments.Client.Models.Products.PriceProperties.UsageBasedPriceProperties;
+using DodoPayments.Client.Models.Webhooks;
+using Meters = DodoPayments.Client.Models.Meters;
+using Payments = DodoPayments.Client.Models.Payments;
+using Payouts = DodoPayments.Client.Models.Payouts;
+using Products = DodoPayments.Client.Models.Products;
+using Refunds = DodoPayments.Client.Models.Refunds;
+using Subscriptions = DodoPayments.Client.Models.Subscriptions;
+using WebhookEvents = DodoPayments.Client.Models.WebhookEvents;
 
 namespace DodoPayments.Client.Core;
 
@@ -63,280 +26,133 @@ public abstract record class ModelBase
     {
         Converters =
         {
-            new ApiEnumConverter<string, Theme>(),
+            new ApiEnumConverter<string, ThemeModel>(),
             new ApiEnumConverter<string, Currency>(),
-            new ApiEnumConverter<string, CustomizationProperties::Theme>(),
-            new ApiEnumConverter<string, IntentStatus>(),
-            new ApiEnumConverter<string, PaymentMethodTypes>(),
-            new ApiEnumConverter<string, Status>(),
-            new ApiEnumConverter<string, SubscriptionStatus>(),
-            new ApiEnumConverter<string, TimeInterval>(),
-            new ApiEnumConverter<string, SubscriptionListParamsProperties::Status>(),
-            new ApiEnumConverter<string, ProrationBillingMode>(),
+            new ApiEnumConverter<string, Theme>(),
+            new ApiEnumConverter<string, Payments::IntentStatus>(),
+            new ApiEnumConverter<string, Payments::PaymentMethodTypes>(),
+            new ApiEnumConverter<string, Payments::Status>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
+            new ApiEnumConverter<string, Subscriptions::TimeInterval>(),
+            new ApiEnumConverter<string, Subscriptions::Status>(),
+            new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
             new ApiEnumConverter<string, LicenseKeyStatus>(),
-            new ApiEnumConverter<string, LicenseKeyListParamsProperties::Status>(),
+            new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, EventType>(),
             new ApiEnumConverter<string, EntryType>(),
-            new ApiEnumConverter<string, RefundStatus>(),
-            new ApiEnumConverter<string, RefundListParamsProperties::Status>(),
+            new ApiEnumConverter<string, Refunds::RefundStatus>(),
+            new ApiEnumConverter<string, Refunds::Status>(),
+            new ApiEnumConverter<string, DisputeStageModel>(),
+            new ApiEnumConverter<string, DisputeStatusModel>(),
             new ApiEnumConverter<string, DisputeStage>(),
             new ApiEnumConverter<string, DisputeStatus>(),
-            new ApiEnumConverter<string, DisputeListParamsProperties::DisputeStage>(),
-            new ApiEnumConverter<string, DisputeListParamsProperties::DisputeStatus>(),
-            new ApiEnumConverter<string, ItemProperties::Status>(),
-            new ApiEnumConverter<string, Type>(),
-            new ApiEnumConverter<string, RecurringPriceProperties::Type>(),
-            new ApiEnumConverter<string, UsageBasedPriceProperties::Type>(),
+            new ApiEnumConverter<string, Payouts::Status>(),
+            new ApiEnumConverter<string, Products::Type>(),
+            new ApiEnumConverter<string, Products::TypeModel>(),
+            new ApiEnumConverter<string, Products::Type1>(),
             new ApiEnumConverter<string, TaxCategory>(),
             new ApiEnumConverter<string, CountryCode>(),
             new ApiEnumConverter<string, DiscountType>(),
             new ApiEnumConverter<string, VerificationStatus>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeAcceptedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, DisputeAcceptedWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeCancelledWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, DisputeCancelledWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeChallengedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, DisputeChallengedWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeExpiredWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, DisputeExpiredWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeLostWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, DisputeLostWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeOpenedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, DisputeOpenedWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeWonWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, DisputeWonWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.LicenseKeyCreatedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, LicenseKeyCreatedWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.PaymentCancelledWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, PaymentCancelledWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.PaymentFailedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, PaymentFailedWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.PaymentProcessingWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, PaymentProcessingWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.PaymentSucceededWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, PaymentSucceededWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.RefundFailedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, RefundFailedWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.RefundSucceededWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, RefundSucceededWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionActiveWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, SubscriptionActiveWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionCancelledWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, SubscriptionCancelledWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionExpiredWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, SubscriptionExpiredWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionFailedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, SubscriptionFailedWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionOnHoldWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, SubscriptionOnHoldWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionPlanChangedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, SubscriptionPlanChangedWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionRenewedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, SubscriptionRenewedWebhookEventProperties::Type>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeAcceptedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, DisputeAcceptedWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeCancelledWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, DisputeCancelledWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeChallengedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, DisputeChallengedWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeExpiredWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, DisputeExpiredWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeLostWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, DisputeLostWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeOpenedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, DisputeOpenedWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.DisputeWonWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, DisputeWonWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.LicenseKeyCreatedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, LicenseKeyCreatedWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.PaymentCancelledWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, PaymentCancelledWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.PaymentFailedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, PaymentFailedWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.PaymentProcessingWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, PaymentProcessingWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.PaymentSucceededWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, PaymentSucceededWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.RefundFailedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, RefundFailedWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.RefundSucceededWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, RefundSucceededWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionActiveWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, SubscriptionActiveWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionCancelledWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, SubscriptionCancelledWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionExpiredWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, SubscriptionExpiredWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionFailedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, SubscriptionFailedWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionOnHoldWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, SubscriptionOnHoldWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionPlanChangedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<
-                string,
-                SubscriptionPlanChangedWebhookEventProperties::TypeModel
-            >(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Webhooks.SubscriptionRenewedWebhookEventProperties.DataProperties.IntersectionMember1Properties.PayloadTypeModel
-            >(),
-            new ApiEnumConverter<string, SubscriptionRenewedWebhookEventProperties::TypeModel>(),
-            new ApiEnumConverter<string, WebhookEventType>(),
             new ApiEnumConverter<string, PayloadType>(),
-            new ApiEnumConverter<string, IntersectionMember1Properties::PayloadType>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties.RefundProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties.DisputeProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.WebhookEvents.WebhookPayloadProperties.DataProperties.LicenseKeyProperties.IntersectionMember1Properties.PayloadType
-            >(),
-            new ApiEnumConverter<string, MeterAggregationProperties::Type>(),
-            new ApiEnumConverter<string, Operator>(),
-            new ApiEnumConverter<string, MeterFilterConditionProperties::Operator>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterProperties.ClausesProperties.MeterFilterConditionProperties.Operator
-            >(),
-            new ApiEnumConverter<string, ClauseProperties::Operator>(),
-            new ApiEnumConverter<string, Conjunction>(),
-            new ApiEnumConverter<string, MeterFilterProperties::Conjunction>(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Meters.MeterFilterProperties.ClausesProperties.MeterFilterProperties.Conjunction
-            >(),
-            new ApiEnumConverter<
-                string,
-                global::DodoPayments.Client.Models.Meters.MeterFilterProperties.Conjunction
-            >(),
+            new ApiEnumConverter<string, Type>(),
+            new ApiEnumConverter<string, PayloadTypeModel>(),
+            new ApiEnumConverter<string, TypeModel>(),
+            new ApiEnumConverter<string, PayloadType1>(),
+            new ApiEnumConverter<string, Type1>(),
+            new ApiEnumConverter<string, PayloadType2>(),
+            new ApiEnumConverter<string, Type2>(),
+            new ApiEnumConverter<string, PayloadType3>(),
+            new ApiEnumConverter<string, Type3>(),
+            new ApiEnumConverter<string, PayloadType4>(),
+            new ApiEnumConverter<string, Type4>(),
+            new ApiEnumConverter<string, PayloadType5>(),
+            new ApiEnumConverter<string, Type5>(),
+            new ApiEnumConverter<string, PayloadType6>(),
+            new ApiEnumConverter<string, Type6>(),
+            new ApiEnumConverter<string, PayloadType7>(),
+            new ApiEnumConverter<string, Type7>(),
+            new ApiEnumConverter<string, PayloadType8>(),
+            new ApiEnumConverter<string, Type8>(),
+            new ApiEnumConverter<string, PayloadType9>(),
+            new ApiEnumConverter<string, Type9>(),
+            new ApiEnumConverter<string, PayloadType10>(),
+            new ApiEnumConverter<string, Type10>(),
+            new ApiEnumConverter<string, PayloadType11>(),
+            new ApiEnumConverter<string, Type11>(),
+            new ApiEnumConverter<string, PayloadType12>(),
+            new ApiEnumConverter<string, Type12>(),
+            new ApiEnumConverter<string, PayloadType13>(),
+            new ApiEnumConverter<string, Type13>(),
+            new ApiEnumConverter<string, PayloadType14>(),
+            new ApiEnumConverter<string, Type14>(),
+            new ApiEnumConverter<string, PayloadType15>(),
+            new ApiEnumConverter<string, Type15>(),
+            new ApiEnumConverter<string, PayloadType16>(),
+            new ApiEnumConverter<string, Type16>(),
+            new ApiEnumConverter<string, PayloadType17>(),
+            new ApiEnumConverter<string, Type17>(),
+            new ApiEnumConverter<string, PayloadType18>(),
+            new ApiEnumConverter<string, Type18>(),
+            new ApiEnumConverter<string, PayloadType19>(),
+            new ApiEnumConverter<string, Type19>(),
+            new ApiEnumConverter<string, PayloadType20>(),
+            new ApiEnumConverter<string, Type20>(),
+            new ApiEnumConverter<string, PayloadType21>(),
+            new ApiEnumConverter<string, Type21>(),
+            new ApiEnumConverter<string, PayloadType22>(),
+            new ApiEnumConverter<string, Type22>(),
+            new ApiEnumConverter<string, PayloadType23>(),
+            new ApiEnumConverter<string, Type23>(),
+            new ApiEnumConverter<string, PayloadType24>(),
+            new ApiEnumConverter<string, Type24>(),
+            new ApiEnumConverter<string, PayloadType25>(),
+            new ApiEnumConverter<string, Type25>(),
+            new ApiEnumConverter<string, PayloadType26>(),
+            new ApiEnumConverter<string, Type26>(),
+            new ApiEnumConverter<string, PayloadType27>(),
+            new ApiEnumConverter<string, Type27>(),
+            new ApiEnumConverter<string, PayloadType28>(),
+            new ApiEnumConverter<string, Type28>(),
+            new ApiEnumConverter<string, PayloadType29>(),
+            new ApiEnumConverter<string, Type29>(),
+            new ApiEnumConverter<string, PayloadType30>(),
+            new ApiEnumConverter<string, Type30>(),
+            new ApiEnumConverter<string, PayloadType31>(),
+            new ApiEnumConverter<string, Type31>(),
+            new ApiEnumConverter<string, PayloadType32>(),
+            new ApiEnumConverter<string, Type32>(),
+            new ApiEnumConverter<string, PayloadType33>(),
+            new ApiEnumConverter<string, Type33>(),
+            new ApiEnumConverter<string, PayloadType34>(),
+            new ApiEnumConverter<string, Type34>(),
+            new ApiEnumConverter<string, PayloadType35>(),
+            new ApiEnumConverter<string, Type35>(),
+            new ApiEnumConverter<string, PayloadType36>(),
+            new ApiEnumConverter<string, Type36>(),
+            new ApiEnumConverter<string, PayloadType37>(),
+            new ApiEnumConverter<string, Type37>(),
+            new ApiEnumConverter<string, PayloadType38>(),
+            new ApiEnumConverter<string, Type38>(),
+            new ApiEnumConverter<string, PayloadType39>(),
+            new ApiEnumConverter<string, Type39>(),
+            new ApiEnumConverter<string, PayloadType40>(),
+            new ApiEnumConverter<string, Type40>(),
+            new ApiEnumConverter<string, WebhookEvents::WebhookEventType>(),
+            new ApiEnumConverter<string, WebhookEvents::PayloadType>(),
+            new ApiEnumConverter<string, WebhookEvents::PayloadTypeModel>(),
+            new ApiEnumConverter<string, WebhookEvents::PayloadType1>(),
+            new ApiEnumConverter<string, WebhookEvents::PayloadType2>(),
+            new ApiEnumConverter<string, WebhookEvents::PayloadType3>(),
+            new ApiEnumConverter<string, Meters::Type>(),
+            new ApiEnumConverter<string, Meters::Operator>(),
+            new ApiEnumConverter<string, Meters::OperatorModel>(),
+            new ApiEnumConverter<string, Meters::Operator1>(),
+            new ApiEnumConverter<string, Meters::Operator2>(),
+            new ApiEnumConverter<string, Meters::Conjunction>(),
+            new ApiEnumConverter<string, Meters::ConjunctionModel>(),
+            new ApiEnumConverter<string, Meters::Conjunction1>(),
+            new ApiEnumConverter<string, Meters::Conjunction2>(),
         },
     };
 

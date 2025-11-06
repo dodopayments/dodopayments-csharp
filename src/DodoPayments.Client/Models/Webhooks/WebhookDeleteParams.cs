@@ -1,6 +1,6 @@
-using System;
 using System.Net.Http;
 using DodoPayments.Client.Core;
+using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -11,9 +11,9 @@ public sealed record class WebhookDeleteParams : ParamsBase
 {
     public required string WebhookID;
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/') + string.Format("/webhooks/{0}", this.WebhookID)
         )
         {

@@ -2,8 +2,8 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Webhooks;
 using DodoPayments.Client.Services.Webhooks.Headers;
+using Webhooks = DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Services.Webhooks;
 
@@ -28,15 +28,17 @@ public sealed class WebhookService : IWebhookService
         get { return _headers.Value; }
     }
 
-    public async Task<WebhookDetails> Create(WebhookCreateParams parameters)
+    public async Task<Webhooks::WebhookDetails> Create(Webhooks::WebhookCreateParams parameters)
     {
-        HttpRequest<WebhookCreateParams> request = new()
+        HttpRequest<Webhooks::WebhookCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var webhookDetails = await response.Deserialize<WebhookDetails>().ConfigureAwait(false);
+        var webhookDetails = await response
+            .Deserialize<Webhooks::WebhookDetails>()
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             webhookDetails.Validate();
@@ -44,15 +46,17 @@ public sealed class WebhookService : IWebhookService
         return webhookDetails;
     }
 
-    public async Task<WebhookDetails> Retrieve(WebhookRetrieveParams parameters)
+    public async Task<Webhooks::WebhookDetails> Retrieve(Webhooks::WebhookRetrieveParams parameters)
     {
-        HttpRequest<WebhookRetrieveParams> request = new()
+        HttpRequest<Webhooks::WebhookRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var webhookDetails = await response.Deserialize<WebhookDetails>().ConfigureAwait(false);
+        var webhookDetails = await response
+            .Deserialize<Webhooks::WebhookDetails>()
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             webhookDetails.Validate();
@@ -60,15 +64,17 @@ public sealed class WebhookService : IWebhookService
         return webhookDetails;
     }
 
-    public async Task<WebhookDetails> Update(WebhookUpdateParams parameters)
+    public async Task<Webhooks::WebhookDetails> Update(Webhooks::WebhookUpdateParams parameters)
     {
-        HttpRequest<WebhookUpdateParams> request = new()
+        HttpRequest<Webhooks::WebhookUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var webhookDetails = await response.Deserialize<WebhookDetails>().ConfigureAwait(false);
+        var webhookDetails = await response
+            .Deserialize<Webhooks::WebhookDetails>()
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             webhookDetails.Validate();
@@ -76,17 +82,21 @@ public sealed class WebhookService : IWebhookService
         return webhookDetails;
     }
 
-    public async Task<WebhookListPageResponse> List(WebhookListParams? parameters = null)
+    public async Task<Webhooks::WebhookListPageResponse> List(
+        Webhooks::WebhookListParams? parameters = null
+    )
     {
         parameters ??= new();
 
-        HttpRequest<WebhookListParams> request = new()
+        HttpRequest<Webhooks::WebhookListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var page = await response.Deserialize<WebhookListPageResponse>().ConfigureAwait(false);
+        var page = await response
+            .Deserialize<Webhooks::WebhookListPageResponse>()
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             page.Validate();
@@ -94,9 +104,9 @@ public sealed class WebhookService : IWebhookService
         return page;
     }
 
-    public async Task Delete(WebhookDeleteParams parameters)
+    public async Task Delete(Webhooks::WebhookDeleteParams parameters)
     {
-        HttpRequest<WebhookDeleteParams> request = new()
+        HttpRequest<Webhooks::WebhookDeleteParams> request = new()
         {
             Method = HttpMethod.Delete,
             Params = parameters,
@@ -104,18 +114,18 @@ public sealed class WebhookService : IWebhookService
         using var response = await this._client.Execute(request).ConfigureAwait(false);
     }
 
-    public async Task<WebhookRetrieveSecretResponse> RetrieveSecret(
-        WebhookRetrieveSecretParams parameters
+    public async Task<Webhooks::WebhookRetrieveSecretResponse> RetrieveSecret(
+        Webhooks::WebhookRetrieveSecretParams parameters
     )
     {
-        HttpRequest<WebhookRetrieveSecretParams> request = new()
+        HttpRequest<Webhooks::WebhookRetrieveSecretParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
         using var response = await this._client.Execute(request).ConfigureAwait(false);
         var deserializedResponse = await response
-            .Deserialize<WebhookRetrieveSecretResponse>()
+            .Deserialize<Webhooks::WebhookRetrieveSecretResponse>()
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
