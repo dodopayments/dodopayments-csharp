@@ -3,20 +3,19 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
 using System = System;
 
-namespace DodoPayments.Client.Models.Webhooks.RefundSucceededWebhookEventProperties.DataProperties.IntersectionMember1Properties;
+namespace DodoPayments.Client.Models.Disputes;
 
-/// <summary>
-/// The type of payload in the data field
-/// </summary>
-[JsonConverter(typeof(PayloadTypeConverter))]
-public enum PayloadType
+[JsonConverter(typeof(DisputeStageModelConverter))]
+public enum DisputeStageModel
 {
-    Refund,
+    PreDispute,
+    Dispute,
+    PreArbitration,
 }
 
-sealed class PayloadTypeConverter : JsonConverter<PayloadType>
+sealed class DisputeStageModelConverter : JsonConverter<DisputeStageModel>
 {
-    public override PayloadType Read(
+    public override DisputeStageModel Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -24,14 +23,16 @@ sealed class PayloadTypeConverter : JsonConverter<PayloadType>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Refund" => PayloadType.Refund,
-            _ => (PayloadType)(-1),
+            "pre_dispute" => DisputeStageModel.PreDispute,
+            "dispute" => DisputeStageModel.Dispute,
+            "pre_arbitration" => DisputeStageModel.PreArbitration,
+            _ => (DisputeStageModel)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType value,
+        DisputeStageModel value,
         JsonSerializerOptions options
     )
     {
@@ -39,7 +40,9 @@ sealed class PayloadTypeConverter : JsonConverter<PayloadType>
             writer,
             value switch
             {
-                PayloadType.Refund => "Refund",
+                DisputeStageModel.PreDispute => "pre_dispute",
+                DisputeStageModel.Dispute => "dispute",
+                DisputeStageModel.PreArbitration => "pre_arbitration",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

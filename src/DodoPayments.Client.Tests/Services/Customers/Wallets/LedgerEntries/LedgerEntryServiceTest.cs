@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries.LedgerEntryCreateParamsProperties;
+using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Services.Customers.Wallets.LedgerEntries;

@@ -1,8 +1,9 @@
-using System;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Subscriptions.SubscriptionListParamsProperties;
+using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -32,14 +33,17 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// <summary>
     /// Get events after this created time
     /// </summary>
-    public DateTime? CreatedAtGte
+    public System::DateTime? CreatedAtGte
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("created_at_gte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -53,14 +57,17 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// <summary>
     /// Get events created before this time
     /// </summary>
-    public DateTime? CreatedAtLte
+    public System::DateTime? CreatedAtLte
     {
         get
         {
             if (!this.QueryProperties.TryGetValue("created_at_lte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<System::DateTime?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         set
         {
@@ -158,9 +165,9 @@ public sealed record class SubscriptionListParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/subscriptions")
+        return new System::UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/subscriptions")
         {
             Query = this.QueryString(client),
         }.Uri;
@@ -176,5 +183,60 @@ public sealed record class SubscriptionListParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+/// <summary>
+/// Filter by status
+/// </summary>
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Pending,
+    Active,
+    OnHold,
+    Cancelled,
+    Failed,
+    Expired,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "pending" => Status.Pending,
+            "active" => Status.Active,
+            "on_hold" => Status.OnHold,
+            "cancelled" => Status.Cancelled,
+            "failed" => Status.Failed,
+            "expired" => Status.Expired,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Pending => "pending",
+                Status.Active => "active",
+                Status.OnHold => "on_hold",
+                Status.Cancelled => "cancelled",
+                Status.Failed => "failed",
+                Status.Expired => "expired",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

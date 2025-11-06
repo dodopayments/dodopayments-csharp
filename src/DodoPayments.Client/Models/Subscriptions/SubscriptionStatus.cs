@@ -1,7 +1,7 @@
-using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -20,7 +20,7 @@ sealed class SubscriptionStatusConverter : JsonConverter<SubscriptionStatus>
 {
     public override SubscriptionStatus Read(
         ref Utf8JsonReader reader,
-        Type typeToConvert,
+        System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {

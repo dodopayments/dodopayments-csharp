@@ -1,7 +1,7 @@
-using System;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -114,9 +114,9 @@ public sealed record class ProductListParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/products")
+        return new System::UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/products")
         {
             Query = this.QueryString(client),
         }.Uri;

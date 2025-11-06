@@ -1,6 +1,6 @@
-using System;
 using System.Net.Http;
 using DodoPayments.Client.Core;
+using System = System;
 
 namespace DodoPayments.Client.Models.Meters;
 
@@ -8,9 +8,9 @@ public sealed record class MeterUnarchiveParams : ParamsBase
 {
     public required string ID;
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/') + string.Format("/meters/{0}/unarchive", this.ID)
         )
         {

@@ -6,7 +6,6 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments.PaymentRetrieveLineItemsResponseProperties;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -39,7 +38,7 @@ public sealed record class PaymentRetrieveLineItemsResponse
         }
     }
 
-    public required List<Item> Items
+    public required List<ItemModel> Items
     {
         get
         {
@@ -49,7 +48,7 @@ public sealed record class PaymentRetrieveLineItemsResponse
                     new ArgumentOutOfRangeException("items", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<List<Item>>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<List<ItemModel>>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'items' cannot be null",
                     new ArgumentNullException("items")
@@ -86,6 +85,162 @@ public sealed record class PaymentRetrieveLineItemsResponse
     public static PaymentRetrieveLineItemsResponse FromRawUnchecked(
         Dictionary<string, JsonElement> properties
     )
+    {
+        return new(properties);
+    }
+}
+
+[JsonConverter(typeof(ModelConverter<ItemModel>))]
+public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
+{
+    public required int Amount
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("amount", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'amount' cannot be null",
+                    new ArgumentOutOfRangeException("amount", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["amount"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public required string ItemsID
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("items_id", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'items_id' cannot be null",
+                    new ArgumentOutOfRangeException("items_id", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'items_id' cannot be null",
+                    new ArgumentNullException("items_id")
+                );
+        }
+        set
+        {
+            this.Properties["items_id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public required int RefundableAmount
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("refundable_amount", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'refundable_amount' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "refundable_amount",
+                        "Missing required argument"
+                    )
+                );
+
+            return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["refundable_amount"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public required int Tax
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("tax", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'tax' cannot be null",
+                    new ArgumentOutOfRangeException("tax", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["tax"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public string? Description
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("description", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["description"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public string? Name
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("name", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public override void Validate()
+    {
+        _ = this.Amount;
+        _ = this.ItemsID;
+        _ = this.RefundableAmount;
+        _ = this.Tax;
+        _ = this.Description;
+        _ = this.Name;
+    }
+
+    public ItemModel() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    ItemModel(Dictionary<string, JsonElement> properties)
+    {
+        Properties = properties;
+    }
+#pragma warning restore CS8618
+
+    public static ItemModel FromRawUnchecked(Dictionary<string, JsonElement> properties)
     {
         return new(properties);
     }

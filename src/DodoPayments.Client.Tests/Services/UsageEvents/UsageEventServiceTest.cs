@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DodoPayments.Client.Models.UsageEvents.EventInputProperties.MetadataProperties;
+using DodoPayments.Client.Models.UsageEvents;
 
 namespace DodoPayments.Client.Tests.Services.UsageEvents;
 
@@ -34,7 +34,10 @@ public class UsageEventServiceTest : TestBase
                         CustomerID = "customer_id",
                         EventID = "event_id",
                         EventName = "event_name",
-                        Metadata = new Dictionary<string, Metadata>() { { "foo", new("string") } },
+                        Metadata = new Dictionary<string, MetadataModel>()
+                        {
+                            { "foo", new("string") },
+                        },
                         Timestamp = DateTime.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],

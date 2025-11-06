@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.WebhookEvents;
+using System = System;
+using WebhookEvents = DodoPayments.Client.Models.WebhookEvents;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -64,17 +64,16 @@ public sealed record class WebhookUpdateParams : ParamsBase
     ///
     /// Webhook event will only be sent for events in the list.
     /// </summary>
-    public List<ApiEnum<string, WebhookEventType>>? FilterTypes
+    public List<ApiEnum<string, WebhookEvents::WebhookEventType>>? FilterTypes
     {
         get
         {
             if (!this.BodyProperties.TryGetValue("filter_types", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<ApiEnum<string, WebhookEventType>>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<List<
+                ApiEnum<string, WebhookEvents::WebhookEventType>
+            >?>(element, ModelBase.SerializerOptions);
         }
         set
         {
@@ -151,9 +150,9 @@ public sealed record class WebhookUpdateParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             client.BaseUrl.ToString().TrimEnd('/') + string.Format("/webhooks/{0}", this.WebhookID)
         )
         {

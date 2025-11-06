@@ -1,12 +1,13 @@
-using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Products.ProductCreateParamsProperties;
+using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -24,13 +25,13 @@ public sealed record class ProductCreateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("price", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
-                    new ArgumentOutOfRangeException("price", "Missing required argument")
+                    new System::ArgumentOutOfRangeException("price", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<Price>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
-                    new ArgumentNullException("price")
+                    new System::ArgumentNullException("price")
                 );
         }
         set
@@ -52,7 +53,10 @@ public sealed record class ProductCreateParams : ParamsBase
             if (!this.BodyProperties.TryGetValue("tax_category", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'tax_category' cannot be null",
-                    new ArgumentOutOfRangeException("tax_category", "Missing required argument")
+                    new System::ArgumentOutOfRangeException(
+                        "tax_category",
+                        "Missing required argument"
+                    )
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>>(
@@ -301,9 +305,9 @@ public sealed record class ProductCreateParams : ParamsBase
         }
     }
 
-    public override Uri Url(IDodoPaymentsClient client)
+    public override System::Uri Url(IDodoPaymentsClient client)
     {
-        return new UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/products")
+        return new System::UriBuilder(client.BaseUrl.ToString().TrimEnd('/') + "/products")
         {
             Query = this.QueryString(client),
         }.Uri;
@@ -328,5 +332,77 @@ public sealed record class ProductCreateParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+/// <summary>
+/// Choose how you would like you digital product delivered
+/// </summary>
+[JsonConverter(typeof(ModelConverter<DigitalProductDelivery>))]
+public sealed record class DigitalProductDelivery : ModelBase, IFromRaw<DigitalProductDelivery>
+{
+    /// <summary>
+    /// External URL to digital product
+    /// </summary>
+    public string? ExternalURL
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("external_url", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["external_url"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
+    /// Instructions to download and use the digital product
+    /// </summary>
+    public string? Instructions
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("instructions", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["instructions"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public override void Validate()
+    {
+        _ = this.ExternalURL;
+        _ = this.Instructions;
+    }
+
+    public DigitalProductDelivery() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DigitalProductDelivery(Dictionary<string, JsonElement> properties)
+    {
+        Properties = properties;
+    }
+#pragma warning restore CS8618
+
+    public static DigitalProductDelivery FromRawUnchecked(
+        Dictionary<string, JsonElement> properties
+    )
+    {
+        return new(properties);
     }
 }

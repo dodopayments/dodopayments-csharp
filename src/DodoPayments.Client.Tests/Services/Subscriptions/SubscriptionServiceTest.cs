@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
-using DodoPayments.Client.Models.Subscriptions.SubscriptionChangePlanParamsProperties;
+using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Services.Subscriptions;
 
@@ -62,7 +62,7 @@ public class SubscriptionServiceTest : TestBase
             {
                 SubscriptionID = "subscription_id",
                 ProductID = "product_id",
-                ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
+                ProrationBillingMode = Subscriptions::ProrationBillingMode.ProratedImmediately,
                 Quantity = 0,
             }
         );

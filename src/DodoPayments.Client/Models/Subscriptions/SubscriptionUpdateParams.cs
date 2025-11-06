@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Payments;
-using DodoPayments.Client.Models.Subscriptions.SubscriptionUpdateParamsProperties;
+using DodoPayments.Client.Exceptions;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -15,14 +17,14 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
 
     public required string SubscriptionID;
 
-    public BillingAddress? Billing
+    public Payments::BillingAddress? Billing
     {
         get
         {
             if (!this.BodyProperties.TryGetValue("billing", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<BillingAddress?>(
+            return JsonSerializer.Deserialize<Payments::BillingAddress?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -209,5 +211,60 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+}
+
+[JsonConverter(typeof(ModelConverter<DisableOnDemand>))]
+public sealed record class DisableOnDemand : ModelBase, IFromRaw<DisableOnDemand>
+{
+    public required DateTime NextBillingDate
+    {
+        get
+        {
+            if (!this.Properties.TryGetValue("next_billing_date", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'next_billing_date' cannot be null",
+                    new ArgumentOutOfRangeException(
+                        "next_billing_date",
+                        "Missing required argument"
+                    )
+                );
+
+            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+        }
+        set
+        {
+            this.Properties["next_billing_date"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public override void Validate()
+    {
+        _ = this.NextBillingDate;
+    }
+
+    public DisableOnDemand() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DisableOnDemand(Dictionary<string, JsonElement> properties)
+    {
+        Properties = properties;
+    }
+#pragma warning restore CS8618
+
+    public static DisableOnDemand FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    {
+        return new(properties);
+    }
+
+    [SetsRequiredMembers]
+    public DisableOnDemand(DateTime nextBillingDate)
+        : this()
+    {
+        this.NextBillingDate = nextBillingDate;
     }
 }

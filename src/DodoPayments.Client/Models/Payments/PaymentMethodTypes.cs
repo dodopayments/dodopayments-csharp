@@ -1,7 +1,7 @@
-using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -33,7 +33,7 @@ sealed class PaymentMethodTypesConverter : JsonConverter<PaymentMethodTypes>
 {
     public override PaymentMethodTypes Read(
         ref Utf8JsonReader reader,
-        Type typeToConvert,
+        System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {
