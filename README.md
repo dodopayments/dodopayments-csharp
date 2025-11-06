@@ -162,10 +162,7 @@ using System;
 
 var checkoutSessionResponse = await client
     .WithOptions(options =>
-        options with
-        {
-            Timeout = TimeSpan.FromSeconds(42)
-        }
+        options with { Timeout = TimeSpan.FromSeconds(42) }
     )
     .CheckoutSessions.Create(parameters);
 
@@ -204,10 +201,7 @@ using System;
 
 var checkoutSessionResponse = await client
     .WithOptions(options =>
-        options with
-        {
-            ResponseValidation = true
-        }
+        options with { ResponseValidation = true }
     )
     .CheckoutSessions.Create(parameters);
 
