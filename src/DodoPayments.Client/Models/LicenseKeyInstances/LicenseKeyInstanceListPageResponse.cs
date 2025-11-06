@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -17,7 +18,7 @@ public sealed record class LicenseKeyInstanceListPageResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("items", out JsonElement element))
+            if (!this._properties.TryGetValue("items", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'items' cannot be null",
                     new ArgumentOutOfRangeException("items", "Missing required argument")
@@ -32,9 +33,9 @@ public sealed record class LicenseKeyInstanceListPageResponse
                     new ArgumentNullException("items")
                 );
         }
-        set
+        init
         {
-            this.Properties["items"] = JsonSerializer.SerializeToElement(
+            this._properties["items"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -51,19 +52,24 @@ public sealed record class LicenseKeyInstanceListPageResponse
 
     public LicenseKeyInstanceListPageResponse() { }
 
+    public LicenseKeyInstanceListPageResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    LicenseKeyInstanceListPageResponse(Dictionary<string, JsonElement> properties)
+    LicenseKeyInstanceListPageResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static LicenseKeyInstanceListPageResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]

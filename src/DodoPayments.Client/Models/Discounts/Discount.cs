@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -21,7 +22,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("amount", out JsonElement element))
+            if (!this._properties.TryGetValue("amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'amount' cannot be null",
                     new ArgumentOutOfRangeException("amount", "Missing required argument")
@@ -29,9 +30,9 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["amount"] = JsonSerializer.SerializeToElement(
+            this._properties["amount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -45,7 +46,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("business_id", out JsonElement element))
+            if (!this._properties.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
                     new ArgumentOutOfRangeException("business_id", "Missing required argument")
@@ -57,9 +58,9 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
                     new ArgumentNullException("business_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["business_id"] = JsonSerializer.SerializeToElement(
+            this._properties["business_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -73,7 +74,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("code", out JsonElement element))
+            if (!this._properties.TryGetValue("code", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'code' cannot be null",
                     new ArgumentOutOfRangeException("code", "Missing required argument")
@@ -85,9 +86,9 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
                     new ArgumentNullException("code")
                 );
         }
-        set
+        init
         {
-            this.Properties["code"] = JsonSerializer.SerializeToElement(
+            this._properties["code"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -101,7 +102,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._properties.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
@@ -109,9 +110,9 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._properties["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -125,7 +126,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("discount_id", out JsonElement element))
+            if (!this._properties.TryGetValue("discount_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'discount_id' cannot be null",
                     new ArgumentOutOfRangeException("discount_id", "Missing required argument")
@@ -137,9 +138,9 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
                     new ArgumentNullException("discount_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["discount_id"] = JsonSerializer.SerializeToElement(
+            this._properties["discount_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -153,7 +154,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("restricted_to", out JsonElement element))
+            if (!this._properties.TryGetValue("restricted_to", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'restricted_to' cannot be null",
                     new ArgumentOutOfRangeException("restricted_to", "Missing required argument")
@@ -165,9 +166,9 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
                     new ArgumentNullException("restricted_to")
                 );
         }
-        set
+        init
         {
-            this.Properties["restricted_to"] = JsonSerializer.SerializeToElement(
+            this._properties["restricted_to"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -181,7 +182,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("times_used", out JsonElement element))
+            if (!this._properties.TryGetValue("times_used", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'times_used' cannot be null",
                     new ArgumentOutOfRangeException("times_used", "Missing required argument")
@@ -189,9 +190,9 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["times_used"] = JsonSerializer.SerializeToElement(
+            this._properties["times_used"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -205,7 +206,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("type", out JsonElement element))
+            if (!this._properties.TryGetValue("type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'type' cannot be null",
                     new ArgumentOutOfRangeException("type", "Missing required argument")
@@ -216,9 +217,9 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["type"] = JsonSerializer.SerializeToElement(
+            this._properties["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -232,14 +233,14 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("expires_at", out JsonElement element))
+            if (!this._properties.TryGetValue("expires_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["expires_at"] = JsonSerializer.SerializeToElement(
+            this._properties["expires_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -253,14 +254,14 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -276,14 +277,14 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("subscription_cycles", out JsonElement element))
+            if (!this._properties.TryGetValue("subscription_cycles", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["subscription_cycles"] = JsonSerializer.SerializeToElement(
+            this._properties["subscription_cycles"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -297,14 +298,14 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         get
         {
-            if (!this.Properties.TryGetValue("usage_limit", out JsonElement element))
+            if (!this._properties.TryGetValue("usage_limit", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["usage_limit"] = JsonSerializer.SerializeToElement(
+            this._properties["usage_limit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -329,16 +330,21 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
 
     public Discount() { }
 
+    public Discount(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Discount(Dictionary<string, JsonElement> properties)
+    Discount(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Discount FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Discount FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

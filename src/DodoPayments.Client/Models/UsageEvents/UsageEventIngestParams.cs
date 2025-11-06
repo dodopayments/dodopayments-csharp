@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -27,7 +29,11 @@ namespace DodoPayments.Client.Models.UsageEvents;
 /// </summary>
 public sealed record class UsageEventIngestParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
     /// <summary>
     /// List of events to be pushed
@@ -36,7 +42,7 @@ public sealed record class UsageEventIngestParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("events", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("events", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'events' cannot be null",
                     new ArgumentOutOfRangeException("events", "Missing required argument")
@@ -51,13 +57,53 @@ public sealed record class UsageEventIngestParams : ParamsBase
                     new ArgumentNullException("events")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["events"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["events"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public UsageEventIngestParams() { }
+
+    public UsageEventIngestParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    UsageEventIngestParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static UsageEventIngestParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override Uri Url(IDodoPaymentsClient client)

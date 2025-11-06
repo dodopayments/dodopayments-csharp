@@ -1,3 +1,6 @@
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -16,14 +19,14 @@ public sealed record class LicenseKeyListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("customer_id", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("customer_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["customer_id"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["customer_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -37,14 +40,14 @@ public sealed record class LicenseKeyListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("page_number", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("page_number", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["page_number"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["page_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -58,14 +61,14 @@ public sealed record class LicenseKeyListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("page_size", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("page_size", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["page_size"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["page_size"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -79,14 +82,14 @@ public sealed record class LicenseKeyListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("product_id", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("product_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.QueryProperties["product_id"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["product_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -100,7 +103,7 @@ public sealed record class LicenseKeyListParams : ParamsBase
     {
         get
         {
-            if (!this.QueryProperties.TryGetValue("status", out JsonElement element))
+            if (!this._queryProperties.TryGetValue("status", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Status>?>(
@@ -108,13 +111,47 @@ public sealed record class LicenseKeyListParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.QueryProperties["status"] = JsonSerializer.SerializeToElement(
+            this._queryProperties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public LicenseKeyListParams() { }
+
+    public LicenseKeyListParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    LicenseKeyListParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+    }
+#pragma warning restore CS8618
+
+    public static LicenseKeyListParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties)
+        );
     }
 
     public override System::Uri Url(IDodoPaymentsClient client)

@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -15,7 +16,7 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
     {
         get
         {
-            if (!this.Properties.TryGetValue("meter_id", out JsonElement element))
+            if (!this._properties.TryGetValue("meter_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'meter_id' cannot be null",
                     new System::ArgumentOutOfRangeException("meter_id", "Missing required argument")
@@ -27,9 +28,9 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
                     new System::ArgumentNullException("meter_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["meter_id"] = JsonSerializer.SerializeToElement(
+            this._properties["meter_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -44,7 +45,7 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
     {
         get
         {
-            if (!this.Properties.TryGetValue("price_per_unit", out JsonElement element))
+            if (!this._properties.TryGetValue("price_per_unit", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'price_per_unit' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -59,9 +60,9 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
                     new System::ArgumentNullException("price_per_unit")
                 );
         }
-        set
+        init
         {
-            this.Properties["price_per_unit"] = JsonSerializer.SerializeToElement(
+            this._properties["price_per_unit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -75,14 +76,14 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
     {
         get
         {
-            if (!this.Properties.TryGetValue("description", out JsonElement element))
+            if (!this._properties.TryGetValue("description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["description"] = JsonSerializer.SerializeToElement(
+            this._properties["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -93,14 +94,14 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
     {
         get
         {
-            if (!this.Properties.TryGetValue("free_threshold", out JsonElement element))
+            if (!this._properties.TryGetValue("free_threshold", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["free_threshold"] = JsonSerializer.SerializeToElement(
+            this._properties["free_threshold"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -114,14 +115,14 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
     {
         get
         {
-            if (!this.Properties.TryGetValue("measurement_unit", out JsonElement element))
+            if (!this._properties.TryGetValue("measurement_unit", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["measurement_unit"] = JsonSerializer.SerializeToElement(
+            this._properties["measurement_unit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -135,14 +136,14 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
     {
         get
         {
-            if (!this.Properties.TryGetValue("name", out JsonElement element))
+            if (!this._properties.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["name"] = JsonSerializer.SerializeToElement(
+            this._properties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -161,16 +162,23 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
 
     public AddMeterToPrice() { }
 
+    public AddMeterToPrice(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    AddMeterToPrice(Dictionary<string, JsonElement> properties)
+    AddMeterToPrice(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static AddMeterToPrice FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static AddMeterToPrice FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

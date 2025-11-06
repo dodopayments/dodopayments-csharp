@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -18,7 +19,7 @@ public sealed record class MeterAggregation : ModelBase, IFromRaw<MeterAggregati
     {
         get
         {
-            if (!this.Properties.TryGetValue("type", out JsonElement element))
+            if (!this._properties.TryGetValue("type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'type' cannot be null",
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
@@ -28,9 +29,9 @@ public sealed record class MeterAggregation : ModelBase, IFromRaw<MeterAggregati
                 ApiEnum<string, global::DodoPayments.Client.Models.Meters.Type>
             >(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["type"] = JsonSerializer.SerializeToElement(
+            this._properties["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -44,14 +45,14 @@ public sealed record class MeterAggregation : ModelBase, IFromRaw<MeterAggregati
     {
         get
         {
-            if (!this.Properties.TryGetValue("key", out JsonElement element))
+            if (!this._properties.TryGetValue("key", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["key"] = JsonSerializer.SerializeToElement(
+            this._properties["key"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -66,17 +67,24 @@ public sealed record class MeterAggregation : ModelBase, IFromRaw<MeterAggregati
 
     public MeterAggregation() { }
 
+    public MeterAggregation(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterAggregation(Dictionary<string, JsonElement> properties)
+    MeterAggregation(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static MeterAggregation FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static MeterAggregation FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]

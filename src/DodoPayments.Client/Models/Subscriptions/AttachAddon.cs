@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -15,7 +16,7 @@ public sealed record class AttachAddon : ModelBase, IFromRaw<AttachAddon>
     {
         get
         {
-            if (!this.Properties.TryGetValue("addon_id", out JsonElement element))
+            if (!this._properties.TryGetValue("addon_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'addon_id' cannot be null",
                     new ArgumentOutOfRangeException("addon_id", "Missing required argument")
@@ -27,9 +28,9 @@ public sealed record class AttachAddon : ModelBase, IFromRaw<AttachAddon>
                     new ArgumentNullException("addon_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["addon_id"] = JsonSerializer.SerializeToElement(
+            this._properties["addon_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -40,7 +41,7 @@ public sealed record class AttachAddon : ModelBase, IFromRaw<AttachAddon>
     {
         get
         {
-            if (!this.Properties.TryGetValue("quantity", out JsonElement element))
+            if (!this._properties.TryGetValue("quantity", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'quantity' cannot be null",
                     new ArgumentOutOfRangeException("quantity", "Missing required argument")
@@ -48,9 +49,9 @@ public sealed record class AttachAddon : ModelBase, IFromRaw<AttachAddon>
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["quantity"] = JsonSerializer.SerializeToElement(
+            this._properties["quantity"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -65,16 +66,21 @@ public sealed record class AttachAddon : ModelBase, IFromRaw<AttachAddon>
 
     public AttachAddon() { }
 
+    public AttachAddon(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    AttachAddon(Dictionary<string, JsonElement> properties)
+    AttachAddon(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static AttachAddon FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static AttachAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

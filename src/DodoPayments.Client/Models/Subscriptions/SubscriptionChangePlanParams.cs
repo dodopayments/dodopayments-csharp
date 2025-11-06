@@ -1,4 +1,6 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -11,9 +13,13 @@ namespace DodoPayments.Client.Models.Subscriptions;
 
 public sealed record class SubscriptionChangePlanParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
-    public required string SubscriptionID;
+    public required string SubscriptionID { get; init; }
 
     /// <summary>
     /// Unique identifier of the product to subscribe to
@@ -22,7 +28,7 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("product_id", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("product_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -37,9 +43,9 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
                     new System::ArgumentNullException("product_id")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["product_id"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["product_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -53,7 +59,9 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("proration_billing_mode", out JsonElement element))
+            if (
+                !this._bodyProperties.TryGetValue("proration_billing_mode", out JsonElement element)
+            )
                 throw new DodoPaymentsInvalidDataException(
                     "'proration_billing_mode' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -67,9 +75,9 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["proration_billing_mode"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["proration_billing_mode"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -83,7 +91,7 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("quantity", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("quantity", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'quantity' cannot be null",
                     new System::ArgumentOutOfRangeException("quantity", "Missing required argument")
@@ -91,9 +99,9 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["quantity"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["quantity"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -107,7 +115,7 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("addons", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("addons", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<AttachAddon>?>(
@@ -115,13 +123,53 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["addons"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["addons"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public SubscriptionChangePlanParams() { }
+
+    public SubscriptionChangePlanParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionChangePlanParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static SubscriptionChangePlanParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override System::Uri Url(IDodoPaymentsClient client)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -20,7 +21,7 @@ public sealed record class BrandUpdateImagesResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("image_id", out JsonElement element))
+            if (!this._properties.TryGetValue("image_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'image_id' cannot be null",
                     new ArgumentOutOfRangeException("image_id", "Missing required argument")
@@ -32,9 +33,9 @@ public sealed record class BrandUpdateImagesResponse
                     new ArgumentNullException("image_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["image_id"] = JsonSerializer.SerializeToElement(
+            this._properties["image_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -48,7 +49,7 @@ public sealed record class BrandUpdateImagesResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("url", out JsonElement element))
+            if (!this._properties.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
                     new ArgumentOutOfRangeException("url", "Missing required argument")
@@ -60,9 +61,9 @@ public sealed record class BrandUpdateImagesResponse
                     new ArgumentNullException("url")
                 );
         }
-        set
+        init
         {
-            this.Properties["url"] = JsonSerializer.SerializeToElement(
+            this._properties["url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -77,18 +78,23 @@ public sealed record class BrandUpdateImagesResponse
 
     public BrandUpdateImagesResponse() { }
 
+    public BrandUpdateImagesResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    BrandUpdateImagesResponse(Dictionary<string, JsonElement> properties)
+    BrandUpdateImagesResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static BrandUpdateImagesResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

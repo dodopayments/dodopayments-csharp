@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -17,7 +18,7 @@ public sealed record class SubscriptionChargeResponse
     {
         get
         {
-            if (!this.Properties.TryGetValue("payment_id", out JsonElement element))
+            if (!this._properties.TryGetValue("payment_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'payment_id' cannot be null",
                     new ArgumentOutOfRangeException("payment_id", "Missing required argument")
@@ -29,9 +30,9 @@ public sealed record class SubscriptionChargeResponse
                     new ArgumentNullException("payment_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["payment_id"] = JsonSerializer.SerializeToElement(
+            this._properties["payment_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -45,19 +46,24 @@ public sealed record class SubscriptionChargeResponse
 
     public SubscriptionChargeResponse() { }
 
+    public SubscriptionChargeResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionChargeResponse(Dictionary<string, JsonElement> properties)
+    SubscriptionChargeResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static SubscriptionChargeResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]

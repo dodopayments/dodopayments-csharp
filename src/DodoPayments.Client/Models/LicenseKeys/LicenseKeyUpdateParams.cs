@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -9,9 +11,13 @@ namespace DodoPayments.Client.Models.LicenseKeys;
 
 public sealed record class LicenseKeyUpdateParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
-    public required string ID;
+    public required string ID { get; init; }
 
     /// <summary>
     /// The updated activation limit for the license key. Use `null` to remove the
@@ -21,14 +27,14 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("activations_limit", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("activations_limit", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["activations_limit"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["activations_limit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -43,14 +49,14 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("disabled", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("disabled", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["disabled"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["disabled"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -65,18 +71,58 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("expires_at", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("expires_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["expires_at"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["expires_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public LicenseKeyUpdateParams() { }
+
+    public LicenseKeyUpdateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    LicenseKeyUpdateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static LicenseKeyUpdateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override Uri Url(IDodoPaymentsClient client)

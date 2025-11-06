@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -18,7 +19,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this.Properties.TryGetValue("id", out JsonElement element))
+            if (!this._properties.TryGetValue("id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
                     new System::ArgumentOutOfRangeException("id", "Missing required argument")
@@ -30,9 +31,9 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
                     new System::ArgumentNullException("id")
                 );
         }
-        set
+        init
         {
-            this.Properties["id"] = JsonSerializer.SerializeToElement(
+            this._properties["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -46,7 +47,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this.Properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._properties.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -61,9 +62,9 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
                     new System::ArgumentNullException("created_at")
                 );
         }
-        set
+        init
         {
-            this.Properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._properties["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -77,7 +78,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this.Properties.TryGetValue("description", out JsonElement element))
+            if (!this._properties.TryGetValue("description", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'description' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -92,9 +93,9 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
                     new System::ArgumentNullException("description")
                 );
         }
-        set
+        init
         {
-            this.Properties["description"] = JsonSerializer.SerializeToElement(
+            this._properties["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -108,7 +109,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this.Properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._properties.TryGetValue("metadata", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'metadata' cannot be null",
                     new System::ArgumentOutOfRangeException("metadata", "Missing required argument")
@@ -123,9 +124,9 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
                     new System::ArgumentNullException("metadata")
                 );
         }
-        set
+        init
         {
-            this.Properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._properties["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -139,7 +140,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this.Properties.TryGetValue("updated_at", out JsonElement element))
+            if (!this._properties.TryGetValue("updated_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'updated_at' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -154,9 +155,9 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
                     new System::ArgumentNullException("updated_at")
                 );
         }
-        set
+        init
         {
-            this.Properties["updated_at"] = JsonSerializer.SerializeToElement(
+            this._properties["updated_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -170,7 +171,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this.Properties.TryGetValue("url", out JsonElement element))
+            if (!this._properties.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
                     new System::ArgumentOutOfRangeException("url", "Missing required argument")
@@ -182,9 +183,9 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
                     new System::ArgumentNullException("url")
                 );
         }
-        set
+        init
         {
-            this.Properties["url"] = JsonSerializer.SerializeToElement(
+            this._properties["url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -200,14 +201,14 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this.Properties.TryGetValue("disabled", out JsonElement element))
+            if (!this._properties.TryGetValue("disabled", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["disabled"] = JsonSerializer.SerializeToElement(
+            this._properties["disabled"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -223,14 +224,14 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this.Properties.TryGetValue("filter_types", out JsonElement element))
+            if (!this._properties.TryGetValue("filter_types", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["filter_types"] = JsonSerializer.SerializeToElement(
+            this._properties["filter_types"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -244,14 +245,14 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this.Properties.TryGetValue("rate_limit", out JsonElement element))
+            if (!this._properties.TryGetValue("rate_limit", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["rate_limit"] = JsonSerializer.SerializeToElement(
+            this._properties["rate_limit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -273,16 +274,23 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
 
     public WebhookDetails() { }
 
+    public WebhookDetails(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    WebhookDetails(Dictionary<string, JsonElement> properties)
+    WebhookDetails(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static WebhookDetails FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static WebhookDetails FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

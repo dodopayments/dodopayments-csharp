@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -18,7 +19,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("product_cart", out JsonElement element))
+            if (!this._properties.TryGetValue("product_cart", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_cart' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -36,9 +37,9 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
                     new System::ArgumentNullException("product_cart")
                 );
         }
-        set
+        init
         {
-            this.Properties["product_cart"] = JsonSerializer.SerializeToElement(
+            this._properties["product_cart"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -58,7 +59,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
         get
         {
             if (
-                !this.Properties.TryGetValue(
+                !this._properties.TryGetValue(
                     "allowed_payment_method_types",
                     out JsonElement element
                 )
@@ -70,9 +71,9 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["allowed_payment_method_types"] = JsonSerializer.SerializeToElement(
+            this._properties["allowed_payment_method_types"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -86,7 +87,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("billing_address", out JsonElement element))
+            if (!this._properties.TryGetValue("billing_address", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<BillingAddressModel?>(
@@ -94,9 +95,9 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["billing_address"] = JsonSerializer.SerializeToElement(
+            this._properties["billing_address"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -110,7 +111,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("billing_currency", out JsonElement element))
+            if (!this._properties.TryGetValue("billing_currency", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>?>(
@@ -118,9 +119,9 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["billing_currency"] = JsonSerializer.SerializeToElement(
+            this._properties["billing_currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -135,14 +136,14 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("confirm", out JsonElement element))
+            if (!this._properties.TryGetValue("confirm", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["confirm"] = JsonSerializer.SerializeToElement(
+            this._properties["confirm"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -156,7 +157,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("customer", out JsonElement element))
+            if (!this._properties.TryGetValue("customer", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Payments::CustomerRequest?>(
@@ -164,9 +165,9 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["customer"] = JsonSerializer.SerializeToElement(
+            this._properties["customer"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -180,7 +181,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("customization", out JsonElement element))
+            if (!this._properties.TryGetValue("customization", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<CustomizationModel?>(
@@ -188,9 +189,9 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["customization"] = JsonSerializer.SerializeToElement(
+            this._properties["customization"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -201,14 +202,14 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("discount_code", out JsonElement element))
+            if (!this._properties.TryGetValue("discount_code", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["discount_code"] = JsonSerializer.SerializeToElement(
+            this._properties["discount_code"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -219,7 +220,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("feature_flags", out JsonElement element))
+            if (!this._properties.TryGetValue("feature_flags", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<FeatureFlagsModel?>(
@@ -227,9 +228,9 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["feature_flags"] = JsonSerializer.SerializeToElement(
+            this._properties["feature_flags"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -243,14 +244,14 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("force_3ds", out JsonElement element))
+            if (!this._properties.TryGetValue("force_3ds", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["force_3ds"] = JsonSerializer.SerializeToElement(
+            this._properties["force_3ds"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -264,7 +265,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._properties.TryGetValue("metadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Dictionary<string, string>?>(
@@ -272,9 +273,9 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._properties["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -288,14 +289,14 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("return_url", out JsonElement element))
+            if (!this._properties.TryGetValue("return_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["return_url"] = JsonSerializer.SerializeToElement(
+            this._properties["return_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -309,14 +310,16 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("show_saved_payment_methods", out JsonElement element))
+            if (
+                !this._properties.TryGetValue("show_saved_payment_methods", out JsonElement element)
+            )
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["show_saved_payment_methods"] = JsonSerializer.SerializeToElement(
+            this._properties["show_saved_payment_methods"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -327,7 +330,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     {
         get
         {
-            if (!this.Properties.TryGetValue("subscription_data", out JsonElement element))
+            if (!this._properties.TryGetValue("subscription_data", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<SubscriptionDataModel?>(
@@ -335,9 +338,9 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["subscription_data"] = JsonSerializer.SerializeToElement(
+            this._properties["subscription_data"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -370,19 +373,24 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
 
     public CheckoutSessionRequest() { }
 
+    public CheckoutSessionRequest(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CheckoutSessionRequest(Dictionary<string, JsonElement> properties)
+    CheckoutSessionRequest(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static CheckoutSessionRequest FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]
@@ -403,7 +411,7 @@ public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartMod
     {
         get
         {
-            if (!this.Properties.TryGetValue("product_id", out JsonElement element))
+            if (!this._properties.TryGetValue("product_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -418,9 +426,9 @@ public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartMod
                     new System::ArgumentNullException("product_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["product_id"] = JsonSerializer.SerializeToElement(
+            this._properties["product_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -431,7 +439,7 @@ public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartMod
     {
         get
         {
-            if (!this.Properties.TryGetValue("quantity", out JsonElement element))
+            if (!this._properties.TryGetValue("quantity", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'quantity' cannot be null",
                     new System::ArgumentOutOfRangeException("quantity", "Missing required argument")
@@ -439,9 +447,9 @@ public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartMod
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["quantity"] = JsonSerializer.SerializeToElement(
+            this._properties["quantity"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -455,7 +463,7 @@ public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartMod
     {
         get
         {
-            if (!this.Properties.TryGetValue("addons", out JsonElement element))
+            if (!this._properties.TryGetValue("addons", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<AttachAddon>?>(
@@ -463,9 +471,9 @@ public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartMod
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["addons"] = JsonSerializer.SerializeToElement(
+            this._properties["addons"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -485,14 +493,14 @@ public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartMod
     {
         get
         {
-            if (!this.Properties.TryGetValue("amount", out JsonElement element))
+            if (!this._properties.TryGetValue("amount", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["amount"] = JsonSerializer.SerializeToElement(
+            this._properties["amount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -512,17 +520,24 @@ public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartMod
 
     public ProductCartModel() { }
 
+    public ProductCartModel(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ProductCartModel(Dictionary<string, JsonElement> properties)
+    ProductCartModel(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static ProductCartModel FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static ProductCartModel FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
@@ -539,7 +554,7 @@ public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddr
     {
         get
         {
-            if (!this.Properties.TryGetValue("country", out JsonElement element))
+            if (!this._properties.TryGetValue("country", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'country' cannot be null",
                     new System::ArgumentOutOfRangeException("country", "Missing required argument")
@@ -550,9 +565,9 @@ public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddr
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["country"] = JsonSerializer.SerializeToElement(
+            this._properties["country"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -566,14 +581,14 @@ public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddr
     {
         get
         {
-            if (!this.Properties.TryGetValue("city", out JsonElement element))
+            if (!this._properties.TryGetValue("city", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["city"] = JsonSerializer.SerializeToElement(
+            this._properties["city"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -587,14 +602,14 @@ public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddr
     {
         get
         {
-            if (!this.Properties.TryGetValue("state", out JsonElement element))
+            if (!this._properties.TryGetValue("state", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["state"] = JsonSerializer.SerializeToElement(
+            this._properties["state"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -608,14 +623,14 @@ public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddr
     {
         get
         {
-            if (!this.Properties.TryGetValue("street", out JsonElement element))
+            if (!this._properties.TryGetValue("street", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["street"] = JsonSerializer.SerializeToElement(
+            this._properties["street"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -629,14 +644,14 @@ public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddr
     {
         get
         {
-            if (!this.Properties.TryGetValue("zipcode", out JsonElement element))
+            if (!this._properties.TryGetValue("zipcode", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["zipcode"] = JsonSerializer.SerializeToElement(
+            this._properties["zipcode"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -654,17 +669,24 @@ public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddr
 
     public BillingAddressModel() { }
 
+    public BillingAddressModel(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    BillingAddressModel(Dictionary<string, JsonElement> properties)
+    BillingAddressModel(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static BillingAddressModel FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static BillingAddressModel FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]
@@ -688,14 +710,14 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
     {
         get
         {
-            if (!this.Properties.TryGetValue("force_language", out JsonElement element))
+            if (!this._properties.TryGetValue("force_language", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["force_language"] = JsonSerializer.SerializeToElement(
+            this._properties["force_language"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -711,14 +733,14 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
     {
         get
         {
-            if (!this.Properties.TryGetValue("show_on_demand_tag", out JsonElement element))
+            if (!this._properties.TryGetValue("show_on_demand_tag", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["show_on_demand_tag"] = JsonSerializer.SerializeToElement(
+            this._properties["show_on_demand_tag"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -734,14 +756,14 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
     {
         get
         {
-            if (!this.Properties.TryGetValue("show_order_details", out JsonElement element))
+            if (!this._properties.TryGetValue("show_order_details", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["show_order_details"] = JsonSerializer.SerializeToElement(
+            this._properties["show_order_details"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -757,7 +779,7 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
     {
         get
         {
-            if (!this.Properties.TryGetValue("theme", out JsonElement element))
+            if (!this._properties.TryGetValue("theme", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, ThemeModel>?>(
@@ -765,9 +787,9 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["theme"] = JsonSerializer.SerializeToElement(
+            this._properties["theme"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -784,17 +806,24 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
 
     public CustomizationModel() { }
 
+    public CustomizationModel(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomizationModel(Dictionary<string, JsonElement> properties)
+    CustomizationModel(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static CustomizationModel FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static CustomizationModel FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
@@ -862,14 +891,14 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
     {
         get
         {
-            if (!this.Properties.TryGetValue("allow_currency_selection", out JsonElement element))
+            if (!this._properties.TryGetValue("allow_currency_selection", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["allow_currency_selection"] = JsonSerializer.SerializeToElement(
+            this._properties["allow_currency_selection"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -885,14 +914,14 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
     {
         get
         {
-            if (!this.Properties.TryGetValue("allow_discount_code", out JsonElement element))
+            if (!this._properties.TryGetValue("allow_discount_code", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["allow_discount_code"] = JsonSerializer.SerializeToElement(
+            this._properties["allow_discount_code"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -909,7 +938,7 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
         get
         {
             if (
-                !this.Properties.TryGetValue(
+                !this._properties.TryGetValue(
                     "allow_phone_number_collection",
                     out JsonElement element
                 )
@@ -918,9 +947,9 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["allow_phone_number_collection"] = JsonSerializer.SerializeToElement(
+            this._properties["allow_phone_number_collection"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -936,14 +965,14 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
     {
         get
         {
-            if (!this.Properties.TryGetValue("allow_tax_id", out JsonElement element))
+            if (!this._properties.TryGetValue("allow_tax_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["allow_tax_id"] = JsonSerializer.SerializeToElement(
+            this._properties["allow_tax_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -960,14 +989,16 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
     {
         get
         {
-            if (!this.Properties.TryGetValue("always_create_new_customer", out JsonElement element))
+            if (
+                !this._properties.TryGetValue("always_create_new_customer", out JsonElement element)
+            )
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["always_create_new_customer"] = JsonSerializer.SerializeToElement(
+            this._properties["always_create_new_customer"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -985,17 +1016,24 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
 
     public FeatureFlagsModel() { }
 
+    public FeatureFlagsModel(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    FeatureFlagsModel(Dictionary<string, JsonElement> properties)
+    FeatureFlagsModel(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static FeatureFlagsModel FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static FeatureFlagsModel FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
@@ -1006,7 +1044,7 @@ public sealed record class SubscriptionDataModel : ModelBase, IFromRaw<Subscript
     {
         get
         {
-            if (!this.Properties.TryGetValue("on_demand", out JsonElement element))
+            if (!this._properties.TryGetValue("on_demand", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<OnDemandSubscription?>(
@@ -1014,9 +1052,9 @@ public sealed record class SubscriptionDataModel : ModelBase, IFromRaw<Subscript
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["on_demand"] = JsonSerializer.SerializeToElement(
+            this._properties["on_demand"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1031,14 +1069,14 @@ public sealed record class SubscriptionDataModel : ModelBase, IFromRaw<Subscript
     {
         get
         {
-            if (!this.Properties.TryGetValue("trial_period_days", out JsonElement element))
+            if (!this._properties.TryGetValue("trial_period_days", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["trial_period_days"] = JsonSerializer.SerializeToElement(
+            this._properties["trial_period_days"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1053,16 +1091,23 @@ public sealed record class SubscriptionDataModel : ModelBase, IFromRaw<Subscript
 
     public SubscriptionDataModel() { }
 
+    public SubscriptionDataModel(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionDataModel(Dictionary<string, JsonElement> properties)
+    SubscriptionDataModel(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static SubscriptionDataModel FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static SubscriptionDataModel FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

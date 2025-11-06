@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -15,7 +16,7 @@ public sealed record class LicenseValidateResponse : ModelBase, IFromRaw<License
     {
         get
         {
-            if (!this.Properties.TryGetValue("valid", out JsonElement element))
+            if (!this._properties.TryGetValue("valid", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'valid' cannot be null",
                     new ArgumentOutOfRangeException("valid", "Missing required argument")
@@ -23,9 +24,9 @@ public sealed record class LicenseValidateResponse : ModelBase, IFromRaw<License
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["valid"] = JsonSerializer.SerializeToElement(
+            this._properties["valid"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -39,19 +40,24 @@ public sealed record class LicenseValidateResponse : ModelBase, IFromRaw<License
 
     public LicenseValidateResponse() { }
 
+    public LicenseValidateResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    LicenseValidateResponse(Dictionary<string, JsonElement> properties)
+    LicenseValidateResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static LicenseValidateResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]

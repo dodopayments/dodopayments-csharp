@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -10,13 +12,17 @@ namespace DodoPayments.Client.Models.Licenses;
 
 public sealed record class LicenseActivateParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
     public required string LicenseKey
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("license_key", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("license_key", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'license_key' cannot be null",
                     new ArgumentOutOfRangeException("license_key", "Missing required argument")
@@ -28,9 +34,9 @@ public sealed record class LicenseActivateParams : ParamsBase
                     new ArgumentNullException("license_key")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["license_key"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["license_key"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -41,7 +47,7 @@ public sealed record class LicenseActivateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("name", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'name' cannot be null",
                     new ArgumentOutOfRangeException("name", "Missing required argument")
@@ -53,13 +59,53 @@ public sealed record class LicenseActivateParams : ParamsBase
                     new ArgumentNullException("name")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["name"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public LicenseActivateParams() { }
+
+    public LicenseActivateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    LicenseActivateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static LicenseActivateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override Uri Url(IDodoPaymentsClient client)

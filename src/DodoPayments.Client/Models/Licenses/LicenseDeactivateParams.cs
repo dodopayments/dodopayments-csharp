@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -10,13 +12,17 @@ namespace DodoPayments.Client.Models.Licenses;
 
 public sealed record class LicenseDeactivateParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
     public required string LicenseKey
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("license_key", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("license_key", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'license_key' cannot be null",
                     new ArgumentOutOfRangeException("license_key", "Missing required argument")
@@ -28,9 +34,9 @@ public sealed record class LicenseDeactivateParams : ParamsBase
                     new ArgumentNullException("license_key")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["license_key"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["license_key"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -42,7 +48,10 @@ public sealed record class LicenseDeactivateParams : ParamsBase
         get
         {
             if (
-                !this.BodyProperties.TryGetValue("license_key_instance_id", out JsonElement element)
+                !this._bodyProperties.TryGetValue(
+                    "license_key_instance_id",
+                    out JsonElement element
+                )
             )
                 throw new DodoPaymentsInvalidDataException(
                     "'license_key_instance_id' cannot be null",
@@ -58,13 +67,53 @@ public sealed record class LicenseDeactivateParams : ParamsBase
                     new ArgumentNullException("license_key_instance_id")
                 );
         }
-        set
+        init
         {
-            this.BodyProperties["license_key_instance_id"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["license_key_instance_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public LicenseDeactivateParams() { }
+
+    public LicenseDeactivateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    LicenseDeactivateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static LicenseDeactivateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override Uri Url(IDodoPaymentsClient client)

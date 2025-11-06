@@ -1,4 +1,6 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -12,15 +14,19 @@ namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
 public sealed record class LedgerEntryCreateParams : ParamsBase
 {
-    public Dictionary<string, JsonElement> BodyProperties { get; set; } = [];
+    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
+    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    {
+        get { return this._bodyProperties.Freeze(); }
+    }
 
-    public required string CustomerID;
+    public required string CustomerID { get; init; }
 
     public required long Amount
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("amount", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'amount' cannot be null",
                     new System::ArgumentOutOfRangeException("amount", "Missing required argument")
@@ -28,9 +34,9 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["amount"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["amount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -44,7 +50,7 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("currency", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
                     new System::ArgumentOutOfRangeException("currency", "Missing required argument")
@@ -55,9 +61,9 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["currency"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -71,7 +77,7 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("entry_type", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("entry_type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'entry_type' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -85,9 +91,9 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.BodyProperties["entry_type"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["entry_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -101,14 +107,14 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("idempotency_key", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("idempotency_key", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["idempotency_key"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["idempotency_key"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -119,18 +125,58 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     {
         get
         {
-            if (!this.BodyProperties.TryGetValue("reason", out JsonElement element))
+            if (!this._bodyProperties.TryGetValue("reason", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.BodyProperties["reason"] = JsonSerializer.SerializeToElement(
+            this._bodyProperties["reason"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public LedgerEntryCreateParams() { }
+
+    public LedgerEntryCreateParams(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    LedgerEntryCreateParams(
+        FrozenDictionary<string, JsonElement> headerProperties,
+        FrozenDictionary<string, JsonElement> queryProperties,
+        FrozenDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        this._headerProperties = [.. headerProperties];
+        this._queryProperties = [.. queryProperties];
+        this._bodyProperties = [.. bodyProperties];
+    }
+#pragma warning restore CS8618
+
+    public static LedgerEntryCreateParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> headerProperties,
+        IReadOnlyDictionary<string, JsonElement> queryProperties,
+        IReadOnlyDictionary<string, JsonElement> bodyProperties
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(headerProperties),
+            FrozenDictionary.ToFrozenDictionary(queryProperties),
+            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+        );
     }
 
     public override System::Uri Url(IDodoPaymentsClient client)

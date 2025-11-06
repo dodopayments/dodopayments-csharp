@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -18,7 +19,7 @@ public sealed record class WebhookListPageResponse : ModelBase, IFromRaw<Webhook
     {
         get
         {
-            if (!this.Properties.TryGetValue("data", out JsonElement element))
+            if (!this._properties.TryGetValue("data", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
@@ -33,9 +34,9 @@ public sealed record class WebhookListPageResponse : ModelBase, IFromRaw<Webhook
                     new System::ArgumentNullException("data")
                 );
         }
-        set
+        init
         {
-            this.Properties["data"] = JsonSerializer.SerializeToElement(
+            this._properties["data"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -49,7 +50,7 @@ public sealed record class WebhookListPageResponse : ModelBase, IFromRaw<Webhook
     {
         get
         {
-            if (!this.Properties.TryGetValue("done", out JsonElement element))
+            if (!this._properties.TryGetValue("done", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'done' cannot be null",
                     new System::ArgumentOutOfRangeException("done", "Missing required argument")
@@ -57,9 +58,9 @@ public sealed record class WebhookListPageResponse : ModelBase, IFromRaw<Webhook
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["done"] = JsonSerializer.SerializeToElement(
+            this._properties["done"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -73,14 +74,14 @@ public sealed record class WebhookListPageResponse : ModelBase, IFromRaw<Webhook
     {
         get
         {
-            if (!this.Properties.TryGetValue("iterator", out JsonElement element))
+            if (!this._properties.TryGetValue("iterator", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["iterator"] = JsonSerializer.SerializeToElement(
+            this._properties["iterator"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -94,14 +95,14 @@ public sealed record class WebhookListPageResponse : ModelBase, IFromRaw<Webhook
     {
         get
         {
-            if (!this.Properties.TryGetValue("prev_iterator", out JsonElement element))
+            if (!this._properties.TryGetValue("prev_iterator", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["prev_iterator"] = JsonSerializer.SerializeToElement(
+            this._properties["prev_iterator"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -121,18 +122,23 @@ public sealed record class WebhookListPageResponse : ModelBase, IFromRaw<Webhook
 
     public WebhookListPageResponse() { }
 
+    public WebhookListPageResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    WebhookListPageResponse(Dictionary<string, JsonElement> properties)
+    WebhookListPageResponse(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
     public static WebhookListPageResponse FromRawUnchecked(
-        Dictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> properties
     )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }

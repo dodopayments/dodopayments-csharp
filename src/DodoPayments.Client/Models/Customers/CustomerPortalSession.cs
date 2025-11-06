@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -15,7 +16,7 @@ public sealed record class CustomerPortalSession : ModelBase, IFromRaw<CustomerP
     {
         get
         {
-            if (!this.Properties.TryGetValue("link", out JsonElement element))
+            if (!this._properties.TryGetValue("link", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'link' cannot be null",
                     new ArgumentOutOfRangeException("link", "Missing required argument")
@@ -27,9 +28,9 @@ public sealed record class CustomerPortalSession : ModelBase, IFromRaw<CustomerP
                     new ArgumentNullException("link")
                 );
         }
-        set
+        init
         {
-            this.Properties["link"] = JsonSerializer.SerializeToElement(
+            this._properties["link"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -43,17 +44,24 @@ public sealed record class CustomerPortalSession : ModelBase, IFromRaw<CustomerP
 
     public CustomerPortalSession() { }
 
+    public CustomerPortalSession(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerPortalSession(Dictionary<string, JsonElement> properties)
+    CustomerPortalSession(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static CustomerPortalSession FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static CustomerPortalSession FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]

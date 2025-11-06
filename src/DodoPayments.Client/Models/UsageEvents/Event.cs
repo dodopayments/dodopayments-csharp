@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -15,7 +16,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this.Properties.TryGetValue("business_id", out JsonElement element))
+            if (!this._properties.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
                     new ArgumentOutOfRangeException("business_id", "Missing required argument")
@@ -27,9 +28,9 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
                     new ArgumentNullException("business_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["business_id"] = JsonSerializer.SerializeToElement(
+            this._properties["business_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -40,7 +41,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this.Properties.TryGetValue("customer_id", out JsonElement element))
+            if (!this._properties.TryGetValue("customer_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'customer_id' cannot be null",
                     new ArgumentOutOfRangeException("customer_id", "Missing required argument")
@@ -52,9 +53,9 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
                     new ArgumentNullException("customer_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["customer_id"] = JsonSerializer.SerializeToElement(
+            this._properties["customer_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -65,7 +66,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this.Properties.TryGetValue("event_id", out JsonElement element))
+            if (!this._properties.TryGetValue("event_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'event_id' cannot be null",
                     new ArgumentOutOfRangeException("event_id", "Missing required argument")
@@ -77,9 +78,9 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
                     new ArgumentNullException("event_id")
                 );
         }
-        set
+        init
         {
-            this.Properties["event_id"] = JsonSerializer.SerializeToElement(
+            this._properties["event_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -90,7 +91,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this.Properties.TryGetValue("event_name", out JsonElement element))
+            if (!this._properties.TryGetValue("event_name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'event_name' cannot be null",
                     new ArgumentOutOfRangeException("event_name", "Missing required argument")
@@ -102,9 +103,9 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
                     new ArgumentNullException("event_name")
                 );
         }
-        set
+        init
         {
-            this.Properties["event_name"] = JsonSerializer.SerializeToElement(
+            this._properties["event_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -115,7 +116,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this.Properties.TryGetValue("timestamp", out JsonElement element))
+            if (!this._properties.TryGetValue("timestamp", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'timestamp' cannot be null",
                     new ArgumentOutOfRangeException("timestamp", "Missing required argument")
@@ -123,9 +124,9 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
 
             return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
-        set
+        init
         {
-            this.Properties["timestamp"] = JsonSerializer.SerializeToElement(
+            this._properties["timestamp"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -139,7 +140,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this.Properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._properties.TryGetValue("metadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Dictionary<string, Metadata>?>(
@@ -147,9 +148,9 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
                 ModelBase.SerializerOptions
             );
         }
-        set
+        init
         {
-            this.Properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._properties["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -174,17 +175,22 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
 
     public Event() { }
 
+    public Event(IReadOnlyDictionary<string, JsonElement> properties)
+    {
+        this._properties = [.. properties];
+    }
+
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Event(Dictionary<string, JsonElement> properties)
+    Event(FrozenDictionary<string, JsonElement> properties)
     {
-        Properties = properties;
+        this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Event FromRawUnchecked(Dictionary<string, JsonElement> properties)
+    public static Event FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
-        return new(properties);
+        return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
