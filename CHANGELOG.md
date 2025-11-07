@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.0.0 (2025-11-07)
+
+Full Changelog: [v1.56.5...v2.0.0](https://github.com/dodopayments/dodopayments-csharp/compare/v1.56.5...v2.0.0)
+
+### ⚠ BREAKING CHANGES
+
+* **client:** make models immutable
+
+### Features
+
+* **client:** make models immutable ([3de9b83](https://github.com/dodopayments/dodopayments-csharp/commit/3de9b8365b026b52aeae0988f9e0128d57d696c4))
+
+
+### Chores
+
+* **internal:** codegen related update ([f716c6a](https://github.com/dodopayments/dodopayments-csharp/commit/f716c6a766c270a25bfff809df27b9f8ae9bc78c))
+
+
+### Documentation
+
+* **client:** document response validation ([8a7df74](https://github.com/dodopayments/dodopayments-csharp/commit/8a7df742b4a29cd0666b47def93866f1129a1414))
+* **client:** improve snippet formatting ([85652c6](https://github.com/dodopayments/dodopayments-csharp/commit/85652c6e5a9b9bebbf662e47fd355b0acf8d0ede))
+
 ## 1.56.5 (2025-11-05)
 
 Full Changelog: [v1.56.4...v1.56.5](https://github.com/dodopayments/dodopayments-csharp/compare/v1.56.4...v1.56.5)
