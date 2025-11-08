@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Brands;
@@ -20,7 +21,10 @@ public sealed class BrandService : IBrandService
         _client = client;
     }
 
-    public async Task<Brand> Create(BrandCreateParams? parameters = null)
+    public async Task<Brand> Create(
+        BrandCreateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
     {
         parameters ??= new();
 
@@ -29,8 +33,10 @@ public sealed class BrandService : IBrandService
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var brand = await response.Deserialize<Brand>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var brand = await response.Deserialize<Brand>(cancellationToken).ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             brand.Validate();
@@ -38,15 +44,20 @@ public sealed class BrandService : IBrandService
         return brand;
     }
 
-    public async Task<Brand> Retrieve(BrandRetrieveParams parameters)
+    public async Task<Brand> Retrieve(
+        BrandRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<BrandRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var brand = await response.Deserialize<Brand>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var brand = await response.Deserialize<Brand>(cancellationToken).ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             brand.Validate();
@@ -54,15 +65,20 @@ public sealed class BrandService : IBrandService
         return brand;
     }
 
-    public async Task<Brand> Update(BrandUpdateParams parameters)
+    public async Task<Brand> Update(
+        BrandUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<BrandUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var brand = await response.Deserialize<Brand>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var brand = await response.Deserialize<Brand>(cancellationToken).ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             brand.Validate();
@@ -70,7 +86,10 @@ public sealed class BrandService : IBrandService
         return brand;
     }
 
-    public async Task<BrandListResponse> List(BrandListParams? parameters = null)
+    public async Task<BrandListResponse> List(
+        BrandListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
     {
         parameters ??= new();
 
@@ -79,8 +98,12 @@ public sealed class BrandService : IBrandService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var brands = await response.Deserialize<BrandListResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var brands = await response
+            .Deserialize<BrandListResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             brands.Validate();
@@ -88,16 +111,21 @@ public sealed class BrandService : IBrandService
         return brands;
     }
 
-    public async Task<BrandUpdateImagesResponse> UpdateImages(BrandUpdateImagesParams parameters)
+    public async Task<BrandUpdateImagesResponse> UpdateImages(
+        BrandUpdateImagesParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<BrandUpdateImagesParams> request = new()
         {
             Method = HttpMethod.Put,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var deserializedResponse = await response
-            .Deserialize<BrandUpdateImagesResponse>()
+            .Deserialize<BrandUpdateImagesResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {

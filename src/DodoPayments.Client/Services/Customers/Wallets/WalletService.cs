@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers.Wallets;
@@ -28,15 +29,22 @@ public sealed class WalletService : IWalletService
         get { return _ledgerEntries.Value; }
     }
 
-    public async Task<WalletListResponse> List(WalletListParams parameters)
+    public async Task<WalletListResponse> List(
+        WalletListParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<WalletListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var wallets = await response.Deserialize<WalletListResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var wallets = await response
+            .Deserialize<WalletListResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             wallets.Validate();

@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Subscriptions;
@@ -20,16 +21,21 @@ public sealed class SubscriptionService : ISubscriptionService
         _client = client;
     }
 
-    public async Task<SubscriptionCreateResponse> Create(SubscriptionCreateParams parameters)
+    public async Task<SubscriptionCreateResponse> Create(
+        SubscriptionCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<SubscriptionCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var subscription = await response
-            .Deserialize<SubscriptionCreateResponse>()
+            .Deserialize<SubscriptionCreateResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -38,15 +44,22 @@ public sealed class SubscriptionService : ISubscriptionService
         return subscription;
     }
 
-    public async Task<Subscription> Retrieve(SubscriptionRetrieveParams parameters)
+    public async Task<Subscription> Retrieve(
+        SubscriptionRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<SubscriptionRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var subscription = await response.Deserialize<Subscription>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var subscription = await response
+            .Deserialize<Subscription>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             subscription.Validate();
@@ -54,15 +67,22 @@ public sealed class SubscriptionService : ISubscriptionService
         return subscription;
     }
 
-    public async Task<Subscription> Update(SubscriptionUpdateParams parameters)
+    public async Task<Subscription> Update(
+        SubscriptionUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<SubscriptionUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var subscription = await response.Deserialize<Subscription>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var subscription = await response
+            .Deserialize<Subscription>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             subscription.Validate();
@@ -70,7 +90,10 @@ public sealed class SubscriptionService : ISubscriptionService
         return subscription;
     }
 
-    public async Task<SubscriptionListPageResponse> List(SubscriptionListParams? parameters = null)
+    public async Task<SubscriptionListPageResponse> List(
+        SubscriptionListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
     {
         parameters ??= new();
 
@@ -79,8 +102,12 @@ public sealed class SubscriptionService : ISubscriptionService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var page = await response.Deserialize<SubscriptionListPageResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var page = await response
+            .Deserialize<SubscriptionListPageResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             page.Validate();
@@ -88,26 +115,36 @@ public sealed class SubscriptionService : ISubscriptionService
         return page;
     }
 
-    public async Task ChangePlan(SubscriptionChangePlanParams parameters)
+    public async Task ChangePlan(
+        SubscriptionChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<SubscriptionChangePlanParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
     }
 
-    public async Task<SubscriptionChargeResponse> Charge(SubscriptionChargeParams parameters)
+    public async Task<SubscriptionChargeResponse> Charge(
+        SubscriptionChargeParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<SubscriptionChargeParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var deserializedResponse = await response
-            .Deserialize<SubscriptionChargeResponse>()
+            .Deserialize<SubscriptionChargeResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -117,7 +154,8 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     public async Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
-        SubscriptionRetrieveUsageHistoryParams parameters
+        SubscriptionRetrieveUsageHistoryParams parameters,
+        CancellationToken cancellationToken = default
     )
     {
         HttpRequest<SubscriptionRetrieveUsageHistoryParams> request = new()
@@ -125,9 +163,11 @@ public sealed class SubscriptionService : ISubscriptionService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var page = await response
-            .Deserialize<SubscriptionRetrieveUsageHistoryPageResponse>()
+            .Deserialize<SubscriptionRetrieveUsageHistoryPageResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Services.Products.Images;
@@ -12,19 +13,38 @@ public interface IProductService
 
     IImageService Images { get; }
 
-    Task<Products::Product> Create(Products::ProductCreateParams parameters);
+    Task<Products::Product> Create(
+        Products::ProductCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task<Products::Product> Retrieve(Products::ProductRetrieveParams parameters);
+    Task<Products::Product> Retrieve(
+        Products::ProductRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task Update(Products::ProductUpdateParams parameters);
+    Task Update(
+        Products::ProductUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task<Products::ProductListPageResponse> List(Products::ProductListParams? parameters = null);
+    Task<Products::ProductListPageResponse> List(
+        Products::ProductListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
-    Task Archive(Products::ProductArchiveParams parameters);
+    Task Archive(
+        Products::ProductArchiveParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task Unarchive(Products::ProductUnarchiveParams parameters);
+    Task Unarchive(
+        Products::ProductUnarchiveParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
     Task<Products::ProductUpdateFilesResponse> UpdateFiles(
-        Products::ProductUpdateFilesParams parameters
+        Products::ProductUpdateFilesParams parameters,
+        CancellationToken cancellationToken = default
     );
 }

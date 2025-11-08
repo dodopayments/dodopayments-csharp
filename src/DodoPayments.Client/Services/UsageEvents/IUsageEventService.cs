@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.UsageEvents;
@@ -25,7 +26,10 @@ public interface IUsageEventService
     ///
     /// ## Example Usage: ```text GET /events/api_call_12345 ```
     /// </summary>
-    Task<Event> Retrieve(UsageEventRetrieveParams parameters);
+    Task<Event> Retrieve(
+        UsageEventRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Fetch events from your account with powerful filtering capabilities. This
@@ -48,7 +52,10 @@ public interface IUsageEventService
     /// 24 hours: `?start=2024-01-14T10:30:00Z&end=2024-01-15T10:30:00Z` - Get events
     /// with meter filtering: `?meter_id=mtr_xyz789` - Paginate results: `?page_size=50&page_number=2`
     /// </summary>
-    Task<UsageEventListPageResponse> List(UsageEventListParams? parameters = null);
+    Task<UsageEventListPageResponse> List(
+        UsageEventListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// This endpoint allows you to ingest custom events that can be used for: - Usage-based
@@ -68,5 +75,8 @@ public interface IUsageEventService
     /// "/api/v1/users",         "method": "GET",         "tokens_used": "150"
     ///    }     }   ] } ```
     /// </summary>
-    Task<UsageEventIngestResponse> Ingest(UsageEventIngestParams parameters);
+    Task<UsageEventIngestResponse> Ingest(
+        UsageEventIngestParams parameters,
+        CancellationToken cancellationToken = default
+    );
 }

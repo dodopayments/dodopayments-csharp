@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers;
@@ -10,5 +11,8 @@ public interface ICustomerPortalService
 {
     ICustomerPortalService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    Task<CustomerPortalSession> Create(CustomerPortalCreateParams parameters);
+    Task<CustomerPortalSession> Create(
+        CustomerPortalCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 }
