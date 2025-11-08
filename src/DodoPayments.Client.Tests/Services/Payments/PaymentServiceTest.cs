@@ -20,7 +20,7 @@ public class PaymentServiceTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
-                Customer = new(new AttachExistingCustomer("customer_id")),
+                Customer = new AttachExistingCustomer("customer_id"),
                 ProductCart =
                 [
                     new()

@@ -482,6 +482,67 @@ public record class UnwrapWebhookEvent
         };
     }
 
+    public static implicit operator UnwrapWebhookEvent(DisputeAcceptedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(DisputeCancelledWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(DisputeChallengedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(DisputeExpiredWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(DisputeLostWebhookEvent value) => new(value);
+
+    public static implicit operator UnwrapWebhookEvent(DisputeOpenedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(DisputeWonWebhookEvent value) => new(value);
+
+    public static implicit operator UnwrapWebhookEvent(LicenseKeyCreatedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(PaymentCancelledWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(PaymentFailedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(PaymentProcessingWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(PaymentSucceededWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(RefundFailedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(RefundSucceededWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(SubscriptionActiveWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(SubscriptionCancelledWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(SubscriptionExpiredWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(SubscriptionFailedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(SubscriptionOnHoldWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(SubscriptionPlanChangedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(SubscriptionRenewedWebhookEvent value) =>
+        new(value);
+
     public void Validate()
     {
         if (this.Value is UnknownVariant)

@@ -79,6 +79,10 @@ public record class CustomerRequest
         };
     }
 
+    public static implicit operator CustomerRequest(AttachExistingCustomer value) => new(value);
+
+    public static implicit operator CustomerRequest(NewCustomer value) => new(value);
+
     public void Validate()
     {
         if (this.Value is UnknownVariant)

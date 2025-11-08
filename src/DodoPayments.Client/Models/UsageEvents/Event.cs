@@ -278,6 +278,12 @@ public record class Metadata
         };
     }
 
+    public static implicit operator Metadata(string value) => new(value);
+
+    public static implicit operator Metadata(double value) => new(value);
+
+    public static implicit operator Metadata(bool value) => new(value);
+
     public void Validate()
     {
         if (this.Value is UnknownVariant)
