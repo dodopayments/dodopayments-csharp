@@ -25,7 +25,7 @@ public abstract record class ParamsBase
         get { return this._headerProperties.Freeze(); }
     }
 
-    public abstract Uri Url(IDodoPaymentsClient client);
+    public abstract Uri Url(ClientOptions options);
 
     protected static void AddQueryElementToCollection(
         NameValueCollection collection,
@@ -131,7 +131,7 @@ public abstract record class ParamsBase
         }
     }
 
-    protected string QueryString(IDodoPaymentsClient client)
+    protected string QueryString(ClientOptions options)
     {
         NameValueCollection collection = [];
         foreach (var item in this.QueryProperties)
@@ -157,21 +157,18 @@ public abstract record class ParamsBase
         return sb.ToString();
     }
 
-    internal abstract void AddHeadersToRequest(
-        HttpRequestMessage request,
-        IDodoPaymentsClient client
-    );
+    internal abstract void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options);
 
     internal virtual StringContent? BodyContent()
     {
         return null;
     }
 
-    protected static void AddDefaultHeaders(HttpRequestMessage request, IDodoPaymentsClient client)
+    protected static void AddDefaultHeaders(HttpRequestMessage request, ClientOptions options)
     {
-        if (client.BearerToken != null)
+        if (options.BearerToken != null)
         {
-            request.Headers.Add("Authorization", string.Format("Bearer {0}", client.BearerToken));
+            request.Headers.Add("Authorization", string.Format("Bearer {0}", options.BearerToken));
         }
     }
 }

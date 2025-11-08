@@ -272,11 +272,14 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
     )
         where T : ParamsBase
     {
-        using HttpRequestMessage requestMessage = new(request.Method, request.Params.Url(this))
+        using HttpRequestMessage requestMessage = new(
+            request.Method,
+            request.Params.Url(this._options)
+        )
         {
             Content = request.Params.BodyContent(),
         };
-        request.Params.AddHeadersToRequest(requestMessage, this);
+        request.Params.AddHeadersToRequest(requestMessage, this._options);
         using CancellationTokenSource timeoutCts = new(this.Timeout);
         using var cts = CancellationTokenSource.CreateLinkedTokenSource(
             timeoutCts.Token,
