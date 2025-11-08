@@ -36,6 +36,8 @@ public interface IDodoPaymentsClient
 
     TimeSpan Timeout { get; init; }
 
+    int MaxRetries { get; init; }
+
     /// <summary>
     /// Bearer Token for API authentication
     /// </summary>
