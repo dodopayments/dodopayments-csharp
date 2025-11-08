@@ -22,9 +22,9 @@ public struct ClientOptions()
 
     public bool ResponseValidation { get; set; } = false;
 
-    public TimeSpan Timeout { get; set; } = TimeSpan.FromMinutes(1);
-
     public int MaxRetries { get; set; } = 2;
+
+    public TimeSpan Timeout { get; set; } = TimeSpan.FromMinutes(1);
 
     /// <summary>
     /// Bearer Token for API authentication
