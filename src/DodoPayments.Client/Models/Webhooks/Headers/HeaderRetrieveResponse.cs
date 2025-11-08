@@ -12,7 +12,7 @@ namespace DodoPayments.Client.Models.Webhooks.Headers;
 /// <summary>
 /// The value of the headers is returned in the `headers` field.
 ///
-/// Sensitive headers that have been redacted are returned in the sensitive field.
+/// <para>Sensitive headers that have been redacted are returned in the sensitive field.</para>
 /// </summary>
 [JsonConverter(typeof(ModelConverter<HeaderRetrieveResponse>))]
 public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRetrieveResponse>

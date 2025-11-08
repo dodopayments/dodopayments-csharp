@@ -369,8 +369,8 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     /// The payment amount, in the smallest denomination of the currency (e.g., cents
     /// for USD). For example, to charge $1.00, pass `100`.
     ///
-    /// If [`pay_what_you_want`](Self::pay_what_you_want) is set to `true`, this
-    /// field represents the **minimum** amount the customer must pay.
+    /// <para>If [`pay_what_you_want`](Self::pay_what_you_want) is set to `true`,
+    /// this field represents the **minimum** amount the customer must pay.</para>
     /// </summary>
     public required int Price
     {
@@ -445,8 +445,8 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     }
 
     /// <summary>
-    /// Indicates whether the customer can pay any amount they choose. If set to
-    /// `true`, the [`price`](Self::price) field is the minimum amount.
+    /// Indicates whether the customer can pay any amount they choose. If set to `true`,
+    /// the [`price`](Self::price) field is the minimum amount.
     /// </summary>
     public bool? PayWhatYouWant
     {

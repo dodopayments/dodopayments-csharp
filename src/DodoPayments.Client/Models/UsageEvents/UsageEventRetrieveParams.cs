@@ -14,15 +14,15 @@ namespace DodoPayments.Client.Models.UsageEvents;
 /// event details for customer support - Validating that events were processed correctly
 /// - Getting the complete metadata for an event
 ///
-/// ## Event ID Format: The event ID should be the same value that was provided during
-/// event ingestion via the `/events/ingest` endpoint. Event IDs are case-sensitive
-/// and must match exactly.
+/// <para>## Event ID Format: The event ID should be the same value that was provided
+/// during event ingestion via the `/events/ingest` endpoint. Event IDs are case-sensitive
+/// and must match exactly.</para>
 ///
-/// ## Response Details: The response includes all event data including: - Complete
+/// <para>## Response Details: The response includes all event data including: - Complete
 /// metadata key-value pairs - Original timestamp (preserved from ingestion) - Customer
-/// and business association - Event name and processing information
+/// and business association - Event name and processing information</para>
 ///
-/// ## Example Usage: ```text GET /events/api_call_12345 ```
+/// <para>## Example Usage: ```text GET /events/api_call_12345 ```</para>
 /// </summary>
 public sealed record class UsageEventRetrieveParams : ParamsBase
 {

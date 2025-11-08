@@ -41,9 +41,9 @@ public sealed record class NewCustomer : ModelBase, IFromRaw<NewCustomer>
     }
 
     /// <summary>
-    /// Optional full name of the customer. If provided during session creation,
-    /// it is persisted and becomes immutable for the session. If omitted here, it
-    /// can be provided later via the confirm API.
+    /// Optional full name of the customer. If provided during session creation, it
+    /// is persisted and becomes immutable for the session. If omitted here, it can
+    /// be provided later via the confirm API.
     /// </summary>
     public string? Name
     {

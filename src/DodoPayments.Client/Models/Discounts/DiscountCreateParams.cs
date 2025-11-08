@@ -25,12 +25,11 @@ public sealed record class DiscountCreateParams : ParamsBase
     /// <summary>
     /// The discount amount.
     ///
-    /// - If `discount_type` is **not** `percentage`, `amount` is in **USD cents**.
-    /// For example, `100` means `$1.00`.   Only USD is allowed. - If `discount_type`
-    /// **is** `percentage`, `amount` is in **basis points**. For example, `540`
-    /// means `5.4%`.
+    /// <para>- If `discount_type` is **not** `percentage`, `amount` is in **USD
+    /// cents**. For example, `100` means `$1.00`.   Only USD is allowed. - If `discount_type`
+    /// **is** `percentage`, `amount` is in **basis points**. For example, `540` means `5.4%`.</para>
     ///
-    /// Must be at least 1.
+    /// <para>Must be at least 1.</para>
     /// </summary>
     public required int Amount
     {
@@ -163,9 +162,9 @@ public sealed record class DiscountCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Number of subscription billing cycles this discount is valid for. If not provided,
-    /// the discount will be applied indefinitely to all recurring payments related
-    /// to the subscription.
+    /// Number of subscription billing cycles this discount is valid for. If not
+    /// provided, the discount will be applied indefinitely to all recurring payments
+    /// related to the subscription.
     /// </summary>
     public int? SubscriptionCycles
     {

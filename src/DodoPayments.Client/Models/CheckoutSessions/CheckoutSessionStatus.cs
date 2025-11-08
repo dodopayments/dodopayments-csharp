@@ -110,7 +110,7 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
     /// <summary>
     /// Id of the payment created by the checkout sessions.
     ///
-    /// Null if checkout sessions is still at the details collection stage.
+    /// <para>Null if checkout sessions is still at the details collection stage.</para>
     /// </summary>
     public string? PaymentID
     {
@@ -133,7 +133,7 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
     /// <summary>
     /// status of the payment.
     ///
-    /// Null if checkout sessions is still at the details collection stage.
+    /// <para>Null if checkout sessions is still at the details collection stage.</para>
     /// </summary>
     public ApiEnum<string, Payments::IntentStatus>? PaymentStatus
     {
