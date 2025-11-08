@@ -78,6 +78,11 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["create_new_customer"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

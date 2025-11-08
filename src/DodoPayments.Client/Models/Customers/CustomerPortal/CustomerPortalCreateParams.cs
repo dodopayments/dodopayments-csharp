@@ -26,6 +26,11 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._queryProperties["send_email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

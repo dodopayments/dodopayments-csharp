@@ -587,6 +587,11 @@ public sealed record class Data31 : ModelBase, IFromRaw<Data31>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["card_issuing_country"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -866,6 +871,11 @@ public sealed record class Data31 : ModelBase, IFromRaw<Data31>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -956,6 +966,11 @@ public sealed record class Data31 : ModelBase, IFromRaw<Data31>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["payload_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1085,6 +1100,11 @@ public sealed record class IntersectionMember131 : ModelBase, IFromRaw<Intersect
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["payload_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

@@ -996,6 +996,11 @@ public sealed record class Payment : ModelBase, IFromRaw<Payment>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["card_issuing_country"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -1275,6 +1280,11 @@ public sealed record class Payment : ModelBase, IFromRaw<Payment>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -2824,6 +2834,11 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

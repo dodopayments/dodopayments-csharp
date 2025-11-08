@@ -30,6 +30,11 @@ public sealed record class LedgerEntryListParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._queryProperties["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -48,6 +53,11 @@ public sealed record class LedgerEntryListParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._queryProperties["page_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -66,6 +76,11 @@ public sealed record class LedgerEntryListParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._queryProperties["page_size"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

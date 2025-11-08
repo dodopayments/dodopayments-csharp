@@ -513,6 +513,11 @@ public sealed record class Data6 : ModelBase, IFromRaw<Data6>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["payload_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -595,6 +600,11 @@ public sealed record class IntersectionMember16 : ModelBase, IFromRaw<Intersecti
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["payload_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
