@@ -264,6 +264,12 @@ public record class MetadataModel
         };
     }
 
+    public static implicit operator MetadataModel(string value) => new(value);
+
+    public static implicit operator MetadataModel(double value) => new(value);
+
+    public static implicit operator MetadataModel(bool value) => new(value);
+
     public void Validate()
     {
         if (this.Value is UnknownVariant)

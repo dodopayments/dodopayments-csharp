@@ -429,6 +429,16 @@ public record class Data
         };
     }
 
+    public static implicit operator Data(Payment value) => new(value);
+
+    public static implicit operator Data(Subscription value) => new(value);
+
+    public static implicit operator Data(Refund value) => new(value);
+
+    public static implicit operator Data(Dispute value) => new(value);
+
+    public static implicit operator Data(LicenseKey value) => new(value);
+
     public void Validate()
     {
         if (this.Value is UnknownVariant)

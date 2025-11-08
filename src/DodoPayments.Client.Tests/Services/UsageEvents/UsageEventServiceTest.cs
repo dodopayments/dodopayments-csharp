@@ -34,10 +34,7 @@ public class UsageEventServiceTest : TestBase
                         CustomerID = "customer_id",
                         EventID = "event_id",
                         EventName = "event_name",
-                        Metadata = new Dictionary<string, MetadataModel>()
-                        {
-                            { "foo", new("string") },
-                        },
+                        Metadata = new Dictionary<string, MetadataModel>() { { "foo", "string" } },
                         Timestamp = DateTime.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],

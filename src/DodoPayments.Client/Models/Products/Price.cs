@@ -211,6 +211,12 @@ public record class Price
         };
     }
 
+    public static implicit operator Price(OneTimePrice value) => new(value);
+
+    public static implicit operator Price(RecurringPrice value) => new(value);
+
+    public static implicit operator Price(UsageBasedPrice value) => new(value);
+
     public void Validate()
     {
         if (this.Value is UnknownVariant)
