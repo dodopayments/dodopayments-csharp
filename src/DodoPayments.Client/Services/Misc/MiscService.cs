@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
@@ -22,7 +23,8 @@ public sealed class MiscService : IMiscService
     }
 
     public async Task<List<ApiEnum<string, CountryCode>>> ListSupportedCountries(
-        MiscListSupportedCountriesParams? parameters = null
+        MiscListSupportedCountriesParams? parameters = null,
+        CancellationToken cancellationToken = default
     )
     {
         parameters ??= new();
@@ -32,9 +34,11 @@ public sealed class MiscService : IMiscService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var countryCodes = await response
-            .Deserialize<List<ApiEnum<string, CountryCode>>>()
+            .Deserialize<List<ApiEnum<string, CountryCode>>>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {

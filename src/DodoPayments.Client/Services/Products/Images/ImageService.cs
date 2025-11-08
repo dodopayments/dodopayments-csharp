@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Products.Images;
@@ -20,15 +21,22 @@ public sealed class ImageService : IImageService
         _client = client;
     }
 
-    public async Task<ImageUpdateResponse> Update(ImageUpdateParams parameters)
+    public async Task<ImageUpdateResponse> Update(
+        ImageUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<ImageUpdateParams> request = new()
         {
             Method = HttpMethod.Put,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var image = await response.Deserialize<ImageUpdateResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var image = await response
+            .Deserialize<ImageUpdateResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             image.Validate();

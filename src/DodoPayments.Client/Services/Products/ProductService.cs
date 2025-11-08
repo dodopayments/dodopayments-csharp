@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Services.Products.Images;
@@ -28,15 +29,22 @@ public sealed class ProductService : IProductService
         get { return _images.Value; }
     }
 
-    public async Task<Products::Product> Create(Products::ProductCreateParams parameters)
+    public async Task<Products::Product> Create(
+        Products::ProductCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Products::ProductCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var product = await response.Deserialize<Products::Product>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var product = await response
+            .Deserialize<Products::Product>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             product.Validate();
@@ -44,15 +52,22 @@ public sealed class ProductService : IProductService
         return product;
     }
 
-    public async Task<Products::Product> Retrieve(Products::ProductRetrieveParams parameters)
+    public async Task<Products::Product> Retrieve(
+        Products::ProductRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Products::ProductRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var product = await response.Deserialize<Products::Product>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var product = await response
+            .Deserialize<Products::Product>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             product.Validate();
@@ -60,18 +75,24 @@ public sealed class ProductService : IProductService
         return product;
     }
 
-    public async Task Update(Products::ProductUpdateParams parameters)
+    public async Task Update(
+        Products::ProductUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Products::ProductUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
     }
 
     public async Task<Products::ProductListPageResponse> List(
-        Products::ProductListParams? parameters = null
+        Products::ProductListParams? parameters = null,
+        CancellationToken cancellationToken = default
     )
     {
         parameters ??= new();
@@ -81,9 +102,11 @@ public sealed class ProductService : IProductService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var page = await response
-            .Deserialize<Products::ProductListPageResponse>()
+            .Deserialize<Products::ProductListPageResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -92,28 +115,39 @@ public sealed class ProductService : IProductService
         return page;
     }
 
-    public async Task Archive(Products::ProductArchiveParams parameters)
+    public async Task Archive(
+        Products::ProductArchiveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Products::ProductArchiveParams> request = new()
         {
             Method = HttpMethod.Delete,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
     }
 
-    public async Task Unarchive(Products::ProductUnarchiveParams parameters)
+    public async Task Unarchive(
+        Products::ProductUnarchiveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Products::ProductUnarchiveParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
     }
 
     public async Task<Products::ProductUpdateFilesResponse> UpdateFiles(
-        Products::ProductUpdateFilesParams parameters
+        Products::ProductUpdateFilesParams parameters,
+        CancellationToken cancellationToken = default
     )
     {
         HttpRequest<Products::ProductUpdateFilesParams> request = new()
@@ -121,9 +155,11 @@ public sealed class ProductService : IProductService
             Method = HttpMethod.Put,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var deserializedResponse = await response
-            .Deserialize<Products::ProductUpdateFilesResponse>()
+            .Deserialize<Products::ProductUpdateFilesResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {

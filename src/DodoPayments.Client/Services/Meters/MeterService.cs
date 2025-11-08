@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using Meters = DodoPayments.Client.Models.Meters;
@@ -20,15 +21,22 @@ public sealed class MeterService : IMeterService
         _client = client;
     }
 
-    public async Task<Meters::Meter> Create(Meters::MeterCreateParams parameters)
+    public async Task<Meters::Meter> Create(
+        Meters::MeterCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Meters::MeterCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var meter = await response.Deserialize<Meters::Meter>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var meter = await response
+            .Deserialize<Meters::Meter>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             meter.Validate();
@@ -36,15 +44,22 @@ public sealed class MeterService : IMeterService
         return meter;
     }
 
-    public async Task<Meters::Meter> Retrieve(Meters::MeterRetrieveParams parameters)
+    public async Task<Meters::Meter> Retrieve(
+        Meters::MeterRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Meters::MeterRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var meter = await response.Deserialize<Meters::Meter>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var meter = await response
+            .Deserialize<Meters::Meter>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             meter.Validate();
@@ -53,7 +68,8 @@ public sealed class MeterService : IMeterService
     }
 
     public async Task<Meters::MeterListPageResponse> List(
-        Meters::MeterListParams? parameters = null
+        Meters::MeterListParams? parameters = null,
+        CancellationToken cancellationToken = default
     )
     {
         parameters ??= new();
@@ -63,9 +79,11 @@ public sealed class MeterService : IMeterService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var page = await response
-            .Deserialize<Meters::MeterListPageResponse>()
+            .Deserialize<Meters::MeterListPageResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -74,23 +92,33 @@ public sealed class MeterService : IMeterService
         return page;
     }
 
-    public async Task Archive(Meters::MeterArchiveParams parameters)
+    public async Task Archive(
+        Meters::MeterArchiveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Meters::MeterArchiveParams> request = new()
         {
             Method = HttpMethod.Delete,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
     }
 
-    public async Task Unarchive(Meters::MeterUnarchiveParams parameters)
+    public async Task Unarchive(
+        Meters::MeterUnarchiveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<Meters::MeterUnarchiveParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
     }
 }

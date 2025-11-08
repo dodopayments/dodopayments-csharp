@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Licenses;
@@ -20,16 +21,21 @@ public sealed class LicenseService : ILicenseService
         _client = client;
     }
 
-    public async Task<LicenseActivateResponse> Activate(LicenseActivateParams parameters)
+    public async Task<LicenseActivateResponse> Activate(
+        LicenseActivateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<LicenseActivateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var deserializedResponse = await response
-            .Deserialize<LicenseActivateResponse>()
+            .Deserialize<LicenseActivateResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -38,26 +44,36 @@ public sealed class LicenseService : ILicenseService
         return deserializedResponse;
     }
 
-    public async Task Deactivate(LicenseDeactivateParams parameters)
+    public async Task Deactivate(
+        LicenseDeactivateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<LicenseDeactivateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
     }
 
-    public async Task<LicenseValidateResponse> Validate(LicenseValidateParams parameters)
+    public async Task<LicenseValidateResponse> Validate(
+        LicenseValidateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<LicenseValidateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var deserializedResponse = await response
-            .Deserialize<LicenseValidateResponse>()
+            .Deserialize<LicenseValidateResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
