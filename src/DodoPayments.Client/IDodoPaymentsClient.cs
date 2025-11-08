@@ -34,9 +34,9 @@ public interface IDodoPaymentsClient
 
     bool ResponseValidation { get; init; }
 
-    TimeSpan Timeout { get; init; }
-
     int MaxRetries { get; init; }
+
+    TimeSpan Timeout { get; init; }
 
     /// <summary>
     /// Bearer Token for API authentication
