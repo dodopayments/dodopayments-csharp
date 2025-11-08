@@ -184,6 +184,12 @@ public record class Clauses
         };
     }
 
+    public static implicit operator Clauses(List<MeterFilterCondition> value) =>
+        new((IReadOnlyList<MeterFilterCondition>)value);
+
+    public static implicit operator Clauses(List<MeterFilterModel> value) =>
+        new((IReadOnlyList<MeterFilterModel>)value);
+
     public void Validate()
     {
         if (this.Value is UnknownVariant)
@@ -525,6 +531,12 @@ public record class ValueModel
         };
     }
 
+    public static implicit operator ValueModel(string value) => new(value);
+
+    public static implicit operator ValueModel(double value) => new(value);
+
+    public static implicit operator ValueModel(bool value) => new(value);
+
     public void Validate()
     {
         if (this.Value is UnknownVariant)
@@ -776,6 +788,12 @@ public record class ClausesModel
             ),
         };
     }
+
+    public static implicit operator ClausesModel(List<MeterFilterConditionModel> value) =>
+        new((IReadOnlyList<MeterFilterConditionModel>)value);
+
+    public static implicit operator ClausesModel(List<MeterFilter1> value) =>
+        new((IReadOnlyList<MeterFilter1>)value);
 
     public void Validate()
     {
@@ -1127,6 +1145,12 @@ public record class Value1
         };
     }
 
+    public static implicit operator Value1(string value) => new(value);
+
+    public static implicit operator Value1(double value) => new(value);
+
+    public static implicit operator Value1(bool value) => new(value);
+
     public void Validate()
     {
         if (this.Value is UnknownVariant)
@@ -1370,6 +1394,12 @@ public record class Clauses1
             ),
         };
     }
+
+    public static implicit operator Clauses1(List<MeterFilterCondition1> value) =>
+        new((IReadOnlyList<MeterFilterCondition1>)value);
+
+    public static implicit operator Clauses1(List<MeterFilter2> value) =>
+        new((IReadOnlyList<MeterFilter2>)value);
 
     public void Validate()
     {
@@ -1714,6 +1744,12 @@ public record class Value2
             ),
         };
     }
+
+    public static implicit operator Value2(string value) => new(value);
+
+    public static implicit operator Value2(double value) => new(value);
+
+    public static implicit operator Value2(bool value) => new(value);
 
     public void Validate()
     {
@@ -2150,6 +2186,12 @@ public record class Value3
             ),
         };
     }
+
+    public static implicit operator Value3(string value) => new(value);
+
+    public static implicit operator Value3(double value) => new(value);
+
+    public static implicit operator Value3(bool value) => new(value);
 
     public void Validate()
     {
