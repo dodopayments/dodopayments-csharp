@@ -459,6 +459,11 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["pay_what_you_want"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -875,6 +880,11 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["trial_period_days"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

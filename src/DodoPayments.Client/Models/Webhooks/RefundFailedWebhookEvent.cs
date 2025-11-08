@@ -436,6 +436,11 @@ public sealed record class Data11 : ModelBase, IFromRaw<Data11>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -481,6 +486,11 @@ public sealed record class Data11 : ModelBase, IFromRaw<Data11>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["payload_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -561,6 +571,11 @@ public sealed record class IntersectionMember111 : ModelBase, IFromRaw<Intersect
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["payload_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

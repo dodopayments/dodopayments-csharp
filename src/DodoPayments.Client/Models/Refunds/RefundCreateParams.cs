@@ -85,6 +85,11 @@ public sealed record class RefundCreateParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._bodyProperties["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -249,6 +254,11 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["tax_inclusive"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
