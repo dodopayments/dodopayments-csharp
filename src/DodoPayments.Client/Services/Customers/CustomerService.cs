@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers;
@@ -36,15 +37,22 @@ public sealed class CustomerService : ICustomerService
         get { return _wallets.Value; }
     }
 
-    public async Task<Customer> Create(CustomerCreateParams parameters)
+    public async Task<Customer> Create(
+        CustomerCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<CustomerCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var customer = await response.Deserialize<Customer>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var customer = await response
+            .Deserialize<Customer>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             customer.Validate();
@@ -52,15 +60,22 @@ public sealed class CustomerService : ICustomerService
         return customer;
     }
 
-    public async Task<Customer> Retrieve(CustomerRetrieveParams parameters)
+    public async Task<Customer> Retrieve(
+        CustomerRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<CustomerRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var customer = await response.Deserialize<Customer>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var customer = await response
+            .Deserialize<Customer>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             customer.Validate();
@@ -68,15 +83,22 @@ public sealed class CustomerService : ICustomerService
         return customer;
     }
 
-    public async Task<Customer> Update(CustomerUpdateParams parameters)
+    public async Task<Customer> Update(
+        CustomerUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<CustomerUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var customer = await response.Deserialize<Customer>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var customer = await response
+            .Deserialize<Customer>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             customer.Validate();
@@ -84,7 +106,10 @@ public sealed class CustomerService : ICustomerService
         return customer;
     }
 
-    public async Task<CustomerListPageResponse> List(CustomerListParams? parameters = null)
+    public async Task<CustomerListPageResponse> List(
+        CustomerListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
     {
         parameters ??= new();
 
@@ -93,8 +118,12 @@ public sealed class CustomerService : ICustomerService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var page = await response.Deserialize<CustomerListPageResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var page = await response
+            .Deserialize<CustomerListPageResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             page.Validate();

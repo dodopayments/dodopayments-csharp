@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers;
@@ -15,11 +16,23 @@ public interface ICustomerService
 
     IWalletService Wallets { get; }
 
-    Task<Customer> Create(CustomerCreateParams parameters);
+    Task<Customer> Create(
+        CustomerCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task<Customer> Retrieve(CustomerRetrieveParams parameters);
+    Task<Customer> Retrieve(
+        CustomerRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task<Customer> Update(CustomerUpdateParams parameters);
+    Task<Customer> Update(
+        CustomerUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task<CustomerListPageResponse> List(CustomerListParams? parameters = null);
+    Task<CustomerListPageResponse> List(
+        CustomerListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }

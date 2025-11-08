@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers.Wallets;
@@ -10,7 +11,13 @@ public interface ILedgerEntryService
 {
     ILedgerEntryService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    Task<CustomerWallet> Create(LedgerEntryCreateParams parameters);
+    Task<CustomerWallet> Create(
+        LedgerEntryCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task<LedgerEntryListPageResponse> List(LedgerEntryListParams parameters);
+    Task<LedgerEntryListPageResponse> List(
+        LedgerEntryListParams parameters,
+        CancellationToken cancellationToken = default
+    );
 }

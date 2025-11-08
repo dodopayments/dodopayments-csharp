@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers.Wallets;
@@ -21,15 +22,22 @@ public sealed class LedgerEntryService : ILedgerEntryService
         _client = client;
     }
 
-    public async Task<CustomerWallet> Create(LedgerEntryCreateParams parameters)
+    public async Task<CustomerWallet> Create(
+        LedgerEntryCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<LedgerEntryCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var customerWallet = await response.Deserialize<CustomerWallet>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var customerWallet = await response
+            .Deserialize<CustomerWallet>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             customerWallet.Validate();
@@ -37,15 +45,22 @@ public sealed class LedgerEntryService : ILedgerEntryService
         return customerWallet;
     }
 
-    public async Task<LedgerEntryListPageResponse> List(LedgerEntryListParams parameters)
+    public async Task<LedgerEntryListPageResponse> List(
+        LedgerEntryListParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<LedgerEntryListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var page = await response.Deserialize<LedgerEntryListPageResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var page = await response
+            .Deserialize<LedgerEntryListPageResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             page.Validate();

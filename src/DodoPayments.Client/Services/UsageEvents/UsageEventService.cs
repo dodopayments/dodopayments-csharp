@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.UsageEvents;
@@ -20,15 +21,22 @@ public sealed class UsageEventService : IUsageEventService
         _client = client;
     }
 
-    public async Task<Event> Retrieve(UsageEventRetrieveParams parameters)
+    public async Task<Event> Retrieve(
+        UsageEventRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<UsageEventRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var deserializedResponse = await response.Deserialize<Event>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<Event>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             deserializedResponse.Validate();
@@ -36,7 +44,10 @@ public sealed class UsageEventService : IUsageEventService
         return deserializedResponse;
     }
 
-    public async Task<UsageEventListPageResponse> List(UsageEventListParams? parameters = null)
+    public async Task<UsageEventListPageResponse> List(
+        UsageEventListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
     {
         parameters ??= new();
 
@@ -45,8 +56,12 @@ public sealed class UsageEventService : IUsageEventService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var page = await response.Deserialize<UsageEventListPageResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var page = await response
+            .Deserialize<UsageEventListPageResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             page.Validate();
@@ -54,16 +69,21 @@ public sealed class UsageEventService : IUsageEventService
         return page;
     }
 
-    public async Task<UsageEventIngestResponse> Ingest(UsageEventIngestParams parameters)
+    public async Task<UsageEventIngestResponse> Ingest(
+        UsageEventIngestParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<UsageEventIngestParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var deserializedResponse = await response
-            .Deserialize<UsageEventIngestResponse>()
+            .Deserialize<UsageEventIngestResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {

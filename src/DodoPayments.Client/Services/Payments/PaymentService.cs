@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Payments;
@@ -20,15 +21,22 @@ public sealed class PaymentService : IPaymentService
         _client = client;
     }
 
-    public async Task<PaymentCreateResponse> Create(PaymentCreateParams parameters)
+    public async Task<PaymentCreateResponse> Create(
+        PaymentCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<PaymentCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var payment = await response.Deserialize<PaymentCreateResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var payment = await response
+            .Deserialize<PaymentCreateResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             payment.Validate();
@@ -36,15 +44,20 @@ public sealed class PaymentService : IPaymentService
         return payment;
     }
 
-    public async Task<Payment> Retrieve(PaymentRetrieveParams parameters)
+    public async Task<Payment> Retrieve(
+        PaymentRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<PaymentRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var payment = await response.Deserialize<Payment>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var payment = await response.Deserialize<Payment>(cancellationToken).ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             payment.Validate();
@@ -52,7 +65,10 @@ public sealed class PaymentService : IPaymentService
         return payment;
     }
 
-    public async Task<PaymentListPageResponse> List(PaymentListParams? parameters = null)
+    public async Task<PaymentListPageResponse> List(
+        PaymentListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
     {
         parameters ??= new();
 
@@ -61,8 +77,12 @@ public sealed class PaymentService : IPaymentService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var page = await response.Deserialize<PaymentListPageResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var page = await response
+            .Deserialize<PaymentListPageResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             page.Validate();
@@ -71,7 +91,8 @@ public sealed class PaymentService : IPaymentService
     }
 
     public async Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
-        PaymentRetrieveLineItemsParams parameters
+        PaymentRetrieveLineItemsParams parameters,
+        CancellationToken cancellationToken = default
     )
     {
         HttpRequest<PaymentRetrieveLineItemsParams> request = new()
@@ -79,9 +100,11 @@ public sealed class PaymentService : IPaymentService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
         var deserializedResponse = await response
-            .Deserialize<PaymentRetrieveLineItemsResponse>()
+            .Deserialize<PaymentRetrieveLineItemsResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {

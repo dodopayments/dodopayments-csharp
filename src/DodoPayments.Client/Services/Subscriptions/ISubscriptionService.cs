@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Subscriptions;
@@ -9,17 +10,35 @@ public interface ISubscriptionService
 {
     ISubscriptionService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    Task<SubscriptionCreateResponse> Create(SubscriptionCreateParams parameters);
+    Task<SubscriptionCreateResponse> Create(
+        SubscriptionCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task<Subscription> Retrieve(SubscriptionRetrieveParams parameters);
+    Task<Subscription> Retrieve(
+        SubscriptionRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task<Subscription> Update(SubscriptionUpdateParams parameters);
+    Task<Subscription> Update(
+        SubscriptionUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task<SubscriptionListPageResponse> List(SubscriptionListParams? parameters = null);
+    Task<SubscriptionListPageResponse> List(
+        SubscriptionListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
-    Task ChangePlan(SubscriptionChangePlanParams parameters);
+    Task ChangePlan(
+        SubscriptionChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    Task<SubscriptionChargeResponse> Charge(SubscriptionChargeParams parameters);
+    Task<SubscriptionChargeResponse> Charge(
+        SubscriptionChargeParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Get detailed usage history for a subscription that includes usage-based billing
@@ -51,6 +70,7 @@ public interface ISubscriptionService
     /// - Recent usage: `?start_date=2024-03-01T00:00:00Z` (from March 1st to now)
     /// </summary>
     Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
-        SubscriptionRetrieveUsageHistoryParams parameters
+        SubscriptionRetrieveUsageHistoryParams parameters,
+        CancellationToken cancellationToken = default
     );
 }

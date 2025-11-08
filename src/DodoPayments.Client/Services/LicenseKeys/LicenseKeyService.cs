@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.LicenseKeys;
@@ -20,15 +21,22 @@ public sealed class LicenseKeyService : ILicenseKeyService
         _client = client;
     }
 
-    public async Task<LicenseKey> Retrieve(LicenseKeyRetrieveParams parameters)
+    public async Task<LicenseKey> Retrieve(
+        LicenseKeyRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<LicenseKeyRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var licenseKey = await response.Deserialize<LicenseKey>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var licenseKey = await response
+            .Deserialize<LicenseKey>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             licenseKey.Validate();
@@ -36,15 +44,22 @@ public sealed class LicenseKeyService : ILicenseKeyService
         return licenseKey;
     }
 
-    public async Task<LicenseKey> Update(LicenseKeyUpdateParams parameters)
+    public async Task<LicenseKey> Update(
+        LicenseKeyUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
         HttpRequest<LicenseKeyUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var licenseKey = await response.Deserialize<LicenseKey>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var licenseKey = await response
+            .Deserialize<LicenseKey>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             licenseKey.Validate();
@@ -52,7 +67,10 @@ public sealed class LicenseKeyService : ILicenseKeyService
         return licenseKey;
     }
 
-    public async Task<LicenseKeyListPageResponse> List(LicenseKeyListParams? parameters = null)
+    public async Task<LicenseKeyListPageResponse> List(
+        LicenseKeyListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
     {
         parameters ??= new();
 
@@ -61,8 +79,12 @@ public sealed class LicenseKeyService : ILicenseKeyService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this._client.Execute(request).ConfigureAwait(false);
-        var page = await response.Deserialize<LicenseKeyListPageResponse>().ConfigureAwait(false);
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var page = await response
+            .Deserialize<LicenseKeyListPageResponse>(cancellationToken)
+            .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
             page.Validate();

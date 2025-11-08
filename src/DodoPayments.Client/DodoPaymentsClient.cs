@@ -192,7 +192,10 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         get { return _meters.Value; }
     }
 
-    public async Task<HttpResponse> Execute<T>(HttpRequest<T> request)
+    public async Task<HttpResponse> Execute<T>(
+        HttpRequest<T> request,
+        CancellationToken cancellationToken = default
+    )
         where T : ParamsBase
     {
         using HttpRequestMessage requestMessage = new(request.Method, request.Params.Url(this))
@@ -200,7 +203,11 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
             Content = request.Params.BodyContent(),
         };
         request.Params.AddHeadersToRequest(requestMessage, this);
-        using CancellationTokenSource cts = new(this.Timeout);
+        using CancellationTokenSource timeoutCts = new(this.Timeout);
+        using var cts = CancellationTokenSource.CreateLinkedTokenSource(
+            timeoutCts.Token,
+            cancellationToken
+        );
         HttpResponseMessage responseMessage;
         try
         {
@@ -222,7 +229,7 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
             {
                 throw DodoPaymentsExceptionFactory.CreateApiException(
                     responseMessage.StatusCode,
-                    await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false)
+                    await responseMessage.Content.ReadAsStringAsync(cts.Token).ConfigureAwait(false)
                 );
             }
             catch (HttpRequestException e)
@@ -234,7 +241,7 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
                 responseMessage.Dispose();
             }
         }
-        return new() { Message = responseMessage };
+        return new() { Message = responseMessage, CancellationToken = cts.Token };
     }
 
     public DodoPaymentsClient()
