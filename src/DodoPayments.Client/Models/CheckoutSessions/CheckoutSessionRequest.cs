@@ -143,6 +143,11 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["confirm"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -191,6 +196,11 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["customization"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -230,6 +240,11 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["feature_flags"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -319,6 +334,11 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["show_saved_payment_methods"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -740,6 +760,11 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["show_on_demand_tag"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -763,6 +788,11 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["show_order_details"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -789,6 +819,11 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["theme"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -898,6 +933,11 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["allow_currency_selection"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -921,6 +961,11 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["allow_discount_code"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -949,6 +994,11 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["allow_phone_number_collection"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -972,6 +1022,11 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["allow_tax_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
@@ -998,6 +1053,11 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._properties["always_create_new_customer"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

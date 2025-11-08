@@ -23,6 +23,11 @@ public sealed record class ImageUpdateParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._queryProperties["force_update"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions

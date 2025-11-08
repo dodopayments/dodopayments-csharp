@@ -109,6 +109,11 @@ public sealed record class WebhookCreateParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._bodyProperties["filter_types"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
