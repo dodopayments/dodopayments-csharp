@@ -161,9 +161,10 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// <summary>
     /// List of payment methods allowed during checkout.
     ///
-    /// Customers will **never** see payment methods that are **not** in this list.
-    /// However, adding a method here **does not guarantee** customers will see it.
-    /// Availability still depends on other factors (e.g., customer location, merchant settings).
+    /// <para>Customers will **never** see payment methods that are **not** in this
+    /// list. However, adding a method here **does not guarantee** customers will
+    /// see it. Availability still depends on other factors (e.g., customer location,
+    /// merchant settings).</para>
     /// </summary>
     public List<ApiEnum<string, Payments::PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {

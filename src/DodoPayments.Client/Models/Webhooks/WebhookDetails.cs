@@ -195,7 +195,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     /// <summary>
     /// Status of the webhook.
     ///
-    /// If true, events are not sent
+    /// <para>If true, events are not sent</para>
     /// </summary>
     public bool? Disabled
     {
@@ -218,7 +218,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     /// <summary>
     /// Filter events to the webhook.
     ///
-    /// Webhook event will only be sent for events in the list.
+    /// <para>Webhook event will only be sent for events in the list.</para>
     /// </summary>
     public List<string>? FilterTypes
     {

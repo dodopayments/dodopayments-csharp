@@ -153,8 +153,8 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     }
 
     /// <summary>
-    /// Optional product description override for billing and line items. If not
-    /// specified, the stored description of the product will be used.
+    /// Optional product description override for billing and line items. If not specified,
+    /// the stored description of the product will be used.
     /// </summary>
     public string? ProductDescription
     {

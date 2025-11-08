@@ -109,9 +109,10 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// <summary>
     /// List of payment methods allowed during checkout.
     ///
-    /// Customers will **never** see payment methods that are **not** in this list.
-    /// However, adding a method here **does not guarantee** customers will see it.
-    /// Availability still depends on other factors (e.g., customer location, merchant settings).
+    /// <para>Customers will **never** see payment methods that are **not** in this
+    /// list. However, adding a method here **does not guarantee** customers will
+    /// see it. Availability still depends on other factors (e.g., customer location,
+    /// merchant settings).</para>
     /// </summary>
     public List<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
@@ -255,8 +256,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Optional URL to redirect the customer after payment. Must be a valid URL
-    /// if provided.
+    /// Optional URL to redirect the customer after payment. Must be a valid URL if provided.
     /// </summary>
     public string? ReturnURL
     {

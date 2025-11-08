@@ -13,20 +13,21 @@ namespace DodoPayments.Client.Models.UsageEvents;
 /// is ideal for: - Debugging event ingestion issues - Analyzing customer usage patterns
 /// - Building custom analytics dashboards - Auditing billing-related events
 ///
-/// ## Filtering Options: - **Customer filtering**: Filter by specific customer ID
-/// - **Event name filtering**: Filter by event type/name - **Meter-based filtering**:
+/// <para>## Filtering Options: - **Customer filtering**: Filter by specific customer
+/// ID - **Event name filtering**: Filter by event type/name - **Meter-based filtering**:
 /// Use a meter ID to apply the meter's event name and filter criteria automatically
 /// - **Time range filtering**: Filter events within a specific date range - **Pagination**:
-/// Navigate through large result sets
+/// Navigate through large result sets</para>
 ///
-/// ## Meter Integration: When using `meter_id`, the endpoint automatically applies:
-/// - The meter's configured `event_name` filter - The meter's custom filter criteria
-/// (if any) - If you also provide `event_name`, it must match the meter's event name
+/// <para>## Meter Integration: When using `meter_id`, the endpoint automatically
+/// applies: - The meter's configured `event_name` filter - The meter's custom filter
+/// criteria (if any) - If you also provide `event_name`, it must match the meter's
+/// event name</para>
 ///
-/// ## Example Queries: - Get all events for a customer: `?customer_id=cus_abc123`
+/// <para>## Example Queries: - Get all events for a customer: `?customer_id=cus_abc123`
 /// - Get API request events: `?event_name=api_request` - Get events from last 24
 /// hours: `?start=2024-01-14T10:30:00Z&end=2024-01-15T10:30:00Z` - Get events with
-/// meter filtering: `?meter_id=mtr_xyz789` - Paginate results: `?page_size=50&page_number=2`
+/// meter filtering: `?meter_id=mtr_xyz789` - Paginate results: `?page_size=50&page_number=2`</para>
 /// </summary>
 public sealed record class UsageEventListParams : ParamsBase
 {

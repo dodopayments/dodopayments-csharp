@@ -68,7 +68,7 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// <summary>
     /// Filter events to the endpoint.
     ///
-    /// Webhook event will only be sent for events in the list.
+    /// <para>Webhook event will only be sent for events in the list.</para>
     /// </summary>
     public List<ApiEnum<string, WebhookEvents::WebhookEventType>>? FilterTypes
     {

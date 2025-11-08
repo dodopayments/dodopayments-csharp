@@ -27,7 +27,7 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// this represents **basis points** (e.g., `540` = `5.4%`). - Otherwise, this
     /// represents **USD cents** (e.g., `100` = `$1.00`).
     ///
-    /// Must be at least 1 if provided.
+    /// <para>Must be at least 1 if provided.</para>
     /// </summary>
     public int? Amount
     {
@@ -127,9 +127,9 @@ public sealed record class DiscountUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Number of subscription billing cycles this discount is valid for. If not provided,
-    /// the discount will be applied indefinitely to all recurring payments related
-    /// to the subscription.
+    /// Number of subscription billing cycles this discount is valid for. If not
+    /// provided, the discount will be applied indefinitely to all recurring payments
+    /// related to the subscription.
     /// </summary>
     public int? SubscriptionCycles
     {

@@ -252,9 +252,9 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
     /// <summary>
     /// A filter structure that combines multiple conditions with logical conjunctions (AND/OR).
     ///
-    /// Supports up to 3 levels of nesting to create complex filter expressions. Each
-    /// filter has a conjunction (and/or) and clauses that can be either direct conditions
-    /// or nested filters.
+    /// <para>Supports up to 3 levels of nesting to create complex filter expressions.
+    /// Each filter has a conjunction (and/or) and clauses that can be either direct
+    /// conditions or nested filters.</para>
     /// </summary>
     public MeterFilter? Filter
     {

@@ -543,8 +543,8 @@ public sealed record class Data9 : ModelBase, IFromRaw<Data9>
     }
 
     /// <summary>
-    /// Total amount charged to the customer including tax, in smallest currency
-    /// unit (e.g. cents)
+    /// Total amount charged to the customer including tax, in smallest currency unit
+    /// (e.g. cents)
     /// </summary>
     public required int TotalAmount
     {
@@ -663,8 +663,8 @@ public sealed record class Data9 : ModelBase, IFromRaw<Data9>
     }
 
     /// <summary>
-    /// If payment is made using a checkout session, this field is set to the id
-    /// of the session.
+    /// If payment is made using a checkout session, this field is set to the id of
+    /// the session.
     /// </summary>
     public string? CheckoutSessionID
     {
