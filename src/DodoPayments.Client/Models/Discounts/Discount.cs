@@ -15,8 +15,8 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     /// <summary>
     /// The discount amount.
     ///
-    /// - If `discount_type` is `percentage`, this is in **basis points**   (e.g.,
-    /// 540 => 5.4%). - Otherwise, this is **USD cents** (e.g., 100 => `$1.00`).
+    /// <para>- If `discount_type` is `percentage`, this is in **basis points**
+    ///  (e.g., 540 => 5.4%). - Otherwise, this is **USD cents** (e.g., 100 => `$1.00`).</para>
     /// </summary>
     public required int Amount
     {
@@ -269,9 +269,9 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     }
 
     /// <summary>
-    /// Number of subscription billing cycles this discount is valid for. If not provided,
-    /// the discount will be applied indefinitely to all recurring payments related
-    /// to the subscription.
+    /// Number of subscription billing cycles this discount is valid for. If not
+    /// provided, the discount will be applied indefinitely to all recurring payments
+    /// related to the subscription.
     /// </summary>
     public int? SubscriptionCycles
     {

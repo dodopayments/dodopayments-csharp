@@ -90,8 +90,8 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
     }
 
     /// <summary>
-    /// Optional product description override for billing and line items. If not
-    /// specified, the stored description of the product will be used.
+    /// Optional product description override for billing and line items. If not specified,
+    /// the stored description of the product will be used.
     /// </summary>
     public string? ProductDescription
     {
@@ -113,8 +113,8 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
 
     /// <summary>
     /// Product price for the initial charge to customer If not specified the stored
-    /// price of the product will be used Represented in the lowest denomination
-    /// of the currency (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+    /// price of the product will be used Represented in the lowest denomination of
+    /// the currency (e.g., cents for USD). For example, to charge $1.00, pass `100`.
     /// </summary>
     public int? ProductPrice
     {

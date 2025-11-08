@@ -134,8 +134,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// <summary>
     /// Message sent to the customer upon license key activation.
     ///
-    /// Only applicable if `license_key_enabled` is `true`. This message contains
-    /// instructions for activating the license key.
+    /// <para>Only applicable if `license_key_enabled` is `true`. This message contains
+    /// instructions for activating the license key.</para>
     /// </summary>
     public string? LicenseKeyActivationMessage
     {
@@ -161,8 +161,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// <summary>
     /// Limit for the number of activations for the license key.
     ///
-    /// Only applicable if `license_key_enabled` is `true`. Represents the maximum
-    /// number of times the license key can be activated.
+    /// <para>Only applicable if `license_key_enabled` is `true`. Represents the
+    /// maximum number of times the license key can be activated.</para>
     /// </summary>
     public int? LicenseKeyActivationsLimit
     {
@@ -188,8 +188,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// <summary>
     /// Duration of the license key if enabled.
     ///
-    /// Only applicable if `license_key_enabled` is `true`. Represents the duration
-    /// in days for which the license key is valid.
+    /// <para>Only applicable if `license_key_enabled` is `true`. Represents the
+    /// duration in days for which the license key is valid.</para>
     /// </summary>
     public LicenseKeyDuration? LicenseKeyDuration
     {
@@ -215,8 +215,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// <summary>
     /// Whether the product requires a license key.
     ///
-    /// If `true`, additional fields related to license key (duration, activations
-    /// limit, activation message) become applicable.
+    /// <para>If `true`, additional fields related to license key (duration, activations
+    /// limit, activation message) become applicable.</para>
     /// </summary>
     public bool? LicenseKeyEnabled
     {

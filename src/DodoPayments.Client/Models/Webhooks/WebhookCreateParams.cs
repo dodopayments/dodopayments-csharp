@@ -71,7 +71,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// <summary>
     /// Create the webhook in a disabled state.
     ///
-    /// Default is false
+    /// <para>Default is false</para>
     /// </summary>
     public bool? Disabled
     {
@@ -94,7 +94,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// <summary>
     /// Filter events to the webhook.
     ///
-    /// Webhook event will only be sent for events in the list.
+    /// <para>Webhook event will only be sent for events in the list.</para>
     /// </summary>
     public List<ApiEnum<string, WebhookEvents::WebhookEventType>>? FilterTypes
     {

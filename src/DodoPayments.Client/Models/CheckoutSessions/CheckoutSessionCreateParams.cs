@@ -58,8 +58,8 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// adding a method here does not guarantee customers will see it. Availability
     /// still depends on other factors (e.g., customer location, merchant settings).
     ///
-    /// Disclaimar: Always provide 'credit' and 'debit' as a fallback. If all payment
-    /// methods are unavailable, checkout session will fail.
+    /// <para>Disclaimar: Always provide 'credit' and 'debit' as a fallback. If all
+    /// payment methods are unavailable, checkout session will fail.</para>
     /// </summary>
     public List<ApiEnum<string, Payments::PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
@@ -521,8 +521,8 @@ public sealed record class ProductCart : ModelBase, IFromRaw<ProductCart>
     /// (e.g., cents for USD). For example, to charge $1.00, pass `100`. Only applicable
     /// for one time payments
     ///
-    /// If amount is not set for pay_what_you_want product, customer is allowed to
-    /// select the amount.
+    /// <para>If amount is not set for pay_what_you_want product, customer is allowed
+    /// to select the amount.</para>
     /// </summary>
     public int? Amount
     {
@@ -760,7 +760,7 @@ public sealed record class Customization : ModelBase, IFromRaw<Customization>
     /// <summary>
     /// Show on demand tag
     ///
-    /// Default is true
+    /// <para>Default is true</para>
     /// </summary>
     public bool? ShowOnDemandTag
     {
@@ -788,7 +788,7 @@ public sealed record class Customization : ModelBase, IFromRaw<Customization>
     /// <summary>
     /// Show order details by default
     ///
-    /// Default is true
+    /// <para>Default is true</para>
     /// </summary>
     public bool? ShowOrderDetails
     {
@@ -816,7 +816,7 @@ public sealed record class Customization : ModelBase, IFromRaw<Customization>
     /// <summary>
     /// Theme of the page
     ///
-    /// Default is `System`.
+    /// <para>Default is `System`.</para>
     /// </summary>
     public ApiEnum<string, Theme>? Theme
     {
@@ -878,7 +878,7 @@ public sealed record class Customization : ModelBase, IFromRaw<Customization>
 /// <summary>
 /// Theme of the page
 ///
-/// Default is `System`.
+/// <para>Default is `System`.</para>
 /// </summary>
 [JsonConverter(typeof(ThemeConverter))]
 public enum Theme
@@ -929,7 +929,7 @@ public sealed record class FeatureFlags : ModelBase, IFromRaw<FeatureFlags>
     /// <summary>
     /// if customer is allowed to change currency, set it to true
     ///
-    /// Default is true
+    /// <para>Default is true</para>
     /// </summary>
     public bool? AllowCurrencySelection
     {
@@ -957,7 +957,7 @@ public sealed record class FeatureFlags : ModelBase, IFromRaw<FeatureFlags>
     /// <summary>
     /// If the customer is allowed to apply discount code, set it to true.
     ///
-    /// Default is true
+    /// <para>Default is true</para>
     /// </summary>
     public bool? AllowDiscountCode
     {
@@ -985,7 +985,7 @@ public sealed record class FeatureFlags : ModelBase, IFromRaw<FeatureFlags>
     /// <summary>
     /// If phone number is collected from customer, set it to rue
     ///
-    /// Default is true
+    /// <para>Default is true</para>
     /// </summary>
     public bool? AllowPhoneNumberCollection
     {
@@ -1018,7 +1018,7 @@ public sealed record class FeatureFlags : ModelBase, IFromRaw<FeatureFlags>
     /// <summary>
     /// If the customer is allowed to add tax id, set it to true
     ///
-    /// Default is true
+    /// <para>Default is true</para>
     /// </summary>
     public bool? AllowTaxID
     {
@@ -1044,10 +1044,10 @@ public sealed record class FeatureFlags : ModelBase, IFromRaw<FeatureFlags>
     }
 
     /// <summary>
-    /// Set to true if a new customer object should be created. By default email is
-    /// used to find an existing customer to attach the session to
+    /// Set to true if a new customer object should be created. By default email
+    /// is used to find an existing customer to attach the session to
     ///
-    /// Default is false
+    /// <para>Default is false</para>
     /// </summary>
     public bool? AlwaysCreateNewCustomer
     {
