@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using Payments = DodoPayments.Client.Models.Payments;
+using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -22,14 +22,14 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
 
     public required string SubscriptionID { get; init; }
 
-    public Payments::BillingAddress? Billing
+    public BillingAddress? Billing
     {
         get
         {
             if (!this._bodyProperties.TryGetValue("billing", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Payments::BillingAddress?>(
+            return JsonSerializer.Deserialize<BillingAddress?>(
                 element,
                 ModelBase.SerializerOptions
             );

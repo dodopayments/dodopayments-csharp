@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using Subscriptions = DodoPayments.Client.Models.Subscriptions;
+using DodoPayments.Client.Models.Subscriptions;
 using System = System;
 
 namespace DodoPayments.Client.Models.Products;
@@ -91,11 +91,11 @@ public record class Price
         }
     }
 
-    public ApiEnum<string, Subscriptions::TimeInterval>? PaymentFrequencyInterval
+    public ApiEnum<string, TimeInterval>? PaymentFrequencyInterval
     {
         get
         {
-            return Match<ApiEnum<string, Subscriptions::TimeInterval>?>(
+            return Match<ApiEnum<string, TimeInterval>?>(
                 oneTime: (_) => null,
                 recurring: (x) => x.PaymentFrequencyInterval,
                 usageBased: (x) => x.PaymentFrequencyInterval
@@ -115,11 +115,11 @@ public record class Price
         }
     }
 
-    public ApiEnum<string, Subscriptions::TimeInterval>? SubscriptionPeriodInterval
+    public ApiEnum<string, TimeInterval>? SubscriptionPeriodInterval
     {
         get
         {
-            return Match<ApiEnum<string, Subscriptions::TimeInterval>?>(
+            return Match<ApiEnum<string, TimeInterval>?>(
                 oneTime: (_) => null,
                 recurring: (x) => x.SubscriptionPeriodInterval,
                 usageBased: (x) => x.SubscriptionPeriodInterval
@@ -676,7 +676,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     /// <summary>
     /// The time interval for the payment frequency (e.g., day, month, year).
     /// </summary>
-    public required ApiEnum<string, Subscriptions::TimeInterval> PaymentFrequencyInterval
+    public required ApiEnum<string, TimeInterval> PaymentFrequencyInterval
     {
         get
         {
@@ -691,7 +691,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -789,7 +789,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     /// <summary>
     /// The time interval for the subscription period (e.g., day, month, year).
     /// </summary>
-    public required ApiEnum<string, Subscriptions::TimeInterval> SubscriptionPeriodInterval
+    public required ApiEnum<string, TimeInterval> SubscriptionPeriodInterval
     {
         get
         {
@@ -807,7 +807,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1087,7 +1087,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     /// <summary>
     /// The time interval for the payment frequency (e.g., day, month, year).
     /// </summary>
-    public required ApiEnum<string, Subscriptions::TimeInterval> PaymentFrequencyInterval
+    public required ApiEnum<string, TimeInterval> PaymentFrequencyInterval
     {
         get
         {
@@ -1102,7 +1102,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1175,7 +1175,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     /// <summary>
     /// The time interval for the subscription period (e.g., day, month, year).
     /// </summary>
-    public required ApiEnum<string, Subscriptions::TimeInterval> SubscriptionPeriodInterval
+    public required ApiEnum<string, TimeInterval> SubscriptionPeriodInterval
     {
         get
         {
@@ -1193,7 +1193,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
                 element,
                 ModelBase.SerializerOptions
             );

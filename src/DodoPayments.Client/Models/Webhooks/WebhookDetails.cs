@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,7 +6,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -22,13 +22,13 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
             if (!this._properties.TryGetValue("id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
-                    new System::ArgumentOutOfRangeException("id", "Missing required argument")
+                    new ArgumentOutOfRangeException("id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
-                    new System::ArgumentNullException("id")
+                    new ArgumentNullException("id")
                 );
         }
         init
@@ -50,16 +50,13 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
             if (!this._properties.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "created_at",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("created_at", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
-                    new System::ArgumentNullException("created_at")
+                    new ArgumentNullException("created_at")
                 );
         }
         init
@@ -81,16 +78,13 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
             if (!this._properties.TryGetValue("description", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'description' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "description",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("description", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'description' cannot be null",
-                    new System::ArgumentNullException("description")
+                    new ArgumentNullException("description")
                 );
         }
         init
@@ -112,7 +106,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
             if (!this._properties.TryGetValue("metadata", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'metadata' cannot be null",
-                    new System::ArgumentOutOfRangeException("metadata", "Missing required argument")
+                    new ArgumentOutOfRangeException("metadata", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<Dictionary<string, string>>(
@@ -121,7 +115,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
                 )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'metadata' cannot be null",
-                    new System::ArgumentNullException("metadata")
+                    new ArgumentNullException("metadata")
                 );
         }
         init
@@ -143,16 +137,13 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
             if (!this._properties.TryGetValue("updated_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'updated_at' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "updated_at",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("updated_at", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'updated_at' cannot be null",
-                    new System::ArgumentNullException("updated_at")
+                    new ArgumentNullException("updated_at")
                 );
         }
         init
@@ -174,13 +165,13 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
             if (!this._properties.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
-                    new System::ArgumentOutOfRangeException("url", "Missing required argument")
+                    new ArgumentOutOfRangeException("url", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
-                    new System::ArgumentNullException("url")
+                    new ArgumentNullException("url")
                 );
         }
         init

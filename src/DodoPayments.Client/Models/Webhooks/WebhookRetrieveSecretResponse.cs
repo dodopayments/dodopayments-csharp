@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,7 +6,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -21,13 +21,13 @@ public sealed record class WebhookRetrieveSecretResponse
             if (!this._properties.TryGetValue("secret", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'secret' cannot be null",
-                    new System::ArgumentOutOfRangeException("secret", "Missing required argument")
+                    new ArgumentOutOfRangeException("secret", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'secret' cannot be null",
-                    new System::ArgumentNullException("secret")
+                    new ArgumentNullException("secret")
                 );
         }
         init

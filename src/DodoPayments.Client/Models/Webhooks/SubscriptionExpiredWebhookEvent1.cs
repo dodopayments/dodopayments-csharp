@@ -6,8 +6,8 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
-using Payments = DodoPayments.Client.Models.Payments;
 using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
@@ -201,7 +201,7 @@ public sealed record class Data36 : ModelBase, IFromRaw<Data36>
         }
     }
 
-    public required Payments::BillingAddress Billing
+    public required BillingAddress Billing
     {
         get
         {
@@ -211,10 +211,7 @@ public sealed record class Data36 : ModelBase, IFromRaw<Data36>
                     new System::ArgumentOutOfRangeException("billing", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Payments::BillingAddress>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
+            return JsonSerializer.Deserialize<BillingAddress>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'billing' cannot be null",
                     new System::ArgumentNullException("billing")
@@ -315,7 +312,7 @@ public sealed record class Data36 : ModelBase, IFromRaw<Data36>
         }
     }
 
-    public required Payments::CustomerLimitedDetails Customer
+    public required CustomerLimitedDetails Customer
     {
         get
         {
@@ -325,7 +322,7 @@ public sealed record class Data36 : ModelBase, IFromRaw<Data36>
                     new System::ArgumentOutOfRangeException("customer", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Payments::CustomerLimitedDetails>(
+            return JsonSerializer.Deserialize<CustomerLimitedDetails>(
                     element,
                     ModelBase.SerializerOptions
                 )

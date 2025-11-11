@@ -3,8 +3,8 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Webhooks;
 using DodoPayments.Client.Services.Webhooks.Headers;
-using Webhooks = DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Services.Webhooks;
 
@@ -29,12 +29,12 @@ public sealed class WebhookService : IWebhookService
         get { return _headers.Value; }
     }
 
-    public async Task<Webhooks::WebhookDetails> Create(
-        Webhooks::WebhookCreateParams parameters,
+    public async Task<WebhookDetails> Create(
+        WebhookCreateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Webhooks::WebhookCreateParams> request = new()
+        HttpRequest<WebhookCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
@@ -43,7 +43,7 @@ public sealed class WebhookService : IWebhookService
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
         var webhookDetails = await response
-            .Deserialize<Webhooks::WebhookDetails>(cancellationToken)
+            .Deserialize<WebhookDetails>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -52,12 +52,12 @@ public sealed class WebhookService : IWebhookService
         return webhookDetails;
     }
 
-    public async Task<Webhooks::WebhookDetails> Retrieve(
-        Webhooks::WebhookRetrieveParams parameters,
+    public async Task<WebhookDetails> Retrieve(
+        WebhookRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Webhooks::WebhookRetrieveParams> request = new()
+        HttpRequest<WebhookRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
@@ -66,7 +66,7 @@ public sealed class WebhookService : IWebhookService
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
         var webhookDetails = await response
-            .Deserialize<Webhooks::WebhookDetails>(cancellationToken)
+            .Deserialize<WebhookDetails>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -75,12 +75,12 @@ public sealed class WebhookService : IWebhookService
         return webhookDetails;
     }
 
-    public async Task<Webhooks::WebhookDetails> Update(
-        Webhooks::WebhookUpdateParams parameters,
+    public async Task<WebhookDetails> Update(
+        WebhookUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Webhooks::WebhookUpdateParams> request = new()
+        HttpRequest<WebhookUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
             Params = parameters,
@@ -89,7 +89,7 @@ public sealed class WebhookService : IWebhookService
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
         var webhookDetails = await response
-            .Deserialize<Webhooks::WebhookDetails>(cancellationToken)
+            .Deserialize<WebhookDetails>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -98,14 +98,14 @@ public sealed class WebhookService : IWebhookService
         return webhookDetails;
     }
 
-    public async Task<Webhooks::WebhookListPageResponse> List(
-        Webhooks::WebhookListParams? parameters = null,
+    public async Task<WebhookListPageResponse> List(
+        WebhookListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
     {
         parameters ??= new();
 
-        HttpRequest<Webhooks::WebhookListParams> request = new()
+        HttpRequest<WebhookListParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
@@ -114,7 +114,7 @@ public sealed class WebhookService : IWebhookService
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
         var page = await response
-            .Deserialize<Webhooks::WebhookListPageResponse>(cancellationToken)
+            .Deserialize<WebhookListPageResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {
@@ -124,11 +124,11 @@ public sealed class WebhookService : IWebhookService
     }
 
     public async Task Delete(
-        Webhooks::WebhookDeleteParams parameters,
+        WebhookDeleteParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Webhooks::WebhookDeleteParams> request = new()
+        HttpRequest<WebhookDeleteParams> request = new()
         {
             Method = HttpMethod.Delete,
             Params = parameters,
@@ -138,12 +138,12 @@ public sealed class WebhookService : IWebhookService
             .ConfigureAwait(false);
     }
 
-    public async Task<Webhooks::WebhookRetrieveSecretResponse> RetrieveSecret(
-        Webhooks::WebhookRetrieveSecretParams parameters,
+    public async Task<WebhookRetrieveSecretResponse> RetrieveSecret(
+        WebhookRetrieveSecretParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<Webhooks::WebhookRetrieveSecretParams> request = new()
+        HttpRequest<WebhookRetrieveSecretParams> request = new()
         {
             Method = HttpMethod.Get,
             Params = parameters,
@@ -152,7 +152,7 @@ public sealed class WebhookService : IWebhookService
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
         var deserializedResponse = await response
-            .Deserialize<Webhooks::WebhookRetrieveSecretResponse>(cancellationToken)
+            .Deserialize<WebhookRetrieveSecretResponse>(cancellationToken)
             .ConfigureAwait(false);
         if (this._client.ResponseValidation)
         {

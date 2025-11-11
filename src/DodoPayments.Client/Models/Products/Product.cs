@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,6 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -20,13 +20,13 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
             if (!this._properties.TryGetValue("brand_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'brand_id' cannot be null",
-                    new System::ArgumentOutOfRangeException("brand_id", "Missing required argument")
+                    new ArgumentOutOfRangeException("brand_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'brand_id' cannot be null",
-                    new System::ArgumentNullException("brand_id")
+                    new ArgumentNullException("brand_id")
                 );
         }
         init
@@ -48,16 +48,13 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
             if (!this._properties.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "business_id",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
-                    new System::ArgumentNullException("business_id")
+                    new ArgumentNullException("business_id")
                 );
         }
         init
@@ -72,23 +69,17 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     /// <summary>
     /// Timestamp when the product was created.
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required DateTime CreatedAt
     {
         get
         {
             if (!this._properties.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "created_at",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("created_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -109,10 +100,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
             if (!this._properties.TryGetValue("is_recurring", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'is_recurring' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "is_recurring",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("is_recurring", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
@@ -136,7 +124,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
             if (!this._properties.TryGetValue("license_key_enabled", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'license_key_enabled' cannot be null",
-                    new System::ArgumentOutOfRangeException(
+                    new ArgumentOutOfRangeException(
                         "license_key_enabled",
                         "Missing required argument"
                     )
@@ -163,7 +151,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
             if (!this._properties.TryGetValue("metadata", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'metadata' cannot be null",
-                    new System::ArgumentOutOfRangeException("metadata", "Missing required argument")
+                    new ArgumentOutOfRangeException("metadata", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<Dictionary<string, string>>(
@@ -172,7 +160,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
                 )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'metadata' cannot be null",
-                    new System::ArgumentNullException("metadata")
+                    new ArgumentNullException("metadata")
                 );
         }
         init
@@ -194,13 +182,13 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
             if (!this._properties.TryGetValue("price", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
-                    new System::ArgumentOutOfRangeException("price", "Missing required argument")
+                    new ArgumentOutOfRangeException("price", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<Price>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
-                    new System::ArgumentNullException("price")
+                    new ArgumentNullException("price")
                 );
         }
         init
@@ -222,16 +210,13 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
             if (!this._properties.TryGetValue("product_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "product_id",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("product_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
-                    new System::ArgumentNullException("product_id")
+                    new ArgumentNullException("product_id")
                 );
         }
         init
@@ -253,10 +238,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
             if (!this._properties.TryGetValue("tax_category", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'tax_category' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "tax_category",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("tax_category", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>>(
@@ -276,23 +258,17 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     /// <summary>
     /// Timestamp when the product was last updated.
     /// </summary>
-    public required System::DateTime UpdatedAt
+    public required DateTime UpdatedAt
     {
         get
         {
             if (!this._properties.TryGetValue("updated_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'updated_at' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "updated_at",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("updated_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -636,13 +612,13 @@ public sealed record class File : ModelBase, IFromRaw<File>
             if (!this._properties.TryGetValue("file_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'file_id' cannot be null",
-                    new System::ArgumentOutOfRangeException("file_id", "Missing required argument")
+                    new ArgumentOutOfRangeException("file_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'file_id' cannot be null",
-                    new System::ArgumentNullException("file_id")
+                    new ArgumentNullException("file_id")
                 );
         }
         init
@@ -661,16 +637,13 @@ public sealed record class File : ModelBase, IFromRaw<File>
             if (!this._properties.TryGetValue("file_name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'file_name' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "file_name",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("file_name", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'file_name' cannot be null",
-                    new System::ArgumentNullException("file_name")
+                    new ArgumentNullException("file_name")
                 );
         }
         init
@@ -689,13 +662,13 @@ public sealed record class File : ModelBase, IFromRaw<File>
             if (!this._properties.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
-                    new System::ArgumentOutOfRangeException("url", "Missing required argument")
+                    new ArgumentOutOfRangeException("url", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
-                    new System::ArgumentNullException("url")
+                    new ArgumentNullException("url")
                 );
         }
         init
