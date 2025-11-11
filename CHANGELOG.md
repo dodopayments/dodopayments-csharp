@@ -1,5 +1,57 @@
 # Changelog
 
+## 3.0.0 (2025-11-11)
+
+Full Changelog: [v2.0.0...v3.0.0](https://github.com/dodopayments/dodopayments-csharp/compare/v2.0.0...v3.0.0)
+
+### ⚠ BREAKING CHANGES
+
+* **client:** flatten service namespaces
+* **client:** interpret null as omitted in some properties
+
+### Features
+
+* **client:** add cancellation token support ([8c09a8f](https://github.com/dodopayments/dodopayments-csharp/commit/8c09a8ff91dc2ab486c485c53b135ef48452b385))
+* **client:** add retries support ([3b9b3e5](https://github.com/dodopayments/dodopayments-csharp/commit/3b9b3e5bc7887b2168237cf973b90e4e82b9176b))
+* **client:** add some implicit operators ([dd2d916](https://github.com/dodopayments/dodopayments-csharp/commit/dd2d916973fe19e0f0c237cb158dc16128db6230))
+* **client:** send `User-Agent` header ([86c07b4](https://github.com/dodopayments/dodopayments-csharp/commit/86c07b451e3324714f68ce75acbfd2374c63d0c7))
+* **client:** send `X-Stainless-Arch` header ([5088b4e](https://github.com/dodopayments/dodopayments-csharp/commit/5088b4e6736d5dc0bbad4f44d74a0f48073e9a3d))
+* **client:** send `X-Stainless-Lang` and `X-Stainless-OS` headers ([ea66424](https://github.com/dodopayments/dodopayments-csharp/commit/ea66424db67601c1a73ad8863e285226c4da4865))
+* **client:** send `X-Stainless-Package-Version` headers ([e2a99e3](https://github.com/dodopayments/dodopayments-csharp/commit/e2a99e3d76ab389aac30fc1c88bb3ba5a0fc5d6d))
+* **client:** send `X-Stainless-Runtime` and `X-Stainless-Runtime-Version` ([48fb647](https://github.com/dodopayments/dodopayments-csharp/commit/48fb647633f9905e042dee13815171ef6486918d))
+* **client:** send `X-Stainless-Timeout` header ([6ba270c](https://github.com/dodopayments/dodopayments-csharp/commit/6ba270c6fdf6e0db8ddd38eaf0ccd658ab484f78))
+
+
+### Bug Fixes
+
+* **client:** interpret null as omitted in some properties ([272fe1b](https://github.com/dodopayments/dodopayments-csharp/commit/272fe1b7a93877d89bc30cd0421e12000484a525))
+
+
+### Performance Improvements
+
+* **client:** optimize header creation ([5893a7b](https://github.com/dodopayments/dodopayments-csharp/commit/5893a7ba52b150d6cc42c8cbbeaeeed4e7cc9561))
+
+
+### Chores
+
+* **internal:** add prism log file to gitignore ([ebf28cb](https://github.com/dodopayments/dodopayments-csharp/commit/ebf28cb2083cbf861c7034af2cfe6a2e2c844f34))
+* **internal:** delete empty test files ([2afba4b](https://github.com/dodopayments/dodopayments-csharp/commit/2afba4b913697f74e81e61fd143dcd26d473f88c))
+* **internal:** improve devcontainer ([4728883](https://github.com/dodopayments/dodopayments-csharp/commit/4728883a3f9f0e61225a9153e95a3f5d1b245fb4))
+* **internal:** minor improvements to csproj and gitignore ([38e62b3](https://github.com/dodopayments/dodopayments-csharp/commit/38e62b35e7e50cd2ad21be66b6a20daeeac8184d))
+* **internal:** reduce import qualification ([7bedcb9](https://github.com/dodopayments/dodopayments-csharp/commit/7bedcb971368f7cffa28e45e00195ce291396af6))
+
+
+### Documentation
+
+* **client:** document max retries ([16753dc](https://github.com/dodopayments/dodopayments-csharp/commit/16753dc0df78248bde16171cec397eb19c2c9c7d))
+* **client:** separate comment content into paragraphs ([bc031ba](https://github.com/dodopayments/dodopayments-csharp/commit/bc031baadf8bb0d06fb86e08f7b903199ac710e5))
+
+
+### Refactors
+
+* **client:** flatten service namespaces ([69967c7](https://github.com/dodopayments/dodopayments-csharp/commit/69967c7987a0e2c4e0d528df6450a655a970a835))
+* **client:** pass around `ClientOptions` instead of client ([1d999b8](https://github.com/dodopayments/dodopayments-csharp/commit/1d999b869ecf38756098a8c54c40c90dd5f7c015))
+
 ## 2.0.0 (2025-11-07)
 
 Full Changelog: [v1.56.5...v2.0.0](https://github.com/dodopayments/dodopayments-csharp/compare/v1.56.5...v2.0.0)
