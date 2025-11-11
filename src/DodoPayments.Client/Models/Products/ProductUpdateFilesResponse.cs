@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,7 +6,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -21,13 +21,13 @@ public sealed record class ProductUpdateFilesResponse
             if (!this._properties.TryGetValue("file_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'file_id' cannot be null",
-                    new System::ArgumentOutOfRangeException("file_id", "Missing required argument")
+                    new ArgumentOutOfRangeException("file_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'file_id' cannot be null",
-                    new System::ArgumentNullException("file_id")
+                    new ArgumentNullException("file_id")
                 );
         }
         init
@@ -46,13 +46,13 @@ public sealed record class ProductUpdateFilesResponse
             if (!this._properties.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
-                    new System::ArgumentOutOfRangeException("url", "Missing required argument")
+                    new ArgumentOutOfRangeException("url", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
-                    new System::ArgumentNullException("url")
+                    new ArgumentNullException("url")
                 );
         }
         init

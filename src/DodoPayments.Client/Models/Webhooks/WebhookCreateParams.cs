@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,8 +7,7 @@ using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
-using WebhookEvents = DodoPayments.Client.Models.WebhookEvents;
+using DodoPayments.Client.Models.WebhookEvents;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -32,13 +32,13 @@ public sealed record class WebhookCreateParams : ParamsBase
             if (!this._bodyProperties.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
-                    new System::ArgumentOutOfRangeException("url", "Missing required argument")
+                    new ArgumentOutOfRangeException("url", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
-                    new System::ArgumentNullException("url")
+                    new ArgumentNullException("url")
                 );
         }
         init
@@ -96,16 +96,17 @@ public sealed record class WebhookCreateParams : ParamsBase
     ///
     /// <para>Webhook event will only be sent for events in the list.</para>
     /// </summary>
-    public List<ApiEnum<string, WebhookEvents::WebhookEventType>>? FilterTypes
+    public List<ApiEnum<string, WebhookEventType>>? FilterTypes
     {
         get
         {
             if (!this._bodyProperties.TryGetValue("filter_types", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<
-                ApiEnum<string, WebhookEvents::WebhookEventType>
-            >?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<List<ApiEnum<string, WebhookEventType>>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {
@@ -248,9 +249,9 @@ public sealed record class WebhookCreateParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/webhooks")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/webhooks")
         {
             Query = this.QueryString(options),
         }.Uri;

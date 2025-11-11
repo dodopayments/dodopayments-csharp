@@ -6,8 +6,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
-using Disputes = DodoPayments.Client.Models.Disputes;
 using Refunds = DodoPayments.Client.Models.Refunds;
 
 namespace DodoPayments.Client.Models.Payments;
@@ -213,7 +213,7 @@ public sealed record class Payment : ModelBase, IFromRaw<Payment>
     /// <summary>
     /// List of disputes associated with this payment
     /// </summary>
-    public required List<Disputes::Dispute> Disputes
+    public required List<Dispute> Disputes
     {
         get
         {
@@ -223,10 +223,7 @@ public sealed record class Payment : ModelBase, IFromRaw<Payment>
                     new ArgumentOutOfRangeException("disputes", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<List<Disputes::Dispute>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
+            return JsonSerializer.Deserialize<List<Dispute>>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'disputes' cannot be null",
                     new ArgumentNullException("disputes")

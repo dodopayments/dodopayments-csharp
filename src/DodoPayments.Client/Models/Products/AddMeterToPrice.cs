@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,7 +6,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -19,13 +19,13 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
             if (!this._properties.TryGetValue("meter_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'meter_id' cannot be null",
-                    new System::ArgumentOutOfRangeException("meter_id", "Missing required argument")
+                    new ArgumentOutOfRangeException("meter_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'meter_id' cannot be null",
-                    new System::ArgumentNullException("meter_id")
+                    new ArgumentNullException("meter_id")
                 );
         }
         init
@@ -48,16 +48,13 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
             if (!this._properties.TryGetValue("price_per_unit", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'price_per_unit' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "price_per_unit",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("price_per_unit", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'price_per_unit' cannot be null",
-                    new System::ArgumentNullException("price_per_unit")
+                    new ArgumentNullException("price_per_unit")
                 );
         }
         init

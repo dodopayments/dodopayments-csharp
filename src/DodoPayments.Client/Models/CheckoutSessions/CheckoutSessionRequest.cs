@@ -6,8 +6,8 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
-using Payments = DodoPayments.Client.Models.Payments;
 using System = System;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
@@ -54,7 +54,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     /// <para>Disclaimar: Always provide 'credit' and 'debit' as a fallback. If all
     /// payment methods are unavailable, checkout session will fail.</para>
     /// </summary>
-    public List<ApiEnum<string, Payments::PaymentMethodTypes>>? AllowedPaymentMethodTypes
+    public List<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
         get
         {
@@ -66,7 +66,7 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
             )
                 return null;
 
-            return JsonSerializer.Deserialize<List<ApiEnum<string, Payments::PaymentMethodTypes>>?>(
+            return JsonSerializer.Deserialize<List<ApiEnum<string, PaymentMethodTypes>>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -158,14 +158,14 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     /// <summary>
     /// Customer details for the session
     /// </summary>
-    public Payments::CustomerRequest? Customer
+    public CustomerRequest? Customer
     {
         get
         {
             if (!this._properties.TryGetValue("customer", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<Payments::CustomerRequest?>(
+            return JsonSerializer.Deserialize<CustomerRequest?>(
                 element,
                 ModelBase.SerializerOptions
             );

@@ -1,10 +1,10 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -176,9 +176,9 @@ public sealed record class ProductListParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/products")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/products")
         {
             Query = this.QueryString(options),
         }.Uri;

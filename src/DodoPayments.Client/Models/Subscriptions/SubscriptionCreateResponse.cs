@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using Payments = DodoPayments.Client.Models.Payments;
+using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -49,7 +49,7 @@ public sealed record class SubscriptionCreateResponse
     /// <summary>
     /// Customer details associated with this subscription
     /// </summary>
-    public required Payments::CustomerLimitedDetails Customer
+    public required CustomerLimitedDetails Customer
     {
         get
         {
@@ -59,7 +59,7 @@ public sealed record class SubscriptionCreateResponse
                     new ArgumentOutOfRangeException("customer", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Payments::CustomerLimitedDetails>(
+            return JsonSerializer.Deserialize<CustomerLimitedDetails>(
                     element,
                     ModelBase.SerializerOptions
                 )

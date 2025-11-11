@@ -2,8 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Webhooks;
 using DodoPayments.Client.Services.Webhooks.Headers;
-using Webhooks = DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Services.Webhooks;
 
@@ -16,48 +16,45 @@ public interface IWebhookService
     /// <summary>
     /// Create a new webhook
     /// </summary>
-    Task<Webhooks::WebhookDetails> Create(
-        Webhooks::WebhookCreateParams parameters,
+    Task<WebhookDetails> Create(
+        WebhookCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
     /// Get a webhook by id
     /// </summary>
-    Task<Webhooks::WebhookDetails> Retrieve(
-        Webhooks::WebhookRetrieveParams parameters,
+    Task<WebhookDetails> Retrieve(
+        WebhookRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
     /// Patch a webhook by id
     /// </summary>
-    Task<Webhooks::WebhookDetails> Update(
-        Webhooks::WebhookUpdateParams parameters,
+    Task<WebhookDetails> Update(
+        WebhookUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
     /// List all webhooks
     /// </summary>
-    Task<Webhooks::WebhookListPageResponse> List(
-        Webhooks::WebhookListParams? parameters = null,
+    Task<WebhookListPageResponse> List(
+        WebhookListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
     /// Delete a webhook by id
     /// </summary>
-    Task Delete(
-        Webhooks::WebhookDeleteParams parameters,
-        CancellationToken cancellationToken = default
-    );
+    Task Delete(WebhookDeleteParams parameters, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get webhook secret by id
     /// </summary>
-    Task<Webhooks::WebhookRetrieveSecretResponse> RetrieveSecret(
-        Webhooks::WebhookRetrieveSecretParams parameters,
+    Task<WebhookRetrieveSecretResponse> RetrieveSecret(
+        WebhookRetrieveSecretParams parameters,
         CancellationToken cancellationToken = default
     );
 }

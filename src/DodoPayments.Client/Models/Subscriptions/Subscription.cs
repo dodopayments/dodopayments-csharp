@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using Payments = DodoPayments.Client.Models.Payments;
+using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -51,7 +51,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     /// <summary>
     /// Billing address details for payments
     /// </summary>
-    public required Payments::BillingAddress Billing
+    public required BillingAddress Billing
     {
         get
         {
@@ -61,10 +61,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
                     new ArgumentOutOfRangeException("billing", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Payments::BillingAddress>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
+            return JsonSerializer.Deserialize<BillingAddress>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'billing' cannot be null",
                     new ArgumentNullException("billing")
@@ -165,7 +162,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     /// <summary>
     /// Customer details associated with the subscription
     /// </summary>
-    public required Payments::CustomerLimitedDetails Customer
+    public required CustomerLimitedDetails Customer
     {
         get
         {
@@ -175,7 +172,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
                     new ArgumentOutOfRangeException("customer", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Payments::CustomerLimitedDetails>(
+            return JsonSerializer.Deserialize<CustomerLimitedDetails>(
                     element,
                     ModelBase.SerializerOptions
                 )

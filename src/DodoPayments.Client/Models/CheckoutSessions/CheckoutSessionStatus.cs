@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using Payments = DodoPayments.Client.Models.Payments;
+using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
 
@@ -135,14 +135,14 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
     ///
     /// <para>Null if checkout sessions is still at the details collection stage.</para>
     /// </summary>
-    public ApiEnum<string, Payments::IntentStatus>? PaymentStatus
+    public ApiEnum<string, IntentStatus>? PaymentStatus
     {
         get
         {
             if (!this._properties.TryGetValue("payment_status", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Payments::IntentStatus>?>(
+            return JsonSerializer.Deserialize<ApiEnum<string, IntentStatus>?>(
                 element,
                 ModelBase.SerializerOptions
             );

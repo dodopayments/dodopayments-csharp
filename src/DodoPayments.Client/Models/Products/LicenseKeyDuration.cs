@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,8 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using Subscriptions = DodoPayments.Client.Models.Subscriptions;
-using System = System;
+using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -20,7 +20,7 @@ public sealed record class LicenseKeyDuration : ModelBase, IFromRaw<LicenseKeyDu
             if (!this._properties.TryGetValue("count", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'count' cannot be null",
-                    new System::ArgumentOutOfRangeException("count", "Missing required argument")
+                    new ArgumentOutOfRangeException("count", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
@@ -34,17 +34,17 @@ public sealed record class LicenseKeyDuration : ModelBase, IFromRaw<LicenseKeyDu
         }
     }
 
-    public required ApiEnum<string, Subscriptions::TimeInterval> Interval
+    public required ApiEnum<string, TimeInterval> Interval
     {
         get
         {
             if (!this._properties.TryGetValue("interval", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'interval' cannot be null",
-                    new System::ArgumentOutOfRangeException("interval", "Missing required argument")
+                    new ArgumentOutOfRangeException("interval", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
                 element,
                 ModelBase.SerializerOptions
             );

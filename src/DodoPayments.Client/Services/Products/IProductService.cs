@@ -2,8 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Services.Products.Images;
-using Products = DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Services.Products;
 
@@ -13,38 +13,32 @@ public interface IProductService
 
     IImageService Images { get; }
 
-    Task<Products::Product> Create(
-        Products::ProductCreateParams parameters,
+    Task<Product> Create(
+        ProductCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
-    Task<Products::Product> Retrieve(
-        Products::ProductRetrieveParams parameters,
+    Task<Product> Retrieve(
+        ProductRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
-    Task Update(
-        Products::ProductUpdateParams parameters,
+    Task Update(ProductUpdateParams parameters, CancellationToken cancellationToken = default);
+
+    Task<ProductListPageResponse> List(
+        ProductListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
-    Task<Products::ProductListPageResponse> List(
-        Products::ProductListParams? parameters = null,
-        CancellationToken cancellationToken = default
-    );
-
-    Task Archive(
-        Products::ProductArchiveParams parameters,
-        CancellationToken cancellationToken = default
-    );
+    Task Archive(ProductArchiveParams parameters, CancellationToken cancellationToken = default);
 
     Task Unarchive(
-        Products::ProductUnarchiveParams parameters,
+        ProductUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
-    Task<Products::ProductUpdateFilesResponse> UpdateFiles(
-        Products::ProductUpdateFilesParams parameters,
+    Task<ProductUpdateFilesResponse> UpdateFiles(
+        ProductUpdateFilesParams parameters,
         CancellationToken cancellationToken = default
     );
 }
