@@ -8,26 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Services.Addons;
-using DodoPayments.Client.Services.Brands;
-using DodoPayments.Client.Services.CheckoutSessions;
-using DodoPayments.Client.Services.Customers;
-using DodoPayments.Client.Services.Discounts;
-using DodoPayments.Client.Services.Disputes;
-using DodoPayments.Client.Services.Invoices;
-using DodoPayments.Client.Services.LicenseKeyInstances;
-using DodoPayments.Client.Services.LicenseKeys;
-using DodoPayments.Client.Services.Licenses;
-using DodoPayments.Client.Services.Meters;
-using DodoPayments.Client.Services.Misc;
-using DodoPayments.Client.Services.Payments;
-using DodoPayments.Client.Services.Payouts;
-using DodoPayments.Client.Services.Products;
-using DodoPayments.Client.Services.Refunds;
-using DodoPayments.Client.Services.Subscriptions;
-using DodoPayments.Client.Services.UsageEvents;
-using DodoPayments.Client.Services.WebhookEvents;
-using DodoPayments.Client.Services.Webhooks;
+using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client;
 
