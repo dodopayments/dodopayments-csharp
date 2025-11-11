@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -8,7 +9,6 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -30,13 +30,13 @@ public sealed record class ProductCreateParams : ParamsBase
             if (!this._bodyProperties.TryGetValue("price", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
-                    new System::ArgumentOutOfRangeException("price", "Missing required argument")
+                    new ArgumentOutOfRangeException("price", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<Price>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
-                    new System::ArgumentNullException("price")
+                    new ArgumentNullException("price")
                 );
         }
         init
@@ -58,10 +58,7 @@ public sealed record class ProductCreateParams : ParamsBase
             if (!this._bodyProperties.TryGetValue("tax_category", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'tax_category' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "tax_category",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("tax_category", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>>(
@@ -355,9 +352,9 @@ public sealed record class ProductCreateParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/products")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/products")
         {
             Query = this.QueryString(options),
         }.Uri;

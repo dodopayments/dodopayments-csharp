@@ -1,10 +1,10 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -49,9 +49,9 @@ public sealed record class WebhookRetrieveSecretParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(
+        return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/webhooks/{0}/secret", this.WebhookID)
         )

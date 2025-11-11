@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,6 @@ using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -27,16 +27,13 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
             if (!this._bodyProperties.TryGetValue("file_name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'file_name' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "file_name",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("file_name", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'file_name' cannot be null",
-                    new System::ArgumentNullException("file_name")
+                    new ArgumentNullException("file_name")
                 );
         }
         init
@@ -88,9 +85,9 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(
+        return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/') + string.Format("/products/{0}/files", this.ID)
         )
         {
