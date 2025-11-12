@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.1.0 (2025-11-12)
+
+Full Changelog: [v3.0.0...v3.1.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.0.0...v3.1.0)
+
+### ⚠ BREAKING CHANGES
+
+* **client:** use `DateTimeOffset` instead of `DateTime`
+
+### Bug Fixes
+
+* **client:** use `DateTimeOffset` instead of `DateTime` ([c1f244e](https://github.com/dodopayments/dodopayments-csharp/commit/c1f244e8d7c91bc8a13f5e14b73d5eb2a5473192))
+
 ## 3.0.0 (2025-11-11)
 
 Full Changelog: [v2.0.0...v3.0.0](https://github.com/dodopayments/dodopayments-csharp/compare/v2.0.0...v3.0.0)
