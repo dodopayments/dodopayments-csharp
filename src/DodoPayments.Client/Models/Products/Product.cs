@@ -69,7 +69,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     /// <summary>
     /// Timestamp when the product was created.
     /// </summary>
-    public required DateTime CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
@@ -79,7 +79,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -258,7 +258,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     /// <summary>
     /// Timestamp when the product was last updated.
     /// </summary>
-    public required DateTime UpdatedAt
+    public required DateTimeOffset UpdatedAt
     {
         get
         {
@@ -268,7 +268,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
                     new ArgumentOutOfRangeException("updated_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {

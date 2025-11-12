@@ -44,14 +44,17 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// <summary>
     /// Filter by end date (inclusive)
     /// </summary>
-    public DateTime? EndDate
+    public DateTimeOffset? EndDate
     {
         get
         {
             if (!this._queryProperties.TryGetValue("end_date", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {
@@ -128,14 +131,17 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// <summary>
     /// Filter by start date (inclusive)
     /// </summary>
-    public DateTime? StartDate
+    public DateTimeOffset? StartDate
     {
         get
         {
             if (!this._queryProperties.TryGetValue("start_date", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {

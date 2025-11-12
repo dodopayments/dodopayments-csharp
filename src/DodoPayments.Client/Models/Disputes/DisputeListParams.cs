@@ -15,14 +15,14 @@ public sealed record class DisputeListParams : ParamsBase
     /// <summary>
     /// Get events after this created time
     /// </summary>
-    public System::DateTime? CreatedAtGte
+    public System::DateTimeOffset? CreatedAtGte
     {
         get
         {
             if (!this._queryProperties.TryGetValue("created_at_gte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -44,14 +44,14 @@ public sealed record class DisputeListParams : ParamsBase
     /// <summary>
     /// Get events created before this time
     /// </summary>
-    public System::DateTime? CreatedAtLte
+    public System::DateTimeOffset? CreatedAtLte
     {
         get
         {
             if (!this._queryProperties.TryGetValue("created_at_lte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );

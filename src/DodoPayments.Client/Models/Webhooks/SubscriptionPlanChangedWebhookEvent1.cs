@@ -79,7 +79,7 @@ public sealed record class SubscriptionPlanChangedWebhookEvent
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTime Timestamp
+    public required System::DateTimeOffset Timestamp
     {
         get
         {
@@ -92,7 +92,7 @@ public sealed record class SubscriptionPlanChangedWebhookEvent
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -261,7 +261,7 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
     /// <summary>
     /// Timestamp when the subscription was created
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -274,7 +274,7 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -402,7 +402,7 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
     /// <summary>
     /// Timestamp of the next scheduled billing. Indicates the end of current billing period
     /// </summary>
-    public required System::DateTime NextBillingDate
+    public required System::DateTimeOffset NextBillingDate
     {
         get
         {
@@ -415,7 +415,7 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -515,7 +515,7 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
     /// <summary>
     /// Timestamp of the last payment. Indicates the start of current billing period
     /// </summary>
-    public required System::DateTime PreviousBillingDate
+    public required System::DateTimeOffset PreviousBillingDate
     {
         get
         {
@@ -528,7 +528,7 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -796,14 +796,14 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
     /// <summary>
     /// Cancelled timestamp if the subscription is cancelled
     /// </summary>
-    public System::DateTime? CancelledAt
+    public System::DateTimeOffset? CancelledAt
     {
         get
         {
             if (!this._properties.TryGetValue("cancelled_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -862,14 +862,14 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
     /// <summary>
     /// Timestamp when the subscription will expire
     /// </summary>
-    public System::DateTime? ExpiresAt
+    public System::DateTimeOffset? ExpiresAt
     {
         get
         {
             if (!this._properties.TryGetValue("expires_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );

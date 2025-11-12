@@ -72,7 +72,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     /// <summary>
     /// Created time
     /// </summary>
-    public required DateTime CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
@@ -82,7 +82,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -202,7 +202,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     /// <summary>
     /// Updated time
     /// </summary>
-    public required DateTime UpdatedAt
+    public required DateTimeOffset UpdatedAt
     {
         get
         {
@@ -212,7 +212,7 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
                     new ArgumentOutOfRangeException("updated_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {

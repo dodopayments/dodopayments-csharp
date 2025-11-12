@@ -77,7 +77,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTime Timestamp
+    public required System::DateTimeOffset Timestamp
     {
         get
         {
@@ -90,7 +90,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -230,7 +230,7 @@ public sealed record class Data27 : ModelBase, IFromRaw<Data27>
     /// <summary>
     /// The timestamp indicating when the license key was created, in UTC.
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -243,7 +243,7 @@ public sealed record class Data27 : ModelBase, IFromRaw<Data27>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -453,14 +453,14 @@ public sealed record class Data27 : ModelBase, IFromRaw<Data27>
     /// <summary>
     /// The timestamp indicating when the license key expires, in UTC.
     /// </summary>
-    public System::DateTime? ExpiresAt
+    public System::DateTimeOffset? ExpiresAt
     {
         get
         {
             if (!this._properties.TryGetValue("expires_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );

@@ -104,7 +104,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         }
     }
 
-    public required DateTime CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
@@ -114,7 +114,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {

@@ -77,7 +77,7 @@ public sealed record class DisputeAcceptedWebhookEvent
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTime Timestamp
+    public required System::DateTimeOffset Timestamp
     {
         get
         {
@@ -90,7 +90,7 @@ public sealed record class DisputeAcceptedWebhookEvent
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -229,7 +229,7 @@ public sealed record class Data : ModelBase, IFromRaw<Data>
     /// <summary>
     /// The timestamp of when the dispute was created, in UTC.
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -242,7 +242,7 @@ public sealed record class Data : ModelBase, IFromRaw<Data>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );

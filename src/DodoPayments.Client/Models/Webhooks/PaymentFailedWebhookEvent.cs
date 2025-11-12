@@ -79,7 +79,7 @@ public sealed record class PaymentFailedWebhookEvent
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTime Timestamp
+    public required System::DateTimeOffset Timestamp
     {
         get
         {
@@ -92,7 +92,7 @@ public sealed record class PaymentFailedWebhookEvent
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -257,7 +257,7 @@ public sealed record class Data8 : ModelBase, IFromRaw<Data8>
     /// <summary>
     /// Timestamp when the payment was created
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -270,7 +270,7 @@ public sealed record class Data8 : ModelBase, IFromRaw<Data8>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -925,14 +925,14 @@ public sealed record class Data8 : ModelBase, IFromRaw<Data8>
     /// <summary>
     /// Timestamp when the payment was last updated
     /// </summary>
-    public System::DateTime? UpdatedAt
+    public System::DateTimeOffset? UpdatedAt
     {
         get
         {
             if (!this._properties.TryGetValue("updated_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
