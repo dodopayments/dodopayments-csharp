@@ -98,7 +98,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     /// <summary>
     /// Timestamp when the discount is created
     /// </summary>
-    public required DateTime CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
@@ -108,7 +108,7 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -229,14 +229,17 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     /// <summary>
     /// Optional date/time after which discount is expired.
     /// </summary>
-    public DateTime? ExpiresAt
+    public DateTimeOffset? ExpiresAt
     {
         get
         {
             if (!this._properties.TryGetValue("expires_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {

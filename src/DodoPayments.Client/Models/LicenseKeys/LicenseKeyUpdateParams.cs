@@ -67,14 +67,17 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// The updated expiration timestamp for the license key in UTC. Use `null` to
     /// remove the expiration date, or omit this field to leave it unchanged.
     /// </summary>
-    public DateTime? ExpiresAt
+    public DateTimeOffset? ExpiresAt
     {
         get
         {
             if (!this._bodyProperties.TryGetValue("expires_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {

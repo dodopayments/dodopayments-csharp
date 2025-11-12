@@ -60,14 +60,17 @@ public sealed record class UsageEventListParams : ParamsBase
     /// <summary>
     /// Filter events created before this timestamp
     /// </summary>
-    public DateTime? End
+    public DateTimeOffset? End
     {
         get
         {
             if (!this._queryProperties.TryGetValue("end", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {
@@ -192,14 +195,17 @@ public sealed record class UsageEventListParams : ParamsBase
     /// <summary>
     /// Filter events created after this timestamp
     /// </summary>
-    public DateTime? Start
+    public DateTimeOffset? Start
     {
         get
         {
             if (!this._queryProperties.TryGetValue("start", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {

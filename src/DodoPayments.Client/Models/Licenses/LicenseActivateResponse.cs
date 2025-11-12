@@ -72,7 +72,7 @@ public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<License
     /// <summary>
     /// Creation timestamp
     /// </summary>
-    public required DateTime CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
@@ -82,7 +82,7 @@ public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<License
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {

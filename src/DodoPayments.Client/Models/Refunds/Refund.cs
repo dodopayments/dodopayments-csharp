@@ -45,7 +45,7 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
     /// <summary>
     /// The timestamp of when the refund was created in UTC.
     /// </summary>
-    public required DateTime CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
@@ -55,7 +55,7 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {

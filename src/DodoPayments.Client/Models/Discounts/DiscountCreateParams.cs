@@ -104,14 +104,17 @@ public sealed record class DiscountCreateParams : ParamsBase
     /// <summary>
     /// When the discount expires, if ever.
     /// </summary>
-    public DateTime? ExpiresAt
+    public DateTimeOffset? ExpiresAt
     {
         get
         {
             if (!this._bodyProperties.TryGetValue("expires_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {
