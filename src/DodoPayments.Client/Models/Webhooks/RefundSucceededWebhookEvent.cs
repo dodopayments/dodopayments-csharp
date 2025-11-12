@@ -79,7 +79,7 @@ public sealed record class RefundSucceededWebhookEvent
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTime Timestamp
+    public required System::DateTimeOffset Timestamp
     {
         get
         {
@@ -92,7 +92,7 @@ public sealed record class RefundSucceededWebhookEvent
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -204,7 +204,7 @@ public sealed record class Data12 : ModelBase, IFromRaw<Data12>
     /// <summary>
     /// The timestamp of when the refund was created in UTC.
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -217,7 +217,7 @@ public sealed record class Data12 : ModelBase, IFromRaw<Data12>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );

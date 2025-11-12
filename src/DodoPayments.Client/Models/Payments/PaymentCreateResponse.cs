@@ -179,14 +179,17 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     /// <summary>
     /// Expiry timestamp of the payment link
     /// </summary>
-    public DateTime? ExpiresOn
+    public DateTimeOffset? ExpiresOn
     {
         get
         {
             if (!this._properties.TryGetValue("expires_on", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {

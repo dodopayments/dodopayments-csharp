@@ -112,7 +112,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
         }
     }
 
-    public required DateTime Timestamp
+    public required DateTimeOffset Timestamp
     {
         get
         {
@@ -122,7 +122,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
                     new ArgumentOutOfRangeException("timestamp", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {

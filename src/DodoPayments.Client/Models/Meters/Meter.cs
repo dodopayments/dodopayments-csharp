@@ -90,7 +90,7 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
         }
     }
 
-    public required DateTime CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
@@ -100,7 +100,7 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -186,7 +186,7 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
         }
     }
 
-    public required DateTime UpdatedAt
+    public required DateTimeOffset UpdatedAt
     {
         get
         {
@@ -196,7 +196,7 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
                     new ArgumentOutOfRangeException("updated_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {

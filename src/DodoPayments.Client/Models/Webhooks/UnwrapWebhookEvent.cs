@@ -42,7 +42,7 @@ public record class UnwrapWebhookEvent
         }
     }
 
-    public System::DateTime Timestamp
+    public System::DateTimeOffset Timestamp
     {
         get
         {

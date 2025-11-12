@@ -164,7 +164,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     /// <summary>
     /// The timestamp when the payout was created, in UTC.
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -177,7 +177,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -382,7 +382,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     /// <summary>
     /// The timestamp when the payout was last updated, in UTC.
     /// </summary>
-    public required System::DateTime UpdatedAt
+    public required System::DateTimeOffset UpdatedAt
     {
         get
         {
@@ -395,7 +395,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );

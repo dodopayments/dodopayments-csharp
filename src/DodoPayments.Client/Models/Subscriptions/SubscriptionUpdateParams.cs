@@ -129,14 +129,17 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
-    public DateTime? NextBillingDate
+    public DateTimeOffset? NextBillingDate
     {
         get
         {
             if (!this._bodyProperties.TryGetValue("next_billing_date", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {
@@ -259,7 +262,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
 [JsonConverter(typeof(ModelConverter<DisableOnDemand>))]
 public sealed record class DisableOnDemand : ModelBase, IFromRaw<DisableOnDemand>
 {
-    public required DateTime NextBillingDate
+    public required DateTimeOffset NextBillingDate
     {
         get
         {
@@ -272,7 +275,7 @@ public sealed record class DisableOnDemand : ModelBase, IFromRaw<DisableOnDemand
                     )
                 );
 
-            return JsonSerializer.Deserialize<DateTime>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -311,7 +314,7 @@ public sealed record class DisableOnDemand : ModelBase, IFromRaw<DisableOnDemand
     }
 
     [SetsRequiredMembers]
-    public DisableOnDemand(DateTime nextBillingDate)
+    public DisableOnDemand(DateTimeOffset nextBillingDate)
         : this()
     {
         this.NextBillingDate = nextBillingDate;

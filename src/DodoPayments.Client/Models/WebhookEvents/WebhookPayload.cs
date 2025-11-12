@@ -78,7 +78,7 @@ public sealed record class WebhookPayload : ModelBase, IFromRaw<WebhookPayload>
     /// The timestamp of when the event occurred (not necessarily the same of when
     /// it was delivered)
     /// </summary>
-    public required System::DateTime Timestamp
+    public required System::DateTimeOffset Timestamp
     {
         get
         {
@@ -91,7 +91,7 @@ public sealed record class WebhookPayload : ModelBase, IFromRaw<WebhookPayload>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -199,7 +199,7 @@ public record class Data
         }
     }
 
-    public System::DateTime CreatedAt
+    public System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -283,11 +283,11 @@ public record class Data
         }
     }
 
-    public System::DateTime? ExpiresAt
+    public System::DateTimeOffset? ExpiresAt
     {
         get
         {
-            return Match<System::DateTime?>(
+            return Match<System::DateTimeOffset?>(
                 payment: (_) => null,
                 subscription: (x) => x.ExpiresAt,
                 refund: (_) => null,
@@ -663,7 +663,7 @@ public sealed record class Payment : ModelBase, IFromRaw<Payment>
     /// <summary>
     /// Timestamp when the payment was created
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -676,7 +676,7 @@ public sealed record class Payment : ModelBase, IFromRaw<Payment>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1337,14 +1337,14 @@ public sealed record class Payment : ModelBase, IFromRaw<Payment>
     /// <summary>
     /// Timestamp when the payment was last updated
     /// </summary>
-    public System::DateTime? UpdatedAt
+    public System::DateTimeOffset? UpdatedAt
     {
         get
         {
             if (!this._properties.TryGetValue("updated_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1693,7 +1693,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     /// <summary>
     /// Timestamp when the subscription was created
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -1706,7 +1706,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1837,7 +1837,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     /// <summary>
     /// Timestamp of the next scheduled billing. Indicates the end of current billing period
     /// </summary>
-    public required System::DateTime NextBillingDate
+    public required System::DateTimeOffset NextBillingDate
     {
         get
         {
@@ -1850,7 +1850,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1950,7 +1950,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     /// <summary>
     /// Timestamp of the last payment. Indicates the start of current billing period
     /// </summary>
-    public required System::DateTime PreviousBillingDate
+    public required System::DateTimeOffset PreviousBillingDate
     {
         get
         {
@@ -1963,7 +1963,7 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -2231,14 +2231,14 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     /// <summary>
     /// Cancelled timestamp if the subscription is cancelled
     /// </summary>
-    public System::DateTime? CancelledAt
+    public System::DateTimeOffset? CancelledAt
     {
         get
         {
             if (!this._properties.TryGetValue("cancelled_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -2297,14 +2297,14 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     /// <summary>
     /// Timestamp when the subscription will expire
     /// </summary>
-    public System::DateTime? ExpiresAt
+    public System::DateTimeOffset? ExpiresAt
     {
         get
         {
             if (!this._properties.TryGetValue("expires_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -2600,7 +2600,7 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
     /// <summary>
     /// The timestamp of when the refund was created in UTC.
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -2613,7 +2613,7 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -3118,7 +3118,7 @@ public sealed record class Dispute : ModelBase, IFromRaw<Dispute>
     /// <summary>
     /// The timestamp of when the dispute was created, in UTC.
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -3131,7 +3131,7 @@ public sealed record class Dispute : ModelBase, IFromRaw<Dispute>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -3610,7 +3610,7 @@ public sealed record class LicenseKey : ModelBase, IFromRaw<LicenseKey>
     /// <summary>
     /// The timestamp indicating when the license key was created, in UTC.
     /// </summary>
-    public required System::DateTime CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
@@ -3623,7 +3623,7 @@ public sealed record class LicenseKey : ModelBase, IFromRaw<LicenseKey>
                     )
                 );
 
-            return JsonSerializer.Deserialize<System::DateTime>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -3833,14 +3833,14 @@ public sealed record class LicenseKey : ModelBase, IFromRaw<LicenseKey>
     /// <summary>
     /// The timestamp indicating when the license key expires, in UTC.
     /// </summary>
-    public System::DateTime? ExpiresAt
+    public System::DateTimeOffset? ExpiresAt
     {
         get
         {
             if (!this._properties.TryGetValue("expires_at", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTime?>(
+            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );

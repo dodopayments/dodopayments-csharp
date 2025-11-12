@@ -13,14 +13,17 @@ public sealed record class PayoutListParams : ParamsBase
     /// <summary>
     /// Get payouts created after this time (inclusive)
     /// </summary>
-    public DateTime? CreatedAtGte
+    public DateTimeOffset? CreatedAtGte
     {
         get
         {
             if (!this._queryProperties.TryGetValue("created_at_gte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {
@@ -39,14 +42,17 @@ public sealed record class PayoutListParams : ParamsBase
     /// <summary>
     /// Get payouts created before this time (inclusive)
     /// </summary>
-    public DateTime? CreatedAtLte
+    public DateTimeOffset? CreatedAtLte
     {
         get
         {
             if (!this._queryProperties.TryGetValue("created_at_lte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {

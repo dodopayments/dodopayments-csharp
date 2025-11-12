@@ -126,14 +126,17 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
     /// Custom Timestamp. Defaults to current timestamp in UTC. Timestamps that are
     /// older that 1 hour or after 5 mins, from current timestamp, will be rejected.
     /// </summary>
-    public DateTime? Timestamp
+    public DateTimeOffset? Timestamp
     {
         get
         {
             if (!this._properties.TryGetValue("timestamp", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DateTime?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {
