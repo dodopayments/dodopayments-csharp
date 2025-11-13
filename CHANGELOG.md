@@ -1,5 +1,24 @@
 # Changelog
 
+## 3.2.0 (2025-11-13)
+
+Full Changelog: [v3.1.0...v3.2.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.1.0...v3.2.0)
+
+### Features
+
+* **client:** add `HttpResponse.ReadAsStream` method ([e17aa6b](https://github.com/dodopayments/dodopayments-csharp/commit/e17aa6b15de9cf9433cf0fc497e9dc0b925111d5))
+* **client:** correct binary response methods ([c981817](https://github.com/dodopayments/dodopayments-csharp/commit/c981817345f20f34c88a14da9b2e4b59e8337a2a))
+
+
+### Chores
+
+* **internal:** codegen related update ([3fd4dba](https://github.com/dodopayments/dodopayments-csharp/commit/3fd4dba167f57ea0f4fd9f89d0fa052737372f25))
+
+
+### Refactors
+
+* **client:** move some defaults out of `ClientOptions` ([e5a513b](https://github.com/dodopayments/dodopayments-csharp/commit/e5a513b02540ecc153980b6cb3e6ef02275ccf1a))
+
 ## 3.1.0 (2025-11-12)
 
 Full Changelog: [v3.0.0...v3.1.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.0.0...v3.1.0)
