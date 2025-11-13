@@ -1,6 +1,5 @@
 using System;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -26,7 +25,7 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
         _client = client;
     }
 
-    public async Task<JsonElement> Retrieve(
+    public async Task<HttpResponse> Retrieve(
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -39,10 +38,10 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        return await response.Deserialize<JsonElement>(cancellationToken).ConfigureAwait(false);
+        return response;
     }
 
-    public async Task<JsonElement> RetrieveRefund(
+    public async Task<HttpResponse> RetrieveRefund(
         PaymentRetrieveRefundParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -55,6 +54,6 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
-        return await response.Deserialize<JsonElement>(cancellationToken).ConfigureAwait(false);
+        return response;
     }
 }

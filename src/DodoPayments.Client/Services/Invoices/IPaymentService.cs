@@ -1,5 +1,4 @@
 using System;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -13,12 +12,12 @@ public interface IPaymentService
         Func<ClientOptions, ClientOptions> modifier
     );
 
-    Task<JsonElement> Retrieve(
+    Task<HttpResponse> Retrieve(
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
-    Task<JsonElement> RetrieveRefund(
+    Task<HttpResponse> RetrieveRefund(
         PaymentRetrieveRefundParams parameters,
         CancellationToken cancellationToken = default
     );
