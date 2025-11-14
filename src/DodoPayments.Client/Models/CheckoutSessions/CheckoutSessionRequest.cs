@@ -83,14 +83,14 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     /// <summary>
     /// Billing address information for the session
     /// </summary>
-    public BillingAddressModel? BillingAddress
+    public CheckoutSessionRequestBillingAddress? BillingAddress
     {
         get
         {
             if (!this._properties.TryGetValue("billing_address", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<BillingAddressModel?>(
+            return JsonSerializer.Deserialize<CheckoutSessionRequestBillingAddress?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -182,14 +182,14 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     /// <summary>
     /// Customization for the checkout session page
     /// </summary>
-    public CustomizationModel? Customization
+    public CheckoutSessionRequestCustomization? Customization
     {
         get
         {
             if (!this._properties.TryGetValue("customization", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<CustomizationModel?>(
+            return JsonSerializer.Deserialize<CheckoutSessionRequestCustomization?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -226,14 +226,14 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
         }
     }
 
-    public FeatureFlagsModel? FeatureFlags
+    public CheckoutSessionRequestFeatureFlags? FeatureFlags
     {
         get
         {
             if (!this._properties.TryGetValue("feature_flags", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<FeatureFlagsModel?>(
+            return JsonSerializer.Deserialize<CheckoutSessionRequestFeatureFlags?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -346,14 +346,14 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
         }
     }
 
-    public SubscriptionDataModel? SubscriptionData
+    public CheckoutSessionRequestSubscriptionData? SubscriptionData
     {
         get
         {
             if (!this._properties.TryGetValue("subscription_data", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<SubscriptionDataModel?>(
+            return JsonSerializer.Deserialize<CheckoutSessionRequestSubscriptionData?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -564,8 +564,10 @@ public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartMod
 /// <summary>
 /// Billing address information for the session
 /// </summary>
-[JsonConverter(typeof(ModelConverter<BillingAddressModel>))]
-public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddressModel>
+[JsonConverter(typeof(ModelConverter<CheckoutSessionRequestBillingAddress>))]
+public sealed record class CheckoutSessionRequestBillingAddress
+    : ModelBase,
+        IFromRaw<CheckoutSessionRequestBillingAddress>
 {
     /// <summary>
     /// Two-letter ISO country code (ISO 3166-1 alpha-2)
@@ -687,22 +689,22 @@ public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddr
         _ = this.Zipcode;
     }
 
-    public BillingAddressModel() { }
+    public CheckoutSessionRequestBillingAddress() { }
 
-    public BillingAddressModel(IReadOnlyDictionary<string, JsonElement> properties)
+    public CheckoutSessionRequestBillingAddress(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    BillingAddressModel(FrozenDictionary<string, JsonElement> properties)
+    CheckoutSessionRequestBillingAddress(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static BillingAddressModel FromRawUnchecked(
+    public static CheckoutSessionRequestBillingAddress FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -710,7 +712,7 @@ public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddr
     }
 
     [SetsRequiredMembers]
-    public BillingAddressModel(ApiEnum<string, CountryCode> country)
+    public CheckoutSessionRequestBillingAddress(ApiEnum<string, CountryCode> country)
         : this()
     {
         this.Country = country;
@@ -720,8 +722,10 @@ public sealed record class BillingAddressModel : ModelBase, IFromRaw<BillingAddr
 /// <summary>
 /// Customization for the checkout session page
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CustomizationModel>))]
-public sealed record class CustomizationModel : ModelBase, IFromRaw<CustomizationModel>
+[JsonConverter(typeof(ModelConverter<CheckoutSessionRequestCustomization>))]
+public sealed record class CheckoutSessionRequestCustomization
+    : ModelBase,
+        IFromRaw<CheckoutSessionRequestCustomization>
 {
     /// <summary>
     /// Force the checkout interface to render in a specific language (e.g. `en`, `es`)
@@ -805,17 +809,17 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
     ///
     /// <para>Default is `System`.</para>
     /// </summary>
-    public ApiEnum<string, ThemeModel>? Theme
+    public ApiEnum<string, CheckoutSessionRequestCustomizationTheme>? Theme
     {
         get
         {
             if (!this._properties.TryGetValue("theme", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, ThemeModel>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                CheckoutSessionRequestCustomizationTheme
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -839,22 +843,22 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
         this.Theme?.Validate();
     }
 
-    public CustomizationModel() { }
+    public CheckoutSessionRequestCustomization() { }
 
-    public CustomizationModel(IReadOnlyDictionary<string, JsonElement> properties)
+    public CheckoutSessionRequestCustomization(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomizationModel(FrozenDictionary<string, JsonElement> properties)
+    CheckoutSessionRequestCustomization(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static CustomizationModel FromRawUnchecked(
+    public static CheckoutSessionRequestCustomization FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -867,17 +871,18 @@ public sealed record class CustomizationModel : ModelBase, IFromRaw<Customizatio
 ///
 /// <para>Default is `System`.</para>
 /// </summary>
-[JsonConverter(typeof(ThemeModelConverter))]
-public enum ThemeModel
+[JsonConverter(typeof(CheckoutSessionRequestCustomizationThemeConverter))]
+public enum CheckoutSessionRequestCustomizationTheme
 {
     Dark,
     Light,
     System,
 }
 
-sealed class ThemeModelConverter : JsonConverter<ThemeModel>
+sealed class CheckoutSessionRequestCustomizationThemeConverter
+    : JsonConverter<CheckoutSessionRequestCustomizationTheme>
 {
-    public override ThemeModel Read(
+    public override CheckoutSessionRequestCustomizationTheme Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -885,16 +890,16 @@ sealed class ThemeModelConverter : JsonConverter<ThemeModel>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "dark" => ThemeModel.Dark,
-            "light" => ThemeModel.Light,
-            "system" => ThemeModel.System,
-            _ => (ThemeModel)(-1),
+            "dark" => CheckoutSessionRequestCustomizationTheme.Dark,
+            "light" => CheckoutSessionRequestCustomizationTheme.Light,
+            "system" => CheckoutSessionRequestCustomizationTheme.System,
+            _ => (CheckoutSessionRequestCustomizationTheme)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        ThemeModel value,
+        CheckoutSessionRequestCustomizationTheme value,
         JsonSerializerOptions options
     )
     {
@@ -902,9 +907,9 @@ sealed class ThemeModelConverter : JsonConverter<ThemeModel>
             writer,
             value switch
             {
-                ThemeModel.Dark => "dark",
-                ThemeModel.Light => "light",
-                ThemeModel.System => "system",
+                CheckoutSessionRequestCustomizationTheme.Dark => "dark",
+                CheckoutSessionRequestCustomizationTheme.Light => "light",
+                CheckoutSessionRequestCustomizationTheme.System => "system",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -914,8 +919,10 @@ sealed class ThemeModelConverter : JsonConverter<ThemeModel>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<FeatureFlagsModel>))]
-public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsModel>
+[JsonConverter(typeof(ModelConverter<CheckoutSessionRequestFeatureFlags>))]
+public sealed record class CheckoutSessionRequestFeatureFlags
+    : ModelBase,
+        IFromRaw<CheckoutSessionRequestFeatureFlags>
 {
     /// <summary>
     /// if customer is allowed to change currency, set it to true
@@ -1074,22 +1081,22 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
         _ = this.AlwaysCreateNewCustomer;
     }
 
-    public FeatureFlagsModel() { }
+    public CheckoutSessionRequestFeatureFlags() { }
 
-    public FeatureFlagsModel(IReadOnlyDictionary<string, JsonElement> properties)
+    public CheckoutSessionRequestFeatureFlags(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    FeatureFlagsModel(FrozenDictionary<string, JsonElement> properties)
+    CheckoutSessionRequestFeatureFlags(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static FeatureFlagsModel FromRawUnchecked(
+    public static CheckoutSessionRequestFeatureFlags FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -1097,8 +1104,10 @@ public sealed record class FeatureFlagsModel : ModelBase, IFromRaw<FeatureFlagsM
     }
 }
 
-[JsonConverter(typeof(ModelConverter<SubscriptionDataModel>))]
-public sealed record class SubscriptionDataModel : ModelBase, IFromRaw<SubscriptionDataModel>
+[JsonConverter(typeof(ModelConverter<CheckoutSessionRequestSubscriptionData>))]
+public sealed record class CheckoutSessionRequestSubscriptionData
+    : ModelBase,
+        IFromRaw<CheckoutSessionRequestSubscriptionData>
 {
     public OnDemandSubscription? OnDemand
     {
@@ -1149,22 +1158,24 @@ public sealed record class SubscriptionDataModel : ModelBase, IFromRaw<Subscript
         _ = this.TrialPeriodDays;
     }
 
-    public SubscriptionDataModel() { }
+    public CheckoutSessionRequestSubscriptionData() { }
 
-    public SubscriptionDataModel(IReadOnlyDictionary<string, JsonElement> properties)
+    public CheckoutSessionRequestSubscriptionData(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionDataModel(FrozenDictionary<string, JsonElement> properties)
+    CheckoutSessionRequestSubscriptionData(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static SubscriptionDataModel FromRawUnchecked(
+    public static CheckoutSessionRequestSubscriptionData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {

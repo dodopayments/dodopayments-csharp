@@ -5,17 +5,17 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Disputes;
 
-[JsonConverter(typeof(DisputeStageModelConverter))]
-public enum DisputeStageModel
+[JsonConverter(typeof(DisputeDisputeStageConverter))]
+public enum DisputeDisputeStage
 {
     PreDispute,
     Dispute,
     PreArbitration,
 }
 
-sealed class DisputeStageModelConverter : JsonConverter<DisputeStageModel>
+sealed class DisputeDisputeStageConverter : JsonConverter<DisputeDisputeStage>
 {
-    public override DisputeStageModel Read(
+    public override DisputeDisputeStage Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -23,16 +23,16 @@ sealed class DisputeStageModelConverter : JsonConverter<DisputeStageModel>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "pre_dispute" => DisputeStageModel.PreDispute,
-            "dispute" => DisputeStageModel.Dispute,
-            "pre_arbitration" => DisputeStageModel.PreArbitration,
-            _ => (DisputeStageModel)(-1),
+            "pre_dispute" => DisputeDisputeStage.PreDispute,
+            "dispute" => DisputeDisputeStage.Dispute,
+            "pre_arbitration" => DisputeDisputeStage.PreArbitration,
+            _ => (DisputeDisputeStage)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        DisputeStageModel value,
+        DisputeDisputeStage value,
         JsonSerializerOptions options
     )
     {
@@ -40,9 +40,9 @@ sealed class DisputeStageModelConverter : JsonConverter<DisputeStageModel>
             writer,
             value switch
             {
-                DisputeStageModel.PreDispute => "pre_dispute",
-                DisputeStageModel.Dispute => "dispute",
-                DisputeStageModel.PreArbitration => "pre_arbitration",
+                DisputeDisputeStage.PreDispute => "pre_dispute",
+                DisputeDisputeStage.Dispute => "dispute",
+                DisputeDisputeStage.PreArbitration => "pre_arbitration",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

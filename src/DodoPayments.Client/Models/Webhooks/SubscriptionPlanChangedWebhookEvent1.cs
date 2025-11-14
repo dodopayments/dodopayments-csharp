@@ -51,7 +51,7 @@ public sealed record class SubscriptionPlanChangedWebhookEvent
     /// <summary>
     /// Event-specific data
     /// </summary>
-    public required Data39 Data
+    public required Data18 Data
     {
         get
         {
@@ -61,7 +61,7 @@ public sealed record class SubscriptionPlanChangedWebhookEvent
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Data39>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<Data18>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentNullException("data")
@@ -109,7 +109,7 @@ public sealed record class SubscriptionPlanChangedWebhookEvent
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, Type39> Type
+    public required ApiEnum<string, Type18> Type
     {
         get
         {
@@ -119,7 +119,7 @@ public sealed record class SubscriptionPlanChangedWebhookEvent
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type39>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, Type18>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -167,8 +167,8 @@ public sealed record class SubscriptionPlanChangedWebhookEvent
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data39>))]
-public sealed record class Data39 : ModelBase, IFromRaw<Data39>
+[JsonConverter(typeof(ModelConverter<Data18>))]
+public sealed record class Data18 : ModelBase, IFromRaw<Data18>
 {
     /// <summary>
     /// Addons associated with this subscription
@@ -907,17 +907,17 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType39>? PayloadType
+    public ApiEnum<string, Data18IntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType39>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                Data18IntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -933,36 +933,36 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
         }
     }
 
-    public static implicit operator Subscription(Data39 data39) =>
+    public static implicit operator Subscription(Data18 data18) =>
         new()
         {
-            Addons = data39.Addons,
-            Billing = data39.Billing,
-            CancelAtNextBillingDate = data39.CancelAtNextBillingDate,
-            CreatedAt = data39.CreatedAt,
-            Currency = data39.Currency,
-            Customer = data39.Customer,
-            Metadata = data39.Metadata,
-            Meters = data39.Meters,
-            NextBillingDate = data39.NextBillingDate,
-            OnDemand = data39.OnDemand,
-            PaymentFrequencyCount = data39.PaymentFrequencyCount,
-            PaymentFrequencyInterval = data39.PaymentFrequencyInterval,
-            PreviousBillingDate = data39.PreviousBillingDate,
-            ProductID = data39.ProductID,
-            Quantity = data39.Quantity,
-            RecurringPreTaxAmount = data39.RecurringPreTaxAmount,
-            Status = data39.Status,
-            SubscriptionID = data39.SubscriptionID,
-            SubscriptionPeriodCount = data39.SubscriptionPeriodCount,
-            SubscriptionPeriodInterval = data39.SubscriptionPeriodInterval,
-            TaxInclusive = data39.TaxInclusive,
-            TrialPeriodDays = data39.TrialPeriodDays,
-            CancelledAt = data39.CancelledAt,
-            DiscountCyclesRemaining = data39.DiscountCyclesRemaining,
-            DiscountID = data39.DiscountID,
-            ExpiresAt = data39.ExpiresAt,
-            TaxID = data39.TaxID,
+            Addons = data18.Addons,
+            Billing = data18.Billing,
+            CancelAtNextBillingDate = data18.CancelAtNextBillingDate,
+            CreatedAt = data18.CreatedAt,
+            Currency = data18.Currency,
+            Customer = data18.Customer,
+            Metadata = data18.Metadata,
+            Meters = data18.Meters,
+            NextBillingDate = data18.NextBillingDate,
+            OnDemand = data18.OnDemand,
+            PaymentFrequencyCount = data18.PaymentFrequencyCount,
+            PaymentFrequencyInterval = data18.PaymentFrequencyInterval,
+            PreviousBillingDate = data18.PreviousBillingDate,
+            ProductID = data18.ProductID,
+            Quantity = data18.Quantity,
+            RecurringPreTaxAmount = data18.RecurringPreTaxAmount,
+            Status = data18.Status,
+            SubscriptionID = data18.SubscriptionID,
+            SubscriptionPeriodCount = data18.SubscriptionPeriodCount,
+            SubscriptionPeriodInterval = data18.SubscriptionPeriodInterval,
+            TaxInclusive = data18.TaxInclusive,
+            TrialPeriodDays = data18.TrialPeriodDays,
+            CancelledAt = data18.CancelledAt,
+            DiscountCyclesRemaining = data18.DiscountCyclesRemaining,
+            DiscountID = data18.DiscountID,
+            ExpiresAt = data18.ExpiresAt,
+            TaxID = data18.TaxID,
         };
 
     public override void Validate()
@@ -1003,44 +1003,46 @@ public sealed record class Data39 : ModelBase, IFromRaw<Data39>
         this.PayloadType?.Validate();
     }
 
-    public Data39() { }
+    public Data18() { }
 
-    public Data39(IReadOnlyDictionary<string, JsonElement> properties)
+    public Data18(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data39(FrozenDictionary<string, JsonElement> properties)
+    Data18(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Data39 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Data18 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember139>))]
-public sealed record class IntersectionMember139 : ModelBase, IFromRaw<IntersectionMember139>
+[JsonConverter(typeof(ModelConverter<Data18IntersectionMember1>))]
+public sealed record class Data18IntersectionMember1
+    : ModelBase,
+        IFromRaw<Data18IntersectionMember1>
 {
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType39>? PayloadType
+    public ApiEnum<string, Data18IntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType39>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                Data18IntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -1061,22 +1063,22 @@ public sealed record class IntersectionMember139 : ModelBase, IFromRaw<Intersect
         this.PayloadType?.Validate();
     }
 
-    public IntersectionMember139() { }
+    public Data18IntersectionMember1() { }
 
-    public IntersectionMember139(IReadOnlyDictionary<string, JsonElement> properties)
+    public Data18IntersectionMember1(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntersectionMember139(FrozenDictionary<string, JsonElement> properties)
+    Data18IntersectionMember1(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static IntersectionMember139 FromRawUnchecked(
+    public static Data18IntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -1087,15 +1089,16 @@ public sealed record class IntersectionMember139 : ModelBase, IFromRaw<Intersect
 /// <summary>
 /// The type of payload in the data field
 /// </summary>
-[JsonConverter(typeof(PayloadType39Converter))]
-public enum PayloadType39
+[JsonConverter(typeof(Data18IntersectionMember1PayloadTypeConverter))]
+public enum Data18IntersectionMember1PayloadType
 {
     Subscription,
 }
 
-sealed class PayloadType39Converter : JsonConverter<PayloadType39>
+sealed class Data18IntersectionMember1PayloadTypeConverter
+    : JsonConverter<Data18IntersectionMember1PayloadType>
 {
-    public override PayloadType39 Read(
+    public override Data18IntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1103,14 +1106,14 @@ sealed class PayloadType39Converter : JsonConverter<PayloadType39>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Subscription" => PayloadType39.Subscription,
-            _ => (PayloadType39)(-1),
+            "Subscription" => Data18IntersectionMember1PayloadType.Subscription,
+            _ => (Data18IntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType39 value,
+        Data18IntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -1118,7 +1121,7 @@ sealed class PayloadType39Converter : JsonConverter<PayloadType39>
             writer,
             value switch
             {
-                PayloadType39.Subscription => "Subscription",
+                Data18IntersectionMember1PayloadType.Subscription => "Subscription",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1131,15 +1134,15 @@ sealed class PayloadType39Converter : JsonConverter<PayloadType39>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(Type39Converter))]
-public enum Type39
+[JsonConverter(typeof(Type18Converter))]
+public enum Type18
 {
     SubscriptionPlanChanged,
 }
 
-sealed class Type39Converter : JsonConverter<Type39>
+sealed class Type18Converter : JsonConverter<Type18>
 {
-    public override Type39 Read(
+    public override Type18 Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1147,18 +1150,18 @@ sealed class Type39Converter : JsonConverter<Type39>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "subscription.plan_changed" => Type39.SubscriptionPlanChanged,
-            _ => (Type39)(-1),
+            "subscription.plan_changed" => Type18.SubscriptionPlanChanged,
+            _ => (Type18)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type39 value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, Type18 value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type39.SubscriptionPlanChanged => "subscription.plan_changed",
+                Type18.SubscriptionPlanChanged => "subscription.plan_changed",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
