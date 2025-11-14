@@ -1,5 +1,32 @@
 # Changelog
 
+## 3.3.0 (2025-11-14)
+
+Full Changelog: [v3.2.0...v3.3.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.2.0...v3.3.0)
+
+### ⚠ BREAKING CHANGES
+
+* **client:** improve names of some types
+
+### Features
+
+* **api:** added update payment method and updated openapi spec to v1.60.0 ([c171d40](https://github.com/dodopayments/dodopayments-csharp/commit/c171d40f4625138e0211da9e5d6f16d5ca34bde6))
+
+
+### Chores
+
+* **client:** deprecate some symbols ([3c318fb](https://github.com/dodopayments/dodopayments-csharp/commit/3c318fb56e59f6466d3aaa25bd5b8c04a91f313c))
+
+
+### Documentation
+
+* **client:** add binary responses to readme ([8c3be50](https://github.com/dodopayments/dodopayments-csharp/commit/8c3be50517a22f590a173be213f1232b67b92397))
+
+
+### Refactors
+
+* **client:** improve names of some types ([ac35743](https://github.com/dodopayments/dodopayments-csharp/commit/ac3574325038c913688cc6e36aa182cd11e7d9c6))
+
 ## 3.2.0 (2025-11-13)
 
 Full Changelog: [v3.1.0...v3.2.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.1.0...v3.2.0)
