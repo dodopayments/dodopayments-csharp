@@ -137,6 +137,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     /// <summary>
     /// The total value of chargebacks associated with the payout.
     /// </summary>
+    [System::Obsolete("deprecated")]
     public required long Chargebacks
     {
         get
@@ -307,6 +308,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     /// <summary>
     /// The total value of refunds associated with the payout.
     /// </summary>
+    [System::Obsolete("deprecated")]
     public required long Refunds
     {
         get
@@ -358,6 +360,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     /// <summary>
     /// The tax applied to the payout.
     /// </summary>
+    [System::Obsolete("deprecated")]
     public required long Tax
     {
         get
