@@ -49,7 +49,7 @@ public sealed record class DisputeCancelledWebhookEvent
     /// <summary>
     /// Event-specific data
     /// </summary>
-    public required Data21 Data
+    public required DataModel Data
     {
         get
         {
@@ -59,7 +59,7 @@ public sealed record class DisputeCancelledWebhookEvent
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Data21>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<DataModel>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentNullException("data")
@@ -107,7 +107,7 @@ public sealed record class DisputeCancelledWebhookEvent
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, Type21> Type
+    public required ApiEnum<string, TypeModel> Type
     {
         get
         {
@@ -117,7 +117,7 @@ public sealed record class DisputeCancelledWebhookEvent
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type21>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, TypeModel>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -165,8 +165,8 @@ public sealed record class DisputeCancelledWebhookEvent
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data21>))]
-public sealed record class Data21 : ModelBase, IFromRaw<Data21>
+[JsonConverter(typeof(ModelConverter<DataModel>))]
+public sealed record class DataModel : ModelBase, IFromRaw<DataModel>
 {
     /// <summary>
     /// The amount involved in the dispute, represented as a string to accommodate precision.
@@ -316,7 +316,7 @@ public sealed record class Data21 : ModelBase, IFromRaw<Data21>
         }
     }
 
-    public required ApiEnum<string, DisputeStageModel> DisputeStage
+    public required ApiEnum<string, DisputeDisputeStage> DisputeStage
     {
         get
         {
@@ -329,7 +329,7 @@ public sealed record class Data21 : ModelBase, IFromRaw<Data21>
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStageModel>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeDisputeStage>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -343,7 +343,7 @@ public sealed record class Data21 : ModelBase, IFromRaw<Data21>
         }
     }
 
-    public required ApiEnum<string, DisputeStatusModel> DisputeStatus
+    public required ApiEnum<string, DisputeDisputeStatus> DisputeStatus
     {
         get
         {
@@ -356,7 +356,7 @@ public sealed record class Data21 : ModelBase, IFromRaw<Data21>
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStatusModel>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeDisputeStatus>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -425,17 +425,17 @@ public sealed record class Data21 : ModelBase, IFromRaw<Data21>
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType21>? PayloadType
+    public ApiEnum<string, DataModelIntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType21>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                DataModelIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -451,18 +451,18 @@ public sealed record class Data21 : ModelBase, IFromRaw<Data21>
         }
     }
 
-    public static implicit operator Dispute(Data21 data21) =>
+    public static implicit operator Dispute(DataModel dataModel) =>
         new()
         {
-            Amount = data21.Amount,
-            BusinessID = data21.BusinessID,
-            CreatedAt = data21.CreatedAt,
-            Currency = data21.Currency,
-            DisputeID = data21.DisputeID,
-            DisputeStage = data21.DisputeStage,
-            DisputeStatus = data21.DisputeStatus,
-            PaymentID = data21.PaymentID,
-            Remarks = data21.Remarks,
+            Amount = dataModel.Amount,
+            BusinessID = dataModel.BusinessID,
+            CreatedAt = dataModel.CreatedAt,
+            Currency = dataModel.Currency,
+            DisputeID = dataModel.DisputeID,
+            DisputeStage = dataModel.DisputeStage,
+            DisputeStatus = dataModel.DisputeStatus,
+            PaymentID = dataModel.PaymentID,
+            Remarks = dataModel.Remarks,
         };
 
     public override void Validate()
@@ -479,44 +479,46 @@ public sealed record class Data21 : ModelBase, IFromRaw<Data21>
         this.PayloadType?.Validate();
     }
 
-    public Data21() { }
+    public DataModel() { }
 
-    public Data21(IReadOnlyDictionary<string, JsonElement> properties)
+    public DataModel(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data21(FrozenDictionary<string, JsonElement> properties)
+    DataModel(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Data21 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static DataModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember121>))]
-public sealed record class IntersectionMember121 : ModelBase, IFromRaw<IntersectionMember121>
+[JsonConverter(typeof(ModelConverter<DataModelIntersectionMember1>))]
+public sealed record class DataModelIntersectionMember1
+    : ModelBase,
+        IFromRaw<DataModelIntersectionMember1>
 {
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType21>? PayloadType
+    public ApiEnum<string, DataModelIntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType21>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                DataModelIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -537,22 +539,22 @@ public sealed record class IntersectionMember121 : ModelBase, IFromRaw<Intersect
         this.PayloadType?.Validate();
     }
 
-    public IntersectionMember121() { }
+    public DataModelIntersectionMember1() { }
 
-    public IntersectionMember121(IReadOnlyDictionary<string, JsonElement> properties)
+    public DataModelIntersectionMember1(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntersectionMember121(FrozenDictionary<string, JsonElement> properties)
+    DataModelIntersectionMember1(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static IntersectionMember121 FromRawUnchecked(
+    public static DataModelIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -563,15 +565,16 @@ public sealed record class IntersectionMember121 : ModelBase, IFromRaw<Intersect
 /// <summary>
 /// The type of payload in the data field
 /// </summary>
-[JsonConverter(typeof(PayloadType21Converter))]
-public enum PayloadType21
+[JsonConverter(typeof(DataModelIntersectionMember1PayloadTypeConverter))]
+public enum DataModelIntersectionMember1PayloadType
 {
     Dispute,
 }
 
-sealed class PayloadType21Converter : JsonConverter<PayloadType21>
+sealed class DataModelIntersectionMember1PayloadTypeConverter
+    : JsonConverter<DataModelIntersectionMember1PayloadType>
 {
-    public override PayloadType21 Read(
+    public override DataModelIntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -579,14 +582,14 @@ sealed class PayloadType21Converter : JsonConverter<PayloadType21>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Dispute" => PayloadType21.Dispute,
-            _ => (PayloadType21)(-1),
+            "Dispute" => DataModelIntersectionMember1PayloadType.Dispute,
+            _ => (DataModelIntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType21 value,
+        DataModelIntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -594,7 +597,7 @@ sealed class PayloadType21Converter : JsonConverter<PayloadType21>
             writer,
             value switch
             {
-                PayloadType21.Dispute => "Dispute",
+                DataModelIntersectionMember1PayloadType.Dispute => "Dispute",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -607,15 +610,15 @@ sealed class PayloadType21Converter : JsonConverter<PayloadType21>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(Type21Converter))]
-public enum Type21
+[JsonConverter(typeof(TypeModelConverter))]
+public enum TypeModel
 {
     DisputeCancelled,
 }
 
-sealed class Type21Converter : JsonConverter<Type21>
+sealed class TypeModelConverter : JsonConverter<TypeModel>
 {
-    public override Type21 Read(
+    public override TypeModel Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -623,18 +626,22 @@ sealed class Type21Converter : JsonConverter<Type21>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "dispute.cancelled" => Type21.DisputeCancelled,
-            _ => (Type21)(-1),
+            "dispute.cancelled" => TypeModel.DisputeCancelled,
+            _ => (TypeModel)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type21 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        TypeModel value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type21.DisputeCancelled => "dispute.cancelled",
+                TypeModel.DisputeCancelled => "dispute.cancelled",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

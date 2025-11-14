@@ -51,7 +51,7 @@ public sealed record class PaymentSucceededWebhookEvent
     /// <summary>
     /// Event-specific data
     /// </summary>
-    public required Data31 Data
+    public required Data10 Data
     {
         get
         {
@@ -61,7 +61,7 @@ public sealed record class PaymentSucceededWebhookEvent
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Data31>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<Data10>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentNullException("data")
@@ -109,7 +109,7 @@ public sealed record class PaymentSucceededWebhookEvent
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, Type31> Type
+    public required ApiEnum<string, Type10> Type
     {
         get
         {
@@ -119,7 +119,7 @@ public sealed record class PaymentSucceededWebhookEvent
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type31>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, Type10>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -167,8 +167,8 @@ public sealed record class PaymentSucceededWebhookEvent
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data31>))]
-public sealed record class Data31 : ModelBase, IFromRaw<Data31>
+[JsonConverter(typeof(ModelConverter<Data10>))]
+public sealed record class Data10 : ModelBase, IFromRaw<Data10>
 {
     public required BillingAddress Billing
     {
@@ -949,17 +949,17 @@ public sealed record class Data31 : ModelBase, IFromRaw<Data31>
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType31>? PayloadType
+    public ApiEnum<string, Data10IntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType31>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                Data10IntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -975,40 +975,40 @@ public sealed record class Data31 : ModelBase, IFromRaw<Data31>
         }
     }
 
-    public static implicit operator Payment(Data31 data31) =>
+    public static implicit operator Payment(Data10 data10) =>
         new()
         {
-            Billing = data31.Billing,
-            BrandID = data31.BrandID,
-            BusinessID = data31.BusinessID,
-            CreatedAt = data31.CreatedAt,
-            Currency = data31.Currency,
-            Customer = data31.Customer,
-            DigitalProductsDelivered = data31.DigitalProductsDelivered,
-            Disputes = data31.Disputes,
-            Metadata = data31.Metadata,
-            PaymentID = data31.PaymentID,
-            Refunds = data31.Refunds,
-            SettlementAmount = data31.SettlementAmount,
-            SettlementCurrency = data31.SettlementCurrency,
-            TotalAmount = data31.TotalAmount,
-            CardIssuingCountry = data31.CardIssuingCountry,
-            CardLastFour = data31.CardLastFour,
-            CardNetwork = data31.CardNetwork,
-            CardType = data31.CardType,
-            CheckoutSessionID = data31.CheckoutSessionID,
-            DiscountID = data31.DiscountID,
-            ErrorCode = data31.ErrorCode,
-            ErrorMessage = data31.ErrorMessage,
-            PaymentLink = data31.PaymentLink,
-            PaymentMethod = data31.PaymentMethod,
-            PaymentMethodType = data31.PaymentMethodType,
-            ProductCart = data31.ProductCart,
-            SettlementTax = data31.SettlementTax,
-            Status = data31.Status,
-            SubscriptionID = data31.SubscriptionID,
-            Tax = data31.Tax,
-            UpdatedAt = data31.UpdatedAt,
+            Billing = data10.Billing,
+            BrandID = data10.BrandID,
+            BusinessID = data10.BusinessID,
+            CreatedAt = data10.CreatedAt,
+            Currency = data10.Currency,
+            Customer = data10.Customer,
+            DigitalProductsDelivered = data10.DigitalProductsDelivered,
+            Disputes = data10.Disputes,
+            Metadata = data10.Metadata,
+            PaymentID = data10.PaymentID,
+            Refunds = data10.Refunds,
+            SettlementAmount = data10.SettlementAmount,
+            SettlementCurrency = data10.SettlementCurrency,
+            TotalAmount = data10.TotalAmount,
+            CardIssuingCountry = data10.CardIssuingCountry,
+            CardLastFour = data10.CardLastFour,
+            CardNetwork = data10.CardNetwork,
+            CardType = data10.CardType,
+            CheckoutSessionID = data10.CheckoutSessionID,
+            DiscountID = data10.DiscountID,
+            ErrorCode = data10.ErrorCode,
+            ErrorMessage = data10.ErrorMessage,
+            PaymentLink = data10.PaymentLink,
+            PaymentMethod = data10.PaymentMethod,
+            PaymentMethodType = data10.PaymentMethodType,
+            ProductCart = data10.ProductCart,
+            SettlementTax = data10.SettlementTax,
+            Status = data10.Status,
+            SubscriptionID = data10.SubscriptionID,
+            Tax = data10.Tax,
+            UpdatedAt = data10.UpdatedAt,
         };
 
     public override void Validate()
@@ -1056,44 +1056,46 @@ public sealed record class Data31 : ModelBase, IFromRaw<Data31>
         this.PayloadType?.Validate();
     }
 
-    public Data31() { }
+    public Data10() { }
 
-    public Data31(IReadOnlyDictionary<string, JsonElement> properties)
+    public Data10(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data31(FrozenDictionary<string, JsonElement> properties)
+    Data10(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Data31 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Data10 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember131>))]
-public sealed record class IntersectionMember131 : ModelBase, IFromRaw<IntersectionMember131>
+[JsonConverter(typeof(ModelConverter<Data10IntersectionMember1>))]
+public sealed record class Data10IntersectionMember1
+    : ModelBase,
+        IFromRaw<Data10IntersectionMember1>
 {
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType31>? PayloadType
+    public ApiEnum<string, Data10IntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType31>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                Data10IntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -1114,22 +1116,22 @@ public sealed record class IntersectionMember131 : ModelBase, IFromRaw<Intersect
         this.PayloadType?.Validate();
     }
 
-    public IntersectionMember131() { }
+    public Data10IntersectionMember1() { }
 
-    public IntersectionMember131(IReadOnlyDictionary<string, JsonElement> properties)
+    public Data10IntersectionMember1(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntersectionMember131(FrozenDictionary<string, JsonElement> properties)
+    Data10IntersectionMember1(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static IntersectionMember131 FromRawUnchecked(
+    public static Data10IntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -1140,15 +1142,16 @@ public sealed record class IntersectionMember131 : ModelBase, IFromRaw<Intersect
 /// <summary>
 /// The type of payload in the data field
 /// </summary>
-[JsonConverter(typeof(PayloadType31Converter))]
-public enum PayloadType31
+[JsonConverter(typeof(Data10IntersectionMember1PayloadTypeConverter))]
+public enum Data10IntersectionMember1PayloadType
 {
     Payment,
 }
 
-sealed class PayloadType31Converter : JsonConverter<PayloadType31>
+sealed class Data10IntersectionMember1PayloadTypeConverter
+    : JsonConverter<Data10IntersectionMember1PayloadType>
 {
-    public override PayloadType31 Read(
+    public override Data10IntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1156,14 +1159,14 @@ sealed class PayloadType31Converter : JsonConverter<PayloadType31>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Payment" => PayloadType31.Payment,
-            _ => (PayloadType31)(-1),
+            "Payment" => Data10IntersectionMember1PayloadType.Payment,
+            _ => (Data10IntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType31 value,
+        Data10IntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -1171,7 +1174,7 @@ sealed class PayloadType31Converter : JsonConverter<PayloadType31>
             writer,
             value switch
             {
-                PayloadType31.Payment => "Payment",
+                Data10IntersectionMember1PayloadType.Payment => "Payment",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1184,15 +1187,15 @@ sealed class PayloadType31Converter : JsonConverter<PayloadType31>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(Type31Converter))]
-public enum Type31
+[JsonConverter(typeof(Type10Converter))]
+public enum Type10
 {
     PaymentSucceeded,
 }
 
-sealed class Type31Converter : JsonConverter<Type31>
+sealed class Type10Converter : JsonConverter<Type10>
 {
-    public override Type31 Read(
+    public override Type10 Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1200,18 +1203,18 @@ sealed class Type31Converter : JsonConverter<Type31>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "payment.succeeded" => Type31.PaymentSucceeded,
-            _ => (Type31)(-1),
+            "payment.succeeded" => Type10.PaymentSucceeded,
+            _ => (Type10)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type31 value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, Type10 value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type31.PaymentSucceeded => "payment.succeeded",
+                Type10.PaymentSucceeded => "payment.succeeded",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

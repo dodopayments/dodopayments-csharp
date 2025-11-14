@@ -51,7 +51,7 @@ public sealed record class PaymentFailedWebhookEvent
     /// <summary>
     /// Event-specific data
     /// </summary>
-    public required Data8 Data
+    public required PaymentFailedWebhookEventData Data
     {
         get
         {
@@ -61,7 +61,10 @@ public sealed record class PaymentFailedWebhookEvent
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Data8>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<PaymentFailedWebhookEventData>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentNullException("data")
@@ -109,7 +112,7 @@ public sealed record class PaymentFailedWebhookEvent
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, Type8> Type
+    public required ApiEnum<string, PaymentFailedWebhookEventType> Type
     {
         get
         {
@@ -119,7 +122,7 @@ public sealed record class PaymentFailedWebhookEvent
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type8>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, PaymentFailedWebhookEventType>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -167,8 +170,10 @@ public sealed record class PaymentFailedWebhookEvent
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data8>))]
-public sealed record class Data8 : ModelBase, IFromRaw<Data8>
+[JsonConverter(typeof(ModelConverter<PaymentFailedWebhookEventData>))]
+public sealed record class PaymentFailedWebhookEventData
+    : ModelBase,
+        IFromRaw<PaymentFailedWebhookEventData>
 {
     public required BillingAddress Billing
     {
@@ -949,17 +954,17 @@ public sealed record class Data8 : ModelBase, IFromRaw<Data8>
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType8>? PayloadType
+    public ApiEnum<string, PaymentFailedWebhookEventDataIntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType8>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                PaymentFailedWebhookEventDataIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -975,40 +980,42 @@ public sealed record class Data8 : ModelBase, IFromRaw<Data8>
         }
     }
 
-    public static implicit operator Payment(Data8 data8) =>
+    public static implicit operator Payment(
+        PaymentFailedWebhookEventData paymentFailedWebhookEventData
+    ) =>
         new()
         {
-            Billing = data8.Billing,
-            BrandID = data8.BrandID,
-            BusinessID = data8.BusinessID,
-            CreatedAt = data8.CreatedAt,
-            Currency = data8.Currency,
-            Customer = data8.Customer,
-            DigitalProductsDelivered = data8.DigitalProductsDelivered,
-            Disputes = data8.Disputes,
-            Metadata = data8.Metadata,
-            PaymentID = data8.PaymentID,
-            Refunds = data8.Refunds,
-            SettlementAmount = data8.SettlementAmount,
-            SettlementCurrency = data8.SettlementCurrency,
-            TotalAmount = data8.TotalAmount,
-            CardIssuingCountry = data8.CardIssuingCountry,
-            CardLastFour = data8.CardLastFour,
-            CardNetwork = data8.CardNetwork,
-            CardType = data8.CardType,
-            CheckoutSessionID = data8.CheckoutSessionID,
-            DiscountID = data8.DiscountID,
-            ErrorCode = data8.ErrorCode,
-            ErrorMessage = data8.ErrorMessage,
-            PaymentLink = data8.PaymentLink,
-            PaymentMethod = data8.PaymentMethod,
-            PaymentMethodType = data8.PaymentMethodType,
-            ProductCart = data8.ProductCart,
-            SettlementTax = data8.SettlementTax,
-            Status = data8.Status,
-            SubscriptionID = data8.SubscriptionID,
-            Tax = data8.Tax,
-            UpdatedAt = data8.UpdatedAt,
+            Billing = paymentFailedWebhookEventData.Billing,
+            BrandID = paymentFailedWebhookEventData.BrandID,
+            BusinessID = paymentFailedWebhookEventData.BusinessID,
+            CreatedAt = paymentFailedWebhookEventData.CreatedAt,
+            Currency = paymentFailedWebhookEventData.Currency,
+            Customer = paymentFailedWebhookEventData.Customer,
+            DigitalProductsDelivered = paymentFailedWebhookEventData.DigitalProductsDelivered,
+            Disputes = paymentFailedWebhookEventData.Disputes,
+            Metadata = paymentFailedWebhookEventData.Metadata,
+            PaymentID = paymentFailedWebhookEventData.PaymentID,
+            Refunds = paymentFailedWebhookEventData.Refunds,
+            SettlementAmount = paymentFailedWebhookEventData.SettlementAmount,
+            SettlementCurrency = paymentFailedWebhookEventData.SettlementCurrency,
+            TotalAmount = paymentFailedWebhookEventData.TotalAmount,
+            CardIssuingCountry = paymentFailedWebhookEventData.CardIssuingCountry,
+            CardLastFour = paymentFailedWebhookEventData.CardLastFour,
+            CardNetwork = paymentFailedWebhookEventData.CardNetwork,
+            CardType = paymentFailedWebhookEventData.CardType,
+            CheckoutSessionID = paymentFailedWebhookEventData.CheckoutSessionID,
+            DiscountID = paymentFailedWebhookEventData.DiscountID,
+            ErrorCode = paymentFailedWebhookEventData.ErrorCode,
+            ErrorMessage = paymentFailedWebhookEventData.ErrorMessage,
+            PaymentLink = paymentFailedWebhookEventData.PaymentLink,
+            PaymentMethod = paymentFailedWebhookEventData.PaymentMethod,
+            PaymentMethodType = paymentFailedWebhookEventData.PaymentMethodType,
+            ProductCart = paymentFailedWebhookEventData.ProductCart,
+            SettlementTax = paymentFailedWebhookEventData.SettlementTax,
+            Status = paymentFailedWebhookEventData.Status,
+            SubscriptionID = paymentFailedWebhookEventData.SubscriptionID,
+            Tax = paymentFailedWebhookEventData.Tax,
+            UpdatedAt = paymentFailedWebhookEventData.UpdatedAt,
         };
 
     public override void Validate()
@@ -1056,44 +1063,48 @@ public sealed record class Data8 : ModelBase, IFromRaw<Data8>
         this.PayloadType?.Validate();
     }
 
-    public Data8() { }
+    public PaymentFailedWebhookEventData() { }
 
-    public Data8(IReadOnlyDictionary<string, JsonElement> properties)
+    public PaymentFailedWebhookEventData(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data8(FrozenDictionary<string, JsonElement> properties)
+    PaymentFailedWebhookEventData(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Data8 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static PaymentFailedWebhookEventData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember18>))]
-public sealed record class IntersectionMember18 : ModelBase, IFromRaw<IntersectionMember18>
+[JsonConverter(typeof(ModelConverter<PaymentFailedWebhookEventDataIntersectionMember1>))]
+public sealed record class PaymentFailedWebhookEventDataIntersectionMember1
+    : ModelBase,
+        IFromRaw<PaymentFailedWebhookEventDataIntersectionMember1>
 {
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType8>? PayloadType
+    public ApiEnum<string, PaymentFailedWebhookEventDataIntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType8>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                PaymentFailedWebhookEventDataIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -1114,22 +1125,26 @@ public sealed record class IntersectionMember18 : ModelBase, IFromRaw<Intersecti
         this.PayloadType?.Validate();
     }
 
-    public IntersectionMember18() { }
+    public PaymentFailedWebhookEventDataIntersectionMember1() { }
 
-    public IntersectionMember18(IReadOnlyDictionary<string, JsonElement> properties)
+    public PaymentFailedWebhookEventDataIntersectionMember1(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntersectionMember18(FrozenDictionary<string, JsonElement> properties)
+    PaymentFailedWebhookEventDataIntersectionMember1(
+        FrozenDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static IntersectionMember18 FromRawUnchecked(
+    public static PaymentFailedWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -1140,15 +1155,16 @@ public sealed record class IntersectionMember18 : ModelBase, IFromRaw<Intersecti
 /// <summary>
 /// The type of payload in the data field
 /// </summary>
-[JsonConverter(typeof(PayloadType8Converter))]
-public enum PayloadType8
+[JsonConverter(typeof(PaymentFailedWebhookEventDataIntersectionMember1PayloadTypeConverter))]
+public enum PaymentFailedWebhookEventDataIntersectionMember1PayloadType
 {
     Payment,
 }
 
-sealed class PayloadType8Converter : JsonConverter<PayloadType8>
+sealed class PaymentFailedWebhookEventDataIntersectionMember1PayloadTypeConverter
+    : JsonConverter<PaymentFailedWebhookEventDataIntersectionMember1PayloadType>
 {
-    public override PayloadType8 Read(
+    public override PaymentFailedWebhookEventDataIntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1156,14 +1172,14 @@ sealed class PayloadType8Converter : JsonConverter<PayloadType8>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Payment" => PayloadType8.Payment,
-            _ => (PayloadType8)(-1),
+            "Payment" => PaymentFailedWebhookEventDataIntersectionMember1PayloadType.Payment,
+            _ => (PaymentFailedWebhookEventDataIntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType8 value,
+        PaymentFailedWebhookEventDataIntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -1171,7 +1187,7 @@ sealed class PayloadType8Converter : JsonConverter<PayloadType8>
             writer,
             value switch
             {
-                PayloadType8.Payment => "Payment",
+                PaymentFailedWebhookEventDataIntersectionMember1PayloadType.Payment => "Payment",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1184,15 +1200,15 @@ sealed class PayloadType8Converter : JsonConverter<PayloadType8>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(Type8Converter))]
-public enum Type8
+[JsonConverter(typeof(PaymentFailedWebhookEventTypeConverter))]
+public enum PaymentFailedWebhookEventType
 {
     PaymentFailed,
 }
 
-sealed class Type8Converter : JsonConverter<Type8>
+sealed class PaymentFailedWebhookEventTypeConverter : JsonConverter<PaymentFailedWebhookEventType>
 {
-    public override Type8 Read(
+    public override PaymentFailedWebhookEventType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1200,18 +1216,22 @@ sealed class Type8Converter : JsonConverter<Type8>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "payment.failed" => Type8.PaymentFailed,
-            _ => (Type8)(-1),
+            "payment.failed" => PaymentFailedWebhookEventType.PaymentFailed,
+            _ => (PaymentFailedWebhookEventType)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type8 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        PaymentFailedWebhookEventType value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type8.PaymentFailed => "payment.failed",
+                PaymentFailedWebhookEventType.PaymentFailed => "payment.failed",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

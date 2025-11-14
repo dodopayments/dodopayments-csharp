@@ -51,7 +51,7 @@ public sealed record class SubscriptionRenewedWebhookEvent
     /// <summary>
     /// Event-specific data
     /// </summary>
-    public required Data19 Data
+    public required SubscriptionRenewedWebhookEventData Data
     {
         get
         {
@@ -61,7 +61,10 @@ public sealed record class SubscriptionRenewedWebhookEvent
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Data19>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<SubscriptionRenewedWebhookEventData>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentNullException("data")
@@ -109,7 +112,7 @@ public sealed record class SubscriptionRenewedWebhookEvent
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, Type19> Type
+    public required ApiEnum<string, SubscriptionRenewedWebhookEventType> Type
     {
         get
         {
@@ -119,7 +122,7 @@ public sealed record class SubscriptionRenewedWebhookEvent
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type19>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, SubscriptionRenewedWebhookEventType>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -167,8 +170,10 @@ public sealed record class SubscriptionRenewedWebhookEvent
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data19>))]
-public sealed record class Data19 : ModelBase, IFromRaw<Data19>
+[JsonConverter(typeof(ModelConverter<SubscriptionRenewedWebhookEventData>))]
+public sealed record class SubscriptionRenewedWebhookEventData
+    : ModelBase,
+        IFromRaw<SubscriptionRenewedWebhookEventData>
 {
     /// <summary>
     /// Addons associated with this subscription
@@ -907,17 +912,20 @@ public sealed record class Data19 : ModelBase, IFromRaw<Data19>
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType19>? PayloadType
+    public ApiEnum<
+        string,
+        SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType
+    >? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType19>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -933,36 +941,39 @@ public sealed record class Data19 : ModelBase, IFromRaw<Data19>
         }
     }
 
-    public static implicit operator Subscription(Data19 data19) =>
+    public static implicit operator Subscription(
+        SubscriptionRenewedWebhookEventData subscriptionRenewedWebhookEventData
+    ) =>
         new()
         {
-            Addons = data19.Addons,
-            Billing = data19.Billing,
-            CancelAtNextBillingDate = data19.CancelAtNextBillingDate,
-            CreatedAt = data19.CreatedAt,
-            Currency = data19.Currency,
-            Customer = data19.Customer,
-            Metadata = data19.Metadata,
-            Meters = data19.Meters,
-            NextBillingDate = data19.NextBillingDate,
-            OnDemand = data19.OnDemand,
-            PaymentFrequencyCount = data19.PaymentFrequencyCount,
-            PaymentFrequencyInterval = data19.PaymentFrequencyInterval,
-            PreviousBillingDate = data19.PreviousBillingDate,
-            ProductID = data19.ProductID,
-            Quantity = data19.Quantity,
-            RecurringPreTaxAmount = data19.RecurringPreTaxAmount,
-            Status = data19.Status,
-            SubscriptionID = data19.SubscriptionID,
-            SubscriptionPeriodCount = data19.SubscriptionPeriodCount,
-            SubscriptionPeriodInterval = data19.SubscriptionPeriodInterval,
-            TaxInclusive = data19.TaxInclusive,
-            TrialPeriodDays = data19.TrialPeriodDays,
-            CancelledAt = data19.CancelledAt,
-            DiscountCyclesRemaining = data19.DiscountCyclesRemaining,
-            DiscountID = data19.DiscountID,
-            ExpiresAt = data19.ExpiresAt,
-            TaxID = data19.TaxID,
+            Addons = subscriptionRenewedWebhookEventData.Addons,
+            Billing = subscriptionRenewedWebhookEventData.Billing,
+            CancelAtNextBillingDate = subscriptionRenewedWebhookEventData.CancelAtNextBillingDate,
+            CreatedAt = subscriptionRenewedWebhookEventData.CreatedAt,
+            Currency = subscriptionRenewedWebhookEventData.Currency,
+            Customer = subscriptionRenewedWebhookEventData.Customer,
+            Metadata = subscriptionRenewedWebhookEventData.Metadata,
+            Meters = subscriptionRenewedWebhookEventData.Meters,
+            NextBillingDate = subscriptionRenewedWebhookEventData.NextBillingDate,
+            OnDemand = subscriptionRenewedWebhookEventData.OnDemand,
+            PaymentFrequencyCount = subscriptionRenewedWebhookEventData.PaymentFrequencyCount,
+            PaymentFrequencyInterval = subscriptionRenewedWebhookEventData.PaymentFrequencyInterval,
+            PreviousBillingDate = subscriptionRenewedWebhookEventData.PreviousBillingDate,
+            ProductID = subscriptionRenewedWebhookEventData.ProductID,
+            Quantity = subscriptionRenewedWebhookEventData.Quantity,
+            RecurringPreTaxAmount = subscriptionRenewedWebhookEventData.RecurringPreTaxAmount,
+            Status = subscriptionRenewedWebhookEventData.Status,
+            SubscriptionID = subscriptionRenewedWebhookEventData.SubscriptionID,
+            SubscriptionPeriodCount = subscriptionRenewedWebhookEventData.SubscriptionPeriodCount,
+            SubscriptionPeriodInterval =
+                subscriptionRenewedWebhookEventData.SubscriptionPeriodInterval,
+            TaxInclusive = subscriptionRenewedWebhookEventData.TaxInclusive,
+            TrialPeriodDays = subscriptionRenewedWebhookEventData.TrialPeriodDays,
+            CancelledAt = subscriptionRenewedWebhookEventData.CancelledAt,
+            DiscountCyclesRemaining = subscriptionRenewedWebhookEventData.DiscountCyclesRemaining,
+            DiscountID = subscriptionRenewedWebhookEventData.DiscountID,
+            ExpiresAt = subscriptionRenewedWebhookEventData.ExpiresAt,
+            TaxID = subscriptionRenewedWebhookEventData.TaxID,
         };
 
     public override void Validate()
@@ -1003,44 +1014,51 @@ public sealed record class Data19 : ModelBase, IFromRaw<Data19>
         this.PayloadType?.Validate();
     }
 
-    public Data19() { }
+    public SubscriptionRenewedWebhookEventData() { }
 
-    public Data19(IReadOnlyDictionary<string, JsonElement> properties)
+    public SubscriptionRenewedWebhookEventData(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data19(FrozenDictionary<string, JsonElement> properties)
+    SubscriptionRenewedWebhookEventData(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Data19 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static SubscriptionRenewedWebhookEventData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember119>))]
-public sealed record class IntersectionMember119 : ModelBase, IFromRaw<IntersectionMember119>
+[JsonConverter(typeof(ModelConverter<SubscriptionRenewedWebhookEventDataIntersectionMember1>))]
+public sealed record class SubscriptionRenewedWebhookEventDataIntersectionMember1
+    : ModelBase,
+        IFromRaw<SubscriptionRenewedWebhookEventDataIntersectionMember1>
 {
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType19>? PayloadType
+    public ApiEnum<
+        string,
+        SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType
+    >? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType19>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -1061,22 +1079,26 @@ public sealed record class IntersectionMember119 : ModelBase, IFromRaw<Intersect
         this.PayloadType?.Validate();
     }
 
-    public IntersectionMember119() { }
+    public SubscriptionRenewedWebhookEventDataIntersectionMember1() { }
 
-    public IntersectionMember119(IReadOnlyDictionary<string, JsonElement> properties)
+    public SubscriptionRenewedWebhookEventDataIntersectionMember1(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntersectionMember119(FrozenDictionary<string, JsonElement> properties)
+    SubscriptionRenewedWebhookEventDataIntersectionMember1(
+        FrozenDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static IntersectionMember119 FromRawUnchecked(
+    public static SubscriptionRenewedWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -1087,15 +1109,16 @@ public sealed record class IntersectionMember119 : ModelBase, IFromRaw<Intersect
 /// <summary>
 /// The type of payload in the data field
 /// </summary>
-[JsonConverter(typeof(PayloadType19Converter))]
-public enum PayloadType19
+[JsonConverter(typeof(SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadTypeConverter))]
+public enum SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType
 {
     Subscription,
 }
 
-sealed class PayloadType19Converter : JsonConverter<PayloadType19>
+sealed class SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadTypeConverter
+    : JsonConverter<SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType>
 {
-    public override PayloadType19 Read(
+    public override SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1103,14 +1126,15 @@ sealed class PayloadType19Converter : JsonConverter<PayloadType19>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Subscription" => PayloadType19.Subscription,
-            _ => (PayloadType19)(-1),
+            "Subscription" =>
+                SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            _ => (SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType19 value,
+        SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -1118,7 +1142,8 @@ sealed class PayloadType19Converter : JsonConverter<PayloadType19>
             writer,
             value switch
             {
-                PayloadType19.Subscription => "Subscription",
+                SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType.Subscription =>
+                    "Subscription",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1131,15 +1156,16 @@ sealed class PayloadType19Converter : JsonConverter<PayloadType19>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(Type19Converter))]
-public enum Type19
+[JsonConverter(typeof(SubscriptionRenewedWebhookEventTypeConverter))]
+public enum SubscriptionRenewedWebhookEventType
 {
     SubscriptionRenewed,
 }
 
-sealed class Type19Converter : JsonConverter<Type19>
+sealed class SubscriptionRenewedWebhookEventTypeConverter
+    : JsonConverter<SubscriptionRenewedWebhookEventType>
 {
-    public override Type19 Read(
+    public override SubscriptionRenewedWebhookEventType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1147,18 +1173,22 @@ sealed class Type19Converter : JsonConverter<Type19>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "subscription.renewed" => Type19.SubscriptionRenewed,
-            _ => (Type19)(-1),
+            "subscription.renewed" => SubscriptionRenewedWebhookEventType.SubscriptionRenewed,
+            _ => (SubscriptionRenewedWebhookEventType)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type19 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionRenewedWebhookEventType value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type19.SubscriptionRenewed => "subscription.renewed",
+                SubscriptionRenewedWebhookEventType.SubscriptionRenewed => "subscription.renewed",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

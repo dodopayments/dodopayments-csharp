@@ -17,8 +17,8 @@ namespace DodoPayments.Client.Models.Meters;
 /// Each filter has a conjunction (and/or) and clauses that can be either direct conditions
 /// or nested filters.</para>
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilter>))]
-public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
+[JsonConverter(typeof(ModelConverter<MeterMeterFilter>))]
+public sealed record class MeterMeterFilter : ModelBase, IFromRaw<MeterMeterFilter>
 {
     /// <summary>
     /// Filter clauses - can be direct conditions or nested filters (up to 3 levels deep)
@@ -51,7 +51,7 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
     /// <summary>
     /// Logical conjunction to apply between clauses (and/or)
     /// </summary>
-    public required ApiEnum<string, Conjunction2> Conjunction
+    public required ApiEnum<string, MeterMeterFilterConjunction> Conjunction
     {
         get
         {
@@ -64,7 +64,7 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Conjunction2>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, MeterMeterFilterConjunction>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -84,22 +84,24 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
         this.Conjunction.Validate();
     }
 
-    public MeterFilter() { }
+    public MeterMeterFilter() { }
 
-    public MeterFilter(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterMeterFilter(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilter(FrozenDictionary<string, JsonElement> properties)
+    MeterMeterFilter(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static MeterMeterFilter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
@@ -118,7 +120,7 @@ public record class Clauses
         Value = ImmutableArray.ToImmutableArray(value);
     }
 
-    public Clauses(IReadOnlyList<MeterFilterModel> value)
+    public Clauses(IReadOnlyList<MeterFilter> value)
     {
         Value = ImmutableArray.ToImmutableArray(value);
     }
@@ -141,17 +143,15 @@ public record class Clauses
         return value != null;
     }
 
-    public bool TryPickNestedMeterFilters(
-        [NotNullWhen(true)] out IReadOnlyList<MeterFilterModel>? value
-    )
+    public bool TryPickNestedMeterFilters([NotNullWhen(true)] out IReadOnlyList<MeterFilter>? value)
     {
-        value = this.Value as IReadOnlyList<MeterFilterModel>;
+        value = this.Value as IReadOnlyList<MeterFilter>;
         return value != null;
     }
 
     public void Switch(
         System::Action<IReadOnlyList<MeterFilterCondition>> directFilterConditions,
-        System::Action<IReadOnlyList<MeterFilterModel>> nestedMeterFilters
+        System::Action<IReadOnlyList<MeterFilter>> nestedMeterFilters
     )
     {
         switch (this.Value)
@@ -159,7 +159,7 @@ public record class Clauses
             case List<MeterFilterCondition> value:
                 directFilterConditions(value);
                 break;
-            case List<MeterFilterModel> value:
+            case List<MeterFilter> value:
                 nestedMeterFilters(value);
                 break;
             default:
@@ -171,13 +171,13 @@ public record class Clauses
 
     public T Match<T>(
         System::Func<IReadOnlyList<MeterFilterCondition>, T> directFilterConditions,
-        System::Func<IReadOnlyList<MeterFilterModel>, T> nestedMeterFilters
+        System::Func<IReadOnlyList<MeterFilter>, T> nestedMeterFilters
     )
     {
         return this.Value switch
         {
             IReadOnlyList<MeterFilterCondition> value => directFilterConditions(value),
-            IReadOnlyList<MeterFilterModel> value => nestedMeterFilters(value),
+            IReadOnlyList<MeterFilter> value => nestedMeterFilters(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Clauses"
             ),
@@ -187,8 +187,8 @@ public record class Clauses
     public static implicit operator Clauses(List<MeterFilterCondition> value) =>
         new((IReadOnlyList<MeterFilterCondition>)value);
 
-    public static implicit operator Clauses(List<MeterFilterModel> value) =>
-        new((IReadOnlyList<MeterFilterModel>)value);
+    public static implicit operator Clauses(List<MeterFilter> value) =>
+        new((IReadOnlyList<MeterFilter>)value);
 
     public void Validate()
     {
@@ -235,10 +235,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilterModel>>(
-                ref reader,
-                options
-            );
+            var deserialized = JsonSerializer.Deserialize<List<MeterFilter>>(ref reader, options);
             if (deserialized != null)
             {
                 return new Clauses(deserialized);
@@ -249,7 +246,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'List<MeterFilterModel>'",
+                    "Data does not match union variant 'List<MeterFilter>'",
                     e
                 )
             );
@@ -326,7 +323,7 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
     /// <summary>
     /// Filter value - can be string, number, or boolean
     /// </summary>
-    public required ValueModel Value
+    public required MeterFilterConditionValue Value
     {
         get
         {
@@ -336,7 +333,10 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
                     new System::ArgumentOutOfRangeException("value", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ValueModel>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<MeterFilterConditionValue>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'value' cannot be null",
                     new System::ArgumentNullException("value")
@@ -442,32 +442,32 @@ sealed class OperatorConverter : JsonConverter<Operator>
 /// <summary>
 /// Filter value - can be string, number, or boolean
 /// </summary>
-[JsonConverter(typeof(ValueModelConverter))]
-public record class ValueModel
+[JsonConverter(typeof(MeterFilterConditionValueConverter))]
+public record class MeterFilterConditionValue
 {
     public object Value { get; private init; }
 
-    public ValueModel(string value)
+    public MeterFilterConditionValue(string value)
     {
         Value = value;
     }
 
-    public ValueModel(double value)
+    public MeterFilterConditionValue(double value)
     {
         Value = value;
     }
 
-    public ValueModel(bool value)
+    public MeterFilterConditionValue(bool value)
     {
         Value = value;
     }
 
-    ValueModel(UnknownVariant value)
+    MeterFilterConditionValue(UnknownVariant value)
     {
         Value = value;
     }
 
-    public static ValueModel CreateUnknownVariant(JsonElement value)
+    public static MeterFilterConditionValue CreateUnknownVariant(JsonElement value)
     {
         return new(new UnknownVariant(value));
     }
@@ -509,7 +509,7 @@ public record class ValueModel
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of ValueModel"
+                    "Data did not match any variant of MeterFilterConditionValue"
                 );
         }
     }
@@ -526,23 +526,23 @@ public record class ValueModel
             double value => @double(value),
             bool value => @bool(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of ValueModel"
+                "Data did not match any variant of MeterFilterConditionValue"
             ),
         };
     }
 
-    public static implicit operator ValueModel(string value) => new(value);
+    public static implicit operator MeterFilterConditionValue(string value) => new(value);
 
-    public static implicit operator ValueModel(double value) => new(value);
+    public static implicit operator MeterFilterConditionValue(double value) => new(value);
 
-    public static implicit operator ValueModel(bool value) => new(value);
+    public static implicit operator MeterFilterConditionValue(bool value) => new(value);
 
     public void Validate()
     {
         if (this.Value is UnknownVariant)
         {
             throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of ValueModel"
+                "Data did not match any variant of MeterFilterConditionValue"
             );
         }
     }
@@ -550,9 +550,9 @@ public record class ValueModel
     record struct UnknownVariant(JsonElement value);
 }
 
-sealed class ValueModelConverter : JsonConverter<ValueModel>
+sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterConditionValue>
 {
-    public override ValueModel? Read(
+    public override MeterFilterConditionValue? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -565,7 +565,7 @@ sealed class ValueModelConverter : JsonConverter<ValueModel>
             var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
             if (deserialized != null)
             {
-                return new ValueModel(deserialized);
+                return new MeterFilterConditionValue(deserialized);
             }
         }
         catch (System::Exception e)
@@ -581,7 +581,9 @@ sealed class ValueModelConverter : JsonConverter<ValueModel>
 
         try
         {
-            return new ValueModel(JsonSerializer.Deserialize<double>(ref reader, options));
+            return new MeterFilterConditionValue(
+                JsonSerializer.Deserialize<double>(ref reader, options)
+            );
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -596,7 +598,9 @@ sealed class ValueModelConverter : JsonConverter<ValueModel>
 
         try
         {
-            return new ValueModel(JsonSerializer.Deserialize<bool>(ref reader, options));
+            return new MeterFilterConditionValue(
+                JsonSerializer.Deserialize<bool>(ref reader, options)
+            );
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -611,7 +615,7 @@ sealed class ValueModelConverter : JsonConverter<ValueModel>
 
     public override void Write(
         Utf8JsonWriter writer,
-        ValueModel value,
+        MeterFilterConditionValue value,
         JsonSerializerOptions options
     )
     {
@@ -623,13 +627,13 @@ sealed class ValueModelConverter : JsonConverter<ValueModel>
 /// <summary>
 /// Level 1 nested filter - can contain Level 2 filters
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilterModel>))]
-public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterModel>
+[JsonConverter(typeof(ModelConverter<MeterFilter>))]
+public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
 {
     /// <summary>
     /// Level 1: Can be conditions or nested filters (2 more levels allowed)
     /// </summary>
-    public required ClausesModel Clauses
+    public required MeterFilterClauses Clauses
     {
         get
         {
@@ -639,7 +643,10 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
                     new System::ArgumentOutOfRangeException("clauses", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ClausesModel>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<MeterFilterClauses>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'clauses' cannot be null",
                     new System::ArgumentNullException("clauses")
@@ -654,7 +661,7 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
         }
     }
 
-    public required ApiEnum<string, Conjunction1> Conjunction
+    public required ApiEnum<string, MeterFilterConjunction> Conjunction
     {
         get
         {
@@ -667,7 +674,7 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Conjunction1>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterConjunction>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -687,24 +694,22 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
         this.Conjunction.Validate();
     }
 
-    public MeterFilterModel() { }
+    public MeterFilter() { }
 
-    public MeterFilterModel(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterFilter(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilterModel(FrozenDictionary<string, JsonElement> properties)
+    MeterFilter(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilterModel FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
-    )
+    public static MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
@@ -713,27 +718,27 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
 /// <summary>
 /// Level 1: Can be conditions or nested filters (2 more levels allowed)
 /// </summary>
-[JsonConverter(typeof(ClausesModelConverter))]
-public record class ClausesModel
+[JsonConverter(typeof(MeterFilterClausesConverter))]
+public record class MeterFilterClauses
 {
     public object Value { get; private init; }
 
-    public ClausesModel(IReadOnlyList<MeterFilterConditionModel> value)
+    public MeterFilterClauses(IReadOnlyList<MeterFilterConditionModel> value)
     {
         Value = ImmutableArray.ToImmutableArray(value);
     }
 
-    public ClausesModel(IReadOnlyList<MeterFilter1> value)
+    public MeterFilterClauses(IReadOnlyList<MeterFilterModel> value)
     {
         Value = ImmutableArray.ToImmutableArray(value);
     }
 
-    ClausesModel(UnknownVariant value)
+    MeterFilterClauses(UnknownVariant value)
     {
         Value = value;
     }
 
-    public static ClausesModel CreateUnknownVariant(JsonElement value)
+    public static MeterFilterClauses CreateUnknownVariant(JsonElement value)
     {
         return new(new UnknownVariant(value));
     }
@@ -747,16 +752,16 @@ public record class ClausesModel
     }
 
     public bool TryPickLevel1NestedFilters(
-        [NotNullWhen(true)] out IReadOnlyList<MeterFilter1>? value
+        [NotNullWhen(true)] out IReadOnlyList<MeterFilterModel>? value
     )
     {
-        value = this.Value as IReadOnlyList<MeterFilter1>;
+        value = this.Value as IReadOnlyList<MeterFilterModel>;
         return value != null;
     }
 
     public void Switch(
         System::Action<IReadOnlyList<MeterFilterConditionModel>> level1FilterConditions,
-        System::Action<IReadOnlyList<MeterFilter1>> level1NestedFilters
+        System::Action<IReadOnlyList<MeterFilterModel>> level1NestedFilters
     )
     {
         switch (this.Value)
@@ -764,43 +769,43 @@ public record class ClausesModel
             case List<MeterFilterConditionModel> value:
                 level1FilterConditions(value);
                 break;
-            case List<MeterFilter1> value:
+            case List<MeterFilterModel> value:
                 level1NestedFilters(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of ClausesModel"
+                    "Data did not match any variant of MeterFilterClauses"
                 );
         }
     }
 
     public T Match<T>(
         System::Func<IReadOnlyList<MeterFilterConditionModel>, T> level1FilterConditions,
-        System::Func<IReadOnlyList<MeterFilter1>, T> level1NestedFilters
+        System::Func<IReadOnlyList<MeterFilterModel>, T> level1NestedFilters
     )
     {
         return this.Value switch
         {
             IReadOnlyList<MeterFilterConditionModel> value => level1FilterConditions(value),
-            IReadOnlyList<MeterFilter1> value => level1NestedFilters(value),
+            IReadOnlyList<MeterFilterModel> value => level1NestedFilters(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of ClausesModel"
+                "Data did not match any variant of MeterFilterClauses"
             ),
         };
     }
 
-    public static implicit operator ClausesModel(List<MeterFilterConditionModel> value) =>
+    public static implicit operator MeterFilterClauses(List<MeterFilterConditionModel> value) =>
         new((IReadOnlyList<MeterFilterConditionModel>)value);
 
-    public static implicit operator ClausesModel(List<MeterFilter1> value) =>
-        new((IReadOnlyList<MeterFilter1>)value);
+    public static implicit operator MeterFilterClauses(List<MeterFilterModel> value) =>
+        new((IReadOnlyList<MeterFilterModel>)value);
 
     public void Validate()
     {
         if (this.Value is UnknownVariant)
         {
             throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of ClausesModel"
+                "Data did not match any variant of MeterFilterClauses"
             );
         }
     }
@@ -808,9 +813,9 @@ public record class ClausesModel
     record struct UnknownVariant(JsonElement value);
 }
 
-sealed class ClausesModelConverter : JsonConverter<ClausesModel>
+sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
 {
-    public override ClausesModel? Read(
+    public override MeterFilterClauses? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -826,7 +831,7 @@ sealed class ClausesModelConverter : JsonConverter<ClausesModel>
             );
             if (deserialized != null)
             {
-                return new ClausesModel(deserialized);
+                return new MeterFilterClauses(deserialized);
             }
         }
         catch (System::Exception e)
@@ -842,10 +847,13 @@ sealed class ClausesModelConverter : JsonConverter<ClausesModel>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilter1>>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<List<MeterFilterModel>>(
+                ref reader,
+                options
+            );
             if (deserialized != null)
             {
-                return new ClausesModel(deserialized);
+                return new MeterFilterClauses(deserialized);
             }
         }
         catch (System::Exception e)
@@ -853,7 +861,7 @@ sealed class ClausesModelConverter : JsonConverter<ClausesModel>
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'List<MeterFilter1>'",
+                    "Data does not match union variant 'List<MeterFilterModel>'",
                     e
                 )
             );
@@ -864,7 +872,7 @@ sealed class ClausesModelConverter : JsonConverter<ClausesModel>
 
     public override void Write(
         Utf8JsonWriter writer,
-        ClausesModel value,
+        MeterFilterClauses value,
         JsonSerializerOptions options
     )
     {
@@ -909,7 +917,7 @@ public sealed record class MeterFilterConditionModel
         }
     }
 
-    public required ApiEnum<string, OperatorModel> Operator
+    public required ApiEnum<string, MeterFilterConditionModelOperator> Operator
     {
         get
         {
@@ -919,7 +927,7 @@ public sealed record class MeterFilterConditionModel
                     new System::ArgumentOutOfRangeException("operator", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, OperatorModel>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterConditionModelOperator>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -936,7 +944,7 @@ public sealed record class MeterFilterConditionModel
     /// <summary>
     /// Filter value - can be string, number, or boolean
     /// </summary>
-    public required Value1 Value
+    public required MeterFilterConditionModelValue Value
     {
         get
         {
@@ -946,7 +954,10 @@ public sealed record class MeterFilterConditionModel
                     new System::ArgumentOutOfRangeException("value", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Value1>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<MeterFilterConditionModelValue>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'value' cannot be null",
                     new System::ArgumentNullException("value")
@@ -991,8 +1002,8 @@ public sealed record class MeterFilterConditionModel
     }
 }
 
-[JsonConverter(typeof(OperatorModelConverter))]
-public enum OperatorModel
+[JsonConverter(typeof(MeterFilterConditionModelOperatorConverter))]
+public enum MeterFilterConditionModelOperator
 {
     Equals,
     NotEquals,
@@ -1004,9 +1015,10 @@ public enum OperatorModel
     DoesNotContain,
 }
 
-sealed class OperatorModelConverter : JsonConverter<OperatorModel>
+sealed class MeterFilterConditionModelOperatorConverter
+    : JsonConverter<MeterFilterConditionModelOperator>
 {
-    public override OperatorModel Read(
+    public override MeterFilterConditionModelOperator Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1014,21 +1026,21 @@ sealed class OperatorModelConverter : JsonConverter<OperatorModel>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "equals" => OperatorModel.Equals,
-            "not_equals" => OperatorModel.NotEquals,
-            "greater_than" => OperatorModel.GreaterThan,
-            "greater_than_or_equals" => OperatorModel.GreaterThanOrEquals,
-            "less_than" => OperatorModel.LessThan,
-            "less_than_or_equals" => OperatorModel.LessThanOrEquals,
-            "contains" => OperatorModel.Contains,
-            "does_not_contain" => OperatorModel.DoesNotContain,
-            _ => (OperatorModel)(-1),
+            "equals" => MeterFilterConditionModelOperator.Equals,
+            "not_equals" => MeterFilterConditionModelOperator.NotEquals,
+            "greater_than" => MeterFilterConditionModelOperator.GreaterThan,
+            "greater_than_or_equals" => MeterFilterConditionModelOperator.GreaterThanOrEquals,
+            "less_than" => MeterFilterConditionModelOperator.LessThan,
+            "less_than_or_equals" => MeterFilterConditionModelOperator.LessThanOrEquals,
+            "contains" => MeterFilterConditionModelOperator.Contains,
+            "does_not_contain" => MeterFilterConditionModelOperator.DoesNotContain,
+            _ => (MeterFilterConditionModelOperator)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        OperatorModel value,
+        MeterFilterConditionModelOperator value,
         JsonSerializerOptions options
     )
     {
@@ -1036,14 +1048,14 @@ sealed class OperatorModelConverter : JsonConverter<OperatorModel>
             writer,
             value switch
             {
-                OperatorModel.Equals => "equals",
-                OperatorModel.NotEquals => "not_equals",
-                OperatorModel.GreaterThan => "greater_than",
-                OperatorModel.GreaterThanOrEquals => "greater_than_or_equals",
-                OperatorModel.LessThan => "less_than",
-                OperatorModel.LessThanOrEquals => "less_than_or_equals",
-                OperatorModel.Contains => "contains",
-                OperatorModel.DoesNotContain => "does_not_contain",
+                MeterFilterConditionModelOperator.Equals => "equals",
+                MeterFilterConditionModelOperator.NotEquals => "not_equals",
+                MeterFilterConditionModelOperator.GreaterThan => "greater_than",
+                MeterFilterConditionModelOperator.GreaterThanOrEquals => "greater_than_or_equals",
+                MeterFilterConditionModelOperator.LessThan => "less_than",
+                MeterFilterConditionModelOperator.LessThanOrEquals => "less_than_or_equals",
+                MeterFilterConditionModelOperator.Contains => "contains",
+                MeterFilterConditionModelOperator.DoesNotContain => "does_not_contain",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1056,32 +1068,32 @@ sealed class OperatorModelConverter : JsonConverter<OperatorModel>
 /// <summary>
 /// Filter value - can be string, number, or boolean
 /// </summary>
-[JsonConverter(typeof(Value1Converter))]
-public record class Value1
+[JsonConverter(typeof(MeterFilterConditionModelValueConverter))]
+public record class MeterFilterConditionModelValue
 {
     public object Value { get; private init; }
 
-    public Value1(string value)
+    public MeterFilterConditionModelValue(string value)
     {
         Value = value;
     }
 
-    public Value1(double value)
+    public MeterFilterConditionModelValue(double value)
     {
         Value = value;
     }
 
-    public Value1(bool value)
+    public MeterFilterConditionModelValue(bool value)
     {
         Value = value;
     }
 
-    Value1(UnknownVariant value)
+    MeterFilterConditionModelValue(UnknownVariant value)
     {
         Value = value;
     }
 
-    public static Value1 CreateUnknownVariant(JsonElement value)
+    public static MeterFilterConditionModelValue CreateUnknownVariant(JsonElement value)
     {
         return new(new UnknownVariant(value));
     }
@@ -1123,7 +1135,7 @@ public record class Value1
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of Value1"
+                    "Data did not match any variant of MeterFilterConditionModelValue"
                 );
         }
     }
@@ -1140,31 +1152,33 @@ public record class Value1
             double value => @double(value),
             bool value => @bool(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Value1"
+                "Data did not match any variant of MeterFilterConditionModelValue"
             ),
         };
     }
 
-    public static implicit operator Value1(string value) => new(value);
+    public static implicit operator MeterFilterConditionModelValue(string value) => new(value);
 
-    public static implicit operator Value1(double value) => new(value);
+    public static implicit operator MeterFilterConditionModelValue(double value) => new(value);
 
-    public static implicit operator Value1(bool value) => new(value);
+    public static implicit operator MeterFilterConditionModelValue(bool value) => new(value);
 
     public void Validate()
     {
         if (this.Value is UnknownVariant)
         {
-            throw new DodoPaymentsInvalidDataException("Data did not match any variant of Value1");
+            throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of MeterFilterConditionModelValue"
+            );
         }
     }
 
     record struct UnknownVariant(JsonElement value);
 }
 
-sealed class Value1Converter : JsonConverter<Value1>
+sealed class MeterFilterConditionModelValueConverter : JsonConverter<MeterFilterConditionModelValue>
 {
-    public override Value1? Read(
+    public override MeterFilterConditionModelValue? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1177,7 +1191,7 @@ sealed class Value1Converter : JsonConverter<Value1>
             var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
             if (deserialized != null)
             {
-                return new Value1(deserialized);
+                return new MeterFilterConditionModelValue(deserialized);
             }
         }
         catch (System::Exception e)
@@ -1193,7 +1207,9 @@ sealed class Value1Converter : JsonConverter<Value1>
 
         try
         {
-            return new Value1(JsonSerializer.Deserialize<double>(ref reader, options));
+            return new MeterFilterConditionModelValue(
+                JsonSerializer.Deserialize<double>(ref reader, options)
+            );
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -1208,7 +1224,9 @@ sealed class Value1Converter : JsonConverter<Value1>
 
         try
         {
-            return new Value1(JsonSerializer.Deserialize<bool>(ref reader, options));
+            return new MeterFilterConditionModelValue(
+                JsonSerializer.Deserialize<bool>(ref reader, options)
+            );
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -1221,7 +1239,11 @@ sealed class Value1Converter : JsonConverter<Value1>
         throw new System::AggregateException(exceptions);
     }
 
-    public override void Write(Utf8JsonWriter writer, Value1 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        MeterFilterConditionModelValue value,
+        JsonSerializerOptions options
+    )
     {
         object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);
@@ -1231,13 +1253,13 @@ sealed class Value1Converter : JsonConverter<Value1>
 /// <summary>
 /// Level 2 nested filter
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilter1>))]
-public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
+[JsonConverter(typeof(ModelConverter<MeterFilterModel>))]
+public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterModel>
 {
     /// <summary>
     /// Level 2: Can be conditions or nested filters (1 more level allowed)
     /// </summary>
-    public required Clauses1 Clauses
+    public required MeterFilterModelClauses Clauses
     {
         get
         {
@@ -1247,7 +1269,10 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
                     new System::ArgumentOutOfRangeException("clauses", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Clauses1>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<MeterFilterModelClauses>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'clauses' cannot be null",
                     new System::ArgumentNullException("clauses")
@@ -1262,7 +1287,7 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
         }
     }
 
-    public required ApiEnum<string, ConjunctionModel> Conjunction
+    public required ApiEnum<string, MeterFilterModelConjunction> Conjunction
     {
         get
         {
@@ -1275,7 +1300,7 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, ConjunctionModel>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterModelConjunction>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1295,22 +1320,24 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
         this.Conjunction.Validate();
     }
 
-    public MeterFilter1() { }
+    public MeterFilterModel() { }
 
-    public MeterFilter1(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterFilterModel(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilter1(FrozenDictionary<string, JsonElement> properties)
+    MeterFilterModel(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilter1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static MeterFilterModel FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
@@ -1319,27 +1346,27 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
 /// <summary>
 /// Level 2: Can be conditions or nested filters (1 more level allowed)
 /// </summary>
-[JsonConverter(typeof(Clauses1Converter))]
-public record class Clauses1
+[JsonConverter(typeof(MeterFilterModelClausesConverter))]
+public record class MeterFilterModelClauses
 {
     public object Value { get; private init; }
 
-    public Clauses1(IReadOnlyList<MeterFilterCondition1> value)
+    public MeterFilterModelClauses(IReadOnlyList<MeterFilterCondition1> value)
     {
         Value = ImmutableArray.ToImmutableArray(value);
     }
 
-    public Clauses1(IReadOnlyList<MeterFilter2> value)
+    public MeterFilterModelClauses(IReadOnlyList<MeterFilter1> value)
     {
         Value = ImmutableArray.ToImmutableArray(value);
     }
 
-    Clauses1(UnknownVariant value)
+    MeterFilterModelClauses(UnknownVariant value)
     {
         Value = value;
     }
 
-    public static Clauses1 CreateUnknownVariant(JsonElement value)
+    public static MeterFilterModelClauses CreateUnknownVariant(JsonElement value)
     {
         return new(new UnknownVariant(value));
     }
@@ -1353,16 +1380,16 @@ public record class Clauses1
     }
 
     public bool TryPickLevel2NestedFilters(
-        [NotNullWhen(true)] out IReadOnlyList<MeterFilter2>? value
+        [NotNullWhen(true)] out IReadOnlyList<MeterFilter1>? value
     )
     {
-        value = this.Value as IReadOnlyList<MeterFilter2>;
+        value = this.Value as IReadOnlyList<MeterFilter1>;
         return value != null;
     }
 
     public void Switch(
         System::Action<IReadOnlyList<MeterFilterCondition1>> level2FilterConditions,
-        System::Action<IReadOnlyList<MeterFilter2>> level2NestedFilters
+        System::Action<IReadOnlyList<MeterFilter1>> level2NestedFilters
     )
     {
         switch (this.Value)
@@ -1370,43 +1397,43 @@ public record class Clauses1
             case List<MeterFilterCondition1> value:
                 level2FilterConditions(value);
                 break;
-            case List<MeterFilter2> value:
+            case List<MeterFilter1> value:
                 level2NestedFilters(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of Clauses1"
+                    "Data did not match any variant of MeterFilterModelClauses"
                 );
         }
     }
 
     public T Match<T>(
         System::Func<IReadOnlyList<MeterFilterCondition1>, T> level2FilterConditions,
-        System::Func<IReadOnlyList<MeterFilter2>, T> level2NestedFilters
+        System::Func<IReadOnlyList<MeterFilter1>, T> level2NestedFilters
     )
     {
         return this.Value switch
         {
             IReadOnlyList<MeterFilterCondition1> value => level2FilterConditions(value),
-            IReadOnlyList<MeterFilter2> value => level2NestedFilters(value),
+            IReadOnlyList<MeterFilter1> value => level2NestedFilters(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Clauses1"
+                "Data did not match any variant of MeterFilterModelClauses"
             ),
         };
     }
 
-    public static implicit operator Clauses1(List<MeterFilterCondition1> value) =>
+    public static implicit operator MeterFilterModelClauses(List<MeterFilterCondition1> value) =>
         new((IReadOnlyList<MeterFilterCondition1>)value);
 
-    public static implicit operator Clauses1(List<MeterFilter2> value) =>
-        new((IReadOnlyList<MeterFilter2>)value);
+    public static implicit operator MeterFilterModelClauses(List<MeterFilter1> value) =>
+        new((IReadOnlyList<MeterFilter1>)value);
 
     public void Validate()
     {
         if (this.Value is UnknownVariant)
         {
             throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Clauses1"
+                "Data did not match any variant of MeterFilterModelClauses"
             );
         }
     }
@@ -1414,9 +1441,9 @@ public record class Clauses1
     record struct UnknownVariant(JsonElement value);
 }
 
-sealed class Clauses1Converter : JsonConverter<Clauses1>
+sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelClauses>
 {
-    public override Clauses1? Read(
+    public override MeterFilterModelClauses? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1432,7 +1459,7 @@ sealed class Clauses1Converter : JsonConverter<Clauses1>
             );
             if (deserialized != null)
             {
-                return new Clauses1(deserialized);
+                return new MeterFilterModelClauses(deserialized);
             }
         }
         catch (System::Exception e)
@@ -1448,10 +1475,10 @@ sealed class Clauses1Converter : JsonConverter<Clauses1>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilter2>>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<List<MeterFilter1>>(ref reader, options);
             if (deserialized != null)
             {
-                return new Clauses1(deserialized);
+                return new MeterFilterModelClauses(deserialized);
             }
         }
         catch (System::Exception e)
@@ -1459,7 +1486,7 @@ sealed class Clauses1Converter : JsonConverter<Clauses1>
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'List<MeterFilter2>'",
+                    "Data does not match union variant 'List<MeterFilter1>'",
                     e
                 )
             );
@@ -1468,7 +1495,11 @@ sealed class Clauses1Converter : JsonConverter<Clauses1>
         throw new System::AggregateException(exceptions);
     }
 
-    public override void Write(Utf8JsonWriter writer, Clauses1 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        MeterFilterModelClauses value,
+        JsonSerializerOptions options
+    )
     {
         object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);
@@ -1509,7 +1540,7 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
         }
     }
 
-    public required ApiEnum<string, Operator1> Operator
+    public required ApiEnum<string, MeterFilterCondition1Operator> Operator
     {
         get
         {
@@ -1519,7 +1550,7 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
                     new System::ArgumentOutOfRangeException("operator", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Operator1>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterCondition1Operator>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1536,7 +1567,7 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
     /// <summary>
     /// Filter value - can be string, number, or boolean
     /// </summary>
-    public required Value2 Value
+    public required MeterFilterCondition1Value Value
     {
         get
         {
@@ -1546,7 +1577,10 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
                     new System::ArgumentOutOfRangeException("value", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Value2>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<MeterFilterCondition1Value>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'value' cannot be null",
                     new System::ArgumentNullException("value")
@@ -1591,8 +1625,8 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
     }
 }
 
-[JsonConverter(typeof(Operator1Converter))]
-public enum Operator1
+[JsonConverter(typeof(MeterFilterCondition1OperatorConverter))]
+public enum MeterFilterCondition1Operator
 {
     Equals,
     NotEquals,
@@ -1604,9 +1638,9 @@ public enum Operator1
     DoesNotContain,
 }
 
-sealed class Operator1Converter : JsonConverter<Operator1>
+sealed class MeterFilterCondition1OperatorConverter : JsonConverter<MeterFilterCondition1Operator>
 {
-    public override Operator1 Read(
+    public override MeterFilterCondition1Operator Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1614,21 +1648,21 @@ sealed class Operator1Converter : JsonConverter<Operator1>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "equals" => Operator1.Equals,
-            "not_equals" => Operator1.NotEquals,
-            "greater_than" => Operator1.GreaterThan,
-            "greater_than_or_equals" => Operator1.GreaterThanOrEquals,
-            "less_than" => Operator1.LessThan,
-            "less_than_or_equals" => Operator1.LessThanOrEquals,
-            "contains" => Operator1.Contains,
-            "does_not_contain" => Operator1.DoesNotContain,
-            _ => (Operator1)(-1),
+            "equals" => MeterFilterCondition1Operator.Equals,
+            "not_equals" => MeterFilterCondition1Operator.NotEquals,
+            "greater_than" => MeterFilterCondition1Operator.GreaterThan,
+            "greater_than_or_equals" => MeterFilterCondition1Operator.GreaterThanOrEquals,
+            "less_than" => MeterFilterCondition1Operator.LessThan,
+            "less_than_or_equals" => MeterFilterCondition1Operator.LessThanOrEquals,
+            "contains" => MeterFilterCondition1Operator.Contains,
+            "does_not_contain" => MeterFilterCondition1Operator.DoesNotContain,
+            _ => (MeterFilterCondition1Operator)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        Operator1 value,
+        MeterFilterCondition1Operator value,
         JsonSerializerOptions options
     )
     {
@@ -1636,14 +1670,14 @@ sealed class Operator1Converter : JsonConverter<Operator1>
             writer,
             value switch
             {
-                Operator1.Equals => "equals",
-                Operator1.NotEquals => "not_equals",
-                Operator1.GreaterThan => "greater_than",
-                Operator1.GreaterThanOrEquals => "greater_than_or_equals",
-                Operator1.LessThan => "less_than",
-                Operator1.LessThanOrEquals => "less_than_or_equals",
-                Operator1.Contains => "contains",
-                Operator1.DoesNotContain => "does_not_contain",
+                MeterFilterCondition1Operator.Equals => "equals",
+                MeterFilterCondition1Operator.NotEquals => "not_equals",
+                MeterFilterCondition1Operator.GreaterThan => "greater_than",
+                MeterFilterCondition1Operator.GreaterThanOrEquals => "greater_than_or_equals",
+                MeterFilterCondition1Operator.LessThan => "less_than",
+                MeterFilterCondition1Operator.LessThanOrEquals => "less_than_or_equals",
+                MeterFilterCondition1Operator.Contains => "contains",
+                MeterFilterCondition1Operator.DoesNotContain => "does_not_contain",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1656,32 +1690,32 @@ sealed class Operator1Converter : JsonConverter<Operator1>
 /// <summary>
 /// Filter value - can be string, number, or boolean
 /// </summary>
-[JsonConverter(typeof(Value2Converter))]
-public record class Value2
+[JsonConverter(typeof(MeterFilterCondition1ValueConverter))]
+public record class MeterFilterCondition1Value
 {
     public object Value { get; private init; }
 
-    public Value2(string value)
+    public MeterFilterCondition1Value(string value)
     {
         Value = value;
     }
 
-    public Value2(double value)
+    public MeterFilterCondition1Value(double value)
     {
         Value = value;
     }
 
-    public Value2(bool value)
+    public MeterFilterCondition1Value(bool value)
     {
         Value = value;
     }
 
-    Value2(UnknownVariant value)
+    MeterFilterCondition1Value(UnknownVariant value)
     {
         Value = value;
     }
 
-    public static Value2 CreateUnknownVariant(JsonElement value)
+    public static MeterFilterCondition1Value CreateUnknownVariant(JsonElement value)
     {
         return new(new UnknownVariant(value));
     }
@@ -1723,7 +1757,7 @@ public record class Value2
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of Value2"
+                    "Data did not match any variant of MeterFilterCondition1Value"
                 );
         }
     }
@@ -1740,31 +1774,33 @@ public record class Value2
             double value => @double(value),
             bool value => @bool(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Value2"
+                "Data did not match any variant of MeterFilterCondition1Value"
             ),
         };
     }
 
-    public static implicit operator Value2(string value) => new(value);
+    public static implicit operator MeterFilterCondition1Value(string value) => new(value);
 
-    public static implicit operator Value2(double value) => new(value);
+    public static implicit operator MeterFilterCondition1Value(double value) => new(value);
 
-    public static implicit operator Value2(bool value) => new(value);
+    public static implicit operator MeterFilterCondition1Value(bool value) => new(value);
 
     public void Validate()
     {
         if (this.Value is UnknownVariant)
         {
-            throw new DodoPaymentsInvalidDataException("Data did not match any variant of Value2");
+            throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of MeterFilterCondition1Value"
+            );
         }
     }
 
     record struct UnknownVariant(JsonElement value);
 }
 
-sealed class Value2Converter : JsonConverter<Value2>
+sealed class MeterFilterCondition1ValueConverter : JsonConverter<MeterFilterCondition1Value>
 {
-    public override Value2? Read(
+    public override MeterFilterCondition1Value? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1777,7 +1813,7 @@ sealed class Value2Converter : JsonConverter<Value2>
             var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
             if (deserialized != null)
             {
-                return new Value2(deserialized);
+                return new MeterFilterCondition1Value(deserialized);
             }
         }
         catch (System::Exception e)
@@ -1793,7 +1829,9 @@ sealed class Value2Converter : JsonConverter<Value2>
 
         try
         {
-            return new Value2(JsonSerializer.Deserialize<double>(ref reader, options));
+            return new MeterFilterCondition1Value(
+                JsonSerializer.Deserialize<double>(ref reader, options)
+            );
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -1808,7 +1846,9 @@ sealed class Value2Converter : JsonConverter<Value2>
 
         try
         {
-            return new Value2(JsonSerializer.Deserialize<bool>(ref reader, options));
+            return new MeterFilterCondition1Value(
+                JsonSerializer.Deserialize<bool>(ref reader, options)
+            );
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -1821,7 +1861,11 @@ sealed class Value2Converter : JsonConverter<Value2>
         throw new System::AggregateException(exceptions);
     }
 
-    public override void Write(Utf8JsonWriter writer, Value2 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        MeterFilterCondition1Value value,
+        JsonSerializerOptions options
+    )
     {
         object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);
@@ -1831,8 +1875,8 @@ sealed class Value2Converter : JsonConverter<Value2>
 /// <summary>
 /// Level 3 nested filter (final nesting level)
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilter2>))]
-public sealed record class MeterFilter2 : ModelBase, IFromRaw<MeterFilter2>
+[JsonConverter(typeof(ModelConverter<MeterFilter1>))]
+public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
 {
     /// <summary>
     /// Level 3: Filter conditions only (max depth reached)
@@ -1898,22 +1942,22 @@ public sealed record class MeterFilter2 : ModelBase, IFromRaw<MeterFilter2>
         this.Conjunction.Validate();
     }
 
-    public MeterFilter2() { }
+    public MeterFilter1() { }
 
-    public MeterFilter2(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterFilter1(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilter2(FrozenDictionary<string, JsonElement> properties)
+    MeterFilter1(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilter2 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static MeterFilter1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
@@ -1953,7 +1997,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
         }
     }
 
-    public required ApiEnum<string, Operator2> Operator
+    public required ApiEnum<string, ClauseOperator> Operator
     {
         get
         {
@@ -1963,7 +2007,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
                     new System::ArgumentOutOfRangeException("operator", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Operator2>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, ClauseOperator>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1980,7 +2024,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
     /// <summary>
     /// Filter value - can be string, number, or boolean
     /// </summary>
-    public required Value3 Value
+    public required ClauseValue Value
     {
         get
         {
@@ -1990,7 +2034,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
                     new System::ArgumentOutOfRangeException("value", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Value3>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<ClauseValue>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'value' cannot be null",
                     new System::ArgumentNullException("value")
@@ -2033,8 +2077,8 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
     }
 }
 
-[JsonConverter(typeof(Operator2Converter))]
-public enum Operator2
+[JsonConverter(typeof(ClauseOperatorConverter))]
+public enum ClauseOperator
 {
     Equals,
     NotEquals,
@@ -2046,9 +2090,9 @@ public enum Operator2
     DoesNotContain,
 }
 
-sealed class Operator2Converter : JsonConverter<Operator2>
+sealed class ClauseOperatorConverter : JsonConverter<ClauseOperator>
 {
-    public override Operator2 Read(
+    public override ClauseOperator Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2056,21 +2100,21 @@ sealed class Operator2Converter : JsonConverter<Operator2>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "equals" => Operator2.Equals,
-            "not_equals" => Operator2.NotEquals,
-            "greater_than" => Operator2.GreaterThan,
-            "greater_than_or_equals" => Operator2.GreaterThanOrEquals,
-            "less_than" => Operator2.LessThan,
-            "less_than_or_equals" => Operator2.LessThanOrEquals,
-            "contains" => Operator2.Contains,
-            "does_not_contain" => Operator2.DoesNotContain,
-            _ => (Operator2)(-1),
+            "equals" => ClauseOperator.Equals,
+            "not_equals" => ClauseOperator.NotEquals,
+            "greater_than" => ClauseOperator.GreaterThan,
+            "greater_than_or_equals" => ClauseOperator.GreaterThanOrEquals,
+            "less_than" => ClauseOperator.LessThan,
+            "less_than_or_equals" => ClauseOperator.LessThanOrEquals,
+            "contains" => ClauseOperator.Contains,
+            "does_not_contain" => ClauseOperator.DoesNotContain,
+            _ => (ClauseOperator)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        Operator2 value,
+        ClauseOperator value,
         JsonSerializerOptions options
     )
     {
@@ -2078,14 +2122,14 @@ sealed class Operator2Converter : JsonConverter<Operator2>
             writer,
             value switch
             {
-                Operator2.Equals => "equals",
-                Operator2.NotEquals => "not_equals",
-                Operator2.GreaterThan => "greater_than",
-                Operator2.GreaterThanOrEquals => "greater_than_or_equals",
-                Operator2.LessThan => "less_than",
-                Operator2.LessThanOrEquals => "less_than_or_equals",
-                Operator2.Contains => "contains",
-                Operator2.DoesNotContain => "does_not_contain",
+                ClauseOperator.Equals => "equals",
+                ClauseOperator.NotEquals => "not_equals",
+                ClauseOperator.GreaterThan => "greater_than",
+                ClauseOperator.GreaterThanOrEquals => "greater_than_or_equals",
+                ClauseOperator.LessThan => "less_than",
+                ClauseOperator.LessThanOrEquals => "less_than_or_equals",
+                ClauseOperator.Contains => "contains",
+                ClauseOperator.DoesNotContain => "does_not_contain",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -2098,32 +2142,32 @@ sealed class Operator2Converter : JsonConverter<Operator2>
 /// <summary>
 /// Filter value - can be string, number, or boolean
 /// </summary>
-[JsonConverter(typeof(Value3Converter))]
-public record class Value3
+[JsonConverter(typeof(ClauseValueConverter))]
+public record class ClauseValue
 {
     public object Value { get; private init; }
 
-    public Value3(string value)
+    public ClauseValue(string value)
     {
         Value = value;
     }
 
-    public Value3(double value)
+    public ClauseValue(double value)
     {
         Value = value;
     }
 
-    public Value3(bool value)
+    public ClauseValue(bool value)
     {
         Value = value;
     }
 
-    Value3(UnknownVariant value)
+    ClauseValue(UnknownVariant value)
     {
         Value = value;
     }
 
-    public static Value3 CreateUnknownVariant(JsonElement value)
+    public static ClauseValue CreateUnknownVariant(JsonElement value)
     {
         return new(new UnknownVariant(value));
     }
@@ -2165,7 +2209,7 @@ public record class Value3
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of Value3"
+                    "Data did not match any variant of ClauseValue"
                 );
         }
     }
@@ -2182,31 +2226,33 @@ public record class Value3
             double value => @double(value),
             bool value => @bool(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Value3"
+                "Data did not match any variant of ClauseValue"
             ),
         };
     }
 
-    public static implicit operator Value3(string value) => new(value);
+    public static implicit operator ClauseValue(string value) => new(value);
 
-    public static implicit operator Value3(double value) => new(value);
+    public static implicit operator ClauseValue(double value) => new(value);
 
-    public static implicit operator Value3(bool value) => new(value);
+    public static implicit operator ClauseValue(bool value) => new(value);
 
     public void Validate()
     {
         if (this.Value is UnknownVariant)
         {
-            throw new DodoPaymentsInvalidDataException("Data did not match any variant of Value3");
+            throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of ClauseValue"
+            );
         }
     }
 
     record struct UnknownVariant(JsonElement value);
 }
 
-sealed class Value3Converter : JsonConverter<Value3>
+sealed class ClauseValueConverter : JsonConverter<ClauseValue>
 {
-    public override Value3? Read(
+    public override ClauseValue? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2219,7 +2265,7 @@ sealed class Value3Converter : JsonConverter<Value3>
             var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
             if (deserialized != null)
             {
-                return new Value3(deserialized);
+                return new ClauseValue(deserialized);
             }
         }
         catch (System::Exception e)
@@ -2235,7 +2281,7 @@ sealed class Value3Converter : JsonConverter<Value3>
 
         try
         {
-            return new Value3(JsonSerializer.Deserialize<double>(ref reader, options));
+            return new ClauseValue(JsonSerializer.Deserialize<double>(ref reader, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -2250,7 +2296,7 @@ sealed class Value3Converter : JsonConverter<Value3>
 
         try
         {
-            return new Value3(JsonSerializer.Deserialize<bool>(ref reader, options));
+            return new ClauseValue(JsonSerializer.Deserialize<bool>(ref reader, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -2263,7 +2309,11 @@ sealed class Value3Converter : JsonConverter<Value3>
         throw new System::AggregateException(exceptions);
     }
 
-    public override void Write(Utf8JsonWriter writer, Value3 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        ClauseValue value,
+        JsonSerializerOptions options
+    )
     {
         object variant = value.Value;
         JsonSerializer.Serialize(writer, variant, options);
@@ -2314,16 +2364,16 @@ sealed class ConjunctionConverter : JsonConverter<Conjunction>
     }
 }
 
-[JsonConverter(typeof(ConjunctionModelConverter))]
-public enum ConjunctionModel
+[JsonConverter(typeof(MeterFilterModelConjunctionConverter))]
+public enum MeterFilterModelConjunction
 {
     And,
     Or,
 }
 
-sealed class ConjunctionModelConverter : JsonConverter<ConjunctionModel>
+sealed class MeterFilterModelConjunctionConverter : JsonConverter<MeterFilterModelConjunction>
 {
-    public override ConjunctionModel Read(
+    public override MeterFilterModelConjunction Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2331,15 +2381,15 @@ sealed class ConjunctionModelConverter : JsonConverter<ConjunctionModel>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "and" => ConjunctionModel.And,
-            "or" => ConjunctionModel.Or,
-            _ => (ConjunctionModel)(-1),
+            "and" => MeterFilterModelConjunction.And,
+            "or" => MeterFilterModelConjunction.Or,
+            _ => (MeterFilterModelConjunction)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        ConjunctionModel value,
+        MeterFilterModelConjunction value,
         JsonSerializerOptions options
     )
     {
@@ -2347,8 +2397,8 @@ sealed class ConjunctionModelConverter : JsonConverter<ConjunctionModel>
             writer,
             value switch
             {
-                ConjunctionModel.And => "and",
-                ConjunctionModel.Or => "or",
+                MeterFilterModelConjunction.And => "and",
+                MeterFilterModelConjunction.Or => "or",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -2358,16 +2408,16 @@ sealed class ConjunctionModelConverter : JsonConverter<ConjunctionModel>
     }
 }
 
-[JsonConverter(typeof(Conjunction1Converter))]
-public enum Conjunction1
+[JsonConverter(typeof(MeterFilterConjunctionConverter))]
+public enum MeterFilterConjunction
 {
     And,
     Or,
 }
 
-sealed class Conjunction1Converter : JsonConverter<Conjunction1>
+sealed class MeterFilterConjunctionConverter : JsonConverter<MeterFilterConjunction>
 {
-    public override Conjunction1 Read(
+    public override MeterFilterConjunction Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2375,15 +2425,15 @@ sealed class Conjunction1Converter : JsonConverter<Conjunction1>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "and" => Conjunction1.And,
-            "or" => Conjunction1.Or,
-            _ => (Conjunction1)(-1),
+            "and" => MeterFilterConjunction.And,
+            "or" => MeterFilterConjunction.Or,
+            _ => (MeterFilterConjunction)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        Conjunction1 value,
+        MeterFilterConjunction value,
         JsonSerializerOptions options
     )
     {
@@ -2391,8 +2441,8 @@ sealed class Conjunction1Converter : JsonConverter<Conjunction1>
             writer,
             value switch
             {
-                Conjunction1.And => "and",
-                Conjunction1.Or => "or",
+                MeterFilterConjunction.And => "and",
+                MeterFilterConjunction.Or => "or",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -2405,16 +2455,16 @@ sealed class Conjunction1Converter : JsonConverter<Conjunction1>
 /// <summary>
 /// Logical conjunction to apply between clauses (and/or)
 /// </summary>
-[JsonConverter(typeof(Conjunction2Converter))]
-public enum Conjunction2
+[JsonConverter(typeof(MeterMeterFilterConjunctionConverter))]
+public enum MeterMeterFilterConjunction
 {
     And,
     Or,
 }
 
-sealed class Conjunction2Converter : JsonConverter<Conjunction2>
+sealed class MeterMeterFilterConjunctionConverter : JsonConverter<MeterMeterFilterConjunction>
 {
-    public override Conjunction2 Read(
+    public override MeterMeterFilterConjunction Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2422,15 +2472,15 @@ sealed class Conjunction2Converter : JsonConverter<Conjunction2>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "and" => Conjunction2.And,
-            "or" => Conjunction2.Or,
-            _ => (Conjunction2)(-1),
+            "and" => MeterMeterFilterConjunction.And,
+            "or" => MeterMeterFilterConjunction.Or,
+            _ => (MeterMeterFilterConjunction)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        Conjunction2 value,
+        MeterMeterFilterConjunction value,
         JsonSerializerOptions options
     )
     {
@@ -2438,8 +2488,8 @@ sealed class Conjunction2Converter : JsonConverter<Conjunction2>
             writer,
             value switch
             {
-                Conjunction2.And => "and",
-                Conjunction2.Or => "or",
+                MeterMeterFilterConjunction.And => "and",
+                MeterMeterFilterConjunction.Or => "or",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
