@@ -113,6 +113,34 @@ To send a request to the Dodo Payments API, build an instance of some `Params` c
 
 For example, `client.CheckoutSessions.Create` should be called with an instance of `CheckoutSessionCreateParams`, and it will return an instance of `Task<CheckoutSessionResponse>`.
 
+## Binary responses
+
+The SDK defines methods that return binary responses, which are used for API responses that shouldn't necessarily be parsed, like non-JSON data.
+
+These methods return `HttpResponse`:
+
+```csharp
+using System;
+using DodoPayments.Client.Models.Invoices.Payments;
+
+PaymentRetrieveParams parameters = new() { PaymentID = "payment_id" };
+
+var payment = await client.Invoices.Payments.Retrieve(parameters);
+
+Console.WriteLine(payment);
+```
+
+To save the response content to a file, or any [`Stream`](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream?view=net-9.0), use the [`CopyToAsync`](<https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.copytoasync?view=net-9.0#system-io-stream-copytoasync(system-io-stream)>) method:
+
+```csharp
+using System.IO;
+
+using var response = await client.Invoices.Payments.Retrieve(parameters);
+using var contentStream = await response.ReadAsStream();
+using var fileStream = File.Open(path, FileMode.OpenOrCreate);
+await contentStream.CopyToAsync(fileStream); // Or any other Stream
+```
+
 ## Error handling
 
 The SDK throws custom unchecked exception types:
