@@ -85,4 +85,17 @@ public class SubscriptionServiceTest : TestBase
         );
         page.Validate();
     }
+
+    [Fact]
+    public async Task UpdatePaymentMethod_Works()
+    {
+        var response = await this.client.Subscriptions.UpdatePaymentMethod(
+            new()
+            {
+                SubscriptionID = "subscription_id",
+                Body = new UnionMember0() { Type = Type.New, ReturnURL = "return_url" },
+            }
+        );
+        response.Validate();
+    }
 }

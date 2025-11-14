@@ -12,6 +12,7 @@ public class ProductServiceTest : TestBase
         var product = await this.client.Products.Create(
             new()
             {
+                Name = "name",
                 Price = new OneTimePrice()
                 {
                     Currency = Currency.Aed,

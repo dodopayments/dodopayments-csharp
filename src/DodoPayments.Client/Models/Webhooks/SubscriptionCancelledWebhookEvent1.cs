@@ -884,6 +884,27 @@ public sealed record class Data14 : ModelBase, IFromRaw<Data14>
     }
 
     /// <summary>
+    /// Saved payment method id used for recurring charges
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get
+        {
+            if (!this._properties.TryGetValue("payment_method_id", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            this._properties["payment_method_id"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Tax identifier provided for this subscription (if applicable)
     /// </summary>
     public string? TaxID
@@ -962,6 +983,7 @@ public sealed record class Data14 : ModelBase, IFromRaw<Data14>
             DiscountCyclesRemaining = data14.DiscountCyclesRemaining,
             DiscountID = data14.DiscountID,
             ExpiresAt = data14.ExpiresAt,
+            PaymentMethodID = data14.PaymentMethodID,
             TaxID = data14.TaxID,
         };
 
@@ -999,6 +1021,7 @@ public sealed record class Data14 : ModelBase, IFromRaw<Data14>
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;
         _ = this.ExpiresAt;
+        _ = this.PaymentMethodID;
         _ = this.TaxID;
         this.PayloadType?.Validate();
     }
