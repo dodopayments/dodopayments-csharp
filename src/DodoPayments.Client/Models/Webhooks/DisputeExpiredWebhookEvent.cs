@@ -49,7 +49,7 @@ public sealed record class DisputeExpiredWebhookEvent
     /// <summary>
     /// Event-specific data
     /// </summary>
-    public required Data2 Data
+    public required DisputeExpiredWebhookEventData Data
     {
         get
         {
@@ -59,7 +59,10 @@ public sealed record class DisputeExpiredWebhookEvent
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Data2>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<DisputeExpiredWebhookEventData>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentNullException("data")
@@ -107,7 +110,7 @@ public sealed record class DisputeExpiredWebhookEvent
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, Type2> Type
+    public required ApiEnum<string, DisputeExpiredWebhookEventType> Type
     {
         get
         {
@@ -117,7 +120,7 @@ public sealed record class DisputeExpiredWebhookEvent
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type2>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeExpiredWebhookEventType>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -165,8 +168,10 @@ public sealed record class DisputeExpiredWebhookEvent
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data2>))]
-public sealed record class Data2 : ModelBase, IFromRaw<Data2>
+[JsonConverter(typeof(ModelConverter<DisputeExpiredWebhookEventData>))]
+public sealed record class DisputeExpiredWebhookEventData
+    : ModelBase,
+        IFromRaw<DisputeExpiredWebhookEventData>
 {
     /// <summary>
     /// The amount involved in the dispute, represented as a string to accommodate precision.
@@ -316,7 +321,7 @@ public sealed record class Data2 : ModelBase, IFromRaw<Data2>
         }
     }
 
-    public required ApiEnum<string, DisputeStageModel> DisputeStage
+    public required ApiEnum<string, DisputeDisputeStage> DisputeStage
     {
         get
         {
@@ -329,7 +334,7 @@ public sealed record class Data2 : ModelBase, IFromRaw<Data2>
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStageModel>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeDisputeStage>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -343,7 +348,7 @@ public sealed record class Data2 : ModelBase, IFromRaw<Data2>
         }
     }
 
-    public required ApiEnum<string, DisputeStatusModel> DisputeStatus
+    public required ApiEnum<string, DisputeDisputeStatus> DisputeStatus
     {
         get
         {
@@ -356,7 +361,7 @@ public sealed record class Data2 : ModelBase, IFromRaw<Data2>
                     )
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStatusModel>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeDisputeStatus>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -425,17 +430,20 @@ public sealed record class Data2 : ModelBase, IFromRaw<Data2>
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType2>? PayloadType
+    public ApiEnum<
+        string,
+        DisputeExpiredWebhookEventDataIntersectionMember1PayloadType
+    >? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType2>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                DisputeExpiredWebhookEventDataIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -451,18 +459,20 @@ public sealed record class Data2 : ModelBase, IFromRaw<Data2>
         }
     }
 
-    public static implicit operator Dispute(Data2 data2) =>
+    public static implicit operator Dispute(
+        DisputeExpiredWebhookEventData disputeExpiredWebhookEventData
+    ) =>
         new()
         {
-            Amount = data2.Amount,
-            BusinessID = data2.BusinessID,
-            CreatedAt = data2.CreatedAt,
-            Currency = data2.Currency,
-            DisputeID = data2.DisputeID,
-            DisputeStage = data2.DisputeStage,
-            DisputeStatus = data2.DisputeStatus,
-            PaymentID = data2.PaymentID,
-            Remarks = data2.Remarks,
+            Amount = disputeExpiredWebhookEventData.Amount,
+            BusinessID = disputeExpiredWebhookEventData.BusinessID,
+            CreatedAt = disputeExpiredWebhookEventData.CreatedAt,
+            Currency = disputeExpiredWebhookEventData.Currency,
+            DisputeID = disputeExpiredWebhookEventData.DisputeID,
+            DisputeStage = disputeExpiredWebhookEventData.DisputeStage,
+            DisputeStatus = disputeExpiredWebhookEventData.DisputeStatus,
+            PaymentID = disputeExpiredWebhookEventData.PaymentID,
+            Remarks = disputeExpiredWebhookEventData.Remarks,
         };
 
     public override void Validate()
@@ -479,44 +489,51 @@ public sealed record class Data2 : ModelBase, IFromRaw<Data2>
         this.PayloadType?.Validate();
     }
 
-    public Data2() { }
+    public DisputeExpiredWebhookEventData() { }
 
-    public Data2(IReadOnlyDictionary<string, JsonElement> properties)
+    public DisputeExpiredWebhookEventData(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data2(FrozenDictionary<string, JsonElement> properties)
+    DisputeExpiredWebhookEventData(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Data2 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static DisputeExpiredWebhookEventData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember12>))]
-public sealed record class IntersectionMember12 : ModelBase, IFromRaw<IntersectionMember12>
+[JsonConverter(typeof(ModelConverter<DisputeExpiredWebhookEventDataIntersectionMember1>))]
+public sealed record class DisputeExpiredWebhookEventDataIntersectionMember1
+    : ModelBase,
+        IFromRaw<DisputeExpiredWebhookEventDataIntersectionMember1>
 {
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType2>? PayloadType
+    public ApiEnum<
+        string,
+        DisputeExpiredWebhookEventDataIntersectionMember1PayloadType
+    >? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType2>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                DisputeExpiredWebhookEventDataIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -537,22 +554,26 @@ public sealed record class IntersectionMember12 : ModelBase, IFromRaw<Intersecti
         this.PayloadType?.Validate();
     }
 
-    public IntersectionMember12() { }
+    public DisputeExpiredWebhookEventDataIntersectionMember1() { }
 
-    public IntersectionMember12(IReadOnlyDictionary<string, JsonElement> properties)
+    public DisputeExpiredWebhookEventDataIntersectionMember1(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntersectionMember12(FrozenDictionary<string, JsonElement> properties)
+    DisputeExpiredWebhookEventDataIntersectionMember1(
+        FrozenDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static IntersectionMember12 FromRawUnchecked(
+    public static DisputeExpiredWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -563,15 +584,16 @@ public sealed record class IntersectionMember12 : ModelBase, IFromRaw<Intersecti
 /// <summary>
 /// The type of payload in the data field
 /// </summary>
-[JsonConverter(typeof(PayloadType2Converter))]
-public enum PayloadType2
+[JsonConverter(typeof(DisputeExpiredWebhookEventDataIntersectionMember1PayloadTypeConverter))]
+public enum DisputeExpiredWebhookEventDataIntersectionMember1PayloadType
 {
     Dispute,
 }
 
-sealed class PayloadType2Converter : JsonConverter<PayloadType2>
+sealed class DisputeExpiredWebhookEventDataIntersectionMember1PayloadTypeConverter
+    : JsonConverter<DisputeExpiredWebhookEventDataIntersectionMember1PayloadType>
 {
-    public override PayloadType2 Read(
+    public override DisputeExpiredWebhookEventDataIntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -579,14 +601,14 @@ sealed class PayloadType2Converter : JsonConverter<PayloadType2>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Dispute" => PayloadType2.Dispute,
-            _ => (PayloadType2)(-1),
+            "Dispute" => DisputeExpiredWebhookEventDataIntersectionMember1PayloadType.Dispute,
+            _ => (DisputeExpiredWebhookEventDataIntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType2 value,
+        DisputeExpiredWebhookEventDataIntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -594,7 +616,7 @@ sealed class PayloadType2Converter : JsonConverter<PayloadType2>
             writer,
             value switch
             {
-                PayloadType2.Dispute => "Dispute",
+                DisputeExpiredWebhookEventDataIntersectionMember1PayloadType.Dispute => "Dispute",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -607,15 +629,15 @@ sealed class PayloadType2Converter : JsonConverter<PayloadType2>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(Type2Converter))]
-public enum Type2
+[JsonConverter(typeof(DisputeExpiredWebhookEventTypeConverter))]
+public enum DisputeExpiredWebhookEventType
 {
     DisputeExpired,
 }
 
-sealed class Type2Converter : JsonConverter<Type2>
+sealed class DisputeExpiredWebhookEventTypeConverter : JsonConverter<DisputeExpiredWebhookEventType>
 {
-    public override Type2 Read(
+    public override DisputeExpiredWebhookEventType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -623,18 +645,22 @@ sealed class Type2Converter : JsonConverter<Type2>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "dispute.expired" => Type2.DisputeExpired,
-            _ => (Type2)(-1),
+            "dispute.expired" => DisputeExpiredWebhookEventType.DisputeExpired,
+            _ => (DisputeExpiredWebhookEventType)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type2 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DisputeExpiredWebhookEventType value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type2.DisputeExpired => "dispute.expired",
+                DisputeExpiredWebhookEventType.DisputeExpired => "dispute.expired",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

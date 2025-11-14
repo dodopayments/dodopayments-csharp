@@ -321,14 +321,14 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
     }
 
-    public DigitalProductDelivery1? DigitalProductDelivery
+    public ProductDigitalProductDelivery? DigitalProductDelivery
     {
         get
         {
             if (!this._properties.TryGetValue("digital_product_delivery", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<DigitalProductDelivery1?>(
+            return JsonSerializer.Deserialize<ProductDigitalProductDelivery?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -503,8 +503,10 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<DigitalProductDelivery1>))]
-public sealed record class DigitalProductDelivery1 : ModelBase, IFromRaw<DigitalProductDelivery1>
+[JsonConverter(typeof(ModelConverter<ProductDigitalProductDelivery>))]
+public sealed record class ProductDigitalProductDelivery
+    : ModelBase,
+        IFromRaw<ProductDigitalProductDelivery>
 {
     /// <summary>
     /// External URL to digital product
@@ -579,22 +581,22 @@ public sealed record class DigitalProductDelivery1 : ModelBase, IFromRaw<Digital
         _ = this.Instructions;
     }
 
-    public DigitalProductDelivery1() { }
+    public ProductDigitalProductDelivery() { }
 
-    public DigitalProductDelivery1(IReadOnlyDictionary<string, JsonElement> properties)
+    public ProductDigitalProductDelivery(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DigitalProductDelivery1(FrozenDictionary<string, JsonElement> properties)
+    ProductDigitalProductDelivery(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static DigitalProductDelivery1 FromRawUnchecked(
+    public static ProductDigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {

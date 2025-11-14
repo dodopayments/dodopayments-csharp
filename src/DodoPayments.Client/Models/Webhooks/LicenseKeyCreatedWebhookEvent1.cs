@@ -49,7 +49,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent
     /// <summary>
     /// Event-specific data
     /// </summary>
-    public required Data27 Data
+    public required Data6 Data
     {
         get
         {
@@ -59,7 +59,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Data27>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<Data6>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentNullException("data")
@@ -107,7 +107,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, Type27> Type
+    public required ApiEnum<string, Type6> Type
     {
         get
         {
@@ -117,7 +117,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type27>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, Type6>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -165,8 +165,8 @@ public sealed record class LicenseKeyCreatedWebhookEvent
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data27>))]
-public sealed record class Data27 : ModelBase, IFromRaw<Data27>
+[JsonConverter(typeof(ModelConverter<Data6>))]
+public sealed record class Data6 : ModelBase, IFromRaw<Data6>
 {
     /// <summary>
     /// The unique identifier of the license key.
@@ -499,17 +499,17 @@ public sealed record class Data27 : ModelBase, IFromRaw<Data27>
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType27>? PayloadType
+    public ApiEnum<string, Data6IntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType27>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                Data6IntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -525,21 +525,21 @@ public sealed record class Data27 : ModelBase, IFromRaw<Data27>
         }
     }
 
-    public static implicit operator LicenseKey(Data27 data27) =>
+    public static implicit operator LicenseKey(Data6 data6) =>
         new()
         {
-            ID = data27.ID,
-            BusinessID = data27.BusinessID,
-            CreatedAt = data27.CreatedAt,
-            CustomerID = data27.CustomerID,
-            InstancesCount = data27.InstancesCount,
-            Key = data27.Key,
-            PaymentID = data27.PaymentID,
-            ProductID = data27.ProductID,
-            Status = data27.Status,
-            ActivationsLimit = data27.ActivationsLimit,
-            ExpiresAt = data27.ExpiresAt,
-            SubscriptionID = data27.SubscriptionID,
+            ID = data6.ID,
+            BusinessID = data6.BusinessID,
+            CreatedAt = data6.CreatedAt,
+            CustomerID = data6.CustomerID,
+            InstancesCount = data6.InstancesCount,
+            Key = data6.Key,
+            PaymentID = data6.PaymentID,
+            ProductID = data6.ProductID,
+            Status = data6.Status,
+            ActivationsLimit = data6.ActivationsLimit,
+            ExpiresAt = data6.ExpiresAt,
+            SubscriptionID = data6.SubscriptionID,
         };
 
     public override void Validate()
@@ -559,44 +559,44 @@ public sealed record class Data27 : ModelBase, IFromRaw<Data27>
         this.PayloadType?.Validate();
     }
 
-    public Data27() { }
+    public Data6() { }
 
-    public Data27(IReadOnlyDictionary<string, JsonElement> properties)
+    public Data6(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data27(FrozenDictionary<string, JsonElement> properties)
+    Data6(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Data27 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Data6 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember127>))]
-public sealed record class IntersectionMember127 : ModelBase, IFromRaw<IntersectionMember127>
+[JsonConverter(typeof(ModelConverter<Data6IntersectionMember1>))]
+public sealed record class Data6IntersectionMember1 : ModelBase, IFromRaw<Data6IntersectionMember1>
 {
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType27>? PayloadType
+    public ApiEnum<string, Data6IntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType27>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                Data6IntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -617,22 +617,22 @@ public sealed record class IntersectionMember127 : ModelBase, IFromRaw<Intersect
         this.PayloadType?.Validate();
     }
 
-    public IntersectionMember127() { }
+    public Data6IntersectionMember1() { }
 
-    public IntersectionMember127(IReadOnlyDictionary<string, JsonElement> properties)
+    public Data6IntersectionMember1(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntersectionMember127(FrozenDictionary<string, JsonElement> properties)
+    Data6IntersectionMember1(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static IntersectionMember127 FromRawUnchecked(
+    public static Data6IntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -643,15 +643,16 @@ public sealed record class IntersectionMember127 : ModelBase, IFromRaw<Intersect
 /// <summary>
 /// The type of payload in the data field
 /// </summary>
-[JsonConverter(typeof(PayloadType27Converter))]
-public enum PayloadType27
+[JsonConverter(typeof(Data6IntersectionMember1PayloadTypeConverter))]
+public enum Data6IntersectionMember1PayloadType
 {
     LicenseKey,
 }
 
-sealed class PayloadType27Converter : JsonConverter<PayloadType27>
+sealed class Data6IntersectionMember1PayloadTypeConverter
+    : JsonConverter<Data6IntersectionMember1PayloadType>
 {
-    public override PayloadType27 Read(
+    public override Data6IntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -659,14 +660,14 @@ sealed class PayloadType27Converter : JsonConverter<PayloadType27>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "LicenseKey" => PayloadType27.LicenseKey,
-            _ => (PayloadType27)(-1),
+            "LicenseKey" => Data6IntersectionMember1PayloadType.LicenseKey,
+            _ => (Data6IntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType27 value,
+        Data6IntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -674,7 +675,7 @@ sealed class PayloadType27Converter : JsonConverter<PayloadType27>
             writer,
             value switch
             {
-                PayloadType27.LicenseKey => "LicenseKey",
+                Data6IntersectionMember1PayloadType.LicenseKey => "LicenseKey",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -687,15 +688,15 @@ sealed class PayloadType27Converter : JsonConverter<PayloadType27>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(Type27Converter))]
-public enum Type27
+[JsonConverter(typeof(Type6Converter))]
+public enum Type6
 {
     LicenseKeyCreated,
 }
 
-sealed class Type27Converter : JsonConverter<Type27>
+sealed class Type6Converter : JsonConverter<Type6>
 {
-    public override Type27 Read(
+    public override Type6 Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -703,18 +704,18 @@ sealed class Type27Converter : JsonConverter<Type27>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "license_key.created" => Type27.LicenseKeyCreated,
-            _ => (Type27)(-1),
+            "license_key.created" => Type6.LicenseKeyCreated,
+            _ => (Type6)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type27 value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, Type6 value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type27.LicenseKeyCreated => "license_key.created",
+                Type6.LicenseKeyCreated => "license_key.created",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

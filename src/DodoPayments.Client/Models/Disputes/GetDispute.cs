@@ -183,7 +183,7 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
     /// <summary>
     /// The current stage of the dispute process.
     /// </summary>
-    public required ApiEnum<string, DisputeStageModel> DisputeStage
+    public required ApiEnum<string, DisputeDisputeStage> DisputeStage
     {
         get
         {
@@ -193,7 +193,7 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
                     new ArgumentOutOfRangeException("dispute_stage", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStageModel>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeDisputeStage>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -210,7 +210,7 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
     /// <summary>
     /// The current status of the dispute.
     /// </summary>
-    public required ApiEnum<string, DisputeStatusModel> DisputeStatus
+    public required ApiEnum<string, DisputeDisputeStatus> DisputeStatus
     {
         get
         {
@@ -220,7 +220,7 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
                     new ArgumentOutOfRangeException("dispute_status", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, DisputeStatusModel>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, DisputeDisputeStatus>>(
                 element,
                 ModelBase.SerializerOptions
             );

@@ -49,7 +49,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent
     /// <summary>
     /// Event-specific data
     /// </summary>
-    public required Data6 Data
+    public required LicenseKeyCreatedWebhookEventData Data
     {
         get
         {
@@ -59,7 +59,10 @@ public sealed record class LicenseKeyCreatedWebhookEvent
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Data6>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEventData>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentNullException("data")
@@ -107,7 +110,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, Type6> Type
+    public required ApiEnum<string, LicenseKeyCreatedWebhookEventType> Type
     {
         get
         {
@@ -117,7 +120,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type6>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, LicenseKeyCreatedWebhookEventType>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -165,8 +168,10 @@ public sealed record class LicenseKeyCreatedWebhookEvent
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data6>))]
-public sealed record class Data6 : ModelBase, IFromRaw<Data6>
+[JsonConverter(typeof(ModelConverter<LicenseKeyCreatedWebhookEventData>))]
+public sealed record class LicenseKeyCreatedWebhookEventData
+    : ModelBase,
+        IFromRaw<LicenseKeyCreatedWebhookEventData>
 {
     /// <summary>
     /// The unique identifier of the license key.
@@ -499,17 +504,20 @@ public sealed record class Data6 : ModelBase, IFromRaw<Data6>
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType6>? PayloadType
+    public ApiEnum<
+        string,
+        LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType
+    >? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType6>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -525,21 +533,23 @@ public sealed record class Data6 : ModelBase, IFromRaw<Data6>
         }
     }
 
-    public static implicit operator LicenseKey(Data6 data6) =>
+    public static implicit operator LicenseKey(
+        LicenseKeyCreatedWebhookEventData licenseKeyCreatedWebhookEventData
+    ) =>
         new()
         {
-            ID = data6.ID,
-            BusinessID = data6.BusinessID,
-            CreatedAt = data6.CreatedAt,
-            CustomerID = data6.CustomerID,
-            InstancesCount = data6.InstancesCount,
-            Key = data6.Key,
-            PaymentID = data6.PaymentID,
-            ProductID = data6.ProductID,
-            Status = data6.Status,
-            ActivationsLimit = data6.ActivationsLimit,
-            ExpiresAt = data6.ExpiresAt,
-            SubscriptionID = data6.SubscriptionID,
+            ID = licenseKeyCreatedWebhookEventData.ID,
+            BusinessID = licenseKeyCreatedWebhookEventData.BusinessID,
+            CreatedAt = licenseKeyCreatedWebhookEventData.CreatedAt,
+            CustomerID = licenseKeyCreatedWebhookEventData.CustomerID,
+            InstancesCount = licenseKeyCreatedWebhookEventData.InstancesCount,
+            Key = licenseKeyCreatedWebhookEventData.Key,
+            PaymentID = licenseKeyCreatedWebhookEventData.PaymentID,
+            ProductID = licenseKeyCreatedWebhookEventData.ProductID,
+            Status = licenseKeyCreatedWebhookEventData.Status,
+            ActivationsLimit = licenseKeyCreatedWebhookEventData.ActivationsLimit,
+            ExpiresAt = licenseKeyCreatedWebhookEventData.ExpiresAt,
+            SubscriptionID = licenseKeyCreatedWebhookEventData.SubscriptionID,
         };
 
     public override void Validate()
@@ -559,44 +569,51 @@ public sealed record class Data6 : ModelBase, IFromRaw<Data6>
         this.PayloadType?.Validate();
     }
 
-    public Data6() { }
+    public LicenseKeyCreatedWebhookEventData() { }
 
-    public Data6(IReadOnlyDictionary<string, JsonElement> properties)
+    public LicenseKeyCreatedWebhookEventData(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data6(FrozenDictionary<string, JsonElement> properties)
+    LicenseKeyCreatedWebhookEventData(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Data6 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static LicenseKeyCreatedWebhookEventData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember16>))]
-public sealed record class IntersectionMember16 : ModelBase, IFromRaw<IntersectionMember16>
+[JsonConverter(typeof(ModelConverter<LicenseKeyCreatedWebhookEventDataIntersectionMember1>))]
+public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1
+    : ModelBase,
+        IFromRaw<LicenseKeyCreatedWebhookEventDataIntersectionMember1>
 {
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType6>? PayloadType
+    public ApiEnum<
+        string,
+        LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType
+    >? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType6>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -617,22 +634,26 @@ public sealed record class IntersectionMember16 : ModelBase, IFromRaw<Intersecti
         this.PayloadType?.Validate();
     }
 
-    public IntersectionMember16() { }
+    public LicenseKeyCreatedWebhookEventDataIntersectionMember1() { }
 
-    public IntersectionMember16(IReadOnlyDictionary<string, JsonElement> properties)
+    public LicenseKeyCreatedWebhookEventDataIntersectionMember1(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntersectionMember16(FrozenDictionary<string, JsonElement> properties)
+    LicenseKeyCreatedWebhookEventDataIntersectionMember1(
+        FrozenDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static IntersectionMember16 FromRawUnchecked(
+    public static LicenseKeyCreatedWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -643,15 +664,16 @@ public sealed record class IntersectionMember16 : ModelBase, IFromRaw<Intersecti
 /// <summary>
 /// The type of payload in the data field
 /// </summary>
-[JsonConverter(typeof(PayloadType6Converter))]
-public enum PayloadType6
+[JsonConverter(typeof(LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadTypeConverter))]
+public enum LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType
 {
     LicenseKey,
 }
 
-sealed class PayloadType6Converter : JsonConverter<PayloadType6>
+sealed class LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadTypeConverter
+    : JsonConverter<LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType>
 {
-    public override PayloadType6 Read(
+    public override LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -659,14 +681,15 @@ sealed class PayloadType6Converter : JsonConverter<PayloadType6>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "LicenseKey" => PayloadType6.LicenseKey,
-            _ => (PayloadType6)(-1),
+            "LicenseKey" =>
+                LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType.LicenseKey,
+            _ => (LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType6 value,
+        LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -674,7 +697,8 @@ sealed class PayloadType6Converter : JsonConverter<PayloadType6>
             writer,
             value switch
             {
-                PayloadType6.LicenseKey => "LicenseKey",
+                LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType.LicenseKey =>
+                    "LicenseKey",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -687,15 +711,16 @@ sealed class PayloadType6Converter : JsonConverter<PayloadType6>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(Type6Converter))]
-public enum Type6
+[JsonConverter(typeof(LicenseKeyCreatedWebhookEventTypeConverter))]
+public enum LicenseKeyCreatedWebhookEventType
 {
     LicenseKeyCreated,
 }
 
-sealed class Type6Converter : JsonConverter<Type6>
+sealed class LicenseKeyCreatedWebhookEventTypeConverter
+    : JsonConverter<LicenseKeyCreatedWebhookEventType>
 {
-    public override Type6 Read(
+    public override LicenseKeyCreatedWebhookEventType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -703,18 +728,22 @@ sealed class Type6Converter : JsonConverter<Type6>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "license_key.created" => Type6.LicenseKeyCreated,
-            _ => (Type6)(-1),
+            "license_key.created" => LicenseKeyCreatedWebhookEventType.LicenseKeyCreated,
+            _ => (LicenseKeyCreatedWebhookEventType)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type6 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        LicenseKeyCreatedWebhookEventType value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type6.LicenseKeyCreated => "license_key.created",
+                LicenseKeyCreatedWebhookEventType.LicenseKeyCreated => "license_key.created",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -51,7 +51,7 @@ public sealed record class RefundSucceededWebhookEvent
     /// <summary>
     /// Event-specific data
     /// </summary>
-    public required Data33 Data
+    public required Data12 Data
     {
         get
         {
@@ -61,7 +61,7 @@ public sealed record class RefundSucceededWebhookEvent
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Data33>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<Data12>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentNullException("data")
@@ -109,7 +109,7 @@ public sealed record class RefundSucceededWebhookEvent
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, Type33> Type
+    public required ApiEnum<string, Type12> Type
     {
         get
         {
@@ -119,7 +119,7 @@ public sealed record class RefundSucceededWebhookEvent
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type33>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, Type12>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -167,8 +167,8 @@ public sealed record class RefundSucceededWebhookEvent
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data33>))]
-public sealed record class Data33 : ModelBase, IFromRaw<Data33>
+[JsonConverter(typeof(ModelConverter<Data12>))]
+public sealed record class Data12 : ModelBase, IFromRaw<Data12>
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
@@ -474,17 +474,17 @@ public sealed record class Data33 : ModelBase, IFromRaw<Data33>
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType33>? PayloadType
+    public ApiEnum<string, Data12IntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType33>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                Data12IntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -500,20 +500,20 @@ public sealed record class Data33 : ModelBase, IFromRaw<Data33>
         }
     }
 
-    public static implicit operator Refund(Data33 data33) =>
+    public static implicit operator Refund(Data12 data12) =>
         new()
         {
-            BusinessID = data33.BusinessID,
-            CreatedAt = data33.CreatedAt,
-            Customer = data33.Customer,
-            IsPartial = data33.IsPartial,
-            Metadata = data33.Metadata,
-            PaymentID = data33.PaymentID,
-            RefundID = data33.RefundID,
-            Status = data33.Status,
-            Amount = data33.Amount,
-            Currency = data33.Currency,
-            Reason = data33.Reason,
+            BusinessID = data12.BusinessID,
+            CreatedAt = data12.CreatedAt,
+            Customer = data12.Customer,
+            IsPartial = data12.IsPartial,
+            Metadata = data12.Metadata,
+            PaymentID = data12.PaymentID,
+            RefundID = data12.RefundID,
+            Status = data12.Status,
+            Amount = data12.Amount,
+            Currency = data12.Currency,
+            Reason = data12.Reason,
         };
 
     public override void Validate()
@@ -532,44 +532,46 @@ public sealed record class Data33 : ModelBase, IFromRaw<Data33>
         this.PayloadType?.Validate();
     }
 
-    public Data33() { }
+    public Data12() { }
 
-    public Data33(IReadOnlyDictionary<string, JsonElement> properties)
+    public Data12(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data33(FrozenDictionary<string, JsonElement> properties)
+    Data12(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Data33 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Data12 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember133>))]
-public sealed record class IntersectionMember133 : ModelBase, IFromRaw<IntersectionMember133>
+[JsonConverter(typeof(ModelConverter<Data12IntersectionMember1>))]
+public sealed record class Data12IntersectionMember1
+    : ModelBase,
+        IFromRaw<Data12IntersectionMember1>
 {
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType33>? PayloadType
+    public ApiEnum<string, Data12IntersectionMember1PayloadType>? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType33>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                Data12IntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -590,22 +592,22 @@ public sealed record class IntersectionMember133 : ModelBase, IFromRaw<Intersect
         this.PayloadType?.Validate();
     }
 
-    public IntersectionMember133() { }
+    public Data12IntersectionMember1() { }
 
-    public IntersectionMember133(IReadOnlyDictionary<string, JsonElement> properties)
+    public Data12IntersectionMember1(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntersectionMember133(FrozenDictionary<string, JsonElement> properties)
+    Data12IntersectionMember1(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static IntersectionMember133 FromRawUnchecked(
+    public static Data12IntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -616,15 +618,16 @@ public sealed record class IntersectionMember133 : ModelBase, IFromRaw<Intersect
 /// <summary>
 /// The type of payload in the data field
 /// </summary>
-[JsonConverter(typeof(PayloadType33Converter))]
-public enum PayloadType33
+[JsonConverter(typeof(Data12IntersectionMember1PayloadTypeConverter))]
+public enum Data12IntersectionMember1PayloadType
 {
     Refund,
 }
 
-sealed class PayloadType33Converter : JsonConverter<PayloadType33>
+sealed class Data12IntersectionMember1PayloadTypeConverter
+    : JsonConverter<Data12IntersectionMember1PayloadType>
 {
-    public override PayloadType33 Read(
+    public override Data12IntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -632,14 +635,14 @@ sealed class PayloadType33Converter : JsonConverter<PayloadType33>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Refund" => PayloadType33.Refund,
-            _ => (PayloadType33)(-1),
+            "Refund" => Data12IntersectionMember1PayloadType.Refund,
+            _ => (Data12IntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType33 value,
+        Data12IntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -647,7 +650,7 @@ sealed class PayloadType33Converter : JsonConverter<PayloadType33>
             writer,
             value switch
             {
-                PayloadType33.Refund => "Refund",
+                Data12IntersectionMember1PayloadType.Refund => "Refund",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -660,15 +663,15 @@ sealed class PayloadType33Converter : JsonConverter<PayloadType33>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(Type33Converter))]
-public enum Type33
+[JsonConverter(typeof(Type12Converter))]
+public enum Type12
 {
     RefundSucceeded,
 }
 
-sealed class Type33Converter : JsonConverter<Type33>
+sealed class Type12Converter : JsonConverter<Type12>
 {
-    public override Type33 Read(
+    public override Type12 Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -676,18 +679,18 @@ sealed class Type33Converter : JsonConverter<Type33>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "refund.succeeded" => Type33.RefundSucceeded,
-            _ => (Type33)(-1),
+            "refund.succeeded" => Type12.RefundSucceeded,
+            _ => (Type12)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type33 value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, Type12 value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type33.RefundSucceeded => "refund.succeeded",
+                Type12.RefundSucceeded => "refund.succeeded",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

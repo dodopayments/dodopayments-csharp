@@ -51,7 +51,7 @@ public sealed record class PaymentProcessingWebhookEvent
     /// <summary>
     /// Event-specific data
     /// </summary>
-    public required Data9 Data
+    public required PaymentProcessingWebhookEventData Data
     {
         get
         {
@@ -61,7 +61,10 @@ public sealed record class PaymentProcessingWebhookEvent
                     new System::ArgumentOutOfRangeException("data", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<Data9>(element, ModelBase.SerializerOptions)
+            return JsonSerializer.Deserialize<PaymentProcessingWebhookEventData>(
+                    element,
+                    ModelBase.SerializerOptions
+                )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'data' cannot be null",
                     new System::ArgumentNullException("data")
@@ -109,7 +112,7 @@ public sealed record class PaymentProcessingWebhookEvent
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, Type9> Type
+    public required ApiEnum<string, PaymentProcessingWebhookEventType> Type
     {
         get
         {
@@ -119,7 +122,7 @@ public sealed record class PaymentProcessingWebhookEvent
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type9>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, PaymentProcessingWebhookEventType>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -167,8 +170,10 @@ public sealed record class PaymentProcessingWebhookEvent
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data9>))]
-public sealed record class Data9 : ModelBase, IFromRaw<Data9>
+[JsonConverter(typeof(ModelConverter<PaymentProcessingWebhookEventData>))]
+public sealed record class PaymentProcessingWebhookEventData
+    : ModelBase,
+        IFromRaw<PaymentProcessingWebhookEventData>
 {
     public required BillingAddress Billing
     {
@@ -949,17 +954,20 @@ public sealed record class Data9 : ModelBase, IFromRaw<Data9>
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType9>? PayloadType
+    public ApiEnum<
+        string,
+        PaymentProcessingWebhookEventDataIntersectionMember1PayloadType
+    >? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType9>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                PaymentProcessingWebhookEventDataIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -975,40 +983,42 @@ public sealed record class Data9 : ModelBase, IFromRaw<Data9>
         }
     }
 
-    public static implicit operator Payment(Data9 data9) =>
+    public static implicit operator Payment(
+        PaymentProcessingWebhookEventData paymentProcessingWebhookEventData
+    ) =>
         new()
         {
-            Billing = data9.Billing,
-            BrandID = data9.BrandID,
-            BusinessID = data9.BusinessID,
-            CreatedAt = data9.CreatedAt,
-            Currency = data9.Currency,
-            Customer = data9.Customer,
-            DigitalProductsDelivered = data9.DigitalProductsDelivered,
-            Disputes = data9.Disputes,
-            Metadata = data9.Metadata,
-            PaymentID = data9.PaymentID,
-            Refunds = data9.Refunds,
-            SettlementAmount = data9.SettlementAmount,
-            SettlementCurrency = data9.SettlementCurrency,
-            TotalAmount = data9.TotalAmount,
-            CardIssuingCountry = data9.CardIssuingCountry,
-            CardLastFour = data9.CardLastFour,
-            CardNetwork = data9.CardNetwork,
-            CardType = data9.CardType,
-            CheckoutSessionID = data9.CheckoutSessionID,
-            DiscountID = data9.DiscountID,
-            ErrorCode = data9.ErrorCode,
-            ErrorMessage = data9.ErrorMessage,
-            PaymentLink = data9.PaymentLink,
-            PaymentMethod = data9.PaymentMethod,
-            PaymentMethodType = data9.PaymentMethodType,
-            ProductCart = data9.ProductCart,
-            SettlementTax = data9.SettlementTax,
-            Status = data9.Status,
-            SubscriptionID = data9.SubscriptionID,
-            Tax = data9.Tax,
-            UpdatedAt = data9.UpdatedAt,
+            Billing = paymentProcessingWebhookEventData.Billing,
+            BrandID = paymentProcessingWebhookEventData.BrandID,
+            BusinessID = paymentProcessingWebhookEventData.BusinessID,
+            CreatedAt = paymentProcessingWebhookEventData.CreatedAt,
+            Currency = paymentProcessingWebhookEventData.Currency,
+            Customer = paymentProcessingWebhookEventData.Customer,
+            DigitalProductsDelivered = paymentProcessingWebhookEventData.DigitalProductsDelivered,
+            Disputes = paymentProcessingWebhookEventData.Disputes,
+            Metadata = paymentProcessingWebhookEventData.Metadata,
+            PaymentID = paymentProcessingWebhookEventData.PaymentID,
+            Refunds = paymentProcessingWebhookEventData.Refunds,
+            SettlementAmount = paymentProcessingWebhookEventData.SettlementAmount,
+            SettlementCurrency = paymentProcessingWebhookEventData.SettlementCurrency,
+            TotalAmount = paymentProcessingWebhookEventData.TotalAmount,
+            CardIssuingCountry = paymentProcessingWebhookEventData.CardIssuingCountry,
+            CardLastFour = paymentProcessingWebhookEventData.CardLastFour,
+            CardNetwork = paymentProcessingWebhookEventData.CardNetwork,
+            CardType = paymentProcessingWebhookEventData.CardType,
+            CheckoutSessionID = paymentProcessingWebhookEventData.CheckoutSessionID,
+            DiscountID = paymentProcessingWebhookEventData.DiscountID,
+            ErrorCode = paymentProcessingWebhookEventData.ErrorCode,
+            ErrorMessage = paymentProcessingWebhookEventData.ErrorMessage,
+            PaymentLink = paymentProcessingWebhookEventData.PaymentLink,
+            PaymentMethod = paymentProcessingWebhookEventData.PaymentMethod,
+            PaymentMethodType = paymentProcessingWebhookEventData.PaymentMethodType,
+            ProductCart = paymentProcessingWebhookEventData.ProductCart,
+            SettlementTax = paymentProcessingWebhookEventData.SettlementTax,
+            Status = paymentProcessingWebhookEventData.Status,
+            SubscriptionID = paymentProcessingWebhookEventData.SubscriptionID,
+            Tax = paymentProcessingWebhookEventData.Tax,
+            UpdatedAt = paymentProcessingWebhookEventData.UpdatedAt,
         };
 
     public override void Validate()
@@ -1056,44 +1066,51 @@ public sealed record class Data9 : ModelBase, IFromRaw<Data9>
         this.PayloadType?.Validate();
     }
 
-    public Data9() { }
+    public PaymentProcessingWebhookEventData() { }
 
-    public Data9(IReadOnlyDictionary<string, JsonElement> properties)
+    public PaymentProcessingWebhookEventData(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data9(FrozenDictionary<string, JsonElement> properties)
+    PaymentProcessingWebhookEventData(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static Data9 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static PaymentProcessingWebhookEventData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember19>))]
-public sealed record class IntersectionMember19 : ModelBase, IFromRaw<IntersectionMember19>
+[JsonConverter(typeof(ModelConverter<PaymentProcessingWebhookEventDataIntersectionMember1>))]
+public sealed record class PaymentProcessingWebhookEventDataIntersectionMember1
+    : ModelBase,
+        IFromRaw<PaymentProcessingWebhookEventDataIntersectionMember1>
 {
     /// <summary>
     /// The type of payload in the data field
     /// </summary>
-    public ApiEnum<string, PayloadType9>? PayloadType
+    public ApiEnum<
+        string,
+        PaymentProcessingWebhookEventDataIntersectionMember1PayloadType
+    >? PayloadType
     {
         get
         {
             if (!this._properties.TryGetValue("payload_type", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<ApiEnum<string, PayloadType9>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<ApiEnum<
+                string,
+                PaymentProcessingWebhookEventDataIntersectionMember1PayloadType
+            >?>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -1114,22 +1131,26 @@ public sealed record class IntersectionMember19 : ModelBase, IFromRaw<Intersecti
         this.PayloadType?.Validate();
     }
 
-    public IntersectionMember19() { }
+    public PaymentProcessingWebhookEventDataIntersectionMember1() { }
 
-    public IntersectionMember19(IReadOnlyDictionary<string, JsonElement> properties)
+    public PaymentProcessingWebhookEventDataIntersectionMember1(
+        IReadOnlyDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntersectionMember19(FrozenDictionary<string, JsonElement> properties)
+    PaymentProcessingWebhookEventDataIntersectionMember1(
+        FrozenDictionary<string, JsonElement> properties
+    )
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static IntersectionMember19 FromRawUnchecked(
+    public static PaymentProcessingWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> properties
     )
     {
@@ -1140,15 +1161,16 @@ public sealed record class IntersectionMember19 : ModelBase, IFromRaw<Intersecti
 /// <summary>
 /// The type of payload in the data field
 /// </summary>
-[JsonConverter(typeof(PayloadType9Converter))]
-public enum PayloadType9
+[JsonConverter(typeof(PaymentProcessingWebhookEventDataIntersectionMember1PayloadTypeConverter))]
+public enum PaymentProcessingWebhookEventDataIntersectionMember1PayloadType
 {
     Payment,
 }
 
-sealed class PayloadType9Converter : JsonConverter<PayloadType9>
+sealed class PaymentProcessingWebhookEventDataIntersectionMember1PayloadTypeConverter
+    : JsonConverter<PaymentProcessingWebhookEventDataIntersectionMember1PayloadType>
 {
-    public override PayloadType9 Read(
+    public override PaymentProcessingWebhookEventDataIntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1156,14 +1178,14 @@ sealed class PayloadType9Converter : JsonConverter<PayloadType9>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Payment" => PayloadType9.Payment,
-            _ => (PayloadType9)(-1),
+            "Payment" => PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment,
+            _ => (PaymentProcessingWebhookEventDataIntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PayloadType9 value,
+        PaymentProcessingWebhookEventDataIntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -1171,7 +1193,8 @@ sealed class PayloadType9Converter : JsonConverter<PayloadType9>
             writer,
             value switch
             {
-                PayloadType9.Payment => "Payment",
+                PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment =>
+                    "Payment",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1184,15 +1207,16 @@ sealed class PayloadType9Converter : JsonConverter<PayloadType9>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(Type9Converter))]
-public enum Type9
+[JsonConverter(typeof(PaymentProcessingWebhookEventTypeConverter))]
+public enum PaymentProcessingWebhookEventType
 {
     PaymentProcessing,
 }
 
-sealed class Type9Converter : JsonConverter<Type9>
+sealed class PaymentProcessingWebhookEventTypeConverter
+    : JsonConverter<PaymentProcessingWebhookEventType>
 {
-    public override Type9 Read(
+    public override PaymentProcessingWebhookEventType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1200,18 +1224,22 @@ sealed class Type9Converter : JsonConverter<Type9>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "payment.processing" => Type9.PaymentProcessing,
-            _ => (Type9)(-1),
+            "payment.processing" => PaymentProcessingWebhookEventType.PaymentProcessing,
+            _ => (PaymentProcessingWebhookEventType)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type9 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        PaymentProcessingWebhookEventType value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type9.PaymentProcessing => "payment.processing",
+                PaymentProcessingWebhookEventType.PaymentProcessing => "payment.processing",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

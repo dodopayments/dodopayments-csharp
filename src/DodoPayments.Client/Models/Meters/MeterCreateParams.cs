@@ -157,14 +157,17 @@ public sealed record class MeterCreateParams : ParamsBase
     /// <summary>
     /// Optional filter to apply to the meter
     /// </summary>
-    public MeterFilter? Filter
+    public MeterMeterFilter? Filter
     {
         get
         {
             if (!this._bodyProperties.TryGetValue("filter", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<MeterFilter?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<MeterMeterFilter?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {

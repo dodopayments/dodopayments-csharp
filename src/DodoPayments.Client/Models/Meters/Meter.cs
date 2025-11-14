@@ -232,14 +232,17 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
     /// Each filter has a conjunction (and/or) and clauses that can be either direct
     /// conditions or nested filters.</para>
     /// </summary>
-    public MeterFilter? Filter
+    public MeterMeterFilter? Filter
     {
         get
         {
             if (!this._properties.TryGetValue("filter", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<MeterFilter?>(element, ModelBase.SerializerOptions);
+            return JsonSerializer.Deserialize<MeterMeterFilter?>(
+                element,
+                ModelBase.SerializerOptions
+            );
         }
         init
         {

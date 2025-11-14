@@ -821,7 +821,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
     }
 
-    public required ApiEnum<string, TypeModel> Type
+    public required ApiEnum<string, RecurringPriceType> Type
     {
         get
         {
@@ -831,7 +831,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, TypeModel>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, RecurringPriceType>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -930,15 +930,15 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     }
 }
 
-[JsonConverter(typeof(TypeModelConverter))]
-public enum TypeModel
+[JsonConverter(typeof(RecurringPriceTypeConverter))]
+public enum RecurringPriceType
 {
     RecurringPrice,
 }
 
-sealed class TypeModelConverter : JsonConverter<TypeModel>
+sealed class RecurringPriceTypeConverter : JsonConverter<RecurringPriceType>
 {
-    public override TypeModel Read(
+    public override RecurringPriceType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -946,14 +946,14 @@ sealed class TypeModelConverter : JsonConverter<TypeModel>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "recurring_price" => TypeModel.RecurringPrice,
-            _ => (TypeModel)(-1),
+            "recurring_price" => RecurringPriceType.RecurringPrice,
+            _ => (RecurringPriceType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        TypeModel value,
+        RecurringPriceType value,
         JsonSerializerOptions options
     )
     {
@@ -961,7 +961,7 @@ sealed class TypeModelConverter : JsonConverter<TypeModel>
             writer,
             value switch
             {
-                TypeModel.RecurringPrice => "recurring_price",
+                RecurringPriceType.RecurringPrice => "recurring_price",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1207,7 +1207,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
     }
 
-    public required ApiEnum<string, Type1> Type
+    public required ApiEnum<string, UsageBasedPriceType> Type
     {
         get
         {
@@ -1217,7 +1217,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, Type1>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, UsageBasedPriceType>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1314,15 +1314,15 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     }
 }
 
-[JsonConverter(typeof(Type1Converter))]
-public enum Type1
+[JsonConverter(typeof(UsageBasedPriceTypeConverter))]
+public enum UsageBasedPriceType
 {
     UsageBasedPrice,
 }
 
-sealed class Type1Converter : JsonConverter<Type1>
+sealed class UsageBasedPriceTypeConverter : JsonConverter<UsageBasedPriceType>
 {
-    public override Type1 Read(
+    public override UsageBasedPriceType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1330,18 +1330,22 @@ sealed class Type1Converter : JsonConverter<Type1>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "usage_based_price" => Type1.UsageBasedPrice,
-            _ => (Type1)(-1),
+            "usage_based_price" => UsageBasedPriceType.UsageBasedPrice,
+            _ => (UsageBasedPriceType)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Type1 value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        UsageBasedPriceType value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Type1.UsageBasedPrice => "usage_based_price",
+                UsageBasedPriceType.UsageBasedPrice => "usage_based_price",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
