@@ -952,6 +952,202 @@ public sealed record class CheckoutSessionRequestFeatureFlags
         }
     }
 
+    public bool? AllowCustomerEditingCity
+    {
+        get
+        {
+            if (
+                !this._properties.TryGetValue(
+                    "allow_customer_editing_city",
+                    out JsonElement element
+                )
+            )
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._properties["allow_customer_editing_city"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public bool? AllowCustomerEditingCountry
+    {
+        get
+        {
+            if (
+                !this._properties.TryGetValue(
+                    "allow_customer_editing_country",
+                    out JsonElement element
+                )
+            )
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._properties["allow_customer_editing_country"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public bool? AllowCustomerEditingEmail
+    {
+        get
+        {
+            if (
+                !this._properties.TryGetValue(
+                    "allow_customer_editing_email",
+                    out JsonElement element
+                )
+            )
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._properties["allow_customer_editing_email"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public bool? AllowCustomerEditingName
+    {
+        get
+        {
+            if (
+                !this._properties.TryGetValue(
+                    "allow_customer_editing_name",
+                    out JsonElement element
+                )
+            )
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._properties["allow_customer_editing_name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public bool? AllowCustomerEditingState
+    {
+        get
+        {
+            if (
+                !this._properties.TryGetValue(
+                    "allow_customer_editing_state",
+                    out JsonElement element
+                )
+            )
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._properties["allow_customer_editing_state"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public bool? AllowCustomerEditingStreet
+    {
+        get
+        {
+            if (
+                !this._properties.TryGetValue(
+                    "allow_customer_editing_street",
+                    out JsonElement element
+                )
+            )
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._properties["allow_customer_editing_street"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    public bool? AllowCustomerEditingZipcode
+    {
+        get
+        {
+            if (
+                !this._properties.TryGetValue(
+                    "allow_customer_editing_zipcode",
+                    out JsonElement element
+                )
+            )
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._properties["allow_customer_editing_zipcode"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
     /// <summary>
     /// If the customer is allowed to apply discount code, set it to true.
     ///
@@ -1075,6 +1271,13 @@ public sealed record class CheckoutSessionRequestFeatureFlags
     public override void Validate()
     {
         _ = this.AllowCurrencySelection;
+        _ = this.AllowCustomerEditingCity;
+        _ = this.AllowCustomerEditingCountry;
+        _ = this.AllowCustomerEditingEmail;
+        _ = this.AllowCustomerEditingName;
+        _ = this.AllowCustomerEditingState;
+        _ = this.AllowCustomerEditingStreet;
+        _ = this.AllowCustomerEditingZipcode;
         _ = this.AllowDiscountCode;
         _ = this.AllowPhoneNumberCollection;
         _ = this.AllowTaxID;

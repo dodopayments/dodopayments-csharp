@@ -31,4 +31,13 @@ public class CustomerServiceTest : TestBase
         var page = await this.client.Customers.List();
         page.Validate();
     }
+
+    [Fact]
+    public async Task RetrievePaymentMethods_Works()
+    {
+        var response = await this.client.Customers.RetrievePaymentMethods(
+            new() { CustomerID = "customer_id" }
+        );
+        response.Validate();
+    }
 }

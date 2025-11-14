@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Models.Brands;
 using DodoPayments.Client.Models.CheckoutSessions;
+using DodoPayments.Client.Models.Customers;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Disputes;
@@ -41,8 +42,11 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::TimeInterval>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
+            new ApiEnumConverter<string, Subscriptions::Type>(),
+            new ApiEnumConverter<string, Subscriptions::UnionMember1Type>(),
             new ApiEnumConverter<string, LicenseKeyStatus>(),
             new ApiEnumConverter<string, Status>(),
+            new ApiEnumConverter<string, PaymentMethod>(),
             new ApiEnumConverter<string, EventType>(),
             new ApiEnumConverter<string, EntryType>(),
             new ApiEnumConverter<string, Refunds::RefundStatus>(),

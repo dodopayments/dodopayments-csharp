@@ -97,6 +97,35 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
     }
 
     /// <summary>
+    /// Additional metadata associated with the customer
+    /// </summary>
+    public Dictionary<string, string>? Metadata
+    {
+        get
+        {
+            if (!this._properties.TryGetValue("metadata", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._properties["metadata"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Phone number of the customer
     /// </summary>
     public string? PhoneNumber
@@ -122,6 +151,7 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
         _ = this.CustomerID;
         _ = this.Email;
         _ = this.Name;
+        _ = this.Metadata;
         _ = this.PhoneNumber;
     }
 

@@ -34,4 +34,9 @@ public interface ICustomerService
         CustomerListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
+
+    Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
+        CustomerRetrievePaymentMethodsParams parameters,
+        CancellationToken cancellationToken = default
+    );
 }

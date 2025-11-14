@@ -129,4 +129,27 @@ public sealed class CustomerService : ICustomerService
         }
         return page;
     }
+
+    public async Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
+        CustomerRetrievePaymentMethodsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HttpRequest<CustomerRetrievePaymentMethodsParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<CustomerRetrievePaymentMethodsResponse>(cancellationToken)
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
+    }
 }
