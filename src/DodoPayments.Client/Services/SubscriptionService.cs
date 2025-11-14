@@ -175,4 +175,27 @@ public sealed class SubscriptionService : ISubscriptionService
         }
         return page;
     }
+
+    public async Task<SubscriptionUpdatePaymentMethodResponse> UpdatePaymentMethod(
+        SubscriptionUpdatePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HttpRequest<SubscriptionUpdatePaymentMethodParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<SubscriptionUpdatePaymentMethodResponse>(cancellationToken)
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
+    }
 }

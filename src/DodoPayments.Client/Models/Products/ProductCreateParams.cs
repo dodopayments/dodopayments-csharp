@@ -21,6 +21,34 @@ public sealed record class ProductCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Name of the product
+    /// </summary>
+    public required string Name
+    {
+        get
+        {
+            if (!this._bodyProperties.TryGetValue("name", out JsonElement element))
+                throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentOutOfRangeException("name", "Missing required argument")
+                );
+
+            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'name' cannot be null",
+                    new ArgumentNullException("name")
+                );
+        }
+        init
+        {
+            this._bodyProperties["name"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
+    /// <summary>
     /// Price configuration for the product
     /// </summary>
     public required Price Price
@@ -285,27 +313,6 @@ public sealed record class ProductCreateParams : ParamsBase
             }
 
             this._bodyProperties["metadata"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
-    }
-
-    /// <summary>
-    /// Optional name of the product
-    /// </summary>
-    public string? Name
-    {
-        get
-        {
-            if (!this._bodyProperties.TryGetValue("name", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._bodyProperties["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );

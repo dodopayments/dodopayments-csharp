@@ -74,4 +74,9 @@ public interface ISubscriptionService
         SubscriptionRetrieveUsageHistoryParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    Task<SubscriptionUpdatePaymentMethodResponse> UpdatePaymentMethod(
+        SubscriptionUpdatePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    );
 }

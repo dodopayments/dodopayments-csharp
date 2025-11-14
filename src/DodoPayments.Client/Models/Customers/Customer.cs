@@ -133,6 +133,35 @@ public sealed record class Customer : ModelBase, IFromRaw<Customer>
         }
     }
 
+    /// <summary>
+    /// Additional metadata for the customer
+    /// </summary>
+    public Dictionary<string, string>? Metadata
+    {
+        get
+        {
+            if (!this._properties.TryGetValue("metadata", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._properties["metadata"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
     public string? PhoneNumber
     {
         get
@@ -158,6 +187,7 @@ public sealed record class Customer : ModelBase, IFromRaw<Customer>
         _ = this.CustomerID;
         _ = this.Email;
         _ = this.Name;
+        _ = this.Metadata;
         _ = this.PhoneNumber;
     }
 

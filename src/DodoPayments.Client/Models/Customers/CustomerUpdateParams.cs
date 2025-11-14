@@ -19,6 +19,30 @@ public sealed record class CustomerUpdateParams : ParamsBase
 
     public required string CustomerID { get; init; }
 
+    /// <summary>
+    /// Additional metadata for the customer
+    /// </summary>
+    public Dictionary<string, string>? Metadata
+    {
+        get
+        {
+            if (!this._bodyProperties.TryGetValue("metadata", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        }
+        init
+        {
+            this._bodyProperties["metadata"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
+    }
+
     public string? Name
     {
         get
