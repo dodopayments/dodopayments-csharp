@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.3.1 (2025-11-15)
+
+Full Changelog: [v3.3.0...v3.3.1](https://github.com/dodopayments/dodopayments-csharp/compare/v3.3.0...v3.3.1)
+
+### Chores
+
+* **internal:** update release please config ([8776a5e](https://github.com/dodopayments/dodopayments-csharp/commit/8776a5ea4f098ea745db6d036ff0b9454d96bfeb))
+
 ## 3.3.0 (2025-11-14)
 
 Full Changelog: [v3.2.0...v3.3.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.2.0...v3.3.0)
