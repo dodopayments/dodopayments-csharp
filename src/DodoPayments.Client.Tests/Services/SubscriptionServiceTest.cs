@@ -93,7 +93,7 @@ public class SubscriptionServiceTest : TestBase
             new()
             {
                 SubscriptionID = "subscription_id",
-                Body = new UnionMember0() { Type = Type.New, ReturnURL = "return_url" },
+                Body = new New() { Type = Type.New, ReturnURL = "return_url" },
             }
         );
         response.Validate();
