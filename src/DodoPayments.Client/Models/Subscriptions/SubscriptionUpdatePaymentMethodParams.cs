@@ -121,12 +121,12 @@ public record class Body
 {
     public object Value { get; private init; }
 
-    public Body(UnionMember0 value)
+    public Body(New value)
     {
         Value = value;
     }
 
-    public Body(UnionMember1 value)
+    public Body(Existing value)
     {
         Value = value;
     }
@@ -141,30 +141,27 @@ public record class Body
         return new(new UnknownVariant(value));
     }
 
-    public bool TryPickUnionMember0([NotNullWhen(true)] out UnionMember0? value)
+    public bool TryPickNew([NotNullWhen(true)] out New? value)
     {
-        value = this.Value as UnionMember0;
+        value = this.Value as New;
         return value != null;
     }
 
-    public bool TryPickUnionMember1([NotNullWhen(true)] out UnionMember1? value)
+    public bool TryPickExisting([NotNullWhen(true)] out Existing? value)
     {
-        value = this.Value as UnionMember1;
+        value = this.Value as Existing;
         return value != null;
     }
 
-    public void Switch(
-        System::Action<UnionMember0> unionMember0,
-        System::Action<UnionMember1> unionMember1
-    )
+    public void Switch(System::Action<New> new1, System::Action<Existing> existing)
     {
         switch (this.Value)
         {
-            case UnionMember0 value:
-                unionMember0(value);
+            case New value:
+                new1(value);
                 break;
-            case UnionMember1 value:
-                unionMember1(value);
+            case Existing value:
+                existing(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -173,24 +170,21 @@ public record class Body
         }
     }
 
-    public T Match<T>(
-        System::Func<UnionMember0, T> unionMember0,
-        System::Func<UnionMember1, T> unionMember1
-    )
+    public T Match<T>(System::Func<New, T> new1, System::Func<Existing, T> existing)
     {
         return this.Value switch
         {
-            UnionMember0 value => unionMember0(value),
-            UnionMember1 value => unionMember1(value),
+            New value => new1(value),
+            Existing value => existing(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Body"
             ),
         };
     }
 
-    public static implicit operator Body(UnionMember0 value) => new(value);
+    public static implicit operator Body(New value) => new(value);
 
-    public static implicit operator Body(UnionMember1 value) => new(value);
+    public static implicit operator Body(Existing value) => new(value);
 
     public void Validate()
     {
@@ -215,7 +209,7 @@ sealed class BodyConverter : JsonConverter<Body>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UnionMember0>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<New>(ref reader, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -226,16 +220,13 @@ sealed class BodyConverter : JsonConverter<Body>
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'UnionMember0'",
-                    e
-                )
+                new DodoPaymentsInvalidDataException("Data does not match union variant 'New'", e)
             );
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UnionMember1>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<Existing>(ref reader, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -247,7 +238,7 @@ sealed class BodyConverter : JsonConverter<Body>
         {
             exceptions.Add(
                 new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'UnionMember1'",
+                    "Data does not match union variant 'Existing'",
                     e
                 )
             );
@@ -263,8 +254,8 @@ sealed class BodyConverter : JsonConverter<Body>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<UnionMember0>))]
-public sealed record class UnionMember0 : ModelBase, IFromRaw<UnionMember0>
+[JsonConverter(typeof(ModelConverter<New>))]
+public sealed record class New : ModelBase, IFromRaw<New>
 {
     public required ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type> Type
     {
@@ -313,28 +304,28 @@ public sealed record class UnionMember0 : ModelBase, IFromRaw<UnionMember0>
         _ = this.ReturnURL;
     }
 
-    public UnionMember0() { }
+    public New() { }
 
-    public UnionMember0(IReadOnlyDictionary<string, JsonElement> properties)
+    public New(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UnionMember0(FrozenDictionary<string, JsonElement> properties)
+    New(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static UnionMember0 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static New FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 
     [SetsRequiredMembers]
-    public UnionMember0(ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type> type)
+    public New(ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type> type)
         : this()
     {
         this.Type = type;
@@ -382,8 +373,8 @@ sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.Su
     }
 }
 
-[JsonConverter(typeof(ModelConverter<UnionMember1>))]
-public sealed record class UnionMember1 : ModelBase, IFromRaw<UnionMember1>
+[JsonConverter(typeof(ModelConverter<Existing>))]
+public sealed record class Existing : ModelBase, IFromRaw<Existing>
 {
     public required string PaymentMethodID
     {
@@ -413,7 +404,7 @@ public sealed record class UnionMember1 : ModelBase, IFromRaw<UnionMember1>
         }
     }
 
-    public required ApiEnum<string, UnionMember1Type> Type
+    public required ApiEnum<string, ExistingType> Type
     {
         get
         {
@@ -423,7 +414,7 @@ public sealed record class UnionMember1 : ModelBase, IFromRaw<UnionMember1>
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+            return JsonSerializer.Deserialize<ApiEnum<string, ExistingType>>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -443,36 +434,36 @@ public sealed record class UnionMember1 : ModelBase, IFromRaw<UnionMember1>
         this.Type.Validate();
     }
 
-    public UnionMember1() { }
+    public Existing() { }
 
-    public UnionMember1(IReadOnlyDictionary<string, JsonElement> properties)
+    public Existing(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UnionMember1(FrozenDictionary<string, JsonElement> properties)
+    Existing(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static UnionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Existing FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }
 }
 
-[JsonConverter(typeof(UnionMember1TypeConverter))]
-public enum UnionMember1Type
+[JsonConverter(typeof(ExistingTypeConverter))]
+public enum ExistingType
 {
     Existing,
 }
 
-sealed class UnionMember1TypeConverter : JsonConverter<UnionMember1Type>
+sealed class ExistingTypeConverter : JsonConverter<ExistingType>
 {
-    public override UnionMember1Type Read(
+    public override ExistingType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -480,14 +471,14 @@ sealed class UnionMember1TypeConverter : JsonConverter<UnionMember1Type>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "existing" => UnionMember1Type.Existing,
-            _ => (UnionMember1Type)(-1),
+            "existing" => ExistingType.Existing,
+            _ => (ExistingType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        UnionMember1Type value,
+        ExistingType value,
         JsonSerializerOptions options
     )
     {
@@ -495,7 +486,7 @@ sealed class UnionMember1TypeConverter : JsonConverter<UnionMember1Type>
             writer,
             value switch
             {
-                UnionMember1Type.Existing => "existing",
+                ExistingType.Existing => "existing",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
