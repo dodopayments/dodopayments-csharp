@@ -84,37 +84,6 @@ public sealed record class CustomerRetrievePaymentMethodsResponse
 [JsonConverter(typeof(ModelConverter<Item>))]
 public sealed record class Item : ModelBase, IFromRaw<Item>
 {
-    public required Dictionary<string, ConnectorPaymentMethodsItem> ConnectorPaymentMethods
-    {
-        get
-        {
-            if (!this._properties.TryGetValue("connector_payment_methods", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'connector_payment_methods' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "connector_payment_methods",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<Dictionary<string, ConnectorPaymentMethodsItem>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'connector_payment_methods' cannot be null",
-                    new System::ArgumentNullException("connector_payment_methods")
-                );
-        }
-        init
-        {
-            this._properties["connector_payment_methods"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
-    }
-
     /// <summary>
     /// PaymentMethod enum from hyperswitch
     ///
@@ -175,37 +144,6 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         }
     }
 
-    public required Dictionary<string, string> ProfileMap
-    {
-        get
-        {
-            if (!this._properties.TryGetValue("profile_map", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'profile_map' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "profile_map",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'profile_map' cannot be null",
-                    new System::ArgumentNullException("profile_map")
-                );
-        }
-        init
-        {
-            this._properties["profile_map"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
-    }
-
     public Card? Card
     {
         get
@@ -245,149 +183,6 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         }
     }
 
-    public bool? RecurringEnabled
-    {
-        get
-        {
-            if (!this._properties.TryGetValue("recurring_enabled", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._properties["recurring_enabled"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
-    }
-
-    public override void Validate()
-    {
-        foreach (var item in this.ConnectorPaymentMethods.Values)
-        {
-            item.Validate();
-        }
-        this.PaymentMethod.Validate();
-        _ = this.PaymentMethodID;
-        _ = this.ProfileMap;
-        this.Card?.Validate();
-        _ = this.LastUsedAt;
-        _ = this.RecurringEnabled;
-    }
-
-    public Item() { }
-
-    public Item(IReadOnlyDictionary<string, JsonElement> properties)
-    {
-        this._properties = [.. properties];
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Item(FrozenDictionary<string, JsonElement> properties)
-    {
-        this._properties = [.. properties];
-    }
-#pragma warning restore CS8618
-
-    public static Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
-    }
-}
-
-[JsonConverter(typeof(ModelConverter<ConnectorPaymentMethodsItem>))]
-public sealed record class ConnectorPaymentMethodsItem
-    : ModelBase,
-        IFromRaw<ConnectorPaymentMethodsItem>
-{
-    public required string ConnectorMandateID
-    {
-        get
-        {
-            if (!this._properties.TryGetValue("connector_mandate_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'connector_mandate_id' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "connector_mandate_id",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'connector_mandate_id' cannot be null",
-                    new System::ArgumentNullException("connector_mandate_id")
-                );
-        }
-        init
-        {
-            this._properties["connector_mandate_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
-    }
-
-    public required long OriginalPaymentAuthorizedAmount
-    {
-        get
-        {
-            if (
-                !this._properties.TryGetValue(
-                    "original_payment_authorized_amount",
-                    out JsonElement element
-                )
-            )
-                throw new DodoPaymentsInvalidDataException(
-                    "'original_payment_authorized_amount' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "original_payment_authorized_amount",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._properties["original_payment_authorized_amount"] =
-                JsonSerializer.SerializeToElement(value, ModelBase.SerializerOptions);
-        }
-    }
-
-    public required ApiEnum<string, Currency> OriginalPaymentAuthorizedCurrency
-    {
-        get
-        {
-            if (
-                !this._properties.TryGetValue(
-                    "original_payment_authorized_currency",
-                    out JsonElement element
-                )
-            )
-                throw new DodoPaymentsInvalidDataException(
-                    "'original_payment_authorized_currency' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "original_payment_authorized_currency",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
-        init
-        {
-            this._properties["original_payment_authorized_currency"] =
-                JsonSerializer.SerializeToElement(value, ModelBase.SerializerOptions);
-        }
-    }
-
     public ApiEnum<string, Payments::PaymentMethodTypes>? PaymentMethodType
     {
         get
@@ -409,32 +204,50 @@ public sealed record class ConnectorPaymentMethodsItem
         }
     }
 
-    public override void Validate()
+    public bool? RecurringEnabled
     {
-        _ = this.ConnectorMandateID;
-        _ = this.OriginalPaymentAuthorizedAmount;
-        this.OriginalPaymentAuthorizedCurrency.Validate();
-        this.PaymentMethodType?.Validate();
+        get
+        {
+            if (!this._properties.TryGetValue("recurring_enabled", out JsonElement element))
+                return null;
+
+            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+        }
+        init
+        {
+            this._properties["recurring_enabled"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
-    public ConnectorPaymentMethodsItem() { }
+    public override void Validate()
+    {
+        this.PaymentMethod.Validate();
+        _ = this.PaymentMethodID;
+        this.Card?.Validate();
+        _ = this.LastUsedAt;
+        this.PaymentMethodType?.Validate();
+        _ = this.RecurringEnabled;
+    }
 
-    public ConnectorPaymentMethodsItem(IReadOnlyDictionary<string, JsonElement> properties)
+    public Item() { }
+
+    public Item(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ConnectorPaymentMethodsItem(FrozenDictionary<string, JsonElement> properties)
+    Item(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 #pragma warning restore CS8618
 
-    public static ConnectorPaymentMethodsItem FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
-    )
+    public static Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
     {
         return new(FrozenDictionary.ToFrozenDictionary(properties));
     }

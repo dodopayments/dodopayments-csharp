@@ -43,7 +43,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
             new ApiEnumConverter<string, Subscriptions::Type>(),
-            new ApiEnumConverter<string, Subscriptions::UnionMember1Type>(),
+            new ApiEnumConverter<string, Subscriptions::ExistingType>(),
             new ApiEnumConverter<string, LicenseKeyStatus>(),
             new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, PaymentMethod>(),
