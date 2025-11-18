@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.4.1 (2025-11-18)
+
+Full Changelog: [v3.4.0...v3.4.1](https://github.com/dodopayments/dodopayments-csharp/compare/v3.4.0...v3.4.1)
+
+### Documentation
+
+* **internal:** add warning about implementing interface ([addd6bd](https://github.com/dodopayments/dodopayments-csharp/commit/addd6bd97265dc4d8bd6d438ea302f97bd4efbe4))
+
 ## 3.4.0 (2025-11-17)
 
 Full Changelog: [v3.3.0...v3.4.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.3.0...v3.4.0)
