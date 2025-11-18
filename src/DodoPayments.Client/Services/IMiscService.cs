@@ -7,6 +7,11 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Services;
 
+/// <summary>
+/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
+/// changes in non-major versions. We may add new methods in the future that cause
+/// existing derived classes to break.
+/// </summary>
 public interface IMiscService
 {
     IMiscService WithOptions(Func<ClientOptions, ClientOptions> modifier);
