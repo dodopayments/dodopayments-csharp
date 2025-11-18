@@ -7,6 +7,11 @@ using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
 namespace DodoPayments.Client.Services.Customers.Wallets;
 
+/// <summary>
+/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
+/// changes in non-major versions. We may add new methods in the future that cause
+/// existing derived classes to break.
+/// </summary>
 public interface ILedgerEntryService
 {
     ILedgerEntryService WithOptions(Func<ClientOptions, ClientOptions> modifier);
