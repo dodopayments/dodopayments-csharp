@@ -6,7 +6,7 @@
     <AssemblyTitle>SDK Code Generation Dodo Payments C#</AssemblyTitle>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Nullable>enable</Nullable>
-    <VersionPrefix>3.4.0</VersionPrefix>
+    <VersionPrefix>3.4.1</VersionPrefix>
     <TargetFrameworks>net8.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <!-- Generate an XML documentation file for the project. -->
