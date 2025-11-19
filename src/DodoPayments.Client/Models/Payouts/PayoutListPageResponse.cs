@@ -494,15 +494,20 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         _ = this.Remarks;
     }
 
+    [System::Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
     public Item() { }
 
+    [System::Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
     public Item(IReadOnlyDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
     }
 
 #pragma warning disable CS8618
-    [SetsRequiredMembers]
+    [
+        System::Obsolete("Required properties are deprecated: chargebacks, refunds, tax"),
+        SetsRequiredMembers
+    ]
     Item(FrozenDictionary<string, JsonElement> properties)
     {
         this._properties = [.. properties];
