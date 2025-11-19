@@ -169,7 +169,14 @@ public sealed record class WebhookPayload : ModelBase, IFromRaw<WebhookPayload>
 [JsonConverter(typeof(DataConverter))]
 public record class Data
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
+
+    JsonElement? _json = null;
+
+    public JsonElement Json
+    {
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+    }
 
     public Payments::BillingAddress? Billing
     {
@@ -311,39 +318,39 @@ public record class Data
         }
     }
 
-    public Data(Payment value)
+    public Data(Payment value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public Data(Subscription value)
+    public Data(Subscription value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public Data(Refund value)
+    public Data(Refund value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public Data(Dispute value)
+    public Data(Dispute value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public Data(LicenseKey value)
+    public Data(LicenseKey value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    Data(UnknownVariant value)
+    public Data(JsonElement json)
     {
-        Value = value;
-    }
-
-    public static Data CreateUnknownVariant(JsonElement value)
-    {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickPayment([NotNullWhen(true)] out Payment? value)
@@ -441,13 +448,11 @@ public record class Data
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Data");
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class DataConverter : JsonConverter<Data>
@@ -458,115 +463,88 @@ sealed class DataConverter : JsonConverter<Data>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Payment>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<Payment>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new Data(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'Payment'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Subscription>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<Subscription>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new Data(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'Subscription'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Refund>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<Refund>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new Data(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'Refund'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Dispute>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<Dispute>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new Data(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'Dispute'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<LicenseKey>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<LicenseKey>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new Data(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'LicenseKey'",
-                    e
-                )
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(Utf8JsonWriter writer, Data value, JsonSerializerOptions options)
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
