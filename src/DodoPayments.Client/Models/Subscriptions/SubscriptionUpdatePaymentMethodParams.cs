@@ -119,26 +119,30 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 [JsonConverter(typeof(BodyConverter))]
 public record class Body
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public Body(New value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = value;
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public Body(Existing value)
+    public Body(New value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    Body(UnknownVariant value)
+    public Body(Existing value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public static Body CreateUnknownVariant(JsonElement value)
+    public Body(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickNew([NotNullWhen(true)] out New? value)
@@ -188,13 +192,11 @@ public record class Body
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Body");
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class BodyConverter : JsonConverter<Body>
@@ -205,52 +207,43 @@ sealed class BodyConverter : JsonConverter<Body>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<New>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<New>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new Body(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException("Data does not match union variant 'New'", e)
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Existing>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<Existing>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new Body(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'Existing'",
-                    e
-                )
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(Utf8JsonWriter writer, Body value, JsonSerializerOptions options)
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 

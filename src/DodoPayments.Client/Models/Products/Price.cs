@@ -17,7 +17,14 @@ namespace DodoPayments.Client.Models.Products;
 [JsonConverter(typeof(PriceConverter))]
 public record class Price
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
+
+    JsonElement? _json = null;
+
+    public JsonElement Json
+    {
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+    }
 
     public ApiEnum<string, Currency> Currency
     {
@@ -127,29 +134,27 @@ public record class Price
         }
     }
 
-    public Price(OneTimePrice value)
+    public Price(OneTimePrice value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public Price(RecurringPrice value)
+    public Price(RecurringPrice value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public Price(UsageBasedPrice value)
+    public Price(UsageBasedPrice value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    Price(UnknownVariant value)
+    public Price(JsonElement json)
     {
-        Value = value;
-    }
-
-    public static Price CreateUnknownVariant(JsonElement value)
-    {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickOneTime([NotNullWhen(true)] out OneTimePrice? value)
@@ -219,13 +224,11 @@ public record class Price
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Price");
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class PriceConverter : JsonConverter<Price>
@@ -236,75 +239,58 @@ sealed class PriceConverter : JsonConverter<Price>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<OneTimePrice>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<OneTimePrice>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new Price(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'OneTimePrice'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<RecurringPrice>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<RecurringPrice>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new Price(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'RecurringPrice'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UsageBasedPrice>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<UsageBasedPrice>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new Price(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'UsageBasedPrice'",
-                    e
-                )
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(Utf8JsonWriter writer, Price value, JsonSerializerOptions options)
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
