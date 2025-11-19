@@ -200,31 +200,36 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
 [JsonConverter(typeof(MetadataConverter))]
 public record class Metadata
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public Metadata(string value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = value;
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public Metadata(double value)
+    public Metadata(string value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public Metadata(bool value)
+    public Metadata(double value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    Metadata(UnknownVariant value)
+    public Metadata(bool value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public static Metadata CreateUnknownVariant(JsonElement value)
+    public Metadata(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickString([NotNullWhen(true)] out string? value)
@@ -286,15 +291,13 @@ public record class Metadata
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Metadata"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class MetadataConverter : JsonConverter<Metadata>
@@ -305,57 +308,43 @@ sealed class MetadataConverter : JsonConverter<Metadata>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<string>(json, options);
             if (deserialized != null)
             {
-                return new Metadata(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'string'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new Metadata(JsonSerializer.Deserialize<double>(ref reader, options));
+            return new(JsonSerializer.Deserialize<double>(json, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'double'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new Metadata(JsonSerializer.Deserialize<bool>(ref reader, options));
+            return new(JsonSerializer.Deserialize<bool>(json, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException("Data does not match union variant 'bool'", e)
-            );
+            // ignore
         }
 
-        throw new AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(Utf8JsonWriter writer, Metadata value, JsonSerializerOptions options)
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }

@@ -189,31 +189,36 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
 [JsonConverter(typeof(MetadataModelConverter))]
 public record class MetadataModel
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public MetadataModel(string value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = value;
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MetadataModel(double value)
+    public MetadataModel(string value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public MetadataModel(bool value)
+    public MetadataModel(double value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    MetadataModel(UnknownVariant value)
+    public MetadataModel(bool value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public static MetadataModel CreateUnknownVariant(JsonElement value)
+    public MetadataModel(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickString([NotNullWhen(true)] out string? value)
@@ -275,15 +280,13 @@ public record class MetadataModel
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of MetadataModel"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class MetadataModelConverter : JsonConverter<MetadataModel>
@@ -294,52 +297,39 @@ sealed class MetadataModelConverter : JsonConverter<MetadataModel>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<string>(json, options);
             if (deserialized != null)
             {
-                return new MetadataModel(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'string'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new MetadataModel(JsonSerializer.Deserialize<double>(ref reader, options));
+            return new(JsonSerializer.Deserialize<double>(json, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'double'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new MetadataModel(JsonSerializer.Deserialize<bool>(ref reader, options));
+            return new(JsonSerializer.Deserialize<bool>(json, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException("Data does not match union variant 'bool'", e)
-            );
+            // ignore
         }
 
-        throw new AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(
@@ -348,7 +338,6 @@ sealed class MetadataModelConverter : JsonConverter<MetadataModel>
         JsonSerializerOptions options
     )
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }

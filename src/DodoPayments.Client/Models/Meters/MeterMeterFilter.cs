@@ -113,26 +113,30 @@ public sealed record class MeterMeterFilter : ModelBase, IFromRaw<MeterMeterFilt
 [JsonConverter(typeof(ClausesConverter))]
 public record class Clauses
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public Clauses(IReadOnlyList<MeterFilterCondition> value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = ImmutableArray.ToImmutableArray(value);
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public Clauses(IReadOnlyList<MeterFilter> value)
+    public Clauses(IReadOnlyList<MeterFilterCondition> value, JsonElement? json = null)
     {
-        Value = ImmutableArray.ToImmutableArray(value);
+        this.Value = ImmutableArray.ToImmutableArray(value);
+        this._json = json;
     }
 
-    Clauses(UnknownVariant value)
+    public Clauses(IReadOnlyList<MeterFilter> value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = ImmutableArray.ToImmutableArray(value);
+        this._json = json;
     }
 
-    public static Clauses CreateUnknownVariant(JsonElement value)
+    public Clauses(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickDirectFilterConditions(
@@ -192,13 +196,11 @@ public record class Clauses
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Clauses");
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class ClausesConverter : JsonConverter<Clauses>
@@ -209,56 +211,44 @@ sealed class ClausesConverter : JsonConverter<Clauses>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
             var deserialized = JsonSerializer.Deserialize<List<MeterFilterCondition>>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
-                return new Clauses(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'List<MeterFilterCondition>'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilter>>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<List<MeterFilter>>(json, options);
             if (deserialized != null)
             {
-                return new Clauses(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'List<MeterFilter>'",
-                    e
-                )
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(Utf8JsonWriter writer, Clauses value, JsonSerializerOptions options)
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
@@ -445,31 +435,36 @@ sealed class OperatorConverter : JsonConverter<Operator>
 [JsonConverter(typeof(MeterFilterConditionValueConverter))]
 public record class MeterFilterConditionValue
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public MeterFilterConditionValue(string value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = value;
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MeterFilterConditionValue(double value)
+    public MeterFilterConditionValue(string value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public MeterFilterConditionValue(bool value)
+    public MeterFilterConditionValue(double value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    MeterFilterConditionValue(UnknownVariant value)
+    public MeterFilterConditionValue(bool value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public static MeterFilterConditionValue CreateUnknownVariant(JsonElement value)
+    public MeterFilterConditionValue(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickString([NotNullWhen(true)] out string? value)
@@ -539,15 +534,13 @@ public record class MeterFilterConditionValue
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of MeterFilterConditionValue"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterConditionValue>
@@ -558,59 +551,42 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<string>(json, options);
             if (deserialized != null)
             {
-                return new MeterFilterConditionValue(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'string'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new MeterFilterConditionValue(
-                JsonSerializer.Deserialize<double>(ref reader, options)
-            );
+            return new(JsonSerializer.Deserialize<double>(json, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'double'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new MeterFilterConditionValue(
-                JsonSerializer.Deserialize<bool>(ref reader, options)
-            );
+            return new(JsonSerializer.Deserialize<bool>(json, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException("Data does not match union variant 'bool'", e)
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(
@@ -619,8 +595,7 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
         JsonSerializerOptions options
     )
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
@@ -721,26 +696,33 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
 [JsonConverter(typeof(MeterFilterClausesConverter))]
 public record class MeterFilterClauses
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public MeterFilterClauses(IReadOnlyList<MeterFilterConditionModel> value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = ImmutableArray.ToImmutableArray(value);
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MeterFilterClauses(IReadOnlyList<MeterFilterModel> value)
+    public MeterFilterClauses(
+        IReadOnlyList<MeterFilterConditionModel> value,
+        JsonElement? json = null
+    )
     {
-        Value = ImmutableArray.ToImmutableArray(value);
+        this.Value = ImmutableArray.ToImmutableArray(value);
+        this._json = json;
     }
 
-    MeterFilterClauses(UnknownVariant value)
+    public MeterFilterClauses(IReadOnlyList<MeterFilterModel> value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = ImmutableArray.ToImmutableArray(value);
+        this._json = json;
     }
 
-    public static MeterFilterClauses CreateUnknownVariant(JsonElement value)
+    public MeterFilterClauses(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickLevel1FilterConditions(
@@ -802,15 +784,13 @@ public record class MeterFilterClauses
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of MeterFilterClauses"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
@@ -821,53 +801,39 @@ sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
             var deserialized = JsonSerializer.Deserialize<List<MeterFilterConditionModel>>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
-                return new MeterFilterClauses(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'List<MeterFilterConditionModel>'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilterModel>>(
-                ref reader,
-                options
-            );
+            var deserialized = JsonSerializer.Deserialize<List<MeterFilterModel>>(json, options);
             if (deserialized != null)
             {
-                return new MeterFilterClauses(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'List<MeterFilterModel>'",
-                    e
-                )
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(
@@ -876,8 +842,7 @@ sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
         JsonSerializerOptions options
     )
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
@@ -1071,31 +1036,36 @@ sealed class MeterFilterConditionModelOperatorConverter
 [JsonConverter(typeof(MeterFilterConditionModelValueConverter))]
 public record class MeterFilterConditionModelValue
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public MeterFilterConditionModelValue(string value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = value;
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MeterFilterConditionModelValue(double value)
+    public MeterFilterConditionModelValue(string value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public MeterFilterConditionModelValue(bool value)
+    public MeterFilterConditionModelValue(double value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    MeterFilterConditionModelValue(UnknownVariant value)
+    public MeterFilterConditionModelValue(bool value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public static MeterFilterConditionModelValue CreateUnknownVariant(JsonElement value)
+    public MeterFilterConditionModelValue(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickString([NotNullWhen(true)] out string? value)
@@ -1165,15 +1135,13 @@ public record class MeterFilterConditionModelValue
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of MeterFilterConditionModelValue"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class MeterFilterConditionModelValueConverter : JsonConverter<MeterFilterConditionModelValue>
@@ -1184,59 +1152,42 @@ sealed class MeterFilterConditionModelValueConverter : JsonConverter<MeterFilter
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<string>(json, options);
             if (deserialized != null)
             {
-                return new MeterFilterConditionModelValue(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'string'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new MeterFilterConditionModelValue(
-                JsonSerializer.Deserialize<double>(ref reader, options)
-            );
+            return new(JsonSerializer.Deserialize<double>(json, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'double'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new MeterFilterConditionModelValue(
-                JsonSerializer.Deserialize<bool>(ref reader, options)
-            );
+            return new(JsonSerializer.Deserialize<bool>(json, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException("Data does not match union variant 'bool'", e)
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(
@@ -1245,8 +1196,7 @@ sealed class MeterFilterConditionModelValueConverter : JsonConverter<MeterFilter
         JsonSerializerOptions options
     )
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
@@ -1349,26 +1299,33 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
 [JsonConverter(typeof(MeterFilterModelClausesConverter))]
 public record class MeterFilterModelClauses
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public MeterFilterModelClauses(IReadOnlyList<MeterFilterCondition1> value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = ImmutableArray.ToImmutableArray(value);
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MeterFilterModelClauses(IReadOnlyList<MeterFilter1> value)
+    public MeterFilterModelClauses(
+        IReadOnlyList<MeterFilterCondition1> value,
+        JsonElement? json = null
+    )
     {
-        Value = ImmutableArray.ToImmutableArray(value);
+        this.Value = ImmutableArray.ToImmutableArray(value);
+        this._json = json;
     }
 
-    MeterFilterModelClauses(UnknownVariant value)
+    public MeterFilterModelClauses(IReadOnlyList<MeterFilter1> value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = ImmutableArray.ToImmutableArray(value);
+        this._json = json;
     }
 
-    public static MeterFilterModelClauses CreateUnknownVariant(JsonElement value)
+    public MeterFilterModelClauses(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickLevel2FilterConditions(
@@ -1430,15 +1387,13 @@ public record class MeterFilterModelClauses
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of MeterFilterModelClauses"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelClauses>
@@ -1449,50 +1404,39 @@ sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelCl
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
             var deserialized = JsonSerializer.Deserialize<List<MeterFilterCondition1>>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
-                return new MeterFilterModelClauses(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'List<MeterFilterCondition1>'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilter1>>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<List<MeterFilter1>>(json, options);
             if (deserialized != null)
             {
-                return new MeterFilterModelClauses(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'List<MeterFilter1>'",
-                    e
-                )
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(
@@ -1501,8 +1445,7 @@ sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelCl
         JsonSerializerOptions options
     )
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
@@ -1693,31 +1636,36 @@ sealed class MeterFilterCondition1OperatorConverter : JsonConverter<MeterFilterC
 [JsonConverter(typeof(MeterFilterCondition1ValueConverter))]
 public record class MeterFilterCondition1Value
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public MeterFilterCondition1Value(string value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = value;
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MeterFilterCondition1Value(double value)
+    public MeterFilterCondition1Value(string value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public MeterFilterCondition1Value(bool value)
+    public MeterFilterCondition1Value(double value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    MeterFilterCondition1Value(UnknownVariant value)
+    public MeterFilterCondition1Value(bool value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public static MeterFilterCondition1Value CreateUnknownVariant(JsonElement value)
+    public MeterFilterCondition1Value(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickString([NotNullWhen(true)] out string? value)
@@ -1787,15 +1735,13 @@ public record class MeterFilterCondition1Value
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of MeterFilterCondition1Value"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class MeterFilterCondition1ValueConverter : JsonConverter<MeterFilterCondition1Value>
@@ -1806,59 +1752,42 @@ sealed class MeterFilterCondition1ValueConverter : JsonConverter<MeterFilterCond
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<string>(json, options);
             if (deserialized != null)
             {
-                return new MeterFilterCondition1Value(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'string'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new MeterFilterCondition1Value(
-                JsonSerializer.Deserialize<double>(ref reader, options)
-            );
+            return new(JsonSerializer.Deserialize<double>(json, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'double'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new MeterFilterCondition1Value(
-                JsonSerializer.Deserialize<bool>(ref reader, options)
-            );
+            return new(JsonSerializer.Deserialize<bool>(json, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException("Data does not match union variant 'bool'", e)
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(
@@ -1867,8 +1796,7 @@ sealed class MeterFilterCondition1ValueConverter : JsonConverter<MeterFilterCond
         JsonSerializerOptions options
     )
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
@@ -2145,31 +2073,36 @@ sealed class ClauseOperatorConverter : JsonConverter<ClauseOperator>
 [JsonConverter(typeof(ClauseValueConverter))]
 public record class ClauseValue
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public ClauseValue(string value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = value;
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public ClauseValue(double value)
+    public ClauseValue(string value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public ClauseValue(bool value)
+    public ClauseValue(double value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    ClauseValue(UnknownVariant value)
+    public ClauseValue(bool value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public static ClauseValue CreateUnknownVariant(JsonElement value)
+    public ClauseValue(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickString([NotNullWhen(true)] out string? value)
@@ -2239,15 +2172,13 @@ public record class ClauseValue
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of ClauseValue"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class ClauseValueConverter : JsonConverter<ClauseValue>
@@ -2258,55 +2189,42 @@ sealed class ClauseValueConverter : JsonConverter<ClauseValue>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<string>(json, options);
             if (deserialized != null)
             {
-                return new ClauseValue(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'string'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new ClauseValue(JsonSerializer.Deserialize<double>(ref reader, options));
+            return new(JsonSerializer.Deserialize<double>(json, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'double'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new ClauseValue(JsonSerializer.Deserialize<bool>(ref reader, options));
+            return new(JsonSerializer.Deserialize<bool>(json, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException("Data does not match union variant 'bool'", e)
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(
@@ -2315,8 +2233,7 @@ sealed class ClauseValueConverter : JsonConverter<ClauseValue>
         JsonSerializerOptions options
     )
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
