@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Customers.Wallets;
 
 public sealed record class WalletListParams : ParamsBase
 {
-    public required string CustomerID { get; init; }
+    public string? CustomerID { get; init; }
 
     public WalletListParams() { }
 

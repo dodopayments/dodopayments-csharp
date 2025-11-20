@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.CheckoutSessions;
 
 public sealed record class CheckoutSessionRetrieveParams : ParamsBase
 {
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     public CheckoutSessionRetrieveParams() { }
 

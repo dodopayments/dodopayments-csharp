@@ -14,14 +14,14 @@ public class BrandServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var brand = await this.client.Brands.Retrieve(new() { ID = "id" });
+        var brand = await this.client.Brands.Retrieve("id");
         brand.Validate();
     }
 
     [Fact]
     public async Task Update_Works()
     {
-        var brand = await this.client.Brands.Update(new() { ID = "id" });
+        var brand = await this.client.Brands.Update("id");
         brand.Validate();
     }
 
@@ -35,7 +35,7 @@ public class BrandServiceTest : TestBase
     [Fact]
     public async Task UpdateImages_Works()
     {
-        var response = await this.client.Brands.UpdateImages(new() { ID = "id" });
+        var response = await this.client.Brands.UpdateImages("id");
         response.Validate();
     }
 }

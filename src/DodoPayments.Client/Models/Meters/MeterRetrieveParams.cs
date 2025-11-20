@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Meters;
 
 public sealed record class MeterRetrieveParams : ParamsBase
 {
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     public MeterRetrieveParams() { }
 

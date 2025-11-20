@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Webhooks;
 using DodoPayments.Client.Services.Webhooks;
 
@@ -57,6 +58,11 @@ public sealed class WebhookService : IWebhookService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.WebhookID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.WebhookID' cannot be null");
+        }
+
         HttpRequest<WebhookRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -75,11 +81,27 @@ public sealed class WebhookService : IWebhookService
         return webhookDetails;
     }
 
+    public async Task<WebhookDetails> Retrieve(
+        string webhookID,
+        WebhookRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { WebhookID = webhookID }, cancellationToken);
+    }
+
     public async Task<WebhookDetails> Update(
         WebhookUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.WebhookID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.WebhookID' cannot be null");
+        }
+
         HttpRequest<WebhookUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
@@ -96,6 +118,17 @@ public sealed class WebhookService : IWebhookService
             webhookDetails.Validate();
         }
         return webhookDetails;
+    }
+
+    public async Task<WebhookDetails> Update(
+        string webhookID,
+        WebhookUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Update(parameters with { WebhookID = webhookID }, cancellationToken);
     }
 
     public async Task<WebhookListPageResponse> List(
@@ -128,6 +161,11 @@ public sealed class WebhookService : IWebhookService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.WebhookID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.WebhookID' cannot be null");
+        }
+
         HttpRequest<WebhookDeleteParams> request = new()
         {
             Method = HttpMethod.Delete,
@@ -138,11 +176,27 @@ public sealed class WebhookService : IWebhookService
             .ConfigureAwait(false);
     }
 
+    public async Task Delete(
+        string webhookID,
+        WebhookDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Delete(parameters with { WebhookID = webhookID }, cancellationToken);
+    }
+
     public async Task<WebhookRetrieveSecretResponse> RetrieveSecret(
         WebhookRetrieveSecretParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.WebhookID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.WebhookID' cannot be null");
+        }
+
         HttpRequest<WebhookRetrieveSecretParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -159,5 +213,22 @@ public sealed class WebhookService : IWebhookService
             deserializedResponse.Validate();
         }
         return deserializedResponse;
+    }
+
+    public async Task<WebhookRetrieveSecretResponse> RetrieveSecret(
+        string webhookID,
+        WebhookRetrieveSecretParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.RetrieveSecret(
+            parameters with
+            {
+                WebhookID = webhookID,
+            },
+            cancellationToken
+        );
     }
 }

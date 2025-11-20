@@ -24,9 +24,19 @@ public interface IAddonService
         AddonRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<AddonResponse> Retrieve(
+        string id,
+        AddonRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     Task<AddonResponse> Update(
         AddonUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+    Task<AddonResponse> Update(
+        string id,
+        AddonUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
@@ -37,6 +47,11 @@ public interface IAddonService
 
     Task<AddonUpdateImagesResponse> UpdateImages(
         AddonUpdateImagesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+    Task<AddonUpdateImagesResponse> UpdateImages(
+        string id,
+        AddonUpdateImagesParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }

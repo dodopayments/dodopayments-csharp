@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Subscriptions;
 
 public sealed record class SubscriptionRetrieveParams : ParamsBase
 {
-    public required string SubscriptionID { get; init; }
+    public string? SubscriptionID { get; init; }
 
     public SubscriptionRetrieveParams() { }
 

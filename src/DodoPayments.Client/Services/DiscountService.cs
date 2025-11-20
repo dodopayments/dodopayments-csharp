@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Discounts;
 
 namespace DodoPayments.Client.Services;
@@ -49,6 +50,11 @@ public sealed class DiscountService : IDiscountService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.DiscountID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.DiscountID' cannot be null");
+        }
+
         HttpRequest<DiscountRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -67,11 +73,27 @@ public sealed class DiscountService : IDiscountService
         return discount;
     }
 
+    public async Task<Discount> Retrieve(
+        string discountID,
+        DiscountRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { DiscountID = discountID }, cancellationToken);
+    }
+
     public async Task<Discount> Update(
         DiscountUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.DiscountID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.DiscountID' cannot be null");
+        }
+
         HttpRequest<DiscountUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
@@ -88,6 +110,17 @@ public sealed class DiscountService : IDiscountService
             discount.Validate();
         }
         return discount;
+    }
+
+    public async Task<Discount> Update(
+        string discountID,
+        DiscountUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Update(parameters with { DiscountID = discountID }, cancellationToken);
     }
 
     public async Task<DiscountListPageResponse> List(
@@ -120,6 +153,11 @@ public sealed class DiscountService : IDiscountService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.DiscountID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.DiscountID' cannot be null");
+        }
+
         HttpRequest<DiscountDeleteParams> request = new()
         {
             Method = HttpMethod.Delete,
@@ -128,5 +166,16 @@ public sealed class DiscountService : IDiscountService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
+    }
+
+    public async Task Delete(
+        string discountID,
+        DiscountDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Delete(parameters with { DiscountID = discountID }, cancellationToken);
     }
 }

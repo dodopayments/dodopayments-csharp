@@ -17,7 +17,7 @@ public sealed record class CustomerUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string CustomerID { get; init; }
+    public string? CustomerID { get; init; }
 
     /// <summary>
     /// Additional metadata for the customer

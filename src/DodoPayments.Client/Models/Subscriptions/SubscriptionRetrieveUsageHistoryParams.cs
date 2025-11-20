@@ -39,7 +39,7 @@ namespace DodoPayments.Client.Models.Subscriptions;
 /// </summary>
 public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
 {
-    public required string SubscriptionID { get; init; }
+    public string? SubscriptionID { get; init; }
 
     /// <summary>
     /// Filter by end date (inclusive)

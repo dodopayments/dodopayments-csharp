@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Customers;
 
 public sealed record class CustomerRetrievePaymentMethodsParams : ParamsBase
 {
-    public required string CustomerID { get; init; }
+    public string? CustomerID { get; init; }
 
     public CustomerRetrievePaymentMethodsParams() { }
 

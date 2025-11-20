@@ -20,7 +20,7 @@ public sealed record class DiscountUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string DiscountID { get; init; }
+    public string? DiscountID { get; init; }
 
     /// <summary>
     /// If present, update the discount amount: - If `discount_type` is `percentage`,

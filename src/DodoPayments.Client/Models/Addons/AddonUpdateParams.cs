@@ -18,7 +18,7 @@ public sealed record class AddonUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     /// <summary>
     /// The currency of the Addon

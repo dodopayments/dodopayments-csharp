@@ -24,4 +24,9 @@ public interface ICheckoutSessionService
         CheckoutSessionRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<CheckoutSessionStatus> Retrieve(
+        string id,
+        CheckoutSessionRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }

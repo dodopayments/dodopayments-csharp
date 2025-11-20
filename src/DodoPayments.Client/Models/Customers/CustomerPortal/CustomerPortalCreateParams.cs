@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Customers.CustomerPortal;
 
 public sealed record class CustomerPortalCreateParams : ParamsBase
 {
-    public required string CustomerID { get; init; }
+    public string? CustomerID { get; init; }
 
     /// <summary>
     /// If true, will send link to user.

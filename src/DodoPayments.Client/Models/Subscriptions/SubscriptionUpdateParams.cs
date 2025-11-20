@@ -20,7 +20,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string SubscriptionID { get; init; }
+    public string? SubscriptionID { get; init; }
 
     public BillingAddress? Billing
     {
