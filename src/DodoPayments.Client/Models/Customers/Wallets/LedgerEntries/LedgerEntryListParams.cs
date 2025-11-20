@@ -11,7 +11,7 @@ namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
 public sealed record class LedgerEntryListParams : ParamsBase
 {
-    public required string CustomerID { get; init; }
+    public string? CustomerID { get; init; }
 
     /// <summary>
     /// Optional currency filter

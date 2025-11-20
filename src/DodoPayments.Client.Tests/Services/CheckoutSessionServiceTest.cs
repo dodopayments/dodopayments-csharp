@@ -28,9 +28,7 @@ public class CheckoutSessionServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var checkoutSessionStatus = await this.client.CheckoutSessions.Retrieve(
-            new() { ID = "id" }
-        );
+        var checkoutSessionStatus = await this.client.CheckoutSessions.Retrieve("id");
         checkoutSessionStatus.Validate();
     }
 }

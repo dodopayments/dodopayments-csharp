@@ -17,14 +17,14 @@ public class DiscountServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var discount = await this.client.Discounts.Retrieve(new() { DiscountID = "discount_id" });
+        var discount = await this.client.Discounts.Retrieve("discount_id");
         discount.Validate();
     }
 
     [Fact]
     public async Task Update_Works()
     {
-        var discount = await this.client.Discounts.Update(new() { DiscountID = "discount_id" });
+        var discount = await this.client.Discounts.Update("discount_id");
         discount.Validate();
     }
 
@@ -38,6 +38,6 @@ public class DiscountServiceTest : TestBase
     [Fact]
     public async Task Delete_Works()
     {
-        await this.client.Discounts.Delete(new() { DiscountID = "discount_id" });
+        await this.client.Discounts.Delete("discount_id");
     }
 }

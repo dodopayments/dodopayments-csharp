@@ -13,7 +13,7 @@ namespace DodoPayments.Client.Models.Brands;
 /// </summary>
 public sealed record class BrandRetrieveParams : ParamsBase
 {
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     public BrandRetrieveParams() { }
 

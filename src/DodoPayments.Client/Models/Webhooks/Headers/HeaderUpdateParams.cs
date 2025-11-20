@@ -21,7 +21,7 @@ public sealed record class HeaderUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string WebhookID { get; init; }
+    public string? WebhookID { get; init; }
 
     /// <summary>
     /// Object of header-value pair to update or add

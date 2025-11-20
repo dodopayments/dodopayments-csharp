@@ -26,7 +26,7 @@ namespace DodoPayments.Client.Models.UsageEvents;
 /// </summary>
 public sealed record class UsageEventRetrieveParams : ParamsBase
 {
-    public required string EventID { get; init; }
+    public string? EventID { get; init; }
 
     public UsageEventRetrieveParams() { }
 

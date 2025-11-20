@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Addons;
 
 public sealed record class AddonUpdateImagesParams : ParamsBase
 {
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     public AddonUpdateImagesParams() { }
 

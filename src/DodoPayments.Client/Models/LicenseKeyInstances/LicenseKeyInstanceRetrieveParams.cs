@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.LicenseKeyInstances;
 
 public sealed record class LicenseKeyInstanceRetrieveParams : ParamsBase
 {
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     public LicenseKeyInstanceRetrieveParams() { }
 

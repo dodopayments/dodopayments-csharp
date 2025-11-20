@@ -35,10 +35,28 @@ public interface IWebhookService
     );
 
     /// <summary>
+    /// Get a webhook by id
+    /// </summary>
+    Task<WebhookDetails> Retrieve(
+        string webhookID,
+        WebhookRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Patch a webhook by id
     /// </summary>
     Task<WebhookDetails> Update(
         WebhookUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Patch a webhook by id
+    /// </summary>
+    Task<WebhookDetails> Update(
+        string webhookID,
+        WebhookUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
@@ -56,10 +74,28 @@ public interface IWebhookService
     Task Delete(WebhookDeleteParams parameters, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Delete a webhook by id
+    /// </summary>
+    Task Delete(
+        string webhookID,
+        WebhookDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Get webhook secret by id
     /// </summary>
     Task<WebhookRetrieveSecretResponse> RetrieveSecret(
         WebhookRetrieveSecretParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Get webhook secret by id
+    /// </summary>
+    Task<WebhookRetrieveSecretResponse> RetrieveSecret(
+        string webhookID,
+        WebhookRetrieveSecretParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }

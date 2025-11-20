@@ -37,6 +37,28 @@ public interface IUsageEventService
     );
 
     /// <summary>
+    /// Fetch detailed information about a single event using its unique event ID.
+    /// This endpoint is useful for: - Debugging specific event ingestion issues -
+    /// Retrieving event details for customer support - Validating that events were
+    /// processed correctly - Getting the complete metadata for an event
+    ///
+    /// <para>## Event ID Format: The event ID should be the same value that was
+    /// provided during event ingestion via the `/events/ingest` endpoint. Event IDs
+    /// are case-sensitive and must match exactly.</para>
+    ///
+    /// <para>## Response Details: The response includes all event data including:
+    /// - Complete metadata key-value pairs - Original timestamp (preserved from
+    /// ingestion) - Customer and business association - Event name and processing information</para>
+    ///
+    /// <para>## Example Usage: ```text GET /events/api_call_12345 ```</para>
+    /// </summary>
+    Task<Event> Retrieve(
+        string eventID,
+        UsageEventRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Fetch events from your account with powerful filtering capabilities. This
     /// endpoint is ideal for: - Debugging event ingestion issues - Analyzing customer
     /// usage patterns - Building custom analytics dashboards - Auditing billing-related events

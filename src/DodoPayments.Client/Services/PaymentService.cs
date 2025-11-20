@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Services;
@@ -49,6 +50,11 @@ public sealed class PaymentService : IPaymentService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.PaymentID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.PaymentID' cannot be null");
+        }
+
         HttpRequest<PaymentRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -63,6 +69,17 @@ public sealed class PaymentService : IPaymentService
             payment.Validate();
         }
         return payment;
+    }
+
+    public async Task<Payment> Retrieve(
+        string paymentID,
+        PaymentRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
     }
 
     public async Task<PaymentListPageResponse> List(
@@ -95,6 +112,11 @@ public sealed class PaymentService : IPaymentService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.PaymentID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.PaymentID' cannot be null");
+        }
+
         HttpRequest<PaymentRetrieveLineItemsParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -111,5 +133,22 @@ public sealed class PaymentService : IPaymentService
             deserializedResponse.Validate();
         }
         return deserializedResponse;
+    }
+
+    public async Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
+        string paymentID,
+        PaymentRetrieveLineItemsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.RetrieveLineItems(
+            parameters with
+            {
+                PaymentID = paymentID,
+            },
+            cancellationToken
+        );
     }
 }

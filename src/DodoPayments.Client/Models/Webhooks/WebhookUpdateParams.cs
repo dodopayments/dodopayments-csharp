@@ -21,7 +21,7 @@ public sealed record class WebhookUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string WebhookID { get; init; }
+    public string? WebhookID { get; init; }
 
     /// <summary>
     /// Description of the webhook

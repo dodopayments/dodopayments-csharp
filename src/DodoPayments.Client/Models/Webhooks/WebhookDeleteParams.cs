@@ -13,7 +13,7 @@ namespace DodoPayments.Client.Models.Webhooks;
 /// </summary>
 public sealed record class WebhookDeleteParams : ParamsBase
 {
-    public required string WebhookID { get; init; }
+    public string? WebhookID { get; init; }
 
     public WebhookDeleteParams() { }
 

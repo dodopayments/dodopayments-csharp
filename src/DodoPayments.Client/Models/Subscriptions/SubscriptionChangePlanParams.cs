@@ -19,7 +19,7 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string SubscriptionID { get; init; }
+    public string? SubscriptionID { get; init; }
 
     /// <summary>
     /// Unique identifier of the product to subscribe to
