@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CheckoutSessions;
 
 namespace DodoPayments.Client.Services;
@@ -49,6 +50,11 @@ public sealed class CheckoutSessionService : ICheckoutSessionService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<CheckoutSessionRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -65,5 +71,16 @@ public sealed class CheckoutSessionService : ICheckoutSessionService
             checkoutSessionStatus.Validate();
         }
         return checkoutSessionStatus;
+    }
+
+    public async Task<CheckoutSessionStatus> Retrieve(
+        string id,
+        CheckoutSessionRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { ID = id }, cancellationToken);
     }
 }

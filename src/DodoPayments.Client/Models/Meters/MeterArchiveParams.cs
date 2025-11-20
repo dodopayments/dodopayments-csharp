@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Meters;
 
 public sealed record class MeterArchiveParams : ParamsBase
 {
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     public MeterArchiveParams() { }
 

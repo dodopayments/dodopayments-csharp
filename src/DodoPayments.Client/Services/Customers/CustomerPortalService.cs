@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Customers;
 using DodoPayments.Client.Models.Customers.CustomerPortal;
 
@@ -27,6 +28,11 @@ public sealed class CustomerPortalService : ICustomerPortalService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CustomerID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.CustomerID' cannot be null");
+        }
+
         HttpRequest<CustomerPortalCreateParams> request = new()
         {
             Method = HttpMethod.Post,
@@ -43,5 +49,16 @@ public sealed class CustomerPortalService : ICustomerPortalService
             customerPortalSession.Validate();
         }
         return customerPortalSession;
+    }
+
+    public async Task<CustomerPortalSession> Create(
+        string customerID,
+        CustomerPortalCreateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Create(parameters with { CustomerID = customerID }, cancellationToken);
     }
 }

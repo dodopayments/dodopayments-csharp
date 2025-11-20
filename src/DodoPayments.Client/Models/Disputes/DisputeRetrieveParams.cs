@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Disputes;
 
 public sealed record class DisputeRetrieveParams : ParamsBase
 {
-    public required string DisputeID { get; init; }
+    public string? DisputeID { get; init; }
 
     public DisputeRetrieveParams() { }
 

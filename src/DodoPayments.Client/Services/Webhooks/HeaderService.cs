@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Webhooks.Headers;
 
 namespace DodoPayments.Client.Services.Webhooks;
@@ -26,6 +27,11 @@ public sealed class HeaderService : IHeaderService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.WebhookID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.WebhookID' cannot be null");
+        }
+
         HttpRequest<HeaderRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -44,11 +50,27 @@ public sealed class HeaderService : IHeaderService
         return header;
     }
 
+    public async Task<HeaderRetrieveResponse> Retrieve(
+        string webhookID,
+        HeaderRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { WebhookID = webhookID }, cancellationToken);
+    }
+
     public async Task Update(
         HeaderUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.WebhookID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.WebhookID' cannot be null");
+        }
+
         HttpRequest<HeaderUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
@@ -57,5 +79,14 @@ public sealed class HeaderService : IHeaderService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
+    }
+
+    public async Task Update(
+        string webhookID,
+        HeaderUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        await this.Update(parameters with { WebhookID = webhookID }, cancellationToken);
     }
 }

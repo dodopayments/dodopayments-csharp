@@ -10,7 +10,7 @@ public class UsageEventServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var event1 = await this.client.UsageEvents.Retrieve(new() { EventID = "event_id" });
+        var event1 = await this.client.UsageEvents.Retrieve("event_id");
         event1.Validate();
     }
 

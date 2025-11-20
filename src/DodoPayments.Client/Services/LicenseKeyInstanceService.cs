@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.LicenseKeyInstances;
 
 namespace DodoPayments.Client.Services;
@@ -26,6 +27,11 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<LicenseKeyInstanceRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -44,11 +50,27 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
         return licenseKeyInstance;
     }
 
+    public async Task<LicenseKeyInstance> Retrieve(
+        string id,
+        LicenseKeyInstanceRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { ID = id }, cancellationToken);
+    }
+
     public async Task<LicenseKeyInstance> Update(
         LicenseKeyInstanceUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<LicenseKeyInstanceUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
@@ -65,6 +87,15 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
             licenseKeyInstance.Validate();
         }
         return licenseKeyInstance;
+    }
+
+    public async Task<LicenseKeyInstance> Update(
+        string id,
+        LicenseKeyInstanceUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return await this.Update(parameters with { ID = id }, cancellationToken);
     }
 
     public async Task<LicenseKeyInstanceListPageResponse> List(

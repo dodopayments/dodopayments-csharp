@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 
 namespace DodoPayments.Client.Services;
@@ -26,6 +27,11 @@ public sealed class DisputeService : IDisputeService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.DisputeID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.DisputeID' cannot be null");
+        }
+
         HttpRequest<DisputeRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -42,6 +48,17 @@ public sealed class DisputeService : IDisputeService
             getDispute.Validate();
         }
         return getDispute;
+    }
+
+    public async Task<GetDispute> Retrieve(
+        string disputeID,
+        DisputeRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { DisputeID = disputeID }, cancellationToken);
     }
 
     public async Task<DisputeListPageResponse> List(

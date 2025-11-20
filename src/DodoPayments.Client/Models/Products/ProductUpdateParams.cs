@@ -19,7 +19,7 @@ public sealed record class ProductUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     /// <summary>
     /// Available Addons for subscription products

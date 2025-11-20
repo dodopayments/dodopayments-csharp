@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Refunds;
 
 public sealed record class RefundRetrieveParams : ParamsBase
 {
-    public required string RefundID { get; init; }
+    public string? RefundID { get; init; }
 
     public RefundRetrieveParams() { }
 

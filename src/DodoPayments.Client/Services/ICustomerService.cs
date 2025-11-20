@@ -29,9 +29,19 @@ public interface ICustomerService
         CustomerRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<Customer> Retrieve(
+        string customerID,
+        CustomerRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     Task<Customer> Update(
         CustomerUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+    Task<Customer> Update(
+        string customerID,
+        CustomerUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
@@ -42,6 +52,11 @@ public interface ICustomerService
 
     Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
         CustomerRetrievePaymentMethodsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+    Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
+        string customerID,
+        CustomerRetrievePaymentMethodsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }

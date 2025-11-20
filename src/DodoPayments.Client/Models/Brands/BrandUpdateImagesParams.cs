@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Brands;
 
 public sealed record class BrandUpdateImagesParams : ParamsBase
 {
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     public BrandUpdateImagesParams() { }
 

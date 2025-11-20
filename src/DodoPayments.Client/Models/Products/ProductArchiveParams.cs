@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Products;
 
 public sealed record class ProductArchiveParams : ParamsBase
 {
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     public ProductArchiveParams() { }
 

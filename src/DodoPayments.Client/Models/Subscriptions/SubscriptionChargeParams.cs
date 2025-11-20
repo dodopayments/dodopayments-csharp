@@ -20,7 +20,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string SubscriptionID { get; init; }
+    public string? SubscriptionID { get; init; }
 
     /// <summary>
     /// The product price. Represented in the lowest denomination of the currency

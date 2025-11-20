@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Brands;
 
 namespace DodoPayments.Client.Services;
@@ -49,6 +50,11 @@ public sealed class BrandService : IBrandService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<BrandRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -65,11 +71,27 @@ public sealed class BrandService : IBrandService
         return brand;
     }
 
+    public async Task<Brand> Retrieve(
+        string id,
+        BrandRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { ID = id }, cancellationToken);
+    }
+
     public async Task<Brand> Update(
         BrandUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<BrandUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
@@ -84,6 +106,17 @@ public sealed class BrandService : IBrandService
             brand.Validate();
         }
         return brand;
+    }
+
+    public async Task<Brand> Update(
+        string id,
+        BrandUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Update(parameters with { ID = id }, cancellationToken);
     }
 
     public async Task<BrandListResponse> List(
@@ -116,6 +149,11 @@ public sealed class BrandService : IBrandService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<BrandUpdateImagesParams> request = new()
         {
             Method = HttpMethod.Put,
@@ -132,5 +170,16 @@ public sealed class BrandService : IBrandService
             deserializedResponse.Validate();
         }
         return deserializedResponse;
+    }
+
+    public async Task<BrandUpdateImagesResponse> UpdateImages(
+        string id,
+        BrandUpdateImagesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.UpdateImages(parameters with { ID = id }, cancellationToken);
     }
 }

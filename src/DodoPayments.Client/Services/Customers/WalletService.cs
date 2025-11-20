@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Customers.Wallets;
 using DodoPayments.Client.Services.Customers.Wallets;
 
@@ -34,6 +35,11 @@ public sealed class WalletService : IWalletService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CustomerID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.CustomerID' cannot be null");
+        }
+
         HttpRequest<WalletListParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -50,5 +56,16 @@ public sealed class WalletService : IWalletService
             wallets.Validate();
         }
         return wallets;
+    }
+
+    public async Task<WalletListResponse> List(
+        string customerID,
+        WalletListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.List(parameters with { CustomerID = customerID }, cancellationToken);
     }
 }

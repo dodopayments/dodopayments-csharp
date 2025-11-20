@@ -13,7 +13,7 @@ namespace DodoPayments.Client.Models.Webhooks.Headers;
 /// </summary>
 public sealed record class HeaderRetrieveParams : ParamsBase
 {
-    public required string WebhookID { get; init; }
+    public string? WebhookID { get; init; }
 
     public HeaderRetrieveParams() { }
 

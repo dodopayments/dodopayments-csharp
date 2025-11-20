@@ -21,6 +21,11 @@ public interface IMeterService
         MeterRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<Meter> Retrieve(
+        string id,
+        MeterRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     Task<MeterListPageResponse> List(
         MeterListParams? parameters = null,
@@ -28,6 +33,16 @@ public interface IMeterService
     );
 
     Task Archive(MeterArchiveParams parameters, CancellationToken cancellationToken = default);
+    Task Archive(
+        string id,
+        MeterArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     Task Unarchive(MeterUnarchiveParams parameters, CancellationToken cancellationToken = default);
+    Task Unarchive(
+        string id,
+        MeterUnarchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }

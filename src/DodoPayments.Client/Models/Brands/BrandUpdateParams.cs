@@ -17,7 +17,7 @@ public sealed record class BrandUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     /// <summary>
     /// The UUID you got back from the presigned‐upload call

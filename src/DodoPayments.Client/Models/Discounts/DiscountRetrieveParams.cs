@@ -13,7 +13,7 @@ namespace DodoPayments.Client.Models.Discounts;
 /// </summary>
 public sealed record class DiscountRetrieveParams : ParamsBase
 {
-    public required string DiscountID { get; init; }
+    public string? DiscountID { get; init; }
 
     public DiscountRetrieveParams() { }
 

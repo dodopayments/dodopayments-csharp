@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Services.Products;
 
@@ -55,6 +56,11 @@ public sealed class ProductService : IProductService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<ProductRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -71,11 +77,27 @@ public sealed class ProductService : IProductService
         return product;
     }
 
+    public async Task<Product> Retrieve(
+        string id,
+        ProductRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { ID = id }, cancellationToken);
+    }
+
     public async Task Update(
         ProductUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<ProductUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
@@ -84,6 +106,17 @@ public sealed class ProductService : IProductService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
+    }
+
+    public async Task Update(
+        string id,
+        ProductUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Update(parameters with { ID = id }, cancellationToken);
     }
 
     public async Task<ProductListPageResponse> List(
@@ -116,6 +149,11 @@ public sealed class ProductService : IProductService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<ProductArchiveParams> request = new()
         {
             Method = HttpMethod.Delete,
@@ -126,11 +164,27 @@ public sealed class ProductService : IProductService
             .ConfigureAwait(false);
     }
 
+    public async Task Archive(
+        string id,
+        ProductArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Archive(parameters with { ID = id }, cancellationToken);
+    }
+
     public async Task Unarchive(
         ProductUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<ProductUnarchiveParams> request = new()
         {
             Method = HttpMethod.Post,
@@ -141,11 +195,27 @@ public sealed class ProductService : IProductService
             .ConfigureAwait(false);
     }
 
+    public async Task Unarchive(
+        string id,
+        ProductUnarchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Unarchive(parameters with { ID = id }, cancellationToken);
+    }
+
     public async Task<ProductUpdateFilesResponse> UpdateFiles(
         ProductUpdateFilesParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<ProductUpdateFilesParams> request = new()
         {
             Method = HttpMethod.Put,
@@ -162,5 +232,14 @@ public sealed class ProductService : IProductService
             deserializedResponse.Validate();
         }
         return deserializedResponse;
+    }
+
+    public async Task<ProductUpdateFilesResponse> UpdateFiles(
+        string id,
+        ProductUpdateFilesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return await this.UpdateFiles(parameters with { ID = id }, cancellationToken);
     }
 }

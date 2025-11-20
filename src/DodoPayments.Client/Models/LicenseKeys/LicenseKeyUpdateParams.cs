@@ -17,7 +17,7 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
         get { return this._bodyProperties.Freeze(); }
     }
 
-    public required string ID { get; init; }
+    public string? ID { get; init; }
 
     /// <summary>
     /// The updated activation limit for the license key. Use `null` to remove the
