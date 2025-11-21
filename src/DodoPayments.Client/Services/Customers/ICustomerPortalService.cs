@@ -20,4 +20,9 @@ public interface ICustomerPortalService
         CustomerPortalCreateParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<CustomerPortalSession> Create(
+        string customerID,
+        CustomerPortalCreateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }

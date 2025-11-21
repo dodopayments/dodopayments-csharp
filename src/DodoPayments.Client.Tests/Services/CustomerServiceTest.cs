@@ -14,14 +14,14 @@ public class CustomerServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var customer = await this.client.Customers.Retrieve(new() { CustomerID = "customer_id" });
+        var customer = await this.client.Customers.Retrieve("customer_id");
         customer.Validate();
     }
 
     [Fact]
     public async Task Update_Works()
     {
-        var customer = await this.client.Customers.Update(new() { CustomerID = "customer_id" });
+        var customer = await this.client.Customers.Update("customer_id");
         customer.Validate();
     }
 
@@ -35,9 +35,7 @@ public class CustomerServiceTest : TestBase
     [Fact]
     public async Task RetrievePaymentMethods_Works()
     {
-        var response = await this.client.Customers.RetrievePaymentMethods(
-            new() { CustomerID = "customer_id" }
-        );
+        var response = await this.client.Customers.RetrievePaymentMethods("customer_id");
         response.Validate();
     }
 }

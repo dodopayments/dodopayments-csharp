@@ -21,9 +21,19 @@ public interface IPaymentService
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<HttpResponse> Retrieve(
+        string paymentID,
+        PaymentRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     Task<HttpResponse> RetrieveRefund(
         PaymentRetrieveRefundParams parameters,
+        CancellationToken cancellationToken = default
+    );
+    Task<HttpResponse> RetrieveRefund(
+        string refundID,
+        PaymentRetrieveRefundParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }

@@ -33,10 +33,28 @@ public interface IDiscountService
     );
 
     /// <summary>
+    /// GET /discounts/{discount_id}
+    /// </summary>
+    Task<Discount> Retrieve(
+        string discountID,
+        DiscountRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// PATCH /discounts/{discount_id}
     /// </summary>
     Task<Discount> Update(
         DiscountUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// PATCH /discounts/{discount_id}
+    /// </summary>
+    Task<Discount> Update(
+        string discountID,
+        DiscountUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
@@ -52,4 +70,13 @@ public interface IDiscountService
     /// DELETE /discounts/{discount_id}
     /// </summary>
     Task Delete(DiscountDeleteParams parameters, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// DELETE /discounts/{discount_id}
+    /// </summary>
+    Task Delete(
+        string discountID,
+        DiscountDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }

@@ -16,7 +16,7 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
     {
         get
         {
-            if (!this._properties.TryGetValue("email", out JsonElement element))
+            if (!this._rawData.TryGetValue("email", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'email' cannot be null",
                     new ArgumentOutOfRangeException("email", "Missing required argument")
@@ -30,7 +30,7 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
         }
         init
         {
-            this._properties["email"] = JsonSerializer.SerializeToElement(
+            this._rawData["email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -41,7 +41,7 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
     {
         get
         {
-            if (!this._properties.TryGetValue("name", out JsonElement element))
+            if (!this._rawData.TryGetValue("name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'name' cannot be null",
                     new ArgumentOutOfRangeException("name", "Missing required argument")
@@ -55,7 +55,7 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
         }
         init
         {
-            this._properties["name"] = JsonSerializer.SerializeToElement(
+            this._rawData["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -71,7 +71,7 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
     {
         get
         {
-            if (!this._properties.TryGetValue("create_new_customer", out JsonElement element))
+            if (!this._rawData.TryGetValue("create_new_customer", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
@@ -83,7 +83,7 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
                 return;
             }
 
-            this._properties["create_new_customer"] = JsonSerializer.SerializeToElement(
+            this._rawData["create_new_customer"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -94,14 +94,14 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
     {
         get
         {
-            if (!this._properties.TryGetValue("phone_number", out JsonElement element))
+            if (!this._rawData.TryGetValue("phone_number", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["phone_number"] = JsonSerializer.SerializeToElement(
+            this._rawData["phone_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -118,23 +118,23 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
 
     public CreateNewCustomer() { }
 
-    public CreateNewCustomer(IReadOnlyDictionary<string, JsonElement> properties)
+    public CreateNewCustomer(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CreateNewCustomer(FrozenDictionary<string, JsonElement> properties)
+    CreateNewCustomer(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static CreateNewCustomer FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -10,7 +9,14 @@ namespace DodoPayments.Client.Models.Webhooks;
 [JsonConverter(typeof(UnwrapWebhookEventConverter))]
 public record class UnwrapWebhookEvent
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
+
+    JsonElement? _json = null;
+
+    public JsonElement Json
+    {
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+    }
 
     public string BusinessID
     {
@@ -72,119 +78,135 @@ public record class UnwrapWebhookEvent
         }
     }
 
-    public UnwrapWebhookEvent(DisputeAcceptedWebhookEvent value)
+    public UnwrapWebhookEvent(DisputeAcceptedWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(DisputeCancelledWebhookEvent value)
+    public UnwrapWebhookEvent(DisputeCancelledWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(DisputeChallengedWebhookEvent value)
+    public UnwrapWebhookEvent(DisputeChallengedWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(DisputeExpiredWebhookEvent value)
+    public UnwrapWebhookEvent(DisputeExpiredWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(DisputeLostWebhookEvent value)
+    public UnwrapWebhookEvent(DisputeLostWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(DisputeOpenedWebhookEvent value)
+    public UnwrapWebhookEvent(DisputeOpenedWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(DisputeWonWebhookEvent value)
+    public UnwrapWebhookEvent(DisputeWonWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(LicenseKeyCreatedWebhookEvent value)
+    public UnwrapWebhookEvent(LicenseKeyCreatedWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(PaymentCancelledWebhookEvent value)
+    public UnwrapWebhookEvent(PaymentCancelledWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(PaymentFailedWebhookEvent value)
+    public UnwrapWebhookEvent(PaymentFailedWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(PaymentProcessingWebhookEvent value)
+    public UnwrapWebhookEvent(PaymentProcessingWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(PaymentSucceededWebhookEvent value)
+    public UnwrapWebhookEvent(PaymentSucceededWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(RefundFailedWebhookEvent value)
+    public UnwrapWebhookEvent(RefundFailedWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(RefundSucceededWebhookEvent value)
+    public UnwrapWebhookEvent(RefundSucceededWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(SubscriptionActiveWebhookEvent value)
+    public UnwrapWebhookEvent(SubscriptionActiveWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(SubscriptionCancelledWebhookEvent value)
+    public UnwrapWebhookEvent(SubscriptionCancelledWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(SubscriptionExpiredWebhookEvent value)
+    public UnwrapWebhookEvent(SubscriptionExpiredWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(SubscriptionFailedWebhookEvent value)
+    public UnwrapWebhookEvent(SubscriptionFailedWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(SubscriptionOnHoldWebhookEvent value)
+    public UnwrapWebhookEvent(SubscriptionOnHoldWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(SubscriptionPlanChangedWebhookEvent value)
+    public UnwrapWebhookEvent(SubscriptionPlanChangedWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public UnwrapWebhookEvent(SubscriptionRenewedWebhookEvent value)
+    public UnwrapWebhookEvent(SubscriptionRenewedWebhookEvent value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    UnwrapWebhookEvent(UnknownVariant value)
+    public UnwrapWebhookEvent(JsonElement json)
     {
-        Value = value;
-    }
-
-    public static UnwrapWebhookEvent CreateUnknownVariant(JsonElement value)
-    {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickDisputeAccepted([NotNullWhen(true)] out DisputeAcceptedWebhookEvent? value)
@@ -545,15 +567,13 @@ public record class UnwrapWebhookEvent
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of UnwrapWebhookEvent"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class UnwrapWebhookEventConverter : JsonConverter<UnwrapWebhookEvent>
@@ -564,492 +584,371 @@ sealed class UnwrapWebhookEventConverter : JsonConverter<UnwrapWebhookEvent>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
             var deserialized = JsonSerializer.Deserialize<DisputeAcceptedWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'DisputeAcceptedWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'DisputeCancelledWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<DisputeChallengedWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'DisputeChallengedWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<DisputeExpiredWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'DisputeExpiredWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<DisputeLostWebhookEvent>(
-                ref reader,
-                options
-            );
+            var deserialized = JsonSerializer.Deserialize<DisputeLostWebhookEvent>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'DisputeLostWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<DisputeOpenedWebhookEvent>(
-                ref reader,
-                options
-            );
+            var deserialized = JsonSerializer.Deserialize<DisputeOpenedWebhookEvent>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'DisputeOpenedWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<DisputeWonWebhookEvent>(
-                ref reader,
-                options
-            );
+            var deserialized = JsonSerializer.Deserialize<DisputeWonWebhookEvent>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'DisputeWonWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'LicenseKeyCreatedWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<PaymentCancelledWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'PaymentCancelledWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<PaymentFailedWebhookEvent>(
-                ref reader,
-                options
-            );
+            var deserialized = JsonSerializer.Deserialize<PaymentFailedWebhookEvent>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'PaymentFailedWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<PaymentProcessingWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'PaymentProcessingWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<PaymentSucceededWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'PaymentSucceededWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<RefundFailedWebhookEvent>(
-                ref reader,
-                options
-            );
+            var deserialized = JsonSerializer.Deserialize<RefundFailedWebhookEvent>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'RefundFailedWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<RefundSucceededWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'RefundSucceededWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionActiveWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'SubscriptionActiveWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionCancelledWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'SubscriptionCancelledWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'SubscriptionExpiredWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionFailedWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'SubscriptionFailedWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionOnHoldWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'SubscriptionOnHoldWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionPlanChangedWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'SubscriptionPlanChangedWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionRenewedWebhookEvent>(
-                ref reader,
+                json,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new UnwrapWebhookEvent(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'SubscriptionRenewedWebhookEvent'",
-                    e
-                )
-            );
+            // ignore
         }
 
-        throw new System::AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(
@@ -1058,7 +957,6 @@ sealed class UnwrapWebhookEventConverter : JsonConverter<UnwrapWebhookEvent>
         JsonSerializerOptions options
     )
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }

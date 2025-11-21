@@ -14,10 +14,10 @@ namespace DodoPayments.Client.Models.Products;
 
 public sealed record class ProductCreateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
-    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
-        get { return this._bodyProperties.Freeze(); }
+        get { return this._rawBodyData.Freeze(); }
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("name", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'name' cannot be null",
                     new ArgumentOutOfRangeException("name", "Missing required argument")
@@ -41,7 +41,7 @@ public sealed record class ProductCreateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["name"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -55,7 +55,7 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("price", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("price", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
                     new ArgumentOutOfRangeException("price", "Missing required argument")
@@ -69,7 +69,7 @@ public sealed record class ProductCreateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["price"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -83,7 +83,7 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("tax_category", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("tax_category", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'tax_category' cannot be null",
                     new ArgumentOutOfRangeException("tax_category", "Missing required argument")
@@ -96,7 +96,7 @@ public sealed record class ProductCreateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["tax_category"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["tax_category"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -110,14 +110,14 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("addons", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("addons", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["addons"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["addons"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -131,14 +131,14 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("brand_id", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("brand_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["brand_id"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["brand_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -152,14 +152,14 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("description", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["description"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -173,12 +173,7 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            if (
-                !this._bodyProperties.TryGetValue(
-                    "digital_product_delivery",
-                    out JsonElement element
-                )
-            )
+            if (!this._rawBodyData.TryGetValue("digital_product_delivery", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DigitalProductDelivery?>(
@@ -188,7 +183,7 @@ public sealed record class ProductCreateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["digital_product_delivery"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["digital_product_delivery"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -203,7 +198,7 @@ public sealed record class ProductCreateParams : ParamsBase
         get
         {
             if (
-                !this._bodyProperties.TryGetValue(
+                !this._rawBodyData.TryGetValue(
                     "license_key_activation_message",
                     out JsonElement element
                 )
@@ -214,8 +209,10 @@ public sealed record class ProductCreateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["license_key_activation_message"] =
-                JsonSerializer.SerializeToElement(value, ModelBase.SerializerOptions);
+            this._rawBodyData["license_key_activation_message"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
         }
     }
 
@@ -227,7 +224,7 @@ public sealed record class ProductCreateParams : ParamsBase
         get
         {
             if (
-                !this._bodyProperties.TryGetValue(
+                !this._rawBodyData.TryGetValue(
                     "license_key_activations_limit",
                     out JsonElement element
                 )
@@ -238,8 +235,10 @@ public sealed record class ProductCreateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["license_key_activations_limit"] =
-                JsonSerializer.SerializeToElement(value, ModelBase.SerializerOptions);
+            this._rawBodyData["license_key_activations_limit"] = JsonSerializer.SerializeToElement(
+                value,
+                ModelBase.SerializerOptions
+            );
         }
     }
 
@@ -252,7 +251,7 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("license_key_duration", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("license_key_duration", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<LicenseKeyDuration?>(
@@ -262,7 +261,7 @@ public sealed record class ProductCreateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["license_key_duration"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["license_key_duration"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -276,14 +275,14 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("license_key_enabled", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("license_key_enabled", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["license_key_enabled"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["license_key_enabled"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -297,7 +296,7 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("metadata", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("metadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Dictionary<string, string>?>(
@@ -312,7 +311,7 @@ public sealed record class ProductCreateParams : ParamsBase
                 return;
             }
 
-            this._bodyProperties["metadata"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -322,40 +321,40 @@ public sealed record class ProductCreateParams : ParamsBase
     public ProductCreateParams() { }
 
     public ProductCreateParams(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ProductCreateParams(
-        FrozenDictionary<string, JsonElement> headerProperties,
-        FrozenDictionary<string, JsonElement> queryProperties,
-        FrozenDictionary<string, JsonElement> bodyProperties
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 #pragma warning restore CS8618
 
     public static ProductCreateParams FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
         return new(
-            FrozenDictionary.ToFrozenDictionary(headerProperties),
-            FrozenDictionary.ToFrozenDictionary(queryProperties),
-            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            FrozenDictionary.ToFrozenDictionary(rawBodyData)
         );
     }
 
@@ -369,17 +368,13 @@ public sealed record class ProductCreateParams : ParamsBase
 
     internal override StringContent? BodyContent()
     {
-        return new(
-            JsonSerializer.Serialize(this.BodyProperties),
-            Encoding.UTF8,
-            "application/json"
-        );
+        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
         ParamsBase.AddDefaultHeaders(request, options);
-        foreach (var item in this.HeaderProperties)
+        foreach (var item in this.RawHeaderData)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
@@ -399,14 +394,14 @@ public sealed record class DigitalProductDelivery : ModelBase, IFromRaw<DigitalP
     {
         get
         {
-            if (!this._properties.TryGetValue("external_url", out JsonElement element))
+            if (!this._rawData.TryGetValue("external_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["external_url"] = JsonSerializer.SerializeToElement(
+            this._rawData["external_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -420,14 +415,14 @@ public sealed record class DigitalProductDelivery : ModelBase, IFromRaw<DigitalP
     {
         get
         {
-            if (!this._properties.TryGetValue("instructions", out JsonElement element))
+            if (!this._rawData.TryGetValue("instructions", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["instructions"] = JsonSerializer.SerializeToElement(
+            this._rawData["instructions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -442,23 +437,23 @@ public sealed record class DigitalProductDelivery : ModelBase, IFromRaw<DigitalP
 
     public DigitalProductDelivery() { }
 
-    public DigitalProductDelivery(IReadOnlyDictionary<string, JsonElement> properties)
+    public DigitalProductDelivery(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DigitalProductDelivery(FrozenDictionary<string, JsonElement> properties)
+    DigitalProductDelivery(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static DigitalProductDelivery FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

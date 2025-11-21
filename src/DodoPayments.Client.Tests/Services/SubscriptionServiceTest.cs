@@ -32,18 +32,14 @@ public class SubscriptionServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var subscription = await this.client.Subscriptions.Retrieve(
-            new() { SubscriptionID = "subscription_id" }
-        );
+        var subscription = await this.client.Subscriptions.Retrieve("subscription_id");
         subscription.Validate();
     }
 
     [Fact]
     public async Task Update_Works()
     {
-        var subscription = await this.client.Subscriptions.Update(
-            new() { SubscriptionID = "subscription_id" }
-        );
+        var subscription = await this.client.Subscriptions.Update("subscription_id");
         subscription.Validate();
     }
 
@@ -58,9 +54,9 @@ public class SubscriptionServiceTest : TestBase
     public async Task ChangePlan_Works()
     {
         await this.client.Subscriptions.ChangePlan(
+            "subscription_id",
             new()
             {
-                SubscriptionID = "subscription_id",
                 ProductID = "product_id",
                 ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
                 Quantity = 0,
@@ -72,7 +68,8 @@ public class SubscriptionServiceTest : TestBase
     public async Task Charge_Works()
     {
         var response = await this.client.Subscriptions.Charge(
-            new() { SubscriptionID = "subscription_id", ProductPrice = 0 }
+            "subscription_id",
+            new() { ProductPrice = 0 }
         );
         response.Validate();
     }
@@ -80,9 +77,7 @@ public class SubscriptionServiceTest : TestBase
     [Fact]
     public async Task RetrieveUsageHistory_Works()
     {
-        var page = await this.client.Subscriptions.RetrieveUsageHistory(
-            new() { SubscriptionID = "subscription_id" }
-        );
+        var page = await this.client.Subscriptions.RetrieveUsageHistory("subscription_id");
         page.Validate();
     }
 
@@ -90,9 +85,9 @@ public class SubscriptionServiceTest : TestBase
     public async Task UpdatePaymentMethod_Works()
     {
         var response = await this.client.Subscriptions.UpdatePaymentMethod(
+            "subscription_id",
             new()
             {
-                SubscriptionID = "subscription_id",
                 Body = new New() { Type = Type.New, ReturnURL = "return_url" },
             }
         );

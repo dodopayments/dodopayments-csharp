@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Invoices.Payments;
 
 namespace DodoPayments.Client.Services.Invoices;
@@ -30,6 +31,11 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.PaymentID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.PaymentID' cannot be null");
+        }
+
         HttpRequest<PaymentRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -41,11 +47,27 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
         return response;
     }
 
+    public async Task<HttpResponse> Retrieve(
+        string paymentID,
+        PaymentRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
+    }
+
     public async Task<HttpResponse> RetrieveRefund(
         PaymentRetrieveRefundParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.RefundID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.RefundID' cannot be null");
+        }
+
         HttpRequest<PaymentRetrieveRefundParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -55,5 +77,22 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
         return response;
+    }
+
+    public async Task<HttpResponse> RetrieveRefund(
+        string refundID,
+        PaymentRetrieveRefundParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.RetrieveRefund(
+            parameters with
+            {
+                RefundID = refundID,
+            },
+            cancellationToken
+        );
     }
 }

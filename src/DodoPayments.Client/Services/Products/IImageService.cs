@@ -19,4 +19,9 @@ public interface IImageService
         ImageUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<ImageUpdateResponse> Update(
+        string id,
+        ImageUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }

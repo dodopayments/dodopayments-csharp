@@ -19,7 +19,7 @@ public sealed record class DisputeListParams : ParamsBase
     {
         get
         {
-            if (!this._queryProperties.TryGetValue("created_at_gte", out JsonElement element))
+            if (!this._rawQueryData.TryGetValue("created_at_gte", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateTimeOffset?>(
@@ -34,7 +34,7 @@ public sealed record class DisputeListParams : ParamsBase
                 return;
             }
 
-            this._queryProperties["created_at_gte"] = JsonSerializer.SerializeToElement(
+            this._rawQueryData["created_at_gte"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -48,7 +48,7 @@ public sealed record class DisputeListParams : ParamsBase
     {
         get
         {
-            if (!this._queryProperties.TryGetValue("created_at_lte", out JsonElement element))
+            if (!this._rawQueryData.TryGetValue("created_at_lte", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateTimeOffset?>(
@@ -63,7 +63,7 @@ public sealed record class DisputeListParams : ParamsBase
                 return;
             }
 
-            this._queryProperties["created_at_lte"] = JsonSerializer.SerializeToElement(
+            this._rawQueryData["created_at_lte"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -77,7 +77,7 @@ public sealed record class DisputeListParams : ParamsBase
     {
         get
         {
-            if (!this._queryProperties.TryGetValue("customer_id", out JsonElement element))
+            if (!this._rawQueryData.TryGetValue("customer_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
@@ -89,7 +89,7 @@ public sealed record class DisputeListParams : ParamsBase
                 return;
             }
 
-            this._queryProperties["customer_id"] = JsonSerializer.SerializeToElement(
+            this._rawQueryData["customer_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -103,7 +103,7 @@ public sealed record class DisputeListParams : ParamsBase
     {
         get
         {
-            if (!this._queryProperties.TryGetValue("dispute_stage", out JsonElement element))
+            if (!this._rawQueryData.TryGetValue("dispute_stage", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, DisputeStage>?>(
@@ -118,7 +118,7 @@ public sealed record class DisputeListParams : ParamsBase
                 return;
             }
 
-            this._queryProperties["dispute_stage"] = JsonSerializer.SerializeToElement(
+            this._rawQueryData["dispute_stage"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -132,7 +132,7 @@ public sealed record class DisputeListParams : ParamsBase
     {
         get
         {
-            if (!this._queryProperties.TryGetValue("dispute_status", out JsonElement element))
+            if (!this._rawQueryData.TryGetValue("dispute_status", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, DisputeStatus>?>(
@@ -147,7 +147,7 @@ public sealed record class DisputeListParams : ParamsBase
                 return;
             }
 
-            this._queryProperties["dispute_status"] = JsonSerializer.SerializeToElement(
+            this._rawQueryData["dispute_status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -161,7 +161,7 @@ public sealed record class DisputeListParams : ParamsBase
     {
         get
         {
-            if (!this._queryProperties.TryGetValue("page_number", out JsonElement element))
+            if (!this._rawQueryData.TryGetValue("page_number", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
@@ -173,7 +173,7 @@ public sealed record class DisputeListParams : ParamsBase
                 return;
             }
 
-            this._queryProperties["page_number"] = JsonSerializer.SerializeToElement(
+            this._rawQueryData["page_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -187,7 +187,7 @@ public sealed record class DisputeListParams : ParamsBase
     {
         get
         {
-            if (!this._queryProperties.TryGetValue("page_size", out JsonElement element))
+            if (!this._rawQueryData.TryGetValue("page_size", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
@@ -199,7 +199,7 @@ public sealed record class DisputeListParams : ParamsBase
                 return;
             }
 
-            this._queryProperties["page_size"] = JsonSerializer.SerializeToElement(
+            this._rawQueryData["page_size"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -209,34 +209,34 @@ public sealed record class DisputeListParams : ParamsBase
     public DisputeListParams() { }
 
     public DisputeListParams(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     DisputeListParams(
-        FrozenDictionary<string, JsonElement> headerProperties,
-        FrozenDictionary<string, JsonElement> queryProperties
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
     }
 #pragma warning restore CS8618
 
     public static DisputeListParams FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
         return new(
-            FrozenDictionary.ToFrozenDictionary(headerProperties),
-            FrozenDictionary.ToFrozenDictionary(queryProperties)
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData)
         );
     }
 
@@ -251,7 +251,7 @@ public sealed record class DisputeListParams : ParamsBase
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
         ParamsBase.AddDefaultHeaders(request, options);
-        foreach (var item in this.HeaderProperties)
+        foreach (var item in this.RawHeaderData)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }

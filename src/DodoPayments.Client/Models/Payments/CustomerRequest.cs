@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -10,26 +9,30 @@ namespace DodoPayments.Client.Models.Payments;
 [JsonConverter(typeof(CustomerRequestConverter))]
 public record class CustomerRequest
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public CustomerRequest(AttachExistingCustomer value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = value;
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public CustomerRequest(NewCustomer value)
+    public CustomerRequest(AttachExistingCustomer value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    CustomerRequest(UnknownVariant value)
+    public CustomerRequest(NewCustomer value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public static CustomerRequest CreateUnknownVariant(JsonElement value)
+    public CustomerRequest(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickAttachExistingCustomer([NotNullWhen(true)] out AttachExistingCustomer? value)
@@ -85,15 +88,13 @@ public record class CustomerRequest
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of CustomerRequest"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
@@ -104,50 +105,36 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<AttachExistingCustomer>(
-                ref reader,
-                options
-            );
+            var deserialized = JsonSerializer.Deserialize<AttachExistingCustomer>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new CustomerRequest(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'AttachExistingCustomer'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<NewCustomer>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<NewCustomer>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new CustomerRequest(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'NewCustomer'",
-                    e
-                )
-            );
+            // ignore
         }
 
-        throw new AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(
@@ -156,7 +143,6 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
         JsonSerializerOptions options
     )
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }

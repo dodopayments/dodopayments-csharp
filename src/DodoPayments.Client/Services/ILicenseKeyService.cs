@@ -19,9 +19,19 @@ public interface ILicenseKeyService
         LicenseKeyRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<LicenseKey> Retrieve(
+        string id,
+        LicenseKeyRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     Task<LicenseKey> Update(
         LicenseKeyUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+    Task<LicenseKey> Update(
+        string id,
+        LicenseKeyUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

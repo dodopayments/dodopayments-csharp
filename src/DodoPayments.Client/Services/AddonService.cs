@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Addons;
 
 namespace DodoPayments.Client.Services;
@@ -49,6 +50,11 @@ public sealed class AddonService : IAddonService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<AddonRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -67,11 +73,27 @@ public sealed class AddonService : IAddonService
         return addonResponse;
     }
 
+    public async Task<AddonResponse> Retrieve(
+        string id,
+        AddonRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { ID = id }, cancellationToken);
+    }
+
     public async Task<AddonResponse> Update(
         AddonUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<AddonUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
@@ -88,6 +110,17 @@ public sealed class AddonService : IAddonService
             addonResponse.Validate();
         }
         return addonResponse;
+    }
+
+    public async Task<AddonResponse> Update(
+        string id,
+        AddonUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Update(parameters with { ID = id }, cancellationToken);
     }
 
     public async Task<AddonListPageResponse> List(
@@ -120,6 +153,11 @@ public sealed class AddonService : IAddonService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<AddonUpdateImagesParams> request = new()
         {
             Method = HttpMethod.Put,
@@ -136,5 +174,16 @@ public sealed class AddonService : IAddonService
             deserializedResponse.Validate();
         }
         return deserializedResponse;
+    }
+
+    public async Task<AddonUpdateImagesResponse> UpdateImages(
+        string id,
+        AddonUpdateImagesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.UpdateImages(parameters with { ID = id }, cancellationToken);
     }
 }

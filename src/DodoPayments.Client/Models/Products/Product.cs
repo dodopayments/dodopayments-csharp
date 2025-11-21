@@ -17,7 +17,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("brand_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("brand_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'brand_id' cannot be null",
                     new ArgumentOutOfRangeException("brand_id", "Missing required argument")
@@ -31,7 +31,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["brand_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["brand_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -45,7 +45,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("business_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
                     new ArgumentOutOfRangeException("business_id", "Missing required argument")
@@ -59,7 +59,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["business_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["business_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -73,7 +73,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
@@ -83,7 +83,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -97,7 +97,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("is_recurring", out JsonElement element))
+            if (!this._rawData.TryGetValue("is_recurring", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'is_recurring' cannot be null",
                     new ArgumentOutOfRangeException("is_recurring", "Missing required argument")
@@ -107,7 +107,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["is_recurring"] = JsonSerializer.SerializeToElement(
+            this._rawData["is_recurring"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -121,7 +121,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("license_key_enabled", out JsonElement element))
+            if (!this._rawData.TryGetValue("license_key_enabled", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'license_key_enabled' cannot be null",
                     new ArgumentOutOfRangeException(
@@ -134,7 +134,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["license_key_enabled"] = JsonSerializer.SerializeToElement(
+            this._rawData["license_key_enabled"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -148,7 +148,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._rawData.TryGetValue("metadata", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'metadata' cannot be null",
                     new ArgumentOutOfRangeException("metadata", "Missing required argument")
@@ -165,7 +165,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._rawData["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -179,7 +179,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("price", out JsonElement element))
+            if (!this._rawData.TryGetValue("price", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
                     new ArgumentOutOfRangeException("price", "Missing required argument")
@@ -193,7 +193,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["price"] = JsonSerializer.SerializeToElement(
+            this._rawData["price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -207,7 +207,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("product_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("product_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
                     new ArgumentOutOfRangeException("product_id", "Missing required argument")
@@ -221,7 +221,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["product_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["product_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -235,7 +235,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("tax_category", out JsonElement element))
+            if (!this._rawData.TryGetValue("tax_category", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'tax_category' cannot be null",
                     new ArgumentOutOfRangeException("tax_category", "Missing required argument")
@@ -248,7 +248,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["tax_category"] = JsonSerializer.SerializeToElement(
+            this._rawData["tax_category"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -262,7 +262,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("updated_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("updated_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'updated_at' cannot be null",
                     new ArgumentOutOfRangeException("updated_at", "Missing required argument")
@@ -272,7 +272,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["updated_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["updated_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -286,14 +286,14 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("addons", out JsonElement element))
+            if (!this._rawData.TryGetValue("addons", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["addons"] = JsonSerializer.SerializeToElement(
+            this._rawData["addons"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -307,14 +307,14 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("description", out JsonElement element))
+            if (!this._rawData.TryGetValue("description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["description"] = JsonSerializer.SerializeToElement(
+            this._rawData["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -325,7 +325,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("digital_product_delivery", out JsonElement element))
+            if (!this._rawData.TryGetValue("digital_product_delivery", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ProductDigitalProductDelivery?>(
@@ -335,7 +335,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["digital_product_delivery"] = JsonSerializer.SerializeToElement(
+            this._rawData["digital_product_delivery"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -349,14 +349,14 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("image", out JsonElement element))
+            if (!this._rawData.TryGetValue("image", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["image"] = JsonSerializer.SerializeToElement(
+            this._rawData["image"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -371,7 +371,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (
-                !this._properties.TryGetValue(
+                !this._rawData.TryGetValue(
                     "license_key_activation_message",
                     out JsonElement element
                 )
@@ -382,7 +382,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["license_key_activation_message"] = JsonSerializer.SerializeToElement(
+            this._rawData["license_key_activation_message"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -397,10 +397,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         get
         {
             if (
-                !this._properties.TryGetValue(
-                    "license_key_activations_limit",
-                    out JsonElement element
-                )
+                !this._rawData.TryGetValue("license_key_activations_limit", out JsonElement element)
             )
                 return null;
 
@@ -408,7 +405,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["license_key_activations_limit"] = JsonSerializer.SerializeToElement(
+            this._rawData["license_key_activations_limit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -422,7 +419,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("license_key_duration", out JsonElement element))
+            if (!this._rawData.TryGetValue("license_key_duration", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<LicenseKeyDuration?>(
@@ -432,7 +429,7 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
         }
         init
         {
-            this._properties["license_key_duration"] = JsonSerializer.SerializeToElement(
+            this._rawData["license_key_duration"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -446,14 +443,14 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         get
         {
-            if (!this._properties.TryGetValue("name", out JsonElement element))
+            if (!this._rawData.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["name"] = JsonSerializer.SerializeToElement(
+            this._rawData["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -484,22 +481,22 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
 
     public Product() { }
 
-    public Product(IReadOnlyDictionary<string, JsonElement> properties)
+    public Product(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Product(FrozenDictionary<string, JsonElement> properties)
+    Product(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -515,14 +512,14 @@ public sealed record class ProductDigitalProductDelivery
     {
         get
         {
-            if (!this._properties.TryGetValue("external_url", out JsonElement element))
+            if (!this._rawData.TryGetValue("external_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["external_url"] = JsonSerializer.SerializeToElement(
+            this._rawData["external_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -536,14 +533,14 @@ public sealed record class ProductDigitalProductDelivery
     {
         get
         {
-            if (!this._properties.TryGetValue("files", out JsonElement element))
+            if (!this._rawData.TryGetValue("files", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<File>?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["files"] = JsonSerializer.SerializeToElement(
+            this._rawData["files"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -557,14 +554,14 @@ public sealed record class ProductDigitalProductDelivery
     {
         get
         {
-            if (!this._properties.TryGetValue("instructions", out JsonElement element))
+            if (!this._rawData.TryGetValue("instructions", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["instructions"] = JsonSerializer.SerializeToElement(
+            this._rawData["instructions"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -583,24 +580,24 @@ public sealed record class ProductDigitalProductDelivery
 
     public ProductDigitalProductDelivery() { }
 
-    public ProductDigitalProductDelivery(IReadOnlyDictionary<string, JsonElement> properties)
+    public ProductDigitalProductDelivery(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ProductDigitalProductDelivery(FrozenDictionary<string, JsonElement> properties)
+    ProductDigitalProductDelivery(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static ProductDigitalProductDelivery FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -611,7 +608,7 @@ public sealed record class File : ModelBase, IFromRaw<File>
     {
         get
         {
-            if (!this._properties.TryGetValue("file_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("file_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'file_id' cannot be null",
                     new ArgumentOutOfRangeException("file_id", "Missing required argument")
@@ -625,7 +622,7 @@ public sealed record class File : ModelBase, IFromRaw<File>
         }
         init
         {
-            this._properties["file_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["file_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -636,7 +633,7 @@ public sealed record class File : ModelBase, IFromRaw<File>
     {
         get
         {
-            if (!this._properties.TryGetValue("file_name", out JsonElement element))
+            if (!this._rawData.TryGetValue("file_name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'file_name' cannot be null",
                     new ArgumentOutOfRangeException("file_name", "Missing required argument")
@@ -650,7 +647,7 @@ public sealed record class File : ModelBase, IFromRaw<File>
         }
         init
         {
-            this._properties["file_name"] = JsonSerializer.SerializeToElement(
+            this._rawData["file_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -661,7 +658,7 @@ public sealed record class File : ModelBase, IFromRaw<File>
     {
         get
         {
-            if (!this._properties.TryGetValue("url", out JsonElement element))
+            if (!this._rawData.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
                     new ArgumentOutOfRangeException("url", "Missing required argument")
@@ -675,7 +672,7 @@ public sealed record class File : ModelBase, IFromRaw<File>
         }
         init
         {
-            this._properties["url"] = JsonSerializer.SerializeToElement(
+            this._rawData["url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -691,21 +688,21 @@ public sealed record class File : ModelBase, IFromRaw<File>
 
     public File() { }
 
-    public File(IReadOnlyDictionary<string, JsonElement> properties)
+    public File(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    File(FrozenDictionary<string, JsonElement> properties)
+    File(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static File FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static File FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

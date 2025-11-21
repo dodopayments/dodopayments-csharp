@@ -10,9 +10,9 @@ public class LedgerEntryServiceTest : TestBase
     public async Task Create_Works()
     {
         var customerWallet = await this.client.Customers.Wallets.LedgerEntries.Create(
+            "customer_id",
             new()
             {
-                CustomerID = "customer_id",
                 Amount = 0,
                 Currency = Currency.Aed,
                 EntryType = EntryType.Credit,
@@ -24,9 +24,7 @@ public class LedgerEntryServiceTest : TestBase
     [Fact]
     public async Task List_Works()
     {
-        var page = await this.client.Customers.Wallets.LedgerEntries.List(
-            new() { CustomerID = "customer_id" }
-        );
+        var page = await this.client.Customers.Wallets.LedgerEntries.List("customer_id");
         page.Validate();
     }
 }

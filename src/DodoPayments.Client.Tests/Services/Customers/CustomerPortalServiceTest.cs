@@ -8,7 +8,7 @@ public class CustomerPortalServiceTest : TestBase
     public async Task Create_Works()
     {
         var customerPortalSession = await this.client.Customers.CustomerPortal.Create(
-            new() { CustomerID = "customer_id" }
+            "customer_id"
         );
         customerPortalSession.Validate();
     }

@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.UsageEvents;
 
 namespace DodoPayments.Client.Services;
@@ -26,6 +27,11 @@ public sealed class UsageEventService : IUsageEventService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.EventID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.EventID' cannot be null");
+        }
+
         HttpRequest<UsageEventRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -42,6 +48,17 @@ public sealed class UsageEventService : IUsageEventService
             deserializedResponse.Validate();
         }
         return deserializedResponse;
+    }
+
+    public async Task<Event> Retrieve(
+        string eventID,
+        UsageEventRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { EventID = eventID }, cancellationToken);
     }
 
     public async Task<UsageEventListPageResponse> List(

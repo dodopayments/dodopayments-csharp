@@ -24,7 +24,25 @@ public interface IHeaderService
     );
 
     /// <summary>
+    /// Get a webhook by id
+    /// </summary>
+    Task<HeaderRetrieveResponse> Retrieve(
+        string webhookID,
+        HeaderRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Patch a webhook by id
     /// </summary>
     Task Update(HeaderUpdateParams parameters, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Patch a webhook by id
+    /// </summary>
+    Task Update(
+        string webhookID,
+        HeaderUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 }

@@ -24,6 +24,11 @@ public interface IPaymentService
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<Payment> Retrieve(
+        string paymentID,
+        PaymentRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     Task<PaymentListPageResponse> List(
         PaymentListParams? parameters = null,
@@ -32,6 +37,11 @@ public interface IPaymentService
 
     Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
         PaymentRetrieveLineItemsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+    Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
+        string paymentID,
+        PaymentRetrieveLineItemsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }

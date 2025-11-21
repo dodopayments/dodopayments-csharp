@@ -16,7 +16,7 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
     {
         get
         {
-            if (!this._properties.TryGetValue("items", out JsonElement element))
+            if (!this._rawData.TryGetValue("items", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'items' cannot be null",
                     new ArgumentOutOfRangeException("items", "Missing required argument")
@@ -33,7 +33,7 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
         }
         init
         {
-            this._properties["items"] = JsonSerializer.SerializeToElement(
+            this._rawData["items"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -47,7 +47,7 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
     {
         get
         {
-            if (!this._properties.TryGetValue("total_balance_usd", out JsonElement element))
+            if (!this._rawData.TryGetValue("total_balance_usd", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'total_balance_usd' cannot be null",
                     new ArgumentOutOfRangeException(
@@ -60,7 +60,7 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
         }
         init
         {
-            this._properties["total_balance_usd"] = JsonSerializer.SerializeToElement(
+            this._rawData["total_balance_usd"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -78,23 +78,23 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
 
     public WalletListResponse() { }
 
-    public WalletListResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    public WalletListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    WalletListResponse(FrozenDictionary<string, JsonElement> properties)
+    WalletListResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static WalletListResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

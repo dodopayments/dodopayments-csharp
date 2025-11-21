@@ -16,7 +16,7 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
     {
         get
         {
-            if (!this._properties.TryGetValue("id", out JsonElement element))
+            if (!this._rawData.TryGetValue("id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
                     new ArgumentOutOfRangeException("id", "Missing required argument")
@@ -30,7 +30,7 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
         }
         init
         {
-            this._properties["id"] = JsonSerializer.SerializeToElement(
+            this._rawData["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -41,7 +41,7 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
     {
         get
         {
-            if (!this._properties.TryGetValue("business_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
                     new ArgumentOutOfRangeException("business_id", "Missing required argument")
@@ -55,7 +55,7 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
         }
         init
         {
-            this._properties["business_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["business_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -66,7 +66,7 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
     {
         get
         {
-            if (!this._properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
@@ -76,7 +76,7 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
         }
         init
         {
-            this._properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -87,7 +87,7 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
     {
         get
         {
-            if (!this._properties.TryGetValue("license_key_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("license_key_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'license_key_id' cannot be null",
                     new ArgumentOutOfRangeException("license_key_id", "Missing required argument")
@@ -101,7 +101,7 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
         }
         init
         {
-            this._properties["license_key_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["license_key_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -112,7 +112,7 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
     {
         get
         {
-            if (!this._properties.TryGetValue("name", out JsonElement element))
+            if (!this._rawData.TryGetValue("name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'name' cannot be null",
                     new ArgumentOutOfRangeException("name", "Missing required argument")
@@ -126,7 +126,7 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
         }
         init
         {
-            this._properties["name"] = JsonSerializer.SerializeToElement(
+            this._rawData["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -144,23 +144,23 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
 
     public LicenseKeyInstance() { }
 
-    public LicenseKeyInstance(IReadOnlyDictionary<string, JsonElement> properties)
+    public LicenseKeyInstance(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    LicenseKeyInstance(FrozenDictionary<string, JsonElement> properties)
+    LicenseKeyInstance(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static LicenseKeyInstance FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

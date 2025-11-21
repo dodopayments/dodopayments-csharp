@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Customers;
 using DodoPayments.Client.Services.Customers;
 
@@ -64,6 +65,11 @@ public sealed class CustomerService : ICustomerService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CustomerID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.CustomerID' cannot be null");
+        }
+
         HttpRequest<CustomerRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -82,11 +88,27 @@ public sealed class CustomerService : ICustomerService
         return customer;
     }
 
+    public async Task<Customer> Retrieve(
+        string customerID,
+        CustomerRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { CustomerID = customerID }, cancellationToken);
+    }
+
     public async Task<Customer> Update(
         CustomerUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CustomerID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.CustomerID' cannot be null");
+        }
+
         HttpRequest<CustomerUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
@@ -103,6 +125,17 @@ public sealed class CustomerService : ICustomerService
             customer.Validate();
         }
         return customer;
+    }
+
+    public async Task<Customer> Update(
+        string customerID,
+        CustomerUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Update(parameters with { CustomerID = customerID }, cancellationToken);
     }
 
     public async Task<CustomerListPageResponse> List(
@@ -135,6 +168,11 @@ public sealed class CustomerService : ICustomerService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CustomerID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.CustomerID' cannot be null");
+        }
+
         HttpRequest<CustomerRetrievePaymentMethodsParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -151,5 +189,22 @@ public sealed class CustomerService : ICustomerService
             deserializedResponse.Validate();
         }
         return deserializedResponse;
+    }
+
+    public async Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
+        string customerID,
+        CustomerRetrievePaymentMethodsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.RetrievePaymentMethods(
+            parameters with
+            {
+                CustomerID = customerID,
+            },
+            cancellationToken
+        );
     }
 }

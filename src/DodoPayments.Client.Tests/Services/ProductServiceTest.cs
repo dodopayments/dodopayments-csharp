@@ -33,14 +33,14 @@ public class ProductServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var product = await this.client.Products.Retrieve(new() { ID = "id" });
+        var product = await this.client.Products.Retrieve("id");
         product.Validate();
     }
 
     [Fact]
     public async Task Update_Works()
     {
-        await this.client.Products.Update(new() { ID = "id" });
+        await this.client.Products.Update("id");
     }
 
     [Fact]
@@ -53,20 +53,21 @@ public class ProductServiceTest : TestBase
     [Fact]
     public async Task Archive_Works()
     {
-        await this.client.Products.Archive(new() { ID = "id" });
+        await this.client.Products.Archive("id");
     }
 
     [Fact]
     public async Task Unarchive_Works()
     {
-        await this.client.Products.Unarchive(new() { ID = "id" });
+        await this.client.Products.Unarchive("id");
     }
 
     [Fact]
     public async Task UpdateFiles_Works()
     {
         var response = await this.client.Products.UpdateFiles(
-            new() { ID = "id", FileName = "file_name" }
+            "id",
+            new() { FileName = "file_name" }
         );
         response.Validate();
     }

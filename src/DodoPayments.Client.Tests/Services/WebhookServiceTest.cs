@@ -14,16 +14,14 @@ public class WebhookServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var webhookDetails = await this.client.Webhooks.Retrieve(
-            new() { WebhookID = "webhook_id" }
-        );
+        var webhookDetails = await this.client.Webhooks.Retrieve("webhook_id");
         webhookDetails.Validate();
     }
 
     [Fact]
     public async Task Update_Works()
     {
-        var webhookDetails = await this.client.Webhooks.Update(new() { WebhookID = "webhook_id" });
+        var webhookDetails = await this.client.Webhooks.Update("webhook_id");
         webhookDetails.Validate();
     }
 
@@ -37,15 +35,13 @@ public class WebhookServiceTest : TestBase
     [Fact]
     public async Task Delete_Works()
     {
-        await this.client.Webhooks.Delete(new() { WebhookID = "webhook_id" });
+        await this.client.Webhooks.Delete("webhook_id");
     }
 
     [Fact]
     public async Task RetrieveSecret_Works()
     {
-        var response = await this.client.Webhooks.RetrieveSecret(
-            new() { WebhookID = "webhook_id" }
-        );
+        var response = await this.client.Webhooks.RetrieveSecret("webhook_id");
         response.Validate();
     }
 }

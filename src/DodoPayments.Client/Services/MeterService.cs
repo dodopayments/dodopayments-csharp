@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Meters;
 
 namespace DodoPayments.Client.Services;
@@ -47,6 +48,11 @@ public sealed class MeterService : IMeterService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<MeterRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -61,6 +67,17 @@ public sealed class MeterService : IMeterService
             meter.Validate();
         }
         return meter;
+    }
+
+    public async Task<Meter> Retrieve(
+        string id,
+        MeterRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { ID = id }, cancellationToken);
     }
 
     public async Task<MeterListPageResponse> List(
@@ -93,6 +110,11 @@ public sealed class MeterService : IMeterService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<MeterArchiveParams> request = new()
         {
             Method = HttpMethod.Delete,
@@ -103,11 +125,27 @@ public sealed class MeterService : IMeterService
             .ConfigureAwait(false);
     }
 
+    public async Task Archive(
+        string id,
+        MeterArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Archive(parameters with { ID = id }, cancellationToken);
+    }
+
     public async Task Unarchive(
         MeterUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<MeterUnarchiveParams> request = new()
         {
             Method = HttpMethod.Post,
@@ -116,5 +154,16 @@ public sealed class MeterService : IMeterService
         using var response = await this
             ._client.Execute(request, cancellationToken)
             .ConfigureAwait(false);
+    }
+
+    public async Task Unarchive(
+        string id,
+        MeterUnarchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.Unarchive(parameters with { ID = id }, cancellationToken);
     }
 }

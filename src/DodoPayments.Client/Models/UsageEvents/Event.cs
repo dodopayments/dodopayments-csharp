@@ -16,7 +16,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this._properties.TryGetValue("business_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
                     new ArgumentOutOfRangeException("business_id", "Missing required argument")
@@ -30,7 +30,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
         }
         init
         {
-            this._properties["business_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["business_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -41,7 +41,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this._properties.TryGetValue("customer_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("customer_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'customer_id' cannot be null",
                     new ArgumentOutOfRangeException("customer_id", "Missing required argument")
@@ -55,7 +55,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
         }
         init
         {
-            this._properties["customer_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["customer_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -66,7 +66,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this._properties.TryGetValue("event_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("event_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'event_id' cannot be null",
                     new ArgumentOutOfRangeException("event_id", "Missing required argument")
@@ -80,7 +80,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
         }
         init
         {
-            this._properties["event_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["event_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -91,7 +91,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this._properties.TryGetValue("event_name", out JsonElement element))
+            if (!this._rawData.TryGetValue("event_name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'event_name' cannot be null",
                     new ArgumentOutOfRangeException("event_name", "Missing required argument")
@@ -105,7 +105,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
         }
         init
         {
-            this._properties["event_name"] = JsonSerializer.SerializeToElement(
+            this._rawData["event_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -116,7 +116,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this._properties.TryGetValue("timestamp", out JsonElement element))
+            if (!this._rawData.TryGetValue("timestamp", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'timestamp' cannot be null",
                     new ArgumentOutOfRangeException("timestamp", "Missing required argument")
@@ -126,7 +126,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
         }
         init
         {
-            this._properties["timestamp"] = JsonSerializer.SerializeToElement(
+            this._rawData["timestamp"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -140,7 +140,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
     {
         get
         {
-            if (!this._properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._rawData.TryGetValue("metadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Dictionary<string, Metadata>?>(
@@ -150,7 +150,7 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
         }
         init
         {
-            this._properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._rawData["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -175,22 +175,22 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
 
     public Event() { }
 
-    public Event(IReadOnlyDictionary<string, JsonElement> properties)
+    public Event(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Event(FrozenDictionary<string, JsonElement> properties)
+    Event(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static Event FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Event FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -200,31 +200,36 @@ public sealed record class Event : ModelBase, IFromRaw<Event>
 [JsonConverter(typeof(MetadataConverter))]
 public record class Metadata
 {
-    public object Value { get; private init; }
+    public object? Value { get; } = null;
 
-    public Metadata(string value)
+    JsonElement? _json = null;
+
+    public JsonElement Json
     {
-        Value = value;
+        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public Metadata(double value)
+    public Metadata(string value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public Metadata(bool value)
+    public Metadata(double value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    Metadata(UnknownVariant value)
+    public Metadata(bool value, JsonElement? json = null)
     {
-        Value = value;
+        this.Value = value;
+        this._json = json;
     }
 
-    public static Metadata CreateUnknownVariant(JsonElement value)
+    public Metadata(JsonElement json)
     {
-        return new(new UnknownVariant(value));
+        this._json = json;
     }
 
     public bool TryPickString([NotNullWhen(true)] out string? value)
@@ -286,15 +291,13 @@ public record class Metadata
 
     public void Validate()
     {
-        if (this.Value is UnknownVariant)
+        if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Metadata"
             );
         }
     }
-
-    record struct UnknownVariant(JsonElement value);
 }
 
 sealed class MetadataConverter : JsonConverter<Metadata>
@@ -305,57 +308,43 @@ sealed class MetadataConverter : JsonConverter<Metadata>
         JsonSerializerOptions options
     )
     {
-        List<DodoPaymentsInvalidDataException> exceptions = [];
-
+        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(ref reader, options);
+            var deserialized = JsonSerializer.Deserialize<string>(json, options);
             if (deserialized != null)
             {
-                return new Metadata(deserialized);
+                return new(deserialized, json);
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'string'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new Metadata(JsonSerializer.Deserialize<double>(ref reader, options));
+            return new(JsonSerializer.Deserialize<double>(json, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException(
-                    "Data does not match union variant 'double'",
-                    e
-                )
-            );
+            // ignore
         }
 
         try
         {
-            return new Metadata(JsonSerializer.Deserialize<bool>(ref reader, options));
+            return new(JsonSerializer.Deserialize<bool>(json, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
-            exceptions.Add(
-                new DodoPaymentsInvalidDataException("Data does not match union variant 'bool'", e)
-            );
+            // ignore
         }
 
-        throw new AggregateException(exceptions);
+        return new(json);
     }
 
     public override void Write(Utf8JsonWriter writer, Metadata value, JsonSerializerOptions options)
     {
-        object variant = value.Value;
-        JsonSerializer.Serialize(writer, variant, options);
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }

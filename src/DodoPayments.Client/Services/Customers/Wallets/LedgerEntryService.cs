@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Customers.Wallets;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
@@ -27,6 +28,11 @@ public sealed class LedgerEntryService : ILedgerEntryService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CustomerID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.CustomerID' cannot be null");
+        }
+
         HttpRequest<LedgerEntryCreateParams> request = new()
         {
             Method = HttpMethod.Post,
@@ -45,11 +51,25 @@ public sealed class LedgerEntryService : ILedgerEntryService
         return customerWallet;
     }
 
+    public async Task<CustomerWallet> Create(
+        string customerID,
+        LedgerEntryCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return await this.Create(parameters with { CustomerID = customerID }, cancellationToken);
+    }
+
     public async Task<LedgerEntryListPageResponse> List(
         LedgerEntryListParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.CustomerID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.CustomerID' cannot be null");
+        }
+
         HttpRequest<LedgerEntryListParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -66,5 +86,16 @@ public sealed class LedgerEntryService : ILedgerEntryService
             page.Validate();
         }
         return page;
+    }
+
+    public async Task<LedgerEntryListPageResponse> List(
+        string customerID,
+        LedgerEntryListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.List(parameters with { CustomerID = customerID }, cancellationToken);
     }
 }

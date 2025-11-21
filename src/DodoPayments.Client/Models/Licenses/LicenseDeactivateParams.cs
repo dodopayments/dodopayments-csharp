@@ -12,17 +12,17 @@ namespace DodoPayments.Client.Models.Licenses;
 
 public sealed record class LicenseDeactivateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
-    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
-        get { return this._bodyProperties.Freeze(); }
+        get { return this._rawBodyData.Freeze(); }
     }
 
     public required string LicenseKey
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("license_key", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("license_key", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'license_key' cannot be null",
                     new ArgumentOutOfRangeException("license_key", "Missing required argument")
@@ -36,7 +36,7 @@ public sealed record class LicenseDeactivateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["license_key"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["license_key"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -47,12 +47,7 @@ public sealed record class LicenseDeactivateParams : ParamsBase
     {
         get
         {
-            if (
-                !this._bodyProperties.TryGetValue(
-                    "license_key_instance_id",
-                    out JsonElement element
-                )
-            )
+            if (!this._rawBodyData.TryGetValue("license_key_instance_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'license_key_instance_id' cannot be null",
                     new ArgumentOutOfRangeException(
@@ -69,7 +64,7 @@ public sealed record class LicenseDeactivateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["license_key_instance_id"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["license_key_instance_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -79,40 +74,40 @@ public sealed record class LicenseDeactivateParams : ParamsBase
     public LicenseDeactivateParams() { }
 
     public LicenseDeactivateParams(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     LicenseDeactivateParams(
-        FrozenDictionary<string, JsonElement> headerProperties,
-        FrozenDictionary<string, JsonElement> queryProperties,
-        FrozenDictionary<string, JsonElement> bodyProperties
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 #pragma warning restore CS8618
 
     public static LicenseDeactivateParams FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
         return new(
-            FrozenDictionary.ToFrozenDictionary(headerProperties),
-            FrozenDictionary.ToFrozenDictionary(queryProperties),
-            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            FrozenDictionary.ToFrozenDictionary(rawBodyData)
         );
     }
 
@@ -126,17 +121,13 @@ public sealed record class LicenseDeactivateParams : ParamsBase
 
     internal override StringContent? BodyContent()
     {
-        return new(
-            JsonSerializer.Serialize(this.BodyProperties),
-            Encoding.UTF8,
-            "application/json"
-        );
+        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
         ParamsBase.AddDefaultHeaders(request, options);
-        foreach (var item in this.HeaderProperties)
+        foreach (var item in this.RawHeaderData)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }

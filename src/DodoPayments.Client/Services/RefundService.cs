@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Refunds;
 
 namespace DodoPayments.Client.Services;
@@ -47,6 +48,11 @@ public sealed class RefundService : IRefundService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.RefundID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.RefundID' cannot be null");
+        }
+
         HttpRequest<RefundRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -61,6 +67,17 @@ public sealed class RefundService : IRefundService
             refund.Validate();
         }
         return refund;
+    }
+
+    public async Task<Refund> Retrieve(
+        string refundID,
+        RefundRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { RefundID = refundID }, cancellationToken);
     }
 
     public async Task<RefundListPageResponse> List(

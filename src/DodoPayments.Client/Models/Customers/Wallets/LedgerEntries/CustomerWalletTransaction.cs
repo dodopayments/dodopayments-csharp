@@ -19,7 +19,7 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("id", out JsonElement element))
+            if (!this._rawData.TryGetValue("id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
                     new System::ArgumentOutOfRangeException("id", "Missing required argument")
@@ -33,7 +33,7 @@ public sealed record class CustomerWalletTransaction
         }
         init
         {
-            this._properties["id"] = JsonSerializer.SerializeToElement(
+            this._rawData["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -44,7 +44,7 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("after_balance", out JsonElement element))
+            if (!this._rawData.TryGetValue("after_balance", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'after_balance' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -57,7 +57,7 @@ public sealed record class CustomerWalletTransaction
         }
         init
         {
-            this._properties["after_balance"] = JsonSerializer.SerializeToElement(
+            this._rawData["after_balance"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -68,7 +68,7 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("amount", out JsonElement element))
+            if (!this._rawData.TryGetValue("amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'amount' cannot be null",
                     new System::ArgumentOutOfRangeException("amount", "Missing required argument")
@@ -78,7 +78,7 @@ public sealed record class CustomerWalletTransaction
         }
         init
         {
-            this._properties["amount"] = JsonSerializer.SerializeToElement(
+            this._rawData["amount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -89,7 +89,7 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("before_balance", out JsonElement element))
+            if (!this._rawData.TryGetValue("before_balance", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'before_balance' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -102,7 +102,7 @@ public sealed record class CustomerWalletTransaction
         }
         init
         {
-            this._properties["before_balance"] = JsonSerializer.SerializeToElement(
+            this._rawData["before_balance"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -113,7 +113,7 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("business_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -130,7 +130,7 @@ public sealed record class CustomerWalletTransaction
         }
         init
         {
-            this._properties["business_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["business_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -141,7 +141,7 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -157,7 +157,7 @@ public sealed record class CustomerWalletTransaction
         }
         init
         {
-            this._properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -168,7 +168,7 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("currency", out JsonElement element))
+            if (!this._rawData.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
                     new System::ArgumentOutOfRangeException("currency", "Missing required argument")
@@ -181,7 +181,7 @@ public sealed record class CustomerWalletTransaction
         }
         init
         {
-            this._properties["currency"] = JsonSerializer.SerializeToElement(
+            this._rawData["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -192,7 +192,7 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("customer_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("customer_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'customer_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -209,7 +209,7 @@ public sealed record class CustomerWalletTransaction
         }
         init
         {
-            this._properties["customer_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["customer_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -220,7 +220,7 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("event_type", out JsonElement element))
+            if (!this._rawData.TryGetValue("event_type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'event_type' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -236,7 +236,7 @@ public sealed record class CustomerWalletTransaction
         }
         init
         {
-            this._properties["event_type"] = JsonSerializer.SerializeToElement(
+            this._rawData["event_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -247,7 +247,7 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("is_credit", out JsonElement element))
+            if (!this._rawData.TryGetValue("is_credit", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'is_credit' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -260,7 +260,7 @@ public sealed record class CustomerWalletTransaction
         }
         init
         {
-            this._properties["is_credit"] = JsonSerializer.SerializeToElement(
+            this._rawData["is_credit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -271,14 +271,14 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("reason", out JsonElement element))
+            if (!this._rawData.TryGetValue("reason", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["reason"] = JsonSerializer.SerializeToElement(
+            this._rawData["reason"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -289,14 +289,14 @@ public sealed record class CustomerWalletTransaction
     {
         get
         {
-            if (!this._properties.TryGetValue("reference_object_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("reference_object_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["reference_object_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["reference_object_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -321,24 +321,24 @@ public sealed record class CustomerWalletTransaction
 
     public CustomerWalletTransaction() { }
 
-    public CustomerWalletTransaction(IReadOnlyDictionary<string, JsonElement> properties)
+    public CustomerWalletTransaction(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerWalletTransaction(FrozenDictionary<string, JsonElement> properties)
+    CustomerWalletTransaction(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static CustomerWalletTransaction FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 

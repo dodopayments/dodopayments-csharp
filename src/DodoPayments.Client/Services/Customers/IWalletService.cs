@@ -22,4 +22,9 @@ public interface IWalletService
         WalletListParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<WalletListResponse> List(
+        string customerID,
+        WalletListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }

@@ -14,7 +14,7 @@ public class RefundServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var refund = await this.client.Refunds.Retrieve(new() { RefundID = "refund_id" });
+        var refund = await this.client.Refunds.Retrieve("refund_id");
         refund.Validate();
     }
 

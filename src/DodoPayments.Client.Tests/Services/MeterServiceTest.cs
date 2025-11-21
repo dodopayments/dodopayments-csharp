@@ -23,7 +23,7 @@ public class MeterServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var meter = await this.client.Meters.Retrieve(new() { ID = "id" });
+        var meter = await this.client.Meters.Retrieve("id");
         meter.Validate();
     }
 
@@ -37,12 +37,12 @@ public class MeterServiceTest : TestBase
     [Fact]
     public async Task Archive_Works()
     {
-        await this.client.Meters.Archive(new() { ID = "id" });
+        await this.client.Meters.Archive("id");
     }
 
     [Fact]
     public async Task Unarchive_Works()
     {
-        await this.client.Meters.Unarchive(new() { ID = "id" });
+        await this.client.Meters.Unarchive("id");
     }
 }

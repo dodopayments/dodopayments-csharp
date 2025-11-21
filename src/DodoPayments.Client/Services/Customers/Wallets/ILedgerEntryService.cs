@@ -20,9 +20,19 @@ public interface ILedgerEntryService
         LedgerEntryCreateParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<CustomerWallet> Create(
+        string customerID,
+        LedgerEntryCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
     Task<LedgerEntryListPageResponse> List(
         LedgerEntryListParams parameters,
+        CancellationToken cancellationToken = default
+    );
+    Task<LedgerEntryListPageResponse> List(
+        string customerID,
+        LedgerEntryListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }

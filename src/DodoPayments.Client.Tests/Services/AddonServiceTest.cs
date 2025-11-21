@@ -23,14 +23,14 @@ public class AddonServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var addonResponse = await this.client.Addons.Retrieve(new() { ID = "id" });
+        var addonResponse = await this.client.Addons.Retrieve("id");
         addonResponse.Validate();
     }
 
     [Fact]
     public async Task Update_Works()
     {
-        var addonResponse = await this.client.Addons.Update(new() { ID = "id" });
+        var addonResponse = await this.client.Addons.Update("id");
         addonResponse.Validate();
     }
 
@@ -44,7 +44,7 @@ public class AddonServiceTest : TestBase
     [Fact]
     public async Task UpdateImages_Works()
     {
-        var response = await this.client.Addons.UpdateImages(new() { ID = "id" });
+        var response = await this.client.Addons.UpdateImages("id");
         response.Validate();
     }
 }

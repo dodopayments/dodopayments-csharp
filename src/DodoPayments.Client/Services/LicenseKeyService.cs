@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.LicenseKeys;
 
 namespace DodoPayments.Client.Services;
@@ -26,6 +27,11 @@ public sealed class LicenseKeyService : ILicenseKeyService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<LicenseKeyRetrieveParams> request = new()
         {
             Method = HttpMethod.Get,
@@ -44,11 +50,27 @@ public sealed class LicenseKeyService : ILicenseKeyService
         return licenseKey;
     }
 
+    public async Task<LicenseKey> Retrieve(
+        string id,
+        LicenseKeyRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Retrieve(parameters with { ID = id }, cancellationToken);
+    }
+
     public async Task<LicenseKey> Update(
         LicenseKeyUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<LicenseKeyUpdateParams> request = new()
         {
             Method = HttpMethod.Patch,
@@ -65,6 +87,17 @@ public sealed class LicenseKeyService : ILicenseKeyService
             licenseKey.Validate();
         }
         return licenseKey;
+    }
+
+    public async Task<LicenseKey> Update(
+        string id,
+        LicenseKeyUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Update(parameters with { ID = id }, cancellationToken);
     }
 
     public async Task<LicenseKeyListPageResponse> List(

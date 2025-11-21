@@ -24,6 +24,11 @@ public interface IRefundService
         RefundRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<Refund> Retrieve(
+        string refundID,
+        RefundRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     Task<RefundListPageResponse> List(
         RefundListParams? parameters = null,

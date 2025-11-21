@@ -28,7 +28,21 @@ public interface IBrandService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Thin handler just calls `get_brand` and wraps in `Json(...)`
+    /// </summary>
+    Task<Brand> Retrieve(
+        string id,
+        BrandRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
     Task<Brand> Update(BrandUpdateParams parameters, CancellationToken cancellationToken = default);
+    Task<Brand> Update(
+        string id,
+        BrandUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     Task<BrandListResponse> List(
         BrandListParams? parameters = null,
@@ -37,6 +51,11 @@ public interface IBrandService
 
     Task<BrandUpdateImagesResponse> UpdateImages(
         BrandUpdateImagesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+    Task<BrandUpdateImagesResponse> UpdateImages(
+        string id,
+        BrandUpdateImagesParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }

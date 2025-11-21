@@ -16,7 +16,7 @@ public sealed record class CustomerPortalSession : ModelBase, IFromRaw<CustomerP
     {
         get
         {
-            if (!this._properties.TryGetValue("link", out JsonElement element))
+            if (!this._rawData.TryGetValue("link", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'link' cannot be null",
                     new ArgumentOutOfRangeException("link", "Missing required argument")
@@ -30,7 +30,7 @@ public sealed record class CustomerPortalSession : ModelBase, IFromRaw<CustomerP
         }
         init
         {
-            this._properties["link"] = JsonSerializer.SerializeToElement(
+            this._rawData["link"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -44,24 +44,24 @@ public sealed record class CustomerPortalSession : ModelBase, IFromRaw<CustomerP
 
     public CustomerPortalSession() { }
 
-    public CustomerPortalSession(IReadOnlyDictionary<string, JsonElement> properties)
+    public CustomerPortalSession(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerPortalSession(FrozenDictionary<string, JsonElement> properties)
+    CustomerPortalSession(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static CustomerPortalSession FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]

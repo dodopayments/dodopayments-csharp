@@ -19,6 +19,11 @@ public interface IDisputeService
         DisputeRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+    Task<GetDispute> Retrieve(
+        string disputeID,
+        DisputeRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     Task<DisputeListPageResponse> List(
         DisputeListParams? parameters = null,

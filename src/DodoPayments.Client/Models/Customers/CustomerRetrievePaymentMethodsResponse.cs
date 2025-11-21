@@ -20,7 +20,7 @@ public sealed record class CustomerRetrievePaymentMethodsResponse
     {
         get
         {
-            if (!this._properties.TryGetValue("items", out JsonElement element))
+            if (!this._rawData.TryGetValue("items", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'items' cannot be null",
                     new System::ArgumentOutOfRangeException("items", "Missing required argument")
@@ -34,7 +34,7 @@ public sealed record class CustomerRetrievePaymentMethodsResponse
         }
         init
         {
-            this._properties["items"] = JsonSerializer.SerializeToElement(
+            this._rawData["items"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -51,26 +51,24 @@ public sealed record class CustomerRetrievePaymentMethodsResponse
 
     public CustomerRetrievePaymentMethodsResponse() { }
 
-    public CustomerRetrievePaymentMethodsResponse(
-        IReadOnlyDictionary<string, JsonElement> properties
-    )
+    public CustomerRetrievePaymentMethodsResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerRetrievePaymentMethodsResponse(FrozenDictionary<string, JsonElement> properties)
+    CustomerRetrievePaymentMethodsResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static CustomerRetrievePaymentMethodsResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]
@@ -93,7 +91,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this._properties.TryGetValue("payment_method", out JsonElement element))
+            if (!this._rawData.TryGetValue("payment_method", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'payment_method' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -109,7 +107,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         }
         init
         {
-            this._properties["payment_method"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_method"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -120,7 +118,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this._properties.TryGetValue("payment_method_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("payment_method_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'payment_method_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -137,7 +135,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         }
         init
         {
-            this._properties["payment_method_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_method_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -148,14 +146,14 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this._properties.TryGetValue("card", out JsonElement element))
+            if (!this._rawData.TryGetValue("card", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Card?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["card"] = JsonSerializer.SerializeToElement(
+            this._rawData["card"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -166,7 +164,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this._properties.TryGetValue("last_used_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("last_used_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<System::DateTimeOffset?>(
@@ -176,7 +174,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         }
         init
         {
-            this._properties["last_used_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["last_used_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -187,7 +185,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this._properties.TryGetValue("payment_method_type", out JsonElement element))
+            if (!this._rawData.TryGetValue("payment_method_type", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Payments::PaymentMethodTypes>?>(
@@ -197,7 +195,7 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
         }
         init
         {
-            this._properties["payment_method_type"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_method_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -208,14 +206,14 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         get
         {
-            if (!this._properties.TryGetValue("recurring_enabled", out JsonElement element))
+            if (!this._rawData.TryGetValue("recurring_enabled", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["recurring_enabled"] = JsonSerializer.SerializeToElement(
+            this._rawData["recurring_enabled"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -234,22 +232,22 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
 
     public Item() { }
 
-    public Item(IReadOnlyDictionary<string, JsonElement> properties)
+    public Item(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Item(FrozenDictionary<string, JsonElement> properties)
+    Item(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -351,7 +349,7 @@ public sealed record class Card : ModelBase, IFromRaw<Card>
     {
         get
         {
-            if (!this._properties.TryGetValue("card_issuing_country", out JsonElement element))
+            if (!this._rawData.TryGetValue("card_issuing_country", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, CountryCode>?>(
@@ -361,7 +359,7 @@ public sealed record class Card : ModelBase, IFromRaw<Card>
         }
         init
         {
-            this._properties["card_issuing_country"] = JsonSerializer.SerializeToElement(
+            this._rawData["card_issuing_country"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -372,14 +370,14 @@ public sealed record class Card : ModelBase, IFromRaw<Card>
     {
         get
         {
-            if (!this._properties.TryGetValue("card_network", out JsonElement element))
+            if (!this._rawData.TryGetValue("card_network", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["card_network"] = JsonSerializer.SerializeToElement(
+            this._rawData["card_network"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -390,14 +388,14 @@ public sealed record class Card : ModelBase, IFromRaw<Card>
     {
         get
         {
-            if (!this._properties.TryGetValue("card_type", out JsonElement element))
+            if (!this._rawData.TryGetValue("card_type", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["card_type"] = JsonSerializer.SerializeToElement(
+            this._rawData["card_type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -408,14 +406,14 @@ public sealed record class Card : ModelBase, IFromRaw<Card>
     {
         get
         {
-            if (!this._properties.TryGetValue("expiry_month", out JsonElement element))
+            if (!this._rawData.TryGetValue("expiry_month", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["expiry_month"] = JsonSerializer.SerializeToElement(
+            this._rawData["expiry_month"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -426,14 +424,14 @@ public sealed record class Card : ModelBase, IFromRaw<Card>
     {
         get
         {
-            if (!this._properties.TryGetValue("expiry_year", out JsonElement element))
+            if (!this._rawData.TryGetValue("expiry_year", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["expiry_year"] = JsonSerializer.SerializeToElement(
+            this._rawData["expiry_year"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -444,14 +442,14 @@ public sealed record class Card : ModelBase, IFromRaw<Card>
     {
         get
         {
-            if (!this._properties.TryGetValue("last4_digits", out JsonElement element))
+            if (!this._rawData.TryGetValue("last4_digits", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["last4_digits"] = JsonSerializer.SerializeToElement(
+            this._rawData["last4_digits"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -470,21 +468,21 @@ public sealed record class Card : ModelBase, IFromRaw<Card>
 
     public Card() { }
 
-    public Card(IReadOnlyDictionary<string, JsonElement> properties)
+    public Card(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Card(FrozenDictionary<string, JsonElement> properties)
+    Card(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static Card FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Card FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

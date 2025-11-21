@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Products.Images;
 
 namespace DodoPayments.Client.Services.Products;
@@ -26,6 +27,11 @@ public sealed class ImageService : IImageService
         CancellationToken cancellationToken = default
     )
     {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
         HttpRequest<ImageUpdateParams> request = new()
         {
             Method = HttpMethod.Put,
@@ -42,5 +48,16 @@ public sealed class ImageService : IImageService
             image.Validate();
         }
         return image;
+    }
+
+    public async Task<ImageUpdateResponse> Update(
+        string id,
+        ImageUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return await this.Update(parameters with { ID = id }, cancellationToken);
     }
 }

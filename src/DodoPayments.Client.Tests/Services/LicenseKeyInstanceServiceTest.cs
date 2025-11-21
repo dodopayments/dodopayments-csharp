@@ -7,9 +7,7 @@ public class LicenseKeyInstanceServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var licenseKeyInstance = await this.client.LicenseKeyInstances.Retrieve(
-            new() { ID = "lki_123" }
-        );
+        var licenseKeyInstance = await this.client.LicenseKeyInstances.Retrieve("lki_123");
         licenseKeyInstance.Validate();
     }
 
@@ -17,7 +15,8 @@ public class LicenseKeyInstanceServiceTest : TestBase
     public async Task Update_Works()
     {
         var licenseKeyInstance = await this.client.LicenseKeyInstances.Update(
-            new() { ID = "lki_123", Name = "name" }
+            "lki_123",
+            new() { Name = "name" }
         );
         licenseKeyInstance.Validate();
     }
