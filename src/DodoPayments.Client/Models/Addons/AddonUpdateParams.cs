@@ -12,10 +12,10 @@ namespace DodoPayments.Client.Models.Addons;
 
 public sealed record class AddonUpdateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
-    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
-        get { return this._bodyProperties.Freeze(); }
+        get { return this._rawBodyData.Freeze(); }
     }
 
     public string? ID { get; init; }
@@ -27,7 +27,7 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("currency", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("currency", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>?>(
@@ -37,7 +37,7 @@ public sealed record class AddonUpdateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["currency"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -51,14 +51,14 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("description", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["description"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -72,14 +72,14 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("image_id", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("image_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["image_id"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["image_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -93,14 +93,14 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("name", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["name"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -114,14 +114,14 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("price", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("price", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["price"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -135,7 +135,7 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("tax_category", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("tax_category", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>?>(
@@ -145,7 +145,7 @@ public sealed record class AddonUpdateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["tax_category"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["tax_category"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -155,40 +155,40 @@ public sealed record class AddonUpdateParams : ParamsBase
     public AddonUpdateParams() { }
 
     public AddonUpdateParams(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     AddonUpdateParams(
-        FrozenDictionary<string, JsonElement> headerProperties,
-        FrozenDictionary<string, JsonElement> queryProperties,
-        FrozenDictionary<string, JsonElement> bodyProperties
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 #pragma warning restore CS8618
 
     public static AddonUpdateParams FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
         return new(
-            FrozenDictionary.ToFrozenDictionary(headerProperties),
-            FrozenDictionary.ToFrozenDictionary(queryProperties),
-            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            FrozenDictionary.ToFrozenDictionary(rawBodyData)
         );
     }
 
@@ -204,17 +204,13 @@ public sealed record class AddonUpdateParams : ParamsBase
 
     internal override StringContent? BodyContent()
     {
-        return new(
-            JsonSerializer.Serialize(this.BodyProperties),
-            Encoding.UTF8,
-            "application/json"
-        );
+        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
         ParamsBase.AddDefaultHeaders(request, options);
-        foreach (var item in this.HeaderProperties)
+        foreach (var item in this.RawHeaderData)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }

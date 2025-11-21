@@ -18,7 +18,7 @@ public sealed record class LedgerEntryListPageResponse
     {
         get
         {
-            if (!this._properties.TryGetValue("items", out JsonElement element))
+            if (!this._rawData.TryGetValue("items", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'items' cannot be null",
                     new ArgumentOutOfRangeException("items", "Missing required argument")
@@ -35,7 +35,7 @@ public sealed record class LedgerEntryListPageResponse
         }
         init
         {
-            this._properties["items"] = JsonSerializer.SerializeToElement(
+            this._rawData["items"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -52,24 +52,24 @@ public sealed record class LedgerEntryListPageResponse
 
     public LedgerEntryListPageResponse() { }
 
-    public LedgerEntryListPageResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    public LedgerEntryListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    LedgerEntryListPageResponse(FrozenDictionary<string, JsonElement> properties)
+    LedgerEntryListPageResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static LedgerEntryListPageResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]

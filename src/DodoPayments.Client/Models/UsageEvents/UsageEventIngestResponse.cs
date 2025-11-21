@@ -16,7 +16,7 @@ public sealed record class UsageEventIngestResponse : ModelBase, IFromRaw<UsageE
     {
         get
         {
-            if (!this._properties.TryGetValue("ingested_count", out JsonElement element))
+            if (!this._rawData.TryGetValue("ingested_count", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'ingested_count' cannot be null",
                     new ArgumentOutOfRangeException("ingested_count", "Missing required argument")
@@ -26,7 +26,7 @@ public sealed record class UsageEventIngestResponse : ModelBase, IFromRaw<UsageE
         }
         init
         {
-            this._properties["ingested_count"] = JsonSerializer.SerializeToElement(
+            this._rawData["ingested_count"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -40,24 +40,24 @@ public sealed record class UsageEventIngestResponse : ModelBase, IFromRaw<UsageE
 
     public UsageEventIngestResponse() { }
 
-    public UsageEventIngestResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    public UsageEventIngestResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UsageEventIngestResponse(FrozenDictionary<string, JsonElement> properties)
+    UsageEventIngestResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static UsageEventIngestResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]

@@ -16,7 +16,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("brand_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("brand_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'brand_id' cannot be null",
                     new System::ArgumentOutOfRangeException("brand_id", "Missing required argument")
@@ -30,7 +30,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         }
         init
         {
-            this._properties["brand_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["brand_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -41,7 +41,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("business_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -58,7 +58,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         }
         init
         {
-            this._properties["business_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["business_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -69,7 +69,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("enabled", out JsonElement element))
+            if (!this._rawData.TryGetValue("enabled", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'enabled' cannot be null",
                     new System::ArgumentOutOfRangeException("enabled", "Missing required argument")
@@ -79,7 +79,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         }
         init
         {
-            this._properties["enabled"] = JsonSerializer.SerializeToElement(
+            this._rawData["enabled"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -90,7 +90,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("statement_descriptor", out JsonElement element))
+            if (!this._rawData.TryGetValue("statement_descriptor", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'statement_descriptor' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -107,7 +107,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         }
         init
         {
-            this._properties["statement_descriptor"] = JsonSerializer.SerializeToElement(
+            this._rawData["statement_descriptor"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -118,7 +118,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("verification_enabled", out JsonElement element))
+            if (!this._rawData.TryGetValue("verification_enabled", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'verification_enabled' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -131,7 +131,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         }
         init
         {
-            this._properties["verification_enabled"] = JsonSerializer.SerializeToElement(
+            this._rawData["verification_enabled"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -142,7 +142,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("verification_status", out JsonElement element))
+            if (!this._rawData.TryGetValue("verification_status", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'verification_status' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -158,7 +158,7 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
         }
         init
         {
-            this._properties["verification_status"] = JsonSerializer.SerializeToElement(
+            this._rawData["verification_status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -169,14 +169,14 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("description", out JsonElement element))
+            if (!this._rawData.TryGetValue("description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["description"] = JsonSerializer.SerializeToElement(
+            this._rawData["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -187,14 +187,14 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("image", out JsonElement element))
+            if (!this._rawData.TryGetValue("image", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["image"] = JsonSerializer.SerializeToElement(
+            this._rawData["image"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -205,14 +205,14 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("name", out JsonElement element))
+            if (!this._rawData.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["name"] = JsonSerializer.SerializeToElement(
+            this._rawData["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -226,14 +226,14 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("reason_for_hold", out JsonElement element))
+            if (!this._rawData.TryGetValue("reason_for_hold", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["reason_for_hold"] = JsonSerializer.SerializeToElement(
+            this._rawData["reason_for_hold"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -244,14 +244,14 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("support_email", out JsonElement element))
+            if (!this._rawData.TryGetValue("support_email", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["support_email"] = JsonSerializer.SerializeToElement(
+            this._rawData["support_email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -262,14 +262,14 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         get
         {
-            if (!this._properties.TryGetValue("url", out JsonElement element))
+            if (!this._rawData.TryGetValue("url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["url"] = JsonSerializer.SerializeToElement(
+            this._rawData["url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -294,22 +294,22 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
 
     public Brand() { }
 
-    public Brand(IReadOnlyDictionary<string, JsonElement> properties)
+    public Brand(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Brand(FrozenDictionary<string, JsonElement> properties)
+    Brand(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static Brand FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Brand FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 

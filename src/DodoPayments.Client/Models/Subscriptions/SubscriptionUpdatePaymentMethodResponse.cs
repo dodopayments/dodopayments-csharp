@@ -17,14 +17,14 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse
     {
         get
         {
-            if (!this._properties.TryGetValue("client_secret", out JsonElement element))
+            if (!this._rawData.TryGetValue("client_secret", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["client_secret"] = JsonSerializer.SerializeToElement(
+            this._rawData["client_secret"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -35,7 +35,7 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse
     {
         get
         {
-            if (!this._properties.TryGetValue("expires_on", out JsonElement element))
+            if (!this._rawData.TryGetValue("expires_on", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTimeOffset?>(
@@ -45,7 +45,7 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse
         }
         init
         {
-            this._properties["expires_on"] = JsonSerializer.SerializeToElement(
+            this._rawData["expires_on"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -56,14 +56,14 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse
     {
         get
         {
-            if (!this._properties.TryGetValue("payment_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("payment_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["payment_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -74,14 +74,14 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse
     {
         get
         {
-            if (!this._properties.TryGetValue("payment_link", out JsonElement element))
+            if (!this._rawData.TryGetValue("payment_link", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["payment_link"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_link"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -98,25 +98,23 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse
 
     public SubscriptionUpdatePaymentMethodResponse() { }
 
-    public SubscriptionUpdatePaymentMethodResponse(
-        IReadOnlyDictionary<string, JsonElement> properties
-    )
+    public SubscriptionUpdatePaymentMethodResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionUpdatePaymentMethodResponse(FrozenDictionary<string, JsonElement> properties)
+    SubscriptionUpdatePaymentMethodResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static SubscriptionUpdatePaymentMethodResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

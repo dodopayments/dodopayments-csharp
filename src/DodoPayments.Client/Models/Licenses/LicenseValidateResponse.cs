@@ -16,7 +16,7 @@ public sealed record class LicenseValidateResponse : ModelBase, IFromRaw<License
     {
         get
         {
-            if (!this._properties.TryGetValue("valid", out JsonElement element))
+            if (!this._rawData.TryGetValue("valid", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'valid' cannot be null",
                     new ArgumentOutOfRangeException("valid", "Missing required argument")
@@ -26,7 +26,7 @@ public sealed record class LicenseValidateResponse : ModelBase, IFromRaw<License
         }
         init
         {
-            this._properties["valid"] = JsonSerializer.SerializeToElement(
+            this._rawData["valid"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -40,24 +40,24 @@ public sealed record class LicenseValidateResponse : ModelBase, IFromRaw<License
 
     public LicenseValidateResponse() { }
 
-    public LicenseValidateResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    public LicenseValidateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    LicenseValidateResponse(FrozenDictionary<string, JsonElement> properties)
+    LicenseValidateResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static LicenseValidateResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]

@@ -19,7 +19,7 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
     {
         get
         {
-            if (!this._properties.TryGetValue("customer_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("customer_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'customer_id' cannot be null",
                     new ArgumentOutOfRangeException("customer_id", "Missing required argument")
@@ -33,7 +33,7 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
         }
         init
         {
-            this._properties["customer_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["customer_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -47,7 +47,7 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
     {
         get
         {
-            if (!this._properties.TryGetValue("email", out JsonElement element))
+            if (!this._rawData.TryGetValue("email", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'email' cannot be null",
                     new ArgumentOutOfRangeException("email", "Missing required argument")
@@ -61,7 +61,7 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
         }
         init
         {
-            this._properties["email"] = JsonSerializer.SerializeToElement(
+            this._rawData["email"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -75,7 +75,7 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
     {
         get
         {
-            if (!this._properties.TryGetValue("name", out JsonElement element))
+            if (!this._rawData.TryGetValue("name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'name' cannot be null",
                     new ArgumentOutOfRangeException("name", "Missing required argument")
@@ -89,7 +89,7 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
         }
         init
         {
-            this._properties["name"] = JsonSerializer.SerializeToElement(
+            this._rawData["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -103,7 +103,7 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
     {
         get
         {
-            if (!this._properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._rawData.TryGetValue("metadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Dictionary<string, string>?>(
@@ -118,7 +118,7 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
                 return;
             }
 
-            this._properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._rawData["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -132,14 +132,14 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
     {
         get
         {
-            if (!this._properties.TryGetValue("phone_number", out JsonElement element))
+            if (!this._rawData.TryGetValue("phone_number", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["phone_number"] = JsonSerializer.SerializeToElement(
+            this._rawData["phone_number"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -157,23 +157,23 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
 
     public CustomerLimitedDetails() { }
 
-    public CustomerLimitedDetails(IReadOnlyDictionary<string, JsonElement> properties)
+    public CustomerLimitedDetails(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerLimitedDetails(FrozenDictionary<string, JsonElement> properties)
+    CustomerLimitedDetails(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static CustomerLimitedDetails FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

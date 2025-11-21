@@ -18,7 +18,7 @@ public sealed record class WebhookRetrieveSecretResponse
     {
         get
         {
-            if (!this._properties.TryGetValue("secret", out JsonElement element))
+            if (!this._rawData.TryGetValue("secret", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'secret' cannot be null",
                     new ArgumentOutOfRangeException("secret", "Missing required argument")
@@ -32,7 +32,7 @@ public sealed record class WebhookRetrieveSecretResponse
         }
         init
         {
-            this._properties["secret"] = JsonSerializer.SerializeToElement(
+            this._rawData["secret"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -46,24 +46,24 @@ public sealed record class WebhookRetrieveSecretResponse
 
     public WebhookRetrieveSecretResponse() { }
 
-    public WebhookRetrieveSecretResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    public WebhookRetrieveSecretResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    WebhookRetrieveSecretResponse(FrozenDictionary<string, JsonElement> properties)
+    WebhookRetrieveSecretResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static WebhookRetrieveSecretResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]

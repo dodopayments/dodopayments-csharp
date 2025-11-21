@@ -20,7 +20,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     {
         get
         {
-            if (!this._properties.TryGetValue("client_secret", out JsonElement element))
+            if (!this._rawData.TryGetValue("client_secret", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'client_secret' cannot be null",
                     new ArgumentOutOfRangeException("client_secret", "Missing required argument")
@@ -34,7 +34,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
         }
         init
         {
-            this._properties["client_secret"] = JsonSerializer.SerializeToElement(
+            this._rawData["client_secret"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -48,7 +48,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     {
         get
         {
-            if (!this._properties.TryGetValue("customer", out JsonElement element))
+            if (!this._rawData.TryGetValue("customer", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'customer' cannot be null",
                     new ArgumentOutOfRangeException("customer", "Missing required argument")
@@ -65,7 +65,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
         }
         init
         {
-            this._properties["customer"] = JsonSerializer.SerializeToElement(
+            this._rawData["customer"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -79,7 +79,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     {
         get
         {
-            if (!this._properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._rawData.TryGetValue("metadata", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'metadata' cannot be null",
                     new ArgumentOutOfRangeException("metadata", "Missing required argument")
@@ -96,7 +96,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
         }
         init
         {
-            this._properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._rawData["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -110,7 +110,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     {
         get
         {
-            if (!this._properties.TryGetValue("payment_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("payment_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'payment_id' cannot be null",
                     new ArgumentOutOfRangeException("payment_id", "Missing required argument")
@@ -124,7 +124,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
         }
         init
         {
-            this._properties["payment_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -138,7 +138,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     {
         get
         {
-            if (!this._properties.TryGetValue("total_amount", out JsonElement element))
+            if (!this._rawData.TryGetValue("total_amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'total_amount' cannot be null",
                     new ArgumentOutOfRangeException("total_amount", "Missing required argument")
@@ -148,7 +148,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
         }
         init
         {
-            this._properties["total_amount"] = JsonSerializer.SerializeToElement(
+            this._rawData["total_amount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -162,14 +162,14 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     {
         get
         {
-            if (!this._properties.TryGetValue("discount_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("discount_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["discount_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["discount_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -183,7 +183,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     {
         get
         {
-            if (!this._properties.TryGetValue("expires_on", out JsonElement element))
+            if (!this._rawData.TryGetValue("expires_on", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTimeOffset?>(
@@ -193,7 +193,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
         }
         init
         {
-            this._properties["expires_on"] = JsonSerializer.SerializeToElement(
+            this._rawData["expires_on"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -207,14 +207,14 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     {
         get
         {
-            if (!this._properties.TryGetValue("payment_link", out JsonElement element))
+            if (!this._rawData.TryGetValue("payment_link", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["payment_link"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_link"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -228,7 +228,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     {
         get
         {
-            if (!this._properties.TryGetValue("product_cart", out JsonElement element))
+            if (!this._rawData.TryGetValue("product_cart", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<OneTimeProductCartItem>?>(
@@ -238,7 +238,7 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
         }
         init
         {
-            this._properties["product_cart"] = JsonSerializer.SerializeToElement(
+            this._rawData["product_cart"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -263,23 +263,23 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
 
     public PaymentCreateResponse() { }
 
-    public PaymentCreateResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    public PaymentCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    PaymentCreateResponse(FrozenDictionary<string, JsonElement> properties)
+    PaymentCreateResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static PaymentCreateResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

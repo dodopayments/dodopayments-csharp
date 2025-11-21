@@ -19,7 +19,7 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
     {
         get
         {
-            if (!this._properties.TryGetValue("checkout_url", out JsonElement element))
+            if (!this._rawData.TryGetValue("checkout_url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'checkout_url' cannot be null",
                     new ArgumentOutOfRangeException("checkout_url", "Missing required argument")
@@ -33,7 +33,7 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
         }
         init
         {
-            this._properties["checkout_url"] = JsonSerializer.SerializeToElement(
+            this._rawData["checkout_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -47,7 +47,7 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
     {
         get
         {
-            if (!this._properties.TryGetValue("session_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("session_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'session_id' cannot be null",
                     new ArgumentOutOfRangeException("session_id", "Missing required argument")
@@ -61,7 +61,7 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
         }
         init
         {
-            this._properties["session_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["session_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -76,23 +76,23 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
 
     public CheckoutSessionResponse() { }
 
-    public CheckoutSessionResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    public CheckoutSessionResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CheckoutSessionResponse(FrozenDictionary<string, JsonElement> properties)
+    CheckoutSessionResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static CheckoutSessionResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

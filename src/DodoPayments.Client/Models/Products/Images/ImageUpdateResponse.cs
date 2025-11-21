@@ -16,7 +16,7 @@ public sealed record class ImageUpdateResponse : ModelBase, IFromRaw<ImageUpdate
     {
         get
         {
-            if (!this._properties.TryGetValue("url", out JsonElement element))
+            if (!this._rawData.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
                     new ArgumentOutOfRangeException("url", "Missing required argument")
@@ -30,7 +30,7 @@ public sealed record class ImageUpdateResponse : ModelBase, IFromRaw<ImageUpdate
         }
         init
         {
-            this._properties["url"] = JsonSerializer.SerializeToElement(
+            this._rawData["url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -41,14 +41,14 @@ public sealed record class ImageUpdateResponse : ModelBase, IFromRaw<ImageUpdate
     {
         get
         {
-            if (!this._properties.TryGetValue("image_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("image_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["image_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["image_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -63,24 +63,24 @@ public sealed record class ImageUpdateResponse : ModelBase, IFromRaw<ImageUpdate
 
     public ImageUpdateResponse() { }
 
-    public ImageUpdateResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    public ImageUpdateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ImageUpdateResponse(FrozenDictionary<string, JsonElement> properties)
+    ImageUpdateResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static ImageUpdateResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]
