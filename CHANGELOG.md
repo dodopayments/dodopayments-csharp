@@ -1,5 +1,29 @@
 # Changelog
 
+## 3.5.0 (2025-11-21)
+
+Full Changelog: [v3.4.1...v3.5.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.4.1...v3.5.0)
+
+### Features
+
+* **client:** additional methods for positional params ([15331e4](https://github.com/dodopayments/dodopayments-csharp/commit/15331e4aabe0c7d2df31452a274fc1da275d4811))
+
+
+### Bug Fixes
+
+* **client:** deprecate some constructors ([d10cfb4](https://github.com/dodopayments/dodopayments-csharp/commit/d10cfb437d35ed969a10e6bcc1c632e62ec2d31c))
+
+
+### Chores
+
+* **client:** change name of underlying properties for models and params ([b205887](https://github.com/dodopayments/dodopayments-csharp/commit/b2058877a601ce480dd8d3eb25caea05ea4103ec))
+* **internal:** update release please config ([f6bdec8](https://github.com/dodopayments/dodopayments-csharp/commit/f6bdec85c17a371aedfa4fc06e70a248a4f1328b))
+
+
+### Refactors
+
+* **client:** make unknown variants implicit ([cb40466](https://github.com/dodopayments/dodopayments-csharp/commit/cb404662d9454041452e776aa770a276b6c1876f))
+
 ## 3.4.1 (2025-11-18)
 
 Full Changelog: [v3.4.0...v3.4.1](https://github.com/dodopayments/dodopayments-csharp/compare/v3.4.0...v3.4.1)
