@@ -63,8 +63,9 @@
   "extra-files": [
     {
       "type": "xml",
-      "path": "src/DodoPayments.Client/DodoPayments.Client.csproj",
-      "xpath": "//Project/PropertyGroup/VersionPrefix"
+      "path": "**/*.csproj",
+      "xpath": "//Project/PropertyGroup/VersionPrefix",
+      "glob": true
     }
   ]
 }
