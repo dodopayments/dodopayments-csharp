@@ -18,7 +18,7 @@ public sealed record class AddonUpdateImagesResponse
     {
         get
         {
-            if (!this._properties.TryGetValue("image_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("image_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'image_id' cannot be null",
                     new ArgumentOutOfRangeException("image_id", "Missing required argument")
@@ -32,7 +32,7 @@ public sealed record class AddonUpdateImagesResponse
         }
         init
         {
-            this._properties["image_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["image_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -43,7 +43,7 @@ public sealed record class AddonUpdateImagesResponse
     {
         get
         {
-            if (!this._properties.TryGetValue("url", out JsonElement element))
+            if (!this._rawData.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
                     new ArgumentOutOfRangeException("url", "Missing required argument")
@@ -57,7 +57,7 @@ public sealed record class AddonUpdateImagesResponse
         }
         init
         {
-            this._properties["url"] = JsonSerializer.SerializeToElement(
+            this._rawData["url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -72,23 +72,23 @@ public sealed record class AddonUpdateImagesResponse
 
     public AddonUpdateImagesResponse() { }
 
-    public AddonUpdateImagesResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    public AddonUpdateImagesResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    AddonUpdateImagesResponse(FrozenDictionary<string, JsonElement> properties)
+    AddonUpdateImagesResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static AddonUpdateImagesResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

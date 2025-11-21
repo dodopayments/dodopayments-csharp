@@ -19,7 +19,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this._properties.TryGetValue("id", out JsonElement element))
+            if (!this._rawData.TryGetValue("id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
                     new ArgumentOutOfRangeException("id", "Missing required argument")
@@ -33,7 +33,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
         }
         init
         {
-            this._properties["id"] = JsonSerializer.SerializeToElement(
+            this._rawData["id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -47,7 +47,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this._properties.TryGetValue("created_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
                     new ArgumentOutOfRangeException("created_at", "Missing required argument")
@@ -61,7 +61,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
         }
         init
         {
-            this._properties["created_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["created_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -75,7 +75,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this._properties.TryGetValue("description", out JsonElement element))
+            if (!this._rawData.TryGetValue("description", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'description' cannot be null",
                     new ArgumentOutOfRangeException("description", "Missing required argument")
@@ -89,7 +89,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
         }
         init
         {
-            this._properties["description"] = JsonSerializer.SerializeToElement(
+            this._rawData["description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -103,7 +103,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this._properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._rawData.TryGetValue("metadata", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'metadata' cannot be null",
                     new ArgumentOutOfRangeException("metadata", "Missing required argument")
@@ -120,7 +120,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
         }
         init
         {
-            this._properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._rawData["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -134,7 +134,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this._properties.TryGetValue("updated_at", out JsonElement element))
+            if (!this._rawData.TryGetValue("updated_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'updated_at' cannot be null",
                     new ArgumentOutOfRangeException("updated_at", "Missing required argument")
@@ -148,7 +148,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
         }
         init
         {
-            this._properties["updated_at"] = JsonSerializer.SerializeToElement(
+            this._rawData["updated_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -162,7 +162,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this._properties.TryGetValue("url", out JsonElement element))
+            if (!this._rawData.TryGetValue("url", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'url' cannot be null",
                     new ArgumentOutOfRangeException("url", "Missing required argument")
@@ -176,7 +176,7 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
         }
         init
         {
-            this._properties["url"] = JsonSerializer.SerializeToElement(
+            this._rawData["url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -192,14 +192,14 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this._properties.TryGetValue("disabled", out JsonElement element))
+            if (!this._rawData.TryGetValue("disabled", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["disabled"] = JsonSerializer.SerializeToElement(
+            this._rawData["disabled"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -215,14 +215,14 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this._properties.TryGetValue("filter_types", out JsonElement element))
+            if (!this._rawData.TryGetValue("filter_types", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["filter_types"] = JsonSerializer.SerializeToElement(
+            this._rawData["filter_types"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -236,14 +236,14 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         get
         {
-            if (!this._properties.TryGetValue("rate_limit", out JsonElement element))
+            if (!this._rawData.TryGetValue("rate_limit", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["rate_limit"] = JsonSerializer.SerializeToElement(
+            this._rawData["rate_limit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -265,23 +265,21 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
 
     public WebhookDetails() { }
 
-    public WebhookDetails(IReadOnlyDictionary<string, JsonElement> properties)
+    public WebhookDetails(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    WebhookDetails(FrozenDictionary<string, JsonElement> properties)
+    WebhookDetails(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static WebhookDetails FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
-    )
+    public static WebhookDetails FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

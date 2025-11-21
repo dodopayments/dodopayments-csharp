@@ -14,10 +14,10 @@ namespace DodoPayments.Client.Models.Discounts;
 /// </summary>
 public sealed record class DiscountUpdateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
-    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
-        get { return this._bodyProperties.Freeze(); }
+        get { return this._rawBodyData.Freeze(); }
     }
 
     public string? DiscountID { get; init; }
@@ -33,14 +33,14 @@ public sealed record class DiscountUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("amount", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("amount", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["amount"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["amount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -54,14 +54,14 @@ public sealed record class DiscountUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("code", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("code", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["code"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["code"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -72,7 +72,7 @@ public sealed record class DiscountUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("expires_at", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("expires_at", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTimeOffset?>(
@@ -82,7 +82,7 @@ public sealed record class DiscountUpdateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["expires_at"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["expires_at"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -93,14 +93,14 @@ public sealed record class DiscountUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("name", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["name"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -115,14 +115,14 @@ public sealed record class DiscountUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("restricted_to", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("restricted_to", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["restricted_to"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["restricted_to"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -138,14 +138,14 @@ public sealed record class DiscountUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("subscription_cycles", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("subscription_cycles", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["subscription_cycles"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["subscription_cycles"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -159,7 +159,7 @@ public sealed record class DiscountUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("type", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("type", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, DiscountType>?>(
@@ -169,7 +169,7 @@ public sealed record class DiscountUpdateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["type"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -180,14 +180,14 @@ public sealed record class DiscountUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("usage_limit", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("usage_limit", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["usage_limit"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["usage_limit"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -197,40 +197,40 @@ public sealed record class DiscountUpdateParams : ParamsBase
     public DiscountUpdateParams() { }
 
     public DiscountUpdateParams(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     DiscountUpdateParams(
-        FrozenDictionary<string, JsonElement> headerProperties,
-        FrozenDictionary<string, JsonElement> queryProperties,
-        FrozenDictionary<string, JsonElement> bodyProperties
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 #pragma warning restore CS8618
 
     public static DiscountUpdateParams FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
         return new(
-            FrozenDictionary.ToFrozenDictionary(headerProperties),
-            FrozenDictionary.ToFrozenDictionary(queryProperties),
-            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            FrozenDictionary.ToFrozenDictionary(rawBodyData)
         );
     }
 
@@ -247,17 +247,13 @@ public sealed record class DiscountUpdateParams : ParamsBase
 
     internal override StringContent? BodyContent()
     {
-        return new(
-            JsonSerializer.Serialize(this.BodyProperties),
-            Encoding.UTF8,
-            "application/json"
-        );
+        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
         ParamsBase.AddDefaultHeaders(request, options);
-        foreach (var item in this.HeaderProperties)
+        foreach (var item in this.RawHeaderData)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }

@@ -20,7 +20,7 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
     {
         get
         {
-            if (!this._properties.TryGetValue("city", out JsonElement element))
+            if (!this._rawData.TryGetValue("city", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'city' cannot be null",
                     new ArgumentOutOfRangeException("city", "Missing required argument")
@@ -34,7 +34,7 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         }
         init
         {
-            this._properties["city"] = JsonSerializer.SerializeToElement(
+            this._rawData["city"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -48,7 +48,7 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
     {
         get
         {
-            if (!this._properties.TryGetValue("country", out JsonElement element))
+            if (!this._rawData.TryGetValue("country", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'country' cannot be null",
                     new ArgumentOutOfRangeException("country", "Missing required argument")
@@ -61,7 +61,7 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         }
         init
         {
-            this._properties["country"] = JsonSerializer.SerializeToElement(
+            this._rawData["country"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -75,7 +75,7 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
     {
         get
         {
-            if (!this._properties.TryGetValue("state", out JsonElement element))
+            if (!this._rawData.TryGetValue("state", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'state' cannot be null",
                     new ArgumentOutOfRangeException("state", "Missing required argument")
@@ -89,7 +89,7 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         }
         init
         {
-            this._properties["state"] = JsonSerializer.SerializeToElement(
+            this._rawData["state"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -103,7 +103,7 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
     {
         get
         {
-            if (!this._properties.TryGetValue("street", out JsonElement element))
+            if (!this._rawData.TryGetValue("street", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'street' cannot be null",
                     new ArgumentOutOfRangeException("street", "Missing required argument")
@@ -117,7 +117,7 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         }
         init
         {
-            this._properties["street"] = JsonSerializer.SerializeToElement(
+            this._rawData["street"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -131,7 +131,7 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
     {
         get
         {
-            if (!this._properties.TryGetValue("zipcode", out JsonElement element))
+            if (!this._rawData.TryGetValue("zipcode", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'zipcode' cannot be null",
                     new ArgumentOutOfRangeException("zipcode", "Missing required argument")
@@ -145,7 +145,7 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
         }
         init
         {
-            this._properties["zipcode"] = JsonSerializer.SerializeToElement(
+            this._rawData["zipcode"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -163,23 +163,21 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
 
     public BillingAddress() { }
 
-    public BillingAddress(IReadOnlyDictionary<string, JsonElement> properties)
+    public BillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    BillingAddress(FrozenDictionary<string, JsonElement> properties)
+    BillingAddress(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static BillingAddress FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
-    )
+    public static BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

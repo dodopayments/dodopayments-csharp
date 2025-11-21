@@ -16,7 +16,7 @@ public sealed record class OneTimeProductCartItem : ModelBase, IFromRaw<OneTimeP
     {
         get
         {
-            if (!this._properties.TryGetValue("product_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("product_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
                     new ArgumentOutOfRangeException("product_id", "Missing required argument")
@@ -30,7 +30,7 @@ public sealed record class OneTimeProductCartItem : ModelBase, IFromRaw<OneTimeP
         }
         init
         {
-            this._properties["product_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["product_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -41,7 +41,7 @@ public sealed record class OneTimeProductCartItem : ModelBase, IFromRaw<OneTimeP
     {
         get
         {
-            if (!this._properties.TryGetValue("quantity", out JsonElement element))
+            if (!this._rawData.TryGetValue("quantity", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'quantity' cannot be null",
                     new ArgumentOutOfRangeException("quantity", "Missing required argument")
@@ -51,7 +51,7 @@ public sealed record class OneTimeProductCartItem : ModelBase, IFromRaw<OneTimeP
         }
         init
         {
-            this._properties["quantity"] = JsonSerializer.SerializeToElement(
+            this._rawData["quantity"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -67,14 +67,14 @@ public sealed record class OneTimeProductCartItem : ModelBase, IFromRaw<OneTimeP
     {
         get
         {
-            if (!this._properties.TryGetValue("amount", out JsonElement element))
+            if (!this._rawData.TryGetValue("amount", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["amount"] = JsonSerializer.SerializeToElement(
+            this._rawData["amount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -90,23 +90,23 @@ public sealed record class OneTimeProductCartItem : ModelBase, IFromRaw<OneTimeP
 
     public OneTimeProductCartItem() { }
 
-    public OneTimeProductCartItem(IReadOnlyDictionary<string, JsonElement> properties)
+    public OneTimeProductCartItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    OneTimeProductCartItem(FrozenDictionary<string, JsonElement> properties)
+    OneTimeProductCartItem(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static OneTimeProductCartItem FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

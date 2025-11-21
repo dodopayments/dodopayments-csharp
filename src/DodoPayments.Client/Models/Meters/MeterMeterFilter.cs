@@ -27,7 +27,7 @@ public sealed record class MeterMeterFilter : ModelBase, IFromRaw<MeterMeterFilt
     {
         get
         {
-            if (!this._properties.TryGetValue("clauses", out JsonElement element))
+            if (!this._rawData.TryGetValue("clauses", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'clauses' cannot be null",
                     new System::ArgumentOutOfRangeException("clauses", "Missing required argument")
@@ -41,7 +41,7 @@ public sealed record class MeterMeterFilter : ModelBase, IFromRaw<MeterMeterFilt
         }
         init
         {
-            this._properties["clauses"] = JsonSerializer.SerializeToElement(
+            this._rawData["clauses"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -55,7 +55,7 @@ public sealed record class MeterMeterFilter : ModelBase, IFromRaw<MeterMeterFilt
     {
         get
         {
-            if (!this._properties.TryGetValue("conjunction", out JsonElement element))
+            if (!this._rawData.TryGetValue("conjunction", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'conjunction' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -71,7 +71,7 @@ public sealed record class MeterMeterFilter : ModelBase, IFromRaw<MeterMeterFilt
         }
         init
         {
-            this._properties["conjunction"] = JsonSerializer.SerializeToElement(
+            this._rawData["conjunction"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -86,24 +86,24 @@ public sealed record class MeterMeterFilter : ModelBase, IFromRaw<MeterMeterFilt
 
     public MeterMeterFilter() { }
 
-    public MeterMeterFilter(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterMeterFilter(FrozenDictionary<string, JsonElement> properties)
+    MeterMeterFilter(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static MeterMeterFilter FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -265,7 +265,7 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
     {
         get
         {
-            if (!this._properties.TryGetValue("key", out JsonElement element))
+            if (!this._rawData.TryGetValue("key", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'key' cannot be null",
                     new System::ArgumentOutOfRangeException("key", "Missing required argument")
@@ -279,7 +279,7 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
         }
         init
         {
-            this._properties["key"] = JsonSerializer.SerializeToElement(
+            this._rawData["key"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -290,7 +290,7 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
     {
         get
         {
-            if (!this._properties.TryGetValue("operator", out JsonElement element))
+            if (!this._rawData.TryGetValue("operator", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'operator' cannot be null",
                     new System::ArgumentOutOfRangeException("operator", "Missing required argument")
@@ -303,7 +303,7 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
         }
         init
         {
-            this._properties["operator"] = JsonSerializer.SerializeToElement(
+            this._rawData["operator"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -317,7 +317,7 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
     {
         get
         {
-            if (!this._properties.TryGetValue("value", out JsonElement element))
+            if (!this._rawData.TryGetValue("value", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'value' cannot be null",
                     new System::ArgumentOutOfRangeException("value", "Missing required argument")
@@ -334,7 +334,7 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
         }
         init
         {
-            this._properties["value"] = JsonSerializer.SerializeToElement(
+            this._rawData["value"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -350,24 +350,24 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
 
     public MeterFilterCondition() { }
 
-    public MeterFilterCondition(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterFilterCondition(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilterCondition(FrozenDictionary<string, JsonElement> properties)
+    MeterFilterCondition(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static MeterFilterCondition FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -612,7 +612,7 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
     {
         get
         {
-            if (!this._properties.TryGetValue("clauses", out JsonElement element))
+            if (!this._rawData.TryGetValue("clauses", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'clauses' cannot be null",
                     new System::ArgumentOutOfRangeException("clauses", "Missing required argument")
@@ -629,7 +629,7 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
         }
         init
         {
-            this._properties["clauses"] = JsonSerializer.SerializeToElement(
+            this._rawData["clauses"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -640,7 +640,7 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
     {
         get
         {
-            if (!this._properties.TryGetValue("conjunction", out JsonElement element))
+            if (!this._rawData.TryGetValue("conjunction", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'conjunction' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -656,7 +656,7 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
         }
         init
         {
-            this._properties["conjunction"] = JsonSerializer.SerializeToElement(
+            this._rawData["conjunction"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -671,22 +671,22 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
 
     public MeterFilter() { }
 
-    public MeterFilter(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilter(FrozenDictionary<string, JsonElement> properties)
+    MeterFilter(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -861,7 +861,7 @@ public sealed record class MeterFilterConditionModel
     {
         get
         {
-            if (!this._properties.TryGetValue("key", out JsonElement element))
+            if (!this._rawData.TryGetValue("key", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'key' cannot be null",
                     new System::ArgumentOutOfRangeException("key", "Missing required argument")
@@ -875,7 +875,7 @@ public sealed record class MeterFilterConditionModel
         }
         init
         {
-            this._properties["key"] = JsonSerializer.SerializeToElement(
+            this._rawData["key"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -886,7 +886,7 @@ public sealed record class MeterFilterConditionModel
     {
         get
         {
-            if (!this._properties.TryGetValue("operator", out JsonElement element))
+            if (!this._rawData.TryGetValue("operator", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'operator' cannot be null",
                     new System::ArgumentOutOfRangeException("operator", "Missing required argument")
@@ -899,7 +899,7 @@ public sealed record class MeterFilterConditionModel
         }
         init
         {
-            this._properties["operator"] = JsonSerializer.SerializeToElement(
+            this._rawData["operator"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -913,7 +913,7 @@ public sealed record class MeterFilterConditionModel
     {
         get
         {
-            if (!this._properties.TryGetValue("value", out JsonElement element))
+            if (!this._rawData.TryGetValue("value", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'value' cannot be null",
                     new System::ArgumentOutOfRangeException("value", "Missing required argument")
@@ -930,7 +930,7 @@ public sealed record class MeterFilterConditionModel
         }
         init
         {
-            this._properties["value"] = JsonSerializer.SerializeToElement(
+            this._rawData["value"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -946,24 +946,24 @@ public sealed record class MeterFilterConditionModel
 
     public MeterFilterConditionModel() { }
 
-    public MeterFilterConditionModel(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterFilterConditionModel(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilterConditionModel(FrozenDictionary<string, JsonElement> properties)
+    MeterFilterConditionModel(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static MeterFilterConditionModel FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -1213,7 +1213,7 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
     {
         get
         {
-            if (!this._properties.TryGetValue("clauses", out JsonElement element))
+            if (!this._rawData.TryGetValue("clauses", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'clauses' cannot be null",
                     new System::ArgumentOutOfRangeException("clauses", "Missing required argument")
@@ -1230,7 +1230,7 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
         }
         init
         {
-            this._properties["clauses"] = JsonSerializer.SerializeToElement(
+            this._rawData["clauses"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1241,7 +1241,7 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
     {
         get
         {
-            if (!this._properties.TryGetValue("conjunction", out JsonElement element))
+            if (!this._rawData.TryGetValue("conjunction", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'conjunction' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -1257,7 +1257,7 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
         }
         init
         {
-            this._properties["conjunction"] = JsonSerializer.SerializeToElement(
+            this._rawData["conjunction"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1272,24 +1272,24 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
 
     public MeterFilterModel() { }
 
-    public MeterFilterModel(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterFilterModel(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilterModel(FrozenDictionary<string, JsonElement> properties)
+    MeterFilterModel(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static MeterFilterModel FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -1462,7 +1462,7 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
     {
         get
         {
-            if (!this._properties.TryGetValue("key", out JsonElement element))
+            if (!this._rawData.TryGetValue("key", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'key' cannot be null",
                     new System::ArgumentOutOfRangeException("key", "Missing required argument")
@@ -1476,7 +1476,7 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
         }
         init
         {
-            this._properties["key"] = JsonSerializer.SerializeToElement(
+            this._rawData["key"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1487,7 +1487,7 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
     {
         get
         {
-            if (!this._properties.TryGetValue("operator", out JsonElement element))
+            if (!this._rawData.TryGetValue("operator", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'operator' cannot be null",
                     new System::ArgumentOutOfRangeException("operator", "Missing required argument")
@@ -1500,7 +1500,7 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
         }
         init
         {
-            this._properties["operator"] = JsonSerializer.SerializeToElement(
+            this._rawData["operator"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1514,7 +1514,7 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
     {
         get
         {
-            if (!this._properties.TryGetValue("value", out JsonElement element))
+            if (!this._rawData.TryGetValue("value", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'value' cannot be null",
                     new System::ArgumentOutOfRangeException("value", "Missing required argument")
@@ -1531,7 +1531,7 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
         }
         init
         {
-            this._properties["value"] = JsonSerializer.SerializeToElement(
+            this._rawData["value"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1547,24 +1547,24 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
 
     public MeterFilterCondition1() { }
 
-    public MeterFilterCondition1(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterFilterCondition1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilterCondition1(FrozenDictionary<string, JsonElement> properties)
+    MeterFilterCondition1(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static MeterFilterCondition1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -1813,7 +1813,7 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
     {
         get
         {
-            if (!this._properties.TryGetValue("clauses", out JsonElement element))
+            if (!this._rawData.TryGetValue("clauses", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'clauses' cannot be null",
                     new System::ArgumentOutOfRangeException("clauses", "Missing required argument")
@@ -1827,7 +1827,7 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
         }
         init
         {
-            this._properties["clauses"] = JsonSerializer.SerializeToElement(
+            this._rawData["clauses"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1838,7 +1838,7 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
     {
         get
         {
-            if (!this._properties.TryGetValue("conjunction", out JsonElement element))
+            if (!this._rawData.TryGetValue("conjunction", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'conjunction' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -1854,7 +1854,7 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
         }
         init
         {
-            this._properties["conjunction"] = JsonSerializer.SerializeToElement(
+            this._rawData["conjunction"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1872,22 +1872,22 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
 
     public MeterFilter1() { }
 
-    public MeterFilter1(IReadOnlyDictionary<string, JsonElement> properties)
+    public MeterFilter1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilter1(FrozenDictionary<string, JsonElement> properties)
+    MeterFilter1(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilter1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static MeterFilter1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -1904,7 +1904,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
     {
         get
         {
-            if (!this._properties.TryGetValue("key", out JsonElement element))
+            if (!this._rawData.TryGetValue("key", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'key' cannot be null",
                     new System::ArgumentOutOfRangeException("key", "Missing required argument")
@@ -1918,7 +1918,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
         }
         init
         {
-            this._properties["key"] = JsonSerializer.SerializeToElement(
+            this._rawData["key"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1929,7 +1929,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
     {
         get
         {
-            if (!this._properties.TryGetValue("operator", out JsonElement element))
+            if (!this._rawData.TryGetValue("operator", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'operator' cannot be null",
                     new System::ArgumentOutOfRangeException("operator", "Missing required argument")
@@ -1942,7 +1942,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
         }
         init
         {
-            this._properties["operator"] = JsonSerializer.SerializeToElement(
+            this._rawData["operator"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1956,7 +1956,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
     {
         get
         {
-            if (!this._properties.TryGetValue("value", out JsonElement element))
+            if (!this._rawData.TryGetValue("value", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'value' cannot be null",
                     new System::ArgumentOutOfRangeException("value", "Missing required argument")
@@ -1970,7 +1970,7 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
         }
         init
         {
-            this._properties["value"] = JsonSerializer.SerializeToElement(
+            this._rawData["value"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1986,22 +1986,22 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
 
     public Clause() { }
 
-    public Clause(IReadOnlyDictionary<string, JsonElement> properties)
+    public Clause(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Clause(FrozenDictionary<string, JsonElement> properties)
+    Clause(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static Clause FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Clause FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 

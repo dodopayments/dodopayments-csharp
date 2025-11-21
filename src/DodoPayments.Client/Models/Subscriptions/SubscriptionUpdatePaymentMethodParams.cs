@@ -13,10 +13,10 @@ namespace DodoPayments.Client.Models.Subscriptions;
 
 public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
-    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
-        get { return this._bodyProperties.Freeze(); }
+        get { return this._rawBodyData.Freeze(); }
     }
 
     public string? SubscriptionID { get; init; }
@@ -25,7 +25,7 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("body", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("body", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'body' cannot be null",
                     new System::ArgumentOutOfRangeException("body", "Missing required argument")
@@ -39,7 +39,7 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["body"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["body"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -49,40 +49,40 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     public SubscriptionUpdatePaymentMethodParams() { }
 
     public SubscriptionUpdatePaymentMethodParams(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionUpdatePaymentMethodParams(
-        FrozenDictionary<string, JsonElement> headerProperties,
-        FrozenDictionary<string, JsonElement> queryProperties,
-        FrozenDictionary<string, JsonElement> bodyProperties
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 #pragma warning restore CS8618
 
     public static SubscriptionUpdatePaymentMethodParams FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
         return new(
-            FrozenDictionary.ToFrozenDictionary(headerProperties),
-            FrozenDictionary.ToFrozenDictionary(queryProperties),
-            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            FrozenDictionary.ToFrozenDictionary(rawBodyData)
         );
     }
 
@@ -99,17 +99,13 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 
     internal override StringContent? BodyContent()
     {
-        return new(
-            JsonSerializer.Serialize(this.BodyProperties),
-            Encoding.UTF8,
-            "application/json"
-        );
+        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
         ParamsBase.AddDefaultHeaders(request, options);
-        foreach (var item in this.HeaderProperties)
+        foreach (var item in this.RawHeaderData)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
@@ -254,7 +250,7 @@ public sealed record class New : ModelBase, IFromRaw<New>
     {
         get
         {
-            if (!this._properties.TryGetValue("type", out JsonElement element))
+            if (!this._rawData.TryGetValue("type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'type' cannot be null",
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
@@ -266,7 +262,7 @@ public sealed record class New : ModelBase, IFromRaw<New>
         }
         init
         {
-            this._properties["type"] = JsonSerializer.SerializeToElement(
+            this._rawData["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -277,14 +273,14 @@ public sealed record class New : ModelBase, IFromRaw<New>
     {
         get
         {
-            if (!this._properties.TryGetValue("return_url", out JsonElement element))
+            if (!this._rawData.TryGetValue("return_url", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["return_url"] = JsonSerializer.SerializeToElement(
+            this._rawData["return_url"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -299,22 +295,22 @@ public sealed record class New : ModelBase, IFromRaw<New>
 
     public New() { }
 
-    public New(IReadOnlyDictionary<string, JsonElement> properties)
+    public New(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    New(FrozenDictionary<string, JsonElement> properties)
+    New(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static New FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static New FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]
@@ -373,7 +369,7 @@ public sealed record class Existing : ModelBase, IFromRaw<Existing>
     {
         get
         {
-            if (!this._properties.TryGetValue("payment_method_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("payment_method_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'payment_method_id' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -390,7 +386,7 @@ public sealed record class Existing : ModelBase, IFromRaw<Existing>
         }
         init
         {
-            this._properties["payment_method_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_method_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -401,7 +397,7 @@ public sealed record class Existing : ModelBase, IFromRaw<Existing>
     {
         get
         {
-            if (!this._properties.TryGetValue("type", out JsonElement element))
+            if (!this._rawData.TryGetValue("type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'type' cannot be null",
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
@@ -414,7 +410,7 @@ public sealed record class Existing : ModelBase, IFromRaw<Existing>
         }
         init
         {
-            this._properties["type"] = JsonSerializer.SerializeToElement(
+            this._rawData["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -429,22 +425,22 @@ public sealed record class Existing : ModelBase, IFromRaw<Existing>
 
     public Existing() { }
 
-    public Existing(IReadOnlyDictionary<string, JsonElement> properties)
+    public Existing(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Existing(FrozenDictionary<string, JsonElement> properties)
+    Existing(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static Existing FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static Existing FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 

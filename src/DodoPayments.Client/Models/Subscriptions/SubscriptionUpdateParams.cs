@@ -14,10 +14,10 @@ namespace DodoPayments.Client.Models.Subscriptions;
 
 public sealed record class SubscriptionUpdateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
-    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
-        get { return this._bodyProperties.Freeze(); }
+        get { return this._rawBodyData.Freeze(); }
     }
 
     public string? SubscriptionID { get; init; }
@@ -26,7 +26,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("billing", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("billing", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<BillingAddress?>(
@@ -36,7 +36,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["billing"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["billing"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -51,7 +51,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         get
         {
             if (
-                !this._bodyProperties.TryGetValue(
+                !this._rawBodyData.TryGetValue(
                     "cancel_at_next_billing_date",
                     out JsonElement element
                 )
@@ -62,7 +62,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["cancel_at_next_billing_date"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["cancel_at_next_billing_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -73,14 +73,14 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("customer_name", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("customer_name", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["customer_name"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["customer_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -91,7 +91,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("disable_on_demand", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("disable_on_demand", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DisableOnDemand?>(
@@ -101,7 +101,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["disable_on_demand"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["disable_on_demand"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -112,7 +112,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("metadata", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("metadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Dictionary<string, string>?>(
@@ -122,7 +122,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["metadata"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -133,7 +133,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("next_billing_date", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("next_billing_date", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTimeOffset?>(
@@ -143,7 +143,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["next_billing_date"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["next_billing_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -154,7 +154,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("status", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("status", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStatus>?>(
@@ -164,7 +164,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["status"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["status"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -175,14 +175,14 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("tax_id", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("tax_id", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["tax_id"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["tax_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -192,40 +192,40 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     public SubscriptionUpdateParams() { }
 
     public SubscriptionUpdateParams(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionUpdateParams(
-        FrozenDictionary<string, JsonElement> headerProperties,
-        FrozenDictionary<string, JsonElement> queryProperties,
-        FrozenDictionary<string, JsonElement> bodyProperties
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 #pragma warning restore CS8618
 
     public static SubscriptionUpdateParams FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
         return new(
-            FrozenDictionary.ToFrozenDictionary(headerProperties),
-            FrozenDictionary.ToFrozenDictionary(queryProperties),
-            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            FrozenDictionary.ToFrozenDictionary(rawBodyData)
         );
     }
 
@@ -242,17 +242,13 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
 
     internal override StringContent? BodyContent()
     {
-        return new(
-            JsonSerializer.Serialize(this.BodyProperties),
-            Encoding.UTF8,
-            "application/json"
-        );
+        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
         ParamsBase.AddDefaultHeaders(request, options);
-        foreach (var item in this.HeaderProperties)
+        foreach (var item in this.RawHeaderData)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
@@ -266,7 +262,7 @@ public sealed record class DisableOnDemand : ModelBase, IFromRaw<DisableOnDemand
     {
         get
         {
-            if (!this._properties.TryGetValue("next_billing_date", out JsonElement element))
+            if (!this._rawData.TryGetValue("next_billing_date", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'next_billing_date' cannot be null",
                     new ArgumentOutOfRangeException(
@@ -279,7 +275,7 @@ public sealed record class DisableOnDemand : ModelBase, IFromRaw<DisableOnDemand
         }
         init
         {
-            this._properties["next_billing_date"] = JsonSerializer.SerializeToElement(
+            this._rawData["next_billing_date"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -293,24 +289,22 @@ public sealed record class DisableOnDemand : ModelBase, IFromRaw<DisableOnDemand
 
     public DisableOnDemand() { }
 
-    public DisableOnDemand(IReadOnlyDictionary<string, JsonElement> properties)
+    public DisableOnDemand(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DisableOnDemand(FrozenDictionary<string, JsonElement> properties)
+    DisableOnDemand(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static DisableOnDemand FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
-    )
+    public static DisableOnDemand FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]
