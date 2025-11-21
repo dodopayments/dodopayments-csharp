@@ -307,7 +307,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("currency", out JsonElement element))
+            if (!this._rawData.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
                     new System::ArgumentOutOfRangeException("currency", "Missing required argument")
@@ -320,7 +320,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
         }
         init
         {
-            this._properties["currency"] = JsonSerializer.SerializeToElement(
+            this._rawData["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -334,7 +334,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("discount", out JsonElement element))
+            if (!this._rawData.TryGetValue("discount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'discount' cannot be null",
                     new System::ArgumentOutOfRangeException("discount", "Missing required argument")
@@ -344,7 +344,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
         }
         init
         {
-            this._properties["discount"] = JsonSerializer.SerializeToElement(
+            this._rawData["discount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -362,7 +362,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("price", out JsonElement element))
+            if (!this._rawData.TryGetValue("price", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
                     new System::ArgumentOutOfRangeException("price", "Missing required argument")
@@ -372,7 +372,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
         }
         init
         {
-            this._properties["price"] = JsonSerializer.SerializeToElement(
+            this._rawData["price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -387,7 +387,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("purchasing_power_parity", out JsonElement element))
+            if (!this._rawData.TryGetValue("purchasing_power_parity", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'purchasing_power_parity' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -400,7 +400,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
         }
         init
         {
-            this._properties["purchasing_power_parity"] = JsonSerializer.SerializeToElement(
+            this._rawData["purchasing_power_parity"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -411,7 +411,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("type", out JsonElement element))
+            if (!this._rawData.TryGetValue("type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'type' cannot be null",
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
@@ -423,7 +423,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
         }
         init
         {
-            this._properties["type"] = JsonSerializer.SerializeToElement(
+            this._rawData["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -438,7 +438,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("pay_what_you_want", out JsonElement element))
+            if (!this._rawData.TryGetValue("pay_what_you_want", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
@@ -450,7 +450,7 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
                 return;
             }
 
-            this._properties["pay_what_you_want"] = JsonSerializer.SerializeToElement(
+            this._rawData["pay_what_you_want"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -465,14 +465,14 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("suggested_price", out JsonElement element))
+            if (!this._rawData.TryGetValue("suggested_price", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["suggested_price"] = JsonSerializer.SerializeToElement(
+            this._rawData["suggested_price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -486,14 +486,14 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("tax_inclusive", out JsonElement element))
+            if (!this._rawData.TryGetValue("tax_inclusive", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["tax_inclusive"] = JsonSerializer.SerializeToElement(
+            this._rawData["tax_inclusive"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -514,22 +514,22 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
 
     public OneTimePrice() { }
 
-    public OneTimePrice(IReadOnlyDictionary<string, JsonElement> properties)
+    public OneTimePrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    OneTimePrice(FrozenDictionary<string, JsonElement> properties)
+    OneTimePrice(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static OneTimePrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static OneTimePrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -587,7 +587,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("currency", out JsonElement element))
+            if (!this._rawData.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
                     new System::ArgumentOutOfRangeException("currency", "Missing required argument")
@@ -600,7 +600,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
         init
         {
-            this._properties["currency"] = JsonSerializer.SerializeToElement(
+            this._rawData["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -614,7 +614,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("discount", out JsonElement element))
+            if (!this._rawData.TryGetValue("discount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'discount' cannot be null",
                     new System::ArgumentOutOfRangeException("discount", "Missing required argument")
@@ -624,7 +624,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
         init
         {
-            this._properties["discount"] = JsonSerializer.SerializeToElement(
+            this._rawData["discount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -639,7 +639,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("payment_frequency_count", out JsonElement element))
+            if (!this._rawData.TryGetValue("payment_frequency_count", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'payment_frequency_count' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -652,7 +652,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
         init
         {
-            this._properties["payment_frequency_count"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_frequency_count"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -666,9 +666,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (
-                !this._properties.TryGetValue("payment_frequency_interval", out JsonElement element)
-            )
+            if (!this._rawData.TryGetValue("payment_frequency_interval", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'payment_frequency_interval' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -684,7 +682,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
         init
         {
-            this._properties["payment_frequency_interval"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_frequency_interval"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -699,7 +697,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("price", out JsonElement element))
+            if (!this._rawData.TryGetValue("price", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'price' cannot be null",
                     new System::ArgumentOutOfRangeException("price", "Missing required argument")
@@ -709,7 +707,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
         init
         {
-            this._properties["price"] = JsonSerializer.SerializeToElement(
+            this._rawData["price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -724,7 +722,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("purchasing_power_parity", out JsonElement element))
+            if (!this._rawData.TryGetValue("purchasing_power_parity", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'purchasing_power_parity' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -737,7 +735,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
         init
         {
-            this._properties["purchasing_power_parity"] = JsonSerializer.SerializeToElement(
+            this._rawData["purchasing_power_parity"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -752,7 +750,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("subscription_period_count", out JsonElement element))
+            if (!this._rawData.TryGetValue("subscription_period_count", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'subscription_period_count' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -765,7 +763,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
         init
         {
-            this._properties["subscription_period_count"] = JsonSerializer.SerializeToElement(
+            this._rawData["subscription_period_count"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -779,12 +777,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (
-                !this._properties.TryGetValue(
-                    "subscription_period_interval",
-                    out JsonElement element
-                )
-            )
+            if (!this._rawData.TryGetValue("subscription_period_interval", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'subscription_period_interval' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -800,7 +793,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
         init
         {
-            this._properties["subscription_period_interval"] = JsonSerializer.SerializeToElement(
+            this._rawData["subscription_period_interval"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -811,7 +804,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("type", out JsonElement element))
+            if (!this._rawData.TryGetValue("type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'type' cannot be null",
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
@@ -824,7 +817,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
         }
         init
         {
-            this._properties["type"] = JsonSerializer.SerializeToElement(
+            this._rawData["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -838,14 +831,14 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("tax_inclusive", out JsonElement element))
+            if (!this._rawData.TryGetValue("tax_inclusive", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["tax_inclusive"] = JsonSerializer.SerializeToElement(
+            this._rawData["tax_inclusive"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -859,7 +852,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     {
         get
         {
-            if (!this._properties.TryGetValue("trial_period_days", out JsonElement element))
+            if (!this._rawData.TryGetValue("trial_period_days", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
@@ -871,7 +864,7 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
                 return;
             }
 
-            this._properties["trial_period_days"] = JsonSerializer.SerializeToElement(
+            this._rawData["trial_period_days"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -895,24 +888,22 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
 
     public RecurringPrice() { }
 
-    public RecurringPrice(IReadOnlyDictionary<string, JsonElement> properties)
+    public RecurringPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    RecurringPrice(FrozenDictionary<string, JsonElement> properties)
+    RecurringPrice(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static RecurringPrice FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
-    )
+    public static RecurringPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
@@ -970,7 +961,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (!this._properties.TryGetValue("currency", out JsonElement element))
+            if (!this._rawData.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
                     new System::ArgumentOutOfRangeException("currency", "Missing required argument")
@@ -983,7 +974,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
         init
         {
-            this._properties["currency"] = JsonSerializer.SerializeToElement(
+            this._rawData["currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -997,7 +988,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (!this._properties.TryGetValue("discount", out JsonElement element))
+            if (!this._rawData.TryGetValue("discount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'discount' cannot be null",
                     new System::ArgumentOutOfRangeException("discount", "Missing required argument")
@@ -1007,7 +998,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
         init
         {
-            this._properties["discount"] = JsonSerializer.SerializeToElement(
+            this._rawData["discount"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1022,7 +1013,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (!this._properties.TryGetValue("fixed_price", out JsonElement element))
+            if (!this._rawData.TryGetValue("fixed_price", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'fixed_price' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -1035,7 +1026,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
         init
         {
-            this._properties["fixed_price"] = JsonSerializer.SerializeToElement(
+            this._rawData["fixed_price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1050,7 +1041,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (!this._properties.TryGetValue("payment_frequency_count", out JsonElement element))
+            if (!this._rawData.TryGetValue("payment_frequency_count", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'payment_frequency_count' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -1063,7 +1054,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
         init
         {
-            this._properties["payment_frequency_count"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_frequency_count"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1077,9 +1068,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (
-                !this._properties.TryGetValue("payment_frequency_interval", out JsonElement element)
-            )
+            if (!this._rawData.TryGetValue("payment_frequency_interval", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'payment_frequency_interval' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -1095,7 +1084,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
         init
         {
-            this._properties["payment_frequency_interval"] = JsonSerializer.SerializeToElement(
+            this._rawData["payment_frequency_interval"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1110,7 +1099,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (!this._properties.TryGetValue("purchasing_power_parity", out JsonElement element))
+            if (!this._rawData.TryGetValue("purchasing_power_parity", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'purchasing_power_parity' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -1123,7 +1112,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
         init
         {
-            this._properties["purchasing_power_parity"] = JsonSerializer.SerializeToElement(
+            this._rawData["purchasing_power_parity"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1138,7 +1127,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (!this._properties.TryGetValue("subscription_period_count", out JsonElement element))
+            if (!this._rawData.TryGetValue("subscription_period_count", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'subscription_period_count' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -1151,7 +1140,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
         init
         {
-            this._properties["subscription_period_count"] = JsonSerializer.SerializeToElement(
+            this._rawData["subscription_period_count"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1165,12 +1154,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (
-                !this._properties.TryGetValue(
-                    "subscription_period_interval",
-                    out JsonElement element
-                )
-            )
+            if (!this._rawData.TryGetValue("subscription_period_interval", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'subscription_period_interval' cannot be null",
                     new System::ArgumentOutOfRangeException(
@@ -1186,7 +1170,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
         init
         {
-            this._properties["subscription_period_interval"] = JsonSerializer.SerializeToElement(
+            this._rawData["subscription_period_interval"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1197,7 +1181,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (!this._properties.TryGetValue("type", out JsonElement element))
+            if (!this._rawData.TryGetValue("type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'type' cannot be null",
                     new System::ArgumentOutOfRangeException("type", "Missing required argument")
@@ -1210,7 +1194,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
         init
         {
-            this._properties["type"] = JsonSerializer.SerializeToElement(
+            this._rawData["type"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1221,7 +1205,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (!this._properties.TryGetValue("meters", out JsonElement element))
+            if (!this._rawData.TryGetValue("meters", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<List<AddMeterToPrice>?>(
@@ -1231,7 +1215,7 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
         }
         init
         {
-            this._properties["meters"] = JsonSerializer.SerializeToElement(
+            this._rawData["meters"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1245,14 +1229,14 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         get
         {
-            if (!this._properties.TryGetValue("tax_inclusive", out JsonElement element))
+            if (!this._rawData.TryGetValue("tax_inclusive", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["tax_inclusive"] = JsonSerializer.SerializeToElement(
+            this._rawData["tax_inclusive"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -1279,24 +1263,22 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
 
     public UsageBasedPrice() { }
 
-    public UsageBasedPrice(IReadOnlyDictionary<string, JsonElement> properties)
+    public UsageBasedPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UsageBasedPrice(FrozenDictionary<string, JsonElement> properties)
+    UsageBasedPrice(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static UsageBasedPrice FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
-    )
+    public static UsageBasedPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 

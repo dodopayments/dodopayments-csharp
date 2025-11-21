@@ -14,10 +14,10 @@ namespace DodoPayments.Client.Models.Subscriptions;
 
 public sealed record class SubscriptionChargeParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _bodyProperties = [];
-    public IReadOnlyDictionary<string, JsonElement> BodyProperties
+    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
-        get { return this._bodyProperties.Freeze(); }
+        get { return this._rawBodyData.Freeze(); }
     }
 
     public string? SubscriptionID { get; init; }
@@ -30,7 +30,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("product_price", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("product_price", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_price' cannot be null",
                     new ArgumentOutOfRangeException("product_price", "Missing required argument")
@@ -40,7 +40,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["product_price"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["product_price"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -57,7 +57,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         get
         {
             if (
-                !this._bodyProperties.TryGetValue(
+                !this._rawBodyData.TryGetValue(
                     "adaptive_currency_fees_inclusive",
                     out JsonElement element
                 )
@@ -68,7 +68,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["adaptive_currency_fees_inclusive"] =
+            this._rawBodyData["adaptive_currency_fees_inclusive"] =
                 JsonSerializer.SerializeToElement(value, ModelBase.SerializerOptions);
         }
     }
@@ -80,12 +80,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            if (
-                !this._bodyProperties.TryGetValue(
-                    "customer_balance_config",
-                    out JsonElement element
-                )
-            )
+            if (!this._rawBodyData.TryGetValue("customer_balance_config", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<CustomerBalanceConfig?>(
@@ -95,7 +90,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["customer_balance_config"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["customer_balance_config"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -110,7 +105,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("metadata", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("metadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Dictionary<string, string>?>(
@@ -120,7 +115,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["metadata"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -135,7 +130,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("product_currency", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("product_currency", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>?>(
@@ -145,7 +140,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         }
         init
         {
-            this._bodyProperties["product_currency"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["product_currency"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -160,14 +155,14 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            if (!this._bodyProperties.TryGetValue("product_description", out JsonElement element))
+            if (!this._rawBodyData.TryGetValue("product_description", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._bodyProperties["product_description"] = JsonSerializer.SerializeToElement(
+            this._rawBodyData["product_description"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -177,40 +172,40 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     public SubscriptionChargeParams() { }
 
     public SubscriptionChargeParams(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionChargeParams(
-        FrozenDictionary<string, JsonElement> headerProperties,
-        FrozenDictionary<string, JsonElement> queryProperties,
-        FrozenDictionary<string, JsonElement> bodyProperties
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._headerProperties = [.. headerProperties];
-        this._queryProperties = [.. queryProperties];
-        this._bodyProperties = [.. bodyProperties];
+        this._rawHeaderData = [.. rawHeaderData];
+        this._rawQueryData = [.. rawQueryData];
+        this._rawBodyData = [.. rawBodyData];
     }
 #pragma warning restore CS8618
 
     public static SubscriptionChargeParams FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> headerProperties,
-        IReadOnlyDictionary<string, JsonElement> queryProperties,
-        IReadOnlyDictionary<string, JsonElement> bodyProperties
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
         return new(
-            FrozenDictionary.ToFrozenDictionary(headerProperties),
-            FrozenDictionary.ToFrozenDictionary(queryProperties),
-            FrozenDictionary.ToFrozenDictionary(bodyProperties)
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            FrozenDictionary.ToFrozenDictionary(rawBodyData)
         );
     }
 
@@ -227,17 +222,13 @@ public sealed record class SubscriptionChargeParams : ParamsBase
 
     internal override StringContent? BodyContent()
     {
-        return new(
-            JsonSerializer.Serialize(this.BodyProperties),
-            Encoding.UTF8,
-            "application/json"
-        );
+        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
     {
         ParamsBase.AddDefaultHeaders(request, options);
-        foreach (var item in this.HeaderProperties)
+        foreach (var item in this.RawHeaderData)
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
@@ -258,7 +249,7 @@ public sealed record class CustomerBalanceConfig : ModelBase, IFromRaw<CustomerB
         get
         {
             if (
-                !this._properties.TryGetValue(
+                !this._rawData.TryGetValue(
                     "allow_customer_credits_purchase",
                     out JsonElement element
                 )
@@ -269,7 +260,7 @@ public sealed record class CustomerBalanceConfig : ModelBase, IFromRaw<CustomerB
         }
         init
         {
-            this._properties["allow_customer_credits_purchase"] = JsonSerializer.SerializeToElement(
+            this._rawData["allow_customer_credits_purchase"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -283,19 +274,14 @@ public sealed record class CustomerBalanceConfig : ModelBase, IFromRaw<CustomerB
     {
         get
         {
-            if (
-                !this._properties.TryGetValue(
-                    "allow_customer_credits_usage",
-                    out JsonElement element
-                )
-            )
+            if (!this._rawData.TryGetValue("allow_customer_credits_usage", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
         }
         init
         {
-            this._properties["allow_customer_credits_usage"] = JsonSerializer.SerializeToElement(
+            this._rawData["allow_customer_credits_usage"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -310,23 +296,23 @@ public sealed record class CustomerBalanceConfig : ModelBase, IFromRaw<CustomerB
 
     public CustomerBalanceConfig() { }
 
-    public CustomerBalanceConfig(IReadOnlyDictionary<string, JsonElement> properties)
+    public CustomerBalanceConfig(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerBalanceConfig(FrozenDictionary<string, JsonElement> properties)
+    CustomerBalanceConfig(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static CustomerBalanceConfig FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

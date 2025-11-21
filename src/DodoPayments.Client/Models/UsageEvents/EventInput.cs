@@ -19,7 +19,7 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
     {
         get
         {
-            if (!this._properties.TryGetValue("customer_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("customer_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'customer_id' cannot be null",
                     new ArgumentOutOfRangeException("customer_id", "Missing required argument")
@@ -33,7 +33,7 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
         }
         init
         {
-            this._properties["customer_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["customer_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -48,7 +48,7 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
     {
         get
         {
-            if (!this._properties.TryGetValue("event_id", out JsonElement element))
+            if (!this._rawData.TryGetValue("event_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'event_id' cannot be null",
                     new ArgumentOutOfRangeException("event_id", "Missing required argument")
@@ -62,7 +62,7 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
         }
         init
         {
-            this._properties["event_id"] = JsonSerializer.SerializeToElement(
+            this._rawData["event_id"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -76,7 +76,7 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
     {
         get
         {
-            if (!this._properties.TryGetValue("event_name", out JsonElement element))
+            if (!this._rawData.TryGetValue("event_name", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'event_name' cannot be null",
                     new ArgumentOutOfRangeException("event_name", "Missing required argument")
@@ -90,7 +90,7 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
         }
         init
         {
-            this._properties["event_name"] = JsonSerializer.SerializeToElement(
+            this._rawData["event_name"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -105,7 +105,7 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
     {
         get
         {
-            if (!this._properties.TryGetValue("metadata", out JsonElement element))
+            if (!this._rawData.TryGetValue("metadata", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<Dictionary<string, MetadataModel>?>(
@@ -115,7 +115,7 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
         }
         init
         {
-            this._properties["metadata"] = JsonSerializer.SerializeToElement(
+            this._rawData["metadata"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -130,7 +130,7 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
     {
         get
         {
-            if (!this._properties.TryGetValue("timestamp", out JsonElement element))
+            if (!this._rawData.TryGetValue("timestamp", out JsonElement element))
                 return null;
 
             return JsonSerializer.Deserialize<DateTimeOffset?>(
@@ -140,7 +140,7 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
         }
         init
         {
-            this._properties["timestamp"] = JsonSerializer.SerializeToElement(
+            this._rawData["timestamp"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -164,22 +164,22 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
 
     public EventInput() { }
 
-    public EventInput(IReadOnlyDictionary<string, JsonElement> properties)
+    public EventInput(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EventInput(FrozenDictionary<string, JsonElement> properties)
+    EventInput(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static EventInput FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> properties)
+    public static EventInput FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 

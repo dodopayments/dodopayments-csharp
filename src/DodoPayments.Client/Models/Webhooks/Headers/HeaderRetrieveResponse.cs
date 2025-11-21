@@ -24,7 +24,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
     {
         get
         {
-            if (!this._properties.TryGetValue("headers", out JsonElement element))
+            if (!this._rawData.TryGetValue("headers", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'headers' cannot be null",
                     new ArgumentOutOfRangeException("headers", "Missing required argument")
@@ -41,7 +41,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
         }
         init
         {
-            this._properties["headers"] = JsonSerializer.SerializeToElement(
+            this._rawData["headers"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -55,7 +55,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
     {
         get
         {
-            if (!this._properties.TryGetValue("sensitive", out JsonElement element))
+            if (!this._rawData.TryGetValue("sensitive", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'sensitive' cannot be null",
                     new ArgumentOutOfRangeException("sensitive", "Missing required argument")
@@ -69,7 +69,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
         }
         init
         {
-            this._properties["sensitive"] = JsonSerializer.SerializeToElement(
+            this._rawData["sensitive"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -84,23 +84,23 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
 
     public HeaderRetrieveResponse() { }
 
-    public HeaderRetrieveResponse(IReadOnlyDictionary<string, JsonElement> properties)
+    public HeaderRetrieveResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    HeaderRetrieveResponse(FrozenDictionary<string, JsonElement> properties)
+    HeaderRetrieveResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static HeaderRetrieveResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }

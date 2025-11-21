@@ -17,7 +17,7 @@ public sealed record class LicenseKeyDuration : ModelBase, IFromRaw<LicenseKeyDu
     {
         get
         {
-            if (!this._properties.TryGetValue("count", out JsonElement element))
+            if (!this._rawData.TryGetValue("count", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'count' cannot be null",
                     new ArgumentOutOfRangeException("count", "Missing required argument")
@@ -27,7 +27,7 @@ public sealed record class LicenseKeyDuration : ModelBase, IFromRaw<LicenseKeyDu
         }
         init
         {
-            this._properties["count"] = JsonSerializer.SerializeToElement(
+            this._rawData["count"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -38,7 +38,7 @@ public sealed record class LicenseKeyDuration : ModelBase, IFromRaw<LicenseKeyDu
     {
         get
         {
-            if (!this._properties.TryGetValue("interval", out JsonElement element))
+            if (!this._rawData.TryGetValue("interval", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'interval' cannot be null",
                     new ArgumentOutOfRangeException("interval", "Missing required argument")
@@ -51,7 +51,7 @@ public sealed record class LicenseKeyDuration : ModelBase, IFromRaw<LicenseKeyDu
         }
         init
         {
-            this._properties["interval"] = JsonSerializer.SerializeToElement(
+            this._rawData["interval"] = JsonSerializer.SerializeToElement(
                 value,
                 ModelBase.SerializerOptions
             );
@@ -66,23 +66,23 @@ public sealed record class LicenseKeyDuration : ModelBase, IFromRaw<LicenseKeyDu
 
     public LicenseKeyDuration() { }
 
-    public LicenseKeyDuration(IReadOnlyDictionary<string, JsonElement> properties)
+    public LicenseKeyDuration(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    LicenseKeyDuration(FrozenDictionary<string, JsonElement> properties)
+    LicenseKeyDuration(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._properties = [.. properties];
+        this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
     public static LicenseKeyDuration FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> properties
+        IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(properties));
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
