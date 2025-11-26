@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Disputes;
 
-[JsonConverter(typeof(ModelConverter<GetDispute>))]
-public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
+[JsonConverter(typeof(ModelConverter<GetDispute, GetDisputeFromRaw>))]
+public sealed record class GetDispute : ModelBase
 {
     /// <summary>
     /// The amount involved in the dispute, represented as a string to accommodate precision.
@@ -338,4 +338,10 @@ public sealed record class GetDispute : ModelBase, IFromRaw<GetDispute>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class GetDisputeFromRaw : IFromRaw<GetDispute>
+{
+    public GetDispute FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        GetDispute.FromRawUnchecked(rawData);
 }

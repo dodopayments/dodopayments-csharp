@@ -11,8 +11,8 @@ using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Refunds;
 
-[JsonConverter(typeof(ModelConverter<Refund>))]
-public sealed record class Refund : ModelBase, IFromRaw<Refund>
+[JsonConverter(typeof(ModelConverter<Refund, RefundFromRaw>))]
+public sealed record class Refund : ModelBase
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
@@ -335,4 +335,10 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class RefundFromRaw : IFromRaw<Refund>
+{
+    public Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Refund.FromRawUnchecked(rawData);
 }

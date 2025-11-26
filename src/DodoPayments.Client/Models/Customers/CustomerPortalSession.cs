@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Customers;
 
-[JsonConverter(typeof(ModelConverter<CustomerPortalSession>))]
-public sealed record class CustomerPortalSession : ModelBase, IFromRaw<CustomerPortalSession>
+[JsonConverter(typeof(ModelConverter<CustomerPortalSession, CustomerPortalSessionFromRaw>))]
+public sealed record class CustomerPortalSession : ModelBase
 {
     public required string Link
     {
@@ -70,4 +70,11 @@ public sealed record class CustomerPortalSession : ModelBase, IFromRaw<CustomerP
     {
         this.Link = link;
     }
+}
+
+class CustomerPortalSessionFromRaw : IFromRaw<CustomerPortalSession>
+{
+    public CustomerPortalSession FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerPortalSession.FromRawUnchecked(rawData);
 }

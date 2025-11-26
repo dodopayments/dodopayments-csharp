@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Meters;
 
-[JsonConverter(typeof(ModelConverter<MeterListPageResponse>))]
-public sealed record class MeterListPageResponse : ModelBase, IFromRaw<MeterListPageResponse>
+[JsonConverter(typeof(ModelConverter<MeterListPageResponse, MeterListPageResponseFromRaw>))]
+public sealed record class MeterListPageResponse : ModelBase
 {
     public required List<Meter> Items
     {
@@ -73,4 +73,11 @@ public sealed record class MeterListPageResponse : ModelBase, IFromRaw<MeterList
     {
         this.Items = items;
     }
+}
+
+class MeterListPageResponseFromRaw : IFromRaw<MeterListPageResponse>
+{
+    public MeterListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => MeterListPageResponse.FromRawUnchecked(rawData);
 }

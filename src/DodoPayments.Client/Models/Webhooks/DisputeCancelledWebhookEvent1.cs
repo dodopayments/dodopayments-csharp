@@ -10,10 +10,10 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<DisputeCancelledWebhookEvent>))]
-public sealed record class DisputeCancelledWebhookEvent
-    : ModelBase,
-        IFromRaw<DisputeCancelledWebhookEvent>
+[JsonConverter(
+    typeof(ModelConverter<DisputeCancelledWebhookEvent, DisputeCancelledWebhookEventFromRaw1>)
+)]
+public sealed record class DisputeCancelledWebhookEvent : ModelBase
 {
     /// <summary>
     /// The business identifier
@@ -162,11 +162,18 @@ public sealed record class DisputeCancelledWebhookEvent
     }
 }
 
+class DisputeCancelledWebhookEventFromRaw1 : IFromRaw<DisputeCancelledWebhookEvent>
+{
+    public DisputeCancelledWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DisputeCancelledWebhookEvent.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<DataModel>))]
-public sealed record class DataModel : ModelBase, IFromRaw<DataModel>
+[JsonConverter(typeof(ModelConverter<DataModel, DataModelFromRaw>))]
+public sealed record class DataModel : ModelBase
 {
     /// <summary>
     /// The amount involved in the dispute, represented as a string to accommodate precision.
@@ -500,10 +507,16 @@ public sealed record class DataModel : ModelBase, IFromRaw<DataModel>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<DataModelIntersectionMember1>))]
-public sealed record class DataModelIntersectionMember1
-    : ModelBase,
-        IFromRaw<DataModelIntersectionMember1>
+class DataModelFromRaw : IFromRaw<DataModel>
+{
+    public DataModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        DataModel.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(
+    typeof(ModelConverter<DataModelIntersectionMember1, DataModelIntersectionMember1FromRaw>)
+)]
+public sealed record class DataModelIntersectionMember1 : ModelBase
 {
     /// <summary>
     /// The type of payload in the data field
@@ -560,6 +573,13 @@ public sealed record class DataModelIntersectionMember1
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class DataModelIntersectionMember1FromRaw : IFromRaw<DataModelIntersectionMember1>
+{
+    public DataModelIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DataModelIntersectionMember1.FromRawUnchecked(rawData);
 }
 
 /// <summary>

@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
 
-[JsonConverter(typeof(ModelConverter<CheckoutSessionStatus>))]
-public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutSessionStatus>
+[JsonConverter(typeof(ModelConverter<CheckoutSessionStatus, CheckoutSessionStatusFromRaw>))]
+public sealed record class CheckoutSessionStatus : ModelBase
 {
     /// <summary>
     /// Id of the checkout session
@@ -187,4 +187,11 @@ public sealed record class CheckoutSessionStatus : ModelBase, IFromRaw<CheckoutS
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CheckoutSessionStatusFromRaw : IFromRaw<CheckoutSessionStatus>
+{
+    public CheckoutSessionStatus FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionStatus.FromRawUnchecked(rawData);
 }

@@ -10,8 +10,8 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Payouts;
 
-[JsonConverter(typeof(ModelConverter<PayoutListPageResponse>))]
-public sealed record class PayoutListPageResponse : ModelBase, IFromRaw<PayoutListPageResponse>
+[JsonConverter(typeof(ModelConverter<PayoutListPageResponse, PayoutListPageResponseFromRaw>))]
+public sealed record class PayoutListPageResponse : ModelBase
 {
     public required List<Item> Items
     {
@@ -76,8 +76,15 @@ public sealed record class PayoutListPageResponse : ModelBase, IFromRaw<PayoutLi
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Item>))]
-public sealed record class Item : ModelBase, IFromRaw<Item>
+class PayoutListPageResponseFromRaw : IFromRaw<PayoutListPageResponse>
+{
+    public PayoutListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => PayoutListPageResponse.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<Item, ItemFromRaw>))]
+public sealed record class Item : ModelBase
 {
     /// <summary>
     /// The total amount of the payout.
@@ -518,6 +525,12 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class ItemFromRaw : IFromRaw<Item>
+{
+    public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Item.FromRawUnchecked(rawData);
 }
 
 /// <summary>

@@ -255,8 +255,8 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     }
 }
 
-[JsonConverter(typeof(ModelConverter<DisableOnDemand>))]
-public sealed record class DisableOnDemand : ModelBase, IFromRaw<DisableOnDemand>
+[JsonConverter(typeof(ModelConverter<DisableOnDemand, DisableOnDemandFromRaw>))]
+public sealed record class DisableOnDemand : ModelBase
 {
     public required DateTimeOffset NextBillingDate
     {
@@ -313,4 +313,10 @@ public sealed record class DisableOnDemand : ModelBase, IFromRaw<DisableOnDemand
     {
         this.NextBillingDate = nextBillingDate;
     }
+}
+
+class DisableOnDemandFromRaw : IFromRaw<DisableOnDemand>
+{
+    public DisableOnDemand FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        DisableOnDemand.FromRawUnchecked(rawData);
 }

@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Licenses;
 
-[JsonConverter(typeof(ModelConverter<LicenseValidateResponse>))]
-public sealed record class LicenseValidateResponse : ModelBase, IFromRaw<LicenseValidateResponse>
+[JsonConverter(typeof(ModelConverter<LicenseValidateResponse, LicenseValidateResponseFromRaw>))]
+public sealed record class LicenseValidateResponse : ModelBase
 {
     public required bool Valid
     {
@@ -66,4 +66,11 @@ public sealed record class LicenseValidateResponse : ModelBase, IFromRaw<License
     {
         this.Valid = valid;
     }
+}
+
+class LicenseValidateResponseFromRaw : IFromRaw<LicenseValidateResponse>
+{
+    public LicenseValidateResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => LicenseValidateResponse.FromRawUnchecked(rawData);
 }

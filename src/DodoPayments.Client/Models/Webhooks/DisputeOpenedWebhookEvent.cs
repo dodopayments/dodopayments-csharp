@@ -10,10 +10,8 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<DisputeOpenedWebhookEvent>))]
-public sealed record class DisputeOpenedWebhookEvent
-    : ModelBase,
-        IFromRaw<DisputeOpenedWebhookEvent>
+[JsonConverter(typeof(ModelConverter<DisputeOpenedWebhookEvent, DisputeOpenedWebhookEventFromRaw>))]
+public sealed record class DisputeOpenedWebhookEvent : ModelBase
 {
     /// <summary>
     /// The business identifier
@@ -165,13 +163,20 @@ public sealed record class DisputeOpenedWebhookEvent
     }
 }
 
+class DisputeOpenedWebhookEventFromRaw : IFromRaw<DisputeOpenedWebhookEvent>
+{
+    public DisputeOpenedWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DisputeOpenedWebhookEvent.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<DisputeOpenedWebhookEventData>))]
-public sealed record class DisputeOpenedWebhookEventData
-    : ModelBase,
-        IFromRaw<DisputeOpenedWebhookEventData>
+[JsonConverter(
+    typeof(ModelConverter<DisputeOpenedWebhookEventData, DisputeOpenedWebhookEventDataFromRaw>)
+)]
+public sealed record class DisputeOpenedWebhookEventData : ModelBase
 {
     /// <summary>
     /// The amount involved in the dispute, represented as a string to accommodate precision.
@@ -509,10 +514,20 @@ public sealed record class DisputeOpenedWebhookEventData
     }
 }
 
-[JsonConverter(typeof(ModelConverter<DisputeOpenedWebhookEventDataIntersectionMember1>))]
-public sealed record class DisputeOpenedWebhookEventDataIntersectionMember1
-    : ModelBase,
-        IFromRaw<DisputeOpenedWebhookEventDataIntersectionMember1>
+class DisputeOpenedWebhookEventDataFromRaw : IFromRaw<DisputeOpenedWebhookEventData>
+{
+    public DisputeOpenedWebhookEventData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DisputeOpenedWebhookEventData.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(
+    typeof(ModelConverter<
+        DisputeOpenedWebhookEventDataIntersectionMember1,
+        DisputeOpenedWebhookEventDataIntersectionMember1FromRaw
+    >)
+)]
+public sealed record class DisputeOpenedWebhookEventDataIntersectionMember1 : ModelBase
 {
     /// <summary>
     /// The type of payload in the data field
@@ -571,6 +586,14 @@ public sealed record class DisputeOpenedWebhookEventDataIntersectionMember1
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class DisputeOpenedWebhookEventDataIntersectionMember1FromRaw
+    : IFromRaw<DisputeOpenedWebhookEventDataIntersectionMember1>
+{
+    public DisputeOpenedWebhookEventDataIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DisputeOpenedWebhookEventDataIntersectionMember1.FromRawUnchecked(rawData);
 }
 
 /// <summary>

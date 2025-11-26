@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.LicenseKeys;
 
-[JsonConverter(typeof(ModelConverter<LicenseKey>))]
-public sealed record class LicenseKey : ModelBase, IFromRaw<LicenseKey>
+[JsonConverter(typeof(ModelConverter<LicenseKey, LicenseKeyFromRaw>))]
+public sealed record class LicenseKey : ModelBase
 {
     /// <summary>
     /// The unique identifier of the license key.
@@ -357,4 +357,10 @@ public sealed record class LicenseKey : ModelBase, IFromRaw<LicenseKey>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class LicenseKeyFromRaw : IFromRaw<LicenseKey>
+{
+    public LicenseKey FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        LicenseKey.FromRawUnchecked(rawData);
 }

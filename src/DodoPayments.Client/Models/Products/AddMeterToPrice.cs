@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Products;
 
-[JsonConverter(typeof(ModelConverter<AddMeterToPrice>))]
-public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice>
+[JsonConverter(typeof(ModelConverter<AddMeterToPrice, AddMeterToPriceFromRaw>))]
+public sealed record class AddMeterToPrice : ModelBase
 {
     public required string MeterID
     {
@@ -176,4 +176,10 @@ public sealed record class AddMeterToPrice : ModelBase, IFromRaw<AddMeterToPrice
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class AddMeterToPriceFromRaw : IFromRaw<AddMeterToPrice>
+{
+    public AddMeterToPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        AddMeterToPrice.FromRawUnchecked(rawData);
 }

@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Addons;
 
-[JsonConverter(typeof(ModelConverter<AddonListPageResponse>))]
-public sealed record class AddonListPageResponse : ModelBase, IFromRaw<AddonListPageResponse>
+[JsonConverter(typeof(ModelConverter<AddonListPageResponse, AddonListPageResponseFromRaw>))]
+public sealed record class AddonListPageResponse : ModelBase
 {
     public required List<AddonResponse> Items
     {
@@ -76,4 +76,11 @@ public sealed record class AddonListPageResponse : ModelBase, IFromRaw<AddonList
     {
         this.Items = items;
     }
+}
+
+class AddonListPageResponseFromRaw : IFromRaw<AddonListPageResponse>
+{
+    public AddonListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => AddonListPageResponse.FromRawUnchecked(rawData);
 }

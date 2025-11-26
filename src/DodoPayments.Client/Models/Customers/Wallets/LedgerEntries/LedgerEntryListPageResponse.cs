@@ -9,10 +9,10 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
-[JsonConverter(typeof(ModelConverter<LedgerEntryListPageResponse>))]
-public sealed record class LedgerEntryListPageResponse
-    : ModelBase,
-        IFromRaw<LedgerEntryListPageResponse>
+[JsonConverter(
+    typeof(ModelConverter<LedgerEntryListPageResponse, LedgerEntryListPageResponseFromRaw>)
+)]
+public sealed record class LedgerEntryListPageResponse : ModelBase
 {
     public required List<CustomerWalletTransaction> Items
     {
@@ -78,4 +78,11 @@ public sealed record class LedgerEntryListPageResponse
     {
         this.Items = items;
     }
+}
+
+class LedgerEntryListPageResponseFromRaw : IFromRaw<LedgerEntryListPageResponse>
+{
+    public LedgerEntryListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => LedgerEntryListPageResponse.FromRawUnchecked(rawData);
 }

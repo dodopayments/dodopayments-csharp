@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<BillingAddress>))]
-public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
+[JsonConverter(typeof(ModelConverter<BillingAddress, BillingAddressFromRaw>))]
+public sealed record class BillingAddress : ModelBase
 {
     /// <summary>
     /// City name
@@ -180,4 +180,10 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class BillingAddressFromRaw : IFromRaw<BillingAddress>
+{
+    public BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        BillingAddress.FromRawUnchecked(rawData);
 }

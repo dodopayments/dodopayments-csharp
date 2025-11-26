@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.LicenseKeyInstances;
 
-[JsonConverter(typeof(ModelConverter<LicenseKeyInstance>))]
-public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyInstance>
+[JsonConverter(typeof(ModelConverter<LicenseKeyInstance, LicenseKeyInstanceFromRaw>))]
+public sealed record class LicenseKeyInstance : ModelBase
 {
     public required string ID
     {
@@ -163,4 +163,10 @@ public sealed record class LicenseKeyInstance : ModelBase, IFromRaw<LicenseKeyIn
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class LicenseKeyInstanceFromRaw : IFromRaw<LicenseKeyInstance>
+{
+    public LicenseKeyInstance FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        LicenseKeyInstance.FromRawUnchecked(rawData);
 }

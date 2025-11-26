@@ -12,8 +12,8 @@ namespace DodoPayments.Client.Models.Subscriptions;
 /// <summary>
 /// Response struct representing subscription details
 /// </summary>
-[JsonConverter(typeof(ModelConverter<AddonCartResponseItem>))]
-public sealed record class AddonCartResponseItem : ModelBase, IFromRaw<AddonCartResponseItem>
+[JsonConverter(typeof(ModelConverter<AddonCartResponseItem, AddonCartResponseItemFromRaw>))]
+public sealed record class AddonCartResponseItem : ModelBase
 {
     public required string AddonID
     {
@@ -88,4 +88,11 @@ public sealed record class AddonCartResponseItem : ModelBase, IFromRaw<AddonCart
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class AddonCartResponseItemFromRaw : IFromRaw<AddonCartResponseItem>
+{
+    public AddonCartResponseItem FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => AddonCartResponseItem.FromRawUnchecked(rawData);
 }

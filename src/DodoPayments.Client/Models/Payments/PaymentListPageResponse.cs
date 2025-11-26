@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<PaymentListPageResponse>))]
-public sealed record class PaymentListPageResponse : ModelBase, IFromRaw<PaymentListPageResponse>
+[JsonConverter(typeof(ModelConverter<PaymentListPageResponse, PaymentListPageResponseFromRaw>))]
+public sealed record class PaymentListPageResponse : ModelBase
 {
     public required List<Item> Items
     {
@@ -76,8 +76,15 @@ public sealed record class PaymentListPageResponse : ModelBase, IFromRaw<Payment
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Item>))]
-public sealed record class Item : ModelBase, IFromRaw<Item>
+class PaymentListPageResponseFromRaw : IFromRaw<PaymentListPageResponse>
+{
+    public PaymentListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => PaymentListPageResponse.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<Item, ItemFromRaw>))]
+public sealed record class Item : ModelBase
 {
     public required string BrandID
     {
@@ -385,4 +392,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class ItemFromRaw : IFromRaw<Item>
+{
+    public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Item.FromRawUnchecked(rawData);
 }

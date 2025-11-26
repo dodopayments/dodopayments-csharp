@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Disputes;
 
-[JsonConverter(typeof(ModelConverter<Dispute>))]
-public sealed record class Dispute : ModelBase, IFromRaw<Dispute>
+[JsonConverter(typeof(ModelConverter<Dispute, DisputeFromRaw>))]
+public sealed record class Dispute : ModelBase
 {
     /// <summary>
     /// The amount involved in the dispute, represented as a string to accommodate precision.
@@ -283,4 +283,10 @@ public sealed record class Dispute : ModelBase, IFromRaw<Dispute>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class DisputeFromRaw : IFromRaw<Dispute>
+{
+    public Dispute FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Dispute.FromRawUnchecked(rawData);
 }
