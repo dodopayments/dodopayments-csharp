@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Licenses;
 
-[JsonConverter(typeof(ModelConverter<LicenseActivateResponse>))]
-public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<LicenseActivateResponse>
+[JsonConverter(typeof(ModelConverter<LicenseActivateResponse, LicenseActivateResponseFromRaw>))]
+public sealed record class LicenseActivateResponse : ModelBase
 {
     /// <summary>
     /// License key instance ID
@@ -242,11 +242,18 @@ public sealed record class LicenseActivateResponse : ModelBase, IFromRaw<License
     }
 }
 
+class LicenseActivateResponseFromRaw : IFromRaw<LicenseActivateResponse>
+{
+    public LicenseActivateResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => LicenseActivateResponse.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Related product info. Present if the license key is tied to a product.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Product>))]
-public sealed record class Product : ModelBase, IFromRaw<Product>
+[JsonConverter(typeof(ModelConverter<Product, ProductFromRaw>))]
+public sealed record class Product : ModelBase
 {
     /// <summary>
     /// Unique identifier for the product.
@@ -329,4 +336,10 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     {
         this.ProductID = productID;
     }
+}
+
+class ProductFromRaw : IFromRaw<Product>
+{
+    public Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Product.FromRawUnchecked(rawData);
 }

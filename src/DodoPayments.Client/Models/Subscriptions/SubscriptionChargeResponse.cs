@@ -9,10 +9,10 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
-[JsonConverter(typeof(ModelConverter<SubscriptionChargeResponse>))]
-public sealed record class SubscriptionChargeResponse
-    : ModelBase,
-        IFromRaw<SubscriptionChargeResponse>
+[JsonConverter(
+    typeof(ModelConverter<SubscriptionChargeResponse, SubscriptionChargeResponseFromRaw>)
+)]
+public sealed record class SubscriptionChargeResponse : ModelBase
 {
     public required string PaymentID
     {
@@ -72,4 +72,11 @@ public sealed record class SubscriptionChargeResponse
     {
         this.PaymentID = paymentID;
     }
+}
+
+class SubscriptionChargeResponseFromRaw : IFromRaw<SubscriptionChargeResponse>
+{
+    public SubscriptionChargeResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionChargeResponse.FromRawUnchecked(rawData);
 }

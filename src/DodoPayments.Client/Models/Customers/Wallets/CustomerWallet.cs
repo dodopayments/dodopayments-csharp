@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Customers.Wallets;
 
-[JsonConverter(typeof(ModelConverter<CustomerWallet>))]
-public sealed record class CustomerWallet : ModelBase, IFromRaw<CustomerWallet>
+[JsonConverter(typeof(ModelConverter<CustomerWallet, CustomerWalletFromRaw>))]
+public sealed record class CustomerWallet : ModelBase
 {
     public required long Balance
     {
@@ -153,4 +153,10 @@ public sealed record class CustomerWallet : ModelBase, IFromRaw<CustomerWallet>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CustomerWalletFromRaw : IFromRaw<CustomerWallet>
+{
+    public CustomerWallet FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CustomerWallet.FromRawUnchecked(rawData);
 }

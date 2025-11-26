@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<WebhookDetails>))]
-public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
+[JsonConverter(typeof(ModelConverter<WebhookDetails, WebhookDetailsFromRaw>))]
+public sealed record class WebhookDetails : ModelBase
 {
     /// <summary>
     /// The webhook's ID.
@@ -282,4 +282,10 @@ public sealed record class WebhookDetails : ModelBase, IFromRaw<WebhookDetails>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class WebhookDetailsFromRaw : IFromRaw<WebhookDetails>
+{
+    public WebhookDetails FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        WebhookDetails.FromRawUnchecked(rawData);
 }

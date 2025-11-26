@@ -10,10 +10,8 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
-[JsonConverter(typeof(ModelConverter<CustomerWalletTransaction>))]
-public sealed record class CustomerWalletTransaction
-    : ModelBase,
-        IFromRaw<CustomerWalletTransaction>
+[JsonConverter(typeof(ModelConverter<CustomerWalletTransaction, CustomerWalletTransactionFromRaw>))]
+public sealed record class CustomerWalletTransaction : ModelBase
 {
     public required string ID
     {
@@ -340,6 +338,13 @@ public sealed record class CustomerWalletTransaction
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CustomerWalletTransactionFromRaw : IFromRaw<CustomerWalletTransaction>
+{
+    public CustomerWalletTransaction FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerWalletTransaction.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(EventTypeConverter))]

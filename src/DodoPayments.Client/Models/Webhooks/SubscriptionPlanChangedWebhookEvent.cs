@@ -12,10 +12,13 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<SubscriptionPlanChangedWebhookEvent>))]
-public sealed record class SubscriptionPlanChangedWebhookEvent
-    : ModelBase,
-        IFromRaw<SubscriptionPlanChangedWebhookEvent>
+[JsonConverter(
+    typeof(ModelConverter<
+        SubscriptionPlanChangedWebhookEvent,
+        SubscriptionPlanChangedWebhookEventFromRaw
+    >)
+)]
+public sealed record class SubscriptionPlanChangedWebhookEvent : ModelBase
 {
     /// <summary>
     /// The business identifier
@@ -166,13 +169,23 @@ public sealed record class SubscriptionPlanChangedWebhookEvent
     }
 }
 
+class SubscriptionPlanChangedWebhookEventFromRaw : IFromRaw<SubscriptionPlanChangedWebhookEvent>
+{
+    public SubscriptionPlanChangedWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPlanChangedWebhookEvent.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<SubscriptionPlanChangedWebhookEventData>))]
-public sealed record class SubscriptionPlanChangedWebhookEventData
-    : ModelBase,
-        IFromRaw<SubscriptionPlanChangedWebhookEventData>
+[JsonConverter(
+    typeof(ModelConverter<
+        SubscriptionPlanChangedWebhookEventData,
+        SubscriptionPlanChangedWebhookEventDataFromRaw
+    >)
+)]
+public sealed record class SubscriptionPlanChangedWebhookEventData : ModelBase
 {
     /// <summary>
     /// Addons associated with this subscription
@@ -1051,10 +1064,21 @@ public sealed record class SubscriptionPlanChangedWebhookEventData
     }
 }
 
-[JsonConverter(typeof(ModelConverter<SubscriptionPlanChangedWebhookEventDataIntersectionMember1>))]
-public sealed record class SubscriptionPlanChangedWebhookEventDataIntersectionMember1
-    : ModelBase,
-        IFromRaw<SubscriptionPlanChangedWebhookEventDataIntersectionMember1>
+class SubscriptionPlanChangedWebhookEventDataFromRaw
+    : IFromRaw<SubscriptionPlanChangedWebhookEventData>
+{
+    public SubscriptionPlanChangedWebhookEventData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPlanChangedWebhookEventData.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(
+    typeof(ModelConverter<
+        SubscriptionPlanChangedWebhookEventDataIntersectionMember1,
+        SubscriptionPlanChangedWebhookEventDataIntersectionMember1FromRaw
+    >)
+)]
+public sealed record class SubscriptionPlanChangedWebhookEventDataIntersectionMember1 : ModelBase
 {
     /// <summary>
     /// The type of payload in the data field
@@ -1118,6 +1142,14 @@ public sealed record class SubscriptionPlanChangedWebhookEventDataIntersectionMe
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class SubscriptionPlanChangedWebhookEventDataIntersectionMember1FromRaw
+    : IFromRaw<SubscriptionPlanChangedWebhookEventDataIntersectionMember1>
+{
+    public SubscriptionPlanChangedWebhookEventDataIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPlanChangedWebhookEventDataIntersectionMember1.FromRawUnchecked(rawData);
 }
 
 /// <summary>

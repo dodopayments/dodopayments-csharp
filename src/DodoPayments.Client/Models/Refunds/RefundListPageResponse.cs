@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Refunds;
 
-[JsonConverter(typeof(ModelConverter<RefundListPageResponse>))]
-public sealed record class RefundListPageResponse : ModelBase, IFromRaw<RefundListPageResponse>
+[JsonConverter(typeof(ModelConverter<RefundListPageResponse, RefundListPageResponseFromRaw>))]
+public sealed record class RefundListPageResponse : ModelBase
 {
     public required List<ItemModel> Items
     {
@@ -76,8 +76,15 @@ public sealed record class RefundListPageResponse : ModelBase, IFromRaw<RefundLi
     }
 }
 
-[JsonConverter(typeof(ModelConverter<ItemModel>))]
-public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
+class RefundListPageResponseFromRaw : IFromRaw<RefundListPageResponse>
+{
+    public RefundListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => RefundListPageResponse.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<ItemModel, ItemModelFromRaw>))]
+public sealed record class ItemModel : ModelBase
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
@@ -336,4 +343,10 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class ItemModelFromRaw : IFromRaw<ItemModel>
+{
+    public ItemModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ItemModel.FromRawUnchecked(rawData);
 }

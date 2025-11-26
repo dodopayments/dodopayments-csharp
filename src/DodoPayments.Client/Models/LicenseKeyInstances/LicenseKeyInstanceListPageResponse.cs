@@ -9,10 +9,13 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.LicenseKeyInstances;
 
-[JsonConverter(typeof(ModelConverter<LicenseKeyInstanceListPageResponse>))]
-public sealed record class LicenseKeyInstanceListPageResponse
-    : ModelBase,
-        IFromRaw<LicenseKeyInstanceListPageResponse>
+[JsonConverter(
+    typeof(ModelConverter<
+        LicenseKeyInstanceListPageResponse,
+        LicenseKeyInstanceListPageResponseFromRaw
+    >)
+)]
+public sealed record class LicenseKeyInstanceListPageResponse : ModelBase
 {
     public required List<LicenseKeyInstance> Items
     {
@@ -78,4 +81,11 @@ public sealed record class LicenseKeyInstanceListPageResponse
     {
         this.Items = items;
     }
+}
+
+class LicenseKeyInstanceListPageResponseFromRaw : IFromRaw<LicenseKeyInstanceListPageResponse>
+{
+    public LicenseKeyInstanceListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => LicenseKeyInstanceListPageResponse.FromRawUnchecked(rawData);
 }

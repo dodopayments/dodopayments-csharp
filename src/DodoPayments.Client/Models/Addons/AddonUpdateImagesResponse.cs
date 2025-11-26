@@ -9,10 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Addons;
 
-[JsonConverter(typeof(ModelConverter<AddonUpdateImagesResponse>))]
-public sealed record class AddonUpdateImagesResponse
-    : ModelBase,
-        IFromRaw<AddonUpdateImagesResponse>
+[JsonConverter(typeof(ModelConverter<AddonUpdateImagesResponse, AddonUpdateImagesResponseFromRaw>))]
+public sealed record class AddonUpdateImagesResponse : ModelBase
 {
     public required string ImageID
     {
@@ -91,4 +89,11 @@ public sealed record class AddonUpdateImagesResponse
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class AddonUpdateImagesResponseFromRaw : IFromRaw<AddonUpdateImagesResponse>
+{
+    public AddonUpdateImagesResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => AddonUpdateImagesResponse.FromRawUnchecked(rawData);
 }

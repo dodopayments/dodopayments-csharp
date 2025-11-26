@@ -10,10 +10,10 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<LicenseKeyCreatedWebhookEvent>))]
-public sealed record class LicenseKeyCreatedWebhookEvent
-    : ModelBase,
-        IFromRaw<LicenseKeyCreatedWebhookEvent>
+[JsonConverter(
+    typeof(ModelConverter<LicenseKeyCreatedWebhookEvent, LicenseKeyCreatedWebhookEventFromRaw>)
+)]
+public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
 {
     /// <summary>
     /// The business identifier
@@ -165,13 +165,23 @@ public sealed record class LicenseKeyCreatedWebhookEvent
     }
 }
 
+class LicenseKeyCreatedWebhookEventFromRaw : IFromRaw<LicenseKeyCreatedWebhookEvent>
+{
+    public LicenseKeyCreatedWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => LicenseKeyCreatedWebhookEvent.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<LicenseKeyCreatedWebhookEventData>))]
-public sealed record class LicenseKeyCreatedWebhookEventData
-    : ModelBase,
-        IFromRaw<LicenseKeyCreatedWebhookEventData>
+[JsonConverter(
+    typeof(ModelConverter<
+        LicenseKeyCreatedWebhookEventData,
+        LicenseKeyCreatedWebhookEventDataFromRaw
+    >)
+)]
+public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
 {
     /// <summary>
     /// The unique identifier of the license key.
@@ -592,10 +602,20 @@ public sealed record class LicenseKeyCreatedWebhookEventData
     }
 }
 
-[JsonConverter(typeof(ModelConverter<LicenseKeyCreatedWebhookEventDataIntersectionMember1>))]
-public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1
-    : ModelBase,
-        IFromRaw<LicenseKeyCreatedWebhookEventDataIntersectionMember1>
+class LicenseKeyCreatedWebhookEventDataFromRaw : IFromRaw<LicenseKeyCreatedWebhookEventData>
+{
+    public LicenseKeyCreatedWebhookEventData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => LicenseKeyCreatedWebhookEventData.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(
+    typeof(ModelConverter<
+        LicenseKeyCreatedWebhookEventDataIntersectionMember1,
+        LicenseKeyCreatedWebhookEventDataIntersectionMember1FromRaw
+    >)
+)]
+public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1 : ModelBase
 {
     /// <summary>
     /// The type of payload in the data field
@@ -659,6 +679,14 @@ public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class LicenseKeyCreatedWebhookEventDataIntersectionMember1FromRaw
+    : IFromRaw<LicenseKeyCreatedWebhookEventDataIntersectionMember1>
+{
+    public LicenseKeyCreatedWebhookEventDataIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => LicenseKeyCreatedWebhookEventDataIntersectionMember1.FromRawUnchecked(rawData);
 }
 
 /// <summary>

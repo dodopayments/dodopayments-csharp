@@ -14,8 +14,8 @@ namespace DodoPayments.Client.Models.Webhooks.Headers;
 ///
 /// <para>Sensitive headers that have been redacted are returned in the sensitive field.</para>
 /// </summary>
-[JsonConverter(typeof(ModelConverter<HeaderRetrieveResponse>))]
-public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRetrieveResponse>
+[JsonConverter(typeof(ModelConverter<HeaderRetrieveResponse, HeaderRetrieveResponseFromRaw>))]
+public sealed record class HeaderRetrieveResponse : ModelBase
 {
     /// <summary>
     /// List of headers configured
@@ -103,4 +103,11 @@ public sealed record class HeaderRetrieveResponse : ModelBase, IFromRaw<HeaderRe
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class HeaderRetrieveResponseFromRaw : IFromRaw<HeaderRetrieveResponse>
+{
+    public HeaderRetrieveResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => HeaderRetrieveResponse.FromRawUnchecked(rawData);
 }

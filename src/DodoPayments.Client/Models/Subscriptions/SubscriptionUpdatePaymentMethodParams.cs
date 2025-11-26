@@ -243,8 +243,8 @@ sealed class BodyConverter : JsonConverter<Body>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<New>))]
-public sealed record class New : ModelBase, IFromRaw<New>
+[JsonConverter(typeof(ModelConverter<New, NewFromRaw>))]
+public sealed record class New : ModelBase
 {
     public required ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type> Type
     {
@@ -321,6 +321,12 @@ public sealed record class New : ModelBase, IFromRaw<New>
     }
 }
 
+class NewFromRaw : IFromRaw<New>
+{
+    public New FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        New.FromRawUnchecked(rawData);
+}
+
 [JsonConverter(typeof(TypeConverter))]
 public enum Type
 {
@@ -362,8 +368,8 @@ sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.Su
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Existing>))]
-public sealed record class Existing : ModelBase, IFromRaw<Existing>
+[JsonConverter(typeof(ModelConverter<Existing, ExistingFromRaw>))]
+public sealed record class Existing : ModelBase
 {
     public required string PaymentMethodID
     {
@@ -442,6 +448,12 @@ public sealed record class Existing : ModelBase, IFromRaw<Existing>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class ExistingFromRaw : IFromRaw<Existing>
+{
+    public Existing FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Existing.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(ExistingTypeConverter))]

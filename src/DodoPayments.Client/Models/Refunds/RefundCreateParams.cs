@@ -181,8 +181,8 @@ public sealed record class RefundCreateParams : ParamsBase
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Item>))]
-public sealed record class Item : ModelBase, IFromRaw<Item>
+[JsonConverter(typeof(ModelConverter<Item, ItemFromRaw>))]
+public sealed record class Item : ModelBase
 {
     /// <summary>
     /// The id of the item (i.e. `product_id` or `addon_id`)
@@ -292,4 +292,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         this.ItemID = itemID;
     }
+}
+
+class ItemFromRaw : IFromRaw<Item>
+{
+    public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Item.FromRawUnchecked(rawData);
 }

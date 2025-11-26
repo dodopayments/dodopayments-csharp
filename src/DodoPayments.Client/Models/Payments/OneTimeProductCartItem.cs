@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<OneTimeProductCartItem>))]
-public sealed record class OneTimeProductCartItem : ModelBase, IFromRaw<OneTimeProductCartItem>
+[JsonConverter(typeof(ModelConverter<OneTimeProductCartItem, OneTimeProductCartItemFromRaw>))]
+public sealed record class OneTimeProductCartItem : ModelBase
 {
     public required string ProductID
     {
@@ -109,4 +109,11 @@ public sealed record class OneTimeProductCartItem : ModelBase, IFromRaw<OneTimeP
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class OneTimeProductCartItemFromRaw : IFromRaw<OneTimeProductCartItem>
+{
+    public OneTimeProductCartItem FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => OneTimeProductCartItem.FromRawUnchecked(rawData);
 }

@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Customers;
 
-[JsonConverter(typeof(ModelConverter<CustomerListPageResponse>))]
-public sealed record class CustomerListPageResponse : ModelBase, IFromRaw<CustomerListPageResponse>
+[JsonConverter(typeof(ModelConverter<CustomerListPageResponse, CustomerListPageResponseFromRaw>))]
+public sealed record class CustomerListPageResponse : ModelBase
 {
     public required List<Customer> Items
     {
@@ -73,4 +73,11 @@ public sealed record class CustomerListPageResponse : ModelBase, IFromRaw<Custom
     {
         this.Items = items;
     }
+}
+
+class CustomerListPageResponseFromRaw : IFromRaw<CustomerListPageResponse>
+{
+    public CustomerListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerListPageResponse.FromRawUnchecked(rawData);
 }

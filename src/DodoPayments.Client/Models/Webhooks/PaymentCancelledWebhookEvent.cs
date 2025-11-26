@@ -12,10 +12,10 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<PaymentCancelledWebhookEvent>))]
-public sealed record class PaymentCancelledWebhookEvent
-    : ModelBase,
-        IFromRaw<PaymentCancelledWebhookEvent>
+[JsonConverter(
+    typeof(ModelConverter<PaymentCancelledWebhookEvent, PaymentCancelledWebhookEventFromRaw>)
+)]
+public sealed record class PaymentCancelledWebhookEvent : ModelBase
 {
     /// <summary>
     /// The business identifier
@@ -167,13 +167,23 @@ public sealed record class PaymentCancelledWebhookEvent
     }
 }
 
+class PaymentCancelledWebhookEventFromRaw : IFromRaw<PaymentCancelledWebhookEvent>
+{
+    public PaymentCancelledWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => PaymentCancelledWebhookEvent.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<PaymentCancelledWebhookEventData>))]
-public sealed record class PaymentCancelledWebhookEventData
-    : ModelBase,
-        IFromRaw<PaymentCancelledWebhookEventData>
+[JsonConverter(
+    typeof(ModelConverter<
+        PaymentCancelledWebhookEventData,
+        PaymentCancelledWebhookEventDataFromRaw
+    >)
+)]
+public sealed record class PaymentCancelledWebhookEventData : ModelBase
 {
     public required BillingAddress Billing
     {
@@ -1087,10 +1097,20 @@ public sealed record class PaymentCancelledWebhookEventData
     }
 }
 
-[JsonConverter(typeof(ModelConverter<PaymentCancelledWebhookEventDataIntersectionMember1>))]
-public sealed record class PaymentCancelledWebhookEventDataIntersectionMember1
-    : ModelBase,
-        IFromRaw<PaymentCancelledWebhookEventDataIntersectionMember1>
+class PaymentCancelledWebhookEventDataFromRaw : IFromRaw<PaymentCancelledWebhookEventData>
+{
+    public PaymentCancelledWebhookEventData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => PaymentCancelledWebhookEventData.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(
+    typeof(ModelConverter<
+        PaymentCancelledWebhookEventDataIntersectionMember1,
+        PaymentCancelledWebhookEventDataIntersectionMember1FromRaw
+    >)
+)]
+public sealed record class PaymentCancelledWebhookEventDataIntersectionMember1 : ModelBase
 {
     /// <summary>
     /// The type of payload in the data field
@@ -1154,6 +1174,14 @@ public sealed record class PaymentCancelledWebhookEventDataIntersectionMember1
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class PaymentCancelledWebhookEventDataIntersectionMember1FromRaw
+    : IFromRaw<PaymentCancelledWebhookEventDataIntersectionMember1>
+{
+    public PaymentCancelledWebhookEventDataIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => PaymentCancelledWebhookEventDataIntersectionMember1.FromRawUnchecked(rawData);
 }
 
 /// <summary>

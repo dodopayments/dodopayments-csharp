@@ -9,8 +9,8 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Brands;
 
-[JsonConverter(typeof(ModelConverter<Brand>))]
-public sealed record class Brand : ModelBase, IFromRaw<Brand>
+[JsonConverter(typeof(ModelConverter<Brand, BrandFromRaw>))]
+public sealed record class Brand : ModelBase
 {
     public required string BrandID
     {
@@ -311,6 +311,12 @@ public sealed record class Brand : ModelBase, IFromRaw<Brand>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class BrandFromRaw : IFromRaw<Brand>
+{
+    public Brand FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Brand.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(VerificationStatusConverter))]

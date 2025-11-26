@@ -9,10 +9,10 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Products;
 
-[JsonConverter(typeof(ModelConverter<ProductUpdateFilesResponse>))]
-public sealed record class ProductUpdateFilesResponse
-    : ModelBase,
-        IFromRaw<ProductUpdateFilesResponse>
+[JsonConverter(
+    typeof(ModelConverter<ProductUpdateFilesResponse, ProductUpdateFilesResponseFromRaw>)
+)]
+public sealed record class ProductUpdateFilesResponse : ModelBase
 {
     public required string FileID
     {
@@ -91,4 +91,11 @@ public sealed record class ProductUpdateFilesResponse
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class ProductUpdateFilesResponseFromRaw : IFromRaw<ProductUpdateFilesResponse>
+{
+    public ProductUpdateFilesResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => ProductUpdateFilesResponse.FromRawUnchecked(rawData);
 }

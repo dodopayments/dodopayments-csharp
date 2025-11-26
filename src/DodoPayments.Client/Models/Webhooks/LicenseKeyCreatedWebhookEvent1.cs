@@ -10,10 +10,10 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<LicenseKeyCreatedWebhookEvent>))]
-public sealed record class LicenseKeyCreatedWebhookEvent
-    : ModelBase,
-        IFromRaw<LicenseKeyCreatedWebhookEvent>
+[JsonConverter(
+    typeof(ModelConverter<LicenseKeyCreatedWebhookEvent, LicenseKeyCreatedWebhookEventFromRaw1>)
+)]
+public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
 {
     /// <summary>
     /// The business identifier
@@ -162,11 +162,18 @@ public sealed record class LicenseKeyCreatedWebhookEvent
     }
 }
 
+class LicenseKeyCreatedWebhookEventFromRaw1 : IFromRaw<LicenseKeyCreatedWebhookEvent>
+{
+    public LicenseKeyCreatedWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => LicenseKeyCreatedWebhookEvent.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data6>))]
-public sealed record class Data6 : ModelBase, IFromRaw<Data6>
+[JsonConverter(typeof(ModelConverter<Data6, Data6FromRaw>))]
+public sealed record class Data6 : ModelBase
 {
     /// <summary>
     /// The unique identifier of the license key.
@@ -580,8 +587,14 @@ public sealed record class Data6 : ModelBase, IFromRaw<Data6>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Data6IntersectionMember1>))]
-public sealed record class Data6IntersectionMember1 : ModelBase, IFromRaw<Data6IntersectionMember1>
+class Data6FromRaw : IFromRaw<Data6>
+{
+    public Data6 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Data6.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<Data6IntersectionMember1, Data6IntersectionMember1FromRaw>))]
+public sealed record class Data6IntersectionMember1 : ModelBase
 {
     /// <summary>
     /// The type of payload in the data field
@@ -638,6 +651,13 @@ public sealed record class Data6IntersectionMember1 : ModelBase, IFromRaw<Data6I
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class Data6IntersectionMember1FromRaw : IFromRaw<Data6IntersectionMember1>
+{
+    public Data6IntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => Data6IntersectionMember1.FromRawUnchecked(rawData);
 }
 
 /// <summary>

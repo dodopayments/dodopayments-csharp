@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<AttachExistingCustomer>))]
-public sealed record class AttachExistingCustomer : ModelBase, IFromRaw<AttachExistingCustomer>
+[JsonConverter(typeof(ModelConverter<AttachExistingCustomer, AttachExistingCustomerFromRaw>))]
+public sealed record class AttachExistingCustomer : ModelBase
 {
     public required string CustomerID
     {
@@ -70,4 +70,11 @@ public sealed record class AttachExistingCustomer : ModelBase, IFromRaw<AttachEx
     {
         this.CustomerID = customerID;
     }
+}
+
+class AttachExistingCustomerFromRaw : IFromRaw<AttachExistingCustomer>
+{
+    public AttachExistingCustomer FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => AttachExistingCustomer.FromRawUnchecked(rawData);
 }

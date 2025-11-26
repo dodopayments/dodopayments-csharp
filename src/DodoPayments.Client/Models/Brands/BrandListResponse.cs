@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Brands;
 
-[JsonConverter(typeof(ModelConverter<BrandListResponse>))]
-public sealed record class BrandListResponse : ModelBase, IFromRaw<BrandListResponse>
+[JsonConverter(typeof(ModelConverter<BrandListResponse, BrandListResponseFromRaw>))]
+public sealed record class BrandListResponse : ModelBase
 {
     /// <summary>
     /// List of brands for this business
@@ -76,4 +76,10 @@ public sealed record class BrandListResponse : ModelBase, IFromRaw<BrandListResp
     {
         this.Items = items;
     }
+}
+
+class BrandListResponseFromRaw : IFromRaw<BrandListResponse>
+{
+    public BrandListResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        BrandListResponse.FromRawUnchecked(rawData);
 }

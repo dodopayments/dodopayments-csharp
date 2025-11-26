@@ -297,8 +297,8 @@ sealed class PriceConverter : JsonConverter<Price>
 /// <summary>
 /// One-time price details.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<OneTimePrice>))]
-public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
+[JsonConverter(typeof(ModelConverter<OneTimePrice, OneTimePriceFromRaw>))]
+public sealed record class OneTimePrice : ModelBase
 {
     /// <summary>
     /// The currency in which the payment is made.
@@ -533,6 +533,12 @@ public sealed record class OneTimePrice : ModelBase, IFromRaw<OneTimePrice>
     }
 }
 
+class OneTimePriceFromRaw : IFromRaw<OneTimePrice>
+{
+    public OneTimePrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        OneTimePrice.FromRawUnchecked(rawData);
+}
+
 [JsonConverter(typeof(TypeConverter))]
 public enum Type
 {
@@ -577,8 +583,8 @@ sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.Pr
 /// <summary>
 /// Recurring price details.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<RecurringPrice>))]
-public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
+[JsonConverter(typeof(ModelConverter<RecurringPrice, RecurringPriceFromRaw>))]
+public sealed record class RecurringPrice : ModelBase
 {
     /// <summary>
     /// The currency in which the payment is made.
@@ -907,6 +913,12 @@ public sealed record class RecurringPrice : ModelBase, IFromRaw<RecurringPrice>
     }
 }
 
+class RecurringPriceFromRaw : IFromRaw<RecurringPrice>
+{
+    public RecurringPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        RecurringPrice.FromRawUnchecked(rawData);
+}
+
 [JsonConverter(typeof(RecurringPriceTypeConverter))]
 public enum RecurringPriceType
 {
@@ -951,8 +963,8 @@ sealed class RecurringPriceTypeConverter : JsonConverter<RecurringPriceType>
 /// <summary>
 /// Usage Based price details.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<UsageBasedPrice>))]
-public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice>
+[JsonConverter(typeof(ModelConverter<UsageBasedPrice, UsageBasedPriceFromRaw>))]
+public sealed record class UsageBasedPrice : ModelBase
 {
     /// <summary>
     /// The currency in which the payment is made.
@@ -1280,6 +1292,12 @@ public sealed record class UsageBasedPrice : ModelBase, IFromRaw<UsageBasedPrice
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class UsageBasedPriceFromRaw : IFromRaw<UsageBasedPrice>
+{
+    public UsageBasedPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        UsageBasedPrice.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(UsageBasedPriceTypeConverter))]

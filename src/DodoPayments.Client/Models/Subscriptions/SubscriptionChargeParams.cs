@@ -238,8 +238,8 @@ public sealed record class SubscriptionChargeParams : ParamsBase
 /// <summary>
 /// Specify how customer balance is used for the payment
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CustomerBalanceConfig>))]
-public sealed record class CustomerBalanceConfig : ModelBase, IFromRaw<CustomerBalanceConfig>
+[JsonConverter(typeof(ModelConverter<CustomerBalanceConfig, CustomerBalanceConfigFromRaw>))]
+public sealed record class CustomerBalanceConfig : ModelBase
 {
     /// <summary>
     /// Allows Customer Credit to be purchased to settle payments
@@ -315,4 +315,11 @@ public sealed record class CustomerBalanceConfig : ModelBase, IFromRaw<CustomerB
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CustomerBalanceConfigFromRaw : IFromRaw<CustomerBalanceConfig>
+{
+    public CustomerBalanceConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerBalanceConfig.FromRawUnchecked(rawData);
 }

@@ -12,8 +12,8 @@ using Refunds = DodoPayments.Client.Models.Refunds;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<Payment>))]
-public sealed record class Payment : ModelBase, IFromRaw<Payment>
+[JsonConverter(typeof(ModelConverter<Payment, PaymentFromRaw>))]
+public sealed record class Payment : ModelBase
 {
     /// <summary>
     /// Billing address details for payments
@@ -846,8 +846,14 @@ public sealed record class Payment : ModelBase, IFromRaw<Payment>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Refund>))]
-public sealed record class Refund : ModelBase, IFromRaw<Refund>
+class PaymentFromRaw : IFromRaw<Payment>
+{
+    public Payment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Payment.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<Refund, RefundFromRaw>))]
+public sealed record class Refund : ModelBase
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
@@ -1108,8 +1114,14 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<ProductCart>))]
-public sealed record class ProductCart : ModelBase, IFromRaw<ProductCart>
+class RefundFromRaw : IFromRaw<Refund>
+{
+    public Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Refund.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<ProductCart, ProductCartFromRaw>))]
+public sealed record class ProductCart : ModelBase
 {
     public required string ProductID
     {
@@ -1182,4 +1194,10 @@ public sealed record class ProductCart : ModelBase, IFromRaw<ProductCart>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class ProductCartFromRaw : IFromRaw<ProductCart>
+{
+    public ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ProductCart.FromRawUnchecked(rawData);
 }

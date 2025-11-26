@@ -10,10 +10,10 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<DisputeOpenedWebhookEvent>))]
-public sealed record class DisputeOpenedWebhookEvent
-    : ModelBase,
-        IFromRaw<DisputeOpenedWebhookEvent>
+[JsonConverter(
+    typeof(ModelConverter<DisputeOpenedWebhookEvent, DisputeOpenedWebhookEventFromRaw1>)
+)]
+public sealed record class DisputeOpenedWebhookEvent : ModelBase
 {
     /// <summary>
     /// The business identifier
@@ -162,11 +162,18 @@ public sealed record class DisputeOpenedWebhookEvent
     }
 }
 
+class DisputeOpenedWebhookEventFromRaw1 : IFromRaw<DisputeOpenedWebhookEvent>
+{
+    public DisputeOpenedWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DisputeOpenedWebhookEvent.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data4>))]
-public sealed record class Data4 : ModelBase, IFromRaw<Data4>
+[JsonConverter(typeof(ModelConverter<Data4, Data4FromRaw>))]
+public sealed record class Data4 : ModelBase
 {
     /// <summary>
     /// The amount involved in the dispute, represented as a string to accommodate precision.
@@ -500,8 +507,14 @@ public sealed record class Data4 : ModelBase, IFromRaw<Data4>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Data4IntersectionMember1>))]
-public sealed record class Data4IntersectionMember1 : ModelBase, IFromRaw<Data4IntersectionMember1>
+class Data4FromRaw : IFromRaw<Data4>
+{
+    public Data4 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Data4.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<Data4IntersectionMember1, Data4IntersectionMember1FromRaw>))]
+public sealed record class Data4IntersectionMember1 : ModelBase
 {
     /// <summary>
     /// The type of payload in the data field
@@ -558,6 +571,13 @@ public sealed record class Data4IntersectionMember1 : ModelBase, IFromRaw<Data4I
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class Data4IntersectionMember1FromRaw : IFromRaw<Data4IntersectionMember1>
+{
+    public Data4IntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => Data4IntersectionMember1.FromRawUnchecked(rawData);
 }
 
 /// <summary>

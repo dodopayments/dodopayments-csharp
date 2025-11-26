@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Addons;
 
-[JsonConverter(typeof(ModelConverter<AddonResponse>))]
-public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
+[JsonConverter(typeof(ModelConverter<AddonResponse, AddonResponseFromRaw>))]
+public sealed record class AddonResponse : ModelBase
 {
     /// <summary>
     /// id of the Addon
@@ -298,4 +298,10 @@ public sealed record class AddonResponse : ModelBase, IFromRaw<AddonResponse>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class AddonResponseFromRaw : IFromRaw<AddonResponse>
+{
+    public AddonResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        AddonResponse.FromRawUnchecked(rawData);
 }

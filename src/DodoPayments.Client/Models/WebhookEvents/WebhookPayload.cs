@@ -15,8 +15,8 @@ using System = System;
 
 namespace DodoPayments.Client.Models.WebhookEvents;
 
-[JsonConverter(typeof(ModelConverter<WebhookPayload>))]
-public sealed record class WebhookPayload : ModelBase, IFromRaw<WebhookPayload>
+[JsonConverter(typeof(ModelConverter<WebhookPayload, WebhookPayloadFromRaw>))]
+public sealed record class WebhookPayload : ModelBase
 {
     public required string BusinessID
     {
@@ -159,6 +159,12 @@ public sealed record class WebhookPayload : ModelBase, IFromRaw<WebhookPayload>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class WebhookPayloadFromRaw : IFromRaw<WebhookPayload>
+{
+    public WebhookPayload FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        WebhookPayload.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -546,8 +552,8 @@ sealed class DataConverter : JsonConverter<Data>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Payment>))]
-public sealed record class Payment : ModelBase, IFromRaw<Payment>
+[JsonConverter(typeof(ModelConverter<Payment, PaymentFromRaw>))]
+public sealed record class Payment : ModelBase
 {
     public required Payments::BillingAddress Billing
     {
@@ -1461,8 +1467,14 @@ public sealed record class Payment : ModelBase, IFromRaw<Payment>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<IntersectionMember1>))]
-public sealed record class IntersectionMember1 : ModelBase, IFromRaw<IntersectionMember1>
+class PaymentFromRaw : IFromRaw<Payment>
+{
+    public Payment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Payment.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<IntersectionMember1, IntersectionMember1FromRaw>))]
+public sealed record class IntersectionMember1 : ModelBase
 {
     public required ApiEnum<string, PayloadType> PayloadType
     {
@@ -1526,6 +1538,12 @@ public sealed record class IntersectionMember1 : ModelBase, IFromRaw<Intersectio
     }
 }
 
+class IntersectionMember1FromRaw : IFromRaw<IntersectionMember1>
+{
+    public IntersectionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        IntersectionMember1.FromRawUnchecked(rawData);
+}
+
 [JsonConverter(typeof(PayloadTypeConverter))]
 public enum PayloadType
 {
@@ -1570,8 +1588,8 @@ sealed class PayloadTypeConverter : JsonConverter<PayloadType>
 /// <summary>
 /// Response struct representing subscription details
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Subscription>))]
-public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
+[JsonConverter(typeof(ModelConverter<Subscription, SubscriptionFromRaw>))]
+public sealed record class Subscription : ModelBase
 {
     /// <summary>
     /// Addons associated with this subscription
@@ -2441,10 +2459,16 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<SubscriptionIntersectionMember1>))]
-public sealed record class SubscriptionIntersectionMember1
-    : ModelBase,
-        IFromRaw<SubscriptionIntersectionMember1>
+class SubscriptionFromRaw : IFromRaw<Subscription>
+{
+    public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Subscription.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(
+    typeof(ModelConverter<SubscriptionIntersectionMember1, SubscriptionIntersectionMember1FromRaw>)
+)]
+public sealed record class SubscriptionIntersectionMember1 : ModelBase
 {
     public required ApiEnum<string, SubscriptionIntersectionMember1PayloadType> PayloadType
     {
@@ -2509,6 +2533,13 @@ public sealed record class SubscriptionIntersectionMember1
     }
 }
 
+class SubscriptionIntersectionMember1FromRaw : IFromRaw<SubscriptionIntersectionMember1>
+{
+    public SubscriptionIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionIntersectionMember1.FromRawUnchecked(rawData);
+}
+
 [JsonConverter(typeof(SubscriptionIntersectionMember1PayloadTypeConverter))]
 public enum SubscriptionIntersectionMember1PayloadType
 {
@@ -2551,8 +2582,8 @@ sealed class SubscriptionIntersectionMember1PayloadTypeConverter
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Refund>))]
-public sealed record class Refund : ModelBase, IFromRaw<Refund>
+[JsonConverter(typeof(ModelConverter<Refund, RefundFromRaw>))]
+public sealed record class Refund : ModelBase
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
@@ -2934,10 +2965,14 @@ public sealed record class Refund : ModelBase, IFromRaw<Refund>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<RefundIntersectionMember1>))]
-public sealed record class RefundIntersectionMember1
-    : ModelBase,
-        IFromRaw<RefundIntersectionMember1>
+class RefundFromRaw : IFromRaw<Refund>
+{
+    public Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Refund.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<RefundIntersectionMember1, RefundIntersectionMember1FromRaw>))]
+public sealed record class RefundIntersectionMember1 : ModelBase
 {
     public required ApiEnum<string, RefundIntersectionMember1PayloadType> PayloadType
     {
@@ -3002,6 +3037,13 @@ public sealed record class RefundIntersectionMember1
     }
 }
 
+class RefundIntersectionMember1FromRaw : IFromRaw<RefundIntersectionMember1>
+{
+    public RefundIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => RefundIntersectionMember1.FromRawUnchecked(rawData);
+}
+
 [JsonConverter(typeof(RefundIntersectionMember1PayloadTypeConverter))]
 public enum RefundIntersectionMember1PayloadType
 {
@@ -3044,8 +3086,8 @@ sealed class RefundIntersectionMember1PayloadTypeConverter
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Dispute>))]
-public sealed record class Dispute : ModelBase, IFromRaw<Dispute>
+[JsonConverter(typeof(ModelConverter<Dispute, DisputeFromRaw>))]
+public sealed record class Dispute : ModelBase
 {
     /// <summary>
     /// The amount involved in the dispute, represented as a string to accommodate precision.
@@ -3429,10 +3471,16 @@ public sealed record class Dispute : ModelBase, IFromRaw<Dispute>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<DisputeIntersectionMember1>))]
-public sealed record class DisputeIntersectionMember1
-    : ModelBase,
-        IFromRaw<DisputeIntersectionMember1>
+class DisputeFromRaw : IFromRaw<Dispute>
+{
+    public Dispute FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Dispute.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(
+    typeof(ModelConverter<DisputeIntersectionMember1, DisputeIntersectionMember1FromRaw>)
+)]
+public sealed record class DisputeIntersectionMember1 : ModelBase
 {
     public required ApiEnum<string, DisputeIntersectionMember1PayloadType> PayloadType
     {
@@ -3497,6 +3545,13 @@ public sealed record class DisputeIntersectionMember1
     }
 }
 
+class DisputeIntersectionMember1FromRaw : IFromRaw<DisputeIntersectionMember1>
+{
+    public DisputeIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DisputeIntersectionMember1.FromRawUnchecked(rawData);
+}
+
 [JsonConverter(typeof(DisputeIntersectionMember1PayloadTypeConverter))]
 public enum DisputeIntersectionMember1PayloadType
 {
@@ -3539,8 +3594,8 @@ sealed class DisputeIntersectionMember1PayloadTypeConverter
     }
 }
 
-[JsonConverter(typeof(ModelConverter<LicenseKey>))]
-public sealed record class LicenseKey : ModelBase, IFromRaw<LicenseKey>
+[JsonConverter(typeof(ModelConverter<LicenseKey, LicenseKeyFromRaw>))]
+public sealed record class LicenseKey : ModelBase
 {
     /// <summary>
     /// The unique identifier of the license key.
@@ -3951,10 +4006,16 @@ public sealed record class LicenseKey : ModelBase, IFromRaw<LicenseKey>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<LicenseKeyIntersectionMember1>))]
-public sealed record class LicenseKeyIntersectionMember1
-    : ModelBase,
-        IFromRaw<LicenseKeyIntersectionMember1>
+class LicenseKeyFromRaw : IFromRaw<LicenseKey>
+{
+    public LicenseKey FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        LicenseKey.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(
+    typeof(ModelConverter<LicenseKeyIntersectionMember1, LicenseKeyIntersectionMember1FromRaw>)
+)]
+public sealed record class LicenseKeyIntersectionMember1 : ModelBase
 {
     public required ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> PayloadType
     {
@@ -4017,6 +4078,13 @@ public sealed record class LicenseKeyIntersectionMember1
     {
         this.PayloadType = payloadType;
     }
+}
+
+class LicenseKeyIntersectionMember1FromRaw : IFromRaw<LicenseKeyIntersectionMember1>
+{
+    public LicenseKeyIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => LicenseKeyIntersectionMember1.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(LicenseKeyIntersectionMember1PayloadTypeConverter))]

@@ -10,10 +10,13 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
-[JsonConverter(typeof(ModelConverter<SubscriptionRetrieveUsageHistoryPageResponse>))]
-public sealed record class SubscriptionRetrieveUsageHistoryPageResponse
-    : ModelBase,
-        IFromRaw<SubscriptionRetrieveUsageHistoryPageResponse>
+[JsonConverter(
+    typeof(ModelConverter<
+        SubscriptionRetrieveUsageHistoryPageResponse,
+        SubscriptionRetrieveUsageHistoryPageResponseFromRaw
+    >)
+)]
+public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelBase
 {
     /// <summary>
     /// List of usage history items
@@ -83,8 +86,16 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse
     }
 }
 
-[JsonConverter(typeof(ModelConverter<ItemModel>))]
-public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
+class SubscriptionRetrieveUsageHistoryPageResponseFromRaw
+    : IFromRaw<SubscriptionRetrieveUsageHistoryPageResponse>
+{
+    public SubscriptionRetrieveUsageHistoryPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionRetrieveUsageHistoryPageResponse.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<ItemModel, ItemModelFromRaw>))]
+public sealed record class ItemModel : ModelBase
 {
     /// <summary>
     /// End date of the billing period
@@ -196,8 +207,14 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<MeterModel>))]
-public sealed record class MeterModel : ModelBase, IFromRaw<MeterModel>
+class ItemModelFromRaw : IFromRaw<ItemModel>
+{
+    public ItemModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ItemModel.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<MeterModel, MeterModelFromRaw>))]
+public sealed record class MeterModel : ModelBase
 {
     /// <summary>
     /// Meter identifier
@@ -445,4 +462,10 @@ public sealed record class MeterModel : ModelBase, IFromRaw<MeterModel>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class MeterModelFromRaw : IFromRaw<MeterModel>
+{
+    public MeterModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        MeterModel.FromRawUnchecked(rawData);
 }

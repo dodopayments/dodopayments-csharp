@@ -12,8 +12,8 @@ using System = System;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
 
-[JsonConverter(typeof(ModelConverter<CheckoutSessionRequest>))]
-public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<CheckoutSessionRequest>
+[JsonConverter(typeof(ModelConverter<CheckoutSessionRequest, CheckoutSessionRequestFromRaw>))]
+public sealed record class CheckoutSessionRequest : ModelBase
 {
     public required List<ProductCartModel> ProductCart
     {
@@ -414,8 +414,15 @@ public sealed record class CheckoutSessionRequest : ModelBase, IFromRaw<Checkout
     }
 }
 
-[JsonConverter(typeof(ModelConverter<ProductCartModel>))]
-public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartModel>
+class CheckoutSessionRequestFromRaw : IFromRaw<CheckoutSessionRequest>
+{
+    public CheckoutSessionRequest FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionRequest.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<ProductCartModel, ProductCartModelFromRaw>))]
+public sealed record class ProductCartModel : ModelBase
 {
     /// <summary>
     /// unique id of the product
@@ -554,13 +561,22 @@ public sealed record class ProductCartModel : ModelBase, IFromRaw<ProductCartMod
     }
 }
 
+class ProductCartModelFromRaw : IFromRaw<ProductCartModel>
+{
+    public ProductCartModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ProductCartModel.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Billing address information for the session
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CheckoutSessionRequestBillingAddress>))]
-public sealed record class CheckoutSessionRequestBillingAddress
-    : ModelBase,
-        IFromRaw<CheckoutSessionRequestBillingAddress>
+[JsonConverter(
+    typeof(ModelConverter<
+        CheckoutSessionRequestBillingAddress,
+        CheckoutSessionRequestBillingAddressFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
 {
     /// <summary>
     /// Two-letter ISO country code (ISO 3166-1 alpha-2)
@@ -712,13 +728,23 @@ public sealed record class CheckoutSessionRequestBillingAddress
     }
 }
 
+class CheckoutSessionRequestBillingAddressFromRaw : IFromRaw<CheckoutSessionRequestBillingAddress>
+{
+    public CheckoutSessionRequestBillingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionRequestBillingAddress.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Customization for the checkout session page
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CheckoutSessionRequestCustomization>))]
-public sealed record class CheckoutSessionRequestCustomization
-    : ModelBase,
-        IFromRaw<CheckoutSessionRequestCustomization>
+[JsonConverter(
+    typeof(ModelConverter<
+        CheckoutSessionRequestCustomization,
+        CheckoutSessionRequestCustomizationFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionRequestCustomization : ModelBase
 {
     /// <summary>
     /// Force the checkout interface to render in a specific language (e.g. `en`, `es`)
@@ -859,6 +885,13 @@ public sealed record class CheckoutSessionRequestCustomization
     }
 }
 
+class CheckoutSessionRequestCustomizationFromRaw : IFromRaw<CheckoutSessionRequestCustomization>
+{
+    public CheckoutSessionRequestCustomization FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionRequestCustomization.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Theme of the page
 ///
@@ -912,10 +945,13 @@ sealed class CheckoutSessionRequestCustomizationThemeConverter
     }
 }
 
-[JsonConverter(typeof(ModelConverter<CheckoutSessionRequestFeatureFlags>))]
-public sealed record class CheckoutSessionRequestFeatureFlags
-    : ModelBase,
-        IFromRaw<CheckoutSessionRequestFeatureFlags>
+[JsonConverter(
+    typeof(ModelConverter<
+        CheckoutSessionRequestFeatureFlags,
+        CheckoutSessionRequestFeatureFlagsFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
 {
     /// <summary>
     /// if customer is allowed to change currency, set it to true
@@ -1272,10 +1308,20 @@ public sealed record class CheckoutSessionRequestFeatureFlags
     }
 }
 
-[JsonConverter(typeof(ModelConverter<CheckoutSessionRequestSubscriptionData>))]
-public sealed record class CheckoutSessionRequestSubscriptionData
-    : ModelBase,
-        IFromRaw<CheckoutSessionRequestSubscriptionData>
+class CheckoutSessionRequestFeatureFlagsFromRaw : IFromRaw<CheckoutSessionRequestFeatureFlags>
+{
+    public CheckoutSessionRequestFeatureFlags FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionRequestFeatureFlags.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(
+    typeof(ModelConverter<
+        CheckoutSessionRequestSubscriptionData,
+        CheckoutSessionRequestSubscriptionDataFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionRequestSubscriptionData : ModelBase
 {
     public OnDemandSubscription? OnDemand
     {
@@ -1347,4 +1393,12 @@ public sealed record class CheckoutSessionRequestSubscriptionData
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CheckoutSessionRequestSubscriptionDataFromRaw
+    : IFromRaw<CheckoutSessionRequestSubscriptionData>
+{
+    public CheckoutSessionRequestSubscriptionData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionRequestSubscriptionData.FromRawUnchecked(rawData);
 }

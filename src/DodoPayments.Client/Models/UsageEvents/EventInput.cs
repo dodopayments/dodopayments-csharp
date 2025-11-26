@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.UsageEvents;
 
-[JsonConverter(typeof(ModelConverter<EventInput>))]
-public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
+[JsonConverter(typeof(ModelConverter<EventInput, EventInputFromRaw>))]
+public sealed record class EventInput : ModelBase
 {
     /// <summary>
     /// customer_id of the customer whose usage needs to be tracked
@@ -181,6 +181,12 @@ public sealed record class EventInput : ModelBase, IFromRaw<EventInput>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class EventInputFromRaw : IFromRaw<EventInput>
+{
+    public EventInput FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        EventInput.FromRawUnchecked(rawData);
 }
 
 /// <summary>

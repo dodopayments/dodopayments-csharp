@@ -9,10 +9,10 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<WebhookRetrieveSecretResponse>))]
-public sealed record class WebhookRetrieveSecretResponse
-    : ModelBase,
-        IFromRaw<WebhookRetrieveSecretResponse>
+[JsonConverter(
+    typeof(ModelConverter<WebhookRetrieveSecretResponse, WebhookRetrieveSecretResponseFromRaw>)
+)]
+public sealed record class WebhookRetrieveSecretResponse : ModelBase
 {
     public required string Secret
     {
@@ -72,4 +72,11 @@ public sealed record class WebhookRetrieveSecretResponse
     {
         this.Secret = secret;
     }
+}
+
+class WebhookRetrieveSecretResponseFromRaw : IFromRaw<WebhookRetrieveSecretResponse>
+{
+    public WebhookRetrieveSecretResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => WebhookRetrieveSecretResponse.FromRawUnchecked(rawData);
 }
