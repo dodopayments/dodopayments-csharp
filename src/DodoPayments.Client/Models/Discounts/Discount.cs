@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Discounts;
 
-[JsonConverter(typeof(ModelConverter<Discount>))]
-public sealed record class Discount : ModelBase, IFromRaw<Discount>
+[JsonConverter(typeof(ModelConverter<Discount, DiscountFromRaw>))]
+public sealed record class Discount : ModelBase
 {
     /// <summary>
     /// The discount amount.
@@ -350,4 +350,10 @@ public sealed record class Discount : ModelBase, IFromRaw<Discount>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class DiscountFromRaw : IFromRaw<Discount>
+{
+    public Discount FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Discount.FromRawUnchecked(rawData);
 }

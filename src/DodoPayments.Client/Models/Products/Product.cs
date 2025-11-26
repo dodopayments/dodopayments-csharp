@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Products;
 
-[JsonConverter(typeof(ModelConverter<Product>))]
-public sealed record class Product : ModelBase, IFromRaw<Product>
+[JsonConverter(typeof(ModelConverter<Product, ProductFromRaw>))]
+public sealed record class Product : ModelBase
 {
     public required string BrandID
     {
@@ -500,10 +500,16 @@ public sealed record class Product : ModelBase, IFromRaw<Product>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<ProductDigitalProductDelivery>))]
-public sealed record class ProductDigitalProductDelivery
-    : ModelBase,
-        IFromRaw<ProductDigitalProductDelivery>
+class ProductFromRaw : IFromRaw<Product>
+{
+    public Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Product.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(
+    typeof(ModelConverter<ProductDigitalProductDelivery, ProductDigitalProductDeliveryFromRaw>)
+)]
+public sealed record class ProductDigitalProductDelivery : ModelBase
 {
     /// <summary>
     /// External URL to digital product
@@ -601,8 +607,15 @@ public sealed record class ProductDigitalProductDelivery
     }
 }
 
-[JsonConverter(typeof(ModelConverter<File>))]
-public sealed record class File : ModelBase, IFromRaw<File>
+class ProductDigitalProductDeliveryFromRaw : IFromRaw<ProductDigitalProductDelivery>
+{
+    public ProductDigitalProductDelivery FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => ProductDigitalProductDelivery.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<File, FileFromRaw>))]
+public sealed record class File : ModelBase
 {
     public required string FileID
     {
@@ -705,4 +718,10 @@ public sealed record class File : ModelBase, IFromRaw<File>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class FileFromRaw : IFromRaw<File>
+{
+    public File FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        File.FromRawUnchecked(rawData);
 }

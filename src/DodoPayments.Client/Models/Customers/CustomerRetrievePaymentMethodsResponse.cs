@@ -11,10 +11,13 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Customers;
 
-[JsonConverter(typeof(ModelConverter<CustomerRetrievePaymentMethodsResponse>))]
-public sealed record class CustomerRetrievePaymentMethodsResponse
-    : ModelBase,
-        IFromRaw<CustomerRetrievePaymentMethodsResponse>
+[JsonConverter(
+    typeof(ModelConverter<
+        CustomerRetrievePaymentMethodsResponse,
+        CustomerRetrievePaymentMethodsResponseFromRaw
+    >)
+)]
+public sealed record class CustomerRetrievePaymentMethodsResponse : ModelBase
 {
     public required List<Item> Items
     {
@@ -79,8 +82,16 @@ public sealed record class CustomerRetrievePaymentMethodsResponse
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Item>))]
-public sealed record class Item : ModelBase, IFromRaw<Item>
+class CustomerRetrievePaymentMethodsResponseFromRaw
+    : IFromRaw<CustomerRetrievePaymentMethodsResponse>
+{
+    public CustomerRetrievePaymentMethodsResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerRetrievePaymentMethodsResponse.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<Item, ItemFromRaw>))]
+public sealed record class Item : ModelBase
 {
     /// <summary>
     /// PaymentMethod enum from hyperswitch
@@ -251,6 +262,12 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     }
 }
 
+class ItemFromRaw : IFromRaw<Item>
+{
+    public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Item.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// PaymentMethod enum from hyperswitch
 ///
@@ -339,8 +356,8 @@ sealed class PaymentMethodConverter : JsonConverter<PaymentMethod>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Card>))]
-public sealed record class Card : ModelBase, IFromRaw<Card>
+[JsonConverter(typeof(ModelConverter<Card, CardFromRaw>))]
+public sealed record class Card : ModelBase
 {
     /// <summary>
     /// ISO country code alpha2 variant
@@ -485,4 +502,10 @@ public sealed record class Card : ModelBase, IFromRaw<Card>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CardFromRaw : IFromRaw<Card>
+{
+    public Card FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Card.FromRawUnchecked(rawData);
 }

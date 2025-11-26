@@ -11,10 +11,10 @@ using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
-[JsonConverter(typeof(ModelConverter<SubscriptionListPageResponse>))]
-public sealed record class SubscriptionListPageResponse
-    : ModelBase,
-        IFromRaw<SubscriptionListPageResponse>
+[JsonConverter(
+    typeof(ModelConverter<SubscriptionListPageResponse, SubscriptionListPageResponseFromRaw>)
+)]
+public sealed record class SubscriptionListPageResponse : ModelBase
 {
     public required List<Item> Items
     {
@@ -79,11 +79,18 @@ public sealed record class SubscriptionListPageResponse
     }
 }
 
+class SubscriptionListPageResponseFromRaw : IFromRaw<SubscriptionListPageResponse>
+{
+    public SubscriptionListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionListPageResponse.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Response struct representing subscription details
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Item>))]
-public sealed record class Item : ModelBase, IFromRaw<Item>
+[JsonConverter(typeof(ModelConverter<Item, ItemFromRaw>))]
+public sealed record class Item : ModelBase
 {
     /// <summary>
     /// Billing address details for payments
@@ -790,4 +797,10 @@ public sealed record class Item : ModelBase, IFromRaw<Item>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class ItemFromRaw : IFromRaw<Item>
+{
+    public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Item.FromRawUnchecked(rawData);
 }

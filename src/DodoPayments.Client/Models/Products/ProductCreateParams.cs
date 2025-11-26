@@ -384,8 +384,8 @@ public sealed record class ProductCreateParams : ParamsBase
 /// <summary>
 /// Choose how you would like you digital product delivered
 /// </summary>
-[JsonConverter(typeof(ModelConverter<DigitalProductDelivery>))]
-public sealed record class DigitalProductDelivery : ModelBase, IFromRaw<DigitalProductDelivery>
+[JsonConverter(typeof(ModelConverter<DigitalProductDelivery, DigitalProductDeliveryFromRaw>))]
+public sealed record class DigitalProductDelivery : ModelBase
 {
     /// <summary>
     /// External URL to digital product
@@ -456,4 +456,11 @@ public sealed record class DigitalProductDelivery : ModelBase, IFromRaw<DigitalP
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class DigitalProductDeliveryFromRaw : IFromRaw<DigitalProductDelivery>
+{
+    public DigitalProductDelivery FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DigitalProductDelivery.FromRawUnchecked(rawData);
 }

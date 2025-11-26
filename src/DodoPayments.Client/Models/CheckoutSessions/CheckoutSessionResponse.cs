@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
 
-[JsonConverter(typeof(ModelConverter<CheckoutSessionResponse>))]
-public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<CheckoutSessionResponse>
+[JsonConverter(typeof(ModelConverter<CheckoutSessionResponse, CheckoutSessionResponseFromRaw>))]
+public sealed record class CheckoutSessionResponse : ModelBase
 {
     /// <summary>
     /// Checkout url
@@ -95,4 +95,11 @@ public sealed record class CheckoutSessionResponse : ModelBase, IFromRaw<Checkou
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CheckoutSessionResponseFromRaw : IFromRaw<CheckoutSessionResponse>
+{
+    public CheckoutSessionResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionResponse.FromRawUnchecked(rawData);
 }

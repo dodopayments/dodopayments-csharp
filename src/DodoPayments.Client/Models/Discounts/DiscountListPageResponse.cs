@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Discounts;
 
-[JsonConverter(typeof(ModelConverter<DiscountListPageResponse>))]
-public sealed record class DiscountListPageResponse : ModelBase, IFromRaw<DiscountListPageResponse>
+[JsonConverter(typeof(ModelConverter<DiscountListPageResponse, DiscountListPageResponseFromRaw>))]
+public sealed record class DiscountListPageResponse : ModelBase
 {
     /// <summary>
     /// Array of active (non-deleted) discounts for the current page.
@@ -76,4 +76,11 @@ public sealed record class DiscountListPageResponse : ModelBase, IFromRaw<Discou
     {
         this.Items = items;
     }
+}
+
+class DiscountListPageResponseFromRaw : IFromRaw<DiscountListPageResponse>
+{
+    public DiscountListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DiscountListPageResponse.FromRawUnchecked(rawData);
 }

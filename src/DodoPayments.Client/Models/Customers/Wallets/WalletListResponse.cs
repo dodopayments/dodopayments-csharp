@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Customers.Wallets;
 
-[JsonConverter(typeof(ModelConverter<WalletListResponse>))]
-public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListResponse>
+[JsonConverter(typeof(ModelConverter<WalletListResponse, WalletListResponseFromRaw>))]
+public sealed record class WalletListResponse : ModelBase
 {
     public required List<CustomerWallet> Items
     {
@@ -97,4 +97,10 @@ public sealed record class WalletListResponse : ModelBase, IFromRaw<WalletListRe
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class WalletListResponseFromRaw : IFromRaw<WalletListResponse>
+{
+    public WalletListResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        WalletListResponse.FromRawUnchecked(rawData);
 }

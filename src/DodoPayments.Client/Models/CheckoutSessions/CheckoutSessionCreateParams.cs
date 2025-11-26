@@ -434,8 +434,8 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     }
 }
 
-[JsonConverter(typeof(ModelConverter<ProductCart>))]
-public sealed record class ProductCart : ModelBase, IFromRaw<ProductCart>
+[JsonConverter(typeof(ModelConverter<ProductCart, ProductCartFromRaw>))]
+public sealed record class ProductCart : ModelBase
 {
     /// <summary>
     /// unique id of the product
@@ -572,11 +572,17 @@ public sealed record class ProductCart : ModelBase, IFromRaw<ProductCart>
     }
 }
 
+class ProductCartFromRaw : IFromRaw<ProductCart>
+{
+    public ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ProductCart.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Billing address information for the session
 /// </summary>
-[JsonConverter(typeof(ModelConverter<BillingAddress>))]
-public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
+[JsonConverter(typeof(ModelConverter<BillingAddress, BillingAddressFromRaw>))]
+public sealed record class BillingAddress : ModelBase
 {
     /// <summary>
     /// Two-letter ISO country code (ISO 3166-1 alpha-2)
@@ -726,11 +732,17 @@ public sealed record class BillingAddress : ModelBase, IFromRaw<BillingAddress>
     }
 }
 
+class BillingAddressFromRaw : IFromRaw<BillingAddress>
+{
+    public BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        BillingAddress.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Customization for the checkout session page
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Customization>))]
-public sealed record class Customization : ModelBase, IFromRaw<Customization>
+[JsonConverter(typeof(ModelConverter<Customization, CustomizationFromRaw>))]
+public sealed record class Customization : ModelBase
 {
     /// <summary>
     /// Force the checkout interface to render in a specific language (e.g. `en`, `es`)
@@ -869,6 +881,12 @@ public sealed record class Customization : ModelBase, IFromRaw<Customization>
     }
 }
 
+class CustomizationFromRaw : IFromRaw<Customization>
+{
+    public Customization FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Customization.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Theme of the page
 ///
@@ -917,8 +935,8 @@ sealed class ThemeConverter : JsonConverter<Theme>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<FeatureFlags>))]
-public sealed record class FeatureFlags : ModelBase, IFromRaw<FeatureFlags>
+[JsonConverter(typeof(ModelConverter<FeatureFlags, FeatureFlagsFromRaw>))]
+public sealed record class FeatureFlags : ModelBase
 {
     /// <summary>
     /// if customer is allowed to change currency, set it to true
@@ -1273,8 +1291,14 @@ public sealed record class FeatureFlags : ModelBase, IFromRaw<FeatureFlags>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<SubscriptionData>))]
-public sealed record class SubscriptionData : ModelBase, IFromRaw<SubscriptionData>
+class FeatureFlagsFromRaw : IFromRaw<FeatureFlags>
+{
+    public FeatureFlags FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        FeatureFlags.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<SubscriptionData, SubscriptionDataFromRaw>))]
+public sealed record class SubscriptionData : ModelBase
 {
     public OnDemandSubscription? OnDemand
     {
@@ -1346,4 +1370,10 @@ public sealed record class SubscriptionData : ModelBase, IFromRaw<SubscriptionDa
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class SubscriptionDataFromRaw : IFromRaw<SubscriptionData>
+{
+    public SubscriptionData FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        SubscriptionData.FromRawUnchecked(rawData);
 }

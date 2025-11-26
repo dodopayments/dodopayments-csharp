@@ -9,10 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Brands;
 
-[JsonConverter(typeof(ModelConverter<BrandUpdateImagesResponse>))]
-public sealed record class BrandUpdateImagesResponse
-    : ModelBase,
-        IFromRaw<BrandUpdateImagesResponse>
+[JsonConverter(typeof(ModelConverter<BrandUpdateImagesResponse, BrandUpdateImagesResponseFromRaw>))]
+public sealed record class BrandUpdateImagesResponse : ModelBase
 {
     /// <summary>
     /// UUID that will be used as the image identifier/key suffix
@@ -97,4 +95,11 @@ public sealed record class BrandUpdateImagesResponse
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class BrandUpdateImagesResponseFromRaw : IFromRaw<BrandUpdateImagesResponse>
+{
+    public BrandUpdateImagesResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => BrandUpdateImagesResponse.FromRawUnchecked(rawData);
 }

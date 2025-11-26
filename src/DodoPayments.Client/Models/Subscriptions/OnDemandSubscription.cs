@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
-[JsonConverter(typeof(ModelConverter<OnDemandSubscription>))]
-public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSubscription>
+[JsonConverter(typeof(ModelConverter<OnDemandSubscription, OnDemandSubscriptionFromRaw>))]
+public sealed record class OnDemandSubscription : ModelBase
 {
     /// <summary>
     /// If set as True, does not perform any charge and only authorizes payment method
@@ -173,4 +173,11 @@ public sealed record class OnDemandSubscription : ModelBase, IFromRaw<OnDemandSu
     {
         this.MandateOnly = mandateOnly;
     }
+}
+
+class OnDemandSubscriptionFromRaw : IFromRaw<OnDemandSubscription>
+{
+    public OnDemandSubscription FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => OnDemandSubscription.FromRawUnchecked(rawData);
 }

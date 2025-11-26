@@ -9,10 +9,10 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.UsageEvents;
 
-[JsonConverter(typeof(ModelConverter<UsageEventListPageResponse>))]
-public sealed record class UsageEventListPageResponse
-    : ModelBase,
-        IFromRaw<UsageEventListPageResponse>
+[JsonConverter(
+    typeof(ModelConverter<UsageEventListPageResponse, UsageEventListPageResponseFromRaw>)
+)]
+public sealed record class UsageEventListPageResponse : ModelBase
 {
     public required List<Event> Items
     {
@@ -75,4 +75,11 @@ public sealed record class UsageEventListPageResponse
     {
         this.Items = items;
     }
+}
+
+class UsageEventListPageResponseFromRaw : IFromRaw<UsageEventListPageResponse>
+{
+    public UsageEventListPageResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => UsageEventListPageResponse.FromRawUnchecked(rawData);
 }

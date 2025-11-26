@@ -10,10 +10,10 @@ using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
-[JsonConverter(typeof(ModelConverter<SubscriptionCreateResponse>))]
-public sealed record class SubscriptionCreateResponse
-    : ModelBase,
-        IFromRaw<SubscriptionCreateResponse>
+[JsonConverter(
+    typeof(ModelConverter<SubscriptionCreateResponse, SubscriptionCreateResponseFromRaw>)
+)]
+public sealed record class SubscriptionCreateResponse : ModelBase
 {
     /// <summary>
     /// Addons associated with this subscription
@@ -317,4 +317,11 @@ public sealed record class SubscriptionCreateResponse
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class SubscriptionCreateResponseFromRaw : IFromRaw<SubscriptionCreateResponse>
+{
+    public SubscriptionCreateResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionCreateResponse.FromRawUnchecked(rawData);
 }

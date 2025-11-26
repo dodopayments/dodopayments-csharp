@@ -8,10 +8,13 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
-[JsonConverter(typeof(ModelConverter<SubscriptionUpdatePaymentMethodResponse>))]
-public sealed record class SubscriptionUpdatePaymentMethodResponse
-    : ModelBase,
-        IFromRaw<SubscriptionUpdatePaymentMethodResponse>
+[JsonConverter(
+    typeof(ModelConverter<
+        SubscriptionUpdatePaymentMethodResponse,
+        SubscriptionUpdatePaymentMethodResponseFromRaw
+    >)
+)]
+public sealed record class SubscriptionUpdatePaymentMethodResponse : ModelBase
 {
     public string? ClientSecret
     {
@@ -117,4 +120,12 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class SubscriptionUpdatePaymentMethodResponseFromRaw
+    : IFromRaw<SubscriptionUpdatePaymentMethodResponse>
+{
+    public SubscriptionUpdatePaymentMethodResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionUpdatePaymentMethodResponse.FromRawUnchecked(rawData);
 }

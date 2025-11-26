@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<CreateNewCustomer>))]
-public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCustomer>
+[JsonConverter(typeof(ModelConverter<CreateNewCustomer, CreateNewCustomerFromRaw>))]
+public sealed record class CreateNewCustomer : ModelBase
 {
     public required string Email
     {
@@ -137,4 +137,10 @@ public sealed record class CreateNewCustomer : ModelBase, IFromRaw<CreateNewCust
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CreateNewCustomerFromRaw : IFromRaw<CreateNewCustomer>
+{
+    public CreateNewCustomer FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreateNewCustomer.FromRawUnchecked(rawData);
 }

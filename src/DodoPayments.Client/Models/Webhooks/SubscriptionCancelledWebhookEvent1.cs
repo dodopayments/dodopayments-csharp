@@ -12,10 +12,13 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<SubscriptionCancelledWebhookEvent>))]
-public sealed record class SubscriptionCancelledWebhookEvent
-    : ModelBase,
-        IFromRaw<SubscriptionCancelledWebhookEvent>
+[JsonConverter(
+    typeof(ModelConverter<
+        SubscriptionCancelledWebhookEvent,
+        SubscriptionCancelledWebhookEventFromRaw1
+    >)
+)]
+public sealed record class SubscriptionCancelledWebhookEvent : ModelBase
 {
     /// <summary>
     /// The business identifier
@@ -164,11 +167,18 @@ public sealed record class SubscriptionCancelledWebhookEvent
     }
 }
 
+class SubscriptionCancelledWebhookEventFromRaw1 : IFromRaw<SubscriptionCancelledWebhookEvent>
+{
+    public SubscriptionCancelledWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionCancelledWebhookEvent.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data14>))]
-public sealed record class Data14 : ModelBase, IFromRaw<Data14>
+[JsonConverter(typeof(ModelConverter<Data14, Data14FromRaw>))]
+public sealed record class Data14 : ModelBase
 {
     /// <summary>
     /// Addons associated with this subscription
@@ -1035,10 +1045,14 @@ public sealed record class Data14 : ModelBase, IFromRaw<Data14>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Data14IntersectionMember1>))]
-public sealed record class Data14IntersectionMember1
-    : ModelBase,
-        IFromRaw<Data14IntersectionMember1>
+class Data14FromRaw : IFromRaw<Data14>
+{
+    public Data14 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Data14.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<Data14IntersectionMember1, Data14IntersectionMember1FromRaw>))]
+public sealed record class Data14IntersectionMember1 : ModelBase
 {
     /// <summary>
     /// The type of payload in the data field
@@ -1095,6 +1109,13 @@ public sealed record class Data14IntersectionMember1
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class Data14IntersectionMember1FromRaw : IFromRaw<Data14IntersectionMember1>
+{
+    public Data14IntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => Data14IntersectionMember1.FromRawUnchecked(rawData);
 }
 
 /// <summary>

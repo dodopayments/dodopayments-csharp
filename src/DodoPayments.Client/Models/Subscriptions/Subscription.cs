@@ -14,8 +14,8 @@ namespace DodoPayments.Client.Models.Subscriptions;
 /// <summary>
 /// Response struct representing subscription details
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Subscription>))]
-public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
+[JsonConverter(typeof(ModelConverter<Subscription, SubscriptionFromRaw>))]
+public sealed record class Subscription : ModelBase
 {
     /// <summary>
     /// Addons associated with this subscription
@@ -813,11 +813,17 @@ public sealed record class Subscription : ModelBase, IFromRaw<Subscription>
     }
 }
 
+class SubscriptionFromRaw : IFromRaw<Subscription>
+{
+    public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Subscription.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Response struct representing usage-based meter cart details for a subscription
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Meter>))]
-public sealed record class Meter : ModelBase, IFromRaw<Meter>
+[JsonConverter(typeof(ModelConverter<Meter, MeterFromRaw>))]
+public sealed record class Meter : ModelBase
 {
     public required ApiEnum<string, Currency> Currency
     {
@@ -1012,4 +1018,10 @@ public sealed record class Meter : ModelBase, IFromRaw<Meter>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class MeterFromRaw : IFromRaw<Meter>
+{
+    public Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Meter.FromRawUnchecked(rawData);
 }

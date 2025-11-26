@@ -9,8 +9,8 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Meters;
 
-[JsonConverter(typeof(ModelConverter<MeterAggregation>))]
-public sealed record class MeterAggregation : ModelBase, IFromRaw<MeterAggregation>
+[JsonConverter(typeof(ModelConverter<MeterAggregation, MeterAggregationFromRaw>))]
+public sealed record class MeterAggregation : ModelBase
 {
     /// <summary>
     /// Aggregation type for the meter
@@ -93,6 +93,12 @@ public sealed record class MeterAggregation : ModelBase, IFromRaw<MeterAggregati
     {
         this.Type = type;
     }
+}
+
+class MeterAggregationFromRaw : IFromRaw<MeterAggregation>
+{
+    public MeterAggregation FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        MeterAggregation.FromRawUnchecked(rawData);
 }
 
 /// <summary>

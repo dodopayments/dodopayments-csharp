@@ -10,8 +10,8 @@ using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Models.Products;
 
-[JsonConverter(typeof(ModelConverter<LicenseKeyDuration>))]
-public sealed record class LicenseKeyDuration : ModelBase, IFromRaw<LicenseKeyDuration>
+[JsonConverter(typeof(ModelConverter<LicenseKeyDuration, LicenseKeyDurationFromRaw>))]
+public sealed record class LicenseKeyDuration : ModelBase
 {
     public required int Count
     {
@@ -85,4 +85,10 @@ public sealed record class LicenseKeyDuration : ModelBase, IFromRaw<LicenseKeyDu
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class LicenseKeyDurationFromRaw : IFromRaw<LicenseKeyDuration>
+{
+    public LicenseKeyDuration FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        LicenseKeyDuration.FromRawUnchecked(rawData);
 }

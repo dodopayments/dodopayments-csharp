@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.UsageEvents;
 
-[JsonConverter(typeof(ModelConverter<UsageEventIngestResponse>))]
-public sealed record class UsageEventIngestResponse : ModelBase, IFromRaw<UsageEventIngestResponse>
+[JsonConverter(typeof(ModelConverter<UsageEventIngestResponse, UsageEventIngestResponseFromRaw>))]
+public sealed record class UsageEventIngestResponse : ModelBase
 {
     public required long IngestedCount
     {
@@ -66,4 +66,11 @@ public sealed record class UsageEventIngestResponse : ModelBase, IFromRaw<UsageE
     {
         this.IngestedCount = ingestedCount;
     }
+}
+
+class UsageEventIngestResponseFromRaw : IFromRaw<UsageEventIngestResponse>
+{
+    public UsageEventIngestResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => UsageEventIngestResponse.FromRawUnchecked(rawData);
 }

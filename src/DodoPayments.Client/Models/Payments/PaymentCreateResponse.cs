@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<PaymentCreateResponse>))]
-public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCreateResponse>
+[JsonConverter(typeof(ModelConverter<PaymentCreateResponse, PaymentCreateResponseFromRaw>))]
+public sealed record class PaymentCreateResponse : ModelBase
 {
     /// <summary>
     /// Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will
@@ -282,4 +282,11 @@ public sealed record class PaymentCreateResponse : ModelBase, IFromRaw<PaymentCr
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class PaymentCreateResponseFromRaw : IFromRaw<PaymentCreateResponse>
+{
+    public PaymentCreateResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => PaymentCreateResponse.FromRawUnchecked(rawData);
 }

@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Products.Images;
 
-[JsonConverter(typeof(ModelConverter<ImageUpdateResponse>))]
-public sealed record class ImageUpdateResponse : ModelBase, IFromRaw<ImageUpdateResponse>
+[JsonConverter(typeof(ModelConverter<ImageUpdateResponse, ImageUpdateResponseFromRaw>))]
+public sealed record class ImageUpdateResponse : ModelBase
 {
     public required string URL
     {
@@ -89,4 +89,10 @@ public sealed record class ImageUpdateResponse : ModelBase, IFromRaw<ImageUpdate
     {
         this.URL = url;
     }
+}
+
+class ImageUpdateResponseFromRaw : IFromRaw<ImageUpdateResponse>
+{
+    public ImageUpdateResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ImageUpdateResponse.FromRawUnchecked(rawData);
 }

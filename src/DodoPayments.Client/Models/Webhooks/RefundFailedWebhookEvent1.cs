@@ -12,8 +12,8 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<RefundFailedWebhookEvent>))]
-public sealed record class RefundFailedWebhookEvent : ModelBase, IFromRaw<RefundFailedWebhookEvent>
+[JsonConverter(typeof(ModelConverter<RefundFailedWebhookEvent, RefundFailedWebhookEventFromRaw1>))]
+public sealed record class RefundFailedWebhookEvent : ModelBase
 {
     /// <summary>
     /// The business identifier
@@ -162,11 +162,18 @@ public sealed record class RefundFailedWebhookEvent : ModelBase, IFromRaw<Refund
     }
 }
 
+class RefundFailedWebhookEventFromRaw1 : IFromRaw<RefundFailedWebhookEvent>
+{
+    public RefundFailedWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => RefundFailedWebhookEvent.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Event-specific data
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Data11>))]
-public sealed record class Data11 : ModelBase, IFromRaw<Data11>
+[JsonConverter(typeof(ModelConverter<Data11, Data11FromRaw>))]
+public sealed record class Data11 : ModelBase
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
@@ -551,10 +558,14 @@ public sealed record class Data11 : ModelBase, IFromRaw<Data11>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Data11IntersectionMember1>))]
-public sealed record class Data11IntersectionMember1
-    : ModelBase,
-        IFromRaw<Data11IntersectionMember1>
+class Data11FromRaw : IFromRaw<Data11>
+{
+    public Data11 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Data11.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<Data11IntersectionMember1, Data11IntersectionMember1FromRaw>))]
+public sealed record class Data11IntersectionMember1 : ModelBase
 {
     /// <summary>
     /// The type of payload in the data field
@@ -611,6 +622,13 @@ public sealed record class Data11IntersectionMember1
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class Data11IntersectionMember1FromRaw : IFromRaw<Data11IntersectionMember1>
+{
+    public Data11IntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => Data11IntersectionMember1.FromRawUnchecked(rawData);
 }
 
 /// <summary>

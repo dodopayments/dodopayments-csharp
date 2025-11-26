@@ -10,10 +10,13 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<PaymentRetrieveLineItemsResponse>))]
-public sealed record class PaymentRetrieveLineItemsResponse
-    : ModelBase,
-        IFromRaw<PaymentRetrieveLineItemsResponse>
+[JsonConverter(
+    typeof(ModelConverter<
+        PaymentRetrieveLineItemsResponse,
+        PaymentRetrieveLineItemsResponseFromRaw
+    >)
+)]
+public sealed record class PaymentRetrieveLineItemsResponse : ModelBase
 {
     public required ApiEnum<string, Currency> Currency
     {
@@ -96,8 +99,15 @@ public sealed record class PaymentRetrieveLineItemsResponse
     }
 }
 
-[JsonConverter(typeof(ModelConverter<ItemModel>))]
-public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
+class PaymentRetrieveLineItemsResponseFromRaw : IFromRaw<PaymentRetrieveLineItemsResponse>
+{
+    public PaymentRetrieveLineItemsResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => PaymentRetrieveLineItemsResponse.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(ModelConverter<ItemModel, ItemModelFromRaw>))]
+public sealed record class ItemModel : ModelBase
 {
     public required int Amount
     {
@@ -255,4 +265,10 @@ public sealed record class ItemModel : ModelBase, IFromRaw<ItemModel>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class ItemModelFromRaw : IFromRaw<ItemModel>
+{
+    public ItemModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ItemModel.FromRawUnchecked(rawData);
 }

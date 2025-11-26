@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
-[JsonConverter(typeof(ModelConverter<AttachAddon>))]
-public sealed record class AttachAddon : ModelBase, IFromRaw<AttachAddon>
+[JsonConverter(typeof(ModelConverter<AttachAddon, AttachAddonFromRaw>))]
+public sealed record class AttachAddon : ModelBase
 {
     public required string AddonID
     {
@@ -83,4 +83,10 @@ public sealed record class AttachAddon : ModelBase, IFromRaw<AttachAddon>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class AttachAddonFromRaw : IFromRaw<AttachAddon>
+{
+    public AttachAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        AttachAddon.FromRawUnchecked(rawData);
 }

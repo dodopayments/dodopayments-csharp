@@ -17,8 +17,8 @@ namespace DodoPayments.Client.Models.Meters;
 /// Each filter has a conjunction (and/or) and clauses that can be either direct conditions
 /// or nested filters.</para>
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterMeterFilter>))]
-public sealed record class MeterMeterFilter : ModelBase, IFromRaw<MeterMeterFilter>
+[JsonConverter(typeof(ModelConverter<MeterMeterFilter, MeterMeterFilterFromRaw>))]
+public sealed record class MeterMeterFilter : ModelBase
 {
     /// <summary>
     /// Filter clauses - can be direct conditions or nested filters (up to 3 levels deep)
@@ -105,6 +105,12 @@ public sealed record class MeterMeterFilter : ModelBase, IFromRaw<MeterMeterFilt
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class MeterMeterFilterFromRaw : IFromRaw<MeterMeterFilter>
+{
+    public MeterMeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        MeterMeterFilter.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -255,8 +261,8 @@ sealed class ClausesConverter : JsonConverter<Clauses>
 /// <summary>
 /// Filter condition with key, operator, and value
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilterCondition>))]
-public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilterCondition>
+[JsonConverter(typeof(ModelConverter<MeterFilterCondition, MeterFilterConditionFromRaw>))]
+public sealed record class MeterFilterCondition : ModelBase
 {
     /// <summary>
     /// Filter key to apply
@@ -369,6 +375,13 @@ public sealed record class MeterFilterCondition : ModelBase, IFromRaw<MeterFilte
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class MeterFilterConditionFromRaw : IFromRaw<MeterFilterCondition>
+{
+    public MeterFilterCondition FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => MeterFilterCondition.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(OperatorConverter))]
@@ -602,8 +615,8 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
 /// <summary>
 /// Level 1 nested filter - can contain Level 2 filters
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilter>))]
-public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
+[JsonConverter(typeof(ModelConverter<MeterFilter, MeterFilterFromRaw>))]
+public sealed record class MeterFilter : ModelBase
 {
     /// <summary>
     /// Level 1: Can be conditions or nested filters (2 more levels allowed)
@@ -688,6 +701,12 @@ public sealed record class MeterFilter : ModelBase, IFromRaw<MeterFilter>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class MeterFilterFromRaw : IFromRaw<MeterFilter>
+{
+    public MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        MeterFilter.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -849,10 +868,8 @@ sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
 /// <summary>
 /// Filter condition with key, operator, and value
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilterConditionModel>))]
-public sealed record class MeterFilterConditionModel
-    : ModelBase,
-        IFromRaw<MeterFilterConditionModel>
+[JsonConverter(typeof(ModelConverter<MeterFilterConditionModel, MeterFilterConditionModelFromRaw>))]
+public sealed record class MeterFilterConditionModel : ModelBase
 {
     /// <summary>
     /// Filter key to apply
@@ -965,6 +982,13 @@ public sealed record class MeterFilterConditionModel
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class MeterFilterConditionModelFromRaw : IFromRaw<MeterFilterConditionModel>
+{
+    public MeterFilterConditionModel FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => MeterFilterConditionModel.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(MeterFilterConditionModelOperatorConverter))]
@@ -1203,8 +1227,8 @@ sealed class MeterFilterConditionModelValueConverter : JsonConverter<MeterFilter
 /// <summary>
 /// Level 2 nested filter
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilterModel>))]
-public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterModel>
+[JsonConverter(typeof(ModelConverter<MeterFilterModel, MeterFilterModelFromRaw>))]
+public sealed record class MeterFilterModel : ModelBase
 {
     /// <summary>
     /// Level 2: Can be conditions or nested filters (1 more level allowed)
@@ -1291,6 +1315,12 @@ public sealed record class MeterFilterModel : ModelBase, IFromRaw<MeterFilterMod
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class MeterFilterModelFromRaw : IFromRaw<MeterFilterModel>
+{
+    public MeterFilterModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        MeterFilterModel.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -1452,8 +1482,8 @@ sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelCl
 /// <summary>
 /// Filter condition with key, operator, and value
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilterCondition1>))]
-public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilterCondition1>
+[JsonConverter(typeof(ModelConverter<MeterFilterCondition1, MeterFilterCondition1FromRaw>))]
+public sealed record class MeterFilterCondition1 : ModelBase
 {
     /// <summary>
     /// Filter key to apply
@@ -1566,6 +1596,13 @@ public sealed record class MeterFilterCondition1 : ModelBase, IFromRaw<MeterFilt
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class MeterFilterCondition1FromRaw : IFromRaw<MeterFilterCondition1>
+{
+    public MeterFilterCondition1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => MeterFilterCondition1.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(MeterFilterCondition1OperatorConverter))]
@@ -1803,8 +1840,8 @@ sealed class MeterFilterCondition1ValueConverter : JsonConverter<MeterFilterCond
 /// <summary>
 /// Level 3 nested filter (final nesting level)
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilter1>))]
-public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
+[JsonConverter(typeof(ModelConverter<MeterFilter1, MeterFilter1FromRaw>))]
+public sealed record class MeterFilter1 : ModelBase
 {
     /// <summary>
     /// Level 3: Filter conditions only (max depth reached)
@@ -1891,11 +1928,17 @@ public sealed record class MeterFilter1 : ModelBase, IFromRaw<MeterFilter1>
     }
 }
 
+class MeterFilter1FromRaw : IFromRaw<MeterFilter1>
+{
+    public MeterFilter1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        MeterFilter1.FromRawUnchecked(rawData);
+}
+
 /// <summary>
 /// Filter condition with key, operator, and value
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Clause>))]
-public sealed record class Clause : ModelBase, IFromRaw<Clause>
+[JsonConverter(typeof(ModelConverter<Clause, ClauseFromRaw>))]
+public sealed record class Clause : ModelBase
 {
     /// <summary>
     /// Filter key to apply
@@ -2003,6 +2046,12 @@ public sealed record class Clause : ModelBase, IFromRaw<Clause>
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class ClauseFromRaw : IFromRaw<Clause>
+{
+    public Clause FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Clause.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(ClauseOperatorConverter))]

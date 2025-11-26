@@ -9,8 +9,8 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<CustomerLimitedDetails>))]
-public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<CustomerLimitedDetails>
+[JsonConverter(typeof(ModelConverter<CustomerLimitedDetails, CustomerLimitedDetailsFromRaw>))]
+public sealed record class CustomerLimitedDetails : ModelBase
 {
     /// <summary>
     /// Unique identifier for the customer
@@ -176,4 +176,11 @@ public sealed record class CustomerLimitedDetails : ModelBase, IFromRaw<Customer
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+}
+
+class CustomerLimitedDetailsFromRaw : IFromRaw<CustomerLimitedDetails>
+{
+    public CustomerLimitedDetails FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerLimitedDetails.FromRawUnchecked(rawData);
 }
