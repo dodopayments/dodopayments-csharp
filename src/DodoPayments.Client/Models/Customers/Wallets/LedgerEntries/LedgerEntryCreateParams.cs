@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -8,7 +9,6 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using System = System;
 
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
@@ -29,7 +29,7 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
             if (!this._rawBodyData.TryGetValue("amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'amount' cannot be null",
-                    new System::ArgumentOutOfRangeException("amount", "Missing required argument")
+                    new ArgumentOutOfRangeException("amount", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
@@ -53,7 +53,7 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
             if (!this._rawBodyData.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
-                    new System::ArgumentOutOfRangeException("currency", "Missing required argument")
+                    new ArgumentOutOfRangeException("currency", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
@@ -80,10 +80,7 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
             if (!this._rawBodyData.TryGetValue("entry_type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'entry_type' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "entry_type",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("entry_type", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, EntryType>>(
@@ -179,9 +176,9 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(
+        return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/customers/{0}/wallets/ledger-entries", this.CustomerID)
         )
@@ -219,7 +216,7 @@ sealed class EntryTypeConverter : JsonConverter<EntryType>
 {
     public override EntryType Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

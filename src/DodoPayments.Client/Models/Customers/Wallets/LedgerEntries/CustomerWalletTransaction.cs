@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,6 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using System = System;
 
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
@@ -20,13 +20,13 @@ public sealed record class CustomerWalletTransaction : ModelBase
             if (!this._rawData.TryGetValue("id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
-                    new System::ArgumentOutOfRangeException("id", "Missing required argument")
+                    new ArgumentOutOfRangeException("id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'id' cannot be null",
-                    new System::ArgumentNullException("id")
+                    new ArgumentNullException("id")
                 );
         }
         init
@@ -45,10 +45,7 @@ public sealed record class CustomerWalletTransaction : ModelBase
             if (!this._rawData.TryGetValue("after_balance", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'after_balance' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "after_balance",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("after_balance", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
@@ -69,7 +66,7 @@ public sealed record class CustomerWalletTransaction : ModelBase
             if (!this._rawData.TryGetValue("amount", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'amount' cannot be null",
-                    new System::ArgumentOutOfRangeException("amount", "Missing required argument")
+                    new ArgumentOutOfRangeException("amount", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
@@ -90,10 +87,7 @@ public sealed record class CustomerWalletTransaction : ModelBase
             if (!this._rawData.TryGetValue("before_balance", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'before_balance' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "before_balance",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("before_balance", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
@@ -114,16 +108,13 @@ public sealed record class CustomerWalletTransaction : ModelBase
             if (!this._rawData.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "business_id",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
-                    new System::ArgumentNullException("business_id")
+                    new ArgumentNullException("business_id")
                 );
         }
         init
@@ -135,23 +126,17 @@ public sealed record class CustomerWalletTransaction : ModelBase
         }
     }
 
-    public required System::DateTimeOffset CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
             if (!this._rawData.TryGetValue("created_at", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'created_at' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "created_at",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("created_at", "Missing required argument")
                 );
 
-            return JsonSerializer.Deserialize<System::DateTimeOffset>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
         }
         init
         {
@@ -169,7 +154,7 @@ public sealed record class CustomerWalletTransaction : ModelBase
             if (!this._rawData.TryGetValue("currency", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'currency' cannot be null",
-                    new System::ArgumentOutOfRangeException("currency", "Missing required argument")
+                    new ArgumentOutOfRangeException("currency", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
@@ -193,16 +178,13 @@ public sealed record class CustomerWalletTransaction : ModelBase
             if (!this._rawData.TryGetValue("customer_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'customer_id' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "customer_id",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("customer_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'customer_id' cannot be null",
-                    new System::ArgumentNullException("customer_id")
+                    new ArgumentNullException("customer_id")
                 );
         }
         init
@@ -221,10 +203,7 @@ public sealed record class CustomerWalletTransaction : ModelBase
             if (!this._rawData.TryGetValue("event_type", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'event_type' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "event_type",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("event_type", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, EventType>>(
@@ -248,10 +227,7 @@ public sealed record class CustomerWalletTransaction : ModelBase
             if (!this._rawData.TryGetValue("is_credit", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'is_credit' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "is_credit",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("is_credit", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
@@ -363,7 +339,7 @@ sealed class EventTypeConverter : JsonConverter<EventType>
 {
     public override EventType Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

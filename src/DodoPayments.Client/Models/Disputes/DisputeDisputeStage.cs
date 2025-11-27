@@ -1,7 +1,7 @@
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Disputes;
 
@@ -17,7 +17,7 @@ sealed class DisputeDisputeStageConverter : JsonConverter<DisputeDisputeStage>
 {
     public override DisputeDisputeStage Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
