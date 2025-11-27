@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Products.Images;
 
 namespace DodoPayments.Client.Services.Products;
 
+/// <inheritdoc />
 public sealed class ImageService : IImageService
 {
+    /// <inheritdoc/>
     public IImageService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new ImageService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class ImageService : IImageService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<ImageUpdateResponse> Update(
         ImageUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -50,6 +53,7 @@ public sealed class ImageService : IImageService
         return image;
     }
 
+    /// <inheritdoc/>
     public async Task<ImageUpdateResponse> Update(
         string id,
         ImageUpdateParams? parameters = null,

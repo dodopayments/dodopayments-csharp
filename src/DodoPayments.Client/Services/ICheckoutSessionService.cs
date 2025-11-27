@@ -13,6 +13,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface ICheckoutSessionService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     ICheckoutSessionService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<CheckoutSessionResponse> Create(
@@ -24,6 +29,8 @@ public interface ICheckoutSessionService
         CheckoutSessionRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Retrieve(CheckoutSessionRetrieveParams, CancellationToken)"/>
     Task<CheckoutSessionStatus> Retrieve(
         string id,
         CheckoutSessionRetrieveParams? parameters = null,

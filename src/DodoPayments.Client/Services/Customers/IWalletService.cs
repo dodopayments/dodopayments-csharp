@@ -14,6 +14,11 @@ namespace DodoPayments.Client.Services.Customers;
 /// </summary>
 public interface IWalletService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IWalletService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     ILedgerEntryService LedgerEntries { get; }
@@ -22,6 +27,8 @@ public interface IWalletService
         WalletListParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="List(WalletListParams, CancellationToken)"/>
     Task<WalletListResponse> List(
         string customerID,
         WalletListParams? parameters = null,

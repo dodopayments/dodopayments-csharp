@@ -4,8 +4,10 @@ using Invoices = DodoPayments.Client.Services.Invoices;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class InvoiceService : IInvoiceService
 {
+    /// <inheritdoc/>
     public IInvoiceService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new InvoiceService(this._client.WithOptions(modifier));

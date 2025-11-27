@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.LicenseKeys;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class LicenseKeyService : ILicenseKeyService
 {
+    /// <inheritdoc/>
     public ILicenseKeyService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new LicenseKeyService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class LicenseKeyService : ILicenseKeyService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseKey> Retrieve(
         LicenseKeyRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -50,6 +53,7 @@ public sealed class LicenseKeyService : ILicenseKeyService
         return licenseKey;
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseKey> Retrieve(
         string id,
         LicenseKeyRetrieveParams? parameters = null,
@@ -61,6 +65,7 @@ public sealed class LicenseKeyService : ILicenseKeyService
         return await this.Retrieve(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseKey> Update(
         LicenseKeyUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -89,6 +94,7 @@ public sealed class LicenseKeyService : ILicenseKeyService
         return licenseKey;
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseKey> Update(
         string id,
         LicenseKeyUpdateParams? parameters = null,
@@ -100,6 +106,7 @@ public sealed class LicenseKeyService : ILicenseKeyService
         return await this.Update(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseKeyListPageResponse> List(
         LicenseKeyListParams? parameters = null,
         CancellationToken cancellationToken = default

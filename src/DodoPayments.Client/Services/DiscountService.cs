@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Discounts;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class DiscountService : IDiscountService
 {
+    /// <inheritdoc/>
     public IDiscountService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new DiscountService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class DiscountService : IDiscountService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<Discount> Create(
         DiscountCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -45,6 +48,7 @@ public sealed class DiscountService : IDiscountService
         return discount;
     }
 
+    /// <inheritdoc/>
     public async Task<Discount> Retrieve(
         DiscountRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -73,6 +77,7 @@ public sealed class DiscountService : IDiscountService
         return discount;
     }
 
+    /// <inheritdoc/>
     public async Task<Discount> Retrieve(
         string discountID,
         DiscountRetrieveParams? parameters = null,
@@ -84,6 +89,7 @@ public sealed class DiscountService : IDiscountService
         return await this.Retrieve(parameters with { DiscountID = discountID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<Discount> Update(
         DiscountUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -112,6 +118,7 @@ public sealed class DiscountService : IDiscountService
         return discount;
     }
 
+    /// <inheritdoc/>
     public async Task<Discount> Update(
         string discountID,
         DiscountUpdateParams? parameters = null,
@@ -123,6 +130,7 @@ public sealed class DiscountService : IDiscountService
         return await this.Update(parameters with { DiscountID = discountID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<DiscountListPageResponse> List(
         DiscountListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -148,6 +156,7 @@ public sealed class DiscountService : IDiscountService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task Delete(
         DiscountDeleteParams parameters,
         CancellationToken cancellationToken = default
@@ -168,6 +177,7 @@ public sealed class DiscountService : IDiscountService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task Delete(
         string discountID,
         DiscountDeleteParams? parameters = null,

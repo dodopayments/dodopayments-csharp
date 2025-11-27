@@ -13,6 +13,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IAddonService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IAddonService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<AddonResponse> Create(
@@ -24,6 +29,8 @@ public interface IAddonService
         AddonRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Retrieve(AddonRetrieveParams, CancellationToken)"/>
     Task<AddonResponse> Retrieve(
         string id,
         AddonRetrieveParams? parameters = null,
@@ -34,6 +41,8 @@ public interface IAddonService
         AddonUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Update(AddonUpdateParams, CancellationToken)"/>
     Task<AddonResponse> Update(
         string id,
         AddonUpdateParams? parameters = null,
@@ -49,6 +58,8 @@ public interface IAddonService
         AddonUpdateImagesParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="UpdateImages(AddonUpdateImagesParams, CancellationToken)"/>
     Task<AddonUpdateImagesResponse> UpdateImages(
         string id,
         AddonUpdateImagesParams? parameters = null,

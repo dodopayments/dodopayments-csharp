@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class PaymentService : IPaymentService
 {
+    /// <inheritdoc/>
     public IPaymentService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new PaymentService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class PaymentService : IPaymentService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<PaymentCreateResponse> Create(
         PaymentCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -45,6 +48,7 @@ public sealed class PaymentService : IPaymentService
         return payment;
     }
 
+    /// <inheritdoc/>
     public async Task<Payment> Retrieve(
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -71,6 +75,7 @@ public sealed class PaymentService : IPaymentService
         return payment;
     }
 
+    /// <inheritdoc/>
     public async Task<Payment> Retrieve(
         string paymentID,
         PaymentRetrieveParams? parameters = null,
@@ -82,6 +87,7 @@ public sealed class PaymentService : IPaymentService
         return await this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<PaymentListPageResponse> List(
         PaymentListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -107,6 +113,7 @@ public sealed class PaymentService : IPaymentService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
         PaymentRetrieveLineItemsParams parameters,
         CancellationToken cancellationToken = default
@@ -135,6 +142,7 @@ public sealed class PaymentService : IPaymentService
         return deserializedResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
         string paymentID,
         PaymentRetrieveLineItemsParams? parameters = null,

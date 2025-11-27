@@ -14,12 +14,19 @@ namespace DodoPayments.Client.Services.Customers.Wallets;
 /// </summary>
 public interface ILedgerEntryService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     ILedgerEntryService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<CustomerWallet> Create(
         LedgerEntryCreateParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Create(LedgerEntryCreateParams, CancellationToken)"/>
     Task<CustomerWallet> Create(
         string customerID,
         LedgerEntryCreateParams parameters,
@@ -30,6 +37,8 @@ public interface ILedgerEntryService
         LedgerEntryListParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="List(LedgerEntryListParams, CancellationToken)"/>
     Task<LedgerEntryListPageResponse> List(
         string customerID,
         LedgerEntryListParams? parameters = null,

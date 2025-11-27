@@ -13,6 +13,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IDiscountService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IDiscountService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
@@ -32,9 +37,7 @@ public interface IDiscountService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// GET /discounts/{discount_id}
-    /// </summary>
+    /// <inheritdoc cref="Retrieve(DiscountRetrieveParams, CancellationToken)"/>
     Task<Discount> Retrieve(
         string discountID,
         DiscountRetrieveParams? parameters = null,
@@ -49,9 +52,7 @@ public interface IDiscountService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// PATCH /discounts/{discount_id}
-    /// </summary>
+    /// <inheritdoc cref="Update(DiscountUpdateParams, CancellationToken)"/>
     Task<Discount> Update(
         string discountID,
         DiscountUpdateParams? parameters = null,
@@ -71,9 +72,7 @@ public interface IDiscountService
     /// </summary>
     Task Delete(DiscountDeleteParams parameters, CancellationToken cancellationToken = default);
 
-    /// <summary>
-    /// DELETE /discounts/{discount_id}
-    /// </summary>
+    /// <inheritdoc cref="Delete(DiscountDeleteParams, CancellationToken)"/>
     Task Delete(
         string discountID,
         DiscountDeleteParams? parameters = null,

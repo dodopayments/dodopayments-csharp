@@ -11,6 +11,7 @@ using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client;
 
+/// <inheritdoc/>
 public sealed class DodoPaymentsClient : IDodoPaymentsClient
 {
     static readonly ThreadLocal<Random> _threadLocalRandom = new(() => new Random());
@@ -22,48 +23,56 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
 
     readonly ClientOptions _options;
 
+    /// <inheritdoc/>
     public HttpClient HttpClient
     {
         get { return this._options.HttpClient; }
         init { this._options.HttpClient = value; }
     }
 
+    /// <inheritdoc/>
     public Uri BaseUrl
     {
         get { return this._options.BaseUrl; }
         init { this._options.BaseUrl = value; }
     }
 
+    /// <inheritdoc/>
     public bool ResponseValidation
     {
         get { return this._options.ResponseValidation; }
         init { this._options.ResponseValidation = value; }
     }
 
+    /// <inheritdoc/>
     public int? MaxRetries
     {
         get { return this._options.MaxRetries; }
         init { this._options.MaxRetries = value; }
     }
 
+    /// <inheritdoc/>
     public TimeSpan? Timeout
     {
         get { return this._options.Timeout; }
         init { this._options.Timeout = value; }
     }
 
+    /// <inheritdoc/>
     public string BearerToken
     {
         get { return this._options.BearerToken; }
         init { this._options.BearerToken = value; }
     }
 
+    /// <inheritdoc/>
     public string? WebhookKey
     {
         get { return this._options.WebhookKey; }
         init { this._options.WebhookKey = value; }
     }
 
+    /// <inheritdoc/>
     public IDodoPaymentsClient WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new DodoPaymentsClient(modifier(this._options));
@@ -189,6 +198,7 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         get { return _meters.Value; }
     }
 
+    /// <inheritdoc/>
     public async Task<HttpResponse> Execute<T>(
         HttpRequest<T> request,
         CancellationToken cancellationToken = default

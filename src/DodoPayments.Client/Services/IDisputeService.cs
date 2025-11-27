@@ -13,12 +13,19 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IDisputeService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IDisputeService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<GetDispute> Retrieve(
         DisputeRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Retrieve(DisputeRetrieveParams, CancellationToken)"/>
     Task<GetDispute> Retrieve(
         string disputeID,
         DisputeRetrieveParams? parameters = null,
