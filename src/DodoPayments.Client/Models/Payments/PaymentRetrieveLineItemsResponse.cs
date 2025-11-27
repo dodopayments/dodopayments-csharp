@@ -42,7 +42,7 @@ public sealed record class PaymentRetrieveLineItemsResponse : ModelBase
         }
     }
 
-    public required List<ItemModel> Items
+    public required IReadOnlyList<ItemModel> Items
     {
         get
         {

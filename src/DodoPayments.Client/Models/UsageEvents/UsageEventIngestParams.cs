@@ -38,7 +38,7 @@ public sealed record class UsageEventIngestParams : ParamsBase
     /// <summary>
     /// List of events to be pushed
     /// </summary>
-    public required List<EventInput> Events
+    public required IReadOnlyList<EventInput> Events
     {
         get
         {

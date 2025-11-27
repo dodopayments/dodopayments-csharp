@@ -108,7 +108,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

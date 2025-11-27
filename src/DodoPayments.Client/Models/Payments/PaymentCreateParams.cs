@@ -78,7 +78,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// <summary>
     /// List of products in the cart. Must contain at least 1 and at most 100 items.
     /// </summary>
-    public required List<OneTimeProductCartItem> ProductCart
+    public required IReadOnlyList<OneTimeProductCartItem> ProductCart
     {
         get
         {
@@ -114,7 +114,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// see it. Availability still depends on other factors (e.g., customer location,
     /// merchant settings).</para>
     /// </summary>
-    public List<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
+    public IReadOnlyList<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
         get
         {
@@ -210,7 +210,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// <summary>
     /// Additional metadata associated with the payment. Defaults to empty if not provided.
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

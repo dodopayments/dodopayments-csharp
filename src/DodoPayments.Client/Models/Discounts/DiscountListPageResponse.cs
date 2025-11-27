@@ -15,7 +15,7 @@ public sealed record class DiscountListPageResponse : ModelBase
     /// <summary>
     /// Array of active (non-deleted) discounts for the current page.
     /// </summary>
-    public required List<Discount> Items
+    public required IReadOnlyList<Discount> Items
     {
         get
         {

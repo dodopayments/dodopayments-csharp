@@ -106,7 +106,7 @@ public sealed record class ProductCreateParams : ParamsBase
     /// <summary>
     /// Addons available for subscription product
     /// </summary>
-    public List<string>? Addons
+    public IReadOnlyList<string>? Addons
     {
         get
         {
@@ -292,7 +292,7 @@ public sealed record class ProductCreateParams : ParamsBase
     /// <summary>
     /// Additional metadata for the product
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

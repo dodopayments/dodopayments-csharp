@@ -101,7 +101,7 @@ public sealed record class EventInput : ModelBase
     /// Custom metadata. Only key value pairs are accepted, objects or arrays submitted
     /// will be rejected.
     /// </summary>
-    public Dictionary<string, MetadataModel>? Metadata
+    public IReadOnlyDictionary<string, MetadataModel>? Metadata
     {
         get
         {

@@ -22,7 +22,7 @@ public sealed record class CustomerUpdateParams : ParamsBase
     /// <summary>
     /// Additional metadata for the customer
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

@@ -50,7 +50,7 @@ public sealed record class RefundCreateParams : ParamsBase
     /// <summary>
     /// Partially Refund an Individual Item
     /// </summary>
-    public List<Item>? Items
+    public IReadOnlyList<Item>? Items
     {
         get
         {
@@ -71,7 +71,7 @@ public sealed record class RefundCreateParams : ParamsBase
     /// <summary>
     /// Additional metadata associated with the refund.
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

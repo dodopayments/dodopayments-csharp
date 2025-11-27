@@ -754,7 +754,7 @@ public sealed record class Payment : ModelBase
     /// <summary>
     /// List of disputes associated with this payment
     /// </summary>
-    public required List<Disputes::Dispute> Disputes
+    public required IReadOnlyList<Disputes::Dispute> Disputes
     {
         get
         {
@@ -785,7 +785,7 @@ public sealed record class Payment : ModelBase
     /// <summary>
     /// Additional custom data associated with the payment
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {
@@ -847,7 +847,7 @@ public sealed record class Payment : ModelBase
     /// <summary>
     /// List of refunds issued for this payment
     /// </summary>
-    public required List<Payments::Refund> Refunds
+    public required IReadOnlyList<Payments::Refund> Refunds
     {
         get
         {
@@ -1202,7 +1202,7 @@ public sealed record class Payment : ModelBase
     /// <summary>
     /// List of products purchased in a one-time payment
     /// </summary>
-    public List<Payments::ProductCart>? ProductCart
+    public IReadOnlyList<Payments::ProductCart>? ProductCart
     {
         get
         {
@@ -1594,7 +1594,7 @@ public sealed record class Subscription : ModelBase
     /// <summary>
     /// Addons associated with this subscription
     /// </summary>
-    public required List<Subscriptions::AddonCartResponseItem> Addons
+    public required IReadOnlyList<Subscriptions::AddonCartResponseItem> Addons
     {
         get
         {
@@ -1762,7 +1762,7 @@ public sealed record class Subscription : ModelBase
     /// <summary>
     /// Additional custom data associated with the subscription
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {
@@ -1793,7 +1793,7 @@ public sealed record class Subscription : ModelBase
     /// <summary>
     /// Meters associated with this subscription (for usage-based billing)
     /// </summary>
-    public required List<Subscriptions::Meter> Meters
+    public required IReadOnlyList<Subscriptions::Meter> Meters
     {
         get
         {
@@ -2704,7 +2704,7 @@ public sealed record class Refund : ModelBase
     /// <summary>
     /// Additional metadata stored with the refund.
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {

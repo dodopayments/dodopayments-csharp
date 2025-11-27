@@ -136,7 +136,7 @@ public sealed record class Customer : ModelBase
     /// <summary>
     /// Additional metadata for the customer
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

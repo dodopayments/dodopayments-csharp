@@ -13,7 +13,7 @@ namespace DodoPayments.Client.Models.Products;
 [JsonConverter(typeof(ModelConverter<ProductListPageResponse, ProductListPageResponseFromRaw>))]
 public sealed record class ProductListPageResponse : ModelBase
 {
-    public required List<Item> Items
+    public required IReadOnlyList<Item> Items
     {
         get
         {
@@ -165,7 +165,7 @@ public sealed record class Item : ModelBase
     /// <summary>
     /// Additional custom data associated with the product
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {

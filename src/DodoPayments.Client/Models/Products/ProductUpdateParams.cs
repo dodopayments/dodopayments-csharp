@@ -24,7 +24,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// <summary>
     /// Available Addons for subscription products
     /// </summary>
-    public List<string>? Addons
+    public IReadOnlyList<string>? Addons
     {
         get
         {
@@ -238,7 +238,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// <summary>
     /// Additional metadata for the product
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {
@@ -422,7 +422,7 @@ public sealed record class DigitalProductDeliveryModel : ModelBase
     /// <summary>
     /// Uploaded files ids of digital product
     /// </summary>
-    public List<string>? Files
+    public IReadOnlyList<string>? Files
     {
         get
         {

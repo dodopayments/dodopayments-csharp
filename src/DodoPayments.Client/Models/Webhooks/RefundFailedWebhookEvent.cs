@@ -299,7 +299,7 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
     /// <summary>
     /// Additional metadata stored with the refund.
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {

@@ -17,7 +17,7 @@ namespace DodoPayments.Client.Models.LicenseKeyInstances;
 )]
 public sealed record class LicenseKeyInstanceListPageResponse : ModelBase
 {
-    public required List<LicenseKeyInstance> Items
+    public required IReadOnlyList<LicenseKeyInstance> Items
     {
         get
         {
