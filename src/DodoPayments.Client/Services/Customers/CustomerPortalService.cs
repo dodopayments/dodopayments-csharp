@@ -9,8 +9,10 @@ using DodoPayments.Client.Models.Customers.CustomerPortal;
 
 namespace DodoPayments.Client.Services.Customers;
 
+/// <inheritdoc />
 public sealed class CustomerPortalService : ICustomerPortalService
 {
+    /// <inheritdoc/>
     public ICustomerPortalService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new CustomerPortalService(this._client.WithOptions(modifier));
@@ -23,6 +25,7 @@ public sealed class CustomerPortalService : ICustomerPortalService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<CustomerPortalSession> Create(
         CustomerPortalCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -51,6 +54,7 @@ public sealed class CustomerPortalService : ICustomerPortalService
         return customerPortalSession;
     }
 
+    /// <inheritdoc/>
     public async Task<CustomerPortalSession> Create(
         string customerID,
         CustomerPortalCreateParams? parameters = null,

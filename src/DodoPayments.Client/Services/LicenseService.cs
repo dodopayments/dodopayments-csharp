@@ -7,8 +7,10 @@ using DodoPayments.Client.Models.Licenses;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class LicenseService : ILicenseService
 {
+    /// <inheritdoc/>
     public ILicenseService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new LicenseService(this._client.WithOptions(modifier));
@@ -21,6 +23,7 @@ public sealed class LicenseService : ILicenseService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseActivateResponse> Activate(
         LicenseActivateParams parameters,
         CancellationToken cancellationToken = default
@@ -44,6 +47,7 @@ public sealed class LicenseService : ILicenseService
         return deserializedResponse;
     }
 
+    /// <inheritdoc/>
     public async Task Deactivate(
         LicenseDeactivateParams parameters,
         CancellationToken cancellationToken = default
@@ -59,6 +63,7 @@ public sealed class LicenseService : ILicenseService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseValidateResponse> Validate(
         LicenseValidateParams parameters,
         CancellationToken cancellationToken = default

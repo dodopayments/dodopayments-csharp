@@ -13,6 +13,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IBrandService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IBrandService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<Brand> Create(
@@ -28,9 +33,7 @@ public interface IBrandService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Thin handler just calls `get_brand` and wraps in `Json(...)`
-    /// </summary>
+    /// <inheritdoc cref="Retrieve(BrandRetrieveParams, CancellationToken)"/>
     Task<Brand> Retrieve(
         string id,
         BrandRetrieveParams? parameters = null,
@@ -38,6 +41,8 @@ public interface IBrandService
     );
 
     Task<Brand> Update(BrandUpdateParams parameters, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc cref="Update(BrandUpdateParams, CancellationToken)"/>
     Task<Brand> Update(
         string id,
         BrandUpdateParams? parameters = null,
@@ -53,6 +58,8 @@ public interface IBrandService
         BrandUpdateImagesParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="UpdateImages(BrandUpdateImagesParams, CancellationToken)"/>
     Task<BrandUpdateImagesResponse> UpdateImages(
         string id,
         BrandUpdateImagesParams? parameters = null,

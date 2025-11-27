@@ -13,6 +13,11 @@ namespace DodoPayments.Client.Services.Webhooks;
 /// </summary>
 public interface IHeaderService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IHeaderService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
@@ -23,9 +28,7 @@ public interface IHeaderService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Get a webhook by id
-    /// </summary>
+    /// <inheritdoc cref="Retrieve(HeaderRetrieveParams, CancellationToken)"/>
     Task<HeaderRetrieveResponse> Retrieve(
         string webhookID,
         HeaderRetrieveParams? parameters = null,
@@ -37,9 +40,7 @@ public interface IHeaderService
     /// </summary>
     Task Update(HeaderUpdateParams parameters, CancellationToken cancellationToken = default);
 
-    /// <summary>
-    /// Patch a webhook by id
-    /// </summary>
+    /// <inheritdoc cref="Update(HeaderUpdateParams, CancellationToken)"/>
     Task Update(
         string webhookID,
         HeaderUpdateParams parameters,

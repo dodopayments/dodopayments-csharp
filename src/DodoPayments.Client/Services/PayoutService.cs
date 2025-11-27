@@ -7,8 +7,10 @@ using DodoPayments.Client.Models.Payouts;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class PayoutService : IPayoutService
 {
+    /// <inheritdoc/>
     public IPayoutService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new PayoutService(this._client.WithOptions(modifier));
@@ -21,6 +23,7 @@ public sealed class PayoutService : IPayoutService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<PayoutListPageResponse> List(
         PayoutListParams? parameters = null,
         CancellationToken cancellationToken = default

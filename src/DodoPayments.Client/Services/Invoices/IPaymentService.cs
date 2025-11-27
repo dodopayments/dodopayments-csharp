@@ -13,6 +13,11 @@ namespace DodoPayments.Client.Services.Invoices;
 /// </summary>
 public interface IPaymentService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     global::DodoPayments.Client.Services.Invoices.IPaymentService WithOptions(
         Func<ClientOptions, ClientOptions> modifier
     );
@@ -21,6 +26,8 @@ public interface IPaymentService
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Retrieve(PaymentRetrieveParams, CancellationToken)"/>
     Task<HttpResponse> Retrieve(
         string paymentID,
         PaymentRetrieveParams? parameters = null,
@@ -31,6 +38,8 @@ public interface IPaymentService
         PaymentRetrieveRefundParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="RetrieveRefund(PaymentRetrieveRefundParams, CancellationToken)"/>
     Task<HttpResponse> RetrieveRefund(
         string refundID,
         PaymentRetrieveRefundParams? parameters = null,

@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Disputes;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class DisputeService : IDisputeService
 {
+    /// <inheritdoc/>
     public IDisputeService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new DisputeService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class DisputeService : IDisputeService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<GetDispute> Retrieve(
         DisputeRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -50,6 +53,7 @@ public sealed class DisputeService : IDisputeService
         return getDispute;
     }
 
+    /// <inheritdoc/>
     public async Task<GetDispute> Retrieve(
         string disputeID,
         DisputeRetrieveParams? parameters = null,
@@ -61,6 +65,7 @@ public sealed class DisputeService : IDisputeService
         return await this.Retrieve(parameters with { DisputeID = disputeID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<DisputeListPageResponse> List(
         DisputeListParams? parameters = null,
         CancellationToken cancellationToken = default

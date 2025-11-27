@@ -9,8 +9,10 @@ using DodoPayments.Client.Services.Products;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class ProductService : IProductService
 {
+    /// <inheritdoc/>
     public IProductService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new ProductService(this._client.WithOptions(modifier));
@@ -30,6 +32,7 @@ public sealed class ProductService : IProductService
         get { return _images.Value; }
     }
 
+    /// <inheritdoc/>
     public async Task<Product> Create(
         ProductCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -51,6 +54,7 @@ public sealed class ProductService : IProductService
         return product;
     }
 
+    /// <inheritdoc/>
     public async Task<Product> Retrieve(
         ProductRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -77,6 +81,7 @@ public sealed class ProductService : IProductService
         return product;
     }
 
+    /// <inheritdoc/>
     public async Task<Product> Retrieve(
         string id,
         ProductRetrieveParams? parameters = null,
@@ -88,6 +93,7 @@ public sealed class ProductService : IProductService
         return await this.Retrieve(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task Update(
         ProductUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -108,6 +114,7 @@ public sealed class ProductService : IProductService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task Update(
         string id,
         ProductUpdateParams? parameters = null,
@@ -119,6 +126,7 @@ public sealed class ProductService : IProductService
         await this.Update(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<ProductListPageResponse> List(
         ProductListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -144,6 +152,7 @@ public sealed class ProductService : IProductService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task Archive(
         ProductArchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -164,6 +173,7 @@ public sealed class ProductService : IProductService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task Archive(
         string id,
         ProductArchiveParams? parameters = null,
@@ -175,6 +185,7 @@ public sealed class ProductService : IProductService
         await this.Archive(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task Unarchive(
         ProductUnarchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -195,6 +206,7 @@ public sealed class ProductService : IProductService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task Unarchive(
         string id,
         ProductUnarchiveParams? parameters = null,
@@ -206,6 +218,7 @@ public sealed class ProductService : IProductService
         await this.Unarchive(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<ProductUpdateFilesResponse> UpdateFiles(
         ProductUpdateFilesParams parameters,
         CancellationToken cancellationToken = default
@@ -234,6 +247,7 @@ public sealed class ProductService : IProductService
         return deserializedResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<ProductUpdateFilesResponse> UpdateFiles(
         string id,
         ProductUpdateFilesParams parameters,

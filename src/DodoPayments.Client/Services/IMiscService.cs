@@ -14,6 +14,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IMiscService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IMiscService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<List<ApiEnum<string, CountryCode>>> ListSupportedCountries(

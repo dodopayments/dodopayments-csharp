@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.UsageEvents;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class UsageEventService : IUsageEventService
 {
+    /// <inheritdoc/>
     public IUsageEventService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new UsageEventService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class UsageEventService : IUsageEventService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<Event> Retrieve(
         UsageEventRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -50,6 +53,7 @@ public sealed class UsageEventService : IUsageEventService
         return deserializedResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<Event> Retrieve(
         string eventID,
         UsageEventRetrieveParams? parameters = null,
@@ -61,6 +65,7 @@ public sealed class UsageEventService : IUsageEventService
         return await this.Retrieve(parameters with { EventID = eventID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<UsageEventListPageResponse> List(
         UsageEventListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -86,6 +91,7 @@ public sealed class UsageEventService : IUsageEventService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task<UsageEventIngestResponse> Ingest(
         UsageEventIngestParams parameters,
         CancellationToken cancellationToken = default

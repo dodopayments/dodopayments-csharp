@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Brands;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class BrandService : IBrandService
 {
+    /// <inheritdoc/>
     public IBrandService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new BrandService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class BrandService : IBrandService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<Brand> Create(
         BrandCreateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -45,6 +48,7 @@ public sealed class BrandService : IBrandService
         return brand;
     }
 
+    /// <inheritdoc/>
     public async Task<Brand> Retrieve(
         BrandRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -71,6 +75,7 @@ public sealed class BrandService : IBrandService
         return brand;
     }
 
+    /// <inheritdoc/>
     public async Task<Brand> Retrieve(
         string id,
         BrandRetrieveParams? parameters = null,
@@ -82,6 +87,7 @@ public sealed class BrandService : IBrandService
         return await this.Retrieve(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<Brand> Update(
         BrandUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -108,6 +114,7 @@ public sealed class BrandService : IBrandService
         return brand;
     }
 
+    /// <inheritdoc/>
     public async Task<Brand> Update(
         string id,
         BrandUpdateParams? parameters = null,
@@ -119,6 +126,7 @@ public sealed class BrandService : IBrandService
         return await this.Update(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<BrandListResponse> List(
         BrandListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -144,6 +152,7 @@ public sealed class BrandService : IBrandService
         return brands;
     }
 
+    /// <inheritdoc/>
     public async Task<BrandUpdateImagesResponse> UpdateImages(
         BrandUpdateImagesParams parameters,
         CancellationToken cancellationToken = default
@@ -172,6 +181,7 @@ public sealed class BrandService : IBrandService
         return deserializedResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<BrandUpdateImagesResponse> UpdateImages(
         string id,
         BrandUpdateImagesParams? parameters = null,

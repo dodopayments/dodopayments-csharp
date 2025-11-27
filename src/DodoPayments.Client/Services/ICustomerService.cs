@@ -14,6 +14,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface ICustomerService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     ICustomerService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     ICustomerPortalService CustomerPortal { get; }
@@ -29,6 +34,8 @@ public interface ICustomerService
         CustomerRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Retrieve(CustomerRetrieveParams, CancellationToken)"/>
     Task<Customer> Retrieve(
         string customerID,
         CustomerRetrieveParams? parameters = null,
@@ -39,6 +46,8 @@ public interface ICustomerService
         CustomerUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Update(CustomerUpdateParams, CancellationToken)"/>
     Task<Customer> Update(
         string customerID,
         CustomerUpdateParams? parameters = null,
@@ -54,6 +63,8 @@ public interface ICustomerService
         CustomerRetrievePaymentMethodsParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="RetrievePaymentMethods(CustomerRetrievePaymentMethodsParams, CancellationToken)"/>
     Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
         string customerID,
         CustomerRetrievePaymentMethodsParams? parameters = null,

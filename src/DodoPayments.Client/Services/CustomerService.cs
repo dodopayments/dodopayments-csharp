@@ -9,8 +9,10 @@ using DodoPayments.Client.Services.Customers;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class CustomerService : ICustomerService
 {
+    /// <inheritdoc/>
     public ICustomerService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new CustomerService(this._client.WithOptions(modifier));
@@ -37,6 +39,7 @@ public sealed class CustomerService : ICustomerService
         get { return _wallets.Value; }
     }
 
+    /// <inheritdoc/>
     public async Task<Customer> Create(
         CustomerCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -60,6 +63,7 @@ public sealed class CustomerService : ICustomerService
         return customer;
     }
 
+    /// <inheritdoc/>
     public async Task<Customer> Retrieve(
         CustomerRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -88,6 +92,7 @@ public sealed class CustomerService : ICustomerService
         return customer;
     }
 
+    /// <inheritdoc/>
     public async Task<Customer> Retrieve(
         string customerID,
         CustomerRetrieveParams? parameters = null,
@@ -99,6 +104,7 @@ public sealed class CustomerService : ICustomerService
         return await this.Retrieve(parameters with { CustomerID = customerID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<Customer> Update(
         CustomerUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -127,6 +133,7 @@ public sealed class CustomerService : ICustomerService
         return customer;
     }
 
+    /// <inheritdoc/>
     public async Task<Customer> Update(
         string customerID,
         CustomerUpdateParams? parameters = null,
@@ -138,6 +145,7 @@ public sealed class CustomerService : ICustomerService
         return await this.Update(parameters with { CustomerID = customerID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<CustomerListPageResponse> List(
         CustomerListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -163,6 +171,7 @@ public sealed class CustomerService : ICustomerService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
         CustomerRetrievePaymentMethodsParams parameters,
         CancellationToken cancellationToken = default
@@ -191,6 +200,7 @@ public sealed class CustomerService : ICustomerService
         return deserializedResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
         string customerID,
         CustomerRetrievePaymentMethodsParams? parameters = null,

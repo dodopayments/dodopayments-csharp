@@ -13,6 +13,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface ILicenseService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     ILicenseService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<LicenseActivateResponse> Activate(

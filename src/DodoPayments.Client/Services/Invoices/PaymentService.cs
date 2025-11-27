@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Invoices.Payments;
 
 namespace DodoPayments.Client.Services.Invoices;
 
+/// <inheritdoc />
 public sealed class PaymentService : global::DodoPayments.Client.Services.Invoices.IPaymentService
 {
+    /// <inheritdoc/>
     public global::DodoPayments.Client.Services.Invoices.IPaymentService WithOptions(
         Func<ClientOptions, ClientOptions> modifier
     )
@@ -26,6 +28,7 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<HttpResponse> Retrieve(
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -47,6 +50,7 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
         return response;
     }
 
+    /// <inheritdoc/>
     public async Task<HttpResponse> Retrieve(
         string paymentID,
         PaymentRetrieveParams? parameters = null,
@@ -58,6 +62,7 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
         return await this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<HttpResponse> RetrieveRefund(
         PaymentRetrieveRefundParams parameters,
         CancellationToken cancellationToken = default
@@ -79,6 +84,7 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
         return response;
     }
 
+    /// <inheritdoc/>
     public async Task<HttpResponse> RetrieveRefund(
         string refundID,
         PaymentRetrieveRefundParams? parameters = null,
