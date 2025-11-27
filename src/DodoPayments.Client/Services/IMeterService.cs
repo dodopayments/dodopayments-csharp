@@ -13,6 +13,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IMeterService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IMeterService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<Meter> Create(MeterCreateParams parameters, CancellationToken cancellationToken = default);
@@ -21,6 +26,8 @@ public interface IMeterService
         MeterRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Retrieve(MeterRetrieveParams, CancellationToken)"/>
     Task<Meter> Retrieve(
         string id,
         MeterRetrieveParams? parameters = null,
@@ -33,6 +40,8 @@ public interface IMeterService
     );
 
     Task Archive(MeterArchiveParams parameters, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc cref="Archive(MeterArchiveParams, CancellationToken)"/>
     Task Archive(
         string id,
         MeterArchiveParams? parameters = null,
@@ -40,6 +49,8 @@ public interface IMeterService
     );
 
     Task Unarchive(MeterUnarchiveParams parameters, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc cref="Unarchive(MeterUnarchiveParams, CancellationToken)"/>
     Task Unarchive(
         string id,
         MeterUnarchiveParams? parameters = null,

@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Addons;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class AddonService : IAddonService
 {
+    /// <inheritdoc/>
     public IAddonService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new AddonService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class AddonService : IAddonService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<AddonResponse> Create(
         AddonCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -45,6 +48,7 @@ public sealed class AddonService : IAddonService
         return addonResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<AddonResponse> Retrieve(
         AddonRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -73,6 +77,7 @@ public sealed class AddonService : IAddonService
         return addonResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<AddonResponse> Retrieve(
         string id,
         AddonRetrieveParams? parameters = null,
@@ -84,6 +89,7 @@ public sealed class AddonService : IAddonService
         return await this.Retrieve(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<AddonResponse> Update(
         AddonUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -112,6 +118,7 @@ public sealed class AddonService : IAddonService
         return addonResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<AddonResponse> Update(
         string id,
         AddonUpdateParams? parameters = null,
@@ -123,6 +130,7 @@ public sealed class AddonService : IAddonService
         return await this.Update(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<AddonListPageResponse> List(
         AddonListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -148,6 +156,7 @@ public sealed class AddonService : IAddonService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task<AddonUpdateImagesResponse> UpdateImages(
         AddonUpdateImagesParams parameters,
         CancellationToken cancellationToken = default
@@ -176,6 +185,7 @@ public sealed class AddonService : IAddonService
         return deserializedResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<AddonUpdateImagesResponse> UpdateImages(
         string id,
         AddonUpdateImagesParams? parameters = null,

@@ -14,6 +14,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IWebhookService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IWebhookService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IHeaderService Headers { get; }
@@ -34,9 +39,7 @@ public interface IWebhookService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Get a webhook by id
-    /// </summary>
+    /// <inheritdoc cref="Retrieve(WebhookRetrieveParams, CancellationToken)"/>
     Task<WebhookDetails> Retrieve(
         string webhookID,
         WebhookRetrieveParams? parameters = null,
@@ -51,9 +54,7 @@ public interface IWebhookService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Patch a webhook by id
-    /// </summary>
+    /// <inheritdoc cref="Update(WebhookUpdateParams, CancellationToken)"/>
     Task<WebhookDetails> Update(
         string webhookID,
         WebhookUpdateParams? parameters = null,
@@ -73,9 +74,7 @@ public interface IWebhookService
     /// </summary>
     Task Delete(WebhookDeleteParams parameters, CancellationToken cancellationToken = default);
 
-    /// <summary>
-    /// Delete a webhook by id
-    /// </summary>
+    /// <inheritdoc cref="Delete(WebhookDeleteParams, CancellationToken)"/>
     Task Delete(
         string webhookID,
         WebhookDeleteParams? parameters = null,
@@ -90,9 +89,7 @@ public interface IWebhookService
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Get webhook secret by id
-    /// </summary>
+    /// <inheritdoc cref="RetrieveSecret(WebhookRetrieveSecretParams, CancellationToken)"/>
     Task<WebhookRetrieveSecretResponse> RetrieveSecret(
         string webhookID,
         WebhookRetrieveSecretParams? parameters = null,

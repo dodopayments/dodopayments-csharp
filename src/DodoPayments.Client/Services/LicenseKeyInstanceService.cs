@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.LicenseKeyInstances;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
 {
+    /// <inheritdoc/>
     public ILicenseKeyInstanceService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new LicenseKeyInstanceService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseKeyInstance> Retrieve(
         LicenseKeyInstanceRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -50,6 +53,7 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
         return licenseKeyInstance;
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseKeyInstance> Retrieve(
         string id,
         LicenseKeyInstanceRetrieveParams? parameters = null,
@@ -61,6 +65,7 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
         return await this.Retrieve(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseKeyInstance> Update(
         LicenseKeyInstanceUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -89,6 +94,7 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
         return licenseKeyInstance;
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseKeyInstance> Update(
         string id,
         LicenseKeyInstanceUpdateParams parameters,
@@ -98,6 +104,7 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
         return await this.Update(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<LicenseKeyInstanceListPageResponse> List(
         LicenseKeyInstanceListParams? parameters = null,
         CancellationToken cancellationToken = default

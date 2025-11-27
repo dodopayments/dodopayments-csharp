@@ -13,6 +13,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IPayoutService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IPayoutService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<PayoutListPageResponse> List(

@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.CheckoutSessions;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class CheckoutSessionService : ICheckoutSessionService
 {
+    /// <inheritdoc/>
     public ICheckoutSessionService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new CheckoutSessionService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class CheckoutSessionService : ICheckoutSessionService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<CheckoutSessionResponse> Create(
         CheckoutSessionCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -45,6 +48,7 @@ public sealed class CheckoutSessionService : ICheckoutSessionService
         return checkoutSessionResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<CheckoutSessionStatus> Retrieve(
         CheckoutSessionRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -73,6 +77,7 @@ public sealed class CheckoutSessionService : ICheckoutSessionService
         return checkoutSessionStatus;
     }
 
+    /// <inheritdoc/>
     public async Task<CheckoutSessionStatus> Retrieve(
         string id,
         CheckoutSessionRetrieveParams? parameters = null,

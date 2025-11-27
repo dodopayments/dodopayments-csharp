@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class MiscService : IMiscService
 {
+    /// <inheritdoc/>
     public IMiscService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new MiscService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class MiscService : IMiscService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<List<ApiEnum<string, CountryCode>>> ListSupportedCountries(
         MiscListSupportedCountriesParams? parameters = null,
         CancellationToken cancellationToken = default

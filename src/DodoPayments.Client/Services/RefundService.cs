@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Refunds;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class RefundService : IRefundService
 {
+    /// <inheritdoc/>
     public IRefundService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new RefundService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class RefundService : IRefundService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<Refund> Create(
         RefundCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -43,6 +46,7 @@ public sealed class RefundService : IRefundService
         return refund;
     }
 
+    /// <inheritdoc/>
     public async Task<Refund> Retrieve(
         RefundRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -69,6 +73,7 @@ public sealed class RefundService : IRefundService
         return refund;
     }
 
+    /// <inheritdoc/>
     public async Task<Refund> Retrieve(
         string refundID,
         RefundRetrieveParams? parameters = null,
@@ -80,6 +85,7 @@ public sealed class RefundService : IRefundService
         return await this.Retrieve(parameters with { RefundID = refundID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<RefundListPageResponse> List(
         RefundListParams? parameters = null,
         CancellationToken cancellationToken = default

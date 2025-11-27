@@ -14,6 +14,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IProductService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IProductService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IImageService Images { get; }
@@ -27,6 +32,8 @@ public interface IProductService
         ProductRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Retrieve(ProductRetrieveParams, CancellationToken)"/>
     Task<Product> Retrieve(
         string id,
         ProductRetrieveParams? parameters = null,
@@ -34,6 +41,8 @@ public interface IProductService
     );
 
     Task Update(ProductUpdateParams parameters, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc cref="Update(ProductUpdateParams, CancellationToken)"/>
     Task Update(
         string id,
         ProductUpdateParams? parameters = null,
@@ -46,6 +55,8 @@ public interface IProductService
     );
 
     Task Archive(ProductArchiveParams parameters, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc cref="Archive(ProductArchiveParams, CancellationToken)"/>
     Task Archive(
         string id,
         ProductArchiveParams? parameters = null,
@@ -56,6 +67,8 @@ public interface IProductService
         ProductUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Unarchive(ProductUnarchiveParams, CancellationToken)"/>
     Task Unarchive(
         string id,
         ProductUnarchiveParams? parameters = null,
@@ -66,6 +79,8 @@ public interface IProductService
         ProductUpdateFilesParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="UpdateFiles(ProductUpdateFilesParams, CancellationToken)"/>
     Task<ProductUpdateFilesResponse> UpdateFiles(
         string id,
         ProductUpdateFilesParams parameters,

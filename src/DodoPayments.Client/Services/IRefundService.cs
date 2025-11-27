@@ -13,6 +13,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IRefundService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IRefundService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<Refund> Create(
@@ -24,6 +29,8 @@ public interface IRefundService
         RefundRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Retrieve(RefundRetrieveParams, CancellationToken)"/>
     Task<Refund> Retrieve(
         string refundID,
         RefundRetrieveParams? parameters = null,

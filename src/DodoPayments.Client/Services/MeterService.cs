@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Meters;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class MeterService : IMeterService
 {
+    /// <inheritdoc/>
     public IMeterService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new MeterService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class MeterService : IMeterService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<Meter> Create(
         MeterCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -43,6 +46,7 @@ public sealed class MeterService : IMeterService
         return meter;
     }
 
+    /// <inheritdoc/>
     public async Task<Meter> Retrieve(
         MeterRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -69,6 +73,7 @@ public sealed class MeterService : IMeterService
         return meter;
     }
 
+    /// <inheritdoc/>
     public async Task<Meter> Retrieve(
         string id,
         MeterRetrieveParams? parameters = null,
@@ -80,6 +85,7 @@ public sealed class MeterService : IMeterService
         return await this.Retrieve(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<MeterListPageResponse> List(
         MeterListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -105,6 +111,7 @@ public sealed class MeterService : IMeterService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task Archive(
         MeterArchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -125,6 +132,7 @@ public sealed class MeterService : IMeterService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task Archive(
         string id,
         MeterArchiveParams? parameters = null,
@@ -136,6 +144,7 @@ public sealed class MeterService : IMeterService
         await this.Archive(parameters with { ID = id }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task Unarchive(
         MeterUnarchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -156,6 +165,7 @@ public sealed class MeterService : IMeterService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task Unarchive(
         string id,
         MeterUnarchiveParams? parameters = null,

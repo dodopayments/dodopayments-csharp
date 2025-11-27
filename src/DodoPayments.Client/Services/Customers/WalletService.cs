@@ -9,8 +9,10 @@ using DodoPayments.Client.Services.Customers.Wallets;
 
 namespace DodoPayments.Client.Services.Customers;
 
+/// <inheritdoc />
 public sealed class WalletService : IWalletService
 {
+    /// <inheritdoc/>
     public IWalletService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new WalletService(this._client.WithOptions(modifier));
@@ -30,6 +32,7 @@ public sealed class WalletService : IWalletService
         get { return _ledgerEntries.Value; }
     }
 
+    /// <inheritdoc/>
     public async Task<WalletListResponse> List(
         WalletListParams parameters,
         CancellationToken cancellationToken = default
@@ -58,6 +61,7 @@ public sealed class WalletService : IWalletService
         return wallets;
     }
 
+    /// <inheritdoc/>
     public async Task<WalletListResponse> List(
         string customerID,
         WalletListParams? parameters = null,

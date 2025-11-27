@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Webhooks.Headers;
 
 namespace DodoPayments.Client.Services.Webhooks;
 
+/// <inheritdoc />
 public sealed class HeaderService : IHeaderService
 {
+    /// <inheritdoc/>
     public IHeaderService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new HeaderService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class HeaderService : IHeaderService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<HeaderRetrieveResponse> Retrieve(
         HeaderRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -50,6 +53,7 @@ public sealed class HeaderService : IHeaderService
         return header;
     }
 
+    /// <inheritdoc/>
     public async Task<HeaderRetrieveResponse> Retrieve(
         string webhookID,
         HeaderRetrieveParams? parameters = null,
@@ -61,6 +65,7 @@ public sealed class HeaderService : IHeaderService
         return await this.Retrieve(parameters with { WebhookID = webhookID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task Update(
         HeaderUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -81,6 +86,7 @@ public sealed class HeaderService : IHeaderService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task Update(
         string webhookID,
         HeaderUpdateParams parameters,

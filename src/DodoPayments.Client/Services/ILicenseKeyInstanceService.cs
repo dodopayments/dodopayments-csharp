@@ -13,12 +13,19 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface ILicenseKeyInstanceService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     ILicenseKeyInstanceService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<LicenseKeyInstance> Retrieve(
         LicenseKeyInstanceRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Retrieve(LicenseKeyInstanceRetrieveParams, CancellationToken)"/>
     Task<LicenseKeyInstance> Retrieve(
         string id,
         LicenseKeyInstanceRetrieveParams? parameters = null,
@@ -29,6 +36,8 @@ public interface ILicenseKeyInstanceService
         LicenseKeyInstanceUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Update(LicenseKeyInstanceUpdateParams, CancellationToken)"/>
     Task<LicenseKeyInstance> Update(
         string id,
         LicenseKeyInstanceUpdateParams parameters,

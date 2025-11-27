@@ -8,8 +8,10 @@ using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class SubscriptionService : ISubscriptionService
 {
+    /// <inheritdoc/>
     public ISubscriptionService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new SubscriptionService(this._client.WithOptions(modifier));
@@ -22,6 +24,7 @@ public sealed class SubscriptionService : ISubscriptionService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<SubscriptionCreateResponse> Create(
         SubscriptionCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -45,6 +48,7 @@ public sealed class SubscriptionService : ISubscriptionService
         return subscription;
     }
 
+    /// <inheritdoc/>
     public async Task<Subscription> Retrieve(
         SubscriptionRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -75,6 +79,7 @@ public sealed class SubscriptionService : ISubscriptionService
         return subscription;
     }
 
+    /// <inheritdoc/>
     public async Task<Subscription> Retrieve(
         string subscriptionID,
         SubscriptionRetrieveParams? parameters = null,
@@ -92,6 +97,7 @@ public sealed class SubscriptionService : ISubscriptionService
         );
     }
 
+    /// <inheritdoc/>
     public async Task<Subscription> Update(
         SubscriptionUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -122,6 +128,7 @@ public sealed class SubscriptionService : ISubscriptionService
         return subscription;
     }
 
+    /// <inheritdoc/>
     public async Task<Subscription> Update(
         string subscriptionID,
         SubscriptionUpdateParams? parameters = null,
@@ -139,6 +146,7 @@ public sealed class SubscriptionService : ISubscriptionService
         );
     }
 
+    /// <inheritdoc/>
     public async Task<SubscriptionListPageResponse> List(
         SubscriptionListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -164,6 +172,7 @@ public sealed class SubscriptionService : ISubscriptionService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task ChangePlan(
         SubscriptionChangePlanParams parameters,
         CancellationToken cancellationToken = default
@@ -186,6 +195,7 @@ public sealed class SubscriptionService : ISubscriptionService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task ChangePlan(
         string subscriptionID,
         SubscriptionChangePlanParams parameters,
@@ -201,6 +211,7 @@ public sealed class SubscriptionService : ISubscriptionService
         );
     }
 
+    /// <inheritdoc/>
     public async Task<SubscriptionChargeResponse> Charge(
         SubscriptionChargeParams parameters,
         CancellationToken cancellationToken = default
@@ -231,6 +242,7 @@ public sealed class SubscriptionService : ISubscriptionService
         return deserializedResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<SubscriptionChargeResponse> Charge(
         string subscriptionID,
         SubscriptionChargeParams parameters,
@@ -246,6 +258,7 @@ public sealed class SubscriptionService : ISubscriptionService
         );
     }
 
+    /// <inheritdoc/>
     public async Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
         SubscriptionRetrieveUsageHistoryParams parameters,
         CancellationToken cancellationToken = default
@@ -276,6 +289,7 @@ public sealed class SubscriptionService : ISubscriptionService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
         string subscriptionID,
         SubscriptionRetrieveUsageHistoryParams? parameters = null,
@@ -293,6 +307,7 @@ public sealed class SubscriptionService : ISubscriptionService
         );
     }
 
+    /// <inheritdoc/>
     public async Task<SubscriptionUpdatePaymentMethodResponse> UpdatePaymentMethod(
         SubscriptionUpdatePaymentMethodParams parameters,
         CancellationToken cancellationToken = default
@@ -323,6 +338,7 @@ public sealed class SubscriptionService : ISubscriptionService
         return deserializedResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<SubscriptionUpdatePaymentMethodResponse> UpdatePaymentMethod(
         string subscriptionID,
         SubscriptionUpdatePaymentMethodParams parameters,

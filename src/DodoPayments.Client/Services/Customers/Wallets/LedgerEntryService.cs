@@ -9,8 +9,10 @@ using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
 namespace DodoPayments.Client.Services.Customers.Wallets;
 
+/// <inheritdoc />
 public sealed class LedgerEntryService : ILedgerEntryService
 {
+    /// <inheritdoc/>
     public ILedgerEntryService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new LedgerEntryService(this._client.WithOptions(modifier));
@@ -23,6 +25,7 @@ public sealed class LedgerEntryService : ILedgerEntryService
         _client = client;
     }
 
+    /// <inheritdoc/>
     public async Task<CustomerWallet> Create(
         LedgerEntryCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -51,6 +54,7 @@ public sealed class LedgerEntryService : ILedgerEntryService
         return customerWallet;
     }
 
+    /// <inheritdoc/>
     public async Task<CustomerWallet> Create(
         string customerID,
         LedgerEntryCreateParams parameters,
@@ -60,6 +64,7 @@ public sealed class LedgerEntryService : ILedgerEntryService
         return await this.Create(parameters with { CustomerID = customerID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<LedgerEntryListPageResponse> List(
         LedgerEntryListParams parameters,
         CancellationToken cancellationToken = default
@@ -88,6 +93,7 @@ public sealed class LedgerEntryService : ILedgerEntryService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task<LedgerEntryListPageResponse> List(
         string customerID,
         LedgerEntryListParams? parameters = null,

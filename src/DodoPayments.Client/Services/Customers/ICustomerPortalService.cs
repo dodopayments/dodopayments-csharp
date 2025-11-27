@@ -14,12 +14,19 @@ namespace DodoPayments.Client.Services.Customers;
 /// </summary>
 public interface ICustomerPortalService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     ICustomerPortalService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<CustomerPortalSession> Create(
         CustomerPortalCreateParams parameters,
         CancellationToken cancellationToken = default
     );
+
+    /// <inheritdoc cref="Create(CustomerPortalCreateParams, CancellationToken)"/>
     Task<CustomerPortalSession> Create(
         string customerID,
         CustomerPortalCreateParams? parameters = null,

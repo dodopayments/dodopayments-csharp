@@ -9,8 +9,10 @@ using DodoPayments.Client.Services.Webhooks;
 
 namespace DodoPayments.Client.Services;
 
+/// <inheritdoc />
 public sealed class WebhookService : IWebhookService
 {
+    /// <inheritdoc/>
     public IWebhookService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new WebhookService(this._client.WithOptions(modifier));
@@ -30,6 +32,7 @@ public sealed class WebhookService : IWebhookService
         get { return _headers.Value; }
     }
 
+    /// <inheritdoc/>
     public async Task<WebhookDetails> Create(
         WebhookCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -53,6 +56,7 @@ public sealed class WebhookService : IWebhookService
         return webhookDetails;
     }
 
+    /// <inheritdoc/>
     public async Task<WebhookDetails> Retrieve(
         WebhookRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -81,6 +85,7 @@ public sealed class WebhookService : IWebhookService
         return webhookDetails;
     }
 
+    /// <inheritdoc/>
     public async Task<WebhookDetails> Retrieve(
         string webhookID,
         WebhookRetrieveParams? parameters = null,
@@ -92,6 +97,7 @@ public sealed class WebhookService : IWebhookService
         return await this.Retrieve(parameters with { WebhookID = webhookID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<WebhookDetails> Update(
         WebhookUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -120,6 +126,7 @@ public sealed class WebhookService : IWebhookService
         return webhookDetails;
     }
 
+    /// <inheritdoc/>
     public async Task<WebhookDetails> Update(
         string webhookID,
         WebhookUpdateParams? parameters = null,
@@ -131,6 +138,7 @@ public sealed class WebhookService : IWebhookService
         return await this.Update(parameters with { WebhookID = webhookID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<WebhookListPageResponse> List(
         WebhookListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -156,6 +164,7 @@ public sealed class WebhookService : IWebhookService
         return page;
     }
 
+    /// <inheritdoc/>
     public async Task Delete(
         WebhookDeleteParams parameters,
         CancellationToken cancellationToken = default
@@ -176,6 +185,7 @@ public sealed class WebhookService : IWebhookService
             .ConfigureAwait(false);
     }
 
+    /// <inheritdoc/>
     public async Task Delete(
         string webhookID,
         WebhookDeleteParams? parameters = null,
@@ -187,6 +197,7 @@ public sealed class WebhookService : IWebhookService
         await this.Delete(parameters with { WebhookID = webhookID }, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public async Task<WebhookRetrieveSecretResponse> RetrieveSecret(
         WebhookRetrieveSecretParams parameters,
         CancellationToken cancellationToken = default
@@ -215,6 +226,7 @@ public sealed class WebhookService : IWebhookService
         return deserializedResponse;
     }
 
+    /// <inheritdoc/>
     public async Task<WebhookRetrieveSecretResponse> RetrieveSecret(
         string webhookID,
         WebhookRetrieveSecretParams? parameters = null,

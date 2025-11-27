@@ -11,6 +11,11 @@ namespace DodoPayments.Client.Services;
 /// </summary>
 public interface IInvoiceService
 {
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
     IInvoiceService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Invoices::IPaymentService Payments { get; }
