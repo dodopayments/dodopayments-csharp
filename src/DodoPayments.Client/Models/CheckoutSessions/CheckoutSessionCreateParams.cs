@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -8,9 +9,8 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Subscriptions;
 using Payments = DodoPayments.Client.Models.Payments;
-using System = System;
+using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
 
@@ -29,10 +29,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
             if (!this._rawBodyData.TryGetValue("product_cart", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_cart' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "product_cart",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("product_cart", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<List<ProductCart>>(
@@ -41,7 +38,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
                 )
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'product_cart' cannot be null",
-                    new System::ArgumentNullException("product_cart")
+                    new ArgumentNullException("product_cart")
                 );
         }
         init
@@ -411,9 +408,9 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/checkouts")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/checkouts")
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -447,16 +444,13 @@ public sealed record class ProductCart : ModelBase
             if (!this._rawData.TryGetValue("product_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "product_id",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("product_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'product_id' cannot be null",
-                    new System::ArgumentNullException("product_id")
+                    new ArgumentNullException("product_id")
                 );
         }
         init
@@ -475,7 +469,7 @@ public sealed record class ProductCart : ModelBase
             if (!this._rawData.TryGetValue("quantity", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'quantity' cannot be null",
-                    new System::ArgumentOutOfRangeException("quantity", "Missing required argument")
+                    new ArgumentOutOfRangeException("quantity", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
@@ -492,14 +486,14 @@ public sealed record class ProductCart : ModelBase
     /// <summary>
     /// only valid if product is a subscription
     /// </summary>
-    public IReadOnlyList<AttachAddon>? Addons
+    public IReadOnlyList<Subscriptions::AttachAddon>? Addons
     {
         get
         {
             if (!this._rawData.TryGetValue("addons", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<List<AttachAddon>?>(
+            return JsonSerializer.Deserialize<List<Subscriptions::AttachAddon>?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -594,7 +588,7 @@ public sealed record class BillingAddress : ModelBase
             if (!this._rawData.TryGetValue("country", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'country' cannot be null",
-                    new System::ArgumentOutOfRangeException("country", "Missing required argument")
+                    new ArgumentOutOfRangeException("country", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, CountryCode>>(
@@ -904,7 +898,7 @@ sealed class ThemeConverter : JsonConverter<Theme>
 {
     public override Theme Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -1300,14 +1294,14 @@ class FeatureFlagsFromRaw : IFromRaw<FeatureFlags>
 [JsonConverter(typeof(ModelConverter<SubscriptionData, SubscriptionDataFromRaw>))]
 public sealed record class SubscriptionData : ModelBase
 {
-    public OnDemandSubscription? OnDemand
+    public Subscriptions::OnDemandSubscription? OnDemand
     {
         get
         {
             if (!this._rawData.TryGetValue("on_demand", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<OnDemandSubscription?>(
+            return JsonSerializer.Deserialize<Subscriptions::OnDemandSubscription?>(
                 element,
                 ModelBase.SerializerOptions
             );

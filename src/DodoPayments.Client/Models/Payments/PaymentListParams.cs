@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -41,14 +41,14 @@ public sealed record class PaymentListParams : ParamsBase
     /// <summary>
     /// Get events after this created time
     /// </summary>
-    public System::DateTimeOffset? CreatedAtGte
+    public DateTimeOffset? CreatedAtGte
     {
         get
         {
             if (!this._rawQueryData.TryGetValue("created_at_gte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -70,14 +70,14 @@ public sealed record class PaymentListParams : ParamsBase
     /// <summary>
     /// Get events created before this time
     /// </summary>
-    public System::DateTimeOffset? CreatedAtLte
+    public DateTimeOffset? CreatedAtLte
     {
         get
         {
             if (!this._rawQueryData.TryGetValue("created_at_lte", out JsonElement element))
                 return null;
 
-            return JsonSerializer.Deserialize<System::DateTimeOffset?>(
+            return JsonSerializer.Deserialize<DateTimeOffset?>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -263,9 +263,9 @@ public sealed record class PaymentListParams : ParamsBase
         );
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/payments")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/payments")
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -304,7 +304,7 @@ sealed class StatusConverter : JsonConverter<Status>
 {
     public override Status Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

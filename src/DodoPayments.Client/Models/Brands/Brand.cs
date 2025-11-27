@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,7 +6,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Brands;
 
@@ -19,13 +19,13 @@ public sealed record class Brand : ModelBase
             if (!this._rawData.TryGetValue("brand_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'brand_id' cannot be null",
-                    new System::ArgumentOutOfRangeException("brand_id", "Missing required argument")
+                    new ArgumentOutOfRangeException("brand_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'brand_id' cannot be null",
-                    new System::ArgumentNullException("brand_id")
+                    new ArgumentNullException("brand_id")
                 );
         }
         init
@@ -44,16 +44,13 @@ public sealed record class Brand : ModelBase
             if (!this._rawData.TryGetValue("business_id", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "business_id",
-                        "Missing required argument"
-                    )
+                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'business_id' cannot be null",
-                    new System::ArgumentNullException("business_id")
+                    new ArgumentNullException("business_id")
                 );
         }
         init
@@ -72,7 +69,7 @@ public sealed record class Brand : ModelBase
             if (!this._rawData.TryGetValue("enabled", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'enabled' cannot be null",
-                    new System::ArgumentOutOfRangeException("enabled", "Missing required argument")
+                    new ArgumentOutOfRangeException("enabled", "Missing required argument")
                 );
 
             return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
@@ -93,7 +90,7 @@ public sealed record class Brand : ModelBase
             if (!this._rawData.TryGetValue("statement_descriptor", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'statement_descriptor' cannot be null",
-                    new System::ArgumentOutOfRangeException(
+                    new ArgumentOutOfRangeException(
                         "statement_descriptor",
                         "Missing required argument"
                     )
@@ -102,7 +99,7 @@ public sealed record class Brand : ModelBase
             return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
                 ?? throw new DodoPaymentsInvalidDataException(
                     "'statement_descriptor' cannot be null",
-                    new System::ArgumentNullException("statement_descriptor")
+                    new ArgumentNullException("statement_descriptor")
                 );
         }
         init
@@ -121,7 +118,7 @@ public sealed record class Brand : ModelBase
             if (!this._rawData.TryGetValue("verification_enabled", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'verification_enabled' cannot be null",
-                    new System::ArgumentOutOfRangeException(
+                    new ArgumentOutOfRangeException(
                         "verification_enabled",
                         "Missing required argument"
                     )
@@ -145,7 +142,7 @@ public sealed record class Brand : ModelBase
             if (!this._rawData.TryGetValue("verification_status", out JsonElement element))
                 throw new DodoPaymentsInvalidDataException(
                     "'verification_status' cannot be null",
-                    new System::ArgumentOutOfRangeException(
+                    new ArgumentOutOfRangeException(
                         "verification_status",
                         "Missing required argument"
                     )
@@ -332,7 +329,7 @@ sealed class VerificationStatusConverter : JsonConverter<VerificationStatus>
 {
     public override VerificationStatus Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
