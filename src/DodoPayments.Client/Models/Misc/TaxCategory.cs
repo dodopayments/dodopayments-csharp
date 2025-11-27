@@ -1,7 +1,7 @@
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Misc;
 
@@ -22,7 +22,7 @@ sealed class TaxCategoryConverter : JsonConverter<TaxCategory>
 {
     public override TaxCategory Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
