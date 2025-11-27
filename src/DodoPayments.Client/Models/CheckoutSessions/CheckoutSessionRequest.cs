@@ -15,7 +15,7 @@ namespace DodoPayments.Client.Models.CheckoutSessions;
 [JsonConverter(typeof(ModelConverter<CheckoutSessionRequest, CheckoutSessionRequestFromRaw>))]
 public sealed record class CheckoutSessionRequest : ModelBase
 {
-    public required List<ProductCartModel> ProductCart
+    public required IReadOnlyList<ProductCartModel> ProductCart
     {
         get
         {
@@ -54,7 +54,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
     /// <para>Disclaimar: Always provide 'credit' and 'debit' as a fallback. If all
     /// payment methods are unavailable, checkout session will fail.</para>
     /// </summary>
-    public List<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
+    public IReadOnlyList<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
         get
         {
@@ -271,7 +271,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
     /// <summary>
     /// Additional metadata associated with the payment. Defaults to empty if not provided.
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {
@@ -479,7 +479,7 @@ public sealed record class ProductCartModel : ModelBase
     /// <summary>
     /// only valid if product is a subscription
     /// </summary>
-    public List<AttachAddon>? Addons
+    public IReadOnlyList<AttachAddon>? Addons
     {
         get
         {

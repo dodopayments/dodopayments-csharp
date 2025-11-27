@@ -109,7 +109,7 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     /// <summary>
     /// Addons for the new plan. Note : Leaving this empty would remove any existing addons
     /// </summary>
-    public List<AttachAddon>? Addons
+    public IReadOnlyList<AttachAddon>? Addons
     {
         get
         {

@@ -18,7 +18,7 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     /// <summary>
     /// Addons associated with this subscription
     /// </summary>
-    public required List<AddonCartResponseItem> Addons
+    public required IReadOnlyList<AddonCartResponseItem> Addons
     {
         get
         {
@@ -80,7 +80,7 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     /// <summary>
     /// Additional metadata associated with the subscription
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {

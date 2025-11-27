@@ -20,7 +20,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase
     /// <summary>
     /// List of headers configured
     /// </summary>
-    public required Dictionary<string, string> Headers
+    public required IReadOnlyDictionary<string, string> Headers
     {
         get
         {
@@ -51,7 +51,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase
     /// <summary>
     /// Sensitive headers without the value
     /// </summary>
-    public required List<string> Sensitive
+    public required IReadOnlyList<string> Sensitive
     {
         get
         {

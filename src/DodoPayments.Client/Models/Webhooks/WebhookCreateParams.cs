@@ -96,7 +96,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     ///
     /// <para>Webhook event will only be sent for events in the list.</para>
     /// </summary>
-    public List<ApiEnum<string, WebhookEventType>>? FilterTypes
+    public IReadOnlyList<ApiEnum<string, WebhookEventType>>? FilterTypes
     {
         get
         {
@@ -125,7 +125,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// <summary>
     /// Custom headers to be passed
     /// </summary>
-    public Dictionary<string, string>? Headers
+    public IReadOnlyDictionary<string, string>? Headers
     {
         get
         {
@@ -170,7 +170,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// <summary>
     /// Metadata to be passed to the webhook Defaut is {}
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

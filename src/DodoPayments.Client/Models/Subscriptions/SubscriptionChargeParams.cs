@@ -101,7 +101,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     /// Metadata for the payment. If not passed, the metadata of the subscription
     /// will be taken
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

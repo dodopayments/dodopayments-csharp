@@ -99,7 +99,7 @@ public sealed record class CustomerLimitedDetails : ModelBase
     /// <summary>
     /// Additional metadata associated with the customer
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

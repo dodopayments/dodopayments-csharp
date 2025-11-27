@@ -14,7 +14,7 @@ namespace DodoPayments.Client.Models.UsageEvents;
 )]
 public sealed record class UsageEventListPageResponse : ModelBase
 {
-    public required List<Event> Items
+    public required IReadOnlyList<Event> Items
     {
         get
         {

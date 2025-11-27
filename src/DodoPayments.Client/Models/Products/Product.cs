@@ -144,7 +144,7 @@ public sealed record class Product : ModelBase
     /// <summary>
     /// Additional custom data associated with the product
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {
@@ -282,7 +282,7 @@ public sealed record class Product : ModelBase
     /// <summary>
     /// Available Addons for subscription products
     /// </summary>
-    public List<string>? Addons
+    public IReadOnlyList<string>? Addons
     {
         get
         {
@@ -535,7 +535,7 @@ public sealed record class ProductDigitalProductDelivery : ModelBase
     /// <summary>
     /// Uploaded files ids of digital product
     /// </summary>
-    public List<File>? Files
+    public IReadOnlyList<File>? Files
     {
         get
         {

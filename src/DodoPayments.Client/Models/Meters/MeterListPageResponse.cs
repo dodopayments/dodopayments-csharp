@@ -12,7 +12,7 @@ namespace DodoPayments.Client.Models.Meters;
 [JsonConverter(typeof(ModelConverter<MeterListPageResponse, MeterListPageResponseFromRaw>))]
 public sealed record class MeterListPageResponse : ModelBase
 {
-    public required List<Meter> Items
+    public required IReadOnlyList<Meter> Items
     {
         get
         {

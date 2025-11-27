@@ -15,7 +15,7 @@ public sealed record class BrandListResponse : ModelBase
     /// <summary>
     /// List of brands for this business
     /// </summary>
-    public required List<Brand> Items
+    public required IReadOnlyList<Brand> Items
     {
         get
         {

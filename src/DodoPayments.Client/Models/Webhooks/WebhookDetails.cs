@@ -99,7 +99,7 @@ public sealed record class WebhookDetails : ModelBase
     /// <summary>
     /// Metadata of the webhook
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {
@@ -211,7 +211,7 @@ public sealed record class WebhookDetails : ModelBase
     ///
     /// <para>Webhook event will only be sent for events in the list.</para>
     /// </summary>
-    public List<string>? FilterTypes
+    public IReadOnlyList<string>? FilterTypes
     {
         get
         {

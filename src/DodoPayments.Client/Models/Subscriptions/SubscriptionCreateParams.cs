@@ -131,7 +131,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// <summary>
     /// Attach addons to this subscription
     /// </summary>
-    public List<AttachAddon>? Addons
+    public IReadOnlyList<AttachAddon>? Addons
     {
         get
         {
@@ -160,7 +160,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// see it. Availability still depends on other factors (e.g., customer location,
     /// merchant settings).</para>
     /// </summary>
-    public List<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
+    public IReadOnlyList<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
         get
         {
@@ -256,7 +256,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// <summary>
     /// Additional metadata for the subscription Defaults to empty if not specified
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

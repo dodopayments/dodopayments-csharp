@@ -22,7 +22,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
         get { return this._rawBodyData.Freeze(); }
     }
 
-    public required List<ProductCart> ProductCart
+    public required IReadOnlyList<ProductCart> ProductCart
     {
         get
         {
@@ -61,7 +61,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// <para>Disclaimar: Always provide 'credit' and 'debit' as a fallback. If all
     /// payment methods are unavailable, checkout session will fail.</para>
     /// </summary>
-    public List<ApiEnum<string, Payments::PaymentMethodTypes>>? AllowedPaymentMethodTypes
+    public IReadOnlyList<ApiEnum<string, Payments::PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
         get
         {
@@ -277,7 +277,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// <summary>
     /// Additional metadata associated with the payment. Defaults to empty if not provided.
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {
@@ -492,7 +492,7 @@ public sealed record class ProductCart : ModelBase
     /// <summary>
     /// only valid if product is a subscription
     /// </summary>
-    public List<AttachAddon>? Addons
+    public IReadOnlyList<AttachAddon>? Addons
     {
         get
         {

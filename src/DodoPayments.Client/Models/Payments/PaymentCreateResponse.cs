@@ -75,7 +75,7 @@ public sealed record class PaymentCreateResponse : ModelBase
     /// <summary>
     /// Additional metadata associated with the payment
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {
@@ -224,7 +224,7 @@ public sealed record class PaymentCreateResponse : ModelBase
     /// <summary>
     /// Optional list of products included in the payment
     /// </summary>
-    public List<OneTimeProductCartItem>? ProductCart
+    public IReadOnlyList<OneTimeProductCartItem>? ProductCart
     {
         get
         {

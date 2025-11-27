@@ -12,7 +12,7 @@ namespace DodoPayments.Client.Models.Disputes;
 [JsonConverter(typeof(ModelConverter<DisputeListPageResponse, DisputeListPageResponseFromRaw>))]
 public sealed record class DisputeListPageResponse : ModelBase
 {
-    public required List<Item> Items
+    public required IReadOnlyList<Item> Items
     {
         get
         {

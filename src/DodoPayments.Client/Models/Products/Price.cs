@@ -1213,7 +1213,7 @@ public sealed record class UsageBasedPrice : ModelBase
         }
     }
 
-    public List<AddMeterToPrice>? Meters
+    public IReadOnlyList<AddMeterToPrice>? Meters
     {
         get
         {

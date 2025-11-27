@@ -26,7 +26,7 @@ public sealed record class HeaderUpdateParams : ParamsBase
     /// <summary>
     /// Object of header-value pair to update or add
     /// </summary>
-    public required Dictionary<string, string> Headers
+    public required IReadOnlyDictionary<string, string> Headers
     {
         get
         {

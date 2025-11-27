@@ -70,7 +70,7 @@ public sealed record class WebhookUpdateParams : ParamsBase
     ///
     /// <para>Webhook event will only be sent for events in the list.</para>
     /// </summary>
-    public List<ApiEnum<string, WebhookEventType>>? FilterTypes
+    public IReadOnlyList<ApiEnum<string, WebhookEventType>>? FilterTypes
     {
         get
         {
@@ -94,7 +94,7 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// <summary>
     /// Metadata
     /// </summary>
-    public Dictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {

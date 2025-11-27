@@ -16,7 +16,7 @@ namespace DodoPayments.Client.Models.Subscriptions;
 )]
 public sealed record class SubscriptionListPageResponse : ModelBase
 {
-    public required List<Item> Items
+    public required IReadOnlyList<Item> Items
     {
         get
         {
@@ -235,7 +235,7 @@ public sealed record class Item : ModelBase
     /// <summary>
     /// Additional custom data associated with the subscription
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {
