@@ -1846,7 +1846,7 @@ public sealed record class MeterFilter1 : ModelBase
     /// <summary>
     /// Level 3: Filter conditions only (max depth reached)
     /// </summary>
-    public required List<Clause> Clauses
+    public required IReadOnlyList<Clause> Clauses
     {
         get
         {

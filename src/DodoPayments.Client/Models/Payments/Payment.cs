@@ -211,7 +211,7 @@ public sealed record class Payment : ModelBase
     /// <summary>
     /// List of disputes associated with this payment
     /// </summary>
-    public required List<Dispute> Disputes
+    public required IReadOnlyList<Dispute> Disputes
     {
         get
         {
@@ -239,7 +239,7 @@ public sealed record class Payment : ModelBase
     /// <summary>
     /// Additional custom data associated with the payment
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {
@@ -298,7 +298,7 @@ public sealed record class Payment : ModelBase
     /// <summary>
     /// List of refunds issued for this payment
     /// </summary>
-    public required List<Refund> Refunds
+    public required IReadOnlyList<Refund> Refunds
     {
         get
         {
@@ -647,7 +647,7 @@ public sealed record class Payment : ModelBase
     /// <summary>
     /// List of products purchased in a one-time payment
     /// </summary>
-    public List<ProductCart>? ProductCart
+    public IReadOnlyList<ProductCart>? ProductCart
     {
         get
         {

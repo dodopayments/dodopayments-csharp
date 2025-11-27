@@ -150,7 +150,7 @@ public sealed record class Discount : ModelBase
     /// <summary>
     /// List of product IDs to which this discount is restricted.
     /// </summary>
-    public required List<string> RestrictedTo
+    public required IReadOnlyList<string> RestrictedTo
     {
         get
         {

@@ -15,7 +15,7 @@ public sealed record class WebhookListPageResponse : ModelBase
     /// <summary>
     /// List of webhoooks
     /// </summary>
-    public required List<WebhookDetails> Data
+    public required IReadOnlyList<WebhookDetails> Data
     {
         get
         {

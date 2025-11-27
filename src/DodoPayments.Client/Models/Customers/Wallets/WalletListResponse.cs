@@ -12,7 +12,7 @@ namespace DodoPayments.Client.Models.Customers.Wallets;
 [JsonConverter(typeof(ModelConverter<WalletListResponse, WalletListResponseFromRaw>))]
 public sealed record class WalletListResponse : ModelBase
 {
-    public required List<CustomerWallet> Items
+    public required IReadOnlyList<CustomerWallet> Items
     {
         get
         {

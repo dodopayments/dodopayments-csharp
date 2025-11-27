@@ -136,7 +136,7 @@ public sealed record class Event : ModelBase
     /// <summary>
     /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
     /// </summary>
-    public Dictionary<string, Metadata>? Metadata
+    public IReadOnlyDictionary<string, Metadata>? Metadata
     {
         get
         {

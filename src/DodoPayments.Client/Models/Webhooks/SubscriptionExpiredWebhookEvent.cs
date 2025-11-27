@@ -188,7 +188,7 @@ public sealed record class SubscriptionExpiredWebhookEventData : ModelBase
     /// <summary>
     /// Addons associated with this subscription
     /// </summary>
-    public required List<AddonCartResponseItem> Addons
+    public required IReadOnlyList<AddonCartResponseItem> Addons
     {
         get
         {
@@ -353,7 +353,7 @@ public sealed record class SubscriptionExpiredWebhookEventData : ModelBase
     /// <summary>
     /// Additional custom data associated with the subscription
     /// </summary>
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {
@@ -384,7 +384,7 @@ public sealed record class SubscriptionExpiredWebhookEventData : ModelBase
     /// <summary>
     /// Meters associated with this subscription (for usage-based billing)
     /// </summary>
-    public required List<Meter> Meters
+    public required IReadOnlyList<Meter> Meters
     {
         get
         {

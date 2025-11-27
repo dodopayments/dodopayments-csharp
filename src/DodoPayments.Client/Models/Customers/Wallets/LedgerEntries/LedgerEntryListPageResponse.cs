@@ -14,7 +14,7 @@ namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 )]
 public sealed record class LedgerEntryListPageResponse : ModelBase
 {
-    public required List<CustomerWalletTransaction> Items
+    public required IReadOnlyList<CustomerWalletTransaction> Items
     {
         get
         {

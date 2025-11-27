@@ -21,7 +21,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelB
     /// <summary>
     /// List of usage history items
     /// </summary>
-    public required List<ItemModel> Items
+    public required IReadOnlyList<ItemModel> Items
     {
         get
         {
@@ -124,7 +124,7 @@ public sealed record class ItemModel : ModelBase
     /// <summary>
     /// List of meters and their usage for this billing period
     /// </summary>
-    public required List<MeterModel> Meters
+    public required IReadOnlyList<MeterModel> Meters
     {
         get
         {

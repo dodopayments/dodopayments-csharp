@@ -12,7 +12,7 @@ namespace DodoPayments.Client.Models.Addons;
 [JsonConverter(typeof(ModelConverter<AddonListPageResponse, AddonListPageResponseFromRaw>))]
 public sealed record class AddonListPageResponse : ModelBase
 {
-    public required List<AddonResponse> Items
+    public required IReadOnlyList<AddonResponse> Items
     {
         get
         {

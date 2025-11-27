@@ -146,7 +146,7 @@ public sealed record class DiscountCreateParams : ParamsBase
     /// <summary>
     /// List of product IDs to restrict usage (if any).
     /// </summary>
-    public List<string>? RestrictedTo
+    public IReadOnlyList<string>? RestrictedTo
     {
         get
         {

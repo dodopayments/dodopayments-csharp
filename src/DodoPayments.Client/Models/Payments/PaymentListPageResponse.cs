@@ -13,7 +13,7 @@ namespace DodoPayments.Client.Models.Payments;
 [JsonConverter(typeof(ModelConverter<PaymentListPageResponse, PaymentListPageResponseFromRaw>))]
 public sealed record class PaymentListPageResponse : ModelBase
 {
-    public required List<Item> Items
+    public required IReadOnlyList<Item> Items
     {
         get
         {
@@ -208,7 +208,7 @@ public sealed record class Item : ModelBase
         }
     }
 
-    public required Dictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {

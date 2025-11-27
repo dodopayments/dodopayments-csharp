@@ -111,7 +111,7 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// If present, replaces all restricted product IDs with this new set. To remove
     /// all restrictions, send empty array
     /// </summary>
-    public List<string>? RestrictedTo
+    public IReadOnlyList<string>? RestrictedTo
     {
         get
         {

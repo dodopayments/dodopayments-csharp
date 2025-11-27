@@ -14,7 +14,7 @@ namespace DodoPayments.Client.Models.LicenseKeys;
 )]
 public sealed record class LicenseKeyListPageResponse : ModelBase
 {
-    public required List<LicenseKey> Items
+    public required IReadOnlyList<LicenseKey> Items
     {
         get
         {

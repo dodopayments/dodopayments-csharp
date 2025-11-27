@@ -19,7 +19,7 @@ namespace DodoPayments.Client.Models.Customers;
 )]
 public sealed record class CustomerRetrievePaymentMethodsResponse : ModelBase
 {
-    public required List<Item> Items
+    public required IReadOnlyList<Item> Items
     {
         get
         {
