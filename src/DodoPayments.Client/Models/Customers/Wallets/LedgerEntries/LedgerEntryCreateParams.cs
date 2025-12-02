@@ -57,9 +57,13 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -84,9 +88,13 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, EntryType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'entry_type' cannot be null",
+                    new ArgumentNullException("entry_type")
+                );
         }
         init
         {

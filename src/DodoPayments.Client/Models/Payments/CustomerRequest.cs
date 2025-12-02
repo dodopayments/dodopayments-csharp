@@ -95,6 +95,16 @@ public record class CustomerRequest
             );
         }
     }
+
+    public virtual bool Equals(CustomerRequest? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>

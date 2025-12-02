@@ -120,9 +120,13 @@ public sealed record class RefundSucceededWebhookEvent : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Type12>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new System::ArgumentNullException("type")
+                );
         }
         init
         {
@@ -397,9 +401,13 @@ public sealed record class Data12 : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, RefundStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'status' cannot be null",
+                    new System::ArgumentNullException("status")
+                );
         }
         init
         {

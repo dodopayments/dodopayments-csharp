@@ -141,9 +141,13 @@ public sealed record class Subscription : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -339,9 +343,13 @@ public sealed record class Subscription : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payment_frequency_interval' cannot be null",
+                    new ArgumentNullException("payment_frequency_interval")
+                );
         }
         init
         {
@@ -473,9 +481,13 @@ public sealed record class Subscription : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'status' cannot be null",
+                    new ArgumentNullException("status")
+                );
         }
         init
         {
@@ -558,9 +570,13 @@ public sealed record class Subscription : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'subscription_period_interval' cannot be null",
+                    new ArgumentNullException("subscription_period_interval")
+                );
         }
         init
         {
@@ -836,9 +852,13 @@ public sealed record class Meter : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentNullException("currency")
+                );
         }
         init
         {

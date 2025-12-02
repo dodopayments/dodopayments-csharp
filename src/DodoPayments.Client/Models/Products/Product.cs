@@ -242,9 +242,13 @@ public sealed record class Product : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'tax_category' cannot be null",
+                    new ArgumentNullException("tax_category")
+                );
         }
         init
         {

@@ -65,9 +65,13 @@ public sealed record class MeterMeterFilter : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, MeterMeterFilterConjunction>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'conjunction' cannot be null",
+                    new System::ArgumentNullException("conjunction")
+                );
         }
         init
         {
@@ -207,6 +211,16 @@ public record class Clauses
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Clauses");
         }
     }
+
+    public virtual bool Equals(Clauses? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class ClausesConverter : JsonConverter<Clauses>
@@ -303,9 +317,13 @@ public sealed record class MeterFilterCondition : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Operator>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'operator' cannot be null",
+                    new System::ArgumentNullException("operator")
+                );
         }
         init
         {
@@ -554,6 +572,16 @@ public record class MeterFilterConditionValue
             );
         }
     }
+
+    public virtual bool Equals(MeterFilterConditionValue? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterConditionValue>
@@ -663,9 +691,13 @@ public sealed record class MeterFilter : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterConjunction>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'conjunction' cannot be null",
+                    new System::ArgumentNullException("conjunction")
+                );
         }
         init
         {
@@ -810,6 +842,16 @@ public record class MeterFilterClauses
             );
         }
     }
+
+    public virtual bool Equals(MeterFilterClauses? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
@@ -910,9 +952,13 @@ public sealed record class MeterFilterConditionModel : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterConditionModelOperator>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'operator' cannot be null",
+                    new System::ArgumentNullException("operator")
+                );
         }
         init
         {
@@ -1166,6 +1212,16 @@ public record class MeterFilterConditionModelValue
             );
         }
     }
+
+    public virtual bool Equals(MeterFilterConditionModelValue? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class MeterFilterConditionModelValueConverter : JsonConverter<MeterFilterConditionModelValue>
@@ -1275,9 +1331,13 @@ public sealed record class MeterFilterModel : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterModelConjunction>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'conjunction' cannot be null",
+                    new System::ArgumentNullException("conjunction")
+                );
         }
         init
         {
@@ -1424,6 +1484,16 @@ public record class MeterFilterModelClauses
             );
         }
     }
+
+    public virtual bool Equals(MeterFilterModelClauses? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelClauses>
@@ -1524,9 +1594,13 @@ public sealed record class MeterFilterCondition1 : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterCondition1Operator>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'operator' cannot be null",
+                    new System::ArgumentNullException("operator")
+                );
         }
         init
         {
@@ -1779,6 +1853,16 @@ public record class MeterFilterCondition1Value
             );
         }
     }
+
+    public virtual bool Equals(MeterFilterCondition1Value? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class MeterFilterCondition1ValueConverter : JsonConverter<MeterFilterCondition1Value>
@@ -1885,9 +1969,13 @@ public sealed record class MeterFilter1 : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Conjunction>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'conjunction' cannot be null",
+                    new System::ArgumentNullException("conjunction")
+                );
         }
         init
         {
@@ -1979,9 +2067,13 @@ public sealed record class Clause : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, ClauseOperator>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'operator' cannot be null",
+                    new System::ArgumentNullException("operator")
+                );
         }
         init
         {
@@ -2227,6 +2319,16 @@ public record class ClauseValue
                 "Data did not match any variant of ClauseValue"
             );
         }
+    }
+
+    public virtual bool Equals(ClauseValue? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }
 

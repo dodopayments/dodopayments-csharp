@@ -69,9 +69,13 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, ProrationBillingMode>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'proration_billing_mode' cannot be null",
+                    new System::ArgumentNullException("proration_billing_mode")
+                );
         }
         init
         {

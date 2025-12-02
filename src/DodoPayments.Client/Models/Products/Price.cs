@@ -229,6 +229,16 @@ public record class Price
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Price");
         }
     }
+
+    public virtual bool Equals(Price? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class PriceConverter : JsonConverter<Price>
@@ -314,9 +324,13 @@ public sealed record class OneTimePrice : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new System::ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -418,8 +432,12 @@ public sealed record class OneTimePrice : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, global::DodoPayments.Client.Models.Products.Type>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, global::DodoPayments.Client.Models.Products.Type>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new System::ArgumentNullException("type")
+                );
         }
         init
         {
@@ -600,9 +618,13 @@ public sealed record class RecurringPrice : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new System::ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -682,9 +704,13 @@ public sealed record class RecurringPrice : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payment_frequency_interval' cannot be null",
+                    new System::ArgumentNullException("payment_frequency_interval")
+                );
         }
         init
         {
@@ -793,9 +819,13 @@ public sealed record class RecurringPrice : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'subscription_period_interval' cannot be null",
+                    new System::ArgumentNullException("subscription_period_interval")
+                );
         }
         init
         {
@@ -817,9 +847,13 @@ public sealed record class RecurringPrice : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, RecurringPriceType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new System::ArgumentNullException("type")
+                );
         }
         init
         {
@@ -980,9 +1014,13 @@ public sealed record class UsageBasedPrice : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new System::ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -1090,9 +1128,13 @@ public sealed record class UsageBasedPrice : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payment_frequency_interval' cannot be null",
+                    new System::ArgumentNullException("payment_frequency_interval")
+                );
         }
         init
         {
@@ -1176,9 +1218,13 @@ public sealed record class UsageBasedPrice : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'subscription_period_interval' cannot be null",
+                    new System::ArgumentNullException("subscription_period_interval")
+                );
         }
         init
         {
@@ -1200,9 +1246,13 @@ public sealed record class UsageBasedPrice : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, UsageBasedPriceType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new System::ArgumentNullException("type")
+                );
         }
         init
         {

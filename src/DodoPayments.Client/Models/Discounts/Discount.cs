@@ -213,9 +213,13 @@ public sealed record class Discount : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, DiscountType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new ArgumentNullException("type")
+                );
         }
         init
         {

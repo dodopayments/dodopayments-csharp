@@ -194,9 +194,13 @@ public sealed record class GetDispute : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, DisputeDisputeStage>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'dispute_stage' cannot be null",
+                    new ArgumentNullException("dispute_stage")
+                );
         }
         init
         {
@@ -221,9 +225,13 @@ public sealed record class GetDispute : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, DisputeDisputeStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'dispute_status' cannot be null",
+                    new ArgumentNullException("dispute_status")
+                );
         }
         init
         {
