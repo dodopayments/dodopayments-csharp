@@ -117,7 +117,7 @@ public sealed class CustomerService : ICustomerService
 
         HttpRequest<CustomerUpdateParams> request = new()
         {
-            Method = HttpMethod.Patch,
+            Method = DodoPaymentsClient.PatchMethod,
             Params = parameters,
         };
         using var response = await this

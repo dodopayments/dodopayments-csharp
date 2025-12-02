@@ -100,7 +100,7 @@ public sealed class BrandService : IBrandService
 
         HttpRequest<BrandUpdateParams> request = new()
         {
-            Method = HttpMethod.Patch,
+            Method = DodoPaymentsClient.PatchMethod,
             Params = parameters,
         };
         using var response = await this

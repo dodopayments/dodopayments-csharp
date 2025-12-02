@@ -102,7 +102,7 @@ public sealed class AddonService : IAddonService
 
         HttpRequest<AddonUpdateParams> request = new()
         {
-            Method = HttpMethod.Patch,
+            Method = DodoPaymentsClient.PatchMethod,
             Params = parameters,
         };
         using var response = await this

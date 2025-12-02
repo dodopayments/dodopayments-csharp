@@ -72,6 +72,8 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         init { this._options.WebhookKey = value; }
     }
 
+    internal static HttpMethod PatchMethod = new("PATCH");
+
     /// <inheritdoc/>
     public IDodoPaymentsClient WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {

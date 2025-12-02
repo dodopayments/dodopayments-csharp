@@ -110,7 +110,7 @@ public sealed class WebhookService : IWebhookService
 
         HttpRequest<WebhookUpdateParams> request = new()
         {
-            Method = HttpMethod.Patch,
+            Method = DodoPaymentsClient.PatchMethod,
             Params = parameters,
         };
         using var response = await this

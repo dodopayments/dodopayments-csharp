@@ -78,7 +78,7 @@ public sealed class LicenseKeyService : ILicenseKeyService
 
         HttpRequest<LicenseKeyUpdateParams> request = new()
         {
-            Method = HttpMethod.Patch,
+            Method = DodoPaymentsClient.PatchMethod,
             Params = parameters,
         };
         using var response = await this
