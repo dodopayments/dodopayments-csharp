@@ -106,7 +106,7 @@ public sealed class ProductService : IProductService
 
         HttpRequest<ProductUpdateParams> request = new()
         {
-            Method = HttpMethod.Patch,
+            Method = DodoPaymentsClient.PatchMethod,
             Params = parameters,
         };
         using var response = await this

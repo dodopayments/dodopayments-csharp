@@ -112,7 +112,7 @@ public sealed class SubscriptionService : ISubscriptionService
 
         HttpRequest<SubscriptionUpdateParams> request = new()
         {
-            Method = HttpMethod.Patch,
+            Method = DodoPaymentsClient.PatchMethod,
             Params = parameters,
         };
         using var response = await this

@@ -102,7 +102,7 @@ public sealed class DiscountService : IDiscountService
 
         HttpRequest<DiscountUpdateParams> request = new()
         {
-            Method = HttpMethod.Patch,
+            Method = DodoPaymentsClient.PatchMethod,
             Params = parameters,
         };
         using var response = await this
