@@ -14,13 +14,7 @@ public sealed record class ImageUpdateParams : ParamsBase
 
     public bool? ForceUpdate
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("force_update", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawQueryData, "force_update"); }
         init
         {
             if (value == null)
@@ -28,10 +22,7 @@ public sealed record class ImageUpdateParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["force_update"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "force_update", value);
         }
     }
 

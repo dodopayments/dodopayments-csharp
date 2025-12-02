@@ -14,210 +14,62 @@ public sealed record class Brand : ModelBase
 {
     public required string BrandID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("brand_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'brand_id' cannot be null",
-                    new ArgumentOutOfRangeException("brand_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'brand_id' cannot be null",
-                    new ArgumentNullException("brand_id")
-                );
-        }
-        init
-        {
-            this._rawData["brand_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "brand_id"); }
+        init { ModelBase.Set(this._rawData, "brand_id", value); }
     }
 
     public required string BusinessID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("business_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'business_id' cannot be null",
-                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'business_id' cannot be null",
-                    new ArgumentNullException("business_id")
-                );
-        }
-        init
-        {
-            this._rawData["business_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { ModelBase.Set(this._rawData, "business_id", value); }
     }
 
     public required bool Enabled
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("enabled", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'enabled' cannot be null",
-                    new ArgumentOutOfRangeException("enabled", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["enabled"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "enabled"); }
+        init { ModelBase.Set(this._rawData, "enabled", value); }
     }
 
     public required string StatementDescriptor
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("statement_descriptor", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'statement_descriptor' cannot be null",
-                    new ArgumentOutOfRangeException(
-                        "statement_descriptor",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'statement_descriptor' cannot be null",
-                    new ArgumentNullException("statement_descriptor")
-                );
-        }
-        init
-        {
-            this._rawData["statement_descriptor"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "statement_descriptor"); }
+        init { ModelBase.Set(this._rawData, "statement_descriptor", value); }
     }
 
     public required bool VerificationEnabled
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("verification_enabled", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'verification_enabled' cannot be null",
-                    new ArgumentOutOfRangeException(
-                        "verification_enabled",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["verification_enabled"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "verification_enabled"); }
+        init { ModelBase.Set(this._rawData, "verification_enabled", value); }
     }
 
     public required ApiEnum<string, VerificationStatus> VerificationStatus
     {
         get
         {
-            if (!this._rawData.TryGetValue("verification_status", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'verification_status' cannot be null",
-                    new ArgumentOutOfRangeException(
-                        "verification_status",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, VerificationStatus>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'verification_status' cannot be null",
-                    new ArgumentNullException("verification_status")
-                );
-        }
-        init
-        {
-            this._rawData["verification_status"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, VerificationStatus>>(
+                this.RawData,
+                "verification_status"
             );
         }
+        init { ModelBase.Set(this._rawData, "verification_status", value); }
     }
 
     public string? Description
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("description", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["description"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "description"); }
+        init { ModelBase.Set(this._rawData, "description", value); }
     }
 
     public string? Image
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("image", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["image"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "image"); }
+        init { ModelBase.Set(this._rawData, "image", value); }
     }
 
     public string? Name
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("name", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
+        init { ModelBase.Set(this._rawData, "name", value); }
     }
 
     /// <summary>
@@ -225,56 +77,20 @@ public sealed record class Brand : ModelBase
     /// </summary>
     public string? ReasonForHold
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("reason_for_hold", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["reason_for_hold"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "reason_for_hold"); }
+        init { ModelBase.Set(this._rawData, "reason_for_hold", value); }
     }
 
     public string? SupportEmail
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("support_email", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["support_email"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "support_email"); }
+        init { ModelBase.Set(this._rawData, "support_email", value); }
     }
 
     public string? URL
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("url", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["url"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "url"); }
+        init { ModelBase.Set(this._rawData, "url", value); }
     }
 
     public override void Validate()

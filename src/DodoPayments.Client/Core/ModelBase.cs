@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Brands;
 using DodoPayments.Client.Models.CheckoutSessions;
 using DodoPayments.Client.Models.Customers;
@@ -232,6 +233,109 @@ public abstract record class ModelBase
     {
         WriteIndented = true,
     };
+
+    internal static void Set<T>(IDictionary<string, JsonElement> dictionary, string key, T value)
+    {
+        dictionary[key] = JsonSerializer.SerializeToElement(value, SerializerOptions);
+    }
+
+    internal static T GetNotNullClass<T>(
+        IReadOnlyDictionary<string, JsonElement> dictionary,
+        string key
+    )
+        where T : class
+    {
+        if (!dictionary.TryGetValue(key, out JsonElement element))
+        {
+            throw new DodoPaymentsInvalidDataException($"'{key}' cannot be absent");
+        }
+
+        try
+        {
+            return JsonSerializer.Deserialize<T>(element, SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException($"'{key}' cannot be null");
+        }
+        catch (JsonException e)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                $"'{key}' must be of type {typeof(T).FullName}",
+                e
+            );
+        }
+    }
+
+    internal static T GetNotNullStruct<T>(
+        IReadOnlyDictionary<string, JsonElement> dictionary,
+        string key
+    )
+        where T : struct
+    {
+        if (!dictionary.TryGetValue(key, out JsonElement element))
+        {
+            throw new DodoPaymentsInvalidDataException($"'{key}' cannot be absent");
+        }
+
+        try
+        {
+            return JsonSerializer.Deserialize<T?>(element, SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException($"'{key}' cannot be null");
+        }
+        catch (JsonException e)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                $"'{key}' must be of type {typeof(T).FullName}",
+                e
+            );
+        }
+    }
+
+    internal static T? GetNullableClass<T>(
+        IReadOnlyDictionary<string, JsonElement> dictionary,
+        string key
+    )
+        where T : class
+    {
+        if (!dictionary.TryGetValue(key, out JsonElement element))
+        {
+            return null;
+        }
+
+        try
+        {
+            return JsonSerializer.Deserialize<T?>(element, SerializerOptions);
+        }
+        catch (JsonException e)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                $"'{key}' must be of type {typeof(T).FullName}",
+                e
+            );
+        }
+    }
+
+    internal static T? GetNullableStruct<T>(
+        IReadOnlyDictionary<string, JsonElement> dictionary,
+        string key
+    )
+        where T : struct
+    {
+        if (!dictionary.TryGetValue(key, out JsonElement element))
+        {
+            return null;
+        }
+
+        try
+        {
+            return JsonSerializer.Deserialize<T?>(element, SerializerOptions);
+        }
+        catch (JsonException e)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                $"'{key}' must be of type {typeof(T).FullName}",
+                e
+            );
+        }
+    }
 
     public sealed override string? ToString()
     {

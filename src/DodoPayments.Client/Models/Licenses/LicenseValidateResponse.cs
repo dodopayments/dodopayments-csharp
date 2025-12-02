@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Licenses;
 
@@ -14,23 +12,8 @@ public sealed record class LicenseValidateResponse : ModelBase
 {
     public required bool Valid
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("valid", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'valid' cannot be null",
-                    new ArgumentOutOfRangeException("valid", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["valid"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "valid"); }
+        init { ModelBase.Set(this._rawData, "valid", value); }
     }
 
     public override void Validate()

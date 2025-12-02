@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Subscriptions;
@@ -19,23 +17,8 @@ public sealed record class OnDemandSubscription : ModelBase
     /// </summary>
     public required bool MandateOnly
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("mandate_only", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'mandate_only' cannot be null",
-                    new ArgumentOutOfRangeException("mandate_only", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["mandate_only"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "mandate_only"); }
+        init { ModelBase.Set(this._rawData, "mandate_only", value); }
     }
 
     /// <summary>
@@ -47,23 +30,12 @@ public sealed record class OnDemandSubscription : ModelBase
     {
         get
         {
-            if (
-                !this._rawData.TryGetValue(
-                    "adaptive_currency_fees_inclusive",
-                    out JsonElement element
-                )
-            )
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["adaptive_currency_fees_inclusive"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableStruct<bool>(
+                this.RawData,
+                "adaptive_currency_fees_inclusive"
             );
         }
+        init { ModelBase.Set(this._rawData, "adaptive_currency_fees_inclusive", value); }
     }
 
     /// <summary>
@@ -74,21 +46,12 @@ public sealed record class OnDemandSubscription : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("product_currency", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Currency>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(
+                this.RawData,
+                "product_currency"
             );
         }
-        init
-        {
-            this._rawData["product_currency"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "product_currency", value); }
     }
 
     /// <summary>
@@ -97,20 +60,8 @@ public sealed record class OnDemandSubscription : ModelBase
     /// </summary>
     public string? ProductDescription
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("product_description", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["product_description"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "product_description"); }
+        init { ModelBase.Set(this._rawData, "product_description", value); }
     }
 
     /// <summary>
@@ -120,20 +71,8 @@ public sealed record class OnDemandSubscription : ModelBase
     /// </summary>
     public int? ProductPrice
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("product_price", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["product_price"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawData, "product_price"); }
+        init { ModelBase.Set(this._rawData, "product_price", value); }
     }
 
     public override void Validate()

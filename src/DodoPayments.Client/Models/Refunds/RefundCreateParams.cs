@@ -7,7 +7,6 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Refunds;
 
@@ -24,27 +23,8 @@ public sealed record class RefundCreateParams : ParamsBase
     /// </summary>
     public required string PaymentID
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("payment_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'payment_id' cannot be null",
-                    new ArgumentOutOfRangeException("payment_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'payment_id' cannot be null",
-                    new ArgumentNullException("payment_id")
-                );
-        }
-        init
-        {
-            this._rawBodyData["payment_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "payment_id"); }
+        init { ModelBase.Set(this._rawBodyData, "payment_id", value); }
     }
 
     /// <summary>
@@ -52,20 +32,8 @@ public sealed record class RefundCreateParams : ParamsBase
     /// </summary>
     public IReadOnlyList<Item>? Items
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("items", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<List<Item>?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["items"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<List<Item>>(this.RawBodyData, "items"); }
+        init { ModelBase.Set(this._rawBodyData, "items", value); }
     }
 
     /// <summary>
@@ -75,12 +43,9 @@ public sealed record class RefundCreateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("metadata", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+                this.RawBodyData,
+                "metadata"
             );
         }
         init
@@ -90,10 +55,7 @@ public sealed record class RefundCreateParams : ParamsBase
                 return;
             }
 
-            this._rawBodyData["metadata"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawBodyData, "metadata", value);
         }
     }
 
@@ -102,20 +64,8 @@ public sealed record class RefundCreateParams : ParamsBase
     /// </summary>
     public string? Reason
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("reason", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["reason"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "reason"); }
+        init { ModelBase.Set(this._rawBodyData, "reason", value); }
     }
 
     public RefundCreateParams() { }
@@ -189,27 +139,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public required string ItemID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("item_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'item_id' cannot be null",
-                    new ArgumentOutOfRangeException("item_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'item_id' cannot be null",
-                    new ArgumentNullException("item_id")
-                );
-        }
-        init
-        {
-            this._rawData["item_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "item_id"); }
+        init { ModelBase.Set(this._rawData, "item_id", value); }
     }
 
     /// <summary>
@@ -217,20 +148,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public int? Amount
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("amount", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["amount"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawData, "amount"); }
+        init { ModelBase.Set(this._rawData, "amount", value); }
     }
 
     /// <summary>
@@ -238,13 +157,7 @@ public sealed record class Item : ModelBase
     /// </summary>
     public bool? TaxInclusive
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("tax_inclusive", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "tax_inclusive"); }
         init
         {
             if (value == null)
@@ -252,10 +165,7 @@ public sealed record class Item : ModelBase
                 return;
             }
 
-            this._rawData["tax_inclusive"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawData, "tax_inclusive", value);
         }
     }
 

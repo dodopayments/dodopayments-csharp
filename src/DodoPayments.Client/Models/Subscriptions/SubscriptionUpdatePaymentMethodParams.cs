@@ -23,27 +23,8 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 
     public required Body Body
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("body", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'body' cannot be null",
-                    new System::ArgumentOutOfRangeException("body", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<Body>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'body' cannot be null",
-                    new System::ArgumentNullException("body")
-                );
-        }
-        init
-        {
-            this._rawBodyData["body"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<Body>(this.RawBodyData, "body"); }
+        init { ModelBase.Set(this._rawBodyData, "body", value); }
     }
 
     public SubscriptionUpdatePaymentMethodParams() { }
@@ -260,45 +241,17 @@ public sealed record class New : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("type", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'type' cannot be null",
-                    new System::ArgumentOutOfRangeException("type", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<
-                    ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type>
-                >(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'type' cannot be null",
-                    new System::ArgumentNullException("type")
-                );
+            return ModelBase.GetNotNullClass<
+                ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type>
+            >(this.RawData, "type");
         }
-        init
-        {
-            this._rawData["type"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "type", value); }
     }
 
     public string? ReturnURL
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("return_url", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["return_url"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "return_url"); }
+        init { ModelBase.Set(this._rawData, "return_url", value); }
     }
 
     public override void Validate()
@@ -387,58 +340,17 @@ public sealed record class Existing : ModelBase
 {
     public required string PaymentMethodID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("payment_method_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'payment_method_id' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "payment_method_id",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'payment_method_id' cannot be null",
-                    new System::ArgumentNullException("payment_method_id")
-                );
-        }
-        init
-        {
-            this._rawData["payment_method_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_method_id"); }
+        init { ModelBase.Set(this._rawData, "payment_method_id", value); }
     }
 
     public required ApiEnum<string, ExistingType> Type
     {
         get
         {
-            if (!this._rawData.TryGetValue("type", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'type' cannot be null",
-                    new System::ArgumentOutOfRangeException("type", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, ExistingType>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'type' cannot be null",
-                    new System::ArgumentNullException("type")
-                );
+            return ModelBase.GetNotNullClass<ApiEnum<string, ExistingType>>(this.RawData, "type");
         }
-        init
-        {
-            this._rawData["type"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "type", value); }
     }
 
     public override void Validate()

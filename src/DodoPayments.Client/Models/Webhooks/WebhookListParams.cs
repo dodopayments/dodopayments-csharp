@@ -18,20 +18,8 @@ public sealed record class WebhookListParams : ParamsBase
     /// </summary>
     public string? Iterator
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("iterator", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawQueryData["iterator"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "iterator"); }
+        init { ModelBase.Set(this._rawQueryData, "iterator", value); }
     }
 
     /// <summary>
@@ -39,20 +27,8 @@ public sealed record class WebhookListParams : ParamsBase
     /// </summary>
     public int? Limit
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("limit", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawQueryData["limit"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "limit"); }
+        init { ModelBase.Set(this._rawQueryData, "limit", value); }
     }
 
     public WebhookListParams() { }

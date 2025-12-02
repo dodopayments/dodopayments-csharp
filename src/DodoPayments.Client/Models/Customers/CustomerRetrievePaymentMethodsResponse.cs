@@ -21,27 +21,8 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : ModelBase
 {
     public required IReadOnlyList<Item> Items
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("items", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'items' cannot be null",
-                    new ArgumentOutOfRangeException("items", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<List<Item>>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'items' cannot be null",
-                    new ArgumentNullException("items")
-                );
-        }
-        init
-        {
-            this._rawData["items"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<List<Item>>(this.RawData, "items"); }
+        init { ModelBase.Set(this._rawData, "items", value); }
     }
 
     public override void Validate()
@@ -102,134 +83,48 @@ public sealed record class Item : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("payment_method", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'payment_method' cannot be null",
-                    new ArgumentOutOfRangeException("payment_method", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, PaymentMethod>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'payment_method' cannot be null",
-                    new ArgumentNullException("payment_method")
-                );
-        }
-        init
-        {
-            this._rawData["payment_method"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, PaymentMethod>>(
+                this.RawData,
+                "payment_method"
             );
         }
+        init { ModelBase.Set(this._rawData, "payment_method", value); }
     }
 
     public required string PaymentMethodID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("payment_method_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'payment_method_id' cannot be null",
-                    new ArgumentOutOfRangeException(
-                        "payment_method_id",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'payment_method_id' cannot be null",
-                    new ArgumentNullException("payment_method_id")
-                );
-        }
-        init
-        {
-            this._rawData["payment_method_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_method_id"); }
+        init { ModelBase.Set(this._rawData, "payment_method_id", value); }
     }
 
     public Card? Card
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("card", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<Card?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["card"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<Card>(this.RawData, "card"); }
+        init { ModelBase.Set(this._rawData, "card", value); }
     }
 
     public DateTimeOffset? LastUsedAt
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("last_used_at", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
-        init
-        {
-            this._rawData["last_used_at"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "last_used_at"); }
+        init { ModelBase.Set(this._rawData, "last_used_at", value); }
     }
 
     public ApiEnum<string, Payments::PaymentMethodTypes>? PaymentMethodType
     {
         get
         {
-            if (!this._rawData.TryGetValue("payment_method_type", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Payments::PaymentMethodTypes>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<ApiEnum<string, Payments::PaymentMethodTypes>>(
+                this.RawData,
+                "payment_method_type"
             );
         }
-        init
-        {
-            this._rawData["payment_method_type"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "payment_method_type", value); }
     }
 
     public bool? RecurringEnabled
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("recurring_enabled", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["recurring_enabled"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "recurring_enabled"); }
+        init { ModelBase.Set(this._rawData, "recurring_enabled", value); }
     }
 
     public override void Validate()
@@ -367,111 +262,42 @@ public sealed record class Card : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("card_issuing_country", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, CountryCode>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<ApiEnum<string, CountryCode>>(
+                this.RawData,
+                "card_issuing_country"
             );
         }
-        init
-        {
-            this._rawData["card_issuing_country"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "card_issuing_country", value); }
     }
 
     public string? CardNetwork
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("card_network", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["card_network"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "card_network"); }
+        init { ModelBase.Set(this._rawData, "card_network", value); }
     }
 
     public string? CardType
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("card_type", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["card_type"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "card_type"); }
+        init { ModelBase.Set(this._rawData, "card_type", value); }
     }
 
     public string? ExpiryMonth
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("expiry_month", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["expiry_month"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "expiry_month"); }
+        init { ModelBase.Set(this._rawData, "expiry_month", value); }
     }
 
     public string? ExpiryYear
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("expiry_year", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["expiry_year"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "expiry_year"); }
+        init { ModelBase.Set(this._rawData, "expiry_year", value); }
     }
 
     public string? Last4Digits
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("last4_digits", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["last4_digits"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "last4_digits"); }
+        init { ModelBase.Set(this._rawData, "last4_digits", value); }
     }
 
     public override void Validate()

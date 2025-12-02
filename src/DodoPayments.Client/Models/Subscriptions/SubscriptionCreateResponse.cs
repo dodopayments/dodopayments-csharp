@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
@@ -22,28 +21,9 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("addons", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'addons' cannot be null",
-                    new ArgumentOutOfRangeException("addons", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<List<AddonCartResponseItem>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'addons' cannot be null",
-                    new ArgumentNullException("addons")
-                );
+            return ModelBase.GetNotNullClass<List<AddonCartResponseItem>>(this.RawData, "addons");
         }
-        init
-        {
-            this._rawData["addons"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "addons", value); }
     }
 
     /// <summary>
@@ -51,30 +31,8 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     /// </summary>
     public required CustomerLimitedDetails Customer
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("customer", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'customer' cannot be null",
-                    new ArgumentOutOfRangeException("customer", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<CustomerLimitedDetails>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'customer' cannot be null",
-                    new ArgumentNullException("customer")
-                );
-        }
-        init
-        {
-            this._rawData["customer"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
+        init { ModelBase.Set(this._rawData, "customer", value); }
     }
 
     /// <summary>
@@ -84,28 +42,9 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("metadata", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'metadata' cannot be null",
-                    new ArgumentOutOfRangeException("metadata", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'metadata' cannot be null",
-                    new ArgumentNullException("metadata")
-                );
+            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
-        init
-        {
-            this._rawData["metadata"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -113,27 +52,8 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     /// </summary>
     public required string PaymentID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("payment_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'payment_id' cannot be null",
-                    new ArgumentOutOfRangeException("payment_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'payment_id' cannot be null",
-                    new ArgumentNullException("payment_id")
-                );
-        }
-        init
-        {
-            this._rawData["payment_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_id"); }
+        init { ModelBase.Set(this._rawData, "payment_id", value); }
     }
 
     /// <summary>
@@ -141,26 +61,8 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     /// </summary>
     public required int RecurringPreTaxAmount
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("recurring_pre_tax_amount", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'recurring_pre_tax_amount' cannot be null",
-                    new ArgumentOutOfRangeException(
-                        "recurring_pre_tax_amount",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["recurring_pre_tax_amount"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "recurring_pre_tax_amount"); }
+        init { ModelBase.Set(this._rawData, "recurring_pre_tax_amount", value); }
     }
 
     /// <summary>
@@ -168,27 +70,8 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     /// </summary>
     public required string SubscriptionID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("subscription_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'subscription_id' cannot be null",
-                    new ArgumentOutOfRangeException("subscription_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'subscription_id' cannot be null",
-                    new ArgumentNullException("subscription_id")
-                );
-        }
-        init
-        {
-            this._rawData["subscription_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "subscription_id"); }
+        init { ModelBase.Set(this._rawData, "subscription_id", value); }
     }
 
     /// <summary>
@@ -197,20 +80,8 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     /// </summary>
     public string? ClientSecret
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("client_secret", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["client_secret"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "client_secret"); }
+        init { ModelBase.Set(this._rawData, "client_secret", value); }
     }
 
     /// <summary>
@@ -218,20 +89,8 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     /// </summary>
     public string? DiscountID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("discount_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["discount_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "discount_id"); }
+        init { ModelBase.Set(this._rawData, "discount_id", value); }
     }
 
     /// <summary>
@@ -239,23 +98,8 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     /// </summary>
     public DateTimeOffset? ExpiresOn
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("expires_on", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
-        init
-        {
-            this._rawData["expires_on"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_on"); }
+        init { ModelBase.Set(this._rawData, "expires_on", value); }
     }
 
     /// <summary>
@@ -263,20 +107,8 @@ public sealed record class SubscriptionCreateResponse : ModelBase
     /// </summary>
     public string? PaymentLink
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("payment_link", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["payment_link"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "payment_link"); }
+        init { ModelBase.Set(this._rawData, "payment_link", value); }
     }
 
     public override void Validate()

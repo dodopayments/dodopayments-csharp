@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.UsageEvents;
 
@@ -40,30 +39,8 @@ public sealed record class UsageEventIngestParams : ParamsBase
     /// </summary>
     public required IReadOnlyList<EventInput> Events
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("events", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'events' cannot be null",
-                    new ArgumentOutOfRangeException("events", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<List<EventInput>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'events' cannot be null",
-                    new ArgumentNullException("events")
-                );
-        }
-        init
-        {
-            this._rawBodyData["events"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<List<EventInput>>(this.RawBodyData, "events"); }
+        init { ModelBase.Set(this._rawBodyData, "events", value); }
     }
 
     public UsageEventIngestParams() { }

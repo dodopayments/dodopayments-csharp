@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -14,27 +12,8 @@ public sealed record class AttachExistingCustomer : ModelBase
 {
     public required string CustomerID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("customer_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'customer_id' cannot be null",
-                    new ArgumentOutOfRangeException("customer_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'customer_id' cannot be null",
-                    new ArgumentNullException("customer_id")
-                );
-        }
-        init
-        {
-            this._rawData["customer_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "customer_id"); }
+        init { ModelBase.Set(this._rawData, "customer_id", value); }
     }
 
     public override void Validate()

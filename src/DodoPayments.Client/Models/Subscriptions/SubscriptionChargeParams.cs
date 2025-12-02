@@ -7,7 +7,6 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Subscriptions;
@@ -28,23 +27,8 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     /// </summary>
     public required int ProductPrice
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("product_price", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'product_price' cannot be null",
-                    new ArgumentOutOfRangeException("product_price", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["product_price"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<int>(this.RawBodyData, "product_price"); }
+        init { ModelBase.Set(this._rawBodyData, "product_price", value); }
     }
 
     /// <summary>
@@ -56,21 +40,12 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            if (
-                !this._rawBodyData.TryGetValue(
-                    "adaptive_currency_fees_inclusive",
-                    out JsonElement element
-                )
-            )
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+            return ModelBase.GetNullableStruct<bool>(
+                this.RawBodyData,
+                "adaptive_currency_fees_inclusive"
+            );
         }
-        init
-        {
-            this._rawBodyData["adaptive_currency_fees_inclusive"] =
-                JsonSerializer.SerializeToElement(value, ModelBase.SerializerOptions);
-        }
+        init { ModelBase.Set(this._rawBodyData, "adaptive_currency_fees_inclusive", value); }
     }
 
     /// <summary>
@@ -80,21 +55,12 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("customer_balance_config", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<CustomerBalanceConfig?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<CustomerBalanceConfig>(
+                this.RawBodyData,
+                "customer_balance_config"
             );
         }
-        init
-        {
-            this._rawBodyData["customer_balance_config"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "customer_balance_config", value); }
     }
 
     /// <summary>
@@ -105,21 +71,12 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("metadata", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+                this.RawBodyData,
+                "metadata"
             );
         }
-        init
-        {
-            this._rawBodyData["metadata"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "metadata", value); }
     }
 
     /// <summary>
@@ -130,21 +87,12 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("product_currency", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Currency>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(
+                this.RawBodyData,
+                "product_currency"
             );
         }
-        init
-        {
-            this._rawBodyData["product_currency"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "product_currency", value); }
     }
 
     /// <summary>
@@ -153,20 +101,8 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     /// </summary>
     public string? ProductDescription
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("product_description", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["product_description"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "product_description"); }
+        init { ModelBase.Set(this._rawBodyData, "product_description", value); }
     }
 
     public SubscriptionChargeParams() { }
@@ -248,23 +184,12 @@ public sealed record class CustomerBalanceConfig : ModelBase
     {
         get
         {
-            if (
-                !this._rawData.TryGetValue(
-                    "allow_customer_credits_purchase",
-                    out JsonElement element
-                )
-            )
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["allow_customer_credits_purchase"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableStruct<bool>(
+                this.RawData,
+                "allow_customer_credits_purchase"
             );
         }
+        init { ModelBase.Set(this._rawData, "allow_customer_credits_purchase", value); }
     }
 
     /// <summary>
@@ -274,18 +199,9 @@ public sealed record class CustomerBalanceConfig : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("allow_customer_credits_usage", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
+            return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_customer_credits_usage");
         }
-        init
-        {
-            this._rawData["allow_customer_credits_usage"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "allow_customer_credits_usage", value); }
     }
 
     public override void Validate()

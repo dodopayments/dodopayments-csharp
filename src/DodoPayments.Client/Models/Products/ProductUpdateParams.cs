@@ -26,38 +26,14 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public IReadOnlyList<string>? Addons
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("addons", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["addons"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<List<string>>(this.RawBodyData, "addons"); }
+        init { ModelBase.Set(this._rawBodyData, "addons", value); }
     }
 
     public string? BrandID
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("brand_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["brand_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "brand_id"); }
+        init { ModelBase.Set(this._rawBodyData, "brand_id", value); }
     }
 
     /// <summary>
@@ -65,20 +41,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("description", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["description"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "description"); }
+        init { ModelBase.Set(this._rawBodyData, "description", value); }
     }
 
     /// <summary>
@@ -88,21 +52,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("digital_product_delivery", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DigitalProductDeliveryModel?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<DigitalProductDeliveryModel>(
+                this.RawBodyData,
+                "digital_product_delivery"
             );
         }
-        init
-        {
-            this._rawBodyData["digital_product_delivery"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "digital_product_delivery", value); }
     }
 
     /// <summary>
@@ -110,20 +65,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public string? ImageID
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("image_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["image_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "image_id"); }
+        init { ModelBase.Set(this._rawBodyData, "image_id", value); }
     }
 
     /// <summary>
@@ -136,23 +79,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (
-                !this._rawBodyData.TryGetValue(
-                    "license_key_activation_message",
-                    out JsonElement element
-                )
-            )
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["license_key_activation_message"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<string>(
+                this.RawBodyData,
+                "license_key_activation_message"
             );
         }
+        init { ModelBase.Set(this._rawBodyData, "license_key_activation_message", value); }
     }
 
     /// <summary>
@@ -165,23 +97,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (
-                !this._rawBodyData.TryGetValue(
-                    "license_key_activations_limit",
-                    out JsonElement element
-                )
-            )
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["license_key_activations_limit"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableStruct<int>(
+                this.RawBodyData,
+                "license_key_activations_limit"
             );
         }
+        init { ModelBase.Set(this._rawBodyData, "license_key_activations_limit", value); }
     }
 
     /// <summary>
@@ -194,21 +115,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("license_key_duration", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<LicenseKeyDuration?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<LicenseKeyDuration>(
+                this.RawBodyData,
+                "license_key_duration"
             );
         }
-        init
-        {
-            this._rawBodyData["license_key_duration"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "license_key_duration", value); }
     }
 
     /// <summary>
@@ -219,20 +131,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public bool? LicenseKeyEnabled
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("license_key_enabled", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["license_key_enabled"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawBodyData, "license_key_enabled"); }
+        init { ModelBase.Set(this._rawBodyData, "license_key_enabled", value); }
     }
 
     /// <summary>
@@ -242,21 +142,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("metadata", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+                this.RawBodyData,
+                "metadata"
             );
         }
-        init
-        {
-            this._rawBodyData["metadata"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "metadata", value); }
     }
 
     /// <summary>
@@ -264,20 +155,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public string? Name
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("name", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "name"); }
+        init { ModelBase.Set(this._rawBodyData, "name", value); }
     }
 
     /// <summary>
@@ -285,20 +164,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public Price? Price
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("price", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<Price?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["price"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<Price>(this.RawBodyData, "price"); }
+        init { ModelBase.Set(this._rawBodyData, "price", value); }
     }
 
     /// <summary>
@@ -308,21 +175,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("tax_category", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<ApiEnum<string, TaxCategory>>(
+                this.RawBodyData,
+                "tax_category"
             );
         }
-        init
-        {
-            this._rawBodyData["tax_category"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "tax_category", value); }
     }
 
     public ProductUpdateParams() { }
@@ -403,20 +261,8 @@ public sealed record class DigitalProductDeliveryModel : ModelBase
     /// </summary>
     public string? ExternalURL
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("external_url", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["external_url"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "external_url"); }
+        init { ModelBase.Set(this._rawData, "external_url", value); }
     }
 
     /// <summary>
@@ -424,20 +270,8 @@ public sealed record class DigitalProductDeliveryModel : ModelBase
     /// </summary>
     public IReadOnlyList<string>? Files
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("files", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<List<string>?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["files"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<List<string>>(this.RawData, "files"); }
+        init { ModelBase.Set(this._rawData, "files", value); }
     }
 
     /// <summary>
@@ -445,20 +279,8 @@ public sealed record class DigitalProductDeliveryModel : ModelBase
     /// </summary>
     public string? Instructions
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("instructions", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["instructions"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "instructions"); }
+        init { ModelBase.Set(this._rawData, "instructions", value); }
     }
 
     public override void Validate()

@@ -17,13 +17,7 @@ public sealed record class PayoutListParams : ParamsBase
     {
         get
         {
-            if (!this._rawQueryData.TryGetValue("created_at_gte", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "created_at_gte");
         }
         init
         {
@@ -32,10 +26,7 @@ public sealed record class PayoutListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["created_at_gte"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "created_at_gte", value);
         }
     }
 
@@ -46,13 +37,7 @@ public sealed record class PayoutListParams : ParamsBase
     {
         get
         {
-            if (!this._rawQueryData.TryGetValue("created_at_lte", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
+            return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "created_at_lte");
         }
         init
         {
@@ -61,10 +46,7 @@ public sealed record class PayoutListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["created_at_lte"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "created_at_lte", value);
         }
     }
 
@@ -73,13 +55,7 @@ public sealed record class PayoutListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_number", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
         init
         {
             if (value == null)
@@ -87,10 +63,7 @@ public sealed record class PayoutListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["page_number"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "page_number", value);
         }
     }
 
@@ -99,13 +72,7 @@ public sealed record class PayoutListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_size", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
         init
         {
             if (value == null)
@@ -113,10 +80,7 @@ public sealed record class PayoutListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["page_size"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "page_size", value);
         }
     }
 
