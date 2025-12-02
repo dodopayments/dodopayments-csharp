@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Licenses;
 
@@ -20,52 +19,14 @@ public sealed record class LicenseActivateParams : ParamsBase
 
     public required string LicenseKey
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("license_key", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'license_key' cannot be null",
-                    new ArgumentOutOfRangeException("license_key", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'license_key' cannot be null",
-                    new ArgumentNullException("license_key")
-                );
-        }
-        init
-        {
-            this._rawBodyData["license_key"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "license_key"); }
+        init { ModelBase.Set(this._rawBodyData, "license_key", value); }
     }
 
     public required string Name
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("name", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'name' cannot be null",
-                    new ArgumentOutOfRangeException("name", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'name' cannot be null",
-                    new ArgumentNullException("name")
-                );
-        }
-        init
-        {
-            this._rawBodyData["name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "name"); }
+        init { ModelBase.Set(this._rawBodyData, "name", value); }
     }
 
     public LicenseActivateParams() { }

@@ -36,13 +36,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public string? CustomerID
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("customer_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "customer_id"); }
         init
         {
             if (value == null)
@@ -50,10 +44,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["customer_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "customer_id", value);
         }
     }
 
@@ -62,16 +53,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public DateTimeOffset? End
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("end", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "end"); }
         init
         {
             if (value == null)
@@ -79,10 +61,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["end"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "end", value);
         }
     }
 
@@ -92,13 +71,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public string? EventName
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("event_name", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "event_name"); }
         init
         {
             if (value == null)
@@ -106,10 +79,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["event_name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "event_name", value);
         }
     }
 
@@ -119,13 +89,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public string? MeterID
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("meter_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "meter_id"); }
         init
         {
             if (value == null)
@@ -133,10 +97,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["meter_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "meter_id", value);
         }
     }
 
@@ -145,13 +106,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_number", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
         init
         {
             if (value == null)
@@ -159,10 +114,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["page_number"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "page_number", value);
         }
     }
 
@@ -171,13 +123,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_size", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
         init
         {
             if (value == null)
@@ -185,10 +131,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["page_size"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "page_size", value);
         }
     }
 
@@ -197,16 +140,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public DateTimeOffset? Start
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("start", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "start"); }
         init
         {
             if (value == null)
@@ -214,10 +148,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["start"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "start", value);
         }
     }
 

@@ -20,12 +20,9 @@ public sealed record class LedgerEntryListParams : ParamsBase
     {
         get
         {
-            if (!this._rawQueryData.TryGetValue("currency", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Currency>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(
+                this.RawQueryData,
+                "currency"
             );
         }
         init
@@ -35,22 +32,13 @@ public sealed record class LedgerEntryListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["currency"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "currency", value);
         }
     }
 
     public int? PageNumber
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_number", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
         init
         {
             if (value == null)
@@ -58,22 +46,13 @@ public sealed record class LedgerEntryListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["page_number"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "page_number", value);
         }
     }
 
     public int? PageSize
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_size", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
         init
         {
             if (value == null)
@@ -81,10 +60,7 @@ public sealed record class LedgerEntryListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["page_size"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "page_size", value);
         }
     }
 

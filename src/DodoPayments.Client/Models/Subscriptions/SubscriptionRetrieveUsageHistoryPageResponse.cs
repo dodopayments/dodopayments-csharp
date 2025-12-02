@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Subscriptions;
@@ -23,27 +22,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelB
     /// </summary>
     public required IReadOnlyList<ItemModel> Items
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("items", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'items' cannot be null",
-                    new ArgumentOutOfRangeException("items", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<List<ItemModel>>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'items' cannot be null",
-                    new ArgumentNullException("items")
-                );
-        }
-        init
-        {
-            this._rawData["items"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<List<ItemModel>>(this.RawData, "items"); }
+        init { ModelBase.Set(this._rawData, "items", value); }
     }
 
     public override void Validate()
@@ -102,23 +82,8 @@ public sealed record class ItemModel : ModelBase
     /// </summary>
     public required DateTimeOffset EndDate
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("end_date", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'end_date' cannot be null",
-                    new ArgumentOutOfRangeException("end_date", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["end_date"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "end_date"); }
+        init { ModelBase.Set(this._rawData, "end_date", value); }
     }
 
     /// <summary>
@@ -126,30 +91,8 @@ public sealed record class ItemModel : ModelBase
     /// </summary>
     public required IReadOnlyList<MeterModel> Meters
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("meters", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'meters' cannot be null",
-                    new ArgumentOutOfRangeException("meters", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<List<MeterModel>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'meters' cannot be null",
-                    new ArgumentNullException("meters")
-                );
-        }
-        init
-        {
-            this._rawData["meters"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<List<MeterModel>>(this.RawData, "meters"); }
+        init { ModelBase.Set(this._rawData, "meters", value); }
     }
 
     /// <summary>
@@ -157,23 +100,8 @@ public sealed record class ItemModel : ModelBase
     /// </summary>
     public required DateTimeOffset StartDate
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("start_date", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'start_date' cannot be null",
-                    new ArgumentOutOfRangeException("start_date", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["start_date"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "start_date"); }
+        init { ModelBase.Set(this._rawData, "start_date", value); }
     }
 
     public override void Validate()
@@ -221,27 +149,8 @@ public sealed record class MeterModel : ModelBase
     /// </summary>
     public required string ID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'id' cannot be null",
-                    new ArgumentOutOfRangeException("id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'id' cannot be null",
-                    new ArgumentNullException("id")
-                );
-        }
-        init
-        {
-            this._rawData["id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "id"); }
+        init { ModelBase.Set(this._rawData, "id", value); }
     }
 
     /// <summary>
@@ -249,27 +158,8 @@ public sealed record class MeterModel : ModelBase
     /// </summary>
     public required string ChargeableUnits
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("chargeable_units", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'chargeable_units' cannot be null",
-                    new ArgumentOutOfRangeException("chargeable_units", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'chargeable_units' cannot be null",
-                    new ArgumentNullException("chargeable_units")
-                );
-        }
-        init
-        {
-            this._rawData["chargeable_units"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "chargeable_units"); }
+        init { ModelBase.Set(this._rawData, "chargeable_units", value); }
     }
 
     /// <summary>
@@ -277,27 +167,8 @@ public sealed record class MeterModel : ModelBase
     /// </summary>
     public required string ConsumedUnits
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("consumed_units", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'consumed_units' cannot be null",
-                    new ArgumentOutOfRangeException("consumed_units", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'consumed_units' cannot be null",
-                    new ArgumentNullException("consumed_units")
-                );
-        }
-        init
-        {
-            this._rawData["consumed_units"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "consumed_units"); }
+        init { ModelBase.Set(this._rawData, "consumed_units", value); }
     }
 
     /// <summary>
@@ -307,28 +178,9 @@ public sealed record class MeterModel : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("currency", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'currency' cannot be null",
-                    new ArgumentOutOfRangeException("currency", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'currency' cannot be null",
-                    new ArgumentNullException("currency")
-                );
+            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init
-        {
-            this._rawData["currency"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "currency", value); }
     }
 
     /// <summary>
@@ -336,23 +188,8 @@ public sealed record class MeterModel : ModelBase
     /// </summary>
     public required long FreeThreshold
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("free_threshold", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'free_threshold' cannot be null",
-                    new ArgumentOutOfRangeException("free_threshold", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["free_threshold"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "free_threshold"); }
+        init { ModelBase.Set(this._rawData, "free_threshold", value); }
     }
 
     /// <summary>
@@ -360,27 +197,8 @@ public sealed record class MeterModel : ModelBase
     /// </summary>
     public required string Name
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("name", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'name' cannot be null",
-                    new ArgumentOutOfRangeException("name", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'name' cannot be null",
-                    new ArgumentNullException("name")
-                );
-        }
-        init
-        {
-            this._rawData["name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "name"); }
+        init { ModelBase.Set(this._rawData, "name", value); }
     }
 
     /// <summary>
@@ -388,27 +206,8 @@ public sealed record class MeterModel : ModelBase
     /// </summary>
     public required string PricePerUnit
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("price_per_unit", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'price_per_unit' cannot be null",
-                    new ArgumentOutOfRangeException("price_per_unit", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'price_per_unit' cannot be null",
-                    new ArgumentNullException("price_per_unit")
-                );
-        }
-        init
-        {
-            this._rawData["price_per_unit"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
+        init { ModelBase.Set(this._rawData, "price_per_unit", value); }
     }
 
     /// <summary>
@@ -416,23 +215,8 @@ public sealed record class MeterModel : ModelBase
     /// </summary>
     public required int TotalPrice
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("total_price", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'total_price' cannot be null",
-                    new ArgumentOutOfRangeException("total_price", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["total_price"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "total_price"); }
+        init { ModelBase.Set(this._rawData, "total_price", value); }
     }
 
     public override void Validate()

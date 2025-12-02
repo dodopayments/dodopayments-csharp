@@ -15,13 +15,7 @@ public sealed record class ProductListParams : ParamsBase
     /// </summary>
     public bool? Archived
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("archived", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawQueryData, "archived"); }
         init
         {
             if (value == null)
@@ -29,10 +23,7 @@ public sealed record class ProductListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["archived"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "archived", value);
         }
     }
 
@@ -41,13 +32,7 @@ public sealed record class ProductListParams : ParamsBase
     /// </summary>
     public string? BrandID
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("brand_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "brand_id"); }
         init
         {
             if (value == null)
@@ -55,10 +40,7 @@ public sealed record class ProductListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["brand_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "brand_id", value);
         }
     }
 
@@ -67,13 +49,7 @@ public sealed record class ProductListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_number", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
         init
         {
             if (value == null)
@@ -81,10 +57,7 @@ public sealed record class ProductListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["page_number"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "page_number", value);
         }
     }
 
@@ -93,13 +66,7 @@ public sealed record class ProductListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_size", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
         init
         {
             if (value == null)
@@ -107,10 +74,7 @@ public sealed record class ProductListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["page_size"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "page_size", value);
         }
     }
 
@@ -121,13 +85,7 @@ public sealed record class ProductListParams : ParamsBase
     /// </summary>
     public bool? Recurring
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("recurring", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawQueryData, "recurring"); }
         init
         {
             if (value == null)
@@ -135,10 +93,7 @@ public sealed record class ProductListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["recurring"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "recurring", value);
         }
     }
 

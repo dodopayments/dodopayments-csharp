@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Webhooks.Headers;
 
@@ -24,28 +22,9 @@ public sealed record class HeaderRetrieveResponse : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("headers", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'headers' cannot be null",
-                    new ArgumentOutOfRangeException("headers", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'headers' cannot be null",
-                    new ArgumentNullException("headers")
-                );
+            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "headers");
         }
-        init
-        {
-            this._rawData["headers"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "headers", value); }
     }
 
     /// <summary>
@@ -53,27 +32,8 @@ public sealed record class HeaderRetrieveResponse : ModelBase
     /// </summary>
     public required IReadOnlyList<string> Sensitive
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("sensitive", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'sensitive' cannot be null",
-                    new ArgumentOutOfRangeException("sensitive", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<List<string>>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'sensitive' cannot be null",
-                    new ArgumentNullException("sensitive")
-                );
-        }
-        init
-        {
-            this._rawData["sensitive"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<List<string>>(this.RawData, "sensitive"); }
+        init { ModelBase.Set(this._rawData, "sensitive", value); }
     }
 
     public override void Validate()

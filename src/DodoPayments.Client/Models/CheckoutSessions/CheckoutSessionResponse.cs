@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
 
@@ -17,27 +15,8 @@ public sealed record class CheckoutSessionResponse : ModelBase
     /// </summary>
     public required string CheckoutURL
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("checkout_url", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'checkout_url' cannot be null",
-                    new ArgumentOutOfRangeException("checkout_url", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'checkout_url' cannot be null",
-                    new ArgumentNullException("checkout_url")
-                );
-        }
-        init
-        {
-            this._rawData["checkout_url"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "checkout_url"); }
+        init { ModelBase.Set(this._rawData, "checkout_url", value); }
     }
 
     /// <summary>
@@ -45,27 +24,8 @@ public sealed record class CheckoutSessionResponse : ModelBase
     /// </summary>
     public required string SessionID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("session_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'session_id' cannot be null",
-                    new ArgumentOutOfRangeException("session_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'session_id' cannot be null",
-                    new ArgumentNullException("session_id")
-                );
-        }
-        init
-        {
-            this._rawData["session_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "session_id"); }
+        init { ModelBase.Set(this._rawData, "session_id", value); }
     }
 
     public override void Validate()

@@ -27,21 +27,12 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("currency", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Currency>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(
+                this.RawBodyData,
+                "currency"
             );
         }
-        init
-        {
-            this._rawBodyData["currency"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "currency", value); }
     }
 
     /// <summary>
@@ -49,20 +40,8 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("description", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["description"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "description"); }
+        init { ModelBase.Set(this._rawBodyData, "description", value); }
     }
 
     /// <summary>
@@ -70,20 +49,8 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public string? ImageID
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("image_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["image_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "image_id"); }
+        init { ModelBase.Set(this._rawBodyData, "image_id", value); }
     }
 
     /// <summary>
@@ -91,20 +58,8 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public string? Name
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("name", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "name"); }
+        init { ModelBase.Set(this._rawBodyData, "name", value); }
     }
 
     /// <summary>
@@ -112,20 +67,8 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public int? Price
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("price", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["price"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawBodyData, "price"); }
+        init { ModelBase.Set(this._rawBodyData, "price", value); }
     }
 
     /// <summary>
@@ -135,21 +78,12 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("tax_category", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<ApiEnum<string, TaxCategory>>(
+                this.RawBodyData,
+                "tax_category"
             );
         }
-        init
-        {
-            this._rawBodyData["tax_category"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "tax_category", value); }
     }
 
     public AddonUpdateParams() { }

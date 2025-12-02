@@ -46,23 +46,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public DateTimeOffset? EndDate
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("end_date", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
-        init
-        {
-            this._rawQueryData["end_date"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "end_date"); }
+        init { ModelBase.Set(this._rawQueryData, "end_date", value); }
     }
 
     /// <summary>
@@ -70,20 +55,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public string? MeterID
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("meter_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawQueryData["meter_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "meter_id"); }
+        init { ModelBase.Set(this._rawQueryData, "meter_id", value); }
     }
 
     /// <summary>
@@ -91,20 +64,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_number", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawQueryData["page_number"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
+        init { ModelBase.Set(this._rawQueryData, "page_number", value); }
     }
 
     /// <summary>
@@ -112,20 +73,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_size", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawQueryData["page_size"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
+        init { ModelBase.Set(this._rawQueryData, "page_size", value); }
     }
 
     /// <summary>
@@ -133,23 +82,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public DateTimeOffset? StartDate
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("start_date", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
-        init
-        {
-            this._rawQueryData["start_date"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "start_date"); }
+        init { ModelBase.Set(this._rawQueryData, "start_date", value); }
     }
 
     public SubscriptionRetrieveUsageHistoryParams() { }

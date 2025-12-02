@@ -15,20 +15,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public string? LicenseKeyID
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("license_key_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawQueryData["license_key_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "license_key_id"); }
+        init { ModelBase.Set(this._rawQueryData, "license_key_id", value); }
     }
 
     /// <summary>
@@ -36,20 +24,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_number", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawQueryData["page_number"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
+        init { ModelBase.Set(this._rawQueryData, "page_number", value); }
     }
 
     /// <summary>
@@ -57,20 +33,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("page_size", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawQueryData["page_size"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
+        init { ModelBase.Set(this._rawQueryData, "page_size", value); }
     }
 
     public LicenseKeyInstanceListParams() { }

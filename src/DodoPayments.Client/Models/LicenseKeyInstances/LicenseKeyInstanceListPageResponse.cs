@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.LicenseKeyInstances;
 
@@ -19,30 +17,8 @@ public sealed record class LicenseKeyInstanceListPageResponse : ModelBase
 {
     public required IReadOnlyList<LicenseKeyInstance> Items
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("items", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'items' cannot be null",
-                    new ArgumentOutOfRangeException("items", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<List<LicenseKeyInstance>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'items' cannot be null",
-                    new ArgumentNullException("items")
-                );
-        }
-        init
-        {
-            this._rawData["items"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<List<LicenseKeyInstance>>(this.RawData, "items"); }
+        init { ModelBase.Set(this._rawData, "items", value); }
     }
 
     public override void Validate()

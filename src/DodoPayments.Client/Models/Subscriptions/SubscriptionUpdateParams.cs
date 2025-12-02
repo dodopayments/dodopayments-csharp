@@ -7,7 +7,6 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
@@ -24,23 +23,8 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
 
     public BillingAddress? Billing
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("billing", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<BillingAddress?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
-        init
-        {
-            this._rawBodyData["billing"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<BillingAddress>(this.RawBodyData, "billing"); }
+        init { ModelBase.Set(this._rawBodyData, "billing", value); }
     }
 
     /// <summary>
@@ -50,143 +34,72 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         get
         {
-            if (
-                !this._rawBodyData.TryGetValue(
-                    "cancel_at_next_billing_date",
-                    out JsonElement element
-                )
-            )
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["cancel_at_next_billing_date"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableStruct<bool>(
+                this.RawBodyData,
+                "cancel_at_next_billing_date"
             );
         }
+        init { ModelBase.Set(this._rawBodyData, "cancel_at_next_billing_date", value); }
     }
 
     public string? CustomerName
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("customer_name", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["customer_name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "customer_name"); }
+        init { ModelBase.Set(this._rawBodyData, "customer_name", value); }
     }
 
     public DisableOnDemand? DisableOnDemand
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("disable_on_demand", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DisableOnDemand?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<DisableOnDemand>(
+                this.RawBodyData,
+                "disable_on_demand"
             );
         }
-        init
-        {
-            this._rawBodyData["disable_on_demand"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "disable_on_demand", value); }
     }
 
     public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("metadata", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+                this.RawBodyData,
+                "metadata"
             );
         }
-        init
-        {
-            this._rawBodyData["metadata"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "metadata", value); }
     }
 
     public DateTimeOffset? NextBillingDate
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("next_billing_date", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableStruct<DateTimeOffset>(
+                this.RawBodyData,
+                "next_billing_date"
             );
         }
-        init
-        {
-            this._rawBodyData["next_billing_date"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "next_billing_date", value); }
     }
 
     public ApiEnum<string, SubscriptionStatus>? Status
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("status", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStatus>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<ApiEnum<string, SubscriptionStatus>>(
+                this.RawBodyData,
+                "status"
             );
         }
-        init
-        {
-            this._rawBodyData["status"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "status", value); }
     }
 
     public string? TaxID
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("tax_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["tax_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "tax_id"); }
+        init { ModelBase.Set(this._rawBodyData, "tax_id", value); }
     }
 
     public SubscriptionUpdateParams() { }
@@ -262,24 +175,9 @@ public sealed record class DisableOnDemand : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("next_billing_date", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'next_billing_date' cannot be null",
-                    new ArgumentOutOfRangeException(
-                        "next_billing_date",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
+            return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "next_billing_date");
         }
-        init
-        {
-            this._rawData["next_billing_date"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "next_billing_date", value); }
     }
 
     public override void Validate()

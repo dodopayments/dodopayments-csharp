@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Webhooks.Headers;
 
@@ -30,28 +29,12 @@ public sealed record class HeaderUpdateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("headers", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'headers' cannot be null",
-                    new ArgumentOutOfRangeException("headers", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'headers' cannot be null",
-                    new ArgumentNullException("headers")
-                );
-        }
-        init
-        {
-            this._rawBodyData["headers"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<Dictionary<string, string>>(
+                this.RawBodyData,
+                "headers"
             );
         }
+        init { ModelBase.Set(this._rawBodyData, "headers", value); }
     }
 
     public HeaderUpdateParams() { }

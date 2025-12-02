@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Meters;
 
@@ -23,30 +22,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required MeterAggregation Aggregation
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("aggregation", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'aggregation' cannot be null",
-                    new ArgumentOutOfRangeException("aggregation", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<MeterAggregation>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'aggregation' cannot be null",
-                    new ArgumentNullException("aggregation")
-                );
-        }
-        init
-        {
-            this._rawBodyData["aggregation"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<MeterAggregation>(this.RawBodyData, "aggregation"); }
+        init { ModelBase.Set(this._rawBodyData, "aggregation", value); }
     }
 
     /// <summary>
@@ -54,27 +31,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required string EventName
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("event_name", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'event_name' cannot be null",
-                    new ArgumentOutOfRangeException("event_name", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'event_name' cannot be null",
-                    new ArgumentNullException("event_name")
-                );
-        }
-        init
-        {
-            this._rawBodyData["event_name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "event_name"); }
+        init { ModelBase.Set(this._rawBodyData, "event_name", value); }
     }
 
     /// <summary>
@@ -82,27 +40,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required string MeasurementUnit
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("measurement_unit", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'measurement_unit' cannot be null",
-                    new ArgumentOutOfRangeException("measurement_unit", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'measurement_unit' cannot be null",
-                    new ArgumentNullException("measurement_unit")
-                );
-        }
-        init
-        {
-            this._rawBodyData["measurement_unit"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "measurement_unit"); }
+        init { ModelBase.Set(this._rawBodyData, "measurement_unit", value); }
     }
 
     /// <summary>
@@ -110,27 +49,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required string Name
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("name", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'name' cannot be null",
-                    new ArgumentOutOfRangeException("name", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'name' cannot be null",
-                    new ArgumentNullException("name")
-                );
-        }
-        init
-        {
-            this._rawBodyData["name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "name"); }
+        init { ModelBase.Set(this._rawBodyData, "name", value); }
     }
 
     /// <summary>
@@ -138,20 +58,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("description", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["description"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "description"); }
+        init { ModelBase.Set(this._rawBodyData, "description", value); }
     }
 
     /// <summary>
@@ -159,23 +67,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public MeterMeterFilter? Filter
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("filter", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<MeterMeterFilter?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
-        init
-        {
-            this._rawBodyData["filter"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<MeterMeterFilter>(this.RawBodyData, "filter"); }
+        init { ModelBase.Set(this._rawBodyData, "filter", value); }
     }
 
     public MeterCreateParams() { }
