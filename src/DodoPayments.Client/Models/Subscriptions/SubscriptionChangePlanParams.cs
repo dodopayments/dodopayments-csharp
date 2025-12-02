@@ -26,30 +26,8 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     /// </summary>
     public required string ProductID
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("product_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'product_id' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "product_id",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'product_id' cannot be null",
-                    new System::ArgumentNullException("product_id")
-                );
-        }
-        init
-        {
-            this._rawBodyData["product_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "product_id"); }
+        init { ModelBase.Set(this._rawBodyData, "product_id", value); }
     }
 
     /// <summary>
@@ -59,31 +37,12 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("proration_billing_mode", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'proration_billing_mode' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "proration_billing_mode",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, ProrationBillingMode>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'proration_billing_mode' cannot be null",
-                    new System::ArgumentNullException("proration_billing_mode")
-                );
-        }
-        init
-        {
-            this._rawBodyData["proration_billing_mode"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, ProrationBillingMode>>(
+                this.RawBodyData,
+                "proration_billing_mode"
             );
         }
+        init { ModelBase.Set(this._rawBodyData, "proration_billing_mode", value); }
     }
 
     /// <summary>
@@ -91,23 +50,8 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     /// </summary>
     public required int Quantity
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("quantity", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'quantity' cannot be null",
-                    new System::ArgumentOutOfRangeException("quantity", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["quantity"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<int>(this.RawBodyData, "quantity"); }
+        init { ModelBase.Set(this._rawBodyData, "quantity", value); }
     }
 
     /// <summary>
@@ -115,23 +59,8 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     /// </summary>
     public IReadOnlyList<AttachAddon>? Addons
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("addons", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<List<AttachAddon>?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
-        init
-        {
-            this._rawBodyData["addons"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<List<AttachAddon>>(this.RawBodyData, "addons"); }
+        init { ModelBase.Set(this._rawBodyData, "addons", value); }
     }
 
     public SubscriptionChangePlanParams() { }

@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Licenses;
 
@@ -20,55 +19,17 @@ public sealed record class LicenseDeactivateParams : ParamsBase
 
     public required string LicenseKey
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("license_key", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'license_key' cannot be null",
-                    new ArgumentOutOfRangeException("license_key", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'license_key' cannot be null",
-                    new ArgumentNullException("license_key")
-                );
-        }
-        init
-        {
-            this._rawBodyData["license_key"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "license_key"); }
+        init { ModelBase.Set(this._rawBodyData, "license_key", value); }
     }
 
     public required string LicenseKeyInstanceID
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("license_key_instance_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'license_key_instance_id' cannot be null",
-                    new ArgumentOutOfRangeException(
-                        "license_key_instance_id",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'license_key_instance_id' cannot be null",
-                    new ArgumentNullException("license_key_instance_id")
-                );
+            return ModelBase.GetNotNullClass<string>(this.RawBodyData, "license_key_instance_id");
         }
-        init
-        {
-            this._rawBodyData["license_key_instance_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "license_key_instance_id", value); }
     }
 
     public LicenseDeactivateParams() { }

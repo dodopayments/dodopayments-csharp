@@ -17,13 +17,7 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
     /// </summary>
     public bool? SendEmail
     {
-        get
-        {
-            if (!this._rawQueryData.TryGetValue("send_email", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawQueryData, "send_email"); }
         init
         {
             if (value == null)
@@ -31,10 +25,7 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData["send_email"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawQueryData, "send_email", value);
         }
     }
 

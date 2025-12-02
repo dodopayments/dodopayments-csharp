@@ -25,20 +25,8 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public int? ActivationsLimit
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("activations_limit", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["activations_limit"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawBodyData, "activations_limit"); }
+        init { ModelBase.Set(this._rawBodyData, "activations_limit", value); }
     }
 
     /// <summary>
@@ -47,20 +35,8 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public bool? Disabled
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("disabled", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["disabled"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawBodyData, "disabled"); }
+        init { ModelBase.Set(this._rawBodyData, "disabled", value); }
     }
 
     /// <summary>
@@ -69,23 +45,8 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("expires_at", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
-        init
-        {
-            this._rawBodyData["expires_at"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawBodyData, "expires_at"); }
+        init { ModelBase.Set(this._rawBodyData, "expires_at", value); }
     }
 
     public LicenseKeyUpdateParams() { }

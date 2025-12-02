@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -17,30 +15,8 @@ public sealed record class WebhookListPageResponse : ModelBase
     /// </summary>
     public required IReadOnlyList<WebhookDetails> Data
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("data", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'data' cannot be null",
-                    new ArgumentOutOfRangeException("data", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<List<WebhookDetails>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'data' cannot be null",
-                    new ArgumentNullException("data")
-                );
-        }
-        init
-        {
-            this._rawData["data"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<List<WebhookDetails>>(this.RawData, "data"); }
+        init { ModelBase.Set(this._rawData, "data", value); }
     }
 
     /// <summary>
@@ -48,23 +24,8 @@ public sealed record class WebhookListPageResponse : ModelBase
     /// </summary>
     public required bool Done
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("done", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'done' cannot be null",
-                    new ArgumentOutOfRangeException("done", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["done"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "done"); }
+        init { ModelBase.Set(this._rawData, "done", value); }
     }
 
     /// <summary>
@@ -72,20 +33,8 @@ public sealed record class WebhookListPageResponse : ModelBase
     /// </summary>
     public string? Iterator
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("iterator", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["iterator"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "iterator"); }
+        init { ModelBase.Set(this._rawData, "iterator", value); }
     }
 
     /// <summary>
@@ -93,20 +42,8 @@ public sealed record class WebhookListPageResponse : ModelBase
     /// </summary>
     public string? PrevIterator
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("prev_iterator", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["prev_iterator"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "prev_iterator"); }
+        init { ModelBase.Set(this._rawData, "prev_iterator", value); }
     }
 
     public override void Validate()

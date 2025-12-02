@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Models.Products;
@@ -15,51 +13,20 @@ public sealed record class LicenseKeyDuration : ModelBase
 {
     public required int Count
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("count", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'count' cannot be null",
-                    new ArgumentOutOfRangeException("count", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<int>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["count"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "count"); }
+        init { ModelBase.Set(this._rawData, "count", value); }
     }
 
     public required ApiEnum<string, TimeInterval> Interval
     {
         get
         {
-            if (!this._rawData.TryGetValue("interval", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'interval' cannot be null",
-                    new ArgumentOutOfRangeException("interval", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'interval' cannot be null",
-                    new ArgumentNullException("interval")
-                );
-        }
-        init
-        {
-            this._rawData["interval"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, TimeInterval>>(
+                this.RawData,
+                "interval"
             );
         }
+        init { ModelBase.Set(this._rawData, "interval", value); }
     }
 
     public override void Validate()

@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.WebhookEvents;
 
 namespace DodoPayments.Client.Models.Webhooks;
@@ -27,45 +26,14 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public required string URL
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("url", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'url' cannot be null",
-                    new ArgumentOutOfRangeException("url", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'url' cannot be null",
-                    new ArgumentNullException("url")
-                );
-        }
-        init
-        {
-            this._rawBodyData["url"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "url"); }
+        init { ModelBase.Set(this._rawBodyData, "url", value); }
     }
 
     public string? Description
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("description", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["description"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "description"); }
+        init { ModelBase.Set(this._rawBodyData, "description", value); }
     }
 
     /// <summary>
@@ -75,20 +43,8 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public bool? Disabled
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("disabled", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<bool?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["disabled"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<bool>(this.RawBodyData, "disabled"); }
+        init { ModelBase.Set(this._rawBodyData, "disabled", value); }
     }
 
     /// <summary>
@@ -100,12 +56,9 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("filter_types", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<List<ApiEnum<string, WebhookEventType>>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<List<ApiEnum<string, WebhookEventType>>>(
+                this.RawBodyData,
+                "filter_types"
             );
         }
         init
@@ -115,10 +68,7 @@ public sealed record class WebhookCreateParams : ParamsBase
                 return;
             }
 
-            this._rawBodyData["filter_types"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawBodyData, "filter_types", value);
         }
     }
 
@@ -129,21 +79,12 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("headers", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+                this.RawBodyData,
+                "headers"
             );
         }
-        init
-        {
-            this._rawBodyData["headers"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "headers", value); }
     }
 
     /// <summary>
@@ -151,20 +92,8 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public string? IdempotencyKey
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("idempotency_key", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["idempotency_key"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "idempotency_key"); }
+        init { ModelBase.Set(this._rawBodyData, "idempotency_key", value); }
     }
 
     /// <summary>
@@ -174,39 +103,18 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("metadata", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+                this.RawBodyData,
+                "metadata"
             );
         }
-        init
-        {
-            this._rawBodyData["metadata"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawBodyData, "metadata", value); }
     }
 
     public int? RateLimit
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("rate_limit", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<int?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["rate_limit"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<int>(this.RawBodyData, "rate_limit"); }
+        init { ModelBase.Set(this._rawBodyData, "rate_limit", value); }
     }
 
     public WebhookCreateParams() { }

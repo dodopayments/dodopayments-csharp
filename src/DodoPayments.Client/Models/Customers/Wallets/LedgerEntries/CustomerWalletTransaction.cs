@@ -15,274 +15,83 @@ public sealed record class CustomerWalletTransaction : ModelBase
 {
     public required string ID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'id' cannot be null",
-                    new ArgumentOutOfRangeException("id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'id' cannot be null",
-                    new ArgumentNullException("id")
-                );
-        }
-        init
-        {
-            this._rawData["id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "id"); }
+        init { ModelBase.Set(this._rawData, "id", value); }
     }
 
     public required long AfterBalance
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("after_balance", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'after_balance' cannot be null",
-                    new ArgumentOutOfRangeException("after_balance", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["after_balance"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "after_balance"); }
+        init { ModelBase.Set(this._rawData, "after_balance", value); }
     }
 
     public required long Amount
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("amount", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'amount' cannot be null",
-                    new ArgumentOutOfRangeException("amount", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["amount"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "amount"); }
+        init { ModelBase.Set(this._rawData, "amount", value); }
     }
 
     public required long BeforeBalance
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("before_balance", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'before_balance' cannot be null",
-                    new ArgumentOutOfRangeException("before_balance", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["before_balance"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "before_balance"); }
+        init { ModelBase.Set(this._rawData, "before_balance", value); }
     }
 
     public required string BusinessID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("business_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'business_id' cannot be null",
-                    new ArgumentOutOfRangeException("business_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'business_id' cannot be null",
-                    new ArgumentNullException("business_id")
-                );
-        }
-        init
-        {
-            this._rawData["business_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { ModelBase.Set(this._rawData, "business_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("created_at", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'created_at' cannot be null",
-                    new ArgumentOutOfRangeException("created_at", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<DateTimeOffset>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["created_at"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { ModelBase.Set(this._rawData, "created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
         get
         {
-            if (!this._rawData.TryGetValue("currency", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'currency' cannot be null",
-                    new ArgumentOutOfRangeException("currency", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'currency' cannot be null",
-                    new ArgumentNullException("currency")
-                );
+            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init
-        {
-            this._rawData["currency"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "currency", value); }
     }
 
     public required string CustomerID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("customer_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'customer_id' cannot be null",
-                    new ArgumentOutOfRangeException("customer_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'customer_id' cannot be null",
-                    new ArgumentNullException("customer_id")
-                );
-        }
-        init
-        {
-            this._rawData["customer_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "customer_id"); }
+        init { ModelBase.Set(this._rawData, "customer_id", value); }
     }
 
     public required ApiEnum<string, EventType> EventType
     {
         get
         {
-            if (!this._rawData.TryGetValue("event_type", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'event_type' cannot be null",
-                    new ArgumentOutOfRangeException("event_type", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, EventType>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'event_type' cannot be null",
-                    new ArgumentNullException("event_type")
-                );
-        }
-        init
-        {
-            this._rawData["event_type"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, EventType>>(
+                this.RawData,
+                "event_type"
             );
         }
+        init { ModelBase.Set(this._rawData, "event_type", value); }
     }
 
     public required bool IsCredit
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("is_credit", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'is_credit' cannot be null",
-                    new ArgumentOutOfRangeException("is_credit", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<bool>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["is_credit"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "is_credit"); }
+        init { ModelBase.Set(this._rawData, "is_credit", value); }
     }
 
     public string? Reason
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("reason", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["reason"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "reason"); }
+        init { ModelBase.Set(this._rawData, "reason", value); }
     }
 
     public string? ReferenceObjectID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("reference_object_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["reference_object_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "reference_object_id"); }
+        init { ModelBase.Set(this._rawData, "reference_object_id", value); }
     }
 
     public override void Validate()

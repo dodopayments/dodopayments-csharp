@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -14,27 +12,8 @@ public sealed record class AddMeterToPrice : ModelBase
 {
     public required string MeterID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("meter_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'meter_id' cannot be null",
-                    new ArgumentOutOfRangeException("meter_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'meter_id' cannot be null",
-                    new ArgumentNullException("meter_id")
-                );
-        }
-        init
-        {
-            this._rawData["meter_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "meter_id"); }
+        init { ModelBase.Set(this._rawData, "meter_id", value); }
     }
 
     /// <summary>
@@ -43,27 +22,8 @@ public sealed record class AddMeterToPrice : ModelBase
     /// </summary>
     public required string PricePerUnit
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("price_per_unit", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'price_per_unit' cannot be null",
-                    new ArgumentOutOfRangeException("price_per_unit", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'price_per_unit' cannot be null",
-                    new ArgumentNullException("price_per_unit")
-                );
-        }
-        init
-        {
-            this._rawData["price_per_unit"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
+        init { ModelBase.Set(this._rawData, "price_per_unit", value); }
     }
 
     /// <summary>
@@ -71,38 +31,14 @@ public sealed record class AddMeterToPrice : ModelBase
     /// </summary>
     public string? Description
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("description", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["description"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "description"); }
+        init { ModelBase.Set(this._rawData, "description", value); }
     }
 
     public long? FreeThreshold
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("free_threshold", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<long?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["free_threshold"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<long>(this.RawData, "free_threshold"); }
+        init { ModelBase.Set(this._rawData, "free_threshold", value); }
     }
 
     /// <summary>
@@ -110,20 +46,8 @@ public sealed record class AddMeterToPrice : ModelBase
     /// </summary>
     public string? MeasurementUnit
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("measurement_unit", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["measurement_unit"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "measurement_unit"); }
+        init { ModelBase.Set(this._rawData, "measurement_unit", value); }
     }
 
     /// <summary>
@@ -131,20 +55,8 @@ public sealed record class AddMeterToPrice : ModelBase
     /// </summary>
     public string? Name
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("name", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
+        init { ModelBase.Set(this._rawData, "name", value); }
     }
 
     public override void Validate()

@@ -44,6 +44,7 @@
     <NoWarn>$(NoWarn),0618</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <InternalsVisibleTo Include="DodoPayments.Client.Tests" />
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
     <InternalsVisibleTo Include="DodoPayments.Client.Tests" />
     <PackageReference Include="System.Text.Json" Version="9.0.9" />

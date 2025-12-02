@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -22,27 +21,8 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
 
     public required string FileName
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("file_name", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'file_name' cannot be null",
-                    new ArgumentOutOfRangeException("file_name", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'file_name' cannot be null",
-                    new ArgumentNullException("file_name")
-                );
-        }
-        init
-        {
-            this._rawBodyData["file_name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "file_name"); }
+        init { ModelBase.Set(this._rawBodyData, "file_name", value); }
     }
 
     public ProductUpdateFilesParams() { }

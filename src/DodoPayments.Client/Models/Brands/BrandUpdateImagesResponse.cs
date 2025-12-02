@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Brands;
 
@@ -17,27 +15,8 @@ public sealed record class BrandUpdateImagesResponse : ModelBase
     /// </summary>
     public required string ImageID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("image_id", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'image_id' cannot be null",
-                    new ArgumentOutOfRangeException("image_id", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'image_id' cannot be null",
-                    new ArgumentNullException("image_id")
-                );
-        }
-        init
-        {
-            this._rawData["image_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "image_id"); }
+        init { ModelBase.Set(this._rawData, "image_id", value); }
     }
 
     /// <summary>
@@ -45,27 +24,8 @@ public sealed record class BrandUpdateImagesResponse : ModelBase
     /// </summary>
     public required string URL
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("url", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'url' cannot be null",
-                    new ArgumentOutOfRangeException("url", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'url' cannot be null",
-                    new ArgumentNullException("url")
-                );
-        }
-        init
-        {
-            this._rawData["url"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "url"); }
+        init { ModelBase.Set(this._rawData, "url", value); }
     }
 
     public override void Validate()

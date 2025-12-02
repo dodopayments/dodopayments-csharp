@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Customers;
 
@@ -20,52 +19,14 @@ public sealed record class CustomerCreateParams : ParamsBase
 
     public required string Email
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("email", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'email' cannot be null",
-                    new ArgumentOutOfRangeException("email", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'email' cannot be null",
-                    new ArgumentNullException("email")
-                );
-        }
-        init
-        {
-            this._rawBodyData["email"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "email"); }
+        init { ModelBase.Set(this._rawBodyData, "email", value); }
     }
 
     public required string Name
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("name", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'name' cannot be null",
-                    new ArgumentOutOfRangeException("name", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'name' cannot be null",
-                    new ArgumentNullException("name")
-                );
-        }
-        init
-        {
-            this._rawBodyData["name"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "name"); }
+        init { ModelBase.Set(this._rawBodyData, "name", value); }
     }
 
     /// <summary>
@@ -75,12 +36,9 @@ public sealed record class CustomerCreateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("metadata", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<Dictionary<string, string>?>(
-                element,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+                this.RawBodyData,
+                "metadata"
             );
         }
         init
@@ -90,29 +48,14 @@ public sealed record class CustomerCreateParams : ParamsBase
                 return;
             }
 
-            this._rawBodyData["metadata"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
+            ModelBase.Set(this._rawBodyData, "metadata", value);
         }
     }
 
     public string? PhoneNumber
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("phone_number", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["phone_number"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "phone_number"); }
+        init { ModelBase.Set(this._rawBodyData, "phone_number", value); }
     }
 
     public CustomerCreateParams() { }

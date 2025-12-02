@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.UsageEvents;
 
@@ -14,23 +12,8 @@ public sealed record class UsageEventIngestResponse : ModelBase
 {
     public required long IngestedCount
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("ingested_count", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'ingested_count' cannot be null",
-                    new ArgumentOutOfRangeException("ingested_count", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["ingested_count"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "ingested_count"); }
+        init { ModelBase.Set(this._rawData, "ingested_count", value); }
     }
 
     public override void Validate()

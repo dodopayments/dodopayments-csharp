@@ -25,27 +25,8 @@ public sealed record class MeterMeterFilter : ModelBase
     /// </summary>
     public required Clauses Clauses
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("clauses", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'clauses' cannot be null",
-                    new System::ArgumentOutOfRangeException("clauses", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<Clauses>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'clauses' cannot be null",
-                    new System::ArgumentNullException("clauses")
-                );
-        }
-        init
-        {
-            this._rawData["clauses"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<Clauses>(this.RawData, "clauses"); }
+        init { ModelBase.Set(this._rawData, "clauses", value); }
     }
 
     /// <summary>
@@ -55,31 +36,12 @@ public sealed record class MeterMeterFilter : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("conjunction", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'conjunction' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "conjunction",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, MeterMeterFilterConjunction>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'conjunction' cannot be null",
-                    new System::ArgumentNullException("conjunction")
-                );
-        }
-        init
-        {
-            this._rawData["conjunction"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, MeterMeterFilterConjunction>>(
+                this.RawData,
+                "conjunction"
             );
         }
+        init { ModelBase.Set(this._rawData, "conjunction", value); }
     }
 
     public override void Validate()
@@ -283,55 +245,17 @@ public sealed record class MeterFilterCondition : ModelBase
     /// </summary>
     public required string Key
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("key", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'key' cannot be null",
-                    new System::ArgumentOutOfRangeException("key", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'key' cannot be null",
-                    new System::ArgumentNullException("key")
-                );
-        }
-        init
-        {
-            this._rawData["key"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "key"); }
+        init { ModelBase.Set(this._rawData, "key", value); }
     }
 
     public required ApiEnum<string, Operator> Operator
     {
         get
         {
-            if (!this._rawData.TryGetValue("operator", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'operator' cannot be null",
-                    new System::ArgumentOutOfRangeException("operator", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Operator>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'operator' cannot be null",
-                    new System::ArgumentNullException("operator")
-                );
+            return ModelBase.GetNotNullClass<ApiEnum<string, Operator>>(this.RawData, "operator");
         }
-        init
-        {
-            this._rawData["operator"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "operator", value); }
     }
 
     /// <summary>
@@ -339,30 +263,8 @@ public sealed record class MeterFilterCondition : ModelBase
     /// </summary>
     public required MeterFilterConditionValue Value
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("value", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'value' cannot be null",
-                    new System::ArgumentOutOfRangeException("value", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<MeterFilterConditionValue>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'value' cannot be null",
-                    new System::ArgumentNullException("value")
-                );
-        }
-        init
-        {
-            this._rawData["value"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<MeterFilterConditionValue>(this.RawData, "value"); }
+        init { ModelBase.Set(this._rawData, "value", value); }
     }
 
     public override void Validate()
@@ -651,61 +553,20 @@ public sealed record class MeterFilter : ModelBase
     /// </summary>
     public required MeterFilterClauses Clauses
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("clauses", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'clauses' cannot be null",
-                    new System::ArgumentOutOfRangeException("clauses", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<MeterFilterClauses>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'clauses' cannot be null",
-                    new System::ArgumentNullException("clauses")
-                );
-        }
-        init
-        {
-            this._rawData["clauses"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<MeterFilterClauses>(this.RawData, "clauses"); }
+        init { ModelBase.Set(this._rawData, "clauses", value); }
     }
 
     public required ApiEnum<string, MeterFilterConjunction> Conjunction
     {
         get
         {
-            if (!this._rawData.TryGetValue("conjunction", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'conjunction' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "conjunction",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterConjunction>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'conjunction' cannot be null",
-                    new System::ArgumentNullException("conjunction")
-                );
-        }
-        init
-        {
-            this._rawData["conjunction"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, MeterFilterConjunction>>(
+                this.RawData,
+                "conjunction"
             );
         }
+        init { ModelBase.Set(this._rawData, "conjunction", value); }
     }
 
     public override void Validate()
@@ -918,55 +779,20 @@ public sealed record class MeterFilterConditionModel : ModelBase
     /// </summary>
     public required string Key
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("key", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'key' cannot be null",
-                    new System::ArgumentOutOfRangeException("key", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'key' cannot be null",
-                    new System::ArgumentNullException("key")
-                );
-        }
-        init
-        {
-            this._rawData["key"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "key"); }
+        init { ModelBase.Set(this._rawData, "key", value); }
     }
 
     public required ApiEnum<string, MeterFilterConditionModelOperator> Operator
     {
         get
         {
-            if (!this._rawData.TryGetValue("operator", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'operator' cannot be null",
-                    new System::ArgumentOutOfRangeException("operator", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterConditionModelOperator>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'operator' cannot be null",
-                    new System::ArgumentNullException("operator")
-                );
-        }
-        init
-        {
-            this._rawData["operator"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, MeterFilterConditionModelOperator>>(
+                this.RawData,
+                "operator"
             );
         }
+        init { ModelBase.Set(this._rawData, "operator", value); }
     }
 
     /// <summary>
@@ -976,28 +802,9 @@ public sealed record class MeterFilterConditionModel : ModelBase
     {
         get
         {
-            if (!this._rawData.TryGetValue("value", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'value' cannot be null",
-                    new System::ArgumentOutOfRangeException("value", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<MeterFilterConditionModelValue>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'value' cannot be null",
-                    new System::ArgumentNullException("value")
-                );
+            return ModelBase.GetNotNullClass<MeterFilterConditionModelValue>(this.RawData, "value");
         }
-        init
-        {
-            this._rawData["value"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        init { ModelBase.Set(this._rawData, "value", value); }
     }
 
     public override void Validate()
@@ -1291,61 +1098,20 @@ public sealed record class MeterFilterModel : ModelBase
     /// </summary>
     public required MeterFilterModelClauses Clauses
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("clauses", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'clauses' cannot be null",
-                    new System::ArgumentOutOfRangeException("clauses", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<MeterFilterModelClauses>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'clauses' cannot be null",
-                    new System::ArgumentNullException("clauses")
-                );
-        }
-        init
-        {
-            this._rawData["clauses"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<MeterFilterModelClauses>(this.RawData, "clauses"); }
+        init { ModelBase.Set(this._rawData, "clauses", value); }
     }
 
     public required ApiEnum<string, MeterFilterModelConjunction> Conjunction
     {
         get
         {
-            if (!this._rawData.TryGetValue("conjunction", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'conjunction' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "conjunction",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterModelConjunction>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'conjunction' cannot be null",
-                    new System::ArgumentNullException("conjunction")
-                );
-        }
-        init
-        {
-            this._rawData["conjunction"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, MeterFilterModelConjunction>>(
+                this.RawData,
+                "conjunction"
             );
         }
+        init { ModelBase.Set(this._rawData, "conjunction", value); }
     }
 
     public override void Validate()
@@ -1560,55 +1326,20 @@ public sealed record class MeterFilterCondition1 : ModelBase
     /// </summary>
     public required string Key
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("key", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'key' cannot be null",
-                    new System::ArgumentOutOfRangeException("key", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'key' cannot be null",
-                    new System::ArgumentNullException("key")
-                );
-        }
-        init
-        {
-            this._rawData["key"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "key"); }
+        init { ModelBase.Set(this._rawData, "key", value); }
     }
 
     public required ApiEnum<string, MeterFilterCondition1Operator> Operator
     {
         get
         {
-            if (!this._rawData.TryGetValue("operator", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'operator' cannot be null",
-                    new System::ArgumentOutOfRangeException("operator", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, MeterFilterCondition1Operator>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'operator' cannot be null",
-                    new System::ArgumentNullException("operator")
-                );
-        }
-        init
-        {
-            this._rawData["operator"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, MeterFilterCondition1Operator>>(
+                this.RawData,
+                "operator"
             );
         }
+        init { ModelBase.Set(this._rawData, "operator", value); }
     }
 
     /// <summary>
@@ -1616,30 +1347,8 @@ public sealed record class MeterFilterCondition1 : ModelBase
     /// </summary>
     public required MeterFilterCondition1Value Value
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("value", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'value' cannot be null",
-                    new System::ArgumentOutOfRangeException("value", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<MeterFilterCondition1Value>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'value' cannot be null",
-                    new System::ArgumentNullException("value")
-                );
-        }
-        init
-        {
-            this._rawData["value"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<MeterFilterCondition1Value>(this.RawData, "value"); }
+        init { ModelBase.Set(this._rawData, "value", value); }
     }
 
     public override void Validate()
@@ -1932,58 +1641,20 @@ public sealed record class MeterFilter1 : ModelBase
     /// </summary>
     public required IReadOnlyList<Clause> Clauses
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("clauses", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'clauses' cannot be null",
-                    new System::ArgumentOutOfRangeException("clauses", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<List<Clause>>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'clauses' cannot be null",
-                    new System::ArgumentNullException("clauses")
-                );
-        }
-        init
-        {
-            this._rawData["clauses"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<List<Clause>>(this.RawData, "clauses"); }
+        init { ModelBase.Set(this._rawData, "clauses", value); }
     }
 
     public required ApiEnum<string, Conjunction> Conjunction
     {
         get
         {
-            if (!this._rawData.TryGetValue("conjunction", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'conjunction' cannot be null",
-                    new System::ArgumentOutOfRangeException(
-                        "conjunction",
-                        "Missing required argument"
-                    )
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Conjunction>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'conjunction' cannot be null",
-                    new System::ArgumentNullException("conjunction")
-                );
-        }
-        init
-        {
-            this._rawData["conjunction"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, Conjunction>>(
+                this.RawData,
+                "conjunction"
             );
         }
+        init { ModelBase.Set(this._rawData, "conjunction", value); }
     }
 
     public override void Validate()
@@ -2033,55 +1704,20 @@ public sealed record class Clause : ModelBase
     /// </summary>
     public required string Key
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("key", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'key' cannot be null",
-                    new System::ArgumentOutOfRangeException("key", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<string>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'key' cannot be null",
-                    new System::ArgumentNullException("key")
-                );
-        }
-        init
-        {
-            this._rawData["key"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<string>(this.RawData, "key"); }
+        init { ModelBase.Set(this._rawData, "key", value); }
     }
 
     public required ApiEnum<string, ClauseOperator> Operator
     {
         get
         {
-            if (!this._rawData.TryGetValue("operator", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'operator' cannot be null",
-                    new System::ArgumentOutOfRangeException("operator", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, ClauseOperator>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'operator' cannot be null",
-                    new System::ArgumentNullException("operator")
-                );
-        }
-        init
-        {
-            this._rawData["operator"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, ClauseOperator>>(
+                this.RawData,
+                "operator"
             );
         }
+        init { ModelBase.Set(this._rawData, "operator", value); }
     }
 
     /// <summary>
@@ -2089,27 +1725,8 @@ public sealed record class Clause : ModelBase
     /// </summary>
     public required ClauseValue Value
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("value", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'value' cannot be null",
-                    new System::ArgumentOutOfRangeException("value", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ClauseValue>(element, ModelBase.SerializerOptions)
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'value' cannot be null",
-                    new System::ArgumentNullException("value")
-                );
-        }
-        init
-        {
-            this._rawData["value"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullClass<ClauseValue>(this.RawData, "value"); }
+        init { ModelBase.Set(this._rawData, "value", value); }
     }
 
     public override void Validate()

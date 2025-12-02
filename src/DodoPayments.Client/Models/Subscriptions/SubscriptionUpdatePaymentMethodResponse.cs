@@ -18,77 +18,26 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse : ModelBase
 {
     public string? ClientSecret
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("client_secret", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["client_secret"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "client_secret"); }
+        init { ModelBase.Set(this._rawData, "client_secret", value); }
     }
 
     public DateTimeOffset? ExpiresOn
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("expires_on", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<DateTimeOffset?>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        }
-        init
-        {
-            this._rawData["expires_on"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_on"); }
+        init { ModelBase.Set(this._rawData, "expires_on", value); }
     }
 
     public string? PaymentID
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("payment_id", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["payment_id"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "payment_id"); }
+        init { ModelBase.Set(this._rawData, "payment_id", value); }
     }
 
     public string? PaymentLink
     {
-        get
-        {
-            if (!this._rawData.TryGetValue("payment_link", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawData["payment_link"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "payment_link"); }
+        init { ModelBase.Set(this._rawData, "payment_link", value); }
     }
 
     public override void Validate()

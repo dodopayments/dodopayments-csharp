@@ -24,23 +24,8 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
 
     public required long Amount
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("amount", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'amount' cannot be null",
-                    new ArgumentOutOfRangeException("amount", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<long>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["amount"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNotNullStruct<long>(this.RawBodyData, "amount"); }
+        init { ModelBase.Set(this._rawBodyData, "amount", value); }
     }
 
     /// <summary>
@@ -50,28 +35,12 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("currency", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'currency' cannot be null",
-                    new ArgumentOutOfRangeException("currency", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'currency' cannot be null",
-                    new ArgumentNullException("currency")
-                );
-        }
-        init
-        {
-            this._rawBodyData["currency"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(
+                this.RawBodyData,
+                "currency"
             );
         }
+        init { ModelBase.Set(this._rawBodyData, "currency", value); }
     }
 
     /// <summary>
@@ -81,28 +50,12 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     {
         get
         {
-            if (!this._rawBodyData.TryGetValue("entry_type", out JsonElement element))
-                throw new DodoPaymentsInvalidDataException(
-                    "'entry_type' cannot be null",
-                    new ArgumentOutOfRangeException("entry_type", "Missing required argument")
-                );
-
-            return JsonSerializer.Deserialize<ApiEnum<string, EntryType>>(
-                    element,
-                    ModelBase.SerializerOptions
-                )
-                ?? throw new DodoPaymentsInvalidDataException(
-                    "'entry_type' cannot be null",
-                    new ArgumentNullException("entry_type")
-                );
-        }
-        init
-        {
-            this._rawBodyData["entry_type"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
+            return ModelBase.GetNotNullClass<ApiEnum<string, EntryType>>(
+                this.RawBodyData,
+                "entry_type"
             );
         }
+        init { ModelBase.Set(this._rawBodyData, "entry_type", value); }
     }
 
     /// <summary>
@@ -110,38 +63,14 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     /// </summary>
     public string? IdempotencyKey
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("idempotency_key", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["idempotency_key"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "idempotency_key"); }
+        init { ModelBase.Set(this._rawBodyData, "idempotency_key", value); }
     }
 
     public string? Reason
     {
-        get
-        {
-            if (!this._rawBodyData.TryGetValue("reason", out JsonElement element))
-                return null;
-
-            return JsonSerializer.Deserialize<string?>(element, ModelBase.SerializerOptions);
-        }
-        init
-        {
-            this._rawBodyData["reason"] = JsonSerializer.SerializeToElement(
-                value,
-                ModelBase.SerializerOptions
-            );
-        }
+        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "reason"); }
+        init { ModelBase.Set(this._rawBodyData, "reason", value); }
     }
 
     public LedgerEntryCreateParams() { }
