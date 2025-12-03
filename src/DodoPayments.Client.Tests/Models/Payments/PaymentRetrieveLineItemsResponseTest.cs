@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
@@ -48,6 +49,101 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
             Assert.Equal(expectedItems[i], model.Items[i]);
         }
     }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new PaymentRetrieveLineItemsResponse
+        {
+            Currency = Currency.Aed,
+            Items =
+            [
+                new()
+                {
+                    Amount = 0,
+                    ItemsID = "items_id",
+                    RefundableAmount = 0,
+                    Tax = 0,
+                    Description = "description",
+                    Name = "name",
+                },
+            ],
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PaymentRetrieveLineItemsResponse>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new PaymentRetrieveLineItemsResponse
+        {
+            Currency = Currency.Aed,
+            Items =
+            [
+                new()
+                {
+                    Amount = 0,
+                    ItemsID = "items_id",
+                    RefundableAmount = 0,
+                    Tax = 0,
+                    Description = "description",
+                    Name = "name",
+                },
+            ],
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PaymentRetrieveLineItemsResponse>(json);
+        Assert.NotNull(deserialized);
+
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        List<ItemModel> expectedItems =
+        [
+            new()
+            {
+                Amount = 0,
+                ItemsID = "items_id",
+                RefundableAmount = 0,
+                Tax = 0,
+                Description = "description",
+                Name = "name",
+            },
+        ];
+
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedItems.Count, deserialized.Items.Count);
+        for (int i = 0; i < expectedItems.Count; i++)
+        {
+            Assert.Equal(expectedItems[i], deserialized.Items[i]);
+        }
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new PaymentRetrieveLineItemsResponse
+        {
+            Currency = Currency.Aed,
+            Items =
+            [
+                new()
+                {
+                    Amount = 0,
+                    ItemsID = "items_id",
+                    RefundableAmount = 0,
+                    Tax = 0,
+                    Description = "description",
+                    Name = "name",
+                },
+            ],
+        };
+
+        model.Validate();
+    }
 }
 
 public class ItemModelTest : TestBase
@@ -78,5 +174,140 @@ public class ItemModelTest : TestBase
         Assert.Equal(expectedTax, model.Tax);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedName, model.Name);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new ItemModel
+        {
+            Amount = 0,
+            ItemsID = "items_id",
+            RefundableAmount = 0,
+            Tax = 0,
+            Description = "description",
+            Name = "name",
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<ItemModel>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new ItemModel
+        {
+            Amount = 0,
+            ItemsID = "items_id",
+            RefundableAmount = 0,
+            Tax = 0,
+            Description = "description",
+            Name = "name",
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<ItemModel>(json);
+        Assert.NotNull(deserialized);
+
+        int expectedAmount = 0;
+        string expectedItemsID = "items_id";
+        int expectedRefundableAmount = 0;
+        int expectedTax = 0;
+        string expectedDescription = "description";
+        string expectedName = "name";
+
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedItemsID, deserialized.ItemsID);
+        Assert.Equal(expectedRefundableAmount, deserialized.RefundableAmount);
+        Assert.Equal(expectedTax, deserialized.Tax);
+        Assert.Equal(expectedDescription, deserialized.Description);
+        Assert.Equal(expectedName, deserialized.Name);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new ItemModel
+        {
+            Amount = 0,
+            ItemsID = "items_id",
+            RefundableAmount = 0,
+            Tax = 0,
+            Description = "description",
+            Name = "name",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new ItemModel
+        {
+            Amount = 0,
+            ItemsID = "items_id",
+            RefundableAmount = 0,
+            Tax = 0,
+        };
+
+        Assert.Null(model.Description);
+        Assert.False(model.RawData.ContainsKey("description"));
+        Assert.Null(model.Name);
+        Assert.False(model.RawData.ContainsKey("name"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new ItemModel
+        {
+            Amount = 0,
+            ItemsID = "items_id",
+            RefundableAmount = 0,
+            Tax = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new ItemModel
+        {
+            Amount = 0,
+            ItemsID = "items_id",
+            RefundableAmount = 0,
+            Tax = 0,
+
+            Description = null,
+            Name = null,
+        };
+
+        Assert.Null(model.Description);
+        Assert.True(model.RawData.ContainsKey("description"));
+        Assert.Null(model.Name);
+        Assert.True(model.RawData.ContainsKey("name"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new ItemModel
+        {
+            Amount = 0,
+            ItemsID = "items_id",
+            RefundableAmount = 0,
+            Tax = 0,
+
+            Description = null,
+            Name = null,
+        };
+
+        model.Validate();
     }
 }

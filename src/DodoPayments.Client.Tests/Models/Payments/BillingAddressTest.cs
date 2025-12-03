@@ -1,3 +1,4 @@
+using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
@@ -29,5 +30,67 @@ public class BillingAddressTest : TestBase
         Assert.Equal(expectedState, model.State);
         Assert.Equal(expectedStreet, model.Street);
         Assert.Equal(expectedZipcode, model.Zipcode);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new BillingAddress
+        {
+            City = "city",
+            Country = CountryCode.Af,
+            State = "state",
+            Street = "street",
+            Zipcode = "zipcode",
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<BillingAddress>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new BillingAddress
+        {
+            City = "city",
+            Country = CountryCode.Af,
+            State = "state",
+            Street = "street",
+            Zipcode = "zipcode",
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<BillingAddress>(json);
+        Assert.NotNull(deserialized);
+
+        string expectedCity = "city";
+        ApiEnum<string, CountryCode> expectedCountry = CountryCode.Af;
+        string expectedState = "state";
+        string expectedStreet = "street";
+        string expectedZipcode = "zipcode";
+
+        Assert.Equal(expectedCity, deserialized.City);
+        Assert.Equal(expectedCountry, deserialized.Country);
+        Assert.Equal(expectedState, deserialized.State);
+        Assert.Equal(expectedStreet, deserialized.Street);
+        Assert.Equal(expectedZipcode, deserialized.Zipcode);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new BillingAddress
+        {
+            City = "city",
+            Country = CountryCode.Af,
+            State = "state",
+            Street = "street",
+            Zipcode = "zipcode",
+        };
+
+        model.Validate();
     }
 }

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.Subscriptions;
@@ -16,5 +17,40 @@ public class LicenseKeyDurationTest : TestBase
 
         Assert.Equal(expectedCount, model.Count);
         Assert.Equal(expectedInterval, model.Interval);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new LicenseKeyDuration { Count = 0, Interval = TimeInterval.Day };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyDuration>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new LicenseKeyDuration { Count = 0, Interval = TimeInterval.Day };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyDuration>(json);
+        Assert.NotNull(deserialized);
+
+        int expectedCount = 0;
+        ApiEnum<string, TimeInterval> expectedInterval = TimeInterval.Day;
+
+        Assert.Equal(expectedCount, deserialized.Count);
+        Assert.Equal(expectedInterval, deserialized.Interval);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new LicenseKeyDuration { Count = 0, Interval = TimeInterval.Day };
+
+        model.Validate();
     }
 }
