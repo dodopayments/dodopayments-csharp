@@ -1,3 +1,4 @@
+using System.Text.Json;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
@@ -14,5 +15,40 @@ public class AddonCartResponseItemTest : TestBase
 
         Assert.Equal(expectedAddonID, model.AddonID);
         Assert.Equal(expectedQuantity, model.Quantity);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new AddonCartResponseItem { AddonID = "addon_id", Quantity = 0 };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<AddonCartResponseItem>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new AddonCartResponseItem { AddonID = "addon_id", Quantity = 0 };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<AddonCartResponseItem>(json);
+        Assert.NotNull(deserialized);
+
+        string expectedAddonID = "addon_id";
+        int expectedQuantity = 0;
+
+        Assert.Equal(expectedAddonID, deserialized.AddonID);
+        Assert.Equal(expectedQuantity, deserialized.Quantity);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new AddonCartResponseItem { AddonID = "addon_id", Quantity = 0 };
+
+        model.Validate();
     }
 }

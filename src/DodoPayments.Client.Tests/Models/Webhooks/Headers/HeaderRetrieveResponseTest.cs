@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json;
 using DodoPayments.Client.Models.Webhooks.Headers;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks.Headers;
@@ -29,5 +30,62 @@ public class HeaderRetrieveResponseTest : TestBase
         {
             Assert.Equal(expectedSensitive[i], model.Sensitive[i]);
         }
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new HeaderRetrieveResponse
+        {
+            Headers = new Dictionary<string, string>() { { "foo", "string" } },
+            Sensitive = ["string"],
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<HeaderRetrieveResponse>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new HeaderRetrieveResponse
+        {
+            Headers = new Dictionary<string, string>() { { "foo", "string" } },
+            Sensitive = ["string"],
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<HeaderRetrieveResponse>(json);
+        Assert.NotNull(deserialized);
+
+        Dictionary<string, string> expectedHeaders = new() { { "foo", "string" } };
+        List<string> expectedSensitive = ["string"];
+
+        Assert.Equal(expectedHeaders.Count, deserialized.Headers.Count);
+        foreach (var item in expectedHeaders)
+        {
+            Assert.True(deserialized.Headers.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Headers[item.Key]);
+        }
+        Assert.Equal(expectedSensitive.Count, deserialized.Sensitive.Count);
+        for (int i = 0; i < expectedSensitive.Count; i++)
+        {
+            Assert.Equal(expectedSensitive[i], deserialized.Sensitive[i]);
+        }
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new HeaderRetrieveResponse
+        {
+            Headers = new Dictionary<string, string>() { { "foo", "string" } },
+            Sensitive = ["string"],
+        };
+
+        model.Validate();
     }
 }
