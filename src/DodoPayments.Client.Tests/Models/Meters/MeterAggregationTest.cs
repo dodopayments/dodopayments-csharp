@@ -1,3 +1,4 @@
+using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Meters;
 
@@ -15,5 +16,84 @@ public class MeterAggregationTest : TestBase
 
         Assert.Equal(expectedType, model.Type);
         Assert.Equal(expectedKey, model.Key);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new MeterAggregation { Type = Type.Count, Key = "key" };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<MeterAggregation>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new MeterAggregation { Type = Type.Count, Key = "key" };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<MeterAggregation>(json);
+        Assert.NotNull(deserialized);
+
+        ApiEnum<string, Type> expectedType = Type.Count;
+        string expectedKey = "key";
+
+        Assert.Equal(expectedType, deserialized.Type);
+        Assert.Equal(expectedKey, deserialized.Key);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new MeterAggregation { Type = Type.Count, Key = "key" };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new MeterAggregation { Type = Type.Count };
+
+        Assert.Null(model.Key);
+        Assert.False(model.RawData.ContainsKey("key"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new MeterAggregation { Type = Type.Count };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new MeterAggregation
+        {
+            Type = Type.Count,
+
+            Key = null,
+        };
+
+        Assert.Null(model.Key);
+        Assert.True(model.RawData.ContainsKey("key"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new MeterAggregation
+        {
+            Type = Type.Count,
+
+            Key = null,
+        };
+
+        model.Validate();
     }
 }

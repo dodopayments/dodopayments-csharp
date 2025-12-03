@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
@@ -72,6 +73,148 @@ public class PaymentListPageResponseTest : TestBase
             Assert.Equal(expectedItems[i], model.Items[i]);
         }
     }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new PaymentListPageResponse
+        {
+            Items =
+            [
+                new()
+                {
+                    BrandID = "brand_id",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Currency = Currency.Aed,
+                    Customer = new()
+                    {
+                        CustomerID = "customer_id",
+                        Email = "email",
+                        Name = "name",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        PhoneNumber = "phone_number",
+                    },
+                    DigitalProductsDelivered = true,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PaymentID = "payment_id",
+                    TotalAmount = 0,
+                    PaymentMethod = "payment_method",
+                    PaymentMethodType = "payment_method_type",
+                    Status = IntentStatus.Succeeded,
+                    SubscriptionID = "subscription_id",
+                },
+            ],
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PaymentListPageResponse>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new PaymentListPageResponse
+        {
+            Items =
+            [
+                new()
+                {
+                    BrandID = "brand_id",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Currency = Currency.Aed,
+                    Customer = new()
+                    {
+                        CustomerID = "customer_id",
+                        Email = "email",
+                        Name = "name",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        PhoneNumber = "phone_number",
+                    },
+                    DigitalProductsDelivered = true,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PaymentID = "payment_id",
+                    TotalAmount = 0,
+                    PaymentMethod = "payment_method",
+                    PaymentMethodType = "payment_method_type",
+                    Status = IntentStatus.Succeeded,
+                    SubscriptionID = "subscription_id",
+                },
+            ],
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PaymentListPageResponse>(json);
+        Assert.NotNull(deserialized);
+
+        List<Item> expectedItems =
+        [
+            new()
+            {
+                BrandID = "brand_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = Currency.Aed,
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                DigitalProductsDelivered = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PaymentID = "payment_id",
+                TotalAmount = 0,
+                PaymentMethod = "payment_method",
+                PaymentMethodType = "payment_method_type",
+                Status = IntentStatus.Succeeded,
+                SubscriptionID = "subscription_id",
+            },
+        ];
+
+        Assert.Equal(expectedItems.Count, deserialized.Items.Count);
+        for (int i = 0; i < expectedItems.Count; i++)
+        {
+            Assert.Equal(expectedItems[i], deserialized.Items[i]);
+        }
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new PaymentListPageResponse
+        {
+            Items =
+            [
+                new()
+                {
+                    BrandID = "brand_id",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Currency = Currency.Aed,
+                    Customer = new()
+                    {
+                        CustomerID = "customer_id",
+                        Email = "email",
+                        Name = "name",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        PhoneNumber = "phone_number",
+                    },
+                    DigitalProductsDelivered = true,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PaymentID = "payment_id",
+                    TotalAmount = 0,
+                    PaymentMethod = "payment_method",
+                    PaymentMethodType = "payment_method_type",
+                    Status = IntentStatus.Succeeded,
+                    SubscriptionID = "subscription_id",
+                },
+            ],
+        };
+
+        model.Validate();
+    }
 }
 
 public class ItemTest : TestBase
@@ -140,5 +283,260 @@ public class ItemTest : TestBase
         Assert.Equal(expectedPaymentMethodType, model.PaymentMethodType);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Item
+        {
+            BrandID = "brand_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DigitalProductsDelivered = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            TotalAmount = 0,
+            PaymentMethod = "payment_method",
+            PaymentMethodType = "payment_method_type",
+            Status = IntentStatus.Succeeded,
+            SubscriptionID = "subscription_id",
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Item>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Item
+        {
+            BrandID = "brand_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DigitalProductsDelivered = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            TotalAmount = 0,
+            PaymentMethod = "payment_method",
+            PaymentMethodType = "payment_method_type",
+            Status = IntentStatus.Succeeded,
+            SubscriptionID = "subscription_id",
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Item>(json);
+        Assert.NotNull(deserialized);
+
+        string expectedBrandID = "brand_id";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        CustomerLimitedDetails expectedCustomer = new()
+        {
+            CustomerID = "customer_id",
+            Email = "email",
+            Name = "name",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PhoneNumber = "phone_number",
+        };
+        bool expectedDigitalProductsDelivered = true;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        string expectedPaymentID = "payment_id";
+        int expectedTotalAmount = 0;
+        string expectedPaymentMethod = "payment_method";
+        string expectedPaymentMethodType = "payment_method_type";
+        ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
+        string expectedSubscriptionID = "subscription_id";
+
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedCustomer, deserialized.Customer);
+        Assert.Equal(expectedDigitalProductsDelivered, deserialized.DigitalProductsDelivered);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
+        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
+        Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
+        Assert.Equal(expectedPaymentMethodType, deserialized.PaymentMethodType);
+        Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Item
+        {
+            BrandID = "brand_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DigitalProductsDelivered = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            TotalAmount = 0,
+            PaymentMethod = "payment_method",
+            PaymentMethodType = "payment_method_type",
+            Status = IntentStatus.Succeeded,
+            SubscriptionID = "subscription_id",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Item
+        {
+            BrandID = "brand_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DigitalProductsDelivered = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            TotalAmount = 0,
+        };
+
+        Assert.Null(model.PaymentMethod);
+        Assert.False(model.RawData.ContainsKey("payment_method"));
+        Assert.Null(model.PaymentMethodType);
+        Assert.False(model.RawData.ContainsKey("payment_method_type"));
+        Assert.Null(model.Status);
+        Assert.False(model.RawData.ContainsKey("status"));
+        Assert.Null(model.SubscriptionID);
+        Assert.False(model.RawData.ContainsKey("subscription_id"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Item
+        {
+            BrandID = "brand_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DigitalProductsDelivered = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            TotalAmount = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new Item
+        {
+            BrandID = "brand_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DigitalProductsDelivered = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            TotalAmount = 0,
+
+            PaymentMethod = null,
+            PaymentMethodType = null,
+            Status = null,
+            SubscriptionID = null,
+        };
+
+        Assert.Null(model.PaymentMethod);
+        Assert.True(model.RawData.ContainsKey("payment_method"));
+        Assert.Null(model.PaymentMethodType);
+        Assert.True(model.RawData.ContainsKey("payment_method_type"));
+        Assert.Null(model.Status);
+        Assert.True(model.RawData.ContainsKey("status"));
+        Assert.Null(model.SubscriptionID);
+        Assert.True(model.RawData.ContainsKey("subscription_id"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Item
+        {
+            BrandID = "brand_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DigitalProductsDelivered = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            TotalAmount = 0,
+
+            PaymentMethod = null,
+            PaymentMethodType = null,
+            Status = null,
+            SubscriptionID = null,
+        };
+
+        model.Validate();
     }
 }

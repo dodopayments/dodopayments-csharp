@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Webhooks;
@@ -54,6 +55,115 @@ public class DisputeChallengedWebhookEventTest : TestBase
         Assert.Equal(expectedTimestamp, model.Timestamp);
         Assert.Equal(expectedType, model.Type);
     }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new DisputeChallengedWebhookEvent
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                Amount = "amount",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = "currency",
+                DisputeID = "dispute_id",
+                DisputeStage = DisputeDisputeStage.PreDispute,
+                DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                PaymentID = "payment_id",
+                Remarks = "remarks",
+                PayloadType =
+                    DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = DisputeChallengedWebhookEventType.DisputeChallenged,
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeChallengedWebhookEvent>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new DisputeChallengedWebhookEvent
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                Amount = "amount",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = "currency",
+                DisputeID = "dispute_id",
+                DisputeStage = DisputeDisputeStage.PreDispute,
+                DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                PaymentID = "payment_id",
+                Remarks = "remarks",
+                PayloadType =
+                    DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = DisputeChallengedWebhookEventType.DisputeChallenged,
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeChallengedWebhookEvent>(json);
+        Assert.NotNull(deserialized);
+
+        string expectedBusinessID = "business_id";
+        DisputeChallengedWebhookEventData expectedData = new()
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            Remarks = "remarks",
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+        };
+        DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, DisputeChallengedWebhookEventType> expectedType =
+            DisputeChallengedWebhookEventType.DisputeChallenged;
+
+        Assert.Equal(expectedBusinessID, deserialized.BusinessID);
+        Assert.Equal(expectedData, deserialized.Data);
+        Assert.Equal(expectedTimestamp, deserialized.Timestamp);
+        Assert.Equal(expectedType, deserialized.Type);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new DisputeChallengedWebhookEvent
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                Amount = "amount",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = "currency",
+                DisputeID = "dispute_id",
+                DisputeStage = DisputeDisputeStage.PreDispute,
+                DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                PaymentID = "payment_id",
+                Remarks = "remarks",
+                PayloadType =
+                    DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = DisputeChallengedWebhookEventType.DisputeChallenged,
+        };
+
+        model.Validate();
+    }
 }
 
 public class DisputeChallengedWebhookEventDataTest : TestBase
@@ -102,6 +212,264 @@ public class DisputeChallengedWebhookEventDataTest : TestBase
         Assert.Equal(expectedRemarks, model.Remarks);
         Assert.Equal(expectedPayloadType, model.PayloadType);
     }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            Remarks = "remarks",
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeChallengedWebhookEventData>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            Remarks = "remarks",
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeChallengedWebhookEventData>(json);
+        Assert.NotNull(deserialized);
+
+        string expectedAmount = "amount";
+        string expectedBusinessID = "business_id";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedCurrency = "currency";
+        string expectedDisputeID = "dispute_id";
+        ApiEnum<string, DisputeDisputeStage> expectedDisputeStage = DisputeDisputeStage.PreDispute;
+        ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
+            DisputeDisputeStatus.DisputeOpened;
+        string expectedPaymentID = "payment_id";
+        string expectedRemarks = "remarks";
+        ApiEnum<
+            string,
+            DisputeChallengedWebhookEventDataIntersectionMember1PayloadType
+        > expectedPayloadType =
+            DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute;
+
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedBusinessID, deserialized.BusinessID);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedDisputeID, deserialized.DisputeID);
+        Assert.Equal(expectedDisputeStage, deserialized.DisputeStage);
+        Assert.Equal(expectedDisputeStatus, deserialized.DisputeStatus);
+        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedRemarks, deserialized.Remarks);
+        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            Remarks = "remarks",
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            Remarks = "remarks",
+        };
+
+        Assert.Null(model.PayloadType);
+        Assert.False(model.RawData.ContainsKey("payload_type"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            Remarks = "remarks",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            Remarks = "remarks",
+
+            // Null should be interpreted as omitted for these properties
+            PayloadType = null,
+        };
+
+        Assert.Null(model.PayloadType);
+        Assert.False(model.RawData.ContainsKey("payload_type"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            Remarks = "remarks",
+
+            // Null should be interpreted as omitted for these properties
+            PayloadType = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+        };
+
+        Assert.Null(model.Remarks);
+        Assert.False(model.RawData.ContainsKey("remarks"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+
+            Remarks = null,
+        };
+
+        Assert.Null(model.Remarks);
+        Assert.True(model.RawData.ContainsKey("remarks"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new DisputeChallengedWebhookEventData
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+
+            Remarks = null,
+        };
+
+        model.Validate();
+    }
 }
 
 public class DisputeChallengedWebhookEventDataIntersectionMember1Test : TestBase
@@ -121,5 +489,95 @@ public class DisputeChallengedWebhookEventDataIntersectionMember1Test : TestBase
             DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute;
 
         Assert.Equal(expectedPayloadType, model.PayloadType);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new DisputeChallengedWebhookEventDataIntersectionMember1
+        {
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized =
+            JsonSerializer.Deserialize<DisputeChallengedWebhookEventDataIntersectionMember1>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new DisputeChallengedWebhookEventDataIntersectionMember1
+        {
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized =
+            JsonSerializer.Deserialize<DisputeChallengedWebhookEventDataIntersectionMember1>(json);
+        Assert.NotNull(deserialized);
+
+        ApiEnum<
+            string,
+            DisputeChallengedWebhookEventDataIntersectionMember1PayloadType
+        > expectedPayloadType =
+            DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute;
+
+        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new DisputeChallengedWebhookEventDataIntersectionMember1
+        {
+            PayloadType = DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new DisputeChallengedWebhookEventDataIntersectionMember1 { };
+
+        Assert.Null(model.PayloadType);
+        Assert.False(model.RawData.ContainsKey("payload_type"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new DisputeChallengedWebhookEventDataIntersectionMember1 { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new DisputeChallengedWebhookEventDataIntersectionMember1
+        {
+            // Null should be interpreted as omitted for these properties
+            PayloadType = null,
+        };
+
+        Assert.Null(model.PayloadType);
+        Assert.False(model.RawData.ContainsKey("payload_type"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new DisputeChallengedWebhookEventDataIntersectionMember1
+        {
+            // Null should be interpreted as omitted for these properties
+            PayloadType = null,
+        };
+
+        model.Validate();
     }
 }
