@@ -15,6 +15,8 @@ The REST API documentation can be found on [docs.dodopayments.com](https://docs.
 
 ## Installation
 
+Install the package from [NuGet](https://www.nuget.org/packages/DodoPayments.Client):
+
 ```bash
 dotnet add package DodoPayments.Client
 ```
