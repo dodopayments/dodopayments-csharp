@@ -208,11 +208,6 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         where T : ParamsBase
     {
         var maxRetries = this.MaxRetries ?? ClientOptions.DefaultMaxRetries;
-        if (maxRetries <= 0)
-        {
-            return await ExecuteOnce(request, cancellationToken).ConfigureAwait(false);
-        }
-
         var retries = 0;
         while (true)
         {
