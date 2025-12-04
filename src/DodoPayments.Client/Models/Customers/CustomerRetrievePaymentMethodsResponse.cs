@@ -36,6 +36,11 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : ModelBase
 
     public CustomerRetrievePaymentMethodsResponse() { }
 
+    public CustomerRetrievePaymentMethodsResponse(
+        CustomerRetrievePaymentMethodsResponse customerRetrievePaymentMethodsResponse
+    )
+        : base(customerRetrievePaymentMethodsResponse) { }
+
     public CustomerRetrievePaymentMethodsResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -142,6 +147,9 @@ public sealed record class Item : ModelBase
     }
 
     public Item() { }
+
+    public Item(Item item)
+        : base(item) { }
 
     public Item(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -318,6 +326,9 @@ public sealed record class Card : ModelBase
     }
 
     public Card() { }
+
+    public Card(Card card)
+        : base(card) { }
 
     public Card(IReadOnlyDictionary<string, JsonElement> rawData)
     {

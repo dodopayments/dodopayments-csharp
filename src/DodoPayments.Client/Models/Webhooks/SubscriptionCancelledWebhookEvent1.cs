@@ -70,6 +70,11 @@ public sealed record class SubscriptionCancelledWebhookEvent : ModelBase
 
     public SubscriptionCancelledWebhookEvent() { }
 
+    public SubscriptionCancelledWebhookEvent(
+        SubscriptionCancelledWebhookEvent subscriptionCancelledWebhookEvent
+    )
+        : base(subscriptionCancelledWebhookEvent) { }
+
     public SubscriptionCancelledWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -492,6 +497,9 @@ public sealed record class Data14 : ModelBase
 
     public Data14() { }
 
+    public Data14(Data14 data14)
+        : base(data14) { }
+
     public Data14(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -551,6 +559,9 @@ public sealed record class Data14IntersectionMember1 : ModelBase
     }
 
     public Data14IntersectionMember1() { }
+
+    public Data14IntersectionMember1(Data14IntersectionMember1 data14IntersectionMember1)
+        : base(data14IntersectionMember1) { }
 
     public Data14IntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {

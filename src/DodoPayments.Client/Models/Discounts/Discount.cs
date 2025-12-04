@@ -146,6 +146,9 @@ public sealed record class Discount : ModelBase
 
     public Discount() { }
 
+    public Discount(Discount discount)
+        : base(discount) { }
+
     public Discount(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

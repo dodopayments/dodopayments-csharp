@@ -14,6 +14,9 @@ public sealed record class ProductArchiveParams : ParamsBase
 
     public ProductArchiveParams() { }
 
+    public ProductArchiveParams(ProductArchiveParams productArchiveParams)
+        : base(productArchiveParams) { }
+
     public ProductArchiveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

@@ -131,6 +131,9 @@ public sealed record class SubscriptionCreateResponse : ModelBase
 
     public SubscriptionCreateResponse() { }
 
+    public SubscriptionCreateResponse(SubscriptionCreateResponse subscriptionCreateResponse)
+        : base(subscriptionCreateResponse) { }
+
     public SubscriptionCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

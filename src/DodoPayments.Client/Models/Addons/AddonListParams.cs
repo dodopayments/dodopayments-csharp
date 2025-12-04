@@ -46,6 +46,9 @@ public sealed record class AddonListParams : ParamsBase
 
     public AddonListParams() { }
 
+    public AddonListParams(AddonListParams addonListParams)
+        : base(addonListParams) { }
+
     public AddonListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

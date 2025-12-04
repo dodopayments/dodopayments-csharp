@@ -95,6 +95,9 @@ public sealed record class Meter : ModelBase
 
     public Meter() { }
 
+    public Meter(Meter meter)
+        : base(meter) { }
+
     public Meter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

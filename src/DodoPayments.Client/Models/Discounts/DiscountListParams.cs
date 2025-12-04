@@ -49,6 +49,9 @@ public sealed record class DiscountListParams : ParamsBase
 
     public DiscountListParams() { }
 
+    public DiscountListParams(DiscountListParams discountListParams)
+        : base(discountListParams) { }
+
     public DiscountListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

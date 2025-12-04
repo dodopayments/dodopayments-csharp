@@ -67,6 +67,9 @@ public sealed record class PaymentSucceededWebhookEvent : ModelBase
 
     public PaymentSucceededWebhookEvent() { }
 
+    public PaymentSucceededWebhookEvent(PaymentSucceededWebhookEvent paymentSucceededWebhookEvent)
+        : base(paymentSucceededWebhookEvent) { }
+
     public PaymentSucceededWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -525,6 +528,9 @@ public sealed record class Data10 : ModelBase
 
     public Data10() { }
 
+    public Data10(Data10 data10)
+        : base(data10) { }
+
     public Data10(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -584,6 +590,9 @@ public sealed record class Data10IntersectionMember1 : ModelBase
     }
 
     public Data10IntersectionMember1() { }
+
+    public Data10IntersectionMember1(Data10IntersectionMember1 data10IntersectionMember1)
+        : base(data10IntersectionMember1) { }
 
     public Data10IntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {

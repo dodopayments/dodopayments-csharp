@@ -120,6 +120,9 @@ public sealed record class Dispute : ModelBase
 
     public Dispute() { }
 
+    public Dispute(Dispute dispute)
+        : base(dispute) { }
+
     public Dispute(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

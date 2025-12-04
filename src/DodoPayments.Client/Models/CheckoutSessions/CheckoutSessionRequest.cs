@@ -242,6 +242,9 @@ public sealed record class CheckoutSessionRequest : ModelBase
 
     public CheckoutSessionRequest() { }
 
+    public CheckoutSessionRequest(CheckoutSessionRequest checkoutSessionRequest)
+        : base(checkoutSessionRequest) { }
+
     public CheckoutSessionRequest(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -346,6 +349,11 @@ public sealed record class CheckoutSessionRequestProductCart : ModelBase
 
     public CheckoutSessionRequestProductCart() { }
 
+    public CheckoutSessionRequestProductCart(
+        CheckoutSessionRequestProductCart checkoutSessionRequestProductCart
+    )
+        : base(checkoutSessionRequestProductCart) { }
+
     public CheckoutSessionRequestProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -446,6 +454,11 @@ public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
     }
 
     public CheckoutSessionRequestBillingAddress() { }
+
+    public CheckoutSessionRequestBillingAddress(
+        CheckoutSessionRequestBillingAddress checkoutSessionRequestBillingAddress
+    )
+        : base(checkoutSessionRequestBillingAddress) { }
 
     public CheckoutSessionRequestBillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -576,6 +589,11 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
     }
 
     public CheckoutSessionRequestCustomization() { }
+
+    public CheckoutSessionRequestCustomization(
+        CheckoutSessionRequestCustomization checkoutSessionRequestCustomization
+    )
+        : base(checkoutSessionRequestCustomization) { }
 
     public CheckoutSessionRequestCustomization(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -914,6 +932,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
 
     public CheckoutSessionRequestFeatureFlags() { }
 
+    public CheckoutSessionRequestFeatureFlags(
+        CheckoutSessionRequestFeatureFlags checkoutSessionRequestFeatureFlags
+    )
+        : base(checkoutSessionRequestFeatureFlags) { }
+
     public CheckoutSessionRequestFeatureFlags(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -982,6 +1005,11 @@ public sealed record class CheckoutSessionRequestSubscriptionData : ModelBase
     }
 
     public CheckoutSessionRequestSubscriptionData() { }
+
+    public CheckoutSessionRequestSubscriptionData(
+        CheckoutSessionRequestSubscriptionData checkoutSessionRequestSubscriptionData
+    )
+        : base(checkoutSessionRequestSubscriptionData) { }
 
     public CheckoutSessionRequestSubscriptionData(IReadOnlyDictionary<string, JsonElement> rawData)
     {

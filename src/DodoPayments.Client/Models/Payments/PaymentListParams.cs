@@ -159,6 +159,9 @@ public sealed record class PaymentListParams : ParamsBase
 
     public PaymentListParams() { }
 
+    public PaymentListParams(PaymentListParams paymentListParams)
+        : base(paymentListParams) { }
+
     public PaymentListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

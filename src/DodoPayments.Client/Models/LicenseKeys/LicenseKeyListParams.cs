@@ -102,6 +102,9 @@ public sealed record class LicenseKeyListParams : ParamsBase
 
     public LicenseKeyListParams() { }
 
+    public LicenseKeyListParams(LicenseKeyListParams licenseKeyListParams)
+        : base(licenseKeyListParams) { }
+
     public LicenseKeyListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

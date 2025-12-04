@@ -53,6 +53,9 @@ public sealed record class LicenseKeyInstance : ModelBase
 
     public LicenseKeyInstance() { }
 
+    public LicenseKeyInstance(LicenseKeyInstance licenseKeyInstance)
+        : base(licenseKeyInstance) { }
+
     public LicenseKeyInstance(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

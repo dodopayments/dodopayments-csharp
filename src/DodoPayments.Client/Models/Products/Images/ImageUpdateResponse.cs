@@ -31,6 +31,9 @@ public sealed record class ImageUpdateResponse : ModelBase
 
     public ImageUpdateResponse() { }
 
+    public ImageUpdateResponse(ImageUpdateResponse imageUpdateResponse)
+        : base(imageUpdateResponse) { }
+
     public ImageUpdateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

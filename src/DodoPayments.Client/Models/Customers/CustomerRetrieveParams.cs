@@ -14,6 +14,9 @@ public sealed record class CustomerRetrieveParams : ParamsBase
 
     public CustomerRetrieveParams() { }
 
+    public CustomerRetrieveParams(CustomerRetrieveParams customerRetrieveParams)
+        : base(customerRetrieveParams) { }
+
     public CustomerRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

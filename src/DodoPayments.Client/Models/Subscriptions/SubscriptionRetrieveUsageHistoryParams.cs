@@ -89,6 +89,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     public SubscriptionRetrieveUsageHistoryParams() { }
 
     public SubscriptionRetrieveUsageHistoryParams(
+        SubscriptionRetrieveUsageHistoryParams subscriptionRetrieveUsageHistoryParams
+    )
+        : base(subscriptionRetrieveUsageHistoryParams) { }
+
+    public SubscriptionRetrieveUsageHistoryParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )

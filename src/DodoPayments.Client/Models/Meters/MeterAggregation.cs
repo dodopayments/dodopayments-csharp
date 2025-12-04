@@ -44,6 +44,9 @@ public sealed record class MeterAggregation : ModelBase
 
     public MeterAggregation() { }
 
+    public MeterAggregation(MeterAggregation meterAggregation)
+        : base(meterAggregation) { }
+
     public MeterAggregation(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

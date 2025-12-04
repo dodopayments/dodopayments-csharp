@@ -151,6 +151,9 @@ public sealed record class DisputeListParams : ParamsBase
 
     public DisputeListParams() { }
 
+    public DisputeListParams(DisputeListParams disputeListParams)
+        : base(disputeListParams) { }
+
     public DisputeListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

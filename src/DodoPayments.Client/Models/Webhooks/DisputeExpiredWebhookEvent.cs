@@ -74,6 +74,9 @@ public sealed record class DisputeExpiredWebhookEvent : ModelBase
 
     public DisputeExpiredWebhookEvent() { }
 
+    public DisputeExpiredWebhookEvent(DisputeExpiredWebhookEvent disputeExpiredWebhookEvent)
+        : base(disputeExpiredWebhookEvent) { }
+
     public DisputeExpiredWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -260,6 +263,11 @@ public sealed record class DisputeExpiredWebhookEventData : ModelBase
 
     public DisputeExpiredWebhookEventData() { }
 
+    public DisputeExpiredWebhookEventData(
+        DisputeExpiredWebhookEventData disputeExpiredWebhookEventData
+    )
+        : base(disputeExpiredWebhookEventData) { }
+
     public DisputeExpiredWebhookEventData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -330,6 +338,11 @@ public sealed record class DisputeExpiredWebhookEventDataIntersectionMember1 : M
     }
 
     public DisputeExpiredWebhookEventDataIntersectionMember1() { }
+
+    public DisputeExpiredWebhookEventDataIntersectionMember1(
+        DisputeExpiredWebhookEventDataIntersectionMember1 disputeExpiredWebhookEventDataIntersectionMember1
+    )
+        : base(disputeExpiredWebhookEventDataIntersectionMember1) { }
 
     public DisputeExpiredWebhookEventDataIntersectionMember1(
         IReadOnlyDictionary<string, JsonElement> rawData

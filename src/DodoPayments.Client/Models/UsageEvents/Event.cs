@@ -76,6 +76,9 @@ public sealed record class Event : ModelBase
 
     public Event() { }
 
+    public Event(Event event1)
+        : base(event1) { }
+
     public Event(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

@@ -28,6 +28,9 @@ public sealed record class DisputeListPageResponse : ModelBase
 
     public DisputeListPageResponse() { }
 
+    public DisputeListPageResponse(DisputeListPageResponse disputeListPageResponse)
+        : base(disputeListPageResponse) { }
+
     public DisputeListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -166,6 +169,9 @@ public sealed record class Item : ModelBase
     }
 
     public Item() { }
+
+    public Item(Item item)
+        : base(item) { }
 
     public Item(IReadOnlyDictionary<string, JsonElement> rawData)
     {

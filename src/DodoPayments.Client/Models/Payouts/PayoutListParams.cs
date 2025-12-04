@@ -86,6 +86,9 @@ public sealed record class PayoutListParams : ParamsBase
 
     public PayoutListParams() { }
 
+    public PayoutListParams(PayoutListParams payoutListParams)
+        : base(payoutListParams) { }
+
     public PayoutListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

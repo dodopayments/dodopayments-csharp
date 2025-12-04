@@ -372,6 +372,9 @@ public sealed record class Payment : ModelBase
 
     public Payment() { }
 
+    public Payment(Payment payment)
+        : base(payment) { }
+
     public Payment(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -508,6 +511,9 @@ public sealed record class Refund : ModelBase
 
     public Refund() { }
 
+    public Refund(Refund refund)
+        : base(refund) { }
+
     public Refund(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -558,6 +564,9 @@ public sealed record class ProductCart : ModelBase
     }
 
     public ProductCart() { }
+
+    public ProductCart(ProductCart productCart)
+        : base(productCart) { }
 
     public ProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {

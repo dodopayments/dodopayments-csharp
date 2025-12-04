@@ -15,6 +15,11 @@ public sealed record class CheckoutSessionRetrieveParams : ParamsBase
     public CheckoutSessionRetrieveParams() { }
 
     public CheckoutSessionRetrieveParams(
+        CheckoutSessionRetrieveParams checkoutSessionRetrieveParams
+    )
+        : base(checkoutSessionRetrieveParams) { }
+
+    public CheckoutSessionRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )

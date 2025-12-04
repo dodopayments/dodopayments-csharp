@@ -349,6 +349,9 @@ public sealed record class Subscription : ModelBase
 
     public Subscription() { }
 
+    public Subscription(Subscription subscription)
+        : base(subscription) { }
+
     public Subscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -440,6 +443,9 @@ public sealed record class Meter : ModelBase
     }
 
     public Meter() { }
+
+    public Meter(Meter meter)
+        : base(meter) { }
 
     public Meter(IReadOnlyDictionary<string, JsonElement> rawData)
     {

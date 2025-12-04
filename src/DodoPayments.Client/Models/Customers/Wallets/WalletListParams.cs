@@ -14,6 +14,9 @@ public sealed record class WalletListParams : ParamsBase
 
     public WalletListParams() { }
 
+    public WalletListParams(WalletListParams walletListParams)
+        : base(walletListParams) { }
+
     public WalletListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

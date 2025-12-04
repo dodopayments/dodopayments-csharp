@@ -141,6 +141,9 @@ public sealed record class GetDispute : ModelBase
 
     public GetDispute() { }
 
+    public GetDispute(GetDispute getDispute)
+        : base(getDispute) { }
+
     public GetDispute(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

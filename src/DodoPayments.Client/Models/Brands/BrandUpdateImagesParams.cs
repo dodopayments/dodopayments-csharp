@@ -14,6 +14,9 @@ public sealed record class BrandUpdateImagesParams : ParamsBase
 
     public BrandUpdateImagesParams() { }
 
+    public BrandUpdateImagesParams(BrandUpdateImagesParams brandUpdateImagesParams)
+        : base(brandUpdateImagesParams) { }
+
     public BrandUpdateImagesParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

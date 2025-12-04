@@ -125,6 +125,9 @@ public sealed record class RefundListParams : ParamsBase
 
     public RefundListParams() { }
 
+    public RefundListParams(RefundListParams refundListParams)
+        : base(refundListParams) { }
+
     public RefundListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

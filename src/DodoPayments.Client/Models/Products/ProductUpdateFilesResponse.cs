@@ -33,6 +33,9 @@ public sealed record class ProductUpdateFilesResponse : ModelBase
 
     public ProductUpdateFilesResponse() { }
 
+    public ProductUpdateFilesResponse(ProductUpdateFilesResponse productUpdateFilesResponse)
+        : base(productUpdateFilesResponse) { }
+
     public ProductUpdateFilesResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

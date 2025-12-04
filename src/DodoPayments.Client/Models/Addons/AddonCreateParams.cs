@@ -77,6 +77,12 @@ public sealed record class AddonCreateParams : ParamsBase
 
     public AddonCreateParams() { }
 
+    public AddonCreateParams(AddonCreateParams addonCreateParams)
+        : base(addonCreateParams)
+    {
+        this._rawBodyData = [.. addonCreateParams._rawBodyData];
+    }
+
     public AddonCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

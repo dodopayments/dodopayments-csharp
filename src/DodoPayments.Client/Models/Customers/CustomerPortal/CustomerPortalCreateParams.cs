@@ -31,6 +31,9 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
 
     public CustomerPortalCreateParams() { }
 
+    public CustomerPortalCreateParams(CustomerPortalCreateParams customerPortalCreateParams)
+        : base(customerPortalCreateParams) { }
+
     public CustomerPortalCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

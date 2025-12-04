@@ -31,6 +31,9 @@ public sealed record class AttachAddon : ModelBase
 
     public AttachAddon() { }
 
+    public AttachAddon(AttachAddon attachAddon)
+        : base(attachAddon) { }
+
     public AttachAddon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

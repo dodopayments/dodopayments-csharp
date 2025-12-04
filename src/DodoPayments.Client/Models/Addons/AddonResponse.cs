@@ -128,6 +128,9 @@ public sealed record class AddonResponse : ModelBase
 
     public AddonResponse() { }
 
+    public AddonResponse(AddonResponse addonResponse)
+        : base(addonResponse) { }
+
     public AddonResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

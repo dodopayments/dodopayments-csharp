@@ -175,6 +175,12 @@ public sealed record class ProductCreateParams : ParamsBase
 
     public ProductCreateParams() { }
 
+    public ProductCreateParams(ProductCreateParams productCreateParams)
+        : base(productCreateParams)
+    {
+        this._rawBodyData = [.. productCreateParams._rawBodyData];
+    }
+
     public ProductCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -269,6 +275,9 @@ public sealed record class DigitalProductDelivery : ModelBase
     }
 
     public DigitalProductDelivery() { }
+
+    public DigitalProductDelivery(DigitalProductDelivery digitalProductDelivery)
+        : base(digitalProductDelivery) { }
 
     public DigitalProductDelivery(IReadOnlyDictionary<string, JsonElement> rawData)
     {

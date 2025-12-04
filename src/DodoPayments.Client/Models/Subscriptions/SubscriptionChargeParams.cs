@@ -107,6 +107,12 @@ public sealed record class SubscriptionChargeParams : ParamsBase
 
     public SubscriptionChargeParams() { }
 
+    public SubscriptionChargeParams(SubscriptionChargeParams subscriptionChargeParams)
+        : base(subscriptionChargeParams)
+    {
+        this._rawBodyData = [.. subscriptionChargeParams._rawBodyData];
+    }
+
     public SubscriptionChargeParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -213,6 +219,9 @@ public sealed record class CustomerBalanceConfig : ModelBase
     }
 
     public CustomerBalanceConfig() { }
+
+    public CustomerBalanceConfig(CustomerBalanceConfig customerBalanceConfig)
+        : base(customerBalanceConfig) { }
 
     public CustomerBalanceConfig(IReadOnlyDictionary<string, JsonElement> rawData)
     {

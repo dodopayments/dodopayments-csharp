@@ -100,6 +100,12 @@ public sealed record class DiscountUpdateParams : ParamsBase
 
     public DiscountUpdateParams() { }
 
+    public DiscountUpdateParams(DiscountUpdateParams discountUpdateParams)
+        : base(discountUpdateParams)
+    {
+        this._rawBodyData = [.. discountUpdateParams._rawBodyData];
+    }
+
     public DiscountUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

@@ -145,6 +145,9 @@ public sealed record class Refund : ModelBase
 
     public Refund() { }
 
+    public Refund(Refund refund)
+        : base(refund) { }
+
     public Refund(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

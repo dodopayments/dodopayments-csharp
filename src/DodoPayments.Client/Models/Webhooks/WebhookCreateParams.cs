@@ -119,6 +119,12 @@ public sealed record class WebhookCreateParams : ParamsBase
 
     public WebhookCreateParams() { }
 
+    public WebhookCreateParams(WebhookCreateParams webhookCreateParams)
+        : base(webhookCreateParams)
+    {
+        this._rawBodyData = [.. webhookCreateParams._rawBodyData];
+    }
+
     public WebhookCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

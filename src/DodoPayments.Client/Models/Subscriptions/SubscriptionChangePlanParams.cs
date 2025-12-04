@@ -65,6 +65,12 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
 
     public SubscriptionChangePlanParams() { }
 
+    public SubscriptionChangePlanParams(SubscriptionChangePlanParams subscriptionChangePlanParams)
+        : base(subscriptionChangePlanParams)
+    {
+        this._rawBodyData = [.. subscriptionChangePlanParams._rawBodyData];
+    }
+
     public SubscriptionChangePlanParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

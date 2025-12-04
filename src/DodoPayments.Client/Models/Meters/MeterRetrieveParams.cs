@@ -14,6 +14,9 @@ public sealed record class MeterRetrieveParams : ParamsBase
 
     public MeterRetrieveParams() { }
 
+    public MeterRetrieveParams(MeterRetrieveParams meterRetrieveParams)
+        : base(meterRetrieveParams) { }
+
     public MeterRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
