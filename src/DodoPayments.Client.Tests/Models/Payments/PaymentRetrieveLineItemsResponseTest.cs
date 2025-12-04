@@ -29,7 +29,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
         };
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        List<ItemModel> expectedItems =
+        List<PaymentRetrieveLineItemsResponseItem> expectedItems =
         [
             new()
             {
@@ -101,7 +101,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        List<ItemModel> expectedItems =
+        List<PaymentRetrieveLineItemsResponseItem> expectedItems =
         [
             new()
             {
@@ -146,12 +146,12 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
     }
 }
 
-public class ItemModelTest : TestBase
+public class PaymentRetrieveLineItemsResponseItemTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new ItemModel
+        var model = new PaymentRetrieveLineItemsResponseItem
         {
             Amount = 0,
             ItemsID = "items_id",
@@ -179,7 +179,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new ItemModel
+        var model = new PaymentRetrieveLineItemsResponseItem
         {
             Amount = 0,
             ItemsID = "items_id",
@@ -190,7 +190,7 @@ public class ItemModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ItemModel>(json);
+        var deserialized = JsonSerializer.Deserialize<PaymentRetrieveLineItemsResponseItem>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -198,7 +198,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new ItemModel
+        var model = new PaymentRetrieveLineItemsResponseItem
         {
             Amount = 0,
             ItemsID = "items_id",
@@ -209,7 +209,7 @@ public class ItemModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ItemModel>(json);
+        var deserialized = JsonSerializer.Deserialize<PaymentRetrieveLineItemsResponseItem>(json);
         Assert.NotNull(deserialized);
 
         int expectedAmount = 0;
@@ -230,7 +230,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new ItemModel
+        var model = new PaymentRetrieveLineItemsResponseItem
         {
             Amount = 0,
             ItemsID = "items_id",
@@ -246,7 +246,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new ItemModel
+        var model = new PaymentRetrieveLineItemsResponseItem
         {
             Amount = 0,
             ItemsID = "items_id",
@@ -263,7 +263,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new ItemModel
+        var model = new PaymentRetrieveLineItemsResponseItem
         {
             Amount = 0,
             ItemsID = "items_id",
@@ -277,7 +277,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new ItemModel
+        var model = new PaymentRetrieveLineItemsResponseItem
         {
             Amount = 0,
             ItemsID = "items_id",
@@ -297,7 +297,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new ItemModel
+        var model = new PaymentRetrieveLineItemsResponseItem
         {
             Amount = 0,
             ItemsID = "items_id",

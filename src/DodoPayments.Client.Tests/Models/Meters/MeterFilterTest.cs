@@ -5,12 +5,12 @@ using DodoPayments.Client.Models.Meters;
 
 namespace DodoPayments.Client.Tests.Models.Meters;
 
-public class MeterMeterFilterTest : TestBase
+public class MeterFilterTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new MeterMeterFilter
+        var model = new MeterFilter
         {
             Clauses = new(
                 [
@@ -28,7 +28,7 @@ public class MeterMeterFilterTest : TestBase
                     },
                 ]
             ),
-            Conjunction = MeterMeterFilterConjunction.And,
+            Conjunction = MeterFilterConjunction.And,
         };
 
         Clauses expectedClauses = new(
@@ -47,8 +47,7 @@ public class MeterMeterFilterTest : TestBase
                 },
             ]
         );
-        ApiEnum<string, MeterMeterFilterConjunction> expectedConjunction =
-            MeterMeterFilterConjunction.And;
+        ApiEnum<string, MeterFilterConjunction> expectedConjunction = MeterFilterConjunction.And;
 
         Assert.Equal(expectedClauses, model.Clauses);
         Assert.Equal(expectedConjunction, model.Conjunction);
@@ -57,7 +56,7 @@ public class MeterMeterFilterTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new MeterMeterFilter
+        var model = new MeterFilter
         {
             Clauses = new(
                 [
@@ -75,11 +74,11 @@ public class MeterMeterFilterTest : TestBase
                     },
                 ]
             ),
-            Conjunction = MeterMeterFilterConjunction.And,
+            Conjunction = MeterFilterConjunction.And,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterMeterFilter>(json);
+        var deserialized = JsonSerializer.Deserialize<MeterFilter>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -87,7 +86,7 @@ public class MeterMeterFilterTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new MeterMeterFilter
+        var model = new MeterFilter
         {
             Clauses = new(
                 [
@@ -105,11 +104,11 @@ public class MeterMeterFilterTest : TestBase
                     },
                 ]
             ),
-            Conjunction = MeterMeterFilterConjunction.And,
+            Conjunction = MeterFilterConjunction.And,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterMeterFilter>(json);
+        var deserialized = JsonSerializer.Deserialize<MeterFilter>(json);
         Assert.NotNull(deserialized);
 
         Clauses expectedClauses = new(
@@ -128,8 +127,7 @@ public class MeterMeterFilterTest : TestBase
                 },
             ]
         );
-        ApiEnum<string, MeterMeterFilterConjunction> expectedConjunction =
-            MeterMeterFilterConjunction.And;
+        ApiEnum<string, MeterFilterConjunction> expectedConjunction = MeterFilterConjunction.And;
 
         Assert.Equal(expectedClauses, deserialized.Clauses);
         Assert.Equal(expectedConjunction, deserialized.Conjunction);
@@ -138,7 +136,7 @@ public class MeterMeterFilterTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new MeterMeterFilter
+        var model = new MeterFilter
         {
             Clauses = new(
                 [
@@ -156,7 +154,7 @@ public class MeterMeterFilterTest : TestBase
                     },
                 ]
             ),
-            Conjunction = MeterMeterFilterConjunction.And,
+            Conjunction = MeterFilterConjunction.And,
         };
 
         model.Validate();
@@ -237,37 +235,38 @@ public class MeterFilterConditionTest : TestBase
     }
 }
 
-public class MeterFilterTest : TestBase
+public class ClausesMeterFilterTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new MeterFilter
+        var model = new ClausesMeterFilter
         {
             Clauses = new(
                 [
                     new()
                     {
                         Key = "x",
-                        Operator = MeterFilterConditionModelOperator.Equals,
+                        Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                         Value = "string",
                     },
                 ]
             ),
-            Conjunction = MeterFilterConjunction.And,
+            Conjunction = ClausesMeterFilterConjunction.And,
         };
 
-        MeterFilterClauses expectedClauses = new(
+        ClausesMeterFilterClauses expectedClauses = new(
             [
                 new()
                 {
                     Key = "x",
-                    Operator = MeterFilterConditionModelOperator.Equals,
+                    Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                     Value = "string",
                 },
             ]
         );
-        ApiEnum<string, MeterFilterConjunction> expectedConjunction = MeterFilterConjunction.And;
+        ApiEnum<string, ClausesMeterFilterConjunction> expectedConjunction =
+            ClausesMeterFilterConjunction.And;
 
         Assert.Equal(expectedClauses, model.Clauses);
         Assert.Equal(expectedConjunction, model.Conjunction);
@@ -276,23 +275,23 @@ public class MeterFilterTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new MeterFilter
+        var model = new ClausesMeterFilter
         {
             Clauses = new(
                 [
                     new()
                     {
                         Key = "x",
-                        Operator = MeterFilterConditionModelOperator.Equals,
+                        Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                         Value = "string",
                     },
                 ]
             ),
-            Conjunction = MeterFilterConjunction.And,
+            Conjunction = ClausesMeterFilterConjunction.And,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilter>(json);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilter>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -300,36 +299,37 @@ public class MeterFilterTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new MeterFilter
+        var model = new ClausesMeterFilter
         {
             Clauses = new(
                 [
                     new()
                     {
                         Key = "x",
-                        Operator = MeterFilterConditionModelOperator.Equals,
+                        Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                         Value = "string",
                     },
                 ]
             ),
-            Conjunction = MeterFilterConjunction.And,
+            Conjunction = ClausesMeterFilterConjunction.And,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilter>(json);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilter>(json);
         Assert.NotNull(deserialized);
 
-        MeterFilterClauses expectedClauses = new(
+        ClausesMeterFilterClauses expectedClauses = new(
             [
                 new()
                 {
                     Key = "x",
-                    Operator = MeterFilterConditionModelOperator.Equals,
+                    Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                     Value = "string",
                 },
             ]
         );
-        ApiEnum<string, MeterFilterConjunction> expectedConjunction = MeterFilterConjunction.And;
+        ApiEnum<string, ClausesMeterFilterConjunction> expectedConjunction =
+            ClausesMeterFilterConjunction.And;
 
         Assert.Equal(expectedClauses, deserialized.Clauses);
         Assert.Equal(expectedConjunction, deserialized.Conjunction);
@@ -338,41 +338,41 @@ public class MeterFilterTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new MeterFilter
+        var model = new ClausesMeterFilter
         {
             Clauses = new(
                 [
                     new()
                     {
                         Key = "x",
-                        Operator = MeterFilterConditionModelOperator.Equals,
+                        Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                         Value = "string",
                     },
                 ]
             ),
-            Conjunction = MeterFilterConjunction.And,
+            Conjunction = ClausesMeterFilterConjunction.And,
         };
 
         model.Validate();
     }
 }
 
-public class MeterFilterConditionModelTest : TestBase
+public class ClausesMeterFilterClausesMeterFilterConditionTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new MeterFilterConditionModel
+        var model = new ClausesMeterFilterClausesMeterFilterCondition
         {
             Key = "x",
-            Operator = MeterFilterConditionModelOperator.Equals,
+            Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
             Value = "string",
         };
 
         string expectedKey = "x";
-        ApiEnum<string, MeterFilterConditionModelOperator> expectedOperator =
-            MeterFilterConditionModelOperator.Equals;
-        MeterFilterConditionModelValue expectedValue = "string";
+        ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator> expectedOperator =
+            ClausesMeterFilterClausesMeterFilterConditionOperator.Equals;
+        ClausesMeterFilterClausesMeterFilterConditionValue expectedValue = "string";
 
         Assert.Equal(expectedKey, model.Key);
         Assert.Equal(expectedOperator, model.Operator);
@@ -382,15 +382,16 @@ public class MeterFilterConditionModelTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new MeterFilterConditionModel
+        var model = new ClausesMeterFilterClausesMeterFilterCondition
         {
             Key = "x",
-            Operator = MeterFilterConditionModelOperator.Equals,
+            Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
             Value = "string",
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionModel>(json);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterCondition>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -398,21 +399,22 @@ public class MeterFilterConditionModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new MeterFilterConditionModel
+        var model = new ClausesMeterFilterClausesMeterFilterCondition
         {
             Key = "x",
-            Operator = MeterFilterConditionModelOperator.Equals,
+            Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
             Value = "string",
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionModel>(json);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterCondition>(json);
         Assert.NotNull(deserialized);
 
         string expectedKey = "x";
-        ApiEnum<string, MeterFilterConditionModelOperator> expectedOperator =
-            MeterFilterConditionModelOperator.Equals;
-        MeterFilterConditionModelValue expectedValue = "string";
+        ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator> expectedOperator =
+            ClausesMeterFilterClausesMeterFilterConditionOperator.Equals;
+        ClausesMeterFilterClausesMeterFilterConditionValue expectedValue = "string";
 
         Assert.Equal(expectedKey, deserialized.Key);
         Assert.Equal(expectedOperator, deserialized.Operator);
@@ -422,10 +424,10 @@ public class MeterFilterConditionModelTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new MeterFilterConditionModel
+        var model = new ClausesMeterFilterClausesMeterFilterCondition
         {
             Key = "x",
-            Operator = MeterFilterConditionModelOperator.Equals,
+            Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
             Value = "string",
         };
 
@@ -433,38 +435,40 @@ public class MeterFilterConditionModelTest : TestBase
     }
 }
 
-public class MeterFilterModelTest : TestBase
+public class ClausesMeterFilterClausesMeterFilterTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new MeterFilterModel
+        var model = new ClausesMeterFilterClausesMeterFilter
         {
             Clauses = new(
                 [
                     new()
                     {
                         Key = "x",
-                        Operator = MeterFilterCondition1Operator.Equals,
+                        Operator =
+                            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                         Value = "string",
                     },
                 ]
             ),
-            Conjunction = MeterFilterModelConjunction.And,
+            Conjunction = ClausesMeterFilterClausesMeterFilterConjunction.And,
         };
 
-        MeterFilterModelClauses expectedClauses = new(
+        ClausesMeterFilterClausesMeterFilterClauses expectedClauses = new(
             [
                 new()
                 {
                     Key = "x",
-                    Operator = MeterFilterCondition1Operator.Equals,
+                    Operator =
+                        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                     Value = "string",
                 },
             ]
         );
-        ApiEnum<string, MeterFilterModelConjunction> expectedConjunction =
-            MeterFilterModelConjunction.And;
+        ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction> expectedConjunction =
+            ClausesMeterFilterClausesMeterFilterConjunction.And;
 
         Assert.Equal(expectedClauses, model.Clauses);
         Assert.Equal(expectedConjunction, model.Conjunction);
@@ -473,23 +477,24 @@ public class MeterFilterModelTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new MeterFilterModel
+        var model = new ClausesMeterFilterClausesMeterFilter
         {
             Clauses = new(
                 [
                     new()
                     {
                         Key = "x",
-                        Operator = MeterFilterCondition1Operator.Equals,
+                        Operator =
+                            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                         Value = "string",
                     },
                 ]
             ),
-            Conjunction = MeterFilterModelConjunction.And,
+            Conjunction = ClausesMeterFilterClausesMeterFilterConjunction.And,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilterModel>(json);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilter>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -497,37 +502,39 @@ public class MeterFilterModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new MeterFilterModel
+        var model = new ClausesMeterFilterClausesMeterFilter
         {
             Clauses = new(
                 [
                     new()
                     {
                         Key = "x",
-                        Operator = MeterFilterCondition1Operator.Equals,
+                        Operator =
+                            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                         Value = "string",
                     },
                 ]
             ),
-            Conjunction = MeterFilterModelConjunction.And,
+            Conjunction = ClausesMeterFilterClausesMeterFilterConjunction.And,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilterModel>(json);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilter>(json);
         Assert.NotNull(deserialized);
 
-        MeterFilterModelClauses expectedClauses = new(
+        ClausesMeterFilterClausesMeterFilterClauses expectedClauses = new(
             [
                 new()
                 {
                     Key = "x",
-                    Operator = MeterFilterCondition1Operator.Equals,
+                    Operator =
+                        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                     Value = "string",
                 },
             ]
         );
-        ApiEnum<string, MeterFilterModelConjunction> expectedConjunction =
-            MeterFilterModelConjunction.And;
+        ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction> expectedConjunction =
+            ClausesMeterFilterClausesMeterFilterConjunction.And;
 
         Assert.Equal(expectedClauses, deserialized.Clauses);
         Assert.Equal(expectedConjunction, deserialized.Conjunction);
@@ -536,41 +543,47 @@ public class MeterFilterModelTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new MeterFilterModel
+        var model = new ClausesMeterFilterClausesMeterFilter
         {
             Clauses = new(
                 [
                     new()
                     {
                         Key = "x",
-                        Operator = MeterFilterCondition1Operator.Equals,
+                        Operator =
+                            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
                         Value = "string",
                     },
                 ]
             ),
-            Conjunction = MeterFilterModelConjunction.And,
+            Conjunction = ClausesMeterFilterClausesMeterFilterConjunction.And,
         };
 
         model.Validate();
     }
 }
 
-public class MeterFilterCondition1Test : TestBase
+public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new MeterFilterCondition1
+        var model = new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition
         {
             Key = "x",
-            Operator = MeterFilterCondition1Operator.Equals,
+            Operator =
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
             Value = "string",
         };
 
         string expectedKey = "x";
-        ApiEnum<string, MeterFilterCondition1Operator> expectedOperator =
-            MeterFilterCondition1Operator.Equals;
-        MeterFilterCondition1Value expectedValue = "string";
+        ApiEnum<
+            string,
+            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
+        > expectedOperator =
+            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals;
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue expectedValue =
+            "string";
 
         Assert.Equal(expectedKey, model.Key);
         Assert.Equal(expectedOperator, model.Operator);
@@ -580,15 +593,19 @@ public class MeterFilterCondition1Test : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new MeterFilterCondition1
+        var model = new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition
         {
             Key = "x",
-            Operator = MeterFilterCondition1Operator.Equals,
+            Operator =
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
             Value = "string",
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilterCondition1>(json);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>(
+                json
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -596,21 +613,29 @@ public class MeterFilterCondition1Test : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new MeterFilterCondition1
+        var model = new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition
         {
             Key = "x",
-            Operator = MeterFilterCondition1Operator.Equals,
+            Operator =
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
             Value = "string",
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilterCondition1>(json);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>(
+                json
+            );
         Assert.NotNull(deserialized);
 
         string expectedKey = "x";
-        ApiEnum<string, MeterFilterCondition1Operator> expectedOperator =
-            MeterFilterCondition1Operator.Equals;
-        MeterFilterCondition1Value expectedValue = "string";
+        ApiEnum<
+            string,
+            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
+        > expectedOperator =
+            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals;
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue expectedValue =
+            "string";
 
         Assert.Equal(expectedKey, deserialized.Key);
         Assert.Equal(expectedOperator, deserialized.Operator);
@@ -620,10 +645,11 @@ public class MeterFilterCondition1Test : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new MeterFilterCondition1
+        var model = new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition
         {
             Key = "x",
-            Operator = MeterFilterCondition1Operator.Equals,
+            Operator =
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
             Value = "string",
         };
 
@@ -631,12 +657,12 @@ public class MeterFilterCondition1Test : TestBase
     }
 }
 
-public class MeterFilter1Test : TestBase
+public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new MeterFilter1
+        var model = new ClausesMeterFilterClausesMeterFilterClausesMeterFilter
         {
             Clauses =
             [
@@ -672,7 +698,7 @@ public class MeterFilter1Test : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new MeterFilter1
+        var model = new ClausesMeterFilterClausesMeterFilterClausesMeterFilter
         {
             Clauses =
             [
@@ -687,7 +713,10 @@ public class MeterFilter1Test : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilter1>(json);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>(
+                json
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -695,7 +724,7 @@ public class MeterFilter1Test : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new MeterFilter1
+        var model = new ClausesMeterFilterClausesMeterFilterClausesMeterFilter
         {
             Clauses =
             [
@@ -710,7 +739,10 @@ public class MeterFilter1Test : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilter1>(json);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>(
+                json
+            );
         Assert.NotNull(deserialized);
 
         List<Clause> expectedClauses =
@@ -735,7 +767,7 @@ public class MeterFilter1Test : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new MeterFilter1
+        var model = new ClausesMeterFilterClausesMeterFilterClausesMeterFilter
         {
             Clauses =
             [

@@ -12,9 +12,15 @@ namespace DodoPayments.Client.Models.Refunds;
 [JsonConverter(typeof(ModelConverter<RefundListPageResponse, RefundListPageResponseFromRaw>))]
 public sealed record class RefundListPageResponse : ModelBase
 {
-    public required IReadOnlyList<ItemModel> Items
+    public required IReadOnlyList<RefundListPageResponseItem> Items
     {
-        get { return ModelBase.GetNotNullClass<List<ItemModel>>(this.RawData, "items"); }
+        get
+        {
+            return ModelBase.GetNotNullClass<List<RefundListPageResponseItem>>(
+                this.RawData,
+                "items"
+            );
+        }
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
@@ -49,7 +55,7 @@ public sealed record class RefundListPageResponse : ModelBase
     }
 
     [SetsRequiredMembers]
-    public RefundListPageResponse(List<ItemModel> items)
+    public RefundListPageResponse(List<RefundListPageResponseItem> items)
         : this()
     {
         this.Items = items;
@@ -63,8 +69,10 @@ class RefundListPageResponseFromRaw : IFromRaw<RefundListPageResponse>
     ) => RefundListPageResponse.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<ItemModel, ItemModelFromRaw>))]
-public sealed record class ItemModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<RefundListPageResponseItem, RefundListPageResponseItemFromRaw>)
+)]
+public sealed record class RefundListPageResponseItem : ModelBase
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
@@ -166,29 +174,32 @@ public sealed record class ItemModel : ModelBase
         _ = this.Reason;
     }
 
-    public ItemModel() { }
+    public RefundListPageResponseItem() { }
 
-    public ItemModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public RefundListPageResponseItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ItemModel(FrozenDictionary<string, JsonElement> rawData)
+    RefundListPageResponseItem(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static ItemModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    public static RefundListPageResponseItem FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class ItemModelFromRaw : IFromRaw<ItemModel>
+class RefundListPageResponseItemFromRaw : IFromRaw<RefundListPageResponseItem>
 {
-    public ItemModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        ItemModel.FromRawUnchecked(rawData);
+    public RefundListPageResponseItem FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => RefundListPageResponseItem.FromRawUnchecked(rawData);
 }

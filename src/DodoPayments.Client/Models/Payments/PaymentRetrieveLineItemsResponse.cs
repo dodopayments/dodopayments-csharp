@@ -25,9 +25,15 @@ public sealed record class PaymentRetrieveLineItemsResponse : ModelBase
         init { ModelBase.Set(this._rawData, "currency", value); }
     }
 
-    public required IReadOnlyList<ItemModel> Items
+    public required IReadOnlyList<PaymentRetrieveLineItemsResponseItem> Items
     {
-        get { return ModelBase.GetNotNullClass<List<ItemModel>>(this.RawData, "items"); }
+        get
+        {
+            return ModelBase.GetNotNullClass<List<PaymentRetrieveLineItemsResponseItem>>(
+                this.RawData,
+                "items"
+            );
+        }
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
@@ -70,8 +76,13 @@ class PaymentRetrieveLineItemsResponseFromRaw : IFromRaw<PaymentRetrieveLineItem
     ) => PaymentRetrieveLineItemsResponse.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<ItemModel, ItemModelFromRaw>))]
-public sealed record class ItemModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<
+        PaymentRetrieveLineItemsResponseItem,
+        PaymentRetrieveLineItemsResponseItemFromRaw
+    >)
+)]
+public sealed record class PaymentRetrieveLineItemsResponseItem : ModelBase
 {
     public required int Amount
     {
@@ -119,29 +130,32 @@ public sealed record class ItemModel : ModelBase
         _ = this.Name;
     }
 
-    public ItemModel() { }
+    public PaymentRetrieveLineItemsResponseItem() { }
 
-    public ItemModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public PaymentRetrieveLineItemsResponseItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ItemModel(FrozenDictionary<string, JsonElement> rawData)
+    PaymentRetrieveLineItemsResponseItem(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static ItemModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    public static PaymentRetrieveLineItemsResponseItem FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class ItemModelFromRaw : IFromRaw<ItemModel>
+class PaymentRetrieveLineItemsResponseItemFromRaw : IFromRaw<PaymentRetrieveLineItemsResponseItem>
 {
-    public ItemModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        ItemModel.FromRawUnchecked(rawData);
+    public PaymentRetrieveLineItemsResponseItem FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => PaymentRetrieveLineItemsResponseItem.FromRawUnchecked(rawData);
 }

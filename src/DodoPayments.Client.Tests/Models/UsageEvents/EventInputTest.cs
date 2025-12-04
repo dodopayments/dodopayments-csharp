@@ -15,14 +15,14 @@ public class EventInputTest : TestBase
             CustomerID = "customer_id",
             EventID = "event_id",
             EventName = "event_name",
-            Metadata = new Dictionary<string, MetadataModel>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, EventInputMetadata>() { { "foo", "string" } },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string expectedCustomerID = "customer_id";
         string expectedEventID = "event_id";
         string expectedEventName = "event_name";
-        Dictionary<string, MetadataModel> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, EventInputMetadata> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedCustomerID, model.CustomerID);
@@ -46,7 +46,7 @@ public class EventInputTest : TestBase
             CustomerID = "customer_id",
             EventID = "event_id",
             EventName = "event_name",
-            Metadata = new Dictionary<string, MetadataModel>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, EventInputMetadata>() { { "foo", "string" } },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -64,7 +64,7 @@ public class EventInputTest : TestBase
             CustomerID = "customer_id",
             EventID = "event_id",
             EventName = "event_name",
-            Metadata = new Dictionary<string, MetadataModel>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, EventInputMetadata>() { { "foo", "string" } },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -75,7 +75,7 @@ public class EventInputTest : TestBase
         string expectedCustomerID = "customer_id";
         string expectedEventID = "event_id";
         string expectedEventName = "event_name";
-        Dictionary<string, MetadataModel> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, EventInputMetadata> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
@@ -99,7 +99,7 @@ public class EventInputTest : TestBase
             CustomerID = "customer_id",
             EventID = "event_id",
             EventName = "event_name",
-            Metadata = new Dictionary<string, MetadataModel>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, EventInputMetadata>() { { "foo", "string" } },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 

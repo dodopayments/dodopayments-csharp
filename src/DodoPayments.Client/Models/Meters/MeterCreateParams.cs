@@ -65,9 +65,9 @@ public sealed record class MeterCreateParams : ParamsBase
     /// <summary>
     /// Optional filter to apply to the meter
     /// </summary>
-    public MeterMeterFilter? Filter
+    public MeterFilter? Filter
     {
-        get { return ModelBase.GetNullableClass<MeterMeterFilter>(this.RawBodyData, "filter"); }
+        get { return ModelBase.GetNullableClass<MeterFilter>(this.RawBodyData, "filter"); }
         init { ModelBase.Set(this._rawBodyData, "filter", value); }
     }
 

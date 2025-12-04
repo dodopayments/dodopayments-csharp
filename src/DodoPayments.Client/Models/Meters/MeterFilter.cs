@@ -17,8 +17,8 @@ namespace DodoPayments.Client.Models.Meters;
 /// Each filter has a conjunction (and/or) and clauses that can be either direct conditions
 /// or nested filters.</para>
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterMeterFilter, MeterMeterFilterFromRaw>))]
-public sealed record class MeterMeterFilter : ModelBase
+[JsonConverter(typeof(ModelConverter<MeterFilter, MeterFilterFromRaw>))]
+public sealed record class MeterFilter : ModelBase
 {
     /// <summary>
     /// Filter clauses - can be direct conditions or nested filters (up to 3 levels deep)
@@ -32,11 +32,11 @@ public sealed record class MeterMeterFilter : ModelBase
     /// <summary>
     /// Logical conjunction to apply between clauses (and/or)
     /// </summary>
-    public required ApiEnum<string, MeterMeterFilterConjunction> Conjunction
+    public required ApiEnum<string, MeterFilterConjunction> Conjunction
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, MeterMeterFilterConjunction>>(
+            return ModelBase.GetNotNullClass<ApiEnum<string, MeterFilterConjunction>>(
                 this.RawData,
                 "conjunction"
             );
@@ -50,33 +50,31 @@ public sealed record class MeterMeterFilter : ModelBase
         this.Conjunction.Validate();
     }
 
-    public MeterMeterFilter() { }
+    public MeterFilter() { }
 
-    public MeterMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
+    public MeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterMeterFilter(FrozenDictionary<string, JsonElement> rawData)
+    MeterFilter(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static MeterMeterFilter FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public static MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class MeterMeterFilterFromRaw : IFromRaw<MeterMeterFilter>
+class MeterFilterFromRaw : IFromRaw<MeterFilter>
 {
-    public MeterMeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        MeterMeterFilter.FromRawUnchecked(rawData);
+    public MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        MeterFilter.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -100,7 +98,7 @@ public record class Clauses
         this._json = json;
     }
 
-    public Clauses(IReadOnlyList<MeterFilter> value, JsonElement? json = null)
+    public Clauses(IReadOnlyList<ClausesMeterFilter> value, JsonElement? json = null)
     {
         this.Value = ImmutableArray.ToImmutableArray(value);
         this._json = json;
@@ -119,15 +117,17 @@ public record class Clauses
         return value != null;
     }
 
-    public bool TryPickNestedMeterFilters([NotNullWhen(true)] out IReadOnlyList<MeterFilter>? value)
+    public bool TryPickNestedMeterFilters(
+        [NotNullWhen(true)] out IReadOnlyList<ClausesMeterFilter>? value
+    )
     {
-        value = this.Value as IReadOnlyList<MeterFilter>;
+        value = this.Value as IReadOnlyList<ClausesMeterFilter>;
         return value != null;
     }
 
     public void Switch(
         System::Action<IReadOnlyList<MeterFilterCondition>> directFilterConditions,
-        System::Action<IReadOnlyList<MeterFilter>> nestedMeterFilters
+        System::Action<IReadOnlyList<ClausesMeterFilter>> nestedMeterFilters
     )
     {
         switch (this.Value)
@@ -135,7 +135,7 @@ public record class Clauses
             case List<MeterFilterCondition> value:
                 directFilterConditions(value);
                 break;
-            case List<MeterFilter> value:
+            case List<ClausesMeterFilter> value:
                 nestedMeterFilters(value);
                 break;
             default:
@@ -147,13 +147,13 @@ public record class Clauses
 
     public T Match<T>(
         System::Func<IReadOnlyList<MeterFilterCondition>, T> directFilterConditions,
-        System::Func<IReadOnlyList<MeterFilter>, T> nestedMeterFilters
+        System::Func<IReadOnlyList<ClausesMeterFilter>, T> nestedMeterFilters
     )
     {
         return this.Value switch
         {
             IReadOnlyList<MeterFilterCondition> value => directFilterConditions(value),
-            IReadOnlyList<MeterFilter> value => nestedMeterFilters(value),
+            IReadOnlyList<ClausesMeterFilter> value => nestedMeterFilters(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Clauses"
             ),
@@ -163,8 +163,8 @@ public record class Clauses
     public static implicit operator Clauses(List<MeterFilterCondition> value) =>
         new((IReadOnlyList<MeterFilterCondition>)value);
 
-    public static implicit operator Clauses(List<MeterFilter> value) =>
-        new((IReadOnlyList<MeterFilter>)value);
+    public static implicit operator Clauses(List<ClausesMeterFilter> value) =>
+        new((IReadOnlyList<ClausesMeterFilter>)value);
 
     public void Validate()
     {
@@ -213,7 +213,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilter>>(json, options);
+            var deserialized = JsonSerializer.Deserialize<List<ClausesMeterFilter>>(json, options);
             if (deserialized != null)
             {
                 return new(deserialized, json);
@@ -545,23 +545,26 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
 /// <summary>
 /// Level 1 nested filter - can contain Level 2 filters
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilter, MeterFilterFromRaw>))]
-public sealed record class MeterFilter : ModelBase
+[JsonConverter(typeof(ModelConverter<ClausesMeterFilter, ClausesMeterFilterFromRaw>))]
+public sealed record class ClausesMeterFilter : ModelBase
 {
     /// <summary>
     /// Level 1: Can be conditions or nested filters (2 more levels allowed)
     /// </summary>
-    public required MeterFilterClauses Clauses
-    {
-        get { return ModelBase.GetNotNullClass<MeterFilterClauses>(this.RawData, "clauses"); }
-        init { ModelBase.Set(this._rawData, "clauses", value); }
-    }
-
-    public required ApiEnum<string, MeterFilterConjunction> Conjunction
+    public required ClausesMeterFilterClauses Clauses
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, MeterFilterConjunction>>(
+            return ModelBase.GetNotNullClass<ClausesMeterFilterClauses>(this.RawData, "clauses");
+        }
+        init { ModelBase.Set(this._rawData, "clauses", value); }
+    }
+
+    public required ApiEnum<string, ClausesMeterFilterConjunction> Conjunction
+    {
+        get
+        {
+            return ModelBase.GetNotNullClass<ApiEnum<string, ClausesMeterFilterConjunction>>(
                 this.RawData,
                 "conjunction"
             );
@@ -575,38 +578,40 @@ public sealed record class MeterFilter : ModelBase
         this.Conjunction.Validate();
     }
 
-    public MeterFilter() { }
+    public ClausesMeterFilter() { }
 
-    public MeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
+    public ClausesMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilter(FrozenDictionary<string, JsonElement> rawData)
+    ClausesMeterFilter(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    public static ClausesMeterFilter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class MeterFilterFromRaw : IFromRaw<MeterFilter>
+class ClausesMeterFilterFromRaw : IFromRaw<ClausesMeterFilter>
 {
-    public MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        MeterFilter.FromRawUnchecked(rawData);
+    public ClausesMeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ClausesMeterFilter.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Level 1: Can be conditions or nested filters (2 more levels allowed)
 /// </summary>
-[JsonConverter(typeof(MeterFilterClausesConverter))]
-public record class MeterFilterClauses
+[JsonConverter(typeof(ClausesMeterFilterClausesConverter))]
+public record class ClausesMeterFilterClauses
 {
     public object? Value { get; } = null;
 
@@ -617,8 +622,8 @@ public record class MeterFilterClauses
         get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MeterFilterClauses(
-        IReadOnlyList<MeterFilterConditionModel> value,
+    public ClausesMeterFilterClauses(
+        IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition> value,
         JsonElement? json = null
     )
     {
@@ -626,85 +631,96 @@ public record class MeterFilterClauses
         this._json = json;
     }
 
-    public MeterFilterClauses(IReadOnlyList<MeterFilterModel> value, JsonElement? json = null)
+    public ClausesMeterFilterClauses(
+        IReadOnlyList<ClausesMeterFilterClausesMeterFilter> value,
+        JsonElement? json = null
+    )
     {
         this.Value = ImmutableArray.ToImmutableArray(value);
         this._json = json;
     }
 
-    public MeterFilterClauses(JsonElement json)
+    public ClausesMeterFilterClauses(JsonElement json)
     {
         this._json = json;
     }
 
     public bool TryPickLevel1FilterConditions(
-        [NotNullWhen(true)] out IReadOnlyList<MeterFilterConditionModel>? value
+        [NotNullWhen(true)] out IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>? value
     )
     {
-        value = this.Value as IReadOnlyList<MeterFilterConditionModel>;
+        value = this.Value as IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>;
         return value != null;
     }
 
     public bool TryPickLevel1NestedFilters(
-        [NotNullWhen(true)] out IReadOnlyList<MeterFilterModel>? value
+        [NotNullWhen(true)] out IReadOnlyList<ClausesMeterFilterClausesMeterFilter>? value
     )
     {
-        value = this.Value as IReadOnlyList<MeterFilterModel>;
+        value = this.Value as IReadOnlyList<ClausesMeterFilterClausesMeterFilter>;
         return value != null;
     }
 
     public void Switch(
-        System::Action<IReadOnlyList<MeterFilterConditionModel>> level1FilterConditions,
-        System::Action<IReadOnlyList<MeterFilterModel>> level1NestedFilters
+        System::Action<
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>
+        > level1FilterConditions,
+        System::Action<IReadOnlyList<ClausesMeterFilterClausesMeterFilter>> level1NestedFilters
     )
     {
         switch (this.Value)
         {
-            case List<MeterFilterConditionModel> value:
+            case List<ClausesMeterFilterClausesMeterFilterCondition> value:
                 level1FilterConditions(value);
                 break;
-            case List<MeterFilterModel> value:
+            case List<ClausesMeterFilterClausesMeterFilter> value:
                 level1NestedFilters(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of MeterFilterClauses"
+                    "Data did not match any variant of ClausesMeterFilterClauses"
                 );
         }
     }
 
     public T Match<T>(
-        System::Func<IReadOnlyList<MeterFilterConditionModel>, T> level1FilterConditions,
-        System::Func<IReadOnlyList<MeterFilterModel>, T> level1NestedFilters
+        System::Func<
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>,
+            T
+        > level1FilterConditions,
+        System::Func<IReadOnlyList<ClausesMeterFilterClausesMeterFilter>, T> level1NestedFilters
     )
     {
         return this.Value switch
         {
-            IReadOnlyList<MeterFilterConditionModel> value => level1FilterConditions(value),
-            IReadOnlyList<MeterFilterModel> value => level1NestedFilters(value),
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition> value =>
+                level1FilterConditions(value),
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilter> value => level1NestedFilters(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of MeterFilterClauses"
+                "Data did not match any variant of ClausesMeterFilterClauses"
             ),
         };
     }
 
-    public static implicit operator MeterFilterClauses(List<MeterFilterConditionModel> value) =>
-        new((IReadOnlyList<MeterFilterConditionModel>)value);
+    public static implicit operator ClausesMeterFilterClauses(
+        List<ClausesMeterFilterClausesMeterFilterCondition> value
+    ) => new((IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>)value);
 
-    public static implicit operator MeterFilterClauses(List<MeterFilterModel> value) =>
-        new((IReadOnlyList<MeterFilterModel>)value);
+    public static implicit operator ClausesMeterFilterClauses(
+        List<ClausesMeterFilterClausesMeterFilter> value
+    ) => new((IReadOnlyList<ClausesMeterFilterClausesMeterFilter>)value);
 
     public void Validate()
     {
         if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of MeterFilterClauses"
+                "Data did not match any variant of ClausesMeterFilterClauses"
             );
         }
     }
 
-    public virtual bool Equals(MeterFilterClauses? other)
+    public virtual bool Equals(ClausesMeterFilterClauses? other)
     {
         return other != null && JsonElement.DeepEquals(this.Json, other.Json);
     }
@@ -715,9 +731,9 @@ public record class MeterFilterClauses
     }
 }
 
-sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
+sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilterClauses>
 {
-    public override MeterFilterClauses? Read(
+    public override ClausesMeterFilterClauses? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -726,10 +742,9 @@ sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
         var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilterConditionModel>>(
-                json,
-                options
-            );
+            var deserialized = JsonSerializer.Deserialize<
+                List<ClausesMeterFilterClausesMeterFilterCondition>
+            >(json, options);
             if (deserialized != null)
             {
                 return new(deserialized, json);
@@ -743,7 +758,9 @@ sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilterModel>>(json, options);
+            var deserialized = JsonSerializer.Deserialize<
+                List<ClausesMeterFilterClausesMeterFilter>
+            >(json, options);
             if (deserialized != null)
             {
                 return new(deserialized, json);
@@ -760,7 +777,7 @@ sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
 
     public override void Write(
         Utf8JsonWriter writer,
-        MeterFilterClauses value,
+        ClausesMeterFilterClauses value,
         JsonSerializerOptions options
     )
     {
@@ -771,8 +788,13 @@ sealed class MeterFilterClausesConverter : JsonConverter<MeterFilterClauses>
 /// <summary>
 /// Filter condition with key, operator, and value
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilterConditionModel, MeterFilterConditionModelFromRaw>))]
-public sealed record class MeterFilterConditionModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<
+        ClausesMeterFilterClausesMeterFilterCondition,
+        ClausesMeterFilterClausesMeterFilterConditionFromRaw
+    >)
+)]
+public sealed record class ClausesMeterFilterClausesMeterFilterCondition : ModelBase
 {
     /// <summary>
     /// Filter key to apply
@@ -783,14 +805,13 @@ public sealed record class MeterFilterConditionModel : ModelBase
         init { ModelBase.Set(this._rawData, "key", value); }
     }
 
-    public required ApiEnum<string, MeterFilterConditionModelOperator> Operator
+    public required ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator> Operator
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, MeterFilterConditionModelOperator>>(
-                this.RawData,
-                "operator"
-            );
+            return ModelBase.GetNotNullClass<
+                ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator>
+            >(this.RawData, "operator");
         }
         init { ModelBase.Set(this._rawData, "operator", value); }
     }
@@ -798,11 +819,14 @@ public sealed record class MeterFilterConditionModel : ModelBase
     /// <summary>
     /// Filter value - can be string, number, or boolean
     /// </summary>
-    public required MeterFilterConditionModelValue Value
+    public required ClausesMeterFilterClausesMeterFilterConditionValue Value
     {
         get
         {
-            return ModelBase.GetNotNullClass<MeterFilterConditionModelValue>(this.RawData, "value");
+            return ModelBase.GetNotNullClass<ClausesMeterFilterClausesMeterFilterConditionValue>(
+                this.RawData,
+                "value"
+            );
         }
         init { ModelBase.Set(this._rawData, "value", value); }
     }
@@ -814,22 +838,24 @@ public sealed record class MeterFilterConditionModel : ModelBase
         this.Value.Validate();
     }
 
-    public MeterFilterConditionModel() { }
+    public ClausesMeterFilterClausesMeterFilterCondition() { }
 
-    public MeterFilterConditionModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public ClausesMeterFilterClausesMeterFilterCondition(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilterConditionModel(FrozenDictionary<string, JsonElement> rawData)
+    ClausesMeterFilterClausesMeterFilterCondition(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilterConditionModel FromRawUnchecked(
+    public static ClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -837,15 +863,16 @@ public sealed record class MeterFilterConditionModel : ModelBase
     }
 }
 
-class MeterFilterConditionModelFromRaw : IFromRaw<MeterFilterConditionModel>
+class ClausesMeterFilterClausesMeterFilterConditionFromRaw
+    : IFromRaw<ClausesMeterFilterClausesMeterFilterCondition>
 {
-    public MeterFilterConditionModel FromRawUnchecked(
+    public ClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => MeterFilterConditionModel.FromRawUnchecked(rawData);
+    ) => ClausesMeterFilterClausesMeterFilterCondition.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(MeterFilterConditionModelOperatorConverter))]
-public enum MeterFilterConditionModelOperator
+[JsonConverter(typeof(ClausesMeterFilterClausesMeterFilterConditionOperatorConverter))]
+public enum ClausesMeterFilterClausesMeterFilterConditionOperator
 {
     Equals,
     NotEquals,
@@ -857,10 +884,10 @@ public enum MeterFilterConditionModelOperator
     DoesNotContain,
 }
 
-sealed class MeterFilterConditionModelOperatorConverter
-    : JsonConverter<MeterFilterConditionModelOperator>
+sealed class ClausesMeterFilterClausesMeterFilterConditionOperatorConverter
+    : JsonConverter<ClausesMeterFilterClausesMeterFilterConditionOperator>
 {
-    public override MeterFilterConditionModelOperator Read(
+    public override ClausesMeterFilterClausesMeterFilterConditionOperator Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -868,21 +895,24 @@ sealed class MeterFilterConditionModelOperatorConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "equals" => MeterFilterConditionModelOperator.Equals,
-            "not_equals" => MeterFilterConditionModelOperator.NotEquals,
-            "greater_than" => MeterFilterConditionModelOperator.GreaterThan,
-            "greater_than_or_equals" => MeterFilterConditionModelOperator.GreaterThanOrEquals,
-            "less_than" => MeterFilterConditionModelOperator.LessThan,
-            "less_than_or_equals" => MeterFilterConditionModelOperator.LessThanOrEquals,
-            "contains" => MeterFilterConditionModelOperator.Contains,
-            "does_not_contain" => MeterFilterConditionModelOperator.DoesNotContain,
-            _ => (MeterFilterConditionModelOperator)(-1),
+            "equals" => ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+            "not_equals" => ClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals,
+            "greater_than" => ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan,
+            "greater_than_or_equals" =>
+                ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals,
+            "less_than" => ClausesMeterFilterClausesMeterFilterConditionOperator.LessThan,
+            "less_than_or_equals" =>
+                ClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals,
+            "contains" => ClausesMeterFilterClausesMeterFilterConditionOperator.Contains,
+            "does_not_contain" =>
+                ClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain,
+            _ => (ClausesMeterFilterClausesMeterFilterConditionOperator)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        MeterFilterConditionModelOperator value,
+        ClausesMeterFilterClausesMeterFilterConditionOperator value,
         JsonSerializerOptions options
     )
     {
@@ -890,14 +920,17 @@ sealed class MeterFilterConditionModelOperatorConverter
             writer,
             value switch
             {
-                MeterFilterConditionModelOperator.Equals => "equals",
-                MeterFilterConditionModelOperator.NotEquals => "not_equals",
-                MeterFilterConditionModelOperator.GreaterThan => "greater_than",
-                MeterFilterConditionModelOperator.GreaterThanOrEquals => "greater_than_or_equals",
-                MeterFilterConditionModelOperator.LessThan => "less_than",
-                MeterFilterConditionModelOperator.LessThanOrEquals => "less_than_or_equals",
-                MeterFilterConditionModelOperator.Contains => "contains",
-                MeterFilterConditionModelOperator.DoesNotContain => "does_not_contain",
+                ClausesMeterFilterClausesMeterFilterConditionOperator.Equals => "equals",
+                ClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals => "not_equals",
+                ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan => "greater_than",
+                ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals =>
+                    "greater_than_or_equals",
+                ClausesMeterFilterClausesMeterFilterConditionOperator.LessThan => "less_than",
+                ClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals =>
+                    "less_than_or_equals",
+                ClausesMeterFilterClausesMeterFilterConditionOperator.Contains => "contains",
+                ClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain =>
+                    "does_not_contain",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -910,8 +943,8 @@ sealed class MeterFilterConditionModelOperatorConverter
 /// <summary>
 /// Filter value - can be string, number, or boolean
 /// </summary>
-[JsonConverter(typeof(MeterFilterConditionModelValueConverter))]
-public record class MeterFilterConditionModelValue
+[JsonConverter(typeof(ClausesMeterFilterClausesMeterFilterConditionValueConverter))]
+public record class ClausesMeterFilterClausesMeterFilterConditionValue
 {
     public object? Value { get; } = null;
 
@@ -922,25 +955,31 @@ public record class MeterFilterConditionModelValue
         get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MeterFilterConditionModelValue(string value, JsonElement? json = null)
+    public ClausesMeterFilterClausesMeterFilterConditionValue(
+        string value,
+        JsonElement? json = null
+    )
     {
         this.Value = value;
         this._json = json;
     }
 
-    public MeterFilterConditionModelValue(double value, JsonElement? json = null)
+    public ClausesMeterFilterClausesMeterFilterConditionValue(
+        double value,
+        JsonElement? json = null
+    )
     {
         this.Value = value;
         this._json = json;
     }
 
-    public MeterFilterConditionModelValue(bool value, JsonElement? json = null)
+    public ClausesMeterFilterClausesMeterFilterConditionValue(bool value, JsonElement? json = null)
     {
         this.Value = value;
         this._json = json;
     }
 
-    public MeterFilterConditionModelValue(JsonElement json)
+    public ClausesMeterFilterClausesMeterFilterConditionValue(JsonElement json)
     {
         this._json = json;
     }
@@ -982,7 +1021,7 @@ public record class MeterFilterConditionModelValue
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of MeterFilterConditionModelValue"
+                    "Data did not match any variant of ClausesMeterFilterClausesMeterFilterConditionValue"
                 );
         }
     }
@@ -999,28 +1038,34 @@ public record class MeterFilterConditionModelValue
             double value => @double(value),
             bool value => @bool(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of MeterFilterConditionModelValue"
+                "Data did not match any variant of ClausesMeterFilterClausesMeterFilterConditionValue"
             ),
         };
     }
 
-    public static implicit operator MeterFilterConditionModelValue(string value) => new(value);
+    public static implicit operator ClausesMeterFilterClausesMeterFilterConditionValue(
+        string value
+    ) => new(value);
 
-    public static implicit operator MeterFilterConditionModelValue(double value) => new(value);
+    public static implicit operator ClausesMeterFilterClausesMeterFilterConditionValue(
+        double value
+    ) => new(value);
 
-    public static implicit operator MeterFilterConditionModelValue(bool value) => new(value);
+    public static implicit operator ClausesMeterFilterClausesMeterFilterConditionValue(
+        bool value
+    ) => new(value);
 
     public void Validate()
     {
         if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of MeterFilterConditionModelValue"
+                "Data did not match any variant of ClausesMeterFilterClausesMeterFilterConditionValue"
             );
         }
     }
 
-    public virtual bool Equals(MeterFilterConditionModelValue? other)
+    public virtual bool Equals(ClausesMeterFilterClausesMeterFilterConditionValue? other)
     {
         return other != null && JsonElement.DeepEquals(this.Json, other.Json);
     }
@@ -1031,9 +1076,10 @@ public record class MeterFilterConditionModelValue
     }
 }
 
-sealed class MeterFilterConditionModelValueConverter : JsonConverter<MeterFilterConditionModelValue>
+sealed class ClausesMeterFilterClausesMeterFilterConditionValueConverter
+    : JsonConverter<ClausesMeterFilterClausesMeterFilterConditionValue>
 {
-    public override MeterFilterConditionModelValue? Read(
+    public override ClausesMeterFilterClausesMeterFilterConditionValue? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1079,7 +1125,7 @@ sealed class MeterFilterConditionModelValueConverter : JsonConverter<MeterFilter
 
     public override void Write(
         Utf8JsonWriter writer,
-        MeterFilterConditionModelValue value,
+        ClausesMeterFilterClausesMeterFilterConditionValue value,
         JsonSerializerOptions options
     )
     {
@@ -1090,26 +1136,36 @@ sealed class MeterFilterConditionModelValueConverter : JsonConverter<MeterFilter
 /// <summary>
 /// Level 2 nested filter
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilterModel, MeterFilterModelFromRaw>))]
-public sealed record class MeterFilterModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<
+        ClausesMeterFilterClausesMeterFilter,
+        ClausesMeterFilterClausesMeterFilterFromRaw
+    >)
+)]
+public sealed record class ClausesMeterFilterClausesMeterFilter : ModelBase
 {
     /// <summary>
     /// Level 2: Can be conditions or nested filters (1 more level allowed)
     /// </summary>
-    public required MeterFilterModelClauses Clauses
-    {
-        get { return ModelBase.GetNotNullClass<MeterFilterModelClauses>(this.RawData, "clauses"); }
-        init { ModelBase.Set(this._rawData, "clauses", value); }
-    }
-
-    public required ApiEnum<string, MeterFilterModelConjunction> Conjunction
+    public required ClausesMeterFilterClausesMeterFilterClauses Clauses
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, MeterFilterModelConjunction>>(
+            return ModelBase.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClauses>(
                 this.RawData,
-                "conjunction"
+                "clauses"
             );
+        }
+        init { ModelBase.Set(this._rawData, "clauses", value); }
+    }
+
+    public required ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction> Conjunction
+    {
+        get
+        {
+            return ModelBase.GetNotNullClass<
+                ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction>
+            >(this.RawData, "conjunction");
         }
         init { ModelBase.Set(this._rawData, "conjunction", value); }
     }
@@ -1120,22 +1176,22 @@ public sealed record class MeterFilterModel : ModelBase
         this.Conjunction.Validate();
     }
 
-    public MeterFilterModel() { }
+    public ClausesMeterFilterClausesMeterFilter() { }
 
-    public MeterFilterModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public ClausesMeterFilterClausesMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilterModel(FrozenDictionary<string, JsonElement> rawData)
+    ClausesMeterFilterClausesMeterFilter(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilterModel FromRawUnchecked(
+    public static ClausesMeterFilterClausesMeterFilter FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1143,17 +1199,18 @@ public sealed record class MeterFilterModel : ModelBase
     }
 }
 
-class MeterFilterModelFromRaw : IFromRaw<MeterFilterModel>
+class ClausesMeterFilterClausesMeterFilterFromRaw : IFromRaw<ClausesMeterFilterClausesMeterFilter>
 {
-    public MeterFilterModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        MeterFilterModel.FromRawUnchecked(rawData);
+    public ClausesMeterFilterClausesMeterFilter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => ClausesMeterFilterClausesMeterFilter.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Level 2: Can be conditions or nested filters (1 more level allowed)
 /// </summary>
-[JsonConverter(typeof(MeterFilterModelClausesConverter))]
-public record class MeterFilterModelClauses
+[JsonConverter(typeof(ClausesMeterFilterClausesMeterFilterClausesConverter))]
+public record class ClausesMeterFilterClausesMeterFilterClauses
 {
     public object? Value { get; } = null;
 
@@ -1164,8 +1221,8 @@ public record class MeterFilterModelClauses
         get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MeterFilterModelClauses(
-        IReadOnlyList<MeterFilterCondition1> value,
+    public ClausesMeterFilterClausesMeterFilterClauses(
+        IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value,
         JsonElement? json = null
     )
     {
@@ -1173,85 +1230,106 @@ public record class MeterFilterModelClauses
         this._json = json;
     }
 
-    public MeterFilterModelClauses(IReadOnlyList<MeterFilter1> value, JsonElement? json = null)
+    public ClausesMeterFilterClausesMeterFilterClauses(
+        IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value,
+        JsonElement? json = null
+    )
     {
         this.Value = ImmutableArray.ToImmutableArray(value);
         this._json = json;
     }
 
-    public MeterFilterModelClauses(JsonElement json)
+    public ClausesMeterFilterClausesMeterFilterClauses(JsonElement json)
     {
         this._json = json;
     }
 
     public bool TryPickLevel2FilterConditions(
-        [NotNullWhen(true)] out IReadOnlyList<MeterFilterCondition1>? value
+        [NotNullWhen(true)]
+            out IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>? value
     )
     {
-        value = this.Value as IReadOnlyList<MeterFilterCondition1>;
+        value =
+            this.Value
+            as IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>;
         return value != null;
     }
 
     public bool TryPickLevel2NestedFilters(
-        [NotNullWhen(true)] out IReadOnlyList<MeterFilter1>? value
+        [NotNullWhen(true)]
+            out IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>? value
     )
     {
-        value = this.Value as IReadOnlyList<MeterFilter1>;
+        value = this.Value as IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>;
         return value != null;
     }
 
     public void Switch(
-        System::Action<IReadOnlyList<MeterFilterCondition1>> level2FilterConditions,
-        System::Action<IReadOnlyList<MeterFilter1>> level2NestedFilters
+        System::Action<
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
+        > level2FilterConditions,
+        System::Action<
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
+        > level2NestedFilters
     )
     {
         switch (this.Value)
         {
-            case List<MeterFilterCondition1> value:
+            case List<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value:
                 level2FilterConditions(value);
                 break;
-            case List<MeterFilter1> value:
+            case List<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value:
                 level2NestedFilters(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of MeterFilterModelClauses"
+                    "Data did not match any variant of ClausesMeterFilterClausesMeterFilterClauses"
                 );
         }
     }
 
     public T Match<T>(
-        System::Func<IReadOnlyList<MeterFilterCondition1>, T> level2FilterConditions,
-        System::Func<IReadOnlyList<MeterFilter1>, T> level2NestedFilters
+        System::Func<
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>,
+            T
+        > level2FilterConditions,
+        System::Func<
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>,
+            T
+        > level2NestedFilters
     )
     {
         return this.Value switch
         {
-            IReadOnlyList<MeterFilterCondition1> value => level2FilterConditions(value),
-            IReadOnlyList<MeterFilter1> value => level2NestedFilters(value),
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value =>
+                level2FilterConditions(value),
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value =>
+                level2NestedFilters(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of MeterFilterModelClauses"
+                "Data did not match any variant of ClausesMeterFilterClausesMeterFilterClauses"
             ),
         };
     }
 
-    public static implicit operator MeterFilterModelClauses(List<MeterFilterCondition1> value) =>
-        new((IReadOnlyList<MeterFilterCondition1>)value);
+    public static implicit operator ClausesMeterFilterClausesMeterFilterClauses(
+        List<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value
+    ) => new((IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>)value);
 
-    public static implicit operator MeterFilterModelClauses(List<MeterFilter1> value) =>
-        new((IReadOnlyList<MeterFilter1>)value);
+    public static implicit operator ClausesMeterFilterClausesMeterFilterClauses(
+        List<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value
+    ) => new((IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>)value);
 
     public void Validate()
     {
         if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of MeterFilterModelClauses"
+                "Data did not match any variant of ClausesMeterFilterClausesMeterFilterClauses"
             );
         }
     }
 
-    public virtual bool Equals(MeterFilterModelClauses? other)
+    public virtual bool Equals(ClausesMeterFilterClausesMeterFilterClauses? other)
     {
         return other != null && JsonElement.DeepEquals(this.Json, other.Json);
     }
@@ -1262,9 +1340,10 @@ public record class MeterFilterModelClauses
     }
 }
 
-sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelClauses>
+sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
+    : JsonConverter<ClausesMeterFilterClausesMeterFilterClauses>
 {
-    public override MeterFilterModelClauses? Read(
+    public override ClausesMeterFilterClausesMeterFilterClauses? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1273,10 +1352,9 @@ sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelCl
         var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilterCondition1>>(
-                json,
-                options
-            );
+            var deserialized = JsonSerializer.Deserialize<
+                List<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
+            >(json, options);
             if (deserialized != null)
             {
                 return new(deserialized, json);
@@ -1290,7 +1368,9 @@ sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelCl
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilter1>>(json, options);
+            var deserialized = JsonSerializer.Deserialize<
+                List<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
+            >(json, options);
             if (deserialized != null)
             {
                 return new(deserialized, json);
@@ -1307,7 +1387,7 @@ sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelCl
 
     public override void Write(
         Utf8JsonWriter writer,
-        MeterFilterModelClauses value,
+        ClausesMeterFilterClausesMeterFilterClauses value,
         JsonSerializerOptions options
     )
     {
@@ -1318,8 +1398,14 @@ sealed class MeterFilterModelClausesConverter : JsonConverter<MeterFilterModelCl
 /// <summary>
 /// Filter condition with key, operator, and value
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilterCondition1, MeterFilterCondition1FromRaw>))]
-public sealed record class MeterFilterCondition1 : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition,
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionFromRaw
+    >)
+)]
+public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition
+    : ModelBase
 {
     /// <summary>
     /// Filter key to apply
@@ -1330,14 +1416,19 @@ public sealed record class MeterFilterCondition1 : ModelBase
         init { ModelBase.Set(this._rawData, "key", value); }
     }
 
-    public required ApiEnum<string, MeterFilterCondition1Operator> Operator
+    public required ApiEnum<
+        string,
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
+    > Operator
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, MeterFilterCondition1Operator>>(
-                this.RawData,
-                "operator"
-            );
+            return ModelBase.GetNotNullClass<
+                ApiEnum<
+                    string,
+                    ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
+                >
+            >(this.RawData, "operator");
         }
         init { ModelBase.Set(this._rawData, "operator", value); }
     }
@@ -1345,9 +1436,15 @@ public sealed record class MeterFilterCondition1 : ModelBase
     /// <summary>
     /// Filter value - can be string, number, or boolean
     /// </summary>
-    public required MeterFilterCondition1Value Value
+    public required ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue Value
     {
-        get { return ModelBase.GetNotNullClass<MeterFilterCondition1Value>(this.RawData, "value"); }
+        get
+        {
+            return ModelBase.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
+                this.RawData,
+                "value"
+            );
+        }
         init { ModelBase.Set(this._rawData, "value", value); }
     }
 
@@ -1358,22 +1455,26 @@ public sealed record class MeterFilterCondition1 : ModelBase
         this.Value.Validate();
     }
 
-    public MeterFilterCondition1() { }
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition() { }
 
-    public MeterFilterCondition1(IReadOnlyDictionary<string, JsonElement> rawData)
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilterCondition1(FrozenDictionary<string, JsonElement> rawData)
+    ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition(
+        FrozenDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilterCondition1 FromRawUnchecked(
+    public static ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1381,15 +1482,18 @@ public sealed record class MeterFilterCondition1 : ModelBase
     }
 }
 
-class MeterFilterCondition1FromRaw : IFromRaw<MeterFilterCondition1>
+class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionFromRaw
+    : IFromRaw<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
 {
-    public MeterFilterCondition1 FromRawUnchecked(
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => MeterFilterCondition1.FromRawUnchecked(rawData);
+    ) => ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(MeterFilterCondition1OperatorConverter))]
-public enum MeterFilterCondition1Operator
+[JsonConverter(
+    typeof(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperatorConverter)
+)]
+public enum ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
 {
     Equals,
     NotEquals,
@@ -1401,9 +1505,10 @@ public enum MeterFilterCondition1Operator
     DoesNotContain,
 }
 
-sealed class MeterFilterCondition1OperatorConverter : JsonConverter<MeterFilterCondition1Operator>
+sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperatorConverter
+    : JsonConverter<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator>
 {
-    public override MeterFilterCondition1Operator Read(
+    public override ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1411,21 +1516,29 @@ sealed class MeterFilterCondition1OperatorConverter : JsonConverter<MeterFilterC
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "equals" => MeterFilterCondition1Operator.Equals,
-            "not_equals" => MeterFilterCondition1Operator.NotEquals,
-            "greater_than" => MeterFilterCondition1Operator.GreaterThan,
-            "greater_than_or_equals" => MeterFilterCondition1Operator.GreaterThanOrEquals,
-            "less_than" => MeterFilterCondition1Operator.LessThan,
-            "less_than_or_equals" => MeterFilterCondition1Operator.LessThanOrEquals,
-            "contains" => MeterFilterCondition1Operator.Contains,
-            "does_not_contain" => MeterFilterCondition1Operator.DoesNotContain,
-            _ => (MeterFilterCondition1Operator)(-1),
+            "equals" =>
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+            "not_equals" =>
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals,
+            "greater_than" =>
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan,
+            "greater_than_or_equals" =>
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals,
+            "less_than" =>
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThan,
+            "less_than_or_equals" =>
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals,
+            "contains" =>
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Contains,
+            "does_not_contain" =>
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain,
+            _ => (ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        MeterFilterCondition1Operator value,
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator value,
         JsonSerializerOptions options
     )
     {
@@ -1433,14 +1546,22 @@ sealed class MeterFilterCondition1OperatorConverter : JsonConverter<MeterFilterC
             writer,
             value switch
             {
-                MeterFilterCondition1Operator.Equals => "equals",
-                MeterFilterCondition1Operator.NotEquals => "not_equals",
-                MeterFilterCondition1Operator.GreaterThan => "greater_than",
-                MeterFilterCondition1Operator.GreaterThanOrEquals => "greater_than_or_equals",
-                MeterFilterCondition1Operator.LessThan => "less_than",
-                MeterFilterCondition1Operator.LessThanOrEquals => "less_than_or_equals",
-                MeterFilterCondition1Operator.Contains => "contains",
-                MeterFilterCondition1Operator.DoesNotContain => "does_not_contain",
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals =>
+                    "equals",
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals =>
+                    "not_equals",
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan =>
+                    "greater_than",
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals =>
+                    "greater_than_or_equals",
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThan =>
+                    "less_than",
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals =>
+                    "less_than_or_equals",
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Contains =>
+                    "contains",
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain =>
+                    "does_not_contain",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1453,8 +1574,10 @@ sealed class MeterFilterCondition1OperatorConverter : JsonConverter<MeterFilterC
 /// <summary>
 /// Filter value - can be string, number, or boolean
 /// </summary>
-[JsonConverter(typeof(MeterFilterCondition1ValueConverter))]
-public record class MeterFilterCondition1Value
+[JsonConverter(
+    typeof(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValueConverter)
+)]
+public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue
 {
     public object? Value { get; } = null;
 
@@ -1465,25 +1588,34 @@ public record class MeterFilterCondition1Value
         get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MeterFilterCondition1Value(string value, JsonElement? json = null)
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(
+        string value,
+        JsonElement? json = null
+    )
     {
         this.Value = value;
         this._json = json;
     }
 
-    public MeterFilterCondition1Value(double value, JsonElement? json = null)
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(
+        double value,
+        JsonElement? json = null
+    )
     {
         this.Value = value;
         this._json = json;
     }
 
-    public MeterFilterCondition1Value(bool value, JsonElement? json = null)
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(
+        bool value,
+        JsonElement? json = null
+    )
     {
         this.Value = value;
         this._json = json;
     }
 
-    public MeterFilterCondition1Value(JsonElement json)
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(JsonElement json)
     {
         this._json = json;
     }
@@ -1525,7 +1657,7 @@ public record class MeterFilterCondition1Value
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of MeterFilterCondition1Value"
+                    "Data did not match any variant of ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue"
                 );
         }
     }
@@ -1542,28 +1674,36 @@ public record class MeterFilterCondition1Value
             double value => @double(value),
             bool value => @bool(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of MeterFilterCondition1Value"
+                "Data did not match any variant of ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue"
             ),
         };
     }
 
-    public static implicit operator MeterFilterCondition1Value(string value) => new(value);
+    public static implicit operator ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(
+        string value
+    ) => new(value);
 
-    public static implicit operator MeterFilterCondition1Value(double value) => new(value);
+    public static implicit operator ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(
+        double value
+    ) => new(value);
 
-    public static implicit operator MeterFilterCondition1Value(bool value) => new(value);
+    public static implicit operator ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(
+        bool value
+    ) => new(value);
 
     public void Validate()
     {
         if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of MeterFilterCondition1Value"
+                "Data did not match any variant of ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue"
             );
         }
     }
 
-    public virtual bool Equals(MeterFilterCondition1Value? other)
+    public virtual bool Equals(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue? other
+    )
     {
         return other != null && JsonElement.DeepEquals(this.Json, other.Json);
     }
@@ -1574,9 +1714,10 @@ public record class MeterFilterCondition1Value
     }
 }
 
-sealed class MeterFilterCondition1ValueConverter : JsonConverter<MeterFilterCondition1Value>
+sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValueConverter
+    : JsonConverter<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>
 {
-    public override MeterFilterCondition1Value? Read(
+    public override ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1622,7 +1763,7 @@ sealed class MeterFilterCondition1ValueConverter : JsonConverter<MeterFilterCond
 
     public override void Write(
         Utf8JsonWriter writer,
-        MeterFilterCondition1Value value,
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value,
         JsonSerializerOptions options
     )
     {
@@ -1633,8 +1774,13 @@ sealed class MeterFilterCondition1ValueConverter : JsonConverter<MeterFilterCond
 /// <summary>
 /// Level 3 nested filter (final nesting level)
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilter1, MeterFilter1FromRaw>))]
-public sealed record class MeterFilter1 : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilter,
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterFromRaw
+    >)
+)]
+public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilter : ModelBase
 {
     /// <summary>
     /// Level 3: Filter conditions only (max depth reached)
@@ -1666,31 +1812,39 @@ public sealed record class MeterFilter1 : ModelBase
         this.Conjunction.Validate();
     }
 
-    public MeterFilter1() { }
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilter() { }
 
-    public MeterFilter1(IReadOnlyDictionary<string, JsonElement> rawData)
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilter(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterFilter1(FrozenDictionary<string, JsonElement> rawData)
+    ClausesMeterFilterClausesMeterFilterClausesMeterFilter(
+        FrozenDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static MeterFilter1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    public static ClausesMeterFilterClausesMeterFilterClausesMeterFilter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class MeterFilter1FromRaw : IFromRaw<MeterFilter1>
+class ClausesMeterFilterClausesMeterFilterClausesMeterFilterFromRaw
+    : IFromRaw<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
 {
-    public MeterFilter1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        MeterFilter1.FromRawUnchecked(rawData);
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => ClausesMeterFilterClausesMeterFilterClausesMeterFilter.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -2049,16 +2203,17 @@ sealed class ConjunctionConverter : JsonConverter<Conjunction>
     }
 }
 
-[JsonConverter(typeof(MeterFilterModelConjunctionConverter))]
-public enum MeterFilterModelConjunction
+[JsonConverter(typeof(ClausesMeterFilterClausesMeterFilterConjunctionConverter))]
+public enum ClausesMeterFilterClausesMeterFilterConjunction
 {
     And,
     Or,
 }
 
-sealed class MeterFilterModelConjunctionConverter : JsonConverter<MeterFilterModelConjunction>
+sealed class ClausesMeterFilterClausesMeterFilterConjunctionConverter
+    : JsonConverter<ClausesMeterFilterClausesMeterFilterConjunction>
 {
-    public override MeterFilterModelConjunction Read(
+    public override ClausesMeterFilterClausesMeterFilterConjunction Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2066,15 +2221,15 @@ sealed class MeterFilterModelConjunctionConverter : JsonConverter<MeterFilterMod
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "and" => MeterFilterModelConjunction.And,
-            "or" => MeterFilterModelConjunction.Or,
-            _ => (MeterFilterModelConjunction)(-1),
+            "and" => ClausesMeterFilterClausesMeterFilterConjunction.And,
+            "or" => ClausesMeterFilterClausesMeterFilterConjunction.Or,
+            _ => (ClausesMeterFilterClausesMeterFilterConjunction)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        MeterFilterModelConjunction value,
+        ClausesMeterFilterClausesMeterFilterConjunction value,
         JsonSerializerOptions options
     )
     {
@@ -2082,8 +2237,8 @@ sealed class MeterFilterModelConjunctionConverter : JsonConverter<MeterFilterMod
             writer,
             value switch
             {
-                MeterFilterModelConjunction.And => "and",
-                MeterFilterModelConjunction.Or => "or",
+                ClausesMeterFilterClausesMeterFilterConjunction.And => "and",
+                ClausesMeterFilterClausesMeterFilterConjunction.Or => "or",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -2093,6 +2248,53 @@ sealed class MeterFilterModelConjunctionConverter : JsonConverter<MeterFilterMod
     }
 }
 
+[JsonConverter(typeof(ClausesMeterFilterConjunctionConverter))]
+public enum ClausesMeterFilterConjunction
+{
+    And,
+    Or,
+}
+
+sealed class ClausesMeterFilterConjunctionConverter : JsonConverter<ClausesMeterFilterConjunction>
+{
+    public override ClausesMeterFilterConjunction Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "and" => ClausesMeterFilterConjunction.And,
+            "or" => ClausesMeterFilterConjunction.Or,
+            _ => (ClausesMeterFilterConjunction)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        ClausesMeterFilterConjunction value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                ClausesMeterFilterConjunction.And => "and",
+                ClausesMeterFilterConjunction.Or => "or",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Logical conjunction to apply between clauses (and/or)
+/// </summary>
 [JsonConverter(typeof(MeterFilterConjunctionConverter))]
 public enum MeterFilterConjunction
 {
@@ -2128,53 +2330,6 @@ sealed class MeterFilterConjunctionConverter : JsonConverter<MeterFilterConjunct
             {
                 MeterFilterConjunction.And => "and",
                 MeterFilterConjunction.Or => "or",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-/// <summary>
-/// Logical conjunction to apply between clauses (and/or)
-/// </summary>
-[JsonConverter(typeof(MeterMeterFilterConjunctionConverter))]
-public enum MeterMeterFilterConjunction
-{
-    And,
-    Or,
-}
-
-sealed class MeterMeterFilterConjunctionConverter : JsonConverter<MeterMeterFilterConjunction>
-{
-    public override MeterMeterFilterConjunction Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "and" => MeterMeterFilterConjunction.And,
-            "or" => MeterMeterFilterConjunction.Or,
-            _ => (MeterMeterFilterConjunction)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        MeterMeterFilterConjunction value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                MeterMeterFilterConjunction.And => "and",
-                MeterMeterFilterConjunction.Or => "or",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

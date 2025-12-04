@@ -38,7 +38,7 @@ public class MeterTest : TestBase
                         },
                     ]
                 ),
-                Conjunction = Meters::MeterMeterFilterConjunction.And,
+                Conjunction = Meters::MeterFilterConjunction.And,
             },
         };
 
@@ -55,7 +55,7 @@ public class MeterTest : TestBase
         string expectedName = "name";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
-        Meters::MeterMeterFilter expectedFilter = new()
+        Meters::MeterFilter expectedFilter = new()
         {
             Clauses = new(
                 [
@@ -73,7 +73,7 @@ public class MeterTest : TestBase
                     },
                 ]
             ),
-            Conjunction = Meters::MeterMeterFilterConjunction.And,
+            Conjunction = Meters::MeterFilterConjunction.And,
         };
 
         Assert.Equal(expectedID, model.ID);
@@ -120,7 +120,7 @@ public class MeterTest : TestBase
                         },
                     ]
                 ),
-                Conjunction = Meters::MeterMeterFilterConjunction.And,
+                Conjunction = Meters::MeterFilterConjunction.And,
             },
         };
 
@@ -162,7 +162,7 @@ public class MeterTest : TestBase
                         },
                     ]
                 ),
-                Conjunction = Meters::MeterMeterFilterConjunction.And,
+                Conjunction = Meters::MeterFilterConjunction.And,
             },
         };
 
@@ -183,7 +183,7 @@ public class MeterTest : TestBase
         string expectedName = "name";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
-        Meters::MeterMeterFilter expectedFilter = new()
+        Meters::MeterFilter expectedFilter = new()
         {
             Clauses = new(
                 [
@@ -201,7 +201,7 @@ public class MeterTest : TestBase
                     },
                 ]
             ),
-            Conjunction = Meters::MeterMeterFilterConjunction.And,
+            Conjunction = Meters::MeterFilterConjunction.And,
         };
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -248,7 +248,7 @@ public class MeterTest : TestBase
                         },
                     ]
                 ),
-                Conjunction = Meters::MeterMeterFilterConjunction.And,
+                Conjunction = Meters::MeterFilterConjunction.And,
             },
         };
 

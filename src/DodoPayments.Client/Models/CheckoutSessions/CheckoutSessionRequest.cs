@@ -15,11 +15,14 @@ namespace DodoPayments.Client.Models.CheckoutSessions;
 [JsonConverter(typeof(ModelConverter<CheckoutSessionRequest, CheckoutSessionRequestFromRaw>))]
 public sealed record class CheckoutSessionRequest : ModelBase
 {
-    public required IReadOnlyList<ProductCartModel> ProductCart
+    public required IReadOnlyList<CheckoutSessionRequestProductCart> ProductCart
     {
         get
         {
-            return ModelBase.GetNotNullClass<List<ProductCartModel>>(this.RawData, "product_cart");
+            return ModelBase.GetNotNullClass<List<CheckoutSessionRequestProductCart>>(
+                this.RawData,
+                "product_cart"
+            );
         }
         init { ModelBase.Set(this._rawData, "product_cart", value); }
     }
@@ -259,7 +262,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
     }
 
     [SetsRequiredMembers]
-    public CheckoutSessionRequest(List<ProductCartModel> productCart)
+    public CheckoutSessionRequest(List<CheckoutSessionRequestProductCart> productCart)
         : this()
     {
         this.ProductCart = productCart;
@@ -273,8 +276,13 @@ class CheckoutSessionRequestFromRaw : IFromRaw<CheckoutSessionRequest>
     ) => CheckoutSessionRequest.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<ProductCartModel, ProductCartModelFromRaw>))]
-public sealed record class ProductCartModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<
+        CheckoutSessionRequestProductCart,
+        CheckoutSessionRequestProductCartFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionRequestProductCart : ModelBase
 {
     /// <summary>
     /// unique id of the product
@@ -332,22 +340,22 @@ public sealed record class ProductCartModel : ModelBase
         _ = this.Amount;
     }
 
-    public ProductCartModel() { }
+    public CheckoutSessionRequestProductCart() { }
 
-    public ProductCartModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CheckoutSessionRequestProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ProductCartModel(FrozenDictionary<string, JsonElement> rawData)
+    CheckoutSessionRequestProductCart(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static ProductCartModel FromRawUnchecked(
+    public static CheckoutSessionRequestProductCart FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -355,10 +363,11 @@ public sealed record class ProductCartModel : ModelBase
     }
 }
 
-class ProductCartModelFromRaw : IFromRaw<ProductCartModel>
+class CheckoutSessionRequestProductCartFromRaw : IFromRaw<CheckoutSessionRequestProductCart>
 {
-    public ProductCartModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        ProductCartModel.FromRawUnchecked(rawData);
+    public CheckoutSessionRequestProductCart FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionRequestProductCart.FromRawUnchecked(rawData);
 }
 
 /// <summary>

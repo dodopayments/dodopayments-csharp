@@ -4,12 +4,12 @@ using DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Tests.Models.Products;
 
-public class DigitalProductDeliveryModelTest : TestBase
+public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DigitalProductDeliveryModel
+        var model = new ProductUpdateParamsDigitalProductDelivery
         {
             ExternalURL = "external_url",
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
@@ -32,7 +32,7 @@ public class DigitalProductDeliveryModelTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DigitalProductDeliveryModel
+        var model = new ProductUpdateParamsDigitalProductDelivery
         {
             ExternalURL = "external_url",
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
@@ -40,7 +40,9 @@ public class DigitalProductDeliveryModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DigitalProductDeliveryModel>(json);
+        var deserialized = JsonSerializer.Deserialize<ProductUpdateParamsDigitalProductDelivery>(
+            json
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -48,7 +50,7 @@ public class DigitalProductDeliveryModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DigitalProductDeliveryModel
+        var model = new ProductUpdateParamsDigitalProductDelivery
         {
             ExternalURL = "external_url",
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
@@ -56,7 +58,9 @@ public class DigitalProductDeliveryModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DigitalProductDeliveryModel>(json);
+        var deserialized = JsonSerializer.Deserialize<ProductUpdateParamsDigitalProductDelivery>(
+            json
+        );
         Assert.NotNull(deserialized);
 
         string expectedExternalURL = "external_url";
@@ -75,7 +79,7 @@ public class DigitalProductDeliveryModelTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DigitalProductDeliveryModel
+        var model = new ProductUpdateParamsDigitalProductDelivery
         {
             ExternalURL = "external_url",
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
@@ -88,7 +92,7 @@ public class DigitalProductDeliveryModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new DigitalProductDeliveryModel { };
+        var model = new ProductUpdateParamsDigitalProductDelivery { };
 
         Assert.Null(model.ExternalURL);
         Assert.False(model.RawData.ContainsKey("external_url"));
@@ -101,7 +105,7 @@ public class DigitalProductDeliveryModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new DigitalProductDeliveryModel { };
+        var model = new ProductUpdateParamsDigitalProductDelivery { };
 
         model.Validate();
     }
@@ -109,7 +113,7 @@ public class DigitalProductDeliveryModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new DigitalProductDeliveryModel
+        var model = new ProductUpdateParamsDigitalProductDelivery
         {
             ExternalURL = null,
             Files = null,
@@ -127,7 +131,7 @@ public class DigitalProductDeliveryModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new DigitalProductDeliveryModel
+        var model = new ProductUpdateParamsDigitalProductDelivery
         {
             ExternalURL = null,
             Files = null,
