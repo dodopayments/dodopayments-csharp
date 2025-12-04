@@ -43,7 +43,7 @@ public class MeterListPageResponseTest : TestBase
                                 },
                             ]
                         ),
-                        Conjunction = Meters::MeterMeterFilterConjunction.And,
+                        Conjunction = Meters::MeterFilterConjunction.And,
                     },
                 },
             ],
@@ -80,7 +80,7 @@ public class MeterListPageResponseTest : TestBase
                             },
                         ]
                     ),
-                    Conjunction = Meters::MeterMeterFilterConjunction.And,
+                    Conjunction = Meters::MeterFilterConjunction.And,
                 },
             },
         ];
@@ -128,7 +128,7 @@ public class MeterListPageResponseTest : TestBase
                                 },
                             ]
                         ),
-                        Conjunction = Meters::MeterMeterFilterConjunction.And,
+                        Conjunction = Meters::MeterFilterConjunction.And,
                     },
                 },
             ],
@@ -176,7 +176,7 @@ public class MeterListPageResponseTest : TestBase
                                 },
                             ]
                         ),
-                        Conjunction = Meters::MeterMeterFilterConjunction.And,
+                        Conjunction = Meters::MeterFilterConjunction.And,
                     },
                 },
             ],
@@ -217,7 +217,7 @@ public class MeterListPageResponseTest : TestBase
                             },
                         ]
                     ),
-                    Conjunction = Meters::MeterMeterFilterConjunction.And,
+                    Conjunction = Meters::MeterFilterConjunction.And,
                 },
             },
         ];
@@ -265,7 +265,7 @@ public class MeterListPageResponseTest : TestBase
                                 },
                             ]
                         ),
-                        Conjunction = Meters::MeterMeterFilterConjunction.And,
+                        Conjunction = Meters::MeterFilterConjunction.And,
                     },
                 },
             ],

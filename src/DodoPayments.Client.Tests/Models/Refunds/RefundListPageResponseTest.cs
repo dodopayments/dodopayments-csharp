@@ -31,7 +31,7 @@ public class RefundListPageResponseTest : TestBase
             ],
         };
 
-        List<ItemModel> expectedItems =
+        List<RefundListPageResponseItem> expectedItems =
         [
             new()
             {
@@ -108,7 +108,7 @@ public class RefundListPageResponseTest : TestBase
         var deserialized = JsonSerializer.Deserialize<RefundListPageResponse>(json);
         Assert.NotNull(deserialized);
 
-        List<ItemModel> expectedItems =
+        List<RefundListPageResponseItem> expectedItems =
         [
             new()
             {
@@ -157,12 +157,12 @@ public class RefundListPageResponseTest : TestBase
     }
 }
 
-public class ItemModelTest : TestBase
+public class RefundListPageResponseItemTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new ItemModel
+        var model = new RefundListPageResponseItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -199,7 +199,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new ItemModel
+        var model = new RefundListPageResponseItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -213,7 +213,7 @@ public class ItemModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ItemModel>(json);
+        var deserialized = JsonSerializer.Deserialize<RefundListPageResponseItem>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -221,7 +221,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new ItemModel
+        var model = new RefundListPageResponseItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -235,7 +235,7 @@ public class ItemModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ItemModel>(json);
+        var deserialized = JsonSerializer.Deserialize<RefundListPageResponseItem>(json);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -262,7 +262,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new ItemModel
+        var model = new RefundListPageResponseItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -281,7 +281,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new ItemModel
+        var model = new RefundListPageResponseItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -302,7 +302,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new ItemModel
+        var model = new RefundListPageResponseItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -318,7 +318,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new ItemModel
+        var model = new RefundListPageResponseItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -343,7 +343,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new ItemModel
+        var model = new RefundListPageResponseItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

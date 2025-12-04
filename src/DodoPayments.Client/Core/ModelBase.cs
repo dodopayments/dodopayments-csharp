@@ -7,12 +7,12 @@ using DodoPayments.Client.Models.Customers;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Disputes;
-using DodoPayments.Client.Models.LicenseKeys;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.WebhookEvents;
+using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Meters = DodoPayments.Client.Models.Meters;
-using Payments = DodoPayments.Client.Models.Payments;
 using Payouts = DodoPayments.Client.Models.Payouts;
 using Refunds = DodoPayments.Client.Models.Refunds;
 using Subscriptions = DodoPayments.Client.Models.Subscriptions;
@@ -36,17 +36,17 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CheckoutSessionRequestCustomizationTheme>(),
             new ApiEnumConverter<string, Currency>(),
             new ApiEnumConverter<string, Theme>(),
-            new ApiEnumConverter<string, Payments::IntentStatus>(),
-            new ApiEnumConverter<string, Payments::PaymentMethodTypes>(),
-            new ApiEnumConverter<string, Payments::Status>(),
+            new ApiEnumConverter<string, IntentStatus>(),
+            new ApiEnumConverter<string, PaymentMethodTypes>(),
+            new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
             new ApiEnumConverter<string, Subscriptions::TimeInterval>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
             new ApiEnumConverter<string, Subscriptions::Type>(),
             new ApiEnumConverter<string, Subscriptions::ExistingType>(),
-            new ApiEnumConverter<string, LicenseKeyStatus>(),
-            new ApiEnumConverter<string, Status>(),
+            new ApiEnumConverter<string, LicenseKeys::LicenseKeyStatus>(),
+            new ApiEnumConverter<string, LicenseKeys::Status>(),
             new ApiEnumConverter<string, PaymentMethod>(),
             new ApiEnumConverter<string, EventType>(),
             new ApiEnumConverter<string, EntryType>(),
@@ -219,13 +219,19 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, LicenseKeyIntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Meters::Type>(),
             new ApiEnumConverter<string, Meters::Operator>(),
-            new ApiEnumConverter<string, Meters::MeterFilterConditionModelOperator>(),
-            new ApiEnumConverter<string, Meters::MeterFilterCondition1Operator>(),
+            new ApiEnumConverter<
+                string,
+                Meters::ClausesMeterFilterClausesMeterFilterConditionOperator
+            >(),
+            new ApiEnumConverter<
+                string,
+                Meters::ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
+            >(),
             new ApiEnumConverter<string, Meters::ClauseOperator>(),
             new ApiEnumConverter<string, Meters::Conjunction>(),
-            new ApiEnumConverter<string, Meters::MeterFilterModelConjunction>(),
+            new ApiEnumConverter<string, Meters::ClausesMeterFilterClausesMeterFilterConjunction>(),
+            new ApiEnumConverter<string, Meters::ClausesMeterFilterConjunction>(),
             new ApiEnumConverter<string, Meters::MeterFilterConjunction>(),
-            new ApiEnumConverter<string, Meters::MeterMeterFilterConjunction>(),
         },
     };
 

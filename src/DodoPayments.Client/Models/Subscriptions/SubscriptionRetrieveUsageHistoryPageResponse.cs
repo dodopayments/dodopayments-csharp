@@ -20,9 +20,14 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelB
     /// <summary>
     /// List of usage history items
     /// </summary>
-    public required IReadOnlyList<ItemModel> Items
+    public required IReadOnlyList<SubscriptionRetrieveUsageHistoryPageResponseItem> Items
     {
-        get { return ModelBase.GetNotNullClass<List<ItemModel>>(this.RawData, "items"); }
+        get
+        {
+            return ModelBase.GetNotNullClass<
+                List<SubscriptionRetrieveUsageHistoryPageResponseItem>
+            >(this.RawData, "items");
+        }
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
@@ -59,7 +64,9 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelB
     }
 
     [SetsRequiredMembers]
-    public SubscriptionRetrieveUsageHistoryPageResponse(List<ItemModel> items)
+    public SubscriptionRetrieveUsageHistoryPageResponse(
+        List<SubscriptionRetrieveUsageHistoryPageResponseItem> items
+    )
         : this()
     {
         this.Items = items;
@@ -74,8 +81,13 @@ class SubscriptionRetrieveUsageHistoryPageResponseFromRaw
     ) => SubscriptionRetrieveUsageHistoryPageResponse.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<ItemModel, ItemModelFromRaw>))]
-public sealed record class ItemModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<
+        SubscriptionRetrieveUsageHistoryPageResponseItem,
+        SubscriptionRetrieveUsageHistoryPageResponseItemFromRaw
+    >)
+)]
+public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItem : ModelBase
 {
     /// <summary>
     /// End date of the billing period
@@ -89,9 +101,14 @@ public sealed record class ItemModel : ModelBase
     /// <summary>
     /// List of meters and their usage for this billing period
     /// </summary>
-    public required IReadOnlyList<MeterModel> Meters
+    public required IReadOnlyList<SubscriptionRetrieveUsageHistoryPageResponseItemMeter> Meters
     {
-        get { return ModelBase.GetNotNullClass<List<MeterModel>>(this.RawData, "meters"); }
+        get
+        {
+            return ModelBase.GetNotNullClass<
+                List<SubscriptionRetrieveUsageHistoryPageResponseItemMeter>
+            >(this.RawData, "meters");
+        }
         init { ModelBase.Set(this._rawData, "meters", value); }
     }
 
@@ -114,35 +131,46 @@ public sealed record class ItemModel : ModelBase
         _ = this.StartDate;
     }
 
-    public ItemModel() { }
+    public SubscriptionRetrieveUsageHistoryPageResponseItem() { }
 
-    public ItemModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionRetrieveUsageHistoryPageResponseItem(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ItemModel(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionRetrieveUsageHistoryPageResponseItem(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static ItemModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    public static SubscriptionRetrieveUsageHistoryPageResponseItem FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class ItemModelFromRaw : IFromRaw<ItemModel>
+class SubscriptionRetrieveUsageHistoryPageResponseItemFromRaw
+    : IFromRaw<SubscriptionRetrieveUsageHistoryPageResponseItem>
 {
-    public ItemModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        ItemModel.FromRawUnchecked(rawData);
+    public SubscriptionRetrieveUsageHistoryPageResponseItem FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionRetrieveUsageHistoryPageResponseItem.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<MeterModel, MeterModelFromRaw>))]
-public sealed record class MeterModel : ModelBase
+[JsonConverter(
+    typeof(ModelConverter<
+        SubscriptionRetrieveUsageHistoryPageResponseItemMeter,
+        SubscriptionRetrieveUsageHistoryPageResponseItemMeterFromRaw
+    >)
+)]
+public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter : ModelBase
 {
     /// <summary>
     /// Meter identifier
@@ -231,29 +259,37 @@ public sealed record class MeterModel : ModelBase
         _ = this.TotalPrice;
     }
 
-    public MeterModel() { }
+    public SubscriptionRetrieveUsageHistoryPageResponseItemMeter() { }
 
-    public MeterModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionRetrieveUsageHistoryPageResponseItemMeter(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    MeterModel(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionRetrieveUsageHistoryPageResponseItemMeter(
+        FrozenDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static MeterModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    public static SubscriptionRetrieveUsageHistoryPageResponseItemMeter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class MeterModelFromRaw : IFromRaw<MeterModel>
+class SubscriptionRetrieveUsageHistoryPageResponseItemMeterFromRaw
+    : IFromRaw<SubscriptionRetrieveUsageHistoryPageResponseItemMeter>
 {
-    public MeterModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        MeterModel.FromRawUnchecked(rawData);
+    public SubscriptionRetrieveUsageHistoryPageResponseItemMeter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionRetrieveUsageHistoryPageResponseItemMeter.FromRawUnchecked(rawData);
 }

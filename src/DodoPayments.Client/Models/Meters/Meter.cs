@@ -72,9 +72,9 @@ public sealed record class Meter : ModelBase
     /// Each filter has a conjunction (and/or) and clauses that can be either direct
     /// conditions or nested filters.</para>
     /// </summary>
-    public MeterMeterFilter? Filter
+    public MeterFilter? Filter
     {
-        get { return ModelBase.GetNullableClass<MeterMeterFilter>(this.RawData, "filter"); }
+        get { return ModelBase.GetNullableClass<MeterFilter>(this.RawData, "filter"); }
         init { ModelBase.Set(this._rawData, "filter", value); }
     }
 

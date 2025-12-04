@@ -12,18 +12,18 @@ public class CreateNewCustomerTest : TestBase
         {
             Email = "email",
             Name = "name",
-            CreateNewCustomer1 = true,
+            CreateNewCustomerValue = true,
             PhoneNumber = "phone_number",
         };
 
         string expectedEmail = "email";
         string expectedName = "name";
-        bool expectedCreateNewCustomer1 = true;
+        bool expectedCreateNewCustomerValue = true;
         string expectedPhoneNumber = "phone_number";
 
         Assert.Equal(expectedEmail, model.Email);
         Assert.Equal(expectedName, model.Name);
-        Assert.Equal(expectedCreateNewCustomer1, model.CreateNewCustomer1);
+        Assert.Equal(expectedCreateNewCustomerValue, model.CreateNewCustomerValue);
         Assert.Equal(expectedPhoneNumber, model.PhoneNumber);
     }
 
@@ -34,7 +34,7 @@ public class CreateNewCustomerTest : TestBase
         {
             Email = "email",
             Name = "name",
-            CreateNewCustomer1 = true,
+            CreateNewCustomerValue = true,
             PhoneNumber = "phone_number",
         };
 
@@ -51,7 +51,7 @@ public class CreateNewCustomerTest : TestBase
         {
             Email = "email",
             Name = "name",
-            CreateNewCustomer1 = true,
+            CreateNewCustomerValue = true,
             PhoneNumber = "phone_number",
         };
 
@@ -61,12 +61,12 @@ public class CreateNewCustomerTest : TestBase
 
         string expectedEmail = "email";
         string expectedName = "name";
-        bool expectedCreateNewCustomer1 = true;
+        bool expectedCreateNewCustomerValue = true;
         string expectedPhoneNumber = "phone_number";
 
         Assert.Equal(expectedEmail, deserialized.Email);
         Assert.Equal(expectedName, deserialized.Name);
-        Assert.Equal(expectedCreateNewCustomer1, deserialized.CreateNewCustomer1);
+        Assert.Equal(expectedCreateNewCustomerValue, deserialized.CreateNewCustomerValue);
         Assert.Equal(expectedPhoneNumber, deserialized.PhoneNumber);
     }
 
@@ -77,7 +77,7 @@ public class CreateNewCustomerTest : TestBase
         {
             Email = "email",
             Name = "name",
-            CreateNewCustomer1 = true,
+            CreateNewCustomerValue = true,
             PhoneNumber = "phone_number",
         };
 
@@ -94,7 +94,7 @@ public class CreateNewCustomerTest : TestBase
             PhoneNumber = "phone_number",
         };
 
-        Assert.Null(model.CreateNewCustomer1);
+        Assert.Null(model.CreateNewCustomerValue);
         Assert.False(model.RawData.ContainsKey("create_new_customer"));
     }
 
@@ -121,10 +121,10 @@ public class CreateNewCustomerTest : TestBase
             PhoneNumber = "phone_number",
 
             // Null should be interpreted as omitted for these properties
-            CreateNewCustomer1 = null,
+            CreateNewCustomerValue = null,
         };
 
-        Assert.Null(model.CreateNewCustomer1);
+        Assert.Null(model.CreateNewCustomerValue);
         Assert.False(model.RawData.ContainsKey("create_new_customer"));
     }
 
@@ -138,7 +138,7 @@ public class CreateNewCustomerTest : TestBase
             PhoneNumber = "phone_number",
 
             // Null should be interpreted as omitted for these properties
-            CreateNewCustomer1 = null,
+            CreateNewCustomerValue = null,
         };
 
         model.Validate();
@@ -151,7 +151,7 @@ public class CreateNewCustomerTest : TestBase
         {
             Email = "email",
             Name = "name",
-            CreateNewCustomer1 = true,
+            CreateNewCustomerValue = true,
         };
 
         Assert.Null(model.PhoneNumber);
@@ -165,7 +165,7 @@ public class CreateNewCustomerTest : TestBase
         {
             Email = "email",
             Name = "name",
-            CreateNewCustomer1 = true,
+            CreateNewCustomerValue = true,
         };
 
         model.Validate();
@@ -178,7 +178,7 @@ public class CreateNewCustomerTest : TestBase
         {
             Email = "email",
             Name = "name",
-            CreateNewCustomer1 = true,
+            CreateNewCustomerValue = true,
 
             PhoneNumber = null,
         };
@@ -194,7 +194,7 @@ public class CreateNewCustomerTest : TestBase
         {
             Email = "email",
             Name = "name",
-            CreateNewCustomer1 = true,
+            CreateNewCustomerValue = true,
 
             PhoneNumber = null,
         };

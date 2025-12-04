@@ -27,7 +27,7 @@ public sealed record class CreateNewCustomer : ModelBase
     /// is used if exists. When true, a new customer object is always created False
     /// by default
     /// </summary>
-    public bool? CreateNewCustomer1
+    public bool? CreateNewCustomerValue
     {
         get { return ModelBase.GetNullableStruct<bool>(this.RawData, "create_new_customer"); }
         init
@@ -51,7 +51,7 @@ public sealed record class CreateNewCustomer : ModelBase
     {
         _ = this.Email;
         _ = this.Name;
-        _ = this.CreateNewCustomer1;
+        _ = this.CreateNewCustomerValue;
         _ = this.PhoneNumber;
     }
 

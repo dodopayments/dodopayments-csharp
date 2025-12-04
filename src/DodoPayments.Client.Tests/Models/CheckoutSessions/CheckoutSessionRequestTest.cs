@@ -78,7 +78,7 @@ public class CheckoutSessionRequestTest : TestBase
             },
         };
 
-        List<ProductCartModel> expectedProductCart =
+        List<CheckoutSessionRequestProductCart> expectedProductCart =
         [
             new()
             {
@@ -322,7 +322,7 @@ public class CheckoutSessionRequestTest : TestBase
         var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequest>(json);
         Assert.NotNull(deserialized);
 
-        List<ProductCartModel> expectedProductCart =
+        List<CheckoutSessionRequestProductCart> expectedProductCart =
         [
             new()
             {
@@ -939,12 +939,12 @@ public class CheckoutSessionRequestTest : TestBase
     }
 }
 
-public class ProductCartModelTest : TestBase
+public class CheckoutSessionRequestProductCartTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new ProductCartModel
+        var model = new CheckoutSessionRequestProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -970,7 +970,7 @@ public class ProductCartModelTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new ProductCartModel
+        var model = new CheckoutSessionRequestProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -979,7 +979,7 @@ public class ProductCartModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ProductCartModel>(json);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestProductCart>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -987,7 +987,7 @@ public class ProductCartModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new ProductCartModel
+        var model = new CheckoutSessionRequestProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -996,7 +996,7 @@ public class ProductCartModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ProductCartModel>(json);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestProductCart>(json);
         Assert.NotNull(deserialized);
 
         string expectedProductID = "product_id";
@@ -1017,7 +1017,7 @@ public class ProductCartModelTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new ProductCartModel
+        var model = new CheckoutSessionRequestProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -1031,7 +1031,11 @@ public class ProductCartModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new ProductCartModel { ProductID = "product_id", Quantity = 0 };
+        var model = new CheckoutSessionRequestProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+        };
 
         Assert.Null(model.Addons);
         Assert.False(model.RawData.ContainsKey("addons"));
@@ -1042,7 +1046,11 @@ public class ProductCartModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new ProductCartModel { ProductID = "product_id", Quantity = 0 };
+        var model = new CheckoutSessionRequestProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+        };
 
         model.Validate();
     }
@@ -1050,7 +1058,7 @@ public class ProductCartModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new ProductCartModel
+        var model = new CheckoutSessionRequestProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -1068,7 +1076,7 @@ public class ProductCartModelTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new ProductCartModel
+        var model = new CheckoutSessionRequestProductCart
         {
             ProductID = "product_id",
             Quantity = 0,

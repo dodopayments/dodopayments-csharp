@@ -44,11 +44,11 @@ public sealed record class EventInput : ModelBase
     /// Custom metadata. Only key value pairs are accepted, objects or arrays submitted
     /// will be rejected.
     /// </summary>
-    public IReadOnlyDictionary<string, MetadataModel>? Metadata
+    public IReadOnlyDictionary<string, EventInputMetadata>? Metadata
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, MetadataModel>>(
+            return ModelBase.GetNullableClass<Dictionary<string, EventInputMetadata>>(
                 this.RawData,
                 "metadata"
             );
@@ -111,8 +111,8 @@ class EventInputFromRaw : IFromRaw<EventInput>
 /// <summary>
 /// Metadata value can be a string, integer, number, or boolean
 /// </summary>
-[JsonConverter(typeof(MetadataModelConverter))]
-public record class MetadataModel
+[JsonConverter(typeof(EventInputMetadataConverter))]
+public record class EventInputMetadata
 {
     public object? Value { get; } = null;
 
@@ -123,25 +123,25 @@ public record class MetadataModel
         get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MetadataModel(string value, JsonElement? json = null)
+    public EventInputMetadata(string value, JsonElement? json = null)
     {
         this.Value = value;
         this._json = json;
     }
 
-    public MetadataModel(double value, JsonElement? json = null)
+    public EventInputMetadata(double value, JsonElement? json = null)
     {
         this.Value = value;
         this._json = json;
     }
 
-    public MetadataModel(bool value, JsonElement? json = null)
+    public EventInputMetadata(bool value, JsonElement? json = null)
     {
         this.Value = value;
         this._json = json;
     }
 
-    public MetadataModel(JsonElement json)
+    public EventInputMetadata(JsonElement json)
     {
         this._json = json;
     }
@@ -179,7 +179,7 @@ public record class MetadataModel
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of MetadataModel"
+                    "Data did not match any variant of EventInputMetadata"
                 );
         }
     }
@@ -192,28 +192,28 @@ public record class MetadataModel
             double value => @number(value),
             bool value => @boolean(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of MetadataModel"
+                "Data did not match any variant of EventInputMetadata"
             ),
         };
     }
 
-    public static implicit operator MetadataModel(string value) => new(value);
+    public static implicit operator EventInputMetadata(string value) => new(value);
 
-    public static implicit operator MetadataModel(double value) => new(value);
+    public static implicit operator EventInputMetadata(double value) => new(value);
 
-    public static implicit operator MetadataModel(bool value) => new(value);
+    public static implicit operator EventInputMetadata(bool value) => new(value);
 
     public void Validate()
     {
         if (this.Value == null)
         {
             throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of MetadataModel"
+                "Data did not match any variant of EventInputMetadata"
             );
         }
     }
 
-    public virtual bool Equals(MetadataModel? other)
+    public virtual bool Equals(EventInputMetadata? other)
     {
         return other != null && JsonElement.DeepEquals(this.Json, other.Json);
     }
@@ -224,9 +224,9 @@ public record class MetadataModel
     }
 }
 
-sealed class MetadataModelConverter : JsonConverter<MetadataModel>
+sealed class EventInputMetadataConverter : JsonConverter<EventInputMetadata>
 {
-    public override MetadataModel? Read(
+    public override EventInputMetadata? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -269,7 +269,7 @@ sealed class MetadataModelConverter : JsonConverter<MetadataModel>
 
     public override void Write(
         Utf8JsonWriter writer,
-        MetadataModel value,
+        EventInputMetadata value,
         JsonSerializerOptions options
     )
     {
