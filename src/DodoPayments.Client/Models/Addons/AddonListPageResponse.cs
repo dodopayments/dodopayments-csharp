@@ -27,6 +27,9 @@ public sealed record class AddonListPageResponse : ModelBase
 
     public AddonListPageResponse() { }
 
+    public AddonListPageResponse(AddonListPageResponse addonListPageResponse)
+        : base(addonListPageResponse) { }
+
     public AddonListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

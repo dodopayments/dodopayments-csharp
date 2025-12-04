@@ -29,6 +29,9 @@ public sealed record class UsageEventListPageResponse : ModelBase
 
     public UsageEventListPageResponse() { }
 
+    public UsageEventListPageResponse(UsageEventListPageResponse usageEventListPageResponse)
+        : base(usageEventListPageResponse) { }
+
     public UsageEventListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

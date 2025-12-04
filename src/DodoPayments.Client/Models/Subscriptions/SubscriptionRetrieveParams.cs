@@ -14,6 +14,9 @@ public sealed record class SubscriptionRetrieveParams : ParamsBase
 
     public SubscriptionRetrieveParams() { }
 
+    public SubscriptionRetrieveParams(SubscriptionRetrieveParams subscriptionRetrieveParams)
+        : base(subscriptionRetrieveParams) { }
+
     public SubscriptionRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

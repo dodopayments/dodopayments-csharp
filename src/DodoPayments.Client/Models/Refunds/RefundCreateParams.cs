@@ -70,6 +70,12 @@ public sealed record class RefundCreateParams : ParamsBase
 
     public RefundCreateParams() { }
 
+    public RefundCreateParams(RefundCreateParams refundCreateParams)
+        : base(refundCreateParams)
+    {
+        this._rawBodyData = [.. refundCreateParams._rawBodyData];
+    }
+
     public RefundCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -179,6 +185,9 @@ public sealed record class Item : ModelBase
     }
 
     public Item() { }
+
+    public Item(Item item)
+        : base(item) { }
 
     public Item(IReadOnlyDictionary<string, JsonElement> rawData)
     {

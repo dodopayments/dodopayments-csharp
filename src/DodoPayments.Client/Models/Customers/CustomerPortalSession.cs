@@ -24,6 +24,9 @@ public sealed record class CustomerPortalSession : ModelBase
 
     public CustomerPortalSession() { }
 
+    public CustomerPortalSession(CustomerPortalSession customerPortalSession)
+        : base(customerPortalSession) { }
+
     public CustomerPortalSession(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

@@ -27,6 +27,12 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
 
     public ProductUpdateFilesParams() { }
 
+    public ProductUpdateFilesParams(ProductUpdateFilesParams productUpdateFilesParams)
+        : base(productUpdateFilesParams)
+    {
+        this._rawBodyData = [.. productUpdateFilesParams._rawBodyData];
+    }
+
     public ProductUpdateFilesParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

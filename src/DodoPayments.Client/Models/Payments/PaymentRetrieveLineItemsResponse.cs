@@ -49,6 +49,11 @@ public sealed record class PaymentRetrieveLineItemsResponse : ModelBase
 
     public PaymentRetrieveLineItemsResponse() { }
 
+    public PaymentRetrieveLineItemsResponse(
+        PaymentRetrieveLineItemsResponse paymentRetrieveLineItemsResponse
+    )
+        : base(paymentRetrieveLineItemsResponse) { }
+
     public PaymentRetrieveLineItemsResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -135,6 +140,11 @@ public sealed record class PaymentRetrieveLineItemsResponseItem : ModelBase
     }
 
     public PaymentRetrieveLineItemsResponseItem() { }
+
+    public PaymentRetrieveLineItemsResponseItem(
+        PaymentRetrieveLineItemsResponseItem paymentRetrieveLineItemsResponseItem
+    )
+        : base(paymentRetrieveLineItemsResponseItem) { }
 
     public PaymentRetrieveLineItemsResponseItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {

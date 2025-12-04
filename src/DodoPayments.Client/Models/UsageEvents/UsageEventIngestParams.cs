@@ -45,6 +45,12 @@ public sealed record class UsageEventIngestParams : ParamsBase
 
     public UsageEventIngestParams() { }
 
+    public UsageEventIngestParams(UsageEventIngestParams usageEventIngestParams)
+        : base(usageEventIngestParams)
+    {
+        this._rawBodyData = [.. usageEventIngestParams._rawBodyData];
+    }
+
     public UsageEventIngestParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

@@ -24,6 +24,9 @@ public sealed record class UsageEventIngestResponse : ModelBase
 
     public UsageEventIngestResponse() { }
 
+    public UsageEventIngestResponse(UsageEventIngestResponse usageEventIngestResponse)
+        : base(usageEventIngestResponse) { }
+
     public UsageEventIngestResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

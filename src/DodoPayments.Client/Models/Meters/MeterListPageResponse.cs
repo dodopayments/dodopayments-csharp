@@ -27,6 +27,9 @@ public sealed record class MeterListPageResponse : ModelBase
 
     public MeterListPageResponse() { }
 
+    public MeterListPageResponse(MeterListPageResponse meterListPageResponse)
+        : base(meterListPageResponse) { }
+
     public MeterListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

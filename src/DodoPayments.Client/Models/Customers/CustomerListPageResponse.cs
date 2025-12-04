@@ -27,6 +27,9 @@ public sealed record class CustomerListPageResponse : ModelBase
 
     public CustomerListPageResponse() { }
 
+    public CustomerListPageResponse(CustomerListPageResponse customerListPageResponse)
+        : base(customerListPageResponse) { }
+
     public CustomerListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

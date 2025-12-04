@@ -99,6 +99,9 @@ public sealed record class ProductListParams : ParamsBase
 
     public ProductListParams() { }
 
+    public ProductListParams(ProductListParams productListParams)
+        : base(productListParams) { }
+
     public ProductListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

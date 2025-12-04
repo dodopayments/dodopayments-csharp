@@ -28,6 +28,9 @@ public sealed record class ImageUpdateParams : ParamsBase
 
     public ImageUpdateParams() { }
 
+    public ImageUpdateParams(ImageUpdateParams imageUpdateParams)
+        : base(imageUpdateParams) { }
+
     public ImageUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

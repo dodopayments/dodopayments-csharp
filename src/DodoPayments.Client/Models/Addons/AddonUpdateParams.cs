@@ -88,6 +88,12 @@ public sealed record class AddonUpdateParams : ParamsBase
 
     public AddonUpdateParams() { }
 
+    public AddonUpdateParams(AddonUpdateParams addonUpdateParams)
+        : base(addonUpdateParams)
+    {
+        this._rawBodyData = [.. addonUpdateParams._rawBodyData];
+    }
+
     public AddonUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

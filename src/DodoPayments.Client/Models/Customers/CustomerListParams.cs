@@ -63,6 +63,9 @@ public sealed record class CustomerListParams : ParamsBase
 
     public CustomerListParams() { }
 
+    public CustomerListParams(CustomerListParams customerListParams)
+        : base(customerListParams) { }
+
     public CustomerListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

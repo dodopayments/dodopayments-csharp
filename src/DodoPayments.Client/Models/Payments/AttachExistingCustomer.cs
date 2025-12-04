@@ -24,6 +24,9 @@ public sealed record class AttachExistingCustomer : ModelBase
 
     public AttachExistingCustomer() { }
 
+    public AttachExistingCustomer(AttachExistingCustomer attachExistingCustomer)
+        : base(attachExistingCustomer) { }
+
     public AttachExistingCustomer(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

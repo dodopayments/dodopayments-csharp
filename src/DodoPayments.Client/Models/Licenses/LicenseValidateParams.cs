@@ -34,6 +34,12 @@ public sealed record class LicenseValidateParams : ParamsBase
 
     public LicenseValidateParams() { }
 
+    public LicenseValidateParams(LicenseValidateParams licenseValidateParams)
+        : base(licenseValidateParams)
+    {
+        this._rawBodyData = [.. licenseValidateParams._rawBodyData];
+    }
+
     public LicenseValidateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

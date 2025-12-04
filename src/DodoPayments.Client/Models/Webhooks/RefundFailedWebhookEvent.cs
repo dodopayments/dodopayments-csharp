@@ -74,6 +74,9 @@ public sealed record class RefundFailedWebhookEvent : ModelBase
 
     public RefundFailedWebhookEvent() { }
 
+    public RefundFailedWebhookEvent(RefundFailedWebhookEvent refundFailedWebhookEvent)
+        : base(refundFailedWebhookEvent) { }
+
     public RefundFailedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -287,6 +290,9 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
 
     public RefundFailedWebhookEventData() { }
 
+    public RefundFailedWebhookEventData(RefundFailedWebhookEventData refundFailedWebhookEventData)
+        : base(refundFailedWebhookEventData) { }
+
     public RefundFailedWebhookEventData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -354,6 +360,11 @@ public sealed record class RefundFailedWebhookEventDataIntersectionMember1 : Mod
     }
 
     public RefundFailedWebhookEventDataIntersectionMember1() { }
+
+    public RefundFailedWebhookEventDataIntersectionMember1(
+        RefundFailedWebhookEventDataIntersectionMember1 refundFailedWebhookEventDataIntersectionMember1
+    )
+        : base(refundFailedWebhookEventDataIntersectionMember1) { }
 
     public RefundFailedWebhookEventDataIntersectionMember1(
         IReadOnlyDictionary<string, JsonElement> rawData

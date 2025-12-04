@@ -223,6 +223,9 @@ public sealed record class Product : ModelBase
 
     public Product() { }
 
+    public Product(Product product)
+        : base(product) { }
+
     public Product(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -295,6 +298,11 @@ public sealed record class ProductDigitalProductDelivery : ModelBase
 
     public ProductDigitalProductDelivery() { }
 
+    public ProductDigitalProductDelivery(
+        ProductDigitalProductDelivery productDigitalProductDelivery
+    )
+        : base(productDigitalProductDelivery) { }
+
     public ProductDigitalProductDelivery(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -355,6 +363,9 @@ public sealed record class File : ModelBase
     }
 
     public File() { }
+
+    public File(File file)
+        : base(file) { }
 
     public File(IReadOnlyDictionary<string, JsonElement> rawData)
     {

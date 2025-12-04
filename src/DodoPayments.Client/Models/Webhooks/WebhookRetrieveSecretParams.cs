@@ -17,6 +17,9 @@ public sealed record class WebhookRetrieveSecretParams : ParamsBase
 
     public WebhookRetrieveSecretParams() { }
 
+    public WebhookRetrieveSecretParams(WebhookRetrieveSecretParams webhookRetrieveSecretParams)
+        : base(webhookRetrieveSecretParams) { }
+
     public WebhookRetrieveSecretParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

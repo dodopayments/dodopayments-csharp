@@ -185,6 +185,12 @@ public sealed record class ProductUpdateParams : ParamsBase
 
     public ProductUpdateParams() { }
 
+    public ProductUpdateParams(ProductUpdateParams productUpdateParams)
+        : base(productUpdateParams)
+    {
+        this._rawBodyData = [.. productUpdateParams._rawBodyData];
+    }
+
     public ProductUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -296,6 +302,11 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : ModelBase
     }
 
     public ProductUpdateParamsDigitalProductDelivery() { }
+
+    public ProductUpdateParamsDigitalProductDelivery(
+        ProductUpdateParamsDigitalProductDelivery productUpdateParamsDigitalProductDelivery
+    )
+        : base(productUpdateParamsDigitalProductDelivery) { }
 
     public ProductUpdateParamsDigitalProductDelivery(
         IReadOnlyDictionary<string, JsonElement> rawData

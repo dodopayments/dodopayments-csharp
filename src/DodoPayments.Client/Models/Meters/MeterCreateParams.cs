@@ -73,6 +73,12 @@ public sealed record class MeterCreateParams : ParamsBase
 
     public MeterCreateParams() { }
 
+    public MeterCreateParams(MeterCreateParams meterCreateParams)
+        : base(meterCreateParams)
+    {
+        this._rawBodyData = [.. meterCreateParams._rawBodyData];
+    }
+
     public MeterCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

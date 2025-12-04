@@ -29,6 +29,9 @@ public sealed record class ProductListPageResponse : ModelBase
 
     public ProductListPageResponse() { }
 
+    public ProductListPageResponse(ProductListPageResponse productListPageResponse)
+        : base(productListPageResponse) { }
+
     public ProductListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -234,6 +237,9 @@ public sealed record class Item : ModelBase
     }
 
     public Item() { }
+
+    public Item(Item item)
+        : base(item) { }
 
     public Item(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -218,6 +218,12 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
 
     public CheckoutSessionCreateParams() { }
 
+    public CheckoutSessionCreateParams(CheckoutSessionCreateParams checkoutSessionCreateParams)
+        : base(checkoutSessionCreateParams)
+    {
+        this._rawBodyData = [.. checkoutSessionCreateParams._rawBodyData];
+    }
+
     public CheckoutSessionCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -342,6 +348,9 @@ public sealed record class ProductCart : ModelBase
 
     public ProductCart() { }
 
+    public ProductCart(ProductCart productCart)
+        : base(productCart) { }
+
     public ProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -434,6 +443,9 @@ public sealed record class BillingAddress : ModelBase
     }
 
     public BillingAddress() { }
+
+    public BillingAddress(BillingAddress billingAddress)
+        : base(billingAddress) { }
 
     public BillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -551,6 +563,9 @@ public sealed record class Customization : ModelBase
     }
 
     public Customization() { }
+
+    public Customization(Customization customization)
+        : base(customization) { }
 
     public Customization(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -876,6 +891,9 @@ public sealed record class FeatureFlags : ModelBase
 
     public FeatureFlags() { }
 
+    public FeatureFlags(FeatureFlags featureFlags)
+        : base(featureFlags) { }
+
     public FeatureFlags(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -936,6 +954,9 @@ public sealed record class SubscriptionData : ModelBase
     }
 
     public SubscriptionData() { }
+
+    public SubscriptionData(SubscriptionData subscriptionData)
+        : base(subscriptionData) { }
 
     public SubscriptionData(IReadOnlyDictionary<string, JsonElement> rawData)
     {

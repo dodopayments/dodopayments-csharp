@@ -77,6 +77,11 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
 
     public LicenseKeyCreatedWebhookEvent() { }
 
+    public LicenseKeyCreatedWebhookEvent(
+        LicenseKeyCreatedWebhookEvent licenseKeyCreatedWebhookEvent
+    )
+        : base(licenseKeyCreatedWebhookEvent) { }
+
     public LicenseKeyCreatedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -300,6 +305,11 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
 
     public LicenseKeyCreatedWebhookEventData() { }
 
+    public LicenseKeyCreatedWebhookEventData(
+        LicenseKeyCreatedWebhookEventData licenseKeyCreatedWebhookEventData
+    )
+        : base(licenseKeyCreatedWebhookEventData) { }
+
     public LicenseKeyCreatedWebhookEventData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -370,6 +380,11 @@ public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1 
     }
 
     public LicenseKeyCreatedWebhookEventDataIntersectionMember1() { }
+
+    public LicenseKeyCreatedWebhookEventDataIntersectionMember1(
+        LicenseKeyCreatedWebhookEventDataIntersectionMember1 licenseKeyCreatedWebhookEventDataIntersectionMember1
+    )
+        : base(licenseKeyCreatedWebhookEventDataIntersectionMember1) { }
 
     public LicenseKeyCreatedWebhookEventDataIntersectionMember1(
         IReadOnlyDictionary<string, JsonElement> rawData

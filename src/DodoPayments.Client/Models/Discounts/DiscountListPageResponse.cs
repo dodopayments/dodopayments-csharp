@@ -30,6 +30,9 @@ public sealed record class DiscountListPageResponse : ModelBase
 
     public DiscountListPageResponse() { }
 
+    public DiscountListPageResponse(DiscountListPageResponse discountListPageResponse)
+        : base(discountListPageResponse) { }
+
     public DiscountListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

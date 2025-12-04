@@ -69,6 +69,9 @@ public sealed record class WebhookPayload : ModelBase
 
     public WebhookPayload() { }
 
+    public WebhookPayload(WebhookPayload webhookPayload)
+        : base(webhookPayload) { }
+
     public WebhookPayload(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -1039,6 +1042,9 @@ public sealed record class Payment : ModelBase
 
     public Payment() { }
 
+    public Payment(Payment payment)
+        : base(payment) { }
+
     public Payment(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -1088,6 +1094,9 @@ public sealed record class IntersectionMember1 : ModelBase
     }
 
     public IntersectionMember1() { }
+
+    public IntersectionMember1(IntersectionMember1 intersectionMember1)
+        : base(intersectionMember1) { }
 
     public IntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1544,6 +1553,9 @@ public sealed record class Subscription : ModelBase
 
     public Subscription() { }
 
+    public Subscription(Subscription subscription)
+        : base(subscription) { }
+
     public Subscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -1594,6 +1606,11 @@ public sealed record class SubscriptionIntersectionMember1 : ModelBase
     }
 
     public SubscriptionIntersectionMember1() { }
+
+    public SubscriptionIntersectionMember1(
+        SubscriptionIntersectionMember1 subscriptionIntersectionMember1
+    )
+        : base(subscriptionIntersectionMember1) { }
 
     public SubscriptionIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1842,6 +1859,9 @@ public sealed record class Refund : ModelBase
 
     public Refund() { }
 
+    public Refund(Refund refund)
+        : base(refund) { }
+
     public Refund(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -1891,6 +1911,9 @@ public sealed record class RefundIntersectionMember1 : ModelBase
     }
 
     public RefundIntersectionMember1() { }
+
+    public RefundIntersectionMember1(RefundIntersectionMember1 refundIntersectionMember1)
+        : base(refundIntersectionMember1) { }
 
     public RefundIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -2130,6 +2153,9 @@ public sealed record class Dispute : ModelBase
 
     public Dispute() { }
 
+    public Dispute(Dispute dispute)
+        : base(dispute) { }
+
     public Dispute(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -2180,6 +2206,9 @@ public sealed record class DisputeIntersectionMember1 : ModelBase
     }
 
     public DisputeIntersectionMember1() { }
+
+    public DisputeIntersectionMember1(DisputeIntersectionMember1 disputeIntersectionMember1)
+        : base(disputeIntersectionMember1) { }
 
     public DisputeIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -2425,6 +2454,9 @@ public sealed record class LicenseKey : ModelBase
 
     public LicenseKey() { }
 
+    public LicenseKey(LicenseKey licenseKey)
+        : base(licenseKey) { }
+
     public LicenseKey(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -2475,6 +2507,11 @@ public sealed record class LicenseKeyIntersectionMember1 : ModelBase
     }
 
     public LicenseKeyIntersectionMember1() { }
+
+    public LicenseKeyIntersectionMember1(
+        LicenseKeyIntersectionMember1 licenseKeyIntersectionMember1
+    )
+        : base(licenseKeyIntersectionMember1) { }
 
     public LicenseKeyIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {

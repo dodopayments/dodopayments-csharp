@@ -37,6 +37,9 @@ public sealed record class WalletListResponse : ModelBase
 
     public WalletListResponse() { }
 
+    public WalletListResponse(WalletListResponse walletListResponse)
+        : base(walletListResponse) { }
+
     public WalletListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

@@ -43,6 +43,9 @@ public sealed record class OneTimeProductCartItem : ModelBase
 
     public OneTimeProductCartItem() { }
 
+    public OneTimeProductCartItem(OneTimeProductCartItem oneTimeProductCartItem)
+        : base(oneTimeProductCartItem) { }
+
     public OneTimeProductCartItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

@@ -81,6 +81,9 @@ public sealed record class Customer : ModelBase
 
     public Customer() { }
 
+    public Customer(Customer customer)
+        : base(customer) { }
+
     public Customer(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

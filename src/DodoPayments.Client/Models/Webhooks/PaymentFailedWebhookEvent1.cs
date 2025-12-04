@@ -67,6 +67,9 @@ public sealed record class PaymentFailedWebhookEvent : ModelBase
 
     public PaymentFailedWebhookEvent() { }
 
+    public PaymentFailedWebhookEvent(PaymentFailedWebhookEvent paymentFailedWebhookEvent)
+        : base(paymentFailedWebhookEvent) { }
+
     public PaymentFailedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -526,6 +529,9 @@ public sealed record class Data8 : ModelBase
 
     public Data8() { }
 
+    public Data8(Data8 data8)
+        : base(data8) { }
+
     public Data8(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -586,6 +592,9 @@ public sealed record class Data8IntersectionMember1 : ModelBase
     }
 
     public Data8IntersectionMember1() { }
+
+    public Data8IntersectionMember1(Data8IntersectionMember1 data8IntersectionMember1)
+        : base(data8IntersectionMember1) { }
 
     public Data8IntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {

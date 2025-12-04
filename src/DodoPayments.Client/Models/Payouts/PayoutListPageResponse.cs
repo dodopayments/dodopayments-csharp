@@ -30,6 +30,9 @@ public sealed record class PayoutListPageResponse : ModelBase
 
     public PayoutListPageResponse() { }
 
+    public PayoutListPageResponse(PayoutListPageResponse payoutListPageResponse)
+        : base(payoutListPageResponse) { }
+
     public PayoutListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -233,6 +236,10 @@ public sealed record class Item : ModelBase
 
     [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
     public Item() { }
+
+    [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
+    public Item(Item item)
+        : base(item) { }
 
     [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
     public Item(IReadOnlyDictionary<string, JsonElement> rawData)

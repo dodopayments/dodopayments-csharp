@@ -113,6 +113,9 @@ public sealed record class CustomerWalletTransaction : ModelBase
 
     public CustomerWalletTransaction() { }
 
+    public CustomerWalletTransaction(CustomerWalletTransaction customerWalletTransaction)
+        : base(customerWalletTransaction) { }
+
     public CustomerWalletTransaction(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

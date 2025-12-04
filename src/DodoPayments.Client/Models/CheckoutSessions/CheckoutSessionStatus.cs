@@ -89,6 +89,9 @@ public sealed record class CheckoutSessionStatus : ModelBase
 
     public CheckoutSessionStatus() { }
 
+    public CheckoutSessionStatus(CheckoutSessionStatus checkoutSessionStatus)
+        : base(checkoutSessionStatus) { }
+
     public CheckoutSessionStatus(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

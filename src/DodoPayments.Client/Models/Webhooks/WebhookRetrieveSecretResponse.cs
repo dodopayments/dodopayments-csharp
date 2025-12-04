@@ -26,6 +26,11 @@ public sealed record class WebhookRetrieveSecretResponse : ModelBase
 
     public WebhookRetrieveSecretResponse() { }
 
+    public WebhookRetrieveSecretResponse(
+        WebhookRetrieveSecretResponse webhookRetrieveSecretResponse
+    )
+        : base(webhookRetrieveSecretResponse) { }
+
     public WebhookRetrieveSecretResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

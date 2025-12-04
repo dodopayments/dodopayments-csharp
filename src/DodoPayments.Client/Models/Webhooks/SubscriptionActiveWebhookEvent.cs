@@ -79,6 +79,11 @@ public sealed record class SubscriptionActiveWebhookEvent : ModelBase
 
     public SubscriptionActiveWebhookEvent() { }
 
+    public SubscriptionActiveWebhookEvent(
+        SubscriptionActiveWebhookEvent subscriptionActiveWebhookEvent
+    )
+        : base(subscriptionActiveWebhookEvent) { }
+
     public SubscriptionActiveWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -512,6 +517,11 @@ public sealed record class SubscriptionActiveWebhookEventData : ModelBase
 
     public SubscriptionActiveWebhookEventData() { }
 
+    public SubscriptionActiveWebhookEventData(
+        SubscriptionActiveWebhookEventData subscriptionActiveWebhookEventData
+    )
+        : base(subscriptionActiveWebhookEventData) { }
+
     public SubscriptionActiveWebhookEventData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -582,6 +592,11 @@ public sealed record class SubscriptionActiveWebhookEventDataIntersectionMember1
     }
 
     public SubscriptionActiveWebhookEventDataIntersectionMember1() { }
+
+    public SubscriptionActiveWebhookEventDataIntersectionMember1(
+        SubscriptionActiveWebhookEventDataIntersectionMember1 subscriptionActiveWebhookEventDataIntersectionMember1
+    )
+        : base(subscriptionActiveWebhookEventDataIntersectionMember1) { }
 
     public SubscriptionActiveWebhookEventDataIntersectionMember1(
         IReadOnlyDictionary<string, JsonElement> rawData

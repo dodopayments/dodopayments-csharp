@@ -14,6 +14,9 @@ public sealed record class PaymentRetrieveRefundParams : ParamsBase
 
     public PaymentRetrieveRefundParams() { }
 
+    public PaymentRetrieveRefundParams(PaymentRetrieveRefundParams paymentRetrieveRefundParams)
+        : base(paymentRetrieveRefundParams) { }
+
     public PaymentRetrieveRefundParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

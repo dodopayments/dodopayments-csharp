@@ -53,6 +53,9 @@ public sealed record class MeterFilter : ModelBase
 
     public MeterFilter() { }
 
+    public MeterFilter(MeterFilter meterFilter)
+        : base(meterFilter) { }
+
     public MeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -360,6 +363,9 @@ public sealed record class MeterFilterCondition : ModelBase
     }
 
     public MeterFilterCondition() { }
+
+    public MeterFilterCondition(MeterFilterCondition meterFilterCondition)
+        : base(meterFilterCondition) { }
 
     public MeterFilterCondition(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -766,6 +772,9 @@ public sealed record class ClausesMeterFilter : ModelBase
 
     public ClausesMeterFilter() { }
 
+    public ClausesMeterFilter(ClausesMeterFilter clausesMeterFilter)
+        : base(clausesMeterFilter) { }
+
     public ClausesMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -1109,6 +1118,11 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : Model
     }
 
     public ClausesMeterFilterClausesMeterFilterCondition() { }
+
+    public ClausesMeterFilterClausesMeterFilterCondition(
+        ClausesMeterFilterClausesMeterFilterCondition clausesMeterFilterClausesMeterFilterCondition
+    )
+        : base(clausesMeterFilterClausesMeterFilterCondition) { }
 
     public ClausesMeterFilterClausesMeterFilterCondition(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -1549,6 +1563,11 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : ModelBase
 
     public ClausesMeterFilterClausesMeterFilter() { }
 
+    public ClausesMeterFilterClausesMeterFilter(
+        ClausesMeterFilterClausesMeterFilter clausesMeterFilterClausesMeterFilter
+    )
+        : base(clausesMeterFilterClausesMeterFilter) { }
+
     public ClausesMeterFilterClausesMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -1911,6 +1930,11 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     }
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition() { }
+
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition clausesMeterFilterClausesMeterFilterClausesMeterFilterCondition
+    )
+        : base(clausesMeterFilterClausesMeterFilterClausesMeterFilterCondition) { }
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -2371,6 +2395,11 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilter() { }
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilter(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilter clausesMeterFilterClausesMeterFilterClausesMeterFilter
+    )
+        : base(clausesMeterFilterClausesMeterFilterClausesMeterFilter) { }
+
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilter(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -2450,6 +2479,9 @@ public sealed record class Clause : ModelBase
     }
 
     public Clause() { }
+
+    public Clause(Clause clause)
+        : base(clause) { }
 
     public Clause(IReadOnlyDictionary<string, JsonElement> rawData)
     {

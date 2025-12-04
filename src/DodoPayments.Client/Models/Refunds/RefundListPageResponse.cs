@@ -35,6 +35,9 @@ public sealed record class RefundListPageResponse : ModelBase
 
     public RefundListPageResponse() { }
 
+    public RefundListPageResponse(RefundListPageResponse refundListPageResponse)
+        : base(refundListPageResponse) { }
+
     public RefundListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -179,6 +182,9 @@ public sealed record class RefundListPageResponseItem : ModelBase
     }
 
     public RefundListPageResponseItem() { }
+
+    public RefundListPageResponseItem(RefundListPageResponseItem refundListPageResponseItem)
+        : base(refundListPageResponseItem) { }
 
     public RefundListPageResponseItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {

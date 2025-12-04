@@ -114,6 +114,9 @@ public sealed record class WebhookDetails : ModelBase
 
     public WebhookDetails() { }
 
+    public WebhookDetails(WebhookDetails webhookDetails)
+        : base(webhookDetails) { }
+
     public WebhookDetails(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
