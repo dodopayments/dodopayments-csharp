@@ -37,6 +37,9 @@ public sealed record class CheckoutSessionResponse : ModelBase
 
     public CheckoutSessionResponse() { }
 
+    public CheckoutSessionResponse(CheckoutSessionResponse checkoutSessionResponse)
+        : base(checkoutSessionResponse) { }
+
     public CheckoutSessionResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

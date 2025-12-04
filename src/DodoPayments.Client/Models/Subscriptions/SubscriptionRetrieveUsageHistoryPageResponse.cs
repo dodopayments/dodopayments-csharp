@@ -43,6 +43,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelB
     public SubscriptionRetrieveUsageHistoryPageResponse() { }
 
     public SubscriptionRetrieveUsageHistoryPageResponse(
+        SubscriptionRetrieveUsageHistoryPageResponse subscriptionRetrieveUsageHistoryPageResponse
+    )
+        : base(subscriptionRetrieveUsageHistoryPageResponse) { }
+
+    public SubscriptionRetrieveUsageHistoryPageResponse(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -136,6 +141,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItem : Mo
     }
 
     public SubscriptionRetrieveUsageHistoryPageResponseItem() { }
+
+    public SubscriptionRetrieveUsageHistoryPageResponseItem(
+        SubscriptionRetrieveUsageHistoryPageResponseItem subscriptionRetrieveUsageHistoryPageResponseItem
+    )
+        : base(subscriptionRetrieveUsageHistoryPageResponseItem) { }
 
     public SubscriptionRetrieveUsageHistoryPageResponseItem(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -267,6 +277,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
     }
 
     public SubscriptionRetrieveUsageHistoryPageResponseItemMeter() { }
+
+    public SubscriptionRetrieveUsageHistoryPageResponseItemMeter(
+        SubscriptionRetrieveUsageHistoryPageResponseItemMeter subscriptionRetrieveUsageHistoryPageResponseItemMeter
+    )
+        : base(subscriptionRetrieveUsageHistoryPageResponseItemMeter) { }
 
     public SubscriptionRetrieveUsageHistoryPageResponseItemMeter(
         IReadOnlyDictionary<string, JsonElement> rawData

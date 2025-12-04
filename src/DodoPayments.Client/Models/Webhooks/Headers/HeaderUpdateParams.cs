@@ -39,6 +39,12 @@ public sealed record class HeaderUpdateParams : ParamsBase
 
     public HeaderUpdateParams() { }
 
+    public HeaderUpdateParams(HeaderUpdateParams headerUpdateParams)
+        : base(headerUpdateParams)
+    {
+        this._rawBodyData = [.. headerUpdateParams._rawBodyData];
+    }
+
     public HeaderUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

@@ -34,6 +34,12 @@ public sealed record class LicenseDeactivateParams : ParamsBase
 
     public LicenseDeactivateParams() { }
 
+    public LicenseDeactivateParams(LicenseDeactivateParams licenseDeactivateParams)
+        : base(licenseDeactivateParams)
+    {
+        this._rawBodyData = [.. licenseDeactivateParams._rawBodyData];
+    }
+
     public LicenseDeactivateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

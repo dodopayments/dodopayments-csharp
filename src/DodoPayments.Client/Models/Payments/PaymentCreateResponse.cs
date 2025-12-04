@@ -121,6 +121,9 @@ public sealed record class PaymentCreateResponse : ModelBase
 
     public PaymentCreateResponse() { }
 
+    public PaymentCreateResponse(PaymentCreateResponse paymentCreateResponse)
+        : base(paymentCreateResponse) { }
+
     public PaymentCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

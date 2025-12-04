@@ -93,6 +93,12 @@ public sealed record class WebhookUpdateParams : ParamsBase
 
     public WebhookUpdateParams() { }
 
+    public WebhookUpdateParams(WebhookUpdateParams webhookUpdateParams)
+        : base(webhookUpdateParams)
+    {
+        this._rawBodyData = [.. webhookUpdateParams._rawBodyData];
+    }
+
     public WebhookUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

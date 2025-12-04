@@ -107,6 +107,12 @@ public sealed record class DiscountCreateParams : ParamsBase
 
     public DiscountCreateParams() { }
 
+    public DiscountCreateParams(DiscountCreateParams discountCreateParams)
+        : base(discountCreateParams)
+    {
+        this._rawBodyData = [.. discountCreateParams._rawBodyData];
+    }
+
     public DiscountCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

@@ -67,6 +67,9 @@ public sealed record class RefundSucceededWebhookEvent : ModelBase
 
     public RefundSucceededWebhookEvent() { }
 
+    public RefundSucceededWebhookEvent(RefundSucceededWebhookEvent refundSucceededWebhookEvent)
+        : base(refundSucceededWebhookEvent) { }
+
     public RefundSucceededWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -276,6 +279,9 @@ public sealed record class Data12 : ModelBase
 
     public Data12() { }
 
+    public Data12(Data12 data12)
+        : base(data12) { }
+
     public Data12(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -335,6 +341,9 @@ public sealed record class Data12IntersectionMember1 : ModelBase
     }
 
     public Data12IntersectionMember1() { }
+
+    public Data12IntersectionMember1(Data12IntersectionMember1 data12IntersectionMember1)
+        : base(data12IntersectionMember1) { }
 
     public Data12IntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {

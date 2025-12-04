@@ -24,6 +24,9 @@ public sealed record class LicenseValidateResponse : ModelBase
 
     public LicenseValidateResponse() { }
 
+    public LicenseValidateResponse(LicenseValidateResponse licenseValidateResponse)
+        : base(licenseValidateResponse) { }
+
     public LicenseValidateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

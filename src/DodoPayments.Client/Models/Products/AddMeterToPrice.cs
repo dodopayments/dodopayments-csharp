@@ -72,6 +72,9 @@ public sealed record class AddMeterToPrice : ModelBase
 
     public AddMeterToPrice() { }
 
+    public AddMeterToPrice(AddMeterToPrice addMeterToPrice)
+        : base(addMeterToPrice) { }
+
     public AddMeterToPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

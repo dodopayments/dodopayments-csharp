@@ -84,6 +84,9 @@ public sealed record class EventInput : ModelBase
 
     public EventInput() { }
 
+    public EventInput(EventInput eventInput)
+        : base(eventInput) { }
+
     public EventInput(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

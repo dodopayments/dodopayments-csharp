@@ -154,6 +154,9 @@ public sealed record class UsageEventListParams : ParamsBase
 
     public UsageEventListParams() { }
 
+    public UsageEventListParams(UsageEventListParams usageEventListParams)
+        : base(usageEventListParams) { }
+
     public UsageEventListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

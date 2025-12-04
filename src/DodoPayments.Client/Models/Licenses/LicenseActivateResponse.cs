@@ -89,6 +89,9 @@ public sealed record class LicenseActivateResponse : ModelBase
 
     public LicenseActivateResponse() { }
 
+    public LicenseActivateResponse(LicenseActivateResponse licenseActivateResponse)
+        : base(licenseActivateResponse) { }
+
     public LicenseActivateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -151,6 +154,9 @@ public sealed record class Product : ModelBase
     }
 
     public Product() { }
+
+    public Product(Product product)
+        : base(product) { }
 
     public Product(IReadOnlyDictionary<string, JsonElement> rawData)
     {

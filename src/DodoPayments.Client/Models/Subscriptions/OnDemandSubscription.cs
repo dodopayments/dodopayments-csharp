@@ -87,6 +87,9 @@ public sealed record class OnDemandSubscription : ModelBase
 
     public OnDemandSubscription() { }
 
+    public OnDemandSubscription(OnDemandSubscription onDemandSubscription)
+        : base(onDemandSubscription) { }
+
     public OnDemandSubscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

@@ -30,6 +30,9 @@ public sealed record class BrandListResponse : ModelBase
 
     public BrandListResponse() { }
 
+    public BrandListResponse(BrandListResponse brandListResponse)
+        : base(brandListResponse) { }
+
     public BrandListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

@@ -79,6 +79,11 @@ public sealed record class PaymentProcessingWebhookEvent : ModelBase
 
     public PaymentProcessingWebhookEvent() { }
 
+    public PaymentProcessingWebhookEvent(
+        PaymentProcessingWebhookEvent paymentProcessingWebhookEvent
+    )
+        : base(paymentProcessingWebhookEvent) { }
+
     public PaymentProcessingWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -547,6 +552,11 @@ public sealed record class PaymentProcessingWebhookEventData : ModelBase
 
     public PaymentProcessingWebhookEventData() { }
 
+    public PaymentProcessingWebhookEventData(
+        PaymentProcessingWebhookEventData paymentProcessingWebhookEventData
+    )
+        : base(paymentProcessingWebhookEventData) { }
+
     public PaymentProcessingWebhookEventData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -617,6 +627,11 @@ public sealed record class PaymentProcessingWebhookEventDataIntersectionMember1 
     }
 
     public PaymentProcessingWebhookEventDataIntersectionMember1() { }
+
+    public PaymentProcessingWebhookEventDataIntersectionMember1(
+        PaymentProcessingWebhookEventDataIntersectionMember1 paymentProcessingWebhookEventDataIntersectionMember1
+    )
+        : base(paymentProcessingWebhookEventDataIntersectionMember1) { }
 
     public PaymentProcessingWebhookEventDataIntersectionMember1(
         IReadOnlyDictionary<string, JsonElement> rawData

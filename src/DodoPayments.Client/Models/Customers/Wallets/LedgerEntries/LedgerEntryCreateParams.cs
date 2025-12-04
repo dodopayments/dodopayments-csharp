@@ -75,6 +75,12 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
 
     public LedgerEntryCreateParams() { }
 
+    public LedgerEntryCreateParams(LedgerEntryCreateParams ledgerEntryCreateParams)
+        : base(ledgerEntryCreateParams)
+    {
+        this._rawBodyData = [.. ledgerEntryCreateParams._rawBodyData];
+    }
+
     public LedgerEntryCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

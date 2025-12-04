@@ -60,6 +60,12 @@ public sealed record class CustomerCreateParams : ParamsBase
 
     public CustomerCreateParams() { }
 
+    public CustomerCreateParams(CustomerCreateParams customerCreateParams)
+        : base(customerCreateParams)
+    {
+        this._rawBodyData = [.. customerCreateParams._rawBodyData];
+    }
+
     public CustomerCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

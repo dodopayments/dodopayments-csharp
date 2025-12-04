@@ -81,6 +81,11 @@ public sealed record class SubscriptionCancelledWebhookEvent : ModelBase
 
     public SubscriptionCancelledWebhookEvent() { }
 
+    public SubscriptionCancelledWebhookEvent(
+        SubscriptionCancelledWebhookEvent subscriptionCancelledWebhookEvent
+    )
+        : base(subscriptionCancelledWebhookEvent) { }
+
     public SubscriptionCancelledWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -515,6 +520,11 @@ public sealed record class SubscriptionCancelledWebhookEventData : ModelBase
 
     public SubscriptionCancelledWebhookEventData() { }
 
+    public SubscriptionCancelledWebhookEventData(
+        SubscriptionCancelledWebhookEventData subscriptionCancelledWebhookEventData
+    )
+        : base(subscriptionCancelledWebhookEventData) { }
+
     public SubscriptionCancelledWebhookEventData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -585,6 +595,11 @@ public sealed record class SubscriptionCancelledWebhookEventDataIntersectionMemb
     }
 
     public SubscriptionCancelledWebhookEventDataIntersectionMember1() { }
+
+    public SubscriptionCancelledWebhookEventDataIntersectionMember1(
+        SubscriptionCancelledWebhookEventDataIntersectionMember1 subscriptionCancelledWebhookEventDataIntersectionMember1
+    )
+        : base(subscriptionCancelledWebhookEventDataIntersectionMember1) { }
 
     public SubscriptionCancelledWebhookEventDataIntersectionMember1(
         IReadOnlyDictionary<string, JsonElement> rawData

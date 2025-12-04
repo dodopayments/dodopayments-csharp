@@ -39,6 +39,9 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
 
     public LicenseKeyInstanceListParams() { }
 
+    public LicenseKeyInstanceListParams(LicenseKeyInstanceListParams licenseKeyInstanceListParams)
+        : base(licenseKeyInstanceListParams) { }
+
     public LicenseKeyInstanceListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

@@ -74,6 +74,9 @@ public sealed record class DisputeAcceptedWebhookEvent : ModelBase
 
     public DisputeAcceptedWebhookEvent() { }
 
+    public DisputeAcceptedWebhookEvent(DisputeAcceptedWebhookEvent disputeAcceptedWebhookEvent)
+        : base(disputeAcceptedWebhookEvent) { }
+
     public DisputeAcceptedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -260,6 +263,11 @@ public sealed record class DisputeAcceptedWebhookEventData : ModelBase
 
     public DisputeAcceptedWebhookEventData() { }
 
+    public DisputeAcceptedWebhookEventData(
+        DisputeAcceptedWebhookEventData disputeAcceptedWebhookEventData
+    )
+        : base(disputeAcceptedWebhookEventData) { }
+
     public DisputeAcceptedWebhookEventData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -330,6 +338,11 @@ public sealed record class DisputeAcceptedWebhookEventDataIntersectionMember1 : 
     }
 
     public DisputeAcceptedWebhookEventDataIntersectionMember1() { }
+
+    public DisputeAcceptedWebhookEventDataIntersectionMember1(
+        DisputeAcceptedWebhookEventDataIntersectionMember1 disputeAcceptedWebhookEventDataIntersectionMember1
+    )
+        : base(disputeAcceptedWebhookEventDataIntersectionMember1) { }
 
     public DisputeAcceptedWebhookEventDataIntersectionMember1(
         IReadOnlyDictionary<string, JsonElement> rawData

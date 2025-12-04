@@ -31,6 +31,9 @@ public sealed record class AddonUpdateImagesResponse : ModelBase
 
     public AddonUpdateImagesResponse() { }
 
+    public AddonUpdateImagesResponse(AddonUpdateImagesResponse addonUpdateImagesResponse)
+        : base(addonUpdateImagesResponse) { }
+
     public AddonUpdateImagesResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

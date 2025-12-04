@@ -30,6 +30,9 @@ public sealed record class UsageEventRetrieveParams : ParamsBase
 
     public UsageEventRetrieveParams() { }
 
+    public UsageEventRetrieveParams(UsageEventRetrieveParams usageEventRetrieveParams)
+        : base(usageEventRetrieveParams) { }
+
     public UsageEventRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

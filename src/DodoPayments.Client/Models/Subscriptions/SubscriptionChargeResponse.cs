@@ -26,6 +26,9 @@ public sealed record class SubscriptionChargeResponse : ModelBase
 
     public SubscriptionChargeResponse() { }
 
+    public SubscriptionChargeResponse(SubscriptionChargeResponse subscriptionChargeResponse)
+        : base(subscriptionChargeResponse) { }
+
     public SubscriptionChargeResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

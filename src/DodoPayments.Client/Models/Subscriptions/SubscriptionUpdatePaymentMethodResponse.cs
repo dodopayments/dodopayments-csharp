@@ -51,6 +51,11 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse : ModelBase
 
     public SubscriptionUpdatePaymentMethodResponse() { }
 
+    public SubscriptionUpdatePaymentMethodResponse(
+        SubscriptionUpdatePaymentMethodResponse subscriptionUpdatePaymentMethodResponse
+    )
+        : base(subscriptionUpdatePaymentMethodResponse) { }
+
     public SubscriptionUpdatePaymentMethodResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

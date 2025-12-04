@@ -28,6 +28,14 @@ public sealed record class LicenseKeyInstanceUpdateParams : ParamsBase
     public LicenseKeyInstanceUpdateParams() { }
 
     public LicenseKeyInstanceUpdateParams(
+        LicenseKeyInstanceUpdateParams licenseKeyInstanceUpdateParams
+    )
+        : base(licenseKeyInstanceUpdateParams)
+    {
+        this._rawBodyData = [.. licenseKeyInstanceUpdateParams._rawBodyData];
+    }
+
+    public LicenseKeyInstanceUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData

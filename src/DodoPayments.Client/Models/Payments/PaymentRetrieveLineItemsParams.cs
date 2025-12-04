@@ -15,6 +15,11 @@ public sealed record class PaymentRetrieveLineItemsParams : ParamsBase
     public PaymentRetrieveLineItemsParams() { }
 
     public PaymentRetrieveLineItemsParams(
+        PaymentRetrieveLineItemsParams paymentRetrieveLineItemsParams
+    )
+        : base(paymentRetrieveLineItemsParams) { }
+
+    public PaymentRetrieveLineItemsParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )

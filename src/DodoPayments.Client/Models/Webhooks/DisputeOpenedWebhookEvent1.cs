@@ -65,6 +65,9 @@ public sealed record class DisputeOpenedWebhookEvent : ModelBase
 
     public DisputeOpenedWebhookEvent() { }
 
+    public DisputeOpenedWebhookEvent(DisputeOpenedWebhookEvent disputeOpenedWebhookEvent)
+        : base(disputeOpenedWebhookEvent) { }
+
     public DisputeOpenedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -245,6 +248,9 @@ public sealed record class Data4 : ModelBase
 
     public Data4() { }
 
+    public Data4(Data4 data4)
+        : base(data4) { }
+
     public Data4(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -305,6 +311,9 @@ public sealed record class Data4IntersectionMember1 : ModelBase
     }
 
     public Data4IntersectionMember1() { }
+
+    public Data4IntersectionMember1(Data4IntersectionMember1 data4IntersectionMember1)
+        : base(data4IntersectionMember1) { }
 
     public Data4IntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {

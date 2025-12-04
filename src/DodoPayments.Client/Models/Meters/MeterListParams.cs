@@ -63,6 +63,9 @@ public sealed record class MeterListParams : ParamsBase
 
     public MeterListParams() { }
 
+    public MeterListParams(MeterListParams meterListParams)
+        : base(meterListParams) { }
+
     public MeterListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

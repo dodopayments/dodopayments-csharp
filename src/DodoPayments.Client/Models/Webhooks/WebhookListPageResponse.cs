@@ -60,6 +60,9 @@ public sealed record class WebhookListPageResponse : ModelBase
 
     public WebhookListPageResponse() { }
 
+    public WebhookListPageResponse(WebhookListPageResponse webhookListPageResponse)
+        : base(webhookListPageResponse) { }
+
     public WebhookListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

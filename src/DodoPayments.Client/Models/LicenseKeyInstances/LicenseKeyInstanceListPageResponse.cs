@@ -32,6 +32,11 @@ public sealed record class LicenseKeyInstanceListPageResponse : ModelBase
 
     public LicenseKeyInstanceListPageResponse() { }
 
+    public LicenseKeyInstanceListPageResponse(
+        LicenseKeyInstanceListPageResponse licenseKeyInstanceListPageResponse
+    )
+        : base(licenseKeyInstanceListPageResponse) { }
+
     public LicenseKeyInstanceListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

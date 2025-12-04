@@ -38,6 +38,9 @@ public sealed record class LicenseKeyDuration : ModelBase
 
     public LicenseKeyDuration() { }
 
+    public LicenseKeyDuration(LicenseKeyDuration licenseKeyDuration)
+        : base(licenseKeyDuration) { }
+
     public LicenseKeyDuration(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

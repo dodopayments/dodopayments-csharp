@@ -145,6 +145,9 @@ public sealed record class LicenseKey : ModelBase
 
     public LicenseKey() { }
 
+    public LicenseKey(LicenseKey licenseKey)
+        : base(licenseKey) { }
+
     public LicenseKey(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

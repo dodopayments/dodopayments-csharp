@@ -32,6 +32,9 @@ public sealed record class SubscriptionListPageResponse : ModelBase
 
     public SubscriptionListPageResponse() { }
 
+    public SubscriptionListPageResponse(SubscriptionListPageResponse subscriptionListPageResponse)
+        : base(subscriptionListPageResponse) { }
+
     public SubscriptionListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -374,6 +377,9 @@ public sealed record class Item : ModelBase
     }
 
     public Item() { }
+
+    public Item(Item item)
+        : base(item) { }
 
     public Item(IReadOnlyDictionary<string, JsonElement> rawData)
     {

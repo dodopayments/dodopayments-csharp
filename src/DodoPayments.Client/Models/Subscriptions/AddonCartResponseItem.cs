@@ -34,6 +34,9 @@ public sealed record class AddonCartResponseItem : ModelBase
 
     public AddonCartResponseItem() { }
 
+    public AddonCartResponseItem(AddonCartResponseItem addonCartResponseItem)
+        : base(addonCartResponseItem) { }
+
     public AddonCartResponseItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

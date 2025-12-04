@@ -515,6 +515,9 @@ public sealed record class OneTimePrice : ModelBase
 
     public OneTimePrice() { }
 
+    public OneTimePrice(OneTimePrice oneTimePrice)
+        : base(oneTimePrice) { }
+
     public OneTimePrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -736,6 +739,9 @@ public sealed record class RecurringPrice : ModelBase
 
     public RecurringPrice() { }
 
+    public RecurringPrice(RecurringPrice recurringPrice)
+        : base(recurringPrice) { }
+
     public RecurringPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -948,6 +954,9 @@ public sealed record class UsageBasedPrice : ModelBase
     }
 
     public UsageBasedPrice() { }
+
+    public UsageBasedPrice(UsageBasedPrice usageBasedPrice)
+        : base(usageBasedPrice) { }
 
     public UsageBasedPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {

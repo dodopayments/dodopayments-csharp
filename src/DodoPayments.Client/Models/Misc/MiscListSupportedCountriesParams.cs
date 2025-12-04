@@ -13,6 +13,11 @@ public sealed record class MiscListSupportedCountriesParams : ParamsBase
     public MiscListSupportedCountriesParams() { }
 
     public MiscListSupportedCountriesParams(
+        MiscListSupportedCountriesParams miscListSupportedCountriesParams
+    )
+        : base(miscListSupportedCountriesParams) { }
+
+    public MiscListSupportedCountriesParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )

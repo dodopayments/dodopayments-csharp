@@ -181,6 +181,12 @@ public sealed record class PaymentCreateParams : ParamsBase
 
     public PaymentCreateParams() { }
 
+    public PaymentCreateParams(PaymentCreateParams paymentCreateParams)
+        : base(paymentCreateParams)
+    {
+        this._rawBodyData = [.. paymentCreateParams._rawBodyData];
+    }
+
     public PaymentCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

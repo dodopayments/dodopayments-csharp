@@ -17,6 +17,9 @@ public sealed record class HeaderRetrieveParams : ParamsBase
 
     public HeaderRetrieveParams() { }
 
+    public HeaderRetrieveParams(HeaderRetrieveParams headerRetrieveParams)
+        : base(headerRetrieveParams) { }
+
     public HeaderRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

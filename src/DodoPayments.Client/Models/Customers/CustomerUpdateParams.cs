@@ -48,6 +48,12 @@ public sealed record class CustomerUpdateParams : ParamsBase
 
     public CustomerUpdateParams() { }
 
+    public CustomerUpdateParams(CustomerUpdateParams customerUpdateParams)
+        : base(customerUpdateParams)
+    {
+        this._rawBodyData = [.. customerUpdateParams._rawBodyData];
+    }
+
     public CustomerUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

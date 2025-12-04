@@ -14,6 +14,9 @@ public sealed record class MeterUnarchiveParams : ParamsBase
 
     public MeterUnarchiveParams() { }
 
+    public MeterUnarchiveParams(MeterUnarchiveParams meterUnarchiveParams)
+        : base(meterUnarchiveParams) { }
+
     public MeterUnarchiveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

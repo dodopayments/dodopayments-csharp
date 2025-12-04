@@ -71,6 +71,9 @@ public sealed record class BillingAddress : ModelBase
 
     public BillingAddress() { }
 
+    public BillingAddress(BillingAddress billingAddress)
+        : base(billingAddress) { }
+
     public BillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

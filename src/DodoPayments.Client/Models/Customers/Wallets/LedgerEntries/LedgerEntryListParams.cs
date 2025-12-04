@@ -66,6 +66,9 @@ public sealed record class LedgerEntryListParams : ParamsBase
 
     public LedgerEntryListParams() { }
 
+    public LedgerEntryListParams(LedgerEntryListParams ledgerEntryListParams)
+        : base(ledgerEntryListParams) { }
+
     public LedgerEntryListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

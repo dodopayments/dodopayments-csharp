@@ -37,6 +37,9 @@ public sealed record class BrandUpdateImagesResponse : ModelBase
 
     public BrandUpdateImagesResponse() { }
 
+    public BrandUpdateImagesResponse(BrandUpdateImagesResponse brandUpdateImagesResponse)
+        : base(brandUpdateImagesResponse) { }
+
     public BrandUpdateImagesResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

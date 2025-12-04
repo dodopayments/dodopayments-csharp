@@ -33,6 +33,9 @@ public sealed record class WebhookListParams : ParamsBase
 
     public WebhookListParams() { }
 
+    public WebhookListParams(WebhookListParams webhookListParams)
+        : base(webhookListParams) { }
+
     public WebhookListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

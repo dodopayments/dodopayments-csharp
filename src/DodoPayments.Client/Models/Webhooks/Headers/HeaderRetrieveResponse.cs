@@ -45,6 +45,9 @@ public sealed record class HeaderRetrieveResponse : ModelBase
 
     public HeaderRetrieveResponse() { }
 
+    public HeaderRetrieveResponse(HeaderRetrieveResponse headerRetrieveResponse)
+        : base(headerRetrieveResponse) { }
+
     public HeaderRetrieveResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

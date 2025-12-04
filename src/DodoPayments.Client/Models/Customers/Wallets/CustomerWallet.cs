@@ -57,6 +57,9 @@ public sealed record class CustomerWallet : ModelBase
 
     public CustomerWallet() { }
 
+    public CustomerWallet(CustomerWallet customerWallet)
+        : base(customerWallet) { }
+
     public CustomerWallet(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

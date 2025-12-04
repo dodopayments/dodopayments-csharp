@@ -30,6 +30,14 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     public SubscriptionUpdatePaymentMethodParams() { }
 
     public SubscriptionUpdatePaymentMethodParams(
+        SubscriptionUpdatePaymentMethodParams subscriptionUpdatePaymentMethodParams
+    )
+        : base(subscriptionUpdatePaymentMethodParams)
+    {
+        this._rawBodyData = [.. subscriptionUpdatePaymentMethodParams._rawBodyData];
+    }
+
+    public SubscriptionUpdatePaymentMethodParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -345,6 +353,9 @@ public sealed record class New : ModelBase
 
     public New() { }
 
+    public New(New new1)
+        : base(new1) { }
+
     public New(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
@@ -446,6 +457,9 @@ public sealed record class Existing : ModelBase
     }
 
     public Existing() { }
+
+    public Existing(Existing existing)
+        : base(existing) { }
 
     public Existing(IReadOnlyDictionary<string, JsonElement> rawData)
     {
