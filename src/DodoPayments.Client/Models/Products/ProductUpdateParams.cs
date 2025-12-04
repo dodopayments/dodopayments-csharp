@@ -48,11 +48,11 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// <summary>
     /// Choose how you would like you digital product delivered
     /// </summary>
-    public DigitalProductDeliveryModel? DigitalProductDelivery
+    public ProductUpdateParamsDigitalProductDelivery? DigitalProductDelivery
     {
         get
         {
-            return ModelBase.GetNullableClass<DigitalProductDeliveryModel>(
+            return ModelBase.GetNullableClass<ProductUpdateParamsDigitalProductDelivery>(
                 this.RawBodyData,
                 "digital_product_delivery"
             );
@@ -252,9 +252,12 @@ public sealed record class ProductUpdateParams : ParamsBase
 /// Choose how you would like you digital product delivered
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<DigitalProductDeliveryModel, DigitalProductDeliveryModelFromRaw>)
+    typeof(ModelConverter<
+        ProductUpdateParamsDigitalProductDelivery,
+        ProductUpdateParamsDigitalProductDeliveryFromRaw
+    >)
 )]
-public sealed record class DigitalProductDeliveryModel : ModelBase
+public sealed record class ProductUpdateParamsDigitalProductDelivery : ModelBase
 {
     /// <summary>
     /// External URL to digital product
@@ -290,22 +293,24 @@ public sealed record class DigitalProductDeliveryModel : ModelBase
         _ = this.Instructions;
     }
 
-    public DigitalProductDeliveryModel() { }
+    public ProductUpdateParamsDigitalProductDelivery() { }
 
-    public DigitalProductDeliveryModel(IReadOnlyDictionary<string, JsonElement> rawData)
+    public ProductUpdateParamsDigitalProductDelivery(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DigitalProductDeliveryModel(FrozenDictionary<string, JsonElement> rawData)
+    ProductUpdateParamsDigitalProductDelivery(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    public static DigitalProductDeliveryModel FromRawUnchecked(
+    public static ProductUpdateParamsDigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -313,9 +318,10 @@ public sealed record class DigitalProductDeliveryModel : ModelBase
     }
 }
 
-class DigitalProductDeliveryModelFromRaw : IFromRaw<DigitalProductDeliveryModel>
+class ProductUpdateParamsDigitalProductDeliveryFromRaw
+    : IFromRaw<ProductUpdateParamsDigitalProductDelivery>
 {
-    public DigitalProductDeliveryModel FromRawUnchecked(
+    public ProductUpdateParamsDigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DigitalProductDeliveryModel.FromRawUnchecked(rawData);
+    ) => ProductUpdateParamsDigitalProductDelivery.FromRawUnchecked(rawData);
 }

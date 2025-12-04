@@ -38,7 +38,7 @@ public class SubscriptionRetrieveUsageHistoryPageResponseTest : TestBase
             ],
         };
 
-        List<ItemModel> expectedItems =
+        List<SubscriptionRetrieveUsageHistoryPageResponseItem> expectedItems =
         [
             new()
             {
@@ -140,7 +140,7 @@ public class SubscriptionRetrieveUsageHistoryPageResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        List<ItemModel> expectedItems =
+        List<SubscriptionRetrieveUsageHistoryPageResponseItem> expectedItems =
         [
             new()
             {
@@ -203,12 +203,12 @@ public class SubscriptionRetrieveUsageHistoryPageResponseTest : TestBase
     }
 }
 
-public class ItemModelTest : TestBase
+public class SubscriptionRetrieveUsageHistoryPageResponseItemTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new ItemModel
+        var model = new SubscriptionRetrieveUsageHistoryPageResponseItem
         {
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Meters =
@@ -229,7 +229,7 @@ public class ItemModelTest : TestBase
         };
 
         DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<MeterModel> expectedMeters =
+        List<SubscriptionRetrieveUsageHistoryPageResponseItemMeter> expectedMeters =
         [
             new()
             {
@@ -257,7 +257,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new ItemModel
+        var model = new SubscriptionRetrieveUsageHistoryPageResponseItem
         {
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Meters =
@@ -278,7 +278,8 @@ public class ItemModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ItemModel>(json);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryPageResponseItem>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -286,7 +287,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new ItemModel
+        var model = new SubscriptionRetrieveUsageHistoryPageResponseItem
         {
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Meters =
@@ -307,11 +308,12 @@ public class ItemModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ItemModel>(json);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryPageResponseItem>(json);
         Assert.NotNull(deserialized);
 
         DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<MeterModel> expectedMeters =
+        List<SubscriptionRetrieveUsageHistoryPageResponseItemMeter> expectedMeters =
         [
             new()
             {
@@ -339,7 +341,7 @@ public class ItemModelTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new ItemModel
+        var model = new SubscriptionRetrieveUsageHistoryPageResponseItem
         {
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Meters =
@@ -363,12 +365,12 @@ public class ItemModelTest : TestBase
     }
 }
 
-public class MeterModelTest : TestBase
+public class SubscriptionRetrieveUsageHistoryPageResponseItemMeterTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new MeterModel
+        var model = new SubscriptionRetrieveUsageHistoryPageResponseItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -402,7 +404,7 @@ public class MeterModelTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new MeterModel
+        var model = new SubscriptionRetrieveUsageHistoryPageResponseItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -415,7 +417,8 @@ public class MeterModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterModel>(json);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryPageResponseItemMeter>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -423,7 +426,7 @@ public class MeterModelTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new MeterModel
+        var model = new SubscriptionRetrieveUsageHistoryPageResponseItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -436,7 +439,8 @@ public class MeterModelTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterModel>(json);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryPageResponseItemMeter>(json);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -461,7 +465,7 @@ public class MeterModelTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new MeterModel
+        var model = new SubscriptionRetrieveUsageHistoryPageResponseItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",

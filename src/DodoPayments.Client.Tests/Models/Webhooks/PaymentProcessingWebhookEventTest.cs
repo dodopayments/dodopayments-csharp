@@ -4,9 +4,9 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
+using DodoPayments.Client.Models.Refunds;
 using DodoPayments.Client.Models.Webhooks;
-using Refunds = DodoPayments.Client.Models.Refunds;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
 
@@ -67,7 +67,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
                         IsPartial = true,
                         PaymentID = "payment_id",
                         RefundID = "refund_id",
-                        Status = Refunds::RefundStatus.Succeeded,
+                        Status = RefundStatus.Succeeded,
                         Amount = 0,
                         Currency = Currency.Aed,
                         Reason = "reason",
@@ -89,7 +89,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
                 SettlementTax = 0,
-                Status = IntentStatus.Succeeded,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -150,7 +150,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -172,7 +172,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             SettlementTax = 0,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -243,7 +243,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
                         IsPartial = true,
                         PaymentID = "payment_id",
                         RefundID = "refund_id",
-                        Status = Refunds::RefundStatus.Succeeded,
+                        Status = RefundStatus.Succeeded,
                         Amount = 0,
                         Currency = Currency.Aed,
                         Reason = "reason",
@@ -265,7 +265,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
                 SettlementTax = 0,
-                Status = IntentStatus.Succeeded,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -337,7 +337,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
                         IsPartial = true,
                         PaymentID = "payment_id",
                         RefundID = "refund_id",
-                        Status = Refunds::RefundStatus.Succeeded,
+                        Status = RefundStatus.Succeeded,
                         Amount = 0,
                         Currency = Currency.Aed,
                         Reason = "reason",
@@ -359,7 +359,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
                 SettlementTax = 0,
-                Status = IntentStatus.Succeeded,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -424,7 +424,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -446,7 +446,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             SettlementTax = 0,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -517,7 +517,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
                         IsPartial = true,
                         PaymentID = "payment_id",
                         RefundID = "refund_id",
-                        Status = Refunds::RefundStatus.Succeeded,
+                        Status = RefundStatus.Succeeded,
                         Amount = 0,
                         Currency = Currency.Aed,
                         Reason = "reason",
@@ -539,7 +539,7 @@ public class PaymentProcessingWebhookEventTest : TestBase
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
                 SettlementTax = 0,
-                Status = IntentStatus.Succeeded,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -608,7 +608,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -630,14 +630,14 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             SettlementTax = 0,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PayloadType = PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment,
         };
 
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             City = "city",
             Country = CountryCode.Af,
@@ -649,7 +649,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -675,7 +675,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
-        List<Refund> expectedRefunds =
+        List<Payments::Refund> expectedRefunds =
         [
             new()
             {
@@ -684,7 +684,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                 IsPartial = true,
                 PaymentID = "payment_id",
                 RefundID = "refund_id",
-                Status = Refunds::RefundStatus.Succeeded,
+                Status = RefundStatus.Succeeded,
                 Amount = 0,
                 Currency = Currency.Aed,
                 Reason = "reason",
@@ -704,9 +704,12 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<ProductCart> expectedProductCart = [new() { ProductID = "product_id", Quantity = 0 }];
+        List<Payments::ProductCart> expectedProductCart =
+        [
+            new() { ProductID = "product_id", Quantity = 0 },
+        ];
         int expectedSettlementTax = 0;
-        ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
+        ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
         int expectedTax = 0;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -820,7 +823,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -842,7 +845,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             SettlementTax = 0,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -907,7 +910,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -929,7 +932,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             SettlementTax = 0,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -940,7 +943,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
         var deserialized = JsonSerializer.Deserialize<PaymentProcessingWebhookEventData>(json);
         Assert.NotNull(deserialized);
 
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             City = "city",
             Country = CountryCode.Af,
@@ -952,7 +955,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -978,7 +981,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
-        List<Refund> expectedRefunds =
+        List<Payments::Refund> expectedRefunds =
         [
             new()
             {
@@ -987,7 +990,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                 IsPartial = true,
                 PaymentID = "payment_id",
                 RefundID = "refund_id",
-                Status = Refunds::RefundStatus.Succeeded,
+                Status = RefundStatus.Succeeded,
                 Amount = 0,
                 Currency = Currency.Aed,
                 Reason = "reason",
@@ -1007,9 +1010,12 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<ProductCart> expectedProductCart = [new() { ProductID = "product_id", Quantity = 0 }];
+        List<Payments::ProductCart> expectedProductCart =
+        [
+            new() { ProductID = "product_id", Quantity = 0 },
+        ];
         int expectedSettlementTax = 0;
-        ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
+        ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
         int expectedTax = 0;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -1123,7 +1129,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1145,7 +1151,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             SettlementTax = 0,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1207,7 +1213,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1293,7 +1299,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1374,7 +1380,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1465,7 +1471,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1551,7 +1557,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1561,7 +1567,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             PayloadType = PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment,
         };
 
@@ -1649,7 +1655,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1659,7 +1665,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             PayloadType = PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment,
         };
 
@@ -1718,7 +1724,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1728,7 +1734,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             PayloadType = PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment,
 
             CardLastFour = null,
@@ -1832,7 +1838,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1842,7 +1848,7 @@ public class PaymentProcessingWebhookEventDataTest : TestBase
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             PayloadType = PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment,
 
             CardLastFour = null,
