@@ -9,7 +9,7 @@ using DodoPayments.Client.Services.Webhooks;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class WebhookService : IWebhookService
 {
     /// <inheritdoc/>

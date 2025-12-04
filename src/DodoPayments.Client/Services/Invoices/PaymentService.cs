@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Invoices.Payments;
 
 namespace DodoPayments.Client.Services.Invoices;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class PaymentService : global::DodoPayments.Client.Services.Invoices.IPaymentService
 {
     /// <inheritdoc/>

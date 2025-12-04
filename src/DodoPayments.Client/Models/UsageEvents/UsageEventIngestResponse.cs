@@ -16,6 +16,7 @@ public sealed record class UsageEventIngestResponse : ModelBase
         init { ModelBase.Set(this._rawData, "ingested_count", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.IngestedCount;
@@ -36,6 +37,7 @@ public sealed record class UsageEventIngestResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="UsageEventIngestResponseFromRaw.FromRawUnchecked"/>
     public static UsageEventIngestResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -53,6 +55,7 @@ public sealed record class UsageEventIngestResponse : ModelBase
 
 class UsageEventIngestResponseFromRaw : IFromRaw<UsageEventIngestResponse>
 {
+    /// <inheritdoc/>
     public UsageEventIngestResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => UsageEventIngestResponse.FromRawUnchecked(rawData);

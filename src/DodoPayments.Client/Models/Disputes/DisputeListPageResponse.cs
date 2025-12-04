@@ -17,6 +17,7 @@ public sealed record class DisputeListPageResponse : ModelBase
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Items)
@@ -40,6 +41,7 @@ public sealed record class DisputeListPageResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="DisputeListPageResponseFromRaw.FromRawUnchecked"/>
     public static DisputeListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -57,6 +59,7 @@ public sealed record class DisputeListPageResponse : ModelBase
 
 class DisputeListPageResponseFromRaw : IFromRaw<DisputeListPageResponse>
 {
+    /// <inheritdoc/>
     public DisputeListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => DisputeListPageResponse.FromRawUnchecked(rawData);
@@ -149,6 +152,7 @@ public sealed record class Item : ModelBase
         init { ModelBase.Set(this._rawData, "payment_id", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
@@ -176,6 +180,7 @@ public sealed record class Item : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ItemFromRaw.FromRawUnchecked"/>
     public static Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -184,6 +189,7 @@ public sealed record class Item : ModelBase
 
 class ItemFromRaw : IFromRaw<Item>
 {
+    /// <inheritdoc/>
     public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Item.FromRawUnchecked(rawData);
 }

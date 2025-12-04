@@ -76,6 +76,7 @@ public sealed record class CheckoutSessionStatus : ModelBase
         init { ModelBase.Set(this._rawData, "payment_status", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -101,6 +102,7 @@ public sealed record class CheckoutSessionStatus : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CheckoutSessionStatusFromRaw.FromRawUnchecked"/>
     public static CheckoutSessionStatus FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -111,6 +113,7 @@ public sealed record class CheckoutSessionStatus : ModelBase
 
 class CheckoutSessionStatusFromRaw : IFromRaw<CheckoutSessionStatus>
 {
+    /// <inheritdoc/>
     public CheckoutSessionStatus FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CheckoutSessionStatus.FromRawUnchecked(rawData);

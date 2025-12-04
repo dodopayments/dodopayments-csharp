@@ -210,6 +210,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
     public static ProductUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -286,6 +287,7 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : ModelBase
         init { ModelBase.Set(this._rawData, "instructions", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ExternalURL;
@@ -310,6 +312,7 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ProductUpdateParamsDigitalProductDeliveryFromRaw.FromRawUnchecked"/>
     public static ProductUpdateParamsDigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -321,6 +324,7 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : ModelBase
 class ProductUpdateParamsDigitalProductDeliveryFromRaw
     : IFromRaw<ProductUpdateParamsDigitalProductDelivery>
 {
+    /// <inheritdoc/>
     public ProductUpdateParamsDigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ProductUpdateParamsDigitalProductDelivery.FromRawUnchecked(rawData);

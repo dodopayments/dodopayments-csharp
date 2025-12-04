@@ -58,6 +58,7 @@ public sealed record class WebhookPayload : ModelBase
         init { ModelBase.Set(this._rawData, "type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BusinessID;
@@ -81,6 +82,7 @@ public sealed record class WebhookPayload : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="WebhookPayloadFromRaw.FromRawUnchecked"/>
     public static WebhookPayload FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -89,6 +91,7 @@ public sealed record class WebhookPayload : ModelBase
 
 class WebhookPayloadFromRaw : IFromRaw<WebhookPayload>
 {
+    /// <inheritdoc/>
     public WebhookPayload FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         WebhookPayload.FromRawUnchecked(rawData);
 }
@@ -283,36 +286,134 @@ public record class Data
         this._json = json;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Payment"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickPayment(out var value)) {
+    ///     // `value` is of type `Payment`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickPayment([NotNullWhen(true)] out Payment? value)
     {
         value = this.Value as Payment;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Subscription"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickSubscription(out var value)) {
+    ///     // `value` is of type `Subscription`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickSubscription([NotNullWhen(true)] out Subscription? value)
     {
         value = this.Value as Subscription;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Refund"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickRefund(out var value)) {
+    ///     // `value` is of type `Refund`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickRefund([NotNullWhen(true)] out Refund? value)
     {
         value = this.Value as Refund;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Dispute"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDispute(out var value)) {
+    ///     // `value` is of type `Dispute`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDispute([NotNullWhen(true)] out Dispute? value)
     {
         value = this.Value as Dispute;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="LicenseKey"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickLicenseKey(out var value)) {
+    ///     // `value` is of type `LicenseKey`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickLicenseKey([NotNullWhen(true)] out LicenseKey? value)
     {
         value = this.Value as LicenseKey;
         return value != null;
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (Payment value) => {...},
+    ///     (Subscription value) => {...},
+    ///     (Refund value) => {...},
+    ///     (Dispute value) => {...},
+    ///     (LicenseKey value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public void Switch(
         Action<Payment> payment,
         Action<Subscription> subscription,
@@ -345,6 +446,30 @@ public record class Data
         }
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (Payment value) => {...},
+    ///     (Subscription value) => {...},
+    ///     (Refund value) => {...},
+    ///     (Dispute value) => {...},
+    ///     (LicenseKey value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public T Match<T>(
         Func<Payment, T> payment,
         Func<Subscription, T> subscription,
@@ -376,6 +501,16 @@ public record class Data
 
     public static implicit operator Data(LicenseKey value) => new(value);
 
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public void Validate()
     {
         if (this.Value == null)
@@ -856,6 +991,7 @@ public sealed record class Payment : ModelBase
             UpdatedAt = payment.UpdatedAt,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Billing.Validate();
@@ -916,6 +1052,7 @@ public sealed record class Payment : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="PaymentFromRaw.FromRawUnchecked"/>
     public static Payment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -924,6 +1061,7 @@ public sealed record class Payment : ModelBase
 
 class PaymentFromRaw : IFromRaw<Payment>
 {
+    /// <inheritdoc/>
     public Payment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Payment.FromRawUnchecked(rawData);
 }
@@ -943,6 +1081,7 @@ public sealed record class IntersectionMember1 : ModelBase
         init { ModelBase.Set(this._rawData, "payload_type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType.Validate();
@@ -963,6 +1102,7 @@ public sealed record class IntersectionMember1 : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IntersectionMember1FromRaw.FromRawUnchecked"/>
     public static IntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -980,6 +1120,7 @@ public sealed record class IntersectionMember1 : ModelBase
 
 class IntersectionMember1FromRaw : IFromRaw<IntersectionMember1>
 {
+    /// <inheritdoc/>
     public IntersectionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         IntersectionMember1.FromRawUnchecked(rawData);
 }
@@ -1361,6 +1502,7 @@ public sealed record class Subscription : ModelBase
             TaxID = subscription.TaxID,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Addons)
@@ -1415,6 +1557,7 @@ public sealed record class Subscription : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionFromRaw.FromRawUnchecked"/>
     public static Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -1423,6 +1566,7 @@ public sealed record class Subscription : ModelBase
 
 class SubscriptionFromRaw : IFromRaw<Subscription>
 {
+    /// <inheritdoc/>
     public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Subscription.FromRawUnchecked(rawData);
 }
@@ -1443,6 +1587,7 @@ public sealed record class SubscriptionIntersectionMember1 : ModelBase
         init { ModelBase.Set(this._rawData, "payload_type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType.Validate();
@@ -1463,6 +1608,7 @@ public sealed record class SubscriptionIntersectionMember1 : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionIntersectionMember1FromRaw.FromRawUnchecked"/>
     public static SubscriptionIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -1482,6 +1628,7 @@ public sealed record class SubscriptionIntersectionMember1 : ModelBase
 
 class SubscriptionIntersectionMember1FromRaw : IFromRaw<SubscriptionIntersectionMember1>
 {
+    /// <inheritdoc/>
     public SubscriptionIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionIntersectionMember1.FromRawUnchecked(rawData);
@@ -1676,6 +1823,7 @@ public sealed record class Refund : ModelBase
             Reason = refund.Reason,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BusinessID;
@@ -1707,6 +1855,7 @@ public sealed record class Refund : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="RefundFromRaw.FromRawUnchecked"/>
     public static Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -1715,6 +1864,7 @@ public sealed record class Refund : ModelBase
 
 class RefundFromRaw : IFromRaw<Refund>
 {
+    /// <inheritdoc/>
     public Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Refund.FromRawUnchecked(rawData);
 }
@@ -1734,6 +1884,7 @@ public sealed record class RefundIntersectionMember1 : ModelBase
         init { ModelBase.Set(this._rawData, "payload_type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType.Validate();
@@ -1754,6 +1905,7 @@ public sealed record class RefundIntersectionMember1 : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="RefundIntersectionMember1FromRaw.FromRawUnchecked"/>
     public static RefundIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -1773,6 +1925,7 @@ public sealed record class RefundIntersectionMember1 : ModelBase
 
 class RefundIntersectionMember1FromRaw : IFromRaw<RefundIntersectionMember1>
 {
+    /// <inheritdoc/>
     public RefundIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => RefundIntersectionMember1.FromRawUnchecked(rawData);
@@ -1958,6 +2111,7 @@ public sealed record class Dispute : ModelBase
             Remarks = dispute.Remarks,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
@@ -1989,6 +2143,7 @@ public sealed record class Dispute : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="DisputeFromRaw.FromRawUnchecked"/>
     public static Dispute FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -1997,6 +2152,7 @@ public sealed record class Dispute : ModelBase
 
 class DisputeFromRaw : IFromRaw<Dispute>
 {
+    /// <inheritdoc/>
     public Dispute FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Dispute.FromRawUnchecked(rawData);
 }
@@ -2017,6 +2173,7 @@ public sealed record class DisputeIntersectionMember1 : ModelBase
         init { ModelBase.Set(this._rawData, "payload_type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType.Validate();
@@ -2037,6 +2194,7 @@ public sealed record class DisputeIntersectionMember1 : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="DisputeIntersectionMember1FromRaw.FromRawUnchecked"/>
     public static DisputeIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -2056,6 +2214,7 @@ public sealed record class DisputeIntersectionMember1 : ModelBase
 
 class DisputeIntersectionMember1FromRaw : IFromRaw<DisputeIntersectionMember1>
 {
+    /// <inheritdoc/>
     public DisputeIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => DisputeIntersectionMember1.FromRawUnchecked(rawData);
@@ -2246,6 +2405,7 @@ public sealed record class LicenseKey : ModelBase
             SubscriptionID = licenseKey.SubscriptionID,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -2278,6 +2438,7 @@ public sealed record class LicenseKey : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseKeyFromRaw.FromRawUnchecked"/>
     public static LicenseKey FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -2286,6 +2447,7 @@ public sealed record class LicenseKey : ModelBase
 
 class LicenseKeyFromRaw : IFromRaw<LicenseKey>
 {
+    /// <inheritdoc/>
     public LicenseKey FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         LicenseKey.FromRawUnchecked(rawData);
 }
@@ -2306,6 +2468,7 @@ public sealed record class LicenseKeyIntersectionMember1 : ModelBase
         init { ModelBase.Set(this._rawData, "payload_type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType.Validate();
@@ -2326,6 +2489,7 @@ public sealed record class LicenseKeyIntersectionMember1 : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseKeyIntersectionMember1FromRaw.FromRawUnchecked"/>
     public static LicenseKeyIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -2345,6 +2509,7 @@ public sealed record class LicenseKeyIntersectionMember1 : ModelBase
 
 class LicenseKeyIntersectionMember1FromRaw : IFromRaw<LicenseKeyIntersectionMember1>
 {
+    /// <inheritdoc/>
     public LicenseKeyIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => LicenseKeyIntersectionMember1.FromRawUnchecked(rawData);

@@ -45,6 +45,7 @@ public sealed record class CustomerWallet : ModelBase
         init { ModelBase.Set(this._rawData, "updated_at", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Balance;
@@ -69,6 +70,7 @@ public sealed record class CustomerWallet : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CustomerWalletFromRaw.FromRawUnchecked"/>
     public static CustomerWallet FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -77,6 +79,7 @@ public sealed record class CustomerWallet : ModelBase
 
 class CustomerWalletFromRaw : IFromRaw<CustomerWallet>
 {
+    /// <inheritdoc/>
     public CustomerWallet FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CustomerWallet.FromRawUnchecked(rawData);
 }

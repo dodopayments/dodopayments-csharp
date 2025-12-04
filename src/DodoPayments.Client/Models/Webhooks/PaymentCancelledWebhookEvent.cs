@@ -68,6 +68,7 @@ public sealed record class PaymentCancelledWebhookEvent : ModelBase
         init { ModelBase.Set(this._rawData, "type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BusinessID;
@@ -91,6 +92,7 @@ public sealed record class PaymentCancelledWebhookEvent : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="PaymentCancelledWebhookEventFromRaw.FromRawUnchecked"/>
     public static PaymentCancelledWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -101,6 +103,7 @@ public sealed record class PaymentCancelledWebhookEvent : ModelBase
 
 class PaymentCancelledWebhookEventFromRaw : IFromRaw<PaymentCancelledWebhookEvent>
 {
+    /// <inheritdoc/>
     public PaymentCancelledWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => PaymentCancelledWebhookEvent.FromRawUnchecked(rawData);
@@ -496,6 +499,7 @@ public sealed record class PaymentCancelledWebhookEventData : ModelBase
             UpdatedAt = paymentCancelledWebhookEventData.UpdatedAt,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Billing.Validate();
@@ -556,6 +560,7 @@ public sealed record class PaymentCancelledWebhookEventData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="PaymentCancelledWebhookEventDataFromRaw.FromRawUnchecked"/>
     public static PaymentCancelledWebhookEventData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -566,6 +571,7 @@ public sealed record class PaymentCancelledWebhookEventData : ModelBase
 
 class PaymentCancelledWebhookEventDataFromRaw : IFromRaw<PaymentCancelledWebhookEventData>
 {
+    /// <inheritdoc/>
     public PaymentCancelledWebhookEventData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => PaymentCancelledWebhookEventData.FromRawUnchecked(rawData);
@@ -604,6 +610,7 @@ public sealed record class PaymentCancelledWebhookEventDataIntersectionMember1 :
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType?.Validate();
@@ -628,6 +635,7 @@ public sealed record class PaymentCancelledWebhookEventDataIntersectionMember1 :
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="PaymentCancelledWebhookEventDataIntersectionMember1FromRaw.FromRawUnchecked"/>
     public static PaymentCancelledWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -639,6 +647,7 @@ public sealed record class PaymentCancelledWebhookEventDataIntersectionMember1 :
 class PaymentCancelledWebhookEventDataIntersectionMember1FromRaw
     : IFromRaw<PaymentCancelledWebhookEventDataIntersectionMember1>
 {
+    /// <inheritdoc/>
     public PaymentCancelledWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => PaymentCancelledWebhookEventDataIntersectionMember1.FromRawUnchecked(rawData);

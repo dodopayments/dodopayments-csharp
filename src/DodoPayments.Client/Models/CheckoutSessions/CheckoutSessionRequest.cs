@@ -215,6 +215,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
         init { ModelBase.Set(this._rawData, "subscription_data", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.ProductCart)
@@ -254,6 +255,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CheckoutSessionRequestFromRaw.FromRawUnchecked"/>
     public static CheckoutSessionRequest FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -271,6 +273,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
 
 class CheckoutSessionRequestFromRaw : IFromRaw<CheckoutSessionRequest>
 {
+    /// <inheritdoc/>
     public CheckoutSessionRequest FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CheckoutSessionRequest.FromRawUnchecked(rawData);
@@ -329,6 +332,7 @@ public sealed record class CheckoutSessionRequestProductCart : ModelBase
         init { ModelBase.Set(this._rawData, "amount", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ProductID;
@@ -355,6 +359,7 @@ public sealed record class CheckoutSessionRequestProductCart : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CheckoutSessionRequestProductCartFromRaw.FromRawUnchecked"/>
     public static CheckoutSessionRequestProductCart FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -365,6 +370,7 @@ public sealed record class CheckoutSessionRequestProductCart : ModelBase
 
 class CheckoutSessionRequestProductCartFromRaw : IFromRaw<CheckoutSessionRequestProductCart>
 {
+    /// <inheritdoc/>
     public CheckoutSessionRequestProductCart FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CheckoutSessionRequestProductCart.FromRawUnchecked(rawData);
@@ -429,6 +435,7 @@ public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
         init { ModelBase.Set(this._rawData, "zipcode", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Country.Validate();
@@ -453,6 +460,7 @@ public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CheckoutSessionRequestBillingAddressFromRaw.FromRawUnchecked"/>
     public static CheckoutSessionRequestBillingAddress FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -470,6 +478,7 @@ public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
 
 class CheckoutSessionRequestBillingAddressFromRaw : IFromRaw<CheckoutSessionRequestBillingAddress>
 {
+    /// <inheritdoc/>
     public CheckoutSessionRequestBillingAddress FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CheckoutSessionRequestBillingAddress.FromRawUnchecked(rawData);
@@ -557,6 +566,7 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ForceLanguage;
@@ -580,6 +590,7 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CheckoutSessionRequestCustomizationFromRaw.FromRawUnchecked"/>
     public static CheckoutSessionRequestCustomization FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -590,6 +601,7 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
 
 class CheckoutSessionRequestCustomizationFromRaw : IFromRaw<CheckoutSessionRequestCustomization>
 {
+    /// <inheritdoc/>
     public CheckoutSessionRequestCustomization FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CheckoutSessionRequestCustomization.FromRawUnchecked(rawData);
@@ -883,6 +895,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.AllowCurrencySelection;
@@ -914,6 +927,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CheckoutSessionRequestFeatureFlagsFromRaw.FromRawUnchecked"/>
     public static CheckoutSessionRequestFeatureFlags FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -924,6 +938,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
 
 class CheckoutSessionRequestFeatureFlagsFromRaw : IFromRaw<CheckoutSessionRequestFeatureFlags>
 {
+    /// <inheritdoc/>
     public CheckoutSessionRequestFeatureFlags FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CheckoutSessionRequestFeatureFlags.FromRawUnchecked(rawData);
@@ -959,6 +974,7 @@ public sealed record class CheckoutSessionRequestSubscriptionData : ModelBase
         init { ModelBase.Set(this._rawData, "trial_period_days", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.OnDemand?.Validate();
@@ -980,6 +996,7 @@ public sealed record class CheckoutSessionRequestSubscriptionData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CheckoutSessionRequestSubscriptionDataFromRaw.FromRawUnchecked"/>
     public static CheckoutSessionRequestSubscriptionData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -991,6 +1008,7 @@ public sealed record class CheckoutSessionRequestSubscriptionData : ModelBase
 class CheckoutSessionRequestSubscriptionDataFromRaw
     : IFromRaw<CheckoutSessionRequestSubscriptionData>
 {
+    /// <inheritdoc/>
     public CheckoutSessionRequestSubscriptionData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CheckoutSessionRequestSubscriptionData.FromRawUnchecked(rawData);

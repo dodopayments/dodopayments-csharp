@@ -7,7 +7,7 @@ using DodoPayments.Client.Models.Licenses;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class LicenseService : ILicenseService
 {
     /// <inheritdoc/>

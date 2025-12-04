@@ -129,6 +129,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
     public static SubscriptionUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -180,6 +181,7 @@ public sealed record class DisableOnDemand : ModelBase
         init { ModelBase.Set(this._rawData, "next_billing_date", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.NextBillingDate;
@@ -200,6 +202,7 @@ public sealed record class DisableOnDemand : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="DisableOnDemandFromRaw.FromRawUnchecked"/>
     public static DisableOnDemand FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -215,6 +218,7 @@ public sealed record class DisableOnDemand : ModelBase
 
 class DisableOnDemandFromRaw : IFromRaw<DisableOnDemand>
 {
+    /// <inheritdoc/>
     public DisableOnDemand FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         DisableOnDemand.FromRawUnchecked(rawData);
 }

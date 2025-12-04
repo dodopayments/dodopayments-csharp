@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class MiscService : IMiscService
 {
     /// <inheritdoc/>

@@ -25,6 +25,7 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : ModelBase
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Items)
@@ -48,6 +49,7 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CustomerRetrievePaymentMethodsResponseFromRaw.FromRawUnchecked"/>
     public static CustomerRetrievePaymentMethodsResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -66,6 +68,7 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : ModelBase
 class CustomerRetrievePaymentMethodsResponseFromRaw
     : IFromRaw<CustomerRetrievePaymentMethodsResponse>
 {
+    /// <inheritdoc/>
     public CustomerRetrievePaymentMethodsResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CustomerRetrievePaymentMethodsResponse.FromRawUnchecked(rawData);
@@ -127,6 +130,7 @@ public sealed record class Item : ModelBase
         init { ModelBase.Set(this._rawData, "recurring_enabled", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PaymentMethod.Validate();
@@ -152,6 +156,7 @@ public sealed record class Item : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ItemFromRaw.FromRawUnchecked"/>
     public static Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -160,6 +165,7 @@ public sealed record class Item : ModelBase
 
 class ItemFromRaw : IFromRaw<Item>
 {
+    /// <inheritdoc/>
     public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Item.FromRawUnchecked(rawData);
 }
@@ -300,6 +306,7 @@ public sealed record class Card : ModelBase
         init { ModelBase.Set(this._rawData, "last4_digits", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.CardIssuingCountry?.Validate();
@@ -325,6 +332,7 @@ public sealed record class Card : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CardFromRaw.FromRawUnchecked"/>
     public static Card FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -333,6 +341,7 @@ public sealed record class Card : ModelBase
 
 class CardFromRaw : IFromRaw<Card>
 {
+    /// <inheritdoc/>
     public Card FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Card.FromRawUnchecked(rawData);
 }

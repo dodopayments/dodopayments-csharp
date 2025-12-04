@@ -68,6 +68,7 @@ public sealed record class SubscriptionRenewedWebhookEvent : ModelBase
         init { ModelBase.Set(this._rawData, "type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BusinessID;
@@ -91,6 +92,7 @@ public sealed record class SubscriptionRenewedWebhookEvent : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionRenewedWebhookEventFromRaw.FromRawUnchecked"/>
     public static SubscriptionRenewedWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -101,6 +103,7 @@ public sealed record class SubscriptionRenewedWebhookEvent : ModelBase
 
 class SubscriptionRenewedWebhookEventFromRaw : IFromRaw<SubscriptionRenewedWebhookEvent>
 {
+    /// <inheritdoc/>
     public SubscriptionRenewedWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionRenewedWebhookEvent.FromRawUnchecked(rawData);
@@ -467,6 +470,7 @@ public sealed record class SubscriptionRenewedWebhookEventData : ModelBase
             TaxID = subscriptionRenewedWebhookEventData.TaxID,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Addons)
@@ -521,6 +525,7 @@ public sealed record class SubscriptionRenewedWebhookEventData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionRenewedWebhookEventDataFromRaw.FromRawUnchecked"/>
     public static SubscriptionRenewedWebhookEventData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -531,6 +536,7 @@ public sealed record class SubscriptionRenewedWebhookEventData : ModelBase
 
 class SubscriptionRenewedWebhookEventDataFromRaw : IFromRaw<SubscriptionRenewedWebhookEventData>
 {
+    /// <inheritdoc/>
     public SubscriptionRenewedWebhookEventData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionRenewedWebhookEventData.FromRawUnchecked(rawData);
@@ -569,6 +575,7 @@ public sealed record class SubscriptionRenewedWebhookEventDataIntersectionMember
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType?.Validate();
@@ -593,6 +600,7 @@ public sealed record class SubscriptionRenewedWebhookEventDataIntersectionMember
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionRenewedWebhookEventDataIntersectionMember1FromRaw.FromRawUnchecked"/>
     public static SubscriptionRenewedWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -604,6 +612,7 @@ public sealed record class SubscriptionRenewedWebhookEventDataIntersectionMember
 class SubscriptionRenewedWebhookEventDataIntersectionMember1FromRaw
     : IFromRaw<SubscriptionRenewedWebhookEventDataIntersectionMember1>
 {
+    /// <inheritdoc/>
     public SubscriptionRenewedWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionRenewedWebhookEventDataIntersectionMember1.FromRawUnchecked(rawData);

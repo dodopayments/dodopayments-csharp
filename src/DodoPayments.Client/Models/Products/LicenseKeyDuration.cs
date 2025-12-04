@@ -29,6 +29,7 @@ public sealed record class LicenseKeyDuration : ModelBase
         init { ModelBase.Set(this._rawData, "interval", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Count;
@@ -50,6 +51,7 @@ public sealed record class LicenseKeyDuration : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseKeyDurationFromRaw.FromRawUnchecked"/>
     public static LicenseKeyDuration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -60,6 +62,7 @@ public sealed record class LicenseKeyDuration : ModelBase
 
 class LicenseKeyDurationFromRaw : IFromRaw<LicenseKeyDuration>
 {
+    /// <inheritdoc/>
     public LicenseKeyDuration FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         LicenseKeyDuration.FromRawUnchecked(rawData);
 }

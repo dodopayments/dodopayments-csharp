@@ -25,6 +25,7 @@ public sealed record class AddonCartResponseItem : ModelBase
         init { ModelBase.Set(this._rawData, "quantity", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.AddonID;
@@ -46,6 +47,7 @@ public sealed record class AddonCartResponseItem : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="AddonCartResponseItemFromRaw.FromRawUnchecked"/>
     public static AddonCartResponseItem FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -56,6 +58,7 @@ public sealed record class AddonCartResponseItem : ModelBase
 
 class AddonCartResponseItemFromRaw : IFromRaw<AddonCartResponseItem>
 {
+    /// <inheritdoc/>
     public AddonCartResponseItem FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => AddonCartResponseItem.FromRawUnchecked(rawData);

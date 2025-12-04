@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Products.Images;
 
 namespace DodoPayments.Client.Services.Products;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class ImageService : IImageService
 {
     /// <inheritdoc/>

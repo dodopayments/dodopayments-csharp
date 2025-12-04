@@ -7,7 +7,7 @@ using DodoPayments.Client.Models.Payouts;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class PayoutService : IPayoutService
 {
     /// <inheritdoc/>

@@ -18,6 +18,7 @@ public sealed record class WebhookRetrieveSecretResponse : ModelBase
         init { ModelBase.Set(this._rawData, "secret", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Secret;
@@ -38,6 +39,7 @@ public sealed record class WebhookRetrieveSecretResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="WebhookRetrieveSecretResponseFromRaw.FromRawUnchecked"/>
     public static WebhookRetrieveSecretResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -55,6 +57,7 @@ public sealed record class WebhookRetrieveSecretResponse : ModelBase
 
 class WebhookRetrieveSecretResponseFromRaw : IFromRaw<WebhookRetrieveSecretResponse>
 {
+    /// <inheritdoc/>
     public WebhookRetrieveSecretResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => WebhookRetrieveSecretResponse.FromRawUnchecked(rawData);

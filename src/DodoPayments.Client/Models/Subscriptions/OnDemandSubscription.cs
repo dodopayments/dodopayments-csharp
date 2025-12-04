@@ -75,6 +75,7 @@ public sealed record class OnDemandSubscription : ModelBase
         init { ModelBase.Set(this._rawData, "product_price", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.MandateOnly;
@@ -99,6 +100,7 @@ public sealed record class OnDemandSubscription : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="OnDemandSubscriptionFromRaw.FromRawUnchecked"/>
     public static OnDemandSubscription FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -116,6 +118,7 @@ public sealed record class OnDemandSubscription : ModelBase
 
 class OnDemandSubscriptionFromRaw : IFromRaw<OnDemandSubscription>
 {
+    /// <inheritdoc/>
     public OnDemandSubscription FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => OnDemandSubscription.FromRawUnchecked(rawData);

@@ -31,6 +31,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelB
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Items)
@@ -56,6 +57,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelB
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionRetrieveUsageHistoryPageResponseFromRaw.FromRawUnchecked"/>
     public static SubscriptionRetrieveUsageHistoryPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -76,6 +78,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelB
 class SubscriptionRetrieveUsageHistoryPageResponseFromRaw
     : IFromRaw<SubscriptionRetrieveUsageHistoryPageResponse>
 {
+    /// <inheritdoc/>
     public SubscriptionRetrieveUsageHistoryPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionRetrieveUsageHistoryPageResponse.FromRawUnchecked(rawData);
@@ -121,6 +124,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItem : Mo
         init { ModelBase.Set(this._rawData, "start_date", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.EndDate;
@@ -148,6 +152,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItem : Mo
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionRetrieveUsageHistoryPageResponseItemFromRaw.FromRawUnchecked"/>
     public static SubscriptionRetrieveUsageHistoryPageResponseItem FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -159,6 +164,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItem : Mo
 class SubscriptionRetrieveUsageHistoryPageResponseItemFromRaw
     : IFromRaw<SubscriptionRetrieveUsageHistoryPageResponseItem>
 {
+    /// <inheritdoc/>
     public SubscriptionRetrieveUsageHistoryPageResponseItem FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionRetrieveUsageHistoryPageResponseItem.FromRawUnchecked(rawData);
@@ -247,6 +253,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
         init { ModelBase.Set(this._rawData, "total_price", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -278,6 +285,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionRetrieveUsageHistoryPageResponseItemMeterFromRaw.FromRawUnchecked"/>
     public static SubscriptionRetrieveUsageHistoryPageResponseItemMeter FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -289,6 +297,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
 class SubscriptionRetrieveUsageHistoryPageResponseItemMeterFromRaw
     : IFromRaw<SubscriptionRetrieveUsageHistoryPageResponseItemMeter>
 {
+    /// <inheritdoc/>
     public SubscriptionRetrieveUsageHistoryPageResponseItemMeter FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionRetrieveUsageHistoryPageResponseItemMeter.FromRawUnchecked(rawData);

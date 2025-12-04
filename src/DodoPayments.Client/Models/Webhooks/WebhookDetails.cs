@@ -98,6 +98,7 @@ public sealed record class WebhookDetails : ModelBase
         init { ModelBase.Set(this._rawData, "rate_limit", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -126,6 +127,7 @@ public sealed record class WebhookDetails : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="WebhookDetailsFromRaw.FromRawUnchecked"/>
     public static WebhookDetails FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -134,6 +136,7 @@ public sealed record class WebhookDetails : ModelBase
 
 class WebhookDetailsFromRaw : IFromRaw<WebhookDetails>
 {
+    /// <inheritdoc/>
     public WebhookDetails FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         WebhookDetails.FromRawUnchecked(rawData);
 }

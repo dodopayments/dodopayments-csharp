@@ -59,6 +59,7 @@ public sealed record class AddMeterToPrice : ModelBase
         init { ModelBase.Set(this._rawData, "name", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.MeterID;
@@ -84,6 +85,7 @@ public sealed record class AddMeterToPrice : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="AddMeterToPriceFromRaw.FromRawUnchecked"/>
     public static AddMeterToPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -92,6 +94,7 @@ public sealed record class AddMeterToPrice : ModelBase
 
 class AddMeterToPriceFromRaw : IFromRaw<AddMeterToPrice>
 {
+    /// <inheritdoc/>
     public AddMeterToPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         AddMeterToPrice.FromRawUnchecked(rawData);
 }
