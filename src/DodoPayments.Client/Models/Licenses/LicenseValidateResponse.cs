@@ -16,6 +16,7 @@ public sealed record class LicenseValidateResponse : ModelBase
         init { ModelBase.Set(this._rawData, "valid", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Valid;
@@ -36,6 +37,7 @@ public sealed record class LicenseValidateResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseValidateResponseFromRaw.FromRawUnchecked"/>
     public static LicenseValidateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -53,6 +55,7 @@ public sealed record class LicenseValidateResponse : ModelBase
 
 class LicenseValidateResponseFromRaw : IFromRaw<LicenseValidateResponse>
 {
+    /// <inheritdoc/>
     public LicenseValidateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => LicenseValidateResponse.FromRawUnchecked(rawData);

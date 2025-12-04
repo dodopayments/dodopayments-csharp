@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class PaymentService : IPaymentService
 {
     /// <inheritdoc/>

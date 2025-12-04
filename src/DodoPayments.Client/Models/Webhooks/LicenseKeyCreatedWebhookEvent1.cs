@@ -54,6 +54,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
         init { ModelBase.Set(this._rawData, "type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BusinessID;
@@ -77,6 +78,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseKeyCreatedWebhookEventFromRaw1.FromRawUnchecked"/>
     public static LicenseKeyCreatedWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -87,6 +89,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
 
 class LicenseKeyCreatedWebhookEventFromRaw1 : IFromRaw<LicenseKeyCreatedWebhookEvent>
 {
+    /// <inheritdoc/>
     public LicenseKeyCreatedWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => LicenseKeyCreatedWebhookEvent.FromRawUnchecked(rawData);
@@ -256,6 +259,7 @@ public sealed record class Data6 : ModelBase
             SubscriptionID = data6.SubscriptionID,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -288,6 +292,7 @@ public sealed record class Data6 : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="Data6FromRaw.FromRawUnchecked"/>
     public static Data6 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -296,6 +301,7 @@ public sealed record class Data6 : ModelBase
 
 class Data6FromRaw : IFromRaw<Data6>
 {
+    /// <inheritdoc/>
     public Data6 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Data6.FromRawUnchecked(rawData);
 }
@@ -326,6 +332,7 @@ public sealed record class Data6IntersectionMember1 : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType?.Validate();
@@ -346,6 +353,7 @@ public sealed record class Data6IntersectionMember1 : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="Data6IntersectionMember1FromRaw.FromRawUnchecked"/>
     public static Data6IntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -356,6 +364,7 @@ public sealed record class Data6IntersectionMember1 : ModelBase
 
 class Data6IntersectionMember1FromRaw : IFromRaw<Data6IntersectionMember1>
 {
+    /// <inheritdoc/>
     public Data6IntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => Data6IntersectionMember1.FromRawUnchecked(rawData);

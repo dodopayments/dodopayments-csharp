@@ -40,6 +40,7 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse : ModelBase
         init { ModelBase.Set(this._rawData, "payment_link", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ClientSecret;
@@ -63,6 +64,7 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionUpdatePaymentMethodResponseFromRaw.FromRawUnchecked"/>
     public static SubscriptionUpdatePaymentMethodResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -74,6 +76,7 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse : ModelBase
 class SubscriptionUpdatePaymentMethodResponseFromRaw
     : IFromRaw<SubscriptionUpdatePaymentMethodResponse>
 {
+    /// <inheritdoc/>
     public SubscriptionUpdatePaymentMethodResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionUpdatePaymentMethodResponse.FromRawUnchecked(rawData);

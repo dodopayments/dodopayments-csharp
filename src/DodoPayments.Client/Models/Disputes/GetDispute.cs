@@ -123,6 +123,7 @@ public sealed record class GetDispute : ModelBase
         init { ModelBase.Set(this._rawData, "remarks", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
@@ -153,6 +154,7 @@ public sealed record class GetDispute : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="GetDisputeFromRaw.FromRawUnchecked"/>
     public static GetDispute FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -161,6 +163,7 @@ public sealed record class GetDispute : ModelBase
 
 class GetDisputeFromRaw : IFromRaw<GetDispute>
 {
+    /// <inheritdoc/>
     public GetDispute FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         GetDispute.FromRawUnchecked(rawData);
 }

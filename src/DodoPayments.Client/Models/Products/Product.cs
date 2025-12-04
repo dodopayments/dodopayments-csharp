@@ -198,6 +198,7 @@ public sealed record class Product : ModelBase
         init { ModelBase.Set(this._rawData, "name", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BrandID;
@@ -235,6 +236,7 @@ public sealed record class Product : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ProductFromRaw.FromRawUnchecked"/>
     public static Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -243,6 +245,7 @@ public sealed record class Product : ModelBase
 
 class ProductFromRaw : IFromRaw<Product>
 {
+    /// <inheritdoc/>
     public Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Product.FromRawUnchecked(rawData);
 }
@@ -279,6 +282,7 @@ public sealed record class ProductDigitalProductDelivery : ModelBase
         init { ModelBase.Set(this._rawData, "instructions", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ExternalURL;
@@ -304,6 +308,7 @@ public sealed record class ProductDigitalProductDelivery : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ProductDigitalProductDeliveryFromRaw.FromRawUnchecked"/>
     public static ProductDigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -314,6 +319,7 @@ public sealed record class ProductDigitalProductDelivery : ModelBase
 
 class ProductDigitalProductDeliveryFromRaw : IFromRaw<ProductDigitalProductDelivery>
 {
+    /// <inheritdoc/>
     public ProductDigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ProductDigitalProductDelivery.FromRawUnchecked(rawData);
@@ -340,6 +346,7 @@ public sealed record class File : ModelBase
         init { ModelBase.Set(this._rawData, "url", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.FileID;
@@ -362,6 +369,7 @@ public sealed record class File : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="FileFromRaw.FromRawUnchecked"/>
     public static File FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -370,6 +378,7 @@ public sealed record class File : ModelBase
 
 class FileFromRaw : IFromRaw<File>
 {
+    /// <inheritdoc/>
     public File FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         File.FromRawUnchecked(rawData);
 }

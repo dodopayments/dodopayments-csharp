@@ -24,6 +24,7 @@ public sealed record class LedgerEntryListPageResponse : ModelBase
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Items)
@@ -47,6 +48,7 @@ public sealed record class LedgerEntryListPageResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LedgerEntryListPageResponseFromRaw.FromRawUnchecked"/>
     public static LedgerEntryListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -64,6 +66,7 @@ public sealed record class LedgerEntryListPageResponse : ModelBase
 
 class LedgerEntryListPageResponseFromRaw : IFromRaw<LedgerEntryListPageResponse>
 {
+    /// <inheritdoc/>
     public LedgerEntryListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => LedgerEntryListPageResponse.FromRawUnchecked(rawData);

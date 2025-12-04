@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Disputes;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class DisputeService : IDisputeService
 {
     /// <inheritdoc/>

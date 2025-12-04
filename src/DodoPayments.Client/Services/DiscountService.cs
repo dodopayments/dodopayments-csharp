@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Discounts;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class DiscountService : IDiscountService
 {
     /// <inheritdoc/>

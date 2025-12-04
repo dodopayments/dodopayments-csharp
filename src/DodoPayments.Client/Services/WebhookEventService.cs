@@ -3,7 +3,7 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class WebhookEventService : IWebhookEventService
 {
     /// <inheritdoc/>

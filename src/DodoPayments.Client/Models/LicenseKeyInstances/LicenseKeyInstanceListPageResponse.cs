@@ -21,6 +21,7 @@ public sealed record class LicenseKeyInstanceListPageResponse : ModelBase
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Items)
@@ -44,6 +45,7 @@ public sealed record class LicenseKeyInstanceListPageResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseKeyInstanceListPageResponseFromRaw.FromRawUnchecked"/>
     public static LicenseKeyInstanceListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -61,6 +63,7 @@ public sealed record class LicenseKeyInstanceListPageResponse : ModelBase
 
 class LicenseKeyInstanceListPageResponseFromRaw : IFromRaw<LicenseKeyInstanceListPageResponse>
 {
+    /// <inheritdoc/>
     public LicenseKeyInstanceListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => LicenseKeyInstanceListPageResponse.FromRawUnchecked(rawData);

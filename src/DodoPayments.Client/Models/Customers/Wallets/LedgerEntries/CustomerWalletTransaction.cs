@@ -94,6 +94,7 @@ public sealed record class CustomerWalletTransaction : ModelBase
         init { ModelBase.Set(this._rawData, "reference_object_id", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -125,6 +126,7 @@ public sealed record class CustomerWalletTransaction : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CustomerWalletTransactionFromRaw.FromRawUnchecked"/>
     public static CustomerWalletTransaction FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -135,6 +137,7 @@ public sealed record class CustomerWalletTransaction : ModelBase
 
 class CustomerWalletTransactionFromRaw : IFromRaw<CustomerWalletTransaction>
 {
+    /// <inheritdoc/>
     public CustomerWalletTransaction FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CustomerWalletTransaction.FromRawUnchecked(rawData);

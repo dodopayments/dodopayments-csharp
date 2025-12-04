@@ -33,6 +33,7 @@ public sealed record class OneTimeProductCartItem : ModelBase
         init { ModelBase.Set(this._rawData, "amount", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ProductID;
@@ -55,6 +56,7 @@ public sealed record class OneTimeProductCartItem : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="OneTimeProductCartItemFromRaw.FromRawUnchecked"/>
     public static OneTimeProductCartItem FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -65,6 +67,7 @@ public sealed record class OneTimeProductCartItem : ModelBase
 
 class OneTimeProductCartItemFromRaw : IFromRaw<OneTimeProductCartItem>
 {
+    /// <inheritdoc/>
     public OneTimeProductCartItem FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => OneTimeProductCartItem.FromRawUnchecked(rawData);

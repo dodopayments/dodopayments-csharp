@@ -22,6 +22,7 @@ public sealed record class AttachAddon : ModelBase
         init { ModelBase.Set(this._rawData, "quantity", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.AddonID;
@@ -43,6 +44,7 @@ public sealed record class AttachAddon : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="AttachAddonFromRaw.FromRawUnchecked"/>
     public static AttachAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -51,6 +53,7 @@ public sealed record class AttachAddon : ModelBase
 
 class AttachAddonFromRaw : IFromRaw<AttachAddon>
 {
+    /// <inheritdoc/>
     public AttachAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         AttachAddon.FromRawUnchecked(rawData);
 }

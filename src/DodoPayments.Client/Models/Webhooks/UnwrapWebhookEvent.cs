@@ -209,18 +209,63 @@ public record class UnwrapWebhookEvent
         this._json = json;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DisputeAcceptedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDisputeAccepted(out var value)) {
+    ///     // `value` is of type `DisputeAcceptedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDisputeAccepted([NotNullWhen(true)] out DisputeAcceptedWebhookEvent? value)
     {
         value = this.Value as DisputeAcceptedWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DisputeCancelledWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDisputeCancelled(out var value)) {
+    ///     // `value` is of type `DisputeCancelledWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDisputeCancelled([NotNullWhen(true)] out DisputeCancelledWebhookEvent? value)
     {
         value = this.Value as DisputeCancelledWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DisputeChallengedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDisputeChallenged(out var value)) {
+    ///     // `value` is of type `DisputeChallengedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDisputeChallenged(
         [NotNullWhen(true)] out DisputeChallengedWebhookEvent? value
     )
@@ -229,30 +274,105 @@ public record class UnwrapWebhookEvent
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DisputeExpiredWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDisputeExpired(out var value)) {
+    ///     // `value` is of type `DisputeExpiredWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDisputeExpired([NotNullWhen(true)] out DisputeExpiredWebhookEvent? value)
     {
         value = this.Value as DisputeExpiredWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DisputeLostWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDisputeLost(out var value)) {
+    ///     // `value` is of type `DisputeLostWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDisputeLost([NotNullWhen(true)] out DisputeLostWebhookEvent? value)
     {
         value = this.Value as DisputeLostWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DisputeOpenedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDisputeOpened(out var value)) {
+    ///     // `value` is of type `DisputeOpenedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDisputeOpened([NotNullWhen(true)] out DisputeOpenedWebhookEvent? value)
     {
         value = this.Value as DisputeOpenedWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DisputeWonWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDisputeWon(out var value)) {
+    ///     // `value` is of type `DisputeWonWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDisputeWon([NotNullWhen(true)] out DisputeWonWebhookEvent? value)
     {
         value = this.Value as DisputeWonWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="LicenseKeyCreatedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickLicenseKeyCreated(out var value)) {
+    ///     // `value` is of type `LicenseKeyCreatedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickLicenseKeyCreated(
         [NotNullWhen(true)] out LicenseKeyCreatedWebhookEvent? value
     )
@@ -261,18 +381,63 @@ public record class UnwrapWebhookEvent
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="PaymentCancelledWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickPaymentCancelled(out var value)) {
+    ///     // `value` is of type `PaymentCancelledWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickPaymentCancelled([NotNullWhen(true)] out PaymentCancelledWebhookEvent? value)
     {
         value = this.Value as PaymentCancelledWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="PaymentFailedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickPaymentFailed(out var value)) {
+    ///     // `value` is of type `PaymentFailedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickPaymentFailed([NotNullWhen(true)] out PaymentFailedWebhookEvent? value)
     {
         value = this.Value as PaymentFailedWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="PaymentProcessingWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickPaymentProcessing(out var value)) {
+    ///     // `value` is of type `PaymentProcessingWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickPaymentProcessing(
         [NotNullWhen(true)] out PaymentProcessingWebhookEvent? value
     )
@@ -281,24 +446,84 @@ public record class UnwrapWebhookEvent
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="PaymentSucceededWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickPaymentSucceeded(out var value)) {
+    ///     // `value` is of type `PaymentSucceededWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickPaymentSucceeded([NotNullWhen(true)] out PaymentSucceededWebhookEvent? value)
     {
         value = this.Value as PaymentSucceededWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="RefundFailedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickRefundFailed(out var value)) {
+    ///     // `value` is of type `RefundFailedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickRefundFailed([NotNullWhen(true)] out RefundFailedWebhookEvent? value)
     {
         value = this.Value as RefundFailedWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="RefundSucceededWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickRefundSucceeded(out var value)) {
+    ///     // `value` is of type `RefundSucceededWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickRefundSucceeded([NotNullWhen(true)] out RefundSucceededWebhookEvent? value)
     {
         value = this.Value as RefundSucceededWebhookEvent;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="SubscriptionActiveWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickSubscriptionActive(out var value)) {
+    ///     // `value` is of type `SubscriptionActiveWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickSubscriptionActive(
         [NotNullWhen(true)] out SubscriptionActiveWebhookEvent? value
     )
@@ -307,6 +532,21 @@ public record class UnwrapWebhookEvent
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="SubscriptionCancelledWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickSubscriptionCancelled(out var value)) {
+    ///     // `value` is of type `SubscriptionCancelledWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickSubscriptionCancelled(
         [NotNullWhen(true)] out SubscriptionCancelledWebhookEvent? value
     )
@@ -315,6 +555,21 @@ public record class UnwrapWebhookEvent
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="SubscriptionExpiredWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickSubscriptionExpired(out var value)) {
+    ///     // `value` is of type `SubscriptionExpiredWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickSubscriptionExpired(
         [NotNullWhen(true)] out SubscriptionExpiredWebhookEvent? value
     )
@@ -323,6 +578,21 @@ public record class UnwrapWebhookEvent
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="SubscriptionFailedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickSubscriptionFailed(out var value)) {
+    ///     // `value` is of type `SubscriptionFailedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickSubscriptionFailed(
         [NotNullWhen(true)] out SubscriptionFailedWebhookEvent? value
     )
@@ -331,6 +601,21 @@ public record class UnwrapWebhookEvent
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="SubscriptionOnHoldWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickSubscriptionOnHold(out var value)) {
+    ///     // `value` is of type `SubscriptionOnHoldWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickSubscriptionOnHold(
         [NotNullWhen(true)] out SubscriptionOnHoldWebhookEvent? value
     )
@@ -339,6 +624,21 @@ public record class UnwrapWebhookEvent
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="SubscriptionPlanChangedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickSubscriptionPlanChanged(out var value)) {
+    ///     // `value` is of type `SubscriptionPlanChangedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickSubscriptionPlanChanged(
         [NotNullWhen(true)] out SubscriptionPlanChangedWebhookEvent? value
     )
@@ -347,6 +647,21 @@ public record class UnwrapWebhookEvent
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="SubscriptionRenewedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickSubscriptionRenewed(out var value)) {
+    ///     // `value` is of type `SubscriptionRenewedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickSubscriptionRenewed(
         [NotNullWhen(true)] out SubscriptionRenewedWebhookEvent? value
     )
@@ -355,6 +670,45 @@ public record class UnwrapWebhookEvent
         return value != null;
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (DisputeAcceptedWebhookEvent value) => {...},
+    ///     (DisputeCancelledWebhookEvent value) => {...},
+    ///     (DisputeChallengedWebhookEvent value) => {...},
+    ///     (DisputeExpiredWebhookEvent value) => {...},
+    ///     (DisputeLostWebhookEvent value) => {...},
+    ///     (DisputeOpenedWebhookEvent value) => {...},
+    ///     (DisputeWonWebhookEvent value) => {...},
+    ///     (LicenseKeyCreatedWebhookEvent value) => {...},
+    ///     (PaymentCancelledWebhookEvent value) => {...},
+    ///     (PaymentFailedWebhookEvent value) => {...},
+    ///     (PaymentProcessingWebhookEvent value) => {...},
+    ///     (PaymentSucceededWebhookEvent value) => {...},
+    ///     (RefundFailedWebhookEvent value) => {...},
+    ///     (RefundSucceededWebhookEvent value) => {...},
+    ///     (SubscriptionActiveWebhookEvent value) => {...},
+    ///     (SubscriptionCancelledWebhookEvent value) => {...},
+    ///     (SubscriptionExpiredWebhookEvent value) => {...},
+    ///     (SubscriptionFailedWebhookEvent value) => {...},
+    ///     (SubscriptionOnHoldWebhookEvent value) => {...},
+    ///     (SubscriptionPlanChangedWebhookEvent value) => {...},
+    ///     (SubscriptionRenewedWebhookEvent value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public void Switch(
         System::Action<DisputeAcceptedWebhookEvent> disputeAccepted,
         System::Action<DisputeCancelledWebhookEvent> disputeCancelled,
@@ -451,6 +805,46 @@ public record class UnwrapWebhookEvent
         }
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (DisputeAcceptedWebhookEvent value) => {...},
+    ///     (DisputeCancelledWebhookEvent value) => {...},
+    ///     (DisputeChallengedWebhookEvent value) => {...},
+    ///     (DisputeExpiredWebhookEvent value) => {...},
+    ///     (DisputeLostWebhookEvent value) => {...},
+    ///     (DisputeOpenedWebhookEvent value) => {...},
+    ///     (DisputeWonWebhookEvent value) => {...},
+    ///     (LicenseKeyCreatedWebhookEvent value) => {...},
+    ///     (PaymentCancelledWebhookEvent value) => {...},
+    ///     (PaymentFailedWebhookEvent value) => {...},
+    ///     (PaymentProcessingWebhookEvent value) => {...},
+    ///     (PaymentSucceededWebhookEvent value) => {...},
+    ///     (RefundFailedWebhookEvent value) => {...},
+    ///     (RefundSucceededWebhookEvent value) => {...},
+    ///     (SubscriptionActiveWebhookEvent value) => {...},
+    ///     (SubscriptionCancelledWebhookEvent value) => {...},
+    ///     (SubscriptionExpiredWebhookEvent value) => {...},
+    ///     (SubscriptionFailedWebhookEvent value) => {...},
+    ///     (SubscriptionOnHoldWebhookEvent value) => {...},
+    ///     (SubscriptionPlanChangedWebhookEvent value) => {...},
+    ///     (SubscriptionRenewedWebhookEvent value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public T Match<T>(
         System::Func<DisputeAcceptedWebhookEvent, T> disputeAccepted,
         System::Func<DisputeCancelledWebhookEvent, T> disputeCancelled,
@@ -565,6 +959,16 @@ public record class UnwrapWebhookEvent
     public static implicit operator UnwrapWebhookEvent(SubscriptionRenewedWebhookEvent value) =>
         new(value);
 
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public void Validate()
     {
         if (this.Value == null)

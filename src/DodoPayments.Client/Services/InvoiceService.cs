@@ -4,7 +4,7 @@ using Invoices = DodoPayments.Client.Services.Invoices;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class InvoiceService : IInvoiceService
 {
     /// <inheritdoc/>

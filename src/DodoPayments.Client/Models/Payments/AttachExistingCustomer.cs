@@ -16,6 +16,7 @@ public sealed record class AttachExistingCustomer : ModelBase
         init { ModelBase.Set(this._rawData, "customer_id", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.CustomerID;
@@ -36,6 +37,7 @@ public sealed record class AttachExistingCustomer : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="AttachExistingCustomerFromRaw.FromRawUnchecked"/>
     public static AttachExistingCustomer FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -53,6 +55,7 @@ public sealed record class AttachExistingCustomer : ModelBase
 
 class AttachExistingCustomerFromRaw : IFromRaw<AttachExistingCustomer>
 {
+    /// <inheritdoc/>
     public AttachExistingCustomer FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => AttachExistingCustomer.FromRawUnchecked(rawData);

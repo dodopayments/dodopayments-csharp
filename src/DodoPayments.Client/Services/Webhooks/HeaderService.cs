@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Webhooks.Headers;
 
 namespace DodoPayments.Client.Services.Webhooks;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class HeaderService : IHeaderService
 {
     /// <inheritdoc/>

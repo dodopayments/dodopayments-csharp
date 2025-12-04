@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Brands;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class BrandService : IBrandService
 {
     /// <inheritdoc/>

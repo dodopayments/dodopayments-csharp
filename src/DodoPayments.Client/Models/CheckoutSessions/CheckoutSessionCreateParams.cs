@@ -243,6 +243,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
     public static CheckoutSessionCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -327,6 +328,7 @@ public sealed record class ProductCart : ModelBase
         init { ModelBase.Set(this._rawData, "amount", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ProductID;
@@ -353,6 +355,7 @@ public sealed record class ProductCart : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ProductCartFromRaw.FromRawUnchecked"/>
     public static ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -361,6 +364,7 @@ public sealed record class ProductCart : ModelBase
 
 class ProductCartFromRaw : IFromRaw<ProductCart>
 {
+    /// <inheritdoc/>
     public ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         ProductCart.FromRawUnchecked(rawData);
 }
@@ -419,6 +423,7 @@ public sealed record class BillingAddress : ModelBase
         init { ModelBase.Set(this._rawData, "zipcode", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Country.Validate();
@@ -443,6 +448,7 @@ public sealed record class BillingAddress : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="BillingAddressFromRaw.FromRawUnchecked"/>
     public static BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -458,6 +464,7 @@ public sealed record class BillingAddress : ModelBase
 
 class BillingAddressFromRaw : IFromRaw<BillingAddress>
 {
+    /// <inheritdoc/>
     public BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         BillingAddress.FromRawUnchecked(rawData);
 }
@@ -534,6 +541,7 @@ public sealed record class Customization : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ForceLanguage;
@@ -557,6 +565,7 @@ public sealed record class Customization : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CustomizationFromRaw.FromRawUnchecked"/>
     public static Customization FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -565,6 +574,7 @@ public sealed record class Customization : ModelBase
 
 class CustomizationFromRaw : IFromRaw<Customization>
 {
+    /// <inheritdoc/>
     public Customization FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Customization.FromRawUnchecked(rawData);
 }
@@ -847,6 +857,7 @@ public sealed record class FeatureFlags : ModelBase
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.AllowCurrencySelection;
@@ -878,6 +889,7 @@ public sealed record class FeatureFlags : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="FeatureFlagsFromRaw.FromRawUnchecked"/>
     public static FeatureFlags FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -886,6 +898,7 @@ public sealed record class FeatureFlags : ModelBase
 
 class FeatureFlagsFromRaw : IFromRaw<FeatureFlags>
 {
+    /// <inheritdoc/>
     public FeatureFlags FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         FeatureFlags.FromRawUnchecked(rawData);
 }
@@ -915,6 +928,7 @@ public sealed record class SubscriptionData : ModelBase
         init { ModelBase.Set(this._rawData, "trial_period_days", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.OnDemand?.Validate();
@@ -936,6 +950,7 @@ public sealed record class SubscriptionData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionDataFromRaw.FromRawUnchecked"/>
     public static SubscriptionData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -946,6 +961,7 @@ public sealed record class SubscriptionData : ModelBase
 
 class SubscriptionDataFromRaw : IFromRaw<SubscriptionData>
 {
+    /// <inheritdoc/>
     public SubscriptionData FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         SubscriptionData.FromRawUnchecked(rawData);
 }

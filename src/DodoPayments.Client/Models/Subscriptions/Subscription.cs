@@ -308,6 +308,7 @@ public sealed record class Subscription : ModelBase
         init { ModelBase.Set(this._rawData, "tax_id", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Addons)
@@ -361,6 +362,7 @@ public sealed record class Subscription : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionFromRaw.FromRawUnchecked"/>
     public static Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -369,6 +371,7 @@ public sealed record class Subscription : ModelBase
 
 class SubscriptionFromRaw : IFromRaw<Subscription>
 {
+    /// <inheritdoc/>
     public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Subscription.FromRawUnchecked(rawData);
 }
@@ -424,6 +427,7 @@ public sealed record class Meter : ModelBase
         init { ModelBase.Set(this._rawData, "description", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Currency.Validate();
@@ -450,6 +454,7 @@ public sealed record class Meter : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="MeterFromRaw.FromRawUnchecked"/>
     public static Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -458,6 +463,7 @@ public sealed record class Meter : ModelBase
 
 class MeterFromRaw : IFromRaw<Meter>
 {
+    /// <inheritdoc/>
     public Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Meter.FromRawUnchecked(rawData);
 }

@@ -46,6 +46,7 @@ public sealed record class WebhookListPageResponse : ModelBase
         init { ModelBase.Set(this._rawData, "prev_iterator", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Data)
@@ -72,6 +73,7 @@ public sealed record class WebhookListPageResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="WebhookListPageResponseFromRaw.FromRawUnchecked"/>
     public static WebhookListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -82,6 +84,7 @@ public sealed record class WebhookListPageResponse : ModelBase
 
 class WebhookListPageResponseFromRaw : IFromRaw<WebhookListPageResponse>
 {
+    /// <inheritdoc/>
     public WebhookListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => WebhookListPageResponse.FromRawUnchecked(rawData);

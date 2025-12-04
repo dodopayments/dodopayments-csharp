@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Meters;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class MeterService : IMeterService
 {
     /// <inheritdoc/>

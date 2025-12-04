@@ -18,6 +18,7 @@ public sealed record class SubscriptionChargeResponse : ModelBase
         init { ModelBase.Set(this._rawData, "payment_id", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.PaymentID;
@@ -38,6 +39,7 @@ public sealed record class SubscriptionChargeResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionChargeResponseFromRaw.FromRawUnchecked"/>
     public static SubscriptionChargeResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -55,6 +57,7 @@ public sealed record class SubscriptionChargeResponse : ModelBase
 
 class SubscriptionChargeResponseFromRaw : IFromRaw<SubscriptionChargeResponse>
 {
+    /// <inheritdoc/>
     public SubscriptionChargeResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionChargeResponse.FromRawUnchecked(rawData);

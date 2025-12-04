@@ -44,6 +44,7 @@ public sealed record class MeterFilter : ModelBase
         init { ModelBase.Set(this._rawData, "conjunction", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Clauses.Validate();
@@ -65,6 +66,7 @@ public sealed record class MeterFilter : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="MeterFilterFromRaw.FromRawUnchecked"/>
     public static MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -73,6 +75,7 @@ public sealed record class MeterFilter : ModelBase
 
 class MeterFilterFromRaw : IFromRaw<MeterFilter>
 {
+    /// <inheritdoc/>
     public MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         MeterFilter.FromRawUnchecked(rawData);
 }
@@ -109,6 +112,21 @@ public record class Clauses
         this._json = json;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="IReadOnlyList<MeterFilterCondition>"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDirectFilterConditions(out var value)) {
+    ///     // `value` is of type `IReadOnlyList<MeterFilterCondition>`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDirectFilterConditions(
         [NotNullWhen(true)] out IReadOnlyList<MeterFilterCondition>? value
     )
@@ -117,6 +135,21 @@ public record class Clauses
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="IReadOnlyList<ClausesMeterFilter>"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickNestedMeterFilters(out var value)) {
+    ///     // `value` is of type `IReadOnlyList<ClausesMeterFilter>`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickNestedMeterFilters(
         [NotNullWhen(true)] out IReadOnlyList<ClausesMeterFilter>? value
     )
@@ -125,6 +158,26 @@ public record class Clauses
         return value != null;
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (IReadOnlyList<MeterFilterCondition> value) => {...},
+    ///     (IReadOnlyList<ClausesMeterFilter> value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public void Switch(
         System::Action<IReadOnlyList<MeterFilterCondition>> directFilterConditions,
         System::Action<IReadOnlyList<ClausesMeterFilter>> nestedMeterFilters
@@ -145,6 +198,27 @@ public record class Clauses
         }
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (IReadOnlyList<MeterFilterCondition> value) => {...},
+    ///     (IReadOnlyList<ClausesMeterFilter> value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public T Match<T>(
         System::Func<IReadOnlyList<MeterFilterCondition>, T> directFilterConditions,
         System::Func<IReadOnlyList<ClausesMeterFilter>, T> nestedMeterFilters
@@ -166,6 +240,16 @@ public record class Clauses
     public static implicit operator Clauses(List<ClausesMeterFilter> value) =>
         new((IReadOnlyList<ClausesMeterFilter>)value);
 
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public void Validate()
     {
         if (this.Value == null)
@@ -267,6 +351,7 @@ public sealed record class MeterFilterCondition : ModelBase
         init { ModelBase.Set(this._rawData, "value", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Key;
@@ -289,6 +374,7 @@ public sealed record class MeterFilterCondition : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="MeterFilterConditionFromRaw.FromRawUnchecked"/>
     public static MeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -299,6 +385,7 @@ public sealed record class MeterFilterCondition : ModelBase
 
 class MeterFilterConditionFromRaw : IFromRaw<MeterFilterCondition>
 {
+    /// <inheritdoc/>
     public MeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => MeterFilterCondition.FromRawUnchecked(rawData);
@@ -400,24 +487,90 @@ public record class MeterFilterConditionValue
         this._json = json;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="string"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickString(out var value)) {
+    ///     // `value` is of type `string`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickString([NotNullWhen(true)] out string? value)
     {
         value = this.Value as string;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="double"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDouble(out var value)) {
+    ///     // `value` is of type `double`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDouble([NotNullWhen(true)] out double? value)
     {
         value = this.Value as double?;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="bool"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickBool(out var value)) {
+    ///     // `value` is of type `bool`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickBool([NotNullWhen(true)] out bool? value)
     {
         value = this.Value as bool?;
         return value != null;
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (string value) => {...},
+    ///     (double value) => {...},
+    ///     (bool value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public void Switch(
         System::Action<string> @string,
         System::Action<double> @double,
@@ -442,6 +595,28 @@ public record class MeterFilterConditionValue
         }
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (string value) => {...},
+    ///     (double value) => {...},
+    ///     (bool value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public T Match<T>(
         System::Func<string, T> @string,
         System::Func<double, T> @double,
@@ -465,6 +640,16 @@ public record class MeterFilterConditionValue
 
     public static implicit operator MeterFilterConditionValue(bool value) => new(value);
 
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public void Validate()
     {
         if (this.Value == null)
@@ -572,6 +757,7 @@ public sealed record class ClausesMeterFilter : ModelBase
         init { ModelBase.Set(this._rawData, "conjunction", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Clauses.Validate();
@@ -593,6 +779,7 @@ public sealed record class ClausesMeterFilter : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ClausesMeterFilterFromRaw.FromRawUnchecked"/>
     public static ClausesMeterFilter FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -603,6 +790,7 @@ public sealed record class ClausesMeterFilter : ModelBase
 
 class ClausesMeterFilterFromRaw : IFromRaw<ClausesMeterFilter>
 {
+    /// <inheritdoc/>
     public ClausesMeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         ClausesMeterFilter.FromRawUnchecked(rawData);
 }
@@ -645,6 +833,21 @@ public record class ClausesMeterFilterClauses
         this._json = json;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickLevel1FilterConditions(out var value)) {
+    ///     // `value` is of type `IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickLevel1FilterConditions(
         [NotNullWhen(true)] out IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>? value
     )
@@ -653,6 +856,21 @@ public record class ClausesMeterFilterClauses
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="IReadOnlyList<ClausesMeterFilterClausesMeterFilter>"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickLevel1NestedFilters(out var value)) {
+    ///     // `value` is of type `IReadOnlyList<ClausesMeterFilterClausesMeterFilter>`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickLevel1NestedFilters(
         [NotNullWhen(true)] out IReadOnlyList<ClausesMeterFilterClausesMeterFilter>? value
     )
@@ -661,6 +879,26 @@ public record class ClausesMeterFilterClauses
         return value != null;
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition> value) => {...},
+    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilter> value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public void Switch(
         System::Action<
             IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>
@@ -683,6 +921,27 @@ public record class ClausesMeterFilterClauses
         }
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition> value) => {...},
+    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilter> value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public T Match<T>(
         System::Func<
             IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>,
@@ -710,6 +969,16 @@ public record class ClausesMeterFilterClauses
         List<ClausesMeterFilterClausesMeterFilter> value
     ) => new((IReadOnlyList<ClausesMeterFilterClausesMeterFilter>)value);
 
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public void Validate()
     {
         if (this.Value == null)
@@ -831,6 +1100,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : Model
         init { ModelBase.Set(this._rawData, "value", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Key;
@@ -855,6 +1125,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : Model
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ClausesMeterFilterClausesMeterFilterConditionFromRaw.FromRawUnchecked"/>
     public static ClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -866,6 +1137,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : Model
 class ClausesMeterFilterClausesMeterFilterConditionFromRaw
     : IFromRaw<ClausesMeterFilterClausesMeterFilterCondition>
 {
+    /// <inheritdoc/>
     public ClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ClausesMeterFilterClausesMeterFilterCondition.FromRawUnchecked(rawData);
@@ -984,24 +1256,90 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue
         this._json = json;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="string"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickString(out var value)) {
+    ///     // `value` is of type `string`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickString([NotNullWhen(true)] out string? value)
     {
         value = this.Value as string;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="double"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDouble(out var value)) {
+    ///     // `value` is of type `double`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDouble([NotNullWhen(true)] out double? value)
     {
         value = this.Value as double?;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="bool"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickBool(out var value)) {
+    ///     // `value` is of type `bool`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickBool([NotNullWhen(true)] out bool? value)
     {
         value = this.Value as bool?;
         return value != null;
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (string value) => {...},
+    ///     (double value) => {...},
+    ///     (bool value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public void Switch(
         System::Action<string> @string,
         System::Action<double> @double,
@@ -1026,6 +1364,28 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue
         }
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (string value) => {...},
+    ///     (double value) => {...},
+    ///     (bool value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public T Match<T>(
         System::Func<string, T> @string,
         System::Func<double, T> @double,
@@ -1055,6 +1415,16 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue
         bool value
     ) => new(value);
 
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public void Validate()
     {
         if (this.Value == null)
@@ -1170,6 +1540,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : ModelBase
         init { ModelBase.Set(this._rawData, "conjunction", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Clauses.Validate();
@@ -1191,6 +1562,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ClausesMeterFilterClausesMeterFilterFromRaw.FromRawUnchecked"/>
     public static ClausesMeterFilterClausesMeterFilter FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -1201,6 +1573,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : ModelBase
 
 class ClausesMeterFilterClausesMeterFilterFromRaw : IFromRaw<ClausesMeterFilterClausesMeterFilter>
 {
+    /// <inheritdoc/>
     public ClausesMeterFilterClausesMeterFilter FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ClausesMeterFilterClausesMeterFilter.FromRawUnchecked(rawData);
@@ -1244,6 +1617,21 @@ public record class ClausesMeterFilterClausesMeterFilterClauses
         this._json = json;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickLevel2FilterConditions(out var value)) {
+    ///     // `value` is of type `IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickLevel2FilterConditions(
         [NotNullWhen(true)]
             out IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>? value
@@ -1255,6 +1643,21 @@ public record class ClausesMeterFilterClausesMeterFilterClauses
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickLevel2NestedFilters(out var value)) {
+    ///     // `value` is of type `IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickLevel2NestedFilters(
         [NotNullWhen(true)]
             out IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>? value
@@ -1264,6 +1667,26 @@ public record class ClausesMeterFilterClausesMeterFilterClauses
         return value != null;
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value) => {...},
+    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public void Switch(
         System::Action<
             IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
@@ -1288,6 +1711,27 @@ public record class ClausesMeterFilterClausesMeterFilterClauses
         }
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value) => {...},
+    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public T Match<T>(
         System::Func<
             IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>,
@@ -1319,6 +1763,16 @@ public record class ClausesMeterFilterClausesMeterFilterClauses
         List<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value
     ) => new((IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>)value);
 
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public void Validate()
     {
         if (this.Value == null)
@@ -1448,6 +1902,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
         init { ModelBase.Set(this._rawData, "value", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Key;
@@ -1474,6 +1929,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionFromRaw.FromRawUnchecked"/>
     public static ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -1485,6 +1941,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
 class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionFromRaw
     : IFromRaw<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
 {
+    /// <inheritdoc/>
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition.FromRawUnchecked(rawData);
@@ -1620,24 +2077,90 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
         this._json = json;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="string"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickString(out var value)) {
+    ///     // `value` is of type `string`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickString([NotNullWhen(true)] out string? value)
     {
         value = this.Value as string;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="double"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDouble(out var value)) {
+    ///     // `value` is of type `double`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDouble([NotNullWhen(true)] out double? value)
     {
         value = this.Value as double?;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="bool"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickBool(out var value)) {
+    ///     // `value` is of type `bool`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickBool([NotNullWhen(true)] out bool? value)
     {
         value = this.Value as bool?;
         return value != null;
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (string value) => {...},
+    ///     (double value) => {...},
+    ///     (bool value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public void Switch(
         System::Action<string> @string,
         System::Action<double> @double,
@@ -1662,6 +2185,28 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
         }
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (string value) => {...},
+    ///     (double value) => {...},
+    ///     (bool value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public T Match<T>(
         System::Func<string, T> @string,
         System::Func<double, T> @double,
@@ -1691,6 +2236,16 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
         bool value
     ) => new(value);
 
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public void Validate()
     {
         if (this.Value == null)
@@ -1803,6 +2358,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
         init { ModelBase.Set(this._rawData, "conjunction", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Clauses)
@@ -1831,6 +2387,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ClausesMeterFilterClausesMeterFilterClausesMeterFilterFromRaw.FromRawUnchecked"/>
     public static ClausesMeterFilterClausesMeterFilterClausesMeterFilter FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -1842,6 +2399,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
 class ClausesMeterFilterClausesMeterFilterClausesMeterFilterFromRaw
     : IFromRaw<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
 {
+    /// <inheritdoc/>
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilter FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ClausesMeterFilterClausesMeterFilterClausesMeterFilter.FromRawUnchecked(rawData);
@@ -1883,6 +2441,7 @@ public sealed record class Clause : ModelBase
         init { ModelBase.Set(this._rawData, "value", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Key;
@@ -1905,6 +2464,7 @@ public sealed record class Clause : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ClauseFromRaw.FromRawUnchecked"/>
     public static Clause FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -1913,6 +2473,7 @@ public sealed record class Clause : ModelBase
 
 class ClauseFromRaw : IFromRaw<Clause>
 {
+    /// <inheritdoc/>
     public Clause FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Clause.FromRawUnchecked(rawData);
 }
@@ -2017,24 +2578,90 @@ public record class ClauseValue
         this._json = json;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="string"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickString(out var value)) {
+    ///     // `value` is of type `string`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickString([NotNullWhen(true)] out string? value)
     {
         value = this.Value as string;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="double"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDouble(out var value)) {
+    ///     // `value` is of type `double`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickDouble([NotNullWhen(true)] out double? value)
     {
         value = this.Value as double?;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="bool"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickBool(out var value)) {
+    ///     // `value` is of type `bool`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickBool([NotNullWhen(true)] out bool? value)
     {
         value = this.Value as bool?;
         return value != null;
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (string value) => {...},
+    ///     (double value) => {...},
+    ///     (bool value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public void Switch(
         System::Action<string> @string,
         System::Action<double> @double,
@@ -2059,6 +2686,28 @@ public record class ClauseValue
         }
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (string value) => {...},
+    ///     (double value) => {...},
+    ///     (bool value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public T Match<T>(
         System::Func<string, T> @string,
         System::Func<double, T> @double,
@@ -2082,6 +2731,16 @@ public record class ClauseValue
 
     public static implicit operator ClauseValue(bool value) => new(value);
 
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public void Validate()
     {
         if (this.Value == null)

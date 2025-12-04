@@ -9,7 +9,7 @@ using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
 namespace DodoPayments.Client.Services.Customers.Wallets;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class LedgerEntryService : ILedgerEntryService
 {
     /// <inheritdoc/>

@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class SubscriptionService : ISubscriptionService
 {
     /// <inheritdoc/>

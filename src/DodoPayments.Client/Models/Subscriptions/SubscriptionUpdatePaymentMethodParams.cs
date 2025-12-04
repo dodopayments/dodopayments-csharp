@@ -54,6 +54,7 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
     public static SubscriptionUpdatePaymentMethodParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -122,18 +123,68 @@ public record class Body
         this._json = json;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="New"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickNew(out var value)) {
+    ///     // `value` is of type `New`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickNew([NotNullWhen(true)] out New? value)
     {
         value = this.Value as New;
         return value != null;
     }
 
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Existing"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickExisting(out var value)) {
+    ///     // `value` is of type `Existing`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
     public bool TryPickExisting([NotNullWhen(true)] out Existing? value)
     {
         value = this.Value as Existing;
         return value != null;
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (New value) => {...},
+    ///     (Existing value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public void Switch(System::Action<New> new1, System::Action<Existing> existing)
     {
         switch (this.Value)
@@ -151,6 +202,27 @@ public record class Body
         }
     }
 
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (New value) => {...},
+    ///     (Existing value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
     public T Match<T>(System::Func<New, T> new1, System::Func<Existing, T> existing)
     {
         return this.Value switch
@@ -167,6 +239,16 @@ public record class Body
 
     public static implicit operator Body(Existing value) => new(value);
 
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="DodoPaymentsInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public void Validate()
     {
         if (this.Value == null)
@@ -254,6 +336,7 @@ public sealed record class New : ModelBase
         init { ModelBase.Set(this._rawData, "return_url", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Type.Validate();
@@ -275,6 +358,7 @@ public sealed record class New : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="NewFromRaw.FromRawUnchecked"/>
     public static New FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -290,6 +374,7 @@ public sealed record class New : ModelBase
 
 class NewFromRaw : IFromRaw<New>
 {
+    /// <inheritdoc/>
     public New FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         New.FromRawUnchecked(rawData);
 }
@@ -353,6 +438,7 @@ public sealed record class Existing : ModelBase
         init { ModelBase.Set(this._rawData, "type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.PaymentMethodID;
@@ -374,6 +460,7 @@ public sealed record class Existing : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ExistingFromRaw.FromRawUnchecked"/>
     public static Existing FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -382,6 +469,7 @@ public sealed record class Existing : ModelBase
 
 class ExistingFromRaw : IFromRaw<Existing>
 {
+    /// <inheritdoc/>
     public Existing FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Existing.FromRawUnchecked(rawData);
 }

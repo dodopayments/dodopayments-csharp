@@ -111,6 +111,7 @@ public sealed record class AddonResponse : ModelBase
         init { ModelBase.Set(this._rawData, "image", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -140,6 +141,7 @@ public sealed record class AddonResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="AddonResponseFromRaw.FromRawUnchecked"/>
     public static AddonResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -148,6 +150,7 @@ public sealed record class AddonResponse : ModelBase
 
 class AddonResponseFromRaw : IFromRaw<AddonResponse>
 {
+    /// <inheritdoc/>
     public AddonResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         AddonResponse.FromRawUnchecked(rawData);
 }
