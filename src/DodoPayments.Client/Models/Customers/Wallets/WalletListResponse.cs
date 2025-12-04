@@ -25,6 +25,7 @@ public sealed record class WalletListResponse : ModelBase
         init { ModelBase.Set(this._rawData, "total_balance_usd", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Items)
@@ -49,6 +50,7 @@ public sealed record class WalletListResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="WalletListResponseFromRaw.FromRawUnchecked"/>
     public static WalletListResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -59,6 +61,7 @@ public sealed record class WalletListResponse : ModelBase
 
 class WalletListResponseFromRaw : IFromRaw<WalletListResponse>
 {
+    /// <inheritdoc/>
     public WalletListResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         WalletListResponse.FromRawUnchecked(rawData);
 }

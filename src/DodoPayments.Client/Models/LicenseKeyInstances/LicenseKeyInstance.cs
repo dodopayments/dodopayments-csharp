@@ -41,6 +41,7 @@ public sealed record class LicenseKeyInstance : ModelBase
         init { ModelBase.Set(this._rawData, "name", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -65,6 +66,7 @@ public sealed record class LicenseKeyInstance : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseKeyInstanceFromRaw.FromRawUnchecked"/>
     public static LicenseKeyInstance FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -75,6 +77,7 @@ public sealed record class LicenseKeyInstance : ModelBase
 
 class LicenseKeyInstanceFromRaw : IFromRaw<LicenseKeyInstance>
 {
+    /// <inheritdoc/>
     public LicenseKeyInstance FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         LicenseKeyInstance.FromRawUnchecked(rawData);
 }

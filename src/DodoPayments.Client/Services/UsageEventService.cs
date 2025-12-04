@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.UsageEvents;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class UsageEventService : IUsageEventService
 {
     /// <inheritdoc/>

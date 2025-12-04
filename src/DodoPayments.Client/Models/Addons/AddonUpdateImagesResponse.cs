@@ -22,6 +22,7 @@ public sealed record class AddonUpdateImagesResponse : ModelBase
         init { ModelBase.Set(this._rawData, "url", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ImageID;
@@ -43,6 +44,7 @@ public sealed record class AddonUpdateImagesResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="AddonUpdateImagesResponseFromRaw.FromRawUnchecked"/>
     public static AddonUpdateImagesResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -53,6 +55,7 @@ public sealed record class AddonUpdateImagesResponse : ModelBase
 
 class AddonUpdateImagesResponseFromRaw : IFromRaw<AddonUpdateImagesResponse>
 {
+    /// <inheritdoc/>
     public AddonUpdateImagesResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => AddonUpdateImagesResponse.FromRawUnchecked(rawData);

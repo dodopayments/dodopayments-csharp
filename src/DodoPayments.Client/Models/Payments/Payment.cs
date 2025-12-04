@@ -325,6 +325,7 @@ public sealed record class Payment : ModelBase
         init { ModelBase.Set(this._rawData, "updated_at", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Billing.Validate();
@@ -384,6 +385,7 @@ public sealed record class Payment : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="PaymentFromRaw.FromRawUnchecked"/>
     public static Payment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -392,6 +394,7 @@ public sealed record class Payment : ModelBase
 
 class PaymentFromRaw : IFromRaw<Payment>
 {
+    /// <inheritdoc/>
     public Payment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Payment.FromRawUnchecked(rawData);
 }
@@ -489,6 +492,7 @@ public sealed record class Refund : ModelBase
         init { ModelBase.Set(this._rawData, "reason", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BusinessID;
@@ -517,6 +521,7 @@ public sealed record class Refund : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="RefundFromRaw.FromRawUnchecked"/>
     public static Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -525,6 +530,7 @@ public sealed record class Refund : ModelBase
 
 class RefundFromRaw : IFromRaw<Refund>
 {
+    /// <inheritdoc/>
     public Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Refund.FromRawUnchecked(rawData);
 }
@@ -544,6 +550,7 @@ public sealed record class ProductCart : ModelBase
         init { ModelBase.Set(this._rawData, "quantity", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ProductID;
@@ -565,6 +572,7 @@ public sealed record class ProductCart : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ProductCartFromRaw.FromRawUnchecked"/>
     public static ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -573,6 +581,7 @@ public sealed record class ProductCart : ModelBase
 
 class ProductCartFromRaw : IFromRaw<ProductCart>
 {
+    /// <inheritdoc/>
     public ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         ProductCart.FromRawUnchecked(rawData);
 }

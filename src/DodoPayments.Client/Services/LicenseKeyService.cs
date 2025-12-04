@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.LicenseKeys;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class LicenseKeyService : ILicenseKeyService
 {
     /// <inheritdoc/>

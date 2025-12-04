@@ -35,6 +35,7 @@ public sealed record class MeterAggregation : ModelBase
         init { ModelBase.Set(this._rawData, "key", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Type.Validate();
@@ -56,6 +57,7 @@ public sealed record class MeterAggregation : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="MeterAggregationFromRaw.FromRawUnchecked"/>
     public static MeterAggregation FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -73,6 +75,7 @@ public sealed record class MeterAggregation : ModelBase
 
 class MeterAggregationFromRaw : IFromRaw<MeterAggregation>
 {
+    /// <inheritdoc/>
     public MeterAggregation FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         MeterAggregation.FromRawUnchecked(rawData);
 }

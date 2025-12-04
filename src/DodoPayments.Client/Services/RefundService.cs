@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Refunds;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class RefundService : IRefundService
 {
     /// <inheritdoc/>

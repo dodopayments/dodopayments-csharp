@@ -93,6 +93,7 @@ public sealed record class Brand : ModelBase
         init { ModelBase.Set(this._rawData, "url", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BrandID;
@@ -124,6 +125,7 @@ public sealed record class Brand : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="BrandFromRaw.FromRawUnchecked"/>
     public static Brand FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -132,6 +134,7 @@ public sealed record class Brand : ModelBase
 
 class BrandFromRaw : IFromRaw<Brand>
 {
+    /// <inheritdoc/>
     public Brand FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Brand.FromRawUnchecked(rawData);
 }

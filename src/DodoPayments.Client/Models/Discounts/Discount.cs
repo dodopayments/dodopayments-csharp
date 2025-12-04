@@ -127,6 +127,7 @@ public sealed record class Discount : ModelBase
         init { ModelBase.Set(this._rawData, "usage_limit", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
@@ -158,6 +159,7 @@ public sealed record class Discount : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="DiscountFromRaw.FromRawUnchecked"/>
     public static Discount FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -166,6 +168,7 @@ public sealed record class Discount : ModelBase
 
 class DiscountFromRaw : IFromRaw<Discount>
 {
+    /// <inheritdoc/>
     public Discount FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Discount.FromRawUnchecked(rawData);
 }

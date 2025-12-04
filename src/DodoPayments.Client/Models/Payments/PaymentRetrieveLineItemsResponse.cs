@@ -37,6 +37,7 @@ public sealed record class PaymentRetrieveLineItemsResponse : ModelBase
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.Currency.Validate();
@@ -61,6 +62,7 @@ public sealed record class PaymentRetrieveLineItemsResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="PaymentRetrieveLineItemsResponseFromRaw.FromRawUnchecked"/>
     public static PaymentRetrieveLineItemsResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -71,6 +73,7 @@ public sealed record class PaymentRetrieveLineItemsResponse : ModelBase
 
 class PaymentRetrieveLineItemsResponseFromRaw : IFromRaw<PaymentRetrieveLineItemsResponse>
 {
+    /// <inheritdoc/>
     public PaymentRetrieveLineItemsResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => PaymentRetrieveLineItemsResponse.FromRawUnchecked(rawData);
@@ -120,6 +123,7 @@ public sealed record class PaymentRetrieveLineItemsResponseItem : ModelBase
         init { ModelBase.Set(this._rawData, "name", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
@@ -145,6 +149,7 @@ public sealed record class PaymentRetrieveLineItemsResponseItem : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="PaymentRetrieveLineItemsResponseItemFromRaw.FromRawUnchecked"/>
     public static PaymentRetrieveLineItemsResponseItem FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -155,6 +160,7 @@ public sealed record class PaymentRetrieveLineItemsResponseItem : ModelBase
 
 class PaymentRetrieveLineItemsResponseItemFromRaw : IFromRaw<PaymentRetrieveLineItemsResponseItem>
 {
+    /// <inheritdoc/>
     public PaymentRetrieveLineItemsResponseItem FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => PaymentRetrieveLineItemsResponseItem.FromRawUnchecked(rawData);

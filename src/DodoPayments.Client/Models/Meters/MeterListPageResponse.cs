@@ -16,6 +16,7 @@ public sealed record class MeterListPageResponse : ModelBase
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Items)
@@ -39,6 +40,7 @@ public sealed record class MeterListPageResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="MeterListPageResponseFromRaw.FromRawUnchecked"/>
     public static MeterListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -56,6 +58,7 @@ public sealed record class MeterListPageResponse : ModelBase
 
 class MeterListPageResponseFromRaw : IFromRaw<MeterListPageResponse>
 {
+    /// <inheritdoc/>
     public MeterListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => MeterListPageResponse.FromRawUnchecked(rawData);

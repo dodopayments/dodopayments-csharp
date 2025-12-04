@@ -126,6 +126,7 @@ public sealed record class LicenseKey : ModelBase
         init { ModelBase.Set(this._rawData, "subscription_id", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -157,6 +158,7 @@ public sealed record class LicenseKey : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseKeyFromRaw.FromRawUnchecked"/>
     public static LicenseKey FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -165,6 +167,7 @@ public sealed record class LicenseKey : ModelBase
 
 class LicenseKeyFromRaw : IFromRaw<LicenseKey>
 {
+    /// <inheritdoc/>
     public LicenseKey FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         LicenseKey.FromRawUnchecked(rawData);
 }

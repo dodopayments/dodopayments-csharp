@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.CheckoutSessions;
 
 namespace DodoPayments.Client.Services;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class CheckoutSessionService : ICheckoutSessionService
 {
     /// <inheritdoc/>

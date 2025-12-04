@@ -102,6 +102,7 @@ public sealed record class PaymentCreateResponse : ModelBase
         init { ModelBase.Set(this._rawData, "product_cart", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ClientSecret;
@@ -133,6 +134,7 @@ public sealed record class PaymentCreateResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="PaymentCreateResponseFromRaw.FromRawUnchecked"/>
     public static PaymentCreateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -143,6 +145,7 @@ public sealed record class PaymentCreateResponse : ModelBase
 
 class PaymentCreateResponseFromRaw : IFromRaw<PaymentCreateResponse>
 {
+    /// <inheritdoc/>
     public PaymentCreateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => PaymentCreateResponse.FromRawUnchecked(rawData);

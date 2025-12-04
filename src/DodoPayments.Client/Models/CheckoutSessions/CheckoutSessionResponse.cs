@@ -28,6 +28,7 @@ public sealed record class CheckoutSessionResponse : ModelBase
         init { ModelBase.Set(this._rawData, "session_id", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.CheckoutURL;
@@ -49,6 +50,7 @@ public sealed record class CheckoutSessionResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CheckoutSessionResponseFromRaw.FromRawUnchecked"/>
     public static CheckoutSessionResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -59,6 +61,7 @@ public sealed record class CheckoutSessionResponse : ModelBase
 
 class CheckoutSessionResponseFromRaw : IFromRaw<CheckoutSessionResponse>
 {
+    /// <inheritdoc/>
     public CheckoutSessionResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CheckoutSessionResponse.FromRawUnchecked(rawData);

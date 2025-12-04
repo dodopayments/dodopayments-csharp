@@ -9,7 +9,7 @@ using DodoPayments.Client.Services.Customers.Wallets;
 
 namespace DodoPayments.Client.Services.Customers;
 
-/// <inheritdoc />
+/// <inheritdoc/>
 public sealed class WalletService : IWalletService
 {
     /// <inheritdoc/>

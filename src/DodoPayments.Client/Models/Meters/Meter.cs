@@ -78,6 +78,7 @@ public sealed record class Meter : ModelBase
         init { ModelBase.Set(this._rawData, "filter", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -107,6 +108,7 @@ public sealed record class Meter : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="MeterFromRaw.FromRawUnchecked"/>
     public static Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -115,6 +117,7 @@ public sealed record class Meter : ModelBase
 
 class MeterFromRaw : IFromRaw<Meter>
 {
+    /// <inheritdoc/>
     public Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Meter.FromRawUnchecked(rawData);
 }

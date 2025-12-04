@@ -16,6 +16,7 @@ public sealed record class CustomerPortalSession : ModelBase
         init { ModelBase.Set(this._rawData, "link", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Link;
@@ -36,6 +37,7 @@ public sealed record class CustomerPortalSession : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CustomerPortalSessionFromRaw.FromRawUnchecked"/>
     public static CustomerPortalSession FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -53,6 +55,7 @@ public sealed record class CustomerPortalSession : ModelBase
 
 class CustomerPortalSessionFromRaw : IFromRaw<CustomerPortalSession>
 {
+    /// <inheritdoc/>
     public CustomerPortalSession FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CustomerPortalSession.FromRawUnchecked(rawData);

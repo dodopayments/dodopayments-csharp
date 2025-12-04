@@ -132,6 +132,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
     public static SubscriptionChargeParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -204,6 +205,7 @@ public sealed record class CustomerBalanceConfig : ModelBase
         init { ModelBase.Set(this._rawData, "allow_customer_credits_usage", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.AllowCustomerCreditsPurchase;
@@ -225,6 +227,7 @@ public sealed record class CustomerBalanceConfig : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="CustomerBalanceConfigFromRaw.FromRawUnchecked"/>
     public static CustomerBalanceConfig FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -235,6 +238,7 @@ public sealed record class CustomerBalanceConfig : ModelBase
 
 class CustomerBalanceConfigFromRaw : IFromRaw<CustomerBalanceConfig>
 {
+    /// <inheritdoc/>
     public CustomerBalanceConfig FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CustomerBalanceConfig.FromRawUnchecked(rawData);

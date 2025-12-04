@@ -70,6 +70,7 @@ public sealed record class SubscriptionCancelledWebhookEvent : ModelBase
         init { ModelBase.Set(this._rawData, "type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BusinessID;
@@ -93,6 +94,7 @@ public sealed record class SubscriptionCancelledWebhookEvent : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionCancelledWebhookEventFromRaw.FromRawUnchecked"/>
     public static SubscriptionCancelledWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -103,6 +105,7 @@ public sealed record class SubscriptionCancelledWebhookEvent : ModelBase
 
 class SubscriptionCancelledWebhookEventFromRaw : IFromRaw<SubscriptionCancelledWebhookEvent>
 {
+    /// <inheritdoc/>
     public SubscriptionCancelledWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionCancelledWebhookEvent.FromRawUnchecked(rawData);
@@ -470,6 +473,7 @@ public sealed record class SubscriptionCancelledWebhookEventData : ModelBase
             TaxID = subscriptionCancelledWebhookEventData.TaxID,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Addons)
@@ -524,6 +528,7 @@ public sealed record class SubscriptionCancelledWebhookEventData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionCancelledWebhookEventDataFromRaw.FromRawUnchecked"/>
     public static SubscriptionCancelledWebhookEventData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -534,6 +539,7 @@ public sealed record class SubscriptionCancelledWebhookEventData : ModelBase
 
 class SubscriptionCancelledWebhookEventDataFromRaw : IFromRaw<SubscriptionCancelledWebhookEventData>
 {
+    /// <inheritdoc/>
     public SubscriptionCancelledWebhookEventData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionCancelledWebhookEventData.FromRawUnchecked(rawData);
@@ -572,6 +578,7 @@ public sealed record class SubscriptionCancelledWebhookEventDataIntersectionMemb
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType?.Validate();
@@ -596,6 +603,7 @@ public sealed record class SubscriptionCancelledWebhookEventDataIntersectionMemb
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="SubscriptionCancelledWebhookEventDataIntersectionMember1FromRaw.FromRawUnchecked"/>
     public static SubscriptionCancelledWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -607,6 +615,7 @@ public sealed record class SubscriptionCancelledWebhookEventDataIntersectionMemb
 class SubscriptionCancelledWebhookEventDataIntersectionMember1FromRaw
     : IFromRaw<SubscriptionCancelledWebhookEventDataIntersectionMember1>
 {
+    /// <inheritdoc/>
     public SubscriptionCancelledWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionCancelledWebhookEventDataIntersectionMember1.FromRawUnchecked(rawData);

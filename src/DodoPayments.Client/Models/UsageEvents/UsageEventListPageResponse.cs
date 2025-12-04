@@ -18,6 +18,7 @@ public sealed record class UsageEventListPageResponse : ModelBase
         init { ModelBase.Set(this._rawData, "items", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         foreach (var item in this.Items)
@@ -41,6 +42,7 @@ public sealed record class UsageEventListPageResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="UsageEventListPageResponseFromRaw.FromRawUnchecked"/>
     public static UsageEventListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -58,6 +60,7 @@ public sealed record class UsageEventListPageResponse : ModelBase
 
 class UsageEventListPageResponseFromRaw : IFromRaw<UsageEventListPageResponse>
 {
+    /// <inheritdoc/>
     public UsageEventListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => UsageEventListPageResponse.FromRawUnchecked(rawData);

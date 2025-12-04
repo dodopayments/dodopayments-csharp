@@ -127,6 +127,7 @@ public sealed record class Refund : ModelBase
         init { ModelBase.Set(this._rawData, "reason", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BusinessID;
@@ -157,6 +158,7 @@ public sealed record class Refund : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="RefundFromRaw.FromRawUnchecked"/>
     public static Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -165,6 +167,7 @@ public sealed record class Refund : ModelBase
 
 class RefundFromRaw : IFromRaw<Refund>
 {
+    /// <inheritdoc/>
     public Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Refund.FromRawUnchecked(rawData);
 }

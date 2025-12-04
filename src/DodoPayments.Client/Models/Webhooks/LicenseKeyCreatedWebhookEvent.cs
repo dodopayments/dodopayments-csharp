@@ -66,6 +66,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
         init { ModelBase.Set(this._rawData, "type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BusinessID;
@@ -89,6 +90,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseKeyCreatedWebhookEventFromRaw.FromRawUnchecked"/>
     public static LicenseKeyCreatedWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -99,6 +101,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
 
 class LicenseKeyCreatedWebhookEventFromRaw : IFromRaw<LicenseKeyCreatedWebhookEvent>
 {
+    /// <inheritdoc/>
     public LicenseKeyCreatedWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => LicenseKeyCreatedWebhookEvent.FromRawUnchecked(rawData);
@@ -277,6 +280,7 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
             SubscriptionID = licenseKeyCreatedWebhookEventData.SubscriptionID,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -309,6 +313,7 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseKeyCreatedWebhookEventDataFromRaw.FromRawUnchecked"/>
     public static LicenseKeyCreatedWebhookEventData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -319,6 +324,7 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
 
 class LicenseKeyCreatedWebhookEventDataFromRaw : IFromRaw<LicenseKeyCreatedWebhookEventData>
 {
+    /// <inheritdoc/>
     public LicenseKeyCreatedWebhookEventData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => LicenseKeyCreatedWebhookEventData.FromRawUnchecked(rawData);
@@ -357,6 +363,7 @@ public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1 
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType?.Validate();
@@ -381,6 +388,7 @@ public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1 
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseKeyCreatedWebhookEventDataIntersectionMember1FromRaw.FromRawUnchecked"/>
     public static LicenseKeyCreatedWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -392,6 +400,7 @@ public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1 
 class LicenseKeyCreatedWebhookEventDataIntersectionMember1FromRaw
     : IFromRaw<LicenseKeyCreatedWebhookEventDataIntersectionMember1>
 {
+    /// <inheritdoc/>
     public LicenseKeyCreatedWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => LicenseKeyCreatedWebhookEventDataIntersectionMember1.FromRawUnchecked(rawData);

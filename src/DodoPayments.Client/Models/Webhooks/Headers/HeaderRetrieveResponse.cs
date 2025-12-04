@@ -36,6 +36,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase
         init { ModelBase.Set(this._rawData, "sensitive", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Headers;
@@ -57,6 +58,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="HeaderRetrieveResponseFromRaw.FromRawUnchecked"/>
     public static HeaderRetrieveResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -67,6 +69,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase
 
 class HeaderRetrieveResponseFromRaw : IFromRaw<HeaderRetrieveResponse>
 {
+    /// <inheritdoc/>
     public HeaderRetrieveResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => HeaderRetrieveResponse.FromRawUnchecked(rawData);

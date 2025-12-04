@@ -75,6 +75,7 @@ public sealed record class LicenseActivateResponse : ModelBase
         init { ModelBase.Set(this._rawData, "product", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
@@ -101,6 +102,7 @@ public sealed record class LicenseActivateResponse : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="LicenseActivateResponseFromRaw.FromRawUnchecked"/>
     public static LicenseActivateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -111,6 +113,7 @@ public sealed record class LicenseActivateResponse : ModelBase
 
 class LicenseActivateResponseFromRaw : IFromRaw<LicenseActivateResponse>
 {
+    /// <inheritdoc/>
     public LicenseActivateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => LicenseActivateResponse.FromRawUnchecked(rawData);
@@ -140,6 +143,7 @@ public sealed record class Product : ModelBase
         init { ModelBase.Set(this._rawData, "name", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ProductID;
@@ -161,6 +165,7 @@ public sealed record class Product : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="ProductFromRaw.FromRawUnchecked"/>
     public static Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
@@ -176,6 +181,7 @@ public sealed record class Product : ModelBase
 
 class ProductFromRaw : IFromRaw<Product>
 {
+    /// <inheritdoc/>
     public Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Product.FromRawUnchecked(rawData);
 }

@@ -66,6 +66,7 @@ public sealed record class DisputeCancelledWebhookEvent : ModelBase
         init { ModelBase.Set(this._rawData, "type", value); }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BusinessID;
@@ -89,6 +90,7 @@ public sealed record class DisputeCancelledWebhookEvent : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="DisputeCancelledWebhookEventFromRaw.FromRawUnchecked"/>
     public static DisputeCancelledWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -99,6 +101,7 @@ public sealed record class DisputeCancelledWebhookEvent : ModelBase
 
 class DisputeCancelledWebhookEventFromRaw : IFromRaw<DisputeCancelledWebhookEvent>
 {
+    /// <inheritdoc/>
     public DisputeCancelledWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => DisputeCancelledWebhookEvent.FromRawUnchecked(rawData);
@@ -246,6 +249,7 @@ public sealed record class DisputeCancelledWebhookEventData : ModelBase
             Remarks = disputeCancelledWebhookEventData.Remarks,
         };
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
@@ -275,6 +279,7 @@ public sealed record class DisputeCancelledWebhookEventData : ModelBase
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="DisputeCancelledWebhookEventDataFromRaw.FromRawUnchecked"/>
     public static DisputeCancelledWebhookEventData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -285,6 +290,7 @@ public sealed record class DisputeCancelledWebhookEventData : ModelBase
 
 class DisputeCancelledWebhookEventDataFromRaw : IFromRaw<DisputeCancelledWebhookEventData>
 {
+    /// <inheritdoc/>
     public DisputeCancelledWebhookEventData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => DisputeCancelledWebhookEventData.FromRawUnchecked(rawData);
@@ -323,6 +329,7 @@ public sealed record class DisputeCancelledWebhookEventDataIntersectionMember1 :
         }
     }
 
+    /// <inheritdoc/>
     public override void Validate()
     {
         this.PayloadType?.Validate();
@@ -347,6 +354,7 @@ public sealed record class DisputeCancelledWebhookEventDataIntersectionMember1 :
     }
 #pragma warning restore CS8618
 
+    /// <inheritdoc cref="DisputeCancelledWebhookEventDataIntersectionMember1FromRaw.FromRawUnchecked"/>
     public static DisputeCancelledWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
@@ -358,6 +366,7 @@ public sealed record class DisputeCancelledWebhookEventDataIntersectionMember1 :
 class DisputeCancelledWebhookEventDataIntersectionMember1FromRaw
     : IFromRaw<DisputeCancelledWebhookEventDataIntersectionMember1>
 {
+    /// <inheritdoc/>
     public DisputeCancelledWebhookEventDataIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => DisputeCancelledWebhookEventDataIntersectionMember1.FromRawUnchecked(rawData);
