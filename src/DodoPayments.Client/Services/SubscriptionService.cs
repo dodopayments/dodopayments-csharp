@@ -259,6 +259,53 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
+    public async Task<SubscriptionPreviewChangePlanResponse> PreviewChangePlan(
+        SubscriptionPreviewChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.SubscriptionID == null)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "'parameters.SubscriptionID' cannot be null"
+            );
+        }
+
+        HttpRequest<SubscriptionPreviewChangePlanParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        using var response = await this
+            ._client.Execute(request, cancellationToken)
+            .ConfigureAwait(false);
+        var deserializedResponse = await response
+            .Deserialize<SubscriptionPreviewChangePlanResponse>(cancellationToken)
+            .ConfigureAwait(false);
+        if (this._client.ResponseValidation)
+        {
+            deserializedResponse.Validate();
+        }
+        return deserializedResponse;
+    }
+
+    /// <inheritdoc/>
+    public async Task<SubscriptionPreviewChangePlanResponse> PreviewChangePlan(
+        string subscriptionID,
+        SubscriptionPreviewChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return await this.PreviewChangePlan(
+            parameters with
+            {
+                SubscriptionID = subscriptionID,
+            },
+            cancellationToken
+        );
+    }
+
+    /// <inheritdoc/>
     public async Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
         SubscriptionRetrieveUsageHistoryParams parameters,
         CancellationToken cancellationToken = default

@@ -21,8 +21,8 @@ public class SubscriptionListPageResponseTest : TestBase
                 {
                     Billing = new()
                     {
-                        City = "city",
                         Country = CountryCode.Af,
+                        City = "city",
                         State = "state",
                         Street = "street",
                         Zipcode = "zipcode",
@@ -68,8 +68,8 @@ public class SubscriptionListPageResponseTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -126,8 +126,8 @@ public class SubscriptionListPageResponseTest : TestBase
                 {
                     Billing = new()
                     {
-                        City = "city",
                         Country = CountryCode.Af,
+                        City = "city",
                         State = "state",
                         Street = "street",
                         Zipcode = "zipcode",
@@ -184,8 +184,8 @@ public class SubscriptionListPageResponseTest : TestBase
                 {
                     Billing = new()
                     {
-                        City = "city",
                         Country = CountryCode.Af,
+                        City = "city",
                         State = "state",
                         Street = "street",
                         Zipcode = "zipcode",
@@ -235,8 +235,8 @@ public class SubscriptionListPageResponseTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -293,8 +293,8 @@ public class SubscriptionListPageResponseTest : TestBase
                 {
                     Billing = new()
                     {
-                        City = "city",
                         Country = CountryCode.Af,
+                        City = "city",
                         State = "state",
                         Street = "street",
                         Zipcode = "zipcode",
@@ -347,8 +347,8 @@ public class ItemTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -388,8 +388,8 @@ public class ItemTest : TestBase
 
         Payments::BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -468,8 +468,8 @@ public class ItemTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -520,8 +520,8 @@ public class ItemTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -565,8 +565,8 @@ public class ItemTest : TestBase
 
         Payments::BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -645,8 +645,8 @@ public class ItemTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -694,8 +694,8 @@ public class ItemTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -747,8 +747,8 @@ public class ItemTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -791,8 +791,8 @@ public class ItemTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -850,8 +850,8 @@ public class ItemTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",

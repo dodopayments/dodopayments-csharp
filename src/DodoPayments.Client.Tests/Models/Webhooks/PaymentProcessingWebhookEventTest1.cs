@@ -22,8 +22,8 @@ public class PaymentProcessingWebhookEventTest1 : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -104,8 +104,8 @@ public class PaymentProcessingWebhookEventTest1 : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -196,8 +196,8 @@ public class PaymentProcessingWebhookEventTest1 : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -289,8 +289,8 @@ public class PaymentProcessingWebhookEventTest1 : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -375,8 +375,8 @@ public class PaymentProcessingWebhookEventTest1 : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -467,8 +467,8 @@ public class PaymentProcessingWebhookEventTest1 : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -557,8 +557,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -633,8 +633,8 @@ public class Data9Test : TestBase
 
         Payments::BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -769,8 +769,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -856,8 +856,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -936,8 +936,8 @@ public class Data9Test : TestBase
 
         Payments::BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -1072,8 +1072,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1156,8 +1156,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1242,8 +1242,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1323,8 +1323,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1414,8 +1414,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1500,8 +1500,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1598,8 +1598,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1667,8 +1667,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1781,8 +1781,8 @@ public class Data9Test : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",

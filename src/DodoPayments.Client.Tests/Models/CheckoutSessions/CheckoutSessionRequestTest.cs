@@ -62,6 +62,7 @@ public class CheckoutSessionRequestTest : TestBase
             },
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimalAddress = true,
             ReturnURL = "return_url",
             ShowSavedPaymentMethods = true,
             SubscriptionData = new()
@@ -128,6 +129,7 @@ public class CheckoutSessionRequestTest : TestBase
         };
         bool expectedForce3DS = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        bool expectedMinimalAddress = true;
         string expectedReturnURL = "return_url";
         bool expectedShowSavedPaymentMethods = true;
         CheckoutSessionRequestSubscriptionData expectedSubscriptionData = new()
@@ -171,6 +173,7 @@ public class CheckoutSessionRequestTest : TestBase
 
             Assert.Equal(value, model.Metadata[item.Key]);
         }
+        Assert.Equal(expectedMinimalAddress, model.MinimalAddress);
         Assert.Equal(expectedReturnURL, model.ReturnURL);
         Assert.Equal(expectedShowSavedPaymentMethods, model.ShowSavedPaymentMethods);
         Assert.Equal(expectedSubscriptionData, model.SubscriptionData);
@@ -228,6 +231,7 @@ public class CheckoutSessionRequestTest : TestBase
             },
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimalAddress = true,
             ReturnURL = "return_url",
             ShowSavedPaymentMethods = true,
             SubscriptionData = new()
@@ -302,6 +306,7 @@ public class CheckoutSessionRequestTest : TestBase
             },
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimalAddress = true,
             ReturnURL = "return_url",
             ShowSavedPaymentMethods = true,
             SubscriptionData = new()
@@ -372,6 +377,7 @@ public class CheckoutSessionRequestTest : TestBase
         };
         bool expectedForce3DS = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        bool expectedMinimalAddress = true;
         string expectedReturnURL = "return_url";
         bool expectedShowSavedPaymentMethods = true;
         CheckoutSessionRequestSubscriptionData expectedSubscriptionData = new()
@@ -418,6 +424,7 @@ public class CheckoutSessionRequestTest : TestBase
 
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
+        Assert.Equal(expectedMinimalAddress, deserialized.MinimalAddress);
         Assert.Equal(expectedReturnURL, deserialized.ReturnURL);
         Assert.Equal(expectedShowSavedPaymentMethods, deserialized.ShowSavedPaymentMethods);
         Assert.Equal(expectedSubscriptionData, deserialized.SubscriptionData);
@@ -475,6 +482,7 @@ public class CheckoutSessionRequestTest : TestBase
             },
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimalAddress = true,
             ReturnURL = "return_url",
             ShowSavedPaymentMethods = true,
             SubscriptionData = new()
@@ -544,6 +552,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("customization"));
         Assert.Null(model.FeatureFlags);
         Assert.False(model.RawData.ContainsKey("feature_flags"));
+        Assert.Null(model.MinimalAddress);
+        Assert.False(model.RawData.ContainsKey("minimal_address"));
         Assert.Null(model.ShowSavedPaymentMethods);
         Assert.False(model.RawData.ContainsKey("show_saved_payment_methods"));
     }
@@ -642,6 +652,7 @@ public class CheckoutSessionRequestTest : TestBase
             Confirm = null,
             Customization = null,
             FeatureFlags = null,
+            MinimalAddress = null,
             ShowSavedPaymentMethods = null,
         };
 
@@ -651,6 +662,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("customization"));
         Assert.Null(model.FeatureFlags);
         Assert.False(model.RawData.ContainsKey("feature_flags"));
+        Assert.Null(model.MinimalAddress);
+        Assert.False(model.RawData.ContainsKey("minimal_address"));
         Assert.Null(model.ShowSavedPaymentMethods);
         Assert.False(model.RawData.ContainsKey("show_saved_payment_methods"));
     }
@@ -702,6 +715,7 @@ public class CheckoutSessionRequestTest : TestBase
             Confirm = null,
             Customization = null,
             FeatureFlags = null,
+            MinimalAddress = null,
             ShowSavedPaymentMethods = null,
         };
 
@@ -746,6 +760,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
             },
+            MinimalAddress = true,
             ShowSavedPaymentMethods = true,
         };
 
@@ -807,6 +822,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
             },
+            MinimalAddress = true,
             ShowSavedPaymentMethods = true,
         };
 
@@ -851,6 +867,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
             },
+            MinimalAddress = true,
             ShowSavedPaymentMethods = true,
 
             AllowedPaymentMethodTypes = null,
@@ -922,6 +939,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
             },
+            MinimalAddress = true,
             ShowSavedPaymentMethods = true,
 
             AllowedPaymentMethodTypes = null,

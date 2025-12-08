@@ -12,15 +12,6 @@ namespace DodoPayments.Client.Models.Payments;
 public sealed record class BillingAddress : ModelBase
 {
     /// <summary>
-    /// City name
-    /// </summary>
-    public required string City
-    {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "city"); }
-        init { ModelBase.Set(this._rawData, "city", value); }
-    }
-
-    /// <summary>
     /// Two-letter ISO country code (ISO 3166-1 alpha-2)
     /// </summary>
     public required ApiEnum<string, CountryCode> Country
@@ -33,37 +24,46 @@ public sealed record class BillingAddress : ModelBase
     }
 
     /// <summary>
+    /// City name
+    /// </summary>
+    public string? City
+    {
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "city"); }
+        init { ModelBase.Set(this._rawData, "city", value); }
+    }
+
+    /// <summary>
     /// State or province name
     /// </summary>
-    public required string State
+    public string? State
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "state"); }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "state"); }
         init { ModelBase.Set(this._rawData, "state", value); }
     }
 
     /// <summary>
     /// Street address including house number and unit/apartment if applicable
     /// </summary>
-    public required string Street
+    public string? Street
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "street"); }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "street"); }
         init { ModelBase.Set(this._rawData, "street", value); }
     }
 
     /// <summary>
     /// Postal code or ZIP code
     /// </summary>
-    public required string Zipcode
+    public string? Zipcode
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "zipcode"); }
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "zipcode"); }
         init { ModelBase.Set(this._rawData, "zipcode", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.City;
         this.Country.Validate();
+        _ = this.City;
         _ = this.State;
         _ = this.Street;
         _ = this.Zipcode;
@@ -91,6 +91,13 @@ public sealed record class BillingAddress : ModelBase
     public static BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public BillingAddress(ApiEnum<string, CountryCode> country)
+        : this()
+    {
+        this.Country = country;
     }
 }
 
