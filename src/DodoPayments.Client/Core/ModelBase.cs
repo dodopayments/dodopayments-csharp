@@ -54,8 +54,15 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
             new ApiEnumConverter<string, Subscriptions::TimeInterval>(),
+            new ApiEnumConverter<string, Subscriptions::UnionMember0Type>(),
+            new ApiEnumConverter<string, Subscriptions::UnionMember1Type>(),
+            new ApiEnumConverter<string, Subscriptions::UnionMember2Type>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionPreviewChangePlanParamsProrationBillingMode
+            >(),
             new ApiEnumConverter<string, Subscriptions::Type>(),
             new ApiEnumConverter<string, Subscriptions::ExistingType>(),
             new ApiEnumConverter<string, LicenseKeys::LicenseKeyStatus>(),
@@ -181,6 +188,11 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Webhooks::SubscriptionRenewedWebhookEventType>(),
             new ApiEnumConverter<
                 string,
+                Webhooks::SubscriptionUpdatedWebhookEventDataIntersectionMember1PayloadType
+            >(),
+            new ApiEnumConverter<string, Webhooks::SubscriptionUpdatedWebhookEventType>(),
+            new ApiEnumConverter<
+                string,
                 Webhooks::DisputeAcceptedWebhookEventDataIntersectionMember1PayloadType
             >(),
             new ApiEnumConverter<string, Webhooks::DisputeAcceptedWebhookEventType>(),
@@ -224,6 +236,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Webhooks::Type18>(),
             new ApiEnumConverter<string, Webhooks::Data19IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type19>(),
+            new ApiEnumConverter<string, Webhooks::Data20IntersectionMember1PayloadType>(),
+            new ApiEnumConverter<string, Webhooks::Type20>(),
             new ApiEnumConverter<string, WebhookEventType>(),
             new ApiEnumConverter<string, PayloadType>(),
             new ApiEnumConverter<string, SubscriptionIntersectionMember1PayloadType>(),

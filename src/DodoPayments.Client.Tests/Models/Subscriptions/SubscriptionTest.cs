@@ -18,8 +18,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -74,8 +74,8 @@ public class SubscriptionTest : TestBase
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -180,8 +180,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -247,8 +247,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -307,8 +307,8 @@ public class SubscriptionTest : TestBase
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -413,8 +413,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -477,8 +477,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -546,8 +546,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -604,8 +604,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -680,8 +680,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",

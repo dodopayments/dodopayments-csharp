@@ -31,6 +31,7 @@ public enum WebhookEventType
     SubscriptionFailed,
     SubscriptionExpired,
     SubscriptionPlanChanged,
+    SubscriptionUpdated,
     LicenseKeyCreated,
 }
 
@@ -64,6 +65,7 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
             "subscription.failed" => WebhookEventType.SubscriptionFailed,
             "subscription.expired" => WebhookEventType.SubscriptionExpired,
             "subscription.plan_changed" => WebhookEventType.SubscriptionPlanChanged,
+            "subscription.updated" => WebhookEventType.SubscriptionUpdated,
             "license_key.created" => WebhookEventType.LicenseKeyCreated,
             _ => (WebhookEventType)(-1),
         };
@@ -99,6 +101,7 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
                 WebhookEventType.SubscriptionFailed => "subscription.failed",
                 WebhookEventType.SubscriptionExpired => "subscription.expired",
                 WebhookEventType.SubscriptionPlanChanged => "subscription.plan_changed",
+                WebhookEventType.SubscriptionUpdated => "subscription.updated",
                 WebhookEventType.LicenseKeyCreated => "license_key.created",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))

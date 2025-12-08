@@ -78,6 +78,18 @@ public interface ISubscriptionService
         CancellationToken cancellationToken = default
     );
 
+    Task<SubscriptionPreviewChangePlanResponse> PreviewChangePlan(
+        SubscriptionPreviewChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="PreviewChangePlan(SubscriptionPreviewChangePlanParams, CancellationToken)"/>
+    Task<SubscriptionPreviewChangePlanResponse> PreviewChangePlan(
+        string subscriptionID,
+        SubscriptionPreviewChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
     /// <summary>
     /// Get detailed usage history for a subscription that includes usage-based billing
     /// (metered components). This endpoint provides insights into customer usage

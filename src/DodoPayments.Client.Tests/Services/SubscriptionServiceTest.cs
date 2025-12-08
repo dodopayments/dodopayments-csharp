@@ -15,8 +15,8 @@ public class SubscriptionServiceTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -70,6 +70,22 @@ public class SubscriptionServiceTest : TestBase
         var response = await this.client.Subscriptions.Charge(
             "subscription_id",
             new() { ProductPrice = 0 }
+        );
+        response.Validate();
+    }
+
+    [Fact]
+    public async Task PreviewChangePlan_Works()
+    {
+        var response = await this.client.Subscriptions.PreviewChangePlan(
+            "subscription_id",
+            new()
+            {
+                ProductID = "product_id",
+                ProrationBillingMode =
+                    SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
+                Quantity = 0,
+            }
         );
         response.Validate();
     }

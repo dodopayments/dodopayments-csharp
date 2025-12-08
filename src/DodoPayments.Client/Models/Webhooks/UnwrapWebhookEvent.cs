@@ -43,7 +43,8 @@ public record class UnwrapWebhookEvent
                 subscriptionFailed: (x) => x.BusinessID,
                 subscriptionOnHold: (x) => x.BusinessID,
                 subscriptionPlanChanged: (x) => x.BusinessID,
-                subscriptionRenewed: (x) => x.BusinessID
+                subscriptionRenewed: (x) => x.BusinessID,
+                subscriptionUpdated: (x) => x.BusinessID
             );
         }
     }
@@ -73,7 +74,8 @@ public record class UnwrapWebhookEvent
                 subscriptionFailed: (x) => x.Timestamp,
                 subscriptionOnHold: (x) => x.Timestamp,
                 subscriptionPlanChanged: (x) => x.Timestamp,
-                subscriptionRenewed: (x) => x.Timestamp
+                subscriptionRenewed: (x) => x.Timestamp,
+                subscriptionUpdated: (x) => x.Timestamp
             );
         }
     }
@@ -199,6 +201,12 @@ public record class UnwrapWebhookEvent
     }
 
     public UnwrapWebhookEvent(SubscriptionRenewedWebhookEvent value, JsonElement? json = null)
+    {
+        this.Value = value;
+        this._json = json;
+    }
+
+    public UnwrapWebhookEvent(SubscriptionUpdatedWebhookEvent value, JsonElement? json = null)
     {
         this.Value = value;
         this._json = json;
@@ -671,6 +679,29 @@ public record class UnwrapWebhookEvent
     }
 
     /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="SubscriptionUpdatedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickSubscriptionUpdated(out var value)) {
+    ///     // `value` is of type `SubscriptionUpdatedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickSubscriptionUpdated(
+        [NotNullWhen(true)] out SubscriptionUpdatedWebhookEvent? value
+    )
+    {
+        value = this.Value as SubscriptionUpdatedWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
     /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
@@ -704,7 +735,8 @@ public record class UnwrapWebhookEvent
     ///     (SubscriptionFailedWebhookEvent value) => {...},
     ///     (SubscriptionOnHoldWebhookEvent value) => {...},
     ///     (SubscriptionPlanChangedWebhookEvent value) => {...},
-    ///     (SubscriptionRenewedWebhookEvent value) => {...}
+    ///     (SubscriptionRenewedWebhookEvent value) => {...},
+    ///     (SubscriptionUpdatedWebhookEvent value) => {...}
     /// );
     /// </code>
     /// </example>
@@ -730,7 +762,8 @@ public record class UnwrapWebhookEvent
         System::Action<SubscriptionFailedWebhookEvent> subscriptionFailed,
         System::Action<SubscriptionOnHoldWebhookEvent> subscriptionOnHold,
         System::Action<SubscriptionPlanChangedWebhookEvent> subscriptionPlanChanged,
-        System::Action<SubscriptionRenewedWebhookEvent> subscriptionRenewed
+        System::Action<SubscriptionRenewedWebhookEvent> subscriptionRenewed,
+        System::Action<SubscriptionUpdatedWebhookEvent> subscriptionUpdated
     )
     {
         switch (this.Value)
@@ -798,6 +831,9 @@ public record class UnwrapWebhookEvent
             case SubscriptionRenewedWebhookEvent value:
                 subscriptionRenewed(value);
                 break;
+            case SubscriptionUpdatedWebhookEvent value:
+                subscriptionUpdated(value);
+                break;
             default:
                 throw new DodoPaymentsInvalidDataException(
                     "Data did not match any variant of UnwrapWebhookEvent"
@@ -840,7 +876,8 @@ public record class UnwrapWebhookEvent
     ///     (SubscriptionFailedWebhookEvent value) => {...},
     ///     (SubscriptionOnHoldWebhookEvent value) => {...},
     ///     (SubscriptionPlanChangedWebhookEvent value) => {...},
-    ///     (SubscriptionRenewedWebhookEvent value) => {...}
+    ///     (SubscriptionRenewedWebhookEvent value) => {...},
+    ///     (SubscriptionUpdatedWebhookEvent value) => {...}
     /// );
     /// </code>
     /// </example>
@@ -866,7 +903,8 @@ public record class UnwrapWebhookEvent
         System::Func<SubscriptionFailedWebhookEvent, T> subscriptionFailed,
         System::Func<SubscriptionOnHoldWebhookEvent, T> subscriptionOnHold,
         System::Func<SubscriptionPlanChangedWebhookEvent, T> subscriptionPlanChanged,
-        System::Func<SubscriptionRenewedWebhookEvent, T> subscriptionRenewed
+        System::Func<SubscriptionRenewedWebhookEvent, T> subscriptionRenewed,
+        System::Func<SubscriptionUpdatedWebhookEvent, T> subscriptionUpdated
     )
     {
         return this.Value switch
@@ -892,6 +930,7 @@ public record class UnwrapWebhookEvent
             SubscriptionOnHoldWebhookEvent value => subscriptionOnHold(value),
             SubscriptionPlanChangedWebhookEvent value => subscriptionPlanChanged(value),
             SubscriptionRenewedWebhookEvent value => subscriptionRenewed(value),
+            SubscriptionUpdatedWebhookEvent value => subscriptionUpdated(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of UnwrapWebhookEvent"
             ),
@@ -957,6 +996,9 @@ public record class UnwrapWebhookEvent
         new(value);
 
     public static implicit operator UnwrapWebhookEvent(SubscriptionRenewedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(SubscriptionUpdatedWebhookEvent value) =>
         new(value);
 
     /// <summary>
@@ -1347,6 +1389,24 @@ sealed class UnwrapWebhookEventConverter : JsonConverter<UnwrapWebhookEvent>
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionRenewedWebhookEvent>(
+                json,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, json);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(
                 json,
                 options
             );
