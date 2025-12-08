@@ -22,8 +22,8 @@ public class PaymentFailedWebhookEventTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -104,8 +104,8 @@ public class PaymentFailedWebhookEventTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -197,8 +197,8 @@ public class PaymentFailedWebhookEventTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -290,8 +290,8 @@ public class PaymentFailedWebhookEventTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -376,8 +376,8 @@ public class PaymentFailedWebhookEventTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -469,8 +469,8 @@ public class PaymentFailedWebhookEventTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -559,8 +559,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -635,8 +635,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
 
         Payments::BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -773,8 +773,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -860,8 +860,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -940,8 +940,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
 
         Payments::BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -1078,8 +1078,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1162,8 +1162,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1248,8 +1248,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1329,8 +1329,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1420,8 +1420,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1506,8 +1506,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1604,8 +1604,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1673,8 +1673,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1787,8 +1787,8 @@ public class PaymentFailedWebhookEventDataTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",

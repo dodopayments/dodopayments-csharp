@@ -12,21 +12,21 @@ public class BillingAddressTest : TestBase
     {
         var model = new BillingAddress
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
         };
 
-        string expectedCity = "city";
         ApiEnum<string, CountryCode> expectedCountry = CountryCode.Af;
+        string expectedCity = "city";
         string expectedState = "state";
         string expectedStreet = "street";
         string expectedZipcode = "zipcode";
 
-        Assert.Equal(expectedCity, model.City);
         Assert.Equal(expectedCountry, model.Country);
+        Assert.Equal(expectedCity, model.City);
         Assert.Equal(expectedState, model.State);
         Assert.Equal(expectedStreet, model.Street);
         Assert.Equal(expectedZipcode, model.Zipcode);
@@ -37,8 +37,8 @@ public class BillingAddressTest : TestBase
     {
         var model = new BillingAddress
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -55,8 +55,8 @@ public class BillingAddressTest : TestBase
     {
         var model = new BillingAddress
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -66,14 +66,14 @@ public class BillingAddressTest : TestBase
         var deserialized = JsonSerializer.Deserialize<BillingAddress>(json);
         Assert.NotNull(deserialized);
 
-        string expectedCity = "city";
         ApiEnum<string, CountryCode> expectedCountry = CountryCode.Af;
+        string expectedCity = "city";
         string expectedState = "state";
         string expectedStreet = "street";
         string expectedZipcode = "zipcode";
 
-        Assert.Equal(expectedCity, deserialized.City);
         Assert.Equal(expectedCountry, deserialized.Country);
+        Assert.Equal(expectedCity, deserialized.City);
         Assert.Equal(expectedState, deserialized.State);
         Assert.Equal(expectedStreet, deserialized.Street);
         Assert.Equal(expectedZipcode, deserialized.Zipcode);
@@ -84,11 +84,73 @@ public class BillingAddressTest : TestBase
     {
         var model = new BillingAddress
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new BillingAddress { Country = CountryCode.Af };
+
+        Assert.Null(model.City);
+        Assert.False(model.RawData.ContainsKey("city"));
+        Assert.Null(model.State);
+        Assert.False(model.RawData.ContainsKey("state"));
+        Assert.Null(model.Street);
+        Assert.False(model.RawData.ContainsKey("street"));
+        Assert.Null(model.Zipcode);
+        Assert.False(model.RawData.ContainsKey("zipcode"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new BillingAddress { Country = CountryCode.Af };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new BillingAddress
+        {
+            Country = CountryCode.Af,
+
+            City = null,
+            State = null,
+            Street = null,
+            Zipcode = null,
+        };
+
+        Assert.Null(model.City);
+        Assert.True(model.RawData.ContainsKey("city"));
+        Assert.Null(model.State);
+        Assert.True(model.RawData.ContainsKey("state"));
+        Assert.Null(model.Street);
+        Assert.True(model.RawData.ContainsKey("street"));
+        Assert.Null(model.Zipcode);
+        Assert.True(model.RawData.ContainsKey("zipcode"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new BillingAddress
+        {
+            Country = CountryCode.Af,
+
+            City = null,
+            State = null,
+            Street = null,
+            Zipcode = null,
         };
 
         model.Validate();

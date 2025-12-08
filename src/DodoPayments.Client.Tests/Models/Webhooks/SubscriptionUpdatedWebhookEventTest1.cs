@@ -9,12 +9,12 @@ using DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
 
-public class SubscriptionExpiredWebhookEventTest : TestBase
+public class SubscriptionUpdatedWebhookEventTest1 : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionExpiredWebhookEvent
+        var model = new SubscriptionUpdatedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -73,15 +73,14 @@ public class SubscriptionExpiredWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
-                PayloadType =
-                    SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+                PayloadType = Data20IntersectionMember1PayloadType.Subscription,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionExpiredWebhookEventType.SubscriptionExpired,
+            Type = Type20.SubscriptionUpdated,
         };
 
         string expectedBusinessID = "business_id";
-        SubscriptionExpiredWebhookEventData expectedData = new()
+        Data20 expectedData = new()
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -137,12 +136,10 @@ public class SubscriptionExpiredWebhookEventTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, SubscriptionExpiredWebhookEventType> expectedType =
-            SubscriptionExpiredWebhookEventType.SubscriptionExpired;
+        ApiEnum<string, Type20> expectedType = Type20.SubscriptionUpdated;
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
@@ -153,7 +150,7 @@ public class SubscriptionExpiredWebhookEventTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionExpiredWebhookEvent
+        var model = new SubscriptionUpdatedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -212,15 +209,14 @@ public class SubscriptionExpiredWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
-                PayloadType =
-                    SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+                PayloadType = Data20IntersectionMember1PayloadType.Subscription,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionExpiredWebhookEventType.SubscriptionExpired,
+            Type = Type20.SubscriptionUpdated,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEvent>(json);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -228,7 +224,7 @@ public class SubscriptionExpiredWebhookEventTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionExpiredWebhookEvent
+        var model = new SubscriptionUpdatedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -287,19 +283,18 @@ public class SubscriptionExpiredWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
-                PayloadType =
-                    SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+                PayloadType = Data20IntersectionMember1PayloadType.Subscription,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionExpiredWebhookEventType.SubscriptionExpired,
+            Type = Type20.SubscriptionUpdated,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEvent>(json);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(json);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
-        SubscriptionExpiredWebhookEventData expectedData = new()
+        Data20 expectedData = new()
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -355,12 +350,10 @@ public class SubscriptionExpiredWebhookEventTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, SubscriptionExpiredWebhookEventType> expectedType =
-            SubscriptionExpiredWebhookEventType.SubscriptionExpired;
+        ApiEnum<string, Type20> expectedType = Type20.SubscriptionUpdated;
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
@@ -371,7 +364,7 @@ public class SubscriptionExpiredWebhookEventTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionExpiredWebhookEvent
+        var model = new SubscriptionUpdatedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -430,23 +423,22 @@ public class SubscriptionExpiredWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
-                PayloadType =
-                    SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+                PayloadType = Data20IntersectionMember1PayloadType.Subscription,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionExpiredWebhookEventType.SubscriptionExpired,
+            Type = Type20.SubscriptionUpdated,
         };
 
         model.Validate();
     }
 }
 
-public class SubscriptionExpiredWebhookEventDataTest : TestBase
+public class Data20Test : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -502,8 +494,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
@@ -562,11 +553,8 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
         string expectedTaxID = "tax_id";
-        ApiEnum<
-            string,
-            SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType
-        > expectedPayloadType =
-            SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription;
+        ApiEnum<string, Data20IntersectionMember1PayloadType> expectedPayloadType =
+            Data20IntersectionMember1PayloadType.Subscription;
 
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -616,7 +604,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -672,12 +660,11 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEventData>(json);
+        var deserialized = JsonSerializer.Deserialize<Data20>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -685,7 +672,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -741,12 +728,11 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEventData>(json);
+        var deserialized = JsonSerializer.Deserialize<Data20>(json);
         Assert.NotNull(deserialized);
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
@@ -805,11 +791,8 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
         string expectedTaxID = "tax_id";
-        ApiEnum<
-            string,
-            SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType
-        > expectedPayloadType =
-            SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription;
+        ApiEnum<string, Data20IntersectionMember1PayloadType> expectedPayloadType =
+            Data20IntersectionMember1PayloadType.Subscription;
 
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -859,7 +842,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -915,8 +898,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
         model.Validate();
@@ -925,7 +907,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -990,7 +972,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -1054,7 +1036,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -1122,7 +1104,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -1189,7 +1171,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -1239,8 +1221,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
         Assert.Null(model.CancelledAt);
@@ -1260,7 +1241,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -1310,8 +1291,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
         model.Validate();
@@ -1320,7 +1300,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -1370,8 +1350,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
 
             CancelledAt = null,
             DiscountCyclesRemaining = null,
@@ -1398,7 +1377,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventData
+        var model = new Data20
         {
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
@@ -1448,8 +1427,7 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
 
             CancelledAt = null,
             DiscountCyclesRemaining = null,
@@ -1463,22 +1441,18 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
     }
 }
 
-public class SubscriptionExpiredWebhookEventDataIntersectionMember1Test : TestBase
+public class Data20IntersectionMember1Test : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventDataIntersectionMember1
+        var model = new Data20IntersectionMember1
         {
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
-        ApiEnum<
-            string,
-            SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType
-        > expectedPayloadType =
-            SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription;
+        ApiEnum<string, Data20IntersectionMember1PayloadType> expectedPayloadType =
+            Data20IntersectionMember1PayloadType.Subscription;
 
         Assert.Equal(expectedPayloadType, model.PayloadType);
     }
@@ -1486,17 +1460,13 @@ public class SubscriptionExpiredWebhookEventDataIntersectionMember1Test : TestBa
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventDataIntersectionMember1
+        var model = new Data20IntersectionMember1
         {
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionExpiredWebhookEventDataIntersectionMember1>(
-                json
-            );
+        var deserialized = JsonSerializer.Deserialize<Data20IntersectionMember1>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -1504,24 +1474,17 @@ public class SubscriptionExpiredWebhookEventDataIntersectionMember1Test : TestBa
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventDataIntersectionMember1
+        var model = new Data20IntersectionMember1
         {
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionExpiredWebhookEventDataIntersectionMember1>(
-                json
-            );
+        var deserialized = JsonSerializer.Deserialize<Data20IntersectionMember1>(json);
         Assert.NotNull(deserialized);
 
-        ApiEnum<
-            string,
-            SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType
-        > expectedPayloadType =
-            SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription;
+        ApiEnum<string, Data20IntersectionMember1PayloadType> expectedPayloadType =
+            Data20IntersectionMember1PayloadType.Subscription;
 
         Assert.Equal(expectedPayloadType, deserialized.PayloadType);
     }
@@ -1529,10 +1492,9 @@ public class SubscriptionExpiredWebhookEventDataIntersectionMember1Test : TestBa
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventDataIntersectionMember1
+        var model = new Data20IntersectionMember1
         {
-            PayloadType =
-                SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
+            PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
         model.Validate();
@@ -1541,7 +1503,7 @@ public class SubscriptionExpiredWebhookEventDataIntersectionMember1Test : TestBa
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventDataIntersectionMember1 { };
+        var model = new Data20IntersectionMember1 { };
 
         Assert.Null(model.PayloadType);
         Assert.False(model.RawData.ContainsKey("payload_type"));
@@ -1550,7 +1512,7 @@ public class SubscriptionExpiredWebhookEventDataIntersectionMember1Test : TestBa
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventDataIntersectionMember1 { };
+        var model = new Data20IntersectionMember1 { };
 
         model.Validate();
     }
@@ -1558,7 +1520,7 @@ public class SubscriptionExpiredWebhookEventDataIntersectionMember1Test : TestBa
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventDataIntersectionMember1
+        var model = new Data20IntersectionMember1
         {
             // Null should be interpreted as omitted for these properties
             PayloadType = null,
@@ -1571,7 +1533,7 @@ public class SubscriptionExpiredWebhookEventDataIntersectionMember1Test : TestBa
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionExpiredWebhookEventDataIntersectionMember1
+        var model = new Data20IntersectionMember1
         {
             // Null should be interpreted as omitted for these properties
             PayloadType = null,

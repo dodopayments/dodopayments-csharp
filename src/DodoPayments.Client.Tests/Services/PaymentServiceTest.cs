@@ -14,8 +14,8 @@ public class PaymentServiceTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",

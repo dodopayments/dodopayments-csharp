@@ -24,8 +24,8 @@ public class WebhookPayloadTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -106,8 +106,8 @@ public class WebhookPayloadTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -198,8 +198,8 @@ public class WebhookPayloadTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -291,8 +291,8 @@ public class WebhookPayloadTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -377,8 +377,8 @@ public class WebhookPayloadTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -469,8 +469,8 @@ public class WebhookPayloadTest : TestBase
             {
                 Billing = new()
                 {
-                    City = "city",
                     Country = CountryCode.Af,
+                    City = "city",
                     State = "state",
                     Street = "street",
                     Zipcode = "zipcode",
@@ -559,8 +559,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -635,8 +635,8 @@ public class PaymentTest : TestBase
 
         Payments::BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -770,8 +770,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -857,8 +857,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -937,8 +937,8 @@ public class PaymentTest : TestBase
 
         Payments::BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -1072,8 +1072,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1156,8 +1156,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1241,8 +1241,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1323,8 +1323,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1412,8 +1412,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1498,8 +1498,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1596,8 +1596,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1665,8 +1665,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1779,8 +1779,8 @@ public class PaymentTest : TestBase
         {
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1914,8 +1914,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -1974,8 +1974,8 @@ public class SubscriptionTest : TestBase
         ];
         Payments::BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -2086,8 +2086,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -2154,8 +2154,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -2218,8 +2218,8 @@ public class SubscriptionTest : TestBase
         ];
         Payments::BillingAddress expectedBilling = new()
         {
-            City = "city",
             Country = CountryCode.Af,
+            City = "city",
             State = "state",
             Street = "street",
             Zipcode = "zipcode",
@@ -2330,8 +2330,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -2395,8 +2395,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -2465,8 +2465,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -2524,8 +2524,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",
@@ -2601,8 +2601,8 @@ public class SubscriptionTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Billing = new()
             {
-                City = "city",
                 Country = CountryCode.Af,
+                City = "city",
                 State = "state",
                 Street = "street",
                 Zipcode = "zipcode",

@@ -175,6 +175,24 @@ public sealed record class CheckoutSessionRequest : ModelBase
     }
 
     /// <summary>
+    /// If true, only zipcode is required when confirm is true; other address fields
+    /// remain optional
+    /// </summary>
+    public bool? MinimalAddress
+    {
+        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "minimal_address"); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            ModelBase.Set(this._rawData, "minimal_address", value);
+        }
+    }
+
+    /// <summary>
     /// The url to redirect after payment failure or success.
     /// </summary>
     public string? ReturnURL
@@ -235,6 +253,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
         this.FeatureFlags?.Validate();
         _ = this.Force3DS;
         _ = this.Metadata;
+        _ = this.MinimalAddress;
         _ = this.ReturnURL;
         _ = this.ShowSavedPaymentMethods;
         this.SubscriptionData?.Validate();
