@@ -820,6 +820,158 @@ public class ImmediateChargeTest : TestBase
     }
 }
 
+public class LineItemTest : TestBase
+{
+    [Fact]
+    public void UnionMember0Validation_Works()
+    {
+        LineItem value = new(
+            new()
+            {
+                ID = "id",
+                Currency = Currency.Aed,
+                ProductID = "product_id",
+                ProrationFactor = 0,
+                Quantity = 0,
+                TaxInclusive = true,
+                Type = UnionMember0Type.Subscription,
+                UnitPrice = 0,
+                Description = "description",
+                Name = "name",
+                Tax = 0,
+                TaxRate = 0,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void UnionMember1Validation_Works()
+    {
+        LineItem value = new(
+            new()
+            {
+                ID = "id",
+                Currency = Currency.Aed,
+                Name = "name",
+                ProrationFactor = 0,
+                Quantity = 0,
+                TaxCategory = TaxCategory.DigitalProducts,
+                TaxInclusive = true,
+                TaxRate = 0,
+                Type = UnionMember1Type.Addon,
+                UnitPrice = 0,
+                Description = "description",
+                Tax = 0,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void UnionMember2Validation_Works()
+    {
+        LineItem value = new(
+            new()
+            {
+                ID = "id",
+                ChargeableUnits = "chargeable_units",
+                Currency = Currency.Aed,
+                FreeThreshold = 0,
+                Name = "name",
+                PricePerUnit = "price_per_unit",
+                Subtotal = 0,
+                TaxInclusive = true,
+                TaxRate = 0,
+                Type = UnionMember2Type.Meter,
+                UnitsConsumed = "units_consumed",
+                Description = "description",
+                Tax = 0,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void UnionMember0SerializationRoundtrip_Works()
+    {
+        LineItem value = new(
+            new()
+            {
+                ID = "id",
+                Currency = Currency.Aed,
+                ProductID = "product_id",
+                ProrationFactor = 0,
+                Quantity = 0,
+                TaxInclusive = true,
+                Type = UnionMember0Type.Subscription,
+                UnitPrice = 0,
+                Description = "description",
+                Name = "name",
+                Tax = 0,
+                TaxRate = 0,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<LineItem>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void UnionMember1SerializationRoundtrip_Works()
+    {
+        LineItem value = new(
+            new()
+            {
+                ID = "id",
+                Currency = Currency.Aed,
+                Name = "name",
+                ProrationFactor = 0,
+                Quantity = 0,
+                TaxCategory = TaxCategory.DigitalProducts,
+                TaxInclusive = true,
+                TaxRate = 0,
+                Type = UnionMember1Type.Addon,
+                UnitPrice = 0,
+                Description = "description",
+                Tax = 0,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<LineItem>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void UnionMember2SerializationRoundtrip_Works()
+    {
+        LineItem value = new(
+            new()
+            {
+                ID = "id",
+                ChargeableUnits = "chargeable_units",
+                Currency = Currency.Aed,
+                FreeThreshold = 0,
+                Name = "name",
+                PricePerUnit = "price_per_unit",
+                Subtotal = 0,
+                TaxInclusive = true,
+                TaxRate = 0,
+                Type = UnionMember2Type.Meter,
+                UnitsConsumed = "units_consumed",
+                Description = "description",
+                Tax = 0,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<LineItem>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class UnionMember0Test : TestBase
 {
     [Fact]

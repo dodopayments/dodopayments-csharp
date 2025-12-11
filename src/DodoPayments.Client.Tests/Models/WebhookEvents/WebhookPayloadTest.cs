@@ -551,6 +551,494 @@ public class WebhookPayloadTest : TestBase
     }
 }
 
+public class DataTest : TestBase
+{
+    [Fact]
+    public void paymentValidation_Works()
+    {
+        Data value = new(
+            new()
+            {
+                Billing = new()
+                {
+                    Country = CountryCode.Af,
+                    City = "city",
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                BrandID = "brand_id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = Currency.Aed,
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                DigitalProductsDelivered = true,
+                Disputes =
+                [
+                    new()
+                    {
+                        Amount = "amount",
+                        BusinessID = "business_id",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Currency = "currency",
+                        DisputeID = "dispute_id",
+                        DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                        DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
+                        PaymentID = "payment_id",
+                        Remarks = "remarks",
+                    },
+                ],
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PaymentID = "payment_id",
+                Refunds =
+                [
+                    new()
+                    {
+                        BusinessID = "business_id",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        IsPartial = true,
+                        PaymentID = "payment_id",
+                        RefundID = "refund_id",
+                        Status = Refunds::RefundStatus.Succeeded,
+                        Amount = 0,
+                        Currency = Currency.Aed,
+                        Reason = "reason",
+                    },
+                ],
+                SettlementAmount = 0,
+                SettlementCurrency = Currency.Aed,
+                TotalAmount = 0,
+                CardIssuingCountry = CountryCode.Af,
+                CardLastFour = "card_last_four",
+                CardNetwork = "card_network",
+                CardType = "card_type",
+                CheckoutSessionID = "checkout_session_id",
+                DiscountID = "discount_id",
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                PaymentLink = "payment_link",
+                PaymentMethod = "payment_method",
+                PaymentMethodType = "payment_method_type",
+                ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                SettlementTax = 0,
+                Status = Payments::IntentStatus.Succeeded,
+                SubscriptionID = "subscription_id",
+                Tax = 0,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PayloadType = PayloadType.Payment,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void subscriptionValidation_Works()
+    {
+        Data value = new(
+            new()
+            {
+                Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                Billing = new()
+                {
+                    Country = CountryCode.Af,
+                    City = "city",
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CancelAtNextBillingDate = true,
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = Currency.Aed,
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Meters =
+                [
+                    new()
+                    {
+                        Currency = Currency.Aed,
+                        FreeThreshold = 0,
+                        MeasurementUnit = "measurement_unit",
+                        MeterID = "meter_id",
+                        Name = "name",
+                        PricePerUnit = "10.50",
+                        Description = "description",
+                    },
+                ],
+                NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OnDemand = true,
+                PaymentFrequencyCount = 0,
+                PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+                PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                RecurringPreTaxAmount = 0,
+                Status = Subscriptions::SubscriptionStatus.Pending,
+                SubscriptionID = "subscription_id",
+                SubscriptionPeriodCount = 0,
+                SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+                TaxInclusive = true,
+                TrialPeriodDays = 0,
+                CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DiscountCyclesRemaining = 0,
+                DiscountID = "discount_id",
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentMethodID = "payment_method_id",
+                TaxID = "tax_id",
+                PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void refundValidation_Works()
+    {
+        Data value = new(
+            new()
+            {
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                IsPartial = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PaymentID = "payment_id",
+                RefundID = "refund_id",
+                Status = Refunds::RefundStatus.Succeeded,
+                Amount = 0,
+                Currency = Currency.Aed,
+                Reason = "reason",
+                PayloadType = RefundIntersectionMember1PayloadType.Refund,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void disputeValidation_Works()
+    {
+        Data value = new(
+            new()
+            {
+                Amount = "amount",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = "currency",
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                DisputeID = "dispute_id",
+                DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
+                PaymentID = "payment_id",
+                Reason = "reason",
+                Remarks = "remarks",
+                PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void license_keyValidation_Works()
+    {
+        Data value = new(
+            new()
+            {
+                ID = "lic_123",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
+                CustomerID = "cus_123",
+                InstancesCount = 0,
+                Key = "key",
+                PaymentID = "payment_id",
+                ProductID = "product_id",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
+                ActivationsLimit = 5,
+                ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+                SubscriptionID = "subscription_id",
+                PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void paymentSerializationRoundtrip_Works()
+    {
+        Data value = new(
+            new()
+            {
+                Billing = new()
+                {
+                    Country = CountryCode.Af,
+                    City = "city",
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                BrandID = "brand_id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = Currency.Aed,
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                DigitalProductsDelivered = true,
+                Disputes =
+                [
+                    new()
+                    {
+                        Amount = "amount",
+                        BusinessID = "business_id",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Currency = "currency",
+                        DisputeID = "dispute_id",
+                        DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                        DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
+                        PaymentID = "payment_id",
+                        Remarks = "remarks",
+                    },
+                ],
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PaymentID = "payment_id",
+                Refunds =
+                [
+                    new()
+                    {
+                        BusinessID = "business_id",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        IsPartial = true,
+                        PaymentID = "payment_id",
+                        RefundID = "refund_id",
+                        Status = Refunds::RefundStatus.Succeeded,
+                        Amount = 0,
+                        Currency = Currency.Aed,
+                        Reason = "reason",
+                    },
+                ],
+                SettlementAmount = 0,
+                SettlementCurrency = Currency.Aed,
+                TotalAmount = 0,
+                CardIssuingCountry = CountryCode.Af,
+                CardLastFour = "card_last_four",
+                CardNetwork = "card_network",
+                CardType = "card_type",
+                CheckoutSessionID = "checkout_session_id",
+                DiscountID = "discount_id",
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                PaymentLink = "payment_link",
+                PaymentMethod = "payment_method",
+                PaymentMethodType = "payment_method_type",
+                ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                SettlementTax = 0,
+                Status = Payments::IntentStatus.Succeeded,
+                SubscriptionID = "subscription_id",
+                Tax = 0,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PayloadType = PayloadType.Payment,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Data>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void subscriptionSerializationRoundtrip_Works()
+    {
+        Data value = new(
+            new()
+            {
+                Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                Billing = new()
+                {
+                    Country = CountryCode.Af,
+                    City = "city",
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CancelAtNextBillingDate = true,
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = Currency.Aed,
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Meters =
+                [
+                    new()
+                    {
+                        Currency = Currency.Aed,
+                        FreeThreshold = 0,
+                        MeasurementUnit = "measurement_unit",
+                        MeterID = "meter_id",
+                        Name = "name",
+                        PricePerUnit = "10.50",
+                        Description = "description",
+                    },
+                ],
+                NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OnDemand = true,
+                PaymentFrequencyCount = 0,
+                PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+                PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                RecurringPreTaxAmount = 0,
+                Status = Subscriptions::SubscriptionStatus.Pending,
+                SubscriptionID = "subscription_id",
+                SubscriptionPeriodCount = 0,
+                SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+                TaxInclusive = true,
+                TrialPeriodDays = 0,
+                CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DiscountCyclesRemaining = 0,
+                DiscountID = "discount_id",
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentMethodID = "payment_method_id",
+                TaxID = "tax_id",
+                PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Data>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void refundSerializationRoundtrip_Works()
+    {
+        Data value = new(
+            new()
+            {
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                IsPartial = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PaymentID = "payment_id",
+                RefundID = "refund_id",
+                Status = Refunds::RefundStatus.Succeeded,
+                Amount = 0,
+                Currency = Currency.Aed,
+                Reason = "reason",
+                PayloadType = RefundIntersectionMember1PayloadType.Refund,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Data>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void disputeSerializationRoundtrip_Works()
+    {
+        Data value = new(
+            new()
+            {
+                Amount = "amount",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = "currency",
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                DisputeID = "dispute_id",
+                DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
+                PaymentID = "payment_id",
+                Reason = "reason",
+                Remarks = "remarks",
+                PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Data>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void license_keySerializationRoundtrip_Works()
+    {
+        Data value = new(
+            new()
+            {
+                ID = "lic_123",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
+                CustomerID = "cus_123",
+                InstancesCount = 0,
+                Key = "key",
+                PaymentID = "payment_id",
+                ProductID = "product_id",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
+                ActivationsLimit = 5,
+                ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+                SubscriptionID = "subscription_id",
+                PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Data>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class PaymentTest : TestBase
 {
     [Fact]
