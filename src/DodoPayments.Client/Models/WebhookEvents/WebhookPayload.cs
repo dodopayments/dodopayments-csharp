@@ -520,6 +520,13 @@ public record class Data
         {
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Data");
         }
+        this.Switch(
+            (payment) => payment.Validate(),
+            (subscription) => subscription.Validate(),
+            (refund) => refund.Validate(),
+            (dispute) => dispute.Validate(),
+            (licenseKey) => licenseKey.Validate()
+        );
     }
 
     public virtual bool Equals(Data? other)
