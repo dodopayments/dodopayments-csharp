@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 
@@ -1061,6 +1062,60 @@ public class UnionMember0Test : TestBase
     }
 }
 
+public class UnionMember0TypeTest : TestBase
+{
+    [Theory]
+    [InlineData(UnionMember0Type.Subscription)]
+    public void Validation_Works(UnionMember0Type rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, UnionMember0Type> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(UnionMember0Type.Subscription)]
+    public void SerializationRoundtrip_Works(UnionMember0Type rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, UnionMember0Type> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class UnionMember1Test : TestBase
 {
     [Fact]
@@ -1296,6 +1351,60 @@ public class UnionMember1Test : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class UnionMember1TypeTest : TestBase
+{
+    [Theory]
+    [InlineData(UnionMember1Type.Addon)]
+    public void Validation_Works(UnionMember1Type rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, UnionMember1Type> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(UnionMember1Type.Addon)]
+    public void SerializationRoundtrip_Works(UnionMember1Type rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, UnionMember1Type> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 
@@ -1546,6 +1655,60 @@ public class UnionMember2Test : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class UnionMember2TypeTest : TestBase
+{
+    [Theory]
+    [InlineData(UnionMember2Type.Meter)]
+    public void Validation_Works(UnionMember2Type rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, UnionMember2Type> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember2Type>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(UnionMember2Type.Meter)]
+    public void SerializationRoundtrip_Works(UnionMember2Type rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, UnionMember2Type> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember2Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember2Type>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember2Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 
