@@ -5,6 +5,47 @@ using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
+public class BodyTest : TestBase
+{
+    [Fact]
+    public void newValidation_Works()
+    {
+        Body value = new(new() { Type = Type.New, ReturnURL = "return_url" });
+        value.Validate();
+    }
+
+    [Fact]
+    public void existingValidation_Works()
+    {
+        Body value = new(
+            new() { PaymentMethodID = "payment_method_id", Type = ExistingType.Existing }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void newSerializationRoundtrip_Works()
+    {
+        Body value = new(new() { Type = Type.New, ReturnURL = "return_url" });
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Body>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void existingSerializationRoundtrip_Works()
+    {
+        Body value = new(
+            new() { PaymentMethodID = "payment_method_id", Type = ExistingType.Existing }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Body>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class NewTest : TestBase
 {
     [Fact]

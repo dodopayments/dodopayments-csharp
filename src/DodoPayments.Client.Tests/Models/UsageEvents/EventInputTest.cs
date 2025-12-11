@@ -170,3 +170,57 @@ public class EventInputTest : TestBase
         model.Validate();
     }
 }
+
+public class EventInputMetadataTest : TestBase
+{
+    [Fact]
+    public void stringValidation_Works()
+    {
+        EventInputMetadata value = new("string");
+        value.Validate();
+    }
+
+    [Fact]
+    public void numberValidation_Works()
+    {
+        EventInputMetadata value = new(0);
+        value.Validate();
+    }
+
+    [Fact]
+    public void booleanValidation_Works()
+    {
+        EventInputMetadata value = new(true);
+        value.Validate();
+    }
+
+    [Fact]
+    public void stringSerializationRoundtrip_Works()
+    {
+        EventInputMetadata value = new("string");
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<EventInputMetadata>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void numberSerializationRoundtrip_Works()
+    {
+        EventInputMetadata value = new(0);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<EventInputMetadata>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void booleanSerializationRoundtrip_Works()
+    {
+        EventInputMetadata value = new(true);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<EventInputMetadata>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+}

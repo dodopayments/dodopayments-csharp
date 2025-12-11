@@ -162,6 +162,97 @@ public class MeterFilterTest : TestBase
     }
 }
 
+public class ClausesTest : TestBase
+{
+    [Fact]
+    public void direct_filter_conditionsValidation_Works()
+    {
+        Clauses value = new(
+            [
+                new()
+                {
+                    Key = "x",
+                    Operator = Operator.Equals,
+                    Value = "string",
+                },
+            ]
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void nested_meter_filtersValidation_Works()
+    {
+        Clauses value = new(
+            [
+                new()
+                {
+                    Clauses = new(
+                        [
+                            new()
+                            {
+                                Key = "x",
+                                Operator =
+                                    ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+                                Value = "string",
+                            },
+                        ]
+                    ),
+                    Conjunction = ClausesMeterFilterConjunction.And,
+                },
+            ]
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void direct_filter_conditionsSerializationRoundtrip_Works()
+    {
+        Clauses value = new(
+            [
+                new()
+                {
+                    Key = "x",
+                    Operator = Operator.Equals,
+                    Value = "string",
+                },
+            ]
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Clauses>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void nested_meter_filtersSerializationRoundtrip_Works()
+    {
+        Clauses value = new(
+            [
+                new()
+                {
+                    Clauses = new(
+                        [
+                            new()
+                            {
+                                Key = "x",
+                                Operator =
+                                    ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+                                Value = "string",
+                            },
+                        ]
+                    ),
+                    Conjunction = ClausesMeterFilterConjunction.And,
+                },
+            ]
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Clauses>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class MeterFilterConditionTest : TestBase
 {
     [Fact]
@@ -304,6 +395,60 @@ public class OperatorTest : TestBase
     }
 }
 
+public class MeterFilterConditionValueTest : TestBase
+{
+    [Fact]
+    public void stringValidation_Works()
+    {
+        MeterFilterConditionValue value = new("string");
+        value.Validate();
+    }
+
+    [Fact]
+    public void doubleValidation_Works()
+    {
+        MeterFilterConditionValue value = new(0);
+        value.Validate();
+    }
+
+    [Fact]
+    public void boolValidation_Works()
+    {
+        MeterFilterConditionValue value = new(true);
+        value.Validate();
+    }
+
+    [Fact]
+    public void stringSerializationRoundtrip_Works()
+    {
+        MeterFilterConditionValue value = new("string");
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void doubleSerializationRoundtrip_Works()
+    {
+        MeterFilterConditionValue value = new(0);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void boolSerializationRoundtrip_Works()
+    {
+        MeterFilterConditionValue value = new(true);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class ClausesMeterFilterTest : TestBase
 {
     [Fact]
@@ -423,6 +568,97 @@ public class ClausesMeterFilterTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class ClausesMeterFilterClausesTest : TestBase
+{
+    [Fact]
+    public void level_1_filter_conditionsValidation_Works()
+    {
+        ClausesMeterFilterClauses value = new(
+            [
+                new()
+                {
+                    Key = "x",
+                    Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+                    Value = "string",
+                },
+            ]
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void level_1_nested_filtersValidation_Works()
+    {
+        ClausesMeterFilterClauses value = new(
+            [
+                new()
+                {
+                    Clauses = new(
+                        [
+                            new()
+                            {
+                                Key = "x",
+                                Operator =
+                                    ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+                                Value = "string",
+                            },
+                        ]
+                    ),
+                    Conjunction = ClausesMeterFilterClausesMeterFilterConjunction.And,
+                },
+            ]
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void level_1_filter_conditionsSerializationRoundtrip_Works()
+    {
+        ClausesMeterFilterClauses value = new(
+            [
+                new()
+                {
+                    Key = "x",
+                    Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+                    Value = "string",
+                },
+            ]
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClauses>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void level_1_nested_filtersSerializationRoundtrip_Works()
+    {
+        ClausesMeterFilterClauses value = new(
+            [
+                new()
+                {
+                    Clauses = new(
+                        [
+                            new()
+                            {
+                                Key = "x",
+                                Operator =
+                                    ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+                                Value = "string",
+                            },
+                        ]
+                    ),
+                    Conjunction = ClausesMeterFilterClausesMeterFilterConjunction.And,
+                },
+            ]
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClauses>(json);
+
+        Assert.Equal(value, deserialized);
     }
 }
 
@@ -576,6 +812,63 @@ public class ClausesMeterFilterClausesMeterFilterConditionOperatorTest : TestBas
     }
 }
 
+public class ClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
+{
+    [Fact]
+    public void stringValidation_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
+        value.Validate();
+    }
+
+    [Fact]
+    public void doubleValidation_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
+        value.Validate();
+    }
+
+    [Fact]
+    public void boolValidation_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
+        value.Validate();
+    }
+
+    [Fact]
+    public void stringSerializationRoundtrip_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
+        string json = JsonSerializer.Serialize(value);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void doubleSerializationRoundtrip_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void boolSerializationRoundtrip_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class ClausesMeterFilterClausesMeterFilterTest : TestBase
 {
     [Fact]
@@ -701,6 +994,99 @@ public class ClausesMeterFilterClausesMeterFilterTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class ClausesMeterFilterClausesMeterFilterClausesTest : TestBase
+{
+    [Fact]
+    public void level_2_filter_conditionsValidation_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterClauses value = new(
+            [
+                new()
+                {
+                    Key = "x",
+                    Operator =
+                        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+                    Value = "string",
+                },
+            ]
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void level_2_nested_filtersValidation_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterClauses value = new(
+            [
+                new()
+                {
+                    Clauses =
+                    [
+                        new()
+                        {
+                            Key = "x",
+                            Operator = ClauseOperator.Equals,
+                            Value = "string",
+                        },
+                    ],
+                    Conjunction = Conjunction.And,
+                },
+            ]
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void level_2_filter_conditionsSerializationRoundtrip_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterClauses value = new(
+            [
+                new()
+                {
+                    Key = "x",
+                    Operator =
+                        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+                    Value = "string",
+                },
+            ]
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClauses>(
+            json
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void level_2_nested_filtersSerializationRoundtrip_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterClauses value = new(
+            [
+                new()
+                {
+                    Clauses =
+                    [
+                        new()
+                        {
+                            Key = "x",
+                            Operator = ClauseOperator.Equals,
+                            Value = "string",
+                        },
+                    ],
+                    Conjunction = Conjunction.And,
+                },
+            ]
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClauses>(
+            json
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 
@@ -889,6 +1275,69 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOper
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator>
         >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
+{
+    [Fact]
+    public void stringValidation_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
+        value.Validate();
+    }
+
+    [Fact]
+    public void doubleValidation_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
+        value.Validate();
+    }
+
+    [Fact]
+    public void boolValidation_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
+        value.Validate();
+    }
+
+    [Fact]
+    public void stringSerializationRoundtrip_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
+        string json = JsonSerializer.Serialize(value);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
+                json
+            );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void doubleSerializationRoundtrip_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
+                json
+            );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void boolSerializationRoundtrip_Works()
+    {
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized =
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
+                json
+            );
 
         Assert.Equal(value, deserialized);
     }
@@ -1159,6 +1608,60 @@ public class ClauseOperatorTest : TestBase
             json,
             ModelBase.SerializerOptions
         );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class ClauseValueTest : TestBase
+{
+    [Fact]
+    public void stringValidation_Works()
+    {
+        ClauseValue value = new("string");
+        value.Validate();
+    }
+
+    [Fact]
+    public void doubleValidation_Works()
+    {
+        ClauseValue value = new(0);
+        value.Validate();
+    }
+
+    [Fact]
+    public void boolValidation_Works()
+    {
+        ClauseValue value = new(true);
+        value.Validate();
+    }
+
+    [Fact]
+    public void stringSerializationRoundtrip_Works()
+    {
+        ClauseValue value = new("string");
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClauseValue>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void doubleSerializationRoundtrip_Works()
+    {
+        ClauseValue value = new(0);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClauseValue>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void boolSerializationRoundtrip_Works()
+    {
+        ClauseValue value = new(true);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClauseValue>(json);
 
         Assert.Equal(value, deserialized);
     }

@@ -180,3 +180,57 @@ public class EventTest : TestBase
         model.Validate();
     }
 }
+
+public class MetadataTest : TestBase
+{
+    [Fact]
+    public void stringValidation_Works()
+    {
+        Metadata value = new("string");
+        value.Validate();
+    }
+
+    [Fact]
+    public void numberValidation_Works()
+    {
+        Metadata value = new(0);
+        value.Validate();
+    }
+
+    [Fact]
+    public void booleanValidation_Works()
+    {
+        Metadata value = new(true);
+        value.Validate();
+    }
+
+    [Fact]
+    public void stringSerializationRoundtrip_Works()
+    {
+        Metadata value = new("string");
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Metadata>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void numberSerializationRoundtrip_Works()
+    {
+        Metadata value = new(0);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Metadata>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void booleanSerializationRoundtrip_Works()
+    {
+        Metadata value = new(true);
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Metadata>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+}

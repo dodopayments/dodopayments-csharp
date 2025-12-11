@@ -8,6 +8,166 @@ using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Products;
 
+public class PriceTest : TestBase
+{
+    [Fact]
+    public void one_timeValidation_Works()
+    {
+        Price value = new(
+            new()
+            {
+                Currency = Currency.Aed,
+                Discount = 0,
+                Price = 0,
+                PurchasingPowerParity = true,
+                Type = Type.OneTimePrice,
+                PayWhatYouWant = true,
+                SuggestedPrice = 0,
+                TaxInclusive = true,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void recurringValidation_Works()
+    {
+        Price value = new(
+            new()
+            {
+                Currency = Currency.Aed,
+                Discount = 0,
+                PaymentFrequencyCount = 0,
+                PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+                Price = 0,
+                PurchasingPowerParity = true,
+                SubscriptionPeriodCount = 0,
+                SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+                Type = RecurringPriceType.RecurringPrice,
+                TaxInclusive = true,
+                TrialPeriodDays = 0,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void usage_basedValidation_Works()
+    {
+        Price value = new(
+            new()
+            {
+                Currency = Currency.Aed,
+                Discount = 0,
+                FixedPrice = 0,
+                PaymentFrequencyCount = 0,
+                PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+                PurchasingPowerParity = true,
+                SubscriptionPeriodCount = 0,
+                SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+                Type = UsageBasedPriceType.UsageBasedPrice,
+                Meters =
+                [
+                    new()
+                    {
+                        MeterID = "meter_id",
+                        PricePerUnit = "10.50",
+                        Description = "description",
+                        FreeThreshold = 0,
+                        MeasurementUnit = "measurement_unit",
+                        Name = "name",
+                    },
+                ],
+                TaxInclusive = true,
+            }
+        );
+        value.Validate();
+    }
+
+    [Fact]
+    public void one_timeSerializationRoundtrip_Works()
+    {
+        Price value = new(
+            new()
+            {
+                Currency = Currency.Aed,
+                Discount = 0,
+                Price = 0,
+                PurchasingPowerParity = true,
+                Type = Type.OneTimePrice,
+                PayWhatYouWant = true,
+                SuggestedPrice = 0,
+                TaxInclusive = true,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Price>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void recurringSerializationRoundtrip_Works()
+    {
+        Price value = new(
+            new()
+            {
+                Currency = Currency.Aed,
+                Discount = 0,
+                PaymentFrequencyCount = 0,
+                PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+                Price = 0,
+                PurchasingPowerParity = true,
+                SubscriptionPeriodCount = 0,
+                SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+                Type = RecurringPriceType.RecurringPrice,
+                TaxInclusive = true,
+                TrialPeriodDays = 0,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Price>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void usage_basedSerializationRoundtrip_Works()
+    {
+        Price value = new(
+            new()
+            {
+                Currency = Currency.Aed,
+                Discount = 0,
+                FixedPrice = 0,
+                PaymentFrequencyCount = 0,
+                PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+                PurchasingPowerParity = true,
+                SubscriptionPeriodCount = 0,
+                SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+                Type = UsageBasedPriceType.UsageBasedPrice,
+                Meters =
+                [
+                    new()
+                    {
+                        MeterID = "meter_id",
+                        PricePerUnit = "10.50",
+                        Description = "description",
+                        FreeThreshold = 0,
+                        MeasurementUnit = "measurement_unit",
+                        Name = "name",
+                    },
+                ],
+                TaxInclusive = true,
+            }
+        );
+        string json = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Price>(json);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class OneTimePriceTest : TestBase
 {
     [Fact]
