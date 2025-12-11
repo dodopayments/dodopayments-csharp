@@ -460,6 +460,11 @@ public record class LineItem
                 "Data did not match any variant of LineItem"
             );
         }
+        this.Switch(
+            (unionMember0) => unionMember0.Validate(),
+            (unionMember1) => unionMember1.Validate(),
+            (unionMember2) => unionMember2.Validate()
+        );
     }
 
     public virtual bool Equals(LineItem? other)

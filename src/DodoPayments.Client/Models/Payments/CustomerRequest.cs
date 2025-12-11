@@ -175,6 +175,10 @@ public record class CustomerRequest
                 "Data did not match any variant of CustomerRequest"
             );
         }
+        this.Switch(
+            (attachExistingCustomer) => attachExistingCustomer.Validate(),
+            (newCustomer) => newCustomer.Validate()
+        );
     }
 
     public virtual bool Equals(CustomerRequest? other)

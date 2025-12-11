@@ -1035,6 +1035,30 @@ public record class UnsafeUnwrapWebhookEvent
                 "Data did not match any variant of UnsafeUnwrapWebhookEvent"
             );
         }
+        this.Switch(
+            (disputeAccepted) => disputeAccepted.Validate(),
+            (disputeCancelled) => disputeCancelled.Validate(),
+            (disputeChallenged) => disputeChallenged.Validate(),
+            (disputeExpired) => disputeExpired.Validate(),
+            (disputeLost) => disputeLost.Validate(),
+            (disputeOpened) => disputeOpened.Validate(),
+            (disputeWon) => disputeWon.Validate(),
+            (licenseKeyCreated) => licenseKeyCreated.Validate(),
+            (paymentCancelled) => paymentCancelled.Validate(),
+            (paymentFailed) => paymentFailed.Validate(),
+            (paymentProcessing) => paymentProcessing.Validate(),
+            (paymentSucceeded) => paymentSucceeded.Validate(),
+            (refundFailed) => refundFailed.Validate(),
+            (refundSucceeded) => refundSucceeded.Validate(),
+            (subscriptionActive) => subscriptionActive.Validate(),
+            (subscriptionCancelled) => subscriptionCancelled.Validate(),
+            (subscriptionExpired) => subscriptionExpired.Validate(),
+            (subscriptionFailed) => subscriptionFailed.Validate(),
+            (subscriptionOnHold) => subscriptionOnHold.Validate(),
+            (subscriptionPlanChanged) => subscriptionPlanChanged.Validate(),
+            (subscriptionRenewed) => subscriptionRenewed.Validate(),
+            (subscriptionUpdated) => subscriptionUpdated.Validate()
+        );
     }
 
     public virtual bool Equals(UnsafeUnwrapWebhookEvent? other)

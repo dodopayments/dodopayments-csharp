@@ -326,6 +326,11 @@ public record class Price
         {
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Price");
         }
+        this.Switch(
+            (oneTime) => oneTime.Validate(),
+            (recurring) => recurring.Validate(),
+            (usageBased) => usageBased.Validate()
+        );
     }
 
     public virtual bool Equals(Price? other)
