@@ -263,6 +263,7 @@ public record class Body
         {
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Body");
         }
+        this.Switch((new1) => new1.Validate(), (existing) => existing.Validate());
     }
 
     public virtual bool Equals(Body? other)
