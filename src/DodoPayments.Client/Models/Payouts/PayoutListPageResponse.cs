@@ -248,7 +248,8 @@ public sealed record class Item : ModelBase
     }
 
 #pragma warning disable CS8618
-    [Obsolete("Required properties are deprecated: chargebacks, refunds, tax"), SetsRequiredMembers]
+    [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
+    [SetsRequiredMembers]
     Item(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];

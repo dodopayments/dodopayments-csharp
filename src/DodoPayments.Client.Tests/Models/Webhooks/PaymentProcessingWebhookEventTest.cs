@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Refunds;
@@ -1979,5 +1980,119 @@ public class PaymentProcessingWebhookEventDataIntersectionMember1Test : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class PaymentProcessingWebhookEventDataIntersectionMember1PayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment)]
+    public void Validation_Works(
+        PaymentProcessingWebhookEventDataIntersectionMember1PayloadType rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentProcessingWebhookEventDataIntersectionMember1PayloadType> value =
+            rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, PaymentProcessingWebhookEventDataIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment)]
+    public void SerializationRoundtrip_Works(
+        PaymentProcessingWebhookEventDataIntersectionMember1PayloadType rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentProcessingWebhookEventDataIntersectionMember1PayloadType> value =
+            rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, PaymentProcessingWebhookEventDataIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, PaymentProcessingWebhookEventDataIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, PaymentProcessingWebhookEventDataIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class PaymentProcessingWebhookEventTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(PaymentProcessingWebhookEventType.PaymentProcessing)]
+    public void Validation_Works(PaymentProcessingWebhookEventType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentProcessingWebhookEventType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentProcessingWebhookEventType>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PaymentProcessingWebhookEventType.PaymentProcessing)]
+    public void SerializationRoundtrip_Works(PaymentProcessingWebhookEventType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentProcessingWebhookEventType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, PaymentProcessingWebhookEventType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentProcessingWebhookEventType>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, PaymentProcessingWebhookEventType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Webhooks;
 
@@ -571,5 +572,117 @@ public class DisputeLostWebhookEventDataIntersectionMember1Test : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class DisputeLostWebhookEventDataIntersectionMember1PayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(DisputeLostWebhookEventDataIntersectionMember1PayloadType.Dispute)]
+    public void Validation_Works(DisputeLostWebhookEventDataIntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DisputeLostWebhookEventDataIntersectionMember1PayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, DisputeLostWebhookEventDataIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(DisputeLostWebhookEventDataIntersectionMember1PayloadType.Dispute)]
+    public void SerializationRoundtrip_Works(
+        DisputeLostWebhookEventDataIntersectionMember1PayloadType rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DisputeLostWebhookEventDataIntersectionMember1PayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, DisputeLostWebhookEventDataIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, DisputeLostWebhookEventDataIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, DisputeLostWebhookEventDataIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class DisputeLostWebhookEventTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(DisputeLostWebhookEventType.DisputeLost)]
+    public void Validation_Works(DisputeLostWebhookEventType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DisputeLostWebhookEventType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DisputeLostWebhookEventType>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(DisputeLostWebhookEventType.DisputeLost)]
+    public void SerializationRoundtrip_Works(DisputeLostWebhookEventType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DisputeLostWebhookEventType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DisputeLostWebhookEventType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DisputeLostWebhookEventType>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DisputeLostWebhookEventType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
@@ -1540,5 +1541,115 @@ public class Data19IntersectionMember1Test : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class Data19IntersectionMember1PayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(Data19IntersectionMember1PayloadType.Subscription)]
+    public void Validation_Works(Data19IntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Data19IntersectionMember1PayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, Data19IntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Data19IntersectionMember1PayloadType.Subscription)]
+    public void SerializationRoundtrip_Works(Data19IntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Data19IntersectionMember1PayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Data19IntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, Data19IntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Data19IntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class Type19Test : TestBase
+{
+    [Theory]
+    [InlineData(Type19.SubscriptionRenewed)]
+    public void Validation_Works(Type19 rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Type19> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Type19>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Type19.SubscriptionRenewed)]
+    public void SerializationRoundtrip_Works(Type19 rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Type19> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Type19>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Type19>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Type19>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
