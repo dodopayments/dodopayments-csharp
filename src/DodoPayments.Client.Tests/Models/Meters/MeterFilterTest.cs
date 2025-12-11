@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Meters;
 
 namespace DodoPayments.Client.Tests.Models.Meters;
@@ -235,6 +236,74 @@ public class MeterFilterConditionTest : TestBase
     }
 }
 
+public class OperatorTest : TestBase
+{
+    [Theory]
+    [InlineData(Operator.Equals)]
+    [InlineData(Operator.NotEquals)]
+    [InlineData(Operator.GreaterThan)]
+    [InlineData(Operator.GreaterThanOrEquals)]
+    [InlineData(Operator.LessThan)]
+    [InlineData(Operator.LessThanOrEquals)]
+    [InlineData(Operator.Contains)]
+    [InlineData(Operator.DoesNotContain)]
+    public void Validation_Works(Operator rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Operator> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Operator>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Operator.Equals)]
+    [InlineData(Operator.NotEquals)]
+    [InlineData(Operator.GreaterThan)]
+    [InlineData(Operator.GreaterThanOrEquals)]
+    [InlineData(Operator.LessThan)]
+    [InlineData(Operator.LessThanOrEquals)]
+    [InlineData(Operator.Contains)]
+    [InlineData(Operator.DoesNotContain)]
+    public void SerializationRoundtrip_Works(Operator rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Operator> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Operator>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Operator>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Operator>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class ClausesMeterFilterTest : TestBase
 {
     [Fact]
@@ -432,6 +501,78 @@ public class ClausesMeterFilterClausesMeterFilterConditionTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class ClausesMeterFilterClausesMeterFilterConditionOperatorTest : TestBase
+{
+    [Theory]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.Equals)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.LessThan)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.Contains)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain)]
+    public void Validation_Works(ClausesMeterFilterClausesMeterFilterConditionOperator rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.Equals)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.LessThan)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.Contains)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain)]
+    public void SerializationRoundtrip_Works(
+        ClausesMeterFilterClausesMeterFilterConditionOperator rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }
 
@@ -657,6 +798,102 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionTest
     }
 }
 
+public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperatorTest : TestBase
+{
+    [Theory]
+    [InlineData(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals)]
+    [InlineData(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan
+    )]
+    [InlineData(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals
+    )]
+    [InlineData(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThan)]
+    [InlineData(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals
+    )]
+    [InlineData(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Contains)]
+    [InlineData(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain
+    )]
+    public void Validation_Works(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
+        > value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals)]
+    [InlineData(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan
+    )]
+    [InlineData(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals
+    )]
+    [InlineData(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThan)]
+    [InlineData(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals
+    )]
+    [InlineData(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Contains)]
+    [InlineData(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain
+    )]
+    public void SerializationRoundtrip_Works(
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
+        > value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterTest : TestBase
 {
     [Fact]
@@ -856,5 +1093,299 @@ public class ClauseTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class ClauseOperatorTest : TestBase
+{
+    [Theory]
+    [InlineData(ClauseOperator.Equals)]
+    [InlineData(ClauseOperator.NotEquals)]
+    [InlineData(ClauseOperator.GreaterThan)]
+    [InlineData(ClauseOperator.GreaterThanOrEquals)]
+    [InlineData(ClauseOperator.LessThan)]
+    [InlineData(ClauseOperator.LessThanOrEquals)]
+    [InlineData(ClauseOperator.Contains)]
+    [InlineData(ClauseOperator.DoesNotContain)]
+    public void Validation_Works(ClauseOperator rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ClauseOperator> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ClauseOperator>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(ClauseOperator.Equals)]
+    [InlineData(ClauseOperator.NotEquals)]
+    [InlineData(ClauseOperator.GreaterThan)]
+    [InlineData(ClauseOperator.GreaterThanOrEquals)]
+    [InlineData(ClauseOperator.LessThan)]
+    [InlineData(ClauseOperator.LessThanOrEquals)]
+    [InlineData(ClauseOperator.Contains)]
+    [InlineData(ClauseOperator.DoesNotContain)]
+    public void SerializationRoundtrip_Works(ClauseOperator rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ClauseOperator> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, ClauseOperator>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ClauseOperator>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, ClauseOperator>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class ConjunctionTest : TestBase
+{
+    [Theory]
+    [InlineData(Conjunction.And)]
+    [InlineData(Conjunction.Or)]
+    public void Validation_Works(Conjunction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Conjunction> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Conjunction>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Conjunction.And)]
+    [InlineData(Conjunction.Or)]
+    public void SerializationRoundtrip_Works(Conjunction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Conjunction> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Conjunction>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Conjunction>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Conjunction>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class ClausesMeterFilterClausesMeterFilterConjunctionTest : TestBase
+{
+    [Theory]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConjunction.And)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConjunction.Or)]
+    public void Validation_Works(ClausesMeterFilterClausesMeterFilterConjunction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConjunction.And)]
+    [InlineData(ClausesMeterFilterClausesMeterFilterConjunction.Or)]
+    public void SerializationRoundtrip_Works(
+        ClausesMeterFilterClausesMeterFilterConjunction rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class ClausesMeterFilterConjunctionTest : TestBase
+{
+    [Theory]
+    [InlineData(ClausesMeterFilterConjunction.And)]
+    [InlineData(ClausesMeterFilterConjunction.Or)]
+    public void Validation_Works(ClausesMeterFilterConjunction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ClausesMeterFilterConjunction> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ClausesMeterFilterConjunction>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(ClausesMeterFilterConjunction.And)]
+    [InlineData(ClausesMeterFilterConjunction.Or)]
+    public void SerializationRoundtrip_Works(ClausesMeterFilterConjunction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ClausesMeterFilterConjunction> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterConjunction>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ClausesMeterFilterConjunction>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ClausesMeterFilterConjunction>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class MeterFilterConjunctionTest : TestBase
+{
+    [Theory]
+    [InlineData(MeterFilterConjunction.And)]
+    [InlineData(MeterFilterConjunction.Or)]
+    public void Validation_Works(MeterFilterConjunction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, MeterFilterConjunction> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, MeterFilterConjunction>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(MeterFilterConjunction.And)]
+    [InlineData(MeterFilterConjunction.Or)]
+    public void SerializationRoundtrip_Works(MeterFilterConjunction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, MeterFilterConjunction> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, MeterFilterConjunction>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, MeterFilterConjunction>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, MeterFilterConjunction>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

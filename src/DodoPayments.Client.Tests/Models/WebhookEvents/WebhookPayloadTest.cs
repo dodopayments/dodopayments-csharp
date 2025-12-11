@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.WebhookEvents;
 using Disputes = DodoPayments.Client.Models.Disputes;
@@ -1904,6 +1905,60 @@ public class IntersectionMember1Test : TestBase
     }
 }
 
+public class PayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(PayloadType.Payment)]
+    public void Validation_Works(PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PayloadType.Payment)]
+    public void SerializationRoundtrip_Works(PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class SubscriptionTest : TestBase
 {
     [Fact]
@@ -2720,6 +2775,62 @@ public class SubscriptionIntersectionMember1Test : TestBase
     }
 }
 
+public class SubscriptionIntersectionMember1PayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionIntersectionMember1PayloadType.Subscription)]
+    public void Validation_Works(SubscriptionIntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionIntersectionMember1PayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionIntersectionMember1PayloadType.Subscription)]
+    public void SerializationRoundtrip_Works(SubscriptionIntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionIntersectionMember1PayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class RefundTest : TestBase
 {
     [Fact]
@@ -3222,6 +3333,62 @@ public class RefundIntersectionMember1Test : TestBase
     }
 }
 
+public class RefundIntersectionMember1PayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(RefundIntersectionMember1PayloadType.Refund)]
+    public void Validation_Works(RefundIntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, RefundIntersectionMember1PayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, RefundIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(RefundIntersectionMember1PayloadType.Refund)]
+    public void SerializationRoundtrip_Works(RefundIntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, RefundIntersectionMember1PayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, RefundIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, RefundIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, RefundIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class DisputeTest : TestBase
 {
     [Fact]
@@ -3596,6 +3763,62 @@ public class DisputeIntersectionMember1Test : TestBase
     }
 }
 
+public class DisputeIntersectionMember1PayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(DisputeIntersectionMember1PayloadType.Dispute)]
+    public void Validation_Works(DisputeIntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DisputeIntersectionMember1PayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, DisputeIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(DisputeIntersectionMember1PayloadType.Dispute)]
+    public void SerializationRoundtrip_Works(DisputeIntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DisputeIntersectionMember1PayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, DisputeIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, DisputeIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, DisputeIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class LicenseKeyTest : TestBase
 {
     [Fact]
@@ -3909,5 +4132,61 @@ public class LicenseKeyIntersectionMember1Test : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class LicenseKeyIntersectionMember1PayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(LicenseKeyIntersectionMember1PayloadType.LicenseKey)]
+    public void Validation_Works(LicenseKeyIntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(LicenseKeyIntersectionMember1PayloadType.LicenseKey)]
+    public void SerializationRoundtrip_Works(LicenseKeyIntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
+        >(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }

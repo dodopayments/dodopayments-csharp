@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Misc;
 
@@ -241,5 +242,71 @@ public class CustomerWalletTransactionTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class EventTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(EventType.Payment)]
+    [InlineData(EventType.PaymentReversal)]
+    [InlineData(EventType.Refund)]
+    [InlineData(EventType.RefundReversal)]
+    [InlineData(EventType.Dispute)]
+    [InlineData(EventType.DisputeReversal)]
+    [InlineData(EventType.MerchantAdjustment)]
+    public void Validation_Works(EventType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EventType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EventType>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(EventType.Payment)]
+    [InlineData(EventType.PaymentReversal)]
+    [InlineData(EventType.Refund)]
+    [InlineData(EventType.RefundReversal)]
+    [InlineData(EventType.Dispute)]
+    [InlineData(EventType.DisputeReversal)]
+    [InlineData(EventType.MerchantAdjustment)]
+    public void SerializationRoundtrip_Works(EventType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EventType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EventType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EventType>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EventType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

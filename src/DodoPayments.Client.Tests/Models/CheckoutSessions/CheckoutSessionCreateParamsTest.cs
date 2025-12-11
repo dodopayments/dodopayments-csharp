@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CheckoutSessions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
@@ -496,6 +497,64 @@ public class CustomizationTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class ThemeTest : TestBase
+{
+    [Theory]
+    [InlineData(Theme.Dark)]
+    [InlineData(Theme.Light)]
+    [InlineData(Theme.System)]
+    public void Validation_Works(Theme rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Theme> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Theme>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Theme.Dark)]
+    [InlineData(Theme.Light)]
+    [InlineData(Theme.System)]
+    public void SerializationRoundtrip_Works(Theme rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Theme> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Theme>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Theme>>(
+            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Theme>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 
