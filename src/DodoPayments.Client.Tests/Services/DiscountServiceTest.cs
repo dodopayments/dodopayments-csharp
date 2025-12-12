@@ -9,7 +9,8 @@ public class DiscountServiceTest : TestBase
     public async Task Create_Works()
     {
         var discount = await this.client.Discounts.Create(
-            new() { Amount = 0, Type = DiscountType.Percentage }
+            new() { Amount = 0, Type = DiscountType.Percentage },
+            TestContext.Current.CancellationToken
         );
         discount.Validate();
     }
@@ -17,27 +18,39 @@ public class DiscountServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var discount = await this.client.Discounts.Retrieve("discount_id");
+        var discount = await this.client.Discounts.Retrieve(
+            "discount_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         discount.Validate();
     }
 
     [Fact]
     public async Task Update_Works()
     {
-        var discount = await this.client.Discounts.Update("discount_id");
+        var discount = await this.client.Discounts.Update(
+            "discount_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         discount.Validate();
     }
 
     [Fact]
     public async Task List_Works()
     {
-        var page = await this.client.Discounts.List();
+        var page = await this.client.Discounts.List(new(), TestContext.Current.CancellationToken);
         page.Validate();
     }
 
     [Fact]
     public async Task Delete_Works()
     {
-        await this.client.Discounts.Delete("discount_id");
+        await this.client.Discounts.Delete(
+            "discount_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
     }
 }

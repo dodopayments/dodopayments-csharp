@@ -10,14 +10,18 @@ public class UsageEventServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var event1 = await this.client.UsageEvents.Retrieve("event_id");
+        var event1 = await this.client.UsageEvents.Retrieve(
+            "event_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         event1.Validate();
     }
 
     [Fact]
     public async Task List_Works()
     {
-        var page = await this.client.UsageEvents.List();
+        var page = await this.client.UsageEvents.List(new(), TestContext.Current.CancellationToken);
         page.Validate();
     }
 
@@ -41,7 +45,8 @@ public class UsageEventServiceTest : TestBase
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
-            }
+            },
+            TestContext.Current.CancellationToken
         );
         response.Validate();
     }

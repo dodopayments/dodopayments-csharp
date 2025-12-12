@@ -7,7 +7,11 @@ public class ImageServiceTest : TestBase
     [Fact]
     public async Task Update_Works()
     {
-        var image = await this.client.Products.Images.Update("id");
+        var image = await this.client.Products.Images.Update(
+            "id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         image.Validate();
     }
 }

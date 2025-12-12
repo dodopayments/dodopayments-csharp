@@ -20,7 +20,8 @@ public class CheckoutSessionServiceTest : TestBase
                         Amount = 0,
                     },
                 ],
-            }
+            },
+            TestContext.Current.CancellationToken
         );
         checkoutSessionResponse.Validate();
     }
@@ -28,7 +29,11 @@ public class CheckoutSessionServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var checkoutSessionStatus = await this.client.CheckoutSessions.Retrieve("id");
+        var checkoutSessionStatus = await this.client.CheckoutSessions.Retrieve(
+            "id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         checkoutSessionStatus.Validate();
     }
 }
