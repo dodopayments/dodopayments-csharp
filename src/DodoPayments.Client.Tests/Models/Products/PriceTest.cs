@@ -923,6 +923,7 @@ public class UsageBasedPriceTest : TestBase
         Assert.Equal(expectedSubscriptionPeriodCount, model.SubscriptionPeriodCount);
         Assert.Equal(expectedSubscriptionPeriodInterval, model.SubscriptionPeriodInterval);
         Assert.Equal(expectedType, model.Type);
+        Assert.NotNull(model.Meters);
         Assert.Equal(expectedMeters.Count, model.Meters.Count);
         for (int i = 0; i < expectedMeters.Count; i++)
         {
@@ -1033,6 +1034,7 @@ public class UsageBasedPriceTest : TestBase
         Assert.Equal(expectedSubscriptionPeriodCount, deserialized.SubscriptionPeriodCount);
         Assert.Equal(expectedSubscriptionPeriodInterval, deserialized.SubscriptionPeriodInterval);
         Assert.Equal(expectedType, deserialized.Type);
+        Assert.NotNull(deserialized.Meters);
         Assert.Equal(expectedMeters.Count, deserialized.Meters.Count);
         for (int i = 0; i < expectedMeters.Count; i++)
         {
