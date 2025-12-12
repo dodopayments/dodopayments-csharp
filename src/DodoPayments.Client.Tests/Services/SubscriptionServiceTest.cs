@@ -24,7 +24,8 @@ public class SubscriptionServiceTest : TestBase
                 Customer = new AttachExistingCustomer("customer_id"),
                 ProductID = "product_id",
                 Quantity = 0,
-            }
+            },
+            TestContext.Current.CancellationToken
         );
         subscription.Validate();
     }
@@ -32,21 +33,32 @@ public class SubscriptionServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var subscription = await this.client.Subscriptions.Retrieve("subscription_id");
+        var subscription = await this.client.Subscriptions.Retrieve(
+            "subscription_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         subscription.Validate();
     }
 
     [Fact]
     public async Task Update_Works()
     {
-        var subscription = await this.client.Subscriptions.Update("subscription_id");
+        var subscription = await this.client.Subscriptions.Update(
+            "subscription_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         subscription.Validate();
     }
 
     [Fact]
     public async Task List_Works()
     {
-        var page = await this.client.Subscriptions.List();
+        var page = await this.client.Subscriptions.List(
+            new(),
+            TestContext.Current.CancellationToken
+        );
         page.Validate();
     }
 
@@ -60,7 +72,8 @@ public class SubscriptionServiceTest : TestBase
                 ProductID = "product_id",
                 ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
                 Quantity = 0,
-            }
+            },
+            TestContext.Current.CancellationToken
         );
     }
 
@@ -69,7 +82,8 @@ public class SubscriptionServiceTest : TestBase
     {
         var response = await this.client.Subscriptions.Charge(
             "subscription_id",
-            new() { ProductPrice = 0 }
+            new() { ProductPrice = 0 },
+            TestContext.Current.CancellationToken
         );
         response.Validate();
     }
@@ -85,7 +99,8 @@ public class SubscriptionServiceTest : TestBase
                 ProrationBillingMode =
                     SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
                 Quantity = 0,
-            }
+            },
+            TestContext.Current.CancellationToken
         );
         response.Validate();
     }
@@ -93,7 +108,11 @@ public class SubscriptionServiceTest : TestBase
     [Fact]
     public async Task RetrieveUsageHistory_Works()
     {
-        var page = await this.client.Subscriptions.RetrieveUsageHistory("subscription_id");
+        var page = await this.client.Subscriptions.RetrieveUsageHistory(
+            "subscription_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         page.Validate();
     }
 
@@ -105,7 +124,8 @@ public class SubscriptionServiceTest : TestBase
             new()
             {
                 Body = new New() { Type = Type.New, ReturnURL = "return_url" },
-            }
+            },
+            TestContext.Current.CancellationToken
         );
         response.Validate();
     }

@@ -8,7 +8,11 @@ public class HeaderServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var header = await this.client.Webhooks.Headers.Retrieve("webhook_id");
+        var header = await this.client.Webhooks.Headers.Retrieve(
+            "webhook_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         header.Validate();
     }
 
@@ -17,7 +21,8 @@ public class HeaderServiceTest : TestBase
     {
         await this.client.Webhooks.Headers.Update(
             "webhook_id",
-            new() { Headers = new Dictionary<string, string>() { { "foo", "string" } } }
+            new() { Headers = new Dictionary<string, string>() { { "foo", "string" } } },
+            TestContext.Current.CancellationToken
         );
     }
 }

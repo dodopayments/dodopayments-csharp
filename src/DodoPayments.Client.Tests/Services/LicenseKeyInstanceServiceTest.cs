@@ -7,7 +7,11 @@ public class LicenseKeyInstanceServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var licenseKeyInstance = await this.client.LicenseKeyInstances.Retrieve("lki_123");
+        var licenseKeyInstance = await this.client.LicenseKeyInstances.Retrieve(
+            "lki_123",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         licenseKeyInstance.Validate();
     }
 
@@ -16,7 +20,8 @@ public class LicenseKeyInstanceServiceTest : TestBase
     {
         var licenseKeyInstance = await this.client.LicenseKeyInstances.Update(
             "lki_123",
-            new() { Name = "name" }
+            new() { Name = "name" },
+            TestContext.Current.CancellationToken
         );
         licenseKeyInstance.Validate();
     }
@@ -24,7 +29,10 @@ public class LicenseKeyInstanceServiceTest : TestBase
     [Fact]
     public async Task List_Works()
     {
-        var page = await this.client.LicenseKeyInstances.List();
+        var page = await this.client.LicenseKeyInstances.List(
+            new(),
+            TestContext.Current.CancellationToken
+        );
         page.Validate();
     }
 }

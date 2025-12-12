@@ -15,7 +15,8 @@ public class AddonServiceTest : TestBase
                 Name = "name",
                 Price = 0,
                 TaxCategory = TaxCategory.DigitalProducts,
-            }
+            },
+            TestContext.Current.CancellationToken
         );
         addonResponse.Validate();
     }
@@ -23,28 +24,40 @@ public class AddonServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var addonResponse = await this.client.Addons.Retrieve("id");
+        var addonResponse = await this.client.Addons.Retrieve(
+            "id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         addonResponse.Validate();
     }
 
     [Fact]
     public async Task Update_Works()
     {
-        var addonResponse = await this.client.Addons.Update("id");
+        var addonResponse = await this.client.Addons.Update(
+            "id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         addonResponse.Validate();
     }
 
     [Fact]
     public async Task List_Works()
     {
-        var page = await this.client.Addons.List();
+        var page = await this.client.Addons.List(new(), TestContext.Current.CancellationToken);
         page.Validate();
     }
 
     [Fact]
     public async Task UpdateImages_Works()
     {
-        var response = await this.client.Addons.UpdateImages("id");
+        var response = await this.client.Addons.UpdateImages(
+            "id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         response.Validate();
     }
 }

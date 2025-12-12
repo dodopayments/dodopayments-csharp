@@ -16,7 +16,8 @@ public class LedgerEntryServiceTest : TestBase
                 Amount = 0,
                 Currency = Currency.Aed,
                 EntryType = EntryType.Credit,
-            }
+            },
+            TestContext.Current.CancellationToken
         );
         customerWallet.Validate();
     }
@@ -24,7 +25,11 @@ public class LedgerEntryServiceTest : TestBase
     [Fact]
     public async Task List_Works()
     {
-        var page = await this.client.Customers.Wallets.LedgerEntries.List("customer_id");
+        var page = await this.client.Customers.Wallets.LedgerEntries.List(
+            "customer_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
         page.Validate();
     }
 }
