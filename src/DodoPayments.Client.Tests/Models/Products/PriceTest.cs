@@ -14,7 +14,7 @@ public class PriceTest : TestBase
     public void one_timeValidation_Works()
     {
         Price value = new(
-            new()
+            new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
@@ -33,7 +33,7 @@ public class PriceTest : TestBase
     public void recurringValidation_Works()
     {
         Price value = new(
-            new()
+            new RecurringPrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
@@ -55,7 +55,7 @@ public class PriceTest : TestBase
     public void usage_basedValidation_Works()
     {
         Price value = new(
-            new()
+            new UsageBasedPrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
@@ -88,7 +88,7 @@ public class PriceTest : TestBase
     public void one_timeSerializationRoundtrip_Works()
     {
         Price value = new(
-            new()
+            new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
@@ -110,7 +110,7 @@ public class PriceTest : TestBase
     public void recurringSerializationRoundtrip_Works()
     {
         Price value = new(
-            new()
+            new RecurringPrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
@@ -135,7 +135,7 @@ public class PriceTest : TestBase
     public void usage_basedSerializationRoundtrip_Works()
     {
         Price value = new(
-            new()
+            new UsageBasedPrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
