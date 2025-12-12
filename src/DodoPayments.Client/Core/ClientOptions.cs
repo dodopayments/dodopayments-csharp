@@ -24,26 +24,23 @@ public struct ClientOptions()
     /// </summary>
     public HttpClient HttpClient { get; set; } = new();
 
-    Lazy<Uri> _baseUrl = new(() =>
-        new Uri(
-            Environment.GetEnvironmentVariable("DODO_PAYMENTS_BASE_URL")
-                ?? "https://live.dodopayments.com"
-        )
+    Lazy<string> _baseUrl = new(() =>
+        Environment.GetEnvironmentVariable("DODO_PAYMENTS_BASE_URL") ?? EnvironmentUrl.LiveMode
     );
 
     /// <summary>
     /// The base URL to use for every request.
     ///
-    /// <para>Defaults to the live_mode environment: https://live.dodopayments.com</para>
+    /// <para>Defaults to the live_mode environment: <see cref="EnvironmentUrl.LiveMode"/></para>
     ///
     /// <para>
     /// The following other environments are available:
     /// <list type="bullet">
-    ///   <item>test_mode: https://test.dodopayments.com</item>
+    ///   <item>test_mode: <see cref="EnvironmentUrl.TestMode"/></item>
     /// </list>
     /// </para>
     /// </summary>
-    public Uri BaseUrl
+    public string BaseUrl
     {
         readonly get { return _baseUrl.Value; }
         set { _baseUrl = new(() => value); }
