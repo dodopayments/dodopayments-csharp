@@ -151,6 +151,7 @@ public class CheckoutSessionRequestTest : TestBase
         {
             Assert.Equal(expectedProductCart[i], model.ProductCart[i]);
         }
+        Assert.NotNull(model.AllowedPaymentMethodTypes);
         Assert.Equal(
             expectedAllowedPaymentMethodTypes.Count,
             model.AllowedPaymentMethodTypes.Count
@@ -399,6 +400,7 @@ public class CheckoutSessionRequestTest : TestBase
         {
             Assert.Equal(expectedProductCart[i], deserialized.ProductCart[i]);
         }
+        Assert.NotNull(deserialized.AllowedPaymentMethodTypes);
         Assert.Equal(
             expectedAllowedPaymentMethodTypes.Count,
             deserialized.AllowedPaymentMethodTypes.Count
@@ -978,6 +980,7 @@ public class CheckoutSessionRequestProductCartTest : TestBase
 
         Assert.Equal(expectedProductID, model.ProductID);
         Assert.Equal(expectedQuantity, model.Quantity);
+        Assert.NotNull(model.Addons);
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
         {
@@ -1025,6 +1028,7 @@ public class CheckoutSessionRequestProductCartTest : TestBase
 
         Assert.Equal(expectedProductID, deserialized.ProductID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
+        Assert.NotNull(deserialized.Addons);
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
         {

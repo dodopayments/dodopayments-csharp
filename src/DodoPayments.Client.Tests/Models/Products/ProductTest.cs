@@ -120,6 +120,7 @@ public class ProductTest : TestBase
         Assert.Equal(expectedProductID, model.ProductID);
         Assert.Equal(expectedTaxCategory, model.TaxCategory);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
+        Assert.NotNull(model.Addons);
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
         {
@@ -302,6 +303,7 @@ public class ProductTest : TestBase
         Assert.Equal(expectedProductID, deserialized.ProductID);
         Assert.Equal(expectedTaxCategory, deserialized.TaxCategory);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+        Assert.NotNull(deserialized.Addons);
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
         {
@@ -569,6 +571,7 @@ public class ProductDigitalProductDeliveryTest : TestBase
         string expectedInstructions = "instructions";
 
         Assert.Equal(expectedExternalURL, model.ExternalURL);
+        Assert.NotNull(model.Files);
         Assert.Equal(expectedFiles.Count, model.Files.Count);
         for (int i = 0; i < expectedFiles.Count; i++)
         {
@@ -640,6 +643,7 @@ public class ProductDigitalProductDeliveryTest : TestBase
         string expectedInstructions = "instructions";
 
         Assert.Equal(expectedExternalURL, deserialized.ExternalURL);
+        Assert.NotNull(deserialized.Files);
         Assert.Equal(expectedFiles.Count, deserialized.Files.Count);
         for (int i = 0; i < expectedFiles.Count; i++)
         {

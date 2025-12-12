@@ -28,6 +28,7 @@ public class ProductCartTest : TestBase
 
         Assert.Equal(expectedProductID, model.ProductID);
         Assert.Equal(expectedQuantity, model.Quantity);
+        Assert.NotNull(model.Addons);
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
         {
@@ -75,6 +76,7 @@ public class ProductCartTest : TestBase
 
         Assert.Equal(expectedProductID, deserialized.ProductID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
+        Assert.NotNull(deserialized.Addons);
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
         {

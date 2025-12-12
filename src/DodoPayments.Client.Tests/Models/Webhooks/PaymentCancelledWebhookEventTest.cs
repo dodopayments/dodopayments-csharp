@@ -759,6 +759,7 @@ public class PaymentCancelledWebhookEventDataTest : TestBase
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
         Assert.Equal(expectedPaymentMethod, model.PaymentMethod);
         Assert.Equal(expectedPaymentMethodType, model.PaymentMethodType);
+        Assert.NotNull(model.ProductCart);
         Assert.Equal(expectedProductCart.Count, model.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
         {
@@ -1065,6 +1066,7 @@ public class PaymentCancelledWebhookEventDataTest : TestBase
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
         Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
         Assert.Equal(expectedPaymentMethodType, deserialized.PaymentMethodType);
+        Assert.NotNull(deserialized.ProductCart);
         Assert.Equal(expectedProductCart.Count, deserialized.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
         {
