@@ -54,9 +54,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
             new ApiEnumConverter<string, Subscriptions::TimeInterval>(),
-            new ApiEnumConverter<string, Subscriptions::UnionMember0Type>(),
-            new ApiEnumConverter<string, Subscriptions::UnionMember1Type>(),
-            new ApiEnumConverter<string, Subscriptions::UnionMember2Type>(),
+            new ApiEnumConverter<string, Subscriptions::LineItemSubscriptionType>(),
+            new ApiEnumConverter<string, Subscriptions::AddonType>(),
+            new ApiEnumConverter<string, Subscriptions::LineItemMeterType>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
             new ApiEnumConverter<

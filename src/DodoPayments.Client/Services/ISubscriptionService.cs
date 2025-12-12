@@ -20,6 +20,7 @@ public interface ISubscriptionService
     /// </summary>
     ISubscriptionService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    [Obsolete("deprecated")]
     Task<SubscriptionCreateResponse> Create(
         SubscriptionCreateParams parameters,
         CancellationToken cancellationToken = default

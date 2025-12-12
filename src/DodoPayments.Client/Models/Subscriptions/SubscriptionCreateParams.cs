@@ -11,6 +11,7 @@ using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
+[Obsolete("deprecated")]
 public sealed record class SubscriptionCreateParams : ParamsBase
 {
     readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
@@ -148,6 +149,22 @@ public sealed record class SubscriptionCreateParams : ParamsBase
             return ModelBase.GetNullableClass<OnDemandSubscription>(this.RawBodyData, "on_demand");
         }
         init { ModelBase.Set(this._rawBodyData, "on_demand", value); }
+    }
+
+    /// <summary>
+    /// List of one time products that will be bundled with the first payment for
+    /// this subscription
+    /// </summary>
+    public IReadOnlyList<OneTimeProductCartItem>? OneTimeProductCart
+    {
+        get
+        {
+            return ModelBase.GetNullableClass<List<OneTimeProductCartItem>>(
+                this.RawBodyData,
+                "one_time_product_cart"
+            );
+        }
+        init { ModelBase.Set(this._rawBodyData, "one_time_product_cart", value); }
     }
 
     /// <summary>

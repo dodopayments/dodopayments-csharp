@@ -29,6 +29,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ClientSecret = "client_secret",
             DiscountID = "discount_id",
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
         };
 
@@ -48,6 +49,10 @@ public class SubscriptionCreateResponseTest : TestBase
         string expectedClientSecret = "client_secret";
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<OneTimeProductCart> expectedOneTimeProductCart =
+        [
+            new() { ProductID = "product_id", Quantity = 0 },
+        ];
         string expectedPaymentLink = "payment_link";
 
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
@@ -69,6 +74,12 @@ public class SubscriptionCreateResponseTest : TestBase
         Assert.Equal(expectedClientSecret, model.ClientSecret);
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedExpiresOn, model.ExpiresOn);
+        Assert.NotNull(model.OneTimeProductCart);
+        Assert.Equal(expectedOneTimeProductCart.Count, model.OneTimeProductCart.Count);
+        for (int i = 0; i < expectedOneTimeProductCart.Count; i++)
+        {
+            Assert.Equal(expectedOneTimeProductCart[i], model.OneTimeProductCart[i]);
+        }
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
     }
 
@@ -93,6 +104,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ClientSecret = "client_secret",
             DiscountID = "discount_id",
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
         };
 
@@ -123,6 +135,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ClientSecret = "client_secret",
             DiscountID = "discount_id",
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
         };
 
@@ -146,6 +159,10 @@ public class SubscriptionCreateResponseTest : TestBase
         string expectedClientSecret = "client_secret";
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<OneTimeProductCart> expectedOneTimeProductCart =
+        [
+            new() { ProductID = "product_id", Quantity = 0 },
+        ];
         string expectedPaymentLink = "payment_link";
 
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
@@ -167,6 +184,12 @@ public class SubscriptionCreateResponseTest : TestBase
         Assert.Equal(expectedClientSecret, deserialized.ClientSecret);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedExpiresOn, deserialized.ExpiresOn);
+        Assert.NotNull(deserialized.OneTimeProductCart);
+        Assert.Equal(expectedOneTimeProductCart.Count, deserialized.OneTimeProductCart.Count);
+        for (int i = 0; i < expectedOneTimeProductCart.Count; i++)
+        {
+            Assert.Equal(expectedOneTimeProductCart[i], deserialized.OneTimeProductCart[i]);
+        }
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
     }
 
@@ -191,6 +214,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ClientSecret = "client_secret",
             DiscountID = "discount_id",
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
         };
 
@@ -223,6 +247,8 @@ public class SubscriptionCreateResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("discount_id"));
         Assert.Null(model.ExpiresOn);
         Assert.False(model.RawData.ContainsKey("expires_on"));
+        Assert.Null(model.OneTimeProductCart);
+        Assert.False(model.RawData.ContainsKey("one_time_product_cart"));
         Assert.Null(model.PaymentLink);
         Assert.False(model.RawData.ContainsKey("payment_link"));
     }
@@ -272,6 +298,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ClientSecret = null,
             DiscountID = null,
             ExpiresOn = null,
+            OneTimeProductCart = null,
             PaymentLink = null,
         };
 
@@ -281,6 +308,8 @@ public class SubscriptionCreateResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("discount_id"));
         Assert.Null(model.ExpiresOn);
         Assert.True(model.RawData.ContainsKey("expires_on"));
+        Assert.Null(model.OneTimeProductCart);
+        Assert.True(model.RawData.ContainsKey("one_time_product_cart"));
         Assert.Null(model.PaymentLink);
         Assert.True(model.RawData.ContainsKey("payment_link"));
     }
@@ -307,8 +336,59 @@ public class SubscriptionCreateResponseTest : TestBase
             ClientSecret = null,
             DiscountID = null,
             ExpiresOn = null,
+            OneTimeProductCart = null,
             PaymentLink = null,
         };
+
+        model.Validate();
+    }
+}
+
+public class OneTimeProductCartTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
+
+        string expectedProductID = "product_id";
+        int expectedQuantity = 0;
+
+        Assert.Equal(expectedProductID, model.ProductID);
+        Assert.Equal(expectedQuantity, model.Quantity);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<OneTimeProductCart>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<OneTimeProductCart>(json);
+        Assert.NotNull(deserialized);
+
+        string expectedProductID = "product_id";
+        int expectedQuantity = 0;
+
+        Assert.Equal(expectedProductID, deserialized.ProductID);
+        Assert.Equal(expectedQuantity, deserialized.Quantity);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
 
         model.Validate();
     }

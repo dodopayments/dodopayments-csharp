@@ -10,6 +10,7 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
+[Obsolete("deprecated")]
 public sealed record class PaymentCreateParams : ParamsBase
 {
     readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];

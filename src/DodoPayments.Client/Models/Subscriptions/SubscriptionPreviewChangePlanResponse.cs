@@ -148,14 +148,7 @@ public record class LineItem
 
     public string ID
     {
-        get
-        {
-            return Match(
-                unionMember0: (x) => x.ID,
-                unionMember1: (x) => x.ID,
-                unionMember2: (x) => x.ID
-            );
-        }
+        get { return Match(subscription: (x) => x.ID, addon: (x) => x.ID, meter: (x) => x.ID); }
     }
 
     public ApiEnum<string, Currency> Currency
@@ -163,9 +156,9 @@ public record class LineItem
         get
         {
             return Match(
-                unionMember0: (x) => x.Currency,
-                unionMember1: (x) => x.Currency,
-                unionMember2: (x) => x.Currency
+                subscription: (x) => x.Currency,
+                addon: (x) => x.Currency,
+                meter: (x) => x.Currency
             );
         }
     }
@@ -175,9 +168,9 @@ public record class LineItem
         get
         {
             return Match<double?>(
-                unionMember0: (x) => x.ProrationFactor,
-                unionMember1: (x) => x.ProrationFactor,
-                unionMember2: (_) => null
+                subscription: (x) => x.ProrationFactor,
+                addon: (x) => x.ProrationFactor,
+                meter: (_) => null
             );
         }
     }
@@ -187,9 +180,9 @@ public record class LineItem
         get
         {
             return Match<int?>(
-                unionMember0: (x) => x.Quantity,
-                unionMember1: (x) => x.Quantity,
-                unionMember2: (_) => null
+                subscription: (x) => x.Quantity,
+                addon: (x) => x.Quantity,
+                meter: (_) => null
             );
         }
     }
@@ -199,9 +192,9 @@ public record class LineItem
         get
         {
             return Match(
-                unionMember0: (x) => x.TaxInclusive,
-                unionMember1: (x) => x.TaxInclusive,
-                unionMember2: (x) => x.TaxInclusive
+                subscription: (x) => x.TaxInclusive,
+                addon: (x) => x.TaxInclusive,
+                meter: (x) => x.TaxInclusive
             );
         }
     }
@@ -211,9 +204,9 @@ public record class LineItem
         get
         {
             return Match<int?>(
-                unionMember0: (x) => x.UnitPrice,
-                unionMember1: (x) => x.UnitPrice,
-                unionMember2: (_) => null
+                subscription: (x) => x.UnitPrice,
+                addon: (x) => x.UnitPrice,
+                meter: (_) => null
             );
         }
     }
@@ -223,9 +216,9 @@ public record class LineItem
         get
         {
             return Match<string?>(
-                unionMember0: (x) => x.Description,
-                unionMember1: (x) => x.Description,
-                unionMember2: (x) => x.Description
+                subscription: (x) => x.Description,
+                addon: (x) => x.Description,
+                meter: (x) => x.Description
             );
         }
     }
@@ -235,9 +228,9 @@ public record class LineItem
         get
         {
             return Match<string?>(
-                unionMember0: (x) => x.Name,
-                unionMember1: (x) => x.Name,
-                unionMember2: (x) => x.Name
+                subscription: (x) => x.Name,
+                addon: (x) => x.Name,
+                meter: (x) => x.Name
             );
         }
     }
@@ -247,9 +240,9 @@ public record class LineItem
         get
         {
             return Match<int?>(
-                unionMember0: (x) => x.Tax,
-                unionMember1: (x) => x.Tax,
-                unionMember2: (x) => x.Tax
+                subscription: (x) => x.Tax,
+                addon: (x) => x.Tax,
+                meter: (x) => x.Tax
             );
         }
     }
@@ -259,26 +252,26 @@ public record class LineItem
         get
         {
             return Match<float?>(
-                unionMember0: (x) => x.TaxRate,
-                unionMember1: (x) => x.TaxRate,
-                unionMember2: (x) => x.TaxRate
+                subscription: (x) => x.TaxRate,
+                addon: (x) => x.TaxRate,
+                meter: (x) => x.TaxRate
             );
         }
     }
 
-    public LineItem(UnionMember0 value, JsonElement? json = null)
+    public LineItem(LineItemSubscription value, JsonElement? json = null)
     {
         this.Value = value;
         this._json = json;
     }
 
-    public LineItem(UnionMember1 value, JsonElement? json = null)
+    public LineItem(Addon value, JsonElement? json = null)
     {
         this.Value = value;
         this._json = json;
     }
 
-    public LineItem(UnionMember2 value, JsonElement? json = null)
+    public LineItem(LineItemMeter value, JsonElement? json = null)
     {
         this.Value = value;
         this._json = json;
@@ -291,64 +284,64 @@ public record class LineItem
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="UnionMember0"/>.
+    /// type <see cref="LineItemSubscription"/>.
     ///
     /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickUnionMember0(out var value)) {
-    ///     // `value` is of type `UnionMember0`
+    /// if (instance.TryPickSubscription(out var value)) {
+    ///     // `value` is of type `LineItemSubscription`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickUnionMember0([NotNullWhen(true)] out UnionMember0? value)
+    public bool TryPickSubscription([NotNullWhen(true)] out LineItemSubscription? value)
     {
-        value = this.Value as UnionMember0;
+        value = this.Value as LineItemSubscription;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="UnionMember1"/>.
+    /// type <see cref="Addon"/>.
     ///
     /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickUnionMember1(out var value)) {
-    ///     // `value` is of type `UnionMember1`
+    /// if (instance.TryPickAddon(out var value)) {
+    ///     // `value` is of type `Addon`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickUnionMember1([NotNullWhen(true)] out UnionMember1? value)
+    public bool TryPickAddon([NotNullWhen(true)] out Addon? value)
     {
-        value = this.Value as UnionMember1;
+        value = this.Value as Addon;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="UnionMember2"/>.
+    /// type <see cref="LineItemMeter"/>.
     ///
     /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickUnionMember2(out var value)) {
-    ///     // `value` is of type `UnionMember2`
+    /// if (instance.TryPickMeter(out var value)) {
+    ///     // `value` is of type `LineItemMeter`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickUnionMember2([NotNullWhen(true)] out UnionMember2? value)
+    public bool TryPickMeter([NotNullWhen(true)] out LineItemMeter? value)
     {
-        value = this.Value as UnionMember2;
+        value = this.Value as LineItemMeter;
         return value != null;
     }
 
@@ -366,29 +359,29 @@ public record class LineItem
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (UnionMember0 value) => {...},
-    ///     (UnionMember1 value) => {...},
-    ///     (UnionMember2 value) => {...}
+    ///     (LineItemSubscription value) => {...},
+    ///     (Addon value) => {...},
+    ///     (LineItemMeter value) => {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<UnionMember0> unionMember0,
-        System::Action<UnionMember1> unionMember1,
-        System::Action<UnionMember2> unionMember2
+        System::Action<LineItemSubscription> subscription,
+        System::Action<Addon> addon,
+        System::Action<LineItemMeter> meter
     )
     {
         switch (this.Value)
         {
-            case UnionMember0 value:
-                unionMember0(value);
+            case LineItemSubscription value:
+                subscription(value);
                 break;
-            case UnionMember1 value:
-                unionMember1(value);
+            case Addon value:
+                addon(value);
                 break;
-            case UnionMember2 value:
-                unionMember2(value);
+            case LineItemMeter value:
+                meter(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -412,35 +405,35 @@ public record class LineItem
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (UnionMember0 value) => {...},
-    ///     (UnionMember1 value) => {...},
-    ///     (UnionMember2 value) => {...}
+    ///     (LineItemSubscription value) => {...},
+    ///     (Addon value) => {...},
+    ///     (LineItemMeter value) => {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<UnionMember0, T> unionMember0,
-        System::Func<UnionMember1, T> unionMember1,
-        System::Func<UnionMember2, T> unionMember2
+        System::Func<LineItemSubscription, T> subscription,
+        System::Func<Addon, T> addon,
+        System::Func<LineItemMeter, T> meter
     )
     {
         return this.Value switch
         {
-            UnionMember0 value => unionMember0(value),
-            UnionMember1 value => unionMember1(value),
-            UnionMember2 value => unionMember2(value),
+            LineItemSubscription value => subscription(value),
+            Addon value => addon(value),
+            LineItemMeter value => meter(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of LineItem"
             ),
         };
     }
 
-    public static implicit operator LineItem(UnionMember0 value) => new(value);
+    public static implicit operator LineItem(LineItemSubscription value) => new(value);
 
-    public static implicit operator LineItem(UnionMember1 value) => new(value);
+    public static implicit operator LineItem(Addon value) => new(value);
 
-    public static implicit operator LineItem(UnionMember2 value) => new(value);
+    public static implicit operator LineItem(LineItemMeter value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -461,9 +454,9 @@ public record class LineItem
             );
         }
         this.Switch(
-            (unionMember0) => unionMember0.Validate(),
-            (unionMember1) => unionMember1.Validate(),
-            (unionMember2) => unionMember2.Validate()
+            (subscription) => subscription.Validate(),
+            (addon) => addon.Validate(),
+            (meter) => meter.Validate()
         );
     }
 
@@ -489,7 +482,7 @@ sealed class LineItemConverter : JsonConverter<LineItem>
         var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UnionMember0>(json, options);
+            var deserialized = JsonSerializer.Deserialize<LineItemSubscription>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -504,7 +497,7 @@ sealed class LineItemConverter : JsonConverter<LineItem>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UnionMember1>(json, options);
+            var deserialized = JsonSerializer.Deserialize<Addon>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -519,7 +512,7 @@ sealed class LineItemConverter : JsonConverter<LineItem>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UnionMember2>(json, options);
+            var deserialized = JsonSerializer.Deserialize<LineItemMeter>(json, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -541,8 +534,8 @@ sealed class LineItemConverter : JsonConverter<LineItem>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<UnionMember0, UnionMember0FromRaw>))]
-public sealed record class UnionMember0 : ModelBase
+[JsonConverter(typeof(ModelConverter<LineItemSubscription, LineItemSubscriptionFromRaw>))]
+public sealed record class LineItemSubscription : ModelBase
 {
     public required string ID
     {
@@ -583,11 +576,11 @@ public sealed record class UnionMember0 : ModelBase
         init { ModelBase.Set(this._rawData, "tax_inclusive", value); }
     }
 
-    public required ApiEnum<string, UnionMember0Type> Type
+    public required ApiEnum<string, LineItemSubscriptionType> Type
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, UnionMember0Type>>(
+            return ModelBase.GetNotNullClass<ApiEnum<string, LineItemSubscriptionType>>(
                 this.RawData,
                 "type"
             );
@@ -642,47 +635,50 @@ public sealed record class UnionMember0 : ModelBase
         _ = this.TaxRate;
     }
 
-    public UnionMember0() { }
+    public LineItemSubscription() { }
 
-    public UnionMember0(UnionMember0 unionMember0)
-        : base(unionMember0) { }
+    public LineItemSubscription(LineItemSubscription lineItemSubscription)
+        : base(lineItemSubscription) { }
 
-    public UnionMember0(IReadOnlyDictionary<string, JsonElement> rawData)
+    public LineItemSubscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UnionMember0(FrozenDictionary<string, JsonElement> rawData)
+    LineItemSubscription(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="UnionMember0FromRaw.FromRawUnchecked"/>
-    public static UnionMember0 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="LineItemSubscriptionFromRaw.FromRawUnchecked"/>
+    public static LineItemSubscription FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class UnionMember0FromRaw : IFromRaw<UnionMember0>
+class LineItemSubscriptionFromRaw : IFromRaw<LineItemSubscription>
 {
     /// <inheritdoc/>
-    public UnionMember0 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        UnionMember0.FromRawUnchecked(rawData);
+    public LineItemSubscription FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => LineItemSubscription.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(UnionMember0TypeConverter))]
-public enum UnionMember0Type
+[JsonConverter(typeof(LineItemSubscriptionTypeConverter))]
+public enum LineItemSubscriptionType
 {
     Subscription,
 }
 
-sealed class UnionMember0TypeConverter : JsonConverter<UnionMember0Type>
+sealed class LineItemSubscriptionTypeConverter : JsonConverter<LineItemSubscriptionType>
 {
-    public override UnionMember0Type Read(
+    public override LineItemSubscriptionType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -690,14 +686,14 @@ sealed class UnionMember0TypeConverter : JsonConverter<UnionMember0Type>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "subscription" => UnionMember0Type.Subscription,
-            _ => (UnionMember0Type)(-1),
+            "subscription" => LineItemSubscriptionType.Subscription,
+            _ => (LineItemSubscriptionType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        UnionMember0Type value,
+        LineItemSubscriptionType value,
         JsonSerializerOptions options
     )
     {
@@ -705,7 +701,7 @@ sealed class UnionMember0TypeConverter : JsonConverter<UnionMember0Type>
             writer,
             value switch
             {
-                UnionMember0Type.Subscription => "subscription",
+                LineItemSubscriptionType.Subscription => "subscription",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -715,8 +711,8 @@ sealed class UnionMember0TypeConverter : JsonConverter<UnionMember0Type>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<UnionMember1, UnionMember1FromRaw>))]
-public sealed record class UnionMember1 : ModelBase
+[JsonConverter(typeof(ModelConverter<Addon, AddonFromRaw>))]
+public sealed record class Addon : ModelBase
 {
     public required string ID
     {
@@ -779,15 +775,9 @@ public sealed record class UnionMember1 : ModelBase
         init { ModelBase.Set(this._rawData, "tax_rate", value); }
     }
 
-    public required ApiEnum<string, UnionMember1Type> Type
+    public required ApiEnum<string, AddonType> Type
     {
-        get
-        {
-            return ModelBase.GetNotNullClass<ApiEnum<string, UnionMember1Type>>(
-                this.RawData,
-                "type"
-            );
-        }
+        get { return ModelBase.GetNotNullClass<ApiEnum<string, AddonType>>(this.RawData, "type"); }
         init { ModelBase.Set(this._rawData, "type", value); }
     }
 
@@ -826,47 +816,47 @@ public sealed record class UnionMember1 : ModelBase
         _ = this.Tax;
     }
 
-    public UnionMember1() { }
+    public Addon() { }
 
-    public UnionMember1(UnionMember1 unionMember1)
-        : base(unionMember1) { }
+    public Addon(Addon addon)
+        : base(addon) { }
 
-    public UnionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Addon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UnionMember1(FrozenDictionary<string, JsonElement> rawData)
+    Addon(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="UnionMember1FromRaw.FromRawUnchecked"/>
-    public static UnionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="AddonFromRaw.FromRawUnchecked"/>
+    public static Addon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class UnionMember1FromRaw : IFromRaw<UnionMember1>
+class AddonFromRaw : IFromRaw<Addon>
 {
     /// <inheritdoc/>
-    public UnionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        UnionMember1.FromRawUnchecked(rawData);
+    public Addon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Addon.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(UnionMember1TypeConverter))]
-public enum UnionMember1Type
+[JsonConverter(typeof(AddonTypeConverter))]
+public enum AddonType
 {
     Addon,
 }
 
-sealed class UnionMember1TypeConverter : JsonConverter<UnionMember1Type>
+sealed class AddonTypeConverter : JsonConverter<AddonType>
 {
-    public override UnionMember1Type Read(
+    public override AddonType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -874,14 +864,14 @@ sealed class UnionMember1TypeConverter : JsonConverter<UnionMember1Type>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "addon" => UnionMember1Type.Addon,
-            _ => (UnionMember1Type)(-1),
+            "addon" => AddonType.Addon,
+            _ => (AddonType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        UnionMember1Type value,
+        AddonType value,
         JsonSerializerOptions options
     )
     {
@@ -889,7 +879,7 @@ sealed class UnionMember1TypeConverter : JsonConverter<UnionMember1Type>
             writer,
             value switch
             {
-                UnionMember1Type.Addon => "addon",
+                AddonType.Addon => "addon",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -899,8 +889,8 @@ sealed class UnionMember1TypeConverter : JsonConverter<UnionMember1Type>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<UnionMember2, UnionMember2FromRaw>))]
-public sealed record class UnionMember2 : ModelBase
+[JsonConverter(typeof(ModelConverter<LineItemMeter, LineItemMeterFromRaw>))]
+public sealed record class LineItemMeter : ModelBase
 {
     public required string ID
     {
@@ -959,11 +949,11 @@ public sealed record class UnionMember2 : ModelBase
         init { ModelBase.Set(this._rawData, "tax_rate", value); }
     }
 
-    public required ApiEnum<string, UnionMember2Type> Type
+    public required ApiEnum<string, LineItemMeterType> Type
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, UnionMember2Type>>(
+            return ModelBase.GetNotNullClass<ApiEnum<string, LineItemMeterType>>(
                 this.RawData,
                 "type"
             );
@@ -1007,47 +997,47 @@ public sealed record class UnionMember2 : ModelBase
         _ = this.Tax;
     }
 
-    public UnionMember2() { }
+    public LineItemMeter() { }
 
-    public UnionMember2(UnionMember2 unionMember2)
-        : base(unionMember2) { }
+    public LineItemMeter(LineItemMeter lineItemMeter)
+        : base(lineItemMeter) { }
 
-    public UnionMember2(IReadOnlyDictionary<string, JsonElement> rawData)
+    public LineItemMeter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UnionMember2(FrozenDictionary<string, JsonElement> rawData)
+    LineItemMeter(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="UnionMember2FromRaw.FromRawUnchecked"/>
-    public static UnionMember2 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="LineItemMeterFromRaw.FromRawUnchecked"/>
+    public static LineItemMeter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class UnionMember2FromRaw : IFromRaw<UnionMember2>
+class LineItemMeterFromRaw : IFromRaw<LineItemMeter>
 {
     /// <inheritdoc/>
-    public UnionMember2 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        UnionMember2.FromRawUnchecked(rawData);
+    public LineItemMeter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        LineItemMeter.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(UnionMember2TypeConverter))]
-public enum UnionMember2Type
+[JsonConverter(typeof(LineItemMeterTypeConverter))]
+public enum LineItemMeterType
 {
     Meter,
 }
 
-sealed class UnionMember2TypeConverter : JsonConverter<UnionMember2Type>
+sealed class LineItemMeterTypeConverter : JsonConverter<LineItemMeterType>
 {
-    public override UnionMember2Type Read(
+    public override LineItemMeterType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1055,14 +1045,14 @@ sealed class UnionMember2TypeConverter : JsonConverter<UnionMember2Type>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "meter" => UnionMember2Type.Meter,
-            _ => (UnionMember2Type)(-1),
+            "meter" => LineItemMeterType.Meter,
+            _ => (LineItemMeterType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        UnionMember2Type value,
+        LineItemMeterType value,
         JsonSerializerOptions options
     )
     {
@@ -1070,7 +1060,7 @@ sealed class UnionMember2TypeConverter : JsonConverter<UnionMember2Type>
             writer,
             value switch
             {
-                UnionMember2Type.Meter => "meter",
+                LineItemMeterType.Meter => "meter",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
