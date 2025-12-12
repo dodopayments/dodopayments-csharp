@@ -557,7 +557,7 @@ public class DataTest : TestBase
     public void paymentValidation_Works()
     {
         Data value = new(
-            new()
+            new Payment()
             {
                 Billing = new()
                 {
@@ -642,7 +642,7 @@ public class DataTest : TestBase
     public void subscriptionValidation_Works()
     {
         Data value = new(
-            new()
+            new Subscription()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -708,7 +708,7 @@ public class DataTest : TestBase
     public void refundValidation_Works()
     {
         Data value = new(
-            new()
+            new Refund()
             {
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -738,7 +738,7 @@ public class DataTest : TestBase
     public void disputeValidation_Works()
     {
         Data value = new(
-            new()
+            new Dispute()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -768,7 +768,7 @@ public class DataTest : TestBase
     public void license_keyValidation_Works()
     {
         Data value = new(
-            new()
+            new LicenseKey()
             {
                 ID = "lic_123",
                 BusinessID = "business_id",
@@ -792,7 +792,7 @@ public class DataTest : TestBase
     public void paymentSerializationRoundtrip_Works()
     {
         Data value = new(
-            new()
+            new Payment()
             {
                 Billing = new()
                 {
@@ -880,7 +880,7 @@ public class DataTest : TestBase
     public void subscriptionSerializationRoundtrip_Works()
     {
         Data value = new(
-            new()
+            new Subscription()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -949,7 +949,7 @@ public class DataTest : TestBase
     public void refundSerializationRoundtrip_Works()
     {
         Data value = new(
-            new()
+            new Refund()
             {
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -982,7 +982,7 @@ public class DataTest : TestBase
     public void disputeSerializationRoundtrip_Works()
     {
         Data value = new(
-            new()
+            new Dispute()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -1015,7 +1015,7 @@ public class DataTest : TestBase
     public void license_keySerializationRoundtrip_Works()
     {
         Data value = new(
-            new()
+            new LicenseKey()
             {
                 ID = "lic_123",
                 BusinessID = "business_id",

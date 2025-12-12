@@ -17,7 +17,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_acceptedValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeAcceptedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -44,7 +44,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_cancelledValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeCancelledWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -72,7 +72,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_challengedValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeChallengedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -100,7 +100,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_expiredValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeExpiredWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -128,7 +128,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_lostValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeLostWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -156,7 +156,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_openedValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeOpenedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -184,7 +184,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_wonValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeWonWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -212,7 +212,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void license_key_createdValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::LicenseKeyCreatedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -243,7 +243,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void payment_cancelledValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::PaymentCancelledWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -335,7 +335,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void payment_failedValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::PaymentFailedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -427,7 +427,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void payment_processingValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::PaymentProcessingWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -519,7 +519,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void payment_succeededValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::PaymentSucceededWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -611,7 +611,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void refund_failedValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::RefundFailedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -648,7 +648,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void refund_succeededValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::RefundSucceededWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -685,7 +685,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_activeValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionActiveWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -758,7 +758,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_cancelledValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionCancelledWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -831,7 +831,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_expiredValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionExpiredWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -904,7 +904,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_failedValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionFailedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -977,7 +977,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_on_holdValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionOnHoldWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1050,7 +1050,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_plan_changedValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionPlanChangedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1123,7 +1123,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_renewedValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionRenewedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1196,7 +1196,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_updatedValidation_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionUpdatedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1269,7 +1269,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_acceptedSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeAcceptedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1299,7 +1299,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_cancelledSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeCancelledWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1330,7 +1330,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_challengedSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeChallengedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1361,7 +1361,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_expiredSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeExpiredWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1392,7 +1392,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_lostSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeLostWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1423,7 +1423,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_openedSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeOpenedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1454,7 +1454,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void dispute_wonSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::DisputeWonWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1485,7 +1485,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void license_key_createdSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::LicenseKeyCreatedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1519,7 +1519,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void payment_cancelledSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::PaymentCancelledWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1614,7 +1614,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void payment_failedSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::PaymentFailedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1709,7 +1709,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void payment_processingSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::PaymentProcessingWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1804,7 +1804,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void payment_succeededSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::PaymentSucceededWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1899,7 +1899,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void refund_failedSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::RefundFailedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1939,7 +1939,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void refund_succeededSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::RefundSucceededWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -1979,7 +1979,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_activeSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionActiveWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -2055,7 +2055,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_cancelledSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionCancelledWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -2131,7 +2131,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_expiredSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionExpiredWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -2207,7 +2207,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_failedSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionFailedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -2283,7 +2283,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_on_holdSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionOnHoldWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -2359,7 +2359,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_plan_changedSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionPlanChangedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -2435,7 +2435,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_renewedSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionRenewedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()
@@ -2511,7 +2511,7 @@ public class UnwrapWebhookEventTest : TestBase
     public void subscription_updatedSerializationRoundtrip_Works()
     {
         Webhooks::UnwrapWebhookEvent value = new(
-            new()
+            new Webhooks::SubscriptionUpdatedWebhookEvent()
             {
                 BusinessID = "business_id",
                 Data = new()

@@ -826,7 +826,7 @@ public class LineItemTest : TestBase
     public void UnionMember0Validation_Works()
     {
         LineItem value = new(
-            new()
+            new UnionMember0()
             {
                 ID = "id",
                 Currency = Currency.Aed,
@@ -849,7 +849,7 @@ public class LineItemTest : TestBase
     public void UnionMember1Validation_Works()
     {
         LineItem value = new(
-            new()
+            new UnionMember1()
             {
                 ID = "id",
                 Currency = Currency.Aed,
@@ -872,7 +872,7 @@ public class LineItemTest : TestBase
     public void UnionMember2Validation_Works()
     {
         LineItem value = new(
-            new()
+            new UnionMember2()
             {
                 ID = "id",
                 ChargeableUnits = "chargeable_units",
@@ -896,7 +896,7 @@ public class LineItemTest : TestBase
     public void UnionMember0SerializationRoundtrip_Works()
     {
         LineItem value = new(
-            new()
+            new UnionMember0()
             {
                 ID = "id",
                 Currency = Currency.Aed,
@@ -922,7 +922,7 @@ public class LineItemTest : TestBase
     public void UnionMember1SerializationRoundtrip_Works()
     {
         LineItem value = new(
-            new()
+            new UnionMember1()
             {
                 ID = "id",
                 Currency = Currency.Aed,
@@ -948,7 +948,7 @@ public class LineItemTest : TestBase
     public void UnionMember2SerializationRoundtrip_Works()
     {
         LineItem value = new(
-            new()
+            new UnionMember2()
             {
                 ID = "id",
                 ChargeableUnits = "chargeable_units",
