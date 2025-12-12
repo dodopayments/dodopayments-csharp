@@ -10,7 +10,7 @@ public class BodyTest : TestBase
     [Fact]
     public void newValidation_Works()
     {
-        Body value = new(new() { Type = Type.New, ReturnURL = "return_url" });
+        Body value = new(new New() { Type = Type.New, ReturnURL = "return_url" });
         value.Validate();
     }
 
@@ -18,7 +18,7 @@ public class BodyTest : TestBase
     public void existingValidation_Works()
     {
         Body value = new(
-            new() { PaymentMethodID = "payment_method_id", Type = ExistingType.Existing }
+            new Existing() { PaymentMethodID = "payment_method_id", Type = ExistingType.Existing }
         );
         value.Validate();
     }
@@ -26,7 +26,7 @@ public class BodyTest : TestBase
     [Fact]
     public void newSerializationRoundtrip_Works()
     {
-        Body value = new(new() { Type = Type.New, ReturnURL = "return_url" });
+        Body value = new(new New() { Type = Type.New, ReturnURL = "return_url" });
         string json = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Body>(json);
 
@@ -37,7 +37,7 @@ public class BodyTest : TestBase
     public void existingSerializationRoundtrip_Works()
     {
         Body value = new(
-            new() { PaymentMethodID = "payment_method_id", Type = ExistingType.Existing }
+            new Existing() { PaymentMethodID = "payment_method_id", Type = ExistingType.Existing }
         );
         string json = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Body>(json);
