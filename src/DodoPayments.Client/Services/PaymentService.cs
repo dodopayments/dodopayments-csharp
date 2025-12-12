@@ -25,6 +25,7 @@ public sealed class PaymentService : IPaymentService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<PaymentCreateResponse> Create(
         PaymentCreateParams parameters,
         CancellationToken cancellationToken = default

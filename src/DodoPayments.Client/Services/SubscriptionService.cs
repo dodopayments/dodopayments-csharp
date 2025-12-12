@@ -25,6 +25,7 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<SubscriptionCreateResponse> Create(
         SubscriptionCreateParams parameters,
         CancellationToken cancellationToken = default

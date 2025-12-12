@@ -20,6 +20,7 @@ public interface IPaymentService
     /// </summary>
     IPaymentService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    [Obsolete("deprecated")]
     Task<PaymentCreateResponse> Create(
         PaymentCreateParams parameters,
         CancellationToken cancellationToken = default

@@ -19,7 +19,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             {
                 LineItems =
                 [
-                    new UnionMember0()
+                    new LineItemSubscription()
                     {
                         ID = "id",
                         Currency = Currency.Aed,
@@ -27,7 +27,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                         ProrationFactor = 0,
                         Quantity = 0,
                         TaxInclusive = true,
-                        Type = UnionMember0Type.Subscription,
+                        Type = LineItemSubscriptionType.Subscription,
                         UnitPrice = 0,
                         Description = "description",
                         Name = "name",
@@ -109,7 +109,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
         {
             LineItems =
             [
-                new UnionMember0()
+                new LineItemSubscription()
                 {
                     ID = "id",
                     Currency = Currency.Aed,
@@ -117,7 +117,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = UnionMember0Type.Subscription,
+                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -207,7 +207,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             {
                 LineItems =
                 [
-                    new UnionMember0()
+                    new LineItemSubscription()
                     {
                         ID = "id",
                         Currency = Currency.Aed,
@@ -215,7 +215,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                         ProrationFactor = 0,
                         Quantity = 0,
                         TaxInclusive = true,
-                        Type = UnionMember0Type.Subscription,
+                        Type = LineItemSubscriptionType.Subscription,
                         UnitPrice = 0,
                         Description = "description",
                         Name = "name",
@@ -308,7 +308,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             {
                 LineItems =
                 [
-                    new UnionMember0()
+                    new LineItemSubscription()
                     {
                         ID = "id",
                         Currency = Currency.Aed,
@@ -316,7 +316,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                         ProrationFactor = 0,
                         Quantity = 0,
                         TaxInclusive = true,
-                        Type = UnionMember0Type.Subscription,
+                        Type = LineItemSubscriptionType.Subscription,
                         UnitPrice = 0,
                         Description = "description",
                         Name = "name",
@@ -402,7 +402,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
         {
             LineItems =
             [
-                new UnionMember0()
+                new LineItemSubscription()
                 {
                     ID = "id",
                     Currency = Currency.Aed,
@@ -410,7 +410,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = UnionMember0Type.Subscription,
+                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -500,7 +500,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             {
                 LineItems =
                 [
-                    new UnionMember0()
+                    new LineItemSubscription()
                     {
                         ID = "id",
                         Currency = Currency.Aed,
@@ -508,7 +508,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                         ProrationFactor = 0,
                         Quantity = 0,
                         TaxInclusive = true,
-                        Type = UnionMember0Type.Subscription,
+                        Type = LineItemSubscriptionType.Subscription,
                         UnitPrice = 0,
                         Description = "description",
                         Name = "name",
@@ -599,7 +599,7 @@ public class ImmediateChargeTest : TestBase
         {
             LineItems =
             [
-                new UnionMember0()
+                new LineItemSubscription()
                 {
                     ID = "id",
                     Currency = Currency.Aed,
@@ -607,7 +607,7 @@ public class ImmediateChargeTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = UnionMember0Type.Subscription,
+                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -629,7 +629,7 @@ public class ImmediateChargeTest : TestBase
 
         List<LineItem> expectedLineItems =
         [
-            new UnionMember0()
+            new LineItemSubscription()
             {
                 ID = "id",
                 Currency = Currency.Aed,
@@ -637,7 +637,7 @@ public class ImmediateChargeTest : TestBase
                 ProrationFactor = 0,
                 Quantity = 0,
                 TaxInclusive = true,
-                Type = UnionMember0Type.Subscription,
+                Type = LineItemSubscriptionType.Subscription,
                 UnitPrice = 0,
                 Description = "description",
                 Name = "name",
@@ -671,7 +671,7 @@ public class ImmediateChargeTest : TestBase
         {
             LineItems =
             [
-                new UnionMember0()
+                new LineItemSubscription()
                 {
                     ID = "id",
                     Currency = Currency.Aed,
@@ -679,7 +679,7 @@ public class ImmediateChargeTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = UnionMember0Type.Subscription,
+                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -712,7 +712,7 @@ public class ImmediateChargeTest : TestBase
         {
             LineItems =
             [
-                new UnionMember0()
+                new LineItemSubscription()
                 {
                     ID = "id",
                     Currency = Currency.Aed,
@@ -720,7 +720,7 @@ public class ImmediateChargeTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = UnionMember0Type.Subscription,
+                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -746,7 +746,7 @@ public class ImmediateChargeTest : TestBase
 
         List<LineItem> expectedLineItems =
         [
-            new UnionMember0()
+            new LineItemSubscription()
             {
                 ID = "id",
                 Currency = Currency.Aed,
@@ -754,7 +754,7 @@ public class ImmediateChargeTest : TestBase
                 ProrationFactor = 0,
                 Quantity = 0,
                 TaxInclusive = true,
-                Type = UnionMember0Type.Subscription,
+                Type = LineItemSubscriptionType.Subscription,
                 UnitPrice = 0,
                 Description = "description",
                 Name = "name",
@@ -788,7 +788,7 @@ public class ImmediateChargeTest : TestBase
         {
             LineItems =
             [
-                new UnionMember0()
+                new LineItemSubscription()
                 {
                     ID = "id",
                     Currency = Currency.Aed,
@@ -796,7 +796,7 @@ public class ImmediateChargeTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = UnionMember0Type.Subscription,
+                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -823,10 +823,10 @@ public class ImmediateChargeTest : TestBase
 public class LineItemTest : TestBase
 {
     [Fact]
-    public void UnionMember0Validation_Works()
+    public void subscriptionValidation_Works()
     {
         LineItem value = new(
-            new UnionMember0()
+            new LineItemSubscription()
             {
                 ID = "id",
                 Currency = Currency.Aed,
@@ -834,7 +834,7 @@ public class LineItemTest : TestBase
                 ProrationFactor = 0,
                 Quantity = 0,
                 TaxInclusive = true,
-                Type = UnionMember0Type.Subscription,
+                Type = LineItemSubscriptionType.Subscription,
                 UnitPrice = 0,
                 Description = "description",
                 Name = "name",
@@ -846,10 +846,10 @@ public class LineItemTest : TestBase
     }
 
     [Fact]
-    public void UnionMember1Validation_Works()
+    public void addonValidation_Works()
     {
         LineItem value = new(
-            new UnionMember1()
+            new Addon()
             {
                 ID = "id",
                 Currency = Currency.Aed,
@@ -859,7 +859,7 @@ public class LineItemTest : TestBase
                 TaxCategory = TaxCategory.DigitalProducts,
                 TaxInclusive = true,
                 TaxRate = 0,
-                Type = UnionMember1Type.Addon,
+                Type = AddonType.Addon,
                 UnitPrice = 0,
                 Description = "description",
                 Tax = 0,
@@ -869,10 +869,10 @@ public class LineItemTest : TestBase
     }
 
     [Fact]
-    public void UnionMember2Validation_Works()
+    public void meterValidation_Works()
     {
         LineItem value = new(
-            new UnionMember2()
+            new LineItemMeter()
             {
                 ID = "id",
                 ChargeableUnits = "chargeable_units",
@@ -883,7 +883,7 @@ public class LineItemTest : TestBase
                 Subtotal = 0,
                 TaxInclusive = true,
                 TaxRate = 0,
-                Type = UnionMember2Type.Meter,
+                Type = LineItemMeterType.Meter,
                 UnitsConsumed = "units_consumed",
                 Description = "description",
                 Tax = 0,
@@ -893,10 +893,10 @@ public class LineItemTest : TestBase
     }
 
     [Fact]
-    public void UnionMember0SerializationRoundtrip_Works()
+    public void subscriptionSerializationRoundtrip_Works()
     {
         LineItem value = new(
-            new UnionMember0()
+            new LineItemSubscription()
             {
                 ID = "id",
                 Currency = Currency.Aed,
@@ -904,7 +904,7 @@ public class LineItemTest : TestBase
                 ProrationFactor = 0,
                 Quantity = 0,
                 TaxInclusive = true,
-                Type = UnionMember0Type.Subscription,
+                Type = LineItemSubscriptionType.Subscription,
                 UnitPrice = 0,
                 Description = "description",
                 Name = "name",
@@ -919,10 +919,10 @@ public class LineItemTest : TestBase
     }
 
     [Fact]
-    public void UnionMember1SerializationRoundtrip_Works()
+    public void addonSerializationRoundtrip_Works()
     {
         LineItem value = new(
-            new UnionMember1()
+            new Addon()
             {
                 ID = "id",
                 Currency = Currency.Aed,
@@ -932,7 +932,7 @@ public class LineItemTest : TestBase
                 TaxCategory = TaxCategory.DigitalProducts,
                 TaxInclusive = true,
                 TaxRate = 0,
-                Type = UnionMember1Type.Addon,
+                Type = AddonType.Addon,
                 UnitPrice = 0,
                 Description = "description",
                 Tax = 0,
@@ -945,10 +945,10 @@ public class LineItemTest : TestBase
     }
 
     [Fact]
-    public void UnionMember2SerializationRoundtrip_Works()
+    public void meterSerializationRoundtrip_Works()
     {
         LineItem value = new(
-            new UnionMember2()
+            new LineItemMeter()
             {
                 ID = "id",
                 ChargeableUnits = "chargeable_units",
@@ -959,7 +959,7 @@ public class LineItemTest : TestBase
                 Subtotal = 0,
                 TaxInclusive = true,
                 TaxRate = 0,
-                Type = UnionMember2Type.Meter,
+                Type = LineItemMeterType.Meter,
                 UnitsConsumed = "units_consumed",
                 Description = "description",
                 Tax = 0,
@@ -972,12 +972,12 @@ public class LineItemTest : TestBase
     }
 }
 
-public class UnionMember0Test : TestBase
+public class LineItemSubscriptionTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new UnionMember0
+        var model = new LineItemSubscription
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -985,7 +985,7 @@ public class UnionMember0Test : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = UnionMember0Type.Subscription,
+            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -999,7 +999,8 @@ public class UnionMember0Test : TestBase
         double expectedProrationFactor = 0;
         int expectedQuantity = 0;
         bool expectedTaxInclusive = true;
-        ApiEnum<string, UnionMember0Type> expectedType = UnionMember0Type.Subscription;
+        ApiEnum<string, LineItemSubscriptionType> expectedType =
+            LineItemSubscriptionType.Subscription;
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
         string expectedName = "name";
@@ -1023,7 +1024,7 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new UnionMember0
+        var model = new LineItemSubscription
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1031,7 +1032,7 @@ public class UnionMember0Test : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = UnionMember0Type.Subscription,
+            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -1040,7 +1041,7 @@ public class UnionMember0Test : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UnionMember0>(json);
+        var deserialized = JsonSerializer.Deserialize<LineItemSubscription>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -1048,7 +1049,7 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new UnionMember0
+        var model = new LineItemSubscription
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1056,7 +1057,7 @@ public class UnionMember0Test : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = UnionMember0Type.Subscription,
+            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -1065,7 +1066,7 @@ public class UnionMember0Test : TestBase
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UnionMember0>(json);
+        var deserialized = JsonSerializer.Deserialize<LineItemSubscription>(json);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -1074,7 +1075,8 @@ public class UnionMember0Test : TestBase
         double expectedProrationFactor = 0;
         int expectedQuantity = 0;
         bool expectedTaxInclusive = true;
-        ApiEnum<string, UnionMember0Type> expectedType = UnionMember0Type.Subscription;
+        ApiEnum<string, LineItemSubscriptionType> expectedType =
+            LineItemSubscriptionType.Subscription;
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
         string expectedName = "name";
@@ -1098,7 +1100,7 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new UnionMember0
+        var model = new LineItemSubscription
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1106,7 +1108,7 @@ public class UnionMember0Test : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = UnionMember0Type.Subscription,
+            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -1120,7 +1122,7 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new UnionMember0
+        var model = new LineItemSubscription
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1128,7 +1130,7 @@ public class UnionMember0Test : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = UnionMember0Type.Subscription,
+            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
         };
 
@@ -1145,7 +1147,7 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new UnionMember0
+        var model = new LineItemSubscription
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1153,7 +1155,7 @@ public class UnionMember0Test : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = UnionMember0Type.Subscription,
+            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
         };
 
@@ -1163,7 +1165,7 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new UnionMember0
+        var model = new LineItemSubscription
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1171,7 +1173,7 @@ public class UnionMember0Test : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = UnionMember0Type.Subscription,
+            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
 
             Description = null,
@@ -1193,7 +1195,7 @@ public class UnionMember0Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new UnionMember0
+        var model = new LineItemSubscription
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1201,7 +1203,7 @@ public class UnionMember0Test : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = UnionMember0Type.Subscription,
+            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
 
             Description = null,
@@ -1214,21 +1216,21 @@ public class UnionMember0Test : TestBase
     }
 }
 
-public class UnionMember0TypeTest : TestBase
+public class LineItemSubscriptionTypeTest : TestBase
 {
     [Theory]
-    [InlineData(UnionMember0Type.Subscription)]
-    public void Validation_Works(UnionMember0Type rawValue)
+    [InlineData(LineItemSubscriptionType.Subscription)]
+    public void Validation_Works(LineItemSubscriptionType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, UnionMember0Type> value = rawValue;
+        ApiEnum<string, LineItemSubscriptionType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemSubscriptionType>>(
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
@@ -1236,14 +1238,14 @@ public class UnionMember0TypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(UnionMember0Type.Subscription)]
-    public void SerializationRoundtrip_Works(UnionMember0Type rawValue)
+    [InlineData(LineItemSubscriptionType.Subscription)]
+    public void SerializationRoundtrip_Works(LineItemSubscriptionType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, UnionMember0Type> value = rawValue;
+        ApiEnum<string, LineItemSubscriptionType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemSubscriptionType>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1254,12 +1256,12 @@ public class UnionMember0TypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemSubscriptionType>>(
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemSubscriptionType>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1268,12 +1270,12 @@ public class UnionMember0TypeTest : TestBase
     }
 }
 
-public class UnionMember1Test : TestBase
+public class AddonTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new UnionMember1
+        var model = new Addon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1283,7 +1285,7 @@ public class UnionMember1Test : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember1Type.Addon,
+            Type = AddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -1297,7 +1299,7 @@ public class UnionMember1Test : TestBase
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         bool expectedTaxInclusive = true;
         float expectedTaxRate = 0;
-        ApiEnum<string, UnionMember1Type> expectedType = UnionMember1Type.Addon;
+        ApiEnum<string, AddonType> expectedType = AddonType.Addon;
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -1319,7 +1321,7 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new UnionMember1
+        var model = new Addon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1329,14 +1331,14 @@ public class UnionMember1Test : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember1Type.Addon,
+            Type = AddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UnionMember1>(json);
+        var deserialized = JsonSerializer.Deserialize<Addon>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -1344,7 +1346,7 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new UnionMember1
+        var model = new Addon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1354,14 +1356,14 @@ public class UnionMember1Test : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember1Type.Addon,
+            Type = AddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UnionMember1>(json);
+        var deserialized = JsonSerializer.Deserialize<Addon>(json);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -1372,7 +1374,7 @@ public class UnionMember1Test : TestBase
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         bool expectedTaxInclusive = true;
         float expectedTaxRate = 0;
-        ApiEnum<string, UnionMember1Type> expectedType = UnionMember1Type.Addon;
+        ApiEnum<string, AddonType> expectedType = AddonType.Addon;
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -1394,7 +1396,7 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new UnionMember1
+        var model = new Addon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1404,7 +1406,7 @@ public class UnionMember1Test : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember1Type.Addon,
+            Type = AddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -1416,7 +1418,7 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new UnionMember1
+        var model = new Addon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1426,7 +1428,7 @@ public class UnionMember1Test : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember1Type.Addon,
+            Type = AddonType.Addon,
             UnitPrice = 0,
         };
 
@@ -1439,7 +1441,7 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new UnionMember1
+        var model = new Addon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1449,7 +1451,7 @@ public class UnionMember1Test : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember1Type.Addon,
+            Type = AddonType.Addon,
             UnitPrice = 0,
         };
 
@@ -1459,7 +1461,7 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new UnionMember1
+        var model = new Addon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1469,7 +1471,7 @@ public class UnionMember1Test : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember1Type.Addon,
+            Type = AddonType.Addon,
             UnitPrice = 0,
 
             Description = null,
@@ -1485,7 +1487,7 @@ public class UnionMember1Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new UnionMember1
+        var model = new Addon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1495,7 +1497,7 @@ public class UnionMember1Test : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember1Type.Addon,
+            Type = AddonType.Addon,
             UnitPrice = 0,
 
             Description = null,
@@ -1506,21 +1508,21 @@ public class UnionMember1Test : TestBase
     }
 }
 
-public class UnionMember1TypeTest : TestBase
+public class AddonTypeTest : TestBase
 {
     [Theory]
-    [InlineData(UnionMember1Type.Addon)]
-    public void Validation_Works(UnionMember1Type rawValue)
+    [InlineData(AddonType.Addon)]
+    public void Validation_Works(AddonType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, UnionMember1Type> value = rawValue;
+        ApiEnum<string, AddonType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AddonType>>(
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
@@ -1528,14 +1530,14 @@ public class UnionMember1TypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(UnionMember1Type.Addon)]
-    public void SerializationRoundtrip_Works(UnionMember1Type rawValue)
+    [InlineData(AddonType.Addon)]
+    public void SerializationRoundtrip_Works(AddonType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, UnionMember1Type> value = rawValue;
+        ApiEnum<string, AddonType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AddonType>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1546,12 +1548,12 @@ public class UnionMember1TypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AddonType>>(
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AddonType>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1560,12 +1562,12 @@ public class UnionMember1TypeTest : TestBase
     }
 }
 
-public class UnionMember2Test : TestBase
+public class LineItemMeterTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new UnionMember2
+        var model = new LineItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -1576,7 +1578,7 @@ public class UnionMember2Test : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember2Type.Meter,
+            Type = LineItemMeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -1591,7 +1593,7 @@ public class UnionMember2Test : TestBase
         int expectedSubtotal = 0;
         bool expectedTaxInclusive = true;
         float expectedTaxRate = 0;
-        ApiEnum<string, UnionMember2Type> expectedType = UnionMember2Type.Meter;
+        ApiEnum<string, LineItemMeterType> expectedType = LineItemMeterType.Meter;
         string expectedUnitsConsumed = "units_consumed";
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -1614,7 +1616,7 @@ public class UnionMember2Test : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new UnionMember2
+        var model = new LineItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -1625,14 +1627,14 @@ public class UnionMember2Test : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember2Type.Meter,
+            Type = LineItemMeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UnionMember2>(json);
+        var deserialized = JsonSerializer.Deserialize<LineItemMeter>(json);
 
         Assert.Equal(model, deserialized);
     }
@@ -1640,7 +1642,7 @@ public class UnionMember2Test : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new UnionMember2
+        var model = new LineItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -1651,14 +1653,14 @@ public class UnionMember2Test : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember2Type.Meter,
+            Type = LineItemMeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
         };
 
         string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UnionMember2>(json);
+        var deserialized = JsonSerializer.Deserialize<LineItemMeter>(json);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -1670,7 +1672,7 @@ public class UnionMember2Test : TestBase
         int expectedSubtotal = 0;
         bool expectedTaxInclusive = true;
         float expectedTaxRate = 0;
-        ApiEnum<string, UnionMember2Type> expectedType = UnionMember2Type.Meter;
+        ApiEnum<string, LineItemMeterType> expectedType = LineItemMeterType.Meter;
         string expectedUnitsConsumed = "units_consumed";
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -1693,7 +1695,7 @@ public class UnionMember2Test : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new UnionMember2
+        var model = new LineItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -1704,7 +1706,7 @@ public class UnionMember2Test : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember2Type.Meter,
+            Type = LineItemMeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -1716,7 +1718,7 @@ public class UnionMember2Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new UnionMember2
+        var model = new LineItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -1727,7 +1729,7 @@ public class UnionMember2Test : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember2Type.Meter,
+            Type = LineItemMeterType.Meter,
             UnitsConsumed = "units_consumed",
         };
 
@@ -1740,7 +1742,7 @@ public class UnionMember2Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new UnionMember2
+        var model = new LineItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -1751,7 +1753,7 @@ public class UnionMember2Test : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember2Type.Meter,
+            Type = LineItemMeterType.Meter,
             UnitsConsumed = "units_consumed",
         };
 
@@ -1761,7 +1763,7 @@ public class UnionMember2Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new UnionMember2
+        var model = new LineItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -1772,7 +1774,7 @@ public class UnionMember2Test : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember2Type.Meter,
+            Type = LineItemMeterType.Meter,
             UnitsConsumed = "units_consumed",
 
             Description = null,
@@ -1788,7 +1790,7 @@ public class UnionMember2Test : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new UnionMember2
+        var model = new LineItemMeter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -1799,7 +1801,7 @@ public class UnionMember2Test : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = UnionMember2Type.Meter,
+            Type = LineItemMeterType.Meter,
             UnitsConsumed = "units_consumed",
 
             Description = null,
@@ -1810,21 +1812,21 @@ public class UnionMember2Test : TestBase
     }
 }
 
-public class UnionMember2TypeTest : TestBase
+public class LineItemMeterTypeTest : TestBase
 {
     [Theory]
-    [InlineData(UnionMember2Type.Meter)]
-    public void Validation_Works(UnionMember2Type rawValue)
+    [InlineData(LineItemMeterType.Meter)]
+    public void Validation_Works(LineItemMeterType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, UnionMember2Type> value = rawValue;
+        ApiEnum<string, LineItemMeterType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember2Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemMeterType>>(
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
@@ -1832,14 +1834,14 @@ public class UnionMember2TypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(UnionMember2Type.Meter)]
-    public void SerializationRoundtrip_Works(UnionMember2Type rawValue)
+    [InlineData(LineItemMeterType.Meter)]
+    public void SerializationRoundtrip_Works(LineItemMeterType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, UnionMember2Type> value = rawValue;
+        ApiEnum<string, LineItemMeterType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember2Type>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemMeterType>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1850,12 +1852,12 @@ public class UnionMember2TypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember2Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemMeterType>>(
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember2Type>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemMeterType>>(
             json,
             ModelBase.SerializerOptions
         );
