@@ -93,7 +93,7 @@ var checkoutSessionResponse = await client
     .WithOptions(options =>
         options with
         {
-            BaseUrl = new("https://example.com"),
+            BaseUrl = "https://example.com",
             Timeout = TimeSpan.FromSeconds(42),
         }
     )
@@ -230,6 +230,17 @@ var checkoutSessionResponse = await client
     .CheckoutSessions.Create(parameters);
 
 Console.WriteLine(checkoutSessionResponse);
+```
+
+### Environments
+
+The SDK sends requests to the live_mode environment by default. To send requests to a different environment, configure the client like so:
+
+```csharp
+using DodoPayments.Client;
+using DodoPayments.Client.Core;
+
+DodoPaymentsClient client = new() { BaseUrl = EnvironmentUrl.TestMode };
 ```
 
 ## Undocumented API functionality

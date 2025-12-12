@@ -31,7 +31,7 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
     }
 
     /// <inheritdoc/>
-    public Uri BaseUrl
+    public string BaseUrl
     {
         get { return this._options.BaseUrl; }
         init { this._options.BaseUrl = value; }

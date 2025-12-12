@@ -29,16 +29,16 @@ public interface IDodoPaymentsClient
     /// <summary>
     /// The base URL to use for every request.
     ///
-    /// <para>Defaults to the live_mode environment: https://live.dodopayments.com</para>
+    /// <para>Defaults to the live_mode environment: <see cref="EnvironmentUrl.LiveMode"/></para>
     ///
     /// <para>
     /// The following other environments are available:
     /// <list type="bullet">
-    ///   <item>test_mode: https://test.dodopayments.com</item>
+    ///   <item>test_mode: <see cref="EnvironmentUrl.TestMode"/></item>
     /// </list>
     /// </para>
     /// </summary>
-    Uri BaseUrl { get; init; }
+    string BaseUrl { get; init; }
 
     /// <summary>
     /// Whether to validate every response before returning it.
