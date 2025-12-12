@@ -45,6 +45,7 @@ public class WebhookDetailsTest : TestBase
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedURL, model.URL);
         Assert.Equal(expectedDisabled, model.Disabled);
+        Assert.NotNull(model.FilterTypes);
         Assert.Equal(expectedFilterTypes.Count, model.FilterTypes.Count);
         for (int i = 0; i < expectedFilterTypes.Count; i++)
         {
@@ -118,6 +119,7 @@ public class WebhookDetailsTest : TestBase
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedURL, deserialized.URL);
         Assert.Equal(expectedDisabled, deserialized.Disabled);
+        Assert.NotNull(deserialized.FilterTypes);
         Assert.Equal(expectedFilterTypes.Count, deserialized.FilterTypes.Count);
         for (int i = 0; i < expectedFilterTypes.Count; i++)
         {

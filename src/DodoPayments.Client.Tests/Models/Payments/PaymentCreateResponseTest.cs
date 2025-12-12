@@ -77,6 +77,7 @@ public class PaymentCreateResponseTest : TestBase
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedExpiresOn, model.ExpiresOn);
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
+        Assert.NotNull(model.ProductCart);
         Assert.Equal(expectedProductCart.Count, model.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
         {
@@ -195,6 +196,7 @@ public class PaymentCreateResponseTest : TestBase
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedExpiresOn, deserialized.ExpiresOn);
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
+        Assert.NotNull(deserialized.ProductCart);
         Assert.Equal(expectedProductCart.Count, deserialized.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
         {

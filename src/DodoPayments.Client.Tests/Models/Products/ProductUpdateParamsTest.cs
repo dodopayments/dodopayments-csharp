@@ -21,6 +21,7 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
         string expectedInstructions = "instructions";
 
         Assert.Equal(expectedExternalURL, model.ExternalURL);
+        Assert.NotNull(model.Files);
         Assert.Equal(expectedFiles.Count, model.Files.Count);
         for (int i = 0; i < expectedFiles.Count; i++)
         {
@@ -68,6 +69,7 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
         string expectedInstructions = "instructions";
 
         Assert.Equal(expectedExternalURL, deserialized.ExternalURL);
+        Assert.NotNull(deserialized.Files);
         Assert.Equal(expectedFiles.Count, deserialized.Files.Count);
         for (int i = 0; i < expectedFiles.Count; i++)
         {
