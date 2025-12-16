@@ -116,9 +116,13 @@ public sealed record class DisputeWonWebhookEvent : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Type5>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new System::ArgumentNullException("type")
+                );
         }
         init
         {
@@ -335,9 +339,13 @@ public sealed record class Data5 : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, DisputeDisputeStage>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'dispute_stage' cannot be null",
+                    new System::ArgumentNullException("dispute_stage")
+                );
         }
         init
         {
@@ -362,9 +370,13 @@ public sealed record class Data5 : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, DisputeDisputeStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'dispute_status' cannot be null",
+                    new System::ArgumentNullException("dispute_status")
+                );
         }
         init
         {

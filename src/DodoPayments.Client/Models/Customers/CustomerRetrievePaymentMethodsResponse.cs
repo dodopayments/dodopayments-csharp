@@ -109,9 +109,13 @@ public sealed record class Item : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, PaymentMethod>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payment_method' cannot be null",
+                    new ArgumentNullException("payment_method")
+                );
         }
         init
         {

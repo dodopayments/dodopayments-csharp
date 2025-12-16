@@ -158,9 +158,13 @@ public sealed record class CustomerWalletTransaction : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -207,9 +211,13 @@ public sealed record class CustomerWalletTransaction : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, EventType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'event_type' cannot be null",
+                    new ArgumentNullException("event_type")
+                );
         }
         init
         {

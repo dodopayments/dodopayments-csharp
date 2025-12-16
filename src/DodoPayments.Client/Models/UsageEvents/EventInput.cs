@@ -293,6 +293,16 @@ public record class MetadataModel
             );
         }
     }
+
+    public virtual bool Equals(MetadataModel? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class MetadataModelConverter : JsonConverter<MetadataModel>

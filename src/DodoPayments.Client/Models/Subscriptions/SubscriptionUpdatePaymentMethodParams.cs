@@ -193,6 +193,16 @@ public record class Body
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Body");
         }
     }
+
+    public virtual bool Equals(Body? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class BodyConverter : JsonConverter<Body>
@@ -257,8 +267,12 @@ public sealed record class New : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new System::ArgumentNullException("type")
+                );
         }
         init
         {
@@ -410,9 +424,13 @@ public sealed record class Existing : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, ExistingType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new System::ArgumentNullException("type")
+                );
         }
         init
         {

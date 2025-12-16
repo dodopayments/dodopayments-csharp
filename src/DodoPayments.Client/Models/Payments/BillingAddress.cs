@@ -55,9 +55,13 @@ public sealed record class BillingAddress : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, CountryCode>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'country' cannot be null",
+                    new ArgumentNullException("country")
+                );
         }
         init
         {

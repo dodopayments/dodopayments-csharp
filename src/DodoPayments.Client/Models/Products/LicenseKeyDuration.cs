@@ -45,9 +45,13 @@ public sealed record class LicenseKeyDuration : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TimeInterval>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'interval' cannot be null",
+                    new ArgumentNullException("interval")
+                );
         }
         init
         {
