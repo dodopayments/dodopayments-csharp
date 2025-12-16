@@ -85,6 +85,7 @@ public class PaymentSucceededWebhookEventTest : TestBase
                 DiscountID = "discount_id",
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                InvoiceID = "invoice_id",
                 PaymentLink = "payment_link",
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
@@ -168,6 +169,7 @@ public class PaymentSucceededWebhookEventTest : TestBase
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -261,6 +263,7 @@ public class PaymentSucceededWebhookEventTest : TestBase
                 DiscountID = "discount_id",
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                InvoiceID = "invoice_id",
                 PaymentLink = "payment_link",
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
@@ -355,6 +358,7 @@ public class PaymentSucceededWebhookEventTest : TestBase
                 DiscountID = "discount_id",
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                InvoiceID = "invoice_id",
                 PaymentLink = "payment_link",
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
@@ -442,6 +446,7 @@ public class PaymentSucceededWebhookEventTest : TestBase
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -535,6 +540,7 @@ public class PaymentSucceededWebhookEventTest : TestBase
                 DiscountID = "discount_id",
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                InvoiceID = "invoice_id",
                 PaymentLink = "payment_link",
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
@@ -626,6 +632,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -702,6 +709,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
         string expectedDiscountID = "discount_id";
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
+        string expectedInvoiceID = "invoice_id";
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
@@ -756,6 +764,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
+        Assert.Equal(expectedInvoiceID, model.InvoiceID);
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
         Assert.Equal(expectedPaymentMethod, model.PaymentMethod);
         Assert.Equal(expectedPaymentMethodType, model.PaymentMethodType);
@@ -842,6 +851,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -929,6 +939,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -1009,6 +1020,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
         string expectedDiscountID = "discount_id";
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
+        string expectedInvoiceID = "invoice_id";
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
@@ -1063,6 +1075,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
+        Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
         Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
         Assert.Equal(expectedPaymentMethodType, deserialized.PaymentMethodType);
@@ -1149,6 +1162,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -1232,6 +1246,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -1318,6 +1333,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -1399,6 +1415,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -1490,6 +1507,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -1588,6 +1606,8 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.False(model.RawData.ContainsKey("error_message"));
+        Assert.Null(model.InvoiceID);
+        Assert.False(model.RawData.ContainsKey("invoice_id"));
         Assert.Null(model.PaymentLink);
         Assert.False(model.RawData.ContainsKey("payment_link"));
         Assert.Null(model.PaymentMethod);
@@ -1747,6 +1767,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             DiscountID = null,
             ErrorCode = null,
             ErrorMessage = null,
+            InvoiceID = null,
             PaymentLink = null,
             PaymentMethod = null,
             PaymentMethodType = null,
@@ -1771,6 +1792,8 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
         Assert.True(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.True(model.RawData.ContainsKey("error_message"));
+        Assert.Null(model.InvoiceID);
+        Assert.True(model.RawData.ContainsKey("invoice_id"));
         Assert.Null(model.PaymentLink);
         Assert.True(model.RawData.ContainsKey("payment_link"));
         Assert.Null(model.PaymentMethod);
@@ -1861,6 +1884,7 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             DiscountID = null,
             ErrorCode = null,
             ErrorMessage = null,
+            InvoiceID = null,
             PaymentLink = null,
             PaymentMethod = null,
             PaymentMethodType = null,
