@@ -854,6 +854,15 @@ public sealed record class Payment : ModelBase
     }
 
     /// <summary>
+    /// Invoice ID for this payment. Uses India-specific invoice ID if available.
+    /// </summary>
+    public string? InvoiceID
+    {
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "invoice_id"); }
+        init { ModelBase.Set(this._rawData, "invoice_id", value); }
+    }
+
+    /// <summary>
     /// Checkout URL
     /// </summary>
     public string? PaymentLink
@@ -990,6 +999,7 @@ public sealed record class Payment : ModelBase
             DiscountID = payment.DiscountID,
             ErrorCode = payment.ErrorCode,
             ErrorMessage = payment.ErrorMessage,
+            InvoiceID = payment.InvoiceID,
             PaymentLink = payment.PaymentLink,
             PaymentMethod = payment.PaymentMethod,
             PaymentMethodType = payment.PaymentMethodType,
@@ -1032,6 +1042,7 @@ public sealed record class Payment : ModelBase
         _ = this.DiscountID;
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
+        _ = this.InvoiceID;
         _ = this.PaymentLink;
         _ = this.PaymentMethod;
         _ = this.PaymentMethodType;
