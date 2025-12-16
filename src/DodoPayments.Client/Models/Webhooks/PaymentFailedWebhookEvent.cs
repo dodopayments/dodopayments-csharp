@@ -335,6 +335,15 @@ public sealed record class PaymentFailedWebhookEventData : ModelBase
     }
 
     /// <summary>
+    /// Invoice ID for this payment. Uses India-specific invoice ID if available.
+    /// </summary>
+    public string? InvoiceID
+    {
+        get { return ModelBase.GetNullableClass<string>(this.RawData, "invoice_id"); }
+        init { ModelBase.Set(this._rawData, "invoice_id", value); }
+    }
+
+    /// <summary>
     /// Checkout URL
     /// </summary>
     public string? PaymentLink
@@ -480,6 +489,7 @@ public sealed record class PaymentFailedWebhookEventData : ModelBase
             DiscountID = paymentFailedWebhookEventData.DiscountID,
             ErrorCode = paymentFailedWebhookEventData.ErrorCode,
             ErrorMessage = paymentFailedWebhookEventData.ErrorMessage,
+            InvoiceID = paymentFailedWebhookEventData.InvoiceID,
             PaymentLink = paymentFailedWebhookEventData.PaymentLink,
             PaymentMethod = paymentFailedWebhookEventData.PaymentMethod,
             PaymentMethodType = paymentFailedWebhookEventData.PaymentMethodType,
@@ -522,6 +532,7 @@ public sealed record class PaymentFailedWebhookEventData : ModelBase
         _ = this.DiscountID;
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
+        _ = this.InvoiceID;
         _ = this.PaymentLink;
         _ = this.PaymentMethod;
         _ = this.PaymentMethodType;
