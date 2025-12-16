@@ -149,9 +149,13 @@ public sealed record class Brand : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, VerificationStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'verification_status' cannot be null",
+                    new ArgumentNullException("verification_status")
+                );
         }
         init
         {

@@ -110,9 +110,13 @@ public sealed record class WebhookPayload : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, WebhookEventType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new ArgumentNullException("type")
+                );
         }
         init
         {
@@ -448,6 +452,16 @@ public record class Data
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Data");
         }
     }
+
+    public virtual bool Equals(Data? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class DataConverter : JsonConverter<Data>
@@ -660,9 +674,13 @@ public sealed record class Payment : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -892,9 +910,13 @@ public sealed record class Payment : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'settlement_currency' cannot be null",
+                    new ArgumentNullException("settlement_currency")
+                );
         }
         init
         {
@@ -1320,9 +1342,13 @@ public sealed record class Payment : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentNullException("payload_type")
+                );
         }
         init
         {
@@ -1455,9 +1481,13 @@ public sealed record class IntersectionMember1 : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentNullException("payload_type")
+                );
         }
         init
         {
@@ -1677,9 +1707,13 @@ public sealed record class Subscription : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -1872,9 +1906,13 @@ public sealed record class Subscription : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payment_frequency_interval' cannot be null",
+                    new ArgumentNullException("payment_frequency_interval")
+                );
         }
         init
         {
@@ -2003,9 +2041,13 @@ public sealed record class Subscription : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::SubscriptionStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'status' cannot be null",
+                    new ArgumentNullException("status")
+                );
         }
         init
         {
@@ -2085,9 +2127,13 @@ public sealed record class Subscription : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::TimeInterval>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'subscription_period_interval' cannot be null",
+                    new ArgumentNullException("subscription_period_interval")
+                );
         }
         init
         {
@@ -2292,8 +2338,12 @@ public sealed record class Subscription : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentNullException("payload_type")
+                );
         }
         init
         {
@@ -2419,8 +2469,12 @@ public sealed record class SubscriptionIntersectionMember1 : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentNullException("payload_type")
+                );
         }
         init
         {
@@ -2722,9 +2776,13 @@ public sealed record class Refund : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Refunds::RefundStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'status' cannot be null",
+                    new ArgumentNullException("status")
+                );
         }
         init
         {
@@ -2814,8 +2872,12 @@ public sealed record class Refund : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, RefundIntersectionMember1PayloadType>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, RefundIntersectionMember1PayloadType>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentNullException("payload_type")
+                );
         }
         init
         {
@@ -2899,8 +2961,12 @@ public sealed record class RefundIntersectionMember1 : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, RefundIntersectionMember1PayloadType>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, RefundIntersectionMember1PayloadType>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentNullException("payload_type")
+                );
         }
         init
         {
@@ -3175,9 +3241,13 @@ public sealed record class Dispute : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Disputes::DisputeDisputeStage>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'dispute_stage' cannot be null",
+                    new ArgumentNullException("dispute_stage")
+                );
         }
         init
         {
@@ -3199,9 +3269,13 @@ public sealed record class Dispute : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Disputes::DisputeDisputeStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'dispute_status' cannot be null",
+                    new ArgumentNullException("dispute_status")
+                );
         }
         init
         {
@@ -3293,8 +3367,12 @@ public sealed record class Dispute : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, DisputeIntersectionMember1PayloadType>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, DisputeIntersectionMember1PayloadType>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentNullException("payload_type")
+                );
         }
         init
         {
@@ -3380,8 +3458,12 @@ public sealed record class DisputeIntersectionMember1 : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, DisputeIntersectionMember1PayloadType>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, DisputeIntersectionMember1PayloadType>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentNullException("payload_type")
+                );
         }
         init
         {
@@ -3708,9 +3790,13 @@ public sealed record class LicenseKey : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, LicenseKeys::LicenseKeyStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'status' cannot be null",
+                    new ArgumentNullException("status")
+                );
         }
         init
         {
@@ -3799,8 +3885,12 @@ public sealed record class LicenseKey : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentNullException("payload_type")
+                );
         }
         init
         {
@@ -3888,8 +3978,12 @@ public sealed record class LicenseKeyIntersectionMember1 : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'payload_type' cannot be null",
+                    new ArgumentNullException("payload_type")
+                );
         }
         init
         {

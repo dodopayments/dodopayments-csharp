@@ -232,9 +232,13 @@ public sealed record class ItemModel : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, RefundStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'status' cannot be null",
+                    new ArgumentNullException("status")
+                );
         }
         init
         {

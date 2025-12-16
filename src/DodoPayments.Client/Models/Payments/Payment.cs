@@ -137,9 +137,13 @@ public sealed record class Payment : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -371,9 +375,13 @@ public sealed record class Payment : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'settlement_currency' cannot be null",
+                    new ArgumentNullException("settlement_currency")
+                );
         }
         init
         {
@@ -1001,9 +1009,13 @@ public sealed record class Refund : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Refunds::RefundStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'status' cannot be null",
+                    new ArgumentNullException("status")
+                );
         }
         init
         {

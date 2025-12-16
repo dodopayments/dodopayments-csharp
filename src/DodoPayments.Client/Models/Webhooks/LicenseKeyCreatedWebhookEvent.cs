@@ -121,9 +121,13 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, LicenseKeyCreatedWebhookEventType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new System::ArgumentNullException("type")
+                );
         }
         init
         {
@@ -431,9 +435,13 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, LicenseKeyStatus>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'status' cannot be null",
+                    new System::ArgumentNullException("status")
+                );
         }
         init
         {

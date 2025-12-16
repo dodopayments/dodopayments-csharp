@@ -574,6 +574,16 @@ public record class UnwrapWebhookEvent
             );
         }
     }
+
+    public virtual bool Equals(UnwrapWebhookEvent? other)
+    {
+        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 sealed class UnwrapWebhookEventConverter : JsonConverter<UnwrapWebhookEvent>

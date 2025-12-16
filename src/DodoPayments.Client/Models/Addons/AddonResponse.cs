@@ -107,9 +107,13 @@ public sealed record class AddonResponse : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -186,9 +190,13 @@ public sealed record class AddonResponse : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, TaxCategory>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'tax_category' cannot be null",
+                    new ArgumentNullException("tax_category")
+                );
         }
         init
         {

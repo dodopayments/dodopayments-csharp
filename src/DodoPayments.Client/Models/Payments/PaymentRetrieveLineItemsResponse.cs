@@ -29,9 +29,13 @@ public sealed record class PaymentRetrieveLineItemsResponse : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new ArgumentNullException("currency")
+                );
         }
         init
         {

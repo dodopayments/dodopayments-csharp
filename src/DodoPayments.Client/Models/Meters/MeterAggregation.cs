@@ -26,8 +26,12 @@ public sealed record class MeterAggregation : ModelBase
                 );
 
             return JsonSerializer.Deserialize<
-                ApiEnum<string, global::DodoPayments.Client.Models.Meters.Type>
-            >(element, ModelBase.SerializerOptions);
+                    ApiEnum<string, global::DodoPayments.Client.Models.Meters.Type>
+                >(element, ModelBase.SerializerOptions)
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new System::ArgumentNullException("type")
+                );
         }
         init
         {

@@ -121,9 +121,13 @@ public sealed record class PaymentFailedWebhookEvent : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, PaymentFailedWebhookEventType>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'type' cannot be null",
+                    new System::ArgumentNullException("type")
+                );
         }
         init
         {
@@ -305,9 +309,13 @@ public sealed record class PaymentFailedWebhookEventData : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'currency' cannot be null",
+                    new System::ArgumentNullException("currency")
+                );
         }
         init
         {
@@ -534,9 +542,13 @@ public sealed record class PaymentFailedWebhookEventData : ModelBase
                 );
 
             return JsonSerializer.Deserialize<ApiEnum<string, Currency>>(
-                element,
-                ModelBase.SerializerOptions
-            );
+                    element,
+                    ModelBase.SerializerOptions
+                )
+                ?? throw new DodoPaymentsInvalidDataException(
+                    "'settlement_currency' cannot be null",
+                    new System::ArgumentNullException("settlement_currency")
+                );
         }
         init
         {
