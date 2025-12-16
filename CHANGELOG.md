@@ -1,5 +1,72 @@
 # Changelog
 
+## 4.0.0 (2025-12-16)
+
+Full Changelog: [v3.5.0...v4.0.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.5.0...v4.0.0)
+
+### ⚠ BREAKING CHANGES
+
+* **client:** use readonly types for properties
+
+### Features
+
+* **api:** manual updates ([294cd23](https://github.com/dodopayments/dodopayments-csharp/commit/294cd2345fbbbf4b61bc5a32cc32186408a86403))
+* **api:** updated openapi spec to 1.67.0 ([0f5f50b](https://github.com/dodopayments/dodopayments-csharp/commit/0f5f50bb92e9ad9f57a5bfc740e037e9ad9c9701))
+* **api:** updated openapi spec to v1.66.1 ([fa43768](https://github.com/dodopayments/dodopayments-csharp/commit/fa43768d2e10b0e84f314083f81f5472cd0a3aeb))
+* **client:** add EnvironmentUrl ([bb6c3a0](https://github.com/dodopayments/dodopayments-csharp/commit/bb6c3a0e8257101361e191788e693688e7c99a69))
+* **client:** add x-stainless-retry-count ([a06736a](https://github.com/dodopayments/dodopayments-csharp/commit/a06736a0256c59f2845348249ad8686e5751461e))
+* **client:** improve csproj ([c12db18](https://github.com/dodopayments/dodopayments-csharp/commit/c12db180abbb99a8132aee8851110ea755f07537))
+* **client:** improve some names ([22ef122](https://github.com/dodopayments/dodopayments-csharp/commit/22ef12235f68a5a5d2cc6b5ff017896bbd73f951))
+* **client:** support .NET Standard 2.0 ([3f2a051](https://github.com/dodopayments/dodopayments-csharp/commit/3f2a0517989b438e214e3363a26b808cead26fa8))
+* **internal:** add additional object tests ([90dbbd7](https://github.com/dodopayments/dodopayments-csharp/commit/90dbbd7ce30c38599dc33075f66c02454a9514bb))
+
+
+### Bug Fixes
+
+* **ci:** fail loudly if version already exists on nuget ([31bb88f](https://github.com/dodopayments/dodopayments-csharp/commit/31bb88f4d6d6439b5068b1c2724540defde60d6c))
+* **client:** check response status when `MaxRetries = 0` ([59d7e66](https://github.com/dodopayments/dodopayments-csharp/commit/59d7e666d03daafe5ae6cbd759c81905553802b3))
+* **client:** handling of null value type ([d6dab64](https://github.com/dodopayments/dodopayments-csharp/commit/d6dab6407901f3987384c65f49f74a5c1bcf6b83))
+* **client:** support patch properly on .net standard 2.0 ([e12e6d2](https://github.com/dodopayments/dodopayments-csharp/commit/e12e6d20adf364e55a45ae5def73f424f9d500b7))
+* **client:** use readonly types for properties ([fb86812](https://github.com/dodopayments/dodopayments-csharp/commit/fb868122e6b0c66faa626286b157f8ed31e031ec))
+* **client:** with expressions for models ([4abebe0](https://github.com/dodopayments/dodopayments-csharp/commit/4abebe0f44355887eb92bb7fec7d6decb3fc029e))
+* **internal:** add nullability checks for tests ([47ef4e6](https://github.com/dodopayments/dodopayments-csharp/commit/47ef4e60cedeccd7143340b4d513d5c9c9428953))
+* **internal:** don't format csproj files ([e7b1135](https://github.com/dodopayments/dodopayments-csharp/commit/e7b113553ce8236aafad29b91217cd3a6d37dceb))
+* **internal:** install csharpier during ci lint phase ([4ea571b](https://github.com/dodopayments/dodopayments-csharp/commit/4ea571ba30abaef8f4b9cff838a8839ada594f7f))
+* **internal:** minor project fixes ([b7a4db6](https://github.com/dodopayments/dodopayments-csharp/commit/b7a4db6018bb73ec9b664a118a0c0b0623e817c5))
+* **internal:** running net462 tests on ci ([5910683](https://github.com/dodopayments/dodopayments-csharp/commit/59106833f2bbbb0950dfc93cb2aa028468ca570f))
+
+
+### Performance Improvements
+
+* **client:** use async deserialization in `HttpResponse` ([d9dffe9](https://github.com/dodopayments/dodopayments-csharp/commit/d9dffe9597da962743f5c76985bb4402a96ea1c8))
+
+
+### Chores
+
+* **client:** improve union validation ([c98032b](https://github.com/dodopayments/dodopayments-csharp/commit/c98032b0e2014145fbf0fc017f13c394877d09af))
+* **client:** update namespace imports ([3a5d519](https://github.com/dodopayments/dodopayments-csharp/commit/3a5d5194d6d9992e40b0146dee14dcd91cec509f))
+* **client:** update test dependencies ([bb3dd4c](https://github.com/dodopayments/dodopayments-csharp/commit/bb3dd4c3dc6a2842a9a4d63e49835599f417ca7f))
+* **internal:** add enum tests ([e6be45d](https://github.com/dodopayments/dodopayments-csharp/commit/e6be45d162c4616cb22ac8eb80a4c078fb195406))
+* **internal:** add union tests ([09dafc4](https://github.com/dodopayments/dodopayments-csharp/commit/09dafc4b2bfcfb611a68bf2352a5e3bc21cfa84a))
+* **internal:** codegen related update ([41947d2](https://github.com/dodopayments/dodopayments-csharp/commit/41947d2e83f9f57950b11e1212bc3f0234fd4c09))
+* **internal:** equality and more unit tests ([46de49f](https://github.com/dodopayments/dodopayments-csharp/commit/46de49f810046d410aeebf98e73f83e74061e239))
+* **internal:** remove redundant keyword ([19a0f99](https://github.com/dodopayments/dodopayments-csharp/commit/19a0f99ead103c11575be691bf19cf711cd5089e))
+* **internal:** suppress diagnostic for .netstandard2.0 ([e8e5891](https://github.com/dodopayments/dodopayments-csharp/commit/e8e5891ae0fc6c667f9a0a4f5a6e03be273f804d))
+* **internal:** update csproj formatting ([54c18d2](https://github.com/dodopayments/dodopayments-csharp/commit/54c18d25d3126661ef1ddb6252ee5fff9b3be97a))
+
+
+### Documentation
+
+* add link to nuget ([8d412c4](https://github.com/dodopayments/dodopayments-csharp/commit/8d412c46131eed498ec6b0598d8d2198891f2fca))
+* add more comments ([b00c16d](https://github.com/dodopayments/dodopayments-csharp/commit/b00c16dd49b2562069c41e4c792fce4c6783223b))
+* add more comments ([0fb2a10](https://github.com/dodopayments/dodopayments-csharp/commit/0fb2a10ee6854d63c60491fbec84f90721f237f9))
+
+
+### Refactors
+
+* **internal:** remove abstract static methods ([b7a08d7](https://github.com/dodopayments/dodopayments-csharp/commit/b7a08d7fe02e12c42384070a991c390fb2c21a5c))
+* **internal:** share get/set logic ([d6dab64](https://github.com/dodopayments/dodopayments-csharp/commit/d6dab6407901f3987384c65f49f74a5c1bcf6b83))
+
 ## 3.5.0 (2025-11-21)
 
 Full Changelog: [v3.4.1...v3.5.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.4.1...v3.5.0)
