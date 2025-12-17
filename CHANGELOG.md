@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.0.1 (2025-12-17)
+
+Full Changelog: [v4.0.0...v4.0.1](https://github.com/dodopayments/dodopayments-csharp/compare/v4.0.0...v4.0.1)
+
+### Chores
+
+* **internal:** use `Random.Shared` in newer .NET versions ([5ceab7b](https://github.com/dodopayments/dodopayments-csharp/commit/5ceab7b013f940caf8a9a4f4a6ae91206d934a3c))
+
 ## 4.0.0 (2025-12-16)
 
 Full Changelog: [v3.5.0...v4.0.0](https://github.com/dodopayments/dodopayments-csharp/compare/v3.5.0...v4.0.0)
