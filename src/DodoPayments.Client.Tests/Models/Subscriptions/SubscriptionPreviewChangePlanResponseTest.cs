@@ -823,7 +823,7 @@ public class ImmediateChargeTest : TestBase
 public class LineItemTest : TestBase
 {
     [Fact]
-    public void subscriptionValidation_Works()
+    public void SubscriptionValidationWorks()
     {
         LineItem value = new(
             new LineItemSubscription()
@@ -846,7 +846,7 @@ public class LineItemTest : TestBase
     }
 
     [Fact]
-    public void addonValidation_Works()
+    public void AddonValidationWorks()
     {
         LineItem value = new(
             new Addon()
@@ -869,7 +869,7 @@ public class LineItemTest : TestBase
     }
 
     [Fact]
-    public void meterValidation_Works()
+    public void MeterValidationWorks()
     {
         LineItem value = new(
             new LineItemMeter()
@@ -893,7 +893,7 @@ public class LineItemTest : TestBase
     }
 
     [Fact]
-    public void subscriptionSerializationRoundtrip_Works()
+    public void SubscriptionSerializationRoundtripWorks()
     {
         LineItem value = new(
             new LineItemSubscription()
@@ -919,7 +919,7 @@ public class LineItemTest : TestBase
     }
 
     [Fact]
-    public void addonSerializationRoundtrip_Works()
+    public void AddonSerializationRoundtripWorks()
     {
         LineItem value = new(
             new Addon()
@@ -945,7 +945,7 @@ public class LineItemTest : TestBase
     }
 
     [Fact]
-    public void meterSerializationRoundtrip_Works()
+    public void MeterSerializationRoundtripWorks()
     {
         LineItem value = new(
             new LineItemMeter()

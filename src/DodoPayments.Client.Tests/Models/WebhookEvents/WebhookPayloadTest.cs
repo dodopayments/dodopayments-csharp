@@ -560,7 +560,7 @@ public class WebhookPayloadTest : TestBase
 public class DataTest : TestBase
 {
     [Fact]
-    public void paymentValidation_Works()
+    public void PaymentValidationWorks()
     {
         Data value = new(
             new Payment()
@@ -646,7 +646,7 @@ public class DataTest : TestBase
     }
 
     [Fact]
-    public void subscriptionValidation_Works()
+    public void SubscriptionValidationWorks()
     {
         Data value = new(
             new Subscription()
@@ -712,7 +712,7 @@ public class DataTest : TestBase
     }
 
     [Fact]
-    public void refundValidation_Works()
+    public void RefundValidationWorks()
     {
         Data value = new(
             new Refund()
@@ -742,7 +742,7 @@ public class DataTest : TestBase
     }
 
     [Fact]
-    public void disputeValidation_Works()
+    public void DisputeValidationWorks()
     {
         Data value = new(
             new Dispute()
@@ -772,7 +772,7 @@ public class DataTest : TestBase
     }
 
     [Fact]
-    public void license_keyValidation_Works()
+    public void LicenseKeyValidationWorks()
     {
         Data value = new(
             new LicenseKey()
@@ -796,7 +796,7 @@ public class DataTest : TestBase
     }
 
     [Fact]
-    public void paymentSerializationRoundtrip_Works()
+    public void PaymentSerializationRoundtripWorks()
     {
         Data value = new(
             new Payment()
@@ -885,7 +885,7 @@ public class DataTest : TestBase
     }
 
     [Fact]
-    public void subscriptionSerializationRoundtrip_Works()
+    public void SubscriptionSerializationRoundtripWorks()
     {
         Data value = new(
             new Subscription()
@@ -954,7 +954,7 @@ public class DataTest : TestBase
     }
 
     [Fact]
-    public void refundSerializationRoundtrip_Works()
+    public void RefundSerializationRoundtripWorks()
     {
         Data value = new(
             new Refund()
@@ -987,7 +987,7 @@ public class DataTest : TestBase
     }
 
     [Fact]
-    public void disputeSerializationRoundtrip_Works()
+    public void DisputeSerializationRoundtripWorks()
     {
         Data value = new(
             new Dispute()
@@ -1020,7 +1020,7 @@ public class DataTest : TestBase
     }
 
     [Fact]
-    public void license_keySerializationRoundtrip_Works()
+    public void LicenseKeySerializationRoundtripWorks()
     {
         Data value = new(
             new LicenseKey()

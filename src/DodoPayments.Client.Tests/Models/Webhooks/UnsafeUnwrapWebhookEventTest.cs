@@ -14,7 +14,7 @@ namespace DodoPayments.Client.Tests.Models.Webhooks;
 public class UnsafeUnwrapWebhookEventTest : TestBase
 {
     [Fact]
-    public void dispute_acceptedValidation_Works()
+    public void DisputeAcceptedValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeAcceptedWebhookEvent()
@@ -41,7 +41,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_cancelledValidation_Works()
+    public void DisputeCancelledValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeCancelledWebhookEvent()
@@ -69,7 +69,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_challengedValidation_Works()
+    public void DisputeChallengedValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeChallengedWebhookEvent()
@@ -97,7 +97,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_expiredValidation_Works()
+    public void DisputeExpiredValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeExpiredWebhookEvent()
@@ -125,7 +125,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_lostValidation_Works()
+    public void DisputeLostValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeLostWebhookEvent()
@@ -153,7 +153,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_openedValidation_Works()
+    public void DisputeOpenedValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeOpenedWebhookEvent()
@@ -181,7 +181,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_wonValidation_Works()
+    public void DisputeWonValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeWonWebhookEvent()
@@ -209,7 +209,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void license_key_createdValidation_Works()
+    public void LicenseKeyCreatedValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::LicenseKeyCreatedWebhookEvent()
@@ -240,7 +240,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void payment_cancelledValidation_Works()
+    public void PaymentCancelledValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::PaymentCancelledWebhookEvent()
@@ -333,7 +333,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void payment_failedValidation_Works()
+    public void PaymentFailedValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::PaymentFailedWebhookEvent()
@@ -426,7 +426,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void payment_processingValidation_Works()
+    public void PaymentProcessingValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::PaymentProcessingWebhookEvent()
@@ -519,7 +519,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void payment_succeededValidation_Works()
+    public void PaymentSucceededValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::PaymentSucceededWebhookEvent()
@@ -612,7 +612,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void refund_failedValidation_Works()
+    public void RefundFailedValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::RefundFailedWebhookEvent()
@@ -649,7 +649,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void refund_succeededValidation_Works()
+    public void RefundSucceededValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::RefundSucceededWebhookEvent()
@@ -686,7 +686,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_activeValidation_Works()
+    public void SubscriptionActiveValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionActiveWebhookEvent()
@@ -759,7 +759,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_cancelledValidation_Works()
+    public void SubscriptionCancelledValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionCancelledWebhookEvent()
@@ -832,7 +832,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_expiredValidation_Works()
+    public void SubscriptionExpiredValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionExpiredWebhookEvent()
@@ -905,7 +905,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_failedValidation_Works()
+    public void SubscriptionFailedValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionFailedWebhookEvent()
@@ -978,7 +978,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_on_holdValidation_Works()
+    public void SubscriptionOnHoldValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionOnHoldWebhookEvent()
@@ -1051,7 +1051,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_plan_changedValidation_Works()
+    public void SubscriptionPlanChangedValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionPlanChangedWebhookEvent()
@@ -1124,7 +1124,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_renewedValidation_Works()
+    public void SubscriptionRenewedValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionRenewedWebhookEvent()
@@ -1197,7 +1197,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_updatedValidation_Works()
+    public void SubscriptionUpdatedValidationWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionUpdatedWebhookEvent()
@@ -1270,7 +1270,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_acceptedSerializationRoundtrip_Works()
+    public void DisputeAcceptedSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeAcceptedWebhookEvent()
@@ -1300,7 +1300,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_cancelledSerializationRoundtrip_Works()
+    public void DisputeCancelledSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeCancelledWebhookEvent()
@@ -1331,7 +1331,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_challengedSerializationRoundtrip_Works()
+    public void DisputeChallengedSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeChallengedWebhookEvent()
@@ -1362,7 +1362,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_expiredSerializationRoundtrip_Works()
+    public void DisputeExpiredSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeExpiredWebhookEvent()
@@ -1393,7 +1393,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_lostSerializationRoundtrip_Works()
+    public void DisputeLostSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeLostWebhookEvent()
@@ -1424,7 +1424,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_openedSerializationRoundtrip_Works()
+    public void DisputeOpenedSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeOpenedWebhookEvent()
@@ -1455,7 +1455,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void dispute_wonSerializationRoundtrip_Works()
+    public void DisputeWonSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::DisputeWonWebhookEvent()
@@ -1486,7 +1486,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void license_key_createdSerializationRoundtrip_Works()
+    public void LicenseKeyCreatedSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::LicenseKeyCreatedWebhookEvent()
@@ -1520,7 +1520,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void payment_cancelledSerializationRoundtrip_Works()
+    public void PaymentCancelledSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::PaymentCancelledWebhookEvent()
@@ -1616,7 +1616,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void payment_failedSerializationRoundtrip_Works()
+    public void PaymentFailedSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::PaymentFailedWebhookEvent()
@@ -1712,7 +1712,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void payment_processingSerializationRoundtrip_Works()
+    public void PaymentProcessingSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::PaymentProcessingWebhookEvent()
@@ -1808,7 +1808,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void payment_succeededSerializationRoundtrip_Works()
+    public void PaymentSucceededSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::PaymentSucceededWebhookEvent()
@@ -1904,7 +1904,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void refund_failedSerializationRoundtrip_Works()
+    public void RefundFailedSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::RefundFailedWebhookEvent()
@@ -1944,7 +1944,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void refund_succeededSerializationRoundtrip_Works()
+    public void RefundSucceededSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::RefundSucceededWebhookEvent()
@@ -1984,7 +1984,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_activeSerializationRoundtrip_Works()
+    public void SubscriptionActiveSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionActiveWebhookEvent()
@@ -2060,7 +2060,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_cancelledSerializationRoundtrip_Works()
+    public void SubscriptionCancelledSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionCancelledWebhookEvent()
@@ -2136,7 +2136,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_expiredSerializationRoundtrip_Works()
+    public void SubscriptionExpiredSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionExpiredWebhookEvent()
@@ -2212,7 +2212,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_failedSerializationRoundtrip_Works()
+    public void SubscriptionFailedSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionFailedWebhookEvent()
@@ -2288,7 +2288,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_on_holdSerializationRoundtrip_Works()
+    public void SubscriptionOnHoldSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionOnHoldWebhookEvent()
@@ -2364,7 +2364,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_plan_changedSerializationRoundtrip_Works()
+    public void SubscriptionPlanChangedSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionPlanChangedWebhookEvent()
@@ -2440,7 +2440,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_renewedSerializationRoundtrip_Works()
+    public void SubscriptionRenewedSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionRenewedWebhookEvent()
@@ -2516,7 +2516,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
-    public void subscription_updatedSerializationRoundtrip_Works()
+    public void SubscriptionUpdatedSerializationRoundtripWorks()
     {
         Webhooks::UnsafeUnwrapWebhookEvent value = new(
             new Webhooks::SubscriptionUpdatedWebhookEvent()

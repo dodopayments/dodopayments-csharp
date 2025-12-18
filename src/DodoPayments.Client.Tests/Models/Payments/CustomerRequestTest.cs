@@ -6,14 +6,14 @@ namespace DodoPayments.Client.Tests.Models.Payments;
 public class CustomerRequestTest : TestBase
 {
     [Fact]
-    public void attach_existing_customerValidation_Works()
+    public void AttachExistingCustomerValidationWorks()
     {
         CustomerRequest value = new(new AttachExistingCustomer("customer_id"));
         value.Validate();
     }
 
     [Fact]
-    public void new_customerValidation_Works()
+    public void NewCustomerValidationWorks()
     {
         CustomerRequest value = new(
             new NewCustomer()
@@ -27,7 +27,7 @@ public class CustomerRequestTest : TestBase
     }
 
     [Fact]
-    public void attach_existing_customerSerializationRoundtrip_Works()
+    public void AttachExistingCustomerSerializationRoundtripWorks()
     {
         CustomerRequest value = new(new AttachExistingCustomer("customer_id"));
         string json = JsonSerializer.Serialize(value);
@@ -37,7 +37,7 @@ public class CustomerRequestTest : TestBase
     }
 
     [Fact]
-    public void new_customerSerializationRoundtrip_Works()
+    public void NewCustomerSerializationRoundtripWorks()
     {
         CustomerRequest value = new(
             new NewCustomer()

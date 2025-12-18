@@ -24,13 +24,13 @@ public class MeterTest : TestBase
             {
                 Clauses = new(
                     [
-                        new()
+                        new Meters::MeterFilterCondition()
                         {
                             Key = "user_id",
                             Operator = Meters::Operator.Equals,
                             Value = "user123",
                         },
-                        new()
+                        new Meters::MeterFilterCondition()
                         {
                             Key = "amount",
                             Operator = Meters::Operator.GreaterThan,
@@ -59,13 +59,13 @@ public class MeterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new Meters::MeterFilterCondition()
                     {
                         Key = "user_id",
                         Operator = Meters::Operator.Equals,
                         Value = "user123",
                     },
-                    new()
+                    new Meters::MeterFilterCondition()
                     {
                         Key = "amount",
                         Operator = Meters::Operator.GreaterThan,
@@ -106,13 +106,13 @@ public class MeterTest : TestBase
             {
                 Clauses = new(
                     [
-                        new()
+                        new Meters::MeterFilterCondition()
                         {
                             Key = "user_id",
                             Operator = Meters::Operator.Equals,
                             Value = "user123",
                         },
-                        new()
+                        new Meters::MeterFilterCondition()
                         {
                             Key = "amount",
                             Operator = Meters::Operator.GreaterThan,
@@ -148,13 +148,13 @@ public class MeterTest : TestBase
             {
                 Clauses = new(
                     [
-                        new()
+                        new Meters::MeterFilterCondition()
                         {
                             Key = "user_id",
                             Operator = Meters::Operator.Equals,
                             Value = "user123",
                         },
-                        new()
+                        new Meters::MeterFilterCondition()
                         {
                             Key = "amount",
                             Operator = Meters::Operator.GreaterThan,
@@ -187,13 +187,13 @@ public class MeterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new Meters::MeterFilterCondition()
                     {
                         Key = "user_id",
                         Operator = Meters::Operator.Equals,
                         Value = "user123",
                     },
-                    new()
+                    new Meters::MeterFilterCondition()
                     {
                         Key = "amount",
                         Operator = Meters::Operator.GreaterThan,
@@ -234,13 +234,13 @@ public class MeterTest : TestBase
             {
                 Clauses = new(
                     [
-                        new()
+                        new Meters::MeterFilterCondition()
                         {
                             Key = "user_id",
                             Operator = Meters::Operator.Equals,
                             Value = "user123",
                         },
-                        new()
+                        new Meters::MeterFilterCondition()
                         {
                             Key = "amount",
                             Operator = Meters::Operator.GreaterThan,
