@@ -8,14 +8,14 @@ namespace DodoPayments.Client.Tests.Models.Subscriptions;
 public class BodyTest : TestBase
 {
     [Fact]
-    public void newValidation_Works()
+    public void NewValidationWorks()
     {
         Body value = new(new New() { Type = Type.New, ReturnURL = "return_url" });
         value.Validate();
     }
 
     [Fact]
-    public void existingValidation_Works()
+    public void ExistingValidationWorks()
     {
         Body value = new(
             new Existing() { PaymentMethodID = "payment_method_id", Type = ExistingType.Existing }
@@ -24,7 +24,7 @@ public class BodyTest : TestBase
     }
 
     [Fact]
-    public void newSerializationRoundtrip_Works()
+    public void NewSerializationRoundtripWorks()
     {
         Body value = new(new New() { Type = Type.New, ReturnURL = "return_url" });
         string json = JsonSerializer.Serialize(value);
@@ -34,7 +34,7 @@ public class BodyTest : TestBase
     }
 
     [Fact]
-    public void existingSerializationRoundtrip_Works()
+    public void ExistingSerializationRoundtripWorks()
     {
         Body value = new(
             new Existing() { PaymentMethodID = "payment_method_id", Type = ExistingType.Existing }

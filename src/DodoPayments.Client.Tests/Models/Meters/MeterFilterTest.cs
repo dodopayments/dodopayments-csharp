@@ -15,13 +15,13 @@ public class MeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new MeterFilterCondition()
                     {
                         Key = "user_id",
                         Operator = Operator.Equals,
                         Value = "user123",
                     },
-                    new()
+                    new MeterFilterCondition()
                     {
                         Key = "amount",
                         Operator = Operator.GreaterThan,
@@ -34,13 +34,13 @@ public class MeterFilterTest : TestBase
 
         Clauses expectedClauses = new(
             [
-                new()
+                new MeterFilterCondition()
                 {
                     Key = "user_id",
                     Operator = Operator.Equals,
                     Value = "user123",
                 },
-                new()
+                new MeterFilterCondition()
                 {
                     Key = "amount",
                     Operator = Operator.GreaterThan,
@@ -61,13 +61,13 @@ public class MeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new MeterFilterCondition()
                     {
                         Key = "user_id",
                         Operator = Operator.Equals,
                         Value = "user123",
                     },
-                    new()
+                    new MeterFilterCondition()
                     {
                         Key = "amount",
                         Operator = Operator.GreaterThan,
@@ -91,13 +91,13 @@ public class MeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new MeterFilterCondition()
                     {
                         Key = "user_id",
                         Operator = Operator.Equals,
                         Value = "user123",
                     },
-                    new()
+                    new MeterFilterCondition()
                     {
                         Key = "amount",
                         Operator = Operator.GreaterThan,
@@ -114,13 +114,13 @@ public class MeterFilterTest : TestBase
 
         Clauses expectedClauses = new(
             [
-                new()
+                new MeterFilterCondition()
                 {
                     Key = "user_id",
                     Operator = Operator.Equals,
                     Value = "user123",
                 },
-                new()
+                new MeterFilterCondition()
                 {
                     Key = "amount",
                     Operator = Operator.GreaterThan,
@@ -141,13 +141,13 @@ public class MeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new MeterFilterCondition()
                     {
                         Key = "user_id",
                         Operator = Operator.Equals,
                         Value = "user123",
                     },
-                    new()
+                    new MeterFilterCondition()
                     {
                         Key = "amount",
                         Operator = Operator.GreaterThan,
@@ -165,11 +165,11 @@ public class MeterFilterTest : TestBase
 public class ClausesTest : TestBase
 {
     [Fact]
-    public void direct_filter_conditionsValidation_Works()
+    public void DirectFilterConditionsValidationWorks()
     {
         Clauses value = new(
             [
-                new()
+                new MeterFilterCondition()
                 {
                     Key = "x",
                     Operator = Operator.Equals,
@@ -181,15 +181,15 @@ public class ClausesTest : TestBase
     }
 
     [Fact]
-    public void nested_meter_filtersValidation_Works()
+    public void NestedMeterFiltersValidationWorks()
     {
         Clauses value = new(
             [
-                new()
+                new ClausesMeterFilter()
                 {
                     Clauses = new(
                         [
-                            new()
+                            new ClausesMeterFilterClausesMeterFilterCondition()
                             {
                                 Key = "x",
                                 Operator =
@@ -206,11 +206,11 @@ public class ClausesTest : TestBase
     }
 
     [Fact]
-    public void direct_filter_conditionsSerializationRoundtrip_Works()
+    public void DirectFilterConditionsSerializationRoundtripWorks()
     {
         Clauses value = new(
             [
-                new()
+                new MeterFilterCondition()
                 {
                     Key = "x",
                     Operator = Operator.Equals,
@@ -225,15 +225,15 @@ public class ClausesTest : TestBase
     }
 
     [Fact]
-    public void nested_meter_filtersSerializationRoundtrip_Works()
+    public void NestedMeterFiltersSerializationRoundtripWorks()
     {
         Clauses value = new(
             [
-                new()
+                new ClausesMeterFilter()
                 {
                     Clauses = new(
                         [
-                            new()
+                            new ClausesMeterFilterClausesMeterFilterCondition()
                             {
                                 Key = "x",
                                 Operator =
@@ -398,28 +398,28 @@ public class OperatorTest : TestBase
 public class MeterFilterConditionValueTest : TestBase
 {
     [Fact]
-    public void stringValidation_Works()
+    public void StringValidationWorks()
     {
         MeterFilterConditionValue value = new("string");
         value.Validate();
     }
 
     [Fact]
-    public void doubleValidation_Works()
+    public void DoubleValidationWorks()
     {
         MeterFilterConditionValue value = new(0);
         value.Validate();
     }
 
     [Fact]
-    public void boolValidation_Works()
+    public void BoolValidationWorks()
     {
         MeterFilterConditionValue value = new(true);
         value.Validate();
     }
 
     [Fact]
-    public void stringSerializationRoundtrip_Works()
+    public void StringSerializationRoundtripWorks()
     {
         MeterFilterConditionValue value = new("string");
         string json = JsonSerializer.Serialize(value);
@@ -429,7 +429,7 @@ public class MeterFilterConditionValueTest : TestBase
     }
 
     [Fact]
-    public void doubleSerializationRoundtrip_Works()
+    public void DoubleSerializationRoundtripWorks()
     {
         MeterFilterConditionValue value = new(0);
         string json = JsonSerializer.Serialize(value);
@@ -439,7 +439,7 @@ public class MeterFilterConditionValueTest : TestBase
     }
 
     [Fact]
-    public void boolSerializationRoundtrip_Works()
+    public void BoolSerializationRoundtripWorks()
     {
         MeterFilterConditionValue value = new(true);
         string json = JsonSerializer.Serialize(value);
@@ -458,7 +458,7 @@ public class ClausesMeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new ClausesMeterFilterClausesMeterFilterCondition()
                     {
                         Key = "x",
                         Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
@@ -471,7 +471,7 @@ public class ClausesMeterFilterTest : TestBase
 
         ClausesMeterFilterClauses expectedClauses = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilterCondition()
                 {
                     Key = "x",
                     Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
@@ -493,7 +493,7 @@ public class ClausesMeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new ClausesMeterFilterClausesMeterFilterCondition()
                     {
                         Key = "x",
                         Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
@@ -517,7 +517,7 @@ public class ClausesMeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new ClausesMeterFilterClausesMeterFilterCondition()
                     {
                         Key = "x",
                         Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
@@ -534,7 +534,7 @@ public class ClausesMeterFilterTest : TestBase
 
         ClausesMeterFilterClauses expectedClauses = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilterCondition()
                 {
                     Key = "x",
                     Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
@@ -556,7 +556,7 @@ public class ClausesMeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new ClausesMeterFilterClausesMeterFilterCondition()
                     {
                         Key = "x",
                         Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
@@ -574,11 +574,11 @@ public class ClausesMeterFilterTest : TestBase
 public class ClausesMeterFilterClausesTest : TestBase
 {
     [Fact]
-    public void level_1_filter_conditionsValidation_Works()
+    public void Level1FilterConditionsValidationWorks()
     {
         ClausesMeterFilterClauses value = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilterCondition()
                 {
                     Key = "x",
                     Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
@@ -590,15 +590,15 @@ public class ClausesMeterFilterClausesTest : TestBase
     }
 
     [Fact]
-    public void level_1_nested_filtersValidation_Works()
+    public void Level1NestedFiltersValidationWorks()
     {
         ClausesMeterFilterClauses value = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilter()
                 {
                     Clauses = new(
                         [
-                            new()
+                            new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
                             {
                                 Key = "x",
                                 Operator =
@@ -615,11 +615,11 @@ public class ClausesMeterFilterClausesTest : TestBase
     }
 
     [Fact]
-    public void level_1_filter_conditionsSerializationRoundtrip_Works()
+    public void Level1FilterConditionsSerializationRoundtripWorks()
     {
         ClausesMeterFilterClauses value = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilterCondition()
                 {
                     Key = "x",
                     Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
@@ -634,15 +634,15 @@ public class ClausesMeterFilterClausesTest : TestBase
     }
 
     [Fact]
-    public void level_1_nested_filtersSerializationRoundtrip_Works()
+    public void Level1NestedFiltersSerializationRoundtripWorks()
     {
         ClausesMeterFilterClauses value = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilter()
                 {
                     Clauses = new(
                         [
-                            new()
+                            new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
                             {
                                 Key = "x",
                                 Operator =
@@ -815,28 +815,28 @@ public class ClausesMeterFilterClausesMeterFilterConditionOperatorTest : TestBas
 public class ClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
 {
     [Fact]
-    public void stringValidation_Works()
+    public void StringValidationWorks()
     {
         ClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
         value.Validate();
     }
 
     [Fact]
-    public void doubleValidation_Works()
+    public void DoubleValidationWorks()
     {
         ClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
         value.Validate();
     }
 
     [Fact]
-    public void boolValidation_Works()
+    public void BoolValidationWorks()
     {
         ClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
         value.Validate();
     }
 
     [Fact]
-    public void stringSerializationRoundtrip_Works()
+    public void StringSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
         string json = JsonSerializer.Serialize(value);
@@ -847,7 +847,7 @@ public class ClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
     }
 
     [Fact]
-    public void doubleSerializationRoundtrip_Works()
+    public void DoubleSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
         string json = JsonSerializer.Serialize(value);
@@ -858,7 +858,7 @@ public class ClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
     }
 
     [Fact]
-    public void boolSerializationRoundtrip_Works()
+    public void BoolSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
         string json = JsonSerializer.Serialize(value);
@@ -878,7 +878,7 @@ public class ClausesMeterFilterClausesMeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
                     {
                         Key = "x",
                         Operator =
@@ -892,7 +892,7 @@ public class ClausesMeterFilterClausesMeterFilterTest : TestBase
 
         ClausesMeterFilterClausesMeterFilterClauses expectedClauses = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
                 {
                     Key = "x",
                     Operator =
@@ -915,7 +915,7 @@ public class ClausesMeterFilterClausesMeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
                     {
                         Key = "x",
                         Operator =
@@ -940,7 +940,7 @@ public class ClausesMeterFilterClausesMeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
                     {
                         Key = "x",
                         Operator =
@@ -958,7 +958,7 @@ public class ClausesMeterFilterClausesMeterFilterTest : TestBase
 
         ClausesMeterFilterClausesMeterFilterClauses expectedClauses = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
                 {
                     Key = "x",
                     Operator =
@@ -981,7 +981,7 @@ public class ClausesMeterFilterClausesMeterFilterTest : TestBase
         {
             Clauses = new(
                 [
-                    new()
+                    new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
                     {
                         Key = "x",
                         Operator =
@@ -1000,11 +1000,11 @@ public class ClausesMeterFilterClausesMeterFilterTest : TestBase
 public class ClausesMeterFilterClausesMeterFilterClausesTest : TestBase
 {
     [Fact]
-    public void level_2_filter_conditionsValidation_Works()
+    public void Level2FilterConditionsValidationWorks()
     {
         ClausesMeterFilterClausesMeterFilterClauses value = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
                 {
                     Key = "x",
                     Operator =
@@ -1017,11 +1017,11 @@ public class ClausesMeterFilterClausesMeterFilterClausesTest : TestBase
     }
 
     [Fact]
-    public void level_2_nested_filtersValidation_Works()
+    public void Level2NestedFiltersValidationWorks()
     {
         ClausesMeterFilterClausesMeterFilterClauses value = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilterClausesMeterFilter()
                 {
                     Clauses =
                     [
@@ -1040,11 +1040,11 @@ public class ClausesMeterFilterClausesMeterFilterClausesTest : TestBase
     }
 
     [Fact]
-    public void level_2_filter_conditionsSerializationRoundtrip_Works()
+    public void Level2FilterConditionsSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterClauses value = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
                 {
                     Key = "x",
                     Operator =
@@ -1062,11 +1062,11 @@ public class ClausesMeterFilterClausesMeterFilterClausesTest : TestBase
     }
 
     [Fact]
-    public void level_2_nested_filtersSerializationRoundtrip_Works()
+    public void Level2NestedFiltersSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterClauses value = new(
             [
-                new()
+                new ClausesMeterFilterClausesMeterFilterClausesMeterFilter()
                 {
                     Clauses =
                     [
@@ -1283,28 +1283,28 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOper
 public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
 {
     [Fact]
-    public void stringValidation_Works()
+    public void StringValidationWorks()
     {
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
         value.Validate();
     }
 
     [Fact]
-    public void doubleValidation_Works()
+    public void DoubleValidationWorks()
     {
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
         value.Validate();
     }
 
     [Fact]
-    public void boolValidation_Works()
+    public void BoolValidationWorks()
     {
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
         value.Validate();
     }
 
     [Fact]
-    public void stringSerializationRoundtrip_Works()
+    public void StringSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
         string json = JsonSerializer.Serialize(value);
@@ -1317,7 +1317,7 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
     }
 
     [Fact]
-    public void doubleSerializationRoundtrip_Works()
+    public void DoubleSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
         string json = JsonSerializer.Serialize(value);
@@ -1330,7 +1330,7 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
     }
 
     [Fact]
-    public void boolSerializationRoundtrip_Works()
+    public void BoolSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
         string json = JsonSerializer.Serialize(value);
@@ -1616,28 +1616,28 @@ public class ClauseOperatorTest : TestBase
 public class ClauseValueTest : TestBase
 {
     [Fact]
-    public void stringValidation_Works()
+    public void StringValidationWorks()
     {
         ClauseValue value = new("string");
         value.Validate();
     }
 
     [Fact]
-    public void doubleValidation_Works()
+    public void DoubleValidationWorks()
     {
         ClauseValue value = new(0);
         value.Validate();
     }
 
     [Fact]
-    public void boolValidation_Works()
+    public void BoolValidationWorks()
     {
         ClauseValue value = new(true);
         value.Validate();
     }
 
     [Fact]
-    public void stringSerializationRoundtrip_Works()
+    public void StringSerializationRoundtripWorks()
     {
         ClauseValue value = new("string");
         string json = JsonSerializer.Serialize(value);
@@ -1647,7 +1647,7 @@ public class ClauseValueTest : TestBase
     }
 
     [Fact]
-    public void doubleSerializationRoundtrip_Works()
+    public void DoubleSerializationRoundtripWorks()
     {
         ClauseValue value = new(0);
         string json = JsonSerializer.Serialize(value);
@@ -1657,7 +1657,7 @@ public class ClauseValueTest : TestBase
     }
 
     [Fact]
-    public void boolSerializationRoundtrip_Works()
+    public void BoolSerializationRoundtripWorks()
     {
         ClauseValue value = new(true);
         string json = JsonSerializer.Serialize(value);

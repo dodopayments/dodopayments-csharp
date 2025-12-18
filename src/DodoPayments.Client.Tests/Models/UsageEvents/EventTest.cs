@@ -184,28 +184,28 @@ public class EventTest : TestBase
 public class MetadataTest : TestBase
 {
     [Fact]
-    public void stringValidation_Works()
+    public void StringValidationWorks()
     {
         Metadata value = new("string");
         value.Validate();
     }
 
     [Fact]
-    public void numberValidation_Works()
+    public void NumberValidationWorks()
     {
         Metadata value = new(0);
         value.Validate();
     }
 
     [Fact]
-    public void booleanValidation_Works()
+    public void BooleanValidationWorks()
     {
         Metadata value = new(true);
         value.Validate();
     }
 
     [Fact]
-    public void stringSerializationRoundtrip_Works()
+    public void StringSerializationRoundtripWorks()
     {
         Metadata value = new("string");
         string json = JsonSerializer.Serialize(value);
@@ -215,7 +215,7 @@ public class MetadataTest : TestBase
     }
 
     [Fact]
-    public void numberSerializationRoundtrip_Works()
+    public void NumberSerializationRoundtripWorks()
     {
         Metadata value = new(0);
         string json = JsonSerializer.Serialize(value);
@@ -225,7 +225,7 @@ public class MetadataTest : TestBase
     }
 
     [Fact]
-    public void booleanSerializationRoundtrip_Works()
+    public void BooleanSerializationRoundtripWorks()
     {
         Metadata value = new(true);
         string json = JsonSerializer.Serialize(value);

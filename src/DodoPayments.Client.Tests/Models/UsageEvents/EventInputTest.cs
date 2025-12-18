@@ -174,28 +174,28 @@ public class EventInputTest : TestBase
 public class EventInputMetadataTest : TestBase
 {
     [Fact]
-    public void stringValidation_Works()
+    public void StringValidationWorks()
     {
         EventInputMetadata value = new("string");
         value.Validate();
     }
 
     [Fact]
-    public void numberValidation_Works()
+    public void NumberValidationWorks()
     {
         EventInputMetadata value = new(0);
         value.Validate();
     }
 
     [Fact]
-    public void booleanValidation_Works()
+    public void BooleanValidationWorks()
     {
         EventInputMetadata value = new(true);
         value.Validate();
     }
 
     [Fact]
-    public void stringSerializationRoundtrip_Works()
+    public void StringSerializationRoundtripWorks()
     {
         EventInputMetadata value = new("string");
         string json = JsonSerializer.Serialize(value);
@@ -205,7 +205,7 @@ public class EventInputMetadataTest : TestBase
     }
 
     [Fact]
-    public void numberSerializationRoundtrip_Works()
+    public void NumberSerializationRoundtripWorks()
     {
         EventInputMetadata value = new(0);
         string json = JsonSerializer.Serialize(value);
@@ -215,7 +215,7 @@ public class EventInputMetadataTest : TestBase
     }
 
     [Fact]
-    public void booleanSerializationRoundtrip_Works()
+    public void BooleanSerializationRoundtripWorks()
     {
         EventInputMetadata value = new(true);
         string json = JsonSerializer.Serialize(value);
