@@ -92,8 +92,8 @@ public class WalletListResponseTest : TestBase
             TotalBalanceUsd = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<WalletListResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<WalletListResponse>(element);
         Assert.NotNull(deserialized);
 
         List<CustomerWallet> expectedItems =

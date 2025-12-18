@@ -19,7 +19,7 @@ public sealed record class RefundListParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "created_at_gte");
+            return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "created_at_gte");
         }
         init
         {
@@ -28,7 +28,7 @@ public sealed record class RefundListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "created_at_gte", value);
+            JsonModel.Set(this._rawQueryData, "created_at_gte", value);
         }
     }
 
@@ -39,7 +39,7 @@ public sealed record class RefundListParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "created_at_lte");
+            return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "created_at_lte");
         }
         init
         {
@@ -48,7 +48,7 @@ public sealed record class RefundListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "created_at_lte", value);
+            JsonModel.Set(this._rawQueryData, "created_at_lte", value);
         }
     }
 
@@ -57,7 +57,7 @@ public sealed record class RefundListParams : ParamsBase
     /// </summary>
     public string? CustomerID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "customer_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "customer_id"); }
         init
         {
             if (value == null)
@@ -65,7 +65,7 @@ public sealed record class RefundListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "customer_id", value);
+            JsonModel.Set(this._rawQueryData, "customer_id", value);
         }
     }
 
@@ -74,7 +74,7 @@ public sealed record class RefundListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
         init
         {
             if (value == null)
@@ -82,7 +82,7 @@ public sealed record class RefundListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "page_number", value);
+            JsonModel.Set(this._rawQueryData, "page_number", value);
         }
     }
 
@@ -91,7 +91,7 @@ public sealed record class RefundListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
         init
         {
             if (value == null)
@@ -99,7 +99,7 @@ public sealed record class RefundListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "page_size", value);
+            JsonModel.Set(this._rawQueryData, "page_size", value);
         }
     }
 
@@ -110,7 +110,7 @@ public sealed record class RefundListParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Status>>(this.RawQueryData, "status");
+            return JsonModel.GetNullableClass<ApiEnum<string, Status>>(this.RawQueryData, "status");
         }
         init
         {
@@ -119,7 +119,7 @@ public sealed record class RefundListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "status", value);
+            JsonModel.Set(this._rawQueryData, "status", value);
         }
     }
 
@@ -149,7 +149,7 @@ public sealed record class RefundListParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static RefundListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

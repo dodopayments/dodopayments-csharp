@@ -7,16 +7,16 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<NewCustomer, NewCustomerFromRaw>))]
-public sealed record class NewCustomer : ModelBase
+[JsonConverter(typeof(JsonModelConverter<NewCustomer, NewCustomerFromRaw>))]
+public sealed record class NewCustomer : JsonModel
 {
     /// <summary>
     /// Email is required for creating a new customer
     /// </summary>
     public required string Email
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "email"); }
-        init { ModelBase.Set(this._rawData, "email", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "email"); }
+        init { JsonModel.Set(this._rawData, "email", value); }
     }
 
     /// <summary>
@@ -26,14 +26,14 @@ public sealed record class NewCustomer : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     public string? PhoneNumber
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "phone_number"); }
-        init { ModelBase.Set(this._rawData, "phone_number", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "phone_number"); }
+        init { JsonModel.Set(this._rawData, "phone_number", value); }
     }
 
     /// <inheritdoc/>
@@ -76,7 +76,7 @@ public sealed record class NewCustomer : ModelBase
     }
 }
 
-class NewCustomerFromRaw : IFromRaw<NewCustomer>
+class NewCustomerFromRaw : IFromRawJson<NewCustomer>
 {
     /// <inheritdoc/>
     public NewCustomer FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

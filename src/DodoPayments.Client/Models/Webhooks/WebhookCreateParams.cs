@@ -26,14 +26,14 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public required string URL
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "url"); }
-        init { ModelBase.Set(this._rawBodyData, "url", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "url"); }
+        init { JsonModel.Set(this._rawBodyData, "url", value); }
     }
 
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "description"); }
-        init { ModelBase.Set(this._rawBodyData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "description"); }
+        init { JsonModel.Set(this._rawBodyData, "description", value); }
     }
 
     /// <summary>
@@ -43,8 +43,8 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public bool? Disabled
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawBodyData, "disabled"); }
-        init { ModelBase.Set(this._rawBodyData, "disabled", value); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "disabled"); }
+        init { JsonModel.Set(this._rawBodyData, "disabled", value); }
     }
 
     /// <summary>
@@ -56,7 +56,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<List<ApiEnum<string, WebhookEventType>>>(
+            return JsonModel.GetNullableClass<List<ApiEnum<string, WebhookEventType>>>(
                 this.RawBodyData,
                 "filter_types"
             );
@@ -68,7 +68,7 @@ public sealed record class WebhookCreateParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawBodyData, "filter_types", value);
+            JsonModel.Set(this._rawBodyData, "filter_types", value);
         }
     }
 
@@ -79,12 +79,12 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+            return JsonModel.GetNullableClass<Dictionary<string, string>>(
                 this.RawBodyData,
                 "headers"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "headers", value); }
+        init { JsonModel.Set(this._rawBodyData, "headers", value); }
     }
 
     /// <summary>
@@ -92,8 +92,8 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public string? IdempotencyKey
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "idempotency_key"); }
-        init { ModelBase.Set(this._rawBodyData, "idempotency_key", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "idempotency_key"); }
+        init { JsonModel.Set(this._rawBodyData, "idempotency_key", value); }
     }
 
     /// <summary>
@@ -103,18 +103,18 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+            return JsonModel.GetNullableClass<Dictionary<string, string>>(
                 this.RawBodyData,
                 "metadata"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "metadata", value); }
+        init { JsonModel.Set(this._rawBodyData, "metadata", value); }
     }
 
     public int? RateLimit
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawBodyData, "rate_limit"); }
-        init { ModelBase.Set(this._rawBodyData, "rate_limit", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "rate_limit"); }
+        init { JsonModel.Set(this._rawBodyData, "rate_limit", value); }
     }
 
     public WebhookCreateParams() { }
@@ -150,7 +150,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static WebhookCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -172,9 +172,13 @@ public sealed record class WebhookCreateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

@@ -62,8 +62,8 @@ public class BillingAddressTest : TestBase
             Zipcode = "zipcode",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<BillingAddress>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<BillingAddress>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, CountryCode> expectedCountry = CountryCode.Af;

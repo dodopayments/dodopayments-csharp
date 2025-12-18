@@ -7,19 +7,21 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Addons;
 
-[JsonConverter(typeof(ModelConverter<AddonUpdateImagesResponse, AddonUpdateImagesResponseFromRaw>))]
-public sealed record class AddonUpdateImagesResponse : ModelBase
+[JsonConverter(
+    typeof(JsonModelConverter<AddonUpdateImagesResponse, AddonUpdateImagesResponseFromRaw>)
+)]
+public sealed record class AddonUpdateImagesResponse : JsonModel
 {
     public required string ImageID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "image_id"); }
-        init { ModelBase.Set(this._rawData, "image_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "image_id"); }
+        init { JsonModel.Set(this._rawData, "image_id", value); }
     }
 
     public required string URL
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "url"); }
-        init { ModelBase.Set(this._rawData, "url", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
+        init { JsonModel.Set(this._rawData, "url", value); }
     }
 
     /// <inheritdoc/>
@@ -56,7 +58,7 @@ public sealed record class AddonUpdateImagesResponse : ModelBase
     }
 }
 
-class AddonUpdateImagesResponseFromRaw : IFromRaw<AddonUpdateImagesResponse>
+class AddonUpdateImagesResponseFromRaw : IFromRawJson<AddonUpdateImagesResponse>
 {
     /// <inheritdoc/>
     public AddonUpdateImagesResponse FromRawUnchecked(

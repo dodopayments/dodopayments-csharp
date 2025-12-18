@@ -8,14 +8,14 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.Webhooks;
 
 [JsonConverter(
-    typeof(ModelConverter<WebhookRetrieveSecretResponse, WebhookRetrieveSecretResponseFromRaw>)
+    typeof(JsonModelConverter<WebhookRetrieveSecretResponse, WebhookRetrieveSecretResponseFromRaw>)
 )]
-public sealed record class WebhookRetrieveSecretResponse : ModelBase
+public sealed record class WebhookRetrieveSecretResponse : JsonModel
 {
     public required string Secret
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "secret"); }
-        init { ModelBase.Set(this._rawData, "secret", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "secret"); }
+        init { JsonModel.Set(this._rawData, "secret", value); }
     }
 
     /// <inheritdoc/>
@@ -60,7 +60,7 @@ public sealed record class WebhookRetrieveSecretResponse : ModelBase
     }
 }
 
-class WebhookRetrieveSecretResponseFromRaw : IFromRaw<WebhookRetrieveSecretResponse>
+class WebhookRetrieveSecretResponseFromRaw : IFromRawJson<WebhookRetrieveSecretResponse>
 {
     /// <inheritdoc/>
     public WebhookRetrieveSecretResponse FromRawUnchecked(

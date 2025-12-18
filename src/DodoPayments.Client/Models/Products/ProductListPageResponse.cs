@@ -9,13 +9,13 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Products;
 
-[JsonConverter(typeof(ModelConverter<ProductListPageResponse, ProductListPageResponseFromRaw>))]
-public sealed record class ProductListPageResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<ProductListPageResponse, ProductListPageResponseFromRaw>))]
+public sealed record class ProductListPageResponse : JsonModel
 {
     public required IReadOnlyList<Item> Items
     {
-        get { return ModelBase.GetNotNullClass<List<Item>>(this.RawData, "items"); }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        get { return JsonModel.GetNotNullClass<List<Item>>(this.RawData, "items"); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -61,7 +61,7 @@ public sealed record class ProductListPageResponse : ModelBase
     }
 }
 
-class ProductListPageResponseFromRaw : IFromRaw<ProductListPageResponse>
+class ProductListPageResponseFromRaw : IFromRawJson<ProductListPageResponse>
 {
     /// <inheritdoc/>
     public ProductListPageResponse FromRawUnchecked(
@@ -69,16 +69,16 @@ class ProductListPageResponseFromRaw : IFromRaw<ProductListPageResponse>
     ) => ProductListPageResponse.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<Item, ItemFromRaw>))]
-public sealed record class Item : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Item, ItemFromRaw>))]
+public sealed record class Item : JsonModel
 {
     /// <summary>
     /// Unique identifier for the business to which the product belongs.
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -86,8 +86,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -95,8 +95,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public required bool IsRecurring
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "is_recurring"); }
-        init { ModelBase.Set(this._rawData, "is_recurring", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "is_recurring"); }
+        init { JsonModel.Set(this._rawData, "is_recurring", value); }
     }
 
     /// <summary>
@@ -106,9 +106,9 @@ public sealed record class Item : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -116,8 +116,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public required string ProductID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { ModelBase.Set(this._rawData, "product_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
+        init { JsonModel.Set(this._rawData, "product_id", value); }
     }
 
     /// <summary>
@@ -127,12 +127,12 @@ public sealed record class Item : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, TaxCategory>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, TaxCategory>>(
                 this.RawData,
                 "tax_category"
             );
         }
-        init { ModelBase.Set(this._rawData, "tax_category", value); }
+        init { JsonModel.Set(this._rawData, "tax_category", value); }
     }
 
     /// <summary>
@@ -140,8 +140,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public required DateTimeOffset UpdatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
-        init { ModelBase.Set(this._rawData, "updated_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
+        init { JsonModel.Set(this._rawData, "updated_at", value); }
     }
 
     /// <summary>
@@ -151,9 +151,9 @@ public sealed record class Item : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     /// <summary>
@@ -161,8 +161,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "description"); }
-        init { ModelBase.Set(this._rawData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
+        init { JsonModel.Set(this._rawData, "description", value); }
     }
 
     /// <summary>
@@ -170,8 +170,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public string? Image
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "image"); }
-        init { ModelBase.Set(this._rawData, "image", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "image"); }
+        init { JsonModel.Set(this._rawData, "image", value); }
     }
 
     /// <summary>
@@ -179,8 +179,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <summary>
@@ -195,8 +195,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public int? Price
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "price"); }
-        init { ModelBase.Set(this._rawData, "price", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "price"); }
+        init { JsonModel.Set(this._rawData, "price", value); }
     }
 
     /// <summary>
@@ -204,8 +204,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public Price? PriceDetail
     {
-        get { return ModelBase.GetNullableClass<Price>(this.RawData, "price_detail"); }
-        init { ModelBase.Set(this._rawData, "price_detail", value); }
+        get { return JsonModel.GetNullableClass<Price>(this.RawData, "price_detail"); }
+        init { JsonModel.Set(this._rawData, "price_detail", value); }
     }
 
     /// <summary>
@@ -213,8 +213,8 @@ public sealed record class Item : ModelBase
     /// </summary>
     public bool? TaxInclusive
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "tax_inclusive"); }
-        init { ModelBase.Set(this._rawData, "tax_inclusive", value); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "tax_inclusive"); }
+        init { JsonModel.Set(this._rawData, "tax_inclusive", value); }
     }
 
     /// <inheritdoc/>
@@ -261,7 +261,7 @@ public sealed record class Item : ModelBase
     }
 }
 
-class ItemFromRaw : IFromRaw<Item>
+class ItemFromRaw : IFromRawJson<Item>
 {
     /// <inheritdoc/>
     public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

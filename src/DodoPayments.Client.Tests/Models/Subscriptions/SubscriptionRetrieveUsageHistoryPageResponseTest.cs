@@ -134,9 +134,9 @@ public class SubscriptionRetrieveUsageHistoryPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized = JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryPageResponse>(
-            json
+            element
         );
         Assert.NotNull(deserialized);
 
@@ -307,9 +307,9 @@ public class SubscriptionRetrieveUsageHistoryPageResponseItemTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
-            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryPageResponseItem>(json);
+            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryPageResponseItem>(element);
         Assert.NotNull(deserialized);
 
         DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -438,9 +438,11 @@ public class SubscriptionRetrieveUsageHistoryPageResponseItemMeterTest : TestBas
             TotalPrice = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
-            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryPageResponseItemMeter>(json);
+            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryPageResponseItemMeter>(
+                element
+            );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";

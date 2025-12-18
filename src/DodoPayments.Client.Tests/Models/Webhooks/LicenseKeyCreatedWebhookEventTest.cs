@@ -124,8 +124,8 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
             Type = LicenseKeyCreatedWebhookEventType.LicenseKeyCreated,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEvent>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -291,8 +291,8 @@ public class LicenseKeyCreatedWebhookEventDataTest : TestBase
                 LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType.LicenseKey,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEventData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEventData>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "lic_123";
@@ -596,9 +596,11 @@ public class LicenseKeyCreatedWebhookEventDataIntersectionMember1Test : TestBase
                 LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType.LicenseKey,
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
-            JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEventDataIntersectionMember1>(json);
+            JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEventDataIntersectionMember1>(
+                element
+            );
         Assert.NotNull(deserialized);
 
         ApiEnum<

@@ -12,16 +12,18 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<RefundFailedWebhookEvent, RefundFailedWebhookEventFromRaw>))]
-public sealed record class RefundFailedWebhookEvent : ModelBase
+[JsonConverter(
+    typeof(JsonModelConverter<RefundFailedWebhookEvent, RefundFailedWebhookEventFromRaw>)
+)]
+public sealed record class RefundFailedWebhookEvent : JsonModel
 {
     /// <summary>
     /// The business identifier
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -31,9 +33,9 @@ public sealed record class RefundFailedWebhookEvent : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<RefundFailedWebhookEventData>(this.RawData, "data");
+            return JsonModel.GetNotNullClass<RefundFailedWebhookEventData>(this.RawData, "data");
         }
-        init { ModelBase.Set(this._rawData, "data", value); }
+        init { JsonModel.Set(this._rawData, "data", value); }
     }
 
     /// <summary>
@@ -43,9 +45,9 @@ public sealed record class RefundFailedWebhookEvent : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "timestamp");
+            return JsonModel.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "timestamp");
         }
-        init { ModelBase.Set(this._rawData, "timestamp", value); }
+        init { JsonModel.Set(this._rawData, "timestamp", value); }
     }
 
     /// <summary>
@@ -55,12 +57,12 @@ public sealed record class RefundFailedWebhookEvent : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, RefundFailedWebhookEventType>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, RefundFailedWebhookEventType>>(
                 this.RawData,
                 "type"
             );
         }
-        init { ModelBase.Set(this._rawData, "type", value); }
+        init { JsonModel.Set(this._rawData, "type", value); }
     }
 
     /// <inheritdoc/>
@@ -99,7 +101,7 @@ public sealed record class RefundFailedWebhookEvent : ModelBase
     }
 }
 
-class RefundFailedWebhookEventFromRaw : IFromRaw<RefundFailedWebhookEvent>
+class RefundFailedWebhookEventFromRaw : IFromRawJson<RefundFailedWebhookEvent>
 {
     /// <inheritdoc/>
     public RefundFailedWebhookEvent FromRawUnchecked(
@@ -111,17 +113,17 @@ class RefundFailedWebhookEventFromRaw : IFromRaw<RefundFailedWebhookEvent>
 /// Event-specific data
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<RefundFailedWebhookEventData, RefundFailedWebhookEventDataFromRaw>)
+    typeof(JsonModelConverter<RefundFailedWebhookEventData, RefundFailedWebhookEventDataFromRaw>)
 )]
-public sealed record class RefundFailedWebhookEventData : ModelBase
+public sealed record class RefundFailedWebhookEventData : JsonModel
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -131,21 +133,21 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "created_at");
+            return JsonModel.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "created_at");
         }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     public required Payments::CustomerLimitedDetails Customer
     {
         get
         {
-            return ModelBase.GetNotNullClass<Payments::CustomerLimitedDetails>(
+            return JsonModel.GetNotNullClass<Payments::CustomerLimitedDetails>(
                 this.RawData,
                 "customer"
             );
         }
-        init { ModelBase.Set(this._rawData, "customer", value); }
+        init { JsonModel.Set(this._rawData, "customer", value); }
     }
 
     /// <summary>
@@ -153,8 +155,8 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
     /// </summary>
     public required bool IsPartial
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "is_partial"); }
-        init { ModelBase.Set(this._rawData, "is_partial", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "is_partial"); }
+        init { JsonModel.Set(this._rawData, "is_partial", value); }
     }
 
     /// <summary>
@@ -164,9 +166,9 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -174,8 +176,8 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
     /// </summary>
     public required string PaymentID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { ModelBase.Set(this._rawData, "payment_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
+        init { JsonModel.Set(this._rawData, "payment_id", value); }
     }
 
     /// <summary>
@@ -183,17 +185,17 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
     /// </summary>
     public required string RefundID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "refund_id"); }
-        init { ModelBase.Set(this._rawData, "refund_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "refund_id"); }
+        init { JsonModel.Set(this._rawData, "refund_id", value); }
     }
 
     public required ApiEnum<string, RefundStatus> Status
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, RefundStatus>>(this.RawData, "status");
+            return JsonModel.GetNotNullClass<ApiEnum<string, RefundStatus>>(this.RawData, "status");
         }
-        init { ModelBase.Set(this._rawData, "status", value); }
+        init { JsonModel.Set(this._rawData, "status", value); }
     }
 
     /// <summary>
@@ -201,15 +203,15 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
     /// </summary>
     public int? Amount
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "amount"); }
-        init { ModelBase.Set(this._rawData, "amount", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "amount"); }
+        init { JsonModel.Set(this._rawData, "amount", value); }
     }
 
     public ApiEnum<string, Currency>? Currency
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
         init
         {
@@ -218,7 +220,7 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "currency", value);
+            JsonModel.Set(this._rawData, "currency", value);
         }
     }
 
@@ -227,8 +229,8 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
     /// </summary>
     public string? Reason
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "reason"); }
-        init { ModelBase.Set(this._rawData, "reason", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason"); }
+        init { JsonModel.Set(this._rawData, "reason", value); }
     }
 
     /// <summary>
@@ -238,7 +240,7 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<
+            return JsonModel.GetNullableClass<
                 ApiEnum<string, RefundFailedWebhookEventDataIntersectionMember1PayloadType>
             >(this.RawData, "payload_type");
         }
@@ -249,7 +251,7 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "payload_type", value);
+            JsonModel.Set(this._rawData, "payload_type", value);
         }
     }
 
@@ -315,7 +317,7 @@ public sealed record class RefundFailedWebhookEventData : ModelBase
     }
 }
 
-class RefundFailedWebhookEventDataFromRaw : IFromRaw<RefundFailedWebhookEventData>
+class RefundFailedWebhookEventDataFromRaw : IFromRawJson<RefundFailedWebhookEventData>
 {
     /// <inheritdoc/>
     public RefundFailedWebhookEventData FromRawUnchecked(
@@ -324,12 +326,12 @@ class RefundFailedWebhookEventDataFromRaw : IFromRaw<RefundFailedWebhookEventDat
 }
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         RefundFailedWebhookEventDataIntersectionMember1,
         RefundFailedWebhookEventDataIntersectionMember1FromRaw
     >)
 )]
-public sealed record class RefundFailedWebhookEventDataIntersectionMember1 : ModelBase
+public sealed record class RefundFailedWebhookEventDataIntersectionMember1 : JsonModel
 {
     /// <summary>
     /// The type of payload in the data field
@@ -338,7 +340,7 @@ public sealed record class RefundFailedWebhookEventDataIntersectionMember1 : Mod
     {
         get
         {
-            return ModelBase.GetNullableClass<
+            return JsonModel.GetNullableClass<
                 ApiEnum<string, RefundFailedWebhookEventDataIntersectionMember1PayloadType>
             >(this.RawData, "payload_type");
         }
@@ -349,7 +351,7 @@ public sealed record class RefundFailedWebhookEventDataIntersectionMember1 : Mod
                 return;
             }
 
-            ModelBase.Set(this._rawData, "payload_type", value);
+            JsonModel.Set(this._rawData, "payload_type", value);
         }
     }
 
@@ -391,7 +393,7 @@ public sealed record class RefundFailedWebhookEventDataIntersectionMember1 : Mod
 }
 
 class RefundFailedWebhookEventDataIntersectionMember1FromRaw
-    : IFromRaw<RefundFailedWebhookEventDataIntersectionMember1>
+    : IFromRawJson<RefundFailedWebhookEventDataIntersectionMember1>
 {
     /// <inheritdoc/>
     public RefundFailedWebhookEventDataIntersectionMember1 FromRawUnchecked(

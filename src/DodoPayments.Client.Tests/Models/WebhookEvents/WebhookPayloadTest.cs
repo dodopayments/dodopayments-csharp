@@ -373,8 +373,8 @@ public class WebhookPayloadTest : TestBase
             Type = WebhookEventType.PaymentSucceeded,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<WebhookPayload>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<WebhookPayload>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -878,8 +878,8 @@ public class DataTest : TestBase
                 PayloadType = PayloadType.Payment,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Data>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Data>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -947,8 +947,8 @@ public class DataTest : TestBase
                 PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Data>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Data>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -980,8 +980,8 @@ public class DataTest : TestBase
                 PayloadType = RefundIntersectionMember1PayloadType.Refund,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Data>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Data>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1013,8 +1013,8 @@ public class DataTest : TestBase
                 PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Data>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Data>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1040,8 +1040,8 @@ public class DataTest : TestBase
                 PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Data>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Data>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1434,8 +1434,8 @@ public class PaymentTest : TestBase
             PayloadType = PayloadType.Payment,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Payment>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Payment>(element);
         Assert.NotNull(deserialized);
 
         Payments::BillingAddress expectedBilling = new()
@@ -2403,8 +2403,8 @@ public class IntersectionMember1Test : TestBase
     {
         var model = new IntersectionMember1 { PayloadType = PayloadType.Payment };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<IntersectionMember1>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<IntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, PayloadType> expectedPayloadType = PayloadType.Payment;
@@ -2779,8 +2779,8 @@ public class SubscriptionTest : TestBase
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Subscription>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Subscription>(element);
         Assert.NotNull(deserialized);
 
         List<Subscriptions::AddonCartResponseItem> expectedAddons =
@@ -3269,8 +3269,8 @@ public class SubscriptionIntersectionMember1Test : TestBase
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionIntersectionMember1>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionIntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, SubscriptionIntersectionMember1PayloadType> expectedPayloadType =
@@ -3474,8 +3474,8 @@ public class RefundTest : TestBase
             PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Refund>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Refund>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -3827,8 +3827,8 @@ public class RefundIntersectionMember1Test : TestBase
             PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<RefundIntersectionMember1>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<RefundIntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, RefundIntersectionMember1PayloadType> expectedPayloadType =
@@ -4028,8 +4028,8 @@ public class DisputeTest : TestBase
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Dispute>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Dispute>(element);
         Assert.NotNull(deserialized);
 
         string expectedAmount = "amount";
@@ -4257,8 +4257,8 @@ public class DisputeIntersectionMember1Test : TestBase
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DisputeIntersectionMember1>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeIntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, DisputeIntersectionMember1PayloadType> expectedPayloadType =
@@ -4434,8 +4434,8 @@ public class LicenseKeyTest : TestBase
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKey>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKey>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "lic_123";
@@ -4629,8 +4629,8 @@ public class LicenseKeyIntersectionMember1Test : TestBase
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyIntersectionMember1>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyIntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> expectedPayloadType =

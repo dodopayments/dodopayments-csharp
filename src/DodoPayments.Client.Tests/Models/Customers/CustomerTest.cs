@@ -78,8 +78,8 @@ public class CustomerTest : TestBase
             PhoneNumber = "phone_number",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Customer>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Customer>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";

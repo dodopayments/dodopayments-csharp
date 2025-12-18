@@ -225,8 +225,8 @@ public class SubscriptionListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Item> expectedItems =
@@ -559,8 +559,8 @@ public class ItemTest : TestBase
             TaxID = "tax_id",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Item>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Item>(element);
         Assert.NotNull(deserialized);
 
         Payments::BillingAddress expectedBilling = new()

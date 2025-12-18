@@ -68,8 +68,8 @@ public class EventInputTest : TestBase
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<EventInput>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<EventInput>(element);
         Assert.NotNull(deserialized);
 
         string expectedCustomerID = "customer_id";
@@ -198,8 +198,8 @@ public class EventInputMetadataTest : TestBase
     public void StringSerializationRoundtripWorks()
     {
         EventInputMetadata value = new("string");
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<EventInputMetadata>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<EventInputMetadata>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -208,8 +208,8 @@ public class EventInputMetadataTest : TestBase
     public void NumberSerializationRoundtripWorks()
     {
         EventInputMetadata value = new(0);
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<EventInputMetadata>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<EventInputMetadata>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -218,8 +218,8 @@ public class EventInputMetadataTest : TestBase
     public void BooleanSerializationRoundtripWorks()
     {
         EventInputMetadata value = new(true);
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<EventInputMetadata>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<EventInputMetadata>(element);
 
         Assert.Equal(value, deserialized);
     }

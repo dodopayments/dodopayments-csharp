@@ -116,8 +116,8 @@ public class WebhookListPageResponseTest : TestBase
             PrevIterator = "prev_iterator",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<WebhookListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<WebhookListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<WebhookDetails> expectedData =

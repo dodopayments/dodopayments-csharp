@@ -101,8 +101,8 @@ public class LicenseActivateResponseTest : TestBase
             Product = new() { ProductID = "product_id", Name = "name" },
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseActivateResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseActivateResponse>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "lki_123";
@@ -184,8 +184,8 @@ public class ProductTest : TestBase
     {
         var model = new Product { ProductID = "product_id", Name = "name" };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Product>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Product>(element);
         Assert.NotNull(deserialized);
 
         string expectedProductID = "product_id";

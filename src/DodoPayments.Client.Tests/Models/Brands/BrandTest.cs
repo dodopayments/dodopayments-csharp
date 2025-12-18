@@ -97,8 +97,8 @@ public class BrandTest : TestBase
             URL = "url",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Brand>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Brand>(element);
         Assert.NotNull(deserialized);
 
         string expectedBrandID = "brand_id";

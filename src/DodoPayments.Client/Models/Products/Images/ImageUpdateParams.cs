@@ -14,7 +14,7 @@ public sealed record class ImageUpdateParams : ParamsBase
 
     public bool? ForceUpdate
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawQueryData, "force_update"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawQueryData, "force_update"); }
         init
         {
             if (value == null)
@@ -22,7 +22,7 @@ public sealed record class ImageUpdateParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "force_update", value);
+            JsonModel.Set(this._rawQueryData, "force_update", value);
         }
     }
 
@@ -52,7 +52,7 @@ public sealed record class ImageUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static ImageUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

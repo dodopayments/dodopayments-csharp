@@ -237,8 +237,8 @@ public class ProductTest : TestBase
             Name = "name",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Products::Product>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Products::Product>(element);
         Assert.NotNull(deserialized);
 
         string expectedBrandID = "brand_id";
@@ -624,9 +624,9 @@ public class ProductDigitalProductDeliveryTest : TestBase
             Instructions = "instructions",
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized = JsonSerializer.Deserialize<Products::ProductDigitalProductDelivery>(
-            json
+            element
         );
         Assert.NotNull(deserialized);
 
@@ -773,8 +773,8 @@ public class FileTest : TestBase
             URL = "url",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Products::File>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Products::File>(element);
         Assert.NotNull(deserialized);
 
         string expectedFileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";

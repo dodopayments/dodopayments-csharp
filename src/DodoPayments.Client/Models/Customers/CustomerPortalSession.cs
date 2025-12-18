@@ -7,13 +7,13 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Customers;
 
-[JsonConverter(typeof(ModelConverter<CustomerPortalSession, CustomerPortalSessionFromRaw>))]
-public sealed record class CustomerPortalSession : ModelBase
+[JsonConverter(typeof(JsonModelConverter<CustomerPortalSession, CustomerPortalSessionFromRaw>))]
+public sealed record class CustomerPortalSession : JsonModel
 {
     public required string Link
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "link"); }
-        init { ModelBase.Set(this._rawData, "link", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "link"); }
+        init { JsonModel.Set(this._rawData, "link", value); }
     }
 
     /// <inheritdoc/>
@@ -56,7 +56,7 @@ public sealed record class CustomerPortalSession : ModelBase
     }
 }
 
-class CustomerPortalSessionFromRaw : IFromRaw<CustomerPortalSession>
+class CustomerPortalSessionFromRaw : IFromRawJson<CustomerPortalSession>
 {
     /// <inheritdoc/>
     public CustomerPortalSession FromRawUnchecked(

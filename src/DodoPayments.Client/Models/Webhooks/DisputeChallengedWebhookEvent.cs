@@ -11,17 +11,17 @@ using System = System;
 namespace DodoPayments.Client.Models.Webhooks;
 
 [JsonConverter(
-    typeof(ModelConverter<DisputeChallengedWebhookEvent, DisputeChallengedWebhookEventFromRaw>)
+    typeof(JsonModelConverter<DisputeChallengedWebhookEvent, DisputeChallengedWebhookEventFromRaw>)
 )]
-public sealed record class DisputeChallengedWebhookEvent : ModelBase
+public sealed record class DisputeChallengedWebhookEvent : JsonModel
 {
     /// <summary>
     /// The business identifier
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -31,12 +31,12 @@ public sealed record class DisputeChallengedWebhookEvent : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<DisputeChallengedWebhookEventData>(
+            return JsonModel.GetNotNullClass<DisputeChallengedWebhookEventData>(
                 this.RawData,
                 "data"
             );
         }
-        init { ModelBase.Set(this._rawData, "data", value); }
+        init { JsonModel.Set(this._rawData, "data", value); }
     }
 
     /// <summary>
@@ -46,9 +46,9 @@ public sealed record class DisputeChallengedWebhookEvent : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "timestamp");
+            return JsonModel.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "timestamp");
         }
-        init { ModelBase.Set(this._rawData, "timestamp", value); }
+        init { JsonModel.Set(this._rawData, "timestamp", value); }
     }
 
     /// <summary>
@@ -58,12 +58,12 @@ public sealed record class DisputeChallengedWebhookEvent : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, DisputeChallengedWebhookEventType>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, DisputeChallengedWebhookEventType>>(
                 this.RawData,
                 "type"
             );
         }
-        init { ModelBase.Set(this._rawData, "type", value); }
+        init { JsonModel.Set(this._rawData, "type", value); }
     }
 
     /// <inheritdoc/>
@@ -104,7 +104,7 @@ public sealed record class DisputeChallengedWebhookEvent : ModelBase
     }
 }
 
-class DisputeChallengedWebhookEventFromRaw : IFromRaw<DisputeChallengedWebhookEvent>
+class DisputeChallengedWebhookEventFromRaw : IFromRawJson<DisputeChallengedWebhookEvent>
 {
     /// <inheritdoc/>
     public DisputeChallengedWebhookEvent FromRawUnchecked(
@@ -116,20 +116,20 @@ class DisputeChallengedWebhookEventFromRaw : IFromRaw<DisputeChallengedWebhookEv
 /// Event-specific data
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         DisputeChallengedWebhookEventData,
         DisputeChallengedWebhookEventDataFromRaw
     >)
 )]
-public sealed record class DisputeChallengedWebhookEventData : ModelBase
+public sealed record class DisputeChallengedWebhookEventData : JsonModel
 {
     /// <summary>
     /// The amount involved in the dispute, represented as a string to accommodate precision.
     /// </summary>
     public required string Amount
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "amount"); }
-        init { ModelBase.Set(this._rawData, "amount", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "amount"); }
+        init { JsonModel.Set(this._rawData, "amount", value); }
     }
 
     /// <summary>
@@ -137,8 +137,8 @@ public sealed record class DisputeChallengedWebhookEventData : ModelBase
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -148,9 +148,9 @@ public sealed record class DisputeChallengedWebhookEventData : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "created_at");
+            return JsonModel.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "created_at");
         }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -158,8 +158,8 @@ public sealed record class DisputeChallengedWebhookEventData : ModelBase
     /// </summary>
     public required string Currency
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "currency"); }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "currency"); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     /// <summary>
@@ -167,32 +167,32 @@ public sealed record class DisputeChallengedWebhookEventData : ModelBase
     /// </summary>
     public required string DisputeID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "dispute_id"); }
-        init { ModelBase.Set(this._rawData, "dispute_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "dispute_id"); }
+        init { JsonModel.Set(this._rawData, "dispute_id", value); }
     }
 
     public required ApiEnum<string, DisputeDisputeStage> DisputeStage
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, DisputeDisputeStage>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, DisputeDisputeStage>>(
                 this.RawData,
                 "dispute_stage"
             );
         }
-        init { ModelBase.Set(this._rawData, "dispute_stage", value); }
+        init { JsonModel.Set(this._rawData, "dispute_stage", value); }
     }
 
     public required ApiEnum<string, DisputeDisputeStatus> DisputeStatus
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, DisputeDisputeStatus>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, DisputeDisputeStatus>>(
                 this.RawData,
                 "dispute_status"
             );
         }
-        init { ModelBase.Set(this._rawData, "dispute_status", value); }
+        init { JsonModel.Set(this._rawData, "dispute_status", value); }
     }
 
     /// <summary>
@@ -200,8 +200,8 @@ public sealed record class DisputeChallengedWebhookEventData : ModelBase
     /// </summary>
     public required string PaymentID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { ModelBase.Set(this._rawData, "payment_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
+        init { JsonModel.Set(this._rawData, "payment_id", value); }
     }
 
     /// <summary>
@@ -209,8 +209,8 @@ public sealed record class DisputeChallengedWebhookEventData : ModelBase
     /// </summary>
     public string? Remarks
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "remarks"); }
-        init { ModelBase.Set(this._rawData, "remarks", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "remarks"); }
+        init { JsonModel.Set(this._rawData, "remarks", value); }
     }
 
     /// <summary>
@@ -223,7 +223,7 @@ public sealed record class DisputeChallengedWebhookEventData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<
+            return JsonModel.GetNullableClass<
                 ApiEnum<string, DisputeChallengedWebhookEventDataIntersectionMember1PayloadType>
             >(this.RawData, "payload_type");
         }
@@ -234,7 +234,7 @@ public sealed record class DisputeChallengedWebhookEventData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "payload_type", value);
+            JsonModel.Set(this._rawData, "payload_type", value);
         }
     }
 
@@ -298,7 +298,7 @@ public sealed record class DisputeChallengedWebhookEventData : ModelBase
     }
 }
 
-class DisputeChallengedWebhookEventDataFromRaw : IFromRaw<DisputeChallengedWebhookEventData>
+class DisputeChallengedWebhookEventDataFromRaw : IFromRawJson<DisputeChallengedWebhookEventData>
 {
     /// <inheritdoc/>
     public DisputeChallengedWebhookEventData FromRawUnchecked(
@@ -307,12 +307,12 @@ class DisputeChallengedWebhookEventDataFromRaw : IFromRaw<DisputeChallengedWebho
 }
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         DisputeChallengedWebhookEventDataIntersectionMember1,
         DisputeChallengedWebhookEventDataIntersectionMember1FromRaw
     >)
 )]
-public sealed record class DisputeChallengedWebhookEventDataIntersectionMember1 : ModelBase
+public sealed record class DisputeChallengedWebhookEventDataIntersectionMember1 : JsonModel
 {
     /// <summary>
     /// The type of payload in the data field
@@ -324,7 +324,7 @@ public sealed record class DisputeChallengedWebhookEventDataIntersectionMember1 
     {
         get
         {
-            return ModelBase.GetNullableClass<
+            return JsonModel.GetNullableClass<
                 ApiEnum<string, DisputeChallengedWebhookEventDataIntersectionMember1PayloadType>
             >(this.RawData, "payload_type");
         }
@@ -335,7 +335,7 @@ public sealed record class DisputeChallengedWebhookEventDataIntersectionMember1 
                 return;
             }
 
-            ModelBase.Set(this._rawData, "payload_type", value);
+            JsonModel.Set(this._rawData, "payload_type", value);
         }
     }
 
@@ -379,7 +379,7 @@ public sealed record class DisputeChallengedWebhookEventDataIntersectionMember1 
 }
 
 class DisputeChallengedWebhookEventDataIntersectionMember1FromRaw
-    : IFromRaw<DisputeChallengedWebhookEventDataIntersectionMember1>
+    : IFromRawJson<DisputeChallengedWebhookEventDataIntersectionMember1>
 {
     /// <inheritdoc/>
     public DisputeChallengedWebhookEventDataIntersectionMember1 FromRawUnchecked(

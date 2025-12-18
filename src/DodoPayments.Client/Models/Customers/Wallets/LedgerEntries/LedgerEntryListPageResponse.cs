@@ -8,20 +8,20 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
 [JsonConverter(
-    typeof(ModelConverter<LedgerEntryListPageResponse, LedgerEntryListPageResponseFromRaw>)
+    typeof(JsonModelConverter<LedgerEntryListPageResponse, LedgerEntryListPageResponseFromRaw>)
 )]
-public sealed record class LedgerEntryListPageResponse : ModelBase
+public sealed record class LedgerEntryListPageResponse : JsonModel
 {
     public required IReadOnlyList<CustomerWalletTransaction> Items
     {
         get
         {
-            return ModelBase.GetNotNullClass<List<CustomerWalletTransaction>>(
+            return JsonModel.GetNotNullClass<List<CustomerWalletTransaction>>(
                 this.RawData,
                 "items"
             );
         }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -67,7 +67,7 @@ public sealed record class LedgerEntryListPageResponse : ModelBase
     }
 }
 
-class LedgerEntryListPageResponseFromRaw : IFromRaw<LedgerEntryListPageResponse>
+class LedgerEntryListPageResponseFromRaw : IFromRawJson<LedgerEntryListPageResponse>
 {
     /// <inheritdoc/>
     public LedgerEntryListPageResponse FromRawUnchecked(

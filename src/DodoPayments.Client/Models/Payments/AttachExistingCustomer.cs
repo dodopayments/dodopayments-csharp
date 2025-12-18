@@ -7,13 +7,13 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<AttachExistingCustomer, AttachExistingCustomerFromRaw>))]
-public sealed record class AttachExistingCustomer : ModelBase
+[JsonConverter(typeof(JsonModelConverter<AttachExistingCustomer, AttachExistingCustomerFromRaw>))]
+public sealed record class AttachExistingCustomer : JsonModel
 {
     public required string CustomerID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { ModelBase.Set(this._rawData, "customer_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
+        init { JsonModel.Set(this._rawData, "customer_id", value); }
     }
 
     /// <inheritdoc/>
@@ -56,7 +56,7 @@ public sealed record class AttachExistingCustomer : ModelBase
     }
 }
 
-class AttachExistingCustomerFromRaw : IFromRaw<AttachExistingCustomer>
+class AttachExistingCustomerFromRaw : IFromRawJson<AttachExistingCustomer>
 {
     /// <inheritdoc/>
     public AttachExistingCustomer FromRawUnchecked(

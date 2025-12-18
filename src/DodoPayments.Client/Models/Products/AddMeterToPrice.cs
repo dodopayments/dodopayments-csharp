@@ -7,13 +7,13 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Products;
 
-[JsonConverter(typeof(ModelConverter<AddMeterToPrice, AddMeterToPriceFromRaw>))]
-public sealed record class AddMeterToPrice : ModelBase
+[JsonConverter(typeof(JsonModelConverter<AddMeterToPrice, AddMeterToPriceFromRaw>))]
+public sealed record class AddMeterToPrice : JsonModel
 {
     public required string MeterID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "meter_id"); }
-        init { ModelBase.Set(this._rawData, "meter_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "meter_id"); }
+        init { JsonModel.Set(this._rawData, "meter_id", value); }
     }
 
     /// <summary>
@@ -22,8 +22,8 @@ public sealed record class AddMeterToPrice : ModelBase
     /// </summary>
     public required string PricePerUnit
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
-        init { ModelBase.Set(this._rawData, "price_per_unit", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
+        init { JsonModel.Set(this._rawData, "price_per_unit", value); }
     }
 
     /// <summary>
@@ -31,14 +31,14 @@ public sealed record class AddMeterToPrice : ModelBase
     /// </summary>
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "description"); }
-        init { ModelBase.Set(this._rawData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
+        init { JsonModel.Set(this._rawData, "description", value); }
     }
 
     public long? FreeThreshold
     {
-        get { return ModelBase.GetNullableStruct<long>(this.RawData, "free_threshold"); }
-        init { ModelBase.Set(this._rawData, "free_threshold", value); }
+        get { return JsonModel.GetNullableStruct<long>(this.RawData, "free_threshold"); }
+        init { JsonModel.Set(this._rawData, "free_threshold", value); }
     }
 
     /// <summary>
@@ -46,8 +46,8 @@ public sealed record class AddMeterToPrice : ModelBase
     /// </summary>
     public string? MeasurementUnit
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "measurement_unit"); }
-        init { ModelBase.Set(this._rawData, "measurement_unit", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "measurement_unit"); }
+        init { JsonModel.Set(this._rawData, "measurement_unit", value); }
     }
 
     /// <summary>
@@ -55,8 +55,8 @@ public sealed record class AddMeterToPrice : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <inheritdoc/>
@@ -95,7 +95,7 @@ public sealed record class AddMeterToPrice : ModelBase
     }
 }
 
-class AddMeterToPriceFromRaw : IFromRaw<AddMeterToPrice>
+class AddMeterToPriceFromRaw : IFromRawJson<AddMeterToPrice>
 {
     /// <inheritdoc/>
     public AddMeterToPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

@@ -11,28 +11,28 @@ public record class CustomerRequest
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public CustomerRequest(AttachExistingCustomer value, JsonElement? json = null)
+    public CustomerRequest(AttachExistingCustomer value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public CustomerRequest(NewCustomer value, JsonElement? json = null)
+    public CustomerRequest(NewCustomer value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public CustomerRequest(JsonElement json)
+    public CustomerRequest(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -200,14 +200,14 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<AttachExistingCustomer>(json, options);
+            var deserialized = JsonSerializer.Deserialize<AttachExistingCustomer>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -217,11 +217,11 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<NewCustomer>(json, options);
+            var deserialized = JsonSerializer.Deserialize<NewCustomer>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -229,7 +229,7 @@ sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(

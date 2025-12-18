@@ -147,8 +147,8 @@ public class RefundFailedWebhookEventTest : TestBase
             Type = RefundFailedWebhookEventType.RefundFailed,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<RefundFailedWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<RefundFailedWebhookEvent>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -349,8 +349,8 @@ public class RefundFailedWebhookEventDataTest : TestBase
             PayloadType = RefundFailedWebhookEventDataIntersectionMember1PayloadType.Refund,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<RefundFailedWebhookEventData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<RefundFailedWebhookEventData>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -709,9 +709,9 @@ public class RefundFailedWebhookEventDataIntersectionMember1Test : TestBase
             PayloadType = RefundFailedWebhookEventDataIntersectionMember1PayloadType.Refund,
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
-            JsonSerializer.Deserialize<RefundFailedWebhookEventDataIntersectionMember1>(json);
+            JsonSerializer.Deserialize<RefundFailedWebhookEventDataIntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<

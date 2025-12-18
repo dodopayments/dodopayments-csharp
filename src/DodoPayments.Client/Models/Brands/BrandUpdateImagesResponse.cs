@@ -7,16 +7,18 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Brands;
 
-[JsonConverter(typeof(ModelConverter<BrandUpdateImagesResponse, BrandUpdateImagesResponseFromRaw>))]
-public sealed record class BrandUpdateImagesResponse : ModelBase
+[JsonConverter(
+    typeof(JsonModelConverter<BrandUpdateImagesResponse, BrandUpdateImagesResponseFromRaw>)
+)]
+public sealed record class BrandUpdateImagesResponse : JsonModel
 {
     /// <summary>
     /// UUID that will be used as the image identifier/key suffix
     /// </summary>
     public required string ImageID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "image_id"); }
-        init { ModelBase.Set(this._rawData, "image_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "image_id"); }
+        init { JsonModel.Set(this._rawData, "image_id", value); }
     }
 
     /// <summary>
@@ -24,8 +26,8 @@ public sealed record class BrandUpdateImagesResponse : ModelBase
     /// </summary>
     public required string URL
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "url"); }
-        init { ModelBase.Set(this._rawData, "url", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
+        init { JsonModel.Set(this._rawData, "url", value); }
     }
 
     /// <inheritdoc/>
@@ -62,7 +64,7 @@ public sealed record class BrandUpdateImagesResponse : ModelBase
     }
 }
 
-class BrandUpdateImagesResponseFromRaw : IFromRaw<BrandUpdateImagesResponse>
+class BrandUpdateImagesResponseFromRaw : IFromRawJson<BrandUpdateImagesResponse>
 {
     /// <inheritdoc/>
     public BrandUpdateImagesResponse FromRawUnchecked(

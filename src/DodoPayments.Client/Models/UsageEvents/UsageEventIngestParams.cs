@@ -39,8 +39,8 @@ public sealed record class UsageEventIngestParams : ParamsBase
     /// </summary>
     public required IReadOnlyList<EventInput> Events
     {
-        get { return ModelBase.GetNotNullClass<List<EventInput>>(this.RawBodyData, "events"); }
-        init { ModelBase.Set(this._rawBodyData, "events", value); }
+        get { return JsonModel.GetNotNullClass<List<EventInput>>(this.RawBodyData, "events"); }
+        init { JsonModel.Set(this._rawBodyData, "events", value); }
     }
 
     public UsageEventIngestParams() { }
@@ -76,7 +76,7 @@ public sealed record class UsageEventIngestParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static UsageEventIngestParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -98,9 +98,13 @@ public sealed record class UsageEventIngestParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

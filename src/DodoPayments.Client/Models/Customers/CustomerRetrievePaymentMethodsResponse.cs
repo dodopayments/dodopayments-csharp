@@ -12,17 +12,17 @@ using Payments = DodoPayments.Client.Models.Payments;
 namespace DodoPayments.Client.Models.Customers;
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         CustomerRetrievePaymentMethodsResponse,
         CustomerRetrievePaymentMethodsResponseFromRaw
     >)
 )]
-public sealed record class CustomerRetrievePaymentMethodsResponse : ModelBase
+public sealed record class CustomerRetrievePaymentMethodsResponse : JsonModel
 {
     public required IReadOnlyList<Item> Items
     {
-        get { return ModelBase.GetNotNullClass<List<Item>>(this.RawData, "items"); }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        get { return JsonModel.GetNotNullClass<List<Item>>(this.RawData, "items"); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -71,7 +71,7 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : ModelBase
 }
 
 class CustomerRetrievePaymentMethodsResponseFromRaw
-    : IFromRaw<CustomerRetrievePaymentMethodsResponse>
+    : IFromRawJson<CustomerRetrievePaymentMethodsResponse>
 {
     /// <inheritdoc/>
     public CustomerRetrievePaymentMethodsResponse FromRawUnchecked(
@@ -79,8 +79,8 @@ class CustomerRetrievePaymentMethodsResponseFromRaw
     ) => CustomerRetrievePaymentMethodsResponse.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<Item, ItemFromRaw>))]
-public sealed record class Item : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Item, ItemFromRaw>))]
+public sealed record class Item : JsonModel
 {
     /// <summary>
     /// PaymentMethod enum from hyperswitch
@@ -91,48 +91,48 @@ public sealed record class Item : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, PaymentMethod>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, PaymentMethod>>(
                 this.RawData,
                 "payment_method"
             );
         }
-        init { ModelBase.Set(this._rawData, "payment_method", value); }
+        init { JsonModel.Set(this._rawData, "payment_method", value); }
     }
 
     public required string PaymentMethodID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_method_id"); }
-        init { ModelBase.Set(this._rawData, "payment_method_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_method_id"); }
+        init { JsonModel.Set(this._rawData, "payment_method_id", value); }
     }
 
     public Card? Card
     {
-        get { return ModelBase.GetNullableClass<Card>(this.RawData, "card"); }
-        init { ModelBase.Set(this._rawData, "card", value); }
+        get { return JsonModel.GetNullableClass<Card>(this.RawData, "card"); }
+        init { JsonModel.Set(this._rawData, "card", value); }
     }
 
     public DateTimeOffset? LastUsedAt
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "last_used_at"); }
-        init { ModelBase.Set(this._rawData, "last_used_at", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "last_used_at"); }
+        init { JsonModel.Set(this._rawData, "last_used_at", value); }
     }
 
     public ApiEnum<string, Payments::PaymentMethodTypes>? PaymentMethodType
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Payments::PaymentMethodTypes>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, Payments::PaymentMethodTypes>>(
                 this.RawData,
                 "payment_method_type"
             );
         }
-        init { ModelBase.Set(this._rawData, "payment_method_type", value); }
+        init { JsonModel.Set(this._rawData, "payment_method_type", value); }
     }
 
     public bool? RecurringEnabled
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "recurring_enabled"); }
-        init { ModelBase.Set(this._rawData, "recurring_enabled", value); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "recurring_enabled"); }
+        init { JsonModel.Set(this._rawData, "recurring_enabled", value); }
     }
 
     /// <inheritdoc/>
@@ -171,7 +171,7 @@ public sealed record class Item : ModelBase
     }
 }
 
-class ItemFromRaw : IFromRaw<Item>
+class ItemFromRaw : IFromRawJson<Item>
 {
     /// <inheritdoc/>
     public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -266,8 +266,8 @@ sealed class PaymentMethodConverter : JsonConverter<PaymentMethod>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Card, CardFromRaw>))]
-public sealed record class Card : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Card, CardFromRaw>))]
+public sealed record class Card : JsonModel
 {
     /// <summary>
     /// ISO country code alpha2 variant
@@ -276,42 +276,42 @@ public sealed record class Card : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, CountryCode>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, CountryCode>>(
                 this.RawData,
                 "card_issuing_country"
             );
         }
-        init { ModelBase.Set(this._rawData, "card_issuing_country", value); }
+        init { JsonModel.Set(this._rawData, "card_issuing_country", value); }
     }
 
     public string? CardNetwork
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "card_network"); }
-        init { ModelBase.Set(this._rawData, "card_network", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "card_network"); }
+        init { JsonModel.Set(this._rawData, "card_network", value); }
     }
 
     public string? CardType
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "card_type"); }
-        init { ModelBase.Set(this._rawData, "card_type", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "card_type"); }
+        init { JsonModel.Set(this._rawData, "card_type", value); }
     }
 
     public string? ExpiryMonth
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "expiry_month"); }
-        init { ModelBase.Set(this._rawData, "expiry_month", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "expiry_month"); }
+        init { JsonModel.Set(this._rawData, "expiry_month", value); }
     }
 
     public string? ExpiryYear
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "expiry_year"); }
-        init { ModelBase.Set(this._rawData, "expiry_year", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "expiry_year"); }
+        init { JsonModel.Set(this._rawData, "expiry_year", value); }
     }
 
     public string? Last4Digits
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "last4_digits"); }
-        init { ModelBase.Set(this._rawData, "last4_digits", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "last4_digits"); }
+        init { JsonModel.Set(this._rawData, "last4_digits", value); }
     }
 
     /// <inheritdoc/>
@@ -350,7 +350,7 @@ public sealed record class Card : ModelBase
     }
 }
 
-class CardFromRaw : IFromRaw<Card>
+class CardFromRaw : IFromRawJson<Card>
 {
     /// <inheritdoc/>
     public Card FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

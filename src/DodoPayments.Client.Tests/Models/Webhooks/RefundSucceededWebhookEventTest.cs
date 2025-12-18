@@ -147,8 +147,8 @@ public class RefundSucceededWebhookEventTest : TestBase
             Type = RefundSucceededWebhookEventType.RefundSucceeded,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<RefundSucceededWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<RefundSucceededWebhookEvent>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -350,8 +350,8 @@ public class RefundSucceededWebhookEventDataTest : TestBase
             PayloadType = RefundSucceededWebhookEventDataIntersectionMember1PayloadType.Refund,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<RefundSucceededWebhookEventData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<RefundSucceededWebhookEventData>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -712,9 +712,9 @@ public class RefundSucceededWebhookEventDataIntersectionMember1Test : TestBase
             PayloadType = RefundSucceededWebhookEventDataIntersectionMember1PayloadType.Refund,
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
-            JsonSerializer.Deserialize<RefundSucceededWebhookEventDataIntersectionMember1>(json);
+            JsonSerializer.Deserialize<RefundSucceededWebhookEventDataIntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<

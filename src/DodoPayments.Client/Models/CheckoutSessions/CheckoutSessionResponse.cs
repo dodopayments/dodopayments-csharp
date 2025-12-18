@@ -7,16 +7,16 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
 
-[JsonConverter(typeof(ModelConverter<CheckoutSessionResponse, CheckoutSessionResponseFromRaw>))]
-public sealed record class CheckoutSessionResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<CheckoutSessionResponse, CheckoutSessionResponseFromRaw>))]
+public sealed record class CheckoutSessionResponse : JsonModel
 {
     /// <summary>
     /// Checkout url
     /// </summary>
     public required string CheckoutURL
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "checkout_url"); }
-        init { ModelBase.Set(this._rawData, "checkout_url", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "checkout_url"); }
+        init { JsonModel.Set(this._rawData, "checkout_url", value); }
     }
 
     /// <summary>
@@ -24,8 +24,8 @@ public sealed record class CheckoutSessionResponse : ModelBase
     /// </summary>
     public required string SessionID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "session_id"); }
-        init { ModelBase.Set(this._rawData, "session_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "session_id"); }
+        init { JsonModel.Set(this._rawData, "session_id", value); }
     }
 
     /// <inheritdoc/>
@@ -62,7 +62,7 @@ public sealed record class CheckoutSessionResponse : ModelBase
     }
 }
 
-class CheckoutSessionResponseFromRaw : IFromRaw<CheckoutSessionResponse>
+class CheckoutSessionResponseFromRaw : IFromRawJson<CheckoutSessionResponse>
 {
     /// <inheritdoc/>
     public CheckoutSessionResponse FromRawUnchecked(

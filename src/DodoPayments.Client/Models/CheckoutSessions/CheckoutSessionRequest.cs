@@ -12,19 +12,19 @@ using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
 
-[JsonConverter(typeof(ModelConverter<CheckoutSessionRequest, CheckoutSessionRequestFromRaw>))]
-public sealed record class CheckoutSessionRequest : ModelBase
+[JsonConverter(typeof(JsonModelConverter<CheckoutSessionRequest, CheckoutSessionRequestFromRaw>))]
+public sealed record class CheckoutSessionRequest : JsonModel
 {
     public required IReadOnlyList<CheckoutSessionRequestProductCart> ProductCart
     {
         get
         {
-            return ModelBase.GetNotNullClass<List<CheckoutSessionRequestProductCart>>(
+            return JsonModel.GetNotNullClass<List<CheckoutSessionRequestProductCart>>(
                 this.RawData,
                 "product_cart"
             );
         }
-        init { ModelBase.Set(this._rawData, "product_cart", value); }
+        init { JsonModel.Set(this._rawData, "product_cart", value); }
     }
 
     /// <summary>
@@ -39,12 +39,12 @@ public sealed record class CheckoutSessionRequest : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<List<ApiEnum<string, PaymentMethodTypes>>>(
+            return JsonModel.GetNullableClass<List<ApiEnum<string, PaymentMethodTypes>>>(
                 this.RawData,
                 "allowed_payment_method_types"
             );
         }
-        init { ModelBase.Set(this._rawData, "allowed_payment_method_types", value); }
+        init { JsonModel.Set(this._rawData, "allowed_payment_method_types", value); }
     }
 
     /// <summary>
@@ -54,12 +54,12 @@ public sealed record class CheckoutSessionRequest : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<CheckoutSessionRequestBillingAddress>(
+            return JsonModel.GetNullableClass<CheckoutSessionRequestBillingAddress>(
                 this.RawData,
                 "billing_address"
             );
         }
-        init { ModelBase.Set(this._rawData, "billing_address", value); }
+        init { JsonModel.Set(this._rawData, "billing_address", value); }
     }
 
     /// <summary>
@@ -69,12 +69,12 @@ public sealed record class CheckoutSessionRequest : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(
                 this.RawData,
                 "billing_currency"
             );
         }
-        init { ModelBase.Set(this._rawData, "billing_currency", value); }
+        init { JsonModel.Set(this._rawData, "billing_currency", value); }
     }
 
     /// <summary>
@@ -83,7 +83,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
     /// </summary>
     public bool? Confirm
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "confirm"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "confirm"); }
         init
         {
             if (value == null)
@@ -91,7 +91,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "confirm", value);
+            JsonModel.Set(this._rawData, "confirm", value);
         }
     }
 
@@ -100,8 +100,8 @@ public sealed record class CheckoutSessionRequest : ModelBase
     /// </summary>
     public CustomerRequest? Customer
     {
-        get { return ModelBase.GetNullableClass<CustomerRequest>(this.RawData, "customer"); }
-        init { ModelBase.Set(this._rawData, "customer", value); }
+        get { return JsonModel.GetNullableClass<CustomerRequest>(this.RawData, "customer"); }
+        init { JsonModel.Set(this._rawData, "customer", value); }
     }
 
     /// <summary>
@@ -111,7 +111,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<CheckoutSessionRequestCustomization>(
+            return JsonModel.GetNullableClass<CheckoutSessionRequestCustomization>(
                 this.RawData,
                 "customization"
             );
@@ -123,21 +123,21 @@ public sealed record class CheckoutSessionRequest : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "customization", value);
+            JsonModel.Set(this._rawData, "customization", value);
         }
     }
 
     public string? DiscountCode
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "discount_code"); }
-        init { ModelBase.Set(this._rawData, "discount_code", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "discount_code"); }
+        init { JsonModel.Set(this._rawData, "discount_code", value); }
     }
 
     public CheckoutSessionRequestFeatureFlags? FeatureFlags
     {
         get
         {
-            return ModelBase.GetNullableClass<CheckoutSessionRequestFeatureFlags>(
+            return JsonModel.GetNullableClass<CheckoutSessionRequestFeatureFlags>(
                 this.RawData,
                 "feature_flags"
             );
@@ -149,7 +149,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "feature_flags", value);
+            JsonModel.Set(this._rawData, "feature_flags", value);
         }
     }
 
@@ -158,8 +158,8 @@ public sealed record class CheckoutSessionRequest : ModelBase
     /// </summary>
     public bool? Force3DS
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "force_3ds"); }
-        init { ModelBase.Set(this._rawData, "force_3ds", value); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "force_3ds"); }
+        init { JsonModel.Set(this._rawData, "force_3ds", value); }
     }
 
     /// <summary>
@@ -169,9 +169,9 @@ public sealed record class CheckoutSessionRequest : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, string>>(this.RawData, "metadata");
+            return JsonModel.GetNullableClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -180,7 +180,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
     /// </summary>
     public bool? MinimalAddress
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "minimal_address"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "minimal_address"); }
         init
         {
             if (value == null)
@@ -188,7 +188,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "minimal_address", value);
+            JsonModel.Set(this._rawData, "minimal_address", value);
         }
     }
 
@@ -197,8 +197,8 @@ public sealed record class CheckoutSessionRequest : ModelBase
     /// </summary>
     public string? ReturnURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "return_url"); }
-        init { ModelBase.Set(this._rawData, "return_url", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "return_url"); }
+        init { JsonModel.Set(this._rawData, "return_url", value); }
     }
 
     /// <summary>
@@ -208,7 +208,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(this.RawData, "show_saved_payment_methods");
+            return JsonModel.GetNullableStruct<bool>(this.RawData, "show_saved_payment_methods");
         }
         init
         {
@@ -217,7 +217,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "show_saved_payment_methods", value);
+            JsonModel.Set(this._rawData, "show_saved_payment_methods", value);
         }
     }
 
@@ -225,12 +225,12 @@ public sealed record class CheckoutSessionRequest : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<CheckoutSessionRequestSubscriptionData>(
+            return JsonModel.GetNullableClass<CheckoutSessionRequestSubscriptionData>(
                 this.RawData,
                 "subscription_data"
             );
         }
-        init { ModelBase.Set(this._rawData, "subscription_data", value); }
+        init { JsonModel.Set(this._rawData, "subscription_data", value); }
     }
 
     /// <inheritdoc/>
@@ -293,7 +293,7 @@ public sealed record class CheckoutSessionRequest : ModelBase
     }
 }
 
-class CheckoutSessionRequestFromRaw : IFromRaw<CheckoutSessionRequest>
+class CheckoutSessionRequestFromRaw : IFromRawJson<CheckoutSessionRequest>
 {
     /// <inheritdoc/>
     public CheckoutSessionRequest FromRawUnchecked(
@@ -302,26 +302,26 @@ class CheckoutSessionRequestFromRaw : IFromRaw<CheckoutSessionRequest>
 }
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         CheckoutSessionRequestProductCart,
         CheckoutSessionRequestProductCartFromRaw
     >)
 )]
-public sealed record class CheckoutSessionRequestProductCart : ModelBase
+public sealed record class CheckoutSessionRequestProductCart : JsonModel
 {
     /// <summary>
     /// unique id of the product
     /// </summary>
     public required string ProductID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { ModelBase.Set(this._rawData, "product_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
+        init { JsonModel.Set(this._rawData, "product_id", value); }
     }
 
     public required int Quantity
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "quantity"); }
-        init { ModelBase.Set(this._rawData, "quantity", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "quantity"); }
+        init { JsonModel.Set(this._rawData, "quantity", value); }
     }
 
     /// <summary>
@@ -331,12 +331,12 @@ public sealed record class CheckoutSessionRequestProductCart : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<List<Subscriptions::AttachAddon>>(
+            return JsonModel.GetNullableClass<List<Subscriptions::AttachAddon>>(
                 this.RawData,
                 "addons"
             );
         }
-        init { ModelBase.Set(this._rawData, "addons", value); }
+        init { JsonModel.Set(this._rawData, "addons", value); }
     }
 
     /// <summary>
@@ -350,8 +350,8 @@ public sealed record class CheckoutSessionRequestProductCart : ModelBase
     /// </summary>
     public int? Amount
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "amount"); }
-        init { ModelBase.Set(this._rawData, "amount", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "amount"); }
+        init { JsonModel.Set(this._rawData, "amount", value); }
     }
 
     /// <inheritdoc/>
@@ -395,7 +395,7 @@ public sealed record class CheckoutSessionRequestProductCart : ModelBase
     }
 }
 
-class CheckoutSessionRequestProductCartFromRaw : IFromRaw<CheckoutSessionRequestProductCart>
+class CheckoutSessionRequestProductCartFromRaw : IFromRawJson<CheckoutSessionRequestProductCart>
 {
     /// <inheritdoc/>
     public CheckoutSessionRequestProductCart FromRawUnchecked(
@@ -407,12 +407,12 @@ class CheckoutSessionRequestProductCartFromRaw : IFromRaw<CheckoutSessionRequest
 /// Billing address information for the session
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         CheckoutSessionRequestBillingAddress,
         CheckoutSessionRequestBillingAddressFromRaw
     >)
 )]
-public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
+public sealed record class CheckoutSessionRequestBillingAddress : JsonModel
 {
     /// <summary>
     /// Two-letter ISO country code (ISO 3166-1 alpha-2)
@@ -421,9 +421,9 @@ public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, CountryCode>>(this.RawData, "country");
+            return JsonModel.GetNotNullClass<ApiEnum<string, CountryCode>>(this.RawData, "country");
         }
-        init { ModelBase.Set(this._rawData, "country", value); }
+        init { JsonModel.Set(this._rawData, "country", value); }
     }
 
     /// <summary>
@@ -431,8 +431,8 @@ public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
     /// </summary>
     public string? City
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "city"); }
-        init { ModelBase.Set(this._rawData, "city", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "city"); }
+        init { JsonModel.Set(this._rawData, "city", value); }
     }
 
     /// <summary>
@@ -440,8 +440,8 @@ public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
     /// </summary>
     public string? State
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "state"); }
-        init { ModelBase.Set(this._rawData, "state", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "state"); }
+        init { JsonModel.Set(this._rawData, "state", value); }
     }
 
     /// <summary>
@@ -449,8 +449,8 @@ public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
     /// </summary>
     public string? Street
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "street"); }
-        init { ModelBase.Set(this._rawData, "street", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "street"); }
+        init { JsonModel.Set(this._rawData, "street", value); }
     }
 
     /// <summary>
@@ -458,8 +458,8 @@ public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
     /// </summary>
     public string? Zipcode
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "zipcode"); }
-        init { ModelBase.Set(this._rawData, "zipcode", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "zipcode"); }
+        init { JsonModel.Set(this._rawData, "zipcode", value); }
     }
 
     /// <inheritdoc/>
@@ -508,7 +508,8 @@ public sealed record class CheckoutSessionRequestBillingAddress : ModelBase
     }
 }
 
-class CheckoutSessionRequestBillingAddressFromRaw : IFromRaw<CheckoutSessionRequestBillingAddress>
+class CheckoutSessionRequestBillingAddressFromRaw
+    : IFromRawJson<CheckoutSessionRequestBillingAddress>
 {
     /// <inheritdoc/>
     public CheckoutSessionRequestBillingAddress FromRawUnchecked(
@@ -520,20 +521,20 @@ class CheckoutSessionRequestBillingAddressFromRaw : IFromRaw<CheckoutSessionRequ
 /// Customization for the checkout session page
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         CheckoutSessionRequestCustomization,
         CheckoutSessionRequestCustomizationFromRaw
     >)
 )]
-public sealed record class CheckoutSessionRequestCustomization : ModelBase
+public sealed record class CheckoutSessionRequestCustomization : JsonModel
 {
     /// <summary>
     /// Force the checkout interface to render in a specific language (e.g. `en`, `es`)
     /// </summary>
     public string? ForceLanguage
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "force_language"); }
-        init { ModelBase.Set(this._rawData, "force_language", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "force_language"); }
+        init { JsonModel.Set(this._rawData, "force_language", value); }
     }
 
     /// <summary>
@@ -543,7 +544,7 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
     /// </summary>
     public bool? ShowOnDemandTag
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "show_on_demand_tag"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "show_on_demand_tag"); }
         init
         {
             if (value == null)
@@ -551,7 +552,7 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "show_on_demand_tag", value);
+            JsonModel.Set(this._rawData, "show_on_demand_tag", value);
         }
     }
 
@@ -562,7 +563,7 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
     /// </summary>
     public bool? ShowOrderDetails
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "show_order_details"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "show_order_details"); }
         init
         {
             if (value == null)
@@ -570,7 +571,7 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "show_order_details", value);
+            JsonModel.Set(this._rawData, "show_order_details", value);
         }
     }
 
@@ -583,7 +584,7 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<
+            return JsonModel.GetNullableClass<
                 ApiEnum<string, CheckoutSessionRequestCustomizationTheme>
             >(this.RawData, "theme");
         }
@@ -594,7 +595,7 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "theme", value);
+            JsonModel.Set(this._rawData, "theme", value);
         }
     }
 
@@ -636,7 +637,7 @@ public sealed record class CheckoutSessionRequestCustomization : ModelBase
     }
 }
 
-class CheckoutSessionRequestCustomizationFromRaw : IFromRaw<CheckoutSessionRequestCustomization>
+class CheckoutSessionRequestCustomizationFromRaw : IFromRawJson<CheckoutSessionRequestCustomization>
 {
     /// <inheritdoc/>
     public CheckoutSessionRequestCustomization FromRawUnchecked(
@@ -698,12 +699,12 @@ sealed class CheckoutSessionRequestCustomizationThemeConverter
 }
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         CheckoutSessionRequestFeatureFlags,
         CheckoutSessionRequestFeatureFlagsFromRaw
     >)
 )]
-public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
+public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
 {
     /// <summary>
     /// if customer is allowed to change currency, set it to true
@@ -712,7 +713,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     /// </summary>
     public bool? AllowCurrencySelection
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_currency_selection"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_currency_selection"); }
         init
         {
             if (value == null)
@@ -720,7 +721,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_currency_selection", value);
+            JsonModel.Set(this._rawData, "allow_currency_selection", value);
         }
     }
 
@@ -728,7 +729,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_city");
+            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_city");
         }
         init
         {
@@ -737,7 +738,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_customer_editing_city", value);
+            JsonModel.Set(this._rawData, "allow_customer_editing_city", value);
         }
     }
 
@@ -745,7 +746,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(
+            return JsonModel.GetNullableStruct<bool>(
                 this.RawData,
                 "allow_customer_editing_country"
             );
@@ -757,7 +758,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_customer_editing_country", value);
+            JsonModel.Set(this._rawData, "allow_customer_editing_country", value);
         }
     }
 
@@ -765,7 +766,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_email");
+            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_email");
         }
         init
         {
@@ -774,7 +775,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_customer_editing_email", value);
+            JsonModel.Set(this._rawData, "allow_customer_editing_email", value);
         }
     }
 
@@ -782,7 +783,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_name");
+            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_name");
         }
         init
         {
@@ -791,7 +792,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_customer_editing_name", value);
+            JsonModel.Set(this._rawData, "allow_customer_editing_name", value);
         }
     }
 
@@ -799,7 +800,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_state");
+            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_state");
         }
         init
         {
@@ -808,7 +809,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_customer_editing_state", value);
+            JsonModel.Set(this._rawData, "allow_customer_editing_state", value);
         }
     }
 
@@ -816,7 +817,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_street");
+            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_street");
         }
         init
         {
@@ -825,7 +826,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_customer_editing_street", value);
+            JsonModel.Set(this._rawData, "allow_customer_editing_street", value);
         }
     }
 
@@ -833,7 +834,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(
+            return JsonModel.GetNullableStruct<bool>(
                 this.RawData,
                 "allow_customer_editing_zipcode"
             );
@@ -845,7 +846,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_customer_editing_zipcode", value);
+            JsonModel.Set(this._rawData, "allow_customer_editing_zipcode", value);
         }
     }
 
@@ -856,7 +857,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     /// </summary>
     public bool? AllowDiscountCode
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_discount_code"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_discount_code"); }
         init
         {
             if (value == null)
@@ -864,7 +865,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_discount_code", value);
+            JsonModel.Set(this._rawData, "allow_discount_code", value);
         }
     }
 
@@ -877,7 +878,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_phone_number_collection");
+            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_phone_number_collection");
         }
         init
         {
@@ -886,7 +887,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_phone_number_collection", value);
+            JsonModel.Set(this._rawData, "allow_phone_number_collection", value);
         }
     }
 
@@ -897,7 +898,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     /// </summary>
     public bool? AllowTaxID
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_tax_id"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_tax_id"); }
         init
         {
             if (value == null)
@@ -905,7 +906,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "allow_tax_id", value);
+            JsonModel.Set(this._rawData, "allow_tax_id", value);
         }
     }
 
@@ -919,7 +920,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(this.RawData, "always_create_new_customer");
+            return JsonModel.GetNullableStruct<bool>(this.RawData, "always_create_new_customer");
         }
         init
         {
@@ -928,7 +929,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "always_create_new_customer", value);
+            JsonModel.Set(this._rawData, "always_create_new_customer", value);
         }
     }
 
@@ -978,7 +979,7 @@ public sealed record class CheckoutSessionRequestFeatureFlags : ModelBase
     }
 }
 
-class CheckoutSessionRequestFeatureFlagsFromRaw : IFromRaw<CheckoutSessionRequestFeatureFlags>
+class CheckoutSessionRequestFeatureFlagsFromRaw : IFromRawJson<CheckoutSessionRequestFeatureFlags>
 {
     /// <inheritdoc/>
     public CheckoutSessionRequestFeatureFlags FromRawUnchecked(
@@ -987,23 +988,23 @@ class CheckoutSessionRequestFeatureFlagsFromRaw : IFromRaw<CheckoutSessionReques
 }
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         CheckoutSessionRequestSubscriptionData,
         CheckoutSessionRequestSubscriptionDataFromRaw
     >)
 )]
-public sealed record class CheckoutSessionRequestSubscriptionData : ModelBase
+public sealed record class CheckoutSessionRequestSubscriptionData : JsonModel
 {
     public Subscriptions::OnDemandSubscription? OnDemand
     {
         get
         {
-            return ModelBase.GetNullableClass<Subscriptions::OnDemandSubscription>(
+            return JsonModel.GetNullableClass<Subscriptions::OnDemandSubscription>(
                 this.RawData,
                 "on_demand"
             );
         }
-        init { ModelBase.Set(this._rawData, "on_demand", value); }
+        init { JsonModel.Set(this._rawData, "on_demand", value); }
     }
 
     /// <summary>
@@ -1012,8 +1013,8 @@ public sealed record class CheckoutSessionRequestSubscriptionData : ModelBase
     /// </summary>
     public int? TrialPeriodDays
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "trial_period_days"); }
-        init { ModelBase.Set(this._rawData, "trial_period_days", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "trial_period_days"); }
+        init { JsonModel.Set(this._rawData, "trial_period_days", value); }
     }
 
     /// <inheritdoc/>
@@ -1053,7 +1054,7 @@ public sealed record class CheckoutSessionRequestSubscriptionData : ModelBase
 }
 
 class CheckoutSessionRequestSubscriptionDataFromRaw
-    : IFromRaw<CheckoutSessionRequestSubscriptionData>
+    : IFromRawJson<CheckoutSessionRequestSubscriptionData>
 {
     /// <inheritdoc/>
     public CheckoutSessionRequestSubscriptionData FromRawUnchecked(

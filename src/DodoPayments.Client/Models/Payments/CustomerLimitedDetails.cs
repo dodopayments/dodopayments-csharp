@@ -7,16 +7,16 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<CustomerLimitedDetails, CustomerLimitedDetailsFromRaw>))]
-public sealed record class CustomerLimitedDetails : ModelBase
+[JsonConverter(typeof(JsonModelConverter<CustomerLimitedDetails, CustomerLimitedDetailsFromRaw>))]
+public sealed record class CustomerLimitedDetails : JsonModel
 {
     /// <summary>
     /// Unique identifier for the customer
     /// </summary>
     public required string CustomerID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { ModelBase.Set(this._rawData, "customer_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
+        init { JsonModel.Set(this._rawData, "customer_id", value); }
     }
 
     /// <summary>
@@ -24,8 +24,8 @@ public sealed record class CustomerLimitedDetails : ModelBase
     /// </summary>
     public required string Email
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "email"); }
-        init { ModelBase.Set(this._rawData, "email", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "email"); }
+        init { JsonModel.Set(this._rawData, "email", value); }
     }
 
     /// <summary>
@@ -33,8 +33,8 @@ public sealed record class CustomerLimitedDetails : ModelBase
     /// </summary>
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ public sealed record class CustomerLimitedDetails : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, string>>(this.RawData, "metadata");
+            return JsonModel.GetNullableClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
         init
         {
@@ -53,7 +53,7 @@ public sealed record class CustomerLimitedDetails : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "metadata", value);
+            JsonModel.Set(this._rawData, "metadata", value);
         }
     }
 
@@ -62,8 +62,8 @@ public sealed record class CustomerLimitedDetails : ModelBase
     /// </summary>
     public string? PhoneNumber
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "phone_number"); }
-        init { ModelBase.Set(this._rawData, "phone_number", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "phone_number"); }
+        init { JsonModel.Set(this._rawData, "phone_number", value); }
     }
 
     /// <inheritdoc/>
@@ -103,7 +103,7 @@ public sealed record class CustomerLimitedDetails : ModelBase
     }
 }
 
-class CustomerLimitedDetailsFromRaw : IFromRaw<CustomerLimitedDetails>
+class CustomerLimitedDetailsFromRaw : IFromRawJson<CustomerLimitedDetails>
 {
     /// <inheritdoc/>
     public CustomerLimitedDetails FromRawUnchecked(

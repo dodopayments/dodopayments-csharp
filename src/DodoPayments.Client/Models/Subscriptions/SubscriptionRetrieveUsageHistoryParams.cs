@@ -46,8 +46,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public DateTimeOffset? EndDate
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "end_date"); }
-        init { ModelBase.Set(this._rawQueryData, "end_date", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "end_date"); }
+        init { JsonModel.Set(this._rawQueryData, "end_date", value); }
     }
 
     /// <summary>
@@ -55,8 +55,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public string? MeterID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "meter_id"); }
-        init { ModelBase.Set(this._rawQueryData, "meter_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "meter_id"); }
+        init { JsonModel.Set(this._rawQueryData, "meter_id", value); }
     }
 
     /// <summary>
@@ -64,8 +64,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
-        init { ModelBase.Set(this._rawQueryData, "page_number", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
+        init { JsonModel.Set(this._rawQueryData, "page_number", value); }
     }
 
     /// <summary>
@@ -73,8 +73,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
-        init { ModelBase.Set(this._rawQueryData, "page_size", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
+        init { JsonModel.Set(this._rawQueryData, "page_size", value); }
     }
 
     /// <summary>
@@ -82,8 +82,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public DateTimeOffset? StartDate
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "start_date"); }
-        init { ModelBase.Set(this._rawQueryData, "start_date", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "start_date"); }
+        init { JsonModel.Set(this._rawQueryData, "start_date", value); }
     }
 
     public SubscriptionRetrieveUsageHistoryParams() { }
@@ -114,7 +114,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static SubscriptionRetrieveUsageHistoryParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

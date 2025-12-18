@@ -9,16 +9,16 @@ using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Licenses;
 
-[JsonConverter(typeof(ModelConverter<LicenseActivateResponse, LicenseActivateResponseFromRaw>))]
-public sealed record class LicenseActivateResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<LicenseActivateResponse, LicenseActivateResponseFromRaw>))]
+public sealed record class LicenseActivateResponse : JsonModel
 {
     /// <summary>
     /// License key instance ID
     /// </summary>
     public required string ID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "id"); }
-        init { ModelBase.Set(this._rawData, "id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
+        init { JsonModel.Set(this._rawData, "id", value); }
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public sealed record class LicenseActivateResponse : ModelBase
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -35,8 +35,8 @@ public sealed record class LicenseActivateResponse : ModelBase
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -44,8 +44,8 @@ public sealed record class LicenseActivateResponse : ModelBase
     /// </summary>
     public required CustomerLimitedDetails Customer
     {
-        get { return ModelBase.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
-        init { ModelBase.Set(this._rawData, "customer", value); }
+        get { return JsonModel.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
+        init { JsonModel.Set(this._rawData, "customer", value); }
     }
 
     /// <summary>
@@ -53,8 +53,8 @@ public sealed record class LicenseActivateResponse : ModelBase
     /// </summary>
     public required string LicenseKeyID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "license_key_id"); }
-        init { ModelBase.Set(this._rawData, "license_key_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "license_key_id"); }
+        init { JsonModel.Set(this._rawData, "license_key_id", value); }
     }
 
     /// <summary>
@@ -62,8 +62,8 @@ public sealed record class LicenseActivateResponse : ModelBase
     /// </summary>
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <summary>
@@ -71,8 +71,8 @@ public sealed record class LicenseActivateResponse : ModelBase
     /// </summary>
     public required Product Product
     {
-        get { return ModelBase.GetNotNullClass<Product>(this.RawData, "product"); }
-        init { ModelBase.Set(this._rawData, "product", value); }
+        get { return JsonModel.GetNotNullClass<Product>(this.RawData, "product"); }
+        init { JsonModel.Set(this._rawData, "product", value); }
     }
 
     /// <inheritdoc/>
@@ -114,7 +114,7 @@ public sealed record class LicenseActivateResponse : ModelBase
     }
 }
 
-class LicenseActivateResponseFromRaw : IFromRaw<LicenseActivateResponse>
+class LicenseActivateResponseFromRaw : IFromRawJson<LicenseActivateResponse>
 {
     /// <inheritdoc/>
     public LicenseActivateResponse FromRawUnchecked(
@@ -125,16 +125,16 @@ class LicenseActivateResponseFromRaw : IFromRaw<LicenseActivateResponse>
 /// <summary>
 /// Related product info. Present if the license key is tied to a product.
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Product, ProductFromRaw>))]
-public sealed record class Product : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Product, ProductFromRaw>))]
+public sealed record class Product : JsonModel
 {
     /// <summary>
     /// Unique identifier for the product.
     /// </summary>
     public required string ProductID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { ModelBase.Set(this._rawData, "product_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
+        init { JsonModel.Set(this._rawData, "product_id", value); }
     }
 
     /// <summary>
@@ -142,8 +142,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <inheritdoc/>
@@ -185,7 +185,7 @@ public sealed record class Product : ModelBase
     }
 }
 
-class ProductFromRaw : IFromRaw<Product>
+class ProductFromRaw : IFromRawJson<Product>
 {
     /// <inheritdoc/>
     public Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

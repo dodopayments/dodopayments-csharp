@@ -31,8 +31,8 @@ public class CustomerPortalSessionTest : TestBase
     {
         var model = new CustomerPortalSession { Link = "link" };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CustomerPortalSession>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CustomerPortalSession>(element);
         Assert.NotNull(deserialized);
 
         string expectedLink = "link";

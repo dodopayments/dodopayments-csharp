@@ -1293,8 +1293,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::Type.DisputeAccepted,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1324,8 +1324,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::DisputeCancelledWebhookEventType.DisputeCancelled,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1355,8 +1355,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::DisputeChallengedWebhookEventType.DisputeChallenged,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1386,8 +1386,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::DisputeExpiredWebhookEventType.DisputeExpired,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1417,8 +1417,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::DisputeLostWebhookEventType.DisputeLost,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1448,8 +1448,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::DisputeOpenedWebhookEventType.DisputeOpened,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1479,8 +1479,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::DisputeWonWebhookEventType.DisputeWon,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1513,8 +1513,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::LicenseKeyCreatedWebhookEventType.LicenseKeyCreated,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1609,8 +1609,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::PaymentCancelledWebhookEventType.PaymentCancelled,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1705,8 +1705,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::PaymentFailedWebhookEventType.PaymentFailed,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1801,8 +1801,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::PaymentProcessingWebhookEventType.PaymentProcessing,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1897,8 +1897,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::PaymentSucceededWebhookEventType.PaymentSucceeded,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1937,8 +1937,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::RefundFailedWebhookEventType.RefundFailed,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1977,8 +1977,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::RefundSucceededWebhookEventType.RefundSucceeded,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -2053,8 +2053,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::SubscriptionActiveWebhookEventType.SubscriptionActive,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -2129,8 +2129,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::SubscriptionCancelledWebhookEventType.SubscriptionCancelled,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -2205,8 +2205,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::SubscriptionExpiredWebhookEventType.SubscriptionExpired,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -2281,8 +2281,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::SubscriptionFailedWebhookEventType.SubscriptionFailed,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -2357,8 +2357,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::SubscriptionOnHoldWebhookEventType.SubscriptionOnHold,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -2433,8 +2433,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::SubscriptionPlanChangedWebhookEventType.SubscriptionPlanChanged,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -2509,8 +2509,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::SubscriptionRenewedWebhookEventType.SubscriptionRenewed,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -2585,8 +2585,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Type = Webhooks::SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Webhooks::UnsafeUnwrapWebhookEvent>(element);
 
         Assert.Equal(value, deserialized);
     }

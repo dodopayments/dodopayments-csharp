@@ -8,17 +8,17 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.LicenseKeyInstances;
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         LicenseKeyInstanceListPageResponse,
         LicenseKeyInstanceListPageResponseFromRaw
     >)
 )]
-public sealed record class LicenseKeyInstanceListPageResponse : ModelBase
+public sealed record class LicenseKeyInstanceListPageResponse : JsonModel
 {
     public required IReadOnlyList<LicenseKeyInstance> Items
     {
-        get { return ModelBase.GetNotNullClass<List<LicenseKeyInstance>>(this.RawData, "items"); }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        get { return JsonModel.GetNotNullClass<List<LicenseKeyInstance>>(this.RawData, "items"); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -66,7 +66,7 @@ public sealed record class LicenseKeyInstanceListPageResponse : ModelBase
     }
 }
 
-class LicenseKeyInstanceListPageResponseFromRaw : IFromRaw<LicenseKeyInstanceListPageResponse>
+class LicenseKeyInstanceListPageResponseFromRaw : IFromRawJson<LicenseKeyInstanceListPageResponse>
 {
     /// <inheritdoc/>
     public LicenseKeyInstanceListPageResponse FromRawUnchecked(

@@ -83,8 +83,8 @@ public class DisputeTest : TestBase
             Remarks = "remarks",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Dispute>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Dispute>(element);
         Assert.NotNull(deserialized);
 
         string expectedAmount = "amount";

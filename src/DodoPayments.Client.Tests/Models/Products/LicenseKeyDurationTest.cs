@@ -35,8 +35,8 @@ public class LicenseKeyDurationTest : TestBase
     {
         var model = new LicenseKeyDuration { Count = 0, Interval = TimeInterval.Day };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyDuration>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyDuration>(element);
         Assert.NotNull(deserialized);
 
         int expectedCount = 0;

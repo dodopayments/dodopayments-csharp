@@ -7,16 +7,16 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<WebhookDetails, WebhookDetailsFromRaw>))]
-public sealed record class WebhookDetails : ModelBase
+[JsonConverter(typeof(JsonModelConverter<WebhookDetails, WebhookDetailsFromRaw>))]
+public sealed record class WebhookDetails : JsonModel
 {
     /// <summary>
     /// The webhook's ID.
     /// </summary>
     public required string ID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "id"); }
-        init { ModelBase.Set(this._rawData, "id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
+        init { JsonModel.Set(this._rawData, "id", value); }
     }
 
     /// <summary>
@@ -24,8 +24,8 @@ public sealed record class WebhookDetails : ModelBase
     /// </summary>
     public required string CreatedAt
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -33,8 +33,8 @@ public sealed record class WebhookDetails : ModelBase
     /// </summary>
     public required string Description
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "description"); }
-        init { ModelBase.Set(this._rawData, "description", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "description"); }
+        init { JsonModel.Set(this._rawData, "description", value); }
     }
 
     /// <summary>
@@ -44,9 +44,9 @@ public sealed record class WebhookDetails : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -54,8 +54,8 @@ public sealed record class WebhookDetails : ModelBase
     /// </summary>
     public required string UpdatedAt
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "updated_at"); }
-        init { ModelBase.Set(this._rawData, "updated_at", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "updated_at"); }
+        init { JsonModel.Set(this._rawData, "updated_at", value); }
     }
 
     /// <summary>
@@ -63,8 +63,8 @@ public sealed record class WebhookDetails : ModelBase
     /// </summary>
     public required string URL
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "url"); }
-        init { ModelBase.Set(this._rawData, "url", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
+        init { JsonModel.Set(this._rawData, "url", value); }
     }
 
     /// <summary>
@@ -74,8 +74,8 @@ public sealed record class WebhookDetails : ModelBase
     /// </summary>
     public bool? Disabled
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "disabled"); }
-        init { ModelBase.Set(this._rawData, "disabled", value); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "disabled"); }
+        init { JsonModel.Set(this._rawData, "disabled", value); }
     }
 
     /// <summary>
@@ -85,8 +85,8 @@ public sealed record class WebhookDetails : ModelBase
     /// </summary>
     public IReadOnlyList<string>? FilterTypes
     {
-        get { return ModelBase.GetNullableClass<List<string>>(this.RawData, "filter_types"); }
-        init { ModelBase.Set(this._rawData, "filter_types", value); }
+        get { return JsonModel.GetNullableClass<List<string>>(this.RawData, "filter_types"); }
+        init { JsonModel.Set(this._rawData, "filter_types", value); }
     }
 
     /// <summary>
@@ -94,8 +94,8 @@ public sealed record class WebhookDetails : ModelBase
     /// </summary>
     public int? RateLimit
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "rate_limit"); }
-        init { ModelBase.Set(this._rawData, "rate_limit", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "rate_limit"); }
+        init { JsonModel.Set(this._rawData, "rate_limit", value); }
     }
 
     /// <inheritdoc/>
@@ -137,7 +137,7 @@ public sealed record class WebhookDetails : ModelBase
     }
 }
 
-class WebhookDetailsFromRaw : IFromRaw<WebhookDetails>
+class WebhookDetailsFromRaw : IFromRawJson<WebhookDetails>
 {
     /// <inheritdoc/>
     public WebhookDetails FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

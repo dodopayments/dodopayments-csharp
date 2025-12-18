@@ -107,8 +107,8 @@ public class DisputeWonWebhookEventTest1 : TestBase
             Type = Type5.DisputeWon,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DisputeWonWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeWonWebhookEvent>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -245,8 +245,8 @@ public class Data5Test : TestBase
             PayloadType = Data5IntersectionMember1PayloadType.Dispute,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Data5>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Data5>(element);
         Assert.NotNull(deserialized);
 
         string expectedAmount = "amount";
@@ -499,8 +499,8 @@ public class Data5IntersectionMember1Test : TestBase
             PayloadType = Data5IntersectionMember1PayloadType.Dispute,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Data5IntersectionMember1>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Data5IntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Data5IntersectionMember1PayloadType> expectedPayloadType =

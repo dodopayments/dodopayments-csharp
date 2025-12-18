@@ -13,8 +13,8 @@ namespace DodoPayments.Client.Models.Subscriptions;
 /// <summary>
 /// Response struct representing subscription details
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Subscription, SubscriptionFromRaw>))]
-public sealed record class Subscription : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Subscription, SubscriptionFromRaw>))]
+public sealed record class Subscription : JsonModel
 {
     /// <summary>
     /// Addons associated with this subscription
@@ -23,9 +23,9 @@ public sealed record class Subscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<List<AddonCartResponseItem>>(this.RawData, "addons");
+            return JsonModel.GetNotNullClass<List<AddonCartResponseItem>>(this.RawData, "addons");
         }
-        init { ModelBase.Set(this._rawData, "addons", value); }
+        init { JsonModel.Set(this._rawData, "addons", value); }
     }
 
     /// <summary>
@@ -33,8 +33,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required BillingAddress Billing
     {
-        get { return ModelBase.GetNotNullClass<BillingAddress>(this.RawData, "billing"); }
-        init { ModelBase.Set(this._rawData, "billing", value); }
+        get { return JsonModel.GetNotNullClass<BillingAddress>(this.RawData, "billing"); }
+        init { JsonModel.Set(this._rawData, "billing", value); }
     }
 
     /// <summary>
@@ -44,9 +44,9 @@ public sealed record class Subscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullStruct<bool>(this.RawData, "cancel_at_next_billing_date");
+            return JsonModel.GetNotNullStruct<bool>(this.RawData, "cancel_at_next_billing_date");
         }
-        init { ModelBase.Set(this._rawData, "cancel_at_next_billing_date", value); }
+        init { JsonModel.Set(this._rawData, "cancel_at_next_billing_date", value); }
     }
 
     /// <summary>
@@ -54,8 +54,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -65,9 +65,9 @@ public sealed record class Subscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     /// <summary>
@@ -75,8 +75,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required CustomerLimitedDetails Customer
     {
-        get { return ModelBase.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
-        init { ModelBase.Set(this._rawData, "customer", value); }
+        get { return JsonModel.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
+        init { JsonModel.Set(this._rawData, "customer", value); }
     }
 
     /// <summary>
@@ -86,9 +86,9 @@ public sealed record class Subscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -96,8 +96,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required IReadOnlyList<Meter> Meters
     {
-        get { return ModelBase.GetNotNullClass<List<Meter>>(this.RawData, "meters"); }
-        init { ModelBase.Set(this._rawData, "meters", value); }
+        get { return JsonModel.GetNotNullClass<List<Meter>>(this.RawData, "meters"); }
+        init { JsonModel.Set(this._rawData, "meters", value); }
     }
 
     /// <summary>
@@ -107,9 +107,9 @@ public sealed record class Subscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "next_billing_date");
+            return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "next_billing_date");
         }
-        init { ModelBase.Set(this._rawData, "next_billing_date", value); }
+        init { JsonModel.Set(this._rawData, "next_billing_date", value); }
     }
 
     /// <summary>
@@ -117,8 +117,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required bool OnDemand
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "on_demand"); }
-        init { ModelBase.Set(this._rawData, "on_demand", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "on_demand"); }
+        init { JsonModel.Set(this._rawData, "on_demand", value); }
     }
 
     /// <summary>
@@ -126,8 +126,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required int PaymentFrequencyCount
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "payment_frequency_count"); }
-        init { ModelBase.Set(this._rawData, "payment_frequency_count", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "payment_frequency_count"); }
+        init { JsonModel.Set(this._rawData, "payment_frequency_count", value); }
     }
 
     /// <summary>
@@ -137,12 +137,12 @@ public sealed record class Subscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, TimeInterval>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, TimeInterval>>(
                 this.RawData,
                 "payment_frequency_interval"
             );
         }
-        init { ModelBase.Set(this._rawData, "payment_frequency_interval", value); }
+        init { JsonModel.Set(this._rawData, "payment_frequency_interval", value); }
     }
 
     /// <summary>
@@ -152,12 +152,12 @@ public sealed record class Subscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullStruct<DateTimeOffset>(
+            return JsonModel.GetNotNullStruct<DateTimeOffset>(
                 this.RawData,
                 "previous_billing_date"
             );
         }
-        init { ModelBase.Set(this._rawData, "previous_billing_date", value); }
+        init { JsonModel.Set(this._rawData, "previous_billing_date", value); }
     }
 
     /// <summary>
@@ -165,8 +165,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required string ProductID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { ModelBase.Set(this._rawData, "product_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
+        init { JsonModel.Set(this._rawData, "product_id", value); }
     }
 
     /// <summary>
@@ -174,8 +174,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required int Quantity
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "quantity"); }
-        init { ModelBase.Set(this._rawData, "quantity", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "quantity"); }
+        init { JsonModel.Set(this._rawData, "quantity", value); }
     }
 
     /// <summary>
@@ -184,8 +184,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required int RecurringPreTaxAmount
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "recurring_pre_tax_amount"); }
-        init { ModelBase.Set(this._rawData, "recurring_pre_tax_amount", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "recurring_pre_tax_amount"); }
+        init { JsonModel.Set(this._rawData, "recurring_pre_tax_amount", value); }
     }
 
     /// <summary>
@@ -195,12 +195,12 @@ public sealed record class Subscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, SubscriptionStatus>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, SubscriptionStatus>>(
                 this.RawData,
                 "status"
             );
         }
-        init { ModelBase.Set(this._rawData, "status", value); }
+        init { JsonModel.Set(this._rawData, "status", value); }
     }
 
     /// <summary>
@@ -208,8 +208,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required string SubscriptionID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "subscription_id"); }
-        init { ModelBase.Set(this._rawData, "subscription_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "subscription_id"); }
+        init { JsonModel.Set(this._rawData, "subscription_id", value); }
     }
 
     /// <summary>
@@ -217,8 +217,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required int SubscriptionPeriodCount
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "subscription_period_count"); }
-        init { ModelBase.Set(this._rawData, "subscription_period_count", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "subscription_period_count"); }
+        init { JsonModel.Set(this._rawData, "subscription_period_count", value); }
     }
 
     /// <summary>
@@ -228,12 +228,12 @@ public sealed record class Subscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, TimeInterval>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, TimeInterval>>(
                 this.RawData,
                 "subscription_period_interval"
             );
         }
-        init { ModelBase.Set(this._rawData, "subscription_period_interval", value); }
+        init { JsonModel.Set(this._rawData, "subscription_period_interval", value); }
     }
 
     /// <summary>
@@ -241,8 +241,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required bool TaxInclusive
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "tax_inclusive"); }
-        init { ModelBase.Set(this._rawData, "tax_inclusive", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "tax_inclusive"); }
+        init { JsonModel.Set(this._rawData, "tax_inclusive", value); }
     }
 
     /// <summary>
@@ -250,8 +250,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public required int TrialPeriodDays
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "trial_period_days"); }
-        init { ModelBase.Set(this._rawData, "trial_period_days", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "trial_period_days"); }
+        init { JsonModel.Set(this._rawData, "trial_period_days", value); }
     }
 
     /// <summary>
@@ -259,8 +259,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public DateTimeOffset? CancelledAt
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "cancelled_at"); }
-        init { ModelBase.Set(this._rawData, "cancelled_at", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "cancelled_at"); }
+        init { JsonModel.Set(this._rawData, "cancelled_at", value); }
     }
 
     /// <summary>
@@ -268,8 +268,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public int? DiscountCyclesRemaining
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "discount_cycles_remaining"); }
-        init { ModelBase.Set(this._rawData, "discount_cycles_remaining", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "discount_cycles_remaining"); }
+        init { JsonModel.Set(this._rawData, "discount_cycles_remaining", value); }
     }
 
     /// <summary>
@@ -277,8 +277,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public string? DiscountID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "discount_id"); }
-        init { ModelBase.Set(this._rawData, "discount_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "discount_id"); }
+        init { JsonModel.Set(this._rawData, "discount_id", value); }
     }
 
     /// <summary>
@@ -286,8 +286,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_at"); }
-        init { ModelBase.Set(this._rawData, "expires_at", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_at"); }
+        init { JsonModel.Set(this._rawData, "expires_at", value); }
     }
 
     /// <summary>
@@ -295,8 +295,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public string? PaymentMethodID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "payment_method_id"); }
-        init { ModelBase.Set(this._rawData, "payment_method_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_method_id"); }
+        init { JsonModel.Set(this._rawData, "payment_method_id", value); }
     }
 
     /// <summary>
@@ -304,8 +304,8 @@ public sealed record class Subscription : ModelBase
     /// </summary>
     public string? TaxID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "tax_id"); }
-        init { ModelBase.Set(this._rawData, "tax_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "tax_id"); }
+        init { JsonModel.Set(this._rawData, "tax_id", value); }
     }
 
     /// <inheritdoc/>
@@ -372,7 +372,7 @@ public sealed record class Subscription : ModelBase
     }
 }
 
-class SubscriptionFromRaw : IFromRaw<Subscription>
+class SubscriptionFromRaw : IFromRawJson<Subscription>
 {
     /// <inheritdoc/>
     public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -382,52 +382,52 @@ class SubscriptionFromRaw : IFromRaw<Subscription>
 /// <summary>
 /// Response struct representing usage-based meter cart details for a subscription
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Meter, MeterFromRaw>))]
-public sealed record class Meter : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Meter, MeterFromRaw>))]
+public sealed record class Meter : JsonModel
 {
     public required ApiEnum<string, Currency> Currency
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     public required long FreeThreshold
     {
-        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "free_threshold"); }
-        init { ModelBase.Set(this._rawData, "free_threshold", value); }
+        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "free_threshold"); }
+        init { JsonModel.Set(this._rawData, "free_threshold", value); }
     }
 
     public required string MeasurementUnit
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "measurement_unit"); }
-        init { ModelBase.Set(this._rawData, "measurement_unit", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "measurement_unit"); }
+        init { JsonModel.Set(this._rawData, "measurement_unit", value); }
     }
 
     public required string MeterID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "meter_id"); }
-        init { ModelBase.Set(this._rawData, "meter_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "meter_id"); }
+        init { JsonModel.Set(this._rawData, "meter_id", value); }
     }
 
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     public required string PricePerUnit
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
-        init { ModelBase.Set(this._rawData, "price_per_unit", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
+        init { JsonModel.Set(this._rawData, "price_per_unit", value); }
     }
 
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "description"); }
-        init { ModelBase.Set(this._rawData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
+        init { JsonModel.Set(this._rawData, "description", value); }
     }
 
     /// <inheritdoc/>
@@ -467,7 +467,7 @@ public sealed record class Meter : ModelBase
     }
 }
 
-class MeterFromRaw : IFromRaw<Meter>
+class MeterFromRaw : IFromRawJson<Meter>
 {
     /// <inheritdoc/>
     public Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

@@ -7,16 +7,16 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
-[JsonConverter(typeof(ModelConverter<WebhookListPageResponse, WebhookListPageResponseFromRaw>))]
-public sealed record class WebhookListPageResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<WebhookListPageResponse, WebhookListPageResponseFromRaw>))]
+public sealed record class WebhookListPageResponse : JsonModel
 {
     /// <summary>
     /// List of webhoooks
     /// </summary>
     public required IReadOnlyList<WebhookDetails> Data
     {
-        get { return ModelBase.GetNotNullClass<List<WebhookDetails>>(this.RawData, "data"); }
-        init { ModelBase.Set(this._rawData, "data", value); }
+        get { return JsonModel.GetNotNullClass<List<WebhookDetails>>(this.RawData, "data"); }
+        init { JsonModel.Set(this._rawData, "data", value); }
     }
 
     /// <summary>
@@ -24,8 +24,8 @@ public sealed record class WebhookListPageResponse : ModelBase
     /// </summary>
     public required bool Done
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "done"); }
-        init { ModelBase.Set(this._rawData, "done", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "done"); }
+        init { JsonModel.Set(this._rawData, "done", value); }
     }
 
     /// <summary>
@@ -33,8 +33,8 @@ public sealed record class WebhookListPageResponse : ModelBase
     /// </summary>
     public string? Iterator
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "iterator"); }
-        init { ModelBase.Set(this._rawData, "iterator", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "iterator"); }
+        init { JsonModel.Set(this._rawData, "iterator", value); }
     }
 
     /// <summary>
@@ -42,8 +42,8 @@ public sealed record class WebhookListPageResponse : ModelBase
     /// </summary>
     public string? PrevIterator
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "prev_iterator"); }
-        init { ModelBase.Set(this._rawData, "prev_iterator", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "prev_iterator"); }
+        init { JsonModel.Set(this._rawData, "prev_iterator", value); }
     }
 
     /// <inheritdoc/>
@@ -85,7 +85,7 @@ public sealed record class WebhookListPageResponse : ModelBase
     }
 }
 
-class WebhookListPageResponseFromRaw : IFromRaw<WebhookListPageResponse>
+class WebhookListPageResponseFromRaw : IFromRawJson<WebhookListPageResponse>
 {
     /// <inheritdoc/>
     public WebhookListPageResponse FromRawUnchecked(

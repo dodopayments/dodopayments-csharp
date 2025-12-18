@@ -164,8 +164,8 @@ public class ProductListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Products::ProductListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Products::ProductListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Products::Item> expectedItems =
@@ -395,8 +395,8 @@ public class ItemTest : TestBase
             TaxInclusive = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Products::Item>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Products::Item>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";

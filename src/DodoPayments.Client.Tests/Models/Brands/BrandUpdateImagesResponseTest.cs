@@ -45,8 +45,8 @@ public class BrandUpdateImagesResponseTest : TestBase
             URL = "url",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<BrandUpdateImagesResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<BrandUpdateImagesResponse>(element);
         Assert.NotNull(deserialized);
 
         string expectedImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";

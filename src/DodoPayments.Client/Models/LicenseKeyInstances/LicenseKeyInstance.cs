@@ -8,37 +8,37 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.LicenseKeyInstances;
 
-[JsonConverter(typeof(ModelConverter<LicenseKeyInstance, LicenseKeyInstanceFromRaw>))]
-public sealed record class LicenseKeyInstance : ModelBase
+[JsonConverter(typeof(JsonModelConverter<LicenseKeyInstance, LicenseKeyInstanceFromRaw>))]
+public sealed record class LicenseKeyInstance : JsonModel
 {
     public required string ID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "id"); }
-        init { ModelBase.Set(this._rawData, "id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
+        init { JsonModel.Set(this._rawData, "id", value); }
     }
 
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     public required string LicenseKeyID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "license_key_id"); }
-        init { ModelBase.Set(this._rawData, "license_key_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "license_key_id"); }
+        init { JsonModel.Set(this._rawData, "license_key_id", value); }
     }
 
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <inheritdoc/>
@@ -78,7 +78,7 @@ public sealed record class LicenseKeyInstance : ModelBase
     }
 }
 
-class LicenseKeyInstanceFromRaw : IFromRaw<LicenseKeyInstance>
+class LicenseKeyInstanceFromRaw : IFromRawJson<LicenseKeyInstance>
 {
     /// <inheritdoc/>
     public LicenseKeyInstance FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

@@ -24,8 +24,8 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
 
     public required long Amount
     {
-        get { return ModelBase.GetNotNullStruct<long>(this.RawBodyData, "amount"); }
-        init { ModelBase.Set(this._rawBodyData, "amount", value); }
+        get { return JsonModel.GetNotNullStruct<long>(this.RawBodyData, "amount"); }
+        init { JsonModel.Set(this._rawBodyData, "amount", value); }
     }
 
     /// <summary>
@@ -35,12 +35,12 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(
                 this.RawBodyData,
                 "currency"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "currency", value); }
+        init { JsonModel.Set(this._rawBodyData, "currency", value); }
     }
 
     /// <summary>
@@ -50,12 +50,12 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, EntryType>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, EntryType>>(
                 this.RawBodyData,
                 "entry_type"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "entry_type", value); }
+        init { JsonModel.Set(this._rawBodyData, "entry_type", value); }
     }
 
     /// <summary>
@@ -63,14 +63,14 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     /// </summary>
     public string? IdempotencyKey
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "idempotency_key"); }
-        init { ModelBase.Set(this._rawBodyData, "idempotency_key", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "idempotency_key"); }
+        init { JsonModel.Set(this._rawBodyData, "idempotency_key", value); }
     }
 
     public string? Reason
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "reason"); }
-        init { ModelBase.Set(this._rawBodyData, "reason", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "reason"); }
+        init { JsonModel.Set(this._rawBodyData, "reason", value); }
     }
 
     public LedgerEntryCreateParams() { }
@@ -106,7 +106,7 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static LedgerEntryCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -131,9 +131,13 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

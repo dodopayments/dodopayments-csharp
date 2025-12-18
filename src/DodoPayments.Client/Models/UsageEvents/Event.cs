@@ -9,37 +9,37 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.UsageEvents;
 
-[JsonConverter(typeof(ModelConverter<Event, EventFromRaw>))]
-public sealed record class Event : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Event, EventFromRaw>))]
+public sealed record class Event : JsonModel
 {
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     public required string CustomerID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { ModelBase.Set(this._rawData, "customer_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
+        init { JsonModel.Set(this._rawData, "customer_id", value); }
     }
 
     public required string EventID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "event_id"); }
-        init { ModelBase.Set(this._rawData, "event_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "event_id"); }
+        init { JsonModel.Set(this._rawData, "event_id", value); }
     }
 
     public required string EventName
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "event_name"); }
-        init { ModelBase.Set(this._rawData, "event_name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "event_name"); }
+        init { JsonModel.Set(this._rawData, "event_name", value); }
     }
 
     public required DateTimeOffset Timestamp
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "timestamp"); }
-        init { ModelBase.Set(this._rawData, "timestamp", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "timestamp"); }
+        init { JsonModel.Set(this._rawData, "timestamp", value); }
     }
 
     /// <summary>
@@ -49,12 +49,12 @@ public sealed record class Event : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, Metadata>>(
+            return JsonModel.GetNullableClass<Dictionary<string, Metadata>>(
                 this.RawData,
                 "metadata"
             );
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <inheritdoc/>
@@ -99,7 +99,7 @@ public sealed record class Event : ModelBase
     }
 }
 
-class EventFromRaw : IFromRaw<Event>
+class EventFromRaw : IFromRawJson<Event>
 {
     /// <inheritdoc/>
     public Event FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -114,34 +114,34 @@ public record class Metadata
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public Metadata(string value, JsonElement? json = null)
+    public Metadata(string value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public Metadata(double value, JsonElement? json = null)
+    public Metadata(double value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public Metadata(bool value, JsonElement? json = null)
+    public Metadata(bool value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public Metadata(JsonElement json)
+    public Metadata(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -328,13 +328,13 @@ sealed class MetadataConverter : JsonConverter<Metadata>
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(json, options);
+            var deserialized = JsonSerializer.Deserialize<string>(element, options);
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -344,7 +344,7 @@ sealed class MetadataConverter : JsonConverter<Metadata>
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(json, options));
+            return new(JsonSerializer.Deserialize<double>(element, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
@@ -353,14 +353,14 @@ sealed class MetadataConverter : JsonConverter<Metadata>
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(json, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(Utf8JsonWriter writer, Metadata value, JsonSerializerOptions options)

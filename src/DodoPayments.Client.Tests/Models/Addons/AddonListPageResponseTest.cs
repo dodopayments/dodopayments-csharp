@@ -107,8 +107,8 @@ public class AddonListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<AddonListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<AddonListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<AddonResponse> expectedItems =

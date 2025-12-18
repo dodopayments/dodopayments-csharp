@@ -55,8 +55,8 @@ public class CreateNewCustomerTest : TestBase
             PhoneNumber = "phone_number",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CreateNewCustomer>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CreateNewCustomer>(element);
         Assert.NotNull(deserialized);
 
         string expectedEmail = "email";

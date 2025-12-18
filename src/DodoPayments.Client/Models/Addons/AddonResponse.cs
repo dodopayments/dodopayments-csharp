@@ -9,16 +9,16 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Addons;
 
-[JsonConverter(typeof(ModelConverter<AddonResponse, AddonResponseFromRaw>))]
-public sealed record class AddonResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<AddonResponse, AddonResponseFromRaw>))]
+public sealed record class AddonResponse : JsonModel
 {
     /// <summary>
     /// id of the Addon
     /// </summary>
     public required string ID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "id"); }
-        init { ModelBase.Set(this._rawData, "id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
+        init { JsonModel.Set(this._rawData, "id", value); }
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public sealed record class AddonResponse : ModelBase
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -35,8 +35,8 @@ public sealed record class AddonResponse : ModelBase
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -46,9 +46,9 @@ public sealed record class AddonResponse : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     /// <summary>
@@ -56,8 +56,8 @@ public sealed record class AddonResponse : ModelBase
     /// </summary>
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <summary>
@@ -65,8 +65,8 @@ public sealed record class AddonResponse : ModelBase
     /// </summary>
     public required int Price
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "price"); }
-        init { ModelBase.Set(this._rawData, "price", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "price"); }
+        init { JsonModel.Set(this._rawData, "price", value); }
     }
 
     /// <summary>
@@ -76,12 +76,12 @@ public sealed record class AddonResponse : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, TaxCategory>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, TaxCategory>>(
                 this.RawData,
                 "tax_category"
             );
         }
-        init { ModelBase.Set(this._rawData, "tax_category", value); }
+        init { JsonModel.Set(this._rawData, "tax_category", value); }
     }
 
     /// <summary>
@@ -89,8 +89,8 @@ public sealed record class AddonResponse : ModelBase
     /// </summary>
     public required DateTimeOffset UpdatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
-        init { ModelBase.Set(this._rawData, "updated_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
+        init { JsonModel.Set(this._rawData, "updated_at", value); }
     }
 
     /// <summary>
@@ -98,8 +98,8 @@ public sealed record class AddonResponse : ModelBase
     /// </summary>
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "description"); }
-        init { ModelBase.Set(this._rawData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
+        init { JsonModel.Set(this._rawData, "description", value); }
     }
 
     /// <summary>
@@ -107,8 +107,8 @@ public sealed record class AddonResponse : ModelBase
     /// </summary>
     public string? Image
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "image"); }
-        init { ModelBase.Set(this._rawData, "image", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "image"); }
+        init { JsonModel.Set(this._rawData, "image", value); }
     }
 
     /// <inheritdoc/>
@@ -151,7 +151,7 @@ public sealed record class AddonResponse : ModelBase
     }
 }
 
-class AddonResponseFromRaw : IFromRaw<AddonResponse>
+class AddonResponseFromRaw : IFromRawJson<AddonResponse>
 {
     /// <inheritdoc/>
     public AddonResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

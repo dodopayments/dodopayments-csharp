@@ -58,9 +58,9 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
             Instructions = "instructions",
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized = JsonSerializer.Deserialize<ProductUpdateParamsDigitalProductDelivery>(
-            json
+            element
         );
         Assert.NotNull(deserialized);
 

@@ -31,8 +31,8 @@ public class WebhookRetrieveSecretResponseTest : TestBase
     {
         var model = new WebhookRetrieveSecretResponse { Secret = "secret" };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<WebhookRetrieveSecretResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<WebhookRetrieveSecretResponse>(element);
         Assert.NotNull(deserialized);
 
         string expectedSecret = "secret";

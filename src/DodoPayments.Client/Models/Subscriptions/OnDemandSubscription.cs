@@ -8,8 +8,8 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
-[JsonConverter(typeof(ModelConverter<OnDemandSubscription, OnDemandSubscriptionFromRaw>))]
-public sealed record class OnDemandSubscription : ModelBase
+[JsonConverter(typeof(JsonModelConverter<OnDemandSubscription, OnDemandSubscriptionFromRaw>))]
+public sealed record class OnDemandSubscription : JsonModel
 {
     /// <summary>
     /// If set as True, does not perform any charge and only authorizes payment method
@@ -17,8 +17,8 @@ public sealed record class OnDemandSubscription : ModelBase
     /// </summary>
     public required bool MandateOnly
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "mandate_only"); }
-        init { ModelBase.Set(this._rawData, "mandate_only", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "mandate_only"); }
+        init { JsonModel.Set(this._rawData, "mandate_only", value); }
     }
 
     /// <summary>
@@ -30,12 +30,12 @@ public sealed record class OnDemandSubscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(
+            return JsonModel.GetNullableStruct<bool>(
                 this.RawData,
                 "adaptive_currency_fees_inclusive"
             );
         }
-        init { ModelBase.Set(this._rawData, "adaptive_currency_fees_inclusive", value); }
+        init { JsonModel.Set(this._rawData, "adaptive_currency_fees_inclusive", value); }
     }
 
     /// <summary>
@@ -46,12 +46,12 @@ public sealed record class OnDemandSubscription : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(
                 this.RawData,
                 "product_currency"
             );
         }
-        init { ModelBase.Set(this._rawData, "product_currency", value); }
+        init { JsonModel.Set(this._rawData, "product_currency", value); }
     }
 
     /// <summary>
@@ -60,8 +60,8 @@ public sealed record class OnDemandSubscription : ModelBase
     /// </summary>
     public string? ProductDescription
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "product_description"); }
-        init { ModelBase.Set(this._rawData, "product_description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "product_description"); }
+        init { JsonModel.Set(this._rawData, "product_description", value); }
     }
 
     /// <summary>
@@ -71,8 +71,8 @@ public sealed record class OnDemandSubscription : ModelBase
     /// </summary>
     public int? ProductPrice
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "product_price"); }
-        init { ModelBase.Set(this._rawData, "product_price", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "product_price"); }
+        init { JsonModel.Set(this._rawData, "product_price", value); }
     }
 
     /// <inheritdoc/>
@@ -119,7 +119,7 @@ public sealed record class OnDemandSubscription : ModelBase
     }
 }
 
-class OnDemandSubscriptionFromRaw : IFromRaw<OnDemandSubscription>
+class OnDemandSubscriptionFromRaw : IFromRawJson<OnDemandSubscription>
 {
     /// <inheritdoc/>
     public OnDemandSubscription FromRawUnchecked(

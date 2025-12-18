@@ -24,8 +24,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public required BillingAddress Billing
     {
-        get { return ModelBase.GetNotNullClass<BillingAddress>(this.RawBodyData, "billing"); }
-        init { ModelBase.Set(this._rawBodyData, "billing", value); }
+        get { return JsonModel.GetNotNullClass<BillingAddress>(this.RawBodyData, "billing"); }
+        init { JsonModel.Set(this._rawBodyData, "billing", value); }
     }
 
     /// <summary>
@@ -33,8 +33,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public required CustomerRequest Customer
     {
-        get { return ModelBase.GetNotNullClass<CustomerRequest>(this.RawBodyData, "customer"); }
-        init { ModelBase.Set(this._rawBodyData, "customer", value); }
+        get { return JsonModel.GetNotNullClass<CustomerRequest>(this.RawBodyData, "customer"); }
+        init { JsonModel.Set(this._rawBodyData, "customer", value); }
     }
 
     /// <summary>
@@ -44,12 +44,12 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<List<OneTimeProductCartItem>>(
+            return JsonModel.GetNotNullClass<List<OneTimeProductCartItem>>(
                 this.RawBodyData,
                 "product_cart"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "product_cart", value); }
+        init { JsonModel.Set(this._rawBodyData, "product_cart", value); }
     }
 
     /// <summary>
@@ -64,12 +64,12 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<List<ApiEnum<string, PaymentMethodTypes>>>(
+            return JsonModel.GetNullableClass<List<ApiEnum<string, PaymentMethodTypes>>>(
                 this.RawBodyData,
                 "allowed_payment_method_types"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "allowed_payment_method_types", value); }
+        init { JsonModel.Set(this._rawBodyData, "allowed_payment_method_types", value); }
     }
 
     /// <summary>
@@ -80,12 +80,12 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(
                 this.RawBodyData,
                 "billing_currency"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "billing_currency", value); }
+        init { JsonModel.Set(this._rawBodyData, "billing_currency", value); }
     }
 
     /// <summary>
@@ -93,8 +93,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public string? DiscountCode
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "discount_code"); }
-        init { ModelBase.Set(this._rawBodyData, "discount_code", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "discount_code"); }
+        init { JsonModel.Set(this._rawBodyData, "discount_code", value); }
     }
 
     /// <summary>
@@ -102,8 +102,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public bool? Force3DS
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawBodyData, "force_3ds"); }
-        init { ModelBase.Set(this._rawBodyData, "force_3ds", value); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "force_3ds"); }
+        init { JsonModel.Set(this._rawBodyData, "force_3ds", value); }
     }
 
     /// <summary>
@@ -113,7 +113,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+            return JsonModel.GetNullableClass<Dictionary<string, string>>(
                 this.RawBodyData,
                 "metadata"
             );
@@ -125,7 +125,7 @@ public sealed record class PaymentCreateParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawBodyData, "metadata", value);
+            JsonModel.Set(this._rawBodyData, "metadata", value);
         }
     }
 
@@ -134,8 +134,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public bool? PaymentLink
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawBodyData, "payment_link"); }
-        init { ModelBase.Set(this._rawBodyData, "payment_link", value); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "payment_link"); }
+        init { JsonModel.Set(this._rawBodyData, "payment_link", value); }
     }
 
     /// <summary>
@@ -143,8 +143,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public string? ReturnURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "return_url"); }
-        init { ModelBase.Set(this._rawBodyData, "return_url", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "return_url"); }
+        init { JsonModel.Set(this._rawBodyData, "return_url", value); }
     }
 
     /// <summary>
@@ -154,7 +154,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(
+            return JsonModel.GetNullableStruct<bool>(
                 this.RawBodyData,
                 "show_saved_payment_methods"
             );
@@ -166,7 +166,7 @@ public sealed record class PaymentCreateParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawBodyData, "show_saved_payment_methods", value);
+            JsonModel.Set(this._rawBodyData, "show_saved_payment_methods", value);
         }
     }
 
@@ -176,8 +176,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public string? TaxID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "tax_id"); }
-        init { ModelBase.Set(this._rawBodyData, "tax_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "tax_id"); }
+        init { JsonModel.Set(this._rawBodyData, "tax_id", value); }
     }
 
     public PaymentCreateParams() { }
@@ -213,7 +213,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static PaymentCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -235,9 +235,13 @@ public sealed record class PaymentCreateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

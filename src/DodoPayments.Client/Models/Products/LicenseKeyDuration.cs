@@ -8,25 +8,25 @@ using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Models.Products;
 
-[JsonConverter(typeof(ModelConverter<LicenseKeyDuration, LicenseKeyDurationFromRaw>))]
-public sealed record class LicenseKeyDuration : ModelBase
+[JsonConverter(typeof(JsonModelConverter<LicenseKeyDuration, LicenseKeyDurationFromRaw>))]
+public sealed record class LicenseKeyDuration : JsonModel
 {
     public required int Count
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "count"); }
-        init { ModelBase.Set(this._rawData, "count", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "count"); }
+        init { JsonModel.Set(this._rawData, "count", value); }
     }
 
     public required ApiEnum<string, TimeInterval> Interval
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, TimeInterval>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, TimeInterval>>(
                 this.RawData,
                 "interval"
             );
         }
-        init { ModelBase.Set(this._rawData, "interval", value); }
+        init { JsonModel.Set(this._rawData, "interval", value); }
     }
 
     /// <inheritdoc/>
@@ -63,7 +63,7 @@ public sealed record class LicenseKeyDuration : ModelBase
     }
 }
 
-class LicenseKeyDurationFromRaw : IFromRaw<LicenseKeyDuration>
+class LicenseKeyDurationFromRaw : IFromRawJson<LicenseKeyDuration>
 {
     /// <inheritdoc/>
     public LicenseKeyDuration FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

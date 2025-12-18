@@ -9,35 +9,35 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.Subscriptions;
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         SubscriptionUpdatePaymentMethodResponse,
         SubscriptionUpdatePaymentMethodResponseFromRaw
     >)
 )]
-public sealed record class SubscriptionUpdatePaymentMethodResponse : ModelBase
+public sealed record class SubscriptionUpdatePaymentMethodResponse : JsonModel
 {
     public string? ClientSecret
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "client_secret"); }
-        init { ModelBase.Set(this._rawData, "client_secret", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "client_secret"); }
+        init { JsonModel.Set(this._rawData, "client_secret", value); }
     }
 
     public DateTimeOffset? ExpiresOn
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_on"); }
-        init { ModelBase.Set(this._rawData, "expires_on", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_on"); }
+        init { JsonModel.Set(this._rawData, "expires_on", value); }
     }
 
     public string? PaymentID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "payment_id"); }
-        init { ModelBase.Set(this._rawData, "payment_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_id"); }
+        init { JsonModel.Set(this._rawData, "payment_id", value); }
     }
 
     public string? PaymentLink
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "payment_link"); }
-        init { ModelBase.Set(this._rawData, "payment_link", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_link"); }
+        init { JsonModel.Set(this._rawData, "payment_link", value); }
     }
 
     /// <inheritdoc/>
@@ -79,7 +79,7 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse : ModelBase
 }
 
 class SubscriptionUpdatePaymentMethodResponseFromRaw
-    : IFromRaw<SubscriptionUpdatePaymentMethodResponse>
+    : IFromRawJson<SubscriptionUpdatePaymentMethodResponse>
 {
     /// <inheritdoc/>
     public SubscriptionUpdatePaymentMethodResponse FromRawUnchecked(
