@@ -375,8 +375,8 @@ public class PaymentSucceededWebhookEventTest : TestBase
             Type = PaymentSucceededWebhookEventType.PaymentSucceeded,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PaymentSucceededWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PaymentSucceededWebhookEvent>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -952,8 +952,8 @@ public class PaymentSucceededWebhookEventDataTest : TestBase
             PayloadType = PaymentSucceededWebhookEventDataIntersectionMember1PayloadType.Payment,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PaymentSucceededWebhookEventData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PaymentSucceededWebhookEventData>(element);
         Assert.NotNull(deserialized);
 
         Payments::BillingAddress expectedBilling = new()
@@ -1941,9 +1941,11 @@ public class PaymentSucceededWebhookEventDataIntersectionMember1Test : TestBase
             PayloadType = PaymentSucceededWebhookEventDataIntersectionMember1PayloadType.Payment,
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
-            JsonSerializer.Deserialize<PaymentSucceededWebhookEventDataIntersectionMember1>(json);
+            JsonSerializer.Deserialize<PaymentSucceededWebhookEventDataIntersectionMember1>(
+                element
+            );
         Assert.NotNull(deserialized);
 
         ApiEnum<

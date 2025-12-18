@@ -17,7 +17,7 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
     /// </summary>
     public bool? SendEmail
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawQueryData, "send_email"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawQueryData, "send_email"); }
         init
         {
             if (value == null)
@@ -25,7 +25,7 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "send_email", value);
+            JsonModel.Set(this._rawQueryData, "send_email", value);
         }
     }
 
@@ -55,7 +55,7 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static CustomerPortalCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

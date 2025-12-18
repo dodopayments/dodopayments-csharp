@@ -11,11 +11,11 @@ public record class UnsafeUnwrapWebhookEvent
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
     public string BusinessID
@@ -80,147 +80,174 @@ public record class UnsafeUnwrapWebhookEvent
         }
     }
 
-    public UnsafeUnwrapWebhookEvent(DisputeAcceptedWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(DisputeAcceptedWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(DisputeCancelledWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(DisputeCancelledWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(DisputeChallengedWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(
+        DisputeChallengedWebhookEvent value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(DisputeExpiredWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(DisputeExpiredWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(DisputeLostWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(DisputeLostWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(DisputeOpenedWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(DisputeOpenedWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(DisputeWonWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(DisputeWonWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(LicenseKeyCreatedWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(
+        LicenseKeyCreatedWebhookEvent value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(PaymentCancelledWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(PaymentCancelledWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(PaymentFailedWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(PaymentFailedWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(PaymentProcessingWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(
+        PaymentProcessingWebhookEvent value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(PaymentSucceededWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(PaymentSucceededWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(RefundFailedWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(RefundFailedWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(RefundSucceededWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(RefundSucceededWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(SubscriptionActiveWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(
+        SubscriptionActiveWebhookEvent value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
     public UnsafeUnwrapWebhookEvent(
         SubscriptionCancelledWebhookEvent value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(SubscriptionExpiredWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(
+        SubscriptionExpiredWebhookEvent value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(SubscriptionFailedWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(
+        SubscriptionFailedWebhookEvent value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(SubscriptionOnHoldWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(
+        SubscriptionOnHoldWebhookEvent value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
     public UnsafeUnwrapWebhookEvent(
         SubscriptionPlanChangedWebhookEvent value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(SubscriptionRenewedWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(
+        SubscriptionRenewedWebhookEvent value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(SubscriptionUpdatedWebhookEvent value, JsonElement? json = null)
+    public UnsafeUnwrapWebhookEvent(
+        SubscriptionUpdatedWebhookEvent value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public UnsafeUnwrapWebhookEvent(JsonElement json)
+    public UnsafeUnwrapWebhookEvent(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -1080,17 +1107,17 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
             var deserialized = JsonSerializer.Deserialize<DisputeAcceptedWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1102,13 +1129,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1120,13 +1147,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<DisputeChallengedWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1138,13 +1165,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<DisputeExpiredWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1155,11 +1182,14 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<DisputeLostWebhookEvent>(json, options);
+            var deserialized = JsonSerializer.Deserialize<DisputeLostWebhookEvent>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1170,11 +1200,14 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<DisputeOpenedWebhookEvent>(json, options);
+            var deserialized = JsonSerializer.Deserialize<DisputeOpenedWebhookEvent>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1185,11 +1218,11 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<DisputeWonWebhookEvent>(json, options);
+            var deserialized = JsonSerializer.Deserialize<DisputeWonWebhookEvent>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1201,13 +1234,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1219,13 +1252,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<PaymentCancelledWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1236,11 +1269,14 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<PaymentFailedWebhookEvent>(json, options);
+            var deserialized = JsonSerializer.Deserialize<PaymentFailedWebhookEvent>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1252,13 +1288,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<PaymentProcessingWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1270,13 +1306,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<PaymentSucceededWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1287,11 +1323,14 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<RefundFailedWebhookEvent>(json, options);
+            var deserialized = JsonSerializer.Deserialize<RefundFailedWebhookEvent>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1303,13 +1342,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<RefundSucceededWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1321,13 +1360,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionActiveWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1339,13 +1378,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionCancelledWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1357,13 +1396,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1375,13 +1414,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionFailedWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1393,13 +1432,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionOnHoldWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1411,13 +1450,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionPlanChangedWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1429,13 +1468,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionRenewedWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1447,13 +1486,13 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1462,7 +1501,7 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(

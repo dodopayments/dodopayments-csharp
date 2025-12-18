@@ -31,8 +31,8 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// </summary>
     public int? Amount
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawBodyData, "amount"); }
-        init { ModelBase.Set(this._rawBodyData, "amount", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "amount"); }
+        init { JsonModel.Set(this._rawBodyData, "amount", value); }
     }
 
     /// <summary>
@@ -40,20 +40,20 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// </summary>
     public string? Code
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "code"); }
-        init { ModelBase.Set(this._rawBodyData, "code", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "code"); }
+        init { JsonModel.Set(this._rawBodyData, "code", value); }
     }
 
     public DateTimeOffset? ExpiresAt
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawBodyData, "expires_at"); }
-        init { ModelBase.Set(this._rawBodyData, "expires_at", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawBodyData, "expires_at"); }
+        init { JsonModel.Set(this._rawBodyData, "expires_at", value); }
     }
 
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "name"); }
-        init { ModelBase.Set(this._rawBodyData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "name"); }
+        init { JsonModel.Set(this._rawBodyData, "name", value); }
     }
 
     /// <summary>
@@ -62,8 +62,8 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// </summary>
     public IReadOnlyList<string>? RestrictedTo
     {
-        get { return ModelBase.GetNullableClass<List<string>>(this.RawBodyData, "restricted_to"); }
-        init { ModelBase.Set(this._rawBodyData, "restricted_to", value); }
+        get { return JsonModel.GetNullableClass<List<string>>(this.RawBodyData, "restricted_to"); }
+        init { JsonModel.Set(this._rawBodyData, "restricted_to", value); }
     }
 
     /// <summary>
@@ -73,8 +73,8 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// </summary>
     public int? SubscriptionCycles
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawBodyData, "subscription_cycles"); }
-        init { ModelBase.Set(this._rawBodyData, "subscription_cycles", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "subscription_cycles"); }
+        init { JsonModel.Set(this._rawBodyData, "subscription_cycles", value); }
     }
 
     /// <summary>
@@ -84,18 +84,18 @@ public sealed record class DiscountUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, DiscountType>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, DiscountType>>(
                 this.RawBodyData,
                 "type"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "type", value); }
+        init { JsonModel.Set(this._rawBodyData, "type", value); }
     }
 
     public int? UsageLimit
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawBodyData, "usage_limit"); }
-        init { ModelBase.Set(this._rawBodyData, "usage_limit", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "usage_limit"); }
+        init { JsonModel.Set(this._rawBodyData, "usage_limit", value); }
     }
 
     public DiscountUpdateParams() { }
@@ -131,7 +131,7 @@ public sealed record class DiscountUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static DiscountUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -156,9 +156,13 @@ public sealed record class DiscountUpdateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

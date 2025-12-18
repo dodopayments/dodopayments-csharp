@@ -45,8 +45,8 @@ public class CheckoutSessionResponseTest : TestBase
             SessionID = "session_id",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionResponse>(element);
         Assert.NotNull(deserialized);
 
         string expectedCheckoutURL = "checkout_url";

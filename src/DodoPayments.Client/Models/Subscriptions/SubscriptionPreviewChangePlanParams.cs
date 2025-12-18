@@ -26,8 +26,8 @@ public sealed record class SubscriptionPreviewChangePlanParams : ParamsBase
     /// </summary>
     public required string ProductID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "product_id"); }
-        init { ModelBase.Set(this._rawBodyData, "product_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "product_id"); }
+        init { JsonModel.Set(this._rawBodyData, "product_id", value); }
     }
 
     /// <summary>
@@ -40,11 +40,11 @@ public sealed record class SubscriptionPreviewChangePlanParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<
+            return JsonModel.GetNotNullClass<
                 ApiEnum<string, SubscriptionPreviewChangePlanParamsProrationBillingMode>
             >(this.RawBodyData, "proration_billing_mode");
         }
-        init { ModelBase.Set(this._rawBodyData, "proration_billing_mode", value); }
+        init { JsonModel.Set(this._rawBodyData, "proration_billing_mode", value); }
     }
 
     /// <summary>
@@ -52,8 +52,8 @@ public sealed record class SubscriptionPreviewChangePlanParams : ParamsBase
     /// </summary>
     public required int Quantity
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawBodyData, "quantity"); }
-        init { ModelBase.Set(this._rawBodyData, "quantity", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawBodyData, "quantity"); }
+        init { JsonModel.Set(this._rawBodyData, "quantity", value); }
     }
 
     /// <summary>
@@ -61,8 +61,8 @@ public sealed record class SubscriptionPreviewChangePlanParams : ParamsBase
     /// </summary>
     public IReadOnlyList<AttachAddon>? Addons
     {
-        get { return ModelBase.GetNullableClass<List<AttachAddon>>(this.RawBodyData, "addons"); }
-        init { ModelBase.Set(this._rawBodyData, "addons", value); }
+        get { return JsonModel.GetNullableClass<List<AttachAddon>>(this.RawBodyData, "addons"); }
+        init { JsonModel.Set(this._rawBodyData, "addons", value); }
     }
 
     public SubscriptionPreviewChangePlanParams() { }
@@ -100,7 +100,7 @@ public sealed record class SubscriptionPreviewChangePlanParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static SubscriptionPreviewChangePlanParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -125,9 +125,13 @@ public sealed record class SubscriptionPreviewChangePlanParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

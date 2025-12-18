@@ -12,8 +12,8 @@ namespace DodoPayments.Client.Models.Webhooks.Headers;
 ///
 /// <para>Sensitive headers that have been redacted are returned in the sensitive field.</para>
 /// </summary>
-[JsonConverter(typeof(ModelConverter<HeaderRetrieveResponse, HeaderRetrieveResponseFromRaw>))]
-public sealed record class HeaderRetrieveResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<HeaderRetrieveResponse, HeaderRetrieveResponseFromRaw>))]
+public sealed record class HeaderRetrieveResponse : JsonModel
 {
     /// <summary>
     /// List of headers configured
@@ -22,9 +22,9 @@ public sealed record class HeaderRetrieveResponse : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "headers");
+            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "headers");
         }
-        init { ModelBase.Set(this._rawData, "headers", value); }
+        init { JsonModel.Set(this._rawData, "headers", value); }
     }
 
     /// <summary>
@@ -32,8 +32,8 @@ public sealed record class HeaderRetrieveResponse : ModelBase
     /// </summary>
     public required IReadOnlyList<string> Sensitive
     {
-        get { return ModelBase.GetNotNullClass<List<string>>(this.RawData, "sensitive"); }
-        init { ModelBase.Set(this._rawData, "sensitive", value); }
+        get { return JsonModel.GetNotNullClass<List<string>>(this.RawData, "sensitive"); }
+        init { JsonModel.Set(this._rawData, "sensitive", value); }
     }
 
     /// <inheritdoc/>
@@ -70,7 +70,7 @@ public sealed record class HeaderRetrieveResponse : ModelBase
     }
 }
 
-class HeaderRetrieveResponseFromRaw : IFromRaw<HeaderRetrieveResponse>
+class HeaderRetrieveResponseFromRaw : IFromRawJson<HeaderRetrieveResponse>
 {
     /// <inheritdoc/>
     public HeaderRetrieveResponse FromRawUnchecked(

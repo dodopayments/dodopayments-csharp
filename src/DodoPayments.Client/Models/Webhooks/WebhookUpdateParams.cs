@@ -28,8 +28,8 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "description"); }
-        init { ModelBase.Set(this._rawBodyData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "description"); }
+        init { JsonModel.Set(this._rawBodyData, "description", value); }
     }
 
     /// <summary>
@@ -37,8 +37,8 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// </summary>
     public bool? Disabled
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawBodyData, "disabled"); }
-        init { ModelBase.Set(this._rawBodyData, "disabled", value); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "disabled"); }
+        init { JsonModel.Set(this._rawBodyData, "disabled", value); }
     }
 
     /// <summary>
@@ -50,12 +50,12 @@ public sealed record class WebhookUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<List<ApiEnum<string, WebhookEventType>>>(
+            return JsonModel.GetNullableClass<List<ApiEnum<string, WebhookEventType>>>(
                 this.RawBodyData,
                 "filter_types"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "filter_types", value); }
+        init { JsonModel.Set(this._rawBodyData, "filter_types", value); }
     }
 
     /// <summary>
@@ -65,12 +65,12 @@ public sealed record class WebhookUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+            return JsonModel.GetNullableClass<Dictionary<string, string>>(
                 this.RawBodyData,
                 "metadata"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "metadata", value); }
+        init { JsonModel.Set(this._rawBodyData, "metadata", value); }
     }
 
     /// <summary>
@@ -78,8 +78,8 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// </summary>
     public int? RateLimit
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawBodyData, "rate_limit"); }
-        init { ModelBase.Set(this._rawBodyData, "rate_limit", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "rate_limit"); }
+        init { JsonModel.Set(this._rawBodyData, "rate_limit", value); }
     }
 
     /// <summary>
@@ -87,8 +87,8 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// </summary>
     public string? URL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "url"); }
-        init { ModelBase.Set(this._rawBodyData, "url", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "url"); }
+        init { JsonModel.Set(this._rawBodyData, "url", value); }
     }
 
     public WebhookUpdateParams() { }
@@ -124,7 +124,7 @@ public sealed record class WebhookUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static WebhookUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -148,9 +148,13 @@ public sealed record class WebhookUpdateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

@@ -9,19 +9,19 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Refunds;
 
-[JsonConverter(typeof(ModelConverter<RefundListPageResponse, RefundListPageResponseFromRaw>))]
-public sealed record class RefundListPageResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<RefundListPageResponse, RefundListPageResponseFromRaw>))]
+public sealed record class RefundListPageResponse : JsonModel
 {
     public required IReadOnlyList<RefundListPageResponseItem> Items
     {
         get
         {
-            return ModelBase.GetNotNullClass<List<RefundListPageResponseItem>>(
+            return JsonModel.GetNotNullClass<List<RefundListPageResponseItem>>(
                 this.RawData,
                 "items"
             );
         }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -67,7 +67,7 @@ public sealed record class RefundListPageResponse : ModelBase
     }
 }
 
-class RefundListPageResponseFromRaw : IFromRaw<RefundListPageResponse>
+class RefundListPageResponseFromRaw : IFromRawJson<RefundListPageResponse>
 {
     /// <inheritdoc/>
     public RefundListPageResponse FromRawUnchecked(
@@ -76,17 +76,17 @@ class RefundListPageResponseFromRaw : IFromRaw<RefundListPageResponse>
 }
 
 [JsonConverter(
-    typeof(ModelConverter<RefundListPageResponseItem, RefundListPageResponseItemFromRaw>)
+    typeof(JsonModelConverter<RefundListPageResponseItem, RefundListPageResponseItemFromRaw>)
 )]
-public sealed record class RefundListPageResponseItem : ModelBase
+public sealed record class RefundListPageResponseItem : JsonModel
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -94,8 +94,8 @@ public sealed record class RefundListPageResponseItem : ModelBase
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -103,8 +103,8 @@ public sealed record class RefundListPageResponseItem : ModelBase
     /// </summary>
     public required bool IsPartial
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "is_partial"); }
-        init { ModelBase.Set(this._rawData, "is_partial", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "is_partial"); }
+        init { JsonModel.Set(this._rawData, "is_partial", value); }
     }
 
     /// <summary>
@@ -112,8 +112,8 @@ public sealed record class RefundListPageResponseItem : ModelBase
     /// </summary>
     public required string PaymentID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { ModelBase.Set(this._rawData, "payment_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
+        init { JsonModel.Set(this._rawData, "payment_id", value); }
     }
 
     /// <summary>
@@ -121,8 +121,8 @@ public sealed record class RefundListPageResponseItem : ModelBase
     /// </summary>
     public required string RefundID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "refund_id"); }
-        init { ModelBase.Set(this._rawData, "refund_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "refund_id"); }
+        init { JsonModel.Set(this._rawData, "refund_id", value); }
     }
 
     /// <summary>
@@ -132,9 +132,9 @@ public sealed record class RefundListPageResponseItem : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, RefundStatus>>(this.RawData, "status");
+            return JsonModel.GetNotNullClass<ApiEnum<string, RefundStatus>>(this.RawData, "status");
         }
-        init { ModelBase.Set(this._rawData, "status", value); }
+        init { JsonModel.Set(this._rawData, "status", value); }
     }
 
     /// <summary>
@@ -142,8 +142,8 @@ public sealed record class RefundListPageResponseItem : ModelBase
     /// </summary>
     public int? Amount
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "amount"); }
-        init { ModelBase.Set(this._rawData, "amount", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "amount"); }
+        init { JsonModel.Set(this._rawData, "amount", value); }
     }
 
     /// <summary>
@@ -153,9 +153,9 @@ public sealed record class RefundListPageResponseItem : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     /// <summary>
@@ -163,8 +163,8 @@ public sealed record class RefundListPageResponseItem : ModelBase
     /// </summary>
     public string? Reason
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "reason"); }
-        init { ModelBase.Set(this._rawData, "reason", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason"); }
+        init { JsonModel.Set(this._rawData, "reason", value); }
     }
 
     /// <inheritdoc/>
@@ -208,7 +208,7 @@ public sealed record class RefundListPageResponseItem : ModelBase
     }
 }
 
-class RefundListPageResponseItemFromRaw : IFromRaw<RefundListPageResponseItem>
+class RefundListPageResponseItemFromRaw : IFromRawJson<RefundListPageResponseItem>
 {
     /// <inheritdoc/>
     public RefundListPageResponseItem FromRawUnchecked(

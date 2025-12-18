@@ -94,8 +94,8 @@ public class CustomerListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CustomerListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CustomerListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Customer> expectedItems =

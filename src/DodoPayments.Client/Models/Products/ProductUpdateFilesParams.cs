@@ -21,8 +21,8 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
 
     public required string FileName
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "file_name"); }
-        init { ModelBase.Set(this._rawBodyData, "file_name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "file_name"); }
+        init { JsonModel.Set(this._rawBodyData, "file_name", value); }
     }
 
     public ProductUpdateFilesParams() { }
@@ -58,7 +58,7 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static ProductUpdateFilesParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -82,9 +82,13 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

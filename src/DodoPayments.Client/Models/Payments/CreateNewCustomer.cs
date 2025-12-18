@@ -7,19 +7,19 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<CreateNewCustomer, CreateNewCustomerFromRaw>))]
-public sealed record class CreateNewCustomer : ModelBase
+[JsonConverter(typeof(JsonModelConverter<CreateNewCustomer, CreateNewCustomerFromRaw>))]
+public sealed record class CreateNewCustomer : JsonModel
 {
     public required string Email
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "email"); }
-        init { ModelBase.Set(this._rawData, "email", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "email"); }
+        init { JsonModel.Set(this._rawData, "email", value); }
     }
 
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ public sealed record class CreateNewCustomer : ModelBase
     /// </summary>
     public bool? CreateNewCustomerValue
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawData, "create_new_customer"); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "create_new_customer"); }
         init
         {
             if (value == null)
@@ -37,14 +37,14 @@ public sealed record class CreateNewCustomer : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "create_new_customer", value);
+            JsonModel.Set(this._rawData, "create_new_customer", value);
         }
     }
 
     public string? PhoneNumber
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "phone_number"); }
-        init { ModelBase.Set(this._rawData, "phone_number", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "phone_number"); }
+        init { JsonModel.Set(this._rawData, "phone_number", value); }
     }
 
     /// <inheritdoc/>
@@ -83,7 +83,7 @@ public sealed record class CreateNewCustomer : ModelBase
     }
 }
 
-class CreateNewCustomerFromRaw : IFromRaw<CreateNewCustomer>
+class CreateNewCustomerFromRaw : IFromRawJson<CreateNewCustomer>
 {
     /// <inheritdoc/>
     public CreateNewCustomer FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

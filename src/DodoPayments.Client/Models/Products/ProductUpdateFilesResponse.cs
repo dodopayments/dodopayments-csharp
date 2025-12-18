@@ -8,20 +8,20 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.Products;
 
 [JsonConverter(
-    typeof(ModelConverter<ProductUpdateFilesResponse, ProductUpdateFilesResponseFromRaw>)
+    typeof(JsonModelConverter<ProductUpdateFilesResponse, ProductUpdateFilesResponseFromRaw>)
 )]
-public sealed record class ProductUpdateFilesResponse : ModelBase
+public sealed record class ProductUpdateFilesResponse : JsonModel
 {
     public required string FileID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "file_id"); }
-        init { ModelBase.Set(this._rawData, "file_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "file_id"); }
+        init { JsonModel.Set(this._rawData, "file_id", value); }
     }
 
     public required string URL
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "url"); }
-        init { ModelBase.Set(this._rawData, "url", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
+        init { JsonModel.Set(this._rawData, "url", value); }
     }
 
     /// <inheritdoc/>
@@ -58,7 +58,7 @@ public sealed record class ProductUpdateFilesResponse : ModelBase
     }
 }
 
-class ProductUpdateFilesResponseFromRaw : IFromRaw<ProductUpdateFilesResponse>
+class ProductUpdateFilesResponseFromRaw : IFromRawJson<ProductUpdateFilesResponse>
 {
     /// <inheritdoc/>
     public ProductUpdateFilesResponse FromRawUnchecked(

@@ -8,61 +8,61 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Meters;
 
-[JsonConverter(typeof(ModelConverter<Meter, MeterFromRaw>))]
-public sealed record class Meter : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Meter, MeterFromRaw>))]
+public sealed record class Meter : JsonModel
 {
     public required string ID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "id"); }
-        init { ModelBase.Set(this._rawData, "id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
+        init { JsonModel.Set(this._rawData, "id", value); }
     }
 
     public required MeterAggregation Aggregation
     {
-        get { return ModelBase.GetNotNullClass<MeterAggregation>(this.RawData, "aggregation"); }
-        init { ModelBase.Set(this._rawData, "aggregation", value); }
+        get { return JsonModel.GetNotNullClass<MeterAggregation>(this.RawData, "aggregation"); }
+        init { JsonModel.Set(this._rawData, "aggregation", value); }
     }
 
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     public required string EventName
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "event_name"); }
-        init { ModelBase.Set(this._rawData, "event_name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "event_name"); }
+        init { JsonModel.Set(this._rawData, "event_name", value); }
     }
 
     public required string MeasurementUnit
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "measurement_unit"); }
-        init { ModelBase.Set(this._rawData, "measurement_unit", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "measurement_unit"); }
+        init { JsonModel.Set(this._rawData, "measurement_unit", value); }
     }
 
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     public required DateTimeOffset UpdatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
-        init { ModelBase.Set(this._rawData, "updated_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
+        init { JsonModel.Set(this._rawData, "updated_at", value); }
     }
 
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "description"); }
-        init { ModelBase.Set(this._rawData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
+        init { JsonModel.Set(this._rawData, "description", value); }
     }
 
     /// <summary>
@@ -74,8 +74,8 @@ public sealed record class Meter : ModelBase
     /// </summary>
     public MeterFilter? Filter
     {
-        get { return ModelBase.GetNullableClass<MeterFilter>(this.RawData, "filter"); }
-        init { ModelBase.Set(this._rawData, "filter", value); }
+        get { return JsonModel.GetNullableClass<MeterFilter>(this.RawData, "filter"); }
+        init { JsonModel.Set(this._rawData, "filter", value); }
     }
 
     /// <inheritdoc/>
@@ -118,7 +118,7 @@ public sealed record class Meter : ModelBase
     }
 }
 
-class MeterFromRaw : IFromRaw<Meter>
+class MeterFromRaw : IFromRawJson<Meter>
 {
     /// <inheritdoc/>
     public Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

@@ -67,8 +67,8 @@ public class CustomerLimitedDetailsTest : TestBase
             PhoneNumber = "phone_number",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CustomerLimitedDetails>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CustomerLimitedDetails>(element);
         Assert.NotNull(deserialized);
 
         string expectedCustomerID = "customer_id";

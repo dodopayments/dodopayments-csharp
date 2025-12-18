@@ -146,8 +146,8 @@ public class RefundSucceededWebhookEventTest1 : TestBase
             Type = Type12.RefundSucceeded,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<RefundSucceededWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<RefundSucceededWebhookEvent>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -345,8 +345,8 @@ public class Data12Test : TestBase
             PayloadType = Data12IntersectionMember1PayloadType.Refund,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Data12>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Data12>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -700,8 +700,8 @@ public class Data12IntersectionMember1Test : TestBase
             PayloadType = Data12IntersectionMember1PayloadType.Refund,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Data12IntersectionMember1>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Data12IntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Data12IntersectionMember1PayloadType> expectedPayloadType =

@@ -9,8 +9,8 @@ using System = System;
 
 namespace DodoPayments.Client.Models.Meters;
 
-[JsonConverter(typeof(ModelConverter<MeterAggregation, MeterAggregationFromRaw>))]
-public sealed record class MeterAggregation : ModelBase
+[JsonConverter(typeof(JsonModelConverter<MeterAggregation, MeterAggregationFromRaw>))]
+public sealed record class MeterAggregation : JsonModel
 {
     /// <summary>
     /// Aggregation type for the meter
@@ -19,11 +19,11 @@ public sealed record class MeterAggregation : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<
+            return JsonModel.GetNotNullClass<
                 ApiEnum<string, global::DodoPayments.Client.Models.Meters.Type>
             >(this.RawData, "type");
         }
-        init { ModelBase.Set(this._rawData, "type", value); }
+        init { JsonModel.Set(this._rawData, "type", value); }
     }
 
     /// <summary>
@@ -31,8 +31,8 @@ public sealed record class MeterAggregation : ModelBase
     /// </summary>
     public string? Key
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "key"); }
-        init { ModelBase.Set(this._rawData, "key", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "key"); }
+        init { JsonModel.Set(this._rawData, "key", value); }
     }
 
     /// <inheritdoc/>
@@ -76,7 +76,7 @@ public sealed record class MeterAggregation : ModelBase
     }
 }
 
-class MeterAggregationFromRaw : IFromRaw<MeterAggregation>
+class MeterAggregationFromRaw : IFromRawJson<MeterAggregation>
 {
     /// <inheritdoc/>
     public MeterAggregation FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

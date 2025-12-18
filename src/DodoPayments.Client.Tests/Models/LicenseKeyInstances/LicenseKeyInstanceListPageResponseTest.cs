@@ -86,8 +86,8 @@ public class LicenseKeyInstanceListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyInstanceListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyInstanceListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<LicenseKeyInstance> expectedItems =

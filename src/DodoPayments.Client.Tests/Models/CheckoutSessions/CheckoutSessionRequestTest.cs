@@ -325,8 +325,8 @@ public class CheckoutSessionRequestTest : TestBase
             },
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequest>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequest>(element);
         Assert.NotNull(deserialized);
 
         List<CheckoutSessionRequestProductCart> expectedProductCart =
@@ -1017,8 +1017,8 @@ public class CheckoutSessionRequestProductCartTest : TestBase
             Amount = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestProductCart>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestProductCart>(element);
         Assert.NotNull(deserialized);
 
         string expectedProductID = "product_id";
@@ -1169,8 +1169,10 @@ public class CheckoutSessionRequestBillingAddressTest : TestBase
             Zipcode = "zipcode",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestBillingAddress>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestBillingAddress>(
+            element
+        );
         Assert.NotNull(deserialized);
 
         ApiEnum<string, CountryCode> expectedCountry = CountryCode.Af;
@@ -1317,8 +1319,8 @@ public class CheckoutSessionRequestCustomizationTest : TestBase
             Theme = CheckoutSessionRequestCustomizationTheme.Dark,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestCustomization>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestCustomization>(element);
         Assert.NotNull(deserialized);
 
         string expectedForceLanguage = "force_language";
@@ -1616,8 +1618,8 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
             AlwaysCreateNewCustomer = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestFeatureFlags>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestFeatureFlags>(element);
         Assert.NotNull(deserialized);
 
         bool expectedAllowCurrencySelection = true;
@@ -1848,8 +1850,10 @@ public class CheckoutSessionRequestSubscriptionDataTest : TestBase
             TrialPeriodDays = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestSubscriptionData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionRequestSubscriptionData>(
+            element
+        );
         Assert.NotNull(deserialized);
 
         OnDemandSubscription expectedOnDemand = new()

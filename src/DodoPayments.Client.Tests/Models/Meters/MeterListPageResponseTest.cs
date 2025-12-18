@@ -182,8 +182,8 @@ public class MeterListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Meters::MeterListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Meters::MeterListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Meters::Meter> expectedItems =

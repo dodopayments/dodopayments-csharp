@@ -295,8 +295,8 @@ public class SubscriptionExpiredWebhookEventTest : TestBase
             Type = SubscriptionExpiredWebhookEventType.SubscriptionExpired,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEvent>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -746,8 +746,8 @@ public class SubscriptionExpiredWebhookEventDataTest : TestBase
                 SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEventData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEventData>(element);
         Assert.NotNull(deserialized);
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
@@ -1511,10 +1511,10 @@ public class SubscriptionExpiredWebhookEventDataIntersectionMember1Test : TestBa
                 SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
             JsonSerializer.Deserialize<SubscriptionExpiredWebhookEventDataIntersectionMember1>(
-                json
+                element
             );
         Assert.NotNull(deserialized);
 

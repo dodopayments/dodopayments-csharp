@@ -113,8 +113,8 @@ public class BrandListResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<BrandListResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<BrandListResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Brand> expectedItems =

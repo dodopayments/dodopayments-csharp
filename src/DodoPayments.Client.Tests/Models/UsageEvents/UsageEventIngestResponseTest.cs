@@ -31,8 +31,8 @@ public class UsageEventIngestResponseTest : TestBase
     {
         var model = new UsageEventIngestResponse { IngestedCount = 0 };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UsageEventIngestResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<UsageEventIngestResponse>(element);
         Assert.NotNull(deserialized);
 
         long expectedIngestedCount = 0;

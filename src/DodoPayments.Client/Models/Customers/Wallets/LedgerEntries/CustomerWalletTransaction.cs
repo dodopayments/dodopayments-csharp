@@ -10,88 +10,90 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
-[JsonConverter(typeof(ModelConverter<CustomerWalletTransaction, CustomerWalletTransactionFromRaw>))]
-public sealed record class CustomerWalletTransaction : ModelBase
+[JsonConverter(
+    typeof(JsonModelConverter<CustomerWalletTransaction, CustomerWalletTransactionFromRaw>)
+)]
+public sealed record class CustomerWalletTransaction : JsonModel
 {
     public required string ID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "id"); }
-        init { ModelBase.Set(this._rawData, "id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
+        init { JsonModel.Set(this._rawData, "id", value); }
     }
 
     public required long AfterBalance
     {
-        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "after_balance"); }
-        init { ModelBase.Set(this._rawData, "after_balance", value); }
+        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "after_balance"); }
+        init { JsonModel.Set(this._rawData, "after_balance", value); }
     }
 
     public required long Amount
     {
-        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "amount"); }
-        init { ModelBase.Set(this._rawData, "amount", value); }
+        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "amount"); }
+        init { JsonModel.Set(this._rawData, "amount", value); }
     }
 
     public required long BeforeBalance
     {
-        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "before_balance"); }
-        init { ModelBase.Set(this._rawData, "before_balance", value); }
+        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "before_balance"); }
+        init { JsonModel.Set(this._rawData, "before_balance", value); }
     }
 
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     public required string CustomerID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { ModelBase.Set(this._rawData, "customer_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
+        init { JsonModel.Set(this._rawData, "customer_id", value); }
     }
 
     public required ApiEnum<string, EventType> EventType
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, EventType>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, EventType>>(
                 this.RawData,
                 "event_type"
             );
         }
-        init { ModelBase.Set(this._rawData, "event_type", value); }
+        init { JsonModel.Set(this._rawData, "event_type", value); }
     }
 
     public required bool IsCredit
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "is_credit"); }
-        init { ModelBase.Set(this._rawData, "is_credit", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "is_credit"); }
+        init { JsonModel.Set(this._rawData, "is_credit", value); }
     }
 
     public string? Reason
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "reason"); }
-        init { ModelBase.Set(this._rawData, "reason", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason"); }
+        init { JsonModel.Set(this._rawData, "reason", value); }
     }
 
     public string? ReferenceObjectID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "reference_object_id"); }
-        init { ModelBase.Set(this._rawData, "reference_object_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "reference_object_id"); }
+        init { JsonModel.Set(this._rawData, "reference_object_id", value); }
     }
 
     /// <inheritdoc/>
@@ -138,7 +140,7 @@ public sealed record class CustomerWalletTransaction : ModelBase
     }
 }
 
-class CustomerWalletTransactionFromRaw : IFromRaw<CustomerWalletTransaction>
+class CustomerWalletTransactionFromRaw : IFromRawJson<CustomerWalletTransaction>
 {
     /// <inheritdoc/>
     public CustomerWalletTransaction FromRawUnchecked(

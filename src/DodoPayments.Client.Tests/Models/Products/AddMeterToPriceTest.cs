@@ -65,8 +65,8 @@ public class AddMeterToPriceTest : TestBase
             Name = "name",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<AddMeterToPrice>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<AddMeterToPrice>(element);
         Assert.NotNull(deserialized);
 
         string expectedMeterID = "meter_id";

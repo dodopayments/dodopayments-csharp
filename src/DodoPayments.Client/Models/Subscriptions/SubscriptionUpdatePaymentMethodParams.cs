@@ -23,8 +23,8 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 
     public required Body Body
     {
-        get { return ModelBase.GetNotNullClass<Body>(this.RawBodyData, "body"); }
-        init { ModelBase.Set(this._rawBodyData, "body", value); }
+        get { return JsonModel.GetNotNullClass<Body>(this.RawBodyData, "body"); }
+        init { JsonModel.Set(this._rawBodyData, "body", value); }
     }
 
     public SubscriptionUpdatePaymentMethodParams() { }
@@ -62,7 +62,7 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static SubscriptionUpdatePaymentMethodParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -87,9 +87,13 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
@@ -107,28 +111,28 @@ public record class Body
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public Body(New value, JsonElement? json = null)
+    public Body(New value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public Body(Existing value, JsonElement? json = null)
+    public Body(Existing value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public Body(JsonElement json)
+    public Body(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -285,14 +289,14 @@ sealed class BodyConverter : JsonConverter<Body>
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<New>(json, options);
+            var deserialized = JsonSerializer.Deserialize<New>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -303,11 +307,11 @@ sealed class BodyConverter : JsonConverter<Body>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Existing>(json, options);
+            var deserialized = JsonSerializer.Deserialize<Existing>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -316,7 +320,7 @@ sealed class BodyConverter : JsonConverter<Body>
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(Utf8JsonWriter writer, Body value, JsonSerializerOptions options)
@@ -325,24 +329,24 @@ sealed class BodyConverter : JsonConverter<Body>
     }
 }
 
-[JsonConverter(typeof(ModelConverter<New, NewFromRaw>))]
-public sealed record class New : ModelBase
+[JsonConverter(typeof(JsonModelConverter<New, NewFromRaw>))]
+public sealed record class New : JsonModel
 {
     public required ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type> Type
     {
         get
         {
-            return ModelBase.GetNotNullClass<
+            return JsonModel.GetNotNullClass<
                 ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type>
             >(this.RawData, "type");
         }
-        init { ModelBase.Set(this._rawData, "type", value); }
+        init { JsonModel.Set(this._rawData, "type", value); }
     }
 
     public string? ReturnURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "return_url"); }
-        init { ModelBase.Set(this._rawData, "return_url", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "return_url"); }
+        init { JsonModel.Set(this._rawData, "return_url", value); }
     }
 
     /// <inheritdoc/>
@@ -384,7 +388,7 @@ public sealed record class New : ModelBase
     }
 }
 
-class NewFromRaw : IFromRaw<New>
+class NewFromRaw : IFromRawJson<New>
 {
     /// <inheritdoc/>
     public New FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -432,22 +436,22 @@ sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.Su
     }
 }
 
-[JsonConverter(typeof(ModelConverter<Existing, ExistingFromRaw>))]
-public sealed record class Existing : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Existing, ExistingFromRaw>))]
+public sealed record class Existing : JsonModel
 {
     public required string PaymentMethodID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_method_id"); }
-        init { ModelBase.Set(this._rawData, "payment_method_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_method_id"); }
+        init { JsonModel.Set(this._rawData, "payment_method_id", value); }
     }
 
     public required ApiEnum<string, ExistingType> Type
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, ExistingType>>(this.RawData, "type");
+            return JsonModel.GetNotNullClass<ApiEnum<string, ExistingType>>(this.RawData, "type");
         }
-        init { ModelBase.Set(this._rawData, "type", value); }
+        init { JsonModel.Set(this._rawData, "type", value); }
     }
 
     /// <inheritdoc/>
@@ -482,7 +486,7 @@ public sealed record class Existing : ModelBase
     }
 }
 
-class ExistingFromRaw : IFromRaw<Existing>
+class ExistingFromRaw : IFromRawJson<Existing>
 {
     /// <inheritdoc/>
     public Existing FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

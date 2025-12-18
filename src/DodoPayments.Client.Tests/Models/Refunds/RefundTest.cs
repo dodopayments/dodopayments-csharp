@@ -129,8 +129,8 @@ public class RefundTest : TestBase
             Reason = "reason",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Refund>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Refund>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";

@@ -33,8 +33,8 @@ public class AttachAddonTest : TestBase
     {
         var model = new AttachAddon { AddonID = "addon_id", Quantity = 0 };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<AttachAddon>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<AttachAddon>(element);
         Assert.NotNull(deserialized);
 
         string expectedAddonID = "addon_id";

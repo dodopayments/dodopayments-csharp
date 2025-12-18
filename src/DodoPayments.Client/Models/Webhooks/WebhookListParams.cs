@@ -18,8 +18,8 @@ public sealed record class WebhookListParams : ParamsBase
     /// </summary>
     public string? Iterator
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "iterator"); }
-        init { ModelBase.Set(this._rawQueryData, "iterator", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "iterator"); }
+        init { JsonModel.Set(this._rawQueryData, "iterator", value); }
     }
 
     /// <summary>
@@ -27,8 +27,8 @@ public sealed record class WebhookListParams : ParamsBase
     /// </summary>
     public int? Limit
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "limit"); }
-        init { ModelBase.Set(this._rawQueryData, "limit", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "limit"); }
+        init { JsonModel.Set(this._rawQueryData, "limit", value); }
     }
 
     public WebhookListParams() { }
@@ -57,7 +57,7 @@ public sealed record class WebhookListParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static WebhookListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

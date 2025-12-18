@@ -31,8 +31,8 @@ public class AttachExistingCustomerTest : TestBase
     {
         var model = new AttachExistingCustomer { CustomerID = "customer_id" };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<AttachExistingCustomer>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<AttachExistingCustomer>(element);
         Assert.NotNull(deserialized);
 
         string expectedCustomerID = "customer_id";

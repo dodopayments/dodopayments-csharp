@@ -104,8 +104,8 @@ public class RefundListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<RefundListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<RefundListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<RefundListPageResponseItem> expectedItems =
@@ -234,8 +234,8 @@ public class RefundListPageResponseItemTest : TestBase
             Reason = "reason",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<RefundListPageResponseItem>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<RefundListPageResponseItem>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";

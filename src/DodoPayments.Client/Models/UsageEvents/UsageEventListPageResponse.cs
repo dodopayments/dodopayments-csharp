@@ -8,14 +8,14 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.UsageEvents;
 
 [JsonConverter(
-    typeof(ModelConverter<UsageEventListPageResponse, UsageEventListPageResponseFromRaw>)
+    typeof(JsonModelConverter<UsageEventListPageResponse, UsageEventListPageResponseFromRaw>)
 )]
-public sealed record class UsageEventListPageResponse : ModelBase
+public sealed record class UsageEventListPageResponse : JsonModel
 {
     public required IReadOnlyList<Event> Items
     {
-        get { return ModelBase.GetNotNullClass<List<Event>>(this.RawData, "items"); }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        get { return JsonModel.GetNotNullClass<List<Event>>(this.RawData, "items"); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -61,7 +61,7 @@ public sealed record class UsageEventListPageResponse : ModelBase
     }
 }
 
-class UsageEventListPageResponseFromRaw : IFromRaw<UsageEventListPageResponse>
+class UsageEventListPageResponseFromRaw : IFromRawJson<UsageEventListPageResponse>
 {
     /// <inheritdoc/>
     public UsageEventListPageResponse FromRawUnchecked(

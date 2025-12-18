@@ -9,13 +9,13 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<PaymentListPageResponse, PaymentListPageResponseFromRaw>))]
-public sealed record class PaymentListPageResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<PaymentListPageResponse, PaymentListPageResponseFromRaw>))]
+public sealed record class PaymentListPageResponse : JsonModel
 {
     public required IReadOnlyList<Item> Items
     {
-        get { return ModelBase.GetNotNullClass<List<Item>>(this.RawData, "items"); }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        get { return JsonModel.GetNotNullClass<List<Item>>(this.RawData, "items"); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -61,7 +61,7 @@ public sealed record class PaymentListPageResponse : ModelBase
     }
 }
 
-class PaymentListPageResponseFromRaw : IFromRaw<PaymentListPageResponse>
+class PaymentListPageResponseFromRaw : IFromRawJson<PaymentListPageResponse>
 {
     /// <inheritdoc/>
     public PaymentListPageResponse FromRawUnchecked(
@@ -69,91 +69,91 @@ class PaymentListPageResponseFromRaw : IFromRaw<PaymentListPageResponse>
     ) => PaymentListPageResponse.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<Item, ItemFromRaw>))]
-public sealed record class Item : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Item, ItemFromRaw>))]
+public sealed record class Item : JsonModel
 {
     public required string BrandID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "brand_id"); }
-        init { ModelBase.Set(this._rawData, "brand_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "brand_id"); }
+        init { JsonModel.Set(this._rawData, "brand_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     public required CustomerLimitedDetails Customer
     {
-        get { return ModelBase.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
-        init { ModelBase.Set(this._rawData, "customer", value); }
+        get { return JsonModel.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
+        init { JsonModel.Set(this._rawData, "customer", value); }
     }
 
     public required bool DigitalProductsDelivered
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "digital_products_delivered"); }
-        init { ModelBase.Set(this._rawData, "digital_products_delivered", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "digital_products_delivered"); }
+        init { JsonModel.Set(this._rawData, "digital_products_delivered", value); }
     }
 
     public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {
-            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     public required string PaymentID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { ModelBase.Set(this._rawData, "payment_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
+        init { JsonModel.Set(this._rawData, "payment_id", value); }
     }
 
     public required int TotalAmount
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "total_amount"); }
-        init { ModelBase.Set(this._rawData, "total_amount", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "total_amount"); }
+        init { JsonModel.Set(this._rawData, "total_amount", value); }
     }
 
     public string? PaymentMethod
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "payment_method"); }
-        init { ModelBase.Set(this._rawData, "payment_method", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_method"); }
+        init { JsonModel.Set(this._rawData, "payment_method", value); }
     }
 
     public string? PaymentMethodType
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "payment_method_type"); }
-        init { ModelBase.Set(this._rawData, "payment_method_type", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_method_type"); }
+        init { JsonModel.Set(this._rawData, "payment_method_type", value); }
     }
 
     public ApiEnum<string, IntentStatus>? Status
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, IntentStatus>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, IntentStatus>>(
                 this.RawData,
                 "status"
             );
         }
-        init { ModelBase.Set(this._rawData, "status", value); }
+        init { JsonModel.Set(this._rawData, "status", value); }
     }
 
     public string? SubscriptionID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "subscription_id"); }
-        init { ModelBase.Set(this._rawData, "subscription_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "subscription_id"); }
+        init { JsonModel.Set(this._rawData, "subscription_id", value); }
     }
 
     /// <inheritdoc/>
@@ -198,7 +198,7 @@ public sealed record class Item : ModelBase
     }
 }
 
-class ItemFromRaw : IFromRaw<Item>
+class ItemFromRaw : IFromRawJson<Item>
 {
     /// <inheritdoc/>
     public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

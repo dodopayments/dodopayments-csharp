@@ -11,17 +11,17 @@ using System = System;
 namespace DodoPayments.Client.Models.Webhooks;
 
 [JsonConverter(
-    typeof(ModelConverter<LicenseKeyCreatedWebhookEvent, LicenseKeyCreatedWebhookEventFromRaw>)
+    typeof(JsonModelConverter<LicenseKeyCreatedWebhookEvent, LicenseKeyCreatedWebhookEventFromRaw>)
 )]
-public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
+public sealed record class LicenseKeyCreatedWebhookEvent : JsonModel
 {
     /// <summary>
     /// The business identifier
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -31,12 +31,12 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<LicenseKeyCreatedWebhookEventData>(
+            return JsonModel.GetNotNullClass<LicenseKeyCreatedWebhookEventData>(
                 this.RawData,
                 "data"
             );
         }
-        init { ModelBase.Set(this._rawData, "data", value); }
+        init { JsonModel.Set(this._rawData, "data", value); }
     }
 
     /// <summary>
@@ -46,9 +46,9 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "timestamp");
+            return JsonModel.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "timestamp");
         }
-        init { ModelBase.Set(this._rawData, "timestamp", value); }
+        init { JsonModel.Set(this._rawData, "timestamp", value); }
     }
 
     /// <summary>
@@ -58,12 +58,12 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, LicenseKeyCreatedWebhookEventType>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, LicenseKeyCreatedWebhookEventType>>(
                 this.RawData,
                 "type"
             );
         }
-        init { ModelBase.Set(this._rawData, "type", value); }
+        init { JsonModel.Set(this._rawData, "type", value); }
     }
 
     /// <inheritdoc/>
@@ -104,7 +104,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent : ModelBase
     }
 }
 
-class LicenseKeyCreatedWebhookEventFromRaw : IFromRaw<LicenseKeyCreatedWebhookEvent>
+class LicenseKeyCreatedWebhookEventFromRaw : IFromRawJson<LicenseKeyCreatedWebhookEvent>
 {
     /// <inheritdoc/>
     public LicenseKeyCreatedWebhookEvent FromRawUnchecked(
@@ -116,20 +116,20 @@ class LicenseKeyCreatedWebhookEventFromRaw : IFromRaw<LicenseKeyCreatedWebhookEv
 /// Event-specific data
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         LicenseKeyCreatedWebhookEventData,
         LicenseKeyCreatedWebhookEventDataFromRaw
     >)
 )]
-public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
+public sealed record class LicenseKeyCreatedWebhookEventData : JsonModel
 {
     /// <summary>
     /// The unique identifier of the license key.
     /// </summary>
     public required string ID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "id"); }
-        init { ModelBase.Set(this._rawData, "id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
+        init { JsonModel.Set(this._rawData, "id", value); }
     }
 
     /// <summary>
@@ -137,8 +137,8 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -148,9 +148,9 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "created_at");
+            return JsonModel.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "created_at");
         }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -158,8 +158,8 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     /// </summary>
     public required string CustomerID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { ModelBase.Set(this._rawData, "customer_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
+        init { JsonModel.Set(this._rawData, "customer_id", value); }
     }
 
     /// <summary>
@@ -167,8 +167,8 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     /// </summary>
     public required int InstancesCount
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "instances_count"); }
-        init { ModelBase.Set(this._rawData, "instances_count", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "instances_count"); }
+        init { JsonModel.Set(this._rawData, "instances_count", value); }
     }
 
     /// <summary>
@@ -176,8 +176,8 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     /// </summary>
     public required string Key
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "key"); }
-        init { ModelBase.Set(this._rawData, "key", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "key"); }
+        init { JsonModel.Set(this._rawData, "key", value); }
     }
 
     /// <summary>
@@ -185,8 +185,8 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     /// </summary>
     public required string PaymentID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { ModelBase.Set(this._rawData, "payment_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
+        init { JsonModel.Set(this._rawData, "payment_id", value); }
     }
 
     /// <summary>
@@ -194,20 +194,20 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     /// </summary>
     public required string ProductID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { ModelBase.Set(this._rawData, "product_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
+        init { JsonModel.Set(this._rawData, "product_id", value); }
     }
 
     public required ApiEnum<string, LicenseKeyStatus> Status
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, LicenseKeyStatus>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, LicenseKeyStatus>>(
                 this.RawData,
                 "status"
             );
         }
-        init { ModelBase.Set(this._rawData, "status", value); }
+        init { JsonModel.Set(this._rawData, "status", value); }
     }
 
     /// <summary>
@@ -215,8 +215,8 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     /// </summary>
     public int? ActivationsLimit
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "activations_limit"); }
-        init { ModelBase.Set(this._rawData, "activations_limit", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "activations_limit"); }
+        init { JsonModel.Set(this._rawData, "activations_limit", value); }
     }
 
     /// <summary>
@@ -226,9 +226,9 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<System::DateTimeOffset>(this.RawData, "expires_at");
+            return JsonModel.GetNullableStruct<System::DateTimeOffset>(this.RawData, "expires_at");
         }
-        init { ModelBase.Set(this._rawData, "expires_at", value); }
+        init { JsonModel.Set(this._rawData, "expires_at", value); }
     }
 
     /// <summary>
@@ -237,8 +237,8 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     /// </summary>
     public string? SubscriptionID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "subscription_id"); }
-        init { ModelBase.Set(this._rawData, "subscription_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "subscription_id"); }
+        init { JsonModel.Set(this._rawData, "subscription_id", value); }
     }
 
     /// <summary>
@@ -251,7 +251,7 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<
+            return JsonModel.GetNullableClass<
                 ApiEnum<string, LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType>
             >(this.RawData, "payload_type");
         }
@@ -262,7 +262,7 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
                 return;
             }
 
-            ModelBase.Set(this._rawData, "payload_type", value);
+            JsonModel.Set(this._rawData, "payload_type", value);
         }
     }
 
@@ -332,7 +332,7 @@ public sealed record class LicenseKeyCreatedWebhookEventData : ModelBase
     }
 }
 
-class LicenseKeyCreatedWebhookEventDataFromRaw : IFromRaw<LicenseKeyCreatedWebhookEventData>
+class LicenseKeyCreatedWebhookEventDataFromRaw : IFromRawJson<LicenseKeyCreatedWebhookEventData>
 {
     /// <inheritdoc/>
     public LicenseKeyCreatedWebhookEventData FromRawUnchecked(
@@ -341,12 +341,12 @@ class LicenseKeyCreatedWebhookEventDataFromRaw : IFromRaw<LicenseKeyCreatedWebho
 }
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         LicenseKeyCreatedWebhookEventDataIntersectionMember1,
         LicenseKeyCreatedWebhookEventDataIntersectionMember1FromRaw
     >)
 )]
-public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1 : ModelBase
+public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1 : JsonModel
 {
     /// <summary>
     /// The type of payload in the data field
@@ -358,7 +358,7 @@ public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1 
     {
         get
         {
-            return ModelBase.GetNullableClass<
+            return JsonModel.GetNullableClass<
                 ApiEnum<string, LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType>
             >(this.RawData, "payload_type");
         }
@@ -369,7 +369,7 @@ public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1 
                 return;
             }
 
-            ModelBase.Set(this._rawData, "payload_type", value);
+            JsonModel.Set(this._rawData, "payload_type", value);
         }
     }
 
@@ -413,7 +413,7 @@ public sealed record class LicenseKeyCreatedWebhookEventDataIntersectionMember1 
 }
 
 class LicenseKeyCreatedWebhookEventDataIntersectionMember1FromRaw
-    : IFromRaw<LicenseKeyCreatedWebhookEventDataIntersectionMember1>
+    : IFromRawJson<LicenseKeyCreatedWebhookEventDataIntersectionMember1>
 {
     /// <inheritdoc/>
     public LicenseKeyCreatedWebhookEventDataIntersectionMember1 FromRawUnchecked(

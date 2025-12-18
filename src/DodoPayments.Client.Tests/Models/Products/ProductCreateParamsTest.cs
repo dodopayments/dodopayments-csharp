@@ -45,8 +45,8 @@ public class DigitalProductDeliveryTest : TestBase
             Instructions = "instructions",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DigitalProductDelivery>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DigitalProductDelivery>(element);
         Assert.NotNull(deserialized);
 
         string expectedExternalURL = "external_url";

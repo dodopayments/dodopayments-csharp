@@ -92,8 +92,8 @@ public class WebhookDetailsTest : TestBase
             RateLimit = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<WebhookDetails>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<WebhookDetails>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";

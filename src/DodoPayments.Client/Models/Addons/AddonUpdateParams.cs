@@ -27,12 +27,12 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(
                 this.RawBodyData,
                 "currency"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "currency", value); }
+        init { JsonModel.Set(this._rawBodyData, "currency", value); }
     }
 
     /// <summary>
@@ -40,8 +40,8 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "description"); }
-        init { ModelBase.Set(this._rawBodyData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "description"); }
+        init { JsonModel.Set(this._rawBodyData, "description", value); }
     }
 
     /// <summary>
@@ -49,8 +49,8 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public string? ImageID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "image_id"); }
-        init { ModelBase.Set(this._rawBodyData, "image_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "image_id"); }
+        init { JsonModel.Set(this._rawBodyData, "image_id", value); }
     }
 
     /// <summary>
@@ -58,8 +58,8 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "name"); }
-        init { ModelBase.Set(this._rawBodyData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "name"); }
+        init { JsonModel.Set(this._rawBodyData, "name", value); }
     }
 
     /// <summary>
@@ -67,8 +67,8 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public int? Price
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawBodyData, "price"); }
-        init { ModelBase.Set(this._rawBodyData, "price", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "price"); }
+        init { JsonModel.Set(this._rawBodyData, "price", value); }
     }
 
     /// <summary>
@@ -78,12 +78,12 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, TaxCategory>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, TaxCategory>>(
                 this.RawBodyData,
                 "tax_category"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "tax_category", value); }
+        init { JsonModel.Set(this._rawBodyData, "tax_category", value); }
     }
 
     public AddonUpdateParams() { }
@@ -119,7 +119,7 @@ public sealed record class AddonUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static AddonUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -143,9 +143,13 @@ public sealed record class AddonUpdateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

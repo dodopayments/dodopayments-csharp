@@ -9,40 +9,40 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Customers.Wallets;
 
-[JsonConverter(typeof(ModelConverter<CustomerWallet, CustomerWalletFromRaw>))]
-public sealed record class CustomerWallet : ModelBase
+[JsonConverter(typeof(JsonModelConverter<CustomerWallet, CustomerWalletFromRaw>))]
+public sealed record class CustomerWallet : JsonModel
 {
     public required long Balance
     {
-        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "balance"); }
-        init { ModelBase.Set(this._rawData, "balance", value); }
+        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "balance"); }
+        init { JsonModel.Set(this._rawData, "balance", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     public required string CustomerID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { ModelBase.Set(this._rawData, "customer_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
+        init { JsonModel.Set(this._rawData, "customer_id", value); }
     }
 
     public required DateTimeOffset UpdatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
-        init { ModelBase.Set(this._rawData, "updated_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
+        init { JsonModel.Set(this._rawData, "updated_at", value); }
     }
 
     /// <inheritdoc/>
@@ -80,7 +80,7 @@ public sealed record class CustomerWallet : ModelBase
     }
 }
 
-class CustomerWalletFromRaw : IFromRaw<CustomerWallet>
+class CustomerWalletFromRaw : IFromRawJson<CustomerWallet>
 {
     /// <inheritdoc/>
     public CustomerWallet FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

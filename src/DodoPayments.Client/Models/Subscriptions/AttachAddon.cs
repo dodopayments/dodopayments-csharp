@@ -7,19 +7,19 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
-[JsonConverter(typeof(ModelConverter<AttachAddon, AttachAddonFromRaw>))]
-public sealed record class AttachAddon : ModelBase
+[JsonConverter(typeof(JsonModelConverter<AttachAddon, AttachAddonFromRaw>))]
+public sealed record class AttachAddon : JsonModel
 {
     public required string AddonID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "addon_id"); }
-        init { ModelBase.Set(this._rawData, "addon_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "addon_id"); }
+        init { JsonModel.Set(this._rawData, "addon_id", value); }
     }
 
     public required int Quantity
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "quantity"); }
-        init { ModelBase.Set(this._rawData, "quantity", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "quantity"); }
+        init { JsonModel.Set(this._rawData, "quantity", value); }
     }
 
     /// <inheritdoc/>
@@ -54,7 +54,7 @@ public sealed record class AttachAddon : ModelBase
     }
 }
 
-class AttachAddonFromRaw : IFromRaw<AttachAddon>
+class AttachAddonFromRaw : IFromRawJson<AttachAddon>
 {
     /// <inheritdoc/>
     public AttachAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

@@ -33,8 +33,8 @@ public class AddonCartResponseItemTest : TestBase
     {
         var model = new AddonCartResponseItem { AddonID = "addon_id", Quantity = 0 };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<AddonCartResponseItem>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<AddonCartResponseItem>(element);
         Assert.NotNull(deserialized);
 
         string expectedAddonID = "addon_id";

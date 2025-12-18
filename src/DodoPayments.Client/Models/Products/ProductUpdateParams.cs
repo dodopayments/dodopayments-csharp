@@ -26,14 +26,14 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public IReadOnlyList<string>? Addons
     {
-        get { return ModelBase.GetNullableClass<List<string>>(this.RawBodyData, "addons"); }
-        init { ModelBase.Set(this._rawBodyData, "addons", value); }
+        get { return JsonModel.GetNullableClass<List<string>>(this.RawBodyData, "addons"); }
+        init { JsonModel.Set(this._rawBodyData, "addons", value); }
     }
 
     public string? BrandID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "brand_id"); }
-        init { ModelBase.Set(this._rawBodyData, "brand_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "brand_id"); }
+        init { JsonModel.Set(this._rawBodyData, "brand_id", value); }
     }
 
     /// <summary>
@@ -41,8 +41,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "description"); }
-        init { ModelBase.Set(this._rawBodyData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "description"); }
+        init { JsonModel.Set(this._rawBodyData, "description", value); }
     }
 
     /// <summary>
@@ -52,12 +52,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ProductUpdateParamsDigitalProductDelivery>(
+            return JsonModel.GetNullableClass<ProductUpdateParamsDigitalProductDelivery>(
                 this.RawBodyData,
                 "digital_product_delivery"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "digital_product_delivery", value); }
+        init { JsonModel.Set(this._rawBodyData, "digital_product_delivery", value); }
     }
 
     /// <summary>
@@ -65,8 +65,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public string? ImageID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "image_id"); }
-        init { ModelBase.Set(this._rawBodyData, "image_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "image_id"); }
+        init { JsonModel.Set(this._rawBodyData, "image_id", value); }
     }
 
     /// <summary>
@@ -79,12 +79,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<string>(
+            return JsonModel.GetNullableClass<string>(
                 this.RawBodyData,
                 "license_key_activation_message"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "license_key_activation_message", value); }
+        init { JsonModel.Set(this._rawBodyData, "license_key_activation_message", value); }
     }
 
     /// <summary>
@@ -97,12 +97,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<int>(
+            return JsonModel.GetNullableStruct<int>(
                 this.RawBodyData,
                 "license_key_activations_limit"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "license_key_activations_limit", value); }
+        init { JsonModel.Set(this._rawBodyData, "license_key_activations_limit", value); }
     }
 
     /// <summary>
@@ -115,12 +115,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<LicenseKeyDuration>(
+            return JsonModel.GetNullableClass<LicenseKeyDuration>(
                 this.RawBodyData,
                 "license_key_duration"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "license_key_duration", value); }
+        init { JsonModel.Set(this._rawBodyData, "license_key_duration", value); }
     }
 
     /// <summary>
@@ -131,8 +131,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public bool? LicenseKeyEnabled
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawBodyData, "license_key_enabled"); }
-        init { ModelBase.Set(this._rawBodyData, "license_key_enabled", value); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "license_key_enabled"); }
+        init { JsonModel.Set(this._rawBodyData, "license_key_enabled", value); }
     }
 
     /// <summary>
@@ -142,12 +142,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+            return JsonModel.GetNullableClass<Dictionary<string, string>>(
                 this.RawBodyData,
                 "metadata"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "metadata", value); }
+        init { JsonModel.Set(this._rawBodyData, "metadata", value); }
     }
 
     /// <summary>
@@ -155,8 +155,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "name"); }
-        init { ModelBase.Set(this._rawBodyData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "name"); }
+        init { JsonModel.Set(this._rawBodyData, "name", value); }
     }
 
     /// <summary>
@@ -164,8 +164,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public Price? Price
     {
-        get { return ModelBase.GetNullableClass<Price>(this.RawBodyData, "price"); }
-        init { ModelBase.Set(this._rawBodyData, "price", value); }
+        get { return JsonModel.GetNullableClass<Price>(this.RawBodyData, "price"); }
+        init { JsonModel.Set(this._rawBodyData, "price", value); }
     }
 
     /// <summary>
@@ -175,12 +175,12 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, TaxCategory>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, TaxCategory>>(
                 this.RawBodyData,
                 "tax_category"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "tax_category", value); }
+        init { JsonModel.Set(this._rawBodyData, "tax_category", value); }
     }
 
     public ProductUpdateParams() { }
@@ -216,7 +216,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static ProductUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -240,9 +240,13 @@ public sealed record class ProductUpdateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
@@ -259,20 +263,20 @@ public sealed record class ProductUpdateParams : ParamsBase
 /// Choose how you would like you digital product delivered
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         ProductUpdateParamsDigitalProductDelivery,
         ProductUpdateParamsDigitalProductDeliveryFromRaw
     >)
 )]
-public sealed record class ProductUpdateParamsDigitalProductDelivery : ModelBase
+public sealed record class ProductUpdateParamsDigitalProductDelivery : JsonModel
 {
     /// <summary>
     /// External URL to digital product
     /// </summary>
     public string? ExternalURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "external_url"); }
-        init { ModelBase.Set(this._rawData, "external_url", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "external_url"); }
+        init { JsonModel.Set(this._rawData, "external_url", value); }
     }
 
     /// <summary>
@@ -280,8 +284,8 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : ModelBase
     /// </summary>
     public IReadOnlyList<string>? Files
     {
-        get { return ModelBase.GetNullableClass<List<string>>(this.RawData, "files"); }
-        init { ModelBase.Set(this._rawData, "files", value); }
+        get { return JsonModel.GetNullableClass<List<string>>(this.RawData, "files"); }
+        init { JsonModel.Set(this._rawData, "files", value); }
     }
 
     /// <summary>
@@ -289,8 +293,8 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : ModelBase
     /// </summary>
     public string? Instructions
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "instructions"); }
-        init { ModelBase.Set(this._rawData, "instructions", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "instructions"); }
+        init { JsonModel.Set(this._rawData, "instructions", value); }
     }
 
     /// <inheritdoc/>
@@ -333,7 +337,7 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : ModelBase
 }
 
 class ProductUpdateParamsDigitalProductDeliveryFromRaw
-    : IFromRaw<ProductUpdateParamsDigitalProductDelivery>
+    : IFromRawJson<ProductUpdateParamsDigitalProductDelivery>
 {
     /// <inheritdoc/>
     public ProductUpdateParamsDigitalProductDelivery FromRawUnchecked(

@@ -9,13 +9,13 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Products;
 
-[JsonConverter(typeof(ModelConverter<Product, ProductFromRaw>))]
-public sealed record class Product : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Product, ProductFromRaw>))]
+public sealed record class Product : JsonModel
 {
     public required string BrandID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "brand_id"); }
-        init { ModelBase.Set(this._rawData, "brand_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "brand_id"); }
+        init { JsonModel.Set(this._rawData, "brand_id", value); }
     }
 
     /// <summary>
@@ -23,8 +23,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -32,8 +32,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -41,8 +41,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public required bool IsRecurring
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "is_recurring"); }
-        init { ModelBase.Set(this._rawData, "is_recurring", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "is_recurring"); }
+        init { JsonModel.Set(this._rawData, "is_recurring", value); }
     }
 
     /// <summary>
@@ -50,8 +50,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public required bool LicenseKeyEnabled
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "license_key_enabled"); }
-        init { ModelBase.Set(this._rawData, "license_key_enabled", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "license_key_enabled"); }
+        init { JsonModel.Set(this._rawData, "license_key_enabled", value); }
     }
 
     /// <summary>
@@ -61,9 +61,9 @@ public sealed record class Product : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -71,8 +71,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public required Price Price
     {
-        get { return ModelBase.GetNotNullClass<Price>(this.RawData, "price"); }
-        init { ModelBase.Set(this._rawData, "price", value); }
+        get { return JsonModel.GetNotNullClass<Price>(this.RawData, "price"); }
+        init { JsonModel.Set(this._rawData, "price", value); }
     }
 
     /// <summary>
@@ -80,8 +80,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public required string ProductID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { ModelBase.Set(this._rawData, "product_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
+        init { JsonModel.Set(this._rawData, "product_id", value); }
     }
 
     /// <summary>
@@ -91,12 +91,12 @@ public sealed record class Product : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, TaxCategory>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, TaxCategory>>(
                 this.RawData,
                 "tax_category"
             );
         }
-        init { ModelBase.Set(this._rawData, "tax_category", value); }
+        init { JsonModel.Set(this._rawData, "tax_category", value); }
     }
 
     /// <summary>
@@ -104,8 +104,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public required DateTimeOffset UpdatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
-        init { ModelBase.Set(this._rawData, "updated_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
+        init { JsonModel.Set(this._rawData, "updated_at", value); }
     }
 
     /// <summary>
@@ -113,8 +113,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public IReadOnlyList<string>? Addons
     {
-        get { return ModelBase.GetNullableClass<List<string>>(this.RawData, "addons"); }
-        init { ModelBase.Set(this._rawData, "addons", value); }
+        get { return JsonModel.GetNullableClass<List<string>>(this.RawData, "addons"); }
+        init { JsonModel.Set(this._rawData, "addons", value); }
     }
 
     /// <summary>
@@ -122,20 +122,20 @@ public sealed record class Product : ModelBase
     /// </summary>
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "description"); }
-        init { ModelBase.Set(this._rawData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
+        init { JsonModel.Set(this._rawData, "description", value); }
     }
 
     public ProductDigitalProductDelivery? DigitalProductDelivery
     {
         get
         {
-            return ModelBase.GetNullableClass<ProductDigitalProductDelivery>(
+            return JsonModel.GetNullableClass<ProductDigitalProductDelivery>(
                 this.RawData,
                 "digital_product_delivery"
             );
         }
-        init { ModelBase.Set(this._rawData, "digital_product_delivery", value); }
+        init { JsonModel.Set(this._rawData, "digital_product_delivery", value); }
     }
 
     /// <summary>
@@ -143,8 +143,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public string? Image
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "image"); }
-        init { ModelBase.Set(this._rawData, "image", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "image"); }
+        init { JsonModel.Set(this._rawData, "image", value); }
     }
 
     /// <summary>
@@ -154,12 +154,12 @@ public sealed record class Product : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<string>(
+            return JsonModel.GetNullableClass<string>(
                 this.RawData,
                 "license_key_activation_message"
             );
         }
-        init { ModelBase.Set(this._rawData, "license_key_activation_message", value); }
+        init { JsonModel.Set(this._rawData, "license_key_activation_message", value); }
     }
 
     /// <summary>
@@ -169,9 +169,9 @@ public sealed record class Product : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<int>(this.RawData, "license_key_activations_limit");
+            return JsonModel.GetNullableStruct<int>(this.RawData, "license_key_activations_limit");
         }
-        init { ModelBase.Set(this._rawData, "license_key_activations_limit", value); }
+        init { JsonModel.Set(this._rawData, "license_key_activations_limit", value); }
     }
 
     /// <summary>
@@ -181,12 +181,12 @@ public sealed record class Product : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<LicenseKeyDuration>(
+            return JsonModel.GetNullableClass<LicenseKeyDuration>(
                 this.RawData,
                 "license_key_duration"
             );
         }
-        init { ModelBase.Set(this._rawData, "license_key_duration", value); }
+        init { JsonModel.Set(this._rawData, "license_key_duration", value); }
     }
 
     /// <summary>
@@ -194,8 +194,8 @@ public sealed record class Product : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <inheritdoc/>
@@ -246,7 +246,7 @@ public sealed record class Product : ModelBase
     }
 }
 
-class ProductFromRaw : IFromRaw<Product>
+class ProductFromRaw : IFromRawJson<Product>
 {
     /// <inheritdoc/>
     public Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -254,17 +254,17 @@ class ProductFromRaw : IFromRaw<Product>
 }
 
 [JsonConverter(
-    typeof(ModelConverter<ProductDigitalProductDelivery, ProductDigitalProductDeliveryFromRaw>)
+    typeof(JsonModelConverter<ProductDigitalProductDelivery, ProductDigitalProductDeliveryFromRaw>)
 )]
-public sealed record class ProductDigitalProductDelivery : ModelBase
+public sealed record class ProductDigitalProductDelivery : JsonModel
 {
     /// <summary>
     /// External URL to digital product
     /// </summary>
     public string? ExternalURL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "external_url"); }
-        init { ModelBase.Set(this._rawData, "external_url", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "external_url"); }
+        init { JsonModel.Set(this._rawData, "external_url", value); }
     }
 
     /// <summary>
@@ -272,8 +272,8 @@ public sealed record class ProductDigitalProductDelivery : ModelBase
     /// </summary>
     public IReadOnlyList<File>? Files
     {
-        get { return ModelBase.GetNullableClass<List<File>>(this.RawData, "files"); }
-        init { ModelBase.Set(this._rawData, "files", value); }
+        get { return JsonModel.GetNullableClass<List<File>>(this.RawData, "files"); }
+        init { JsonModel.Set(this._rawData, "files", value); }
     }
 
     /// <summary>
@@ -281,8 +281,8 @@ public sealed record class ProductDigitalProductDelivery : ModelBase
     /// </summary>
     public string? Instructions
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "instructions"); }
-        init { ModelBase.Set(this._rawData, "instructions", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "instructions"); }
+        init { JsonModel.Set(this._rawData, "instructions", value); }
     }
 
     /// <inheritdoc/>
@@ -325,7 +325,7 @@ public sealed record class ProductDigitalProductDelivery : ModelBase
     }
 }
 
-class ProductDigitalProductDeliveryFromRaw : IFromRaw<ProductDigitalProductDelivery>
+class ProductDigitalProductDeliveryFromRaw : IFromRawJson<ProductDigitalProductDelivery>
 {
     /// <inheritdoc/>
     public ProductDigitalProductDelivery FromRawUnchecked(
@@ -333,25 +333,25 @@ class ProductDigitalProductDeliveryFromRaw : IFromRaw<ProductDigitalProductDeliv
     ) => ProductDigitalProductDelivery.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ModelConverter<File, FileFromRaw>))]
-public sealed record class File : ModelBase
+[JsonConverter(typeof(JsonModelConverter<File, FileFromRaw>))]
+public sealed record class File : JsonModel
 {
     public required string FileID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "file_id"); }
-        init { ModelBase.Set(this._rawData, "file_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "file_id"); }
+        init { JsonModel.Set(this._rawData, "file_id", value); }
     }
 
     public required string FileName
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "file_name"); }
-        init { ModelBase.Set(this._rawData, "file_name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "file_name"); }
+        init { JsonModel.Set(this._rawData, "file_name", value); }
     }
 
     public required string URL
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "url"); }
-        init { ModelBase.Set(this._rawData, "url", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
+        init { JsonModel.Set(this._rawData, "url", value); }
     }
 
     /// <inheritdoc/>
@@ -387,7 +387,7 @@ public sealed record class File : ModelBase
     }
 }
 
-class FileFromRaw : IFromRaw<File>
+class FileFromRaw : IFromRawJson<File>
 {
     /// <inheritdoc/>
     public File FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

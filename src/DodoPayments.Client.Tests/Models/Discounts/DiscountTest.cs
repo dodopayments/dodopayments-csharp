@@ -102,8 +102,8 @@ public class DiscountTest : TestBase
             UsageLimit = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Discount>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Discount>(element);
         Assert.NotNull(deserialized);
 
         int expectedAmount = 0;

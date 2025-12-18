@@ -8,14 +8,14 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.Subscriptions;
 
 [JsonConverter(
-    typeof(ModelConverter<SubscriptionChargeResponse, SubscriptionChargeResponseFromRaw>)
+    typeof(JsonModelConverter<SubscriptionChargeResponse, SubscriptionChargeResponseFromRaw>)
 )]
-public sealed record class SubscriptionChargeResponse : ModelBase
+public sealed record class SubscriptionChargeResponse : JsonModel
 {
     public required string PaymentID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { ModelBase.Set(this._rawData, "payment_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
+        init { JsonModel.Set(this._rawData, "payment_id", value); }
     }
 
     /// <inheritdoc/>
@@ -58,7 +58,7 @@ public sealed record class SubscriptionChargeResponse : ModelBase
     }
 }
 
-class SubscriptionChargeResponseFromRaw : IFromRaw<SubscriptionChargeResponse>
+class SubscriptionChargeResponseFromRaw : IFromRawJson<SubscriptionChargeResponse>
 {
     /// <inheritdoc/>
     public SubscriptionChargeResponse FromRawUnchecked(

@@ -8,8 +8,8 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<PaymentCreateResponse, PaymentCreateResponseFromRaw>))]
-public sealed record class PaymentCreateResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<PaymentCreateResponse, PaymentCreateResponseFromRaw>))]
+public sealed record class PaymentCreateResponse : JsonModel
 {
     /// <summary>
     /// Client secret used to load Dodo checkout SDK NOTE : Dodo checkout SDK will
@@ -17,8 +17,8 @@ public sealed record class PaymentCreateResponse : ModelBase
     /// </summary>
     public required string ClientSecret
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "client_secret"); }
-        init { ModelBase.Set(this._rawData, "client_secret", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "client_secret"); }
+        init { JsonModel.Set(this._rawData, "client_secret", value); }
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public sealed record class PaymentCreateResponse : ModelBase
     /// </summary>
     public required CustomerLimitedDetails Customer
     {
-        get { return ModelBase.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
-        init { ModelBase.Set(this._rawData, "customer", value); }
+        get { return JsonModel.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
+        init { JsonModel.Set(this._rawData, "customer", value); }
     }
 
     /// <summary>
@@ -37,9 +37,9 @@ public sealed record class PaymentCreateResponse : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -47,8 +47,8 @@ public sealed record class PaymentCreateResponse : ModelBase
     /// </summary>
     public required string PaymentID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { ModelBase.Set(this._rawData, "payment_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
+        init { JsonModel.Set(this._rawData, "payment_id", value); }
     }
 
     /// <summary>
@@ -56,8 +56,8 @@ public sealed record class PaymentCreateResponse : ModelBase
     /// </summary>
     public required int TotalAmount
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "total_amount"); }
-        init { ModelBase.Set(this._rawData, "total_amount", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "total_amount"); }
+        init { JsonModel.Set(this._rawData, "total_amount", value); }
     }
 
     /// <summary>
@@ -65,8 +65,8 @@ public sealed record class PaymentCreateResponse : ModelBase
     /// </summary>
     public string? DiscountID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "discount_id"); }
-        init { ModelBase.Set(this._rawData, "discount_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "discount_id"); }
+        init { JsonModel.Set(this._rawData, "discount_id", value); }
     }
 
     /// <summary>
@@ -74,8 +74,8 @@ public sealed record class PaymentCreateResponse : ModelBase
     /// </summary>
     public DateTimeOffset? ExpiresOn
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_on"); }
-        init { ModelBase.Set(this._rawData, "expires_on", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_on"); }
+        init { JsonModel.Set(this._rawData, "expires_on", value); }
     }
 
     /// <summary>
@@ -83,8 +83,8 @@ public sealed record class PaymentCreateResponse : ModelBase
     /// </summary>
     public string? PaymentLink
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "payment_link"); }
-        init { ModelBase.Set(this._rawData, "payment_link", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_link"); }
+        init { JsonModel.Set(this._rawData, "payment_link", value); }
     }
 
     /// <summary>
@@ -94,12 +94,12 @@ public sealed record class PaymentCreateResponse : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<List<OneTimeProductCartItem>>(
+            return JsonModel.GetNullableClass<List<OneTimeProductCartItem>>(
                 this.RawData,
                 "product_cart"
             );
         }
-        init { ModelBase.Set(this._rawData, "product_cart", value); }
+        init { JsonModel.Set(this._rawData, "product_cart", value); }
     }
 
     /// <inheritdoc/>
@@ -146,7 +146,7 @@ public sealed record class PaymentCreateResponse : ModelBase
     }
 }
 
-class PaymentCreateResponseFromRaw : IFromRaw<PaymentCreateResponse>
+class PaymentCreateResponseFromRaw : IFromRawJson<PaymentCreateResponse>
 {
     /// <inheritdoc/>
     public PaymentCreateResponse FromRawUnchecked(

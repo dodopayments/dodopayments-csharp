@@ -8,8 +8,8 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Discounts;
 
-[JsonConverter(typeof(ModelConverter<Discount, DiscountFromRaw>))]
-public sealed record class Discount : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Discount, DiscountFromRaw>))]
+public sealed record class Discount : JsonModel
 {
     /// <summary>
     /// The discount amount.
@@ -19,8 +19,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public required int Amount
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "amount"); }
-        init { ModelBase.Set(this._rawData, "amount", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "amount"); }
+        init { JsonModel.Set(this._rawData, "amount", value); }
     }
 
     /// <summary>
@@ -28,8 +28,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -37,8 +37,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public required string Code
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "code"); }
-        init { ModelBase.Set(this._rawData, "code", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "code"); }
+        init { JsonModel.Set(this._rawData, "code", value); }
     }
 
     /// <summary>
@@ -46,8 +46,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -55,8 +55,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public required string DiscountID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "discount_id"); }
-        init { ModelBase.Set(this._rawData, "discount_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "discount_id"); }
+        init { JsonModel.Set(this._rawData, "discount_id", value); }
     }
 
     /// <summary>
@@ -64,8 +64,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public required IReadOnlyList<string> RestrictedTo
     {
-        get { return ModelBase.GetNotNullClass<List<string>>(this.RawData, "restricted_to"); }
-        init { ModelBase.Set(this._rawData, "restricted_to", value); }
+        get { return JsonModel.GetNotNullClass<List<string>>(this.RawData, "restricted_to"); }
+        init { JsonModel.Set(this._rawData, "restricted_to", value); }
     }
 
     /// <summary>
@@ -73,8 +73,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public required int TimesUsed
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "times_used"); }
-        init { ModelBase.Set(this._rawData, "times_used", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "times_used"); }
+        init { JsonModel.Set(this._rawData, "times_used", value); }
     }
 
     /// <summary>
@@ -84,9 +84,9 @@ public sealed record class Discount : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, DiscountType>>(this.RawData, "type");
+            return JsonModel.GetNotNullClass<ApiEnum<string, DiscountType>>(this.RawData, "type");
         }
-        init { ModelBase.Set(this._rawData, "type", value); }
+        init { JsonModel.Set(this._rawData, "type", value); }
     }
 
     /// <summary>
@@ -94,8 +94,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_at"); }
-        init { ModelBase.Set(this._rawData, "expires_at", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_at"); }
+        init { JsonModel.Set(this._rawData, "expires_at", value); }
     }
 
     /// <summary>
@@ -103,8 +103,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <summary>
@@ -114,8 +114,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public int? SubscriptionCycles
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "subscription_cycles"); }
-        init { ModelBase.Set(this._rawData, "subscription_cycles", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "subscription_cycles"); }
+        init { JsonModel.Set(this._rawData, "subscription_cycles", value); }
     }
 
     /// <summary>
@@ -123,8 +123,8 @@ public sealed record class Discount : ModelBase
     /// </summary>
     public int? UsageLimit
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "usage_limit"); }
-        init { ModelBase.Set(this._rawData, "usage_limit", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "usage_limit"); }
+        init { JsonModel.Set(this._rawData, "usage_limit", value); }
     }
 
     /// <inheritdoc/>
@@ -169,7 +169,7 @@ public sealed record class Discount : ModelBase
     }
 }
 
-class DiscountFromRaw : IFromRaw<Discount>
+class DiscountFromRaw : IFromRawJson<Discount>
 {
     /// <inheritdoc/>
     public Discount FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

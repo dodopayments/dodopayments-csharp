@@ -88,8 +88,8 @@ public class AddonResponseTest : TestBase
             Image = "image",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<AddonResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<AddonResponse>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";

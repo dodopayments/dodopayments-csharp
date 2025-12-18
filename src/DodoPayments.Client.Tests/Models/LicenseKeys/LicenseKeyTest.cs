@@ -97,8 +97,8 @@ public class LicenseKeyTest : TestBase
             SubscriptionID = "subscription_id",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKey>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKey>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "lic_123";

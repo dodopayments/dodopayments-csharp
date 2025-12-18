@@ -19,14 +19,14 @@ public sealed record class CustomerCreateParams : ParamsBase
 
     public required string Email
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "email"); }
-        init { ModelBase.Set(this._rawBodyData, "email", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "email"); }
+        init { JsonModel.Set(this._rawBodyData, "email", value); }
     }
 
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "name"); }
-        init { ModelBase.Set(this._rawBodyData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "name"); }
+        init { JsonModel.Set(this._rawBodyData, "name", value); }
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public sealed record class CustomerCreateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+            return JsonModel.GetNullableClass<Dictionary<string, string>>(
                 this.RawBodyData,
                 "metadata"
             );
@@ -48,14 +48,14 @@ public sealed record class CustomerCreateParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawBodyData, "metadata", value);
+            JsonModel.Set(this._rawBodyData, "metadata", value);
         }
     }
 
     public string? PhoneNumber
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "phone_number"); }
-        init { ModelBase.Set(this._rawBodyData, "phone_number", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "phone_number"); }
+        init { JsonModel.Set(this._rawBodyData, "phone_number", value); }
     }
 
     public CustomerCreateParams() { }
@@ -91,7 +91,7 @@ public sealed record class CustomerCreateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static CustomerCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -113,9 +113,13 @@ public sealed record class CustomerCreateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

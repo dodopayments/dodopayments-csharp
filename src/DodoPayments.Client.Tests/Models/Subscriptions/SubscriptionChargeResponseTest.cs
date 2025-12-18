@@ -31,8 +31,8 @@ public class SubscriptionChargeResponseTest : TestBase
     {
         var model = new SubscriptionChargeResponse { PaymentID = "payment_id" };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionChargeResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionChargeResponse>(element);
         Assert.NotNull(deserialized);
 
         string expectedPaymentID = "payment_id";

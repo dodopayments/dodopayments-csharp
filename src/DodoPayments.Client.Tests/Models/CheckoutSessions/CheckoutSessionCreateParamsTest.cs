@@ -65,8 +65,8 @@ public class ProductCartTest : TestBase
             Amount = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ProductCart>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<ProductCart>(element);
         Assert.NotNull(deserialized);
 
         string expectedProductID = "product_id";
@@ -209,8 +209,8 @@ public class BillingAddressTest : TestBase
             Zipcode = "zipcode",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<BillingAddress>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<BillingAddress>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, CountryCode> expectedCountry = CountryCode.Af;
@@ -356,8 +356,8 @@ public class CustomizationTest : TestBase
             Theme = Theme.Dark,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Customization>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Customization>(element);
         Assert.NotNull(deserialized);
 
         string expectedForceLanguage = "force_language";
@@ -652,8 +652,8 @@ public class FeatureFlagsTest : TestBase
             AlwaysCreateNewCustomer = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<FeatureFlags>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<FeatureFlags>(element);
         Assert.NotNull(deserialized);
 
         bool expectedAllowCurrencySelection = true;
@@ -884,8 +884,8 @@ public class SubscriptionDataTest : TestBase
             TrialPeriodDays = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionData>(element);
         Assert.NotNull(deserialized);
 
         OnDemandSubscription expectedOnDemand = new()
