@@ -392,6 +392,8 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         return e is IOException || e is DodoPaymentsIOException;
     }
 
+    public void Dispose() => this.HttpClient.Dispose();
+
     public DodoPaymentsClient()
     {
         _options = new();

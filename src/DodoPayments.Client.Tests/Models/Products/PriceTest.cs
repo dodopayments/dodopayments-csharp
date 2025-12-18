@@ -11,7 +11,7 @@ namespace DodoPayments.Client.Tests.Models.Products;
 public class PriceTest : TestBase
 {
     [Fact]
-    public void one_timeValidation_Works()
+    public void OneTimeValidationWorks()
     {
         Price value = new(
             new OneTimePrice()
@@ -30,7 +30,7 @@ public class PriceTest : TestBase
     }
 
     [Fact]
-    public void recurringValidation_Works()
+    public void RecurringValidationWorks()
     {
         Price value = new(
             new RecurringPrice()
@@ -52,7 +52,7 @@ public class PriceTest : TestBase
     }
 
     [Fact]
-    public void usage_basedValidation_Works()
+    public void UsageBasedValidationWorks()
     {
         Price value = new(
             new UsageBasedPrice()
@@ -85,7 +85,7 @@ public class PriceTest : TestBase
     }
 
     [Fact]
-    public void one_timeSerializationRoundtrip_Works()
+    public void OneTimeSerializationRoundtripWorks()
     {
         Price value = new(
             new OneTimePrice()
@@ -107,7 +107,7 @@ public class PriceTest : TestBase
     }
 
     [Fact]
-    public void recurringSerializationRoundtrip_Works()
+    public void RecurringSerializationRoundtripWorks()
     {
         Price value = new(
             new RecurringPrice()
@@ -132,7 +132,7 @@ public class PriceTest : TestBase
     }
 
     [Fact]
-    public void usage_basedSerializationRoundtrip_Works()
+    public void UsageBasedSerializationRoundtripWorks()
     {
         Price value = new(
             new UsageBasedPrice()
