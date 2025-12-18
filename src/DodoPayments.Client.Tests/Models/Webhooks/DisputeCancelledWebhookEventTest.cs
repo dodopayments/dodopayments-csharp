@@ -111,8 +111,8 @@ public class DisputeCancelledWebhookEventTest : TestBase
             Type = DisputeCancelledWebhookEventType.DisputeCancelled,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEvent>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -254,8 +254,8 @@ public class DisputeCancelledWebhookEventDataTest : TestBase
             PayloadType = DisputeCancelledWebhookEventDataIntersectionMember1PayloadType.Dispute,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEventData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEventData>(element);
         Assert.NotNull(deserialized);
 
         string expectedAmount = "amount";
@@ -515,9 +515,11 @@ public class DisputeCancelledWebhookEventDataIntersectionMember1Test : TestBase
             PayloadType = DisputeCancelledWebhookEventDataIntersectionMember1PayloadType.Dispute,
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
-            JsonSerializer.Deserialize<DisputeCancelledWebhookEventDataIntersectionMember1>(json);
+            JsonSerializer.Deserialize<DisputeCancelledWebhookEventDataIntersectionMember1>(
+                element
+            );
         Assert.NotNull(deserialized);
 
         ApiEnum<

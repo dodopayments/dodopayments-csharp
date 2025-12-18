@@ -27,8 +27,8 @@ public class BodyTest : TestBase
     public void NewSerializationRoundtripWorks()
     {
         Body value = new(new New() { Type = Type.New, ReturnURL = "return_url" });
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Body>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Body>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -39,8 +39,8 @@ public class BodyTest : TestBase
         Body value = new(
             new Existing() { PaymentMethodID = "payment_method_id", Type = ExistingType.Existing }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Body>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Body>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -76,8 +76,8 @@ public class NewTest : TestBase
     {
         var model = new New { Type = Type.New, ReturnURL = "return_url" };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<New>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<New>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Type> expectedType = Type.New;
@@ -236,8 +236,8 @@ public class ExistingTest : TestBase
             Type = ExistingType.Existing,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Existing>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Existing>(element);
         Assert.NotNull(deserialized);
 
         string expectedPaymentMethodID = "payment_method_id";

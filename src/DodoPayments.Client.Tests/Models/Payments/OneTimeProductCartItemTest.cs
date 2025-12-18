@@ -50,8 +50,8 @@ public class OneTimeProductCartItemTest : TestBase
             Amount = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<OneTimeProductCartItem>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<OneTimeProductCartItem>(element);
         Assert.NotNull(deserialized);
 
         string expectedProductID = "product_id";

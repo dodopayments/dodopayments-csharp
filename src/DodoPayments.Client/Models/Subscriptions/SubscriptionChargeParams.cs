@@ -27,8 +27,8 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     /// </summary>
     public required int ProductPrice
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawBodyData, "product_price"); }
-        init { ModelBase.Set(this._rawBodyData, "product_price", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawBodyData, "product_price"); }
+        init { JsonModel.Set(this._rawBodyData, "product_price", value); }
     }
 
     /// <summary>
@@ -40,12 +40,12 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(
+            return JsonModel.GetNullableStruct<bool>(
                 this.RawBodyData,
                 "adaptive_currency_fees_inclusive"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "adaptive_currency_fees_inclusive", value); }
+        init { JsonModel.Set(this._rawBodyData, "adaptive_currency_fees_inclusive", value); }
     }
 
     /// <summary>
@@ -55,12 +55,12 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<CustomerBalanceConfig>(
+            return JsonModel.GetNullableClass<CustomerBalanceConfig>(
                 this.RawBodyData,
                 "customer_balance_config"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "customer_balance_config", value); }
+        init { JsonModel.Set(this._rawBodyData, "customer_balance_config", value); }
     }
 
     /// <summary>
@@ -71,12 +71,12 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, string>>(
+            return JsonModel.GetNullableClass<Dictionary<string, string>>(
                 this.RawBodyData,
                 "metadata"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "metadata", value); }
+        init { JsonModel.Set(this._rawBodyData, "metadata", value); }
     }
 
     /// <summary>
@@ -87,12 +87,12 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(
+            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(
                 this.RawBodyData,
                 "product_currency"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "product_currency", value); }
+        init { JsonModel.Set(this._rawBodyData, "product_currency", value); }
     }
 
     /// <summary>
@@ -101,8 +101,8 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     /// </summary>
     public string? ProductDescription
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "product_description"); }
-        init { ModelBase.Set(this._rawBodyData, "product_description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "product_description"); }
+        init { JsonModel.Set(this._rawBodyData, "product_description", value); }
     }
 
     public SubscriptionChargeParams() { }
@@ -138,7 +138,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static SubscriptionChargeParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -163,9 +163,13 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
@@ -181,8 +185,8 @@ public sealed record class SubscriptionChargeParams : ParamsBase
 /// <summary>
 /// Specify how customer balance is used for the payment
 /// </summary>
-[JsonConverter(typeof(ModelConverter<CustomerBalanceConfig, CustomerBalanceConfigFromRaw>))]
-public sealed record class CustomerBalanceConfig : ModelBase
+[JsonConverter(typeof(JsonModelConverter<CustomerBalanceConfig, CustomerBalanceConfigFromRaw>))]
+public sealed record class CustomerBalanceConfig : JsonModel
 {
     /// <summary>
     /// Allows Customer Credit to be purchased to settle payments
@@ -191,12 +195,12 @@ public sealed record class CustomerBalanceConfig : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(
+            return JsonModel.GetNullableStruct<bool>(
                 this.RawData,
                 "allow_customer_credits_purchase"
             );
         }
-        init { ModelBase.Set(this._rawData, "allow_customer_credits_purchase", value); }
+        init { JsonModel.Set(this._rawData, "allow_customer_credits_purchase", value); }
     }
 
     /// <summary>
@@ -206,9 +210,9 @@ public sealed record class CustomerBalanceConfig : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableStruct<bool>(this.RawData, "allow_customer_credits_usage");
+            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_credits_usage");
         }
-        init { ModelBase.Set(this._rawData, "allow_customer_credits_usage", value); }
+        init { JsonModel.Set(this._rawData, "allow_customer_credits_usage", value); }
     }
 
     /// <inheritdoc/>
@@ -245,7 +249,7 @@ public sealed record class CustomerBalanceConfig : ModelBase
     }
 }
 
-class CustomerBalanceConfigFromRaw : IFromRaw<CustomerBalanceConfig>
+class CustomerBalanceConfigFromRaw : IFromRawJson<CustomerBalanceConfig>
 {
     /// <inheritdoc/>
     public CustomerBalanceConfig FromRawUnchecked(

@@ -108,8 +108,8 @@ public class MeterFilterTest : TestBase
             Conjunction = MeterFilterConjunction.And,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilter>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<MeterFilter>(element);
         Assert.NotNull(deserialized);
 
         Clauses expectedClauses = new(
@@ -218,8 +218,8 @@ public class ClausesTest : TestBase
                 },
             ]
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Clauses>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Clauses>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -246,8 +246,8 @@ public class ClausesTest : TestBase
                 },
             ]
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Clauses>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Clauses>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -300,8 +300,8 @@ public class MeterFilterConditionTest : TestBase
             Value = "string",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterFilterCondition>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<MeterFilterCondition>(element);
         Assert.NotNull(deserialized);
 
         string expectedKey = "x";
@@ -422,8 +422,8 @@ public class MeterFilterConditionValueTest : TestBase
     public void StringSerializationRoundtripWorks()
     {
         MeterFilterConditionValue value = new("string");
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -432,8 +432,8 @@ public class MeterFilterConditionValueTest : TestBase
     public void DoubleSerializationRoundtripWorks()
     {
         MeterFilterConditionValue value = new(0);
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -442,8 +442,8 @@ public class MeterFilterConditionValueTest : TestBase
     public void BoolSerializationRoundtripWorks()
     {
         MeterFilterConditionValue value = new(true);
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -528,8 +528,8 @@ public class ClausesMeterFilterTest : TestBase
             Conjunction = ClausesMeterFilterConjunction.And,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilter>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilter>(element);
         Assert.NotNull(deserialized);
 
         ClausesMeterFilterClauses expectedClauses = new(
@@ -627,8 +627,8 @@ public class ClausesMeterFilterClausesTest : TestBase
                 },
             ]
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClauses>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClauses>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -655,8 +655,8 @@ public class ClausesMeterFilterClausesTest : TestBase
                 },
             ]
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClauses>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClauses>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -711,9 +711,9 @@ public class ClausesMeterFilterClausesMeterFilterConditionTest : TestBase
             Value = "string",
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
-            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterCondition>(json);
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterCondition>(element);
         Assert.NotNull(deserialized);
 
         string expectedKey = "x";
@@ -839,9 +839,9 @@ public class ClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
     public void StringSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
-        string json = JsonSerializer.Serialize(value);
+        string element = JsonSerializer.Serialize(value);
         var deserialized =
-            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(json);
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -850,9 +850,9 @@ public class ClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
     public void DoubleSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
-        string json = JsonSerializer.Serialize(value);
+        string element = JsonSerializer.Serialize(value);
         var deserialized =
-            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(json);
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -861,9 +861,9 @@ public class ClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
     public void BoolSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
-        string json = JsonSerializer.Serialize(value);
+        string element = JsonSerializer.Serialize(value);
         var deserialized =
-            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(json);
+            JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -952,8 +952,10 @@ public class ClausesMeterFilterClausesMeterFilterTest : TestBase
             Conjunction = ClausesMeterFilterClausesMeterFilterConjunction.And,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilter>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilter>(
+            element
+        );
         Assert.NotNull(deserialized);
 
         ClausesMeterFilterClausesMeterFilterClauses expectedClauses = new(
@@ -1053,9 +1055,9 @@ public class ClausesMeterFilterClausesMeterFilterClausesTest : TestBase
                 },
             ]
         );
-        string json = JsonSerializer.Serialize(value);
+        string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClauses>(
-            json
+            element
         );
 
         Assert.Equal(value, deserialized);
@@ -1081,9 +1083,9 @@ public class ClausesMeterFilterClausesMeterFilterClausesTest : TestBase
                 },
             ]
         );
-        string json = JsonSerializer.Serialize(value);
+        string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClauses>(
-            json
+            element
         );
 
         Assert.Equal(value, deserialized);
@@ -1148,10 +1150,10 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionTest
             Value = "string",
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>(
-                json
+                element
             );
         Assert.NotNull(deserialized);
 
@@ -1307,10 +1309,10 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
     public void StringSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
-        string json = JsonSerializer.Serialize(value);
+        string element = JsonSerializer.Serialize(value);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
-                json
+                element
             );
 
         Assert.Equal(value, deserialized);
@@ -1320,10 +1322,10 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
     public void DoubleSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
-        string json = JsonSerializer.Serialize(value);
+        string element = JsonSerializer.Serialize(value);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
-                json
+                element
             );
 
         Assert.Equal(value, deserialized);
@@ -1333,10 +1335,10 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
     public void BoolSerializationRoundtripWorks()
     {
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
-        string json = JsonSerializer.Serialize(value);
+        string element = JsonSerializer.Serialize(value);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
-                json
+                element
             );
 
         Assert.Equal(value, deserialized);
@@ -1424,10 +1426,10 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterTest : TestBa
             Conjunction = Conjunction.And,
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>(
-                json
+                element
             );
         Assert.NotNull(deserialized);
 
@@ -1518,8 +1520,8 @@ public class ClauseTest : TestBase
             Value = "string",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Clause>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Clause>(element);
         Assert.NotNull(deserialized);
 
         string expectedKey = "x";
@@ -1640,8 +1642,8 @@ public class ClauseValueTest : TestBase
     public void StringSerializationRoundtripWorks()
     {
         ClauseValue value = new("string");
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<ClauseValue>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClauseValue>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1650,8 +1652,8 @@ public class ClauseValueTest : TestBase
     public void DoubleSerializationRoundtripWorks()
     {
         ClauseValue value = new(0);
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<ClauseValue>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClauseValue>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1660,8 +1662,8 @@ public class ClauseValueTest : TestBase
     public void BoolSerializationRoundtripWorks()
     {
         ClauseValue value = new(true);
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<ClauseValue>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<ClauseValue>(element);
 
         Assert.Equal(value, deserialized);
     }

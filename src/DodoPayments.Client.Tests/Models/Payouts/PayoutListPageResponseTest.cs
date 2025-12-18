@@ -129,8 +129,8 @@ public class PayoutListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PayoutListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PayoutListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Item> expectedItems =
@@ -301,8 +301,8 @@ public class ItemTest : TestBase
             Remarks = "remarks",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Item>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Item>(element);
         Assert.NotNull(deserialized);
 
         long expectedAmount = 0;

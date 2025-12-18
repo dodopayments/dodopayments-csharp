@@ -90,8 +90,8 @@ public class UsageEventListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UsageEventListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<UsageEventListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Event> expectedItems =

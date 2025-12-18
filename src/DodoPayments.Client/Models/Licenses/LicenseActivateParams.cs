@@ -19,14 +19,14 @@ public sealed record class LicenseActivateParams : ParamsBase
 
     public required string LicenseKey
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "license_key"); }
-        init { ModelBase.Set(this._rawBodyData, "license_key", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "license_key"); }
+        init { JsonModel.Set(this._rawBodyData, "license_key", value); }
     }
 
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "name"); }
-        init { ModelBase.Set(this._rawBodyData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "name"); }
+        init { JsonModel.Set(this._rawBodyData, "name", value); }
     }
 
     public LicenseActivateParams() { }
@@ -62,7 +62,7 @@ public sealed record class LicenseActivateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static LicenseActivateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -84,9 +84,13 @@ public sealed record class LicenseActivateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

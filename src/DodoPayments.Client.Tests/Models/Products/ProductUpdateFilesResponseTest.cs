@@ -45,8 +45,8 @@ public class ProductUpdateFilesResponseTest : TestBase
             URL = "url",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ProductUpdateFilesResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<ProductUpdateFilesResponse>(element);
         Assert.NotNull(deserialized);
 
         string expectedFileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";

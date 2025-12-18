@@ -139,8 +139,8 @@ public class SubscriptionCreateResponseTest : TestBase
             PaymentLink = "payment_link",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionCreateResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionCreateResponse>(element);
         Assert.NotNull(deserialized);
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
@@ -374,8 +374,8 @@ public class OneTimeProductCartTest : TestBase
     {
         var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<OneTimeProductCart>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<OneTimeProductCart>(element);
         Assert.NotNull(deserialized);
 
         string expectedProductID = "product_id";

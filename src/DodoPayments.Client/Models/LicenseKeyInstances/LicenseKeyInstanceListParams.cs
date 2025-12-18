@@ -15,8 +15,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public string? LicenseKeyID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "license_key_id"); }
-        init { ModelBase.Set(this._rawQueryData, "license_key_id", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "license_key_id"); }
+        init { JsonModel.Set(this._rawQueryData, "license_key_id", value); }
     }
 
     /// <summary>
@@ -24,8 +24,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
-        init { ModelBase.Set(this._rawQueryData, "page_number", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
+        init { JsonModel.Set(this._rawQueryData, "page_number", value); }
     }
 
     /// <summary>
@@ -33,8 +33,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
-        init { ModelBase.Set(this._rawQueryData, "page_size", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
+        init { JsonModel.Set(this._rawQueryData, "page_size", value); }
     }
 
     public LicenseKeyInstanceListParams() { }
@@ -63,7 +63,7 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static LicenseKeyInstanceListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

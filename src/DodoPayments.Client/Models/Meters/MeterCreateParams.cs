@@ -22,8 +22,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required MeterAggregation Aggregation
     {
-        get { return ModelBase.GetNotNullClass<MeterAggregation>(this.RawBodyData, "aggregation"); }
-        init { ModelBase.Set(this._rawBodyData, "aggregation", value); }
+        get { return JsonModel.GetNotNullClass<MeterAggregation>(this.RawBodyData, "aggregation"); }
+        init { JsonModel.Set(this._rawBodyData, "aggregation", value); }
     }
 
     /// <summary>
@@ -31,8 +31,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required string EventName
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "event_name"); }
-        init { ModelBase.Set(this._rawBodyData, "event_name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "event_name"); }
+        init { JsonModel.Set(this._rawBodyData, "event_name", value); }
     }
 
     /// <summary>
@@ -40,8 +40,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required string MeasurementUnit
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "measurement_unit"); }
-        init { ModelBase.Set(this._rawBodyData, "measurement_unit", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "measurement_unit"); }
+        init { JsonModel.Set(this._rawBodyData, "measurement_unit", value); }
     }
 
     /// <summary>
@@ -49,8 +49,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawBodyData, "name"); }
-        init { ModelBase.Set(this._rawBodyData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "name"); }
+        init { JsonModel.Set(this._rawBodyData, "name", value); }
     }
 
     /// <summary>
@@ -58,8 +58,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "description"); }
-        init { ModelBase.Set(this._rawBodyData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "description"); }
+        init { JsonModel.Set(this._rawBodyData, "description", value); }
     }
 
     /// <summary>
@@ -67,8 +67,8 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public MeterFilter? Filter
     {
-        get { return ModelBase.GetNullableClass<MeterFilter>(this.RawBodyData, "filter"); }
-        init { ModelBase.Set(this._rawBodyData, "filter", value); }
+        get { return JsonModel.GetNullableClass<MeterFilter>(this.RawBodyData, "filter"); }
+        init { JsonModel.Set(this._rawBodyData, "filter", value); }
     }
 
     public MeterCreateParams() { }
@@ -104,7 +104,7 @@ public sealed record class MeterCreateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static MeterCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -126,9 +126,13 @@ public sealed record class MeterCreateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

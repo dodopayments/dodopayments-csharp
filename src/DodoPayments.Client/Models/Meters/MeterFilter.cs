@@ -17,16 +17,16 @@ namespace DodoPayments.Client.Models.Meters;
 /// Each filter has a conjunction (and/or) and clauses that can be either direct conditions
 /// or nested filters.</para>
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilter, MeterFilterFromRaw>))]
-public sealed record class MeterFilter : ModelBase
+[JsonConverter(typeof(JsonModelConverter<MeterFilter, MeterFilterFromRaw>))]
+public sealed record class MeterFilter : JsonModel
 {
     /// <summary>
     /// Filter clauses - can be direct conditions or nested filters (up to 3 levels deep)
     /// </summary>
     public required Clauses Clauses
     {
-        get { return ModelBase.GetNotNullClass<Clauses>(this.RawData, "clauses"); }
-        init { ModelBase.Set(this._rawData, "clauses", value); }
+        get { return JsonModel.GetNotNullClass<Clauses>(this.RawData, "clauses"); }
+        init { JsonModel.Set(this._rawData, "clauses", value); }
     }
 
     /// <summary>
@@ -36,12 +36,12 @@ public sealed record class MeterFilter : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, MeterFilterConjunction>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, MeterFilterConjunction>>(
                 this.RawData,
                 "conjunction"
             );
         }
-        init { ModelBase.Set(this._rawData, "conjunction", value); }
+        init { JsonModel.Set(this._rawData, "conjunction", value); }
     }
 
     /// <inheritdoc/>
@@ -76,7 +76,7 @@ public sealed record class MeterFilter : ModelBase
     }
 }
 
-class MeterFilterFromRaw : IFromRaw<MeterFilter>
+class MeterFilterFromRaw : IFromRawJson<MeterFilter>
 {
     /// <inheritdoc/>
     public MeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -91,28 +91,28 @@ public record class Clauses
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public Clauses(IReadOnlyList<MeterFilterCondition> value, JsonElement? json = null)
+    public Clauses(IReadOnlyList<MeterFilterCondition> value, JsonElement? element = null)
     {
         this.Value = ImmutableArray.ToImmutableArray(value);
-        this._json = json;
+        this._element = element;
     }
 
-    public Clauses(IReadOnlyList<ClausesMeterFilter> value, JsonElement? json = null)
+    public Clauses(IReadOnlyList<ClausesMeterFilter> value, JsonElement? element = null)
     {
         this.Value = ImmutableArray.ToImmutableArray(value);
-        this._json = json;
+        this._element = element;
     }
 
-    public Clauses(JsonElement json)
+    public Clauses(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -280,16 +280,16 @@ sealed class ClausesConverter : JsonConverter<Clauses>
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
             var deserialized = JsonSerializer.Deserialize<List<MeterFilterCondition>>(
-                json,
+                element,
                 options
             );
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -300,10 +300,13 @@ sealed class ClausesConverter : JsonConverter<Clauses>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<ClausesMeterFilter>>(json, options);
+            var deserialized = JsonSerializer.Deserialize<List<ClausesMeterFilter>>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -312,7 +315,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(Utf8JsonWriter writer, Clauses value, JsonSerializerOptions options)
@@ -324,25 +327,25 @@ sealed class ClausesConverter : JsonConverter<Clauses>
 /// <summary>
 /// Filter condition with key, operator, and value
 /// </summary>
-[JsonConverter(typeof(ModelConverter<MeterFilterCondition, MeterFilterConditionFromRaw>))]
-public sealed record class MeterFilterCondition : ModelBase
+[JsonConverter(typeof(JsonModelConverter<MeterFilterCondition, MeterFilterConditionFromRaw>))]
+public sealed record class MeterFilterCondition : JsonModel
 {
     /// <summary>
     /// Filter key to apply
     /// </summary>
     public required string Key
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "key"); }
-        init { ModelBase.Set(this._rawData, "key", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "key"); }
+        init { JsonModel.Set(this._rawData, "key", value); }
     }
 
     public required ApiEnum<string, Operator> Operator
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Operator>>(this.RawData, "operator");
+            return JsonModel.GetNotNullClass<ApiEnum<string, Operator>>(this.RawData, "operator");
         }
-        init { ModelBase.Set(this._rawData, "operator", value); }
+        init { JsonModel.Set(this._rawData, "operator", value); }
     }
 
     /// <summary>
@@ -350,8 +353,8 @@ public sealed record class MeterFilterCondition : ModelBase
     /// </summary>
     public required MeterFilterConditionValue Value
     {
-        get { return ModelBase.GetNotNullClass<MeterFilterConditionValue>(this.RawData, "value"); }
-        init { ModelBase.Set(this._rawData, "value", value); }
+        get { return JsonModel.GetNotNullClass<MeterFilterConditionValue>(this.RawData, "value"); }
+        init { JsonModel.Set(this._rawData, "value", value); }
     }
 
     /// <inheritdoc/>
@@ -389,7 +392,7 @@ public sealed record class MeterFilterCondition : ModelBase
     }
 }
 
-class MeterFilterConditionFromRaw : IFromRaw<MeterFilterCondition>
+class MeterFilterConditionFromRaw : IFromRawJson<MeterFilterCondition>
 {
     /// <inheritdoc/>
     public MeterFilterCondition FromRawUnchecked(
@@ -463,34 +466,34 @@ public record class MeterFilterConditionValue
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public MeterFilterConditionValue(string value, JsonElement? json = null)
+    public MeterFilterConditionValue(string value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public MeterFilterConditionValue(double value, JsonElement? json = null)
+    public MeterFilterConditionValue(double value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public MeterFilterConditionValue(bool value, JsonElement? json = null)
+    public MeterFilterConditionValue(bool value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public MeterFilterConditionValue(JsonElement json)
+    public MeterFilterConditionValue(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -685,13 +688,13 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(json, options);
+            var deserialized = JsonSerializer.Deserialize<string>(element, options);
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -702,7 +705,7 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(json, options));
+            return new(JsonSerializer.Deserialize<double>(element, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -712,7 +715,7 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(json, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -720,7 +723,7 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(
@@ -736,8 +739,8 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
 /// <summary>
 /// Level 1 nested filter - can contain Level 2 filters
 /// </summary>
-[JsonConverter(typeof(ModelConverter<ClausesMeterFilter, ClausesMeterFilterFromRaw>))]
-public sealed record class ClausesMeterFilter : ModelBase
+[JsonConverter(typeof(JsonModelConverter<ClausesMeterFilter, ClausesMeterFilterFromRaw>))]
+public sealed record class ClausesMeterFilter : JsonModel
 {
     /// <summary>
     /// Level 1: Can be conditions or nested filters (2 more levels allowed)
@@ -746,21 +749,21 @@ public sealed record class ClausesMeterFilter : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ClausesMeterFilterClauses>(this.RawData, "clauses");
+            return JsonModel.GetNotNullClass<ClausesMeterFilterClauses>(this.RawData, "clauses");
         }
-        init { ModelBase.Set(this._rawData, "clauses", value); }
+        init { JsonModel.Set(this._rawData, "clauses", value); }
     }
 
     public required ApiEnum<string, ClausesMeterFilterConjunction> Conjunction
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, ClausesMeterFilterConjunction>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, ClausesMeterFilterConjunction>>(
                 this.RawData,
                 "conjunction"
             );
         }
-        init { ModelBase.Set(this._rawData, "conjunction", value); }
+        init { JsonModel.Set(this._rawData, "conjunction", value); }
     }
 
     /// <inheritdoc/>
@@ -797,7 +800,7 @@ public sealed record class ClausesMeterFilter : ModelBase
     }
 }
 
-class ClausesMeterFilterFromRaw : IFromRaw<ClausesMeterFilter>
+class ClausesMeterFilterFromRaw : IFromRawJson<ClausesMeterFilter>
 {
     /// <inheritdoc/>
     public ClausesMeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -812,34 +815,34 @@ public record class ClausesMeterFilterClauses
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
     public ClausesMeterFilterClauses(
         IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition> value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = ImmutableArray.ToImmutableArray(value);
-        this._json = json;
+        this._element = element;
     }
 
     public ClausesMeterFilterClauses(
         IReadOnlyList<ClausesMeterFilterClausesMeterFilter> value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = ImmutableArray.ToImmutableArray(value);
-        this._json = json;
+        this._element = element;
     }
 
-    public ClausesMeterFilterClauses(JsonElement json)
+    public ClausesMeterFilterClauses(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -1017,15 +1020,15 @@ sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilt
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
             var deserialized = JsonSerializer.Deserialize<
                 List<ClausesMeterFilterClausesMeterFilterCondition>
-            >(json, options);
+            >(element, options);
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1038,10 +1041,10 @@ sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilt
         {
             var deserialized = JsonSerializer.Deserialize<
                 List<ClausesMeterFilterClausesMeterFilter>
-            >(json, options);
+            >(element, options);
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1050,7 +1053,7 @@ sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilt
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(
@@ -1067,31 +1070,31 @@ sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilt
 /// Filter condition with key, operator, and value
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         ClausesMeterFilterClausesMeterFilterCondition,
         ClausesMeterFilterClausesMeterFilterConditionFromRaw
     >)
 )]
-public sealed record class ClausesMeterFilterClausesMeterFilterCondition : ModelBase
+public sealed record class ClausesMeterFilterClausesMeterFilterCondition : JsonModel
 {
     /// <summary>
     /// Filter key to apply
     /// </summary>
     public required string Key
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "key"); }
-        init { ModelBase.Set(this._rawData, "key", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "key"); }
+        init { JsonModel.Set(this._rawData, "key", value); }
     }
 
     public required ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator> Operator
     {
         get
         {
-            return ModelBase.GetNotNullClass<
+            return JsonModel.GetNotNullClass<
                 ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator>
             >(this.RawData, "operator");
         }
-        init { ModelBase.Set(this._rawData, "operator", value); }
+        init { JsonModel.Set(this._rawData, "operator", value); }
     }
 
     /// <summary>
@@ -1101,12 +1104,12 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : Model
     {
         get
         {
-            return ModelBase.GetNotNullClass<ClausesMeterFilterClausesMeterFilterConditionValue>(
+            return JsonModel.GetNotNullClass<ClausesMeterFilterClausesMeterFilterConditionValue>(
                 this.RawData,
                 "value"
             );
         }
-        init { ModelBase.Set(this._rawData, "value", value); }
+        init { JsonModel.Set(this._rawData, "value", value); }
     }
 
     /// <inheritdoc/>
@@ -1149,7 +1152,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : Model
 }
 
 class ClausesMeterFilterClausesMeterFilterConditionFromRaw
-    : IFromRaw<ClausesMeterFilterClausesMeterFilterCondition>
+    : IFromRawJson<ClausesMeterFilterClausesMeterFilterCondition>
 {
     /// <inheritdoc/>
     public ClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
@@ -1234,40 +1237,43 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
     public ClausesMeterFilterClausesMeterFilterConditionValue(
         string value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
     public ClausesMeterFilterClausesMeterFilterConditionValue(
         double value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public ClausesMeterFilterClausesMeterFilterConditionValue(bool value, JsonElement? json = null)
+    public ClausesMeterFilterClausesMeterFilterConditionValue(
+        bool value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public ClausesMeterFilterClausesMeterFilterConditionValue(JsonElement json)
+    public ClausesMeterFilterClausesMeterFilterConditionValue(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -1469,13 +1475,13 @@ sealed class ClausesMeterFilterClausesMeterFilterConditionValueConverter
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(json, options);
+            var deserialized = JsonSerializer.Deserialize<string>(element, options);
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1486,7 +1492,7 @@ sealed class ClausesMeterFilterClausesMeterFilterConditionValueConverter
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(json, options));
+            return new(JsonSerializer.Deserialize<double>(element, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -1496,7 +1502,7 @@ sealed class ClausesMeterFilterClausesMeterFilterConditionValueConverter
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(json, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -1504,7 +1510,7 @@ sealed class ClausesMeterFilterClausesMeterFilterConditionValueConverter
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(
@@ -1521,12 +1527,12 @@ sealed class ClausesMeterFilterClausesMeterFilterConditionValueConverter
 /// Level 2 nested filter
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         ClausesMeterFilterClausesMeterFilter,
         ClausesMeterFilterClausesMeterFilterFromRaw
     >)
 )]
-public sealed record class ClausesMeterFilterClausesMeterFilter : ModelBase
+public sealed record class ClausesMeterFilterClausesMeterFilter : JsonModel
 {
     /// <summary>
     /// Level 2: Can be conditions or nested filters (1 more level allowed)
@@ -1535,23 +1541,23 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClauses>(
+            return JsonModel.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClauses>(
                 this.RawData,
                 "clauses"
             );
         }
-        init { ModelBase.Set(this._rawData, "clauses", value); }
+        init { JsonModel.Set(this._rawData, "clauses", value); }
     }
 
     public required ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction> Conjunction
     {
         get
         {
-            return ModelBase.GetNotNullClass<
+            return JsonModel.GetNotNullClass<
                 ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction>
             >(this.RawData, "conjunction");
         }
-        init { ModelBase.Set(this._rawData, "conjunction", value); }
+        init { JsonModel.Set(this._rawData, "conjunction", value); }
     }
 
     /// <inheritdoc/>
@@ -1590,7 +1596,8 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : ModelBase
     }
 }
 
-class ClausesMeterFilterClausesMeterFilterFromRaw : IFromRaw<ClausesMeterFilterClausesMeterFilter>
+class ClausesMeterFilterClausesMeterFilterFromRaw
+    : IFromRawJson<ClausesMeterFilterClausesMeterFilter>
 {
     /// <inheritdoc/>
     public ClausesMeterFilterClausesMeterFilter FromRawUnchecked(
@@ -1606,34 +1613,34 @@ public record class ClausesMeterFilterClausesMeterFilterClauses
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
     public ClausesMeterFilterClausesMeterFilterClauses(
         IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = ImmutableArray.ToImmutableArray(value);
-        this._json = json;
+        this._element = element;
     }
 
     public ClausesMeterFilterClausesMeterFilterClauses(
         IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = ImmutableArray.ToImmutableArray(value);
-        this._json = json;
+        this._element = element;
     }
 
-    public ClausesMeterFilterClausesMeterFilterClauses(JsonElement json)
+    public ClausesMeterFilterClausesMeterFilterClauses(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -1822,15 +1829,15 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
             var deserialized = JsonSerializer.Deserialize<
                 List<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
-            >(json, options);
+            >(element, options);
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1843,10 +1850,10 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
         {
             var deserialized = JsonSerializer.Deserialize<
                 List<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
-            >(json, options);
+            >(element, options);
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -1855,7 +1862,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(
@@ -1872,21 +1879,21 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
 /// Filter condition with key, operator, and value
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition,
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionFromRaw
     >)
 )]
 public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition
-    : ModelBase
+    : JsonModel
 {
     /// <summary>
     /// Filter key to apply
     /// </summary>
     public required string Key
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "key"); }
-        init { ModelBase.Set(this._rawData, "key", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "key"); }
+        init { JsonModel.Set(this._rawData, "key", value); }
     }
 
     public required ApiEnum<
@@ -1896,14 +1903,14 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     {
         get
         {
-            return ModelBase.GetNotNullClass<
+            return JsonModel.GetNotNullClass<
                 ApiEnum<
                     string,
                     ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
                 >
             >(this.RawData, "operator");
         }
-        init { ModelBase.Set(this._rawData, "operator", value); }
+        init { JsonModel.Set(this._rawData, "operator", value); }
     }
 
     /// <summary>
@@ -1913,12 +1920,12 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     {
         get
         {
-            return ModelBase.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
+            return JsonModel.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
                 this.RawData,
                 "value"
             );
         }
-        init { ModelBase.Set(this._rawData, "value", value); }
+        init { JsonModel.Set(this._rawData, "value", value); }
     }
 
     /// <inheritdoc/>
@@ -1963,7 +1970,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
 }
 
 class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionFromRaw
-    : IFromRaw<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
+    : IFromRawJson<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
 {
     /// <inheritdoc/>
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
@@ -2062,43 +2069,43 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(
         string value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(
         double value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(
         bool value,
-        JsonElement? json = null
+        JsonElement? element = null
     )
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(JsonElement json)
+    public ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -2302,13 +2309,13 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(json, options);
+            var deserialized = JsonSerializer.Deserialize<string>(element, options);
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -2319,7 +2326,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(json, options));
+            return new(JsonSerializer.Deserialize<double>(element, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -2329,7 +2336,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(json, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -2337,7 +2344,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(
@@ -2354,32 +2361,32 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
 /// Level 3 nested filter (final nesting level)
 /// </summary>
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         ClausesMeterFilterClausesMeterFilterClausesMeterFilter,
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterFromRaw
     >)
 )]
-public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilter : ModelBase
+public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilter : JsonModel
 {
     /// <summary>
     /// Level 3: Filter conditions only (max depth reached)
     /// </summary>
     public required IReadOnlyList<Clause> Clauses
     {
-        get { return ModelBase.GetNotNullClass<List<Clause>>(this.RawData, "clauses"); }
-        init { ModelBase.Set(this._rawData, "clauses", value); }
+        get { return JsonModel.GetNotNullClass<List<Clause>>(this.RawData, "clauses"); }
+        init { JsonModel.Set(this._rawData, "clauses", value); }
     }
 
     public required ApiEnum<string, Conjunction> Conjunction
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Conjunction>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, Conjunction>>(
                 this.RawData,
                 "conjunction"
             );
         }
-        init { ModelBase.Set(this._rawData, "conjunction", value); }
+        init { JsonModel.Set(this._rawData, "conjunction", value); }
     }
 
     /// <inheritdoc/>
@@ -2426,7 +2433,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
 }
 
 class ClausesMeterFilterClausesMeterFilterClausesMeterFilterFromRaw
-    : IFromRaw<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
+    : IFromRawJson<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
 {
     /// <inheritdoc/>
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilter FromRawUnchecked(
@@ -2437,28 +2444,28 @@ class ClausesMeterFilterClausesMeterFilterClausesMeterFilterFromRaw
 /// <summary>
 /// Filter condition with key, operator, and value
 /// </summary>
-[JsonConverter(typeof(ModelConverter<Clause, ClauseFromRaw>))]
-public sealed record class Clause : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Clause, ClauseFromRaw>))]
+public sealed record class Clause : JsonModel
 {
     /// <summary>
     /// Filter key to apply
     /// </summary>
     public required string Key
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "key"); }
-        init { ModelBase.Set(this._rawData, "key", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "key"); }
+        init { JsonModel.Set(this._rawData, "key", value); }
     }
 
     public required ApiEnum<string, ClauseOperator> Operator
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, ClauseOperator>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, ClauseOperator>>(
                 this.RawData,
                 "operator"
             );
         }
-        init { ModelBase.Set(this._rawData, "operator", value); }
+        init { JsonModel.Set(this._rawData, "operator", value); }
     }
 
     /// <summary>
@@ -2466,8 +2473,8 @@ public sealed record class Clause : ModelBase
     /// </summary>
     public required ClauseValue Value
     {
-        get { return ModelBase.GetNotNullClass<ClauseValue>(this.RawData, "value"); }
-        init { ModelBase.Set(this._rawData, "value", value); }
+        get { return JsonModel.GetNotNullClass<ClauseValue>(this.RawData, "value"); }
+        init { JsonModel.Set(this._rawData, "value", value); }
     }
 
     /// <inheritdoc/>
@@ -2503,7 +2510,7 @@ public sealed record class Clause : ModelBase
     }
 }
 
-class ClauseFromRaw : IFromRaw<Clause>
+class ClauseFromRaw : IFromRawJson<Clause>
 {
     /// <inheritdoc/>
     public Clause FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -2580,34 +2587,34 @@ public record class ClauseValue
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public ClauseValue(string value, JsonElement? json = null)
+    public ClauseValue(string value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public ClauseValue(double value, JsonElement? json = null)
+    public ClauseValue(double value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public ClauseValue(bool value, JsonElement? json = null)
+    public ClauseValue(bool value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public ClauseValue(JsonElement json)
+    public ClauseValue(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -2802,13 +2809,13 @@ sealed class ClauseValueConverter : JsonConverter<ClauseValue>
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(json, options);
+            var deserialized = JsonSerializer.Deserialize<string>(element, options);
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (System::Exception e)
@@ -2819,7 +2826,7 @@ sealed class ClauseValueConverter : JsonConverter<ClauseValue>
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(json, options));
+            return new(JsonSerializer.Deserialize<double>(element, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -2829,7 +2836,7 @@ sealed class ClauseValueConverter : JsonConverter<ClauseValue>
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(json, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options));
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -2837,7 +2844,7 @@ sealed class ClauseValueConverter : JsonConverter<ClauseValue>
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(

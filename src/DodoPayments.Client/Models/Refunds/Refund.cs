@@ -10,16 +10,16 @@ using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Refunds;
 
-[JsonConverter(typeof(ModelConverter<Refund, RefundFromRaw>))]
-public sealed record class Refund : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Refund, RefundFromRaw>))]
+public sealed record class Refund : JsonModel
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -27,8 +27,8 @@ public sealed record class Refund : ModelBase
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -38,12 +38,12 @@ public sealed record class Refund : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<Payments::CustomerLimitedDetails>(
+            return JsonModel.GetNotNullClass<Payments::CustomerLimitedDetails>(
                 this.RawData,
                 "customer"
             );
         }
-        init { ModelBase.Set(this._rawData, "customer", value); }
+        init { JsonModel.Set(this._rawData, "customer", value); }
     }
 
     /// <summary>
@@ -51,8 +51,8 @@ public sealed record class Refund : ModelBase
     /// </summary>
     public required bool IsPartial
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "is_partial"); }
-        init { ModelBase.Set(this._rawData, "is_partial", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "is_partial"); }
+        init { JsonModel.Set(this._rawData, "is_partial", value); }
     }
 
     /// <summary>
@@ -62,9 +62,9 @@ public sealed record class Refund : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -72,8 +72,8 @@ public sealed record class Refund : ModelBase
     /// </summary>
     public required string PaymentID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { ModelBase.Set(this._rawData, "payment_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
+        init { JsonModel.Set(this._rawData, "payment_id", value); }
     }
 
     /// <summary>
@@ -81,8 +81,8 @@ public sealed record class Refund : ModelBase
     /// </summary>
     public required string RefundID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "refund_id"); }
-        init { ModelBase.Set(this._rawData, "refund_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "refund_id"); }
+        init { JsonModel.Set(this._rawData, "refund_id", value); }
     }
 
     /// <summary>
@@ -92,9 +92,9 @@ public sealed record class Refund : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, RefundStatus>>(this.RawData, "status");
+            return JsonModel.GetNotNullClass<ApiEnum<string, RefundStatus>>(this.RawData, "status");
         }
-        init { ModelBase.Set(this._rawData, "status", value); }
+        init { JsonModel.Set(this._rawData, "status", value); }
     }
 
     /// <summary>
@@ -102,8 +102,8 @@ public sealed record class Refund : ModelBase
     /// </summary>
     public int? Amount
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "amount"); }
-        init { ModelBase.Set(this._rawData, "amount", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "amount"); }
+        init { JsonModel.Set(this._rawData, "amount", value); }
     }
 
     /// <summary>
@@ -113,9 +113,9 @@ public sealed record class Refund : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     /// <summary>
@@ -123,8 +123,8 @@ public sealed record class Refund : ModelBase
     /// </summary>
     public string? Reason
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "reason"); }
-        init { ModelBase.Set(this._rawData, "reason", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason"); }
+        init { JsonModel.Set(this._rawData, "reason", value); }
     }
 
     /// <inheritdoc/>
@@ -168,7 +168,7 @@ public sealed record class Refund : ModelBase
     }
 }
 
-class RefundFromRaw : IFromRaw<Refund>
+class RefundFromRaw : IFromRawJson<Refund>
 {
     /// <inheritdoc/>
     public Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

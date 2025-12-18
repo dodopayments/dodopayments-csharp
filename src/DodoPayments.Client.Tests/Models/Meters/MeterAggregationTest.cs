@@ -35,8 +35,8 @@ public class MeterAggregationTest : TestBase
     {
         var model = new MeterAggregation { Type = Type.Count, Key = "key" };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<MeterAggregation>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<MeterAggregation>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Type> expectedType = Type.Count;

@@ -56,8 +56,8 @@ public class HeaderRetrieveResponseTest : TestBase
             Sensitive = ["string"],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<HeaderRetrieveResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<HeaderRetrieveResponse>(element);
         Assert.NotNull(deserialized);
 
         Dictionary<string, string> expectedHeaders = new() { { "foo", "string" } };

@@ -10,12 +10,12 @@ using DodoPayments.Client.Models.Misc;
 namespace DodoPayments.Client.Models.Subscriptions;
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         SubscriptionRetrieveUsageHistoryPageResponse,
         SubscriptionRetrieveUsageHistoryPageResponseFromRaw
     >)
 )]
-public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelBase
+public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : JsonModel
 {
     /// <summary>
     /// List of usage history items
@@ -24,11 +24,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelB
     {
         get
         {
-            return ModelBase.GetNotNullClass<
+            return JsonModel.GetNotNullClass<
                 List<SubscriptionRetrieveUsageHistoryPageResponseItem>
             >(this.RawData, "items");
         }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -81,7 +81,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : ModelB
 }
 
 class SubscriptionRetrieveUsageHistoryPageResponseFromRaw
-    : IFromRaw<SubscriptionRetrieveUsageHistoryPageResponse>
+    : IFromRawJson<SubscriptionRetrieveUsageHistoryPageResponse>
 {
     /// <inheritdoc/>
     public SubscriptionRetrieveUsageHistoryPageResponse FromRawUnchecked(
@@ -90,20 +90,20 @@ class SubscriptionRetrieveUsageHistoryPageResponseFromRaw
 }
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         SubscriptionRetrieveUsageHistoryPageResponseItem,
         SubscriptionRetrieveUsageHistoryPageResponseItemFromRaw
     >)
 )]
-public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItem : ModelBase
+public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItem : JsonModel
 {
     /// <summary>
     /// End date of the billing period
     /// </summary>
     public required DateTimeOffset EndDate
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "end_date"); }
-        init { ModelBase.Set(this._rawData, "end_date", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "end_date"); }
+        init { JsonModel.Set(this._rawData, "end_date", value); }
     }
 
     /// <summary>
@@ -113,11 +113,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItem : Mo
     {
         get
         {
-            return ModelBase.GetNotNullClass<
+            return JsonModel.GetNotNullClass<
                 List<SubscriptionRetrieveUsageHistoryPageResponseItemMeter>
             >(this.RawData, "meters");
         }
-        init { ModelBase.Set(this._rawData, "meters", value); }
+        init { JsonModel.Set(this._rawData, "meters", value); }
     }
 
     /// <summary>
@@ -125,8 +125,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItem : Mo
     /// </summary>
     public required DateTimeOffset StartDate
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "start_date"); }
-        init { ModelBase.Set(this._rawData, "start_date", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "start_date"); }
+        init { JsonModel.Set(this._rawData, "start_date", value); }
     }
 
     /// <inheritdoc/>
@@ -172,7 +172,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItem : Mo
 }
 
 class SubscriptionRetrieveUsageHistoryPageResponseItemFromRaw
-    : IFromRaw<SubscriptionRetrieveUsageHistoryPageResponseItem>
+    : IFromRawJson<SubscriptionRetrieveUsageHistoryPageResponseItem>
 {
     /// <inheritdoc/>
     public SubscriptionRetrieveUsageHistoryPageResponseItem FromRawUnchecked(
@@ -181,20 +181,20 @@ class SubscriptionRetrieveUsageHistoryPageResponseItemFromRaw
 }
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         SubscriptionRetrieveUsageHistoryPageResponseItemMeter,
         SubscriptionRetrieveUsageHistoryPageResponseItemMeterFromRaw
     >)
 )]
-public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter : ModelBase
+public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter : JsonModel
 {
     /// <summary>
     /// Meter identifier
     /// </summary>
     public required string ID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "id"); }
-        init { ModelBase.Set(this._rawData, "id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
+        init { JsonModel.Set(this._rawData, "id", value); }
     }
 
     /// <summary>
@@ -202,8 +202,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
     /// </summary>
     public required string ChargeableUnits
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "chargeable_units"); }
-        init { ModelBase.Set(this._rawData, "chargeable_units", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "chargeable_units"); }
+        init { JsonModel.Set(this._rawData, "chargeable_units", value); }
     }
 
     /// <summary>
@@ -211,8 +211,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
     /// </summary>
     public required string ConsumedUnits
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "consumed_units"); }
-        init { ModelBase.Set(this._rawData, "consumed_units", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "consumed_units"); }
+        init { JsonModel.Set(this._rawData, "consumed_units", value); }
     }
 
     /// <summary>
@@ -222,9 +222,9 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     /// <summary>
@@ -232,8 +232,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
     /// </summary>
     public required long FreeThreshold
     {
-        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "free_threshold"); }
-        init { ModelBase.Set(this._rawData, "free_threshold", value); }
+        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "free_threshold"); }
+        init { JsonModel.Set(this._rawData, "free_threshold", value); }
     }
 
     /// <summary>
@@ -241,8 +241,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
     /// </summary>
     public required string Name
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <summary>
@@ -250,8 +250,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
     /// </summary>
     public required string PricePerUnit
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
-        init { ModelBase.Set(this._rawData, "price_per_unit", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
+        init { JsonModel.Set(this._rawData, "price_per_unit", value); }
     }
 
     /// <summary>
@@ -259,8 +259,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
     /// </summary>
     public required int TotalPrice
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "total_price"); }
-        init { ModelBase.Set(this._rawData, "total_price", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "total_price"); }
+        init { JsonModel.Set(this._rawData, "total_price", value); }
     }
 
     /// <inheritdoc/>
@@ -310,7 +310,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponseItemMeter
 }
 
 class SubscriptionRetrieveUsageHistoryPageResponseItemMeterFromRaw
-    : IFromRaw<SubscriptionRetrieveUsageHistoryPageResponseItemMeter>
+    : IFromRawJson<SubscriptionRetrieveUsageHistoryPageResponseItemMeter>
 {
     /// <inheritdoc/>
     public SubscriptionRetrieveUsageHistoryPageResponseItemMeter FromRawUnchecked(

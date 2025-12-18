@@ -7,13 +7,13 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Meters;
 
-[JsonConverter(typeof(ModelConverter<MeterListPageResponse, MeterListPageResponseFromRaw>))]
-public sealed record class MeterListPageResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<MeterListPageResponse, MeterListPageResponseFromRaw>))]
+public sealed record class MeterListPageResponse : JsonModel
 {
     public required IReadOnlyList<Meter> Items
     {
-        get { return ModelBase.GetNotNullClass<List<Meter>>(this.RawData, "items"); }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        get { return JsonModel.GetNotNullClass<List<Meter>>(this.RawData, "items"); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -59,7 +59,7 @@ public sealed record class MeterListPageResponse : ModelBase
     }
 }
 
-class MeterListPageResponseFromRaw : IFromRaw<MeterListPageResponse>
+class MeterListPageResponseFromRaw : IFromRawJson<MeterListPageResponse>
 {
     /// <inheritdoc/>
     public MeterListPageResponse FromRawUnchecked(

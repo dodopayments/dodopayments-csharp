@@ -9,67 +9,67 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Brands;
 
-[JsonConverter(typeof(ModelConverter<Brand, BrandFromRaw>))]
-public sealed record class Brand : ModelBase
+[JsonConverter(typeof(JsonModelConverter<Brand, BrandFromRaw>))]
+public sealed record class Brand : JsonModel
 {
     public required string BrandID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "brand_id"); }
-        init { ModelBase.Set(this._rawData, "brand_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "brand_id"); }
+        init { JsonModel.Set(this._rawData, "brand_id", value); }
     }
 
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     public required bool Enabled
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "enabled"); }
-        init { ModelBase.Set(this._rawData, "enabled", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "enabled"); }
+        init { JsonModel.Set(this._rawData, "enabled", value); }
     }
 
     public required string StatementDescriptor
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "statement_descriptor"); }
-        init { ModelBase.Set(this._rawData, "statement_descriptor", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "statement_descriptor"); }
+        init { JsonModel.Set(this._rawData, "statement_descriptor", value); }
     }
 
     public required bool VerificationEnabled
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "verification_enabled"); }
-        init { ModelBase.Set(this._rawData, "verification_enabled", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "verification_enabled"); }
+        init { JsonModel.Set(this._rawData, "verification_enabled", value); }
     }
 
     public required ApiEnum<string, VerificationStatus> VerificationStatus
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, VerificationStatus>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, VerificationStatus>>(
                 this.RawData,
                 "verification_status"
             );
         }
-        init { ModelBase.Set(this._rawData, "verification_status", value); }
+        init { JsonModel.Set(this._rawData, "verification_status", value); }
     }
 
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "description"); }
-        init { ModelBase.Set(this._rawData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
+        init { JsonModel.Set(this._rawData, "description", value); }
     }
 
     public string? Image
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "image"); }
-        init { ModelBase.Set(this._rawData, "image", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "image"); }
+        init { JsonModel.Set(this._rawData, "image", value); }
     }
 
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <summary>
@@ -77,20 +77,20 @@ public sealed record class Brand : ModelBase
     /// </summary>
     public string? ReasonForHold
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "reason_for_hold"); }
-        init { ModelBase.Set(this._rawData, "reason_for_hold", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason_for_hold"); }
+        init { JsonModel.Set(this._rawData, "reason_for_hold", value); }
     }
 
     public string? SupportEmail
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "support_email"); }
-        init { ModelBase.Set(this._rawData, "support_email", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "support_email"); }
+        init { JsonModel.Set(this._rawData, "support_email", value); }
     }
 
     public string? URL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "url"); }
-        init { ModelBase.Set(this._rawData, "url", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "url"); }
+        init { JsonModel.Set(this._rawData, "url", value); }
     }
 
     /// <inheritdoc/>
@@ -135,7 +135,7 @@ public sealed record class Brand : ModelBase
     }
 }
 
-class BrandFromRaw : IFromRaw<Brand>
+class BrandFromRaw : IFromRawJson<Brand>
 {
     /// <inheritdoc/>
     public Brand FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

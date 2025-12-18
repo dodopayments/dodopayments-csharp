@@ -19,32 +19,32 @@ public sealed record class BrandCreateParams : ParamsBase
 
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "description"); }
-        init { ModelBase.Set(this._rawBodyData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "description"); }
+        init { JsonModel.Set(this._rawBodyData, "description", value); }
     }
 
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "name"); }
-        init { ModelBase.Set(this._rawBodyData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "name"); }
+        init { JsonModel.Set(this._rawBodyData, "name", value); }
     }
 
     public string? StatementDescriptor
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "statement_descriptor"); }
-        init { ModelBase.Set(this._rawBodyData, "statement_descriptor", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "statement_descriptor"); }
+        init { JsonModel.Set(this._rawBodyData, "statement_descriptor", value); }
     }
 
     public string? SupportEmail
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "support_email"); }
-        init { ModelBase.Set(this._rawBodyData, "support_email", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "support_email"); }
+        init { JsonModel.Set(this._rawBodyData, "support_email", value); }
     }
 
     public string? URL
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawBodyData, "url"); }
-        init { ModelBase.Set(this._rawBodyData, "url", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "url"); }
+        init { JsonModel.Set(this._rawBodyData, "url", value); }
     }
 
     public BrandCreateParams() { }
@@ -80,7 +80,7 @@ public sealed record class BrandCreateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static BrandCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -102,9 +102,13 @@ public sealed record class BrandCreateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

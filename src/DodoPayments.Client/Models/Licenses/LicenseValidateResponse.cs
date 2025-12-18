@@ -7,13 +7,13 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Licenses;
 
-[JsonConverter(typeof(ModelConverter<LicenseValidateResponse, LicenseValidateResponseFromRaw>))]
-public sealed record class LicenseValidateResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<LicenseValidateResponse, LicenseValidateResponseFromRaw>))]
+public sealed record class LicenseValidateResponse : JsonModel
 {
     public required bool Valid
     {
-        get { return ModelBase.GetNotNullStruct<bool>(this.RawData, "valid"); }
-        init { ModelBase.Set(this._rawData, "valid", value); }
+        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "valid"); }
+        init { JsonModel.Set(this._rawData, "valid", value); }
     }
 
     /// <inheritdoc/>
@@ -56,7 +56,7 @@ public sealed record class LicenseValidateResponse : ModelBase
     }
 }
 
-class LicenseValidateResponseFromRaw : IFromRaw<LicenseValidateResponse>
+class LicenseValidateResponseFromRaw : IFromRawJson<LicenseValidateResponse>
 {
     /// <inheritdoc/>
     public LicenseValidateResponse FromRawUnchecked(

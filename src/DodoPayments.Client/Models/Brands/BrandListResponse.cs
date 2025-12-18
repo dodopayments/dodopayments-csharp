@@ -7,16 +7,16 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Brands;
 
-[JsonConverter(typeof(ModelConverter<BrandListResponse, BrandListResponseFromRaw>))]
-public sealed record class BrandListResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<BrandListResponse, BrandListResponseFromRaw>))]
+public sealed record class BrandListResponse : JsonModel
 {
     /// <summary>
     /// List of brands for this business
     /// </summary>
     public required IReadOnlyList<Brand> Items
     {
-        get { return ModelBase.GetNotNullClass<List<Brand>>(this.RawData, "items"); }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        get { return JsonModel.GetNotNullClass<List<Brand>>(this.RawData, "items"); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -62,7 +62,7 @@ public sealed record class BrandListResponse : ModelBase
     }
 }
 
-class BrandListResponseFromRaw : IFromRaw<BrandListResponse>
+class BrandListResponseFromRaw : IFromRawJson<BrandListResponse>
 {
     /// <inheritdoc/>
     public BrandListResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

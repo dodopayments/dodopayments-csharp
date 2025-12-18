@@ -8,8 +8,8 @@ using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<BillingAddress, BillingAddressFromRaw>))]
-public sealed record class BillingAddress : ModelBase
+[JsonConverter(typeof(JsonModelConverter<BillingAddress, BillingAddressFromRaw>))]
+public sealed record class BillingAddress : JsonModel
 {
     /// <summary>
     /// Two-letter ISO country code (ISO 3166-1 alpha-2)
@@ -18,9 +18,9 @@ public sealed record class BillingAddress : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, CountryCode>>(this.RawData, "country");
+            return JsonModel.GetNotNullClass<ApiEnum<string, CountryCode>>(this.RawData, "country");
         }
-        init { ModelBase.Set(this._rawData, "country", value); }
+        init { JsonModel.Set(this._rawData, "country", value); }
     }
 
     /// <summary>
@@ -28,8 +28,8 @@ public sealed record class BillingAddress : ModelBase
     /// </summary>
     public string? City
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "city"); }
-        init { ModelBase.Set(this._rawData, "city", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "city"); }
+        init { JsonModel.Set(this._rawData, "city", value); }
     }
 
     /// <summary>
@@ -37,8 +37,8 @@ public sealed record class BillingAddress : ModelBase
     /// </summary>
     public string? State
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "state"); }
-        init { ModelBase.Set(this._rawData, "state", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "state"); }
+        init { JsonModel.Set(this._rawData, "state", value); }
     }
 
     /// <summary>
@@ -46,8 +46,8 @@ public sealed record class BillingAddress : ModelBase
     /// </summary>
     public string? Street
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "street"); }
-        init { ModelBase.Set(this._rawData, "street", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "street"); }
+        init { JsonModel.Set(this._rawData, "street", value); }
     }
 
     /// <summary>
@@ -55,8 +55,8 @@ public sealed record class BillingAddress : ModelBase
     /// </summary>
     public string? Zipcode
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "zipcode"); }
-        init { ModelBase.Set(this._rawData, "zipcode", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "zipcode"); }
+        init { JsonModel.Set(this._rawData, "zipcode", value); }
     }
 
     /// <inheritdoc/>
@@ -101,7 +101,7 @@ public sealed record class BillingAddress : ModelBase
     }
 }
 
-class BillingAddressFromRaw : IFromRaw<BillingAddress>
+class BillingAddressFromRaw : IFromRawJson<BillingAddress>
 {
     /// <inheritdoc/>
     public BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

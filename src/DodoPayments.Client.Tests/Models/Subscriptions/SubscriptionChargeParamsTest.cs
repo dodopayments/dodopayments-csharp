@@ -45,8 +45,8 @@ public class CustomerBalanceConfigTest : TestBase
             AllowCustomerCreditsUsage = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CustomerBalanceConfig>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CustomerBalanceConfig>(element);
         Assert.NotNull(deserialized);
 
         bool expectedAllowCustomerCreditsPurchase = true;

@@ -9,32 +9,32 @@ using DodoPayments.Client.Models.Misc;
 namespace DodoPayments.Client.Models.Payments;
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         PaymentRetrieveLineItemsResponse,
         PaymentRetrieveLineItemsResponseFromRaw
     >)
 )]
-public sealed record class PaymentRetrieveLineItemsResponse : ModelBase
+public sealed record class PaymentRetrieveLineItemsResponse : JsonModel
 {
     public required ApiEnum<string, Currency> Currency
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
+            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
         }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     public required IReadOnlyList<PaymentRetrieveLineItemsResponseItem> Items
     {
         get
         {
-            return ModelBase.GetNotNullClass<List<PaymentRetrieveLineItemsResponseItem>>(
+            return JsonModel.GetNotNullClass<List<PaymentRetrieveLineItemsResponseItem>>(
                 this.RawData,
                 "items"
             );
         }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -76,7 +76,7 @@ public sealed record class PaymentRetrieveLineItemsResponse : ModelBase
     }
 }
 
-class PaymentRetrieveLineItemsResponseFromRaw : IFromRaw<PaymentRetrieveLineItemsResponse>
+class PaymentRetrieveLineItemsResponseFromRaw : IFromRawJson<PaymentRetrieveLineItemsResponse>
 {
     /// <inheritdoc/>
     public PaymentRetrieveLineItemsResponse FromRawUnchecked(
@@ -85,47 +85,47 @@ class PaymentRetrieveLineItemsResponseFromRaw : IFromRaw<PaymentRetrieveLineItem
 }
 
 [JsonConverter(
-    typeof(ModelConverter<
+    typeof(JsonModelConverter<
         PaymentRetrieveLineItemsResponseItem,
         PaymentRetrieveLineItemsResponseItemFromRaw
     >)
 )]
-public sealed record class PaymentRetrieveLineItemsResponseItem : ModelBase
+public sealed record class PaymentRetrieveLineItemsResponseItem : JsonModel
 {
     public required int Amount
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "amount"); }
-        init { ModelBase.Set(this._rawData, "amount", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "amount"); }
+        init { JsonModel.Set(this._rawData, "amount", value); }
     }
 
     public required string ItemsID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "items_id"); }
-        init { ModelBase.Set(this._rawData, "items_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "items_id"); }
+        init { JsonModel.Set(this._rawData, "items_id", value); }
     }
 
     public required int RefundableAmount
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "refundable_amount"); }
-        init { ModelBase.Set(this._rawData, "refundable_amount", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "refundable_amount"); }
+        init { JsonModel.Set(this._rawData, "refundable_amount", value); }
     }
 
     public required int Tax
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "tax"); }
-        init { ModelBase.Set(this._rawData, "tax", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "tax"); }
+        init { JsonModel.Set(this._rawData, "tax", value); }
     }
 
     public string? Description
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "description"); }
-        init { ModelBase.Set(this._rawData, "description", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
+        init { JsonModel.Set(this._rawData, "description", value); }
     }
 
     public string? Name
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "name"); }
-        init { ModelBase.Set(this._rawData, "name", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
+        init { JsonModel.Set(this._rawData, "name", value); }
     }
 
     /// <inheritdoc/>
@@ -168,7 +168,8 @@ public sealed record class PaymentRetrieveLineItemsResponseItem : ModelBase
     }
 }
 
-class PaymentRetrieveLineItemsResponseItemFromRaw : IFromRaw<PaymentRetrieveLineItemsResponseItem>
+class PaymentRetrieveLineItemsResponseItemFromRaw
+    : IFromRawJson<PaymentRetrieveLineItemsResponseItem>
 {
     /// <inheritdoc/>
     public PaymentRetrieveLineItemsResponseItem FromRawUnchecked(

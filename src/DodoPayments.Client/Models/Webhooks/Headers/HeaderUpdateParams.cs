@@ -29,12 +29,12 @@ public sealed record class HeaderUpdateParams : ParamsBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<Dictionary<string, string>>(
+            return JsonModel.GetNotNullClass<Dictionary<string, string>>(
                 this.RawBodyData,
                 "headers"
             );
         }
-        init { ModelBase.Set(this._rawBodyData, "headers", value); }
+        init { JsonModel.Set(this._rawBodyData, "headers", value); }
     }
 
     public HeaderUpdateParams() { }
@@ -70,7 +70,7 @@ public sealed record class HeaderUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static HeaderUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -95,9 +95,13 @@ public sealed record class HeaderUpdateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

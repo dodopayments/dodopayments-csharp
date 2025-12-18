@@ -115,8 +115,8 @@ public class LedgerEntryListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LedgerEntryListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LedgerEntryListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<CustomerWalletTransaction> expectedItems =

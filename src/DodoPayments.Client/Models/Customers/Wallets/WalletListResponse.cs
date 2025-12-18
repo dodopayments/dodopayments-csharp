@@ -7,13 +7,13 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Customers.Wallets;
 
-[JsonConverter(typeof(ModelConverter<WalletListResponse, WalletListResponseFromRaw>))]
-public sealed record class WalletListResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<WalletListResponse, WalletListResponseFromRaw>))]
+public sealed record class WalletListResponse : JsonModel
 {
     public required IReadOnlyList<CustomerWallet> Items
     {
-        get { return ModelBase.GetNotNullClass<List<CustomerWallet>>(this.RawData, "items"); }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        get { return JsonModel.GetNotNullClass<List<CustomerWallet>>(this.RawData, "items"); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <summary>
@@ -21,8 +21,8 @@ public sealed record class WalletListResponse : ModelBase
     /// </summary>
     public required long TotalBalanceUsd
     {
-        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "total_balance_usd"); }
-        init { ModelBase.Set(this._rawData, "total_balance_usd", value); }
+        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "total_balance_usd"); }
+        init { JsonModel.Set(this._rawData, "total_balance_usd", value); }
     }
 
     /// <inheritdoc/>
@@ -62,7 +62,7 @@ public sealed record class WalletListResponse : ModelBase
     }
 }
 
-class WalletListResponseFromRaw : IFromRaw<WalletListResponse>
+class WalletListResponseFromRaw : IFromRawJson<WalletListResponse>
 {
     /// <inheritdoc/>
     public WalletListResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

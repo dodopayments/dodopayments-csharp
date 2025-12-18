@@ -99,8 +99,8 @@ public class DisputeListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DisputeListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Item> expectedItems =
@@ -223,8 +223,8 @@ public class ItemTest : TestBase
             PaymentID = "payment_id",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Item>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Item>(element);
         Assert.NotNull(deserialized);
 
         string expectedAmount = "amount";

@@ -126,8 +126,10 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CustomerRetrievePaymentMethodsResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CustomerRetrievePaymentMethodsResponse>(
+            element
+        );
         Assert.NotNull(deserialized);
 
         List<Item> expectedItems =
@@ -284,8 +286,8 @@ public class ItemTest : TestBase
             RecurringEnabled = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Item>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Item>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, PaymentMethod> expectedPaymentMethod = PaymentMethod.Card;
@@ -553,8 +555,8 @@ public class CardTest : TestBase
             Last4Digits = "last4_digits",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Card>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Card>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, CountryCode> expectedCardIssuingCountry = CountryCode.Af;

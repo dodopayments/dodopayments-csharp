@@ -36,7 +36,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public string? CustomerID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "customer_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "customer_id"); }
         init
         {
             if (value == null)
@@ -44,7 +44,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "customer_id", value);
+            JsonModel.Set(this._rawQueryData, "customer_id", value);
         }
     }
 
@@ -53,7 +53,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public DateTimeOffset? End
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "end"); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "end"); }
         init
         {
             if (value == null)
@@ -61,7 +61,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "end", value);
+            JsonModel.Set(this._rawQueryData, "end", value);
         }
     }
 
@@ -71,7 +71,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public string? EventName
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "event_name"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "event_name"); }
         init
         {
             if (value == null)
@@ -79,7 +79,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "event_name", value);
+            JsonModel.Set(this._rawQueryData, "event_name", value);
         }
     }
 
@@ -89,7 +89,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public string? MeterID
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawQueryData, "meter_id"); }
+        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "meter_id"); }
         init
         {
             if (value == null)
@@ -97,7 +97,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "meter_id", value);
+            JsonModel.Set(this._rawQueryData, "meter_id", value);
         }
     }
 
@@ -106,7 +106,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
         init
         {
             if (value == null)
@@ -114,7 +114,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "page_number", value);
+            JsonModel.Set(this._rawQueryData, "page_number", value);
         }
     }
 
@@ -123,7 +123,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
         init
         {
             if (value == null)
@@ -131,7 +131,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "page_size", value);
+            JsonModel.Set(this._rawQueryData, "page_size", value);
         }
     }
 
@@ -140,7 +140,7 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public DateTimeOffset? Start
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "start"); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawQueryData, "start"); }
         init
         {
             if (value == null)
@@ -148,7 +148,7 @@ public sealed record class UsageEventListParams : ParamsBase
                 return;
             }
 
-            ModelBase.Set(this._rawQueryData, "start", value);
+            JsonModel.Set(this._rawQueryData, "start", value);
         }
     }
 
@@ -178,7 +178,7 @@ public sealed record class UsageEventListParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static UsageEventListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

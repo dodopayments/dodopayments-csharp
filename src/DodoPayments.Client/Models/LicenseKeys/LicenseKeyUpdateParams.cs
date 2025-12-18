@@ -25,8 +25,8 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public int? ActivationsLimit
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawBodyData, "activations_limit"); }
-        init { ModelBase.Set(this._rawBodyData, "activations_limit", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "activations_limit"); }
+        init { JsonModel.Set(this._rawBodyData, "activations_limit", value); }
     }
 
     /// <summary>
@@ -35,8 +35,8 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public bool? Disabled
     {
-        get { return ModelBase.GetNullableStruct<bool>(this.RawBodyData, "disabled"); }
-        init { ModelBase.Set(this._rawBodyData, "disabled", value); }
+        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "disabled"); }
+        init { JsonModel.Set(this._rawBodyData, "disabled", value); }
     }
 
     /// <summary>
@@ -45,8 +45,8 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawBodyData, "expires_at"); }
-        init { ModelBase.Set(this._rawBodyData, "expires_at", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawBodyData, "expires_at"); }
+        init { JsonModel.Set(this._rawBodyData, "expires_at", value); }
     }
 
     public LicenseKeyUpdateParams() { }
@@ -82,7 +82,7 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRaw.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
     public static LicenseKeyUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -106,9 +106,13 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
         }.Uri;
     }
 
-    internal override StringContent? BodyContent()
+    internal override HttpContent? BodyContent()
     {
-        return new(JsonSerializer.Serialize(this.RawBodyData), Encoding.UTF8, "application/json");
+        return new StringContent(
+            JsonSerializer.Serialize(this.RawBodyData),
+            Encoding.UTF8,
+            "application/json"
+        );
     }
 
     internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)

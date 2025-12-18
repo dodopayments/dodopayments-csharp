@@ -394,8 +394,10 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             },
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewChangePlanResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewChangePlanResponse>(
+            element
+        );
         Assert.NotNull(deserialized);
 
         ImmediateCharge expectedImmediateCharge = new()
@@ -740,8 +742,8 @@ public class ImmediateChargeTest : TestBase
             },
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ImmediateCharge>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<ImmediateCharge>(element);
         Assert.NotNull(deserialized);
 
         List<LineItem> expectedLineItems =
@@ -912,8 +914,8 @@ public class LineItemTest : TestBase
                 TaxRate = 0,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<LineItem>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<LineItem>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -938,8 +940,8 @@ public class LineItemTest : TestBase
                 Tax = 0,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<LineItem>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<LineItem>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -965,8 +967,8 @@ public class LineItemTest : TestBase
                 Tax = 0,
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<LineItem>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<LineItem>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -1065,8 +1067,8 @@ public class LineItemSubscriptionTest : TestBase
             TaxRate = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LineItemSubscription>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LineItemSubscription>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -1362,8 +1364,8 @@ public class AddonTest : TestBase
             Tax = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Addon>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Addon>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -1659,8 +1661,8 @@ public class LineItemMeterTest : TestBase
             Tax = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LineItemMeter>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LineItemMeter>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -1933,8 +1935,8 @@ public class SummaryTest : TestBase
             Tax = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Summary>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Summary>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;

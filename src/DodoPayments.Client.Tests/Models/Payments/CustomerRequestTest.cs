@@ -30,8 +30,8 @@ public class CustomerRequestTest : TestBase
     public void AttachExistingCustomerSerializationRoundtripWorks()
     {
         CustomerRequest value = new(new AttachExistingCustomer("customer_id"));
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<CustomerRequest>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<CustomerRequest>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -47,8 +47,8 @@ public class CustomerRequestTest : TestBase
                 PhoneNumber = "phone_number",
             }
         );
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<CustomerRequest>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<CustomerRequest>(element);
 
         Assert.Equal(value, deserialized);
     }

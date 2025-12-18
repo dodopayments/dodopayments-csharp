@@ -290,8 +290,8 @@ public class SubscriptionUpdatedWebhookEventTest1 : TestBase
             Type = Type20.SubscriptionUpdated,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -732,8 +732,8 @@ public class Data20Test : TestBase
             PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Data20>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Data20>(element);
         Assert.NotNull(deserialized);
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
@@ -1480,8 +1480,8 @@ public class Data20IntersectionMember1Test : TestBase
             PayloadType = Data20IntersectionMember1PayloadType.Subscription,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Data20IntersectionMember1>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Data20IntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Data20IntersectionMember1PayloadType> expectedPayloadType =

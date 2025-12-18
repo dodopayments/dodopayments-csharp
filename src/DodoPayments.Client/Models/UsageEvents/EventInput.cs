@@ -9,16 +9,16 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.UsageEvents;
 
-[JsonConverter(typeof(ModelConverter<EventInput, EventInputFromRaw>))]
-public sealed record class EventInput : ModelBase
+[JsonConverter(typeof(JsonModelConverter<EventInput, EventInputFromRaw>))]
+public sealed record class EventInput : JsonModel
 {
     /// <summary>
     /// customer_id of the customer whose usage needs to be tracked
     /// </summary>
     public required string CustomerID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { ModelBase.Set(this._rawData, "customer_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
+        init { JsonModel.Set(this._rawData, "customer_id", value); }
     }
 
     /// <summary>
@@ -27,8 +27,8 @@ public sealed record class EventInput : ModelBase
     /// </summary>
     public required string EventID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "event_id"); }
-        init { ModelBase.Set(this._rawData, "event_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "event_id"); }
+        init { JsonModel.Set(this._rawData, "event_id", value); }
     }
 
     /// <summary>
@@ -36,8 +36,8 @@ public sealed record class EventInput : ModelBase
     /// </summary>
     public required string EventName
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "event_name"); }
-        init { ModelBase.Set(this._rawData, "event_name", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "event_name"); }
+        init { JsonModel.Set(this._rawData, "event_name", value); }
     }
 
     /// <summary>
@@ -48,12 +48,12 @@ public sealed record class EventInput : ModelBase
     {
         get
         {
-            return ModelBase.GetNullableClass<Dictionary<string, EventInputMetadata>>(
+            return JsonModel.GetNullableClass<Dictionary<string, EventInputMetadata>>(
                 this.RawData,
                 "metadata"
             );
         }
-        init { ModelBase.Set(this._rawData, "metadata", value); }
+        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -62,8 +62,8 @@ public sealed record class EventInput : ModelBase
     /// </summary>
     public DateTimeOffset? Timestamp
     {
-        get { return ModelBase.GetNullableStruct<DateTimeOffset>(this.RawData, "timestamp"); }
-        init { ModelBase.Set(this._rawData, "timestamp", value); }
+        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "timestamp"); }
+        init { JsonModel.Set(this._rawData, "timestamp", value); }
     }
 
     /// <inheritdoc/>
@@ -107,7 +107,7 @@ public sealed record class EventInput : ModelBase
     }
 }
 
-class EventInputFromRaw : IFromRaw<EventInput>
+class EventInputFromRaw : IFromRawJson<EventInput>
 {
     /// <inheritdoc/>
     public EventInput FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
@@ -122,34 +122,34 @@ public record class EventInputMetadata
 {
     public object? Value { get; } = null;
 
-    JsonElement? _json = null;
+    JsonElement? _element = null;
 
     public JsonElement Json
     {
-        get { return this._json ??= JsonSerializer.SerializeToElement(this.Value); }
+        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
     }
 
-    public EventInputMetadata(string value, JsonElement? json = null)
+    public EventInputMetadata(string value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public EventInputMetadata(double value, JsonElement? json = null)
+    public EventInputMetadata(double value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public EventInputMetadata(bool value, JsonElement? json = null)
+    public EventInputMetadata(bool value, JsonElement? element = null)
     {
         this.Value = value;
-        this._json = json;
+        this._element = element;
     }
 
-    public EventInputMetadata(JsonElement json)
+    public EventInputMetadata(JsonElement element)
     {
-        this._json = json;
+        this._element = element;
     }
 
     /// <summary>
@@ -336,13 +336,13 @@ sealed class EventInputMetadataConverter : JsonConverter<EventInputMetadata>
         JsonSerializerOptions options
     )
     {
-        var json = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<string>(json, options);
+            var deserialized = JsonSerializer.Deserialize<string>(element, options);
             if (deserialized != null)
             {
-                return new(deserialized, json);
+                return new(deserialized, element);
             }
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -352,7 +352,7 @@ sealed class EventInputMetadataConverter : JsonConverter<EventInputMetadata>
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(json, options));
+            return new(JsonSerializer.Deserialize<double>(element, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
@@ -361,14 +361,14 @@ sealed class EventInputMetadataConverter : JsonConverter<EventInputMetadata>
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(json, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options));
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
             // ignore
         }
 
-        return new(json);
+        return new(element);
     }
 
     public override void Write(

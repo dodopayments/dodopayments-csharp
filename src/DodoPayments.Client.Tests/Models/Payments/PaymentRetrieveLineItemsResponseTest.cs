@@ -96,8 +96,8 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PaymentRetrieveLineItemsResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PaymentRetrieveLineItemsResponse>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
@@ -208,8 +208,10 @@ public class PaymentRetrieveLineItemsResponseItemTest : TestBase
             Name = "name",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PaymentRetrieveLineItemsResponseItem>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PaymentRetrieveLineItemsResponseItem>(
+            element
+        );
         Assert.NotNull(deserialized);
 
         int expectedAmount = 0;

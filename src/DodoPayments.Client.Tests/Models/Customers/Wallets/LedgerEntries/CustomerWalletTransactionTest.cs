@@ -99,8 +99,8 @@ public class CustomerWalletTransactionTest : TestBase
             ReferenceObjectID = "reference_object_id",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CustomerWalletTransaction>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<CustomerWalletTransaction>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";

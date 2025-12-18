@@ -31,8 +31,8 @@ public class LicenseValidateResponseTest : TestBase
     {
         var model = new LicenseValidateResponse { Valid = true };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseValidateResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseValidateResponse>(element);
         Assert.NotNull(deserialized);
 
         bool expectedValid = true;

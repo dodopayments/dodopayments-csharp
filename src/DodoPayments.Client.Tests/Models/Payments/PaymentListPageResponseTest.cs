@@ -144,8 +144,8 @@ public class PaymentListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PaymentListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PaymentListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Item> expectedItems =
@@ -343,8 +343,8 @@ public class ItemTest : TestBase
             SubscriptionID = "subscription_id",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Item>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Item>(element);
         Assert.NotNull(deserialized);
 
         string expectedBrandID = "brand_id";

@@ -108,8 +108,8 @@ public class DisputeLostWebhookEventTest : TestBase
             Type = DisputeLostWebhookEventType.DisputeLost,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DisputeLostWebhookEvent>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeLostWebhookEvent>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -249,8 +249,8 @@ public class DisputeLostWebhookEventDataTest : TestBase
             PayloadType = DisputeLostWebhookEventDataIntersectionMember1PayloadType.Dispute,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DisputeLostWebhookEventData>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DisputeLostWebhookEventData>(element);
         Assert.NotNull(deserialized);
 
         string expectedAmount = "amount";
@@ -508,9 +508,9 @@ public class DisputeLostWebhookEventDataIntersectionMember1Test : TestBase
             PayloadType = DisputeLostWebhookEventDataIntersectionMember1PayloadType.Dispute,
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized =
-            JsonSerializer.Deserialize<DisputeLostWebhookEventDataIntersectionMember1>(json);
+            JsonSerializer.Deserialize<DisputeLostWebhookEventDataIntersectionMember1>(element);
         Assert.NotNull(deserialized);
 
         ApiEnum<

@@ -73,8 +73,8 @@ public class EventTest : TestBase
             Metadata = new Dictionary<string, Metadata>() { { "foo", "string" } },
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Event>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Event>(element);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -208,8 +208,8 @@ public class MetadataTest : TestBase
     public void StringSerializationRoundtripWorks()
     {
         Metadata value = new("string");
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Metadata>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Metadata>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -218,8 +218,8 @@ public class MetadataTest : TestBase
     public void NumberSerializationRoundtripWorks()
     {
         Metadata value = new(0);
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Metadata>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Metadata>(element);
 
         Assert.Equal(value, deserialized);
     }
@@ -228,8 +228,8 @@ public class MetadataTest : TestBase
     public void BooleanSerializationRoundtripWorks()
     {
         Metadata value = new(true);
-        string json = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Metadata>(json);
+        string element = JsonSerializer.Serialize(value);
+        var deserialized = JsonSerializer.Deserialize<Metadata>(element);
 
         Assert.Equal(value, deserialized);
     }

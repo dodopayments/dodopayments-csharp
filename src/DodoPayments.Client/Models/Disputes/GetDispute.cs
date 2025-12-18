@@ -9,16 +9,16 @@ using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Disputes;
 
-[JsonConverter(typeof(ModelConverter<GetDispute, GetDisputeFromRaw>))]
-public sealed record class GetDispute : ModelBase
+[JsonConverter(typeof(JsonModelConverter<GetDispute, GetDisputeFromRaw>))]
+public sealed record class GetDispute : JsonModel
 {
     /// <summary>
     /// The amount involved in the dispute, represented as a string to accommodate precision.
     /// </summary>
     public required string Amount
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "amount"); }
-        init { ModelBase.Set(this._rawData, "amount", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "amount"); }
+        init { JsonModel.Set(this._rawData, "amount", value); }
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public sealed record class GetDispute : ModelBase
     /// </summary>
     public required string BusinessID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { ModelBase.Set(this._rawData, "business_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
+        init { JsonModel.Set(this._rawData, "business_id", value); }
     }
 
     /// <summary>
@@ -35,8 +35,8 @@ public sealed record class GetDispute : ModelBase
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return ModelBase.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { ModelBase.Set(this._rawData, "created_at", value); }
+        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
+        init { JsonModel.Set(this._rawData, "created_at", value); }
     }
 
     /// <summary>
@@ -44,8 +44,8 @@ public sealed record class GetDispute : ModelBase
     /// </summary>
     public required string Currency
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "currency"); }
-        init { ModelBase.Set(this._rawData, "currency", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "currency"); }
+        init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
     /// <summary>
@@ -53,8 +53,8 @@ public sealed record class GetDispute : ModelBase
     /// </summary>
     public required CustomerLimitedDetails Customer
     {
-        get { return ModelBase.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
-        init { ModelBase.Set(this._rawData, "customer", value); }
+        get { return JsonModel.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
+        init { JsonModel.Set(this._rawData, "customer", value); }
     }
 
     /// <summary>
@@ -62,8 +62,8 @@ public sealed record class GetDispute : ModelBase
     /// </summary>
     public required string DisputeID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "dispute_id"); }
-        init { ModelBase.Set(this._rawData, "dispute_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "dispute_id"); }
+        init { JsonModel.Set(this._rawData, "dispute_id", value); }
     }
 
     /// <summary>
@@ -73,12 +73,12 @@ public sealed record class GetDispute : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, DisputeDisputeStage>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, DisputeDisputeStage>>(
                 this.RawData,
                 "dispute_stage"
             );
         }
-        init { ModelBase.Set(this._rawData, "dispute_stage", value); }
+        init { JsonModel.Set(this._rawData, "dispute_stage", value); }
     }
 
     /// <summary>
@@ -88,12 +88,12 @@ public sealed record class GetDispute : ModelBase
     {
         get
         {
-            return ModelBase.GetNotNullClass<ApiEnum<string, DisputeDisputeStatus>>(
+            return JsonModel.GetNotNullClass<ApiEnum<string, DisputeDisputeStatus>>(
                 this.RawData,
                 "dispute_status"
             );
         }
-        init { ModelBase.Set(this._rawData, "dispute_status", value); }
+        init { JsonModel.Set(this._rawData, "dispute_status", value); }
     }
 
     /// <summary>
@@ -101,8 +101,8 @@ public sealed record class GetDispute : ModelBase
     /// </summary>
     public required string PaymentID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { ModelBase.Set(this._rawData, "payment_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
+        init { JsonModel.Set(this._rawData, "payment_id", value); }
     }
 
     /// <summary>
@@ -110,8 +110,8 @@ public sealed record class GetDispute : ModelBase
     /// </summary>
     public string? Reason
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "reason"); }
-        init { ModelBase.Set(this._rawData, "reason", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason"); }
+        init { JsonModel.Set(this._rawData, "reason", value); }
     }
 
     /// <summary>
@@ -119,8 +119,8 @@ public sealed record class GetDispute : ModelBase
     /// </summary>
     public string? Remarks
     {
-        get { return ModelBase.GetNullableClass<string>(this.RawData, "remarks"); }
-        init { ModelBase.Set(this._rawData, "remarks", value); }
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "remarks"); }
+        init { JsonModel.Set(this._rawData, "remarks", value); }
     }
 
     /// <inheritdoc/>
@@ -164,7 +164,7 @@ public sealed record class GetDispute : ModelBase
     }
 }
 
-class GetDisputeFromRaw : IFromRaw<GetDispute>
+class GetDisputeFromRaw : IFromRawJson<GetDispute>
 {
     /// <inheritdoc/>
     public GetDispute FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>

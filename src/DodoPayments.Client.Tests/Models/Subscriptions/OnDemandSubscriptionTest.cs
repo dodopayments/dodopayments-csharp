@@ -62,8 +62,8 @@ public class OnDemandSubscriptionTest : TestBase
             ProductPrice = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<OnDemandSubscription>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<OnDemandSubscription>(element);
         Assert.NotNull(deserialized);
 
         bool expectedMandateOnly = true;

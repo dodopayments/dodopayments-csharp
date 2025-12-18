@@ -7,19 +7,19 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(ModelConverter<OneTimeProductCartItem, OneTimeProductCartItemFromRaw>))]
-public sealed record class OneTimeProductCartItem : ModelBase
+[JsonConverter(typeof(JsonModelConverter<OneTimeProductCartItem, OneTimeProductCartItemFromRaw>))]
+public sealed record class OneTimeProductCartItem : JsonModel
 {
     public required string ProductID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { ModelBase.Set(this._rawData, "product_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
+        init { JsonModel.Set(this._rawData, "product_id", value); }
     }
 
     public required int Quantity
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "quantity"); }
-        init { ModelBase.Set(this._rawData, "quantity", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "quantity"); }
+        init { JsonModel.Set(this._rawData, "quantity", value); }
     }
 
     /// <summary>
@@ -29,8 +29,8 @@ public sealed record class OneTimeProductCartItem : ModelBase
     /// </summary>
     public int? Amount
     {
-        get { return ModelBase.GetNullableStruct<int>(this.RawData, "amount"); }
-        init { ModelBase.Set(this._rawData, "amount", value); }
+        get { return JsonModel.GetNullableStruct<int>(this.RawData, "amount"); }
+        init { JsonModel.Set(this._rawData, "amount", value); }
     }
 
     /// <inheritdoc/>
@@ -68,7 +68,7 @@ public sealed record class OneTimeProductCartItem : ModelBase
     }
 }
 
-class OneTimeProductCartItemFromRaw : IFromRaw<OneTimeProductCartItem>
+class OneTimeProductCartItemFromRaw : IFromRawJson<OneTimeProductCartItem>
 {
     /// <inheritdoc/>
     public OneTimeProductCartItem FromRawUnchecked(

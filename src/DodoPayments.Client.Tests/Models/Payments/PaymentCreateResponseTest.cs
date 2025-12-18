@@ -153,8 +153,8 @@ public class PaymentCreateResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PaymentCreateResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<PaymentCreateResponse>(element);
         Assert.NotNull(deserialized);
 
         string expectedClientSecret = "client_secret";

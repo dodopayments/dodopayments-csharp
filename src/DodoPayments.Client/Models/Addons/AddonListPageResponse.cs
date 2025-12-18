@@ -7,13 +7,13 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Addons;
 
-[JsonConverter(typeof(ModelConverter<AddonListPageResponse, AddonListPageResponseFromRaw>))]
-public sealed record class AddonListPageResponse : ModelBase
+[JsonConverter(typeof(JsonModelConverter<AddonListPageResponse, AddonListPageResponseFromRaw>))]
+public sealed record class AddonListPageResponse : JsonModel
 {
     public required IReadOnlyList<AddonResponse> Items
     {
-        get { return ModelBase.GetNotNullClass<List<AddonResponse>>(this.RawData, "items"); }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        get { return JsonModel.GetNotNullClass<List<AddonResponse>>(this.RawData, "items"); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -59,7 +59,7 @@ public sealed record class AddonListPageResponse : ModelBase
     }
 }
 
-class AddonListPageResponseFromRaw : IFromRaw<AddonListPageResponse>
+class AddonListPageResponseFromRaw : IFromRawJson<AddonListPageResponse>
 {
     /// <inheritdoc/>
     public AddonListPageResponse FromRawUnchecked(

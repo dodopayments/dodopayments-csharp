@@ -7,13 +7,15 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.UsageEvents;
 
-[JsonConverter(typeof(ModelConverter<UsageEventIngestResponse, UsageEventIngestResponseFromRaw>))]
-public sealed record class UsageEventIngestResponse : ModelBase
+[JsonConverter(
+    typeof(JsonModelConverter<UsageEventIngestResponse, UsageEventIngestResponseFromRaw>)
+)]
+public sealed record class UsageEventIngestResponse : JsonModel
 {
     public required long IngestedCount
     {
-        get { return ModelBase.GetNotNullStruct<long>(this.RawData, "ingested_count"); }
-        init { ModelBase.Set(this._rawData, "ingested_count", value); }
+        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "ingested_count"); }
+        init { JsonModel.Set(this._rawData, "ingested_count", value); }
     }
 
     /// <inheritdoc/>
@@ -56,7 +58,7 @@ public sealed record class UsageEventIngestResponse : ModelBase
     }
 }
 
-class UsageEventIngestResponseFromRaw : IFromRaw<UsageEventIngestResponse>
+class UsageEventIngestResponseFromRaw : IFromRawJson<UsageEventIngestResponse>
 {
     /// <inheritdoc/>
     public UsageEventIngestResponse FromRawUnchecked(

@@ -114,8 +114,8 @@ public class DiscountListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DiscountListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<DiscountListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<Discount> expectedItems =

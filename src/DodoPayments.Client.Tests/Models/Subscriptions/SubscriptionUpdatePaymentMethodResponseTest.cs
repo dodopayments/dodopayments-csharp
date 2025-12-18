@@ -58,9 +58,9 @@ public class SubscriptionUpdatePaymentMethodResponseTest : TestBase
             PaymentLink = "payment_link",
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model);
         var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatePaymentMethodResponse>(
-            json
+            element
         );
         Assert.NotNull(deserialized);
 

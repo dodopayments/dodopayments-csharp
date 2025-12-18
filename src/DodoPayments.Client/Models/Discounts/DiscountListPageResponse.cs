@@ -7,16 +7,18 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Discounts;
 
-[JsonConverter(typeof(ModelConverter<DiscountListPageResponse, DiscountListPageResponseFromRaw>))]
-public sealed record class DiscountListPageResponse : ModelBase
+[JsonConverter(
+    typeof(JsonModelConverter<DiscountListPageResponse, DiscountListPageResponseFromRaw>)
+)]
+public sealed record class DiscountListPageResponse : JsonModel
 {
     /// <summary>
     /// Array of active (non-deleted) discounts for the current page.
     /// </summary>
     public required IReadOnlyList<Discount> Items
     {
-        get { return ModelBase.GetNotNullClass<List<Discount>>(this.RawData, "items"); }
-        init { ModelBase.Set(this._rawData, "items", value); }
+        get { return JsonModel.GetNotNullClass<List<Discount>>(this.RawData, "items"); }
+        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -62,7 +64,7 @@ public sealed record class DiscountListPageResponse : ModelBase
     }
 }
 
-class DiscountListPageResponseFromRaw : IFromRaw<DiscountListPageResponse>
+class DiscountListPageResponseFromRaw : IFromRawJson<DiscountListPageResponse>
 {
     /// <inheritdoc/>
     public DiscountListPageResponse FromRawUnchecked(

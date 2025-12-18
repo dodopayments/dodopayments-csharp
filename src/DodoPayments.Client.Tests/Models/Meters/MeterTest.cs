@@ -166,8 +166,8 @@ public class MeterTest : TestBase
             },
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Meters::Meter>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<Meters::Meter>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";

@@ -61,8 +61,8 @@ public class LicenseKeyInstanceTest : TestBase
             Name = "Production Server 1",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyInstance>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyInstance>(element);
         Assert.NotNull(deserialized);
 
         string expectedID = "lki_123";

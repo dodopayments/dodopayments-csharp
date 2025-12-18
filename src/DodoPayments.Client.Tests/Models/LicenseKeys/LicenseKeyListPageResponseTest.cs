@@ -114,8 +114,8 @@ public class LicenseKeyListPageResponseTest : TestBase
             ],
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyListPageResponse>(json);
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyListPageResponse>(element);
         Assert.NotNull(deserialized);
 
         List<LicenseKey> expectedItems =

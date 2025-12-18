@@ -10,19 +10,19 @@ namespace DodoPayments.Client.Models.Subscriptions;
 /// <summary>
 /// Response struct representing subscription details
 /// </summary>
-[JsonConverter(typeof(ModelConverter<AddonCartResponseItem, AddonCartResponseItemFromRaw>))]
-public sealed record class AddonCartResponseItem : ModelBase
+[JsonConverter(typeof(JsonModelConverter<AddonCartResponseItem, AddonCartResponseItemFromRaw>))]
+public sealed record class AddonCartResponseItem : JsonModel
 {
     public required string AddonID
     {
-        get { return ModelBase.GetNotNullClass<string>(this.RawData, "addon_id"); }
-        init { ModelBase.Set(this._rawData, "addon_id", value); }
+        get { return JsonModel.GetNotNullClass<string>(this.RawData, "addon_id"); }
+        init { JsonModel.Set(this._rawData, "addon_id", value); }
     }
 
     public required int Quantity
     {
-        get { return ModelBase.GetNotNullStruct<int>(this.RawData, "quantity"); }
-        init { ModelBase.Set(this._rawData, "quantity", value); }
+        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "quantity"); }
+        init { JsonModel.Set(this._rawData, "quantity", value); }
     }
 
     /// <inheritdoc/>
@@ -59,7 +59,7 @@ public sealed record class AddonCartResponseItem : ModelBase
     }
 }
 
-class AddonCartResponseItemFromRaw : IFromRaw<AddonCartResponseItem>
+class AddonCartResponseItemFromRaw : IFromRawJson<AddonCartResponseItem>
 {
     /// <inheritdoc/>
     public AddonCartResponseItem FromRawUnchecked(
