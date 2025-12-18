@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.1.0 (2025-12-18)
+
+Full Changelog: [v4.0.1...v4.1.0](https://github.com/dodopayments/dodopayments-csharp/compare/v4.0.1...v4.1.0)
+
+### Features
+
+* **client:** add multipart form data support ([177ae9c](https://github.com/dodopayments/dodopayments-csharp/commit/177ae9c60973d7a40c6ccaa44efc0e1351a15df5))
+
+
+### Chores
+
+* **client:** improve object instantiation ([b1048ac](https://github.com/dodopayments/dodopayments-csharp/commit/b1048acee9b31f1b06d8175fe2132cc39ecc9296))
+
+
+### Documentation
+
+* add contributing.md ([fa31911](https://github.com/dodopayments/dodopayments-csharp/commit/fa319113f3362bfe446805a31fe20be08cf72be7))
+
 ## 4.0.1 (2025-12-17)
 
 Full Changelog: [v4.0.0...v4.0.1](https://github.com/dodopayments/dodopayments-csharp/compare/v4.0.0...v4.0.1)
