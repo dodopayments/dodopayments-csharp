@@ -1,5 +1,24 @@
 # Changelog
 
+## 4.2.0 (2025-12-19)
+
+Full Changelog: [v4.1.0...v4.2.0](https://github.com/dodopayments/dodopayments-csharp/compare/v4.1.0...v4.2.0)
+
+### Features
+
+* **api:** updated openapi spec to v1.68.4 ([748a73f](https://github.com/dodopayments/dodopayments-csharp/commit/748a73f1e9ee75ae2258dd602d04bb3e528052cc))
+
+
+### Bug Fixes
+
+* **internal:** test nullability warnings ([976436a](https://github.com/dodopayments/dodopayments-csharp/commit/976436abe238715a0fd18cbc8da0247cbcc7f8b3))
+
+
+### Chores
+
+* **internal:** share csproj properties with dir build props ([976436a](https://github.com/dodopayments/dodopayments-csharp/commit/976436abe238715a0fd18cbc8da0247cbcc7f8b3))
+* **internal:** use better test examples ([976436a](https://github.com/dodopayments/dodopayments-csharp/commit/976436abe238715a0fd18cbc8da0247cbcc7f8b3))
+
 ## 4.1.0 (2025-12-18)
 
 Full Changelog: [v4.0.1...v4.1.0](https://github.com/dodopayments/dodopayments-csharp/compare/v4.0.1...v4.1.0)
