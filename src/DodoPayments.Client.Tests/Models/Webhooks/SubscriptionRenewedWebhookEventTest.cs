@@ -1605,6 +1605,8 @@ public class SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadTypeTe
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
+
+        Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
@@ -1664,6 +1666,8 @@ public class SubscriptionRenewedWebhookEventTypeTest : TestBase
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
+
+        Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 

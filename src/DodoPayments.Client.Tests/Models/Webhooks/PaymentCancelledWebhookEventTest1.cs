@@ -2009,6 +2009,8 @@ public class Data7IntersectionMember1PayloadTypeTest : TestBase
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
+
+        Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
@@ -2063,6 +2065,8 @@ public class Type7Test : TestBase
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
+
+        Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 

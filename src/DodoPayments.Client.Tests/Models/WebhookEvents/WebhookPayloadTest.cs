@@ -2439,6 +2439,8 @@ public class PayloadTypeTest : TestBase
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
+
+        Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
@@ -3311,6 +3313,8 @@ public class SubscriptionIntersectionMember1PayloadTypeTest : TestBase
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
+
+        Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
@@ -3869,6 +3873,8 @@ public class RefundIntersectionMember1PayloadTypeTest : TestBase
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
+
+        Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
@@ -4299,6 +4305,8 @@ public class DisputeIntersectionMember1PayloadTypeTest : TestBase
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
+
+        Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
@@ -4671,6 +4679,8 @@ public class LicenseKeyIntersectionMember1PayloadTypeTest : TestBase
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
+
+        Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 

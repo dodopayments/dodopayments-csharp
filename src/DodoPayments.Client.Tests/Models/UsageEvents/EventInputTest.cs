@@ -28,6 +28,7 @@ public class EventInputTest : TestBase
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedEventID, model.EventID);
         Assert.Equal(expectedEventName, model.EventName);
+        Assert.NotNull(model.Metadata);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -81,6 +82,7 @@ public class EventInputTest : TestBase
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedEventID, deserialized.EventID);
         Assert.Equal(expectedEventName, deserialized.EventName);
+        Assert.NotNull(deserialized.Metadata);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {

@@ -34,6 +34,7 @@ public class CustomerTest : TestBase
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedEmail, model.Email);
         Assert.Equal(expectedName, model.Name);
+        Assert.NotNull(model.Metadata);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -95,6 +96,7 @@ public class CustomerTest : TestBase
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedEmail, deserialized.Email);
         Assert.Equal(expectedName, deserialized.Name);
+        Assert.NotNull(deserialized.Metadata);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
