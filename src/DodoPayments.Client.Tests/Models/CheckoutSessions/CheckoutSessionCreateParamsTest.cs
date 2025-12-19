@@ -581,6 +581,7 @@ public class FeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
         };
 
         bool expectedAllowCurrencySelection = true;
@@ -595,6 +596,7 @@ public class FeatureFlagsTest : TestBase
         bool expectedAllowPhoneNumberCollection = true;
         bool expectedAllowTaxID = true;
         bool expectedAlwaysCreateNewCustomer = true;
+        bool expectedRedirectImmediately = true;
 
         Assert.Equal(expectedAllowCurrencySelection, model.AllowCurrencySelection);
         Assert.Equal(expectedAllowCustomerEditingCity, model.AllowCustomerEditingCity);
@@ -608,6 +610,7 @@ public class FeatureFlagsTest : TestBase
         Assert.Equal(expectedAllowPhoneNumberCollection, model.AllowPhoneNumberCollection);
         Assert.Equal(expectedAllowTaxID, model.AllowTaxID);
         Assert.Equal(expectedAlwaysCreateNewCustomer, model.AlwaysCreateNewCustomer);
+        Assert.Equal(expectedRedirectImmediately, model.RedirectImmediately);
     }
 
     [Fact]
@@ -627,6 +630,7 @@ public class FeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -652,6 +656,7 @@ public class FeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
         };
 
         string element = JsonSerializer.Serialize(model);
@@ -670,6 +675,7 @@ public class FeatureFlagsTest : TestBase
         bool expectedAllowPhoneNumberCollection = true;
         bool expectedAllowTaxID = true;
         bool expectedAlwaysCreateNewCustomer = true;
+        bool expectedRedirectImmediately = true;
 
         Assert.Equal(expectedAllowCurrencySelection, deserialized.AllowCurrencySelection);
         Assert.Equal(expectedAllowCustomerEditingCity, deserialized.AllowCustomerEditingCity);
@@ -683,6 +689,7 @@ public class FeatureFlagsTest : TestBase
         Assert.Equal(expectedAllowPhoneNumberCollection, deserialized.AllowPhoneNumberCollection);
         Assert.Equal(expectedAllowTaxID, deserialized.AllowTaxID);
         Assert.Equal(expectedAlwaysCreateNewCustomer, deserialized.AlwaysCreateNewCustomer);
+        Assert.Equal(expectedRedirectImmediately, deserialized.RedirectImmediately);
     }
 
     [Fact]
@@ -702,6 +709,7 @@ public class FeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
         };
 
         model.Validate();
@@ -736,6 +744,8 @@ public class FeatureFlagsTest : TestBase
         Assert.False(model.RawData.ContainsKey("allow_tax_id"));
         Assert.Null(model.AlwaysCreateNewCustomer);
         Assert.False(model.RawData.ContainsKey("always_create_new_customer"));
+        Assert.Null(model.RedirectImmediately);
+        Assert.False(model.RawData.ContainsKey("redirect_immediately"));
     }
 
     [Fact]
@@ -764,6 +774,7 @@ public class FeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = null,
             AllowTaxID = null,
             AlwaysCreateNewCustomer = null,
+            RedirectImmediately = null,
         };
 
         Assert.Null(model.AllowCurrencySelection);
@@ -790,6 +801,8 @@ public class FeatureFlagsTest : TestBase
         Assert.False(model.RawData.ContainsKey("allow_tax_id"));
         Assert.Null(model.AlwaysCreateNewCustomer);
         Assert.False(model.RawData.ContainsKey("always_create_new_customer"));
+        Assert.Null(model.RedirectImmediately);
+        Assert.False(model.RawData.ContainsKey("redirect_immediately"));
     }
 
     [Fact]
@@ -810,6 +823,7 @@ public class FeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = null,
             AllowTaxID = null,
             AlwaysCreateNewCustomer = null,
+            RedirectImmediately = null,
         };
 
         model.Validate();
