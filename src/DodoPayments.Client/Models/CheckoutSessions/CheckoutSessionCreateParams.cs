@@ -200,6 +200,23 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// If true, returns a shortened checkout URL. Defaults to false if not specified.
+    /// </summary>
+    public bool? ShortLink
+    {
+        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "short_link"); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            JsonModel.Set(this._rawBodyData, "short_link", value);
+        }
+    }
+
+    /// <summary>
     /// Display saved payment methods of a returning customer False by default
     /// </summary>
     public bool? ShowSavedPaymentMethods
@@ -894,6 +911,25 @@ public sealed record class FeatureFlags : JsonModel
         }
     }
 
+    /// <summary>
+    /// If true, redirects the customer immediately after payment completion
+    ///
+    /// <para>Default is false</para>
+    /// </summary>
+    public bool? RedirectImmediately
+    {
+        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "redirect_immediately"); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            JsonModel.Set(this._rawData, "redirect_immediately", value);
+        }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -909,6 +945,7 @@ public sealed record class FeatureFlags : JsonModel
         _ = this.AllowPhoneNumberCollection;
         _ = this.AllowTaxID;
         _ = this.AlwaysCreateNewCustomer;
+        _ = this.RedirectImmediately;
     }
 
     public FeatureFlags() { }

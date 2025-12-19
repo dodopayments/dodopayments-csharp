@@ -60,11 +60,13 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowPhoneNumberCollection = true,
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
             },
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
             ReturnURL = "return_url",
+            ShortLink = true,
             ShowSavedPaymentMethods = true,
             SubscriptionData = new()
             {
@@ -127,11 +129,13 @@ public class CheckoutSessionRequestTest : TestBase
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
         };
         bool expectedForce3DS = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMinimalAddress = true;
         string expectedReturnURL = "return_url";
+        bool expectedShortLink = true;
         bool expectedShowSavedPaymentMethods = true;
         CheckoutSessionRequestSubscriptionData expectedSubscriptionData = new()
         {
@@ -178,6 +182,7 @@ public class CheckoutSessionRequestTest : TestBase
         }
         Assert.Equal(expectedMinimalAddress, model.MinimalAddress);
         Assert.Equal(expectedReturnURL, model.ReturnURL);
+        Assert.Equal(expectedShortLink, model.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, model.ShowSavedPaymentMethods);
         Assert.Equal(expectedSubscriptionData, model.SubscriptionData);
     }
@@ -231,11 +236,13 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowPhoneNumberCollection = true,
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
             },
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
             ReturnURL = "return_url",
+            ShortLink = true,
             ShowSavedPaymentMethods = true,
             SubscriptionData = new()
             {
@@ -306,11 +313,13 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowPhoneNumberCollection = true,
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
             },
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
             ReturnURL = "return_url",
+            ShortLink = true,
             ShowSavedPaymentMethods = true,
             SubscriptionData = new()
             {
@@ -377,11 +386,13 @@ public class CheckoutSessionRequestTest : TestBase
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
         };
         bool expectedForce3DS = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMinimalAddress = true;
         string expectedReturnURL = "return_url";
+        bool expectedShortLink = true;
         bool expectedShowSavedPaymentMethods = true;
         CheckoutSessionRequestSubscriptionData expectedSubscriptionData = new()
         {
@@ -431,6 +442,7 @@ public class CheckoutSessionRequestTest : TestBase
         }
         Assert.Equal(expectedMinimalAddress, deserialized.MinimalAddress);
         Assert.Equal(expectedReturnURL, deserialized.ReturnURL);
+        Assert.Equal(expectedShortLink, deserialized.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, deserialized.ShowSavedPaymentMethods);
         Assert.Equal(expectedSubscriptionData, deserialized.SubscriptionData);
     }
@@ -484,11 +496,13 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowPhoneNumberCollection = true,
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
             },
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
             ReturnURL = "return_url",
+            ShortLink = true,
             ShowSavedPaymentMethods = true,
             SubscriptionData = new()
             {
@@ -559,6 +573,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("feature_flags"));
         Assert.Null(model.MinimalAddress);
         Assert.False(model.RawData.ContainsKey("minimal_address"));
+        Assert.Null(model.ShortLink);
+        Assert.False(model.RawData.ContainsKey("short_link"));
         Assert.Null(model.ShowSavedPaymentMethods);
         Assert.False(model.RawData.ContainsKey("show_saved_payment_methods"));
     }
@@ -658,6 +674,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = null,
             FeatureFlags = null,
             MinimalAddress = null,
+            ShortLink = null,
             ShowSavedPaymentMethods = null,
         };
 
@@ -669,6 +686,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("feature_flags"));
         Assert.Null(model.MinimalAddress);
         Assert.False(model.RawData.ContainsKey("minimal_address"));
+        Assert.Null(model.ShortLink);
+        Assert.False(model.RawData.ContainsKey("short_link"));
         Assert.Null(model.ShowSavedPaymentMethods);
         Assert.False(model.RawData.ContainsKey("show_saved_payment_methods"));
     }
@@ -721,6 +740,7 @@ public class CheckoutSessionRequestTest : TestBase
             Customization = null,
             FeatureFlags = null,
             MinimalAddress = null,
+            ShortLink = null,
             ShowSavedPaymentMethods = null,
         };
 
@@ -764,8 +784,10 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowPhoneNumberCollection = true,
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
             },
             MinimalAddress = true,
+            ShortLink = true,
             ShowSavedPaymentMethods = true,
         };
 
@@ -826,8 +848,10 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowPhoneNumberCollection = true,
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
             },
             MinimalAddress = true,
+            ShortLink = true,
             ShowSavedPaymentMethods = true,
         };
 
@@ -871,8 +895,10 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowPhoneNumberCollection = true,
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
             },
             MinimalAddress = true,
+            ShortLink = true,
             ShowSavedPaymentMethods = true,
 
             AllowedPaymentMethodTypes = null,
@@ -943,8 +969,10 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowPhoneNumberCollection = true,
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
             },
             MinimalAddress = true,
+            ShortLink = true,
             ShowSavedPaymentMethods = true,
 
             AllowedPaymentMethodTypes = null,
@@ -1549,6 +1577,7 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
         };
 
         bool expectedAllowCurrencySelection = true;
@@ -1563,6 +1592,7 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
         bool expectedAllowPhoneNumberCollection = true;
         bool expectedAllowTaxID = true;
         bool expectedAlwaysCreateNewCustomer = true;
+        bool expectedRedirectImmediately = true;
 
         Assert.Equal(expectedAllowCurrencySelection, model.AllowCurrencySelection);
         Assert.Equal(expectedAllowCustomerEditingCity, model.AllowCustomerEditingCity);
@@ -1576,6 +1606,7 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
         Assert.Equal(expectedAllowPhoneNumberCollection, model.AllowPhoneNumberCollection);
         Assert.Equal(expectedAllowTaxID, model.AllowTaxID);
         Assert.Equal(expectedAlwaysCreateNewCustomer, model.AlwaysCreateNewCustomer);
+        Assert.Equal(expectedRedirectImmediately, model.RedirectImmediately);
     }
 
     [Fact]
@@ -1595,6 +1626,7 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -1620,6 +1652,7 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
         };
 
         string element = JsonSerializer.Serialize(model);
@@ -1638,6 +1671,7 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
         bool expectedAllowPhoneNumberCollection = true;
         bool expectedAllowTaxID = true;
         bool expectedAlwaysCreateNewCustomer = true;
+        bool expectedRedirectImmediately = true;
 
         Assert.Equal(expectedAllowCurrencySelection, deserialized.AllowCurrencySelection);
         Assert.Equal(expectedAllowCustomerEditingCity, deserialized.AllowCustomerEditingCity);
@@ -1651,6 +1685,7 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
         Assert.Equal(expectedAllowPhoneNumberCollection, deserialized.AllowPhoneNumberCollection);
         Assert.Equal(expectedAllowTaxID, deserialized.AllowTaxID);
         Assert.Equal(expectedAlwaysCreateNewCustomer, deserialized.AlwaysCreateNewCustomer);
+        Assert.Equal(expectedRedirectImmediately, deserialized.RedirectImmediately);
     }
 
     [Fact]
@@ -1670,6 +1705,7 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
         };
 
         model.Validate();
@@ -1704,6 +1740,8 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
         Assert.False(model.RawData.ContainsKey("allow_tax_id"));
         Assert.Null(model.AlwaysCreateNewCustomer);
         Assert.False(model.RawData.ContainsKey("always_create_new_customer"));
+        Assert.Null(model.RedirectImmediately);
+        Assert.False(model.RawData.ContainsKey("redirect_immediately"));
     }
 
     [Fact]
@@ -1732,6 +1770,7 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = null,
             AllowTaxID = null,
             AlwaysCreateNewCustomer = null,
+            RedirectImmediately = null,
         };
 
         Assert.Null(model.AllowCurrencySelection);
@@ -1758,6 +1797,8 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
         Assert.False(model.RawData.ContainsKey("allow_tax_id"));
         Assert.Null(model.AlwaysCreateNewCustomer);
         Assert.False(model.RawData.ContainsKey("always_create_new_customer"));
+        Assert.Null(model.RedirectImmediately);
+        Assert.False(model.RawData.ContainsKey("redirect_immediately"));
     }
 
     [Fact]
@@ -1778,6 +1819,7 @@ public class CheckoutSessionRequestFeatureFlagsTest : TestBase
             AllowPhoneNumberCollection = null,
             AllowTaxID = null,
             AlwaysCreateNewCustomer = null,
+            RedirectImmediately = null,
         };
 
         model.Validate();
