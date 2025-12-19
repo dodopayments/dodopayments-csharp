@@ -168,6 +168,7 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.Equal(expectedDiscountCode, model.DiscountCode);
         Assert.Equal(expectedFeatureFlags, model.FeatureFlags);
         Assert.Equal(expectedForce3DS, model.Force3DS);
+        Assert.NotNull(model.Metadata);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -420,6 +421,7 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.Equal(expectedDiscountCode, deserialized.DiscountCode);
         Assert.Equal(expectedFeatureFlags, deserialized.FeatureFlags);
         Assert.Equal(expectedForce3DS, deserialized.Force3DS);
+        Assert.NotNull(deserialized.Metadata);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -1488,6 +1490,8 @@ public class CheckoutSessionRequestCustomizationThemeTest : TestBase
             JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
             ModelBase.SerializerOptions
         );
+
+        Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 

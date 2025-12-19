@@ -32,6 +32,7 @@ public class EventTest : TestBase
         Assert.Equal(expectedEventID, model.EventID);
         Assert.Equal(expectedEventName, model.EventName);
         Assert.Equal(expectedTimestamp, model.Timestamp);
+        Assert.NotNull(model.Metadata);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -89,6 +90,7 @@ public class EventTest : TestBase
         Assert.Equal(expectedEventID, deserialized.EventID);
         Assert.Equal(expectedEventName, deserialized.EventName);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
+        Assert.NotNull(deserialized.Metadata);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
