@@ -177,12 +177,39 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// If true, redirects the customer immediately after payment completion False
+    /// by default
+    /// </summary>
+    public bool? RedirectImmediately
+    {
+        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "redirect_immediately"); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            JsonModel.Set(this._rawBodyData, "redirect_immediately", value);
+        }
+    }
+
+    /// <summary>
     /// Optional URL to redirect after successful subscription creation
     /// </summary>
     public string? ReturnURL
     {
         get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "return_url"); }
         init { JsonModel.Set(this._rawBodyData, "return_url", value); }
+    }
+
+    /// <summary>
+    /// If true, returns a shortened payment link. Defaults to false if not specified.
+    /// </summary>
+    public bool? ShortLink
+    {
+        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "short_link"); }
+        init { JsonModel.Set(this._rawBodyData, "short_link", value); }
     }
 
     /// <summary>
