@@ -24,7 +24,7 @@ public sealed class PayoutService : IPayoutService
     }
 
     /// <inheritdoc/>
-    public async Task<PayoutListPageResponse> List(
+    public async Task<PayoutListPage> List(
         PayoutListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -46,6 +46,6 @@ public sealed class PayoutService : IPayoutService
         {
             page.Validate();
         }
-        return page;
+        return new PayoutListPage(this, parameters, page);
     }
 }

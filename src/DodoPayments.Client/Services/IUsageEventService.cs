@@ -69,7 +69,7 @@ public interface IUsageEventService
     /// 24 hours: `?start=2024-01-14T10:30:00Z&end=2024-01-15T10:30:00Z` - Get events
     /// with meter filtering: `?meter_id=mtr_xyz789` - Paginate results: `?page_size=50&page_number=2`</para>
     /// </summary>
-    Task<UsageEventListPageResponse> List(
+    Task<UsageEventListPage> List(
         UsageEventListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

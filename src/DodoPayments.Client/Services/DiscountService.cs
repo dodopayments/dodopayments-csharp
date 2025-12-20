@@ -131,7 +131,7 @@ public sealed class DiscountService : IDiscountService
     }
 
     /// <inheritdoc/>
-    public async Task<DiscountListPageResponse> List(
+    public async Task<DiscountListPage> List(
         DiscountListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -153,7 +153,7 @@ public sealed class DiscountService : IDiscountService
         {
             page.Validate();
         }
-        return page;
+        return new DiscountListPage(this, parameters, page);
     }
 
     /// <inheritdoc/>

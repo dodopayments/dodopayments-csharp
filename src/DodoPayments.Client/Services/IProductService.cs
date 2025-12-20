@@ -49,7 +49,7 @@ public interface IProductService
         CancellationToken cancellationToken = default
     );
 
-    Task<ProductListPageResponse> List(
+    Task<ProductListPage> List(
         ProductListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

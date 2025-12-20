@@ -139,7 +139,7 @@ public sealed class WebhookService : IWebhookService
     }
 
     /// <inheritdoc/>
-    public async Task<WebhookListPageResponse> List(
+    public async Task<WebhookListPage> List(
         WebhookListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -161,7 +161,7 @@ public sealed class WebhookService : IWebhookService
         {
             page.Validate();
         }
-        return page;
+        return new WebhookListPage(this, parameters, page);
     }
 
     /// <inheritdoc/>

@@ -62,7 +62,7 @@ public interface IDiscountService
     /// <summary>
     /// GET /discounts
     /// </summary>
-    Task<DiscountListPageResponse> List(
+    Task<DiscountListPage> List(
         DiscountListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

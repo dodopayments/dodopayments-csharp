@@ -66,7 +66,7 @@ public sealed class UsageEventService : IUsageEventService
     }
 
     /// <inheritdoc/>
-    public async Task<UsageEventListPageResponse> List(
+    public async Task<UsageEventListPage> List(
         UsageEventListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -88,7 +88,7 @@ public sealed class UsageEventService : IUsageEventService
         {
             page.Validate();
         }
-        return page;
+        return new UsageEventListPage(this, parameters, page);
     }
 
     /// <inheritdoc/>

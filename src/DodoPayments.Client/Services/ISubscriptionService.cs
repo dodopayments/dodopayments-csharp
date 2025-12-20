@@ -50,7 +50,7 @@ public interface ISubscriptionService
         CancellationToken cancellationToken = default
     );
 
-    Task<SubscriptionListPageResponse> List(
+    Task<SubscriptionListPage> List(
         SubscriptionListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
@@ -121,13 +121,13 @@ public interface ISubscriptionService
     /// - Filter by meter: `?meter_id=mtr_api_requests` - Paginate results: `?page_size=20&page_number=1`
     /// - Recent usage: `?start_date=2024-03-01T00:00:00Z` (from March 1st to now)</para>
     /// </summary>
-    Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
+    Task<SubscriptionRetrieveUsageHistoryPage> RetrieveUsageHistory(
         SubscriptionRetrieveUsageHistoryParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="RetrieveUsageHistory(SubscriptionRetrieveUsageHistoryParams, CancellationToken)"/>
-    Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
+    Task<SubscriptionRetrieveUsageHistoryPage> RetrieveUsageHistory(
         string subscriptionID,
         SubscriptionRetrieveUsageHistoryParams? parameters = null,
         CancellationToken cancellationToken = default

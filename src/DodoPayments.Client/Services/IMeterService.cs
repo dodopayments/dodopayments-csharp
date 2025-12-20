@@ -34,7 +34,7 @@ public interface IMeterService
         CancellationToken cancellationToken = default
     );
 
-    Task<MeterListPageResponse> List(
+    Task<MeterListPage> List(
         MeterListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

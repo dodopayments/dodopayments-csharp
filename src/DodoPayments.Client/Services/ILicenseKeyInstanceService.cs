@@ -44,7 +44,7 @@ public interface ILicenseKeyInstanceService
         CancellationToken cancellationToken = default
     );
 
-    Task<LicenseKeyInstanceListPageResponse> List(
+    Task<LicenseKeyInstanceListPage> List(
         LicenseKeyInstanceListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

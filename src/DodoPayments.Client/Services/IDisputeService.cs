@@ -32,7 +32,7 @@ public interface IDisputeService
         CancellationToken cancellationToken = default
     );
 
-    Task<DisputeListPageResponse> List(
+    Task<DisputeListPage> List(
         DisputeListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

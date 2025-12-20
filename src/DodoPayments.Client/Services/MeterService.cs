@@ -86,7 +86,7 @@ public sealed class MeterService : IMeterService
     }
 
     /// <inheritdoc/>
-    public async Task<MeterListPageResponse> List(
+    public async Task<MeterListPage> List(
         MeterListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -108,7 +108,7 @@ public sealed class MeterService : IMeterService
         {
             page.Validate();
         }
-        return page;
+        return new MeterListPage(this, parameters, page);
     }
 
     /// <inheritdoc/>

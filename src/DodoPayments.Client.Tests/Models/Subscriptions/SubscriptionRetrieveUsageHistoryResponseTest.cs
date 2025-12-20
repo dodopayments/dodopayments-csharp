@@ -1,0 +1,288 @@
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Subscriptions;
+
+namespace DodoPayments.Client.Tests.Models.Subscriptions;
+
+public class SubscriptionRetrieveUsageHistoryResponseTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionRetrieveUsageHistoryResponse
+        {
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Meters =
+            [
+                new()
+                {
+                    ID = "id",
+                    ChargeableUnits = "chargeable_units",
+                    ConsumedUnits = "consumed_units",
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    Name = "name",
+                    PricePerUnit = "price_per_unit",
+                    TotalPrice = 0,
+                },
+            ],
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<SubscriptionRetrieveUsageHistoryResponseMeter> expectedMeters =
+        [
+            new()
+            {
+                ID = "id",
+                ChargeableUnits = "chargeable_units",
+                ConsumedUnits = "consumed_units",
+                Currency = Currency.Aed,
+                FreeThreshold = 0,
+                Name = "name",
+                PricePerUnit = "price_per_unit",
+                TotalPrice = 0,
+            },
+        ];
+        DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedEndDate, model.EndDate);
+        Assert.Equal(expectedMeters.Count, model.Meters.Count);
+        for (int i = 0; i < expectedMeters.Count; i++)
+        {
+            Assert.Equal(expectedMeters[i], model.Meters[i]);
+        }
+        Assert.Equal(expectedStartDate, model.StartDate);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionRetrieveUsageHistoryResponse
+        {
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Meters =
+            [
+                new()
+                {
+                    ID = "id",
+                    ChargeableUnits = "chargeable_units",
+                    ConsumedUnits = "consumed_units",
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    Name = "name",
+                    PricePerUnit = "price_per_unit",
+                    TotalPrice = 0,
+                },
+            ],
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryResponse>(
+            json
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionRetrieveUsageHistoryResponse
+        {
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Meters =
+            [
+                new()
+                {
+                    ID = "id",
+                    ChargeableUnits = "chargeable_units",
+                    ConsumedUnits = "consumed_units",
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    Name = "name",
+                    PricePerUnit = "price_per_unit",
+                    TotalPrice = 0,
+                },
+            ],
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string element = JsonSerializer.Serialize(model);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryResponse>(
+            element
+        );
+        Assert.NotNull(deserialized);
+
+        DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<SubscriptionRetrieveUsageHistoryResponseMeter> expectedMeters =
+        [
+            new()
+            {
+                ID = "id",
+                ChargeableUnits = "chargeable_units",
+                ConsumedUnits = "consumed_units",
+                Currency = Currency.Aed,
+                FreeThreshold = 0,
+                Name = "name",
+                PricePerUnit = "price_per_unit",
+                TotalPrice = 0,
+            },
+        ];
+        DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedEndDate, deserialized.EndDate);
+        Assert.Equal(expectedMeters.Count, deserialized.Meters.Count);
+        for (int i = 0; i < expectedMeters.Count; i++)
+        {
+            Assert.Equal(expectedMeters[i], deserialized.Meters[i]);
+        }
+        Assert.Equal(expectedStartDate, deserialized.StartDate);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionRetrieveUsageHistoryResponse
+        {
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Meters =
+            [
+                new()
+                {
+                    ID = "id",
+                    ChargeableUnits = "chargeable_units",
+                    ConsumedUnits = "consumed_units",
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    Name = "name",
+                    PricePerUnit = "price_per_unit",
+                    TotalPrice = 0,
+                },
+            ],
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+}
+
+public class SubscriptionRetrieveUsageHistoryResponseMeterTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionRetrieveUsageHistoryResponseMeter
+        {
+            ID = "id",
+            ChargeableUnits = "chargeable_units",
+            ConsumedUnits = "consumed_units",
+            Currency = Currency.Aed,
+            FreeThreshold = 0,
+            Name = "name",
+            PricePerUnit = "price_per_unit",
+            TotalPrice = 0,
+        };
+
+        string expectedID = "id";
+        string expectedChargeableUnits = "chargeable_units";
+        string expectedConsumedUnits = "consumed_units";
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        long expectedFreeThreshold = 0;
+        string expectedName = "name";
+        string expectedPricePerUnit = "price_per_unit";
+        int expectedTotalPrice = 0;
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedChargeableUnits, model.ChargeableUnits);
+        Assert.Equal(expectedConsumedUnits, model.ConsumedUnits);
+        Assert.Equal(expectedCurrency, model.Currency);
+        Assert.Equal(expectedFreeThreshold, model.FreeThreshold);
+        Assert.Equal(expectedName, model.Name);
+        Assert.Equal(expectedPricePerUnit, model.PricePerUnit);
+        Assert.Equal(expectedTotalPrice, model.TotalPrice);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionRetrieveUsageHistoryResponseMeter
+        {
+            ID = "id",
+            ChargeableUnits = "chargeable_units",
+            ConsumedUnits = "consumed_units",
+            Currency = Currency.Aed,
+            FreeThreshold = 0,
+            Name = "name",
+            PricePerUnit = "price_per_unit",
+            TotalPrice = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryResponseMeter>(json);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionRetrieveUsageHistoryResponseMeter
+        {
+            ID = "id",
+            ChargeableUnits = "chargeable_units",
+            ConsumedUnits = "consumed_units",
+            Currency = Currency.Aed,
+            FreeThreshold = 0,
+            Name = "name",
+            PricePerUnit = "price_per_unit",
+            TotalPrice = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryResponseMeter>(element);
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        string expectedChargeableUnits = "chargeable_units";
+        string expectedConsumedUnits = "consumed_units";
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        long expectedFreeThreshold = 0;
+        string expectedName = "name";
+        string expectedPricePerUnit = "price_per_unit";
+        int expectedTotalPrice = 0;
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedChargeableUnits, deserialized.ChargeableUnits);
+        Assert.Equal(expectedConsumedUnits, deserialized.ConsumedUnits);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedFreeThreshold, deserialized.FreeThreshold);
+        Assert.Equal(expectedName, deserialized.Name);
+        Assert.Equal(expectedPricePerUnit, deserialized.PricePerUnit);
+        Assert.Equal(expectedTotalPrice, deserialized.TotalPrice);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionRetrieveUsageHistoryResponseMeter
+        {
+            ID = "id",
+            ChargeableUnits = "chargeable_units",
+            ConsumedUnits = "consumed_units",
+            Currency = Currency.Aed,
+            FreeThreshold = 0,
+            Name = "name",
+            PricePerUnit = "price_per_unit",
+            TotalPrice = 0,
+        };
+
+        model.Validate();
+    }
+}
