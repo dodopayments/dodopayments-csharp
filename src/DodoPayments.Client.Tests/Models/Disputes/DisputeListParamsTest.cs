@@ -1,9 +1,96 @@
+using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 
 namespace DodoPayments.Client.Tests.Models.Disputes;
+
+public class DisputeListParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new DisputeListParams
+        {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            DisputeStage = DisputeStage.PreDispute,
+            DisputeStatus = DisputeStatus.DisputeOpened,
+            PageNumber = 0,
+            PageSize = 0,
+        };
+
+        DateTimeOffset expectedCreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedCreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedCustomerID = "customer_id";
+        ApiEnum<string, DisputeStage> expectedDisputeStage = DisputeStage.PreDispute;
+        ApiEnum<string, DisputeStatus> expectedDisputeStatus = DisputeStatus.DisputeOpened;
+        int expectedPageNumber = 0;
+        int expectedPageSize = 0;
+
+        Assert.Equal(expectedCreatedAtGte, parameters.CreatedAtGte);
+        Assert.Equal(expectedCreatedAtLte, parameters.CreatedAtLte);
+        Assert.Equal(expectedCustomerID, parameters.CustomerID);
+        Assert.Equal(expectedDisputeStage, parameters.DisputeStage);
+        Assert.Equal(expectedDisputeStatus, parameters.DisputeStatus);
+        Assert.Equal(expectedPageNumber, parameters.PageNumber);
+        Assert.Equal(expectedPageSize, parameters.PageSize);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new DisputeListParams { };
+
+        Assert.Null(parameters.CreatedAtGte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_gte"));
+        Assert.Null(parameters.CreatedAtLte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_lte"));
+        Assert.Null(parameters.CustomerID);
+        Assert.False(parameters.RawQueryData.ContainsKey("customer_id"));
+        Assert.Null(parameters.DisputeStage);
+        Assert.False(parameters.RawQueryData.ContainsKey("dispute_stage"));
+        Assert.Null(parameters.DisputeStatus);
+        Assert.False(parameters.RawQueryData.ContainsKey("dispute_status"));
+        Assert.Null(parameters.PageNumber);
+        Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
+        Assert.Null(parameters.PageSize);
+        Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new DisputeListParams
+        {
+            // Null should be interpreted as omitted for these properties
+            CreatedAtGte = null,
+            CreatedAtLte = null,
+            CustomerID = null,
+            DisputeStage = null,
+            DisputeStatus = null,
+            PageNumber = null,
+            PageSize = null,
+        };
+
+        Assert.Null(parameters.CreatedAtGte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_gte"));
+        Assert.Null(parameters.CreatedAtLte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_lte"));
+        Assert.Null(parameters.CustomerID);
+        Assert.False(parameters.RawQueryData.ContainsKey("customer_id"));
+        Assert.Null(parameters.DisputeStage);
+        Assert.False(parameters.RawQueryData.ContainsKey("dispute_stage"));
+        Assert.Null(parameters.DisputeStatus);
+        Assert.False(parameters.RawQueryData.ContainsKey("dispute_status"));
+        Assert.Null(parameters.PageNumber);
+        Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
+        Assert.Null(parameters.PageSize);
+        Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
+    }
+}
 
 public class DisputeStageTest : TestBase
 {

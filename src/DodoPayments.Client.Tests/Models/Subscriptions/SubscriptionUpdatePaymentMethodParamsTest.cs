@@ -5,6 +5,25 @@ using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
+public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new SubscriptionUpdatePaymentMethodParams
+        {
+            SubscriptionID = "subscription_id",
+            Body = new New() { Type = Type.New, ReturnURL = "return_url" },
+        };
+
+        string expectedSubscriptionID = "subscription_id";
+        Body expectedBody = new New() { Type = Type.New, ReturnURL = "return_url" };
+
+        Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
+        Assert.Equal(expectedBody, parameters.Body);
+    }
+}
+
 public class BodyTest : TestBase
 {
     [Fact]
