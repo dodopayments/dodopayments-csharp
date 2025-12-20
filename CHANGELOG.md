@@ -1,5 +1,22 @@
 # Changelog
 
+## 5.0.0 (2025-12-20)
+
+Full Changelog: [v4.2.0...v5.0.0](https://github.com/dodopayments/dodopayments-csharp/compare/v4.2.0...v5.0.0)
+
+### ⚠ BREAKING CHANGES
+
+* **client:** add pagination
+
+### Features
+
+* **client:** add pagination ([7dc2e75](https://github.com/dodopayments/dodopayments-csharp/commit/7dc2e75311cee1e75232332db4ee5ccabe7a991a))
+
+
+### Chores
+
+* **internal:** turn off overzealous lints ([e319118](https://github.com/dodopayments/dodopayments-csharp/commit/e319118baed3b5ff1e41af143968700d9ae5a822))
+
 ## 4.2.0 (2025-12-19)
 
 Full Changelog: [v4.1.0...v4.2.0](https://github.com/dodopayments/dodopayments-csharp/compare/v4.1.0...v4.2.0)
