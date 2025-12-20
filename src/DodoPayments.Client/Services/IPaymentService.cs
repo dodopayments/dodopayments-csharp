@@ -38,7 +38,7 @@ public interface IPaymentService
         CancellationToken cancellationToken = default
     );
 
-    Task<PaymentListPageResponse> List(
+    Task<PaymentListPage> List(
         PaymentListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

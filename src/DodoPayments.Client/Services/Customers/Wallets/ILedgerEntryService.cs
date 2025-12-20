@@ -33,13 +33,13 @@ public interface ILedgerEntryService
         CancellationToken cancellationToken = default
     );
 
-    Task<LedgerEntryListPageResponse> List(
+    Task<LedgerEntryListPage> List(
         LedgerEntryListParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="List(LedgerEntryListParams, CancellationToken)"/>
-    Task<LedgerEntryListPageResponse> List(
+    Task<LedgerEntryListPage> List(
         string customerID,
         LedgerEntryListParams? parameters = null,
         CancellationToken cancellationToken = default

@@ -25,15 +25,9 @@ public sealed record class PaymentRetrieveLineItemsResponse : JsonModel
         init { JsonModel.Set(this._rawData, "currency", value); }
     }
 
-    public required IReadOnlyList<PaymentRetrieveLineItemsResponseItem> Items
+    public required IReadOnlyList<Item> Items
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<List<PaymentRetrieveLineItemsResponseItem>>(
-                this.RawData,
-                "items"
-            );
-        }
+        get { return JsonModel.GetNotNullClass<List<Item>>(this.RawData, "items"); }
         init { JsonModel.Set(this._rawData, "items", value); }
     }
 
@@ -84,13 +78,8 @@ class PaymentRetrieveLineItemsResponseFromRaw : IFromRawJson<PaymentRetrieveLine
     ) => PaymentRetrieveLineItemsResponse.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(
-    typeof(JsonModelConverter<
-        PaymentRetrieveLineItemsResponseItem,
-        PaymentRetrieveLineItemsResponseItemFromRaw
-    >)
-)]
-public sealed record class PaymentRetrieveLineItemsResponseItem : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Item, ItemFromRaw>))]
+public sealed record class Item : JsonModel
 {
     public required int Amount
     {
@@ -139,40 +128,34 @@ public sealed record class PaymentRetrieveLineItemsResponseItem : JsonModel
         _ = this.Name;
     }
 
-    public PaymentRetrieveLineItemsResponseItem() { }
+    public Item() { }
 
-    public PaymentRetrieveLineItemsResponseItem(
-        PaymentRetrieveLineItemsResponseItem paymentRetrieveLineItemsResponseItem
-    )
-        : base(paymentRetrieveLineItemsResponseItem) { }
+    public Item(Item item)
+        : base(item) { }
 
-    public PaymentRetrieveLineItemsResponseItem(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Item(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    PaymentRetrieveLineItemsResponseItem(FrozenDictionary<string, JsonElement> rawData)
+    Item(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = [.. rawData];
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="PaymentRetrieveLineItemsResponseItemFromRaw.FromRawUnchecked"/>
-    public static PaymentRetrieveLineItemsResponseItem FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="ItemFromRaw.FromRawUnchecked"/>
+    public static Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class PaymentRetrieveLineItemsResponseItemFromRaw
-    : IFromRawJson<PaymentRetrieveLineItemsResponseItem>
+class ItemFromRaw : IFromRawJson<Item>
 {
     /// <inheritdoc/>
-    public PaymentRetrieveLineItemsResponseItem FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => PaymentRetrieveLineItemsResponseItem.FromRawUnchecked(rawData);
+    public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Item.FromRawUnchecked(rawData);
 }

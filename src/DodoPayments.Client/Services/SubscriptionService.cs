@@ -148,7 +148,7 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public async Task<SubscriptionListPageResponse> List(
+    public async Task<SubscriptionListPage> List(
         SubscriptionListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -170,7 +170,7 @@ public sealed class SubscriptionService : ISubscriptionService
         {
             page.Validate();
         }
-        return page;
+        return new SubscriptionListPage(this, parameters, page);
     }
 
     /// <inheritdoc/>
@@ -307,7 +307,7 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public async Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
+    public async Task<SubscriptionRetrieveUsageHistoryPage> RetrieveUsageHistory(
         SubscriptionRetrieveUsageHistoryParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -334,11 +334,11 @@ public sealed class SubscriptionService : ISubscriptionService
         {
             page.Validate();
         }
-        return page;
+        return new SubscriptionRetrieveUsageHistoryPage(this, parameters, page);
     }
 
     /// <inheritdoc/>
-    public async Task<SubscriptionRetrieveUsageHistoryPageResponse> RetrieveUsageHistory(
+    public async Task<SubscriptionRetrieveUsageHistoryPage> RetrieveUsageHistory(
         string subscriptionID,
         SubscriptionRetrieveUsageHistoryParams? parameters = null,
         CancellationToken cancellationToken = default

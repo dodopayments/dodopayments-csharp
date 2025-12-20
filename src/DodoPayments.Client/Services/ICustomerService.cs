@@ -54,7 +54,7 @@ public interface ICustomerService
         CancellationToken cancellationToken = default
     );
 
-    Task<CustomerListPageResponse> List(
+    Task<CustomerListPage> List(
         CustomerListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

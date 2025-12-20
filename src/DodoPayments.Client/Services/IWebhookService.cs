@@ -64,7 +64,7 @@ public interface IWebhookService
     /// <summary>
     /// List all webhooks
     /// </summary>
-    Task<WebhookListPageResponse> List(
+    Task<WebhookListPage> List(
         WebhookListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

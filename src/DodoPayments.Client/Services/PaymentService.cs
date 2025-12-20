@@ -89,7 +89,7 @@ public sealed class PaymentService : IPaymentService
     }
 
     /// <inheritdoc/>
-    public async Task<PaymentListPageResponse> List(
+    public async Task<PaymentListPage> List(
         PaymentListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -111,7 +111,7 @@ public sealed class PaymentService : IPaymentService
         {
             page.Validate();
         }
-        return page;
+        return new PaymentListPage(this, parameters, page);
     }
 
     /// <inheritdoc/>

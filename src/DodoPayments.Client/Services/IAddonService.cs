@@ -49,7 +49,7 @@ public interface IAddonService
         CancellationToken cancellationToken = default
     );
 
-    Task<AddonListPageResponse> List(
+    Task<AddonListPage> List(
         AddonListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

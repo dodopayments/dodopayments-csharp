@@ -65,7 +65,7 @@ public sealed class LedgerEntryService : ILedgerEntryService
     }
 
     /// <inheritdoc/>
-    public async Task<LedgerEntryListPageResponse> List(
+    public async Task<LedgerEntryListPage> List(
         LedgerEntryListParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -90,11 +90,11 @@ public sealed class LedgerEntryService : ILedgerEntryService
         {
             page.Validate();
         }
-        return page;
+        return new LedgerEntryListPage(this, parameters, page);
     }
 
     /// <inheritdoc/>
-    public async Task<LedgerEntryListPageResponse> List(
+    public async Task<LedgerEntryListPage> List(
         string customerID,
         LedgerEntryListParams? parameters = null,
         CancellationToken cancellationToken = default
