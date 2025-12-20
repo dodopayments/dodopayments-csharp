@@ -37,7 +37,7 @@ public interface IRefundService
         CancellationToken cancellationToken = default
     );
 
-    Task<RefundListPageResponse> List(
+    Task<RefundListPage> List(
         RefundListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

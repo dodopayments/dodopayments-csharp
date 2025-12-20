@@ -20,7 +20,7 @@ public interface IPayoutService
     /// </summary>
     IPayoutService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    Task<PayoutListPageResponse> List(
+    Task<PayoutListPage> List(
         PayoutListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

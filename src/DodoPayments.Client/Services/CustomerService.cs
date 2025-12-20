@@ -146,7 +146,7 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
-    public async Task<CustomerListPageResponse> List(
+    public async Task<CustomerListPage> List(
         CustomerListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -168,7 +168,7 @@ public sealed class CustomerService : ICustomerService
         {
             page.Validate();
         }
-        return page;
+        return new CustomerListPage(this, parameters, page);
     }
 
     /// <inheritdoc/>

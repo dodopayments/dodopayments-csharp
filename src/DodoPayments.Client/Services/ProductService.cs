@@ -127,7 +127,7 @@ public sealed class ProductService : IProductService
     }
 
     /// <inheritdoc/>
-    public async Task<ProductListPageResponse> List(
+    public async Task<ProductListPage> List(
         ProductListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -149,7 +149,7 @@ public sealed class ProductService : IProductService
         {
             page.Validate();
         }
-        return page;
+        return new ProductListPage(this, parameters, page);
     }
 
     /// <inheritdoc/>

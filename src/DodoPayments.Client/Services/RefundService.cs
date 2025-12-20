@@ -86,7 +86,7 @@ public sealed class RefundService : IRefundService
     }
 
     /// <inheritdoc/>
-    public async Task<RefundListPageResponse> List(
+    public async Task<RefundListPage> List(
         RefundListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -108,6 +108,6 @@ public sealed class RefundService : IRefundService
         {
             page.Validate();
         }
-        return page;
+        return new RefundListPage(this, parameters, page);
     }
 }

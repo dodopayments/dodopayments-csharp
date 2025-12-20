@@ -66,7 +66,7 @@ public sealed class DisputeService : IDisputeService
     }
 
     /// <inheritdoc/>
-    public async Task<DisputeListPageResponse> List(
+    public async Task<DisputeListPage> List(
         DisputeListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -88,6 +88,6 @@ public sealed class DisputeService : IDisputeService
         {
             page.Validate();
         }
-        return page;
+        return new DisputeListPage(this, parameters, page);
     }
 }

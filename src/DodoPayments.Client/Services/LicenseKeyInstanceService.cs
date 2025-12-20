@@ -105,7 +105,7 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
     }
 
     /// <inheritdoc/>
-    public async Task<LicenseKeyInstanceListPageResponse> List(
+    public async Task<LicenseKeyInstanceListPage> List(
         LicenseKeyInstanceListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -127,6 +127,6 @@ public sealed class LicenseKeyInstanceService : ILicenseKeyInstanceService
         {
             page.Validate();
         }
-        return page;
+        return new LicenseKeyInstanceListPage(this, parameters, page);
     }
 }

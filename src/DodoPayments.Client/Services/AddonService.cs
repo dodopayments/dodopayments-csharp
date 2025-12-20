@@ -131,7 +131,7 @@ public sealed class AddonService : IAddonService
     }
 
     /// <inheritdoc/>
-    public async Task<AddonListPageResponse> List(
+    public async Task<AddonListPage> List(
         AddonListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -153,7 +153,7 @@ public sealed class AddonService : IAddonService
         {
             page.Validate();
         }
-        return page;
+        return new AddonListPage(this, parameters, page);
     }
 
     /// <inheritdoc/>
