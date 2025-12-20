@@ -1,7 +1,141 @@
+using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Models.Refunds;
 
 namespace DodoPayments.Client.Tests.Models.Refunds;
+
+public class RefundCreateParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new RefundCreateParams
+        {
+            PaymentID = "payment_id",
+            Items =
+            [
+                new()
+                {
+                    ItemID = "item_id",
+                    Amount = 0,
+                    TaxInclusive = true,
+                },
+            ],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Reason = "reason",
+        };
+
+        string expectedPaymentID = "payment_id";
+        List<Item> expectedItems =
+        [
+            new()
+            {
+                ItemID = "item_id",
+                Amount = 0,
+                TaxInclusive = true,
+            },
+        ];
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        string expectedReason = "reason";
+
+        Assert.Equal(expectedPaymentID, parameters.PaymentID);
+        Assert.NotNull(parameters.Items);
+        Assert.Equal(expectedItems.Count, parameters.Items.Count);
+        for (int i = 0; i < expectedItems.Count; i++)
+        {
+            Assert.Equal(expectedItems[i], parameters.Items[i]);
+        }
+        Assert.NotNull(parameters.Metadata);
+        Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(parameters.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, parameters.Metadata[item.Key]);
+        }
+        Assert.Equal(expectedReason, parameters.Reason);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new RefundCreateParams
+        {
+            PaymentID = "payment_id",
+            Items =
+            [
+                new()
+                {
+                    ItemID = "item_id",
+                    Amount = 0,
+                    TaxInclusive = true,
+                },
+            ],
+            Reason = "reason",
+        };
+
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new RefundCreateParams
+        {
+            PaymentID = "payment_id",
+            Items =
+            [
+                new()
+                {
+                    ItemID = "item_id",
+                    Amount = 0,
+                    TaxInclusive = true,
+                },
+            ],
+            Reason = "reason",
+
+            // Null should be interpreted as omitted for these properties
+            Metadata = null,
+        };
+
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new RefundCreateParams
+        {
+            PaymentID = "payment_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        Assert.Null(parameters.Items);
+        Assert.False(parameters.RawBodyData.ContainsKey("items"));
+        Assert.Null(parameters.Reason);
+        Assert.False(parameters.RawBodyData.ContainsKey("reason"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsSetToNullAreSetToNull_Works()
+    {
+        var parameters = new RefundCreateParams
+        {
+            PaymentID = "payment_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+
+            Items = null,
+            Reason = null,
+        };
+
+        Assert.Null(parameters.Items);
+        Assert.False(parameters.RawBodyData.ContainsKey("items"));
+        Assert.Null(parameters.Reason);
+        Assert.False(parameters.RawBodyData.ContainsKey("reason"));
+    }
+}
 
 public class ItemTest : TestBase
 {
