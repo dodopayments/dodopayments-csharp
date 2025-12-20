@@ -1,0 +1,370 @@
+using System.Collections.Generic;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Payments;
+using DodoPayments.Client.Models.Subscriptions;
+
+namespace DodoPayments.Client.Tests.Models.Subscriptions;
+
+public class SubscriptionCreateParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new SubscriptionCreateParams
+        {
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            Customer = new AttachExistingCustomer("customer_id"),
+            ProductID = "product_id",
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
+            BillingCurrency = Currency.Aed,
+            DiscountCode = "discount_code",
+            Force3DS = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            OnDemand = new()
+            {
+                MandateOnly = true,
+                AdaptiveCurrencyFeesInclusive = true,
+                ProductCurrency = Currency.Aed,
+                ProductDescription = "product_description",
+                ProductPrice = 0,
+            },
+            OneTimeProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Amount = 0,
+                },
+            ],
+            PaymentLink = true,
+            RedirectImmediately = true,
+            ReturnURL = "return_url",
+            ShortLink = true,
+            ShowSavedPaymentMethods = true,
+            TaxID = "tax_id",
+            TrialPeriodDays = 0,
+        };
+
+        BillingAddress expectedBilling = new()
+        {
+            Country = CountryCode.Af,
+            City = "city",
+            State = "state",
+            Street = "street",
+            Zipcode = "zipcode",
+        };
+        CustomerRequest expectedCustomer = new AttachExistingCustomer("customer_id");
+        string expectedProductID = "product_id";
+        int expectedQuantity = 0;
+        List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
+        [
+            PaymentMethodTypes.Credit,
+        ];
+        ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
+        string expectedDiscountCode = "discount_code";
+        bool expectedForce3DS = true;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        OnDemandSubscription expectedOnDemand = new()
+        {
+            MandateOnly = true,
+            AdaptiveCurrencyFeesInclusive = true,
+            ProductCurrency = Currency.Aed,
+            ProductDescription = "product_description",
+            ProductPrice = 0,
+        };
+        List<OneTimeProductCartItem> expectedOneTimeProductCart =
+        [
+            new()
+            {
+                ProductID = "product_id",
+                Quantity = 0,
+                Amount = 0,
+            },
+        ];
+        bool expectedPaymentLink = true;
+        bool expectedRedirectImmediately = true;
+        string expectedReturnURL = "return_url";
+        bool expectedShortLink = true;
+        bool expectedShowSavedPaymentMethods = true;
+        string expectedTaxID = "tax_id";
+        int expectedTrialPeriodDays = 0;
+
+        Assert.Equal(expectedBilling, parameters.Billing);
+        Assert.Equal(expectedCustomer, parameters.Customer);
+        Assert.Equal(expectedProductID, parameters.ProductID);
+        Assert.Equal(expectedQuantity, parameters.Quantity);
+        Assert.NotNull(parameters.Addons);
+        Assert.Equal(expectedAddons.Count, parameters.Addons.Count);
+        for (int i = 0; i < expectedAddons.Count; i++)
+        {
+            Assert.Equal(expectedAddons[i], parameters.Addons[i]);
+        }
+        Assert.NotNull(parameters.AllowedPaymentMethodTypes);
+        Assert.Equal(
+            expectedAllowedPaymentMethodTypes.Count,
+            parameters.AllowedPaymentMethodTypes.Count
+        );
+        for (int i = 0; i < expectedAllowedPaymentMethodTypes.Count; i++)
+        {
+            Assert.Equal(
+                expectedAllowedPaymentMethodTypes[i],
+                parameters.AllowedPaymentMethodTypes[i]
+            );
+        }
+        Assert.Equal(expectedBillingCurrency, parameters.BillingCurrency);
+        Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
+        Assert.Equal(expectedForce3DS, parameters.Force3DS);
+        Assert.NotNull(parameters.Metadata);
+        Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(parameters.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, parameters.Metadata[item.Key]);
+        }
+        Assert.Equal(expectedOnDemand, parameters.OnDemand);
+        Assert.NotNull(parameters.OneTimeProductCart);
+        Assert.Equal(expectedOneTimeProductCart.Count, parameters.OneTimeProductCart.Count);
+        for (int i = 0; i < expectedOneTimeProductCart.Count; i++)
+        {
+            Assert.Equal(expectedOneTimeProductCart[i], parameters.OneTimeProductCart[i]);
+        }
+        Assert.Equal(expectedPaymentLink, parameters.PaymentLink);
+        Assert.Equal(expectedRedirectImmediately, parameters.RedirectImmediately);
+        Assert.Equal(expectedReturnURL, parameters.ReturnURL);
+        Assert.Equal(expectedShortLink, parameters.ShortLink);
+        Assert.Equal(expectedShowSavedPaymentMethods, parameters.ShowSavedPaymentMethods);
+        Assert.Equal(expectedTaxID, parameters.TaxID);
+        Assert.Equal(expectedTrialPeriodDays, parameters.TrialPeriodDays);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new SubscriptionCreateParams
+        {
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            Customer = new AttachExistingCustomer("customer_id"),
+            ProductID = "product_id",
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
+            BillingCurrency = Currency.Aed,
+            DiscountCode = "discount_code",
+            Force3DS = true,
+            OnDemand = new()
+            {
+                MandateOnly = true,
+                AdaptiveCurrencyFeesInclusive = true,
+                ProductCurrency = Currency.Aed,
+                ProductDescription = "product_description",
+                ProductPrice = 0,
+            },
+            OneTimeProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Amount = 0,
+                },
+            ],
+            PaymentLink = true,
+            ReturnURL = "return_url",
+            ShortLink = true,
+            TaxID = "tax_id",
+            TrialPeriodDays = 0,
+        };
+
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.RedirectImmediately);
+        Assert.False(parameters.RawBodyData.ContainsKey("redirect_immediately"));
+        Assert.Null(parameters.ShowSavedPaymentMethods);
+        Assert.False(parameters.RawBodyData.ContainsKey("show_saved_payment_methods"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new SubscriptionCreateParams
+        {
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            Customer = new AttachExistingCustomer("customer_id"),
+            ProductID = "product_id",
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
+            BillingCurrency = Currency.Aed,
+            DiscountCode = "discount_code",
+            Force3DS = true,
+            OnDemand = new()
+            {
+                MandateOnly = true,
+                AdaptiveCurrencyFeesInclusive = true,
+                ProductCurrency = Currency.Aed,
+                ProductDescription = "product_description",
+                ProductPrice = 0,
+            },
+            OneTimeProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Amount = 0,
+                },
+            ],
+            PaymentLink = true,
+            ReturnURL = "return_url",
+            ShortLink = true,
+            TaxID = "tax_id",
+            TrialPeriodDays = 0,
+
+            // Null should be interpreted as omitted for these properties
+            Metadata = null,
+            RedirectImmediately = null,
+            ShowSavedPaymentMethods = null,
+        };
+
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.RedirectImmediately);
+        Assert.False(parameters.RawBodyData.ContainsKey("redirect_immediately"));
+        Assert.Null(parameters.ShowSavedPaymentMethods);
+        Assert.False(parameters.RawBodyData.ContainsKey("show_saved_payment_methods"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new SubscriptionCreateParams
+        {
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            Customer = new AttachExistingCustomer("customer_id"),
+            ProductID = "product_id",
+            Quantity = 0,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            RedirectImmediately = true,
+            ShowSavedPaymentMethods = true,
+        };
+
+        Assert.Null(parameters.Addons);
+        Assert.False(parameters.RawBodyData.ContainsKey("addons"));
+        Assert.Null(parameters.AllowedPaymentMethodTypes);
+        Assert.False(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
+        Assert.Null(parameters.BillingCurrency);
+        Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
+        Assert.Null(parameters.DiscountCode);
+        Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.Force3DS);
+        Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
+        Assert.Null(parameters.OnDemand);
+        Assert.False(parameters.RawBodyData.ContainsKey("on_demand"));
+        Assert.Null(parameters.OneTimeProductCart);
+        Assert.False(parameters.RawBodyData.ContainsKey("one_time_product_cart"));
+        Assert.Null(parameters.PaymentLink);
+        Assert.False(parameters.RawBodyData.ContainsKey("payment_link"));
+        Assert.Null(parameters.ReturnURL);
+        Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
+        Assert.Null(parameters.ShortLink);
+        Assert.False(parameters.RawBodyData.ContainsKey("short_link"));
+        Assert.Null(parameters.TaxID);
+        Assert.False(parameters.RawBodyData.ContainsKey("tax_id"));
+        Assert.Null(parameters.TrialPeriodDays);
+        Assert.False(parameters.RawBodyData.ContainsKey("trial_period_days"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsSetToNullAreSetToNull_Works()
+    {
+        var parameters = new SubscriptionCreateParams
+        {
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            Customer = new AttachExistingCustomer("customer_id"),
+            ProductID = "product_id",
+            Quantity = 0,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            RedirectImmediately = true,
+            ShowSavedPaymentMethods = true,
+
+            Addons = null,
+            AllowedPaymentMethodTypes = null,
+            BillingCurrency = null,
+            DiscountCode = null,
+            Force3DS = null,
+            OnDemand = null,
+            OneTimeProductCart = null,
+            PaymentLink = null,
+            ReturnURL = null,
+            ShortLink = null,
+            TaxID = null,
+            TrialPeriodDays = null,
+        };
+
+        Assert.Null(parameters.Addons);
+        Assert.False(parameters.RawBodyData.ContainsKey("addons"));
+        Assert.Null(parameters.AllowedPaymentMethodTypes);
+        Assert.False(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
+        Assert.Null(parameters.BillingCurrency);
+        Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
+        Assert.Null(parameters.DiscountCode);
+        Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.Force3DS);
+        Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
+        Assert.Null(parameters.OnDemand);
+        Assert.False(parameters.RawBodyData.ContainsKey("on_demand"));
+        Assert.Null(parameters.OneTimeProductCart);
+        Assert.False(parameters.RawBodyData.ContainsKey("one_time_product_cart"));
+        Assert.Null(parameters.PaymentLink);
+        Assert.False(parameters.RawBodyData.ContainsKey("payment_link"));
+        Assert.Null(parameters.ReturnURL);
+        Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
+        Assert.Null(parameters.ShortLink);
+        Assert.False(parameters.RawBodyData.ContainsKey("short_link"));
+        Assert.Null(parameters.TaxID);
+        Assert.False(parameters.RawBodyData.ContainsKey("tax_id"));
+        Assert.Null(parameters.TrialPeriodDays);
+        Assert.False(parameters.RawBodyData.ContainsKey("trial_period_days"));
+    }
+}

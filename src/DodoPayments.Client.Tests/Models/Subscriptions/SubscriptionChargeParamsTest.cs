@@ -1,7 +1,110 @@
+using System.Collections.Generic;
 using System.Text.Json;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
+
+public class SubscriptionChargeParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new SubscriptionChargeParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductPrice = 0,
+            AdaptiveCurrencyFeesInclusive = true,
+            CustomerBalanceConfig = new()
+            {
+                AllowCustomerCreditsPurchase = true,
+                AllowCustomerCreditsUsage = true,
+            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            ProductCurrency = Currency.Aed,
+            ProductDescription = "product_description",
+        };
+
+        string expectedSubscriptionID = "subscription_id";
+        int expectedProductPrice = 0;
+        bool expectedAdaptiveCurrencyFeesInclusive = true;
+        CustomerBalanceConfig expectedCustomerBalanceConfig = new()
+        {
+            AllowCustomerCreditsPurchase = true,
+            AllowCustomerCreditsUsage = true,
+        };
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        ApiEnum<string, Currency> expectedProductCurrency = Currency.Aed;
+        string expectedProductDescription = "product_description";
+
+        Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
+        Assert.Equal(expectedProductPrice, parameters.ProductPrice);
+        Assert.Equal(
+            expectedAdaptiveCurrencyFeesInclusive,
+            parameters.AdaptiveCurrencyFeesInclusive
+        );
+        Assert.Equal(expectedCustomerBalanceConfig, parameters.CustomerBalanceConfig);
+        Assert.NotNull(parameters.Metadata);
+        Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(parameters.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, parameters.Metadata[item.Key]);
+        }
+        Assert.Equal(expectedProductCurrency, parameters.ProductCurrency);
+        Assert.Equal(expectedProductDescription, parameters.ProductDescription);
+    }
+
+    [Fact]
+    public void OptionalNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new SubscriptionChargeParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductPrice = 0,
+        };
+
+        Assert.Null(parameters.AdaptiveCurrencyFeesInclusive);
+        Assert.False(parameters.RawBodyData.ContainsKey("adaptive_currency_fees_inclusive"));
+        Assert.Null(parameters.CustomerBalanceConfig);
+        Assert.False(parameters.RawBodyData.ContainsKey("customer_balance_config"));
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.ProductCurrency);
+        Assert.False(parameters.RawBodyData.ContainsKey("product_currency"));
+        Assert.Null(parameters.ProductDescription);
+        Assert.False(parameters.RawBodyData.ContainsKey("product_description"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsSetToNullAreSetToNull_Works()
+    {
+        var parameters = new SubscriptionChargeParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductPrice = 0,
+
+            AdaptiveCurrencyFeesInclusive = null,
+            CustomerBalanceConfig = null,
+            Metadata = null,
+            ProductCurrency = null,
+            ProductDescription = null,
+        };
+
+        Assert.Null(parameters.AdaptiveCurrencyFeesInclusive);
+        Assert.False(parameters.RawBodyData.ContainsKey("adaptive_currency_fees_inclusive"));
+        Assert.Null(parameters.CustomerBalanceConfig);
+        Assert.False(parameters.RawBodyData.ContainsKey("customer_balance_config"));
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.ProductCurrency);
+        Assert.False(parameters.RawBodyData.ContainsKey("product_currency"));
+        Assert.Null(parameters.ProductDescription);
+        Assert.False(parameters.RawBodyData.ContainsKey("product_description"));
+    }
+}
 
 public class CustomerBalanceConfigTest : TestBase
 {

@@ -5,8 +5,455 @@ using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CheckoutSessions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.CheckoutSessions;
+
+public class CheckoutSessionCreateParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new CheckoutSessionCreateParams
+        {
+            ProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                    Amount = 0,
+                },
+            ],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Credit],
+            BillingAddress = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BillingCurrency = Currency.Aed,
+            Confirm = true,
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
+            Customization = new()
+            {
+                ForceLanguage = "force_language",
+                ShowOnDemandTag = true,
+                ShowOrderDetails = true,
+                Theme = Theme.Dark,
+            },
+            DiscountCode = "discount_code",
+            FeatureFlags = new()
+            {
+                AllowCurrencySelection = true,
+                AllowCustomerEditingCity = true,
+                AllowCustomerEditingCountry = true,
+                AllowCustomerEditingEmail = true,
+                AllowCustomerEditingName = true,
+                AllowCustomerEditingState = true,
+                AllowCustomerEditingStreet = true,
+                AllowCustomerEditingZipcode = true,
+                AllowDiscountCode = true,
+                AllowPhoneNumberCollection = true,
+                AllowTaxID = true,
+                AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
+            },
+            Force3DS = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimalAddress = true,
+            ReturnURL = "return_url",
+            ShortLink = true,
+            ShowSavedPaymentMethods = true,
+            SubscriptionData = new()
+            {
+                OnDemand = new()
+                {
+                    MandateOnly = true,
+                    AdaptiveCurrencyFeesInclusive = true,
+                    ProductCurrency = Currency.Aed,
+                    ProductDescription = "product_description",
+                    ProductPrice = 0,
+                },
+                TrialPeriodDays = 0,
+            },
+        };
+
+        List<ProductCart> expectedProductCart =
+        [
+            new()
+            {
+                ProductID = "product_id",
+                Quantity = 0,
+                Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                Amount = 0,
+            },
+        ];
+        List<ApiEnum<string, Payments::PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
+        [
+            Payments::PaymentMethodTypes.Credit,
+        ];
+        BillingAddress expectedBillingAddress = new()
+        {
+            Country = CountryCode.Af,
+            City = "city",
+            State = "state",
+            Street = "street",
+            Zipcode = "zipcode",
+        };
+        ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
+        bool expectedConfirm = true;
+        Payments::CustomerRequest expectedCustomer = new Payments::AttachExistingCustomer(
+            "customer_id"
+        );
+        Customization expectedCustomization = new()
+        {
+            ForceLanguage = "force_language",
+            ShowOnDemandTag = true,
+            ShowOrderDetails = true,
+            Theme = Theme.Dark,
+        };
+        string expectedDiscountCode = "discount_code";
+        FeatureFlags expectedFeatureFlags = new()
+        {
+            AllowCurrencySelection = true,
+            AllowCustomerEditingCity = true,
+            AllowCustomerEditingCountry = true,
+            AllowCustomerEditingEmail = true,
+            AllowCustomerEditingName = true,
+            AllowCustomerEditingState = true,
+            AllowCustomerEditingStreet = true,
+            AllowCustomerEditingZipcode = true,
+            AllowDiscountCode = true,
+            AllowPhoneNumberCollection = true,
+            AllowTaxID = true,
+            AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
+        };
+        bool expectedForce3DS = true;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        bool expectedMinimalAddress = true;
+        string expectedReturnURL = "return_url";
+        bool expectedShortLink = true;
+        bool expectedShowSavedPaymentMethods = true;
+        SubscriptionData expectedSubscriptionData = new()
+        {
+            OnDemand = new()
+            {
+                MandateOnly = true,
+                AdaptiveCurrencyFeesInclusive = true,
+                ProductCurrency = Currency.Aed,
+                ProductDescription = "product_description",
+                ProductPrice = 0,
+            },
+            TrialPeriodDays = 0,
+        };
+
+        Assert.Equal(expectedProductCart.Count, parameters.ProductCart.Count);
+        for (int i = 0; i < expectedProductCart.Count; i++)
+        {
+            Assert.Equal(expectedProductCart[i], parameters.ProductCart[i]);
+        }
+        Assert.NotNull(parameters.AllowedPaymentMethodTypes);
+        Assert.Equal(
+            expectedAllowedPaymentMethodTypes.Count,
+            parameters.AllowedPaymentMethodTypes.Count
+        );
+        for (int i = 0; i < expectedAllowedPaymentMethodTypes.Count; i++)
+        {
+            Assert.Equal(
+                expectedAllowedPaymentMethodTypes[i],
+                parameters.AllowedPaymentMethodTypes[i]
+            );
+        }
+        Assert.Equal(expectedBillingAddress, parameters.BillingAddress);
+        Assert.Equal(expectedBillingCurrency, parameters.BillingCurrency);
+        Assert.Equal(expectedConfirm, parameters.Confirm);
+        Assert.Equal(expectedCustomer, parameters.Customer);
+        Assert.Equal(expectedCustomization, parameters.Customization);
+        Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
+        Assert.Equal(expectedFeatureFlags, parameters.FeatureFlags);
+        Assert.Equal(expectedForce3DS, parameters.Force3DS);
+        Assert.NotNull(parameters.Metadata);
+        Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(parameters.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, parameters.Metadata[item.Key]);
+        }
+        Assert.Equal(expectedMinimalAddress, parameters.MinimalAddress);
+        Assert.Equal(expectedReturnURL, parameters.ReturnURL);
+        Assert.Equal(expectedShortLink, parameters.ShortLink);
+        Assert.Equal(expectedShowSavedPaymentMethods, parameters.ShowSavedPaymentMethods);
+        Assert.Equal(expectedSubscriptionData, parameters.SubscriptionData);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new CheckoutSessionCreateParams
+        {
+            ProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                    Amount = 0,
+                },
+            ],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Credit],
+            BillingAddress = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BillingCurrency = Currency.Aed,
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
+            DiscountCode = "discount_code",
+            Force3DS = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            ReturnURL = "return_url",
+            SubscriptionData = new()
+            {
+                OnDemand = new()
+                {
+                    MandateOnly = true,
+                    AdaptiveCurrencyFeesInclusive = true,
+                    ProductCurrency = Currency.Aed,
+                    ProductDescription = "product_description",
+                    ProductPrice = 0,
+                },
+                TrialPeriodDays = 0,
+            },
+        };
+
+        Assert.Null(parameters.Confirm);
+        Assert.False(parameters.RawBodyData.ContainsKey("confirm"));
+        Assert.Null(parameters.Customization);
+        Assert.False(parameters.RawBodyData.ContainsKey("customization"));
+        Assert.Null(parameters.FeatureFlags);
+        Assert.False(parameters.RawBodyData.ContainsKey("feature_flags"));
+        Assert.Null(parameters.MinimalAddress);
+        Assert.False(parameters.RawBodyData.ContainsKey("minimal_address"));
+        Assert.Null(parameters.ShortLink);
+        Assert.False(parameters.RawBodyData.ContainsKey("short_link"));
+        Assert.Null(parameters.ShowSavedPaymentMethods);
+        Assert.False(parameters.RawBodyData.ContainsKey("show_saved_payment_methods"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new CheckoutSessionCreateParams
+        {
+            ProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                    Amount = 0,
+                },
+            ],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Credit],
+            BillingAddress = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BillingCurrency = Currency.Aed,
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
+            DiscountCode = "discount_code",
+            Force3DS = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            ReturnURL = "return_url",
+            SubscriptionData = new()
+            {
+                OnDemand = new()
+                {
+                    MandateOnly = true,
+                    AdaptiveCurrencyFeesInclusive = true,
+                    ProductCurrency = Currency.Aed,
+                    ProductDescription = "product_description",
+                    ProductPrice = 0,
+                },
+                TrialPeriodDays = 0,
+            },
+
+            // Null should be interpreted as omitted for these properties
+            Confirm = null,
+            Customization = null,
+            FeatureFlags = null,
+            MinimalAddress = null,
+            ShortLink = null,
+            ShowSavedPaymentMethods = null,
+        };
+
+        Assert.Null(parameters.Confirm);
+        Assert.False(parameters.RawBodyData.ContainsKey("confirm"));
+        Assert.Null(parameters.Customization);
+        Assert.False(parameters.RawBodyData.ContainsKey("customization"));
+        Assert.Null(parameters.FeatureFlags);
+        Assert.False(parameters.RawBodyData.ContainsKey("feature_flags"));
+        Assert.Null(parameters.MinimalAddress);
+        Assert.False(parameters.RawBodyData.ContainsKey("minimal_address"));
+        Assert.Null(parameters.ShortLink);
+        Assert.False(parameters.RawBodyData.ContainsKey("short_link"));
+        Assert.Null(parameters.ShowSavedPaymentMethods);
+        Assert.False(parameters.RawBodyData.ContainsKey("show_saved_payment_methods"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new CheckoutSessionCreateParams
+        {
+            ProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                    Amount = 0,
+                },
+            ],
+            Confirm = true,
+            Customization = new()
+            {
+                ForceLanguage = "force_language",
+                ShowOnDemandTag = true,
+                ShowOrderDetails = true,
+                Theme = Theme.Dark,
+            },
+            FeatureFlags = new()
+            {
+                AllowCurrencySelection = true,
+                AllowCustomerEditingCity = true,
+                AllowCustomerEditingCountry = true,
+                AllowCustomerEditingEmail = true,
+                AllowCustomerEditingName = true,
+                AllowCustomerEditingState = true,
+                AllowCustomerEditingStreet = true,
+                AllowCustomerEditingZipcode = true,
+                AllowDiscountCode = true,
+                AllowPhoneNumberCollection = true,
+                AllowTaxID = true,
+                AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
+            },
+            MinimalAddress = true,
+            ShortLink = true,
+            ShowSavedPaymentMethods = true,
+        };
+
+        Assert.Null(parameters.AllowedPaymentMethodTypes);
+        Assert.False(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
+        Assert.Null(parameters.BillingAddress);
+        Assert.False(parameters.RawBodyData.ContainsKey("billing_address"));
+        Assert.Null(parameters.BillingCurrency);
+        Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
+        Assert.Null(parameters.Customer);
+        Assert.False(parameters.RawBodyData.ContainsKey("customer"));
+        Assert.Null(parameters.DiscountCode);
+        Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.Force3DS);
+        Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.ReturnURL);
+        Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
+        Assert.Null(parameters.SubscriptionData);
+        Assert.False(parameters.RawBodyData.ContainsKey("subscription_data"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsSetToNullAreSetToNull_Works()
+    {
+        var parameters = new CheckoutSessionCreateParams
+        {
+            ProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                    Amount = 0,
+                },
+            ],
+            Confirm = true,
+            Customization = new()
+            {
+                ForceLanguage = "force_language",
+                ShowOnDemandTag = true,
+                ShowOrderDetails = true,
+                Theme = Theme.Dark,
+            },
+            FeatureFlags = new()
+            {
+                AllowCurrencySelection = true,
+                AllowCustomerEditingCity = true,
+                AllowCustomerEditingCountry = true,
+                AllowCustomerEditingEmail = true,
+                AllowCustomerEditingName = true,
+                AllowCustomerEditingState = true,
+                AllowCustomerEditingStreet = true,
+                AllowCustomerEditingZipcode = true,
+                AllowDiscountCode = true,
+                AllowPhoneNumberCollection = true,
+                AllowTaxID = true,
+                AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
+            },
+            MinimalAddress = true,
+            ShortLink = true,
+            ShowSavedPaymentMethods = true,
+
+            AllowedPaymentMethodTypes = null,
+            BillingAddress = null,
+            BillingCurrency = null,
+            Customer = null,
+            DiscountCode = null,
+            Force3DS = null,
+            Metadata = null,
+            ReturnURL = null,
+            SubscriptionData = null,
+        };
+
+        Assert.Null(parameters.AllowedPaymentMethodTypes);
+        Assert.False(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
+        Assert.Null(parameters.BillingAddress);
+        Assert.False(parameters.RawBodyData.ContainsKey("billing_address"));
+        Assert.Null(parameters.BillingCurrency);
+        Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
+        Assert.Null(parameters.Customer);
+        Assert.False(parameters.RawBodyData.ContainsKey("customer"));
+        Assert.Null(parameters.DiscountCode);
+        Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.Force3DS);
+        Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.ReturnURL);
+        Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
+        Assert.Null(parameters.SubscriptionData);
+        Assert.False(parameters.RawBodyData.ContainsKey("subscription_data"));
+    }
+}
 
 public class ProductCartTest : TestBase
 {

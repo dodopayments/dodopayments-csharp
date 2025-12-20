@@ -1,9 +1,82 @@
+using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
+
+public class SubscriptionPreviewChangePlanParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new SubscriptionPreviewChangePlanParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductID = "product_id",
+            ProrationBillingMode =
+                SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+        };
+
+        string expectedSubscriptionID = "subscription_id";
+        string expectedProductID = "product_id";
+        ApiEnum<
+            string,
+            SubscriptionPreviewChangePlanParamsProrationBillingMode
+        > expectedProrationBillingMode =
+            SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately;
+        int expectedQuantity = 0;
+        List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+
+        Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
+        Assert.Equal(expectedProductID, parameters.ProductID);
+        Assert.Equal(expectedProrationBillingMode, parameters.ProrationBillingMode);
+        Assert.Equal(expectedQuantity, parameters.Quantity);
+        Assert.NotNull(parameters.Addons);
+        Assert.Equal(expectedAddons.Count, parameters.Addons.Count);
+        for (int i = 0; i < expectedAddons.Count; i++)
+        {
+            Assert.Equal(expectedAddons[i], parameters.Addons[i]);
+        }
+    }
+
+    [Fact]
+    public void OptionalNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new SubscriptionPreviewChangePlanParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductID = "product_id",
+            ProrationBillingMode =
+                SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
+            Quantity = 0,
+        };
+
+        Assert.Null(parameters.Addons);
+        Assert.False(parameters.RawBodyData.ContainsKey("addons"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsSetToNullAreSetToNull_Works()
+    {
+        var parameters = new SubscriptionPreviewChangePlanParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductID = "product_id",
+            ProrationBillingMode =
+                SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
+            Quantity = 0,
+
+            Addons = null,
+        };
+
+        Assert.Null(parameters.Addons);
+        Assert.False(parameters.RawBodyData.ContainsKey("addons"));
+    }
+}
 
 public class SubscriptionPreviewChangePlanParamsProrationBillingModeTest : TestBase
 {

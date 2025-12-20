@@ -2,8 +2,77 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Customers.Wallets.LedgerEntries;
+
+public class LedgerEntryCreateParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new LedgerEntryCreateParams
+        {
+            CustomerID = "customer_id",
+            Amount = 0,
+            Currency = Currency.Aed,
+            EntryType = EntryType.Credit,
+            IdempotencyKey = "idempotency_key",
+            Reason = "reason",
+        };
+
+        string expectedCustomerID = "customer_id";
+        long expectedAmount = 0;
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        ApiEnum<string, EntryType> expectedEntryType = EntryType.Credit;
+        string expectedIdempotencyKey = "idempotency_key";
+        string expectedReason = "reason";
+
+        Assert.Equal(expectedCustomerID, parameters.CustomerID);
+        Assert.Equal(expectedAmount, parameters.Amount);
+        Assert.Equal(expectedCurrency, parameters.Currency);
+        Assert.Equal(expectedEntryType, parameters.EntryType);
+        Assert.Equal(expectedIdempotencyKey, parameters.IdempotencyKey);
+        Assert.Equal(expectedReason, parameters.Reason);
+    }
+
+    [Fact]
+    public void OptionalNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new LedgerEntryCreateParams
+        {
+            CustomerID = "customer_id",
+            Amount = 0,
+            Currency = Currency.Aed,
+            EntryType = EntryType.Credit,
+        };
+
+        Assert.Null(parameters.IdempotencyKey);
+        Assert.False(parameters.RawBodyData.ContainsKey("idempotency_key"));
+        Assert.Null(parameters.Reason);
+        Assert.False(parameters.RawBodyData.ContainsKey("reason"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsSetToNullAreSetToNull_Works()
+    {
+        var parameters = new LedgerEntryCreateParams
+        {
+            CustomerID = "customer_id",
+            Amount = 0,
+            Currency = Currency.Aed,
+            EntryType = EntryType.Credit,
+
+            IdempotencyKey = null,
+            Reason = null,
+        };
+
+        Assert.Null(parameters.IdempotencyKey);
+        Assert.False(parameters.RawBodyData.ContainsKey("idempotency_key"));
+        Assert.Null(parameters.Reason);
+        Assert.False(parameters.RawBodyData.ContainsKey("reason"));
+    }
+}
 
 public class EntryTypeTest : TestBase
 {
