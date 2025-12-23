@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.2.0 (2025-12-23)
+
+Full Changelog: [v5.1.0...v5.2.0](https://github.com/dodopayments/dodopayments-csharp/compare/v5.1.0...v5.2.0)
+
+### Features
+
+* **api:** manual updates ([75d038a](https://github.com/dodopayments/dodopayments-csharp/commit/75d038af842f089ad9c90a327c8b8b7654be5641))
+
 ## 5.1.0 (2025-12-23)
 
 Full Changelog: [v5.0.0...v5.1.0](https://github.com/dodopayments/dodopayments-csharp/compare/v5.0.0...v5.1.0)
