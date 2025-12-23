@@ -36,6 +36,7 @@ public class PaymentCreateParamsTest : TestBase
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentLink = true,
+            PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,
             ReturnURL = "return_url",
             ShortLink = true,
@@ -70,6 +71,7 @@ public class PaymentCreateParamsTest : TestBase
         bool expectedForce3DS = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedPaymentLink = true;
+        string expectedPaymentMethodID = "payment_method_id";
         bool expectedRedirectImmediately = true;
         string expectedReturnURL = "return_url";
         bool expectedShortLink = true;
@@ -107,6 +109,7 @@ public class PaymentCreateParamsTest : TestBase
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentLink, parameters.PaymentLink);
+        Assert.Equal(expectedPaymentMethodID, parameters.PaymentMethodID);
         Assert.Equal(expectedRedirectImmediately, parameters.RedirectImmediately);
         Assert.Equal(expectedReturnURL, parameters.ReturnURL);
         Assert.Equal(expectedShortLink, parameters.ShortLink);
@@ -142,6 +145,7 @@ public class PaymentCreateParamsTest : TestBase
             DiscountCode = "discount_code",
             Force3DS = true,
             PaymentLink = true,
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             ShortLink = true,
             TaxID = "tax_id",
@@ -183,6 +187,7 @@ public class PaymentCreateParamsTest : TestBase
             DiscountCode = "discount_code",
             Force3DS = true,
             PaymentLink = true,
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             ShortLink = true,
             TaxID = "tax_id",
@@ -239,6 +244,8 @@ public class PaymentCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.PaymentLink);
         Assert.False(parameters.RawBodyData.ContainsKey("payment_link"));
+        Assert.Null(parameters.PaymentMethodID);
+        Assert.False(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.ReturnURL);
         Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
         Assert.Null(parameters.ShortLink);
@@ -279,6 +286,7 @@ public class PaymentCreateParamsTest : TestBase
             DiscountCode = null,
             Force3DS = null,
             PaymentLink = null,
+            PaymentMethodID = null,
             ReturnURL = null,
             ShortLink = null,
             TaxID = null,
@@ -294,6 +302,8 @@ public class PaymentCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.PaymentLink);
         Assert.False(parameters.RawBodyData.ContainsKey("payment_link"));
+        Assert.Null(parameters.PaymentMethodID);
+        Assert.False(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.ReturnURL);
         Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
         Assert.Null(parameters.ShortLink);
