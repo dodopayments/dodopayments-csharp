@@ -24,12 +24,19 @@ public sealed class ProductService : IProductService
     {
         _client = client;
         _images = new(() => new ImageService(client));
+        _shortLinks = new(() => new ShortLinkService(client));
     }
 
     readonly Lazy<IImageService> _images;
     public IImageService Images
     {
         get { return _images.Value; }
+    }
+
+    readonly Lazy<IShortLinkService> _shortLinks;
+    public IShortLinkService ShortLinks
+    {
+        get { return _shortLinks.Value; }
     }
 
     /// <inheritdoc/>
