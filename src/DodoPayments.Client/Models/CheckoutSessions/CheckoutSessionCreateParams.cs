@@ -191,6 +191,16 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Optional payment method ID to use for this checkout session. Only allowed
+    /// when `confirm` is true. If provided, existing customer id must also be provided.
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "payment_method_id"); }
+        init { JsonModel.Set(this._rawBodyData, "payment_method_id", value); }
+    }
+
+    /// <summary>
     /// The url to redirect after payment failure or success.
     /// </summary>
     public string? ReturnURL

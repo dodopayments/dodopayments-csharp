@@ -193,6 +193,16 @@ public sealed record class CheckoutSessionRequest : JsonModel
     }
 
     /// <summary>
+    /// Optional payment method ID to use for this checkout session. Only allowed
+    /// when `confirm` is true. If provided, existing customer id must also be provided.
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_method_id"); }
+        init { JsonModel.Set(this._rawData, "payment_method_id", value); }
+    }
+
+    /// <summary>
     /// The url to redirect after payment failure or success.
     /// </summary>
     public string? ReturnURL
@@ -271,6 +281,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
         _ = this.Force3DS;
         _ = this.Metadata;
         _ = this.MinimalAddress;
+        _ = this.PaymentMethodID;
         _ = this.ReturnURL;
         _ = this.ShortLink;
         _ = this.ShowSavedPaymentMethods;

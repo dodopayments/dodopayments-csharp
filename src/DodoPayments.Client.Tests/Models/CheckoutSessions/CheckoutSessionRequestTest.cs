@@ -65,6 +65,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
@@ -134,6 +135,7 @@ public class CheckoutSessionRequestTest : TestBase
         bool expectedForce3DS = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMinimalAddress = true;
+        string expectedPaymentMethodID = "payment_method_id";
         string expectedReturnURL = "return_url";
         bool expectedShortLink = true;
         bool expectedShowSavedPaymentMethods = true;
@@ -181,6 +183,7 @@ public class CheckoutSessionRequestTest : TestBase
             Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedMinimalAddress, model.MinimalAddress);
+        Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
         Assert.Equal(expectedReturnURL, model.ReturnURL);
         Assert.Equal(expectedShortLink, model.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, model.ShowSavedPaymentMethods);
@@ -241,6 +244,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
@@ -318,6 +322,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
@@ -391,6 +396,7 @@ public class CheckoutSessionRequestTest : TestBase
         bool expectedForce3DS = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMinimalAddress = true;
+        string expectedPaymentMethodID = "payment_method_id";
         string expectedReturnURL = "return_url";
         bool expectedShortLink = true;
         bool expectedShowSavedPaymentMethods = true;
@@ -441,6 +447,7 @@ public class CheckoutSessionRequestTest : TestBase
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedMinimalAddress, deserialized.MinimalAddress);
+        Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
         Assert.Equal(expectedReturnURL, deserialized.ReturnURL);
         Assert.Equal(expectedShortLink, deserialized.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, deserialized.ShowSavedPaymentMethods);
@@ -501,6 +508,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
@@ -550,6 +558,7 @@ public class CheckoutSessionRequestTest : TestBase
             DiscountCode = "discount_code",
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             SubscriptionData = new()
             {
@@ -608,6 +617,7 @@ public class CheckoutSessionRequestTest : TestBase
             DiscountCode = "discount_code",
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             SubscriptionData = new()
             {
@@ -655,6 +665,7 @@ public class CheckoutSessionRequestTest : TestBase
             DiscountCode = "discount_code",
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             SubscriptionData = new()
             {
@@ -721,6 +732,7 @@ public class CheckoutSessionRequestTest : TestBase
             DiscountCode = "discount_code",
             Force3DS = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             SubscriptionData = new()
             {
@@ -805,6 +817,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("force_3ds"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
+        Assert.Null(model.PaymentMethodID);
+        Assert.False(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.ReturnURL);
         Assert.False(model.RawData.ContainsKey("return_url"));
         Assert.Null(model.SubscriptionData);
@@ -908,6 +922,7 @@ public class CheckoutSessionRequestTest : TestBase
             DiscountCode = null,
             Force3DS = null,
             Metadata = null,
+            PaymentMethodID = null,
             ReturnURL = null,
             SubscriptionData = null,
         };
@@ -926,6 +941,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.True(model.RawData.ContainsKey("force_3ds"));
         Assert.Null(model.Metadata);
         Assert.True(model.RawData.ContainsKey("metadata"));
+        Assert.Null(model.PaymentMethodID);
+        Assert.True(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.ReturnURL);
         Assert.True(model.RawData.ContainsKey("return_url"));
         Assert.Null(model.SubscriptionData);
@@ -982,6 +999,7 @@ public class CheckoutSessionRequestTest : TestBase
             DiscountCode = null,
             Force3DS = null,
             Metadata = null,
+            PaymentMethodID = null,
             ReturnURL = null,
             SubscriptionData = null,
         };
