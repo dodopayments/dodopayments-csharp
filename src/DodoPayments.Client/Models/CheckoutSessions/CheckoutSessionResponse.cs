@@ -11,15 +11,6 @@ namespace DodoPayments.Client.Models.CheckoutSessions;
 public sealed record class CheckoutSessionResponse : JsonModel
 {
     /// <summary>
-    /// Checkout url
-    /// </summary>
-    public required string CheckoutURL
-    {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "checkout_url"); }
-        init { JsonModel.Set(this._rawData, "checkout_url", value); }
-    }
-
-    /// <summary>
     /// The ID of the created checkout session
     /// </summary>
     public required string SessionID
@@ -28,11 +19,20 @@ public sealed record class CheckoutSessionResponse : JsonModel
         init { JsonModel.Set(this._rawData, "session_id", value); }
     }
 
+    /// <summary>
+    /// Checkout url (None when payment_method_id is provided)
+    /// </summary>
+    public string? CheckoutURL
+    {
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "checkout_url"); }
+        init { JsonModel.Set(this._rawData, "checkout_url", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.CheckoutURL;
         _ = this.SessionID;
+        _ = this.CheckoutURL;
     }
 
     public CheckoutSessionResponse() { }
@@ -59,6 +59,13 @@ public sealed record class CheckoutSessionResponse : JsonModel
     )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public CheckoutSessionResponse(string sessionID)
+        : this()
+    {
+        this.SessionID = sessionID;
     }
 }
 

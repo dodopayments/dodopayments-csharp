@@ -139,6 +139,17 @@ public sealed record class PaymentCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Optional payment method ID to use for this payment. If provided, customer_id
+    /// must also be provided. The payment method will be validated for eligibility
+    /// with the payment's currency.
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "payment_method_id"); }
+        init { JsonModel.Set(this._rawBodyData, "payment_method_id", value); }
+    }
+
+    /// <summary>
     /// If true, redirects the customer immediately after payment completion False
     /// by default
     /// </summary>

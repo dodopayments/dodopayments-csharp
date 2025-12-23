@@ -48,6 +48,7 @@ public class SubscriptionCreateParamsTest : TestBase
                 },
             ],
             PaymentLink = true,
+            PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,
             ReturnURL = "return_url",
             ShortLink = true,
@@ -94,6 +95,7 @@ public class SubscriptionCreateParamsTest : TestBase
             },
         ];
         bool expectedPaymentLink = true;
+        string expectedPaymentMethodID = "payment_method_id";
         bool expectedRedirectImmediately = true;
         string expectedReturnURL = "return_url";
         bool expectedShortLink = true;
@@ -142,6 +144,7 @@ public class SubscriptionCreateParamsTest : TestBase
             Assert.Equal(expectedOneTimeProductCart[i], parameters.OneTimeProductCart[i]);
         }
         Assert.Equal(expectedPaymentLink, parameters.PaymentLink);
+        Assert.Equal(expectedPaymentMethodID, parameters.PaymentMethodID);
         Assert.Equal(expectedRedirectImmediately, parameters.RedirectImmediately);
         Assert.Equal(expectedReturnURL, parameters.ReturnURL);
         Assert.Equal(expectedShortLink, parameters.ShortLink);
@@ -189,6 +192,7 @@ public class SubscriptionCreateParamsTest : TestBase
                 },
             ],
             PaymentLink = true,
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             ShortLink = true,
             TaxID = "tax_id",
@@ -242,6 +246,7 @@ public class SubscriptionCreateParamsTest : TestBase
                 },
             ],
             PaymentLink = true,
+            PaymentMethodID = "payment_method_id",
             ReturnURL = "return_url",
             ShortLink = true,
             TaxID = "tax_id",
@@ -298,6 +303,8 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("one_time_product_cart"));
         Assert.Null(parameters.PaymentLink);
         Assert.False(parameters.RawBodyData.ContainsKey("payment_link"));
+        Assert.Null(parameters.PaymentMethodID);
+        Assert.False(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.ReturnURL);
         Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
         Assert.Null(parameters.ShortLink);
@@ -336,6 +343,7 @@ public class SubscriptionCreateParamsTest : TestBase
             OnDemand = null,
             OneTimeProductCart = null,
             PaymentLink = null,
+            PaymentMethodID = null,
             ReturnURL = null,
             ShortLink = null,
             TaxID = null,
@@ -358,6 +366,8 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("one_time_product_cart"));
         Assert.Null(parameters.PaymentLink);
         Assert.False(parameters.RawBodyData.ContainsKey("payment_link"));
+        Assert.Null(parameters.PaymentMethodID);
+        Assert.False(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.ReturnURL);
         Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
         Assert.Null(parameters.ShortLink);
