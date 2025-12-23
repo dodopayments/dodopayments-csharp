@@ -23,6 +23,8 @@ public interface IProductService
 
     IImageService Images { get; }
 
+    IShortLinkService ShortLinks { get; }
+
     Task<Product> Create(
         ProductCreateParams parameters,
         CancellationToken cancellationToken = default
