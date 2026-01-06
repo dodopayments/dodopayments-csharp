@@ -17,7 +17,7 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
             Body = new Subscriptions::New()
             {
                 Type = Subscriptions::Type.New,
-                ReturnURL = "return_url",
+                ReturnUrl = "return_url",
             },
         };
 
@@ -25,7 +25,7 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
         Subscriptions::Body expectedBody = new Subscriptions::New()
         {
             Type = Subscriptions::Type.New,
-            ReturnURL = "return_url",
+            ReturnUrl = "return_url",
         };
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
@@ -41,7 +41,7 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
             Body = new Subscriptions::New()
             {
                 Type = Subscriptions::Type.New,
-                ReturnURL = "return_url",
+                ReturnUrl = "return_url",
             },
         };
 
@@ -62,7 +62,7 @@ public class BodyTest : TestBase
     public void NewValidationWorks()
     {
         Subscriptions::Body value = new(
-            new Subscriptions::New() { Type = Subscriptions::Type.New, ReturnURL = "return_url" }
+            new Subscriptions::New() { Type = Subscriptions::Type.New, ReturnUrl = "return_url" }
         );
         value.Validate();
     }
@@ -84,7 +84,7 @@ public class BodyTest : TestBase
     public void NewSerializationRoundtripWorks()
     {
         Subscriptions::Body value = new(
-            new Subscriptions::New() { Type = Subscriptions::Type.New, ReturnURL = "return_url" }
+            new Subscriptions::New() { Type = Subscriptions::Type.New, ReturnUrl = "return_url" }
         );
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Subscriptions::Body>(element);
@@ -117,14 +117,14 @@ public class NewTest : TestBase
         var model = new Subscriptions::New
         {
             Type = Subscriptions::Type.New,
-            ReturnURL = "return_url",
+            ReturnUrl = "return_url",
         };
 
         ApiEnum<string, Subscriptions::Type> expectedType = Subscriptions::Type.New;
-        string expectedReturnURL = "return_url";
+        string expectedReturnUrl = "return_url";
 
         Assert.Equal(expectedType, model.Type);
-        Assert.Equal(expectedReturnURL, model.ReturnURL);
+        Assert.Equal(expectedReturnUrl, model.ReturnUrl);
     }
 
     [Fact]
@@ -133,7 +133,7 @@ public class NewTest : TestBase
         var model = new Subscriptions::New
         {
             Type = Subscriptions::Type.New,
-            ReturnURL = "return_url",
+            ReturnUrl = "return_url",
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -148,7 +148,7 @@ public class NewTest : TestBase
         var model = new Subscriptions::New
         {
             Type = Subscriptions::Type.New,
-            ReturnURL = "return_url",
+            ReturnUrl = "return_url",
         };
 
         string element = JsonSerializer.Serialize(model);
@@ -156,10 +156,10 @@ public class NewTest : TestBase
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Subscriptions::Type> expectedType = Subscriptions::Type.New;
-        string expectedReturnURL = "return_url";
+        string expectedReturnUrl = "return_url";
 
         Assert.Equal(expectedType, deserialized.Type);
-        Assert.Equal(expectedReturnURL, deserialized.ReturnURL);
+        Assert.Equal(expectedReturnUrl, deserialized.ReturnUrl);
     }
 
     [Fact]
@@ -168,7 +168,7 @@ public class NewTest : TestBase
         var model = new Subscriptions::New
         {
             Type = Subscriptions::Type.New,
-            ReturnURL = "return_url",
+            ReturnUrl = "return_url",
         };
 
         model.Validate();
@@ -179,7 +179,7 @@ public class NewTest : TestBase
     {
         var model = new Subscriptions::New { Type = Subscriptions::Type.New };
 
-        Assert.Null(model.ReturnURL);
+        Assert.Null(model.ReturnUrl);
         Assert.False(model.RawData.ContainsKey("return_url"));
     }
 
@@ -198,10 +198,10 @@ public class NewTest : TestBase
         {
             Type = Subscriptions::Type.New,
 
-            ReturnURL = null,
+            ReturnUrl = null,
         };
 
-        Assert.Null(model.ReturnURL);
+        Assert.Null(model.ReturnUrl);
         Assert.True(model.RawData.ContainsKey("return_url"));
     }
 
@@ -212,7 +212,7 @@ public class NewTest : TestBase
         {
             Type = Subscriptions::Type.New,
 
-            ReturnURL = null,
+            ReturnUrl = null,
         };
 
         model.Validate();

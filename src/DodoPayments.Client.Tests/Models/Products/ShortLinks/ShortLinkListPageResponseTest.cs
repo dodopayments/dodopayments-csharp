@@ -17,9 +17,9 @@ public class ShortLinkListPageResponseTest : TestBase
                 new()
                 {
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FullURL = "full_url",
+                    FullUrl = "full_url",
                     ProductID = "product_id",
-                    ShortURL = "short_url",
+                    ShortUrl = "short_url",
                 },
             ],
         };
@@ -29,9 +29,9 @@ public class ShortLinkListPageResponseTest : TestBase
             new()
             {
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                FullURL = "full_url",
+                FullUrl = "full_url",
                 ProductID = "product_id",
-                ShortURL = "short_url",
+                ShortUrl = "short_url",
             },
         ];
 
@@ -52,9 +52,9 @@ public class ShortLinkListPageResponseTest : TestBase
                 new()
                 {
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FullURL = "full_url",
+                    FullUrl = "full_url",
                     ProductID = "product_id",
-                    ShortURL = "short_url",
+                    ShortUrl = "short_url",
                 },
             ],
         };
@@ -75,9 +75,9 @@ public class ShortLinkListPageResponseTest : TestBase
                 new()
                 {
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FullURL = "full_url",
+                    FullUrl = "full_url",
                     ProductID = "product_id",
-                    ShortURL = "short_url",
+                    ShortUrl = "short_url",
                 },
             ],
         };
@@ -91,9 +91,9 @@ public class ShortLinkListPageResponseTest : TestBase
             new()
             {
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                FullURL = "full_url",
+                FullUrl = "full_url",
                 ProductID = "product_id",
-                ShortURL = "short_url",
+                ShortUrl = "short_url",
             },
         ];
 
@@ -114,9 +114,9 @@ public class ShortLinkListPageResponseTest : TestBase
                 new()
                 {
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FullURL = "full_url",
+                    FullUrl = "full_url",
                     ProductID = "product_id",
-                    ShortURL = "short_url",
+                    ShortUrl = "short_url",
                 },
             ],
         };

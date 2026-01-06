@@ -26,7 +26,7 @@ public class BrandListResponseTest : TestBase
                     Name = "name",
                     ReasonForHold = "reason_for_hold",
                     SupportEmail = "support_email",
-                    URL = "url",
+                    Url = "url",
                 },
             ],
         };
@@ -46,7 +46,7 @@ public class BrandListResponseTest : TestBase
                 Name = "name",
                 ReasonForHold = "reason_for_hold",
                 SupportEmail = "support_email",
-                URL = "url",
+                Url = "url",
             },
         ];
 
@@ -77,7 +77,7 @@ public class BrandListResponseTest : TestBase
                     Name = "name",
                     ReasonForHold = "reason_for_hold",
                     SupportEmail = "support_email",
-                    URL = "url",
+                    Url = "url",
                 },
             ],
         };
@@ -108,7 +108,7 @@ public class BrandListResponseTest : TestBase
                     Name = "name",
                     ReasonForHold = "reason_for_hold",
                     SupportEmail = "support_email",
-                    URL = "url",
+                    Url = "url",
                 },
             ],
         };
@@ -132,7 +132,7 @@ public class BrandListResponseTest : TestBase
                 Name = "name",
                 ReasonForHold = "reason_for_hold",
                 SupportEmail = "support_email",
-                URL = "url",
+                Url = "url",
             },
         ];
 
@@ -163,7 +163,7 @@ public class BrandListResponseTest : TestBase
                     Name = "name",
                     ReasonForHold = "reason_for_hold",
                     SupportEmail = "support_email",
-                    URL = "url",
+                    Url = "url",
                 },
             ],
         };

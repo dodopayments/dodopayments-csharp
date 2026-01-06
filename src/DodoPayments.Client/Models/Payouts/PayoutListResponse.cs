@@ -139,7 +139,7 @@ public sealed record class PayoutListResponse : JsonModel
     /// <summary>
     /// The URL of the document associated with the payout.
     /// </summary>
-    public string? PayoutDocumentURL
+    public string? PayoutDocumentUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "payout_document_url"); }
         init { JsonModel.Set(this._rawData, "payout_document_url", value); }
@@ -170,7 +170,7 @@ public sealed record class PayoutListResponse : JsonModel
         _ = this.Tax;
         _ = this.UpdatedAt;
         _ = this.Name;
-        _ = this.PayoutDocumentURL;
+        _ = this.PayoutDocumentUrl;
         _ = this.Remarks;
     }
 

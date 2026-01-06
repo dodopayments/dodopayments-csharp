@@ -273,7 +273,7 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : JsonModel
     /// <summary>
     /// External URL to digital product
     /// </summary>
-    public string? ExternalURL
+    public string? ExternalUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "external_url"); }
         init { JsonModel.Set(this._rawData, "external_url", value); }
@@ -300,7 +300,7 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.ExternalURL;
+        _ = this.ExternalUrl;
         _ = this.Files;
         _ = this.Instructions;
     }

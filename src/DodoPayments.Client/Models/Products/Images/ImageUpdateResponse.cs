@@ -10,7 +10,7 @@ namespace DodoPayments.Client.Models.Products.Images;
 [JsonConverter(typeof(JsonModelConverter<ImageUpdateResponse, ImageUpdateResponseFromRaw>))]
 public sealed record class ImageUpdateResponse : JsonModel
 {
-    public required string URL
+    public required string Url
     {
         get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
         init { JsonModel.Set(this._rawData, "url", value); }
@@ -25,7 +25,7 @@ public sealed record class ImageUpdateResponse : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.URL;
+        _ = this.Url;
         _ = this.ImageID;
     }
 
@@ -59,7 +59,7 @@ public sealed record class ImageUpdateResponse : JsonModel
     public ImageUpdateResponse(string url)
         : this()
     {
-        this.URL = url;
+        this.Url = url;
     }
 }
 

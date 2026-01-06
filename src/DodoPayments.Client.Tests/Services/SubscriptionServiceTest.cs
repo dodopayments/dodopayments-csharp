@@ -123,7 +123,7 @@ public class SubscriptionServiceTest : TestBase
             "subscription_id",
             new()
             {
-                Body = new New() { Type = Type.New, ReturnURL = "return_url" },
+                Body = new New() { Type = Type.New, ReturnUrl = "return_url" },
             },
             TestContext.Current.CancellationToken
         );

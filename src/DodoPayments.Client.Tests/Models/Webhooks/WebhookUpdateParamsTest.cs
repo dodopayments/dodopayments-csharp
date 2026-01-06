@@ -19,7 +19,7 @@ public class WebhookUpdateParamsTest : TestBase
             FilterTypes = [WebhookEventType.PaymentSucceeded],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             RateLimit = 0,
-            URL = "url",
+            UrlValue = "url",
         };
 
         string expectedWebhookID = "webhook_id";
@@ -31,7 +31,7 @@ public class WebhookUpdateParamsTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         int expectedRateLimit = 0;
-        string expectedURL = "url";
+        string expectedUrlValue = "url";
 
         Assert.Equal(expectedWebhookID, parameters.WebhookID);
         Assert.Equal(expectedDescription, parameters.Description);
@@ -51,7 +51,7 @@ public class WebhookUpdateParamsTest : TestBase
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
         Assert.Equal(expectedRateLimit, parameters.RateLimit);
-        Assert.Equal(expectedURL, parameters.URL);
+        Assert.Equal(expectedUrlValue, parameters.UrlValue);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class WebhookUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.RateLimit);
         Assert.False(parameters.RawBodyData.ContainsKey("rate_limit"));
-        Assert.Null(parameters.URL);
+        Assert.Null(parameters.UrlValue);
         Assert.False(parameters.RawBodyData.ContainsKey("url"));
     }
 
@@ -85,7 +85,7 @@ public class WebhookUpdateParamsTest : TestBase
             FilterTypes = null,
             Metadata = null,
             RateLimit = null,
-            URL = null,
+            UrlValue = null,
         };
 
         Assert.Null(parameters.Description);
@@ -98,7 +98,7 @@ public class WebhookUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.RateLimit);
         Assert.True(parameters.RawBodyData.ContainsKey("rate_limit"));
-        Assert.Null(parameters.URL);
+        Assert.Null(parameters.UrlValue);
         Assert.True(parameters.RawBodyData.ContainsKey("url"));
     }
 

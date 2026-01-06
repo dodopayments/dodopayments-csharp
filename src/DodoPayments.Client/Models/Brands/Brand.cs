@@ -87,7 +87,7 @@ public sealed record class Brand : JsonModel
         init { JsonModel.Set(this._rawData, "support_email", value); }
     }
 
-    public string? URL
+    public string? Url
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "url"); }
         init { JsonModel.Set(this._rawData, "url", value); }
@@ -107,7 +107,7 @@ public sealed record class Brand : JsonModel
         _ = this.Name;
         _ = this.ReasonForHold;
         _ = this.SupportEmail;
-        _ = this.URL;
+        _ = this.Url;
     }
 
     public Brand() { }

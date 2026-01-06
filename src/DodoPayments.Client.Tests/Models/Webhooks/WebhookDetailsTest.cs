@@ -16,7 +16,7 @@ public class WebhookDetailsTest : TestBase
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = "updated_at",
-            URL = "url",
+            Url = "url",
             Disabled = true,
             FilterTypes = ["string"],
             RateLimit = 0,
@@ -27,7 +27,7 @@ public class WebhookDetailsTest : TestBase
         string expectedDescription = "description";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedUpdatedAt = "updated_at";
-        string expectedURL = "url";
+        string expectedUrl = "url";
         bool expectedDisabled = true;
         List<string> expectedFilterTypes = ["string"];
         int expectedRateLimit = 0;
@@ -43,7 +43,7 @@ public class WebhookDetailsTest : TestBase
             Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
-        Assert.Equal(expectedURL, model.URL);
+        Assert.Equal(expectedUrl, model.Url);
         Assert.Equal(expectedDisabled, model.Disabled);
         Assert.NotNull(model.FilterTypes);
         Assert.Equal(expectedFilterTypes.Count, model.FilterTypes.Count);
@@ -64,7 +64,7 @@ public class WebhookDetailsTest : TestBase
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = "updated_at",
-            URL = "url",
+            Url = "url",
             Disabled = true,
             FilterTypes = ["string"],
             RateLimit = 0,
@@ -86,7 +86,7 @@ public class WebhookDetailsTest : TestBase
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = "updated_at",
-            URL = "url",
+            Url = "url",
             Disabled = true,
             FilterTypes = ["string"],
             RateLimit = 0,
@@ -101,7 +101,7 @@ public class WebhookDetailsTest : TestBase
         string expectedDescription = "description";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedUpdatedAt = "updated_at";
-        string expectedURL = "url";
+        string expectedUrl = "url";
         bool expectedDisabled = true;
         List<string> expectedFilterTypes = ["string"];
         int expectedRateLimit = 0;
@@ -117,7 +117,7 @@ public class WebhookDetailsTest : TestBase
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
-        Assert.Equal(expectedURL, deserialized.URL);
+        Assert.Equal(expectedUrl, deserialized.Url);
         Assert.Equal(expectedDisabled, deserialized.Disabled);
         Assert.NotNull(deserialized.FilterTypes);
         Assert.Equal(expectedFilterTypes.Count, deserialized.FilterTypes.Count);
@@ -138,7 +138,7 @@ public class WebhookDetailsTest : TestBase
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = "updated_at",
-            URL = "url",
+            Url = "url",
             Disabled = true,
             FilterTypes = ["string"],
             RateLimit = 0,
@@ -157,7 +157,7 @@ public class WebhookDetailsTest : TestBase
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = "updated_at",
-            URL = "url",
+            Url = "url",
         };
 
         Assert.Null(model.Disabled);
@@ -178,7 +178,7 @@ public class WebhookDetailsTest : TestBase
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = "updated_at",
-            URL = "url",
+            Url = "url",
         };
 
         model.Validate();
@@ -194,7 +194,7 @@ public class WebhookDetailsTest : TestBase
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = "updated_at",
-            URL = "url",
+            Url = "url",
 
             Disabled = null,
             FilterTypes = null,
@@ -219,7 +219,7 @@ public class WebhookDetailsTest : TestBase
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = "updated_at",
-            URL = "url",
+            Url = "url",
 
             Disabled = null,
             FilterTypes = null,

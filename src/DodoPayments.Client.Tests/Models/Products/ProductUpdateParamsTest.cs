@@ -21,7 +21,7 @@ public class ProductUpdateParamsTest : TestBase
             Description = "description",
             DigitalProductDelivery = new()
             {
-                ExternalURL = "external_url",
+                ExternalUrl = "external_url",
                 Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 Instructions = "instructions",
             },
@@ -52,7 +52,7 @@ public class ProductUpdateParamsTest : TestBase
         string expectedDescription = "description";
         Products::ProductUpdateParamsDigitalProductDelivery expectedDigitalProductDelivery = new()
         {
-            ExternalURL = "external_url",
+            ExternalUrl = "external_url",
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             Instructions = "instructions",
         };
@@ -209,16 +209,16 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
     {
         var model = new Products::ProductUpdateParamsDigitalProductDelivery
         {
-            ExternalURL = "external_url",
+            ExternalUrl = "external_url",
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             Instructions = "instructions",
         };
 
-        string expectedExternalURL = "external_url";
+        string expectedExternalUrl = "external_url";
         List<string> expectedFiles = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"];
         string expectedInstructions = "instructions";
 
-        Assert.Equal(expectedExternalURL, model.ExternalURL);
+        Assert.Equal(expectedExternalUrl, model.ExternalUrl);
         Assert.NotNull(model.Files);
         Assert.Equal(expectedFiles.Count, model.Files.Count);
         for (int i = 0; i < expectedFiles.Count; i++)
@@ -233,7 +233,7 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
     {
         var model = new Products::ProductUpdateParamsDigitalProductDelivery
         {
-            ExternalURL = "external_url",
+            ExternalUrl = "external_url",
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             Instructions = "instructions",
         };
@@ -250,7 +250,7 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
     {
         var model = new Products::ProductUpdateParamsDigitalProductDelivery
         {
-            ExternalURL = "external_url",
+            ExternalUrl = "external_url",
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             Instructions = "instructions",
         };
@@ -262,11 +262,11 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
             );
         Assert.NotNull(deserialized);
 
-        string expectedExternalURL = "external_url";
+        string expectedExternalUrl = "external_url";
         List<string> expectedFiles = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"];
         string expectedInstructions = "instructions";
 
-        Assert.Equal(expectedExternalURL, deserialized.ExternalURL);
+        Assert.Equal(expectedExternalUrl, deserialized.ExternalUrl);
         Assert.NotNull(deserialized.Files);
         Assert.Equal(expectedFiles.Count, deserialized.Files.Count);
         for (int i = 0; i < expectedFiles.Count; i++)
@@ -281,7 +281,7 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
     {
         var model = new Products::ProductUpdateParamsDigitalProductDelivery
         {
-            ExternalURL = "external_url",
+            ExternalUrl = "external_url",
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             Instructions = "instructions",
         };
@@ -294,7 +294,7 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
     {
         var model = new Products::ProductUpdateParamsDigitalProductDelivery { };
 
-        Assert.Null(model.ExternalURL);
+        Assert.Null(model.ExternalUrl);
         Assert.False(model.RawData.ContainsKey("external_url"));
         Assert.Null(model.Files);
         Assert.False(model.RawData.ContainsKey("files"));
@@ -315,12 +315,12 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
     {
         var model = new Products::ProductUpdateParamsDigitalProductDelivery
         {
-            ExternalURL = null,
+            ExternalUrl = null,
             Files = null,
             Instructions = null,
         };
 
-        Assert.Null(model.ExternalURL);
+        Assert.Null(model.ExternalUrl);
         Assert.True(model.RawData.ContainsKey("external_url"));
         Assert.Null(model.Files);
         Assert.True(model.RawData.ContainsKey("files"));
@@ -333,7 +333,7 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
     {
         var model = new Products::ProductUpdateParamsDigitalProductDelivery
         {
-            ExternalURL = null,
+            ExternalUrl = null,
             Files = null,
             Instructions = null,
         };

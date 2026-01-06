@@ -85,7 +85,7 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// <summary>
     /// Url endpoint
     /// </summary>
-    public string? URL
+    public string? UrlValue
     {
         get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "url"); }
         init { JsonModel.Set(this._rawBodyData, "url", value); }

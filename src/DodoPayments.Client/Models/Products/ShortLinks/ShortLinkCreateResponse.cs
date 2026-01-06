@@ -13,7 +13,7 @@ public sealed record class ShortLinkCreateResponse : JsonModel
     /// <summary>
     /// Full URL.
     /// </summary>
-    public required string FullURL
+    public required string FullUrl
     {
         get { return JsonModel.GetNotNullClass<string>(this.RawData, "full_url"); }
         init { JsonModel.Set(this._rawData, "full_url", value); }
@@ -22,7 +22,7 @@ public sealed record class ShortLinkCreateResponse : JsonModel
     /// <summary>
     /// Short URL.
     /// </summary>
-    public required string ShortURL
+    public required string ShortUrl
     {
         get { return JsonModel.GetNotNullClass<string>(this.RawData, "short_url"); }
         init { JsonModel.Set(this._rawData, "short_url", value); }
@@ -31,8 +31,8 @@ public sealed record class ShortLinkCreateResponse : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.FullURL;
-        _ = this.ShortURL;
+        _ = this.FullUrl;
+        _ = this.ShortUrl;
     }
 
     public ShortLinkCreateResponse() { }

@@ -61,7 +61,7 @@ public sealed record class WebhookDetails : JsonModel
     /// <summary>
     /// Url endpoint of the webhook
     /// </summary>
-    public required string URL
+    public required string Url
     {
         get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
         init { JsonModel.Set(this._rawData, "url", value); }
@@ -106,7 +106,7 @@ public sealed record class WebhookDetails : JsonModel
         _ = this.Description;
         _ = this.Metadata;
         _ = this.UpdatedAt;
-        _ = this.URL;
+        _ = this.Url;
         _ = this.Disabled;
         _ = this.FilterTypes;
         _ = this.RateLimit;
