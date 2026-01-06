@@ -22,6 +22,9 @@ public interface IPaymentService
         Func<ClientOptions, ClientOptions> modifier
     );
 
+    /// <summary>
+    /// It's the caller's responsibility to dispose the returned response.
+    /// </summary>
     Task<HttpResponse> Retrieve(
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -34,6 +37,9 @@ public interface IPaymentService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// It's the caller's responsibility to dispose the returned response.
+    /// </summary>
     Task<HttpResponse> RetrieveRefund(
         PaymentRetrieveRefundParams parameters,
         CancellationToken cancellationToken = default
