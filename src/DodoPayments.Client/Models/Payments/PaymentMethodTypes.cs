@@ -24,7 +24,7 @@ public enum PaymentMethodTypes
     Affirm,
     Klarna,
     Sepa,
-    ACH,
+    Ach,
     AmazonPay,
     AfterpayClearpay,
 }
@@ -55,7 +55,7 @@ sealed class PaymentMethodTypesConverter : JsonConverter<PaymentMethodTypes>
             "affirm" => PaymentMethodTypes.Affirm,
             "klarna" => PaymentMethodTypes.Klarna,
             "sepa" => PaymentMethodTypes.Sepa,
-            "ach" => PaymentMethodTypes.ACH,
+            "ach" => PaymentMethodTypes.Ach,
             "amazon_pay" => PaymentMethodTypes.AmazonPay,
             "afterpay_clearpay" => PaymentMethodTypes.AfterpayClearpay,
             _ => (PaymentMethodTypes)(-1),
@@ -88,7 +88,7 @@ sealed class PaymentMethodTypesConverter : JsonConverter<PaymentMethodTypes>
                 PaymentMethodTypes.Affirm => "affirm",
                 PaymentMethodTypes.Klarna => "klarna",
                 PaymentMethodTypes.Sepa => "sepa",
-                PaymentMethodTypes.ACH => "ach",
+                PaymentMethodTypes.Ach => "ach",
                 PaymentMethodTypes.AmazonPay => "amazon_pay",
                 PaymentMethodTypes.AfterpayClearpay => "afterpay_clearpay",
                 _ => throw new DodoPaymentsInvalidDataException(

@@ -113,7 +113,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// <summary>
     /// Override merchant default 3DS behaviour for this subscription
     /// </summary>
-    public bool? Force3DS
+    public bool? Force3ds
     {
         get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "force_3ds"); }
         init { JsonModel.Set(this._rawBodyData, "force_3ds", value); }
@@ -208,7 +208,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// <summary>
     /// Optional URL to redirect after successful subscription creation
     /// </summary>
-    public string? ReturnURL
+    public string? ReturnUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "return_url"); }
         init { JsonModel.Set(this._rawBodyData, "return_url", value); }

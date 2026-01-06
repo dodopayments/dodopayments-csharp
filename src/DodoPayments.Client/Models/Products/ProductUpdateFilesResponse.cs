@@ -18,7 +18,7 @@ public sealed record class ProductUpdateFilesResponse : JsonModel
         init { JsonModel.Set(this._rawData, "file_id", value); }
     }
 
-    public required string URL
+    public required string Url
     {
         get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
         init { JsonModel.Set(this._rawData, "url", value); }
@@ -28,7 +28,7 @@ public sealed record class ProductUpdateFilesResponse : JsonModel
     public override void Validate()
     {
         _ = this.FileID;
-        _ = this.URL;
+        _ = this.Url;
     }
 
     public ProductUpdateFilesResponse() { }

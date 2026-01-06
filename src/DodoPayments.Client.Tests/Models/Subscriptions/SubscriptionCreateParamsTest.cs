@@ -29,7 +29,7 @@ public class SubscriptionCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
-            Force3DS = true,
+            Force3ds = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnDemand = new()
             {
@@ -51,7 +51,7 @@ public class SubscriptionCreateParamsTest : TestBase
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,
-            ReturnURL = "return_url",
+            ReturnUrl = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
             TaxID = "tax_id",
@@ -76,7 +76,7 @@ public class SubscriptionCreateParamsTest : TestBase
         ];
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
         string expectedDiscountCode = "discount_code";
-        bool expectedForce3DS = true;
+        bool expectedForce3ds = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         OnDemandSubscription expectedOnDemand = new()
         {
@@ -98,7 +98,7 @@ public class SubscriptionCreateParamsTest : TestBase
         bool expectedPaymentLink = true;
         string expectedPaymentMethodID = "payment_method_id";
         bool expectedRedirectImmediately = true;
-        string expectedReturnURL = "return_url";
+        string expectedReturnUrl = "return_url";
         bool expectedShortLink = true;
         bool expectedShowSavedPaymentMethods = true;
         string expectedTaxID = "tax_id";
@@ -128,7 +128,7 @@ public class SubscriptionCreateParamsTest : TestBase
         }
         Assert.Equal(expectedBillingCurrency, parameters.BillingCurrency);
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
-        Assert.Equal(expectedForce3DS, parameters.Force3DS);
+        Assert.Equal(expectedForce3ds, parameters.Force3ds);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -147,7 +147,7 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.Equal(expectedPaymentLink, parameters.PaymentLink);
         Assert.Equal(expectedPaymentMethodID, parameters.PaymentMethodID);
         Assert.Equal(expectedRedirectImmediately, parameters.RedirectImmediately);
-        Assert.Equal(expectedReturnURL, parameters.ReturnURL);
+        Assert.Equal(expectedReturnUrl, parameters.ReturnUrl);
         Assert.Equal(expectedShortLink, parameters.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, parameters.ShowSavedPaymentMethods);
         Assert.Equal(expectedTaxID, parameters.TaxID);
@@ -174,7 +174,7 @@ public class SubscriptionCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
-            Force3DS = true,
+            Force3ds = true,
             OnDemand = new()
             {
                 MandateOnly = true,
@@ -194,7 +194,7 @@ public class SubscriptionCreateParamsTest : TestBase
             ],
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
-            ReturnURL = "return_url",
+            ReturnUrl = "return_url",
             ShortLink = true,
             TaxID = "tax_id",
             TrialPeriodDays = 0,
@@ -228,7 +228,7 @@ public class SubscriptionCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
-            Force3DS = true,
+            Force3ds = true,
             OnDemand = new()
             {
                 MandateOnly = true,
@@ -248,7 +248,7 @@ public class SubscriptionCreateParamsTest : TestBase
             ],
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
-            ReturnURL = "return_url",
+            ReturnUrl = "return_url",
             ShortLink = true,
             TaxID = "tax_id",
             TrialPeriodDays = 0,
@@ -296,7 +296,7 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
         Assert.Null(parameters.DiscountCode);
         Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
-        Assert.Null(parameters.Force3DS);
+        Assert.Null(parameters.Force3ds);
         Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.OnDemand);
         Assert.False(parameters.RawBodyData.ContainsKey("on_demand"));
@@ -306,7 +306,7 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("payment_link"));
         Assert.Null(parameters.PaymentMethodID);
         Assert.False(parameters.RawBodyData.ContainsKey("payment_method_id"));
-        Assert.Null(parameters.ReturnURL);
+        Assert.Null(parameters.ReturnUrl);
         Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
         Assert.Null(parameters.ShortLink);
         Assert.False(parameters.RawBodyData.ContainsKey("short_link"));
@@ -340,12 +340,12 @@ public class SubscriptionCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = null,
             BillingCurrency = null,
             DiscountCode = null,
-            Force3DS = null,
+            Force3ds = null,
             OnDemand = null,
             OneTimeProductCart = null,
             PaymentLink = null,
             PaymentMethodID = null,
-            ReturnURL = null,
+            ReturnUrl = null,
             ShortLink = null,
             TaxID = null,
             TrialPeriodDays = null,
@@ -359,7 +359,7 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("billing_currency"));
         Assert.Null(parameters.DiscountCode);
         Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
-        Assert.Null(parameters.Force3DS);
+        Assert.Null(parameters.Force3ds);
         Assert.True(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.OnDemand);
         Assert.True(parameters.RawBodyData.ContainsKey("on_demand"));
@@ -369,7 +369,7 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("payment_link"));
         Assert.Null(parameters.PaymentMethodID);
         Assert.True(parameters.RawBodyData.ContainsKey("payment_method_id"));
-        Assert.Null(parameters.ReturnURL);
+        Assert.Null(parameters.ReturnUrl);
         Assert.True(parameters.RawBodyData.ContainsKey("return_url"));
         Assert.Null(parameters.ShortLink);
         Assert.True(parameters.RawBodyData.ContainsKey("short_link"));

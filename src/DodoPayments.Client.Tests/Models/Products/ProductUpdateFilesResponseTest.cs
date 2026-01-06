@@ -11,14 +11,14 @@ public class ProductUpdateFilesResponseTest : TestBase
         var model = new ProductUpdateFilesResponse
         {
             FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            URL = "url",
+            Url = "url",
         };
 
         string expectedFileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedURL = "url";
+        string expectedUrl = "url";
 
         Assert.Equal(expectedFileID, model.FileID);
-        Assert.Equal(expectedURL, model.URL);
+        Assert.Equal(expectedUrl, model.Url);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class ProductUpdateFilesResponseTest : TestBase
         var model = new ProductUpdateFilesResponse
         {
             FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            URL = "url",
+            Url = "url",
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -42,7 +42,7 @@ public class ProductUpdateFilesResponseTest : TestBase
         var model = new ProductUpdateFilesResponse
         {
             FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            URL = "url",
+            Url = "url",
         };
 
         string element = JsonSerializer.Serialize(model);
@@ -50,10 +50,10 @@ public class ProductUpdateFilesResponseTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedFileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedURL = "url";
+        string expectedUrl = "url";
 
         Assert.Equal(expectedFileID, deserialized.FileID);
-        Assert.Equal(expectedURL, deserialized.URL);
+        Assert.Equal(expectedUrl, deserialized.Url);
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public class ProductUpdateFilesResponseTest : TestBase
         var model = new ProductUpdateFilesResponse
         {
             FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            URL = "url",
+            Url = "url",
         };
 
         model.Validate();

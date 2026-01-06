@@ -18,7 +18,7 @@ public sealed record class AddonUpdateImagesResponse : JsonModel
         init { JsonModel.Set(this._rawData, "image_id", value); }
     }
 
-    public required string URL
+    public required string Url
     {
         get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
         init { JsonModel.Set(this._rawData, "url", value); }
@@ -28,7 +28,7 @@ public sealed record class AddonUpdateImagesResponse : JsonModel
     public override void Validate()
     {
         _ = this.ImageID;
-        _ = this.URL;
+        _ = this.Url;
     }
 
     public AddonUpdateImagesResponse() { }

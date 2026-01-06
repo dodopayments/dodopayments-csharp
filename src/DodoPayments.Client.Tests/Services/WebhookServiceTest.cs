@@ -8,7 +8,7 @@ public class WebhookServiceTest : TestBase
     public async Task Create_Works()
     {
         var webhookDetails = await this.client.Webhooks.Create(
-            new() { URL = "url" },
+            new() { UrlValue = "url" },
             TestContext.Current.CancellationToken
         );
         webhookDetails.Validate();

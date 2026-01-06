@@ -33,7 +33,7 @@ public class ProductCreateParamsTest : TestBase
             Description = "description",
             DigitalProductDelivery = new()
             {
-                ExternalURL = "external_url",
+                ExternalUrl = "external_url",
                 Instructions = "instructions",
             },
             LicenseKeyActivationMessage = "license_key_activation_message",
@@ -61,7 +61,7 @@ public class ProductCreateParamsTest : TestBase
         string expectedDescription = "description";
         Products::DigitalProductDelivery expectedDigitalProductDelivery = new()
         {
-            ExternalURL = "external_url",
+            ExternalUrl = "external_url",
             Instructions = "instructions",
         };
         string expectedLicenseKeyActivationMessage = "license_key_activation_message";
@@ -123,7 +123,7 @@ public class ProductCreateParamsTest : TestBase
             Description = "description",
             DigitalProductDelivery = new()
             {
-                ExternalURL = "external_url",
+                ExternalUrl = "external_url",
                 Instructions = "instructions",
             },
             LicenseKeyActivationMessage = "license_key_activation_message",
@@ -159,7 +159,7 @@ public class ProductCreateParamsTest : TestBase
             Description = "description",
             DigitalProductDelivery = new()
             {
-                ExternalURL = "external_url",
+                ExternalUrl = "external_url",
                 Instructions = "instructions",
             },
             LicenseKeyActivationMessage = "license_key_activation_message",
@@ -295,14 +295,14 @@ public class DigitalProductDeliveryTest : TestBase
     {
         var model = new Products::DigitalProductDelivery
         {
-            ExternalURL = "external_url",
+            ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
-        string expectedExternalURL = "external_url";
+        string expectedExternalUrl = "external_url";
         string expectedInstructions = "instructions";
 
-        Assert.Equal(expectedExternalURL, model.ExternalURL);
+        Assert.Equal(expectedExternalUrl, model.ExternalUrl);
         Assert.Equal(expectedInstructions, model.Instructions);
     }
 
@@ -311,7 +311,7 @@ public class DigitalProductDeliveryTest : TestBase
     {
         var model = new Products::DigitalProductDelivery
         {
-            ExternalURL = "external_url",
+            ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
@@ -326,7 +326,7 @@ public class DigitalProductDeliveryTest : TestBase
     {
         var model = new Products::DigitalProductDelivery
         {
-            ExternalURL = "external_url",
+            ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
@@ -334,10 +334,10 @@ public class DigitalProductDeliveryTest : TestBase
         var deserialized = JsonSerializer.Deserialize<Products::DigitalProductDelivery>(element);
         Assert.NotNull(deserialized);
 
-        string expectedExternalURL = "external_url";
+        string expectedExternalUrl = "external_url";
         string expectedInstructions = "instructions";
 
-        Assert.Equal(expectedExternalURL, deserialized.ExternalURL);
+        Assert.Equal(expectedExternalUrl, deserialized.ExternalUrl);
         Assert.Equal(expectedInstructions, deserialized.Instructions);
     }
 
@@ -346,7 +346,7 @@ public class DigitalProductDeliveryTest : TestBase
     {
         var model = new Products::DigitalProductDelivery
         {
-            ExternalURL = "external_url",
+            ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
@@ -358,7 +358,7 @@ public class DigitalProductDeliveryTest : TestBase
     {
         var model = new Products::DigitalProductDelivery { };
 
-        Assert.Null(model.ExternalURL);
+        Assert.Null(model.ExternalUrl);
         Assert.False(model.RawData.ContainsKey("external_url"));
         Assert.Null(model.Instructions);
         Assert.False(model.RawData.ContainsKey("instructions"));
@@ -377,11 +377,11 @@ public class DigitalProductDeliveryTest : TestBase
     {
         var model = new Products::DigitalProductDelivery
         {
-            ExternalURL = null,
+            ExternalUrl = null,
             Instructions = null,
         };
 
-        Assert.Null(model.ExternalURL);
+        Assert.Null(model.ExternalUrl);
         Assert.True(model.RawData.ContainsKey("external_url"));
         Assert.Null(model.Instructions);
         Assert.True(model.RawData.ContainsKey("instructions"));
@@ -392,7 +392,7 @@ public class DigitalProductDeliveryTest : TestBase
     {
         var model = new Products::DigitalProductDelivery
         {
-            ExternalURL = null,
+            ExternalUrl = null,
             Instructions = null,
         };
 

@@ -261,7 +261,7 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
     /// <summary>
     /// External URL to digital product
     /// </summary>
-    public string? ExternalURL
+    public string? ExternalUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "external_url"); }
         init { JsonModel.Set(this._rawData, "external_url", value); }
@@ -288,7 +288,7 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.ExternalURL;
+        _ = this.ExternalUrl;
         foreach (var item in this.Files ?? [])
         {
             item.Validate();
@@ -348,7 +348,7 @@ public sealed record class File : JsonModel
         init { JsonModel.Set(this._rawData, "file_name", value); }
     }
 
-    public required string URL
+    public required string Url
     {
         get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
         init { JsonModel.Set(this._rawData, "url", value); }
@@ -359,7 +359,7 @@ public sealed record class File : JsonModel
     {
         _ = this.FileID;
         _ = this.FileName;
-        _ = this.URL;
+        _ = this.Url;
     }
 
     public File() { }

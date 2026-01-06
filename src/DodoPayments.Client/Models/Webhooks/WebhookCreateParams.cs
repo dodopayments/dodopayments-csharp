@@ -24,7 +24,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// <summary>
     /// Url of the webhook
     /// </summary>
-    public required string URL
+    public required string UrlValue
     {
         get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "url"); }
         init { JsonModel.Set(this._rawBodyData, "url", value); }

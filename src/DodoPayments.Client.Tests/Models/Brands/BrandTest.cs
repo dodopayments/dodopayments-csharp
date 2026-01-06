@@ -23,7 +23,7 @@ public class BrandTest : TestBase
             Name = "name",
             ReasonForHold = "reason_for_hold",
             SupportEmail = "support_email",
-            URL = "url",
+            Url = "url",
         };
 
         string expectedBrandID = "brand_id";
@@ -37,7 +37,7 @@ public class BrandTest : TestBase
         string expectedName = "name";
         string expectedReasonForHold = "reason_for_hold";
         string expectedSupportEmail = "support_email";
-        string expectedURL = "url";
+        string expectedUrl = "url";
 
         Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -50,7 +50,7 @@ public class BrandTest : TestBase
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedReasonForHold, model.ReasonForHold);
         Assert.Equal(expectedSupportEmail, model.SupportEmail);
-        Assert.Equal(expectedURL, model.URL);
+        Assert.Equal(expectedUrl, model.Url);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class BrandTest : TestBase
             Name = "name",
             ReasonForHold = "reason_for_hold",
             SupportEmail = "support_email",
-            URL = "url",
+            Url = "url",
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -94,7 +94,7 @@ public class BrandTest : TestBase
             Name = "name",
             ReasonForHold = "reason_for_hold",
             SupportEmail = "support_email",
-            URL = "url",
+            Url = "url",
         };
 
         string element = JsonSerializer.Serialize(model);
@@ -112,7 +112,7 @@ public class BrandTest : TestBase
         string expectedName = "name";
         string expectedReasonForHold = "reason_for_hold";
         string expectedSupportEmail = "support_email";
-        string expectedURL = "url";
+        string expectedUrl = "url";
 
         Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -125,7 +125,7 @@ public class BrandTest : TestBase
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedReasonForHold, deserialized.ReasonForHold);
         Assert.Equal(expectedSupportEmail, deserialized.SupportEmail);
-        Assert.Equal(expectedURL, deserialized.URL);
+        Assert.Equal(expectedUrl, deserialized.Url);
     }
 
     [Fact]
@@ -144,7 +144,7 @@ public class BrandTest : TestBase
             Name = "name",
             ReasonForHold = "reason_for_hold",
             SupportEmail = "support_email",
-            URL = "url",
+            Url = "url",
         };
 
         model.Validate();
@@ -173,7 +173,7 @@ public class BrandTest : TestBase
         Assert.False(model.RawData.ContainsKey("reason_for_hold"));
         Assert.Null(model.SupportEmail);
         Assert.False(model.RawData.ContainsKey("support_email"));
-        Assert.Null(model.URL);
+        Assert.Null(model.Url);
         Assert.False(model.RawData.ContainsKey("url"));
     }
 
@@ -210,7 +210,7 @@ public class BrandTest : TestBase
             Name = null,
             ReasonForHold = null,
             SupportEmail = null,
-            URL = null,
+            Url = null,
         };
 
         Assert.Null(model.Description);
@@ -223,7 +223,7 @@ public class BrandTest : TestBase
         Assert.True(model.RawData.ContainsKey("reason_for_hold"));
         Assert.Null(model.SupportEmail);
         Assert.True(model.RawData.ContainsKey("support_email"));
-        Assert.Null(model.URL);
+        Assert.Null(model.Url);
         Assert.True(model.RawData.ContainsKey("url"));
     }
 
@@ -244,7 +244,7 @@ public class BrandTest : TestBase
             Name = null,
             ReasonForHold = null,
             SupportEmail = null,
-            URL = null,
+            Url = null,
         };
 
         model.Validate();

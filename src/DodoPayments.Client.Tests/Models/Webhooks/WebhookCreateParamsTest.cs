@@ -13,7 +13,7 @@ public class WebhookCreateParamsTest : TestBase
     {
         var parameters = new WebhookCreateParams
         {
-            URL = "url",
+            UrlValue = "url",
             Description = "description",
             Disabled = true,
             FilterTypes = [WebhookEventType.PaymentSucceeded],
@@ -23,7 +23,7 @@ public class WebhookCreateParamsTest : TestBase
             RateLimit = 0,
         };
 
-        string expectedURL = "url";
+        string expectedUrlValue = "url";
         string expectedDescription = "description";
         bool expectedDisabled = true;
         List<ApiEnum<string, WebhookEventType>> expectedFilterTypes =
@@ -35,7 +35,7 @@ public class WebhookCreateParamsTest : TestBase
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         int expectedRateLimit = 0;
 
-        Assert.Equal(expectedURL, parameters.URL);
+        Assert.Equal(expectedUrlValue, parameters.UrlValue);
         Assert.Equal(expectedDescription, parameters.Description);
         Assert.Equal(expectedDisabled, parameters.Disabled);
         Assert.NotNull(parameters.FilterTypes);
@@ -69,7 +69,7 @@ public class WebhookCreateParamsTest : TestBase
     {
         var parameters = new WebhookCreateParams
         {
-            URL = "url",
+            UrlValue = "url",
             Description = "description",
             Disabled = true,
             Headers = new Dictionary<string, string>() { { "foo", "string" } },
@@ -87,7 +87,7 @@ public class WebhookCreateParamsTest : TestBase
     {
         var parameters = new WebhookCreateParams
         {
-            URL = "url",
+            UrlValue = "url",
             Description = "description",
             Disabled = true,
             Headers = new Dictionary<string, string>() { { "foo", "string" } },
@@ -108,7 +108,7 @@ public class WebhookCreateParamsTest : TestBase
     {
         var parameters = new WebhookCreateParams
         {
-            URL = "url",
+            UrlValue = "url",
             FilterTypes = [WebhookEventType.PaymentSucceeded],
         };
 
@@ -131,7 +131,7 @@ public class WebhookCreateParamsTest : TestBase
     {
         var parameters = new WebhookCreateParams
         {
-            URL = "url",
+            UrlValue = "url",
             FilterTypes = [WebhookEventType.PaymentSucceeded],
 
             Description = null,
@@ -159,7 +159,7 @@ public class WebhookCreateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        WebhookCreateParams parameters = new() { URL = "url" };
+        WebhookCreateParams parameters = new() { UrlValue = "url" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 

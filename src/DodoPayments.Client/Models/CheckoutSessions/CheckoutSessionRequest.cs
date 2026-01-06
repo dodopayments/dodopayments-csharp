@@ -156,7 +156,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// <summary>
     /// Override merchant default 3DS behaviour for this session
     /// </summary>
-    public bool? Force3DS
+    public bool? Force3ds
     {
         get { return JsonModel.GetNullableStruct<bool>(this.RawData, "force_3ds"); }
         init { JsonModel.Set(this._rawData, "force_3ds", value); }
@@ -205,7 +205,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// <summary>
     /// The url to redirect after payment failure or success.
     /// </summary>
-    public string? ReturnURL
+    public string? ReturnUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "return_url"); }
         init { JsonModel.Set(this._rawData, "return_url", value); }
@@ -278,11 +278,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
         this.Customization?.Validate();
         _ = this.DiscountCode;
         this.FeatureFlags?.Validate();
-        _ = this.Force3DS;
+        _ = this.Force3ds;
         _ = this.Metadata;
         _ = this.MinimalAddress;
         _ = this.PaymentMethodID;
-        _ = this.ReturnURL;
+        _ = this.ReturnUrl;
         _ = this.ShortLink;
         _ = this.ShowSavedPaymentMethods;
         this.SubscriptionData?.Validate();
