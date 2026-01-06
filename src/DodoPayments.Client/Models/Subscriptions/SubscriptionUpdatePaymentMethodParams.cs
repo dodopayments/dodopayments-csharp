@@ -343,7 +343,7 @@ public sealed record class New : JsonModel
         init { JsonModel.Set(this._rawData, "type", value); }
     }
 
-    public string? ReturnURL
+    public string? ReturnUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "return_url"); }
         init { JsonModel.Set(this._rawData, "return_url", value); }
@@ -353,7 +353,7 @@ public sealed record class New : JsonModel
     public override void Validate()
     {
         this.Type.Validate();
-        _ = this.ReturnURL;
+        _ = this.ReturnUrl;
     }
 
     public New() { }

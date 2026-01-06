@@ -14,20 +14,20 @@ public class BrandCreateParamsTest : TestBase
             Name = "name",
             StatementDescriptor = "statement_descriptor",
             SupportEmail = "support_email",
-            URL = "url",
+            UrlValue = "url",
         };
 
         string expectedDescription = "description";
         string expectedName = "name";
         string expectedStatementDescriptor = "statement_descriptor";
         string expectedSupportEmail = "support_email";
-        string expectedURL = "url";
+        string expectedUrlValue = "url";
 
         Assert.Equal(expectedDescription, parameters.Description);
         Assert.Equal(expectedName, parameters.Name);
         Assert.Equal(expectedStatementDescriptor, parameters.StatementDescriptor);
         Assert.Equal(expectedSupportEmail, parameters.SupportEmail);
-        Assert.Equal(expectedURL, parameters.URL);
+        Assert.Equal(expectedUrlValue, parameters.UrlValue);
     }
 
     [Fact]
@@ -43,7 +43,7 @@ public class BrandCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("statement_descriptor"));
         Assert.Null(parameters.SupportEmail);
         Assert.False(parameters.RawBodyData.ContainsKey("support_email"));
-        Assert.Null(parameters.URL);
+        Assert.Null(parameters.UrlValue);
         Assert.False(parameters.RawBodyData.ContainsKey("url"));
     }
 
@@ -56,7 +56,7 @@ public class BrandCreateParamsTest : TestBase
             Name = null,
             StatementDescriptor = null,
             SupportEmail = null,
-            URL = null,
+            UrlValue = null,
         };
 
         Assert.Null(parameters.Description);
@@ -67,7 +67,7 @@ public class BrandCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("statement_descriptor"));
         Assert.Null(parameters.SupportEmail);
         Assert.True(parameters.RawBodyData.ContainsKey("support_email"));
-        Assert.Null(parameters.URL);
+        Assert.Null(parameters.UrlValue);
         Assert.True(parameters.RawBodyData.ContainsKey("url"));
     }
 

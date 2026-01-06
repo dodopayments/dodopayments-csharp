@@ -41,7 +41,7 @@ public sealed record class BrandCreateParams : ParamsBase
         init { JsonModel.Set(this._rawBodyData, "support_email", value); }
     }
 
-    public string? URL
+    public string? UrlValue
     {
         get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "url"); }
         init { JsonModel.Set(this._rawBodyData, "url", value); }

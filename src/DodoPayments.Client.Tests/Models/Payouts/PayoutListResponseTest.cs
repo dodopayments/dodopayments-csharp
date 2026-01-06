@@ -27,7 +27,7 @@ public class PayoutListResponseTest : TestBase
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
-            PayoutDocumentURL = "payout_document_url",
+            PayoutDocumentUrl = "payout_document_url",
             Remarks = "remarks",
         };
 
@@ -44,7 +44,7 @@ public class PayoutListResponseTest : TestBase
         long expectedTax = 0;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedName = "name";
-        string expectedPayoutDocumentURL = "payout_document_url";
+        string expectedPayoutDocumentUrl = "payout_document_url";
         string expectedRemarks = "remarks";
 
         Assert.Equal(expectedAmount, model.Amount);
@@ -60,7 +60,7 @@ public class PayoutListResponseTest : TestBase
         Assert.Equal(expectedTax, model.Tax);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedName, model.Name);
-        Assert.Equal(expectedPayoutDocumentURL, model.PayoutDocumentURL);
+        Assert.Equal(expectedPayoutDocumentUrl, model.PayoutDocumentUrl);
         Assert.Equal(expectedRemarks, model.Remarks);
     }
 
@@ -82,7 +82,7 @@ public class PayoutListResponseTest : TestBase
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
-            PayoutDocumentURL = "payout_document_url",
+            PayoutDocumentUrl = "payout_document_url",
             Remarks = "remarks",
         };
 
@@ -110,7 +110,7 @@ public class PayoutListResponseTest : TestBase
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
-            PayoutDocumentURL = "payout_document_url",
+            PayoutDocumentUrl = "payout_document_url",
             Remarks = "remarks",
         };
 
@@ -131,7 +131,7 @@ public class PayoutListResponseTest : TestBase
         long expectedTax = 0;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedName = "name";
-        string expectedPayoutDocumentURL = "payout_document_url";
+        string expectedPayoutDocumentUrl = "payout_document_url";
         string expectedRemarks = "remarks";
 
         Assert.Equal(expectedAmount, deserialized.Amount);
@@ -147,7 +147,7 @@ public class PayoutListResponseTest : TestBase
         Assert.Equal(expectedTax, deserialized.Tax);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedName, deserialized.Name);
-        Assert.Equal(expectedPayoutDocumentURL, deserialized.PayoutDocumentURL);
+        Assert.Equal(expectedPayoutDocumentUrl, deserialized.PayoutDocumentUrl);
         Assert.Equal(expectedRemarks, deserialized.Remarks);
     }
 
@@ -169,7 +169,7 @@ public class PayoutListResponseTest : TestBase
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
-            PayoutDocumentURL = "payout_document_url",
+            PayoutDocumentUrl = "payout_document_url",
             Remarks = "remarks",
         };
 
@@ -197,7 +197,7 @@ public class PayoutListResponseTest : TestBase
 
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
-        Assert.Null(model.PayoutDocumentURL);
+        Assert.Null(model.PayoutDocumentUrl);
         Assert.False(model.RawData.ContainsKey("payout_document_url"));
         Assert.Null(model.Remarks);
         Assert.False(model.RawData.ContainsKey("remarks"));
@@ -244,13 +244,13 @@ public class PayoutListResponseTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             Name = null,
-            PayoutDocumentURL = null,
+            PayoutDocumentUrl = null,
             Remarks = null,
         };
 
         Assert.Null(model.Name);
         Assert.True(model.RawData.ContainsKey("name"));
-        Assert.Null(model.PayoutDocumentURL);
+        Assert.Null(model.PayoutDocumentUrl);
         Assert.True(model.RawData.ContainsKey("payout_document_url"));
         Assert.Null(model.Remarks);
         Assert.True(model.RawData.ContainsKey("remarks"));
@@ -275,7 +275,7 @@ public class PayoutListResponseTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             Name = null,
-            PayoutDocumentURL = null,
+            PayoutDocumentUrl = null,
             Remarks = null,
         };
 

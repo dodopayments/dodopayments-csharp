@@ -12,20 +12,20 @@ public class ShortLinkListResponseTest : TestBase
         var model = new ShortLinkListResponse
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FullURL = "full_url",
+            FullUrl = "full_url",
             ProductID = "product_id",
-            ShortURL = "short_url",
+            ShortUrl = "short_url",
         };
 
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        string expectedFullURL = "full_url";
+        string expectedFullUrl = "full_url";
         string expectedProductID = "product_id";
-        string expectedShortURL = "short_url";
+        string expectedShortUrl = "short_url";
 
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
-        Assert.Equal(expectedFullURL, model.FullURL);
+        Assert.Equal(expectedFullUrl, model.FullUrl);
         Assert.Equal(expectedProductID, model.ProductID);
-        Assert.Equal(expectedShortURL, model.ShortURL);
+        Assert.Equal(expectedShortUrl, model.ShortUrl);
     }
 
     [Fact]
@@ -34,9 +34,9 @@ public class ShortLinkListResponseTest : TestBase
         var model = new ShortLinkListResponse
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FullURL = "full_url",
+            FullUrl = "full_url",
             ProductID = "product_id",
-            ShortURL = "short_url",
+            ShortUrl = "short_url",
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -51,9 +51,9 @@ public class ShortLinkListResponseTest : TestBase
         var model = new ShortLinkListResponse
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FullURL = "full_url",
+            FullUrl = "full_url",
             ProductID = "product_id",
-            ShortURL = "short_url",
+            ShortUrl = "short_url",
         };
 
         string element = JsonSerializer.Serialize(model);
@@ -61,14 +61,14 @@ public class ShortLinkListResponseTest : TestBase
         Assert.NotNull(deserialized);
 
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        string expectedFullURL = "full_url";
+        string expectedFullUrl = "full_url";
         string expectedProductID = "product_id";
-        string expectedShortURL = "short_url";
+        string expectedShortUrl = "short_url";
 
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
-        Assert.Equal(expectedFullURL, deserialized.FullURL);
+        Assert.Equal(expectedFullUrl, deserialized.FullUrl);
         Assert.Equal(expectedProductID, deserialized.ProductID);
-        Assert.Equal(expectedShortURL, deserialized.ShortURL);
+        Assert.Equal(expectedShortUrl, deserialized.ShortUrl);
     }
 
     [Fact]
@@ -77,9 +77,9 @@ public class ShortLinkListResponseTest : TestBase
         var model = new ShortLinkListResponse
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FullURL = "full_url",
+            FullUrl = "full_url",
             ProductID = "product_id",
-            ShortURL = "short_url",
+            ShortUrl = "short_url",
         };
 
         model.Validate();

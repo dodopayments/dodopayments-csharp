@@ -11,14 +11,14 @@ public class CheckoutSessionResponseTest : TestBase
         var model = new CheckoutSessionResponse
         {
             SessionID = "session_id",
-            CheckoutURL = "checkout_url",
+            CheckoutUrl = "checkout_url",
         };
 
         string expectedSessionID = "session_id";
-        string expectedCheckoutURL = "checkout_url";
+        string expectedCheckoutUrl = "checkout_url";
 
         Assert.Equal(expectedSessionID, model.SessionID);
-        Assert.Equal(expectedCheckoutURL, model.CheckoutURL);
+        Assert.Equal(expectedCheckoutUrl, model.CheckoutUrl);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class CheckoutSessionResponseTest : TestBase
         var model = new CheckoutSessionResponse
         {
             SessionID = "session_id",
-            CheckoutURL = "checkout_url",
+            CheckoutUrl = "checkout_url",
         };
 
         string json = JsonSerializer.Serialize(model);
@@ -42,7 +42,7 @@ public class CheckoutSessionResponseTest : TestBase
         var model = new CheckoutSessionResponse
         {
             SessionID = "session_id",
-            CheckoutURL = "checkout_url",
+            CheckoutUrl = "checkout_url",
         };
 
         string element = JsonSerializer.Serialize(model);
@@ -50,10 +50,10 @@ public class CheckoutSessionResponseTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedSessionID = "session_id";
-        string expectedCheckoutURL = "checkout_url";
+        string expectedCheckoutUrl = "checkout_url";
 
         Assert.Equal(expectedSessionID, deserialized.SessionID);
-        Assert.Equal(expectedCheckoutURL, deserialized.CheckoutURL);
+        Assert.Equal(expectedCheckoutUrl, deserialized.CheckoutUrl);
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public class CheckoutSessionResponseTest : TestBase
         var model = new CheckoutSessionResponse
         {
             SessionID = "session_id",
-            CheckoutURL = "checkout_url",
+            CheckoutUrl = "checkout_url",
         };
 
         model.Validate();
@@ -73,7 +73,7 @@ public class CheckoutSessionResponseTest : TestBase
     {
         var model = new CheckoutSessionResponse { SessionID = "session_id" };
 
-        Assert.Null(model.CheckoutURL);
+        Assert.Null(model.CheckoutUrl);
         Assert.False(model.RawData.ContainsKey("checkout_url"));
     }
 
@@ -92,10 +92,10 @@ public class CheckoutSessionResponseTest : TestBase
         {
             SessionID = "session_id",
 
-            CheckoutURL = null,
+            CheckoutUrl = null,
         };
 
-        Assert.Null(model.CheckoutURL);
+        Assert.Null(model.CheckoutUrl);
         Assert.True(model.RawData.ContainsKey("checkout_url"));
     }
 
@@ -106,7 +106,7 @@ public class CheckoutSessionResponseTest : TestBase
         {
             SessionID = "session_id",
 
-            CheckoutURL = null,
+            CheckoutUrl = null,
         };
 
         model.Validate();

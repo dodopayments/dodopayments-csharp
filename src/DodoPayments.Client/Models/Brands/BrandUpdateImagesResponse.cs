@@ -24,7 +24,7 @@ public sealed record class BrandUpdateImagesResponse : JsonModel
     /// <summary>
     /// Presigned URL to upload the image
     /// </summary>
-    public required string URL
+    public required string Url
     {
         get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
         init { JsonModel.Set(this._rawData, "url", value); }
@@ -34,7 +34,7 @@ public sealed record class BrandUpdateImagesResponse : JsonModel
     public override void Validate()
     {
         _ = this.ImageID;
-        _ = this.URL;
+        _ = this.Url;
     }
 
     public BrandUpdateImagesResponse() { }

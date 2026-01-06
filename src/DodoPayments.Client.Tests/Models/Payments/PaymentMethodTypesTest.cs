@@ -24,7 +24,7 @@ public class PaymentMethodTypesTest : TestBase
     [InlineData(PaymentMethodTypes.Affirm)]
     [InlineData(PaymentMethodTypes.Klarna)]
     [InlineData(PaymentMethodTypes.Sepa)]
-    [InlineData(PaymentMethodTypes.ACH)]
+    [InlineData(PaymentMethodTypes.Ach)]
     [InlineData(PaymentMethodTypes.AmazonPay)]
     [InlineData(PaymentMethodTypes.AfterpayClearpay)]
     public void Validation_Works(PaymentMethodTypes rawValue)
@@ -63,7 +63,7 @@ public class PaymentMethodTypesTest : TestBase
     [InlineData(PaymentMethodTypes.Affirm)]
     [InlineData(PaymentMethodTypes.Klarna)]
     [InlineData(PaymentMethodTypes.Sepa)]
-    [InlineData(PaymentMethodTypes.ACH)]
+    [InlineData(PaymentMethodTypes.Ach)]
     [InlineData(PaymentMethodTypes.AmazonPay)]
     [InlineData(PaymentMethodTypes.AfterpayClearpay)]
     public void SerializationRoundtrip_Works(PaymentMethodTypes rawValue)

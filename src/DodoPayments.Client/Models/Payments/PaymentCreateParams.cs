@@ -100,7 +100,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// <summary>
     /// Override merchant default 3DS behaviour for this payment
     /// </summary>
-    public bool? Force3DS
+    public bool? Force3ds
     {
         get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "force_3ds"); }
         init { JsonModel.Set(this._rawBodyData, "force_3ds", value); }
@@ -170,7 +170,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// <summary>
     /// Optional URL to redirect the customer after payment. Must be a valid URL if provided.
     /// </summary>
-    public string? ReturnURL
+    public string? ReturnUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "return_url"); }
         init { JsonModel.Set(this._rawBodyData, "return_url", value); }

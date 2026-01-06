@@ -10,14 +10,14 @@ public class ImageUpdateResponseTest : TestBase
     {
         var model = new ImageUpdateResponse
         {
-            URL = "url",
+            Url = "url",
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
-        string expectedURL = "url";
+        string expectedUrl = "url";
         string expectedImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
 
-        Assert.Equal(expectedURL, model.URL);
+        Assert.Equal(expectedUrl, model.Url);
         Assert.Equal(expectedImageID, model.ImageID);
     }
 
@@ -26,7 +26,7 @@ public class ImageUpdateResponseTest : TestBase
     {
         var model = new ImageUpdateResponse
         {
-            URL = "url",
+            Url = "url",
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
@@ -41,7 +41,7 @@ public class ImageUpdateResponseTest : TestBase
     {
         var model = new ImageUpdateResponse
         {
-            URL = "url",
+            Url = "url",
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
@@ -49,10 +49,10 @@ public class ImageUpdateResponseTest : TestBase
         var deserialized = JsonSerializer.Deserialize<ImageUpdateResponse>(element);
         Assert.NotNull(deserialized);
 
-        string expectedURL = "url";
+        string expectedUrl = "url";
         string expectedImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
 
-        Assert.Equal(expectedURL, deserialized.URL);
+        Assert.Equal(expectedUrl, deserialized.Url);
         Assert.Equal(expectedImageID, deserialized.ImageID);
     }
 
@@ -61,7 +61,7 @@ public class ImageUpdateResponseTest : TestBase
     {
         var model = new ImageUpdateResponse
         {
-            URL = "url",
+            Url = "url",
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
@@ -71,7 +71,7 @@ public class ImageUpdateResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new ImageUpdateResponse { URL = "url" };
+        var model = new ImageUpdateResponse { Url = "url" };
 
         Assert.Null(model.ImageID);
         Assert.False(model.RawData.ContainsKey("image_id"));
@@ -80,7 +80,7 @@ public class ImageUpdateResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new ImageUpdateResponse { URL = "url" };
+        var model = new ImageUpdateResponse { Url = "url" };
 
         model.Validate();
     }
@@ -90,7 +90,7 @@ public class ImageUpdateResponseTest : TestBase
     {
         var model = new ImageUpdateResponse
         {
-            URL = "url",
+            Url = "url",
 
             ImageID = null,
         };
@@ -104,7 +104,7 @@ public class ImageUpdateResponseTest : TestBase
     {
         var model = new ImageUpdateResponse
         {
-            URL = "url",
+            Url = "url",
 
             ImageID = null,
         };

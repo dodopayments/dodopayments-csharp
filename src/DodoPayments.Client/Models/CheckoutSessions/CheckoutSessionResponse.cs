@@ -22,7 +22,7 @@ public sealed record class CheckoutSessionResponse : JsonModel
     /// <summary>
     /// Checkout url (None when payment_method_id is provided)
     /// </summary>
-    public string? CheckoutURL
+    public string? CheckoutUrl
     {
         get { return JsonModel.GetNullableClass<string>(this.RawData, "checkout_url"); }
         init { JsonModel.Set(this._rawData, "checkout_url", value); }
@@ -32,7 +32,7 @@ public sealed record class CheckoutSessionResponse : JsonModel
     public override void Validate()
     {
         _ = this.SessionID;
-        _ = this.CheckoutURL;
+        _ = this.CheckoutUrl;
     }
 
     public CheckoutSessionResponse() { }

@@ -8,19 +8,19 @@ public class ShortLinkCreateResponseTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new ShortLinkCreateResponse { FullURL = "full_url", ShortURL = "short_url" };
+        var model = new ShortLinkCreateResponse { FullUrl = "full_url", ShortUrl = "short_url" };
 
-        string expectedFullURL = "full_url";
-        string expectedShortURL = "short_url";
+        string expectedFullUrl = "full_url";
+        string expectedShortUrl = "short_url";
 
-        Assert.Equal(expectedFullURL, model.FullURL);
-        Assert.Equal(expectedShortURL, model.ShortURL);
+        Assert.Equal(expectedFullUrl, model.FullUrl);
+        Assert.Equal(expectedShortUrl, model.ShortUrl);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new ShortLinkCreateResponse { FullURL = "full_url", ShortURL = "short_url" };
+        var model = new ShortLinkCreateResponse { FullUrl = "full_url", ShortUrl = "short_url" };
 
         string json = JsonSerializer.Serialize(model);
         var deserialized = JsonSerializer.Deserialize<ShortLinkCreateResponse>(json);
@@ -31,23 +31,23 @@ public class ShortLinkCreateResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new ShortLinkCreateResponse { FullURL = "full_url", ShortURL = "short_url" };
+        var model = new ShortLinkCreateResponse { FullUrl = "full_url", ShortUrl = "short_url" };
 
         string element = JsonSerializer.Serialize(model);
         var deserialized = JsonSerializer.Deserialize<ShortLinkCreateResponse>(element);
         Assert.NotNull(deserialized);
 
-        string expectedFullURL = "full_url";
-        string expectedShortURL = "short_url";
+        string expectedFullUrl = "full_url";
+        string expectedShortUrl = "short_url";
 
-        Assert.Equal(expectedFullURL, deserialized.FullURL);
-        Assert.Equal(expectedShortURL, deserialized.ShortURL);
+        Assert.Equal(expectedFullUrl, deserialized.FullUrl);
+        Assert.Equal(expectedShortUrl, deserialized.ShortUrl);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new ShortLinkCreateResponse { FullURL = "full_url", ShortURL = "short_url" };
+        var model = new ShortLinkCreateResponse { FullUrl = "full_url", ShortUrl = "short_url" };
 
         model.Validate();
     }
