@@ -4,7 +4,7 @@
     <Company>Dodo Payments</Company>
     <PackageTags>sdk;api;http;library</PackageTags>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <Copyright>Copyright 2025 Dodo Payments</Copyright>
+    <Copyright>Copyright 2026 Dodo Payments</Copyright>
     <PackageProjectUrl>https://docs.dodopayments.com/api-reference/introduction</PackageProjectUrl>
     <RepositoryUrl>https://www.github.com/dodopayments/dodopayments-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
