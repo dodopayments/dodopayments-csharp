@@ -1,3 +1,4 @@
+using System;
 using DodoPayments.Client.Models.Discounts;
 
 namespace DodoPayments.Client.Tests.Models.Discounts;
@@ -41,5 +42,18 @@ public class DiscountListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        DiscountListParams parameters = new() { PageNumber = 0, PageSize = 0 };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri("https://live.dodopayments.com/discounts?page_number=0&page_size=0"),
+            url
+        );
     }
 }

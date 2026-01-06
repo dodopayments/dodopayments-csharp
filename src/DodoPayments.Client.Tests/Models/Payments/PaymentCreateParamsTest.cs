@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
@@ -293,22 +294,52 @@ public class PaymentCreateParamsTest : TestBase
         };
 
         Assert.Null(parameters.AllowedPaymentMethodTypes);
-        Assert.False(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
+        Assert.True(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
         Assert.Null(parameters.BillingCurrency);
-        Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
+        Assert.True(parameters.RawBodyData.ContainsKey("billing_currency"));
         Assert.Null(parameters.DiscountCode);
-        Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
         Assert.Null(parameters.Force3DS);
-        Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
+        Assert.True(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.PaymentLink);
-        Assert.False(parameters.RawBodyData.ContainsKey("payment_link"));
+        Assert.True(parameters.RawBodyData.ContainsKey("payment_link"));
         Assert.Null(parameters.PaymentMethodID);
-        Assert.False(parameters.RawBodyData.ContainsKey("payment_method_id"));
+        Assert.True(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.ReturnURL);
-        Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
+        Assert.True(parameters.RawBodyData.ContainsKey("return_url"));
         Assert.Null(parameters.ShortLink);
-        Assert.False(parameters.RawBodyData.ContainsKey("short_link"));
+        Assert.True(parameters.RawBodyData.ContainsKey("short_link"));
         Assert.Null(parameters.TaxID);
-        Assert.False(parameters.RawBodyData.ContainsKey("tax_id"));
+        Assert.True(parameters.RawBodyData.ContainsKey("tax_id"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        PaymentCreateParams parameters = new()
+        {
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            Customer = new AttachExistingCustomer("customer_id"),
+            ProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Amount = 0,
+                },
+            ],
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/payments"), url);
     }
 }

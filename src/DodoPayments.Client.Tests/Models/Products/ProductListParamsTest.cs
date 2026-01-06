@@ -1,3 +1,4 @@
+using System;
 using DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Tests.Models.Products;
@@ -69,5 +70,27 @@ public class ProductListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
         Assert.Null(parameters.Recurring);
         Assert.False(parameters.RawQueryData.ContainsKey("recurring"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        ProductListParams parameters = new()
+        {
+            Archived = true,
+            BrandID = "brand_id",
+            PageNumber = 0,
+            PageSize = 0,
+            Recurring = true,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri(
+                "https://live.dodopayments.com/products?archived=true&brand_id=brand_id&page_number=0&page_size=0&recurring=true"
+            ),
+            url
+        );
     }
 }

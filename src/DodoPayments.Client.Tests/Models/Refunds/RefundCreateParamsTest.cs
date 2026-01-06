@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Models.Refunds;
@@ -131,9 +132,19 @@ public class RefundCreateParamsTest : TestBase
         };
 
         Assert.Null(parameters.Items);
-        Assert.False(parameters.RawBodyData.ContainsKey("items"));
+        Assert.True(parameters.RawBodyData.ContainsKey("items"));
         Assert.Null(parameters.Reason);
-        Assert.False(parameters.RawBodyData.ContainsKey("reason"));
+        Assert.True(parameters.RawBodyData.ContainsKey("reason"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        RefundCreateParams parameters = new() { PaymentID = "payment_id" };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/refunds"), url);
     }
 }
 

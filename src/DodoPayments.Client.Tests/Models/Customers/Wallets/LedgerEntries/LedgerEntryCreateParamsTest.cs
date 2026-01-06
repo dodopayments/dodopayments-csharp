@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
@@ -68,9 +69,28 @@ public class LedgerEntryCreateParamsTest : TestBase
         };
 
         Assert.Null(parameters.IdempotencyKey);
-        Assert.False(parameters.RawBodyData.ContainsKey("idempotency_key"));
+        Assert.True(parameters.RawBodyData.ContainsKey("idempotency_key"));
         Assert.Null(parameters.Reason);
-        Assert.False(parameters.RawBodyData.ContainsKey("reason"));
+        Assert.True(parameters.RawBodyData.ContainsKey("reason"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        LedgerEntryCreateParams parameters = new()
+        {
+            CustomerID = "customer_id",
+            Amount = 0,
+            Currency = Currency.Aed,
+            EntryType = EntryType.Credit,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri("https://live.dodopayments.com/customers/customer_id/wallets/ledger-entries"),
+            url
+        );
     }
 }
 

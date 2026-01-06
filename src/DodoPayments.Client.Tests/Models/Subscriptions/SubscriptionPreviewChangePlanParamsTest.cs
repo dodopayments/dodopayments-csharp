@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
@@ -74,7 +75,29 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         };
 
         Assert.Null(parameters.Addons);
-        Assert.False(parameters.RawBodyData.ContainsKey("addons"));
+        Assert.True(parameters.RawBodyData.ContainsKey("addons"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        SubscriptionPreviewChangePlanParams parameters = new()
+        {
+            SubscriptionID = "subscription_id",
+            ProductID = "product_id",
+            ProrationBillingMode =
+                SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
+            Quantity = 0,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri(
+                "https://live.dodopayments.com/subscriptions/subscription_id/change-plan/preview"
+            ),
+            url
+        );
     }
 }
 

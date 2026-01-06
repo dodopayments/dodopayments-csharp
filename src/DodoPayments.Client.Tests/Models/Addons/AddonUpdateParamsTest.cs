@@ -1,3 +1,4 @@
+using System;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Addons;
 using DodoPayments.Client.Models.Misc;
@@ -72,16 +73,26 @@ public class AddonUpdateParamsTest : TestBase
         };
 
         Assert.Null(parameters.Currency);
-        Assert.False(parameters.RawBodyData.ContainsKey("currency"));
+        Assert.True(parameters.RawBodyData.ContainsKey("currency"));
         Assert.Null(parameters.Description);
-        Assert.False(parameters.RawBodyData.ContainsKey("description"));
+        Assert.True(parameters.RawBodyData.ContainsKey("description"));
         Assert.Null(parameters.ImageID);
-        Assert.False(parameters.RawBodyData.ContainsKey("image_id"));
+        Assert.True(parameters.RawBodyData.ContainsKey("image_id"));
         Assert.Null(parameters.Name);
-        Assert.False(parameters.RawBodyData.ContainsKey("name"));
+        Assert.True(parameters.RawBodyData.ContainsKey("name"));
         Assert.Null(parameters.Price);
-        Assert.False(parameters.RawBodyData.ContainsKey("price"));
+        Assert.True(parameters.RawBodyData.ContainsKey("price"));
         Assert.Null(parameters.TaxCategory);
-        Assert.False(parameters.RawBodyData.ContainsKey("tax_category"));
+        Assert.True(parameters.RawBodyData.ContainsKey("tax_category"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        AddonUpdateParams parameters = new() { ID = "id" };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/addons/id"), url);
     }
 }

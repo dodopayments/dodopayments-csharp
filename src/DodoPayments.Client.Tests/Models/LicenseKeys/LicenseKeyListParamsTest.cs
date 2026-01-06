@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
@@ -72,6 +73,28 @@ public class LicenseKeyListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("product_id"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        LicenseKeyListParams parameters = new()
+        {
+            CustomerID = "customer_id",
+            PageNumber = 0,
+            PageSize = 0,
+            ProductID = "product_id",
+            Status = Status.Active,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri(
+                "https://live.dodopayments.com/license_keys?customer_id=customer_id&page_number=0&page_size=0&product_id=product_id&status=active"
+            ),
+            url
+        );
     }
 }
 

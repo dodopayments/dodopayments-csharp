@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Models.Products.ShortLinks;
 
@@ -52,6 +53,16 @@ public class ShortLinkCreateParamsTest : TestBase
         };
 
         Assert.Null(parameters.StaticCheckoutParams);
-        Assert.False(parameters.RawBodyData.ContainsKey("static_checkout_params"));
+        Assert.True(parameters.RawBodyData.ContainsKey("static_checkout_params"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        ShortLinkCreateParams parameters = new() { ID = "id", Slug = "slug" };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/products/id/short_links"), url);
     }
 }

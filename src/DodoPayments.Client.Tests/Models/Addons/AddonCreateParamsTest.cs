@@ -1,3 +1,4 @@
+using System;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Addons;
 using DodoPayments.Client.Models.Misc;
@@ -60,6 +61,22 @@ public class AddonCreateParamsTest : TestBase
         };
 
         Assert.Null(parameters.Description);
-        Assert.False(parameters.RawBodyData.ContainsKey("description"));
+        Assert.True(parameters.RawBodyData.ContainsKey("description"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        AddonCreateParams parameters = new()
+        {
+            Currency = Currency.Aed,
+            Name = "name",
+            Price = 0,
+            TaxCategory = TaxCategory.DigitalProducts,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/addons"), url);
     }
 }

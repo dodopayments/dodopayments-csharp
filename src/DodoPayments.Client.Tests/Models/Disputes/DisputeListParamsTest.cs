@@ -90,6 +90,30 @@ public class DisputeListParamsTest : TestBase
         Assert.Null(parameters.PageSize);
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
     }
+
+    [Fact]
+    public void Url_Works()
+    {
+        DisputeListParams parameters = new()
+        {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            DisputeStage = DisputeStage.PreDispute,
+            DisputeStatus = DisputeStatus.DisputeOpened,
+            PageNumber = 0,
+            PageSize = 0,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri(
+                "https://live.dodopayments.com/disputes?created_at_gte=2019-12-27T18%3a11%3a19.117Z&created_at_lte=2019-12-27T18%3a11%3a19.117Z&customer_id=customer_id&dispute_stage=pre_dispute&dispute_status=dispute_opened&page_number=0&page_size=0"
+            ),
+            url
+        );
+    }
 }
 
 public class DisputeStageTest : TestBase

@@ -53,10 +53,20 @@ public class LicenseKeyUpdateParamsTest : TestBase
         };
 
         Assert.Null(parameters.ActivationsLimit);
-        Assert.False(parameters.RawBodyData.ContainsKey("activations_limit"));
+        Assert.True(parameters.RawBodyData.ContainsKey("activations_limit"));
         Assert.Null(parameters.Disabled);
-        Assert.False(parameters.RawBodyData.ContainsKey("disabled"));
+        Assert.True(parameters.RawBodyData.ContainsKey("disabled"));
         Assert.Null(parameters.ExpiresAt);
-        Assert.False(parameters.RawBodyData.ContainsKey("expires_at"));
+        Assert.True(parameters.RawBodyData.ContainsKey("expires_at"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        LicenseKeyUpdateParams parameters = new() { ID = "lic_123" };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/license_keys/lic_123"), url);
     }
 }

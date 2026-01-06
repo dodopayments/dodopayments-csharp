@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.WebhookEvents;
@@ -88,16 +89,26 @@ public class WebhookUpdateParamsTest : TestBase
         };
 
         Assert.Null(parameters.Description);
-        Assert.False(parameters.RawBodyData.ContainsKey("description"));
+        Assert.True(parameters.RawBodyData.ContainsKey("description"));
         Assert.Null(parameters.Disabled);
-        Assert.False(parameters.RawBodyData.ContainsKey("disabled"));
+        Assert.True(parameters.RawBodyData.ContainsKey("disabled"));
         Assert.Null(parameters.FilterTypes);
-        Assert.False(parameters.RawBodyData.ContainsKey("filter_types"));
+        Assert.True(parameters.RawBodyData.ContainsKey("filter_types"));
         Assert.Null(parameters.Metadata);
-        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.RateLimit);
-        Assert.False(parameters.RawBodyData.ContainsKey("rate_limit"));
+        Assert.True(parameters.RawBodyData.ContainsKey("rate_limit"));
         Assert.Null(parameters.URL);
-        Assert.False(parameters.RawBodyData.ContainsKey("url"));
+        Assert.True(parameters.RawBodyData.ContainsKey("url"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        WebhookUpdateParams parameters = new() { WebhookID = "webhook_id" };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/webhooks/webhook_id"), url);
     }
 }
