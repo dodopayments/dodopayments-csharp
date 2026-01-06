@@ -68,14 +68,37 @@ public class SubscriptionRetrieveUsageHistoryParamsTest : TestBase
         };
 
         Assert.Null(parameters.EndDate);
-        Assert.False(parameters.RawQueryData.ContainsKey("end_date"));
+        Assert.True(parameters.RawQueryData.ContainsKey("end_date"));
         Assert.Null(parameters.MeterID);
-        Assert.False(parameters.RawQueryData.ContainsKey("meter_id"));
+        Assert.True(parameters.RawQueryData.ContainsKey("meter_id"));
         Assert.Null(parameters.PageNumber);
-        Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
+        Assert.True(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
-        Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
+        Assert.True(parameters.RawQueryData.ContainsKey("page_size"));
         Assert.Null(parameters.StartDate);
-        Assert.False(parameters.RawQueryData.ContainsKey("start_date"));
+        Assert.True(parameters.RawQueryData.ContainsKey("start_date"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        SubscriptionRetrieveUsageHistoryParams parameters = new()
+        {
+            SubscriptionID = "subscription_id",
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            MeterID = "meter_id",
+            PageNumber = 0,
+            PageSize = 0,
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri(
+                "https://live.dodopayments.com/subscriptions/subscription_id/usage-history?end_date=2019-12-27T18%3a11%3a19.117Z&meter_id=meter_id&page_number=0&page_size=0&start_date=2019-12-27T18%3a11%3a19.117Z"
+            ),
+            url
+        );
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Models.Customers;
 
@@ -92,6 +93,16 @@ public class CustomerCreateParamsTest : TestBase
         };
 
         Assert.Null(parameters.PhoneNumber);
-        Assert.False(parameters.RawBodyData.ContainsKey("phone_number"));
+        Assert.True(parameters.RawBodyData.ContainsKey("phone_number"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        CustomerCreateParams parameters = new() { Email = "email", Name = "name" };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/customers"), url);
     }
 }

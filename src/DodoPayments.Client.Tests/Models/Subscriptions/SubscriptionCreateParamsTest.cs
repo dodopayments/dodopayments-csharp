@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
@@ -351,30 +352,53 @@ public class SubscriptionCreateParamsTest : TestBase
         };
 
         Assert.Null(parameters.Addons);
-        Assert.False(parameters.RawBodyData.ContainsKey("addons"));
+        Assert.True(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.AllowedPaymentMethodTypes);
-        Assert.False(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
+        Assert.True(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
         Assert.Null(parameters.BillingCurrency);
-        Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
+        Assert.True(parameters.RawBodyData.ContainsKey("billing_currency"));
         Assert.Null(parameters.DiscountCode);
-        Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
         Assert.Null(parameters.Force3DS);
-        Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
+        Assert.True(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.OnDemand);
-        Assert.False(parameters.RawBodyData.ContainsKey("on_demand"));
+        Assert.True(parameters.RawBodyData.ContainsKey("on_demand"));
         Assert.Null(parameters.OneTimeProductCart);
-        Assert.False(parameters.RawBodyData.ContainsKey("one_time_product_cart"));
+        Assert.True(parameters.RawBodyData.ContainsKey("one_time_product_cart"));
         Assert.Null(parameters.PaymentLink);
-        Assert.False(parameters.RawBodyData.ContainsKey("payment_link"));
+        Assert.True(parameters.RawBodyData.ContainsKey("payment_link"));
         Assert.Null(parameters.PaymentMethodID);
-        Assert.False(parameters.RawBodyData.ContainsKey("payment_method_id"));
+        Assert.True(parameters.RawBodyData.ContainsKey("payment_method_id"));
         Assert.Null(parameters.ReturnURL);
-        Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
+        Assert.True(parameters.RawBodyData.ContainsKey("return_url"));
         Assert.Null(parameters.ShortLink);
-        Assert.False(parameters.RawBodyData.ContainsKey("short_link"));
+        Assert.True(parameters.RawBodyData.ContainsKey("short_link"));
         Assert.Null(parameters.TaxID);
-        Assert.False(parameters.RawBodyData.ContainsKey("tax_id"));
+        Assert.True(parameters.RawBodyData.ContainsKey("tax_id"));
         Assert.Null(parameters.TrialPeriodDays);
-        Assert.False(parameters.RawBodyData.ContainsKey("trial_period_days"));
+        Assert.True(parameters.RawBodyData.ContainsKey("trial_period_days"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        SubscriptionCreateParams parameters = new()
+        {
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            Customer = new AttachExistingCustomer("customer_id"),
+            ProductID = "product_id",
+            Quantity = 0,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/subscriptions"), url);
     }
 }

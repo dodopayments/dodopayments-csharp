@@ -1,3 +1,4 @@
+using System;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Misc;
@@ -60,5 +61,26 @@ public class LedgerEntryListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        LedgerEntryListParams parameters = new()
+        {
+            CustomerID = "customer_id",
+            Currency = Currency.Aed,
+            PageNumber = 0,
+            PageSize = 0,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri(
+                "https://live.dodopayments.com/customers/customer_id/wallets/ledger-entries?currency=AED&page_number=0&page_size=0"
+            ),
+            url
+        );
     }
 }

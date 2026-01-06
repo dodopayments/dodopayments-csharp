@@ -1,3 +1,4 @@
+using System;
 using DodoPayments.Client.Models.Customers.CustomerPortal;
 
 namespace DodoPayments.Client.Tests.Models.Customers.CustomerPortal;
@@ -42,5 +43,24 @@ public class CustomerPortalCreateParamsTest : TestBase
 
         Assert.Null(parameters.SendEmail);
         Assert.False(parameters.RawQueryData.ContainsKey("send_email"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        CustomerPortalCreateParams parameters = new()
+        {
+            CustomerID = "customer_id",
+            SendEmail = true,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri(
+                "https://live.dodopayments.com/customers/customer_id/customer-portal/session?send_email=true"
+            ),
+            url
+        );
     }
 }

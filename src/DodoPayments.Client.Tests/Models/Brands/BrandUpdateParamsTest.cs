@@ -1,3 +1,4 @@
+using System;
 using DodoPayments.Client.Models.Brands;
 
 namespace DodoPayments.Client.Tests.Models.Brands;
@@ -58,12 +59,22 @@ public class BrandUpdateParamsTest : TestBase
         };
 
         Assert.Null(parameters.ImageID);
-        Assert.False(parameters.RawBodyData.ContainsKey("image_id"));
+        Assert.True(parameters.RawBodyData.ContainsKey("image_id"));
         Assert.Null(parameters.Name);
-        Assert.False(parameters.RawBodyData.ContainsKey("name"));
+        Assert.True(parameters.RawBodyData.ContainsKey("name"));
         Assert.Null(parameters.StatementDescriptor);
-        Assert.False(parameters.RawBodyData.ContainsKey("statement_descriptor"));
+        Assert.True(parameters.RawBodyData.ContainsKey("statement_descriptor"));
         Assert.Null(parameters.SupportEmail);
-        Assert.False(parameters.RawBodyData.ContainsKey("support_email"));
+        Assert.True(parameters.RawBodyData.ContainsKey("support_email"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        BrandUpdateParams parameters = new() { ID = "id" };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/brands/id"), url);
     }
 }

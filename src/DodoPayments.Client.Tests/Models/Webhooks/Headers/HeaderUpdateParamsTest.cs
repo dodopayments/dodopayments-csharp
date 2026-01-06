@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Models.Webhooks.Headers;
 
@@ -25,5 +26,19 @@ public class HeaderUpdateParamsTest : TestBase
 
             Assert.Equal(value, parameters.Headers[item.Key]);
         }
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        HeaderUpdateParams parameters = new()
+        {
+            WebhookID = "webhook_id",
+            Headers = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/webhooks/webhook_id/headers"), url);
     }
 }

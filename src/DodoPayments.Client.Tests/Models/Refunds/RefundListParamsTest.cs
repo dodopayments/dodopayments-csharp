@@ -82,6 +82,29 @@ public class RefundListParamsTest : TestBase
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
     }
+
+    [Fact]
+    public void Url_Works()
+    {
+        RefundListParams parameters = new()
+        {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            PageNumber = 0,
+            PageSize = 0,
+            Status = Status.Succeeded,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri(
+                "https://live.dodopayments.com/refunds?created_at_gte=2019-12-27T18%3a11%3a19.117Z&created_at_lte=2019-12-27T18%3a11%3a19.117Z&customer_id=customer_id&page_number=0&page_size=0&status=succeeded"
+            ),
+            url
+        );
+    }
 }
 
 public class StatusTest : TestBase

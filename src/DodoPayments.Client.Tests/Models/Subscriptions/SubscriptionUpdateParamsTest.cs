@@ -111,21 +111,31 @@ public class SubscriptionUpdateParamsTest : TestBase
         };
 
         Assert.Null(parameters.Billing);
-        Assert.False(parameters.RawBodyData.ContainsKey("billing"));
+        Assert.True(parameters.RawBodyData.ContainsKey("billing"));
         Assert.Null(parameters.CancelAtNextBillingDate);
-        Assert.False(parameters.RawBodyData.ContainsKey("cancel_at_next_billing_date"));
+        Assert.True(parameters.RawBodyData.ContainsKey("cancel_at_next_billing_date"));
         Assert.Null(parameters.CustomerName);
-        Assert.False(parameters.RawBodyData.ContainsKey("customer_name"));
+        Assert.True(parameters.RawBodyData.ContainsKey("customer_name"));
         Assert.Null(parameters.DisableOnDemand);
-        Assert.False(parameters.RawBodyData.ContainsKey("disable_on_demand"));
+        Assert.True(parameters.RawBodyData.ContainsKey("disable_on_demand"));
         Assert.Null(parameters.Metadata);
-        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.NextBillingDate);
-        Assert.False(parameters.RawBodyData.ContainsKey("next_billing_date"));
+        Assert.True(parameters.RawBodyData.ContainsKey("next_billing_date"));
         Assert.Null(parameters.Status);
-        Assert.False(parameters.RawBodyData.ContainsKey("status"));
+        Assert.True(parameters.RawBodyData.ContainsKey("status"));
         Assert.Null(parameters.TaxID);
-        Assert.False(parameters.RawBodyData.ContainsKey("tax_id"));
+        Assert.True(parameters.RawBodyData.ContainsKey("tax_id"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        SubscriptionUpdateParams parameters = new() { SubscriptionID = "subscription_id" };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/subscriptions/subscription_id"), url);
     }
 }
 

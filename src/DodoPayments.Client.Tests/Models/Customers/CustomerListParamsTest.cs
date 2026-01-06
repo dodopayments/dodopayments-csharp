@@ -1,3 +1,4 @@
+using System;
 using DodoPayments.Client.Models.Customers;
 
 namespace DodoPayments.Client.Tests.Models.Customers;
@@ -53,5 +54,25 @@ public class CustomerListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        CustomerListParams parameters = new()
+        {
+            Email = "email",
+            PageNumber = 0,
+            PageSize = 0,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri(
+                "https://live.dodopayments.com/customers?email=email&page_number=0&page_size=0"
+            ),
+            url
+        );
     }
 }
