@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Models.Customers;
 
@@ -60,10 +61,20 @@ public class CustomerUpdateParamsTest : TestBase
         };
 
         Assert.Null(parameters.Metadata);
-        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Name);
-        Assert.False(parameters.RawBodyData.ContainsKey("name"));
+        Assert.True(parameters.RawBodyData.ContainsKey("name"));
         Assert.Null(parameters.PhoneNumber);
-        Assert.False(parameters.RawBodyData.ContainsKey("phone_number"));
+        Assert.True(parameters.RawBodyData.ContainsKey("phone_number"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        CustomerUpdateParams parameters = new() { CustomerID = "customer_id" };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/customers/customer_id"), url);
     }
 }

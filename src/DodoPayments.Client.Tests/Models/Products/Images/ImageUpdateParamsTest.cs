@@ -1,3 +1,4 @@
+using System;
 using DodoPayments.Client.Models.Products.Images;
 
 namespace DodoPayments.Client.Tests.Models.Products.Images;
@@ -38,5 +39,18 @@ public class ImageUpdateParamsTest : TestBase
 
         Assert.Null(parameters.ForceUpdate);
         Assert.False(parameters.RawQueryData.ContainsKey("force_update"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        ImageUpdateParams parameters = new() { ID = "id", ForceUpdate = true };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri("https://live.dodopayments.com/products/id/images?force_update=true"),
+            url
+        );
     }
 }

@@ -87,4 +87,28 @@ public class UsageEventListParamsTest : TestBase
         Assert.Null(parameters.Start);
         Assert.False(parameters.RawQueryData.ContainsKey("start"));
     }
+
+    [Fact]
+    public void Url_Works()
+    {
+        UsageEventListParams parameters = new()
+        {
+            CustomerID = "customer_id",
+            End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EventName = "event_name",
+            MeterID = "meter_id",
+            PageNumber = 0,
+            PageSize = 0,
+            Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri(
+                "https://live.dodopayments.com/events?customer_id=customer_id&end=2019-12-27T18%3a11%3a19.117Z&event_name=event_name&meter_id=meter_id&page_number=0&page_size=0&start=2019-12-27T18%3a11%3a19.117Z"
+            ),
+            url
+        );
+    }
 }

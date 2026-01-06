@@ -1,4 +1,5 @@
-using DodoPayments.Client.Models.Meters;
+using System;
+using Meters = DodoPayments.Client.Models.Meters;
 
 namespace DodoPayments.Client.Tests.Models.Meters;
 
@@ -7,9 +8,9 @@ public class MeterCreateParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new MeterCreateParams
+        var parameters = new Meters::MeterCreateParams
         {
-            Aggregation = new() { Type = Type.Count, Key = "key" },
+            Aggregation = new() { Type = Meters::Type.Count, Key = "key" },
             EventName = "event_name",
             MeasurementUnit = "measurement_unit",
             Name = "name",
@@ -18,48 +19,52 @@ public class MeterCreateParamsTest : TestBase
             {
                 Clauses = new(
                     [
-                        new MeterFilterCondition()
+                        new Meters::MeterFilterCondition()
                         {
                             Key = "user_id",
-                            Operator = Operator.Equals,
+                            Operator = Meters::Operator.Equals,
                             Value = "user123",
                         },
-                        new MeterFilterCondition()
+                        new Meters::MeterFilterCondition()
                         {
                             Key = "amount",
-                            Operator = Operator.GreaterThan,
+                            Operator = Meters::Operator.GreaterThan,
                             Value = 100,
                         },
                     ]
                 ),
-                Conjunction = MeterFilterConjunction.And,
+                Conjunction = Meters::MeterFilterConjunction.And,
             },
         };
 
-        MeterAggregation expectedAggregation = new() { Type = Type.Count, Key = "key" };
+        Meters::MeterAggregation expectedAggregation = new()
+        {
+            Type = Meters::Type.Count,
+            Key = "key",
+        };
         string expectedEventName = "event_name";
         string expectedMeasurementUnit = "measurement_unit";
         string expectedName = "name";
         string expectedDescription = "description";
-        MeterFilter expectedFilter = new()
+        Meters::MeterFilter expectedFilter = new()
         {
             Clauses = new(
                 [
-                    new MeterFilterCondition()
+                    new Meters::MeterFilterCondition()
                     {
                         Key = "user_id",
-                        Operator = Operator.Equals,
+                        Operator = Meters::Operator.Equals,
                         Value = "user123",
                     },
-                    new MeterFilterCondition()
+                    new Meters::MeterFilterCondition()
                     {
                         Key = "amount",
-                        Operator = Operator.GreaterThan,
+                        Operator = Meters::Operator.GreaterThan,
                         Value = 100,
                     },
                 ]
             ),
-            Conjunction = MeterFilterConjunction.And,
+            Conjunction = Meters::MeterFilterConjunction.And,
         };
 
         Assert.Equal(expectedAggregation, parameters.Aggregation);
@@ -73,9 +78,9 @@ public class MeterCreateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new MeterCreateParams
+        var parameters = new Meters::MeterCreateParams
         {
-            Aggregation = new() { Type = Type.Count, Key = "key" },
+            Aggregation = new() { Type = Meters::Type.Count, Key = "key" },
             EventName = "event_name",
             MeasurementUnit = "measurement_unit",
             Name = "name",
@@ -90,9 +95,9 @@ public class MeterCreateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsSetToNullAreSetToNull_Works()
     {
-        var parameters = new MeterCreateParams
+        var parameters = new Meters::MeterCreateParams
         {
-            Aggregation = new() { Type = Type.Count, Key = "key" },
+            Aggregation = new() { Type = Meters::Type.Count, Key = "key" },
             EventName = "event_name",
             MeasurementUnit = "measurement_unit",
             Name = "name",
@@ -102,8 +107,24 @@ public class MeterCreateParamsTest : TestBase
         };
 
         Assert.Null(parameters.Description);
-        Assert.False(parameters.RawBodyData.ContainsKey("description"));
+        Assert.True(parameters.RawBodyData.ContainsKey("description"));
         Assert.Null(parameters.Filter);
-        Assert.False(parameters.RawBodyData.ContainsKey("filter"));
+        Assert.True(parameters.RawBodyData.ContainsKey("filter"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        Meters::MeterCreateParams parameters = new()
+        {
+            Aggregation = new() { Type = Meters::Type.Count, Key = "key" },
+            EventName = "event_name",
+            MeasurementUnit = "measurement_unit",
+            Name = "name",
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/meters"), url);
     }
 }

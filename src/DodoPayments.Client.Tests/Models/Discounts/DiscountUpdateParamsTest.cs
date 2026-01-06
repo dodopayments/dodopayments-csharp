@@ -90,20 +90,30 @@ public class DiscountUpdateParamsTest : TestBase
         };
 
         Assert.Null(parameters.Amount);
-        Assert.False(parameters.RawBodyData.ContainsKey("amount"));
+        Assert.True(parameters.RawBodyData.ContainsKey("amount"));
         Assert.Null(parameters.Code);
-        Assert.False(parameters.RawBodyData.ContainsKey("code"));
+        Assert.True(parameters.RawBodyData.ContainsKey("code"));
         Assert.Null(parameters.ExpiresAt);
-        Assert.False(parameters.RawBodyData.ContainsKey("expires_at"));
+        Assert.True(parameters.RawBodyData.ContainsKey("expires_at"));
         Assert.Null(parameters.Name);
-        Assert.False(parameters.RawBodyData.ContainsKey("name"));
+        Assert.True(parameters.RawBodyData.ContainsKey("name"));
         Assert.Null(parameters.RestrictedTo);
-        Assert.False(parameters.RawBodyData.ContainsKey("restricted_to"));
+        Assert.True(parameters.RawBodyData.ContainsKey("restricted_to"));
         Assert.Null(parameters.SubscriptionCycles);
-        Assert.False(parameters.RawBodyData.ContainsKey("subscription_cycles"));
+        Assert.True(parameters.RawBodyData.ContainsKey("subscription_cycles"));
         Assert.Null(parameters.Type);
-        Assert.False(parameters.RawBodyData.ContainsKey("type"));
+        Assert.True(parameters.RawBodyData.ContainsKey("type"));
         Assert.Null(parameters.UsageLimit);
-        Assert.False(parameters.RawBodyData.ContainsKey("usage_limit"));
+        Assert.True(parameters.RawBodyData.ContainsKey("usage_limit"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        DiscountUpdateParams parameters = new() { DiscountID = "discount_id" };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(new Uri("https://live.dodopayments.com/discounts/discount_id"), url);
     }
 }

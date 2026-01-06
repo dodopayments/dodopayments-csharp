@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
@@ -94,15 +95,32 @@ public class SubscriptionChargeParamsTest : TestBase
         };
 
         Assert.Null(parameters.AdaptiveCurrencyFeesInclusive);
-        Assert.False(parameters.RawBodyData.ContainsKey("adaptive_currency_fees_inclusive"));
+        Assert.True(parameters.RawBodyData.ContainsKey("adaptive_currency_fees_inclusive"));
         Assert.Null(parameters.CustomerBalanceConfig);
-        Assert.False(parameters.RawBodyData.ContainsKey("customer_balance_config"));
+        Assert.True(parameters.RawBodyData.ContainsKey("customer_balance_config"));
         Assert.Null(parameters.Metadata);
-        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.ProductCurrency);
-        Assert.False(parameters.RawBodyData.ContainsKey("product_currency"));
+        Assert.True(parameters.RawBodyData.ContainsKey("product_currency"));
         Assert.Null(parameters.ProductDescription);
-        Assert.False(parameters.RawBodyData.ContainsKey("product_description"));
+        Assert.True(parameters.RawBodyData.ContainsKey("product_description"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        SubscriptionChargeParams parameters = new()
+        {
+            SubscriptionID = "subscription_id",
+            ProductPrice = 0,
+        };
+
+        var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
+
+        Assert.Equal(
+            new Uri("https://live.dodopayments.com/subscriptions/subscription_id/charge"),
+            url
+        );
     }
 }
 
