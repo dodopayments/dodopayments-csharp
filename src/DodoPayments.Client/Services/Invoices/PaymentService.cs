@@ -44,9 +44,7 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
         return response;
     }
 
@@ -78,9 +76,7 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
         return response;
     }
 
