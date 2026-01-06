@@ -197,12 +197,12 @@ public record class Body
     /// </code>
     /// </example>
     /// </summary>
-    public void Switch(System::Action<New> new1, System::Action<Existing> existing)
+    public void Switch(System::Action<New> new_, System::Action<Existing> existing)
     {
         switch (this.Value)
         {
             case New value:
-                new1(value);
+                new_(value);
                 break;
             case Existing value:
                 existing(value);
@@ -235,11 +235,11 @@ public record class Body
     /// </code>
     /// </example>
     /// </summary>
-    public T Match<T>(System::Func<New, T> new1, System::Func<Existing, T> existing)
+    public T Match<T>(System::Func<New, T> new_, System::Func<Existing, T> existing)
     {
         return this.Value switch
         {
-            New value => new1(value),
+            New value => new_(value),
             Existing value => existing(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Body"
@@ -267,7 +267,7 @@ public record class Body
         {
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Body");
         }
-        this.Switch((new1) => new1.Validate(), (existing) => existing.Validate());
+        this.Switch((new_) => new_.Validate(), (existing) => existing.Validate());
     }
 
     public virtual bool Equals(Body? other)
@@ -358,8 +358,8 @@ public sealed record class New : JsonModel
 
     public New() { }
 
-    public New(New new1)
-        : base(new1) { }
+    public New(New new_)
+        : base(new_) { }
 
     public New(IReadOnlyDictionary<string, JsonElement> rawData)
     {

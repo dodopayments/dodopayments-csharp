@@ -10,12 +10,12 @@ public class UsageEventServiceTest : TestBase
     [Fact]
     public async Task Retrieve_Works()
     {
-        var event1 = await this.client.UsageEvents.Retrieve(
+        var event_ = await this.client.UsageEvents.Retrieve(
             "event_id",
             new(),
             TestContext.Current.CancellationToken
         );
-        event1.Validate();
+        event_.Validate();
     }
 
     [Fact]
