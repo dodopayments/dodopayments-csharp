@@ -24,6 +24,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     PaymentMethodID = "payment_method_id",
                     Card = new()
                     {
+                        CardHolderName = "card_holder_name",
                         CardIssuingCountry = CountryCode.Af,
                         CardNetwork = "card_network",
                         CardType = "card_type",
@@ -32,7 +33,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -46,6 +47,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 Card = new()
                 {
+                    CardHolderName = "card_holder_name",
                     CardIssuingCountry = CountryCode.Af,
                     CardNetwork = "card_network",
                     CardType = "card_type",
@@ -54,7 +56,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     Last4Digits = "last4_digits",
                 },
                 LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                 RecurringEnabled = true,
             },
         ];
@@ -79,6 +81,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     PaymentMethodID = "payment_method_id",
                     Card = new()
                     {
+                        CardHolderName = "card_holder_name",
                         CardIssuingCountry = CountryCode.Af,
                         CardNetwork = "card_network",
                         CardType = "card_type",
@@ -87,7 +90,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -112,6 +115,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     PaymentMethodID = "payment_method_id",
                     Card = new()
                     {
+                        CardHolderName = "card_holder_name",
                         CardIssuingCountry = CountryCode.Af,
                         CardNetwork = "card_network",
                         CardType = "card_type",
@@ -120,7 +124,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -140,6 +144,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 Card = new()
                 {
+                    CardHolderName = "card_holder_name",
                     CardIssuingCountry = CountryCode.Af,
                     CardNetwork = "card_network",
                     CardType = "card_type",
@@ -148,7 +153,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     Last4Digits = "last4_digits",
                 },
                 LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                 RecurringEnabled = true,
             },
         ];
@@ -173,6 +178,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     PaymentMethodID = "payment_method_id",
                     Card = new()
                     {
+                        CardHolderName = "card_holder_name",
                         CardIssuingCountry = CountryCode.Af,
                         CardNetwork = "card_network",
                         CardType = "card_type",
@@ -181,7 +187,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -202,6 +208,7 @@ public class ItemTest : TestBase
             PaymentMethodID = "payment_method_id",
             Card = new()
             {
+                CardHolderName = "card_holder_name",
                 CardIssuingCountry = CountryCode.Af,
                 CardNetwork = "card_network",
                 CardType = "card_type",
@@ -210,7 +217,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
@@ -218,6 +225,7 @@ public class ItemTest : TestBase
         string expectedPaymentMethodID = "payment_method_id";
         Card expectedCard = new()
         {
+            CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardNetwork = "card_network",
             CardType = "card_type",
@@ -227,7 +235,7 @@ public class ItemTest : TestBase
         };
         DateTimeOffset expectedLastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Payments::PaymentMethodTypes> expectedPaymentMethodType =
-            Payments::PaymentMethodTypes.Credit;
+            Payments::PaymentMethodTypes.Ach;
         bool expectedRecurringEnabled = true;
 
         Assert.Equal(expectedPaymentMethod, model.PaymentMethod);
@@ -247,6 +255,7 @@ public class ItemTest : TestBase
             PaymentMethodID = "payment_method_id",
             Card = new()
             {
+                CardHolderName = "card_holder_name",
                 CardIssuingCountry = CountryCode.Af,
                 CardNetwork = "card_network",
                 CardType = "card_type",
@@ -255,7 +264,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
@@ -274,6 +283,7 @@ public class ItemTest : TestBase
             PaymentMethodID = "payment_method_id",
             Card = new()
             {
+                CardHolderName = "card_holder_name",
                 CardIssuingCountry = CountryCode.Af,
                 CardNetwork = "card_network",
                 CardType = "card_type",
@@ -282,7 +292,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
@@ -294,6 +304,7 @@ public class ItemTest : TestBase
         string expectedPaymentMethodID = "payment_method_id";
         Card expectedCard = new()
         {
+            CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardNetwork = "card_network",
             CardType = "card_type",
@@ -303,7 +314,7 @@ public class ItemTest : TestBase
         };
         DateTimeOffset expectedLastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Payments::PaymentMethodTypes> expectedPaymentMethodType =
-            Payments::PaymentMethodTypes.Credit;
+            Payments::PaymentMethodTypes.Ach;
         bool expectedRecurringEnabled = true;
 
         Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
@@ -323,6 +334,7 @@ public class ItemTest : TestBase
             PaymentMethodID = "payment_method_id",
             Card = new()
             {
+                CardHolderName = "card_holder_name",
                 CardIssuingCountry = CountryCode.Af,
                 CardNetwork = "card_network",
                 CardType = "card_type",
@@ -331,7 +343,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
@@ -502,6 +514,7 @@ public class CardTest : TestBase
     {
         var model = new Card
         {
+            CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardNetwork = "card_network",
             CardType = "card_type",
@@ -510,6 +523,7 @@ public class CardTest : TestBase
             Last4Digits = "last4_digits",
         };
 
+        string expectedCardHolderName = "card_holder_name";
         ApiEnum<string, CountryCode> expectedCardIssuingCountry = CountryCode.Af;
         string expectedCardNetwork = "card_network";
         string expectedCardType = "card_type";
@@ -517,6 +531,7 @@ public class CardTest : TestBase
         string expectedExpiryYear = "expiry_year";
         string expectedLast4Digits = "last4_digits";
 
+        Assert.Equal(expectedCardHolderName, model.CardHolderName);
         Assert.Equal(expectedCardIssuingCountry, model.CardIssuingCountry);
         Assert.Equal(expectedCardNetwork, model.CardNetwork);
         Assert.Equal(expectedCardType, model.CardType);
@@ -530,6 +545,7 @@ public class CardTest : TestBase
     {
         var model = new Card
         {
+            CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardNetwork = "card_network",
             CardType = "card_type",
@@ -549,6 +565,7 @@ public class CardTest : TestBase
     {
         var model = new Card
         {
+            CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardNetwork = "card_network",
             CardType = "card_type",
@@ -561,6 +578,7 @@ public class CardTest : TestBase
         var deserialized = JsonSerializer.Deserialize<Card>(element);
         Assert.NotNull(deserialized);
 
+        string expectedCardHolderName = "card_holder_name";
         ApiEnum<string, CountryCode> expectedCardIssuingCountry = CountryCode.Af;
         string expectedCardNetwork = "card_network";
         string expectedCardType = "card_type";
@@ -568,6 +586,7 @@ public class CardTest : TestBase
         string expectedExpiryYear = "expiry_year";
         string expectedLast4Digits = "last4_digits";
 
+        Assert.Equal(expectedCardHolderName, deserialized.CardHolderName);
         Assert.Equal(expectedCardIssuingCountry, deserialized.CardIssuingCountry);
         Assert.Equal(expectedCardNetwork, deserialized.CardNetwork);
         Assert.Equal(expectedCardType, deserialized.CardType);
@@ -581,6 +600,7 @@ public class CardTest : TestBase
     {
         var model = new Card
         {
+            CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardNetwork = "card_network",
             CardType = "card_type",
@@ -597,6 +617,8 @@ public class CardTest : TestBase
     {
         var model = new Card { };
 
+        Assert.Null(model.CardHolderName);
+        Assert.False(model.RawData.ContainsKey("card_holder_name"));
         Assert.Null(model.CardIssuingCountry);
         Assert.False(model.RawData.ContainsKey("card_issuing_country"));
         Assert.Null(model.CardNetwork);
@@ -624,6 +646,7 @@ public class CardTest : TestBase
     {
         var model = new Card
         {
+            CardHolderName = null,
             CardIssuingCountry = null,
             CardNetwork = null,
             CardType = null,
@@ -632,6 +655,8 @@ public class CardTest : TestBase
             Last4Digits = null,
         };
 
+        Assert.Null(model.CardHolderName);
+        Assert.True(model.RawData.ContainsKey("card_holder_name"));
         Assert.Null(model.CardIssuingCountry);
         Assert.True(model.RawData.ContainsKey("card_issuing_country"));
         Assert.Null(model.CardNetwork);
@@ -651,6 +676,7 @@ public class CardTest : TestBase
     {
         var model = new Card
         {
+            CardHolderName = null,
             CardIssuingCountry = null,
             CardNetwork = null,
             CardType = null,

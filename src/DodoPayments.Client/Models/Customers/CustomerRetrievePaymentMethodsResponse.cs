@@ -82,11 +82,6 @@ class CustomerRetrievePaymentMethodsResponseFromRaw
 [JsonConverter(typeof(JsonModelConverter<Item, ItemFromRaw>))]
 public sealed record class Item : JsonModel
 {
-    /// <summary>
-    /// PaymentMethod enum from hyperswitch
-    ///
-    /// <para>https://github.com/juspay/hyperswitch/blob/ecd05d53c99ae701ac94893ec632a3988afe3238/crates/common_enums/src/enums.rs#L2097</para>
-    /// </summary>
     public required ApiEnum<string, PaymentMethod> PaymentMethod
     {
         get
@@ -178,11 +173,6 @@ class ItemFromRaw : IFromRawJson<Item>
         Item.FromRawUnchecked(rawData);
 }
 
-/// <summary>
-/// PaymentMethod enum from hyperswitch
-///
-/// <para>https://github.com/juspay/hyperswitch/blob/ecd05d53c99ae701ac94893ec632a3988afe3238/crates/common_enums/src/enums.rs#L2097</para>
-/// </summary>
 [JsonConverter(typeof(PaymentMethodConverter))]
 public enum PaymentMethod
 {
@@ -269,6 +259,12 @@ sealed class PaymentMethodConverter : JsonConverter<PaymentMethod>
 [JsonConverter(typeof(JsonModelConverter<Card, CardFromRaw>))]
 public sealed record class Card : JsonModel
 {
+    public string? CardHolderName
+    {
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "card_holder_name"); }
+        init { JsonModel.Set(this._rawData, "card_holder_name", value); }
+    }
+
     /// <summary>
     /// ISO country code alpha2 variant
     /// </summary>
@@ -317,6 +313,7 @@ public sealed record class Card : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.CardHolderName;
         this.CardIssuingCountry?.Validate();
         _ = this.CardNetwork;
         _ = this.CardType;

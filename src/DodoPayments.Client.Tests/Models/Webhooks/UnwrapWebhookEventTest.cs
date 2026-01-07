@@ -31,7 +31,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType = Webhooks::PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::Type.DisputeAccepted,
@@ -58,8 +57,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeCancelledWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeCancelledWebhookEventType.DisputeCancelled,
@@ -86,8 +83,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeChallengedWebhookEventType.DisputeChallenged,
@@ -114,8 +109,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeExpiredWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeExpiredWebhookEventType.DisputeExpired,
@@ -142,8 +135,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeLostWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeLostWebhookEventType.DisputeLost,
@@ -170,8 +161,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeOpenedWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeOpenedWebhookEventType.DisputeOpened,
@@ -198,8 +187,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeWonWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeWonWebhookEventType.DisputeWon,
@@ -229,8 +216,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ActivationsLimit = 5,
                     ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
                     SubscriptionID = "subscription_id",
-                    PayloadType =
-                        Webhooks::LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType.LicenseKey,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::LicenseKeyCreatedWebhookEventType.LicenseKeyCreated,
@@ -304,6 +289,7 @@ public class UnwrapWebhookEventTest : TestBase
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
+                    CardHolderName = "card_holder_name",
                     CardIssuingCountry = CountryCode.Af,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -322,8 +308,6 @@ public class UnwrapWebhookEventTest : TestBase
                     SubscriptionID = "subscription_id",
                     Tax = 0,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PayloadType =
-                        Webhooks::PaymentCancelledWebhookEventDataIntersectionMember1PayloadType.Payment,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::PaymentCancelledWebhookEventType.PaymentCancelled,
@@ -397,6 +381,7 @@ public class UnwrapWebhookEventTest : TestBase
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
+                    CardHolderName = "card_holder_name",
                     CardIssuingCountry = CountryCode.Af,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -415,8 +400,6 @@ public class UnwrapWebhookEventTest : TestBase
                     SubscriptionID = "subscription_id",
                     Tax = 0,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PayloadType =
-                        Webhooks::PaymentFailedWebhookEventDataIntersectionMember1PayloadType.Payment,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::PaymentFailedWebhookEventType.PaymentFailed,
@@ -490,6 +473,7 @@ public class UnwrapWebhookEventTest : TestBase
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
+                    CardHolderName = "card_holder_name",
                     CardIssuingCountry = CountryCode.Af,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -508,8 +492,6 @@ public class UnwrapWebhookEventTest : TestBase
                     SubscriptionID = "subscription_id",
                     Tax = 0,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PayloadType =
-                        Webhooks::PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::PaymentProcessingWebhookEventType.PaymentProcessing,
@@ -583,6 +565,7 @@ public class UnwrapWebhookEventTest : TestBase
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
+                    CardHolderName = "card_holder_name",
                     CardIssuingCountry = CountryCode.Af,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -601,8 +584,6 @@ public class UnwrapWebhookEventTest : TestBase
                     SubscriptionID = "subscription_id",
                     Tax = 0,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PayloadType =
-                        Webhooks::PaymentSucceededWebhookEventDataIntersectionMember1PayloadType.Payment,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::PaymentSucceededWebhookEventType.PaymentSucceeded,
@@ -638,8 +619,6 @@ public class UnwrapWebhookEventTest : TestBase
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
-                    PayloadType =
-                        Webhooks::RefundFailedWebhookEventDataIntersectionMember1PayloadType.Refund,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::RefundFailedWebhookEventType.RefundFailed,
@@ -675,8 +654,6 @@ public class UnwrapWebhookEventTest : TestBase
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
-                    PayloadType =
-                        Webhooks::RefundSucceededWebhookEventDataIntersectionMember1PayloadType.Refund,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::RefundSucceededWebhookEventType.RefundSucceeded,
@@ -748,8 +725,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionActiveWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionActiveWebhookEventType.SubscriptionActive,
@@ -821,8 +796,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionCancelledWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionCancelledWebhookEventType.SubscriptionCancelled,
@@ -894,8 +867,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionExpiredWebhookEventType.SubscriptionExpired,
@@ -967,8 +938,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionFailedWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionFailedWebhookEventType.SubscriptionFailed,
@@ -1040,8 +1009,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionOnHoldWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionOnHoldWebhookEventType.SubscriptionOnHold,
@@ -1113,8 +1080,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionPlanChangedWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionPlanChangedWebhookEventType.SubscriptionPlanChanged,
@@ -1186,8 +1151,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionRenewedWebhookEventType.SubscriptionRenewed,
@@ -1259,8 +1222,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionUpdatedWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
@@ -1287,7 +1248,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType = Webhooks::PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::Type.DisputeAccepted,
@@ -1317,8 +1277,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeCancelledWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeCancelledWebhookEventType.DisputeCancelled,
@@ -1348,8 +1306,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeChallengedWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeChallengedWebhookEventType.DisputeChallenged,
@@ -1379,8 +1335,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeExpiredWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeExpiredWebhookEventType.DisputeExpired,
@@ -1410,8 +1364,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeLostWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeLostWebhookEventType.DisputeLost,
@@ -1441,8 +1393,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeOpenedWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeOpenedWebhookEventType.DisputeOpened,
@@ -1472,8 +1422,6 @@ public class UnwrapWebhookEventTest : TestBase
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     Remarks = "remarks",
-                    PayloadType =
-                        Webhooks::DisputeWonWebhookEventDataIntersectionMember1PayloadType.Dispute,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::DisputeWonWebhookEventType.DisputeWon,
@@ -1506,8 +1454,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ActivationsLimit = 5,
                     ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
                     SubscriptionID = "subscription_id",
-                    PayloadType =
-                        Webhooks::LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType.LicenseKey,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::LicenseKeyCreatedWebhookEventType.LicenseKeyCreated,
@@ -1584,6 +1530,7 @@ public class UnwrapWebhookEventTest : TestBase
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
+                    CardHolderName = "card_holder_name",
                     CardIssuingCountry = CountryCode.Af,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -1602,8 +1549,6 @@ public class UnwrapWebhookEventTest : TestBase
                     SubscriptionID = "subscription_id",
                     Tax = 0,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PayloadType =
-                        Webhooks::PaymentCancelledWebhookEventDataIntersectionMember1PayloadType.Payment,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::PaymentCancelledWebhookEventType.PaymentCancelled,
@@ -1680,6 +1625,7 @@ public class UnwrapWebhookEventTest : TestBase
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
+                    CardHolderName = "card_holder_name",
                     CardIssuingCountry = CountryCode.Af,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -1698,8 +1644,6 @@ public class UnwrapWebhookEventTest : TestBase
                     SubscriptionID = "subscription_id",
                     Tax = 0,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PayloadType =
-                        Webhooks::PaymentFailedWebhookEventDataIntersectionMember1PayloadType.Payment,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::PaymentFailedWebhookEventType.PaymentFailed,
@@ -1776,6 +1720,7 @@ public class UnwrapWebhookEventTest : TestBase
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
+                    CardHolderName = "card_holder_name",
                     CardIssuingCountry = CountryCode.Af,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -1794,8 +1739,6 @@ public class UnwrapWebhookEventTest : TestBase
                     SubscriptionID = "subscription_id",
                     Tax = 0,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PayloadType =
-                        Webhooks::PaymentProcessingWebhookEventDataIntersectionMember1PayloadType.Payment,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::PaymentProcessingWebhookEventType.PaymentProcessing,
@@ -1872,6 +1815,7 @@ public class UnwrapWebhookEventTest : TestBase
                     SettlementAmount = 0,
                     SettlementCurrency = Currency.Aed,
                     TotalAmount = 0,
+                    CardHolderName = "card_holder_name",
                     CardIssuingCountry = CountryCode.Af,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -1890,8 +1834,6 @@ public class UnwrapWebhookEventTest : TestBase
                     SubscriptionID = "subscription_id",
                     Tax = 0,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PayloadType =
-                        Webhooks::PaymentSucceededWebhookEventDataIntersectionMember1PayloadType.Payment,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::PaymentSucceededWebhookEventType.PaymentSucceeded,
@@ -1930,8 +1872,6 @@ public class UnwrapWebhookEventTest : TestBase
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
-                    PayloadType =
-                        Webhooks::RefundFailedWebhookEventDataIntersectionMember1PayloadType.Refund,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::RefundFailedWebhookEventType.RefundFailed,
@@ -1970,8 +1910,6 @@ public class UnwrapWebhookEventTest : TestBase
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
-                    PayloadType =
-                        Webhooks::RefundSucceededWebhookEventDataIntersectionMember1PayloadType.Refund,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::RefundSucceededWebhookEventType.RefundSucceeded,
@@ -2046,8 +1984,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionActiveWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionActiveWebhookEventType.SubscriptionActive,
@@ -2122,8 +2058,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionCancelledWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionCancelledWebhookEventType.SubscriptionCancelled,
@@ -2198,8 +2132,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionExpiredWebhookEventType.SubscriptionExpired,
@@ -2274,8 +2206,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionFailedWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionFailedWebhookEventType.SubscriptionFailed,
@@ -2350,8 +2280,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionOnHoldWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionOnHoldWebhookEventType.SubscriptionOnHold,
@@ -2426,8 +2354,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionPlanChangedWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionPlanChangedWebhookEventType.SubscriptionPlanChanged,
@@ -2502,8 +2428,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionRenewedWebhookEventType.SubscriptionRenewed,
@@ -2578,8 +2502,6 @@ public class UnwrapWebhookEventTest : TestBase
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     TaxID = "tax_id",
-                    PayloadType =
-                        Webhooks::SubscriptionUpdatedWebhookEventDataIntersectionMember1PayloadType.Subscription,
                 },
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Type = Webhooks::SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,

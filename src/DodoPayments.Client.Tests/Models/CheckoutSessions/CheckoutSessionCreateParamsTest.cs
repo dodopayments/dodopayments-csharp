@@ -27,7 +27,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -96,7 +96,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
         ];
         List<ApiEnum<string, Payments::PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
         [
-            Payments::PaymentMethodTypes.Credit,
+            Payments::PaymentMethodTypes.Ach,
         ];
         BillingAddress expectedBillingAddress = new()
         {
@@ -211,7 +211,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -270,7 +270,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,

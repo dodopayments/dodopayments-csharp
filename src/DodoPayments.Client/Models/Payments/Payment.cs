@@ -158,6 +158,15 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Cardholder name
+    /// </summary>
+    public string? CardHolderName
+    {
+        get { return JsonModel.GetNullableClass<string>(this.RawData, "card_holder_name"); }
+        init { JsonModel.Set(this._rawData, "card_holder_name", value); }
+    }
+
+    /// <summary>
     /// ISO2 country code of the card
     /// </summary>
     public ApiEnum<string, CountryCode>? CardIssuingCountry
@@ -357,6 +366,7 @@ public sealed record class Payment : JsonModel
         _ = this.SettlementAmount;
         this.SettlementCurrency.Validate();
         _ = this.TotalAmount;
+        _ = this.CardHolderName;
         this.CardIssuingCountry?.Validate();
         _ = this.CardLastFour;
         _ = this.CardNetwork;
