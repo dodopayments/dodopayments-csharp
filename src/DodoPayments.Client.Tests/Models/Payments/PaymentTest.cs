@@ -72,6 +72,7 @@ public class PaymentTest : TestBase
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
+            CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -148,6 +149,7 @@ public class PaymentTest : TestBase
         int expectedSettlementAmount = 0;
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
         int expectedTotalAmount = 0;
+        string expectedCardHolderName = "card_holder_name";
         ApiEnum<string, CountryCode> expectedCardIssuingCountry = CountryCode.Af;
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
@@ -195,6 +197,7 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedSettlementAmount, model.SettlementAmount);
         Assert.Equal(expectedSettlementCurrency, model.SettlementCurrency);
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
+        Assert.Equal(expectedCardHolderName, model.CardHolderName);
         Assert.Equal(expectedCardIssuingCountry, model.CardIssuingCountry);
         Assert.Equal(expectedCardLastFour, model.CardLastFour);
         Assert.Equal(expectedCardNetwork, model.CardNetwork);
@@ -281,6 +284,7 @@ public class PaymentTest : TestBase
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
+            CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -368,6 +372,7 @@ public class PaymentTest : TestBase
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
+            CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -448,6 +453,7 @@ public class PaymentTest : TestBase
         int expectedSettlementAmount = 0;
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
         int expectedTotalAmount = 0;
+        string expectedCardHolderName = "card_holder_name";
         ApiEnum<string, CountryCode> expectedCardIssuingCountry = CountryCode.Af;
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
@@ -495,6 +501,7 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedSettlementAmount, deserialized.SettlementAmount);
         Assert.Equal(expectedSettlementCurrency, deserialized.SettlementCurrency);
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
+        Assert.Equal(expectedCardHolderName, deserialized.CardHolderName);
         Assert.Equal(expectedCardIssuingCountry, deserialized.CardIssuingCountry);
         Assert.Equal(expectedCardLastFour, deserialized.CardLastFour);
         Assert.Equal(expectedCardNetwork, deserialized.CardNetwork);
@@ -581,6 +588,7 @@ public class PaymentTest : TestBase
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
+            CardHolderName = "card_holder_name",
             CardIssuingCountry = CountryCode.Af,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -667,6 +675,8 @@ public class PaymentTest : TestBase
             TotalAmount = 0,
         };
 
+        Assert.Null(model.CardHolderName);
+        Assert.False(model.RawData.ContainsKey("card_holder_name"));
         Assert.Null(model.CardIssuingCountry);
         Assert.False(model.RawData.ContainsKey("card_issuing_country"));
         Assert.Null(model.CardLastFour);
@@ -833,6 +843,7 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
 
+            CardHolderName = null,
             CardIssuingCountry = null,
             CardLastFour = null,
             CardNetwork = null,
@@ -853,6 +864,8 @@ public class PaymentTest : TestBase
             UpdatedAt = null,
         };
 
+        Assert.Null(model.CardHolderName);
+        Assert.True(model.RawData.ContainsKey("card_holder_name"));
         Assert.Null(model.CardIssuingCountry);
         Assert.True(model.RawData.ContainsKey("card_issuing_country"));
         Assert.Null(model.CardLastFour);
@@ -953,6 +966,7 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
 
+            CardHolderName = null,
             CardIssuingCountry = null,
             CardLastFour = null,
             CardNetwork = null,

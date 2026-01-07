@@ -73,159 +73,49 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CountryCode>(),
             new ApiEnumConverter<string, DiscountType>(),
             new ApiEnumConverter<string, VerificationStatus>(),
-            new ApiEnumConverter<string, Webhooks::PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::DisputeCancelledWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::DisputeCancelledWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::DisputeChallengedWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::DisputeChallengedWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::DisputeExpiredWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::DisputeExpiredWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::DisputeLostWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::DisputeLostWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::DisputeOpenedWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::DisputeOpenedWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::DisputeWonWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::DisputeWonWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::LicenseKeyCreatedWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::LicenseKeyCreatedWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::PaymentCancelledWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::PaymentCancelledWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::PaymentFailedWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::PaymentFailedWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::PaymentProcessingWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::PaymentProcessingWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::PaymentSucceededWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::PaymentSucceededWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::RefundFailedWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::RefundFailedWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::RefundSucceededWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::RefundSucceededWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::SubscriptionActiveWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::SubscriptionActiveWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::SubscriptionCancelledWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::SubscriptionCancelledWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::SubscriptionExpiredWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::SubscriptionExpiredWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::SubscriptionFailedWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::SubscriptionFailedWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::SubscriptionOnHoldWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::SubscriptionOnHoldWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::SubscriptionPlanChangedWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::SubscriptionPlanChangedWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::SubscriptionRenewedWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::SubscriptionRenewedWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::SubscriptionUpdatedWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::SubscriptionUpdatedWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::DisputeAcceptedWebhookEventDataIntersectionMember1PayloadType
-            >(),
             new ApiEnumConverter<string, Webhooks::DisputeAcceptedWebhookEventType>(),
-            new ApiEnumConverter<string, Webhooks::DataModelIntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::TypeModel>(),
-            new ApiEnumConverter<string, Webhooks::Data1IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type1>(),
-            new ApiEnumConverter<string, Webhooks::Data2IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type2>(),
-            new ApiEnumConverter<string, Webhooks::Data3IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type3>(),
-            new ApiEnumConverter<string, Webhooks::Data4IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type4>(),
-            new ApiEnumConverter<string, Webhooks::Data5IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type5>(),
-            new ApiEnumConverter<string, Webhooks::Data6IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type6>(),
-            new ApiEnumConverter<string, Webhooks::Data7IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type7>(),
-            new ApiEnumConverter<string, Webhooks::Data8IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type8>(),
-            new ApiEnumConverter<string, Webhooks::Data9IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type9>(),
-            new ApiEnumConverter<string, Webhooks::Data10IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type10>(),
-            new ApiEnumConverter<string, Webhooks::Data11IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type11>(),
-            new ApiEnumConverter<string, Webhooks::Data12IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type12>(),
-            new ApiEnumConverter<string, Webhooks::Data13IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type13>(),
-            new ApiEnumConverter<string, Webhooks::Data14IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type14>(),
-            new ApiEnumConverter<string, Webhooks::Data15IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type15>(),
-            new ApiEnumConverter<string, Webhooks::Data16IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type16>(),
-            new ApiEnumConverter<string, Webhooks::Data17IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type17>(),
-            new ApiEnumConverter<string, Webhooks::Data18IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type18>(),
-            new ApiEnumConverter<string, Webhooks::Data19IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type19>(),
-            new ApiEnumConverter<string, Webhooks::Data20IntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, Webhooks::Type20>(),
             new ApiEnumConverter<string, WebhookEventType>(),
             new ApiEnumConverter<string, PayloadType>(),
