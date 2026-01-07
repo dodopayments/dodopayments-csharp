@@ -1,5 +1,37 @@
 # Changelog
 
+## 6.0.0 (2026-01-07)
+
+Full Changelog: [v5.2.0...v6.0.0](https://github.com/dodopayments/dodopayments-csharp/compare/v5.2.0...v6.0.0)
+
+### ⚠ BREAKING CHANGES
+
+* **client:** change casing of some identifiers
+* **client:** **Migration:** Only use all-caps in PascalCase for two-letter acronyms. Otherwise, use a capital letter for the first letter and lowercase letters for the rest.
+
+### Features
+
+* **api:** updated openapi spec to v1.70.0 ([30635c6](https://github.com/dodopayments/dodopayments-csharp/commit/30635c603e7519f60938cc98d204d09ba42ef728))
+
+
+### Bug Fixes
+
+* **ci:** run tests properly on windows ([767db44](https://github.com/dodopayments/dodopayments-csharp/commit/767db441e2d46295f454444b530bacb41a58743d))
+* **client:** don't dispose `HttpResponse` for methods that directly return it ([9c4c7b0](https://github.com/dodopayments/dodopayments-csharp/commit/9c4c7b0cde4878915b7fa2bd81a11c5a68bc39b6))
+
+
+### Chores
+
+* **internal:** add files to sln so they show up in visual studio ([fbcc47a](https://github.com/dodopayments/dodopayments-csharp/commit/fbcc47af92c73a669948a438f1db18adc90a4e1c))
+* **internal:** codegen related update ([fa1365e](https://github.com/dodopayments/dodopayments-csharp/commit/fa1365edd377396e7fde9639c8b7435a54417e07))
+* **internal:** suppress a diagnostic ([fb2639f](https://github.com/dodopayments/dodopayments-csharp/commit/fb2639fbb1ab227aef947930e7b80cb5d449bd09))
+* rename some identifiers ([eada113](https://github.com/dodopayments/dodopayments-csharp/commit/eada113230cac358c6b33e6a84a040e41403d372))
+
+
+### Refactors
+
+* **client:** change casing of some identifiers ([86a2567](https://github.com/dodopayments/dodopayments-csharp/commit/86a2567794ccdccd0f45e41960d3855530e72354))
+
 ## 5.2.0 (2025-12-23)
 
 Full Changelog: [v5.1.0...v5.2.0](https://github.com/dodopayments/dodopayments-csharp/compare/v5.1.0...v5.2.0)
