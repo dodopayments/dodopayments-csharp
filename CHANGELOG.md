@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.0.1 (2026-01-08)
+
+Full Changelog: [v6.0.0...v6.0.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.0.0...v6.0.1)
+
+### Bug Fixes
+
+* **internal:** don't try to push symbols to nuget as separate package ([f3d3bd6](https://github.com/dodopayments/dodopayments-csharp/commit/f3d3bd63338a41cef6266549f6add5fa1fada763))
+
 ## 6.0.0 (2026-01-07)
 
 Full Changelog: [v5.2.0...v6.0.0](https://github.com/dodopayments/dodopayments-csharp/compare/v5.2.0...v6.0.0)
