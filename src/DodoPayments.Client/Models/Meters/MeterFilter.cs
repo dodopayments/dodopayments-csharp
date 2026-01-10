@@ -87,7 +87,7 @@ class MeterFilterFromRaw : IFromRawJson<MeterFilter>
 /// Filter clauses - can be direct conditions or nested filters (up to 3 levels deep)
 /// </summary>
 [JsonConverter(typeof(ClausesConverter))]
-public record class Clauses
+public record class Clauses : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -253,7 +253,7 @@ public record class Clauses
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {
@@ -465,7 +465,7 @@ sealed class OperatorConverter : JsonConverter<Operator>
 /// Filter value - can be string, number, or boolean
 /// </summary>
 [JsonConverter(typeof(MeterFilterConditionValueConverter))]
-public record class MeterFilterConditionValue
+public record class MeterFilterConditionValue : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -662,7 +662,7 @@ public record class MeterFilterConditionValue
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {
@@ -817,7 +817,7 @@ class ClausesMeterFilterFromRaw : IFromRawJson<ClausesMeterFilter>
 /// Level 1: Can be conditions or nested filters (2 more levels allowed)
 /// </summary>
 [JsonConverter(typeof(ClausesMeterFilterClausesConverter))]
-public record class ClausesMeterFilterClauses
+public record class ClausesMeterFilterClauses : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -997,7 +997,7 @@ public record class ClausesMeterFilterClauses
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {
@@ -1242,7 +1242,7 @@ sealed class ClausesMeterFilterClausesMeterFilterConditionOperatorConverter
 /// Filter value - can be string, number, or boolean
 /// </summary>
 [JsonConverter(typeof(ClausesMeterFilterClausesMeterFilterConditionValueConverter))]
-public record class ClausesMeterFilterClausesMeterFilterConditionValue
+public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -1454,7 +1454,7 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {
@@ -1621,7 +1621,7 @@ class ClausesMeterFilterClausesMeterFilterFromRaw
 /// Level 2: Can be conditions or nested filters (1 more level allowed)
 /// </summary>
 [JsonConverter(typeof(ClausesMeterFilterClausesMeterFilterClausesConverter))]
-public record class ClausesMeterFilterClausesMeterFilterClauses
+public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -1811,7 +1811,7 @@ public record class ClausesMeterFilterClausesMeterFilterClauses
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {
@@ -2080,7 +2080,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOper
 [JsonConverter(
     typeof(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValueConverter)
 )]
-public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue
+public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -2292,7 +2292,7 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {
@@ -2601,7 +2601,7 @@ sealed class ClauseOperatorConverter : JsonConverter<ClauseOperator>
 /// Filter value - can be string, number, or boolean
 /// </summary>
 [JsonConverter(typeof(ClauseValueConverter))]
-public record class ClauseValue
+public record class ClauseValue : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -2798,7 +2798,7 @@ public record class ClauseValue
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {

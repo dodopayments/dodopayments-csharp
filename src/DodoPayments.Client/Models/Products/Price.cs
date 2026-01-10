@@ -15,7 +15,7 @@ namespace DodoPayments.Client.Models.Products;
 /// One-time price details.
 /// </summary>
 [JsonConverter(typeof(PriceConverter))]
-public record class Price
+public record class Price : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -320,7 +320,7 @@ public record class Price
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {

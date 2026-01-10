@@ -107,7 +107,7 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 }
 
 [JsonConverter(typeof(BodyConverter))]
-public record class Body
+public record class Body : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -261,7 +261,7 @@ public record class Body
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {
