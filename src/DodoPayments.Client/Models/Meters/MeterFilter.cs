@@ -270,6 +270,9 @@ public record class Clauses
     {
         return 0;
     }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
 }
 
 sealed class ClausesConverter : JsonConverter<Clauses>
@@ -678,6 +681,9 @@ public record class MeterFilterConditionValue
     {
         return 0;
     }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
 }
 
 sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterConditionValue>
@@ -1010,6 +1016,9 @@ public record class ClausesMeterFilterClauses
     {
         return 0;
     }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
 }
 
 sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilterClauses>
@@ -1464,6 +1473,9 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue
     {
         return 0;
     }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
 }
 
 sealed class ClausesMeterFilterClausesMeterFilterConditionValueConverter
@@ -1818,6 +1830,9 @@ public record class ClausesMeterFilterClausesMeterFilterClauses
     {
         return 0;
     }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
 }
 
 sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
@@ -2298,6 +2313,9 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
     {
         return 0;
     }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
 }
 
 sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValueConverter
@@ -2799,6 +2817,9 @@ public record class ClauseValue
     {
         return 0;
     }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
 }
 
 sealed class ClauseValueConverter : JsonConverter<ClauseValue>

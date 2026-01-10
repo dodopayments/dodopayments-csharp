@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Payments;
@@ -190,6 +191,9 @@ public record class CustomerRequest
     {
         return 0;
     }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
 }
 
 sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
