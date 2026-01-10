@@ -7,7 +7,7 @@ using DodoPayments.Client.Services;
 namespace DodoPayments.Client.Models.UsageEvents;
 
 public sealed class UsageEventListPage(
-    IUsageEventService service,
+    IUsageEventServiceWithRawResponse service,
     UsageEventListParams parameters,
     UsageEventListPageResponse response
 ) : IPage<Event>
@@ -32,9 +32,10 @@ public sealed class UsageEventListPage(
     public async Task<UsageEventListPage> Next(CancellationToken cancellationToken = default)
     {
         var currentPageNumber = parameters.PageNumber ?? 1;
-        return await service
+        using var nextResponse = await service
             .List(parameters with { PageNumber = currentPageNumber + 1 }, cancellationToken)
             .ConfigureAwait(false);
+        return await nextResponse.Deserialize(cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>

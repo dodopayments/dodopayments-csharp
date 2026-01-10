@@ -15,6 +15,12 @@ namespace DodoPayments.Client.Services.Customers;
 public interface IWalletService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    IWalletServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -30,6 +36,38 @@ public interface IWalletService
 
     /// <inheritdoc cref="List(WalletListParams, CancellationToken)"/>
     Task<WalletListResponse> List(
+        string customerID,
+        WalletListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="IWalletService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface IWalletServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IWalletServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    ILedgerEntryServiceWithRawResponse LedgerEntries { get; }
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /customers/{customer_id}/wallets`, but is otherwise the
+    /// same as <see cref="IWalletService.List(WalletListParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<WalletListResponse>> List(
+        WalletListParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="List(WalletListParams, CancellationToken)"/>
+    Task<HttpResponse<WalletListResponse>> List(
         string customerID,
         WalletListParams? parameters = null,
         CancellationToken cancellationToken = default

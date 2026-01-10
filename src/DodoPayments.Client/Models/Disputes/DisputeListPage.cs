@@ -7,7 +7,7 @@ using DodoPayments.Client.Services;
 namespace DodoPayments.Client.Models.Disputes;
 
 public sealed class DisputeListPage(
-    IDisputeService service,
+    IDisputeServiceWithRawResponse service,
     DisputeListParams parameters,
     DisputeListPageResponse response
 ) : IPage<DisputeListResponse>
@@ -33,9 +33,10 @@ public sealed class DisputeListPage(
     public async Task<DisputeListPage> Next(CancellationToken cancellationToken = default)
     {
         var currentPageNumber = parameters.PageNumber ?? 1;
-        return await service
+        using var nextResponse = await service
             .List(parameters with { PageNumber = currentPageNumber + 1 }, cancellationToken)
             .ConfigureAwait(false);
+        return await nextResponse.Deserialize(cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>

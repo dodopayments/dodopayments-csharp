@@ -14,6 +14,12 @@ namespace DodoPayments.Client.Services;
 public interface IUsageEventService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    IUsageEventServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -93,6 +99,54 @@ public interface IUsageEventService
     ///     }     }   ] } ```</para>
     /// </summary>
     Task<UsageEventIngestResponse> Ingest(
+        UsageEventIngestParams parameters,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="IUsageEventService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface IUsageEventServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IUsageEventServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /events/{event_id}`, but is otherwise the
+    /// same as <see cref="IUsageEventService.Retrieve(UsageEventRetrieveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Event>> Retrieve(
+        UsageEventRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Retrieve(UsageEventRetrieveParams, CancellationToken)"/>
+    Task<HttpResponse<Event>> Retrieve(
+        string eventID,
+        UsageEventRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /events`, but is otherwise the
+    /// same as <see cref="IUsageEventService.List(UsageEventListParams?, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<UsageEventListPage>> List(
+        UsageEventListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /events/ingest`, but is otherwise the
+    /// same as <see cref="IUsageEventService.Ingest(UsageEventIngestParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<UsageEventIngestResponse>> Ingest(
         UsageEventIngestParams parameters,
         CancellationToken cancellationToken = default
     );
