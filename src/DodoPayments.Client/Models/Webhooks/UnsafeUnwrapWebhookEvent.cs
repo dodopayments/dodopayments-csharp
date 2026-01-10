@@ -8,7 +8,7 @@ using System = System;
 namespace DodoPayments.Client.Models.Webhooks;
 
 [JsonConverter(typeof(UnsafeUnwrapWebhookEventConverter))]
-public record class UnsafeUnwrapWebhookEvent
+public record class UnsafeUnwrapWebhookEvent : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -1055,7 +1055,7 @@ public record class UnsafeUnwrapWebhookEvent
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {

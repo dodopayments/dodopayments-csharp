@@ -136,7 +136,7 @@ class ImmediateChargeFromRaw : IFromRawJson<ImmediateCharge>
 }
 
 [JsonConverter(typeof(LineItemConverter))]
-public record class LineItem
+public record class LineItem : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -446,7 +446,7 @@ public record class LineItem
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {

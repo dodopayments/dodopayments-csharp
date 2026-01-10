@@ -103,7 +103,7 @@ class WebhookPayloadFromRaw : IFromRawJson<WebhookPayload>
 /// The latest data at the time of delivery attempt
 /// </summary>
 [JsonConverter(typeof(DataConverter))]
-public record class Data
+public record class Data : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -514,7 +514,7 @@ public record class Data
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {

@@ -118,7 +118,7 @@ class EventInputFromRaw : IFromRawJson<EventInput>
 /// Metadata value can be a string, integer, number, or boolean
 /// </summary>
 [JsonConverter(typeof(EventInputMetadataConverter))]
-public record class EventInputMetadata
+public record class EventInputMetadata : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -307,7 +307,7 @@ public record class EventInputMetadata
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {

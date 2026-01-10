@@ -8,7 +8,7 @@ using DodoPayments.Client.Exceptions;
 namespace DodoPayments.Client.Models.Payments;
 
 [JsonConverter(typeof(CustomerRequestConverter))]
-public record class CustomerRequest
+public record class CustomerRequest : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -168,7 +168,7 @@ public record class CustomerRequest
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {
