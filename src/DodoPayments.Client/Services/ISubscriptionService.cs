@@ -14,6 +14,12 @@ namespace DodoPayments.Client.Services;
 public interface ISubscriptionService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    ISubscriptionServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -140,6 +146,151 @@ public interface ISubscriptionService
 
     /// <inheritdoc cref="UpdatePaymentMethod(SubscriptionUpdatePaymentMethodParams, CancellationToken)"/>
     Task<SubscriptionUpdatePaymentMethodResponse> UpdatePaymentMethod(
+        string subscriptionID,
+        SubscriptionUpdatePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="ISubscriptionService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface ISubscriptionServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    ISubscriptionServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /subscriptions`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.Create(SubscriptionCreateParams, CancellationToken)"/>.
+    /// </summary>
+    [Obsolete("deprecated")]
+    Task<HttpResponse<SubscriptionCreateResponse>> Create(
+        SubscriptionCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /subscriptions/{subscription_id}`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.Retrieve(SubscriptionRetrieveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Subscription>> Retrieve(
+        SubscriptionRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Retrieve(SubscriptionRetrieveParams, CancellationToken)"/>
+    Task<HttpResponse<Subscription>> Retrieve(
+        string subscriptionID,
+        SubscriptionRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `patch /subscriptions/{subscription_id}`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.Update(SubscriptionUpdateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Subscription>> Update(
+        SubscriptionUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Update(SubscriptionUpdateParams, CancellationToken)"/>
+    Task<HttpResponse<Subscription>> Update(
+        string subscriptionID,
+        SubscriptionUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /subscriptions`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.List(SubscriptionListParams?, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionListPage>> List(
+        SubscriptionListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /subscriptions/{subscription_id}/change-plan`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.ChangePlan(SubscriptionChangePlanParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse> ChangePlan(
+        SubscriptionChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ChangePlan(SubscriptionChangePlanParams, CancellationToken)"/>
+    Task<HttpResponse> ChangePlan(
+        string subscriptionID,
+        SubscriptionChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /subscriptions/{subscription_id}/charge`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.Charge(SubscriptionChargeParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionChargeResponse>> Charge(
+        SubscriptionChargeParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Charge(SubscriptionChargeParams, CancellationToken)"/>
+    Task<HttpResponse<SubscriptionChargeResponse>> Charge(
+        string subscriptionID,
+        SubscriptionChargeParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /subscriptions/{subscription_id}/change-plan/preview`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.PreviewChangePlan(SubscriptionPreviewChangePlanParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionPreviewChangePlanResponse>> PreviewChangePlan(
+        SubscriptionPreviewChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="PreviewChangePlan(SubscriptionPreviewChangePlanParams, CancellationToken)"/>
+    Task<HttpResponse<SubscriptionPreviewChangePlanResponse>> PreviewChangePlan(
+        string subscriptionID,
+        SubscriptionPreviewChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /subscriptions/{subscription_id}/usage-history`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.RetrieveUsageHistory(SubscriptionRetrieveUsageHistoryParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionRetrieveUsageHistoryPage>> RetrieveUsageHistory(
+        SubscriptionRetrieveUsageHistoryParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveUsageHistory(SubscriptionRetrieveUsageHistoryParams, CancellationToken)"/>
+    Task<HttpResponse<SubscriptionRetrieveUsageHistoryPage>> RetrieveUsageHistory(
+        string subscriptionID,
+        SubscriptionRetrieveUsageHistoryParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /subscriptions/{subscription_id}/update-payment-method`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.UpdatePaymentMethod(SubscriptionUpdatePaymentMethodParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionUpdatePaymentMethodResponse>> UpdatePaymentMethod(
+        SubscriptionUpdatePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="UpdatePaymentMethod(SubscriptionUpdatePaymentMethodParams, CancellationToken)"/>
+    Task<HttpResponse<SubscriptionUpdatePaymentMethodResponse>> UpdatePaymentMethod(
         string subscriptionID,
         SubscriptionUpdatePaymentMethodParams parameters,
         CancellationToken cancellationToken = default

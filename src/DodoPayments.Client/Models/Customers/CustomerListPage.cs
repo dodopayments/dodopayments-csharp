@@ -7,7 +7,7 @@ using DodoPayments.Client.Services;
 namespace DodoPayments.Client.Models.Customers;
 
 public sealed class CustomerListPage(
-    ICustomerService service,
+    ICustomerServiceWithRawResponse service,
     CustomerListParams parameters,
     CustomerListPageResponse response
 ) : IPage<Customer>
@@ -32,9 +32,10 @@ public sealed class CustomerListPage(
     public async Task<CustomerListPage> Next(CancellationToken cancellationToken = default)
     {
         var currentPageNumber = parameters.PageNumber ?? 1;
-        return await service
+        using var nextResponse = await service
             .List(parameters with { PageNumber = currentPageNumber + 1 }, cancellationToken)
             .ConfigureAwait(false);
+        return await nextResponse.Deserialize(cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>

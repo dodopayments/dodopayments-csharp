@@ -14,6 +14,12 @@ namespace DodoPayments.Client.Services;
 public interface IPayoutService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    IPayoutServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -21,6 +27,29 @@ public interface IPayoutService
     IPayoutService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<PayoutListPage> List(
+        PayoutListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="IPayoutService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface IPayoutServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IPayoutServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /payouts`, but is otherwise the
+    /// same as <see cref="IPayoutService.List(PayoutListParams?, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<PayoutListPage>> List(
         PayoutListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

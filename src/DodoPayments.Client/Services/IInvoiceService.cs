@@ -12,6 +12,12 @@ namespace DodoPayments.Client.Services;
 public interface IInvoiceService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    IInvoiceServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -19,4 +25,20 @@ public interface IInvoiceService
     IInvoiceService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Invoices::IPaymentService Payments { get; }
+}
+
+/// <summary>
+/// A view of <see cref="IInvoiceService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface IInvoiceServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IInvoiceServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    Invoices::IPaymentServiceWithRawResponse Payments { get; }
 }

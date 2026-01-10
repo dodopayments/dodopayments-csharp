@@ -7,7 +7,7 @@ using DodoPayments.Client.Services;
 namespace DodoPayments.Client.Models.Subscriptions;
 
 public sealed class SubscriptionRetrieveUsageHistoryPage(
-    ISubscriptionService service,
+    ISubscriptionServiceWithRawResponse service,
     SubscriptionRetrieveUsageHistoryParams parameters,
     SubscriptionRetrieveUsageHistoryPageResponse response
 ) : IPage<SubscriptionRetrieveUsageHistoryResponse>
@@ -36,7 +36,7 @@ public sealed class SubscriptionRetrieveUsageHistoryPage(
     )
     {
         var currentPageNumber = parameters.PageNumber ?? 1;
-        return await service
+        using var nextResponse = await service
             .RetrieveUsageHistory(
                 parameters with
                 {
@@ -45,6 +45,7 @@ public sealed class SubscriptionRetrieveUsageHistoryPage(
                 cancellationToken
             )
             .ConfigureAwait(false);
+        return await nextResponse.Deserialize(cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>

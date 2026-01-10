@@ -7,7 +7,7 @@ using DodoPayments.Client.Services.Customers.Wallets;
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
 public sealed class LedgerEntryListPage(
-    ILedgerEntryService service,
+    ILedgerEntryServiceWithRawResponse service,
     LedgerEntryListParams parameters,
     LedgerEntryListPageResponse response
 ) : IPage<CustomerWalletTransaction>
@@ -33,9 +33,10 @@ public sealed class LedgerEntryListPage(
     public async Task<LedgerEntryListPage> Next(CancellationToken cancellationToken = default)
     {
         var currentPageNumber = parameters.PageNumber ?? 1;
-        return await service
+        using var nextResponse = await service
             .List(parameters with { PageNumber = currentPageNumber + 1 }, cancellationToken)
             .ConfigureAwait(false);
+        return await nextResponse.Deserialize(cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>

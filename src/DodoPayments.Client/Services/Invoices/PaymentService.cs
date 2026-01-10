@@ -11,6 +11,16 @@ namespace DodoPayments.Client.Services.Invoices;
 /// <inheritdoc/>
 public sealed class PaymentService : global::DodoPayments.Client.Services.Invoices.IPaymentService
 {
+    readonly Lazy<global::DodoPayments.Client.Services.Invoices.IPaymentServiceWithRawResponse> _withRawResponse;
+
+    /// <inheritdoc/>
+    public global::DodoPayments.Client.Services.Invoices.IPaymentServiceWithRawResponse WithRawResponse
+    {
+        get { return _withRawResponse.Value; }
+    }
+
+    readonly IDodoPaymentsClient _client;
+
     /// <inheritdoc/>
     public global::DodoPayments.Client.Services.Invoices.IPaymentService WithOptions(
         Func<ClientOptions, ClientOptions> modifier
@@ -21,15 +31,83 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
         );
     }
 
-    readonly IDodoPaymentsClient _client;
-
     public PaymentService(IDodoPaymentsClient client)
+    {
+        _client = client;
+
+        _withRawResponse = new(() =>
+            new global::DodoPayments.Client.Services.Invoices.PaymentServiceWithRawResponse(
+                client.WithRawResponse
+            )
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> Retrieve(
+        PaymentRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.WithRawResponse.Retrieve(parameters, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> Retrieve(
+        string paymentID,
+        PaymentRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> RetrieveRefund(
+        PaymentRetrieveRefundParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.WithRawResponse.RetrieveRefund(parameters, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> RetrieveRefund(
+        string refundID,
+        PaymentRetrieveRefundParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveRefund(parameters with { RefundID = refundID }, cancellationToken);
+    }
+}
+
+/// <inheritdoc/>
+public sealed class PaymentServiceWithRawResponse
+    : global::DodoPayments.Client.Services.Invoices.IPaymentServiceWithRawResponse
+{
+    readonly IDodoPaymentsClientWithRawResponse _client;
+
+    /// <inheritdoc/>
+    public global::DodoPayments.Client.Services.Invoices.IPaymentServiceWithRawResponse WithOptions(
+        Func<ClientOptions, ClientOptions> modifier
+    )
+    {
+        return new global::DodoPayments.Client.Services.Invoices.PaymentServiceWithRawResponse(
+            this._client.WithOptions(modifier)
+        );
+    }
+
+    public PaymentServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
     {
         _client = client;
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse> Retrieve(
+    public Task<HttpResponse> Retrieve(
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -44,12 +122,11 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
-        return response;
+        return this._client.Execute(request, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse> Retrieve(
+    public Task<HttpResponse> Retrieve(
         string paymentID,
         PaymentRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -57,11 +134,11 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
     {
         parameters ??= new();
 
-        return await this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
+        return this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse> RetrieveRefund(
+    public Task<HttpResponse> RetrieveRefund(
         PaymentRetrieveRefundParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -76,12 +153,11 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
-        return response;
+        return this._client.Execute(request, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse> RetrieveRefund(
+    public Task<HttpResponse> RetrieveRefund(
         string refundID,
         PaymentRetrieveRefundParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -89,12 +165,6 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
     {
         parameters ??= new();
 
-        return await this.RetrieveRefund(
-            parameters with
-            {
-                RefundID = refundID,
-            },
-            cancellationToken
-        );
+        return this.RetrieveRefund(parameters with { RefundID = refundID }, cancellationToken);
     }
 }

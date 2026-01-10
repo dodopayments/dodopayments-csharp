@@ -15,6 +15,12 @@ namespace DodoPayments.Client.Services;
 public interface IMiscService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    IMiscServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -22,6 +28,29 @@ public interface IMiscService
     IMiscService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Task<List<ApiEnum<string, CountryCode>>> ListSupportedCountries(
+        MiscListSupportedCountriesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="IMiscService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface IMiscServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IMiscServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /checkout/supported_countries`, but is otherwise the
+    /// same as <see cref="IMiscService.ListSupportedCountries(MiscListSupportedCountriesParams?, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<List<ApiEnum<string, CountryCode>>>> ListSupportedCountries(
         MiscListSupportedCountriesParams? parameters = null,
         CancellationToken cancellationToken = default
     );

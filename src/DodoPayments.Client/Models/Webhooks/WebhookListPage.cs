@@ -9,7 +9,7 @@ using DodoPayments.Client.Services;
 namespace DodoPayments.Client.Models.Webhooks;
 
 public sealed class WebhookListPage(
-    IWebhookService service,
+    IWebhookServiceWithRawResponse service,
     WebhookListParams parameters,
     WebhookListPageResponse response
 ) : IPage<WebhookDetails>
@@ -45,9 +45,10 @@ public sealed class WebhookListPage(
     {
         var nextCursor =
             response.Iterator ?? throw new InvalidOperationException("Cannot request next page");
-        return await service
+        using var nextResponse = await service
             .List(parameters with { Iterator = nextCursor }, cancellationToken)
             .ConfigureAwait(false);
+        return await nextResponse.Deserialize(cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>

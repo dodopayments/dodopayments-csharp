@@ -11,17 +11,27 @@ namespace DodoPayments.Client.Services;
 /// <inheritdoc/>
 public sealed class PaymentService : IPaymentService
 {
+    readonly Lazy<IPaymentServiceWithRawResponse> _withRawResponse;
+
+    /// <inheritdoc/>
+    public IPaymentServiceWithRawResponse WithRawResponse
+    {
+        get { return _withRawResponse.Value; }
+    }
+
+    readonly IDodoPaymentsClient _client;
+
     /// <inheritdoc/>
     public IPaymentService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new PaymentService(this._client.WithOptions(modifier));
     }
 
-    readonly IDodoPaymentsClient _client;
-
     public PaymentService(IDodoPaymentsClient client)
     {
         _client = client;
+
+        _withRawResponse = new(() => new PaymentServiceWithRawResponse(client.WithRawResponse));
     }
 
     /// <inheritdoc/>
@@ -31,26 +41,120 @@ public sealed class PaymentService : IPaymentService
         CancellationToken cancellationToken = default
     )
     {
+        using var response = await this
+            .WithRawResponse.Create(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task<Payment> Retrieve(
+        PaymentRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Retrieve(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<Payment> Retrieve(
+        string paymentID,
+        PaymentRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<PaymentListPage> List(
+        PaymentListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.List(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
+        PaymentRetrieveLineItemsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.RetrieveLineItems(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
+        string paymentID,
+        PaymentRetrieveLineItemsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveLineItems(parameters with { PaymentID = paymentID }, cancellationToken);
+    }
+}
+
+/// <inheritdoc/>
+public sealed class PaymentServiceWithRawResponse : IPaymentServiceWithRawResponse
+{
+    readonly IDodoPaymentsClientWithRawResponse _client;
+
+    /// <inheritdoc/>
+    public IPaymentServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new PaymentServiceWithRawResponse(this._client.WithOptions(modifier));
+    }
+
+    public PaymentServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
+    {
+        _client = client;
+    }
+
+    /// <inheritdoc/>
+    [Obsolete("deprecated")]
+    public async Task<HttpResponse<PaymentCreateResponse>> Create(
+        PaymentCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
         HttpRequest<PaymentCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var payment = await response
-            .Deserialize<PaymentCreateResponse>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            payment.Validate();
-        }
-        return payment;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var payment = await response
+                    .Deserialize<PaymentCreateResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    payment.Validate();
+                }
+                return payment;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<Payment> Retrieve(
+    public async Task<HttpResponse<Payment>> Retrieve(
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -65,19 +169,23 @@ public sealed class PaymentService : IPaymentService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var payment = await response.Deserialize<Payment>(cancellationToken).ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            payment.Validate();
-        }
-        return payment;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var payment = await response.Deserialize<Payment>(token).ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    payment.Validate();
+                }
+                return payment;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<Payment> Retrieve(
+    public Task<HttpResponse<Payment>> Retrieve(
         string paymentID,
         PaymentRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -85,11 +193,11 @@ public sealed class PaymentService : IPaymentService
     {
         parameters ??= new();
 
-        return await this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
+        return this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<PaymentListPage> List(
+    public async Task<HttpResponse<PaymentListPage>> List(
         PaymentListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -101,21 +209,25 @@ public sealed class PaymentService : IPaymentService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var page = await response
-            .Deserialize<PaymentListPageResponse>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            page.Validate();
-        }
-        return new PaymentListPage(this, parameters, page);
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var page = await response
+                    .Deserialize<PaymentListPageResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    page.Validate();
+                }
+                return new PaymentListPage(this, parameters, page);
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
+    public async Task<HttpResponse<PaymentRetrieveLineItemsResponse>> RetrieveLineItems(
         PaymentRetrieveLineItemsParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -130,21 +242,25 @@ public sealed class PaymentService : IPaymentService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var deserializedResponse = await response
-            .Deserialize<PaymentRetrieveLineItemsResponse>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            deserializedResponse.Validate();
-        }
-        return deserializedResponse;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<PaymentRetrieveLineItemsResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
+    public Task<HttpResponse<PaymentRetrieveLineItemsResponse>> RetrieveLineItems(
         string paymentID,
         PaymentRetrieveLineItemsParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -152,12 +268,6 @@ public sealed class PaymentService : IPaymentService
     {
         parameters ??= new();
 
-        return await this.RetrieveLineItems(
-            parameters with
-            {
-                PaymentID = paymentID,
-            },
-            cancellationToken
-        );
+        return this.RetrieveLineItems(parameters with { PaymentID = paymentID }, cancellationToken);
     }
 }

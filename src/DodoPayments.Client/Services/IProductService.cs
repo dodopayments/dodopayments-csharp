@@ -15,6 +15,12 @@ namespace DodoPayments.Client.Services;
 public interface IProductService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    IProductServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -84,6 +90,122 @@ public interface IProductService
 
     /// <inheritdoc cref="UpdateFiles(ProductUpdateFilesParams, CancellationToken)"/>
     Task<ProductUpdateFilesResponse> UpdateFiles(
+        string id,
+        ProductUpdateFilesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="IProductService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface IProductServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IProductServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    IImageServiceWithRawResponse Images { get; }
+
+    IShortLinkServiceWithRawResponse ShortLinks { get; }
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /products`, but is otherwise the
+    /// same as <see cref="IProductService.Create(ProductCreateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Product>> Create(
+        ProductCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /products/{id}`, but is otherwise the
+    /// same as <see cref="IProductService.Retrieve(ProductRetrieveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Product>> Retrieve(
+        ProductRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Retrieve(ProductRetrieveParams, CancellationToken)"/>
+    Task<HttpResponse<Product>> Retrieve(
+        string id,
+        ProductRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `patch /products/{id}`, but is otherwise the
+    /// same as <see cref="IProductService.Update(ProductUpdateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse> Update(
+        ProductUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Update(ProductUpdateParams, CancellationToken)"/>
+    Task<HttpResponse> Update(
+        string id,
+        ProductUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /products`, but is otherwise the
+    /// same as <see cref="IProductService.List(ProductListParams?, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<ProductListPage>> List(
+        ProductListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `delete /products/{id}`, but is otherwise the
+    /// same as <see cref="IProductService.Archive(ProductArchiveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse> Archive(
+        ProductArchiveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Archive(ProductArchiveParams, CancellationToken)"/>
+    Task<HttpResponse> Archive(
+        string id,
+        ProductArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /products/{id}/unarchive`, but is otherwise the
+    /// same as <see cref="IProductService.Unarchive(ProductUnarchiveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse> Unarchive(
+        ProductUnarchiveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Unarchive(ProductUnarchiveParams, CancellationToken)"/>
+    Task<HttpResponse> Unarchive(
+        string id,
+        ProductUnarchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `put /products/{id}/files`, but is otherwise the
+    /// same as <see cref="IProductService.UpdateFiles(ProductUpdateFilesParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<ProductUpdateFilesResponse>> UpdateFiles(
+        ProductUpdateFilesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="UpdateFiles(ProductUpdateFilesParams, CancellationToken)"/>
+    Task<HttpResponse<ProductUpdateFilesResponse>> UpdateFiles(
         string id,
         ProductUpdateFilesParams parameters,
         CancellationToken cancellationToken = default

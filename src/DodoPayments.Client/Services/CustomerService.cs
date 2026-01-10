@@ -12,17 +12,27 @@ namespace DodoPayments.Client.Services;
 /// <inheritdoc/>
 public sealed class CustomerService : ICustomerService
 {
+    readonly Lazy<ICustomerServiceWithRawResponse> _withRawResponse;
+
+    /// <inheritdoc/>
+    public ICustomerServiceWithRawResponse WithRawResponse
+    {
+        get { return _withRawResponse.Value; }
+    }
+
+    readonly IDodoPaymentsClient _client;
+
     /// <inheritdoc/>
     public ICustomerService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new CustomerService(this._client.WithOptions(modifier));
     }
 
-    readonly IDodoPaymentsClient _client;
-
     public CustomerService(IDodoPaymentsClient client)
     {
         _client = client;
+
+        _withRawResponse = new(() => new CustomerServiceWithRawResponse(client.WithRawResponse));
         _customerPortal = new(() => new CustomerPortalService(client));
         _wallets = new(() => new WalletService(client));
     }
@@ -45,26 +55,162 @@ public sealed class CustomerService : ICustomerService
         CancellationToken cancellationToken = default
     )
     {
+        using var response = await this
+            .WithRawResponse.Create(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task<Customer> Retrieve(
+        CustomerRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Retrieve(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<Customer> Retrieve(
+        string customerID,
+        CustomerRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Retrieve(parameters with { CustomerID = customerID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<Customer> Update(
+        CustomerUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Update(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<Customer> Update(
+        string customerID,
+        CustomerUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Update(parameters with { CustomerID = customerID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<CustomerListPage> List(
+        CustomerListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.List(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
+        CustomerRetrievePaymentMethodsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.RetrievePaymentMethods(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
+        string customerID,
+        CustomerRetrievePaymentMethodsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrievePaymentMethods(
+            parameters with
+            {
+                CustomerID = customerID,
+            },
+            cancellationToken
+        );
+    }
+}
+
+/// <inheritdoc/>
+public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResponse
+{
+    readonly IDodoPaymentsClientWithRawResponse _client;
+
+    /// <inheritdoc/>
+    public ICustomerServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new CustomerServiceWithRawResponse(this._client.WithOptions(modifier));
+    }
+
+    public CustomerServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
+    {
+        _client = client;
+
+        _customerPortal = new(() => new CustomerPortalServiceWithRawResponse(client));
+        _wallets = new(() => new WalletServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<ICustomerPortalServiceWithRawResponse> _customerPortal;
+    public ICustomerPortalServiceWithRawResponse CustomerPortal
+    {
+        get { return _customerPortal.Value; }
+    }
+
+    readonly Lazy<IWalletServiceWithRawResponse> _wallets;
+    public IWalletServiceWithRawResponse Wallets
+    {
+        get { return _wallets.Value; }
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<Customer>> Create(
+        CustomerCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
         HttpRequest<CustomerCreateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var customer = await response
-            .Deserialize<Customer>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            customer.Validate();
-        }
-        return customer;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var customer = await response.Deserialize<Customer>(token).ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    customer.Validate();
+                }
+                return customer;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<Customer> Retrieve(
+    public async Task<HttpResponse<Customer>> Retrieve(
         CustomerRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -79,21 +225,23 @@ public sealed class CustomerService : ICustomerService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var customer = await response
-            .Deserialize<Customer>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            customer.Validate();
-        }
-        return customer;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var customer = await response.Deserialize<Customer>(token).ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    customer.Validate();
+                }
+                return customer;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<Customer> Retrieve(
+    public Task<HttpResponse<Customer>> Retrieve(
         string customerID,
         CustomerRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -101,11 +249,11 @@ public sealed class CustomerService : ICustomerService
     {
         parameters ??= new();
 
-        return await this.Retrieve(parameters with { CustomerID = customerID }, cancellationToken);
+        return this.Retrieve(parameters with { CustomerID = customerID }, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<Customer> Update(
+    public async Task<HttpResponse<Customer>> Update(
         CustomerUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -120,21 +268,23 @@ public sealed class CustomerService : ICustomerService
             Method = DodoPaymentsClient.PatchMethod,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var customer = await response
-            .Deserialize<Customer>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            customer.Validate();
-        }
-        return customer;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var customer = await response.Deserialize<Customer>(token).ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    customer.Validate();
+                }
+                return customer;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<Customer> Update(
+    public Task<HttpResponse<Customer>> Update(
         string customerID,
         CustomerUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -142,11 +292,11 @@ public sealed class CustomerService : ICustomerService
     {
         parameters ??= new();
 
-        return await this.Update(parameters with { CustomerID = customerID }, cancellationToken);
+        return this.Update(parameters with { CustomerID = customerID }, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<CustomerListPage> List(
+    public async Task<HttpResponse<CustomerListPage>> List(
         CustomerListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -158,21 +308,25 @@ public sealed class CustomerService : ICustomerService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var page = await response
-            .Deserialize<CustomerListPageResponse>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            page.Validate();
-        }
-        return new CustomerListPage(this, parameters, page);
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var page = await response
+                    .Deserialize<CustomerListPageResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    page.Validate();
+                }
+                return new CustomerListPage(this, parameters, page);
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
+    public async Task<HttpResponse<CustomerRetrievePaymentMethodsResponse>> RetrievePaymentMethods(
         CustomerRetrievePaymentMethodsParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -187,21 +341,25 @@ public sealed class CustomerService : ICustomerService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var deserializedResponse = await response
-            .Deserialize<CustomerRetrievePaymentMethodsResponse>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            deserializedResponse.Validate();
-        }
-        return deserializedResponse;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<CustomerRetrievePaymentMethodsResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
+    public Task<HttpResponse<CustomerRetrievePaymentMethodsResponse>> RetrievePaymentMethods(
         string customerID,
         CustomerRetrievePaymentMethodsParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -209,7 +367,7 @@ public sealed class CustomerService : ICustomerService
     {
         parameters ??= new();
 
-        return await this.RetrievePaymentMethods(
+        return this.RetrievePaymentMethods(
             parameters with
             {
                 CustomerID = customerID,

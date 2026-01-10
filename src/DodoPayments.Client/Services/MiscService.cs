@@ -11,21 +11,60 @@ namespace DodoPayments.Client.Services;
 /// <inheritdoc/>
 public sealed class MiscService : IMiscService
 {
+    readonly Lazy<IMiscServiceWithRawResponse> _withRawResponse;
+
+    /// <inheritdoc/>
+    public IMiscServiceWithRawResponse WithRawResponse
+    {
+        get { return _withRawResponse.Value; }
+    }
+
+    readonly IDodoPaymentsClient _client;
+
     /// <inheritdoc/>
     public IMiscService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new MiscService(this._client.WithOptions(modifier));
     }
 
-    readonly IDodoPaymentsClient _client;
-
     public MiscService(IDodoPaymentsClient client)
+    {
+        _client = client;
+
+        _withRawResponse = new(() => new MiscServiceWithRawResponse(client.WithRawResponse));
+    }
+
+    /// <inheritdoc/>
+    public async Task<List<ApiEnum<string, CountryCode>>> ListSupportedCountries(
+        MiscListSupportedCountriesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListSupportedCountries(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+}
+
+/// <inheritdoc/>
+public sealed class MiscServiceWithRawResponse : IMiscServiceWithRawResponse
+{
+    readonly IDodoPaymentsClientWithRawResponse _client;
+
+    /// <inheritdoc/>
+    public IMiscServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new MiscServiceWithRawResponse(this._client.WithOptions(modifier));
+    }
+
+    public MiscServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
     {
         _client = client;
     }
 
     /// <inheritdoc/>
-    public async Task<List<ApiEnum<string, CountryCode>>> ListSupportedCountries(
+    public async Task<HttpResponse<List<ApiEnum<string, CountryCode>>>> ListSupportedCountries(
         MiscListSupportedCountriesParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -37,19 +76,23 @@ public sealed class MiscService : IMiscService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var countryCodes = await response
-            .Deserialize<List<ApiEnum<string, CountryCode>>>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            foreach (var item in countryCodes)
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
             {
-                item.Validate();
+                var countryCodes = await response
+                    .Deserialize<List<ApiEnum<string, CountryCode>>>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    foreach (var item in countryCodes)
+                    {
+                        item.Validate();
+                    }
+                }
+                return countryCodes;
             }
-        }
-        return countryCodes;
+        );
     }
 }
