@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
@@ -43,4 +44,7 @@ public sealed class LicenseKeyListPage(
     {
         response.Validate();
     }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(this.Items, ModelBase.ToStringSerializerOptions);
 }
