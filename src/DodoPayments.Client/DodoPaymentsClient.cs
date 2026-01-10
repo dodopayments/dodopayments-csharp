@@ -14,17 +14,6 @@ namespace DodoPayments.Client;
 /// <inheritdoc/>
 public sealed class DodoPaymentsClient : IDodoPaymentsClient
 {
-#if NET
-    static readonly Random Random = Random.Shared;
-#else
-    static readonly ThreadLocal<Random> _threadLocalRandom = new(() => new Random());
-
-    static Random Random
-    {
-        get { return _threadLocalRandom.Value!; }
-    }
-#endif
-
     readonly ClientOptions _options;
 
     /// <inheritdoc/>
@@ -76,7 +65,13 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         init { this._options.WebhookKey = value; }
     }
 
-    internal static HttpMethod PatchMethod = new("PATCH");
+    readonly Lazy<IDodoPaymentsClientWithRawResponse> _withRawResponse;
+
+    /// <inheritdoc/>
+    public IDodoPaymentsClientWithRawResponse WithRawResponse
+    {
+        get { return _withRawResponse.Value; }
+    }
 
     /// <inheritdoc/>
     public IDodoPaymentsClient WithOptions(Func<ClientOptions, ClientOptions> modifier)
@@ -200,6 +195,237 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
 
     readonly Lazy<IMeterService> _meters;
     public IMeterService Meters
+    {
+        get { return _meters.Value; }
+    }
+
+    public void Dispose() => this.HttpClient.Dispose();
+
+    public DodoPaymentsClient()
+    {
+        _options = new();
+
+        _withRawResponse = new(() => new DodoPaymentsClientWithRawResponse(this._options));
+        _checkoutSessions = new(() => new CheckoutSessionService(this));
+        _payments = new(() => new PaymentService(this));
+        _subscriptions = new(() => new SubscriptionService(this));
+        _invoices = new(() => new InvoiceService(this));
+        _licenses = new(() => new LicenseService(this));
+        _licenseKeys = new(() => new LicenseKeyService(this));
+        _licenseKeyInstances = new(() => new LicenseKeyInstanceService(this));
+        _customers = new(() => new CustomerService(this));
+        _refunds = new(() => new RefundService(this));
+        _disputes = new(() => new DisputeService(this));
+        _payouts = new(() => new PayoutService(this));
+        _products = new(() => new ProductService(this));
+        _misc = new(() => new MiscService(this));
+        _discounts = new(() => new DiscountService(this));
+        _addons = new(() => new AddonService(this));
+        _brands = new(() => new BrandService(this));
+        _webhooks = new(() => new WebhookService(this));
+        _webhookEvents = new(() => new WebhookEventService(this));
+        _usageEvents = new(() => new UsageEventService(this));
+        _meters = new(() => new MeterService(this));
+    }
+
+    public DodoPaymentsClient(ClientOptions options)
+        : this()
+    {
+        _options = options;
+    }
+}
+
+/// <inheritdoc/>
+public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithRawResponse
+{
+#if NET
+    static readonly Random Random = Random.Shared;
+#else
+    static readonly ThreadLocal<Random> _threadLocalRandom = new(() => new Random());
+
+    static Random Random
+    {
+        get { return _threadLocalRandom.Value!; }
+    }
+#endif
+
+    internal static HttpMethod PatchMethod = new("PATCH");
+
+    readonly ClientOptions _options;
+
+    /// <inheritdoc/>
+    public HttpClient HttpClient
+    {
+        get { return this._options.HttpClient; }
+        init { this._options.HttpClient = value; }
+    }
+
+    /// <inheritdoc/>
+    public string BaseUrl
+    {
+        get { return this._options.BaseUrl; }
+        init { this._options.BaseUrl = value; }
+    }
+
+    /// <inheritdoc/>
+    public bool ResponseValidation
+    {
+        get { return this._options.ResponseValidation; }
+        init { this._options.ResponseValidation = value; }
+    }
+
+    /// <inheritdoc/>
+    public int? MaxRetries
+    {
+        get { return this._options.MaxRetries; }
+        init { this._options.MaxRetries = value; }
+    }
+
+    /// <inheritdoc/>
+    public TimeSpan? Timeout
+    {
+        get { return this._options.Timeout; }
+        init { this._options.Timeout = value; }
+    }
+
+    /// <inheritdoc/>
+    public string BearerToken
+    {
+        get { return this._options.BearerToken; }
+        init { this._options.BearerToken = value; }
+    }
+
+    /// <inheritdoc/>
+    public string? WebhookKey
+    {
+        get { return this._options.WebhookKey; }
+        init { this._options.WebhookKey = value; }
+    }
+
+    /// <inheritdoc/>
+    public IDodoPaymentsClientWithRawResponse WithOptions(
+        Func<ClientOptions, ClientOptions> modifier
+    )
+    {
+        return new DodoPaymentsClientWithRawResponse(modifier(this._options));
+    }
+
+    readonly Lazy<ICheckoutSessionServiceWithRawResponse> _checkoutSessions;
+    public ICheckoutSessionServiceWithRawResponse CheckoutSessions
+    {
+        get { return _checkoutSessions.Value; }
+    }
+
+    readonly Lazy<IPaymentServiceWithRawResponse> _payments;
+    public IPaymentServiceWithRawResponse Payments
+    {
+        get { return _payments.Value; }
+    }
+
+    readonly Lazy<ISubscriptionServiceWithRawResponse> _subscriptions;
+    public ISubscriptionServiceWithRawResponse Subscriptions
+    {
+        get { return _subscriptions.Value; }
+    }
+
+    readonly Lazy<IInvoiceServiceWithRawResponse> _invoices;
+    public IInvoiceServiceWithRawResponse Invoices
+    {
+        get { return _invoices.Value; }
+    }
+
+    readonly Lazy<ILicenseServiceWithRawResponse> _licenses;
+    public ILicenseServiceWithRawResponse Licenses
+    {
+        get { return _licenses.Value; }
+    }
+
+    readonly Lazy<ILicenseKeyServiceWithRawResponse> _licenseKeys;
+    public ILicenseKeyServiceWithRawResponse LicenseKeys
+    {
+        get { return _licenseKeys.Value; }
+    }
+
+    readonly Lazy<ILicenseKeyInstanceServiceWithRawResponse> _licenseKeyInstances;
+    public ILicenseKeyInstanceServiceWithRawResponse LicenseKeyInstances
+    {
+        get { return _licenseKeyInstances.Value; }
+    }
+
+    readonly Lazy<ICustomerServiceWithRawResponse> _customers;
+    public ICustomerServiceWithRawResponse Customers
+    {
+        get { return _customers.Value; }
+    }
+
+    readonly Lazy<IRefundServiceWithRawResponse> _refunds;
+    public IRefundServiceWithRawResponse Refunds
+    {
+        get { return _refunds.Value; }
+    }
+
+    readonly Lazy<IDisputeServiceWithRawResponse> _disputes;
+    public IDisputeServiceWithRawResponse Disputes
+    {
+        get { return _disputes.Value; }
+    }
+
+    readonly Lazy<IPayoutServiceWithRawResponse> _payouts;
+    public IPayoutServiceWithRawResponse Payouts
+    {
+        get { return _payouts.Value; }
+    }
+
+    readonly Lazy<IProductServiceWithRawResponse> _products;
+    public IProductServiceWithRawResponse Products
+    {
+        get { return _products.Value; }
+    }
+
+    readonly Lazy<IMiscServiceWithRawResponse> _misc;
+    public IMiscServiceWithRawResponse Misc
+    {
+        get { return _misc.Value; }
+    }
+
+    readonly Lazy<IDiscountServiceWithRawResponse> _discounts;
+    public IDiscountServiceWithRawResponse Discounts
+    {
+        get { return _discounts.Value; }
+    }
+
+    readonly Lazy<IAddonServiceWithRawResponse> _addons;
+    public IAddonServiceWithRawResponse Addons
+    {
+        get { return _addons.Value; }
+    }
+
+    readonly Lazy<IBrandServiceWithRawResponse> _brands;
+    public IBrandServiceWithRawResponse Brands
+    {
+        get { return _brands.Value; }
+    }
+
+    readonly Lazy<IWebhookServiceWithRawResponse> _webhooks;
+    public IWebhookServiceWithRawResponse Webhooks
+    {
+        get { return _webhooks.Value; }
+    }
+
+    readonly Lazy<IWebhookEventServiceWithRawResponse> _webhookEvents;
+    public IWebhookEventServiceWithRawResponse WebhookEvents
+    {
+        get { return _webhookEvents.Value; }
+    }
+
+    readonly Lazy<IUsageEventServiceWithRawResponse> _usageEvents;
+    public IUsageEventServiceWithRawResponse UsageEvents
+    {
+        get { return _usageEvents.Value; }
+    }
+
+    readonly Lazy<IMeterServiceWithRawResponse> _meters;
+    public IMeterServiceWithRawResponse Meters
     {
         get { return _meters.Value; }
     }
@@ -394,33 +620,33 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
 
     public void Dispose() => this.HttpClient.Dispose();
 
-    public DodoPaymentsClient()
+    public DodoPaymentsClientWithRawResponse()
     {
         _options = new();
 
-        _checkoutSessions = new(() => new CheckoutSessionService(this));
-        _payments = new(() => new PaymentService(this));
-        _subscriptions = new(() => new SubscriptionService(this));
-        _invoices = new(() => new InvoiceService(this));
-        _licenses = new(() => new LicenseService(this));
-        _licenseKeys = new(() => new LicenseKeyService(this));
-        _licenseKeyInstances = new(() => new LicenseKeyInstanceService(this));
-        _customers = new(() => new CustomerService(this));
-        _refunds = new(() => new RefundService(this));
-        _disputes = new(() => new DisputeService(this));
-        _payouts = new(() => new PayoutService(this));
-        _products = new(() => new ProductService(this));
-        _misc = new(() => new MiscService(this));
-        _discounts = new(() => new DiscountService(this));
-        _addons = new(() => new AddonService(this));
-        _brands = new(() => new BrandService(this));
-        _webhooks = new(() => new WebhookService(this));
-        _webhookEvents = new(() => new WebhookEventService(this));
-        _usageEvents = new(() => new UsageEventService(this));
-        _meters = new(() => new MeterService(this));
+        _checkoutSessions = new(() => new CheckoutSessionServiceWithRawResponse(this));
+        _payments = new(() => new PaymentServiceWithRawResponse(this));
+        _subscriptions = new(() => new SubscriptionServiceWithRawResponse(this));
+        _invoices = new(() => new InvoiceServiceWithRawResponse(this));
+        _licenses = new(() => new LicenseServiceWithRawResponse(this));
+        _licenseKeys = new(() => new LicenseKeyServiceWithRawResponse(this));
+        _licenseKeyInstances = new(() => new LicenseKeyInstanceServiceWithRawResponse(this));
+        _customers = new(() => new CustomerServiceWithRawResponse(this));
+        _refunds = new(() => new RefundServiceWithRawResponse(this));
+        _disputes = new(() => new DisputeServiceWithRawResponse(this));
+        _payouts = new(() => new PayoutServiceWithRawResponse(this));
+        _products = new(() => new ProductServiceWithRawResponse(this));
+        _misc = new(() => new MiscServiceWithRawResponse(this));
+        _discounts = new(() => new DiscountServiceWithRawResponse(this));
+        _addons = new(() => new AddonServiceWithRawResponse(this));
+        _brands = new(() => new BrandServiceWithRawResponse(this));
+        _webhooks = new(() => new WebhookServiceWithRawResponse(this));
+        _webhookEvents = new(() => new WebhookEventServiceWithRawResponse(this));
+        _usageEvents = new(() => new UsageEventServiceWithRawResponse(this));
+        _meters = new(() => new MeterServiceWithRawResponse(this));
     }
 
-    public DodoPaymentsClient(ClientOptions options)
+    public DodoPaymentsClientWithRawResponse(ClientOptions options)
         : this()
     {
         _options = options;

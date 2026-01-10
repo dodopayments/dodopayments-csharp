@@ -14,6 +14,12 @@ namespace DodoPayments.Client.Services.Products;
 public interface IImageService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    IImageServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -27,6 +33,36 @@ public interface IImageService
 
     /// <inheritdoc cref="Update(ImageUpdateParams, CancellationToken)"/>
     Task<ImageUpdateResponse> Update(
+        string id,
+        ImageUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="IImageService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface IImageServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IImageServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Returns a raw HTTP response for `put /products/{id}/images`, but is otherwise the
+    /// same as <see cref="IImageService.Update(ImageUpdateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<ImageUpdateResponse>> Update(
+        ImageUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Update(ImageUpdateParams, CancellationToken)"/>
+    Task<HttpResponse<ImageUpdateResponse>> Update(
         string id,
         ImageUpdateParams? parameters = null,
         CancellationToken cancellationToken = default

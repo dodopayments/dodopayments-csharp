@@ -7,7 +7,7 @@ using DodoPayments.Client.Services;
 namespace DodoPayments.Client.Models.LicenseKeys;
 
 public sealed class LicenseKeyListPage(
-    ILicenseKeyService service,
+    ILicenseKeyServiceWithRawResponse service,
     LicenseKeyListParams parameters,
     LicenseKeyListPageResponse response
 ) : IPage<LicenseKey>
@@ -32,9 +32,10 @@ public sealed class LicenseKeyListPage(
     public async Task<LicenseKeyListPage> Next(CancellationToken cancellationToken = default)
     {
         var currentPageNumber = parameters.PageNumber ?? 1;
-        return await service
+        using var nextResponse = await service
             .List(parameters with { PageNumber = currentPageNumber + 1 }, cancellationToken)
             .ConfigureAwait(false);
+        return await nextResponse.Deserialize(cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>

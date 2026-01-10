@@ -14,6 +14,12 @@ namespace DodoPayments.Client.Services;
 public interface ICheckoutSessionService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    ICheckoutSessionServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
@@ -32,6 +38,45 @@ public interface ICheckoutSessionService
 
     /// <inheritdoc cref="Retrieve(CheckoutSessionRetrieveParams, CancellationToken)"/>
     Task<CheckoutSessionStatus> Retrieve(
+        string id,
+        CheckoutSessionRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="ICheckoutSessionService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface ICheckoutSessionServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    ICheckoutSessionServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /checkouts`, but is otherwise the
+    /// same as <see cref="ICheckoutSessionService.Create(CheckoutSessionCreateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CheckoutSessionResponse>> Create(
+        CheckoutSessionCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /checkouts/{id}`, but is otherwise the
+    /// same as <see cref="ICheckoutSessionService.Retrieve(CheckoutSessionRetrieveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CheckoutSessionStatus>> Retrieve(
+        CheckoutSessionRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Retrieve(CheckoutSessionRetrieveParams, CancellationToken)"/>
+    Task<HttpResponse<CheckoutSessionStatus>> Retrieve(
         string id,
         CheckoutSessionRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default

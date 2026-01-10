@@ -11,21 +11,95 @@ namespace DodoPayments.Client.Services.Webhooks;
 /// <inheritdoc/>
 public sealed class HeaderService : IHeaderService
 {
+    readonly Lazy<IHeaderServiceWithRawResponse> _withRawResponse;
+
+    /// <inheritdoc/>
+    public IHeaderServiceWithRawResponse WithRawResponse
+    {
+        get { return _withRawResponse.Value; }
+    }
+
+    readonly IDodoPaymentsClient _client;
+
     /// <inheritdoc/>
     public IHeaderService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new HeaderService(this._client.WithOptions(modifier));
     }
 
-    readonly IDodoPaymentsClient _client;
-
     public HeaderService(IDodoPaymentsClient client)
+    {
+        _client = client;
+
+        _withRawResponse = new(() => new HeaderServiceWithRawResponse(client.WithRawResponse));
+    }
+
+    /// <inheritdoc/>
+    public async Task<HeaderRetrieveResponse> Retrieve(
+        HeaderRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Retrieve(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<HeaderRetrieveResponse> Retrieve(
+        string webhookID,
+        HeaderRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Retrieve(parameters with { WebhookID = webhookID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task Update(
+        HeaderUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Update(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task Update(
+        string webhookID,
+        HeaderUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        await this.Update(parameters with { WebhookID = webhookID }, cancellationToken)
+            .ConfigureAwait(false);
+    }
+}
+
+/// <inheritdoc/>
+public sealed class HeaderServiceWithRawResponse : IHeaderServiceWithRawResponse
+{
+    readonly IDodoPaymentsClientWithRawResponse _client;
+
+    /// <inheritdoc/>
+    public IHeaderServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new HeaderServiceWithRawResponse(this._client.WithOptions(modifier));
+    }
+
+    public HeaderServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
     {
         _client = client;
     }
 
     /// <inheritdoc/>
-    public async Task<HeaderRetrieveResponse> Retrieve(
+    public async Task<HttpResponse<HeaderRetrieveResponse>> Retrieve(
         HeaderRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -40,21 +114,25 @@ public sealed class HeaderService : IHeaderService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var header = await response
-            .Deserialize<HeaderRetrieveResponse>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            header.Validate();
-        }
-        return header;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var header = await response
+                    .Deserialize<HeaderRetrieveResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    header.Validate();
+                }
+                return header;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<HeaderRetrieveResponse> Retrieve(
+    public Task<HttpResponse<HeaderRetrieveResponse>> Retrieve(
         string webhookID,
         HeaderRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -62,11 +140,11 @@ public sealed class HeaderService : IHeaderService
     {
         parameters ??= new();
 
-        return await this.Retrieve(parameters with { WebhookID = webhookID }, cancellationToken);
+        return this.Retrieve(parameters with { WebhookID = webhookID }, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task Update(
+    public Task<HttpResponse> Update(
         HeaderUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -81,18 +159,16 @@ public sealed class HeaderService : IHeaderService
             Method = DodoPaymentsClient.PatchMethod,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
+        return this._client.Execute(request, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task Update(
+    public Task<HttpResponse> Update(
         string webhookID,
         HeaderUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        await this.Update(parameters with { WebhookID = webhookID }, cancellationToken);
+        return this.Update(parameters with { WebhookID = webhookID }, cancellationToken);
     }
 }

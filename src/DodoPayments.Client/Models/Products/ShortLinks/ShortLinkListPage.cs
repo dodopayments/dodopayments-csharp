@@ -7,7 +7,7 @@ using DodoPayments.Client.Services.Products;
 namespace DodoPayments.Client.Models.Products.ShortLinks;
 
 public sealed class ShortLinkListPage(
-    IShortLinkService service,
+    IShortLinkServiceWithRawResponse service,
     ShortLinkListParams parameters,
     ShortLinkListPageResponse response
 ) : IPage<ShortLinkListResponse>
@@ -33,9 +33,10 @@ public sealed class ShortLinkListPage(
     public async Task<ShortLinkListPage> Next(CancellationToken cancellationToken = default)
     {
         var currentPageNumber = parameters.PageNumber ?? 1;
-        return await service
+        using var nextResponse = await service
             .List(parameters with { PageNumber = currentPageNumber + 1 }, cancellationToken)
             .ConfigureAwait(false);
+        return await nextResponse.Deserialize(cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>

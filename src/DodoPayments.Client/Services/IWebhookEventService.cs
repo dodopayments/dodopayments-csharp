@@ -11,9 +11,29 @@ namespace DodoPayments.Client.Services;
 public interface IWebhookEventService
 {
     /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    IWebhookEventServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
     /// </summary>
     IWebhookEventService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+}
+
+/// <summary>
+/// A view of <see cref="IWebhookEventService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface IWebhookEventServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IWebhookEventServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 }

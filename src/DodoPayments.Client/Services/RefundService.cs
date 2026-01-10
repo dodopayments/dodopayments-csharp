@@ -11,21 +11,96 @@ namespace DodoPayments.Client.Services;
 /// <inheritdoc/>
 public sealed class RefundService : IRefundService
 {
+    readonly Lazy<IRefundServiceWithRawResponse> _withRawResponse;
+
+    /// <inheritdoc/>
+    public IRefundServiceWithRawResponse WithRawResponse
+    {
+        get { return _withRawResponse.Value; }
+    }
+
+    readonly IDodoPaymentsClient _client;
+
     /// <inheritdoc/>
     public IRefundService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new RefundService(this._client.WithOptions(modifier));
     }
 
-    readonly IDodoPaymentsClient _client;
-
     public RefundService(IDodoPaymentsClient client)
+    {
+        _client = client;
+
+        _withRawResponse = new(() => new RefundServiceWithRawResponse(client.WithRawResponse));
+    }
+
+    /// <inheritdoc/>
+    public async Task<Refund> Create(
+        RefundCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Create(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task<Refund> Retrieve(
+        RefundRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Retrieve(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<Refund> Retrieve(
+        string refundID,
+        RefundRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Retrieve(parameters with { RefundID = refundID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<RefundListPage> List(
+        RefundListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.List(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+}
+
+/// <inheritdoc/>
+public sealed class RefundServiceWithRawResponse : IRefundServiceWithRawResponse
+{
+    readonly IDodoPaymentsClientWithRawResponse _client;
+
+    /// <inheritdoc/>
+    public IRefundServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new RefundServiceWithRawResponse(this._client.WithOptions(modifier));
+    }
+
+    public RefundServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
     {
         _client = client;
     }
 
     /// <inheritdoc/>
-    public async Task<Refund> Create(
+    public async Task<HttpResponse<Refund>> Create(
         RefundCreateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -35,19 +110,23 @@ public sealed class RefundService : IRefundService
             Method = HttpMethod.Post,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var refund = await response.Deserialize<Refund>(cancellationToken).ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            refund.Validate();
-        }
-        return refund;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var refund = await response.Deserialize<Refund>(token).ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    refund.Validate();
+                }
+                return refund;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<Refund> Retrieve(
+    public async Task<HttpResponse<Refund>> Retrieve(
         RefundRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -62,19 +141,23 @@ public sealed class RefundService : IRefundService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var refund = await response.Deserialize<Refund>(cancellationToken).ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            refund.Validate();
-        }
-        return refund;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var refund = await response.Deserialize<Refund>(token).ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    refund.Validate();
+                }
+                return refund;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<Refund> Retrieve(
+    public Task<HttpResponse<Refund>> Retrieve(
         string refundID,
         RefundRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -82,11 +165,11 @@ public sealed class RefundService : IRefundService
     {
         parameters ??= new();
 
-        return await this.Retrieve(parameters with { RefundID = refundID }, cancellationToken);
+        return this.Retrieve(parameters with { RefundID = refundID }, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<RefundListPage> List(
+    public async Task<HttpResponse<RefundListPage>> List(
         RefundListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -98,16 +181,20 @@ public sealed class RefundService : IRefundService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var page = await response
-            .Deserialize<RefundListPageResponse>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            page.Validate();
-        }
-        return new RefundListPage(this, parameters, page);
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var page = await response
+                    .Deserialize<RefundListPageResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    page.Validate();
+                }
+                return new RefundListPage(this, parameters, page);
+            }
+        );
     }
 }

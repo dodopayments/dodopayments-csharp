@@ -12,17 +12,27 @@ namespace DodoPayments.Client.Services.Customers;
 /// <inheritdoc/>
 public sealed class WalletService : IWalletService
 {
+    readonly Lazy<IWalletServiceWithRawResponse> _withRawResponse;
+
+    /// <inheritdoc/>
+    public IWalletServiceWithRawResponse WithRawResponse
+    {
+        get { return _withRawResponse.Value; }
+    }
+
+    readonly IDodoPaymentsClient _client;
+
     /// <inheritdoc/>
     public IWalletService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
         return new WalletService(this._client.WithOptions(modifier));
     }
 
-    readonly IDodoPaymentsClient _client;
-
     public WalletService(IDodoPaymentsClient client)
     {
         _client = client;
+
+        _withRawResponse = new(() => new WalletServiceWithRawResponse(client.WithRawResponse));
         _ledgerEntries = new(() => new LedgerEntryService(client));
     }
 
@@ -38,6 +48,55 @@ public sealed class WalletService : IWalletService
         CancellationToken cancellationToken = default
     )
     {
+        using var response = await this
+            .WithRawResponse.List(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<WalletListResponse> List(
+        string customerID,
+        WalletListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.List(parameters with { CustomerID = customerID }, cancellationToken);
+    }
+}
+
+/// <inheritdoc/>
+public sealed class WalletServiceWithRawResponse : IWalletServiceWithRawResponse
+{
+    readonly IDodoPaymentsClientWithRawResponse _client;
+
+    /// <inheritdoc/>
+    public IWalletServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier)
+    {
+        return new WalletServiceWithRawResponse(this._client.WithOptions(modifier));
+    }
+
+    public WalletServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
+    {
+        _client = client;
+
+        _ledgerEntries = new(() => new LedgerEntryServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<ILedgerEntryServiceWithRawResponse> _ledgerEntries;
+    public ILedgerEntryServiceWithRawResponse LedgerEntries
+    {
+        get { return _ledgerEntries.Value; }
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<WalletListResponse>> List(
+        WalletListParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
         if (parameters.CustomerID == null)
         {
             throw new DodoPaymentsInvalidDataException("'parameters.CustomerID' cannot be null");
@@ -48,21 +107,25 @@ public sealed class WalletService : IWalletService
             Method = HttpMethod.Get,
             Params = parameters,
         };
-        using var response = await this
-            ._client.Execute(request, cancellationToken)
-            .ConfigureAwait(false);
-        var wallets = await response
-            .Deserialize<WalletListResponse>(cancellationToken)
-            .ConfigureAwait(false);
-        if (this._client.ResponseValidation)
-        {
-            wallets.Validate();
-        }
-        return wallets;
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var wallets = await response
+                    .Deserialize<WalletListResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    wallets.Validate();
+                }
+                return wallets;
+            }
+        );
     }
 
     /// <inheritdoc/>
-    public async Task<WalletListResponse> List(
+    public Task<HttpResponse<WalletListResponse>> List(
         string customerID,
         WalletListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -70,6 +133,6 @@ public sealed class WalletService : IWalletService
     {
         parameters ??= new();
 
-        return await this.List(parameters with { CustomerID = customerID }, cancellationToken);
+        return this.List(parameters with { CustomerID = customerID }, cancellationToken);
     }
 }
