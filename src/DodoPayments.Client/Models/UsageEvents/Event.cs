@@ -110,7 +110,7 @@ class EventFromRaw : IFromRawJson<Event>
 /// Metadata value can be a string, integer, number, or boolean
 /// </summary>
 [JsonConverter(typeof(MetadataConverter))]
-public record class Metadata
+public record class Metadata : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -299,7 +299,7 @@ public record class Metadata
     /// Thrown when the instance does not pass validation.
     /// </exception>
     /// </summary>
-    public void Validate()
+    public override void Validate()
     {
         if (this.Value == null)
         {
