@@ -188,10 +188,10 @@ public record class Clauses : ModelBase
     {
         switch (this.Value)
         {
-            case List<MeterFilterCondition> value:
+            case IReadOnlyList<MeterFilterCondition> value:
                 directFilterConditions(value);
                 break;
-            case List<ClausesMeterFilter> value:
+            case IReadOnlyList<ClausesMeterFilter> value:
                 nestedMeterFilters(value);
                 break;
             default:
@@ -926,10 +926,10 @@ public record class ClausesMeterFilterClauses : ModelBase
     {
         switch (this.Value)
         {
-            case List<ClausesMeterFilterClausesMeterFilterCondition> value:
+            case IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition> value:
                 level1FilterConditions(value);
                 break;
-            case List<ClausesMeterFilterClausesMeterFilter> value:
+            case IReadOnlyList<ClausesMeterFilterClausesMeterFilter> value:
                 level1NestedFilters(value);
                 break;
             default:
@@ -1736,10 +1736,10 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
     {
         switch (this.Value)
         {
-            case List<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value:
+            case IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value:
                 level2FilterConditions(value);
                 break;
-            case List<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value:
+            case IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value:
                 level2NestedFilters(value);
                 break;
             default:
