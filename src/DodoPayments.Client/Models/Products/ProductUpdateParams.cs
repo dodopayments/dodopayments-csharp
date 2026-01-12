@@ -188,6 +188,8 @@ public sealed record class ProductUpdateParams : ParamsBase
     public ProductUpdateParams(ProductUpdateParams productUpdateParams)
         : base(productUpdateParams)
     {
+        this.ID = productUpdateParams.ID;
+
         this._rawBodyData = [.. productUpdateParams._rawBodyData];
     }
 

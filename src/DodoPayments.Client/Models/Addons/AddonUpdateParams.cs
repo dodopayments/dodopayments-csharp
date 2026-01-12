@@ -91,6 +91,8 @@ public sealed record class AddonUpdateParams : ParamsBase
     public AddonUpdateParams(AddonUpdateParams addonUpdateParams)
         : base(addonUpdateParams)
     {
+        this.ID = addonUpdateParams.ID;
+
         this._rawBodyData = [.. addonUpdateParams._rawBodyData];
     }
 

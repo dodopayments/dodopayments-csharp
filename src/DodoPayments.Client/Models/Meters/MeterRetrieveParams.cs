@@ -15,7 +15,10 @@ public sealed record class MeterRetrieveParams : ParamsBase
     public MeterRetrieveParams() { }
 
     public MeterRetrieveParams(MeterRetrieveParams meterRetrieveParams)
-        : base(meterRetrieveParams) { }
+        : base(meterRetrieveParams)
+    {
+        this.ID = meterRetrieveParams.ID;
+    }
 
     public MeterRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

@@ -52,6 +52,8 @@ public sealed record class ShortLinkCreateParams : ParamsBase
     public ShortLinkCreateParams(ShortLinkCreateParams shortLinkCreateParams)
         : base(shortLinkCreateParams)
     {
+        this.ID = shortLinkCreateParams.ID;
+
         this._rawBodyData = [.. shortLinkCreateParams._rawBodyData];
     }
 

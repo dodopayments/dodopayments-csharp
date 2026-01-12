@@ -18,7 +18,10 @@ public sealed record class WebhookDeleteParams : ParamsBase
     public WebhookDeleteParams() { }
 
     public WebhookDeleteParams(WebhookDeleteParams webhookDeleteParams)
-        : base(webhookDeleteParams) { }
+        : base(webhookDeleteParams)
+    {
+        this.WebhookID = webhookDeleteParams.WebhookID;
+    }
 
     public WebhookDeleteParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

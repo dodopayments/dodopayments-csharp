@@ -15,7 +15,10 @@ public sealed record class BrandUpdateImagesParams : ParamsBase
     public BrandUpdateImagesParams() { }
 
     public BrandUpdateImagesParams(BrandUpdateImagesParams brandUpdateImagesParams)
-        : base(brandUpdateImagesParams) { }
+        : base(brandUpdateImagesParams)
+    {
+        this.ID = brandUpdateImagesParams.ID;
+    }
 
     public BrandUpdateImagesParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

@@ -15,7 +15,10 @@ public sealed record class AddonUpdateImagesParams : ParamsBase
     public AddonUpdateImagesParams() { }
 
     public AddonUpdateImagesParams(AddonUpdateImagesParams addonUpdateImagesParams)
-        : base(addonUpdateImagesParams) { }
+        : base(addonUpdateImagesParams)
+    {
+        this.ID = addonUpdateImagesParams.ID;
+    }
 
     public AddonUpdateImagesParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

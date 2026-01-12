@@ -103,6 +103,8 @@ public sealed record class DiscountUpdateParams : ParamsBase
     public DiscountUpdateParams(DiscountUpdateParams discountUpdateParams)
         : base(discountUpdateParams)
     {
+        this.DiscountID = discountUpdateParams.DiscountID;
+
         this._rawBodyData = [.. discountUpdateParams._rawBodyData];
     }
 

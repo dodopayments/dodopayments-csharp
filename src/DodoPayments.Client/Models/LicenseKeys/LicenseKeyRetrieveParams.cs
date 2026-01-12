@@ -15,7 +15,10 @@ public sealed record class LicenseKeyRetrieveParams : ParamsBase
     public LicenseKeyRetrieveParams() { }
 
     public LicenseKeyRetrieveParams(LicenseKeyRetrieveParams licenseKeyRetrieveParams)
-        : base(licenseKeyRetrieveParams) { }
+        : base(licenseKeyRetrieveParams)
+    {
+        this.ID = licenseKeyRetrieveParams.ID;
+    }
 
     public LicenseKeyRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

@@ -17,7 +17,10 @@ public sealed record class CustomerRetrievePaymentMethodsParams : ParamsBase
     public CustomerRetrievePaymentMethodsParams(
         CustomerRetrievePaymentMethodsParams customerRetrievePaymentMethodsParams
     )
-        : base(customerRetrievePaymentMethodsParams) { }
+        : base(customerRetrievePaymentMethodsParams)
+    {
+        this.CustomerID = customerRetrievePaymentMethodsParams.CustomerID;
+    }
 
     public CustomerRetrievePaymentMethodsParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
