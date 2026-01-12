@@ -107,6 +107,8 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     public SubscriptionUpdateParams(SubscriptionUpdateParams subscriptionUpdateParams)
         : base(subscriptionUpdateParams)
     {
+        this.SubscriptionID = subscriptionUpdateParams.SubscriptionID;
+
         this._rawBodyData = [.. subscriptionUpdateParams._rawBodyData];
     }
 

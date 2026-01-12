@@ -32,7 +32,10 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
     public CustomerPortalCreateParams() { }
 
     public CustomerPortalCreateParams(CustomerPortalCreateParams customerPortalCreateParams)
-        : base(customerPortalCreateParams) { }
+        : base(customerPortalCreateParams)
+    {
+        this.CustomerID = customerPortalCreateParams.CustomerID;
+    }
 
     public CustomerPortalCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

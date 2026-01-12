@@ -67,7 +67,10 @@ public sealed record class LedgerEntryListParams : ParamsBase
     public LedgerEntryListParams() { }
 
     public LedgerEntryListParams(LedgerEntryListParams ledgerEntryListParams)
-        : base(ledgerEntryListParams) { }
+        : base(ledgerEntryListParams)
+    {
+        this.CustomerID = ledgerEntryListParams.CustomerID;
+    }
 
     public LedgerEntryListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

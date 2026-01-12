@@ -96,6 +96,8 @@ public sealed record class WebhookUpdateParams : ParamsBase
     public WebhookUpdateParams(WebhookUpdateParams webhookUpdateParams)
         : base(webhookUpdateParams)
     {
+        this.WebhookID = webhookUpdateParams.WebhookID;
+
         this._rawBodyData = [.. webhookUpdateParams._rawBodyData];
     }
 

@@ -78,6 +78,8 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     public LedgerEntryCreateParams(LedgerEntryCreateParams ledgerEntryCreateParams)
         : base(ledgerEntryCreateParams)
     {
+        this.CustomerID = ledgerEntryCreateParams.CustomerID;
+
         this._rawBodyData = [.. ledgerEntryCreateParams._rawBodyData];
     }
 

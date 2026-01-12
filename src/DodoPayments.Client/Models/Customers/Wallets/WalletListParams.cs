@@ -15,7 +15,10 @@ public sealed record class WalletListParams : ParamsBase
     public WalletListParams() { }
 
     public WalletListParams(WalletListParams walletListParams)
-        : base(walletListParams) { }
+        : base(walletListParams)
+    {
+        this.CustomerID = walletListParams.CustomerID;
+    }
 
     public WalletListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

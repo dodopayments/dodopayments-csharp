@@ -72,6 +72,8 @@ public sealed record class SubscriptionPreviewChangePlanParams : ParamsBase
     )
         : base(subscriptionPreviewChangePlanParams)
     {
+        this.SubscriptionID = subscriptionPreviewChangePlanParams.SubscriptionID;
+
         this._rawBodyData = [.. subscriptionPreviewChangePlanParams._rawBodyData];
     }
 

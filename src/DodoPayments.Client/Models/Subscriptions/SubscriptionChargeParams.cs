@@ -110,6 +110,8 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     public SubscriptionChargeParams(SubscriptionChargeParams subscriptionChargeParams)
         : base(subscriptionChargeParams)
     {
+        this.SubscriptionID = subscriptionChargeParams.SubscriptionID;
+
         this._rawBodyData = [.. subscriptionChargeParams._rawBodyData];
     }
 

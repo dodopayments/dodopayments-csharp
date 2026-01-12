@@ -18,7 +18,10 @@ public sealed record class BrandRetrieveParams : ParamsBase
     public BrandRetrieveParams() { }
 
     public BrandRetrieveParams(BrandRetrieveParams brandRetrieveParams)
-        : base(brandRetrieveParams) { }
+        : base(brandRetrieveParams)
+    {
+        this.ID = brandRetrieveParams.ID;
+    }
 
     public BrandRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

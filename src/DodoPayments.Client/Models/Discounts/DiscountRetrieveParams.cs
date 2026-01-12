@@ -18,7 +18,10 @@ public sealed record class DiscountRetrieveParams : ParamsBase
     public DiscountRetrieveParams() { }
 
     public DiscountRetrieveParams(DiscountRetrieveParams discountRetrieveParams)
-        : base(discountRetrieveParams) { }
+        : base(discountRetrieveParams)
+    {
+        this.DiscountID = discountRetrieveParams.DiscountID;
+    }
 
     public DiscountRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

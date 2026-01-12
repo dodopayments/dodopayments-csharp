@@ -15,7 +15,10 @@ public sealed record class AddonRetrieveParams : ParamsBase
     public AddonRetrieveParams() { }
 
     public AddonRetrieveParams(AddonRetrieveParams addonRetrieveParams)
-        : base(addonRetrieveParams) { }
+        : base(addonRetrieveParams)
+    {
+        this.ID = addonRetrieveParams.ID;
+    }
 
     public AddonRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

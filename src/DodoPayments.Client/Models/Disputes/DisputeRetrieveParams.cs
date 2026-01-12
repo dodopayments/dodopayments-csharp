@@ -15,7 +15,10 @@ public sealed record class DisputeRetrieveParams : ParamsBase
     public DisputeRetrieveParams() { }
 
     public DisputeRetrieveParams(DisputeRetrieveParams disputeRetrieveParams)
-        : base(disputeRetrieveParams) { }
+        : base(disputeRetrieveParams)
+    {
+        this.DisputeID = disputeRetrieveParams.DisputeID;
+    }
 
     public DisputeRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
