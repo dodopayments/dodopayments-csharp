@@ -26,6 +26,9 @@ public interface IPayoutService
     /// </summary>
     IPayoutService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>get /payouts<c/>.
+    /// </summary>
     Task<PayoutListPage> List(
         PayoutListParams? parameters = null,
         CancellationToken cancellationToken = default

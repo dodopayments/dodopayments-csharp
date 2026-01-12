@@ -26,6 +26,9 @@ public interface IImageService
     /// </summary>
     IImageService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>put /products/{id}/images<c/>.
+    /// </summary>
     Task<ImageUpdateResponse> Update(
         ImageUpdateParams parameters,
         CancellationToken cancellationToken = default

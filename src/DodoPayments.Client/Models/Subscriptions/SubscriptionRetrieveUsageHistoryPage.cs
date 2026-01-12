@@ -7,6 +7,9 @@ using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
+/// <summary>
+/// A single page from the paginated endpoint that <see cref="ISubscriptionService.RetrieveUsageHistory(SubscriptionRetrieveUsageHistoryParams, CancellationToken)"/> queries.
+/// </summary>
 public sealed class SubscriptionRetrieveUsageHistoryPage(
     ISubscriptionServiceWithRawResponse service,
     SubscriptionRetrieveUsageHistoryParams parameters,

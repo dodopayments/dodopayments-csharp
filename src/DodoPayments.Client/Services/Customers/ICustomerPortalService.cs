@@ -27,6 +27,9 @@ public interface ICustomerPortalService
     /// </summary>
     ICustomerPortalService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>post /customers/{customer_id}/customer-portal/session<c/>.
+    /// </summary>
     Task<CustomerPortalSession> Create(
         CustomerPortalCreateParams parameters,
         CancellationToken cancellationToken = default

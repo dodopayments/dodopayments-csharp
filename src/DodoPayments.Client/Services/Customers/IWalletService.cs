@@ -29,6 +29,9 @@ public interface IWalletService
 
     ILedgerEntryService LedgerEntries { get; }
 
+    /// <summary>
+    /// Sends a request to <c>get /customers/{customer_id}/wallets<c/>.
+    /// </summary>
     Task<WalletListResponse> List(
         WalletListParams parameters,
         CancellationToken cancellationToken = default

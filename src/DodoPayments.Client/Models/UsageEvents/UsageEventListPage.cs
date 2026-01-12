@@ -7,6 +7,9 @@ using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client.Models.UsageEvents;
 
+/// <summary>
+/// A single page from the paginated endpoint that <see cref="IUsageEventService.List(UsageEventListParams, CancellationToken)"/> queries.
+/// </summary>
 public sealed class UsageEventListPage(
     IUsageEventServiceWithRawResponse service,
     UsageEventListParams parameters,

@@ -7,6 +7,9 @@ using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client.Models.Disputes;
 
+/// <summary>
+/// A single page from the paginated endpoint that <see cref="IDisputeService.List(DisputeListParams, CancellationToken)"/> queries.
+/// </summary>
 public sealed class DisputeListPage(
     IDisputeServiceWithRawResponse service,
     DisputeListParams parameters,

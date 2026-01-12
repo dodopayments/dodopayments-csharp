@@ -26,12 +26,18 @@ public interface IPaymentService
     /// </summary>
     IPaymentService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>post /payments<c/>.
+    /// </summary>
     [Obsolete("deprecated")]
     Task<PaymentCreateResponse> Create(
         PaymentCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /payments/{payment_id}<c/>.
+    /// </summary>
     Task<Payment> Retrieve(
         PaymentRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -44,11 +50,17 @@ public interface IPaymentService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /payments<c/>.
+    /// </summary>
     Task<PaymentListPage> List(
         PaymentListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /payments/{payment_id}/line-items<c/>.
+    /// </summary>
     Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
         PaymentRetrieveLineItemsParams parameters,
         CancellationToken cancellationToken = default

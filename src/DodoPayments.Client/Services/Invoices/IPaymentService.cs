@@ -29,7 +29,9 @@ public interface IPaymentService
     );
 
     /// <summary>
-    /// It's the caller's responsibility to dispose the returned response.
+    /// Sends a request to <c>get /invoices/payments/{payment_id}<c/>.
+    ///
+    /// <para>It's the caller's responsibility to dispose the returned response.</para>
     /// </summary>
     Task<HttpResponse> Retrieve(
         PaymentRetrieveParams parameters,
@@ -44,7 +46,9 @@ public interface IPaymentService
     );
 
     /// <summary>
-    /// It's the caller's responsibility to dispose the returned response.
+    /// Sends a request to <c>get /invoices/refunds/{refund_id}<c/>.
+    ///
+    /// <para>It's the caller's responsibility to dispose the returned response.</para>
     /// </summary>
     Task<HttpResponse> RetrieveRefund(
         PaymentRetrieveRefundParams parameters,

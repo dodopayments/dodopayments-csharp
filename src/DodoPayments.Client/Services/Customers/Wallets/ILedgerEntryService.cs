@@ -27,6 +27,9 @@ public interface ILedgerEntryService
     /// </summary>
     ILedgerEntryService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>post /customers/{customer_id}/wallets/ledger-entries<c/>.
+    /// </summary>
     Task<CustomerWallet> Create(
         LedgerEntryCreateParams parameters,
         CancellationToken cancellationToken = default
@@ -39,6 +42,9 @@ public interface ILedgerEntryService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /customers/{customer_id}/wallets/ledger-entries<c/>.
+    /// </summary>
     Task<LedgerEntryListPage> List(
         LedgerEntryListParams parameters,
         CancellationToken cancellationToken = default
