@@ -26,12 +26,18 @@ public interface ISubscriptionService
     /// </summary>
     ISubscriptionService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>post /subscriptions<c/>.
+    /// </summary>
     [Obsolete("deprecated")]
     Task<SubscriptionCreateResponse> Create(
         SubscriptionCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /subscriptions/{subscription_id}<c/>.
+    /// </summary>
     Task<Subscription> Retrieve(
         SubscriptionRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -44,6 +50,9 @@ public interface ISubscriptionService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>patch /subscriptions/{subscription_id}<c/>.
+    /// </summary>
     Task<Subscription> Update(
         SubscriptionUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -56,11 +65,17 @@ public interface ISubscriptionService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /subscriptions<c/>.
+    /// </summary>
     Task<SubscriptionListPage> List(
         SubscriptionListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>post /subscriptions/{subscription_id}/change-plan<c/>.
+    /// </summary>
     Task ChangePlan(
         SubscriptionChangePlanParams parameters,
         CancellationToken cancellationToken = default
@@ -73,6 +88,9 @@ public interface ISubscriptionService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>post /subscriptions/{subscription_id}/charge<c/>.
+    /// </summary>
     Task<SubscriptionChargeResponse> Charge(
         SubscriptionChargeParams parameters,
         CancellationToken cancellationToken = default
@@ -85,6 +103,9 @@ public interface ISubscriptionService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>post /subscriptions/{subscription_id}/change-plan/preview<c/>.
+    /// </summary>
     Task<SubscriptionPreviewChangePlanResponse> PreviewChangePlan(
         SubscriptionPreviewChangePlanParams parameters,
         CancellationToken cancellationToken = default
@@ -139,6 +160,9 @@ public interface ISubscriptionService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>post /subscriptions/{subscription_id}/update-payment-method<c/>.
+    /// </summary>
     Task<SubscriptionUpdatePaymentMethodResponse> UpdatePaymentMethod(
         SubscriptionUpdatePaymentMethodParams parameters,
         CancellationToken cancellationToken = default

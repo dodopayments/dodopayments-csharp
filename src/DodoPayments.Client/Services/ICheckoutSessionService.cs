@@ -26,11 +26,17 @@ public interface ICheckoutSessionService
     /// </summary>
     ICheckoutSessionService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>post /checkouts<c/>.
+    /// </summary>
     Task<CheckoutSessionResponse> Create(
         CheckoutSessionCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /checkouts/{id}<c/>.
+    /// </summary>
     Task<CheckoutSessionStatus> Retrieve(
         CheckoutSessionRetrieveParams parameters,
         CancellationToken cancellationToken = default

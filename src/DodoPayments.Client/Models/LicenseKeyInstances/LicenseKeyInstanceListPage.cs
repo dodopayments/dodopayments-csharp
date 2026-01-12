@@ -7,6 +7,9 @@ using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client.Models.LicenseKeyInstances;
 
+/// <summary>
+/// A single page from the paginated endpoint that <see cref="ILicenseKeyInstanceService.List(LicenseKeyInstanceListParams, CancellationToken)"/> queries.
+/// </summary>
 public sealed class LicenseKeyInstanceListPage(
     ILicenseKeyInstanceServiceWithRawResponse service,
     LicenseKeyInstanceListParams parameters,

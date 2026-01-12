@@ -7,6 +7,9 @@ using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client.Models.Products;
 
+/// <summary>
+/// A single page from the paginated endpoint that <see cref="IProductService.List(ProductListParams, CancellationToken)"/> queries.
+/// </summary>
 public sealed class ProductListPage(
     IProductServiceWithRawResponse service,
     ProductListParams parameters,

@@ -26,6 +26,9 @@ public interface IDisputeService
     /// </summary>
     IDisputeService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>get /disputes/{dispute_id}<c/>.
+    /// </summary>
     Task<GetDispute> Retrieve(
         DisputeRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -38,6 +41,9 @@ public interface IDisputeService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /disputes<c/>.
+    /// </summary>
     Task<DisputeListPage> List(
         DisputeListParams? parameters = null,
         CancellationToken cancellationToken = default

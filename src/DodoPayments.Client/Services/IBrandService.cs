@@ -26,6 +26,9 @@ public interface IBrandService
     /// </summary>
     IBrandService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>post /brands<c/>.
+    /// </summary>
     Task<Brand> Create(
         BrandCreateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -46,6 +49,9 @@ public interface IBrandService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>patch /brands/{id}<c/>.
+    /// </summary>
     Task<Brand> Update(BrandUpdateParams parameters, CancellationToken cancellationToken = default);
 
     /// <inheritdoc cref="Update(BrandUpdateParams, CancellationToken)"/>
@@ -55,11 +61,17 @@ public interface IBrandService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /brands<c/>.
+    /// </summary>
     Task<BrandListResponse> List(
         BrandListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>put /brands/{id}/images<c/>.
+    /// </summary>
     Task<BrandUpdateImagesResponse> UpdateImages(
         BrandUpdateImagesParams parameters,
         CancellationToken cancellationToken = default

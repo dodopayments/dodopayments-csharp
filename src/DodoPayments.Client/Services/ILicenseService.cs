@@ -26,16 +26,25 @@ public interface ILicenseService
     /// </summary>
     ILicenseService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>post /licenses/activate<c/>.
+    /// </summary>
     Task<LicenseActivateResponse> Activate(
         LicenseActivateParams parameters,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>post /licenses/deactivate<c/>.
+    /// </summary>
     Task Deactivate(
         LicenseDeactivateParams parameters,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>post /licenses/validate<c/>.
+    /// </summary>
     Task<LicenseValidateResponse> Validate(
         LicenseValidateParams parameters,
         CancellationToken cancellationToken = default

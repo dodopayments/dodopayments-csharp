@@ -26,6 +26,9 @@ public interface ILicenseKeyService
     /// </summary>
     ILicenseKeyService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>get /license_keys/{id}<c/>.
+    /// </summary>
     Task<LicenseKey> Retrieve(
         LicenseKeyRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -38,6 +41,9 @@ public interface ILicenseKeyService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>patch /license_keys/{id}<c/>.
+    /// </summary>
     Task<LicenseKey> Update(
         LicenseKeyUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -50,6 +56,9 @@ public interface ILicenseKeyService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /license_keys<c/>.
+    /// </summary>
     Task<LicenseKeyListPage> List(
         LicenseKeyListParams? parameters = null,
         CancellationToken cancellationToken = default

@@ -26,11 +26,17 @@ public interface IAddonService
     /// </summary>
     IAddonService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>post /addons<c/>.
+    /// </summary>
     Task<AddonResponse> Create(
         AddonCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /addons/{id}<c/>.
+    /// </summary>
     Task<AddonResponse> Retrieve(
         AddonRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -43,6 +49,9 @@ public interface IAddonService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>patch /addons/{id}<c/>.
+    /// </summary>
     Task<AddonResponse> Update(
         AddonUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -55,11 +64,17 @@ public interface IAddonService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /addons<c/>.
+    /// </summary>
     Task<AddonListPage> List(
         AddonListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>put /addons/{id}/images<c/>.
+    /// </summary>
     Task<AddonUpdateImagesResponse> UpdateImages(
         AddonUpdateImagesParams parameters,
         CancellationToken cancellationToken = default
