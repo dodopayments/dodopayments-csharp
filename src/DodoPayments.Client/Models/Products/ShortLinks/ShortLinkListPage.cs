@@ -7,6 +7,9 @@ using DodoPayments.Client.Services.Products;
 
 namespace DodoPayments.Client.Models.Products.ShortLinks;
 
+/// <summary>
+/// A single page from the paginated endpoint that <see cref="IShortLinkService.List(ShortLinkListParams, CancellationToken)"/> queries.
+/// </summary>
 public sealed class ShortLinkListPage(
     IShortLinkServiceWithRawResponse service,
     ShortLinkListParams parameters,

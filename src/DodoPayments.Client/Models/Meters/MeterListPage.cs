@@ -7,6 +7,9 @@ using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client.Models.Meters;
 
+/// <summary>
+/// A single page from the paginated endpoint that <see cref="IMeterService.List(MeterListParams, CancellationToken)"/> queries.
+/// </summary>
 public sealed class MeterListPage(
     IMeterServiceWithRawResponse service,
     MeterListParams parameters,

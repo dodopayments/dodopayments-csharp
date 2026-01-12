@@ -26,11 +26,17 @@ public interface IRefundService
     /// </summary>
     IRefundService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>post /refunds<c/>.
+    /// </summary>
     Task<Refund> Create(
         RefundCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /refunds/{refund_id}<c/>.
+    /// </summary>
     Task<Refund> Retrieve(
         RefundRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -43,6 +49,9 @@ public interface IRefundService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /refunds<c/>.
+    /// </summary>
     Task<RefundListPage> List(
         RefundListParams? parameters = null,
         CancellationToken cancellationToken = default

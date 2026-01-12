@@ -31,11 +31,17 @@ public interface IProductService
 
     IShortLinkService ShortLinks { get; }
 
+    /// <summary>
+    /// Sends a request to <c>post /products<c/>.
+    /// </summary>
     Task<Product> Create(
         ProductCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /products/{id}<c/>.
+    /// </summary>
     Task<Product> Retrieve(
         ProductRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -48,6 +54,9 @@ public interface IProductService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>patch /products/{id}<c/>.
+    /// </summary>
     Task Update(ProductUpdateParams parameters, CancellationToken cancellationToken = default);
 
     /// <inheritdoc cref="Update(ProductUpdateParams, CancellationToken)"/>
@@ -57,11 +66,17 @@ public interface IProductService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /products<c/>.
+    /// </summary>
     Task<ProductListPage> List(
         ProductListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>delete /products/{id}<c/>.
+    /// </summary>
     Task Archive(ProductArchiveParams parameters, CancellationToken cancellationToken = default);
 
     /// <inheritdoc cref="Archive(ProductArchiveParams, CancellationToken)"/>
@@ -71,6 +86,9 @@ public interface IProductService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>post /products/{id}/unarchive<c/>.
+    /// </summary>
     Task Unarchive(
         ProductUnarchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -83,6 +101,9 @@ public interface IProductService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>put /products/{id}/files<c/>.
+    /// </summary>
     Task<ProductUpdateFilesResponse> UpdateFiles(
         ProductUpdateFilesParams parameters,
         CancellationToken cancellationToken = default

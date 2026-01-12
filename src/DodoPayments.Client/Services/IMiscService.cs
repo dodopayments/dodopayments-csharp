@@ -27,6 +27,9 @@ public interface IMiscService
     /// </summary>
     IMiscService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>get /checkout/supported_countries<c/>.
+    /// </summary>
     Task<List<ApiEnum<string, CountryCode>>> ListSupportedCountries(
         MiscListSupportedCountriesParams? parameters = null,
         CancellationToken cancellationToken = default

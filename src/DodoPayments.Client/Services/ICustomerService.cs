@@ -31,11 +31,17 @@ public interface ICustomerService
 
     IWalletService Wallets { get; }
 
+    /// <summary>
+    /// Sends a request to <c>post /customers<c/>.
+    /// </summary>
     Task<Customer> Create(
         CustomerCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /customers/{customer_id}<c/>.
+    /// </summary>
     Task<Customer> Retrieve(
         CustomerRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -48,6 +54,9 @@ public interface ICustomerService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>patch /customers/{customer_id}<c/>.
+    /// </summary>
     Task<Customer> Update(
         CustomerUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -60,11 +69,17 @@ public interface ICustomerService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /customers<c/>.
+    /// </summary>
     Task<CustomerListPage> List(
         CustomerListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /customers/{customer_id}/payment-methods<c/>.
+    /// </summary>
     Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
         CustomerRetrievePaymentMethodsParams parameters,
         CancellationToken cancellationToken = default

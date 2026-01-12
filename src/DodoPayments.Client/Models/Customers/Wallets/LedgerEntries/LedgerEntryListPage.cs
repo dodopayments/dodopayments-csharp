@@ -7,6 +7,9 @@ using DodoPayments.Client.Services.Customers.Wallets;
 
 namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
+/// <summary>
+/// A single page from the paginated endpoint that <see cref="ILedgerEntryService.List(LedgerEntryListParams, CancellationToken)"/> queries.
+/// </summary>
 public sealed class LedgerEntryListPage(
     ILedgerEntryServiceWithRawResponse service,
     LedgerEntryListParams parameters,

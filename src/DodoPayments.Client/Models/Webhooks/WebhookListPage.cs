@@ -9,6 +9,9 @@ using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
+/// <summary>
+/// A single page from the paginated endpoint that <see cref="IWebhookService.List(WebhookListParams, CancellationToken)"/> queries.
+/// </summary>
 public sealed class WebhookListPage(
     IWebhookServiceWithRawResponse service,
     WebhookListParams parameters,

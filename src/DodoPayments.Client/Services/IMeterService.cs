@@ -26,8 +26,14 @@ public interface IMeterService
     /// </summary>
     IMeterService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    /// <summary>
+    /// Sends a request to <c>post /meters<c/>.
+    /// </summary>
     Task<Meter> Create(MeterCreateParams parameters, CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// Sends a request to <c>get /meters/{id}<c/>.
+    /// </summary>
     Task<Meter> Retrieve(
         MeterRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -40,11 +46,17 @@ public interface IMeterService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>get /meters<c/>.
+    /// </summary>
     Task<MeterListPage> List(
         MeterListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>delete /meters/{id}<c/>.
+    /// </summary>
     Task Archive(MeterArchiveParams parameters, CancellationToken cancellationToken = default);
 
     /// <inheritdoc cref="Archive(MeterArchiveParams, CancellationToken)"/>
@@ -54,6 +66,9 @@ public interface IMeterService
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Sends a request to <c>post /meters/{id}/unarchive<c/>.
+    /// </summary>
     Task Unarchive(MeterUnarchiveParams parameters, CancellationToken cancellationToken = default);
 
     /// <inheritdoc cref="Unarchive(MeterUnarchiveParams, CancellationToken)"/>

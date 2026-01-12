@@ -7,6 +7,9 @@ using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client.Models.Refunds;
 
+/// <summary>
+/// A single page from the paginated endpoint that <see cref="IRefundService.List(RefundListParams, CancellationToken)"/> queries.
+/// </summary>
 public sealed class RefundListPage(
     IRefundServiceWithRawResponse service,
     RefundListParams parameters,
