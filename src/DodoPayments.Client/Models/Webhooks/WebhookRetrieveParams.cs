@@ -18,7 +18,10 @@ public sealed record class WebhookRetrieveParams : ParamsBase
     public WebhookRetrieveParams() { }
 
     public WebhookRetrieveParams(WebhookRetrieveParams webhookRetrieveParams)
-        : base(webhookRetrieveParams) { }
+        : base(webhookRetrieveParams)
+    {
+        this.WebhookID = webhookRetrieveParams.WebhookID;
+    }
 
     public WebhookRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

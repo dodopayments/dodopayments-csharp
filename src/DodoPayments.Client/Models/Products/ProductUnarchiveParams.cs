@@ -15,7 +15,10 @@ public sealed record class ProductUnarchiveParams : ParamsBase
     public ProductUnarchiveParams() { }
 
     public ProductUnarchiveParams(ProductUnarchiveParams productUnarchiveParams)
-        : base(productUnarchiveParams) { }
+        : base(productUnarchiveParams)
+    {
+        this.ID = productUnarchiveParams.ID;
+    }
 
     public ProductUnarchiveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

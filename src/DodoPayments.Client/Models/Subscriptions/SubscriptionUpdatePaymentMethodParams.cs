@@ -34,6 +34,8 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     )
         : base(subscriptionUpdatePaymentMethodParams)
     {
+        this.SubscriptionID = subscriptionUpdatePaymentMethodParams.SubscriptionID;
+
         this._rawBodyData = [.. subscriptionUpdatePaymentMethodParams._rawBodyData];
     }
 

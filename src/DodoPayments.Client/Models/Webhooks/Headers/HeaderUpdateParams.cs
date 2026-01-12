@@ -42,6 +42,8 @@ public sealed record class HeaderUpdateParams : ParamsBase
     public HeaderUpdateParams(HeaderUpdateParams headerUpdateParams)
         : base(headerUpdateParams)
     {
+        this.WebhookID = headerUpdateParams.WebhookID;
+
         this._rawBodyData = [.. headerUpdateParams._rawBodyData];
     }
 

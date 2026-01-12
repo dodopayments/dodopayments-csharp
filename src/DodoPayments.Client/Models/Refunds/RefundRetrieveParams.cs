@@ -15,7 +15,10 @@ public sealed record class RefundRetrieveParams : ParamsBase
     public RefundRetrieveParams() { }
 
     public RefundRetrieveParams(RefundRetrieveParams refundRetrieveParams)
-        : base(refundRetrieveParams) { }
+        : base(refundRetrieveParams)
+    {
+        this.RefundID = refundRetrieveParams.RefundID;
+    }
 
     public RefundRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

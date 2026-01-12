@@ -18,7 +18,10 @@ public sealed record class DiscountDeleteParams : ParamsBase
     public DiscountDeleteParams() { }
 
     public DiscountDeleteParams(DiscountDeleteParams discountDeleteParams)
-        : base(discountDeleteParams) { }
+        : base(discountDeleteParams)
+    {
+        this.DiscountID = discountDeleteParams.DiscountID;
+    }
 
     public DiscountDeleteParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

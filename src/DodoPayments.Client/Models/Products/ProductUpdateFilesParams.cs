@@ -30,6 +30,8 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
     public ProductUpdateFilesParams(ProductUpdateFilesParams productUpdateFilesParams)
         : base(productUpdateFilesParams)
     {
+        this.ID = productUpdateFilesParams.ID;
+
         this._rawBodyData = [.. productUpdateFilesParams._rawBodyData];
     }
 

@@ -17,7 +17,10 @@ public sealed record class CheckoutSessionRetrieveParams : ParamsBase
     public CheckoutSessionRetrieveParams(
         CheckoutSessionRetrieveParams checkoutSessionRetrieveParams
     )
-        : base(checkoutSessionRetrieveParams) { }
+        : base(checkoutSessionRetrieveParams)
+    {
+        this.ID = checkoutSessionRetrieveParams.ID;
+    }
 
     public CheckoutSessionRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

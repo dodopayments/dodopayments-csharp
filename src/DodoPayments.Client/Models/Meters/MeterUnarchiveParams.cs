@@ -15,7 +15,10 @@ public sealed record class MeterUnarchiveParams : ParamsBase
     public MeterUnarchiveParams() { }
 
     public MeterUnarchiveParams(MeterUnarchiveParams meterUnarchiveParams)
-        : base(meterUnarchiveParams) { }
+        : base(meterUnarchiveParams)
+    {
+        this.ID = meterUnarchiveParams.ID;
+    }
 
     public MeterUnarchiveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,

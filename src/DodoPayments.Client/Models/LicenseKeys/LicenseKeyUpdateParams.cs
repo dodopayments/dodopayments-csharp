@@ -54,6 +54,8 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     public LicenseKeyUpdateParams(LicenseKeyUpdateParams licenseKeyUpdateParams)
         : base(licenseKeyUpdateParams)
     {
+        this.ID = licenseKeyUpdateParams.ID;
+
         this._rawBodyData = [.. licenseKeyUpdateParams._rawBodyData];
     }
 
