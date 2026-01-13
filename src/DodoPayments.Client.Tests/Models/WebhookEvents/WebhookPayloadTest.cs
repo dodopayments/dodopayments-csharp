@@ -2462,7 +2462,7 @@ public class PayloadTypeTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
 
@@ -2490,7 +2490,7 @@ public class PayloadTypeTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
+            JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
@@ -3335,10 +3335,7 @@ public class SubscriptionIntersectionMember1PayloadTypeTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
@@ -3364,10 +3361,7 @@ public class SubscriptionIntersectionMember1PayloadTypeTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
@@ -3895,10 +3889,7 @@ public class RefundIntersectionMember1PayloadTypeTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, RefundIntersectionMember1PayloadType>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
@@ -3924,10 +3915,7 @@ public class RefundIntersectionMember1PayloadTypeTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, RefundIntersectionMember1PayloadType>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, RefundIntersectionMember1PayloadType>
@@ -4327,10 +4315,7 @@ public class DisputeIntersectionMember1PayloadTypeTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, DisputeIntersectionMember1PayloadType>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
@@ -4356,10 +4341,7 @@ public class DisputeIntersectionMember1PayloadTypeTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, DisputeIntersectionMember1PayloadType>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, DisputeIntersectionMember1PayloadType>
@@ -4701,10 +4683,7 @@ public class LicenseKeyIntersectionMember1PayloadTypeTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
@@ -4730,10 +4709,7 @@ public class LicenseKeyIntersectionMember1PayloadTypeTest : TestBase
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
