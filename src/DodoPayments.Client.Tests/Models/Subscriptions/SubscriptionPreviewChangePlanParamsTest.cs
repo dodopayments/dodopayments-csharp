@@ -119,10 +119,7 @@ public class SubscriptionPreviewChangePlanParamsProrationBillingModeTest : TestB
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionPreviewChangePlanParamsProrationBillingMode>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
@@ -152,10 +149,7 @@ public class SubscriptionPreviewChangePlanParamsProrationBillingModeTest : TestB
     {
         var value = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionPreviewChangePlanParamsProrationBillingMode>
-        >(
-            JsonSerializer.Deserialize<JsonElement>("\"invalid value\""),
-            ModelBase.SerializerOptions
-        );
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionPreviewChangePlanParamsProrationBillingMode>
