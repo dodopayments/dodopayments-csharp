@@ -21,7 +21,11 @@ public sealed record class SubscriptionPreviewChangePlanResponse : JsonModel
 {
     public required ImmediateCharge ImmediateCharge
     {
-        get { return this._rawData.GetNotNullClass<ImmediateCharge>("immediate_charge"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ImmediateCharge>("immediate_charge");
+        }
         init { this._rawData.Set("immediate_charge", value); }
     }
 
@@ -30,7 +34,11 @@ public sealed record class SubscriptionPreviewChangePlanResponse : JsonModel
     /// </summary>
     public required Subscription NewPlan
     {
-        get { return this._rawData.GetNotNullClass<Subscription>("new_plan"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Subscription>("new_plan");
+        }
         init { this._rawData.Set("new_plan", value); }
     }
 
@@ -84,7 +92,11 @@ public sealed record class ImmediateCharge : JsonModel
 {
     public required IReadOnlyList<LineItem> LineItems
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<LineItem>>("line_items"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<LineItem>>("line_items");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<LineItem>>(
@@ -96,7 +108,11 @@ public sealed record class ImmediateCharge : JsonModel
 
     public required Summary Summary
     {
-        get { return this._rawData.GetNotNullClass<Summary>("summary"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Summary>("summary");
+        }
         init { this._rawData.Set("summary", value); }
     }
 
@@ -550,37 +566,61 @@ public sealed record class LineItemSubscription : JsonModel
 {
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
     public required double ProrationFactor
     {
-        get { return this._rawData.GetNotNullStruct<double>("proration_factor"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("proration_factor");
+        }
         init { this._rawData.Set("proration_factor", value); }
     }
 
     public required int Quantity
     {
-        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("quantity");
+        }
         init { this._rawData.Set("quantity", value); }
     }
 
     public required bool TaxInclusive
     {
-        get { return this._rawData.GetNotNullStruct<bool>("tax_inclusive"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("tax_inclusive");
+        }
         init { this._rawData.Set("tax_inclusive", value); }
     }
 
@@ -588,6 +628,7 @@ public sealed record class LineItemSubscription : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, LineItemSubscriptionType>>("type");
         }
         init { this._rawData.Set("type", value); }
@@ -595,31 +636,51 @@ public sealed record class LineItemSubscription : JsonModel
 
     public required int UnitPrice
     {
-        get { return this._rawData.GetNotNullStruct<int>("unit_price"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("unit_price");
+        }
         init { this._rawData.Set("unit_price", value); }
     }
 
     public string? Description
     {
-        get { return this._rawData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
         init { this._rawData.Set("description", value); }
     }
 
     public string? Name
     {
-        get { return this._rawData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
     public int? Tax
     {
-        get { return this._rawData.GetNullableStruct<int>("tax"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("tax");
+        }
         init { this._rawData.Set("tax", value); }
     }
 
     public float? TaxRate
     {
-        get { return this._rawData.GetNullableStruct<float>("tax_rate"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<float>("tax_rate");
+        }
         init { this._rawData.Set("tax_rate", value); }
     }
 
@@ -721,31 +782,51 @@ public sealed record class Addon : JsonModel
 {
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required string Name
     {
-        get { return this._rawData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
     public required double ProrationFactor
     {
-        get { return this._rawData.GetNotNullStruct<double>("proration_factor"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("proration_factor");
+        }
         init { this._rawData.Set("proration_factor", value); }
     }
 
     public required int Quantity
     {
-        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("quantity");
+        }
         init { this._rawData.Set("quantity", value); }
     }
 
@@ -755,43 +836,71 @@ public sealed record class Addon : JsonModel
     /// </summary>
     public required ApiEnum<string, TaxCategory> TaxCategory
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category");
+        }
         init { this._rawData.Set("tax_category", value); }
     }
 
     public required bool TaxInclusive
     {
-        get { return this._rawData.GetNotNullStruct<bool>("tax_inclusive"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("tax_inclusive");
+        }
         init { this._rawData.Set("tax_inclusive", value); }
     }
 
     public required float TaxRate
     {
-        get { return this._rawData.GetNotNullStruct<float>("tax_rate"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<float>("tax_rate");
+        }
         init { this._rawData.Set("tax_rate", value); }
     }
 
     public required ApiEnum<string, AddonType> Type
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, AddonType>>("type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, AddonType>>("type");
+        }
         init { this._rawData.Set("type", value); }
     }
 
     public required int UnitPrice
     {
-        get { return this._rawData.GetNotNullStruct<int>("unit_price"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("unit_price");
+        }
         init { this._rawData.Set("unit_price", value); }
     }
 
     public string? Description
     {
-        get { return this._rawData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
         init { this._rawData.Set("description", value); }
     }
 
     public int? Tax
     {
-        get { return this._rawData.GetNullableStruct<int>("tax"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("tax");
+        }
         init { this._rawData.Set("tax", value); }
     }
 
@@ -890,79 +999,131 @@ public sealed record class LineItemMeter : JsonModel
 {
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
     public required string ChargeableUnits
     {
-        get { return this._rawData.GetNotNullClass<string>("chargeable_units"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("chargeable_units");
+        }
         init { this._rawData.Set("chargeable_units", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required long FreeThreshold
     {
-        get { return this._rawData.GetNotNullStruct<long>("free_threshold"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("free_threshold");
+        }
         init { this._rawData.Set("free_threshold", value); }
     }
 
     public required string Name
     {
-        get { return this._rawData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
     public required string PricePerUnit
     {
-        get { return this._rawData.GetNotNullClass<string>("price_per_unit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("price_per_unit");
+        }
         init { this._rawData.Set("price_per_unit", value); }
     }
 
     public required int Subtotal
     {
-        get { return this._rawData.GetNotNullStruct<int>("subtotal"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("subtotal");
+        }
         init { this._rawData.Set("subtotal", value); }
     }
 
     public required bool TaxInclusive
     {
-        get { return this._rawData.GetNotNullStruct<bool>("tax_inclusive"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("tax_inclusive");
+        }
         init { this._rawData.Set("tax_inclusive", value); }
     }
 
     public required float TaxRate
     {
-        get { return this._rawData.GetNotNullStruct<float>("tax_rate"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<float>("tax_rate");
+        }
         init { this._rawData.Set("tax_rate", value); }
     }
 
     public required ApiEnum<string, LineItemMeterType> Type
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, LineItemMeterType>>("type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, LineItemMeterType>>("type");
+        }
         init { this._rawData.Set("type", value); }
     }
 
     public required string UnitsConsumed
     {
-        get { return this._rawData.GetNotNullClass<string>("units_consumed"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("units_consumed");
+        }
         init { this._rawData.Set("units_consumed", value); }
     }
 
     public string? Description
     {
-        get { return this._rawData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
         init { this._rawData.Set("description", value); }
     }
 
     public int? Tax
     {
-        get { return this._rawData.GetNullableStruct<int>("tax"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("tax");
+        }
         init { this._rawData.Set("tax", value); }
     }
 
@@ -1062,19 +1223,31 @@ public sealed record class Summary : JsonModel
 {
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required long CustomerCredits
     {
-        get { return this._rawData.GetNotNullStruct<long>("customer_credits"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("customer_credits");
+        }
         init { this._rawData.Set("customer_credits", value); }
     }
 
     public required int SettlementAmount
     {
-        get { return this._rawData.GetNotNullStruct<int>("settlement_amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("settlement_amount");
+        }
         init { this._rawData.Set("settlement_amount", value); }
     }
 
@@ -1082,6 +1255,7 @@ public sealed record class Summary : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("settlement_currency");
         }
         init { this._rawData.Set("settlement_currency", value); }
@@ -1089,19 +1263,31 @@ public sealed record class Summary : JsonModel
 
     public required int TotalAmount
     {
-        get { return this._rawData.GetNotNullStruct<int>("total_amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("total_amount");
+        }
         init { this._rawData.Set("total_amount", value); }
     }
 
     public int? SettlementTax
     {
-        get { return this._rawData.GetNullableStruct<int>("settlement_tax"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("settlement_tax");
+        }
         init { this._rawData.Set("settlement_tax", value); }
     }
 
     public int? Tax
     {
-        get { return this._rawData.GetNullableStruct<int>("tax"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("tax");
+        }
         init { this._rawData.Set("tax", value); }
     }
 

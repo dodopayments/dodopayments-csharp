@@ -16,7 +16,11 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public required ApiEnum<string, CountryCode> Country
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, CountryCode>>("country"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, CountryCode>>("country");
+        }
         init { this._rawData.Set("country", value); }
     }
 
@@ -25,7 +29,11 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? City
     {
-        get { return this._rawData.GetNullableClass<string>("city"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("city");
+        }
         init { this._rawData.Set("city", value); }
     }
 
@@ -34,7 +42,11 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? State
     {
-        get { return this._rawData.GetNullableClass<string>("state"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("state");
+        }
         init { this._rawData.Set("state", value); }
     }
 
@@ -43,7 +55,11 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? Street
     {
-        get { return this._rawData.GetNullableClass<string>("street"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("street");
+        }
         init { this._rawData.Set("street", value); }
     }
 
@@ -52,7 +68,11 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? Zipcode
     {
-        get { return this._rawData.GetNullableClass<string>("zipcode"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("zipcode");
+        }
         init { this._rawData.Set("zipcode", value); }
     }
 

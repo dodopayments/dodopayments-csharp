@@ -19,13 +19,21 @@ public sealed record class CustomerCreateParams : ParamsBase
 
     public required string Email
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("email"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("email");
+        }
         init { this._rawBodyData.Set("email", value); }
     }
 
     public required string Name
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("name");
+        }
         init { this._rawBodyData.Set("name", value); }
     }
 
@@ -36,6 +44,7 @@ public sealed record class CustomerCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
@@ -54,7 +63,11 @@ public sealed record class CustomerCreateParams : ParamsBase
 
     public string? PhoneNumber
     {
-        get { return this._rawBodyData.GetNullableClass<string>("phone_number"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("phone_number");
+        }
         init { this._rawBodyData.Set("phone_number", value); }
     }
 

@@ -25,7 +25,11 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public ApiEnum<string, Currency>? Currency
     {
-        get { return this._rawBodyData.GetNullableClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawBodyData.Set("currency", value); }
     }
 
@@ -34,7 +38,11 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("description");
+        }
         init { this._rawBodyData.Set("description", value); }
     }
 
@@ -43,7 +51,11 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public string? ImageID
     {
-        get { return this._rawBodyData.GetNullableClass<string>("image_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("image_id");
+        }
         init { this._rawBodyData.Set("image_id", value); }
     }
 
@@ -52,7 +64,11 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public string? Name
     {
-        get { return this._rawBodyData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("name");
+        }
         init { this._rawBodyData.Set("name", value); }
     }
 
@@ -61,7 +77,11 @@ public sealed record class AddonUpdateParams : ParamsBase
     /// </summary>
     public int? Price
     {
-        get { return this._rawBodyData.GetNullableStruct<int>("price"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("price");
+        }
         init { this._rawBodyData.Set("price", value); }
     }
 
@@ -72,6 +92,7 @@ public sealed record class AddonUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<ApiEnum<string, TaxCategory>>("tax_category");
         }
         init { this._rawBodyData.Set("tax_category", value); }

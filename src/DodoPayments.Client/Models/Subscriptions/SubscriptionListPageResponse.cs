@@ -17,6 +17,7 @@ public sealed record class SubscriptionListPageResponse : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<ImmutableArray<SubscriptionListResponse>>(
                 "items"
             );

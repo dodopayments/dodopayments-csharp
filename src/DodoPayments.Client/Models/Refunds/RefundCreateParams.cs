@@ -24,7 +24,11 @@ public sealed record class RefundCreateParams : ParamsBase
     /// </summary>
     public required string PaymentID
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("payment_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("payment_id");
+        }
         init { this._rawBodyData.Set("payment_id", value); }
     }
 
@@ -33,7 +37,11 @@ public sealed record class RefundCreateParams : ParamsBase
     /// </summary>
     public IReadOnlyList<Item>? Items
     {
-        get { return this._rawBodyData.GetNullableStruct<ImmutableArray<Item>>("items"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<Item>>("items");
+        }
         init
         {
             this._rawBodyData.Set<ImmutableArray<Item>?>(
@@ -50,6 +58,7 @@ public sealed record class RefundCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
@@ -71,7 +80,11 @@ public sealed record class RefundCreateParams : ParamsBase
     /// </summary>
     public string? Reason
     {
-        get { return this._rawBodyData.GetNullableClass<string>("reason"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("reason");
+        }
         init { this._rawBodyData.Set("reason", value); }
     }
 
@@ -157,7 +170,11 @@ public sealed record class Item : JsonModel
     /// </summary>
     public required string ItemID
     {
-        get { return this._rawData.GetNotNullClass<string>("item_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("item_id");
+        }
         init { this._rawData.Set("item_id", value); }
     }
 
@@ -166,7 +183,11 @@ public sealed record class Item : JsonModel
     /// </summary>
     public int? Amount
     {
-        get { return this._rawData.GetNullableStruct<int>("amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("amount");
+        }
         init { this._rawData.Set("amount", value); }
     }
 
@@ -175,7 +196,11 @@ public sealed record class Item : JsonModel
     /// </summary>
     public bool? TaxInclusive
     {
-        get { return this._rawData.GetNullableStruct<bool>("tax_inclusive"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("tax_inclusive");
+        }
         init
         {
             if (value == null)

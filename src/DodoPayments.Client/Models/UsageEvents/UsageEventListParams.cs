@@ -36,7 +36,11 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public string? CustomerID
     {
-        get { return this._rawQueryData.GetNullableClass<string>("customer_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("customer_id");
+        }
         init
         {
             if (value == null)
@@ -53,7 +57,11 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public DateTimeOffset? End
     {
-        get { return this._rawQueryData.GetNullableStruct<DateTimeOffset>("end"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("end");
+        }
         init
         {
             if (value == null)
@@ -71,7 +79,11 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public string? EventName
     {
-        get { return this._rawQueryData.GetNullableClass<string>("event_name"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("event_name");
+        }
         init
         {
             if (value == null)
@@ -89,7 +101,11 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public string? MeterID
     {
-        get { return this._rawQueryData.GetNullableClass<string>("meter_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("meter_id");
+        }
         init
         {
             if (value == null)
@@ -106,7 +122,11 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_number");
+        }
         init
         {
             if (value == null)
@@ -123,7 +143,11 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_size");
+        }
         init
         {
             if (value == null)
@@ -140,7 +164,11 @@ public sealed record class UsageEventListParams : ParamsBase
     /// </summary>
     public DateTimeOffset? Start
     {
-        get { return this._rawQueryData.GetNullableStruct<DateTimeOffset>("start"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("start");
+        }
         init
         {
             if (value == null)

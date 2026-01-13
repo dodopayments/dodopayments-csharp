@@ -13,7 +13,11 @@ public sealed record class AddonListPageResponse : JsonModel
 {
     public required IReadOnlyList<AddonResponse> Items
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<AddonResponse>>("items"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<AddonResponse>>("items");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<AddonResponse>>(

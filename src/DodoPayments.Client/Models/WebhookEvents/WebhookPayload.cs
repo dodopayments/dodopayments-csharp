@@ -21,7 +21,11 @@ public sealed record class WebhookPayload : JsonModel
 {
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -30,7 +34,11 @@ public sealed record class WebhookPayload : JsonModel
     /// </summary>
     public required Data Data
     {
-        get { return this._rawData.GetNotNullClass<Data>("data"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Data>("data");
+        }
         init { this._rawData.Set("data", value); }
     }
 
@@ -40,7 +48,11 @@ public sealed record class WebhookPayload : JsonModel
     /// </summary>
     public required DateTimeOffset Timestamp
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp");
+        }
         init { this._rawData.Set("timestamp", value); }
     }
 
@@ -49,7 +61,11 @@ public sealed record class WebhookPayload : JsonModel
     /// </summary>
     public required ApiEnum<string, WebhookEventType> Type
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, WebhookEventType>>("type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, WebhookEventType>>("type");
+        }
         init { this._rawData.Set("type", value); }
     }
 
@@ -631,7 +647,11 @@ public sealed record class Payment : JsonModel
 {
     public required Payments::BillingAddress Billing
     {
-        get { return this._rawData.GetNotNullClass<Payments::BillingAddress>("billing"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Payments::BillingAddress>("billing");
+        }
         init { this._rawData.Set("billing", value); }
     }
 
@@ -640,7 +660,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public required string BrandID
     {
-        get { return this._rawData.GetNotNullClass<string>("brand_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
         init { this._rawData.Set("brand_id", value); }
     }
 
@@ -649,7 +673,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -658,19 +686,31 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required Payments::CustomerLimitedDetails Customer
     {
-        get { return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer");
+        }
         init { this._rawData.Set("customer", value); }
     }
 
@@ -679,7 +719,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public required bool DigitalProductsDelivered
     {
-        get { return this._rawData.GetNotNullStruct<bool>("digital_products_delivered"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("digital_products_delivered");
+        }
         init { this._rawData.Set("digital_products_delivered", value); }
     }
 
@@ -690,6 +734,7 @@ public sealed record class Payment : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<ImmutableArray<Disputes::Dispute>>("disputes");
         }
         init
@@ -706,7 +751,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>>(
@@ -721,7 +770,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public required string PaymentID
     {
-        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_id");
+        }
         init { this._rawData.Set("payment_id", value); }
     }
 
@@ -730,7 +783,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public required IReadOnlyList<Payments::Refund> Refunds
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<Payments::Refund>>("refunds"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<Payments::Refund>>("refunds");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<Payments::Refund>>(
@@ -747,7 +804,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public required int SettlementAmount
     {
-        get { return this._rawData.GetNotNullStruct<int>("settlement_amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("settlement_amount");
+        }
         init { this._rawData.Set("settlement_amount", value); }
     }
 
@@ -755,6 +816,7 @@ public sealed record class Payment : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("settlement_currency");
         }
         init { this._rawData.Set("settlement_currency", value); }
@@ -766,7 +828,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public required int TotalAmount
     {
-        get { return this._rawData.GetNotNullStruct<int>("total_amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("total_amount");
+        }
         init { this._rawData.Set("total_amount", value); }
     }
 
@@ -775,7 +841,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? CardHolderName
     {
-        get { return this._rawData.GetNullableClass<string>("card_holder_name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_holder_name");
+        }
         init { this._rawData.Set("card_holder_name", value); }
     }
 
@@ -786,6 +856,7 @@ public sealed record class Payment : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<ApiEnum<string, CountryCode>>(
                 "card_issuing_country"
             );
@@ -806,7 +877,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? CardLastFour
     {
-        get { return this._rawData.GetNullableClass<string>("card_last_four"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_last_four");
+        }
         init { this._rawData.Set("card_last_four", value); }
     }
 
@@ -815,7 +890,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? CardNetwork
     {
-        get { return this._rawData.GetNullableClass<string>("card_network"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_network");
+        }
         init { this._rawData.Set("card_network", value); }
     }
 
@@ -824,7 +903,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? CardType
     {
-        get { return this._rawData.GetNullableClass<string>("card_type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_type");
+        }
         init { this._rawData.Set("card_type", value); }
     }
 
@@ -834,7 +917,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? CheckoutSessionID
     {
-        get { return this._rawData.GetNullableClass<string>("checkout_session_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("checkout_session_id");
+        }
         init { this._rawData.Set("checkout_session_id", value); }
     }
 
@@ -843,7 +930,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? DiscountID
     {
-        get { return this._rawData.GetNullableClass<string>("discount_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("discount_id");
+        }
         init { this._rawData.Set("discount_id", value); }
     }
 
@@ -852,7 +943,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? ErrorCode
     {
-        get { return this._rawData.GetNullableClass<string>("error_code"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("error_code");
+        }
         init { this._rawData.Set("error_code", value); }
     }
 
@@ -861,7 +956,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? ErrorMessage
     {
-        get { return this._rawData.GetNullableClass<string>("error_message"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("error_message");
+        }
         init { this._rawData.Set("error_message", value); }
     }
 
@@ -870,7 +969,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? InvoiceID
     {
-        get { return this._rawData.GetNullableClass<string>("invoice_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("invoice_id");
+        }
         init { this._rawData.Set("invoice_id", value); }
     }
 
@@ -879,7 +982,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? PaymentLink
     {
-        get { return this._rawData.GetNullableClass<string>("payment_link"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_link");
+        }
         init { this._rawData.Set("payment_link", value); }
     }
 
@@ -888,7 +995,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? PaymentMethod
     {
-        get { return this._rawData.GetNullableClass<string>("payment_method"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method");
+        }
         init { this._rawData.Set("payment_method", value); }
     }
 
@@ -897,7 +1008,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? PaymentMethodType
     {
-        get { return this._rawData.GetNullableClass<string>("payment_method_type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method_type");
+        }
         init { this._rawData.Set("payment_method_type", value); }
     }
 
@@ -908,6 +1023,7 @@ public sealed record class Payment : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableStruct<ImmutableArray<Payments::ProductCart>>(
                 "product_cart"
             );
@@ -928,7 +1044,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public int? SettlementTax
     {
-        get { return this._rawData.GetNullableStruct<int>("settlement_tax"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("settlement_tax");
+        }
         init { this._rawData.Set("settlement_tax", value); }
     }
 
@@ -936,6 +1056,7 @@ public sealed record class Payment : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<ApiEnum<string, Payments::IntentStatus>>(
                 "status"
             );
@@ -956,7 +1077,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public string? SubscriptionID
     {
-        get { return this._rawData.GetNullableClass<string>("subscription_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("subscription_id");
+        }
         init { this._rawData.Set("subscription_id", value); }
     }
 
@@ -965,7 +1090,11 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public int? Tax
     {
-        get { return this._rawData.GetNullableStruct<int>("tax"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("tax");
+        }
         init { this._rawData.Set("tax", value); }
     }
 
@@ -974,13 +1103,21 @@ public sealed record class Payment : JsonModel
     /// </summary>
     public DateTimeOffset? UpdatedAt
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("updated_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("updated_at");
+        }
         init { this._rawData.Set("updated_at", value); }
     }
 
     public required ApiEnum<string, PayloadType> PayloadType
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, PayloadType>>("payload_type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, PayloadType>>("payload_type");
+        }
         init { this._rawData.Set("payload_type", value); }
     }
 
@@ -1107,7 +1244,11 @@ public sealed record class IntersectionMember1 : JsonModel
 {
     public required ApiEnum<string, PayloadType> PayloadType
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, PayloadType>>("payload_type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, PayloadType>>("payload_type");
+        }
         init { this._rawData.Set("payload_type", value); }
     }
 
@@ -1212,6 +1353,7 @@ public sealed record class Subscription : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<
                 ImmutableArray<Subscriptions::AddonCartResponseItem>
             >("addons");
@@ -1227,7 +1369,11 @@ public sealed record class Subscription : JsonModel
 
     public required Payments::BillingAddress Billing
     {
-        get { return this._rawData.GetNotNullClass<Payments::BillingAddress>("billing"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Payments::BillingAddress>("billing");
+        }
         init { this._rawData.Set("billing", value); }
     }
 
@@ -1236,7 +1382,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required bool CancelAtNextBillingDate
     {
-        get { return this._rawData.GetNotNullStruct<bool>("cancel_at_next_billing_date"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("cancel_at_next_billing_date");
+        }
         init { this._rawData.Set("cancel_at_next_billing_date", value); }
     }
 
@@ -1245,19 +1395,31 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required Payments::CustomerLimitedDetails Customer
     {
-        get { return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer");
+        }
         init { this._rawData.Set("customer", value); }
     }
 
@@ -1266,7 +1428,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>>(
@@ -1283,6 +1449,7 @@ public sealed record class Subscription : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<ImmutableArray<Subscriptions::Meter>>("meters");
         }
         init
@@ -1299,7 +1466,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required DateTimeOffset NextBillingDate
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date");
+        }
         init { this._rawData.Set("next_billing_date", value); }
     }
 
@@ -1308,7 +1479,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required bool OnDemand
     {
-        get { return this._rawData.GetNotNullStruct<bool>("on_demand"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("on_demand");
+        }
         init { this._rawData.Set("on_demand", value); }
     }
 
@@ -1317,7 +1492,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required int PaymentFrequencyCount
     {
-        get { return this._rawData.GetNotNullStruct<int>("payment_frequency_count"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("payment_frequency_count");
+        }
         init { this._rawData.Set("payment_frequency_count", value); }
     }
 
@@ -1325,6 +1504,7 @@ public sealed record class Subscription : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, Subscriptions::TimeInterval>>(
                 "payment_frequency_interval"
             );
@@ -1337,7 +1517,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required DateTimeOffset PreviousBillingDate
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("previous_billing_date"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("previous_billing_date");
+        }
         init { this._rawData.Set("previous_billing_date", value); }
     }
 
@@ -1346,7 +1530,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
@@ -1355,7 +1543,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required int Quantity
     {
-        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("quantity");
+        }
         init { this._rawData.Set("quantity", value); }
     }
 
@@ -1365,7 +1557,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required int RecurringPreTaxAmount
     {
-        get { return this._rawData.GetNotNullStruct<int>("recurring_pre_tax_amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("recurring_pre_tax_amount");
+        }
         init { this._rawData.Set("recurring_pre_tax_amount", value); }
     }
 
@@ -1373,6 +1569,7 @@ public sealed record class Subscription : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, Subscriptions::SubscriptionStatus>
             >("status");
@@ -1385,7 +1582,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required string SubscriptionID
     {
-        get { return this._rawData.GetNotNullClass<string>("subscription_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("subscription_id");
+        }
         init { this._rawData.Set("subscription_id", value); }
     }
 
@@ -1394,7 +1595,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required int SubscriptionPeriodCount
     {
-        get { return this._rawData.GetNotNullStruct<int>("subscription_period_count"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("subscription_period_count");
+        }
         init { this._rawData.Set("subscription_period_count", value); }
     }
 
@@ -1402,6 +1607,7 @@ public sealed record class Subscription : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, Subscriptions::TimeInterval>>(
                 "subscription_period_interval"
             );
@@ -1414,7 +1620,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required bool TaxInclusive
     {
-        get { return this._rawData.GetNotNullStruct<bool>("tax_inclusive"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("tax_inclusive");
+        }
         init { this._rawData.Set("tax_inclusive", value); }
     }
 
@@ -1423,7 +1633,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public required int TrialPeriodDays
     {
-        get { return this._rawData.GetNotNullStruct<int>("trial_period_days"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("trial_period_days");
+        }
         init { this._rawData.Set("trial_period_days", value); }
     }
 
@@ -1432,7 +1646,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public DateTimeOffset? CancelledAt
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("cancelled_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("cancelled_at");
+        }
         init { this._rawData.Set("cancelled_at", value); }
     }
 
@@ -1441,7 +1659,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public int? DiscountCyclesRemaining
     {
-        get { return this._rawData.GetNullableStruct<int>("discount_cycles_remaining"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("discount_cycles_remaining");
+        }
         init { this._rawData.Set("discount_cycles_remaining", value); }
     }
 
@@ -1450,7 +1672,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public string? DiscountID
     {
-        get { return this._rawData.GetNullableClass<string>("discount_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("discount_id");
+        }
         init { this._rawData.Set("discount_id", value); }
     }
 
@@ -1459,7 +1685,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
+        }
         init { this._rawData.Set("expires_at", value); }
     }
 
@@ -1468,7 +1698,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public string? PaymentMethodID
     {
-        get { return this._rawData.GetNullableClass<string>("payment_method_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method_id");
+        }
         init { this._rawData.Set("payment_method_id", value); }
     }
 
@@ -1477,7 +1711,11 @@ public sealed record class Subscription : JsonModel
     /// </summary>
     public string? TaxID
     {
-        get { return this._rawData.GetNullableClass<string>("tax_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("tax_id");
+        }
         init { this._rawData.Set("tax_id", value); }
     }
 
@@ -1485,6 +1723,7 @@ public sealed record class Subscription : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
             >("payload_type");
@@ -1609,6 +1848,7 @@ public sealed record class SubscriptionIntersectionMember1 : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
             >("payload_type");
@@ -1718,7 +1958,11 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -1727,13 +1971,21 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
     public required Payments::CustomerLimitedDetails Customer
     {
-        get { return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer");
+        }
         init { this._rawData.Set("customer", value); }
     }
 
@@ -1742,7 +1994,11 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required bool IsPartial
     {
-        get { return this._rawData.GetNotNullStruct<bool>("is_partial"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("is_partial");
+        }
         init { this._rawData.Set("is_partial", value); }
     }
 
@@ -1751,7 +2007,11 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>>(
@@ -1766,7 +2026,11 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required string PaymentID
     {
-        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_id");
+        }
         init { this._rawData.Set("payment_id", value); }
     }
 
@@ -1775,7 +2039,11 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required string RefundID
     {
-        get { return this._rawData.GetNotNullClass<string>("refund_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("refund_id");
+        }
         init { this._rawData.Set("refund_id", value); }
     }
 
@@ -1783,6 +2051,7 @@ public sealed record class Refund : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, Refunds::RefundStatus>>("status");
         }
         init { this._rawData.Set("status", value); }
@@ -1793,13 +2062,21 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public int? Amount
     {
-        get { return this._rawData.GetNullableStruct<int>("amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("amount");
+        }
         init { this._rawData.Set("amount", value); }
     }
 
     public ApiEnum<string, Currency>? Currency
     {
-        get { return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency");
+        }
         init
         {
             if (value == null)
@@ -1816,7 +2093,11 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public string? Reason
     {
-        get { return this._rawData.GetNullableClass<string>("reason"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("reason");
+        }
         init { this._rawData.Set("reason", value); }
     }
 
@@ -1824,6 +2105,7 @@ public sealed record class Refund : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, RefundIntersectionMember1PayloadType>
             >("payload_type");
@@ -1905,6 +2187,7 @@ public sealed record class RefundIntersectionMember1 : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, RefundIntersectionMember1PayloadType>
             >("payload_type");
@@ -2012,7 +2295,11 @@ public sealed record class Dispute : JsonModel
     /// </summary>
     public required string Amount
     {
-        get { return this._rawData.GetNotNullClass<string>("amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("amount");
+        }
         init { this._rawData.Set("amount", value); }
     }
 
@@ -2021,7 +2308,11 @@ public sealed record class Dispute : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -2030,7 +2321,11 @@ public sealed record class Dispute : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -2039,13 +2334,21 @@ public sealed record class Dispute : JsonModel
     /// </summary>
     public required string Currency
     {
-        get { return this._rawData.GetNotNullClass<string>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required Payments::CustomerLimitedDetails Customer
     {
-        get { return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer");
+        }
         init { this._rawData.Set("customer", value); }
     }
 
@@ -2054,7 +2357,11 @@ public sealed record class Dispute : JsonModel
     /// </summary>
     public required string DisputeID
     {
-        get { return this._rawData.GetNotNullClass<string>("dispute_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("dispute_id");
+        }
         init { this._rawData.Set("dispute_id", value); }
     }
 
@@ -2062,6 +2369,7 @@ public sealed record class Dispute : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, Disputes::DisputeDisputeStage>>(
                 "dispute_stage"
             );
@@ -2073,6 +2381,7 @@ public sealed record class Dispute : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, Disputes::DisputeDisputeStatus>>(
                 "dispute_status"
             );
@@ -2085,7 +2394,11 @@ public sealed record class Dispute : JsonModel
     /// </summary>
     public required string PaymentID
     {
-        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_id");
+        }
         init { this._rawData.Set("payment_id", value); }
     }
 
@@ -2094,7 +2407,11 @@ public sealed record class Dispute : JsonModel
     /// </summary>
     public string? Reason
     {
-        get { return this._rawData.GetNullableClass<string>("reason"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("reason");
+        }
         init { this._rawData.Set("reason", value); }
     }
 
@@ -2103,7 +2420,11 @@ public sealed record class Dispute : JsonModel
     /// </summary>
     public string? Remarks
     {
-        get { return this._rawData.GetNullableClass<string>("remarks"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("remarks");
+        }
         init { this._rawData.Set("remarks", value); }
     }
 
@@ -2111,6 +2432,7 @@ public sealed record class Dispute : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, DisputeIntersectionMember1PayloadType>
             >("payload_type");
@@ -2192,6 +2514,7 @@ public sealed record class DisputeIntersectionMember1 : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, DisputeIntersectionMember1PayloadType>
             >("payload_type");
@@ -2299,7 +2622,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
@@ -2308,7 +2635,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -2317,7 +2648,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -2326,7 +2661,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string CustomerID
     {
-        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
         init { this._rawData.Set("customer_id", value); }
     }
 
@@ -2335,7 +2674,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required int InstancesCount
     {
-        get { return this._rawData.GetNotNullStruct<int>("instances_count"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("instances_count");
+        }
         init { this._rawData.Set("instances_count", value); }
     }
 
@@ -2344,7 +2687,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string Key
     {
-        get { return this._rawData.GetNotNullClass<string>("key"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
         init { this._rawData.Set("key", value); }
     }
 
@@ -2353,7 +2700,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string PaymentID
     {
-        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_id");
+        }
         init { this._rawData.Set("payment_id", value); }
     }
 
@@ -2362,7 +2713,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
@@ -2370,6 +2725,7 @@ public sealed record class LicenseKey : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, LicenseKeys::LicenseKeyStatus>>(
                 "status"
             );
@@ -2382,7 +2738,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public int? ActivationsLimit
     {
-        get { return this._rawData.GetNullableStruct<int>("activations_limit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("activations_limit");
+        }
         init { this._rawData.Set("activations_limit", value); }
     }
 
@@ -2391,7 +2751,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
+        }
         init { this._rawData.Set("expires_at", value); }
     }
 
@@ -2401,7 +2765,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public string? SubscriptionID
     {
-        get { return this._rawData.GetNullableClass<string>("subscription_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("subscription_id");
+        }
         init { this._rawData.Set("subscription_id", value); }
     }
 
@@ -2409,6 +2777,7 @@ public sealed record class LicenseKey : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
             >("payload_type");
@@ -2492,6 +2861,7 @@ public sealed record class LicenseKeyIntersectionMember1 : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
             >("payload_type");

@@ -16,7 +16,11 @@ public sealed record class BrandListResponse : JsonModel
     /// </summary>
     public required IReadOnlyList<Brand> Items
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<Brand>>("items"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<Brand>>("items");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<Brand>>(

@@ -21,7 +21,11 @@ public sealed record class HeaderRetrieveResponse : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Headers
     {
-        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("headers"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("headers");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>>(
@@ -36,7 +40,11 @@ public sealed record class HeaderRetrieveResponse : JsonModel
     /// </summary>
     public required IReadOnlyList<string> Sensitive
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<string>>("sensitive"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("sensitive");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<string>>(

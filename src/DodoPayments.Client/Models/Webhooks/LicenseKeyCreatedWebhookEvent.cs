@@ -20,13 +20,21 @@ public sealed record class LicenseKeyCreatedWebhookEvent : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
     public required LicenseKey Data
     {
-        get { return this._rawData.GetNotNullClass<LicenseKey>("data"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<LicenseKey>("data");
+        }
         init { this._rawData.Set("data", value); }
     }
 
@@ -35,7 +43,11 @@ public sealed record class LicenseKeyCreatedWebhookEvent : JsonModel
     /// </summary>
     public required System::DateTimeOffset Timestamp
     {
-        get { return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp");
+        }
         init { this._rawData.Set("timestamp", value); }
     }
 
@@ -46,6 +58,7 @@ public sealed record class LicenseKeyCreatedWebhookEvent : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, LicenseKeyCreatedWebhookEventType>
             >("type");

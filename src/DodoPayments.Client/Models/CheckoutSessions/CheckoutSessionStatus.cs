@@ -17,7 +17,11 @@ public sealed record class CheckoutSessionStatus : JsonModel
     /// </summary>
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
@@ -26,7 +30,11 @@ public sealed record class CheckoutSessionStatus : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -35,7 +43,11 @@ public sealed record class CheckoutSessionStatus : JsonModel
     /// </summary>
     public string? CustomerEmail
     {
-        get { return this._rawData.GetNullableClass<string>("customer_email"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("customer_email");
+        }
         init { this._rawData.Set("customer_email", value); }
     }
 
@@ -44,7 +56,11 @@ public sealed record class CheckoutSessionStatus : JsonModel
     /// </summary>
     public string? CustomerName
     {
-        get { return this._rawData.GetNullableClass<string>("customer_name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("customer_name");
+        }
         init { this._rawData.Set("customer_name", value); }
     }
 
@@ -55,7 +71,11 @@ public sealed record class CheckoutSessionStatus : JsonModel
     /// </summary>
     public string? PaymentID
     {
-        get { return this._rawData.GetNullableClass<string>("payment_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_id");
+        }
         init { this._rawData.Set("payment_id", value); }
     }
 
@@ -68,6 +88,7 @@ public sealed record class CheckoutSessionStatus : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<ApiEnum<string, IntentStatus>>("payment_status");
         }
         init { this._rawData.Set("payment_status", value); }

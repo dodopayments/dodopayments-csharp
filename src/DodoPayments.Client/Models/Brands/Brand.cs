@@ -14,31 +14,51 @@ public sealed record class Brand : JsonModel
 {
     public required string BrandID
     {
-        get { return this._rawData.GetNotNullClass<string>("brand_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
         init { this._rawData.Set("brand_id", value); }
     }
 
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
     public required bool Enabled
     {
-        get { return this._rawData.GetNotNullStruct<bool>("enabled"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("enabled");
+        }
         init { this._rawData.Set("enabled", value); }
     }
 
     public required string StatementDescriptor
     {
-        get { return this._rawData.GetNotNullClass<string>("statement_descriptor"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("statement_descriptor");
+        }
         init { this._rawData.Set("statement_descriptor", value); }
     }
 
     public required bool VerificationEnabled
     {
-        get { return this._rawData.GetNotNullStruct<bool>("verification_enabled"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("verification_enabled");
+        }
         init { this._rawData.Set("verification_enabled", value); }
     }
 
@@ -46,6 +66,7 @@ public sealed record class Brand : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, VerificationStatus>>(
                 "verification_status"
             );
@@ -55,19 +76,31 @@ public sealed record class Brand : JsonModel
 
     public string? Description
     {
-        get { return this._rawData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
         init { this._rawData.Set("description", value); }
     }
 
     public string? Image
     {
-        get { return this._rawData.GetNullableClass<string>("image"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("image");
+        }
         init { this._rawData.Set("image", value); }
     }
 
     public string? Name
     {
-        get { return this._rawData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
@@ -76,19 +109,31 @@ public sealed record class Brand : JsonModel
     /// </summary>
     public string? ReasonForHold
     {
-        get { return this._rawData.GetNullableClass<string>("reason_for_hold"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("reason_for_hold");
+        }
         init { this._rawData.Set("reason_for_hold", value); }
     }
 
     public string? SupportEmail
     {
-        get { return this._rawData.GetNullableClass<string>("support_email"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("support_email");
+        }
         init { this._rawData.Set("support_email", value); }
     }
 
     public string? Url
     {
-        get { return this._rawData.GetNullableClass<string>("url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("url");
+        }
         init { this._rawData.Set("url", value); }
     }
 

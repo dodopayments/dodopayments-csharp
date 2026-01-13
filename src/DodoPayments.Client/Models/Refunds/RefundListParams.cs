@@ -17,7 +17,11 @@ public sealed record class RefundListParams : ParamsBase
     /// </summary>
     public DateTimeOffset? CreatedAtGte
     {
-        get { return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_gte"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_gte");
+        }
         init
         {
             if (value == null)
@@ -34,7 +38,11 @@ public sealed record class RefundListParams : ParamsBase
     /// </summary>
     public DateTimeOffset? CreatedAtLte
     {
-        get { return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_lte"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_lte");
+        }
         init
         {
             if (value == null)
@@ -51,7 +59,11 @@ public sealed record class RefundListParams : ParamsBase
     /// </summary>
     public string? CustomerID
     {
-        get { return this._rawQueryData.GetNullableClass<string>("customer_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("customer_id");
+        }
         init
         {
             if (value == null)
@@ -68,7 +80,11 @@ public sealed record class RefundListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_number");
+        }
         init
         {
             if (value == null)
@@ -85,7 +101,11 @@ public sealed record class RefundListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_size");
+        }
         init
         {
             if (value == null)
@@ -102,7 +122,11 @@ public sealed record class RefundListParams : ParamsBase
     /// </summary>
     public ApiEnum<string, Status>? Status
     {
-        get { return this._rawQueryData.GetNullableClass<ApiEnum<string, Status>>("status"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, Status>>("status");
+        }
         init
         {
             if (value == null)

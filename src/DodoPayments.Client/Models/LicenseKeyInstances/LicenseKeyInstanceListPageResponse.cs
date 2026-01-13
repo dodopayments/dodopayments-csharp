@@ -18,7 +18,11 @@ public sealed record class LicenseKeyInstanceListPageResponse : JsonModel
 {
     public required IReadOnlyList<LicenseKeyInstance> Items
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<LicenseKeyInstance>>("items"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<LicenseKeyInstance>>("items");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<LicenseKeyInstance>>(

@@ -20,13 +20,21 @@ public sealed record class PaymentCancelledWebhookEvent : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
     public required Payment Data
     {
-        get { return this._rawData.GetNotNullClass<Payment>("data"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Payment>("data");
+        }
         init { this._rawData.Set("data", value); }
     }
 
@@ -35,7 +43,11 @@ public sealed record class PaymentCancelledWebhookEvent : JsonModel
     /// </summary>
     public required System::DateTimeOffset Timestamp
     {
-        get { return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp");
+        }
         init { this._rawData.Set("timestamp", value); }
     }
 
@@ -44,7 +56,11 @@ public sealed record class PaymentCancelledWebhookEvent : JsonModel
     /// </summary>
     public required ApiEnum<string, Type7> Type
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Type7>>("type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Type7>>("type");
+        }
         init { this._rawData.Set("type", value); }
     }
 

@@ -17,7 +17,11 @@ public sealed record class BrandUpdateImagesResponse : JsonModel
     /// </summary>
     public required string ImageID
     {
-        get { return this._rawData.GetNotNullClass<string>("image_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("image_id");
+        }
         init { this._rawData.Set("image_id", value); }
     }
 
@@ -26,7 +30,11 @@ public sealed record class BrandUpdateImagesResponse : JsonModel
     /// </summary>
     public required string Url
     {
-        get { return this._rawData.GetNotNullClass<string>("url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("url");
+        }
         init { this._rawData.Set("url", value); }
     }
 

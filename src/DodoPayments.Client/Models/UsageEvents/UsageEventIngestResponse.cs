@@ -14,7 +14,11 @@ public sealed record class UsageEventIngestResponse : JsonModel
 {
     public required long IngestedCount
     {
-        get { return this._rawData.GetNotNullStruct<long>("ingested_count"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("ingested_count");
+        }
         init { this._rawData.Set("ingested_count", value); }
     }
 

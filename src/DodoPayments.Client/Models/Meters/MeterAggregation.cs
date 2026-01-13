@@ -19,6 +19,7 @@ public sealed record class MeterAggregation : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, global::DodoPayments.Client.Models.Meters.Type>
             >("type");
@@ -31,7 +32,11 @@ public sealed record class MeterAggregation : JsonModel
     /// </summary>
     public string? Key
     {
-        get { return this._rawData.GetNullableClass<string>("key"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("key");
+        }
         init { this._rawData.Set("key", value); }
     }
 

@@ -17,7 +17,11 @@ public sealed record class EventInput : JsonModel
     /// </summary>
     public required string CustomerID
     {
-        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
         init { this._rawData.Set("customer_id", value); }
     }
 
@@ -27,7 +31,11 @@ public sealed record class EventInput : JsonModel
     /// </summary>
     public required string EventID
     {
-        get { return this._rawData.GetNotNullClass<string>("event_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("event_id");
+        }
         init { this._rawData.Set("event_id", value); }
     }
 
@@ -36,7 +44,11 @@ public sealed record class EventInput : JsonModel
     /// </summary>
     public required string EventName
     {
-        get { return this._rawData.GetNotNullClass<string>("event_name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("event_name");
+        }
         init { this._rawData.Set("event_name", value); }
     }
 
@@ -48,6 +60,7 @@ public sealed record class EventInput : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<FrozenDictionary<string, EventInputMetadata>>(
                 "metadata"
             );
@@ -67,7 +80,11 @@ public sealed record class EventInput : JsonModel
     /// </summary>
     public DateTimeOffset? Timestamp
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("timestamp"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("timestamp");
+        }
         init { this._rawData.Set("timestamp", value); }
     }
 

@@ -40,7 +40,11 @@ public sealed record class UsageEventIngestParams : ParamsBase
     /// </summary>
     public required IReadOnlyList<EventInput> Events
     {
-        get { return this._rawBodyData.GetNotNullStruct<ImmutableArray<EventInput>>("events"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullStruct<ImmutableArray<EventInput>>("events");
+        }
         init
         {
             this._rawBodyData.Set<ImmutableArray<EventInput>>(

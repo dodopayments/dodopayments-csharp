@@ -23,7 +23,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponse : JsonModel
     /// </summary>
     public required DateTimeOffset EndDate
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("end_date"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("end_date");
+        }
         init { this._rawData.Set("end_date", value); }
     }
 
@@ -34,6 +38,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponse : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<
                 ImmutableArray<SubscriptionRetrieveUsageHistoryResponseMeter>
             >("meters");
@@ -52,7 +57,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponse : JsonModel
     /// </summary>
     public required DateTimeOffset StartDate
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("start_date"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("start_date");
+        }
         init { this._rawData.Set("start_date", value); }
     }
 
@@ -120,7 +129,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
@@ -129,7 +142,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required string ChargeableUnits
     {
-        get { return this._rawData.GetNotNullClass<string>("chargeable_units"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("chargeable_units");
+        }
         init { this._rawData.Set("chargeable_units", value); }
     }
 
@@ -138,7 +155,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required string ConsumedUnits
     {
-        get { return this._rawData.GetNotNullClass<string>("consumed_units"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("consumed_units");
+        }
         init { this._rawData.Set("consumed_units", value); }
     }
 
@@ -147,7 +168,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
@@ -156,7 +181,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required long FreeThreshold
     {
-        get { return this._rawData.GetNotNullStruct<long>("free_threshold"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("free_threshold");
+        }
         init { this._rawData.Set("free_threshold", value); }
     }
 
@@ -165,7 +194,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required string Name
     {
-        get { return this._rawData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
@@ -174,7 +207,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required string PricePerUnit
     {
-        get { return this._rawData.GetNotNullClass<string>("price_per_unit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("price_per_unit");
+        }
         init { this._rawData.Set("price_per_unit", value); }
     }
 
@@ -183,7 +220,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required int TotalPrice
     {
-        get { return this._rawData.GetNotNullStruct<int>("total_price"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("total_price");
+        }
         init { this._rawData.Set("total_price", value); }
     }
 

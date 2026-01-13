@@ -18,25 +18,41 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse : JsonModel
 {
     public string? ClientSecret
     {
-        get { return this._rawData.GetNullableClass<string>("client_secret"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("client_secret");
+        }
         init { this._rawData.Set("client_secret", value); }
     }
 
     public DateTimeOffset? ExpiresOn
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("expires_on"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_on");
+        }
         init { this._rawData.Set("expires_on", value); }
     }
 
     public string? PaymentID
     {
-        get { return this._rawData.GetNullableClass<string>("payment_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_id");
+        }
         init { this._rawData.Set("payment_id", value); }
     }
 
     public string? PaymentLink
     {
-        get { return this._rawData.GetNullableClass<string>("payment_link"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_link");
+        }
         init { this._rawData.Set("payment_link", value); }
     }
 

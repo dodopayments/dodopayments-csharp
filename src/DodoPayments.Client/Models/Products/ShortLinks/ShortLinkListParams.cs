@@ -18,7 +18,11 @@ public sealed record class ShortLinkListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_number");
+        }
         init
         {
             if (value == null)
@@ -35,7 +39,11 @@ public sealed record class ShortLinkListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_size");
+        }
         init
         {
             if (value == null)
@@ -52,7 +60,11 @@ public sealed record class ShortLinkListParams : ParamsBase
     /// </summary>
     public string? ProductID
     {
-        get { return this._rawQueryData.GetNullableClass<string>("product_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("product_id");
+        }
         init
         {
             if (value == null)

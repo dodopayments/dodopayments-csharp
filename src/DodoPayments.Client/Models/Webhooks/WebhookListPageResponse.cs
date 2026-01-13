@@ -16,7 +16,11 @@ public sealed record class WebhookListPageResponse : JsonModel
     /// </summary>
     public required IReadOnlyList<WebhookDetails> Data
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<WebhookDetails>>("data"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<WebhookDetails>>("data");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<WebhookDetails>>(
@@ -31,7 +35,11 @@ public sealed record class WebhookListPageResponse : JsonModel
     /// </summary>
     public required bool Done
     {
-        get { return this._rawData.GetNotNullStruct<bool>("done"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("done");
+        }
         init { this._rawData.Set("done", value); }
     }
 
@@ -40,7 +48,11 @@ public sealed record class WebhookListPageResponse : JsonModel
     /// </summary>
     public string? Iterator
     {
-        get { return this._rawData.GetNullableClass<string>("iterator"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("iterator");
+        }
         init { this._rawData.Set("iterator", value); }
     }
 
@@ -49,7 +61,11 @@ public sealed record class WebhookListPageResponse : JsonModel
     /// </summary>
     public string? PrevIterator
     {
-        get { return this._rawData.GetNullableClass<string>("prev_iterator"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("prev_iterator");
+        }
         init { this._rawData.Set("prev_iterator", value); }
     }
 

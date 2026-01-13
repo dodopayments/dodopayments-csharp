@@ -25,7 +25,11 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public int? ActivationsLimit
     {
-        get { return this._rawBodyData.GetNullableStruct<int>("activations_limit"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("activations_limit");
+        }
         init { this._rawBodyData.Set("activations_limit", value); }
     }
 
@@ -35,7 +39,11 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public bool? Disabled
     {
-        get { return this._rawBodyData.GetNullableStruct<bool>("disabled"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("disabled");
+        }
         init { this._rawBodyData.Set("disabled", value); }
     }
 
@@ -45,7 +53,11 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return this._rawBodyData.GetNullableStruct<DateTimeOffset>("expires_at"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<DateTimeOffset>("expires_at");
+        }
         init { this._rawBodyData.Set("expires_at", value); }
     }
 

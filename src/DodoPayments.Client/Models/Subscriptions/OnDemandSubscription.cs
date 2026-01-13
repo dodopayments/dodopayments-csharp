@@ -17,7 +17,11 @@ public sealed record class OnDemandSubscription : JsonModel
     /// </summary>
     public required bool MandateOnly
     {
-        get { return this._rawData.GetNotNullStruct<bool>("mandate_only"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("mandate_only");
+        }
         init { this._rawData.Set("mandate_only", value); }
     }
 
@@ -28,7 +32,11 @@ public sealed record class OnDemandSubscription : JsonModel
     /// </summary>
     public bool? AdaptiveCurrencyFeesInclusive
     {
-        get { return this._rawData.GetNullableStruct<bool>("adaptive_currency_fees_inclusive"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("adaptive_currency_fees_inclusive");
+        }
         init { this._rawData.Set("adaptive_currency_fees_inclusive", value); }
     }
 
@@ -40,6 +48,7 @@ public sealed record class OnDemandSubscription : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("product_currency");
         }
         init { this._rawData.Set("product_currency", value); }
@@ -51,7 +60,11 @@ public sealed record class OnDemandSubscription : JsonModel
     /// </summary>
     public string? ProductDescription
     {
-        get { return this._rawData.GetNullableClass<string>("product_description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("product_description");
+        }
         init { this._rawData.Set("product_description", value); }
     }
 
@@ -62,7 +75,11 @@ public sealed record class OnDemandSubscription : JsonModel
     /// </summary>
     public int? ProductPrice
     {
-        get { return this._rawData.GetNullableStruct<int>("product_price"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("product_price");
+        }
         init { this._rawData.Set("product_price", value); }
     }
 
