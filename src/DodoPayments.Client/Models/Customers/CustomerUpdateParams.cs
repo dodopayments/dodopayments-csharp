@@ -11,7 +11,7 @@ namespace DodoPayments.Client.Models.Customers;
 
 public sealed record class CustomerUpdateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -26,24 +26,27 @@ public sealed record class CustomerUpdateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, string>>(
-                this.RawBodyData,
-                "metadata"
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "metadata", value); }
     }
 
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "name"); }
-        init { JsonModel.Set(this._rawBodyData, "name", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("name"); }
+        init { this._rawBodyData.Set("name", value); }
     }
 
     public string? PhoneNumber
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "phone_number"); }
-        init { JsonModel.Set(this._rawBodyData, "phone_number", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("phone_number"); }
+        init { this._rawBodyData.Set("phone_number", value); }
     }
 
     public CustomerUpdateParams() { }
@@ -53,7 +56,7 @@ public sealed record class CustomerUpdateParams : ParamsBase
     {
         this.CustomerID = customerUpdateParams.CustomerID;
 
-        this._rawBodyData = [.. customerUpdateParams._rawBodyData];
+        this._rawBodyData = new(customerUpdateParams._rawBodyData);
     }
 
     public CustomerUpdateParams(
@@ -62,9 +65,9 @@ public sealed record class CustomerUpdateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -75,9 +78,9 @@ public sealed record class CustomerUpdateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

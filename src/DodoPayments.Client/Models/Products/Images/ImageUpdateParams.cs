@@ -14,7 +14,7 @@ public sealed record class ImageUpdateParams : ParamsBase
 
     public bool? ForceUpdate
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawQueryData, "force_update"); }
+        get { return this._rawQueryData.GetNullableStruct<bool>("force_update"); }
         init
         {
             if (value == null)
@@ -22,7 +22,7 @@ public sealed record class ImageUpdateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "force_update", value);
+            this._rawQueryData.Set("force_update", value);
         }
     }
 
@@ -39,8 +39,8 @@ public sealed record class ImageUpdateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 
 #pragma warning disable CS8618
@@ -50,8 +50,8 @@ public sealed record class ImageUpdateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 #pragma warning restore CS8618
 

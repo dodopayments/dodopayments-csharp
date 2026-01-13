@@ -12,14 +12,14 @@ public sealed record class CreateNewCustomer : JsonModel
 {
     public required string Email
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "email"); }
-        init { JsonModel.Set(this._rawData, "email", value); }
+        get { return this._rawData.GetNotNullClass<string>("email"); }
+        init { this._rawData.Set("email", value); }
     }
 
     public required string Name
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNotNullClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ public sealed record class CreateNewCustomer : JsonModel
     /// </summary>
     public bool? CreateNewCustomerValue
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "create_new_customer"); }
+        get { return this._rawData.GetNullableStruct<bool>("create_new_customer"); }
         init
         {
             if (value == null)
@@ -37,14 +37,14 @@ public sealed record class CreateNewCustomer : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "create_new_customer", value);
+            this._rawData.Set("create_new_customer", value);
         }
     }
 
     public string? PhoneNumber
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "phone_number"); }
-        init { JsonModel.Set(this._rawData, "phone_number", value); }
+        get { return this._rawData.GetNullableClass<string>("phone_number"); }
+        init { this._rawData.Set("phone_number", value); }
     }
 
     /// <inheritdoc/>
@@ -63,14 +63,14 @@ public sealed record class CreateNewCustomer : JsonModel
 
     public CreateNewCustomer(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     CreateNewCustomer(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

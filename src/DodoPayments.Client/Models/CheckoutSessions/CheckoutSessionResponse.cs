@@ -15,8 +15,8 @@ public sealed record class CheckoutSessionResponse : JsonModel
     /// </summary>
     public required string SessionID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "session_id"); }
-        init { JsonModel.Set(this._rawData, "session_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("session_id"); }
+        init { this._rawData.Set("session_id", value); }
     }
 
     /// <summary>
@@ -24,8 +24,8 @@ public sealed record class CheckoutSessionResponse : JsonModel
     /// </summary>
     public string? CheckoutUrl
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "checkout_url"); }
-        init { JsonModel.Set(this._rawData, "checkout_url", value); }
+        get { return this._rawData.GetNullableClass<string>("checkout_url"); }
+        init { this._rawData.Set("checkout_url", value); }
     }
 
     /// <inheritdoc/>
@@ -42,14 +42,14 @@ public sealed record class CheckoutSessionResponse : JsonModel
 
     public CheckoutSessionResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     CheckoutSessionResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

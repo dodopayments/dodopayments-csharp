@@ -14,35 +14,32 @@ public sealed record class CustomerWallet : JsonModel
 {
     public required long Balance
     {
-        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "balance"); }
-        init { JsonModel.Set(this._rawData, "balance", value); }
+        get { return this._rawData.GetNotNullStruct<long>("balance"); }
+        init { this._rawData.Set("balance", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     public required string CustomerID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { JsonModel.Set(this._rawData, "customer_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        init { this._rawData.Set("customer_id", value); }
     }
 
     public required DateTimeOffset UpdatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
-        init { JsonModel.Set(this._rawData, "updated_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at"); }
+        init { this._rawData.Set("updated_at", value); }
     }
 
     /// <inheritdoc/>
@@ -62,14 +59,14 @@ public sealed record class CustomerWallet : JsonModel
 
     public CustomerWallet(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     CustomerWallet(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

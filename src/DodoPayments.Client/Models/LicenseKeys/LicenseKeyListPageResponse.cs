@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,8 +15,14 @@ public sealed record class LicenseKeyListPageResponse : JsonModel
 {
     public required IReadOnlyList<LicenseKey> Items
     {
-        get { return JsonModel.GetNotNullClass<List<LicenseKey>>(this.RawData, "items"); }
-        init { JsonModel.Set(this._rawData, "items", value); }
+        get { return this._rawData.GetNotNullStruct<ImmutableArray<LicenseKey>>("items"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<LicenseKey>>(
+                "items",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <inheritdoc/>
@@ -34,14 +41,14 @@ public sealed record class LicenseKeyListPageResponse : JsonModel
 
     public LicenseKeyListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     LicenseKeyListPageResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

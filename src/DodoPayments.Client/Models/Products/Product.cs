@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,8 +15,8 @@ public sealed record class Product : JsonModel
 {
     public required string BrandID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "brand_id"); }
-        init { JsonModel.Set(this._rawData, "brand_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("brand_id"); }
+        init { this._rawData.Set("brand_id", value); }
     }
 
     /// <summary>
@@ -23,8 +24,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     /// <summary>
@@ -32,8 +33,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     /// <summary>
@@ -41,8 +42,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required bool IsRecurring
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "is_recurring"); }
-        init { JsonModel.Set(this._rawData, "is_recurring", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("is_recurring"); }
+        init { this._rawData.Set("is_recurring", value); }
     }
 
     /// <summary>
@@ -50,8 +51,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required bool LicenseKeyEnabled
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "license_key_enabled"); }
-        init { JsonModel.Set(this._rawData, "license_key_enabled", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("license_key_enabled"); }
+        init { this._rawData.Set("license_key_enabled", value); }
     }
 
     /// <summary>
@@ -59,11 +60,14 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get
+        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        init
         {
-            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
-        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -71,8 +75,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required Price Price
     {
-        get { return JsonModel.GetNotNullClass<Price>(this.RawData, "price"); }
-        init { JsonModel.Set(this._rawData, "price", value); }
+        get { return this._rawData.GetNotNullClass<Price>("price"); }
+        init { this._rawData.Set("price", value); }
     }
 
     /// <summary>
@@ -80,8 +84,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { JsonModel.Set(this._rawData, "product_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        init { this._rawData.Set("product_id", value); }
     }
 
     /// <summary>
@@ -89,14 +93,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required ApiEnum<string, TaxCategory> TaxCategory
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, TaxCategory>>(
-                this.RawData,
-                "tax_category"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "tax_category", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category"); }
+        init { this._rawData.Set("tax_category", value); }
     }
 
     /// <summary>
@@ -104,8 +102,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required DateTimeOffset UpdatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
-        init { JsonModel.Set(this._rawData, "updated_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at"); }
+        init { this._rawData.Set("updated_at", value); }
     }
 
     /// <summary>
@@ -113,8 +111,14 @@ public sealed record class Product : JsonModel
     /// </summary>
     public IReadOnlyList<string>? Addons
     {
-        get { return JsonModel.GetNullableClass<List<string>>(this.RawData, "addons"); }
-        init { JsonModel.Set(this._rawData, "addons", value); }
+        get { return this._rawData.GetNullableStruct<ImmutableArray<string>>("addons"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>?>(
+                "addons",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -122,20 +126,19 @@ public sealed record class Product : JsonModel
     /// </summary>
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
-        init { JsonModel.Set(this._rawData, "description", value); }
+        get { return this._rawData.GetNullableClass<string>("description"); }
+        init { this._rawData.Set("description", value); }
     }
 
     public ProductDigitalProductDelivery? DigitalProductDelivery
     {
         get
         {
-            return JsonModel.GetNullableClass<ProductDigitalProductDelivery>(
-                this.RawData,
+            return this._rawData.GetNullableClass<ProductDigitalProductDelivery>(
                 "digital_product_delivery"
             );
         }
-        init { JsonModel.Set(this._rawData, "digital_product_delivery", value); }
+        init { this._rawData.Set("digital_product_delivery", value); }
     }
 
     /// <summary>
@@ -143,8 +146,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public string? Image
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "image"); }
-        init { JsonModel.Set(this._rawData, "image", value); }
+        get { return this._rawData.GetNullableClass<string>("image"); }
+        init { this._rawData.Set("image", value); }
     }
 
     /// <summary>
@@ -152,14 +155,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public string? LicenseKeyActivationMessage
     {
-        get
-        {
-            return JsonModel.GetNullableClass<string>(
-                this.RawData,
-                "license_key_activation_message"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "license_key_activation_message", value); }
+        get { return this._rawData.GetNullableClass<string>("license_key_activation_message"); }
+        init { this._rawData.Set("license_key_activation_message", value); }
     }
 
     /// <summary>
@@ -167,11 +164,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public int? LicenseKeyActivationsLimit
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<int>(this.RawData, "license_key_activations_limit");
-        }
-        init { JsonModel.Set(this._rawData, "license_key_activations_limit", value); }
+        get { return this._rawData.GetNullableStruct<int>("license_key_activations_limit"); }
+        init { this._rawData.Set("license_key_activations_limit", value); }
     }
 
     /// <summary>
@@ -179,14 +173,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public LicenseKeyDuration? LicenseKeyDuration
     {
-        get
-        {
-            return JsonModel.GetNullableClass<LicenseKeyDuration>(
-                this.RawData,
-                "license_key_duration"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "license_key_duration", value); }
+        get { return this._rawData.GetNullableClass<LicenseKeyDuration>("license_key_duration"); }
+        init { this._rawData.Set("license_key_duration", value); }
     }
 
     /// <summary>
@@ -194,8 +182,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNullableClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     /// <inheritdoc/>
@@ -228,14 +216,14 @@ public sealed record class Product : JsonModel
 
     public Product(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Product(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -263,8 +251,8 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
     /// </summary>
     public string? ExternalUrl
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "external_url"); }
-        init { JsonModel.Set(this._rawData, "external_url", value); }
+        get { return this._rawData.GetNullableClass<string>("external_url"); }
+        init { this._rawData.Set("external_url", value); }
     }
 
     /// <summary>
@@ -272,8 +260,14 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
     /// </summary>
     public IReadOnlyList<File>? Files
     {
-        get { return JsonModel.GetNullableClass<List<File>>(this.RawData, "files"); }
-        init { JsonModel.Set(this._rawData, "files", value); }
+        get { return this._rawData.GetNullableStruct<ImmutableArray<File>>("files"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<File>?>(
+                "files",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -281,8 +275,8 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
     /// </summary>
     public string? Instructions
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "instructions"); }
-        init { JsonModel.Set(this._rawData, "instructions", value); }
+        get { return this._rawData.GetNullableClass<string>("instructions"); }
+        init { this._rawData.Set("instructions", value); }
     }
 
     /// <inheritdoc/>
@@ -305,14 +299,14 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
 
     public ProductDigitalProductDelivery(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ProductDigitalProductDelivery(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -338,20 +332,20 @@ public sealed record class File : JsonModel
 {
     public required string FileID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "file_id"); }
-        init { JsonModel.Set(this._rawData, "file_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("file_id"); }
+        init { this._rawData.Set("file_id", value); }
     }
 
     public required string FileName
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "file_name"); }
-        init { JsonModel.Set(this._rawData, "file_name", value); }
+        get { return this._rawData.GetNotNullClass<string>("file_name"); }
+        init { this._rawData.Set("file_name", value); }
     }
 
     public required string Url
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
-        init { JsonModel.Set(this._rawData, "url", value); }
+        get { return this._rawData.GetNotNullClass<string>("url"); }
+        init { this._rawData.Set("url", value); }
     }
 
     /// <inheritdoc/>
@@ -369,14 +363,14 @@ public sealed record class File : JsonModel
 
     public File(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     File(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

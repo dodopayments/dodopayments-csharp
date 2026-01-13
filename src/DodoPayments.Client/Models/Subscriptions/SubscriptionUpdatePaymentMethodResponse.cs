@@ -18,26 +18,26 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse : JsonModel
 {
     public string? ClientSecret
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "client_secret"); }
-        init { JsonModel.Set(this._rawData, "client_secret", value); }
+        get { return this._rawData.GetNullableClass<string>("client_secret"); }
+        init { this._rawData.Set("client_secret", value); }
     }
 
     public DateTimeOffset? ExpiresOn
     {
-        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_on"); }
-        init { JsonModel.Set(this._rawData, "expires_on", value); }
+        get { return this._rawData.GetNullableStruct<DateTimeOffset>("expires_on"); }
+        init { this._rawData.Set("expires_on", value); }
     }
 
     public string? PaymentID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_id"); }
-        init { JsonModel.Set(this._rawData, "payment_id", value); }
+        get { return this._rawData.GetNullableClass<string>("payment_id"); }
+        init { this._rawData.Set("payment_id", value); }
     }
 
     public string? PaymentLink
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_link"); }
-        init { JsonModel.Set(this._rawData, "payment_link", value); }
+        get { return this._rawData.GetNullableClass<string>("payment_link"); }
+        init { this._rawData.Set("payment_link", value); }
     }
 
     /// <inheritdoc/>
@@ -58,14 +58,14 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse : JsonModel
 
     public SubscriptionUpdatePaymentMethodResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionUpdatePaymentMethodResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

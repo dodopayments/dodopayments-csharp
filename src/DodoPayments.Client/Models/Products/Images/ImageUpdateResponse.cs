@@ -12,14 +12,14 @@ public sealed record class ImageUpdateResponse : JsonModel
 {
     public required string Url
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
-        init { JsonModel.Set(this._rawData, "url", value); }
+        get { return this._rawData.GetNotNullClass<string>("url"); }
+        init { this._rawData.Set("url", value); }
     }
 
     public string? ImageID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "image_id"); }
-        init { JsonModel.Set(this._rawData, "image_id", value); }
+        get { return this._rawData.GetNullableClass<string>("image_id"); }
+        init { this._rawData.Set("image_id", value); }
     }
 
     /// <inheritdoc/>
@@ -36,14 +36,14 @@ public sealed record class ImageUpdateResponse : JsonModel
 
     public ImageUpdateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ImageUpdateResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

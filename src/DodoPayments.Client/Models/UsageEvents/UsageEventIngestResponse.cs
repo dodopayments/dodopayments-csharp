@@ -14,8 +14,8 @@ public sealed record class UsageEventIngestResponse : JsonModel
 {
     public required long IngestedCount
     {
-        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "ingested_count"); }
-        init { JsonModel.Set(this._rawData, "ingested_count", value); }
+        get { return this._rawData.GetNotNullStruct<long>("ingested_count"); }
+        init { this._rawData.Set("ingested_count", value); }
     }
 
     /// <inheritdoc/>
@@ -31,14 +31,14 @@ public sealed record class UsageEventIngestResponse : JsonModel
 
     public UsageEventIngestResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     UsageEventIngestResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

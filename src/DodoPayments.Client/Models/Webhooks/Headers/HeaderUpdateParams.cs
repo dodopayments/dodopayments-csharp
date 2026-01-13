@@ -14,7 +14,7 @@ namespace DodoPayments.Client.Models.Webhooks.Headers;
 /// </summary>
 public sealed record class HeaderUpdateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -29,12 +29,15 @@ public sealed record class HeaderUpdateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNotNullClass<Dictionary<string, string>>(
-                this.RawBodyData,
-                "headers"
+            return this._rawBodyData.GetNotNullClass<FrozenDictionary<string, string>>("headers");
+        }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>>(
+                "headers",
+                FrozenDictionary.ToFrozenDictionary(value)
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "headers", value); }
     }
 
     public HeaderUpdateParams() { }
@@ -44,7 +47,7 @@ public sealed record class HeaderUpdateParams : ParamsBase
     {
         this.WebhookID = headerUpdateParams.WebhookID;
 
-        this._rawBodyData = [.. headerUpdateParams._rawBodyData];
+        this._rawBodyData = new(headerUpdateParams._rawBodyData);
     }
 
     public HeaderUpdateParams(
@@ -53,9 +56,9 @@ public sealed record class HeaderUpdateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -66,9 +69,9 @@ public sealed record class HeaderUpdateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

@@ -14,32 +14,32 @@ public sealed record class Event : JsonModel
 {
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     public required string CustomerID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { JsonModel.Set(this._rawData, "customer_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        init { this._rawData.Set("customer_id", value); }
     }
 
     public required string EventID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "event_id"); }
-        init { JsonModel.Set(this._rawData, "event_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("event_id"); }
+        init { this._rawData.Set("event_id", value); }
     }
 
     public required string EventName
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "event_name"); }
-        init { JsonModel.Set(this._rawData, "event_name", value); }
+        get { return this._rawData.GetNotNullClass<string>("event_name"); }
+        init { this._rawData.Set("event_name", value); }
     }
 
     public required DateTimeOffset Timestamp
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "timestamp"); }
-        init { JsonModel.Set(this._rawData, "timestamp", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp"); }
+        init { this._rawData.Set("timestamp", value); }
     }
 
     /// <summary>
@@ -49,12 +49,15 @@ public sealed record class Event : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, Metadata>>(
-                this.RawData,
-                "metadata"
+            return this._rawData.GetNullableClass<FrozenDictionary<string, Metadata>>("metadata");
+        }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, Metadata>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
-        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <inheritdoc/>
@@ -81,14 +84,14 @@ public sealed record class Event : JsonModel
 
     public Event(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Event(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

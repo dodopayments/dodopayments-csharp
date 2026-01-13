@@ -18,8 +18,8 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     /// <summary>
@@ -27,8 +27,8 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     /// <summary>
@@ -36,14 +36,8 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required Payments::CustomerLimitedDetails Customer
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<Payments::CustomerLimitedDetails>(
-                this.RawData,
-                "customer"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "customer", value); }
+        get { return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer"); }
+        init { this._rawData.Set("customer", value); }
     }
 
     /// <summary>
@@ -51,8 +45,8 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required bool IsPartial
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "is_partial"); }
-        init { JsonModel.Set(this._rawData, "is_partial", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("is_partial"); }
+        init { this._rawData.Set("is_partial", value); }
     }
 
     /// <summary>
@@ -60,11 +54,14 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get
+        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        init
         {
-            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
-        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -72,8 +69,8 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required string PaymentID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { JsonModel.Set(this._rawData, "payment_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        init { this._rawData.Set("payment_id", value); }
     }
 
     /// <summary>
@@ -81,8 +78,8 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required string RefundID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "refund_id"); }
-        init { JsonModel.Set(this._rawData, "refund_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("refund_id"); }
+        init { this._rawData.Set("refund_id", value); }
     }
 
     /// <summary>
@@ -90,11 +87,8 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public required ApiEnum<string, RefundStatus> Status
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, RefundStatus>>(this.RawData, "status");
-        }
-        init { JsonModel.Set(this._rawData, "status", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, RefundStatus>>("status"); }
+        init { this._rawData.Set("status", value); }
     }
 
     /// <summary>
@@ -102,8 +96,8 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public int? Amount
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "amount"); }
-        init { JsonModel.Set(this._rawData, "amount", value); }
+        get { return this._rawData.GetNullableStruct<int>("amount"); }
+        init { this._rawData.Set("amount", value); }
     }
 
     /// <summary>
@@ -111,11 +105,8 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public ApiEnum<string, Currency>? Currency
     {
-        get
-        {
-            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <summary>
@@ -123,8 +114,8 @@ public sealed record class Refund : JsonModel
     /// </summary>
     public string? Reason
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason"); }
-        init { JsonModel.Set(this._rawData, "reason", value); }
+        get { return this._rawData.GetNullableClass<string>("reason"); }
+        init { this._rawData.Set("reason", value); }
     }
 
     /// <inheritdoc/>
@@ -150,14 +141,14 @@ public sealed record class Refund : JsonModel
 
     public Refund(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Refund(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

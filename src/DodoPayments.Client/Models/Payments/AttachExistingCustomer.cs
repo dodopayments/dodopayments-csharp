@@ -12,8 +12,8 @@ public sealed record class AttachExistingCustomer : JsonModel
 {
     public required string CustomerID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { JsonModel.Set(this._rawData, "customer_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        init { this._rawData.Set("customer_id", value); }
     }
 
     /// <inheritdoc/>
@@ -29,14 +29,14 @@ public sealed record class AttachExistingCustomer : JsonModel
 
     public AttachExistingCustomer(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     AttachExistingCustomer(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

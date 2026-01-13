@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -16,9 +17,17 @@ public sealed record class SubscriptionListPageResponse : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<List<SubscriptionListResponse>>(this.RawData, "items");
+            return this._rawData.GetNotNullStruct<ImmutableArray<SubscriptionListResponse>>(
+                "items"
+            );
         }
-        init { JsonModel.Set(this._rawData, "items", value); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<SubscriptionListResponse>>(
+                "items",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <inheritdoc/>
@@ -37,14 +46,14 @@ public sealed record class SubscriptionListPageResponse : JsonModel
 
     public SubscriptionListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionListPageResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

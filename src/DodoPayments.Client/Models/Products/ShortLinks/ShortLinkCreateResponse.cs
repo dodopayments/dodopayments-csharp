@@ -15,8 +15,8 @@ public sealed record class ShortLinkCreateResponse : JsonModel
     /// </summary>
     public required string FullUrl
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "full_url"); }
-        init { JsonModel.Set(this._rawData, "full_url", value); }
+        get { return this._rawData.GetNotNullClass<string>("full_url"); }
+        init { this._rawData.Set("full_url", value); }
     }
 
     /// <summary>
@@ -24,8 +24,8 @@ public sealed record class ShortLinkCreateResponse : JsonModel
     /// </summary>
     public required string ShortUrl
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "short_url"); }
-        init { JsonModel.Set(this._rawData, "short_url", value); }
+        get { return this._rawData.GetNotNullClass<string>("short_url"); }
+        init { this._rawData.Set("short_url", value); }
     }
 
     /// <inheritdoc/>
@@ -42,14 +42,14 @@ public sealed record class ShortLinkCreateResponse : JsonModel
 
     public ShortLinkCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ShortLinkCreateResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

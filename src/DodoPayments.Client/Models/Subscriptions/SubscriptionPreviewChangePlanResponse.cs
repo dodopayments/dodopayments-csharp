@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -20,8 +21,8 @@ public sealed record class SubscriptionPreviewChangePlanResponse : JsonModel
 {
     public required ImmediateCharge ImmediateCharge
     {
-        get { return JsonModel.GetNotNullClass<ImmediateCharge>(this.RawData, "immediate_charge"); }
-        init { JsonModel.Set(this._rawData, "immediate_charge", value); }
+        get { return this._rawData.GetNotNullClass<ImmediateCharge>("immediate_charge"); }
+        init { this._rawData.Set("immediate_charge", value); }
     }
 
     /// <summary>
@@ -29,8 +30,8 @@ public sealed record class SubscriptionPreviewChangePlanResponse : JsonModel
     /// </summary>
     public required Subscription NewPlan
     {
-        get { return JsonModel.GetNotNullClass<Subscription>(this.RawData, "new_plan"); }
-        init { JsonModel.Set(this._rawData, "new_plan", value); }
+        get { return this._rawData.GetNotNullClass<Subscription>("new_plan"); }
+        init { this._rawData.Set("new_plan", value); }
     }
 
     /// <inheritdoc/>
@@ -49,14 +50,14 @@ public sealed record class SubscriptionPreviewChangePlanResponse : JsonModel
 
     public SubscriptionPreviewChangePlanResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionPreviewChangePlanResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -83,14 +84,20 @@ public sealed record class ImmediateCharge : JsonModel
 {
     public required IReadOnlyList<LineItem> LineItems
     {
-        get { return JsonModel.GetNotNullClass<List<LineItem>>(this.RawData, "line_items"); }
-        init { JsonModel.Set(this._rawData, "line_items", value); }
+        get { return this._rawData.GetNotNullStruct<ImmutableArray<LineItem>>("line_items"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<LineItem>>(
+                "line_items",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     public required Summary Summary
     {
-        get { return JsonModel.GetNotNullClass<Summary>(this.RawData, "summary"); }
-        init { JsonModel.Set(this._rawData, "summary", value); }
+        get { return this._rawData.GetNotNullClass<Summary>("summary"); }
+        init { this._rawData.Set("summary", value); }
     }
 
     /// <inheritdoc/>
@@ -110,14 +117,14 @@ public sealed record class ImmediateCharge : JsonModel
 
     public ImmediateCharge(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ImmediateCharge(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -543,83 +550,77 @@ public sealed record class LineItemSubscription : JsonModel
 {
     public required string ID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
-        init { JsonModel.Set(this._rawData, "id", value); }
+        get { return this._rawData.GetNotNullClass<string>("id"); }
+        init { this._rawData.Set("id", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     public required string ProductID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { JsonModel.Set(this._rawData, "product_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        init { this._rawData.Set("product_id", value); }
     }
 
     public required double ProrationFactor
     {
-        get { return JsonModel.GetNotNullStruct<double>(this.RawData, "proration_factor"); }
-        init { JsonModel.Set(this._rawData, "proration_factor", value); }
+        get { return this._rawData.GetNotNullStruct<double>("proration_factor"); }
+        init { this._rawData.Set("proration_factor", value); }
     }
 
     public required int Quantity
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "quantity"); }
-        init { JsonModel.Set(this._rawData, "quantity", value); }
+        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        init { this._rawData.Set("quantity", value); }
     }
 
     public required bool TaxInclusive
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "tax_inclusive"); }
-        init { JsonModel.Set(this._rawData, "tax_inclusive", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("tax_inclusive"); }
+        init { this._rawData.Set("tax_inclusive", value); }
     }
 
     public required ApiEnum<string, LineItemSubscriptionType> Type
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, LineItemSubscriptionType>>(
-                this.RawData,
-                "type"
-            );
+            return this._rawData.GetNotNullClass<ApiEnum<string, LineItemSubscriptionType>>("type");
         }
-        init { JsonModel.Set(this._rawData, "type", value); }
+        init { this._rawData.Set("type", value); }
     }
 
     public required int UnitPrice
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "unit_price"); }
-        init { JsonModel.Set(this._rawData, "unit_price", value); }
+        get { return this._rawData.GetNotNullStruct<int>("unit_price"); }
+        init { this._rawData.Set("unit_price", value); }
     }
 
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
-        init { JsonModel.Set(this._rawData, "description", value); }
+        get { return this._rawData.GetNullableClass<string>("description"); }
+        init { this._rawData.Set("description", value); }
     }
 
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNullableClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     public int? Tax
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "tax"); }
-        init { JsonModel.Set(this._rawData, "tax", value); }
+        get { return this._rawData.GetNullableStruct<int>("tax"); }
+        init { this._rawData.Set("tax", value); }
     }
 
     public float? TaxRate
     {
-        get { return JsonModel.GetNullableStruct<float>(this.RawData, "tax_rate"); }
-        init { JsonModel.Set(this._rawData, "tax_rate", value); }
+        get { return this._rawData.GetNullableStruct<float>("tax_rate"); }
+        init { this._rawData.Set("tax_rate", value); }
     }
 
     /// <inheritdoc/>
@@ -646,14 +647,14 @@ public sealed record class LineItemSubscription : JsonModel
 
     public LineItemSubscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     LineItemSubscription(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -720,35 +721,32 @@ public sealed record class Addon : JsonModel
 {
     public required string ID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
-        init { JsonModel.Set(this._rawData, "id", value); }
+        get { return this._rawData.GetNotNullClass<string>("id"); }
+        init { this._rawData.Set("id", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     public required string Name
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNotNullClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     public required double ProrationFactor
     {
-        get { return JsonModel.GetNotNullStruct<double>(this.RawData, "proration_factor"); }
-        init { JsonModel.Set(this._rawData, "proration_factor", value); }
+        get { return this._rawData.GetNotNullStruct<double>("proration_factor"); }
+        init { this._rawData.Set("proration_factor", value); }
     }
 
     public required int Quantity
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "quantity"); }
-        init { JsonModel.Set(this._rawData, "quantity", value); }
+        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        init { this._rawData.Set("quantity", value); }
     }
 
     /// <summary>
@@ -757,50 +755,44 @@ public sealed record class Addon : JsonModel
     /// </summary>
     public required ApiEnum<string, TaxCategory> TaxCategory
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, TaxCategory>>(
-                this.RawData,
-                "tax_category"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "tax_category", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category"); }
+        init { this._rawData.Set("tax_category", value); }
     }
 
     public required bool TaxInclusive
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "tax_inclusive"); }
-        init { JsonModel.Set(this._rawData, "tax_inclusive", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("tax_inclusive"); }
+        init { this._rawData.Set("tax_inclusive", value); }
     }
 
     public required float TaxRate
     {
-        get { return JsonModel.GetNotNullStruct<float>(this.RawData, "tax_rate"); }
-        init { JsonModel.Set(this._rawData, "tax_rate", value); }
+        get { return this._rawData.GetNotNullStruct<float>("tax_rate"); }
+        init { this._rawData.Set("tax_rate", value); }
     }
 
     public required ApiEnum<string, AddonType> Type
     {
-        get { return JsonModel.GetNotNullClass<ApiEnum<string, AddonType>>(this.RawData, "type"); }
-        init { JsonModel.Set(this._rawData, "type", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, AddonType>>("type"); }
+        init { this._rawData.Set("type", value); }
     }
 
     public required int UnitPrice
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "unit_price"); }
-        init { JsonModel.Set(this._rawData, "unit_price", value); }
+        get { return this._rawData.GetNotNullStruct<int>("unit_price"); }
+        init { this._rawData.Set("unit_price", value); }
     }
 
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
-        init { JsonModel.Set(this._rawData, "description", value); }
+        get { return this._rawData.GetNullableClass<string>("description"); }
+        init { this._rawData.Set("description", value); }
     }
 
     public int? Tax
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "tax"); }
-        init { JsonModel.Set(this._rawData, "tax", value); }
+        get { return this._rawData.GetNullableStruct<int>("tax"); }
+        init { this._rawData.Set("tax", value); }
     }
 
     /// <inheritdoc/>
@@ -827,14 +819,14 @@ public sealed record class Addon : JsonModel
 
     public Addon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Addon(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -898,89 +890,80 @@ public sealed record class LineItemMeter : JsonModel
 {
     public required string ID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
-        init { JsonModel.Set(this._rawData, "id", value); }
+        get { return this._rawData.GetNotNullClass<string>("id"); }
+        init { this._rawData.Set("id", value); }
     }
 
     public required string ChargeableUnits
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "chargeable_units"); }
-        init { JsonModel.Set(this._rawData, "chargeable_units", value); }
+        get { return this._rawData.GetNotNullClass<string>("chargeable_units"); }
+        init { this._rawData.Set("chargeable_units", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     public required long FreeThreshold
     {
-        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "free_threshold"); }
-        init { JsonModel.Set(this._rawData, "free_threshold", value); }
+        get { return this._rawData.GetNotNullStruct<long>("free_threshold"); }
+        init { this._rawData.Set("free_threshold", value); }
     }
 
     public required string Name
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNotNullClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     public required string PricePerUnit
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
-        init { JsonModel.Set(this._rawData, "price_per_unit", value); }
+        get { return this._rawData.GetNotNullClass<string>("price_per_unit"); }
+        init { this._rawData.Set("price_per_unit", value); }
     }
 
     public required int Subtotal
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "subtotal"); }
-        init { JsonModel.Set(this._rawData, "subtotal", value); }
+        get { return this._rawData.GetNotNullStruct<int>("subtotal"); }
+        init { this._rawData.Set("subtotal", value); }
     }
 
     public required bool TaxInclusive
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "tax_inclusive"); }
-        init { JsonModel.Set(this._rawData, "tax_inclusive", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("tax_inclusive"); }
+        init { this._rawData.Set("tax_inclusive", value); }
     }
 
     public required float TaxRate
     {
-        get { return JsonModel.GetNotNullStruct<float>(this.RawData, "tax_rate"); }
-        init { JsonModel.Set(this._rawData, "tax_rate", value); }
+        get { return this._rawData.GetNotNullStruct<float>("tax_rate"); }
+        init { this._rawData.Set("tax_rate", value); }
     }
 
     public required ApiEnum<string, LineItemMeterType> Type
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, LineItemMeterType>>(
-                this.RawData,
-                "type"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "type", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, LineItemMeterType>>("type"); }
+        init { this._rawData.Set("type", value); }
     }
 
     public required string UnitsConsumed
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "units_consumed"); }
-        init { JsonModel.Set(this._rawData, "units_consumed", value); }
+        get { return this._rawData.GetNotNullClass<string>("units_consumed"); }
+        init { this._rawData.Set("units_consumed", value); }
     }
 
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
-        init { JsonModel.Set(this._rawData, "description", value); }
+        get { return this._rawData.GetNullableClass<string>("description"); }
+        init { this._rawData.Set("description", value); }
     }
 
     public int? Tax
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "tax"); }
-        init { JsonModel.Set(this._rawData, "tax", value); }
+        get { return this._rawData.GetNullableStruct<int>("tax"); }
+        init { this._rawData.Set("tax", value); }
     }
 
     /// <inheritdoc/>
@@ -1008,14 +991,14 @@ public sealed record class LineItemMeter : JsonModel
 
     public LineItemMeter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     LineItemMeter(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -1079,53 +1062,47 @@ public sealed record class Summary : JsonModel
 {
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     public required long CustomerCredits
     {
-        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "customer_credits"); }
-        init { JsonModel.Set(this._rawData, "customer_credits", value); }
+        get { return this._rawData.GetNotNullStruct<long>("customer_credits"); }
+        init { this._rawData.Set("customer_credits", value); }
     }
 
     public required int SettlementAmount
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "settlement_amount"); }
-        init { JsonModel.Set(this._rawData, "settlement_amount", value); }
+        get { return this._rawData.GetNotNullStruct<int>("settlement_amount"); }
+        init { this._rawData.Set("settlement_amount", value); }
     }
 
     public required ApiEnum<string, Currency> SettlementCurrency
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(
-                this.RawData,
-                "settlement_currency"
-            );
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("settlement_currency");
         }
-        init { JsonModel.Set(this._rawData, "settlement_currency", value); }
+        init { this._rawData.Set("settlement_currency", value); }
     }
 
     public required int TotalAmount
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "total_amount"); }
-        init { JsonModel.Set(this._rawData, "total_amount", value); }
+        get { return this._rawData.GetNotNullStruct<int>("total_amount"); }
+        init { this._rawData.Set("total_amount", value); }
     }
 
     public int? SettlementTax
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "settlement_tax"); }
-        init { JsonModel.Set(this._rawData, "settlement_tax", value); }
+        get { return this._rawData.GetNullableStruct<int>("settlement_tax"); }
+        init { this._rawData.Set("settlement_tax", value); }
     }
 
     public int? Tax
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "tax"); }
-        init { JsonModel.Set(this._rawData, "tax", value); }
+        get { return this._rawData.GetNullableStruct<int>("tax"); }
+        init { this._rawData.Set("tax", value); }
     }
 
     /// <inheritdoc/>
@@ -1147,14 +1124,14 @@ public sealed record class Summary : JsonModel
 
     public Summary(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Summary(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

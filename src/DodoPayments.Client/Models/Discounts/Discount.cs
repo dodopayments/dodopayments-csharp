@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -19,8 +20,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required int Amount
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "amount"); }
-        init { JsonModel.Set(this._rawData, "amount", value); }
+        get { return this._rawData.GetNotNullStruct<int>("amount"); }
+        init { this._rawData.Set("amount", value); }
     }
 
     /// <summary>
@@ -28,8 +29,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     /// <summary>
@@ -37,8 +38,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required string Code
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "code"); }
-        init { JsonModel.Set(this._rawData, "code", value); }
+        get { return this._rawData.GetNotNullClass<string>("code"); }
+        init { this._rawData.Set("code", value); }
     }
 
     /// <summary>
@@ -46,8 +47,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     /// <summary>
@@ -55,8 +56,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required string DiscountID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "discount_id"); }
-        init { JsonModel.Set(this._rawData, "discount_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("discount_id"); }
+        init { this._rawData.Set("discount_id", value); }
     }
 
     /// <summary>
@@ -64,8 +65,14 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required IReadOnlyList<string> RestrictedTo
     {
-        get { return JsonModel.GetNotNullClass<List<string>>(this.RawData, "restricted_to"); }
-        init { JsonModel.Set(this._rawData, "restricted_to", value); }
+        get { return this._rawData.GetNotNullStruct<ImmutableArray<string>>("restricted_to"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "restricted_to",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -73,8 +80,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required int TimesUsed
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "times_used"); }
-        init { JsonModel.Set(this._rawData, "times_used", value); }
+        get { return this._rawData.GetNotNullStruct<int>("times_used"); }
+        init { this._rawData.Set("times_used", value); }
     }
 
     /// <summary>
@@ -82,11 +89,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required ApiEnum<string, DiscountType> Type
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, DiscountType>>(this.RawData, "type");
-        }
-        init { JsonModel.Set(this._rawData, "type", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, DiscountType>>("type"); }
+        init { this._rawData.Set("type", value); }
     }
 
     /// <summary>
@@ -94,8 +98,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_at"); }
-        init { JsonModel.Set(this._rawData, "expires_at", value); }
+        get { return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at"); }
+        init { this._rawData.Set("expires_at", value); }
     }
 
     /// <summary>
@@ -103,8 +107,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNullableClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     /// <summary>
@@ -114,8 +118,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public int? SubscriptionCycles
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "subscription_cycles"); }
-        init { JsonModel.Set(this._rawData, "subscription_cycles", value); }
+        get { return this._rawData.GetNullableStruct<int>("subscription_cycles"); }
+        init { this._rawData.Set("subscription_cycles", value); }
     }
 
     /// <summary>
@@ -123,8 +127,8 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public int? UsageLimit
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "usage_limit"); }
-        init { JsonModel.Set(this._rawData, "usage_limit", value); }
+        get { return this._rawData.GetNullableStruct<int>("usage_limit"); }
+        init { this._rawData.Set("usage_limit", value); }
     }
 
     /// <inheritdoc/>
@@ -151,14 +155,14 @@ public sealed record class Discount : JsonModel
 
     public Discount(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Discount(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

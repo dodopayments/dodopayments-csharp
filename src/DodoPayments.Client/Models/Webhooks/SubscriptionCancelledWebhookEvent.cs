@@ -23,8 +23,8 @@ public sealed record class SubscriptionCancelledWebhookEvent : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     /// <summary>
@@ -32,8 +32,8 @@ public sealed record class SubscriptionCancelledWebhookEvent : JsonModel
     /// </summary>
     public required Subscription Data
     {
-        get { return JsonModel.GetNotNullClass<Subscription>(this.RawData, "data"); }
-        init { JsonModel.Set(this._rawData, "data", value); }
+        get { return this._rawData.GetNotNullClass<Subscription>("data"); }
+        init { this._rawData.Set("data", value); }
     }
 
     /// <summary>
@@ -41,11 +41,8 @@ public sealed record class SubscriptionCancelledWebhookEvent : JsonModel
     /// </summary>
     public required System::DateTimeOffset Timestamp
     {
-        get
-        {
-            return JsonModel.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "timestamp");
-        }
-        init { JsonModel.Set(this._rawData, "timestamp", value); }
+        get { return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp"); }
+        init { this._rawData.Set("timestamp", value); }
     }
 
     /// <summary>
@@ -55,11 +52,11 @@ public sealed record class SubscriptionCancelledWebhookEvent : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<
+            return this._rawData.GetNotNullClass<
                 ApiEnum<string, SubscriptionCancelledWebhookEventType>
-            >(this.RawData, "type");
+            >("type");
         }
-        init { JsonModel.Set(this._rawData, "type", value); }
+        init { this._rawData.Set("type", value); }
     }
 
     /// <inheritdoc/>
@@ -80,14 +77,14 @@ public sealed record class SubscriptionCancelledWebhookEvent : JsonModel
 
     public SubscriptionCancelledWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionCancelledWebhookEvent(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

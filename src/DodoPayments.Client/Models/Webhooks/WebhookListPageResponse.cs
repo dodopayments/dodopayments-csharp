@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -15,8 +16,14 @@ public sealed record class WebhookListPageResponse : JsonModel
     /// </summary>
     public required IReadOnlyList<WebhookDetails> Data
     {
-        get { return JsonModel.GetNotNullClass<List<WebhookDetails>>(this.RawData, "data"); }
-        init { JsonModel.Set(this._rawData, "data", value); }
+        get { return this._rawData.GetNotNullStruct<ImmutableArray<WebhookDetails>>("data"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<WebhookDetails>>(
+                "data",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -24,8 +31,8 @@ public sealed record class WebhookListPageResponse : JsonModel
     /// </summary>
     public required bool Done
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "done"); }
-        init { JsonModel.Set(this._rawData, "done", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("done"); }
+        init { this._rawData.Set("done", value); }
     }
 
     /// <summary>
@@ -33,8 +40,8 @@ public sealed record class WebhookListPageResponse : JsonModel
     /// </summary>
     public string? Iterator
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "iterator"); }
-        init { JsonModel.Set(this._rawData, "iterator", value); }
+        get { return this._rawData.GetNullableClass<string>("iterator"); }
+        init { this._rawData.Set("iterator", value); }
     }
 
     /// <summary>
@@ -42,8 +49,8 @@ public sealed record class WebhookListPageResponse : JsonModel
     /// </summary>
     public string? PrevIterator
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "prev_iterator"); }
-        init { JsonModel.Set(this._rawData, "prev_iterator", value); }
+        get { return this._rawData.GetNullableClass<string>("prev_iterator"); }
+        init { this._rawData.Set("prev_iterator", value); }
     }
 
     /// <inheritdoc/>
@@ -65,14 +72,14 @@ public sealed record class WebhookListPageResponse : JsonModel
 
     public WebhookListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     WebhookListPageResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
