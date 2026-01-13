@@ -827,93 +827,85 @@ public class LineItemTest : TestBase
     [Fact]
     public void SubscriptionValidationWorks()
     {
-        LineItem value = new(
-            new LineItemSubscription()
-            {
-                ID = "id",
-                Currency = Currency.Aed,
-                ProductID = "product_id",
-                ProrationFactor = 0,
-                Quantity = 0,
-                TaxInclusive = true,
-                Type = LineItemSubscriptionType.Subscription,
-                UnitPrice = 0,
-                Description = "description",
-                Name = "name",
-                Tax = 0,
-                TaxRate = 0,
-            }
-        );
+        LineItem value = new LineItemSubscription()
+        {
+            ID = "id",
+            Currency = Currency.Aed,
+            ProductID = "product_id",
+            ProrationFactor = 0,
+            Quantity = 0,
+            TaxInclusive = true,
+            Type = LineItemSubscriptionType.Subscription,
+            UnitPrice = 0,
+            Description = "description",
+            Name = "name",
+            Tax = 0,
+            TaxRate = 0,
+        };
         value.Validate();
     }
 
     [Fact]
     public void AddonValidationWorks()
     {
-        LineItem value = new(
-            new Addon()
-            {
-                ID = "id",
-                Currency = Currency.Aed,
-                Name = "name",
-                ProrationFactor = 0,
-                Quantity = 0,
-                TaxCategory = TaxCategory.DigitalProducts,
-                TaxInclusive = true,
-                TaxRate = 0,
-                Type = AddonType.Addon,
-                UnitPrice = 0,
-                Description = "description",
-                Tax = 0,
-            }
-        );
+        LineItem value = new Addon()
+        {
+            ID = "id",
+            Currency = Currency.Aed,
+            Name = "name",
+            ProrationFactor = 0,
+            Quantity = 0,
+            TaxCategory = TaxCategory.DigitalProducts,
+            TaxInclusive = true,
+            TaxRate = 0,
+            Type = AddonType.Addon,
+            UnitPrice = 0,
+            Description = "description",
+            Tax = 0,
+        };
         value.Validate();
     }
 
     [Fact]
     public void MeterValidationWorks()
     {
-        LineItem value = new(
-            new LineItemMeter()
-            {
-                ID = "id",
-                ChargeableUnits = "chargeable_units",
-                Currency = Currency.Aed,
-                FreeThreshold = 0,
-                Name = "name",
-                PricePerUnit = "price_per_unit",
-                Subtotal = 0,
-                TaxInclusive = true,
-                TaxRate = 0,
-                Type = LineItemMeterType.Meter,
-                UnitsConsumed = "units_consumed",
-                Description = "description",
-                Tax = 0,
-            }
-        );
+        LineItem value = new LineItemMeter()
+        {
+            ID = "id",
+            ChargeableUnits = "chargeable_units",
+            Currency = Currency.Aed,
+            FreeThreshold = 0,
+            Name = "name",
+            PricePerUnit = "price_per_unit",
+            Subtotal = 0,
+            TaxInclusive = true,
+            TaxRate = 0,
+            Type = LineItemMeterType.Meter,
+            UnitsConsumed = "units_consumed",
+            Description = "description",
+            Tax = 0,
+        };
         value.Validate();
     }
 
     [Fact]
     public void SubscriptionSerializationRoundtripWorks()
     {
-        LineItem value = new(
-            new LineItemSubscription()
-            {
-                ID = "id",
-                Currency = Currency.Aed,
-                ProductID = "product_id",
-                ProrationFactor = 0,
-                Quantity = 0,
-                TaxInclusive = true,
-                Type = LineItemSubscriptionType.Subscription,
-                UnitPrice = 0,
-                Description = "description",
-                Name = "name",
-                Tax = 0,
-                TaxRate = 0,
-            }
-        );
+        LineItem value = new LineItemSubscription()
+        {
+            ID = "id",
+            Currency = Currency.Aed,
+            ProductID = "product_id",
+            ProrationFactor = 0,
+            Quantity = 0,
+            TaxInclusive = true,
+            Type = LineItemSubscriptionType.Subscription,
+            UnitPrice = 0,
+            Description = "description",
+            Name = "name",
+            Tax = 0,
+            TaxRate = 0,
+        };
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<LineItem>(element);
 
@@ -923,23 +915,21 @@ public class LineItemTest : TestBase
     [Fact]
     public void AddonSerializationRoundtripWorks()
     {
-        LineItem value = new(
-            new Addon()
-            {
-                ID = "id",
-                Currency = Currency.Aed,
-                Name = "name",
-                ProrationFactor = 0,
-                Quantity = 0,
-                TaxCategory = TaxCategory.DigitalProducts,
-                TaxInclusive = true,
-                TaxRate = 0,
-                Type = AddonType.Addon,
-                UnitPrice = 0,
-                Description = "description",
-                Tax = 0,
-            }
-        );
+        LineItem value = new Addon()
+        {
+            ID = "id",
+            Currency = Currency.Aed,
+            Name = "name",
+            ProrationFactor = 0,
+            Quantity = 0,
+            TaxCategory = TaxCategory.DigitalProducts,
+            TaxInclusive = true,
+            TaxRate = 0,
+            Type = AddonType.Addon,
+            UnitPrice = 0,
+            Description = "description",
+            Tax = 0,
+        };
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<LineItem>(element);
 
@@ -949,24 +939,22 @@ public class LineItemTest : TestBase
     [Fact]
     public void MeterSerializationRoundtripWorks()
     {
-        LineItem value = new(
-            new LineItemMeter()
-            {
-                ID = "id",
-                ChargeableUnits = "chargeable_units",
-                Currency = Currency.Aed,
-                FreeThreshold = 0,
-                Name = "name",
-                PricePerUnit = "price_per_unit",
-                Subtotal = 0,
-                TaxInclusive = true,
-                TaxRate = 0,
-                Type = LineItemMeterType.Meter,
-                UnitsConsumed = "units_consumed",
-                Description = "description",
-                Tax = 0,
-            }
-        );
+        LineItem value = new LineItemMeter()
+        {
+            ID = "id",
+            ChargeableUnits = "chargeable_units",
+            Currency = Currency.Aed,
+            FreeThreshold = 0,
+            Name = "name",
+            PricePerUnit = "price_per_unit",
+            Subtotal = 0,
+            TaxInclusive = true,
+            TaxRate = 0,
+            Type = LineItemMeterType.Meter,
+            UnitsConsumed = "units_consumed",
+            Description = "description",
+            Tax = 0,
+        };
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<LineItem>(element);
 
