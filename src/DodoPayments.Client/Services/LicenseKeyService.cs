@@ -171,7 +171,7 @@ public sealed class LicenseKeyServiceWithRawResponse : ILicenseKeyServiceWithRaw
 
         HttpRequest<LicenseKeyUpdateParams> request = new()
         {
-            Method = DodoPaymentsClient.PatchMethod,
+            Method = DodoPaymentsClientWithRawResponse.PatchMethod,
             Params = parameters,
         };
         var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);

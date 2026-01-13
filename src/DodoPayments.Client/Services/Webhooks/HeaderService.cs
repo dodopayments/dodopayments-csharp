@@ -150,7 +150,7 @@ public sealed class HeaderServiceWithRawResponse : IHeaderServiceWithRawResponse
 
         HttpRequest<HeaderUpdateParams> request = new()
         {
-            Method = DodoPaymentsClient.PatchMethod,
+            Method = DodoPaymentsClientWithRawResponse.PatchMethod,
             Params = parameters,
         };
         return this._client.Execute(request, cancellationToken);
