@@ -12,7 +12,11 @@ public sealed record class AttachExistingCustomer : JsonModel
 {
     public required string CustomerID
     {
-        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
         init { this._rawData.Set("customer_id", value); }
     }
 

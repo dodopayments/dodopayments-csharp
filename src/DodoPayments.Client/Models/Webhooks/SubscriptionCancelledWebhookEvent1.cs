@@ -23,7 +23,11 @@ public sealed record class SubscriptionCancelledWebhookEvent : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -32,7 +36,11 @@ public sealed record class SubscriptionCancelledWebhookEvent : JsonModel
     /// </summary>
     public required Subscription Data
     {
-        get { return this._rawData.GetNotNullClass<Subscription>("data"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Subscription>("data");
+        }
         init { this._rawData.Set("data", value); }
     }
 
@@ -41,7 +49,11 @@ public sealed record class SubscriptionCancelledWebhookEvent : JsonModel
     /// </summary>
     public required System::DateTimeOffset Timestamp
     {
-        get { return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp");
+        }
         init { this._rawData.Set("timestamp", value); }
     }
 
@@ -50,7 +62,11 @@ public sealed record class SubscriptionCancelledWebhookEvent : JsonModel
     /// </summary>
     public required ApiEnum<string, Type14> Type
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Type14>>("type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Type14>>("type");
+        }
         init { this._rawData.Set("type", value); }
     }
 

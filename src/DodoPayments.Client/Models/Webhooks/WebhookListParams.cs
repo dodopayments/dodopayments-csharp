@@ -18,7 +18,11 @@ public sealed record class WebhookListParams : ParamsBase
     /// </summary>
     public string? Iterator
     {
-        get { return this._rawQueryData.GetNullableClass<string>("iterator"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("iterator");
+        }
         init { this._rawQueryData.Set("iterator", value); }
     }
 
@@ -27,7 +31,11 @@ public sealed record class WebhookListParams : ParamsBase
     /// </summary>
     public int? Limit
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("limit"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("limit");
+        }
         init { this._rawQueryData.Set("limit", value); }
     }
 

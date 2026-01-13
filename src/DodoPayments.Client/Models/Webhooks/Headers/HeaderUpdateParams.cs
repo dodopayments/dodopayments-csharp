@@ -29,6 +29,7 @@ public sealed record class HeaderUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNotNullClass<FrozenDictionary<string, string>>("headers");
         }
         init

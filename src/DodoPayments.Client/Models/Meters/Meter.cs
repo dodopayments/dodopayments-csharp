@@ -13,55 +13,91 @@ public sealed record class Meter : JsonModel
 {
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
     public required MeterAggregation Aggregation
     {
-        get { return this._rawData.GetNotNullClass<MeterAggregation>("aggregation"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<MeterAggregation>("aggregation");
+        }
         init { this._rawData.Set("aggregation", value); }
     }
 
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
     public required string EventName
     {
-        get { return this._rawData.GetNotNullClass<string>("event_name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("event_name");
+        }
         init { this._rawData.Set("event_name", value); }
     }
 
     public required string MeasurementUnit
     {
-        get { return this._rawData.GetNotNullClass<string>("measurement_unit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("measurement_unit");
+        }
         init { this._rawData.Set("measurement_unit", value); }
     }
 
     public required string Name
     {
-        get { return this._rawData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
     public required DateTimeOffset UpdatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at");
+        }
         init { this._rawData.Set("updated_at", value); }
     }
 
     public string? Description
     {
-        get { return this._rawData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
         init { this._rawData.Set("description", value); }
     }
 
@@ -74,7 +110,11 @@ public sealed record class Meter : JsonModel
     /// </summary>
     public MeterFilter? Filter
     {
-        get { return this._rawData.GetNullableClass<MeterFilter>("filter"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<MeterFilter>("filter");
+        }
         init { this._rawData.Set("filter", value); }
     }
 

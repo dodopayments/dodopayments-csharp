@@ -15,7 +15,11 @@ public sealed record class CustomerLimitedDetails : JsonModel
     /// </summary>
     public required string CustomerID
     {
-        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
         init { this._rawData.Set("customer_id", value); }
     }
 
@@ -24,7 +28,11 @@ public sealed record class CustomerLimitedDetails : JsonModel
     /// </summary>
     public required string Email
     {
-        get { return this._rawData.GetNotNullClass<string>("email"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("email");
+        }
         init { this._rawData.Set("email", value); }
     }
 
@@ -33,7 +41,11 @@ public sealed record class CustomerLimitedDetails : JsonModel
     /// </summary>
     public required string Name
     {
-        get { return this._rawData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
@@ -42,7 +54,11 @@ public sealed record class CustomerLimitedDetails : JsonModel
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {
-        get { return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             if (value == null)
@@ -62,7 +78,11 @@ public sealed record class CustomerLimitedDetails : JsonModel
     /// </summary>
     public string? PhoneNumber
     {
-        get { return this._rawData.GetNullableClass<string>("phone_number"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("phone_number");
+        }
         init { this._rawData.Set("phone_number", value); }
     }
 

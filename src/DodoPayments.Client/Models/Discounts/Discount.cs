@@ -20,7 +20,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required int Amount
     {
-        get { return this._rawData.GetNotNullStruct<int>("amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("amount");
+        }
         init { this._rawData.Set("amount", value); }
     }
 
@@ -29,7 +33,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -38,7 +46,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required string Code
     {
-        get { return this._rawData.GetNotNullClass<string>("code"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("code");
+        }
         init { this._rawData.Set("code", value); }
     }
 
@@ -47,7 +59,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -56,7 +72,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required string DiscountID
     {
-        get { return this._rawData.GetNotNullClass<string>("discount_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("discount_id");
+        }
         init { this._rawData.Set("discount_id", value); }
     }
 
@@ -65,7 +85,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required IReadOnlyList<string> RestrictedTo
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<string>>("restricted_to"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("restricted_to");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<string>>(
@@ -80,7 +104,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required int TimesUsed
     {
-        get { return this._rawData.GetNotNullStruct<int>("times_used"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("times_used");
+        }
         init { this._rawData.Set("times_used", value); }
     }
 
@@ -89,7 +117,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public required ApiEnum<string, DiscountType> Type
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, DiscountType>>("type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, DiscountType>>("type");
+        }
         init { this._rawData.Set("type", value); }
     }
 
@@ -98,7 +130,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
+        }
         init { this._rawData.Set("expires_at", value); }
     }
 
@@ -107,7 +143,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return this._rawData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
@@ -118,7 +158,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public int? SubscriptionCycles
     {
-        get { return this._rawData.GetNullableStruct<int>("subscription_cycles"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("subscription_cycles");
+        }
         init { this._rawData.Set("subscription_cycles", value); }
     }
 
@@ -127,7 +171,11 @@ public sealed record class Discount : JsonModel
     /// </summary>
     public int? UsageLimit
     {
-        get { return this._rawData.GetNullableStruct<int>("usage_limit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("usage_limit");
+        }
         init { this._rawData.Set("usage_limit", value); }
     }
 

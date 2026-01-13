@@ -14,37 +14,61 @@ public sealed record class PaymentListResponse : JsonModel
 {
     public required string BrandID
     {
-        get { return this._rawData.GetNotNullClass<string>("brand_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
         init { this._rawData.Set("brand_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required CustomerLimitedDetails Customer
     {
-        get { return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer");
+        }
         init { this._rawData.Set("customer", value); }
     }
 
     public required bool DigitalProductsDelivered
     {
-        get { return this._rawData.GetNotNullStruct<bool>("digital_products_delivered"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("digital_products_delivered");
+        }
         init { this._rawData.Set("digital_products_delivered", value); }
     }
 
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>>(
@@ -56,37 +80,61 @@ public sealed record class PaymentListResponse : JsonModel
 
     public required string PaymentID
     {
-        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_id");
+        }
         init { this._rawData.Set("payment_id", value); }
     }
 
     public required int TotalAmount
     {
-        get { return this._rawData.GetNotNullStruct<int>("total_amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("total_amount");
+        }
         init { this._rawData.Set("total_amount", value); }
     }
 
     public string? PaymentMethod
     {
-        get { return this._rawData.GetNullableClass<string>("payment_method"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method");
+        }
         init { this._rawData.Set("payment_method", value); }
     }
 
     public string? PaymentMethodType
     {
-        get { return this._rawData.GetNullableClass<string>("payment_method_type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method_type");
+        }
         init { this._rawData.Set("payment_method_type", value); }
     }
 
     public ApiEnum<string, IntentStatus>? Status
     {
-        get { return this._rawData.GetNullableClass<ApiEnum<string, IntentStatus>>("status"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, IntentStatus>>("status");
+        }
         init { this._rawData.Set("status", value); }
     }
 
     public string? SubscriptionID
     {
-        get { return this._rawData.GetNullableClass<string>("subscription_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("subscription_id");
+        }
         init { this._rawData.Set("subscription_id", value); }
     }
 

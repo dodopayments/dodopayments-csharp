@@ -22,7 +22,11 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : JsonModel
 {
     public required IReadOnlyList<Item> Items
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<Item>>("items"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<Item>>("items");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<Item>>(
@@ -93,6 +97,7 @@ public sealed record class Item : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, PaymentMethod>>("payment_method");
         }
         init { this._rawData.Set("payment_method", value); }
@@ -100,19 +105,31 @@ public sealed record class Item : JsonModel
 
     public required string PaymentMethodID
     {
-        get { return this._rawData.GetNotNullClass<string>("payment_method_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_method_id");
+        }
         init { this._rawData.Set("payment_method_id", value); }
     }
 
     public Card? Card
     {
-        get { return this._rawData.GetNullableClass<Card>("card"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Card>("card");
+        }
         init { this._rawData.Set("card", value); }
     }
 
     public DateTimeOffset? LastUsedAt
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("last_used_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("last_used_at");
+        }
         init { this._rawData.Set("last_used_at", value); }
     }
 
@@ -120,6 +137,7 @@ public sealed record class Item : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<ApiEnum<string, Payments::PaymentMethodTypes>>(
                 "payment_method_type"
             );
@@ -129,7 +147,11 @@ public sealed record class Item : JsonModel
 
     public bool? RecurringEnabled
     {
-        get { return this._rawData.GetNullableStruct<bool>("recurring_enabled"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("recurring_enabled");
+        }
         init { this._rawData.Set("recurring_enabled", value); }
     }
 
@@ -264,7 +286,11 @@ public sealed record class Card : JsonModel
 {
     public string? CardHolderName
     {
-        get { return this._rawData.GetNullableClass<string>("card_holder_name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_holder_name");
+        }
         init { this._rawData.Set("card_holder_name", value); }
     }
 
@@ -275,6 +301,7 @@ public sealed record class Card : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<ApiEnum<string, CountryCode>>(
                 "card_issuing_country"
             );
@@ -284,31 +311,51 @@ public sealed record class Card : JsonModel
 
     public string? CardNetwork
     {
-        get { return this._rawData.GetNullableClass<string>("card_network"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_network");
+        }
         init { this._rawData.Set("card_network", value); }
     }
 
     public string? CardType
     {
-        get { return this._rawData.GetNullableClass<string>("card_type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_type");
+        }
         init { this._rawData.Set("card_type", value); }
     }
 
     public string? ExpiryMonth
     {
-        get { return this._rawData.GetNullableClass<string>("expiry_month"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("expiry_month");
+        }
         init { this._rawData.Set("expiry_month", value); }
     }
 
     public string? ExpiryYear
     {
-        get { return this._rawData.GetNullableClass<string>("expiry_year"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("expiry_year");
+        }
         init { this._rawData.Set("expiry_year", value); }
     }
 
     public string? Last4Digits
     {
-        get { return this._rawData.GetNullableClass<string>("last4_digits"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("last4_digits");
+        }
         init { this._rawData.Set("last4_digits", value); }
     }
 

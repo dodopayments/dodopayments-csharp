@@ -12,7 +12,11 @@ public sealed record class CustomerPortalSession : JsonModel
 {
     public required string Link
     {
-        get { return this._rawData.GetNotNullClass<string>("link"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("link");
+        }
         init { this._rawData.Set("link", value); }
     }
 

@@ -16,7 +16,11 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required string Amount
     {
-        get { return this._rawData.GetNotNullClass<string>("amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("amount");
+        }
         init { this._rawData.Set("amount", value); }
     }
 
@@ -25,7 +29,11 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -34,7 +42,11 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -43,7 +55,11 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required string Currency
     {
-        get { return this._rawData.GetNotNullClass<string>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
@@ -52,7 +68,11 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required string DisputeID
     {
-        get { return this._rawData.GetNotNullClass<string>("dispute_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("dispute_id");
+        }
         init { this._rawData.Set("dispute_id", value); }
     }
 
@@ -63,6 +83,7 @@ public sealed record class DisputeListResponse : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, DisputeDisputeStage>>(
                 "dispute_stage"
             );
@@ -77,6 +98,7 @@ public sealed record class DisputeListResponse : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, DisputeDisputeStatus>>(
                 "dispute_status"
             );
@@ -89,7 +111,11 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required string PaymentID
     {
-        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_id");
+        }
         init { this._rawData.Set("payment_id", value); }
     }
 

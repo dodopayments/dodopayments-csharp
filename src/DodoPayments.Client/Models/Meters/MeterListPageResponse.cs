@@ -13,7 +13,11 @@ public sealed record class MeterListPageResponse : JsonModel
 {
     public required IReadOnlyList<Meter> Items
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<Meter>>("items"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<Meter>>("items");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<Meter>>(

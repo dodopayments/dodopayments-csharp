@@ -15,7 +15,11 @@ public sealed record class CheckoutSessionResponse : JsonModel
     /// </summary>
     public required string SessionID
     {
-        get { return this._rawData.GetNotNullClass<string>("session_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("session_id");
+        }
         init { this._rawData.Set("session_id", value); }
     }
 
@@ -24,7 +28,11 @@ public sealed record class CheckoutSessionResponse : JsonModel
     /// </summary>
     public string? CheckoutUrl
     {
-        get { return this._rawData.GetNullableClass<string>("checkout_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("checkout_url");
+        }
         init { this._rawData.Set("checkout_url", value); }
     }
 

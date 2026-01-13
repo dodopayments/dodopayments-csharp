@@ -27,7 +27,11 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawBodyData.Set("product_id", value); }
     }
 
@@ -38,6 +42,7 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNotNullClass<ApiEnum<string, ProrationBillingMode>>(
                 "proration_billing_mode"
             );
@@ -50,7 +55,11 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     /// </summary>
     public required int Quantity
     {
-        get { return this._rawBodyData.GetNotNullStruct<int>("quantity"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullStruct<int>("quantity");
+        }
         init { this._rawBodyData.Set("quantity", value); }
     }
 
@@ -59,7 +68,11 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     /// </summary>
     public IReadOnlyList<AttachAddon>? Addons
     {
-        get { return this._rawBodyData.GetNullableStruct<ImmutableArray<AttachAddon>>("addons"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<AttachAddon>>("addons");
+        }
         init
         {
             this._rawBodyData.Set<ImmutableArray<AttachAddon>?>(

@@ -14,31 +14,51 @@ public sealed record class CustomerWallet : JsonModel
 {
     public required long Balance
     {
-        get { return this._rawData.GetNotNullStruct<long>("balance"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("balance");
+        }
         init { this._rawData.Set("balance", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required string CustomerID
     {
-        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
         init { this._rawData.Set("customer_id", value); }
     }
 
     public required DateTimeOffset UpdatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at");
+        }
         init { this._rawData.Set("updated_at", value); }
     }
 

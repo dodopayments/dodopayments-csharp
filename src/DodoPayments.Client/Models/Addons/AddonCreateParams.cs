@@ -23,7 +23,11 @@ public sealed record class AddonCreateParams : ParamsBase
     /// </summary>
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawBodyData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawBodyData.Set("currency", value); }
     }
 
@@ -32,7 +36,11 @@ public sealed record class AddonCreateParams : ParamsBase
     /// </summary>
     public required string Name
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("name");
+        }
         init { this._rawBodyData.Set("name", value); }
     }
 
@@ -41,7 +49,11 @@ public sealed record class AddonCreateParams : ParamsBase
     /// </summary>
     public required int Price
     {
-        get { return this._rawBodyData.GetNotNullStruct<int>("price"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullStruct<int>("price");
+        }
         init { this._rawBodyData.Set("price", value); }
     }
 
@@ -52,6 +64,7 @@ public sealed record class AddonCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category");
         }
         init { this._rawBodyData.Set("tax_category", value); }
@@ -62,7 +75,11 @@ public sealed record class AddonCreateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("description");
+        }
         init { this._rawBodyData.Set("description", value); }
     }
 

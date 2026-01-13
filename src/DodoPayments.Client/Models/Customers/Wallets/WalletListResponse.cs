@@ -13,7 +13,11 @@ public sealed record class WalletListResponse : JsonModel
 {
     public required IReadOnlyList<CustomerWallet> Items
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<CustomerWallet>>("items"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<CustomerWallet>>("items");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<CustomerWallet>>(
@@ -28,7 +32,11 @@ public sealed record class WalletListResponse : JsonModel
     /// </summary>
     public required long TotalBalanceUsd
     {
-        get { return this._rawData.GetNotNullStruct<long>("total_balance_usd"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("total_balance_usd");
+        }
         init { this._rawData.Set("total_balance_usd", value); }
     }
 

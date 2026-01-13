@@ -14,31 +14,51 @@ public sealed record class Event : JsonModel
 {
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
     public required string CustomerID
     {
-        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
         init { this._rawData.Set("customer_id", value); }
     }
 
     public required string EventID
     {
-        get { return this._rawData.GetNotNullClass<string>("event_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("event_id");
+        }
         init { this._rawData.Set("event_id", value); }
     }
 
     public required string EventName
     {
-        get { return this._rawData.GetNotNullClass<string>("event_name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("event_name");
+        }
         init { this._rawData.Set("event_name", value); }
     }
 
     public required DateTimeOffset Timestamp
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp");
+        }
         init { this._rawData.Set("timestamp", value); }
     }
 
@@ -49,6 +69,7 @@ public sealed record class Event : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<FrozenDictionary<string, Metadata>>("metadata");
         }
         init

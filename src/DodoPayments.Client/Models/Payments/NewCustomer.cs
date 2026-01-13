@@ -15,7 +15,11 @@ public sealed record class NewCustomer : JsonModel
     /// </summary>
     public required string Email
     {
-        get { return this._rawData.GetNotNullClass<string>("email"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("email");
+        }
         init { this._rawData.Set("email", value); }
     }
 
@@ -26,13 +30,21 @@ public sealed record class NewCustomer : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return this._rawData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
     public string? PhoneNumber
     {
-        get { return this._rawData.GetNullableClass<string>("phone_number"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("phone_number");
+        }
         init { this._rawData.Set("phone_number", value); }
     }
 

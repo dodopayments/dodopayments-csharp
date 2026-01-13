@@ -23,6 +23,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : JsonMo
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<
                 ImmutableArray<SubscriptionRetrieveUsageHistoryResponse>
             >("items");

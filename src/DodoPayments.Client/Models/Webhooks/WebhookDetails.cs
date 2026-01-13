@@ -16,7 +16,11 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
@@ -25,7 +29,11 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required string CreatedAt
     {
-        get { return this._rawData.GetNotNullClass<string>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -34,7 +42,11 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required string Description
     {
-        get { return this._rawData.GetNotNullClass<string>("description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("description");
+        }
         init { this._rawData.Set("description", value); }
     }
 
@@ -43,7 +55,11 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>>(
@@ -58,7 +74,11 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required string UpdatedAt
     {
-        get { return this._rawData.GetNotNullClass<string>("updated_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("updated_at");
+        }
         init { this._rawData.Set("updated_at", value); }
     }
 
@@ -67,7 +87,11 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required string Url
     {
-        get { return this._rawData.GetNotNullClass<string>("url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("url");
+        }
         init { this._rawData.Set("url", value); }
     }
 
@@ -78,7 +102,11 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public bool? Disabled
     {
-        get { return this._rawData.GetNullableStruct<bool>("disabled"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("disabled");
+        }
         init { this._rawData.Set("disabled", value); }
     }
 
@@ -89,7 +117,11 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public IReadOnlyList<string>? FilterTypes
     {
-        get { return this._rawData.GetNullableStruct<ImmutableArray<string>>("filter_types"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("filter_types");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<string>?>(
@@ -104,7 +136,11 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public int? RateLimit
     {
-        get { return this._rawData.GetNullableStruct<int>("rate_limit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("rate_limit");
+        }
         init { this._rawData.Set("rate_limit", value); }
     }
 

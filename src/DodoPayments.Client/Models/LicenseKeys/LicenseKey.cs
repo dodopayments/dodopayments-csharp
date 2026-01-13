@@ -16,7 +16,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
@@ -25,7 +29,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -34,7 +42,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -43,7 +55,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string CustomerID
     {
-        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
         init { this._rawData.Set("customer_id", value); }
     }
 
@@ -52,7 +68,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required int InstancesCount
     {
-        get { return this._rawData.GetNotNullStruct<int>("instances_count"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("instances_count");
+        }
         init { this._rawData.Set("instances_count", value); }
     }
 
@@ -61,7 +81,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string Key
     {
-        get { return this._rawData.GetNotNullClass<string>("key"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
         init { this._rawData.Set("key", value); }
     }
 
@@ -70,7 +94,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string PaymentID
     {
-        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_id");
+        }
         init { this._rawData.Set("payment_id", value); }
     }
 
@@ -79,7 +107,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
@@ -88,7 +120,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required ApiEnum<string, LicenseKeyStatus> Status
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, LicenseKeyStatus>>("status"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, LicenseKeyStatus>>("status");
+        }
         init { this._rawData.Set("status", value); }
     }
 
@@ -97,7 +133,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public int? ActivationsLimit
     {
-        get { return this._rawData.GetNullableStruct<int>("activations_limit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("activations_limit");
+        }
         init { this._rawData.Set("activations_limit", value); }
     }
 
@@ -106,7 +146,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
+        }
         init { this._rawData.Set("expires_at", value); }
     }
 
@@ -116,7 +160,11 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public string? SubscriptionID
     {
-        get { return this._rawData.GetNullableClass<string>("subscription_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("subscription_id");
+        }
         init { this._rawData.Set("subscription_id", value); }
     }
 

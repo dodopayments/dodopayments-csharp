@@ -19,13 +19,21 @@ public sealed record class LicenseActivateParams : ParamsBase
 
     public required string LicenseKey
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("license_key"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("license_key");
+        }
         init { this._rawBodyData.Set("license_key", value); }
     }
 
     public required string Name
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("name");
+        }
         init { this._rawBodyData.Set("name", value); }
     }
 

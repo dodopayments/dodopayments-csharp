@@ -16,7 +16,11 @@ public sealed record class ShortLinkListResponse : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -25,7 +29,11 @@ public sealed record class ShortLinkListResponse : JsonModel
     /// </summary>
     public required string FullUrl
     {
-        get { return this._rawData.GetNotNullClass<string>("full_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("full_url");
+        }
         init { this._rawData.Set("full_url", value); }
     }
 
@@ -34,7 +42,11 @@ public sealed record class ShortLinkListResponse : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
@@ -43,7 +55,11 @@ public sealed record class ShortLinkListResponse : JsonModel
     /// </summary>
     public required string ShortUrl
     {
-        get { return this._rawData.GetNotNullClass<string>("short_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("short_url");
+        }
         init { this._rawData.Set("short_url", value); }
     }
 

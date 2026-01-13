@@ -18,7 +18,11 @@ public sealed record class LedgerEntryListParams : ParamsBase
     /// </summary>
     public ApiEnum<string, Currency>? Currency
     {
-        get { return this._rawQueryData.GetNullableClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, Currency>>("currency");
+        }
         init
         {
             if (value == null)
@@ -32,7 +36,11 @@ public sealed record class LedgerEntryListParams : ParamsBase
 
     public int? PageNumber
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_number");
+        }
         init
         {
             if (value == null)
@@ -46,7 +54,11 @@ public sealed record class LedgerEntryListParams : ParamsBase
 
     public int? PageSize
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_size");
+        }
         init
         {
             if (value == null)

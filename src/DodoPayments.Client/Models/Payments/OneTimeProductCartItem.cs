@@ -12,13 +12,21 @@ public sealed record class OneTimeProductCartItem : JsonModel
 {
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
     public required int Quantity
     {
-        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("quantity");
+        }
         init { this._rawData.Set("quantity", value); }
     }
 
@@ -29,7 +37,11 @@ public sealed record class OneTimeProductCartItem : JsonModel
     /// </summary>
     public int? Amount
     {
-        get { return this._rawData.GetNullableStruct<int>("amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("amount");
+        }
         init { this._rawData.Set("amount", value); }
     }
 

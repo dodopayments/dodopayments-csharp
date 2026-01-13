@@ -15,7 +15,11 @@ public sealed record class ProductListParams : ParamsBase
     /// </summary>
     public bool? Archived
     {
-        get { return this._rawQueryData.GetNullableStruct<bool>("archived"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<bool>("archived");
+        }
         init
         {
             if (value == null)
@@ -32,7 +36,11 @@ public sealed record class ProductListParams : ParamsBase
     /// </summary>
     public string? BrandID
     {
-        get { return this._rawQueryData.GetNullableClass<string>("brand_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("brand_id");
+        }
         init
         {
             if (value == null)
@@ -49,7 +57,11 @@ public sealed record class ProductListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_number");
+        }
         init
         {
             if (value == null)
@@ -66,7 +78,11 @@ public sealed record class ProductListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_size");
+        }
         init
         {
             if (value == null)
@@ -85,7 +101,11 @@ public sealed record class ProductListParams : ParamsBase
     /// </summary>
     public bool? Recurring
     {
-        get { return this._rawQueryData.GetNullableStruct<bool>("recurring"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<bool>("recurring");
+        }
         init
         {
             if (value == null)

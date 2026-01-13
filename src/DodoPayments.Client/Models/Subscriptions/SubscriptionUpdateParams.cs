@@ -23,7 +23,11 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
 
     public BillingAddress? Billing
     {
-        get { return this._rawBodyData.GetNullableClass<BillingAddress>("billing"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<BillingAddress>("billing");
+        }
         init { this._rawBodyData.Set("billing", value); }
     }
 
@@ -32,19 +36,31 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     /// </summary>
     public bool? CancelAtNextBillingDate
     {
-        get { return this._rawBodyData.GetNullableStruct<bool>("cancel_at_next_billing_date"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("cancel_at_next_billing_date");
+        }
         init { this._rawBodyData.Set("cancel_at_next_billing_date", value); }
     }
 
     public string? CustomerName
     {
-        get { return this._rawBodyData.GetNullableClass<string>("customer_name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("customer_name");
+        }
         init { this._rawBodyData.Set("customer_name", value); }
     }
 
     public DisableOnDemand? DisableOnDemand
     {
-        get { return this._rawBodyData.GetNullableClass<DisableOnDemand>("disable_on_demand"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<DisableOnDemand>("disable_on_demand");
+        }
         init { this._rawBodyData.Set("disable_on_demand", value); }
     }
 
@@ -52,6 +68,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
@@ -65,7 +82,11 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
 
     public DateTimeOffset? NextBillingDate
     {
-        get { return this._rawBodyData.GetNullableStruct<DateTimeOffset>("next_billing_date"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<DateTimeOffset>("next_billing_date");
+        }
         init { this._rawBodyData.Set("next_billing_date", value); }
     }
 
@@ -73,6 +94,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<ApiEnum<string, SubscriptionStatus>>(
                 "status"
             );
@@ -82,7 +104,11 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
 
     public string? TaxID
     {
-        get { return this._rawBodyData.GetNullableClass<string>("tax_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("tax_id");
+        }
         init { this._rawBodyData.Set("tax_id", value); }
     }
 
@@ -170,7 +196,11 @@ public sealed record class DisableOnDemand : JsonModel
 {
     public required DateTimeOffset NextBillingDate
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date");
+        }
         init { this._rawData.Set("next_billing_date", value); }
     }
 

@@ -13,13 +13,21 @@ public sealed record class LicenseKeyDuration : JsonModel
 {
     public required int Count
     {
-        get { return this._rawData.GetNotNullStruct<int>("count"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("count");
+        }
         init { this._rawData.Set("count", value); }
     }
 
     public required ApiEnum<string, TimeInterval> Interval
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, TimeInterval>>("interval"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, TimeInterval>>("interval");
+        }
         init { this._rawData.Set("interval", value); }
     }
 

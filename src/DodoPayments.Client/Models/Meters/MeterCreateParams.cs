@@ -22,7 +22,11 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required MeterAggregation Aggregation
     {
-        get { return this._rawBodyData.GetNotNullClass<MeterAggregation>("aggregation"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<MeterAggregation>("aggregation");
+        }
         init { this._rawBodyData.Set("aggregation", value); }
     }
 
@@ -31,7 +35,11 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required string EventName
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("event_name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("event_name");
+        }
         init { this._rawBodyData.Set("event_name", value); }
     }
 
@@ -40,7 +48,11 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required string MeasurementUnit
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("measurement_unit"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("measurement_unit");
+        }
         init { this._rawBodyData.Set("measurement_unit", value); }
     }
 
@@ -49,7 +61,11 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public required string Name
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("name");
+        }
         init { this._rawBodyData.Set("name", value); }
     }
 
@@ -58,7 +74,11 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("description");
+        }
         init { this._rawBodyData.Set("description", value); }
     }
 
@@ -67,7 +87,11 @@ public sealed record class MeterCreateParams : ParamsBase
     /// </summary>
     public MeterFilter? Filter
     {
-        get { return this._rawBodyData.GetNullableClass<MeterFilter>("filter"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<MeterFilter>("filter");
+        }
         init { this._rawBodyData.Set("filter", value); }
     }
 

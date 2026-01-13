@@ -27,7 +27,11 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     /// </summary>
     public required int ProductPrice
     {
-        get { return this._rawBodyData.GetNotNullStruct<int>("product_price"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullStruct<int>("product_price");
+        }
         init { this._rawBodyData.Set("product_price", value); }
     }
 
@@ -40,6 +44,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableStruct<bool>("adaptive_currency_fees_inclusive");
         }
         init { this._rawBodyData.Set("adaptive_currency_fees_inclusive", value); }
@@ -52,6 +57,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<CustomerBalanceConfig>(
                 "customer_balance_config"
             );
@@ -67,6 +73,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
@@ -86,6 +93,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<ApiEnum<string, Currency>>(
                 "product_currency"
             );
@@ -99,7 +107,11 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     /// </summary>
     public string? ProductDescription
     {
-        get { return this._rawBodyData.GetNullableClass<string>("product_description"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("product_description");
+        }
         init { this._rawBodyData.Set("product_description", value); }
     }
 
@@ -193,7 +205,11 @@ public sealed record class CustomerBalanceConfig : JsonModel
     /// </summary>
     public bool? AllowCustomerCreditsPurchase
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_customer_credits_purchase"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_credits_purchase");
+        }
         init { this._rawData.Set("allow_customer_credits_purchase", value); }
     }
 
@@ -202,7 +218,11 @@ public sealed record class CustomerBalanceConfig : JsonModel
     /// </summary>
     public bool? AllowCustomerCreditsUsage
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_customer_credits_usage"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_credits_usage");
+        }
         init { this._rawData.Set("allow_customer_credits_usage", value); }
     }
 

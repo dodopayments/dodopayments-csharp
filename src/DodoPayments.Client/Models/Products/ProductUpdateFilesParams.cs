@@ -21,7 +21,11 @@ public sealed record class ProductUpdateFilesParams : ParamsBase
 
     public required string FileName
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("file_name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("file_name");
+        }
         init { this._rawBodyData.Set("file_name", value); }
     }
 

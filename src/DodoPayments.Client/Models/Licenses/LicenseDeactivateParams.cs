@@ -19,13 +19,21 @@ public sealed record class LicenseDeactivateParams : ParamsBase
 
     public required string LicenseKey
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("license_key"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("license_key");
+        }
         init { this._rawBodyData.Set("license_key", value); }
     }
 
     public required string LicenseKeyInstanceID
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("license_key_instance_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("license_key_instance_id");
+        }
         init { this._rawBodyData.Set("license_key_instance_id", value); }
     }
 
