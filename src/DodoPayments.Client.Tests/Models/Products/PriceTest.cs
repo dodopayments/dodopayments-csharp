@@ -13,93 +13,85 @@ public class PriceTest : TestBase
     [Fact]
     public void OneTimeValidationWorks()
     {
-        Price value = new(
-            new OneTimePrice()
-            {
-                Currency = Currency.Aed,
-                Discount = 0,
-                Price = 0,
-                PurchasingPowerParity = true,
-                Type = Type.OneTimePrice,
-                PayWhatYouWant = true,
-                SuggestedPrice = 0,
-                TaxInclusive = true,
-            }
-        );
+        Price value = new OneTimePrice()
+        {
+            Currency = Currency.Aed,
+            Discount = 0,
+            Price = 0,
+            PurchasingPowerParity = true,
+            Type = Type.OneTimePrice,
+            PayWhatYouWant = true,
+            SuggestedPrice = 0,
+            TaxInclusive = true,
+        };
         value.Validate();
     }
 
     [Fact]
     public void RecurringValidationWorks()
     {
-        Price value = new(
-            new RecurringPrice()
-            {
-                Currency = Currency.Aed,
-                Discount = 0,
-                PaymentFrequencyCount = 0,
-                PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
-                Price = 0,
-                PurchasingPowerParity = true,
-                SubscriptionPeriodCount = 0,
-                SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
-                Type = RecurringPriceType.RecurringPrice,
-                TaxInclusive = true,
-                TrialPeriodDays = 0,
-            }
-        );
+        Price value = new RecurringPrice()
+        {
+            Currency = Currency.Aed,
+            Discount = 0,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            Price = 0,
+            PurchasingPowerParity = true,
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            Type = RecurringPriceType.RecurringPrice,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+        };
         value.Validate();
     }
 
     [Fact]
     public void UsageBasedValidationWorks()
     {
-        Price value = new(
-            new UsageBasedPrice()
-            {
-                Currency = Currency.Aed,
-                Discount = 0,
-                FixedPrice = 0,
-                PaymentFrequencyCount = 0,
-                PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
-                PurchasingPowerParity = true,
-                SubscriptionPeriodCount = 0,
-                SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
-                Type = UsageBasedPriceType.UsageBasedPrice,
-                Meters =
-                [
-                    new()
-                    {
-                        MeterID = "meter_id",
-                        PricePerUnit = "10.50",
-                        Description = "description",
-                        FreeThreshold = 0,
-                        MeasurementUnit = "measurement_unit",
-                        Name = "name",
-                    },
-                ],
-                TaxInclusive = true,
-            }
-        );
+        Price value = new UsageBasedPrice()
+        {
+            Currency = Currency.Aed,
+            Discount = 0,
+            FixedPrice = 0,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            PurchasingPowerParity = true,
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            Type = UsageBasedPriceType.UsageBasedPrice,
+            Meters =
+            [
+                new()
+                {
+                    MeterID = "meter_id",
+                    PricePerUnit = "10.50",
+                    Description = "description",
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    Name = "name",
+                },
+            ],
+            TaxInclusive = true,
+        };
         value.Validate();
     }
 
     [Fact]
     public void OneTimeSerializationRoundtripWorks()
     {
-        Price value = new(
-            new OneTimePrice()
-            {
-                Currency = Currency.Aed,
-                Discount = 0,
-                Price = 0,
-                PurchasingPowerParity = true,
-                Type = Type.OneTimePrice,
-                PayWhatYouWant = true,
-                SuggestedPrice = 0,
-                TaxInclusive = true,
-            }
-        );
+        Price value = new OneTimePrice()
+        {
+            Currency = Currency.Aed,
+            Discount = 0,
+            Price = 0,
+            PurchasingPowerParity = true,
+            Type = Type.OneTimePrice,
+            PayWhatYouWant = true,
+            SuggestedPrice = 0,
+            TaxInclusive = true,
+        };
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Price>(element);
 
@@ -109,22 +101,20 @@ public class PriceTest : TestBase
     [Fact]
     public void RecurringSerializationRoundtripWorks()
     {
-        Price value = new(
-            new RecurringPrice()
-            {
-                Currency = Currency.Aed,
-                Discount = 0,
-                PaymentFrequencyCount = 0,
-                PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
-                Price = 0,
-                PurchasingPowerParity = true,
-                SubscriptionPeriodCount = 0,
-                SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
-                Type = RecurringPriceType.RecurringPrice,
-                TaxInclusive = true,
-                TrialPeriodDays = 0,
-            }
-        );
+        Price value = new RecurringPrice()
+        {
+            Currency = Currency.Aed,
+            Discount = 0,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            Price = 0,
+            PurchasingPowerParity = true,
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            Type = RecurringPriceType.RecurringPrice,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+        };
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Price>(element);
 
@@ -134,33 +124,31 @@ public class PriceTest : TestBase
     [Fact]
     public void UsageBasedSerializationRoundtripWorks()
     {
-        Price value = new(
-            new UsageBasedPrice()
-            {
-                Currency = Currency.Aed,
-                Discount = 0,
-                FixedPrice = 0,
-                PaymentFrequencyCount = 0,
-                PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
-                PurchasingPowerParity = true,
-                SubscriptionPeriodCount = 0,
-                SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
-                Type = UsageBasedPriceType.UsageBasedPrice,
-                Meters =
-                [
-                    new()
-                    {
-                        MeterID = "meter_id",
-                        PricePerUnit = "10.50",
-                        Description = "description",
-                        FreeThreshold = 0,
-                        MeasurementUnit = "measurement_unit",
-                        Name = "name",
-                    },
-                ],
-                TaxInclusive = true,
-            }
-        );
+        Price value = new UsageBasedPrice()
+        {
+            Currency = Currency.Aed,
+            Discount = 0,
+            FixedPrice = 0,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            PurchasingPowerParity = true,
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            Type = UsageBasedPriceType.UsageBasedPrice,
+            Meters =
+            [
+                new()
+                {
+                    MeterID = "meter_id",
+                    PricePerUnit = "10.50",
+                    Description = "description",
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    Name = "name",
+                },
+            ],
+            TaxInclusive = true,
+        };
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Price>(element);
 

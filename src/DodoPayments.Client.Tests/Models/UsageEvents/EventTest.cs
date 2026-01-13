@@ -188,28 +188,28 @@ public class MetadataTest : TestBase
     [Fact]
     public void StringValidationWorks()
     {
-        Metadata value = new("string");
+        Metadata value = "string";
         value.Validate();
     }
 
     [Fact]
     public void NumberValidationWorks()
     {
-        Metadata value = new(0);
+        Metadata value = 0;
         value.Validate();
     }
 
     [Fact]
     public void BooleanValidationWorks()
     {
-        Metadata value = new(true);
+        Metadata value = true;
         value.Validate();
     }
 
     [Fact]
     public void StringSerializationRoundtripWorks()
     {
-        Metadata value = new("string");
+        Metadata value = "string";
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Metadata>(element);
 
@@ -219,7 +219,7 @@ public class MetadataTest : TestBase
     [Fact]
     public void NumberSerializationRoundtripWorks()
     {
-        Metadata value = new(0);
+        Metadata value = 0;
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Metadata>(element);
 
@@ -229,7 +229,7 @@ public class MetadataTest : TestBase
     [Fact]
     public void BooleanSerializationRoundtripWorks()
     {
-        Metadata value = new(true);
+        Metadata value = true;
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Metadata>(element);
 

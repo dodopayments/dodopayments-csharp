@@ -61,31 +61,33 @@ public class BodyTest : TestBase
     [Fact]
     public void NewValidationWorks()
     {
-        Subscriptions::Body value = new(
-            new Subscriptions::New() { Type = Subscriptions::Type.New, ReturnUrl = "return_url" }
-        );
+        Subscriptions::Body value = new Subscriptions::New()
+        {
+            Type = Subscriptions::Type.New,
+            ReturnUrl = "return_url",
+        };
         value.Validate();
     }
 
     [Fact]
     public void ExistingValidationWorks()
     {
-        Subscriptions::Body value = new(
-            new Subscriptions::Existing()
-            {
-                PaymentMethodID = "payment_method_id",
-                Type = Subscriptions::ExistingType.Existing,
-            }
-        );
+        Subscriptions::Body value = new Subscriptions::Existing()
+        {
+            PaymentMethodID = "payment_method_id",
+            Type = Subscriptions::ExistingType.Existing,
+        };
         value.Validate();
     }
 
     [Fact]
     public void NewSerializationRoundtripWorks()
     {
-        Subscriptions::Body value = new(
-            new Subscriptions::New() { Type = Subscriptions::Type.New, ReturnUrl = "return_url" }
-        );
+        Subscriptions::Body value = new Subscriptions::New()
+        {
+            Type = Subscriptions::Type.New,
+            ReturnUrl = "return_url",
+        };
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Subscriptions::Body>(element);
 
@@ -95,13 +97,11 @@ public class BodyTest : TestBase
     [Fact]
     public void ExistingSerializationRoundtripWorks()
     {
-        Subscriptions::Body value = new(
-            new Subscriptions::Existing()
-            {
-                PaymentMethodID = "payment_method_id",
-                Type = Subscriptions::ExistingType.Existing,
-            }
-        );
+        Subscriptions::Body value = new Subscriptions::Existing()
+        {
+            PaymentMethodID = "payment_method_id",
+            Type = Subscriptions::ExistingType.Existing,
+        };
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<Subscriptions::Body>(element);
 
