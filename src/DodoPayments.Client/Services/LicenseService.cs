@@ -46,15 +46,12 @@ public sealed class LicenseService : ILicenseService
     }
 
     /// <inheritdoc/>
-    public async Task Deactivate(
+    public Task Deactivate(
         LicenseDeactivateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        using var response = await this
-            .WithRawResponse.Deactivate(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+        return this.WithRawResponse.Deactivate(parameters, cancellationToken);
     }
 
     /// <inheritdoc/>

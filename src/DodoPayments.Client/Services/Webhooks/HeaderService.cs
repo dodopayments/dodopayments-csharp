@@ -59,15 +59,9 @@ public sealed class HeaderService : IHeaderService
     }
 
     /// <inheritdoc/>
-    public async Task Update(
-        HeaderUpdateParams parameters,
-        CancellationToken cancellationToken = default
-    )
+    public Task Update(HeaderUpdateParams parameters, CancellationToken cancellationToken = default)
     {
-        using var response = await this
-            .WithRawResponse.Update(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+        return this.WithRawResponse.Update(parameters, cancellationToken);
     }
 
     /// <inheritdoc/>

@@ -83,15 +83,12 @@ public sealed class MeterService : IMeterService
     }
 
     /// <inheritdoc/>
-    public async Task Archive(
+    public Task Archive(
         MeterArchiveParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        using var response = await this
-            .WithRawResponse.Archive(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+        return this.WithRawResponse.Archive(parameters, cancellationToken);
     }
 
     /// <inheritdoc/>
@@ -107,15 +104,12 @@ public sealed class MeterService : IMeterService
     }
 
     /// <inheritdoc/>
-    public async Task Unarchive(
+    public Task Unarchive(
         MeterUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        using var response = await this
-            .WithRawResponse.Unarchive(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+        return this.WithRawResponse.Unarchive(parameters, cancellationToken);
     }
 
     /// <inheritdoc/>
