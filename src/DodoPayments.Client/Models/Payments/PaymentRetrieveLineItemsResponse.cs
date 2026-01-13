@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -18,17 +19,20 @@ public sealed record class PaymentRetrieveLineItemsResponse : JsonModel
 {
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     public required IReadOnlyList<Item> Items
     {
-        get { return JsonModel.GetNotNullClass<List<Item>>(this.RawData, "items"); }
-        init { JsonModel.Set(this._rawData, "items", value); }
+        get { return this._rawData.GetNotNullStruct<ImmutableArray<Item>>("items"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Item>>(
+                "items",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <inheritdoc/>
@@ -50,14 +54,14 @@ public sealed record class PaymentRetrieveLineItemsResponse : JsonModel
 
     public PaymentRetrieveLineItemsResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     PaymentRetrieveLineItemsResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -83,38 +87,38 @@ public sealed record class Item : JsonModel
 {
     public required int Amount
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "amount"); }
-        init { JsonModel.Set(this._rawData, "amount", value); }
+        get { return this._rawData.GetNotNullStruct<int>("amount"); }
+        init { this._rawData.Set("amount", value); }
     }
 
     public required string ItemsID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "items_id"); }
-        init { JsonModel.Set(this._rawData, "items_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("items_id"); }
+        init { this._rawData.Set("items_id", value); }
     }
 
     public required int RefundableAmount
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "refundable_amount"); }
-        init { JsonModel.Set(this._rawData, "refundable_amount", value); }
+        get { return this._rawData.GetNotNullStruct<int>("refundable_amount"); }
+        init { this._rawData.Set("refundable_amount", value); }
     }
 
     public required int Tax
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "tax"); }
-        init { JsonModel.Set(this._rawData, "tax", value); }
+        get { return this._rawData.GetNotNullStruct<int>("tax"); }
+        init { this._rawData.Set("tax", value); }
     }
 
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
-        init { JsonModel.Set(this._rawData, "description", value); }
+        get { return this._rawData.GetNullableClass<string>("description"); }
+        init { this._rawData.Set("description", value); }
     }
 
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNullableClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     /// <inheritdoc/>
@@ -135,14 +139,14 @@ public sealed record class Item : JsonModel
 
     public Item(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Item(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

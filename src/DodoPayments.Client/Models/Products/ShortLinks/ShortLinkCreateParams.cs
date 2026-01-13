@@ -15,7 +15,7 @@ namespace DodoPayments.Client.Models.Products.ShortLinks;
 /// </summary>
 public sealed record class ShortLinkCreateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -28,8 +28,8 @@ public sealed record class ShortLinkCreateParams : ParamsBase
     /// </summary>
     public required string Slug
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "slug"); }
-        init { JsonModel.Set(this._rawBodyData, "slug", value); }
+        get { return this._rawBodyData.GetNotNullClass<string>("slug"); }
+        init { this._rawBodyData.Set("slug", value); }
     }
 
     /// <summary>
@@ -39,12 +39,17 @@ public sealed record class ShortLinkCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, string>>(
-                this.RawBodyData,
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>(
                 "static_checkout_params"
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "static_checkout_params", value); }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "static_checkout_params",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
     }
 
     public ShortLinkCreateParams() { }
@@ -54,7 +59,7 @@ public sealed record class ShortLinkCreateParams : ParamsBase
     {
         this.ID = shortLinkCreateParams.ID;
 
-        this._rawBodyData = [.. shortLinkCreateParams._rawBodyData];
+        this._rawBodyData = new(shortLinkCreateParams._rawBodyData);
     }
 
     public ShortLinkCreateParams(
@@ -63,9 +68,9 @@ public sealed record class ShortLinkCreateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -76,9 +81,9 @@ public sealed record class ShortLinkCreateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

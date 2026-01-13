@@ -17,7 +17,7 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// </summary>
     public string? BrandID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "brand_id"); }
+        get { return this._rawQueryData.GetNullableClass<string>("brand_id"); }
         init
         {
             if (value == null)
@@ -25,7 +25,7 @@ public sealed record class SubscriptionListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "brand_id", value);
+            this._rawQueryData.Set("brand_id", value);
         }
     }
 
@@ -36,10 +36,7 @@ public sealed record class SubscriptionListParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableStruct<System::DateTimeOffset>(
-                this.RawQueryData,
-                "created_at_gte"
-            );
+            return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("created_at_gte");
         }
         init
         {
@@ -48,7 +45,7 @@ public sealed record class SubscriptionListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "created_at_gte", value);
+            this._rawQueryData.Set("created_at_gte", value);
         }
     }
 
@@ -59,10 +56,7 @@ public sealed record class SubscriptionListParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableStruct<System::DateTimeOffset>(
-                this.RawQueryData,
-                "created_at_lte"
-            );
+            return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("created_at_lte");
         }
         init
         {
@@ -71,7 +65,7 @@ public sealed record class SubscriptionListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "created_at_lte", value);
+            this._rawQueryData.Set("created_at_lte", value);
         }
     }
 
@@ -80,7 +74,7 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// </summary>
     public string? CustomerID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "customer_id"); }
+        get { return this._rawQueryData.GetNullableClass<string>("customer_id"); }
         init
         {
             if (value == null)
@@ -88,7 +82,7 @@ public sealed record class SubscriptionListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "customer_id", value);
+            this._rawQueryData.Set("customer_id", value);
         }
     }
 
@@ -97,7 +91,7 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
+        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
         init
         {
             if (value == null)
@@ -105,7 +99,7 @@ public sealed record class SubscriptionListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "page_number", value);
+            this._rawQueryData.Set("page_number", value);
         }
     }
 
@@ -114,7 +108,7 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
+        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
         init
         {
             if (value == null)
@@ -122,7 +116,7 @@ public sealed record class SubscriptionListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "page_size", value);
+            this._rawQueryData.Set("page_size", value);
         }
     }
 
@@ -131,10 +125,7 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// </summary>
     public ApiEnum<string, Status>? Status
     {
-        get
-        {
-            return JsonModel.GetNullableClass<ApiEnum<string, Status>>(this.RawQueryData, "status");
-        }
+        get { return this._rawQueryData.GetNullableClass<ApiEnum<string, Status>>("status"); }
         init
         {
             if (value == null)
@@ -142,7 +133,7 @@ public sealed record class SubscriptionListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "status", value);
+            this._rawQueryData.Set("status", value);
         }
     }
 
@@ -156,8 +147,8 @@ public sealed record class SubscriptionListParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 
 #pragma warning disable CS8618
@@ -167,8 +158,8 @@ public sealed record class SubscriptionListParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 #pragma warning restore CS8618
 

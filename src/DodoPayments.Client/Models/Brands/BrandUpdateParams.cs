@@ -11,7 +11,7 @@ namespace DodoPayments.Client.Models.Brands;
 
 public sealed record class BrandUpdateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -24,26 +24,26 @@ public sealed record class BrandUpdateParams : ParamsBase
     /// </summary>
     public string? ImageID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "image_id"); }
-        init { JsonModel.Set(this._rawBodyData, "image_id", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("image_id"); }
+        init { this._rawBodyData.Set("image_id", value); }
     }
 
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "name"); }
-        init { JsonModel.Set(this._rawBodyData, "name", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("name"); }
+        init { this._rawBodyData.Set("name", value); }
     }
 
     public string? StatementDescriptor
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "statement_descriptor"); }
-        init { JsonModel.Set(this._rawBodyData, "statement_descriptor", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("statement_descriptor"); }
+        init { this._rawBodyData.Set("statement_descriptor", value); }
     }
 
     public string? SupportEmail
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "support_email"); }
-        init { JsonModel.Set(this._rawBodyData, "support_email", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("support_email"); }
+        init { this._rawBodyData.Set("support_email", value); }
     }
 
     public BrandUpdateParams() { }
@@ -53,7 +53,7 @@ public sealed record class BrandUpdateParams : ParamsBase
     {
         this.ID = brandUpdateParams.ID;
 
-        this._rawBodyData = [.. brandUpdateParams._rawBodyData];
+        this._rawBodyData = new(brandUpdateParams._rawBodyData);
     }
 
     public BrandUpdateParams(
@@ -62,9 +62,9 @@ public sealed record class BrandUpdateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -75,9 +75,9 @@ public sealed record class BrandUpdateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

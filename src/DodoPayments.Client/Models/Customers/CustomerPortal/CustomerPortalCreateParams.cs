@@ -17,7 +17,7 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
     /// </summary>
     public bool? SendEmail
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawQueryData, "send_email"); }
+        get { return this._rawQueryData.GetNullableStruct<bool>("send_email"); }
         init
         {
             if (value == null)
@@ -25,7 +25,7 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "send_email", value);
+            this._rawQueryData.Set("send_email", value);
         }
     }
 
@@ -42,8 +42,8 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 
 #pragma warning disable CS8618
@@ -53,8 +53,8 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 #pragma warning restore CS8618
 

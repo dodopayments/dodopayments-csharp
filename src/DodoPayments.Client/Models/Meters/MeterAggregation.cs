@@ -19,11 +19,11 @@ public sealed record class MeterAggregation : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<
+            return this._rawData.GetNotNullClass<
                 ApiEnum<string, global::DodoPayments.Client.Models.Meters.Type>
-            >(this.RawData, "type");
+            >("type");
         }
-        init { JsonModel.Set(this._rawData, "type", value); }
+        init { this._rawData.Set("type", value); }
     }
 
     /// <summary>
@@ -31,8 +31,8 @@ public sealed record class MeterAggregation : JsonModel
     /// </summary>
     public string? Key
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "key"); }
-        init { JsonModel.Set(this._rawData, "key", value); }
+        get { return this._rawData.GetNullableClass<string>("key"); }
+        init { this._rawData.Set("key", value); }
     }
 
     /// <inheritdoc/>
@@ -49,14 +49,14 @@ public sealed record class MeterAggregation : JsonModel
 
     public MeterAggregation(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     MeterAggregation(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -13,7 +14,7 @@ namespace DodoPayments.Client.Models.Products;
 
 public sealed record class ProductCreateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -24,8 +25,8 @@ public sealed record class ProductCreateParams : ParamsBase
     /// </summary>
     public required string Name
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "name"); }
-        init { JsonModel.Set(this._rawBodyData, "name", value); }
+        get { return this._rawBodyData.GetNotNullClass<string>("name"); }
+        init { this._rawBodyData.Set("name", value); }
     }
 
     /// <summary>
@@ -33,8 +34,8 @@ public sealed record class ProductCreateParams : ParamsBase
     /// </summary>
     public required Price Price
     {
-        get { return JsonModel.GetNotNullClass<Price>(this.RawBodyData, "price"); }
-        init { JsonModel.Set(this._rawBodyData, "price", value); }
+        get { return this._rawBodyData.GetNotNullClass<Price>("price"); }
+        init { this._rawBodyData.Set("price", value); }
     }
 
     /// <summary>
@@ -44,12 +45,9 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, TaxCategory>>(
-                this.RawBodyData,
-                "tax_category"
-            );
+            return this._rawBodyData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category");
         }
-        init { JsonModel.Set(this._rawBodyData, "tax_category", value); }
+        init { this._rawBodyData.Set("tax_category", value); }
     }
 
     /// <summary>
@@ -57,8 +55,14 @@ public sealed record class ProductCreateParams : ParamsBase
     /// </summary>
     public IReadOnlyList<string>? Addons
     {
-        get { return JsonModel.GetNullableClass<List<string>>(this.RawBodyData, "addons"); }
-        init { JsonModel.Set(this._rawBodyData, "addons", value); }
+        get { return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("addons"); }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<string>?>(
+                "addons",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -66,8 +70,8 @@ public sealed record class ProductCreateParams : ParamsBase
     /// </summary>
     public string? BrandID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "brand_id"); }
-        init { JsonModel.Set(this._rawBodyData, "brand_id", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("brand_id"); }
+        init { this._rawBodyData.Set("brand_id", value); }
     }
 
     /// <summary>
@@ -75,8 +79,8 @@ public sealed record class ProductCreateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "description"); }
-        init { JsonModel.Set(this._rawBodyData, "description", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        init { this._rawBodyData.Set("description", value); }
     }
 
     /// <summary>
@@ -86,12 +90,11 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<DigitalProductDelivery>(
-                this.RawBodyData,
+            return this._rawBodyData.GetNullableClass<DigitalProductDelivery>(
                 "digital_product_delivery"
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "digital_product_delivery", value); }
+        init { this._rawBodyData.Set("digital_product_delivery", value); }
     }
 
     /// <summary>
@@ -99,14 +102,8 @@ public sealed record class ProductCreateParams : ParamsBase
     /// </summary>
     public string? LicenseKeyActivationMessage
     {
-        get
-        {
-            return JsonModel.GetNullableClass<string>(
-                this.RawBodyData,
-                "license_key_activation_message"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "license_key_activation_message", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("license_key_activation_message"); }
+        init { this._rawBodyData.Set("license_key_activation_message", value); }
     }
 
     /// <summary>
@@ -114,14 +111,8 @@ public sealed record class ProductCreateParams : ParamsBase
     /// </summary>
     public int? LicenseKeyActivationsLimit
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<int>(
-                this.RawBodyData,
-                "license_key_activations_limit"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "license_key_activations_limit", value); }
+        get { return this._rawBodyData.GetNullableStruct<int>("license_key_activations_limit"); }
+        init { this._rawBodyData.Set("license_key_activations_limit", value); }
     }
 
     /// <summary>
@@ -133,12 +124,9 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<LicenseKeyDuration>(
-                this.RawBodyData,
-                "license_key_duration"
-            );
+            return this._rawBodyData.GetNullableClass<LicenseKeyDuration>("license_key_duration");
         }
-        init { JsonModel.Set(this._rawBodyData, "license_key_duration", value); }
+        init { this._rawBodyData.Set("license_key_duration", value); }
     }
 
     /// <summary>
@@ -146,8 +134,8 @@ public sealed record class ProductCreateParams : ParamsBase
     /// </summary>
     public bool? LicenseKeyEnabled
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "license_key_enabled"); }
-        init { JsonModel.Set(this._rawBodyData, "license_key_enabled", value); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("license_key_enabled"); }
+        init { this._rawBodyData.Set("license_key_enabled", value); }
     }
 
     /// <summary>
@@ -157,10 +145,7 @@ public sealed record class ProductCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, string>>(
-                this.RawBodyData,
-                "metadata"
-            );
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
         {
@@ -169,7 +154,10 @@ public sealed record class ProductCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "metadata", value);
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
     }
 
@@ -178,7 +166,7 @@ public sealed record class ProductCreateParams : ParamsBase
     public ProductCreateParams(ProductCreateParams productCreateParams)
         : base(productCreateParams)
     {
-        this._rawBodyData = [.. productCreateParams._rawBodyData];
+        this._rawBodyData = new(productCreateParams._rawBodyData);
     }
 
     public ProductCreateParams(
@@ -187,9 +175,9 @@ public sealed record class ProductCreateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -200,9 +188,9 @@ public sealed record class ProductCreateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 
@@ -258,8 +246,8 @@ public sealed record class DigitalProductDelivery : JsonModel
     /// </summary>
     public string? ExternalUrl
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "external_url"); }
-        init { JsonModel.Set(this._rawData, "external_url", value); }
+        get { return this._rawData.GetNullableClass<string>("external_url"); }
+        init { this._rawData.Set("external_url", value); }
     }
 
     /// <summary>
@@ -267,8 +255,8 @@ public sealed record class DigitalProductDelivery : JsonModel
     /// </summary>
     public string? Instructions
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "instructions"); }
-        init { JsonModel.Set(this._rawData, "instructions", value); }
+        get { return this._rawData.GetNullableClass<string>("instructions"); }
+        init { this._rawData.Set("instructions", value); }
     }
 
     /// <inheritdoc/>
@@ -285,14 +273,14 @@ public sealed record class DigitalProductDelivery : JsonModel
 
     public DigitalProductDelivery(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     DigitalProductDelivery(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

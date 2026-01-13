@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,12 +23,17 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : JsonMo
     {
         get
         {
-            return JsonModel.GetNotNullClass<List<SubscriptionRetrieveUsageHistoryResponse>>(
-                this.RawData,
-                "items"
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<SubscriptionRetrieveUsageHistoryResponse>
+            >("items");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<SubscriptionRetrieveUsageHistoryResponse>>(
+                "items",
+                ImmutableArray.ToImmutableArray(value)
             );
         }
-        init { JsonModel.Set(this._rawData, "items", value); }
     }
 
     /// <inheritdoc/>
@@ -50,14 +56,14 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : JsonMo
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionRetrieveUsageHistoryPageResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

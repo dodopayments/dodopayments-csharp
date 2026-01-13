@@ -18,7 +18,7 @@ public sealed record class DiscountListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
+        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
         init
         {
             if (value == null)
@@ -26,7 +26,7 @@ public sealed record class DiscountListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "page_number", value);
+            this._rawQueryData.Set("page_number", value);
         }
     }
 
@@ -35,7 +35,7 @@ public sealed record class DiscountListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
+        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
         init
         {
             if (value == null)
@@ -43,7 +43,7 @@ public sealed record class DiscountListParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawQueryData, "page_size", value);
+            this._rawQueryData.Set("page_size", value);
         }
     }
 
@@ -57,8 +57,8 @@ public sealed record class DiscountListParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 
 #pragma warning disable CS8618
@@ -68,8 +68,8 @@ public sealed record class DiscountListParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 #pragma warning restore CS8618
 

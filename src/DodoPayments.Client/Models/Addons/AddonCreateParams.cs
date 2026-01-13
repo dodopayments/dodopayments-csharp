@@ -12,7 +12,7 @@ namespace DodoPayments.Client.Models.Addons;
 
 public sealed record class AddonCreateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -23,14 +23,8 @@ public sealed record class AddonCreateParams : ParamsBase
     /// </summary>
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(
-                this.RawBodyData,
-                "currency"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "currency", value); }
+        get { return this._rawBodyData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawBodyData.Set("currency", value); }
     }
 
     /// <summary>
@@ -38,8 +32,8 @@ public sealed record class AddonCreateParams : ParamsBase
     /// </summary>
     public required string Name
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "name"); }
-        init { JsonModel.Set(this._rawBodyData, "name", value); }
+        get { return this._rawBodyData.GetNotNullClass<string>("name"); }
+        init { this._rawBodyData.Set("name", value); }
     }
 
     /// <summary>
@@ -47,8 +41,8 @@ public sealed record class AddonCreateParams : ParamsBase
     /// </summary>
     public required int Price
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawBodyData, "price"); }
-        init { JsonModel.Set(this._rawBodyData, "price", value); }
+        get { return this._rawBodyData.GetNotNullStruct<int>("price"); }
+        init { this._rawBodyData.Set("price", value); }
     }
 
     /// <summary>
@@ -58,12 +52,9 @@ public sealed record class AddonCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, TaxCategory>>(
-                this.RawBodyData,
-                "tax_category"
-            );
+            return this._rawBodyData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category");
         }
-        init { JsonModel.Set(this._rawBodyData, "tax_category", value); }
+        init { this._rawBodyData.Set("tax_category", value); }
     }
 
     /// <summary>
@@ -71,8 +62,8 @@ public sealed record class AddonCreateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "description"); }
-        init { JsonModel.Set(this._rawBodyData, "description", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        init { this._rawBodyData.Set("description", value); }
     }
 
     public AddonCreateParams() { }
@@ -80,7 +71,7 @@ public sealed record class AddonCreateParams : ParamsBase
     public AddonCreateParams(AddonCreateParams addonCreateParams)
         : base(addonCreateParams)
     {
-        this._rawBodyData = [.. addonCreateParams._rawBodyData];
+        this._rawBodyData = new(addonCreateParams._rawBodyData);
     }
 
     public AddonCreateParams(
@@ -89,9 +80,9 @@ public sealed record class AddonCreateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -102,9 +93,9 @@ public sealed record class AddonCreateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

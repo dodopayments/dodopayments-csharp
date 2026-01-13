@@ -13,56 +13,56 @@ public sealed record class Meter : JsonModel
 {
     public required string ID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
-        init { JsonModel.Set(this._rawData, "id", value); }
+        get { return this._rawData.GetNotNullClass<string>("id"); }
+        init { this._rawData.Set("id", value); }
     }
 
     public required MeterAggregation Aggregation
     {
-        get { return JsonModel.GetNotNullClass<MeterAggregation>(this.RawData, "aggregation"); }
-        init { JsonModel.Set(this._rawData, "aggregation", value); }
+        get { return this._rawData.GetNotNullClass<MeterAggregation>("aggregation"); }
+        init { this._rawData.Set("aggregation", value); }
     }
 
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     public required string EventName
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "event_name"); }
-        init { JsonModel.Set(this._rawData, "event_name", value); }
+        get { return this._rawData.GetNotNullClass<string>("event_name"); }
+        init { this._rawData.Set("event_name", value); }
     }
 
     public required string MeasurementUnit
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "measurement_unit"); }
-        init { JsonModel.Set(this._rawData, "measurement_unit", value); }
+        get { return this._rawData.GetNotNullClass<string>("measurement_unit"); }
+        init { this._rawData.Set("measurement_unit", value); }
     }
 
     public required string Name
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNotNullClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     public required DateTimeOffset UpdatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
-        init { JsonModel.Set(this._rawData, "updated_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at"); }
+        init { this._rawData.Set("updated_at", value); }
     }
 
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
-        init { JsonModel.Set(this._rawData, "description", value); }
+        get { return this._rawData.GetNullableClass<string>("description"); }
+        init { this._rawData.Set("description", value); }
     }
 
     /// <summary>
@@ -74,8 +74,8 @@ public sealed record class Meter : JsonModel
     /// </summary>
     public MeterFilter? Filter
     {
-        get { return JsonModel.GetNullableClass<MeterFilter>(this.RawData, "filter"); }
-        init { JsonModel.Set(this._rawData, "filter", value); }
+        get { return this._rawData.GetNullableClass<MeterFilter>("filter"); }
+        init { this._rawData.Set("filter", value); }
     }
 
     /// <inheritdoc/>
@@ -100,14 +100,14 @@ public sealed record class Meter : JsonModel
 
     public Meter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Meter(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

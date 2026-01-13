@@ -17,8 +17,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     /// <summary>
@@ -35,8 +35,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required bool IsRecurring
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "is_recurring"); }
-        init { JsonModel.Set(this._rawData, "is_recurring", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("is_recurring"); }
+        init { this._rawData.Set("is_recurring", value); }
     }
 
     /// <summary>
@@ -44,11 +44,14 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get
+        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        init
         {
-            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
-        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -56,8 +59,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { JsonModel.Set(this._rawData, "product_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        init { this._rawData.Set("product_id", value); }
     }
 
     /// <summary>
@@ -65,14 +68,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required ApiEnum<string, TaxCategory> TaxCategory
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, TaxCategory>>(
-                this.RawData,
-                "tax_category"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "tax_category", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category"); }
+        init { this._rawData.Set("tax_category", value); }
     }
 
     /// <summary>
@@ -80,8 +77,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required DateTimeOffset UpdatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "updated_at"); }
-        init { JsonModel.Set(this._rawData, "updated_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at"); }
+        init { this._rawData.Set("updated_at", value); }
     }
 
     /// <summary>
@@ -89,11 +86,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public ApiEnum<string, Currency>? Currency
     {
-        get
-        {
-            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <summary>
@@ -101,8 +95,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
-        init { JsonModel.Set(this._rawData, "description", value); }
+        get { return this._rawData.GetNullableClass<string>("description"); }
+        init { this._rawData.Set("description", value); }
     }
 
     /// <summary>
@@ -110,8 +104,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public string? Image
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "image"); }
-        init { JsonModel.Set(this._rawData, "image", value); }
+        get { return this._rawData.GetNullableClass<string>("image"); }
+        init { this._rawData.Set("image", value); }
     }
 
     /// <summary>
@@ -119,8 +113,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNullableClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     /// <summary>
@@ -135,8 +129,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public int? Price
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "price"); }
-        init { JsonModel.Set(this._rawData, "price", value); }
+        get { return this._rawData.GetNullableStruct<int>("price"); }
+        init { this._rawData.Set("price", value); }
     }
 
     /// <summary>
@@ -144,8 +138,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public Price? PriceDetail
     {
-        get { return JsonModel.GetNullableClass<Price>(this.RawData, "price_detail"); }
-        init { JsonModel.Set(this._rawData, "price_detail", value); }
+        get { return this._rawData.GetNullableClass<Price>("price_detail"); }
+        init { this._rawData.Set("price_detail", value); }
     }
 
     /// <summary>
@@ -153,8 +147,8 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public bool? TaxInclusive
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "tax_inclusive"); }
-        init { JsonModel.Set(this._rawData, "tax_inclusive", value); }
+        get { return this._rawData.GetNullableStruct<bool>("tax_inclusive"); }
+        init { this._rawData.Set("tax_inclusive", value); }
     }
 
     /// <inheritdoc/>
@@ -183,14 +177,14 @@ public sealed record class ProductListResponse : JsonModel
 
     public ProductListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ProductListResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

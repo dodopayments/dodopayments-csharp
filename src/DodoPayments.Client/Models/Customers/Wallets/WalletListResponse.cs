@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -12,8 +13,14 @@ public sealed record class WalletListResponse : JsonModel
 {
     public required IReadOnlyList<CustomerWallet> Items
     {
-        get { return JsonModel.GetNotNullClass<List<CustomerWallet>>(this.RawData, "items"); }
-        init { JsonModel.Set(this._rawData, "items", value); }
+        get { return this._rawData.GetNotNullStruct<ImmutableArray<CustomerWallet>>("items"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<CustomerWallet>>(
+                "items",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -21,8 +28,8 @@ public sealed record class WalletListResponse : JsonModel
     /// </summary>
     public required long TotalBalanceUsd
     {
-        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "total_balance_usd"); }
-        init { JsonModel.Set(this._rawData, "total_balance_usd", value); }
+        get { return this._rawData.GetNotNullStruct<long>("total_balance_usd"); }
+        init { this._rawData.Set("total_balance_usd", value); }
     }
 
     /// <inheritdoc/>
@@ -42,14 +49,14 @@ public sealed record class WalletListResponse : JsonModel
 
     public WalletListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     WalletListResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

@@ -20,14 +20,14 @@ public sealed record class PaymentFailedWebhookEvent : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     public required Payment Data
     {
-        get { return JsonModel.GetNotNullClass<Payment>(this.RawData, "data"); }
-        init { JsonModel.Set(this._rawData, "data", value); }
+        get { return this._rawData.GetNotNullClass<Payment>("data"); }
+        init { this._rawData.Set("data", value); }
     }
 
     /// <summary>
@@ -35,11 +35,8 @@ public sealed record class PaymentFailedWebhookEvent : JsonModel
     /// </summary>
     public required System::DateTimeOffset Timestamp
     {
-        get
-        {
-            return JsonModel.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "timestamp");
-        }
-        init { JsonModel.Set(this._rawData, "timestamp", value); }
+        get { return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp"); }
+        init { this._rawData.Set("timestamp", value); }
     }
 
     /// <summary>
@@ -49,12 +46,11 @@ public sealed record class PaymentFailedWebhookEvent : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, PaymentFailedWebhookEventType>>(
-                this.RawData,
+            return this._rawData.GetNotNullClass<ApiEnum<string, PaymentFailedWebhookEventType>>(
                 "type"
             );
         }
-        init { JsonModel.Set(this._rawData, "type", value); }
+        init { this._rawData.Set("type", value); }
     }
 
     /// <inheritdoc/>
@@ -73,14 +69,14 @@ public sealed record class PaymentFailedWebhookEvent : JsonModel
 
     public PaymentFailedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     PaymentFailedWebhookEvent(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

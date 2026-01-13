@@ -11,7 +11,7 @@ namespace DodoPayments.Client.Models.Brands;
 
 public sealed record class BrandCreateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -19,32 +19,32 @@ public sealed record class BrandCreateParams : ParamsBase
 
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "description"); }
-        init { JsonModel.Set(this._rawBodyData, "description", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        init { this._rawBodyData.Set("description", value); }
     }
 
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "name"); }
-        init { JsonModel.Set(this._rawBodyData, "name", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("name"); }
+        init { this._rawBodyData.Set("name", value); }
     }
 
     public string? StatementDescriptor
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "statement_descriptor"); }
-        init { JsonModel.Set(this._rawBodyData, "statement_descriptor", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("statement_descriptor"); }
+        init { this._rawBodyData.Set("statement_descriptor", value); }
     }
 
     public string? SupportEmail
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "support_email"); }
-        init { JsonModel.Set(this._rawBodyData, "support_email", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("support_email"); }
+        init { this._rawBodyData.Set("support_email", value); }
     }
 
     public string? UrlValue
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "url"); }
-        init { JsonModel.Set(this._rawBodyData, "url", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("url"); }
+        init { this._rawBodyData.Set("url", value); }
     }
 
     public BrandCreateParams() { }
@@ -52,7 +52,7 @@ public sealed record class BrandCreateParams : ParamsBase
     public BrandCreateParams(BrandCreateParams brandCreateParams)
         : base(brandCreateParams)
     {
-        this._rawBodyData = [.. brandCreateParams._rawBodyData];
+        this._rawBodyData = new(brandCreateParams._rawBodyData);
     }
 
     public BrandCreateParams(
@@ -61,9 +61,9 @@ public sealed record class BrandCreateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -74,9 +74,9 @@ public sealed record class BrandCreateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

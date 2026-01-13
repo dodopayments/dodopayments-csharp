@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -16,12 +17,17 @@ public sealed record class LedgerEntryListPageResponse : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<List<CustomerWalletTransaction>>(
-                this.RawData,
+            return this._rawData.GetNotNullStruct<ImmutableArray<CustomerWalletTransaction>>(
                 "items"
             );
         }
-        init { JsonModel.Set(this._rawData, "items", value); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<CustomerWalletTransaction>>(
+                "items",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <inheritdoc/>
@@ -40,14 +46,14 @@ public sealed record class LedgerEntryListPageResponse : JsonModel
 
     public LedgerEntryListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     LedgerEntryListPageResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

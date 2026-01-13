@@ -12,8 +12,8 @@ public sealed record class LicenseValidateResponse : JsonModel
 {
     public required bool Valid
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "valid"); }
-        init { JsonModel.Set(this._rawData, "valid", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("valid"); }
+        init { this._rawData.Set("valid", value); }
     }
 
     /// <inheritdoc/>
@@ -29,14 +29,14 @@ public sealed record class LicenseValidateResponse : JsonModel
 
     public LicenseValidateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     LicenseValidateResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

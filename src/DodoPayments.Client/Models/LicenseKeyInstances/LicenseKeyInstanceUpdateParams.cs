@@ -11,7 +11,7 @@ namespace DodoPayments.Client.Models.LicenseKeyInstances;
 
 public sealed record class LicenseKeyInstanceUpdateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -21,8 +21,8 @@ public sealed record class LicenseKeyInstanceUpdateParams : ParamsBase
 
     public required string Name
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "name"); }
-        init { JsonModel.Set(this._rawBodyData, "name", value); }
+        get { return this._rawBodyData.GetNotNullClass<string>("name"); }
+        init { this._rawBodyData.Set("name", value); }
     }
 
     public LicenseKeyInstanceUpdateParams() { }
@@ -34,7 +34,7 @@ public sealed record class LicenseKeyInstanceUpdateParams : ParamsBase
     {
         this.ID = licenseKeyInstanceUpdateParams.ID;
 
-        this._rawBodyData = [.. licenseKeyInstanceUpdateParams._rawBodyData];
+        this._rawBodyData = new(licenseKeyInstanceUpdateParams._rawBodyData);
     }
 
     public LicenseKeyInstanceUpdateParams(
@@ -43,9 +43,9 @@ public sealed record class LicenseKeyInstanceUpdateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -56,9 +56,9 @@ public sealed record class LicenseKeyInstanceUpdateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

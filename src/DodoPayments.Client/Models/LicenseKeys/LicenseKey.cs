@@ -16,8 +16,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string ID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
-        init { JsonModel.Set(this._rawData, "id", value); }
+        get { return this._rawData.GetNotNullClass<string>("id"); }
+        init { this._rawData.Set("id", value); }
     }
 
     /// <summary>
@@ -25,8 +25,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     /// <summary>
@@ -34,8 +34,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     /// <summary>
@@ -43,8 +43,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string CustomerID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { JsonModel.Set(this._rawData, "customer_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        init { this._rawData.Set("customer_id", value); }
     }
 
     /// <summary>
@@ -52,8 +52,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required int InstancesCount
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "instances_count"); }
-        init { JsonModel.Set(this._rawData, "instances_count", value); }
+        get { return this._rawData.GetNotNullStruct<int>("instances_count"); }
+        init { this._rawData.Set("instances_count", value); }
     }
 
     /// <summary>
@@ -61,8 +61,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string Key
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "key"); }
-        init { JsonModel.Set(this._rawData, "key", value); }
+        get { return this._rawData.GetNotNullClass<string>("key"); }
+        init { this._rawData.Set("key", value); }
     }
 
     /// <summary>
@@ -70,8 +70,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string PaymentID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { JsonModel.Set(this._rawData, "payment_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        init { this._rawData.Set("payment_id", value); }
     }
 
     /// <summary>
@@ -79,8 +79,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { JsonModel.Set(this._rawData, "product_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        init { this._rawData.Set("product_id", value); }
     }
 
     /// <summary>
@@ -88,14 +88,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public required ApiEnum<string, LicenseKeyStatus> Status
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, LicenseKeyStatus>>(
-                this.RawData,
-                "status"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "status", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, LicenseKeyStatus>>("status"); }
+        init { this._rawData.Set("status", value); }
     }
 
     /// <summary>
@@ -103,8 +97,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public int? ActivationsLimit
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "activations_limit"); }
-        init { JsonModel.Set(this._rawData, "activations_limit", value); }
+        get { return this._rawData.GetNullableStruct<int>("activations_limit"); }
+        init { this._rawData.Set("activations_limit", value); }
     }
 
     /// <summary>
@@ -112,8 +106,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "expires_at"); }
-        init { JsonModel.Set(this._rawData, "expires_at", value); }
+        get { return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at"); }
+        init { this._rawData.Set("expires_at", value); }
     }
 
     /// <summary>
@@ -122,8 +116,8 @@ public sealed record class LicenseKey : JsonModel
     /// </summary>
     public string? SubscriptionID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "subscription_id"); }
-        init { JsonModel.Set(this._rawData, "subscription_id", value); }
+        get { return this._rawData.GetNullableClass<string>("subscription_id"); }
+        init { this._rawData.Set("subscription_id", value); }
     }
 
     /// <inheritdoc/>
@@ -150,14 +144,14 @@ public sealed record class LicenseKey : JsonModel
 
     public LicenseKey(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     LicenseKey(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

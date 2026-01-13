@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -21,8 +22,14 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : JsonModel
 {
     public required IReadOnlyList<Item> Items
     {
-        get { return JsonModel.GetNotNullClass<List<Item>>(this.RawData, "items"); }
-        init { JsonModel.Set(this._rawData, "items", value); }
+        get { return this._rawData.GetNotNullStruct<ImmutableArray<Item>>("items"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Item>>(
+                "items",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <inheritdoc/>
@@ -43,14 +50,14 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : JsonModel
 
     public CustomerRetrievePaymentMethodsResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     CustomerRetrievePaymentMethodsResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -86,48 +93,44 @@ public sealed record class Item : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, PaymentMethod>>(
-                this.RawData,
-                "payment_method"
-            );
+            return this._rawData.GetNotNullClass<ApiEnum<string, PaymentMethod>>("payment_method");
         }
-        init { JsonModel.Set(this._rawData, "payment_method", value); }
+        init { this._rawData.Set("payment_method", value); }
     }
 
     public required string PaymentMethodID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_method_id"); }
-        init { JsonModel.Set(this._rawData, "payment_method_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("payment_method_id"); }
+        init { this._rawData.Set("payment_method_id", value); }
     }
 
     public Card? Card
     {
-        get { return JsonModel.GetNullableClass<Card>(this.RawData, "card"); }
-        init { JsonModel.Set(this._rawData, "card", value); }
+        get { return this._rawData.GetNullableClass<Card>("card"); }
+        init { this._rawData.Set("card", value); }
     }
 
     public DateTimeOffset? LastUsedAt
     {
-        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "last_used_at"); }
-        init { JsonModel.Set(this._rawData, "last_used_at", value); }
+        get { return this._rawData.GetNullableStruct<DateTimeOffset>("last_used_at"); }
+        init { this._rawData.Set("last_used_at", value); }
     }
 
     public ApiEnum<string, Payments::PaymentMethodTypes>? PaymentMethodType
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, Payments::PaymentMethodTypes>>(
-                this.RawData,
+            return this._rawData.GetNullableClass<ApiEnum<string, Payments::PaymentMethodTypes>>(
                 "payment_method_type"
             );
         }
-        init { JsonModel.Set(this._rawData, "payment_method_type", value); }
+        init { this._rawData.Set("payment_method_type", value); }
     }
 
     public bool? RecurringEnabled
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "recurring_enabled"); }
-        init { JsonModel.Set(this._rawData, "recurring_enabled", value); }
+        get { return this._rawData.GetNullableStruct<bool>("recurring_enabled"); }
+        init { this._rawData.Set("recurring_enabled", value); }
     }
 
     /// <inheritdoc/>
@@ -148,14 +151,14 @@ public sealed record class Item : JsonModel
 
     public Item(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Item(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -261,8 +264,8 @@ public sealed record class Card : JsonModel
 {
     public string? CardHolderName
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "card_holder_name"); }
-        init { JsonModel.Set(this._rawData, "card_holder_name", value); }
+        get { return this._rawData.GetNullableClass<string>("card_holder_name"); }
+        init { this._rawData.Set("card_holder_name", value); }
     }
 
     /// <summary>
@@ -272,42 +275,41 @@ public sealed record class Card : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, CountryCode>>(
-                this.RawData,
+            return this._rawData.GetNullableClass<ApiEnum<string, CountryCode>>(
                 "card_issuing_country"
             );
         }
-        init { JsonModel.Set(this._rawData, "card_issuing_country", value); }
+        init { this._rawData.Set("card_issuing_country", value); }
     }
 
     public string? CardNetwork
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "card_network"); }
-        init { JsonModel.Set(this._rawData, "card_network", value); }
+        get { return this._rawData.GetNullableClass<string>("card_network"); }
+        init { this._rawData.Set("card_network", value); }
     }
 
     public string? CardType
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "card_type"); }
-        init { JsonModel.Set(this._rawData, "card_type", value); }
+        get { return this._rawData.GetNullableClass<string>("card_type"); }
+        init { this._rawData.Set("card_type", value); }
     }
 
     public string? ExpiryMonth
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "expiry_month"); }
-        init { JsonModel.Set(this._rawData, "expiry_month", value); }
+        get { return this._rawData.GetNullableClass<string>("expiry_month"); }
+        init { this._rawData.Set("expiry_month", value); }
     }
 
     public string? ExpiryYear
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "expiry_year"); }
-        init { JsonModel.Set(this._rawData, "expiry_year", value); }
+        get { return this._rawData.GetNullableClass<string>("expiry_year"); }
+        init { this._rawData.Set("expiry_year", value); }
     }
 
     public string? Last4Digits
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "last4_digits"); }
-        init { JsonModel.Set(this._rawData, "last4_digits", value); }
+        get { return this._rawData.GetNullableClass<string>("last4_digits"); }
+        init { this._rawData.Set("last4_digits", value); }
     }
 
     /// <inheritdoc/>
@@ -329,14 +331,14 @@ public sealed record class Card : JsonModel
 
     public Card(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Card(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

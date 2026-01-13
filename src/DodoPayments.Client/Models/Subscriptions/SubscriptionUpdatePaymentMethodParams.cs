@@ -13,7 +13,7 @@ namespace DodoPayments.Client.Models.Subscriptions;
 
 public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -23,8 +23,8 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 
     public required Body Body
     {
-        get { return JsonModel.GetNotNullClass<Body>(this.RawBodyData, "body"); }
-        init { JsonModel.Set(this._rawBodyData, "body", value); }
+        get { return this._rawBodyData.GetNotNullClass<Body>("body"); }
+        init { this._rawBodyData.Set("body", value); }
     }
 
     public SubscriptionUpdatePaymentMethodParams() { }
@@ -36,7 +36,7 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     {
         this.SubscriptionID = subscriptionUpdatePaymentMethodParams.SubscriptionID;
 
-        this._rawBodyData = [.. subscriptionUpdatePaymentMethodParams._rawBodyData];
+        this._rawBodyData = new(subscriptionUpdatePaymentMethodParams._rawBodyData);
     }
 
     public SubscriptionUpdatePaymentMethodParams(
@@ -45,9 +45,9 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -58,9 +58,9 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 
@@ -341,17 +341,17 @@ public sealed record class New : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<
+            return this._rawData.GetNotNullClass<
                 ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type>
-            >(this.RawData, "type");
+            >("type");
         }
-        init { JsonModel.Set(this._rawData, "type", value); }
+        init { this._rawData.Set("type", value); }
     }
 
     public string? ReturnUrl
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "return_url"); }
-        init { JsonModel.Set(this._rawData, "return_url", value); }
+        get { return this._rawData.GetNullableClass<string>("return_url"); }
+        init { this._rawData.Set("return_url", value); }
     }
 
     /// <inheritdoc/>
@@ -368,14 +368,14 @@ public sealed record class New : JsonModel
 
     public New(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     New(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -446,17 +446,14 @@ public sealed record class Existing : JsonModel
 {
     public required string PaymentMethodID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_method_id"); }
-        init { JsonModel.Set(this._rawData, "payment_method_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("payment_method_id"); }
+        init { this._rawData.Set("payment_method_id", value); }
     }
 
     public required ApiEnum<string, ExistingType> Type
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, ExistingType>>(this.RawData, "type");
-        }
-        init { JsonModel.Set(this._rawData, "type", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, ExistingType>>("type"); }
+        init { this._rawData.Set("type", value); }
     }
 
     /// <inheritdoc/>
@@ -473,14 +470,14 @@ public sealed record class Existing : JsonModel
 
     public Existing(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Existing(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

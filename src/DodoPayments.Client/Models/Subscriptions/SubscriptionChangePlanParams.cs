@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -13,7 +14,7 @@ namespace DodoPayments.Client.Models.Subscriptions;
 
 public sealed record class SubscriptionChangePlanParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -26,8 +27,8 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     /// </summary>
     public required string ProductID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "product_id"); }
-        init { JsonModel.Set(this._rawBodyData, "product_id", value); }
+        get { return this._rawBodyData.GetNotNullClass<string>("product_id"); }
+        init { this._rawBodyData.Set("product_id", value); }
     }
 
     /// <summary>
@@ -37,12 +38,11 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, ProrationBillingMode>>(
-                this.RawBodyData,
+            return this._rawBodyData.GetNotNullClass<ApiEnum<string, ProrationBillingMode>>(
                 "proration_billing_mode"
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "proration_billing_mode", value); }
+        init { this._rawBodyData.Set("proration_billing_mode", value); }
     }
 
     /// <summary>
@@ -50,8 +50,8 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     /// </summary>
     public required int Quantity
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawBodyData, "quantity"); }
-        init { JsonModel.Set(this._rawBodyData, "quantity", value); }
+        get { return this._rawBodyData.GetNotNullStruct<int>("quantity"); }
+        init { this._rawBodyData.Set("quantity", value); }
     }
 
     /// <summary>
@@ -59,8 +59,14 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     /// </summary>
     public IReadOnlyList<AttachAddon>? Addons
     {
-        get { return JsonModel.GetNullableClass<List<AttachAddon>>(this.RawBodyData, "addons"); }
-        init { JsonModel.Set(this._rawBodyData, "addons", value); }
+        get { return this._rawBodyData.GetNullableStruct<ImmutableArray<AttachAddon>>("addons"); }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<AttachAddon>?>(
+                "addons",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     public SubscriptionChangePlanParams() { }
@@ -70,7 +76,7 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
     {
         this.SubscriptionID = subscriptionChangePlanParams.SubscriptionID;
 
-        this._rawBodyData = [.. subscriptionChangePlanParams._rawBodyData];
+        this._rawBodyData = new(subscriptionChangePlanParams._rawBodyData);
     }
 
     public SubscriptionChangePlanParams(
@@ -79,9 +85,9 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -92,9 +98,9 @@ public sealed record class SubscriptionChangePlanParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

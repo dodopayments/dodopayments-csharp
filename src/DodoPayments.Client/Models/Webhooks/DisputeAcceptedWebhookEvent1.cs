@@ -20,14 +20,14 @@ public sealed record class DisputeAcceptedWebhookEvent : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     public required Dispute Data
     {
-        get { return JsonModel.GetNotNullClass<Dispute>(this.RawData, "data"); }
-        init { JsonModel.Set(this._rawData, "data", value); }
+        get { return this._rawData.GetNotNullClass<Dispute>("data"); }
+        init { this._rawData.Set("data", value); }
     }
 
     /// <summary>
@@ -35,11 +35,8 @@ public sealed record class DisputeAcceptedWebhookEvent : JsonModel
     /// </summary>
     public required System::DateTimeOffset Timestamp
     {
-        get
-        {
-            return JsonModel.GetNotNullStruct<System::DateTimeOffset>(this.RawData, "timestamp");
-        }
-        init { JsonModel.Set(this._rawData, "timestamp", value); }
+        get { return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp"); }
+        init { this._rawData.Set("timestamp", value); }
     }
 
     /// <summary>
@@ -49,12 +46,11 @@ public sealed record class DisputeAcceptedWebhookEvent : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, DisputeAcceptedWebhookEventType>>(
-                this.RawData,
+            return this._rawData.GetNotNullClass<ApiEnum<string, DisputeAcceptedWebhookEventType>>(
                 "type"
             );
         }
-        init { JsonModel.Set(this._rawData, "type", value); }
+        init { this._rawData.Set("type", value); }
     }
 
     /// <inheritdoc/>
@@ -73,14 +69,14 @@ public sealed record class DisputeAcceptedWebhookEvent : JsonModel
 
     public DisputeAcceptedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     DisputeAcceptedWebhookEvent(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

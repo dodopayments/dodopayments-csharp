@@ -17,8 +17,8 @@ public sealed record class CheckoutSessionStatus : JsonModel
     /// </summary>
     public required string ID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
-        init { JsonModel.Set(this._rawData, "id", value); }
+        get { return this._rawData.GetNotNullClass<string>("id"); }
+        init { this._rawData.Set("id", value); }
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public sealed record class CheckoutSessionStatus : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     /// <summary>
@@ -35,8 +35,8 @@ public sealed record class CheckoutSessionStatus : JsonModel
     /// </summary>
     public string? CustomerEmail
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "customer_email"); }
-        init { JsonModel.Set(this._rawData, "customer_email", value); }
+        get { return this._rawData.GetNullableClass<string>("customer_email"); }
+        init { this._rawData.Set("customer_email", value); }
     }
 
     /// <summary>
@@ -44,8 +44,8 @@ public sealed record class CheckoutSessionStatus : JsonModel
     /// </summary>
     public string? CustomerName
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "customer_name"); }
-        init { JsonModel.Set(this._rawData, "customer_name", value); }
+        get { return this._rawData.GetNullableClass<string>("customer_name"); }
+        init { this._rawData.Set("customer_name", value); }
     }
 
     /// <summary>
@@ -55,8 +55,8 @@ public sealed record class CheckoutSessionStatus : JsonModel
     /// </summary>
     public string? PaymentID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_id"); }
-        init { JsonModel.Set(this._rawData, "payment_id", value); }
+        get { return this._rawData.GetNullableClass<string>("payment_id"); }
+        init { this._rawData.Set("payment_id", value); }
     }
 
     /// <summary>
@@ -68,12 +68,9 @@ public sealed record class CheckoutSessionStatus : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, IntentStatus>>(
-                this.RawData,
-                "payment_status"
-            );
+            return this._rawData.GetNullableClass<ApiEnum<string, IntentStatus>>("payment_status");
         }
-        init { JsonModel.Set(this._rawData, "payment_status", value); }
+        init { this._rawData.Set("payment_status", value); }
     }
 
     /// <inheritdoc/>
@@ -94,14 +91,14 @@ public sealed record class CheckoutSessionStatus : JsonModel
 
     public CheckoutSessionStatus(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     CheckoutSessionStatus(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

@@ -14,86 +14,80 @@ public sealed record class PaymentListResponse : JsonModel
 {
     public required string BrandID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "brand_id"); }
-        init { JsonModel.Set(this._rawData, "brand_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("brand_id"); }
+        init { this._rawData.Set("brand_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     public required CustomerLimitedDetails Customer
     {
-        get { return JsonModel.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
-        init { JsonModel.Set(this._rawData, "customer", value); }
+        get { return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer"); }
+        init { this._rawData.Set("customer", value); }
     }
 
     public required bool DigitalProductsDelivered
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "digital_products_delivered"); }
-        init { JsonModel.Set(this._rawData, "digital_products_delivered", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("digital_products_delivered"); }
+        init { this._rawData.Set("digital_products_delivered", value); }
     }
 
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get
+        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        init
         {
-            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
-        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     public required string PaymentID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { JsonModel.Set(this._rawData, "payment_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        init { this._rawData.Set("payment_id", value); }
     }
 
     public required int TotalAmount
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "total_amount"); }
-        init { JsonModel.Set(this._rawData, "total_amount", value); }
+        get { return this._rawData.GetNotNullStruct<int>("total_amount"); }
+        init { this._rawData.Set("total_amount", value); }
     }
 
     public string? PaymentMethod
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_method"); }
-        init { JsonModel.Set(this._rawData, "payment_method", value); }
+        get { return this._rawData.GetNullableClass<string>("payment_method"); }
+        init { this._rawData.Set("payment_method", value); }
     }
 
     public string? PaymentMethodType
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "payment_method_type"); }
-        init { JsonModel.Set(this._rawData, "payment_method_type", value); }
+        get { return this._rawData.GetNullableClass<string>("payment_method_type"); }
+        init { this._rawData.Set("payment_method_type", value); }
     }
 
     public ApiEnum<string, IntentStatus>? Status
     {
-        get
-        {
-            return JsonModel.GetNullableClass<ApiEnum<string, IntentStatus>>(
-                this.RawData,
-                "status"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "status", value); }
+        get { return this._rawData.GetNullableClass<ApiEnum<string, IntentStatus>>("status"); }
+        init { this._rawData.Set("status", value); }
     }
 
     public string? SubscriptionID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "subscription_id"); }
-        init { JsonModel.Set(this._rawData, "subscription_id", value); }
+        get { return this._rawData.GetNullableClass<string>("subscription_id"); }
+        init { this._rawData.Set("subscription_id", value); }
     }
 
     /// <inheritdoc/>
@@ -120,14 +114,14 @@ public sealed record class PaymentListResponse : JsonModel
 
     public PaymentListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     PaymentListResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

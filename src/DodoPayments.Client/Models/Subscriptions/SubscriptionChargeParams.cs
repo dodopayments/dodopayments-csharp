@@ -13,7 +13,7 @@ namespace DodoPayments.Client.Models.Subscriptions;
 
 public sealed record class SubscriptionChargeParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -27,8 +27,8 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     /// </summary>
     public required int ProductPrice
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawBodyData, "product_price"); }
-        init { JsonModel.Set(this._rawBodyData, "product_price", value); }
+        get { return this._rawBodyData.GetNotNullStruct<int>("product_price"); }
+        init { this._rawBodyData.Set("product_price", value); }
     }
 
     /// <summary>
@@ -40,12 +40,9 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableStruct<bool>(
-                this.RawBodyData,
-                "adaptive_currency_fees_inclusive"
-            );
+            return this._rawBodyData.GetNullableStruct<bool>("adaptive_currency_fees_inclusive");
         }
-        init { JsonModel.Set(this._rawBodyData, "adaptive_currency_fees_inclusive", value); }
+        init { this._rawBodyData.Set("adaptive_currency_fees_inclusive", value); }
     }
 
     /// <summary>
@@ -55,12 +52,11 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<CustomerBalanceConfig>(
-                this.RawBodyData,
+            return this._rawBodyData.GetNullableClass<CustomerBalanceConfig>(
                 "customer_balance_config"
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "customer_balance_config", value); }
+        init { this._rawBodyData.Set("customer_balance_config", value); }
     }
 
     /// <summary>
@@ -71,12 +67,15 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, string>>(
-                this.RawBodyData,
-                "metadata"
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "metadata", value); }
     }
 
     /// <summary>
@@ -87,12 +86,11 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(
-                this.RawBodyData,
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, Currency>>(
                 "product_currency"
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "product_currency", value); }
+        init { this._rawBodyData.Set("product_currency", value); }
     }
 
     /// <summary>
@@ -101,8 +99,8 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     /// </summary>
     public string? ProductDescription
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "product_description"); }
-        init { JsonModel.Set(this._rawBodyData, "product_description", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("product_description"); }
+        init { this._rawBodyData.Set("product_description", value); }
     }
 
     public SubscriptionChargeParams() { }
@@ -112,7 +110,7 @@ public sealed record class SubscriptionChargeParams : ParamsBase
     {
         this.SubscriptionID = subscriptionChargeParams.SubscriptionID;
 
-        this._rawBodyData = [.. subscriptionChargeParams._rawBodyData];
+        this._rawBodyData = new(subscriptionChargeParams._rawBodyData);
     }
 
     public SubscriptionChargeParams(
@@ -121,9 +119,9 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -134,9 +132,9 @@ public sealed record class SubscriptionChargeParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 
@@ -195,14 +193,8 @@ public sealed record class CustomerBalanceConfig : JsonModel
     /// </summary>
     public bool? AllowCustomerCreditsPurchase
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(
-                this.RawData,
-                "allow_customer_credits_purchase"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "allow_customer_credits_purchase", value); }
+        get { return this._rawData.GetNullableStruct<bool>("allow_customer_credits_purchase"); }
+        init { this._rawData.Set("allow_customer_credits_purchase", value); }
     }
 
     /// <summary>
@@ -210,11 +202,8 @@ public sealed record class CustomerBalanceConfig : JsonModel
     /// </summary>
     public bool? AllowCustomerCreditsUsage
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_credits_usage");
-        }
-        init { JsonModel.Set(this._rawData, "allow_customer_credits_usage", value); }
+        get { return this._rawData.GetNullableStruct<bool>("allow_customer_credits_usage"); }
+        init { this._rawData.Set("allow_customer_credits_usage", value); }
     }
 
     /// <inheritdoc/>
@@ -231,14 +220,14 @@ public sealed record class CustomerBalanceConfig : JsonModel
 
     public CustomerBalanceConfig(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     CustomerBalanceConfig(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

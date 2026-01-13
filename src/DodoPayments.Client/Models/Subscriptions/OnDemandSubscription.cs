@@ -17,8 +17,8 @@ public sealed record class OnDemandSubscription : JsonModel
     /// </summary>
     public required bool MandateOnly
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "mandate_only"); }
-        init { JsonModel.Set(this._rawData, "mandate_only", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("mandate_only"); }
+        init { this._rawData.Set("mandate_only", value); }
     }
 
     /// <summary>
@@ -28,14 +28,8 @@ public sealed record class OnDemandSubscription : JsonModel
     /// </summary>
     public bool? AdaptiveCurrencyFeesInclusive
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(
-                this.RawData,
-                "adaptive_currency_fees_inclusive"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "adaptive_currency_fees_inclusive", value); }
+        get { return this._rawData.GetNullableStruct<bool>("adaptive_currency_fees_inclusive"); }
+        init { this._rawData.Set("adaptive_currency_fees_inclusive", value); }
     }
 
     /// <summary>
@@ -46,12 +40,9 @@ public sealed record class OnDemandSubscription : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(
-                this.RawData,
-                "product_currency"
-            );
+            return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("product_currency");
         }
-        init { JsonModel.Set(this._rawData, "product_currency", value); }
+        init { this._rawData.Set("product_currency", value); }
     }
 
     /// <summary>
@@ -60,8 +51,8 @@ public sealed record class OnDemandSubscription : JsonModel
     /// </summary>
     public string? ProductDescription
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "product_description"); }
-        init { JsonModel.Set(this._rawData, "product_description", value); }
+        get { return this._rawData.GetNullableClass<string>("product_description"); }
+        init { this._rawData.Set("product_description", value); }
     }
 
     /// <summary>
@@ -71,8 +62,8 @@ public sealed record class OnDemandSubscription : JsonModel
     /// </summary>
     public int? ProductPrice
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "product_price"); }
-        init { JsonModel.Set(this._rawData, "product_price", value); }
+        get { return this._rawData.GetNullableStruct<int>("product_price"); }
+        init { this._rawData.Set("product_price", value); }
     }
 
     /// <inheritdoc/>
@@ -92,14 +83,14 @@ public sealed record class OnDemandSubscription : JsonModel
 
     public OnDemandSubscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     OnDemandSubscription(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

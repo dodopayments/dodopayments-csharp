@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -15,7 +16,7 @@ namespace DodoPayments.Client.Models.Webhooks;
 /// </summary>
 public sealed record class WebhookCreateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -26,14 +27,14 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public required string UrlValue
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "url"); }
-        init { JsonModel.Set(this._rawBodyData, "url", value); }
+        get { return this._rawBodyData.GetNotNullClass<string>("url"); }
+        init { this._rawBodyData.Set("url", value); }
     }
 
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "description"); }
-        init { JsonModel.Set(this._rawBodyData, "description", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        init { this._rawBodyData.Set("description", value); }
     }
 
     /// <summary>
@@ -43,8 +44,8 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public bool? Disabled
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "disabled"); }
-        init { JsonModel.Set(this._rawBodyData, "disabled", value); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("disabled"); }
+        init { this._rawBodyData.Set("disabled", value); }
     }
 
     /// <summary>
@@ -56,10 +57,9 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<List<ApiEnum<string, WebhookEventType>>>(
-                this.RawBodyData,
-                "filter_types"
-            );
+            return this._rawBodyData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, WebhookEventType>>
+            >("filter_types");
         }
         init
         {
@@ -68,7 +68,10 @@ public sealed record class WebhookCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "filter_types", value);
+            this._rawBodyData.Set<ImmutableArray<ApiEnum<string, WebhookEventType>>?>(
+                "filter_types",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -79,12 +82,15 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, string>>(
-                this.RawBodyData,
-                "headers"
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("headers");
+        }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "headers",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "headers", value); }
     }
 
     /// <summary>
@@ -92,8 +98,8 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public string? IdempotencyKey
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "idempotency_key"); }
-        init { JsonModel.Set(this._rawBodyData, "idempotency_key", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("idempotency_key"); }
+        init { this._rawBodyData.Set("idempotency_key", value); }
     }
 
     /// <summary>
@@ -103,18 +109,21 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, string>>(
-                this.RawBodyData,
-                "metadata"
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "metadata", value); }
     }
 
     public int? RateLimit
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "rate_limit"); }
-        init { JsonModel.Set(this._rawBodyData, "rate_limit", value); }
+        get { return this._rawBodyData.GetNullableStruct<int>("rate_limit"); }
+        init { this._rawBodyData.Set("rate_limit", value); }
     }
 
     public WebhookCreateParams() { }
@@ -122,7 +131,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     public WebhookCreateParams(WebhookCreateParams webhookCreateParams)
         : base(webhookCreateParams)
     {
-        this._rawBodyData = [.. webhookCreateParams._rawBodyData];
+        this._rawBodyData = new(webhookCreateParams._rawBodyData);
     }
 
     public WebhookCreateParams(
@@ -131,9 +140,9 @@ public sealed record class WebhookCreateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -144,9 +153,9 @@ public sealed record class WebhookCreateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

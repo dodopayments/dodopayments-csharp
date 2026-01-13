@@ -18,8 +18,8 @@ public sealed record class WebhookListParams : ParamsBase
     /// </summary>
     public string? Iterator
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "iterator"); }
-        init { JsonModel.Set(this._rawQueryData, "iterator", value); }
+        get { return this._rawQueryData.GetNullableClass<string>("iterator"); }
+        init { this._rawQueryData.Set("iterator", value); }
     }
 
     /// <summary>
@@ -27,8 +27,8 @@ public sealed record class WebhookListParams : ParamsBase
     /// </summary>
     public int? Limit
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "limit"); }
-        init { JsonModel.Set(this._rawQueryData, "limit", value); }
+        get { return this._rawQueryData.GetNullableStruct<int>("limit"); }
+        init { this._rawQueryData.Set("limit", value); }
     }
 
     public WebhookListParams() { }
@@ -41,8 +41,8 @@ public sealed record class WebhookListParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 
 #pragma warning disable CS8618
@@ -52,8 +52,8 @@ public sealed record class WebhookListParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 #pragma warning restore CS8618
 

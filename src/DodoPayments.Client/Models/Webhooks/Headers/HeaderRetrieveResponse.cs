@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -20,11 +21,14 @@ public sealed record class HeaderRetrieveResponse : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Headers
     {
-        get
+        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("headers"); }
+        init
         {
-            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "headers");
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "headers",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
-        init { JsonModel.Set(this._rawData, "headers", value); }
     }
 
     /// <summary>
@@ -32,8 +36,14 @@ public sealed record class HeaderRetrieveResponse : JsonModel
     /// </summary>
     public required IReadOnlyList<string> Sensitive
     {
-        get { return JsonModel.GetNotNullClass<List<string>>(this.RawData, "sensitive"); }
-        init { JsonModel.Set(this._rawData, "sensitive", value); }
+        get { return this._rawData.GetNotNullStruct<ImmutableArray<string>>("sensitive"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "sensitive",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <inheritdoc/>
@@ -50,14 +60,14 @@ public sealed record class HeaderRetrieveResponse : JsonModel
 
     public HeaderRetrieveResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     HeaderRetrieveResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

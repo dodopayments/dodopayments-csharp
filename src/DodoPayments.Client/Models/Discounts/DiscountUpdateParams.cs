@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -14,7 +15,7 @@ namespace DodoPayments.Client.Models.Discounts;
 /// </summary>
 public sealed record class DiscountUpdateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -31,8 +32,8 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// </summary>
     public int? Amount
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "amount"); }
-        init { JsonModel.Set(this._rawBodyData, "amount", value); }
+        get { return this._rawBodyData.GetNullableStruct<int>("amount"); }
+        init { this._rawBodyData.Set("amount", value); }
     }
 
     /// <summary>
@@ -40,20 +41,20 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// </summary>
     public string? Code
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "code"); }
-        init { JsonModel.Set(this._rawBodyData, "code", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("code"); }
+        init { this._rawBodyData.Set("code", value); }
     }
 
     public DateTimeOffset? ExpiresAt
     {
-        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawBodyData, "expires_at"); }
-        init { JsonModel.Set(this._rawBodyData, "expires_at", value); }
+        get { return this._rawBodyData.GetNullableStruct<DateTimeOffset>("expires_at"); }
+        init { this._rawBodyData.Set("expires_at", value); }
     }
 
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "name"); }
-        init { JsonModel.Set(this._rawBodyData, "name", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("name"); }
+        init { this._rawBodyData.Set("name", value); }
     }
 
     /// <summary>
@@ -62,8 +63,14 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// </summary>
     public IReadOnlyList<string>? RestrictedTo
     {
-        get { return JsonModel.GetNullableClass<List<string>>(this.RawBodyData, "restricted_to"); }
-        init { JsonModel.Set(this._rawBodyData, "restricted_to", value); }
+        get { return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("restricted_to"); }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<string>?>(
+                "restricted_to",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -73,8 +80,8 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// </summary>
     public int? SubscriptionCycles
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "subscription_cycles"); }
-        init { JsonModel.Set(this._rawBodyData, "subscription_cycles", value); }
+        get { return this._rawBodyData.GetNullableStruct<int>("subscription_cycles"); }
+        init { this._rawBodyData.Set("subscription_cycles", value); }
     }
 
     /// <summary>
@@ -82,20 +89,14 @@ public sealed record class DiscountUpdateParams : ParamsBase
     /// </summary>
     public ApiEnum<string, DiscountType>? Type
     {
-        get
-        {
-            return JsonModel.GetNullableClass<ApiEnum<string, DiscountType>>(
-                this.RawBodyData,
-                "type"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "type", value); }
+        get { return this._rawBodyData.GetNullableClass<ApiEnum<string, DiscountType>>("type"); }
+        init { this._rawBodyData.Set("type", value); }
     }
 
     public int? UsageLimit
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "usage_limit"); }
-        init { JsonModel.Set(this._rawBodyData, "usage_limit", value); }
+        get { return this._rawBodyData.GetNullableStruct<int>("usage_limit"); }
+        init { this._rawBodyData.Set("usage_limit", value); }
     }
 
     public DiscountUpdateParams() { }
@@ -105,7 +106,7 @@ public sealed record class DiscountUpdateParams : ParamsBase
     {
         this.DiscountID = discountUpdateParams.DiscountID;
 
-        this._rawBodyData = [.. discountUpdateParams._rawBodyData];
+        this._rawBodyData = new(discountUpdateParams._rawBodyData);
     }
 
     public DiscountUpdateParams(
@@ -114,9 +115,9 @@ public sealed record class DiscountUpdateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -127,9 +128,9 @@ public sealed record class DiscountUpdateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

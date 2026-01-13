@@ -12,8 +12,8 @@ public sealed record class AddMeterToPrice : JsonModel
 {
     public required string MeterID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "meter_id"); }
-        init { JsonModel.Set(this._rawData, "meter_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("meter_id"); }
+        init { this._rawData.Set("meter_id", value); }
     }
 
     /// <summary>
@@ -22,8 +22,8 @@ public sealed record class AddMeterToPrice : JsonModel
     /// </summary>
     public required string PricePerUnit
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
-        init { JsonModel.Set(this._rawData, "price_per_unit", value); }
+        get { return this._rawData.GetNotNullClass<string>("price_per_unit"); }
+        init { this._rawData.Set("price_per_unit", value); }
     }
 
     /// <summary>
@@ -31,14 +31,14 @@ public sealed record class AddMeterToPrice : JsonModel
     /// </summary>
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
-        init { JsonModel.Set(this._rawData, "description", value); }
+        get { return this._rawData.GetNullableClass<string>("description"); }
+        init { this._rawData.Set("description", value); }
     }
 
     public long? FreeThreshold
     {
-        get { return JsonModel.GetNullableStruct<long>(this.RawData, "free_threshold"); }
-        init { JsonModel.Set(this._rawData, "free_threshold", value); }
+        get { return this._rawData.GetNullableStruct<long>("free_threshold"); }
+        init { this._rawData.Set("free_threshold", value); }
     }
 
     /// <summary>
@@ -46,8 +46,8 @@ public sealed record class AddMeterToPrice : JsonModel
     /// </summary>
     public string? MeasurementUnit
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "measurement_unit"); }
-        init { JsonModel.Set(this._rawData, "measurement_unit", value); }
+        get { return this._rawData.GetNullableClass<string>("measurement_unit"); }
+        init { this._rawData.Set("measurement_unit", value); }
     }
 
     /// <summary>
@@ -55,8 +55,8 @@ public sealed record class AddMeterToPrice : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNullableClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     /// <inheritdoc/>
@@ -77,14 +77,14 @@ public sealed record class AddMeterToPrice : JsonModel
 
     public AddMeterToPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     AddMeterToPrice(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
