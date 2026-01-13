@@ -14,8 +14,8 @@ public sealed record class WebhookRetrieveSecretResponse : JsonModel
 {
     public required string Secret
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "secret"); }
-        init { JsonModel.Set(this._rawData, "secret", value); }
+        get { return this._rawData.GetNotNullClass<string>("secret"); }
+        init { this._rawData.Set("secret", value); }
     }
 
     /// <inheritdoc/>
@@ -33,14 +33,14 @@ public sealed record class WebhookRetrieveSecretResponse : JsonModel
 
     public WebhookRetrieveSecretResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     WebhookRetrieveSecretResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

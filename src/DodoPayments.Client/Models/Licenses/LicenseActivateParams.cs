@@ -11,7 +11,7 @@ namespace DodoPayments.Client.Models.Licenses;
 
 public sealed record class LicenseActivateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -19,14 +19,14 @@ public sealed record class LicenseActivateParams : ParamsBase
 
     public required string LicenseKey
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "license_key"); }
-        init { JsonModel.Set(this._rawBodyData, "license_key", value); }
+        get { return this._rawBodyData.GetNotNullClass<string>("license_key"); }
+        init { this._rawBodyData.Set("license_key", value); }
     }
 
     public required string Name
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawBodyData, "name"); }
-        init { JsonModel.Set(this._rawBodyData, "name", value); }
+        get { return this._rawBodyData.GetNotNullClass<string>("name"); }
+        init { this._rawBodyData.Set("name", value); }
     }
 
     public LicenseActivateParams() { }
@@ -34,7 +34,7 @@ public sealed record class LicenseActivateParams : ParamsBase
     public LicenseActivateParams(LicenseActivateParams licenseActivateParams)
         : base(licenseActivateParams)
     {
-        this._rawBodyData = [.. licenseActivateParams._rawBodyData];
+        this._rawBodyData = new(licenseActivateParams._rawBodyData);
     }
 
     public LicenseActivateParams(
@@ -43,9 +43,9 @@ public sealed record class LicenseActivateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -56,9 +56,9 @@ public sealed record class LicenseActivateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

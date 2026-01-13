@@ -17,83 +17,74 @@ public sealed record class CustomerWalletTransaction : JsonModel
 {
     public required string ID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
-        init { JsonModel.Set(this._rawData, "id", value); }
+        get { return this._rawData.GetNotNullClass<string>("id"); }
+        init { this._rawData.Set("id", value); }
     }
 
     public required long AfterBalance
     {
-        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "after_balance"); }
-        init { JsonModel.Set(this._rawData, "after_balance", value); }
+        get { return this._rawData.GetNotNullStruct<long>("after_balance"); }
+        init { this._rawData.Set("after_balance", value); }
     }
 
     public required long Amount
     {
-        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "amount"); }
-        init { JsonModel.Set(this._rawData, "amount", value); }
+        get { return this._rawData.GetNotNullStruct<long>("amount"); }
+        init { this._rawData.Set("amount", value); }
     }
 
     public required long BeforeBalance
     {
-        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "before_balance"); }
-        init { JsonModel.Set(this._rawData, "before_balance", value); }
+        get { return this._rawData.GetNotNullStruct<long>("before_balance"); }
+        init { this._rawData.Set("before_balance", value); }
     }
 
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     public required string CustomerID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { JsonModel.Set(this._rawData, "customer_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        init { this._rawData.Set("customer_id", value); }
     }
 
     public required ApiEnum<string, EventType> EventType
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, EventType>>(
-                this.RawData,
-                "event_type"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "event_type", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, EventType>>("event_type"); }
+        init { this._rawData.Set("event_type", value); }
     }
 
     public required bool IsCredit
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "is_credit"); }
-        init { JsonModel.Set(this._rawData, "is_credit", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("is_credit"); }
+        init { this._rawData.Set("is_credit", value); }
     }
 
     public string? Reason
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason"); }
-        init { JsonModel.Set(this._rawData, "reason", value); }
+        get { return this._rawData.GetNullableClass<string>("reason"); }
+        init { this._rawData.Set("reason", value); }
     }
 
     public string? ReferenceObjectID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "reference_object_id"); }
-        init { JsonModel.Set(this._rawData, "reference_object_id", value); }
+        get { return this._rawData.GetNullableClass<string>("reference_object_id"); }
+        init { this._rawData.Set("reference_object_id", value); }
     }
 
     /// <inheritdoc/>
@@ -120,14 +111,14 @@ public sealed record class CustomerWalletTransaction : JsonModel
 
     public CustomerWalletTransaction(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     CustomerWalletTransaction(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

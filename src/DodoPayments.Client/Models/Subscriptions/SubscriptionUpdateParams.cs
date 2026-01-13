@@ -13,7 +13,7 @@ namespace DodoPayments.Client.Models.Subscriptions;
 
 public sealed record class SubscriptionUpdateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -23,8 +23,8 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
 
     public BillingAddress? Billing
     {
-        get { return JsonModel.GetNullableClass<BillingAddress>(this.RawBodyData, "billing"); }
-        init { JsonModel.Set(this._rawBodyData, "billing", value); }
+        get { return this._rawBodyData.GetNullableClass<BillingAddress>("billing"); }
+        init { this._rawBodyData.Set("billing", value); }
     }
 
     /// <summary>
@@ -32,74 +32,58 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     /// </summary>
     public bool? CancelAtNextBillingDate
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(
-                this.RawBodyData,
-                "cancel_at_next_billing_date"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "cancel_at_next_billing_date", value); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("cancel_at_next_billing_date"); }
+        init { this._rawBodyData.Set("cancel_at_next_billing_date", value); }
     }
 
     public string? CustomerName
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "customer_name"); }
-        init { JsonModel.Set(this._rawBodyData, "customer_name", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("customer_name"); }
+        init { this._rawBodyData.Set("customer_name", value); }
     }
 
     public DisableOnDemand? DisableOnDemand
     {
-        get
-        {
-            return JsonModel.GetNullableClass<DisableOnDemand>(
-                this.RawBodyData,
-                "disable_on_demand"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "disable_on_demand", value); }
+        get { return this._rawBodyData.GetNullableClass<DisableOnDemand>("disable_on_demand"); }
+        init { this._rawBodyData.Set("disable_on_demand", value); }
     }
 
     public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, string>>(
-                this.RawBodyData,
-                "metadata"
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "metadata", value); }
     }
 
     public DateTimeOffset? NextBillingDate
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<DateTimeOffset>(
-                this.RawBodyData,
-                "next_billing_date"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "next_billing_date", value); }
+        get { return this._rawBodyData.GetNullableStruct<DateTimeOffset>("next_billing_date"); }
+        init { this._rawBodyData.Set("next_billing_date", value); }
     }
 
     public ApiEnum<string, SubscriptionStatus>? Status
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, SubscriptionStatus>>(
-                this.RawBodyData,
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, SubscriptionStatus>>(
                 "status"
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "status", value); }
+        init { this._rawBodyData.Set("status", value); }
     }
 
     public string? TaxID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "tax_id"); }
-        init { JsonModel.Set(this._rawBodyData, "tax_id", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("tax_id"); }
+        init { this._rawBodyData.Set("tax_id", value); }
     }
 
     public SubscriptionUpdateParams() { }
@@ -109,7 +93,7 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
     {
         this.SubscriptionID = subscriptionUpdateParams.SubscriptionID;
 
-        this._rawBodyData = [.. subscriptionUpdateParams._rawBodyData];
+        this._rawBodyData = new(subscriptionUpdateParams._rawBodyData);
     }
 
     public SubscriptionUpdateParams(
@@ -118,9 +102,9 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -131,9 +115,9 @@ public sealed record class SubscriptionUpdateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 
@@ -186,11 +170,8 @@ public sealed record class DisableOnDemand : JsonModel
 {
     public required DateTimeOffset NextBillingDate
     {
-        get
-        {
-            return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "next_billing_date");
-        }
-        init { JsonModel.Set(this._rawData, "next_billing_date", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date"); }
+        init { this._rawData.Set("next_billing_date", value); }
     }
 
     /// <inheritdoc/>
@@ -206,14 +187,14 @@ public sealed record class DisableOnDemand : JsonModel
 
     public DisableOnDemand(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     DisableOnDemand(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

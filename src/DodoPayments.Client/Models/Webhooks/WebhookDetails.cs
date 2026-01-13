@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -15,8 +16,8 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required string ID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
-        init { JsonModel.Set(this._rawData, "id", value); }
+        get { return this._rawData.GetNotNullClass<string>("id"); }
+        init { this._rawData.Set("id", value); }
     }
 
     /// <summary>
@@ -24,8 +25,8 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required string CreatedAt
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullClass<string>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     /// <summary>
@@ -33,8 +34,8 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required string Description
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "description"); }
-        init { JsonModel.Set(this._rawData, "description", value); }
+        get { return this._rawData.GetNotNullClass<string>("description"); }
+        init { this._rawData.Set("description", value); }
     }
 
     /// <summary>
@@ -42,11 +43,14 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get
+        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        init
         {
-            return JsonModel.GetNotNullClass<Dictionary<string, string>>(this.RawData, "metadata");
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
-        init { JsonModel.Set(this._rawData, "metadata", value); }
     }
 
     /// <summary>
@@ -54,8 +58,8 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required string UpdatedAt
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "updated_at"); }
-        init { JsonModel.Set(this._rawData, "updated_at", value); }
+        get { return this._rawData.GetNotNullClass<string>("updated_at"); }
+        init { this._rawData.Set("updated_at", value); }
     }
 
     /// <summary>
@@ -63,8 +67,8 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public required string Url
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
-        init { JsonModel.Set(this._rawData, "url", value); }
+        get { return this._rawData.GetNotNullClass<string>("url"); }
+        init { this._rawData.Set("url", value); }
     }
 
     /// <summary>
@@ -74,8 +78,8 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public bool? Disabled
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "disabled"); }
-        init { JsonModel.Set(this._rawData, "disabled", value); }
+        get { return this._rawData.GetNullableStruct<bool>("disabled"); }
+        init { this._rawData.Set("disabled", value); }
     }
 
     /// <summary>
@@ -85,8 +89,14 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public IReadOnlyList<string>? FilterTypes
     {
-        get { return JsonModel.GetNullableClass<List<string>>(this.RawData, "filter_types"); }
-        init { JsonModel.Set(this._rawData, "filter_types", value); }
+        get { return this._rawData.GetNullableStruct<ImmutableArray<string>>("filter_types"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>?>(
+                "filter_types",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -94,8 +104,8 @@ public sealed record class WebhookDetails : JsonModel
     /// </summary>
     public int? RateLimit
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "rate_limit"); }
-        init { JsonModel.Set(this._rawData, "rate_limit", value); }
+        get { return this._rawData.GetNullableStruct<int>("rate_limit"); }
+        init { this._rawData.Set("rate_limit", value); }
     }
 
     /// <inheritdoc/>
@@ -119,14 +129,14 @@ public sealed record class WebhookDetails : JsonModel
 
     public WebhookDetails(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     WebhookDetails(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

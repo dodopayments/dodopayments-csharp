@@ -17,8 +17,8 @@ public sealed record class BrandUpdateImagesResponse : JsonModel
     /// </summary>
     public required string ImageID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "image_id"); }
-        init { JsonModel.Set(this._rawData, "image_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("image_id"); }
+        init { this._rawData.Set("image_id", value); }
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public sealed record class BrandUpdateImagesResponse : JsonModel
     /// </summary>
     public required string Url
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "url"); }
-        init { JsonModel.Set(this._rawData, "url", value); }
+        get { return this._rawData.GetNotNullClass<string>("url"); }
+        init { this._rawData.Set("url", value); }
     }
 
     /// <inheritdoc/>
@@ -44,14 +44,14 @@ public sealed record class BrandUpdateImagesResponse : JsonModel
 
     public BrandUpdateImagesResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     BrandUpdateImagesResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

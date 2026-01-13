@@ -15,8 +15,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public string? LicenseKeyID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawQueryData, "license_key_id"); }
-        init { JsonModel.Set(this._rawQueryData, "license_key_id", value); }
+        get { return this._rawQueryData.GetNullableClass<string>("license_key_id"); }
+        init { this._rawQueryData.Set("license_key_id", value); }
     }
 
     /// <summary>
@@ -24,8 +24,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_number"); }
-        init { JsonModel.Set(this._rawQueryData, "page_number", value); }
+        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        init { this._rawQueryData.Set("page_number", value); }
     }
 
     /// <summary>
@@ -33,8 +33,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawQueryData, "page_size"); }
-        init { JsonModel.Set(this._rawQueryData, "page_size", value); }
+        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        init { this._rawQueryData.Set("page_size", value); }
     }
 
     public LicenseKeyInstanceListParams() { }
@@ -47,8 +47,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 
 #pragma warning disable CS8618
@@ -58,8 +58,8 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawQueryData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
     }
 #pragma warning restore CS8618
 

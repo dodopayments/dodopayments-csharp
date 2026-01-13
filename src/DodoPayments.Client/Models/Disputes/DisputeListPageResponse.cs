@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -12,8 +13,14 @@ public sealed record class DisputeListPageResponse : JsonModel
 {
     public required IReadOnlyList<DisputeListResponse> Items
     {
-        get { return JsonModel.GetNotNullClass<List<DisputeListResponse>>(this.RawData, "items"); }
-        init { JsonModel.Set(this._rawData, "items", value); }
+        get { return this._rawData.GetNotNullStruct<ImmutableArray<DisputeListResponse>>("items"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<DisputeListResponse>>(
+                "items",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <inheritdoc/>
@@ -32,14 +39,14 @@ public sealed record class DisputeListPageResponse : JsonModel
 
     public DisputeListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     DisputeListPageResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

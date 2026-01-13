@@ -14,8 +14,8 @@ public sealed record class SubscriptionChargeResponse : JsonModel
 {
     public required string PaymentID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { JsonModel.Set(this._rawData, "payment_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        init { this._rawData.Set("payment_id", value); }
     }
 
     /// <inheritdoc/>
@@ -31,14 +31,14 @@ public sealed record class SubscriptionChargeResponse : JsonModel
 
     public SubscriptionChargeResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionChargeResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

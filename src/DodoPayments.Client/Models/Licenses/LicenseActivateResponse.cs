@@ -17,8 +17,8 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required string ID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
-        init { JsonModel.Set(this._rawData, "id", value); }
+        get { return this._rawData.GetNotNullClass<string>("id"); }
+        init { this._rawData.Set("id", value); }
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     /// <summary>
@@ -35,8 +35,8 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     /// <summary>
@@ -44,8 +44,8 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required CustomerLimitedDetails Customer
     {
-        get { return JsonModel.GetNotNullClass<CustomerLimitedDetails>(this.RawData, "customer"); }
-        init { JsonModel.Set(this._rawData, "customer", value); }
+        get { return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer"); }
+        init { this._rawData.Set("customer", value); }
     }
 
     /// <summary>
@@ -53,8 +53,8 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required string LicenseKeyID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "license_key_id"); }
-        init { JsonModel.Set(this._rawData, "license_key_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("license_key_id"); }
+        init { this._rawData.Set("license_key_id", value); }
     }
 
     /// <summary>
@@ -62,8 +62,8 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required string Name
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNotNullClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     /// <summary>
@@ -71,8 +71,8 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required Product Product
     {
-        get { return JsonModel.GetNotNullClass<Product>(this.RawData, "product"); }
-        init { JsonModel.Set(this._rawData, "product", value); }
+        get { return this._rawData.GetNotNullClass<Product>("product"); }
+        init { this._rawData.Set("product", value); }
     }
 
     /// <inheritdoc/>
@@ -94,14 +94,14 @@ public sealed record class LicenseActivateResponse : JsonModel
 
     public LicenseActivateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     LicenseActivateResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -133,8 +133,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { JsonModel.Set(this._rawData, "product_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        init { this._rawData.Set("product_id", value); }
     }
 
     /// <summary>
@@ -142,8 +142,8 @@ public sealed record class Product : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNullableClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     /// <inheritdoc/>
@@ -160,14 +160,14 @@ public sealed record class Product : JsonModel
 
     public Product(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Product(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

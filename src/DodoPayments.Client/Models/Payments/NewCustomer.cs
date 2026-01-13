@@ -15,8 +15,8 @@ public sealed record class NewCustomer : JsonModel
     /// </summary>
     public required string Email
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "email"); }
-        init { JsonModel.Set(this._rawData, "email", value); }
+        get { return this._rawData.GetNotNullClass<string>("email"); }
+        init { this._rawData.Set("email", value); }
     }
 
     /// <summary>
@@ -26,14 +26,14 @@ public sealed record class NewCustomer : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNullableClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     public string? PhoneNumber
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "phone_number"); }
-        init { JsonModel.Set(this._rawData, "phone_number", value); }
+        get { return this._rawData.GetNullableClass<string>("phone_number"); }
+        init { this._rawData.Set("phone_number", value); }
     }
 
     /// <inheritdoc/>
@@ -51,14 +51,14 @@ public sealed record class NewCustomer : JsonModel
 
     public NewCustomer(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     NewCustomer(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

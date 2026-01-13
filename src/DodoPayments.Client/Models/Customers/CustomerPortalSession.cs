@@ -12,8 +12,8 @@ public sealed record class CustomerPortalSession : JsonModel
 {
     public required string Link
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "link"); }
-        init { JsonModel.Set(this._rawData, "link", value); }
+        get { return this._rawData.GetNotNullClass<string>("link"); }
+        init { this._rawData.Set("link", value); }
     }
 
     /// <inheritdoc/>
@@ -29,14 +29,14 @@ public sealed record class CustomerPortalSession : JsonModel
 
     public CustomerPortalSession(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     CustomerPortalSession(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

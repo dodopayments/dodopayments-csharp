@@ -16,11 +16,8 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public required ApiEnum<string, CountryCode> Country
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, CountryCode>>(this.RawData, "country");
-        }
-        init { JsonModel.Set(this._rawData, "country", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, CountryCode>>("country"); }
+        init { this._rawData.Set("country", value); }
     }
 
     /// <summary>
@@ -28,8 +25,8 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? City
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "city"); }
-        init { JsonModel.Set(this._rawData, "city", value); }
+        get { return this._rawData.GetNullableClass<string>("city"); }
+        init { this._rawData.Set("city", value); }
     }
 
     /// <summary>
@@ -37,8 +34,8 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? State
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "state"); }
-        init { JsonModel.Set(this._rawData, "state", value); }
+        get { return this._rawData.GetNullableClass<string>("state"); }
+        init { this._rawData.Set("state", value); }
     }
 
     /// <summary>
@@ -46,8 +43,8 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? Street
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "street"); }
-        init { JsonModel.Set(this._rawData, "street", value); }
+        get { return this._rawData.GetNullableClass<string>("street"); }
+        init { this._rawData.Set("street", value); }
     }
 
     /// <summary>
@@ -55,8 +52,8 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? Zipcode
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "zipcode"); }
-        init { JsonModel.Set(this._rawData, "zipcode", value); }
+        get { return this._rawData.GetNullableClass<string>("zipcode"); }
+        init { this._rawData.Set("zipcode", value); }
     }
 
     /// <inheritdoc/>
@@ -76,14 +73,14 @@ public sealed record class BillingAddress : JsonModel
 
     public BillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     BillingAddress(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

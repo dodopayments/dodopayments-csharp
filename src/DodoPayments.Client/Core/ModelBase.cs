@@ -35,6 +35,7 @@ public abstract record class ModelBase
     {
         Converters =
         {
+            new FrozenDictionaryConverterFactory(),
             new ApiEnumConverter<string, CheckoutSessionRequestCustomizationTheme>(),
             new ApiEnumConverter<string, Currency>(),
             new ApiEnumConverter<string, Theme>(),

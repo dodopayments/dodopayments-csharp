@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -16,9 +17,15 @@ public sealed record class ShortLinkListPageResponse : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<List<ShortLinkListResponse>>(this.RawData, "items");
+            return this._rawData.GetNotNullStruct<ImmutableArray<ShortLinkListResponse>>("items");
         }
-        init { JsonModel.Set(this._rawData, "items", value); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<ShortLinkListResponse>>(
+                "items",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <inheritdoc/>
@@ -37,14 +44,14 @@ public sealed record class ShortLinkListPageResponse : JsonModel
 
     public ShortLinkListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ShortLinkListPageResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

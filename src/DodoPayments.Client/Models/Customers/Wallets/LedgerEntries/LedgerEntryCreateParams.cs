@@ -14,7 +14,7 @@ namespace DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 
 public sealed record class LedgerEntryCreateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -24,8 +24,8 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
 
     public required long Amount
     {
-        get { return JsonModel.GetNotNullStruct<long>(this.RawBodyData, "amount"); }
-        init { JsonModel.Set(this._rawBodyData, "amount", value); }
+        get { return this._rawBodyData.GetNotNullStruct<long>("amount"); }
+        init { this._rawBodyData.Set("amount", value); }
     }
 
     /// <summary>
@@ -33,14 +33,8 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     /// </summary>
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(
-                this.RawBodyData,
-                "currency"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "currency", value); }
+        get { return this._rawBodyData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawBodyData.Set("currency", value); }
     }
 
     /// <summary>
@@ -48,14 +42,8 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     /// </summary>
     public required ApiEnum<string, EntryType> EntryType
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, EntryType>>(
-                this.RawBodyData,
-                "entry_type"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "entry_type", value); }
+        get { return this._rawBodyData.GetNotNullClass<ApiEnum<string, EntryType>>("entry_type"); }
+        init { this._rawBodyData.Set("entry_type", value); }
     }
 
     /// <summary>
@@ -63,14 +51,14 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     /// </summary>
     public string? IdempotencyKey
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "idempotency_key"); }
-        init { JsonModel.Set(this._rawBodyData, "idempotency_key", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("idempotency_key"); }
+        init { this._rawBodyData.Set("idempotency_key", value); }
     }
 
     public string? Reason
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "reason"); }
-        init { JsonModel.Set(this._rawBodyData, "reason", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("reason"); }
+        init { this._rawBodyData.Set("reason", value); }
     }
 
     public LedgerEntryCreateParams() { }
@@ -80,7 +68,7 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     {
         this.CustomerID = ledgerEntryCreateParams.CustomerID;
 
-        this._rawBodyData = [.. ledgerEntryCreateParams._rawBodyData];
+        this._rawBodyData = new(ledgerEntryCreateParams._rawBodyData);
     }
 
     public LedgerEntryCreateParams(
@@ -89,9 +77,9 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -102,9 +90,9 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

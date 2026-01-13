@@ -14,62 +14,61 @@ public sealed record class Brand : JsonModel
 {
     public required string BrandID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "brand_id"); }
-        init { JsonModel.Set(this._rawData, "brand_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("brand_id"); }
+        init { this._rawData.Set("brand_id", value); }
     }
 
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     public required bool Enabled
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "enabled"); }
-        init { JsonModel.Set(this._rawData, "enabled", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("enabled"); }
+        init { this._rawData.Set("enabled", value); }
     }
 
     public required string StatementDescriptor
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "statement_descriptor"); }
-        init { JsonModel.Set(this._rawData, "statement_descriptor", value); }
+        get { return this._rawData.GetNotNullClass<string>("statement_descriptor"); }
+        init { this._rawData.Set("statement_descriptor", value); }
     }
 
     public required bool VerificationEnabled
     {
-        get { return JsonModel.GetNotNullStruct<bool>(this.RawData, "verification_enabled"); }
-        init { JsonModel.Set(this._rawData, "verification_enabled", value); }
+        get { return this._rawData.GetNotNullStruct<bool>("verification_enabled"); }
+        init { this._rawData.Set("verification_enabled", value); }
     }
 
     public required ApiEnum<string, VerificationStatus> VerificationStatus
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, VerificationStatus>>(
-                this.RawData,
+            return this._rawData.GetNotNullClass<ApiEnum<string, VerificationStatus>>(
                 "verification_status"
             );
         }
-        init { JsonModel.Set(this._rawData, "verification_status", value); }
+        init { this._rawData.Set("verification_status", value); }
     }
 
     public string? Description
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "description"); }
-        init { JsonModel.Set(this._rawData, "description", value); }
+        get { return this._rawData.GetNullableClass<string>("description"); }
+        init { this._rawData.Set("description", value); }
     }
 
     public string? Image
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "image"); }
-        init { JsonModel.Set(this._rawData, "image", value); }
+        get { return this._rawData.GetNullableClass<string>("image"); }
+        init { this._rawData.Set("image", value); }
     }
 
     public string? Name
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNullableClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     /// <summary>
@@ -77,20 +76,20 @@ public sealed record class Brand : JsonModel
     /// </summary>
     public string? ReasonForHold
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "reason_for_hold"); }
-        init { JsonModel.Set(this._rawData, "reason_for_hold", value); }
+        get { return this._rawData.GetNullableClass<string>("reason_for_hold"); }
+        init { this._rawData.Set("reason_for_hold", value); }
     }
 
     public string? SupportEmail
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "support_email"); }
-        init { JsonModel.Set(this._rawData, "support_email", value); }
+        get { return this._rawData.GetNullableClass<string>("support_email"); }
+        init { this._rawData.Set("support_email", value); }
     }
 
     public string? Url
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "url"); }
-        init { JsonModel.Set(this._rawData, "url", value); }
+        get { return this._rawData.GetNullableClass<string>("url"); }
+        init { this._rawData.Set("url", value); }
     }
 
     /// <inheritdoc/>
@@ -117,14 +116,14 @@ public sealed record class Brand : JsonModel
 
     public Brand(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Brand(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

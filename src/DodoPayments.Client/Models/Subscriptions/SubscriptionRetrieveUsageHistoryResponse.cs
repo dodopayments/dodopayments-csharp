@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +23,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponse : JsonModel
     /// </summary>
     public required DateTimeOffset EndDate
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "end_date"); }
-        init { JsonModel.Set(this._rawData, "end_date", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("end_date"); }
+        init { this._rawData.Set("end_date", value); }
     }
 
     /// <summary>
@@ -33,12 +34,17 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponse : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<List<SubscriptionRetrieveUsageHistoryResponseMeter>>(
-                this.RawData,
-                "meters"
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<SubscriptionRetrieveUsageHistoryResponseMeter>
+            >("meters");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<SubscriptionRetrieveUsageHistoryResponseMeter>>(
+                "meters",
+                ImmutableArray.ToImmutableArray(value)
             );
         }
-        init { JsonModel.Set(this._rawData, "meters", value); }
     }
 
     /// <summary>
@@ -46,8 +52,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponse : JsonModel
     /// </summary>
     public required DateTimeOffset StartDate
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "start_date"); }
-        init { JsonModel.Set(this._rawData, "start_date", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("start_date"); }
+        init { this._rawData.Set("start_date", value); }
     }
 
     /// <inheritdoc/>
@@ -72,14 +78,14 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponse : JsonModel
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionRetrieveUsageHistoryResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -114,8 +120,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required string ID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "id"); }
-        init { JsonModel.Set(this._rawData, "id", value); }
+        get { return this._rawData.GetNotNullClass<string>("id"); }
+        init { this._rawData.Set("id", value); }
     }
 
     /// <summary>
@@ -123,8 +129,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required string ChargeableUnits
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "chargeable_units"); }
-        init { JsonModel.Set(this._rawData, "chargeable_units", value); }
+        get { return this._rawData.GetNotNullClass<string>("chargeable_units"); }
+        init { this._rawData.Set("chargeable_units", value); }
     }
 
     /// <summary>
@@ -132,8 +138,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required string ConsumedUnits
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "consumed_units"); }
-        init { JsonModel.Set(this._rawData, "consumed_units", value); }
+        get { return this._rawData.GetNotNullClass<string>("consumed_units"); }
+        init { this._rawData.Set("consumed_units", value); }
     }
 
     /// <summary>
@@ -141,11 +147,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required ApiEnum<string, Currency> Currency
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Currency>>(this.RawData, "currency");
-        }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <summary>
@@ -153,8 +156,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required long FreeThreshold
     {
-        get { return JsonModel.GetNotNullStruct<long>(this.RawData, "free_threshold"); }
-        init { JsonModel.Set(this._rawData, "free_threshold", value); }
+        get { return this._rawData.GetNotNullStruct<long>("free_threshold"); }
+        init { this._rawData.Set("free_threshold", value); }
     }
 
     /// <summary>
@@ -162,8 +165,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required string Name
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "name"); }
-        init { JsonModel.Set(this._rawData, "name", value); }
+        get { return this._rawData.GetNotNullClass<string>("name"); }
+        init { this._rawData.Set("name", value); }
     }
 
     /// <summary>
@@ -171,8 +174,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required string PricePerUnit
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "price_per_unit"); }
-        init { JsonModel.Set(this._rawData, "price_per_unit", value); }
+        get { return this._rawData.GetNotNullClass<string>("price_per_unit"); }
+        init { this._rawData.Set("price_per_unit", value); }
     }
 
     /// <summary>
@@ -180,8 +183,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     /// </summary>
     public required int TotalPrice
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "total_price"); }
-        init { JsonModel.Set(this._rawData, "total_price", value); }
+        get { return this._rawData.GetNotNullStruct<int>("total_price"); }
+        init { this._rawData.Set("total_price", value); }
     }
 
     /// <inheritdoc/>
@@ -208,14 +211,14 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionRetrieveUsageHistoryResponseMeter(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

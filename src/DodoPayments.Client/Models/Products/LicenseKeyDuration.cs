@@ -13,20 +13,14 @@ public sealed record class LicenseKeyDuration : JsonModel
 {
     public required int Count
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "count"); }
-        init { JsonModel.Set(this._rawData, "count", value); }
+        get { return this._rawData.GetNotNullStruct<int>("count"); }
+        init { this._rawData.Set("count", value); }
     }
 
     public required ApiEnum<string, TimeInterval> Interval
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, TimeInterval>>(
-                this.RawData,
-                "interval"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "interval", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, TimeInterval>>("interval"); }
+        init { this._rawData.Set("interval", value); }
     }
 
     /// <inheritdoc/>
@@ -43,14 +37,14 @@ public sealed record class LicenseKeyDuration : JsonModel
 
     public LicenseKeyDuration(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     LicenseKeyDuration(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

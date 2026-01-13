@@ -11,7 +11,7 @@ namespace DodoPayments.Client.Models.LicenseKeys;
 
 public sealed record class LicenseKeyUpdateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -25,8 +25,8 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public int? ActivationsLimit
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawBodyData, "activations_limit"); }
-        init { JsonModel.Set(this._rawBodyData, "activations_limit", value); }
+        get { return this._rawBodyData.GetNullableStruct<int>("activations_limit"); }
+        init { this._rawBodyData.Set("activations_limit", value); }
     }
 
     /// <summary>
@@ -35,8 +35,8 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public bool? Disabled
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "disabled"); }
-        init { JsonModel.Set(this._rawBodyData, "disabled", value); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("disabled"); }
+        init { this._rawBodyData.Set("disabled", value); }
     }
 
     /// <summary>
@@ -45,8 +45,8 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawBodyData, "expires_at"); }
-        init { JsonModel.Set(this._rawBodyData, "expires_at", value); }
+        get { return this._rawBodyData.GetNullableStruct<DateTimeOffset>("expires_at"); }
+        init { this._rawBodyData.Set("expires_at", value); }
     }
 
     public LicenseKeyUpdateParams() { }
@@ -56,7 +56,7 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
     {
         this.ID = licenseKeyUpdateParams.ID;
 
-        this._rawBodyData = [.. licenseKeyUpdateParams._rawBodyData];
+        this._rawBodyData = new(licenseKeyUpdateParams._rawBodyData);
     }
 
     public LicenseKeyUpdateParams(
@@ -65,9 +65,9 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -78,9 +78,9 @@ public sealed record class LicenseKeyUpdateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

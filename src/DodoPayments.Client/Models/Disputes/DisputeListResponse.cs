@@ -16,8 +16,8 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required string Amount
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "amount"); }
-        init { JsonModel.Set(this._rawData, "amount", value); }
+        get { return this._rawData.GetNotNullClass<string>("amount"); }
+        init { this._rawData.Set("amount", value); }
     }
 
     /// <summary>
@@ -25,8 +25,8 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "business_id"); }
-        init { JsonModel.Set(this._rawData, "business_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        init { this._rawData.Set("business_id", value); }
     }
 
     /// <summary>
@@ -34,8 +34,8 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return JsonModel.GetNotNullStruct<DateTimeOffset>(this.RawData, "created_at"); }
-        init { JsonModel.Set(this._rawData, "created_at", value); }
+        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        init { this._rawData.Set("created_at", value); }
     }
 
     /// <summary>
@@ -43,8 +43,8 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required string Currency
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "currency"); }
-        init { JsonModel.Set(this._rawData, "currency", value); }
+        get { return this._rawData.GetNotNullClass<string>("currency"); }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <summary>
@@ -52,8 +52,8 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required string DisputeID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "dispute_id"); }
-        init { JsonModel.Set(this._rawData, "dispute_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("dispute_id"); }
+        init { this._rawData.Set("dispute_id", value); }
     }
 
     /// <summary>
@@ -63,12 +63,11 @@ public sealed record class DisputeListResponse : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, DisputeDisputeStage>>(
-                this.RawData,
+            return this._rawData.GetNotNullClass<ApiEnum<string, DisputeDisputeStage>>(
                 "dispute_stage"
             );
         }
-        init { JsonModel.Set(this._rawData, "dispute_stage", value); }
+        init { this._rawData.Set("dispute_stage", value); }
     }
 
     /// <summary>
@@ -78,12 +77,11 @@ public sealed record class DisputeListResponse : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, DisputeDisputeStatus>>(
-                this.RawData,
+            return this._rawData.GetNotNullClass<ApiEnum<string, DisputeDisputeStatus>>(
                 "dispute_status"
             );
         }
-        init { JsonModel.Set(this._rawData, "dispute_status", value); }
+        init { this._rawData.Set("dispute_status", value); }
     }
 
     /// <summary>
@@ -91,8 +89,8 @@ public sealed record class DisputeListResponse : JsonModel
     /// </summary>
     public required string PaymentID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "payment_id"); }
-        init { JsonModel.Set(this._rawData, "payment_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        init { this._rawData.Set("payment_id", value); }
     }
 
     /// <inheritdoc/>
@@ -115,14 +113,14 @@ public sealed record class DisputeListResponse : JsonModel
 
     public DisputeListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     DisputeListResponse(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

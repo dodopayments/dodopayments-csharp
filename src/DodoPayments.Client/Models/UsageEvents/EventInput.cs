@@ -17,8 +17,8 @@ public sealed record class EventInput : JsonModel
     /// </summary>
     public required string CustomerID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "customer_id"); }
-        init { JsonModel.Set(this._rawData, "customer_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        init { this._rawData.Set("customer_id", value); }
     }
 
     /// <summary>
@@ -27,8 +27,8 @@ public sealed record class EventInput : JsonModel
     /// </summary>
     public required string EventID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "event_id"); }
-        init { JsonModel.Set(this._rawData, "event_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("event_id"); }
+        init { this._rawData.Set("event_id", value); }
     }
 
     /// <summary>
@@ -36,8 +36,8 @@ public sealed record class EventInput : JsonModel
     /// </summary>
     public required string EventName
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "event_name"); }
-        init { JsonModel.Set(this._rawData, "event_name", value); }
+        get { return this._rawData.GetNotNullClass<string>("event_name"); }
+        init { this._rawData.Set("event_name", value); }
     }
 
     /// <summary>
@@ -48,12 +48,17 @@ public sealed record class EventInput : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, EventInputMetadata>>(
-                this.RawData,
+            return this._rawData.GetNullableClass<FrozenDictionary<string, EventInputMetadata>>(
                 "metadata"
             );
         }
-        init { JsonModel.Set(this._rawData, "metadata", value); }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, EventInputMetadata>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
     }
 
     /// <summary>
@@ -62,8 +67,8 @@ public sealed record class EventInput : JsonModel
     /// </summary>
     public DateTimeOffset? Timestamp
     {
-        get { return JsonModel.GetNullableStruct<DateTimeOffset>(this.RawData, "timestamp"); }
-        init { JsonModel.Set(this._rawData, "timestamp", value); }
+        get { return this._rawData.GetNullableStruct<DateTimeOffset>("timestamp"); }
+        init { this._rawData.Set("timestamp", value); }
     }
 
     /// <inheritdoc/>
@@ -89,14 +94,14 @@ public sealed record class EventInput : JsonModel
 
     public EventInput(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     EventInput(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

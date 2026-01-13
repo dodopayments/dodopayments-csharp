@@ -25,8 +25,8 @@ public sealed record class MeterFilter : JsonModel
     /// </summary>
     public required Clauses Clauses
     {
-        get { return JsonModel.GetNotNullClass<Clauses>(this.RawData, "clauses"); }
-        init { JsonModel.Set(this._rawData, "clauses", value); }
+        get { return this._rawData.GetNotNullClass<Clauses>("clauses"); }
+        init { this._rawData.Set("clauses", value); }
     }
 
     /// <summary>
@@ -36,12 +36,11 @@ public sealed record class MeterFilter : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, MeterFilterConjunction>>(
-                this.RawData,
+            return this._rawData.GetNotNullClass<ApiEnum<string, MeterFilterConjunction>>(
                 "conjunction"
             );
         }
-        init { JsonModel.Set(this._rawData, "conjunction", value); }
+        init { this._rawData.Set("conjunction", value); }
     }
 
     /// <inheritdoc/>
@@ -58,14 +57,14 @@ public sealed record class MeterFilter : JsonModel
 
     public MeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     MeterFilter(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -286,7 +285,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<MeterFilterCondition>>(
+            var deserialized = JsonSerializer.Deserialize<ImmutableArray<MeterFilterCondition>>(
                 element,
                 options
             );
@@ -303,7 +302,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<List<ClausesMeterFilter>>(
+            var deserialized = JsonSerializer.Deserialize<ImmutableArray<ClausesMeterFilter>>(
                 element,
                 options
             );
@@ -338,17 +337,14 @@ public sealed record class MeterFilterCondition : JsonModel
     /// </summary>
     public required string Key
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "key"); }
-        init { JsonModel.Set(this._rawData, "key", value); }
+        get { return this._rawData.GetNotNullClass<string>("key"); }
+        init { this._rawData.Set("key", value); }
     }
 
     public required ApiEnum<string, Operator> Operator
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Operator>>(this.RawData, "operator");
-        }
-        init { JsonModel.Set(this._rawData, "operator", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Operator>>("operator"); }
+        init { this._rawData.Set("operator", value); }
     }
 
     /// <summary>
@@ -356,8 +352,8 @@ public sealed record class MeterFilterCondition : JsonModel
     /// </summary>
     public required MeterFilterConditionValue Value
     {
-        get { return JsonModel.GetNotNullClass<MeterFilterConditionValue>(this.RawData, "value"); }
-        init { JsonModel.Set(this._rawData, "value", value); }
+        get { return this._rawData.GetNotNullClass<MeterFilterConditionValue>("value"); }
+        init { this._rawData.Set("value", value); }
     }
 
     /// <inheritdoc/>
@@ -375,14 +371,14 @@ public sealed record class MeterFilterCondition : JsonModel
 
     public MeterFilterCondition(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     MeterFilterCondition(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -753,23 +749,19 @@ public sealed record class ClausesMeterFilter : JsonModel
     /// </summary>
     public required ClausesMeterFilterClauses Clauses
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ClausesMeterFilterClauses>(this.RawData, "clauses");
-        }
-        init { JsonModel.Set(this._rawData, "clauses", value); }
+        get { return this._rawData.GetNotNullClass<ClausesMeterFilterClauses>("clauses"); }
+        init { this._rawData.Set("clauses", value); }
     }
 
     public required ApiEnum<string, ClausesMeterFilterConjunction> Conjunction
     {
         get
         {
-            return JsonModel.GetNotNullClass<ApiEnum<string, ClausesMeterFilterConjunction>>(
-                this.RawData,
+            return this._rawData.GetNotNullClass<ApiEnum<string, ClausesMeterFilterConjunction>>(
                 "conjunction"
             );
         }
-        init { JsonModel.Set(this._rawData, "conjunction", value); }
+        init { this._rawData.Set("conjunction", value); }
     }
 
     /// <inheritdoc/>
@@ -786,14 +778,14 @@ public sealed record class ClausesMeterFilter : JsonModel
 
     public ClausesMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ClausesMeterFilter(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -1033,7 +1025,7 @@ sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilt
         try
         {
             var deserialized = JsonSerializer.Deserialize<
-                List<ClausesMeterFilterClausesMeterFilterCondition>
+                ImmutableArray<ClausesMeterFilterClausesMeterFilterCondition>
             >(element, options);
             if (deserialized != null)
             {
@@ -1049,7 +1041,7 @@ sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilt
         try
         {
             var deserialized = JsonSerializer.Deserialize<
-                List<ClausesMeterFilterClausesMeterFilter>
+                ImmutableArray<ClausesMeterFilterClausesMeterFilter>
             >(element, options);
             if (deserialized != null)
             {
@@ -1091,19 +1083,19 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : JsonM
     /// </summary>
     public required string Key
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "key"); }
-        init { JsonModel.Set(this._rawData, "key", value); }
+        get { return this._rawData.GetNotNullClass<string>("key"); }
+        init { this._rawData.Set("key", value); }
     }
 
     public required ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator> Operator
     {
         get
         {
-            return JsonModel.GetNotNullClass<
+            return this._rawData.GetNotNullClass<
                 ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator>
-            >(this.RawData, "operator");
+            >("operator");
         }
-        init { JsonModel.Set(this._rawData, "operator", value); }
+        init { this._rawData.Set("operator", value); }
     }
 
     /// <summary>
@@ -1113,12 +1105,11 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : JsonM
     {
         get
         {
-            return JsonModel.GetNotNullClass<ClausesMeterFilterClausesMeterFilterConditionValue>(
-                this.RawData,
+            return this._rawData.GetNotNullClass<ClausesMeterFilterClausesMeterFilterConditionValue>(
                 "value"
             );
         }
-        init { JsonModel.Set(this._rawData, "value", value); }
+        init { this._rawData.Set("value", value); }
     }
 
     /// <inheritdoc/>
@@ -1140,14 +1131,14 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : JsonM
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ClausesMeterFilterClausesMeterFilterCondition(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -1553,23 +1544,22 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : JsonModel
     {
         get
         {
-            return JsonModel.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClauses>(
-                this.RawData,
+            return this._rawData.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClauses>(
                 "clauses"
             );
         }
-        init { JsonModel.Set(this._rawData, "clauses", value); }
+        init { this._rawData.Set("clauses", value); }
     }
 
     public required ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction> Conjunction
     {
         get
         {
-            return JsonModel.GetNotNullClass<
+            return this._rawData.GetNotNullClass<
                 ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction>
-            >(this.RawData, "conjunction");
+            >("conjunction");
         }
-        init { JsonModel.Set(this._rawData, "conjunction", value); }
+        init { this._rawData.Set("conjunction", value); }
     }
 
     /// <inheritdoc/>
@@ -1588,14 +1578,14 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : JsonModel
 
     public ClausesMeterFilterClausesMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ClausesMeterFilterClausesMeterFilter(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -1848,7 +1838,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
         try
         {
             var deserialized = JsonSerializer.Deserialize<
-                List<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
+                ImmutableArray<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
             >(element, options);
             if (deserialized != null)
             {
@@ -1864,7 +1854,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
         try
         {
             var deserialized = JsonSerializer.Deserialize<
-                List<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
+                ImmutableArray<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
             >(element, options);
             if (deserialized != null)
             {
@@ -1907,8 +1897,8 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     /// </summary>
     public required string Key
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "key"); }
-        init { JsonModel.Set(this._rawData, "key", value); }
+        get { return this._rawData.GetNotNullClass<string>("key"); }
+        init { this._rawData.Set("key", value); }
     }
 
     public required ApiEnum<
@@ -1918,14 +1908,14 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     {
         get
         {
-            return JsonModel.GetNotNullClass<
+            return this._rawData.GetNotNullClass<
                 ApiEnum<
                     string,
                     ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
                 >
-            >(this.RawData, "operator");
+            >("operator");
         }
-        init { JsonModel.Set(this._rawData, "operator", value); }
+        init { this._rawData.Set("operator", value); }
     }
 
     /// <summary>
@@ -1935,12 +1925,11 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     {
         get
         {
-            return JsonModel.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
-                this.RawData,
+            return this._rawData.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
                 "value"
             );
         }
-        init { JsonModel.Set(this._rawData, "value", value); }
+        init { this._rawData.Set("value", value); }
     }
 
     /// <inheritdoc/>
@@ -1962,7 +1951,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
@@ -1971,7 +1960,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
         FrozenDictionary<string, JsonElement> rawData
     )
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -2391,20 +2380,20 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     /// </summary>
     public required IReadOnlyList<Clause> Clauses
     {
-        get { return JsonModel.GetNotNullClass<List<Clause>>(this.RawData, "clauses"); }
-        init { JsonModel.Set(this._rawData, "clauses", value); }
+        get { return this._rawData.GetNotNullStruct<ImmutableArray<Clause>>("clauses"); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Clause>>(
+                "clauses",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     public required ApiEnum<string, Conjunction> Conjunction
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, Conjunction>>(
-                this.RawData,
-                "conjunction"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "conjunction", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, Conjunction>>("conjunction"); }
+        init { this._rawData.Set("conjunction", value); }
     }
 
     /// <inheritdoc/>
@@ -2428,7 +2417,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
@@ -2437,7 +2426,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
         FrozenDictionary<string, JsonElement> rawData
     )
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -2470,20 +2459,14 @@ public sealed record class Clause : JsonModel
     /// </summary>
     public required string Key
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "key"); }
-        init { JsonModel.Set(this._rawData, "key", value); }
+        get { return this._rawData.GetNotNullClass<string>("key"); }
+        init { this._rawData.Set("key", value); }
     }
 
     public required ApiEnum<string, ClauseOperator> Operator
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, ClauseOperator>>(
-                this.RawData,
-                "operator"
-            );
-        }
-        init { JsonModel.Set(this._rawData, "operator", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, ClauseOperator>>("operator"); }
+        init { this._rawData.Set("operator", value); }
     }
 
     /// <summary>
@@ -2491,8 +2474,8 @@ public sealed record class Clause : JsonModel
     /// </summary>
     public required ClauseValue Value
     {
-        get { return JsonModel.GetNotNullClass<ClauseValue>(this.RawData, "value"); }
-        init { JsonModel.Set(this._rawData, "value", value); }
+        get { return this._rawData.GetNotNullClass<ClauseValue>("value"); }
+        init { this._rawData.Set("value", value); }
     }
 
     /// <inheritdoc/>
@@ -2510,14 +2493,14 @@ public sealed record class Clause : JsonModel
 
     public Clause(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Clause(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -28,7 +29,7 @@ namespace DodoPayments.Client.Models.UsageEvents;
 /// </summary>
 public sealed record class UsageEventIngestParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -39,8 +40,14 @@ public sealed record class UsageEventIngestParams : ParamsBase
     /// </summary>
     public required IReadOnlyList<EventInput> Events
     {
-        get { return JsonModel.GetNotNullClass<List<EventInput>>(this.RawBodyData, "events"); }
-        init { JsonModel.Set(this._rawBodyData, "events", value); }
+        get { return this._rawBodyData.GetNotNullStruct<ImmutableArray<EventInput>>("events"); }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<EventInput>>(
+                "events",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     public UsageEventIngestParams() { }
@@ -48,7 +55,7 @@ public sealed record class UsageEventIngestParams : ParamsBase
     public UsageEventIngestParams(UsageEventIngestParams usageEventIngestParams)
         : base(usageEventIngestParams)
     {
-        this._rawBodyData = [.. usageEventIngestParams._rawBodyData];
+        this._rawBodyData = new(usageEventIngestParams._rawBodyData);
     }
 
     public UsageEventIngestParams(
@@ -57,9 +64,9 @@ public sealed record class UsageEventIngestParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -70,9 +77,9 @@ public sealed record class UsageEventIngestParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 

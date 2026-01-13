@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -16,7 +17,7 @@ namespace DodoPayments.Client.Models.CheckoutSessions;
 
 public sealed record class CheckoutSessionCreateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -26,9 +27,15 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNotNullClass<List<ProductCart>>(this.RawBodyData, "product_cart");
+            return this._rawBodyData.GetNotNullStruct<ImmutableArray<ProductCart>>("product_cart");
         }
-        init { JsonModel.Set(this._rawBodyData, "product_cart", value); }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<ProductCart>>(
+                "product_cart",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -43,12 +50,17 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<List<ApiEnum<string, Payments::PaymentMethodTypes>>>(
-                this.RawBodyData,
-                "allowed_payment_method_types"
+            return this._rawBodyData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, Payments::PaymentMethodTypes>>
+            >("allowed_payment_method_types");
+        }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<ApiEnum<string, Payments::PaymentMethodTypes>>?>(
+                "allowed_payment_method_types",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "allowed_payment_method_types", value); }
     }
 
     /// <summary>
@@ -56,11 +68,8 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// </summary>
     public BillingAddress? BillingAddress
     {
-        get
-        {
-            return JsonModel.GetNullableClass<BillingAddress>(this.RawBodyData, "billing_address");
-        }
-        init { JsonModel.Set(this._rawBodyData, "billing_address", value); }
+        get { return this._rawBodyData.GetNullableClass<BillingAddress>("billing_address"); }
+        init { this._rawBodyData.Set("billing_address", value); }
     }
 
     /// <summary>
@@ -70,12 +79,11 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(
-                this.RawBodyData,
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, Currency>>(
                 "billing_currency"
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "billing_currency", value); }
+        init { this._rawBodyData.Set("billing_currency", value); }
     }
 
     /// <summary>
@@ -84,7 +92,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// </summary>
     public bool? Confirm
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "confirm"); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("confirm"); }
         init
         {
             if (value == null)
@@ -92,7 +100,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "confirm", value);
+            this._rawBodyData.Set("confirm", value);
         }
     }
 
@@ -101,14 +109,8 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// </summary>
     public Payments::CustomerRequest? Customer
     {
-        get
-        {
-            return JsonModel.GetNullableClass<Payments::CustomerRequest>(
-                this.RawBodyData,
-                "customer"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "customer", value); }
+        get { return this._rawBodyData.GetNullableClass<Payments::CustomerRequest>("customer"); }
+        init { this._rawBodyData.Set("customer", value); }
     }
 
     /// <summary>
@@ -116,7 +118,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// </summary>
     public Customization? Customization
     {
-        get { return JsonModel.GetNullableClass<Customization>(this.RawBodyData, "customization"); }
+        get { return this._rawBodyData.GetNullableClass<Customization>("customization"); }
         init
         {
             if (value == null)
@@ -124,19 +126,19 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "customization", value);
+            this._rawBodyData.Set("customization", value);
         }
     }
 
     public string? DiscountCode
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "discount_code"); }
-        init { JsonModel.Set(this._rawBodyData, "discount_code", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("discount_code"); }
+        init { this._rawBodyData.Set("discount_code", value); }
     }
 
     public FeatureFlags? FeatureFlags
     {
-        get { return JsonModel.GetNullableClass<FeatureFlags>(this.RawBodyData, "feature_flags"); }
+        get { return this._rawBodyData.GetNullableClass<FeatureFlags>("feature_flags"); }
         init
         {
             if (value == null)
@@ -144,7 +146,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "feature_flags", value);
+            this._rawBodyData.Set("feature_flags", value);
         }
     }
 
@@ -153,8 +155,8 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// </summary>
     public bool? Force3ds
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "force_3ds"); }
-        init { JsonModel.Set(this._rawBodyData, "force_3ds", value); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("force_3ds"); }
+        init { this._rawBodyData.Set("force_3ds", value); }
     }
 
     /// <summary>
@@ -164,12 +166,15 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, string>>(
-                this.RawBodyData,
-                "metadata"
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "metadata", value); }
     }
 
     /// <summary>
@@ -178,7 +183,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// </summary>
     public bool? MinimalAddress
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "minimal_address"); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("minimal_address"); }
         init
         {
             if (value == null)
@@ -186,7 +191,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "minimal_address", value);
+            this._rawBodyData.Set("minimal_address", value);
         }
     }
 
@@ -196,8 +201,8 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// </summary>
     public string? PaymentMethodID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "payment_method_id"); }
-        init { JsonModel.Set(this._rawBodyData, "payment_method_id", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("payment_method_id"); }
+        init { this._rawBodyData.Set("payment_method_id", value); }
     }
 
     /// <summary>
@@ -205,8 +210,8 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// </summary>
     public string? ReturnUrl
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "return_url"); }
-        init { JsonModel.Set(this._rawBodyData, "return_url", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("return_url"); }
+        init { this._rawBodyData.Set("return_url", value); }
     }
 
     /// <summary>
@@ -214,7 +219,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// </summary>
     public bool? ShortLink
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "short_link"); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("short_link"); }
         init
         {
             if (value == null)
@@ -222,7 +227,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "short_link", value);
+            this._rawBodyData.Set("short_link", value);
         }
     }
 
@@ -231,13 +236,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     /// </summary>
     public bool? ShowSavedPaymentMethods
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(
-                this.RawBodyData,
-                "show_saved_payment_methods"
-            );
-        }
+        get { return this._rawBodyData.GetNullableStruct<bool>("show_saved_payment_methods"); }
         init
         {
             if (value == null)
@@ -245,20 +244,14 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "show_saved_payment_methods", value);
+            this._rawBodyData.Set("show_saved_payment_methods", value);
         }
     }
 
     public SubscriptionData? SubscriptionData
     {
-        get
-        {
-            return JsonModel.GetNullableClass<SubscriptionData>(
-                this.RawBodyData,
-                "subscription_data"
-            );
-        }
-        init { JsonModel.Set(this._rawBodyData, "subscription_data", value); }
+        get { return this._rawBodyData.GetNullableClass<SubscriptionData>("subscription_data"); }
+        init { this._rawBodyData.Set("subscription_data", value); }
     }
 
     public CheckoutSessionCreateParams() { }
@@ -266,7 +259,7 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
     public CheckoutSessionCreateParams(CheckoutSessionCreateParams checkoutSessionCreateParams)
         : base(checkoutSessionCreateParams)
     {
-        this._rawBodyData = [.. checkoutSessionCreateParams._rawBodyData];
+        this._rawBodyData = new(checkoutSessionCreateParams._rawBodyData);
     }
 
     public CheckoutSessionCreateParams(
@@ -275,9 +268,9 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -288,9 +281,9 @@ public sealed record class CheckoutSessionCreateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 
@@ -343,14 +336,14 @@ public sealed record class ProductCart : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { JsonModel.Set(this._rawData, "product_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        init { this._rawData.Set("product_id", value); }
     }
 
     public required int Quantity
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "quantity"); }
-        init { JsonModel.Set(this._rawData, "quantity", value); }
+        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        init { this._rawData.Set("quantity", value); }
     }
 
     /// <summary>
@@ -360,12 +353,17 @@ public sealed record class ProductCart : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<List<Subscriptions::AttachAddon>>(
-                this.RawData,
+            return this._rawData.GetNullableStruct<ImmutableArray<Subscriptions::AttachAddon>>(
                 "addons"
             );
         }
-        init { JsonModel.Set(this._rawData, "addons", value); }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Subscriptions::AttachAddon>?>(
+                "addons",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -379,8 +377,8 @@ public sealed record class ProductCart : JsonModel
     /// </summary>
     public int? Amount
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "amount"); }
-        init { JsonModel.Set(this._rawData, "amount", value); }
+        get { return this._rawData.GetNullableStruct<int>("amount"); }
+        init { this._rawData.Set("amount", value); }
     }
 
     /// <inheritdoc/>
@@ -402,14 +400,14 @@ public sealed record class ProductCart : JsonModel
 
     public ProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     ProductCart(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -438,11 +436,8 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public required ApiEnum<string, CountryCode> Country
     {
-        get
-        {
-            return JsonModel.GetNotNullClass<ApiEnum<string, CountryCode>>(this.RawData, "country");
-        }
-        init { JsonModel.Set(this._rawData, "country", value); }
+        get { return this._rawData.GetNotNullClass<ApiEnum<string, CountryCode>>("country"); }
+        init { this._rawData.Set("country", value); }
     }
 
     /// <summary>
@@ -450,8 +445,8 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? City
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "city"); }
-        init { JsonModel.Set(this._rawData, "city", value); }
+        get { return this._rawData.GetNullableClass<string>("city"); }
+        init { this._rawData.Set("city", value); }
     }
 
     /// <summary>
@@ -459,8 +454,8 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? State
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "state"); }
-        init { JsonModel.Set(this._rawData, "state", value); }
+        get { return this._rawData.GetNullableClass<string>("state"); }
+        init { this._rawData.Set("state", value); }
     }
 
     /// <summary>
@@ -468,8 +463,8 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? Street
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "street"); }
-        init { JsonModel.Set(this._rawData, "street", value); }
+        get { return this._rawData.GetNullableClass<string>("street"); }
+        init { this._rawData.Set("street", value); }
     }
 
     /// <summary>
@@ -477,8 +472,8 @@ public sealed record class BillingAddress : JsonModel
     /// </summary>
     public string? Zipcode
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "zipcode"); }
-        init { JsonModel.Set(this._rawData, "zipcode", value); }
+        get { return this._rawData.GetNullableClass<string>("zipcode"); }
+        init { this._rawData.Set("zipcode", value); }
     }
 
     /// <inheritdoc/>
@@ -498,14 +493,14 @@ public sealed record class BillingAddress : JsonModel
 
     public BillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     BillingAddress(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -541,8 +536,8 @@ public sealed record class Customization : JsonModel
     /// </summary>
     public string? ForceLanguage
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawData, "force_language"); }
-        init { JsonModel.Set(this._rawData, "force_language", value); }
+        get { return this._rawData.GetNullableClass<string>("force_language"); }
+        init { this._rawData.Set("force_language", value); }
     }
 
     /// <summary>
@@ -552,7 +547,7 @@ public sealed record class Customization : JsonModel
     /// </summary>
     public bool? ShowOnDemandTag
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "show_on_demand_tag"); }
+        get { return this._rawData.GetNullableStruct<bool>("show_on_demand_tag"); }
         init
         {
             if (value == null)
@@ -560,7 +555,7 @@ public sealed record class Customization : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "show_on_demand_tag", value);
+            this._rawData.Set("show_on_demand_tag", value);
         }
     }
 
@@ -571,7 +566,7 @@ public sealed record class Customization : JsonModel
     /// </summary>
     public bool? ShowOrderDetails
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "show_order_details"); }
+        get { return this._rawData.GetNullableStruct<bool>("show_order_details"); }
         init
         {
             if (value == null)
@@ -579,7 +574,7 @@ public sealed record class Customization : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "show_order_details", value);
+            this._rawData.Set("show_order_details", value);
         }
     }
 
@@ -590,7 +585,7 @@ public sealed record class Customization : JsonModel
     /// </summary>
     public ApiEnum<string, Theme>? Theme
     {
-        get { return JsonModel.GetNullableClass<ApiEnum<string, Theme>>(this.RawData, "theme"); }
+        get { return this._rawData.GetNullableClass<ApiEnum<string, Theme>>("theme"); }
         init
         {
             if (value == null)
@@ -598,7 +593,7 @@ public sealed record class Customization : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "theme", value);
+            this._rawData.Set("theme", value);
         }
     }
 
@@ -618,14 +613,14 @@ public sealed record class Customization : JsonModel
 
     public Customization(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     Customization(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -701,7 +696,7 @@ public sealed record class FeatureFlags : JsonModel
     /// </summary>
     public bool? AllowCurrencySelection
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_currency_selection"); }
+        get { return this._rawData.GetNullableStruct<bool>("allow_currency_selection"); }
         init
         {
             if (value == null)
@@ -709,16 +704,13 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_currency_selection", value);
+            this._rawData.Set("allow_currency_selection", value);
         }
     }
 
     public bool? AllowCustomerEditingCity
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_city");
-        }
+        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_city"); }
         init
         {
             if (value == null)
@@ -726,19 +718,13 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_customer_editing_city", value);
+            this._rawData.Set("allow_customer_editing_city", value);
         }
     }
 
     public bool? AllowCustomerEditingCountry
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(
-                this.RawData,
-                "allow_customer_editing_country"
-            );
-        }
+        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_country"); }
         init
         {
             if (value == null)
@@ -746,16 +732,13 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_customer_editing_country", value);
+            this._rawData.Set("allow_customer_editing_country", value);
         }
     }
 
     public bool? AllowCustomerEditingEmail
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_email");
-        }
+        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_email"); }
         init
         {
             if (value == null)
@@ -763,16 +746,13 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_customer_editing_email", value);
+            this._rawData.Set("allow_customer_editing_email", value);
         }
     }
 
     public bool? AllowCustomerEditingName
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_name");
-        }
+        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_name"); }
         init
         {
             if (value == null)
@@ -780,16 +760,13 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_customer_editing_name", value);
+            this._rawData.Set("allow_customer_editing_name", value);
         }
     }
 
     public bool? AllowCustomerEditingState
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_state");
-        }
+        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_state"); }
         init
         {
             if (value == null)
@@ -797,16 +774,13 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_customer_editing_state", value);
+            this._rawData.Set("allow_customer_editing_state", value);
         }
     }
 
     public bool? AllowCustomerEditingStreet
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_customer_editing_street");
-        }
+        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_street"); }
         init
         {
             if (value == null)
@@ -814,19 +788,13 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_customer_editing_street", value);
+            this._rawData.Set("allow_customer_editing_street", value);
         }
     }
 
     public bool? AllowCustomerEditingZipcode
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(
-                this.RawData,
-                "allow_customer_editing_zipcode"
-            );
-        }
+        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_zipcode"); }
         init
         {
             if (value == null)
@@ -834,7 +802,7 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_customer_editing_zipcode", value);
+            this._rawData.Set("allow_customer_editing_zipcode", value);
         }
     }
 
@@ -845,7 +813,7 @@ public sealed record class FeatureFlags : JsonModel
     /// </summary>
     public bool? AllowDiscountCode
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_discount_code"); }
+        get { return this._rawData.GetNullableStruct<bool>("allow_discount_code"); }
         init
         {
             if (value == null)
@@ -853,7 +821,7 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_discount_code", value);
+            this._rawData.Set("allow_discount_code", value);
         }
     }
 
@@ -864,10 +832,7 @@ public sealed record class FeatureFlags : JsonModel
     /// </summary>
     public bool? AllowPhoneNumberCollection
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_phone_number_collection");
-        }
+        get { return this._rawData.GetNullableStruct<bool>("allow_phone_number_collection"); }
         init
         {
             if (value == null)
@@ -875,7 +840,7 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_phone_number_collection", value);
+            this._rawData.Set("allow_phone_number_collection", value);
         }
     }
 
@@ -886,7 +851,7 @@ public sealed record class FeatureFlags : JsonModel
     /// </summary>
     public bool? AllowTaxID
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "allow_tax_id"); }
+        get { return this._rawData.GetNullableStruct<bool>("allow_tax_id"); }
         init
         {
             if (value == null)
@@ -894,7 +859,7 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "allow_tax_id", value);
+            this._rawData.Set("allow_tax_id", value);
         }
     }
 
@@ -906,10 +871,7 @@ public sealed record class FeatureFlags : JsonModel
     /// </summary>
     public bool? AlwaysCreateNewCustomer
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(this.RawData, "always_create_new_customer");
-        }
+        get { return this._rawData.GetNullableStruct<bool>("always_create_new_customer"); }
         init
         {
             if (value == null)
@@ -917,7 +879,7 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "always_create_new_customer", value);
+            this._rawData.Set("always_create_new_customer", value);
         }
     }
 
@@ -928,7 +890,7 @@ public sealed record class FeatureFlags : JsonModel
     /// </summary>
     public bool? RedirectImmediately
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawData, "redirect_immediately"); }
+        get { return this._rawData.GetNullableStruct<bool>("redirect_immediately"); }
         init
         {
             if (value == null)
@@ -936,7 +898,7 @@ public sealed record class FeatureFlags : JsonModel
                 return;
             }
 
-            JsonModel.Set(this._rawData, "redirect_immediately", value);
+            this._rawData.Set("redirect_immediately", value);
         }
     }
 
@@ -965,14 +927,14 @@ public sealed record class FeatureFlags : JsonModel
 
     public FeatureFlags(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     FeatureFlags(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
@@ -997,12 +959,9 @@ public sealed record class SubscriptionData : JsonModel
     {
         get
         {
-            return JsonModel.GetNullableClass<Subscriptions::OnDemandSubscription>(
-                this.RawData,
-                "on_demand"
-            );
+            return this._rawData.GetNullableClass<Subscriptions::OnDemandSubscription>("on_demand");
         }
-        init { JsonModel.Set(this._rawData, "on_demand", value); }
+        init { this._rawData.Set("on_demand", value); }
     }
 
     /// <summary>
@@ -1011,8 +970,8 @@ public sealed record class SubscriptionData : JsonModel
     /// </summary>
     public int? TrialPeriodDays
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "trial_period_days"); }
-        init { JsonModel.Set(this._rawData, "trial_period_days", value); }
+        get { return this._rawData.GetNullableStruct<int>("trial_period_days"); }
+        init { this._rawData.Set("trial_period_days", value); }
     }
 
     /// <inheritdoc/>
@@ -1029,14 +988,14 @@ public sealed record class SubscriptionData : JsonModel
 
     public SubscriptionData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     SubscriptionData(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

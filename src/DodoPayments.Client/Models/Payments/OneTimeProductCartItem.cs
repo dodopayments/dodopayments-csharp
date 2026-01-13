@@ -12,14 +12,14 @@ public sealed record class OneTimeProductCartItem : JsonModel
 {
     public required string ProductID
     {
-        get { return JsonModel.GetNotNullClass<string>(this.RawData, "product_id"); }
-        init { JsonModel.Set(this._rawData, "product_id", value); }
+        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        init { this._rawData.Set("product_id", value); }
     }
 
     public required int Quantity
     {
-        get { return JsonModel.GetNotNullStruct<int>(this.RawData, "quantity"); }
-        init { JsonModel.Set(this._rawData, "quantity", value); }
+        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        init { this._rawData.Set("quantity", value); }
     }
 
     /// <summary>
@@ -29,8 +29,8 @@ public sealed record class OneTimeProductCartItem : JsonModel
     /// </summary>
     public int? Amount
     {
-        get { return JsonModel.GetNullableStruct<int>(this.RawData, "amount"); }
-        init { JsonModel.Set(this._rawData, "amount", value); }
+        get { return this._rawData.GetNullableStruct<int>("amount"); }
+        init { this._rawData.Set("amount", value); }
     }
 
     /// <inheritdoc/>
@@ -48,14 +48,14 @@ public sealed record class OneTimeProductCartItem : JsonModel
 
     public OneTimeProductCartItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
     OneTimeProductCartItem(FrozenDictionary<string, JsonElement> rawData)
     {
-        this._rawData = [.. rawData];
+        this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 

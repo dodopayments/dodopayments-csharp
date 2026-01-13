@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -13,7 +14,7 @@ namespace DodoPayments.Client.Models.Payments;
 [Obsolete("deprecated")]
 public sealed record class PaymentCreateParams : ParamsBase
 {
-    readonly FreezableDictionary<string, JsonElement> _rawBodyData = [];
+    readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
     {
         get { return this._rawBodyData.Freeze(); }
@@ -24,8 +25,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public required BillingAddress Billing
     {
-        get { return JsonModel.GetNotNullClass<BillingAddress>(this.RawBodyData, "billing"); }
-        init { JsonModel.Set(this._rawBodyData, "billing", value); }
+        get { return this._rawBodyData.GetNotNullClass<BillingAddress>("billing"); }
+        init { this._rawBodyData.Set("billing", value); }
     }
 
     /// <summary>
@@ -33,8 +34,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public required CustomerRequest Customer
     {
-        get { return JsonModel.GetNotNullClass<CustomerRequest>(this.RawBodyData, "customer"); }
-        init { JsonModel.Set(this._rawBodyData, "customer", value); }
+        get { return this._rawBodyData.GetNotNullClass<CustomerRequest>("customer"); }
+        init { this._rawBodyData.Set("customer", value); }
     }
 
     /// <summary>
@@ -44,12 +45,17 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNotNullClass<List<OneTimeProductCartItem>>(
-                this.RawBodyData,
+            return this._rawBodyData.GetNotNullStruct<ImmutableArray<OneTimeProductCartItem>>(
                 "product_cart"
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "product_cart", value); }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<OneTimeProductCartItem>>(
+                "product_cart",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -64,12 +70,17 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<List<ApiEnum<string, PaymentMethodTypes>>>(
-                this.RawBodyData,
-                "allowed_payment_method_types"
+            return this._rawBodyData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, PaymentMethodTypes>>
+            >("allowed_payment_method_types");
+        }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<ApiEnum<string, PaymentMethodTypes>>?>(
+                "allowed_payment_method_types",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "allowed_payment_method_types", value); }
     }
 
     /// <summary>
@@ -80,12 +91,11 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<ApiEnum<string, Currency>>(
-                this.RawBodyData,
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, Currency>>(
                 "billing_currency"
             );
         }
-        init { JsonModel.Set(this._rawBodyData, "billing_currency", value); }
+        init { this._rawBodyData.Set("billing_currency", value); }
     }
 
     /// <summary>
@@ -93,8 +103,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public string? DiscountCode
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "discount_code"); }
-        init { JsonModel.Set(this._rawBodyData, "discount_code", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("discount_code"); }
+        init { this._rawBodyData.Set("discount_code", value); }
     }
 
     /// <summary>
@@ -102,8 +112,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public bool? Force3ds
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "force_3ds"); }
-        init { JsonModel.Set(this._rawBodyData, "force_3ds", value); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("force_3ds"); }
+        init { this._rawBodyData.Set("force_3ds", value); }
     }
 
     /// <summary>
@@ -113,10 +123,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     {
         get
         {
-            return JsonModel.GetNullableClass<Dictionary<string, string>>(
-                this.RawBodyData,
-                "metadata"
-            );
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
         {
@@ -125,7 +132,10 @@ public sealed record class PaymentCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "metadata", value);
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
     }
 
@@ -134,8 +144,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public bool? PaymentLink
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "payment_link"); }
-        init { JsonModel.Set(this._rawBodyData, "payment_link", value); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("payment_link"); }
+        init { this._rawBodyData.Set("payment_link", value); }
     }
 
     /// <summary>
@@ -145,8 +155,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public string? PaymentMethodID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "payment_method_id"); }
-        init { JsonModel.Set(this._rawBodyData, "payment_method_id", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("payment_method_id"); }
+        init { this._rawBodyData.Set("payment_method_id", value); }
     }
 
     /// <summary>
@@ -155,7 +165,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public bool? RedirectImmediately
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "redirect_immediately"); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("redirect_immediately"); }
         init
         {
             if (value == null)
@@ -163,7 +173,7 @@ public sealed record class PaymentCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "redirect_immediately", value);
+            this._rawBodyData.Set("redirect_immediately", value);
         }
     }
 
@@ -172,8 +182,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public string? ReturnUrl
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "return_url"); }
-        init { JsonModel.Set(this._rawBodyData, "return_url", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("return_url"); }
+        init { this._rawBodyData.Set("return_url", value); }
     }
 
     /// <summary>
@@ -181,8 +191,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public bool? ShortLink
     {
-        get { return JsonModel.GetNullableStruct<bool>(this.RawBodyData, "short_link"); }
-        init { JsonModel.Set(this._rawBodyData, "short_link", value); }
+        get { return this._rawBodyData.GetNullableStruct<bool>("short_link"); }
+        init { this._rawBodyData.Set("short_link", value); }
     }
 
     /// <summary>
@@ -190,13 +200,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public bool? ShowSavedPaymentMethods
     {
-        get
-        {
-            return JsonModel.GetNullableStruct<bool>(
-                this.RawBodyData,
-                "show_saved_payment_methods"
-            );
-        }
+        get { return this._rawBodyData.GetNullableStruct<bool>("show_saved_payment_methods"); }
         init
         {
             if (value == null)
@@ -204,7 +208,7 @@ public sealed record class PaymentCreateParams : ParamsBase
                 return;
             }
 
-            JsonModel.Set(this._rawBodyData, "show_saved_payment_methods", value);
+            this._rawBodyData.Set("show_saved_payment_methods", value);
         }
     }
 
@@ -214,8 +218,8 @@ public sealed record class PaymentCreateParams : ParamsBase
     /// </summary>
     public string? TaxID
     {
-        get { return JsonModel.GetNullableClass<string>(this.RawBodyData, "tax_id"); }
-        init { JsonModel.Set(this._rawBodyData, "tax_id", value); }
+        get { return this._rawBodyData.GetNullableClass<string>("tax_id"); }
+        init { this._rawBodyData.Set("tax_id", value); }
     }
 
     public PaymentCreateParams() { }
@@ -223,7 +227,7 @@ public sealed record class PaymentCreateParams : ParamsBase
     public PaymentCreateParams(PaymentCreateParams paymentCreateParams)
         : base(paymentCreateParams)
     {
-        this._rawBodyData = [.. paymentCreateParams._rawBodyData];
+        this._rawBodyData = new(paymentCreateParams._rawBodyData);
     }
 
     public PaymentCreateParams(
@@ -232,9 +236,9 @@ public sealed record class PaymentCreateParams : ParamsBase
         IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 
 #pragma warning disable CS8618
@@ -245,9 +249,9 @@ public sealed record class PaymentCreateParams : ParamsBase
         FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
-        this._rawHeaderData = [.. rawHeaderData];
-        this._rawQueryData = [.. rawQueryData];
-        this._rawBodyData = [.. rawBodyData];
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this._rawBodyData = new(rawBodyData);
     }
 #pragma warning restore CS8618
 
