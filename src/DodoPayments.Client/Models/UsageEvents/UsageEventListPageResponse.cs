@@ -15,7 +15,11 @@ public sealed record class UsageEventListPageResponse : JsonModel
 {
     public required IReadOnlyList<Event> Items
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<Event>>("items"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<Event>>("items");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<Event>>(

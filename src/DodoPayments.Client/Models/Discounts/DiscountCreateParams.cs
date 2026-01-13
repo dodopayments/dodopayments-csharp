@@ -33,7 +33,11 @@ public sealed record class DiscountCreateParams : ParamsBase
     /// </summary>
     public required int Amount
     {
-        get { return this._rawBodyData.GetNotNullStruct<int>("amount"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullStruct<int>("amount");
+        }
         init { this._rawBodyData.Set("amount", value); }
     }
 
@@ -42,7 +46,11 @@ public sealed record class DiscountCreateParams : ParamsBase
     /// </summary>
     public required ApiEnum<string, DiscountType> Type
     {
-        get { return this._rawBodyData.GetNotNullClass<ApiEnum<string, DiscountType>>("type"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<ApiEnum<string, DiscountType>>("type");
+        }
         init { this._rawBodyData.Set("type", value); }
     }
 
@@ -52,7 +60,11 @@ public sealed record class DiscountCreateParams : ParamsBase
     /// </summary>
     public string? Code
     {
-        get { return this._rawBodyData.GetNullableClass<string>("code"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("code");
+        }
         init { this._rawBodyData.Set("code", value); }
     }
 
@@ -61,13 +73,21 @@ public sealed record class DiscountCreateParams : ParamsBase
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
-        get { return this._rawBodyData.GetNullableStruct<DateTimeOffset>("expires_at"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<DateTimeOffset>("expires_at");
+        }
         init { this._rawBodyData.Set("expires_at", value); }
     }
 
     public string? Name
     {
-        get { return this._rawBodyData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("name");
+        }
         init { this._rawBodyData.Set("name", value); }
     }
 
@@ -76,7 +96,11 @@ public sealed record class DiscountCreateParams : ParamsBase
     /// </summary>
     public IReadOnlyList<string>? RestrictedTo
     {
-        get { return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("restricted_to"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("restricted_to");
+        }
         init
         {
             this._rawBodyData.Set<ImmutableArray<string>?>(
@@ -93,7 +117,11 @@ public sealed record class DiscountCreateParams : ParamsBase
     /// </summary>
     public int? SubscriptionCycles
     {
-        get { return this._rawBodyData.GetNullableStruct<int>("subscription_cycles"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("subscription_cycles");
+        }
         init { this._rawBodyData.Set("subscription_cycles", value); }
     }
 
@@ -102,7 +130,11 @@ public sealed record class DiscountCreateParams : ParamsBase
     /// </summary>
     public int? UsageLimit
     {
-        get { return this._rawBodyData.GetNullableStruct<int>("usage_limit"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("usage_limit");
+        }
         init { this._rawBodyData.Set("usage_limit", value); }
     }
 

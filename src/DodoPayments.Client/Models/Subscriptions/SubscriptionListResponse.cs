@@ -23,7 +23,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required BillingAddress Billing
     {
-        get { return this._rawData.GetNotNullClass<BillingAddress>("billing"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<BillingAddress>("billing");
+        }
         init { this._rawData.Set("billing", value); }
     }
 
@@ -32,7 +36,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required bool CancelAtNextBillingDate
     {
-        get { return this._rawData.GetNotNullStruct<bool>("cancel_at_next_billing_date"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("cancel_at_next_billing_date");
+        }
         init { this._rawData.Set("cancel_at_next_billing_date", value); }
     }
 
@@ -41,7 +49,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -50,7 +62,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
@@ -59,7 +75,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required CustomerLimitedDetails Customer
     {
-        get { return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer");
+        }
         init { this._rawData.Set("customer", value); }
     }
 
@@ -68,7 +88,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>>(
@@ -83,7 +107,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required DateTimeOffset NextBillingDate
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date");
+        }
         init { this._rawData.Set("next_billing_date", value); }
     }
 
@@ -92,7 +120,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required bool OnDemand
     {
-        get { return this._rawData.GetNotNullStruct<bool>("on_demand"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("on_demand");
+        }
         init { this._rawData.Set("on_demand", value); }
     }
 
@@ -101,7 +133,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required int PaymentFrequencyCount
     {
-        get { return this._rawData.GetNotNullStruct<int>("payment_frequency_count"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("payment_frequency_count");
+        }
         init { this._rawData.Set("payment_frequency_count", value); }
     }
 
@@ -112,6 +148,7 @@ public sealed record class SubscriptionListResponse : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, TimeInterval>>(
                 "payment_frequency_interval"
             );
@@ -124,7 +161,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required DateTimeOffset PreviousBillingDate
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("previous_billing_date"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("previous_billing_date");
+        }
         init { this._rawData.Set("previous_billing_date", value); }
     }
 
@@ -133,7 +174,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
@@ -142,7 +187,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required int Quantity
     {
-        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("quantity");
+        }
         init { this._rawData.Set("quantity", value); }
     }
 
@@ -152,7 +201,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required int RecurringPreTaxAmount
     {
-        get { return this._rawData.GetNotNullStruct<int>("recurring_pre_tax_amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("recurring_pre_tax_amount");
+        }
         init { this._rawData.Set("recurring_pre_tax_amount", value); }
     }
 
@@ -161,7 +214,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required ApiEnum<string, SubscriptionStatus> Status
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionStatus>>("status"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionStatus>>("status");
+        }
         init { this._rawData.Set("status", value); }
     }
 
@@ -170,7 +227,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required string SubscriptionID
     {
-        get { return this._rawData.GetNotNullClass<string>("subscription_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("subscription_id");
+        }
         init { this._rawData.Set("subscription_id", value); }
     }
 
@@ -179,7 +240,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required int SubscriptionPeriodCount
     {
-        get { return this._rawData.GetNotNullStruct<int>("subscription_period_count"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("subscription_period_count");
+        }
         init { this._rawData.Set("subscription_period_count", value); }
     }
 
@@ -190,6 +255,7 @@ public sealed record class SubscriptionListResponse : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, TimeInterval>>(
                 "subscription_period_interval"
             );
@@ -202,7 +268,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required bool TaxInclusive
     {
-        get { return this._rawData.GetNotNullStruct<bool>("tax_inclusive"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("tax_inclusive");
+        }
         init { this._rawData.Set("tax_inclusive", value); }
     }
 
@@ -211,7 +281,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public required int TrialPeriodDays
     {
-        get { return this._rawData.GetNotNullStruct<int>("trial_period_days"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("trial_period_days");
+        }
         init { this._rawData.Set("trial_period_days", value); }
     }
 
@@ -220,7 +294,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public DateTimeOffset? CancelledAt
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("cancelled_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("cancelled_at");
+        }
         init { this._rawData.Set("cancelled_at", value); }
     }
 
@@ -229,7 +307,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public int? DiscountCyclesRemaining
     {
-        get { return this._rawData.GetNullableStruct<int>("discount_cycles_remaining"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("discount_cycles_remaining");
+        }
         init { this._rawData.Set("discount_cycles_remaining", value); }
     }
 
@@ -238,7 +320,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public string? DiscountID
     {
-        get { return this._rawData.GetNullableClass<string>("discount_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("discount_id");
+        }
         init { this._rawData.Set("discount_id", value); }
     }
 
@@ -247,7 +333,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public string? PaymentMethodID
     {
-        get { return this._rawData.GetNullableClass<string>("payment_method_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method_id");
+        }
         init { this._rawData.Set("payment_method_id", value); }
     }
 
@@ -256,7 +346,11 @@ public sealed record class SubscriptionListResponse : JsonModel
     /// </summary>
     public string? TaxID
     {
-        get { return this._rawData.GetNullableClass<string>("tax_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("tax_id");
+        }
         init { this._rawData.Set("tax_id", value); }
     }
 

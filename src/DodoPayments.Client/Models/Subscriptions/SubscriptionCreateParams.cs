@@ -26,7 +26,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public required BillingAddress Billing
     {
-        get { return this._rawBodyData.GetNotNullClass<BillingAddress>("billing"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<BillingAddress>("billing");
+        }
         init { this._rawBodyData.Set("billing", value); }
     }
 
@@ -35,7 +39,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public required CustomerRequest Customer
     {
-        get { return this._rawBodyData.GetNotNullClass<CustomerRequest>("customer"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<CustomerRequest>("customer");
+        }
         init { this._rawBodyData.Set("customer", value); }
     }
 
@@ -44,7 +52,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawBodyData.Set("product_id", value); }
     }
 
@@ -53,7 +65,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public required int Quantity
     {
-        get { return this._rawBodyData.GetNotNullStruct<int>("quantity"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullStruct<int>("quantity");
+        }
         init { this._rawBodyData.Set("quantity", value); }
     }
 
@@ -62,7 +78,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public IReadOnlyList<AttachAddon>? Addons
     {
-        get { return this._rawBodyData.GetNullableStruct<ImmutableArray<AttachAddon>>("addons"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<AttachAddon>>("addons");
+        }
         init
         {
             this._rawBodyData.Set<ImmutableArray<AttachAddon>?>(
@@ -84,6 +104,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableStruct<
                 ImmutableArray<ApiEnum<string, PaymentMethodTypes>>
             >("allowed_payment_method_types");
@@ -105,6 +126,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<ApiEnum<string, Currency>>(
                 "billing_currency"
             );
@@ -117,7 +139,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public string? DiscountCode
     {
-        get { return this._rawBodyData.GetNullableClass<string>("discount_code"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("discount_code");
+        }
         init { this._rawBodyData.Set("discount_code", value); }
     }
 
@@ -126,7 +152,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public bool? Force3ds
     {
-        get { return this._rawBodyData.GetNullableStruct<bool>("force_3ds"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("force_3ds");
+        }
         init { this._rawBodyData.Set("force_3ds", value); }
     }
 
@@ -137,6 +167,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
@@ -155,7 +186,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
 
     public OnDemandSubscription? OnDemand
     {
-        get { return this._rawBodyData.GetNullableClass<OnDemandSubscription>("on_demand"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<OnDemandSubscription>("on_demand");
+        }
         init { this._rawBodyData.Set("on_demand", value); }
     }
 
@@ -167,6 +202,7 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableStruct<ImmutableArray<OneTimeProductCartItem>>(
                 "one_time_product_cart"
             );
@@ -185,7 +221,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public bool? PaymentLink
     {
-        get { return this._rawBodyData.GetNullableStruct<bool>("payment_link"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("payment_link");
+        }
         init { this._rawBodyData.Set("payment_link", value); }
     }
 
@@ -196,7 +236,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public string? PaymentMethodID
     {
-        get { return this._rawBodyData.GetNullableClass<string>("payment_method_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("payment_method_id");
+        }
         init { this._rawBodyData.Set("payment_method_id", value); }
     }
 
@@ -206,7 +250,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public bool? RedirectImmediately
     {
-        get { return this._rawBodyData.GetNullableStruct<bool>("redirect_immediately"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("redirect_immediately");
+        }
         init
         {
             if (value == null)
@@ -223,7 +271,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public string? ReturnUrl
     {
-        get { return this._rawBodyData.GetNullableClass<string>("return_url"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("return_url");
+        }
         init { this._rawBodyData.Set("return_url", value); }
     }
 
@@ -232,7 +284,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public bool? ShortLink
     {
-        get { return this._rawBodyData.GetNullableStruct<bool>("short_link"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("short_link");
+        }
         init { this._rawBodyData.Set("short_link", value); }
     }
 
@@ -241,7 +297,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public bool? ShowSavedPaymentMethods
     {
-        get { return this._rawBodyData.GetNullableStruct<bool>("show_saved_payment_methods"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("show_saved_payment_methods");
+        }
         init
         {
             if (value == null)
@@ -259,7 +319,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public string? TaxID
     {
-        get { return this._rawBodyData.GetNullableClass<string>("tax_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("tax_id");
+        }
         init { this._rawBodyData.Set("tax_id", value); }
     }
 
@@ -269,7 +333,11 @@ public sealed record class SubscriptionCreateParams : ParamsBase
     /// </summary>
     public int? TrialPeriodDays
     {
-        get { return this._rawBodyData.GetNullableStruct<int>("trial_period_days"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("trial_period_days");
+        }
         init { this._rawBodyData.Set("trial_period_days", value); }
     }
 

@@ -28,7 +28,11 @@ public sealed record class ShortLinkCreateParams : ParamsBase
     /// </summary>
     public required string Slug
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("slug"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("slug");
+        }
         init { this._rawBodyData.Set("slug", value); }
     }
 
@@ -39,6 +43,7 @@ public sealed record class ShortLinkCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>(
                 "static_checkout_params"
             );

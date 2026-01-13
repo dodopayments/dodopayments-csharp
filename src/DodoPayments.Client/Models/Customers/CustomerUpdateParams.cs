@@ -26,6 +26,7 @@ public sealed record class CustomerUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
@@ -39,13 +40,21 @@ public sealed record class CustomerUpdateParams : ParamsBase
 
     public string? Name
     {
-        get { return this._rawBodyData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("name");
+        }
         init { this._rawBodyData.Set("name", value); }
     }
 
     public string? PhoneNumber
     {
-        get { return this._rawBodyData.GetNullableClass<string>("phone_number"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("phone_number");
+        }
         init { this._rawBodyData.Set("phone_number", value); }
     }
 

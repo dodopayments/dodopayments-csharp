@@ -15,7 +15,11 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public string? LicenseKeyID
     {
-        get { return this._rawQueryData.GetNullableClass<string>("license_key_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("license_key_id");
+        }
         init { this._rawQueryData.Set("license_key_id", value); }
     }
 
@@ -24,7 +28,11 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_number");
+        }
         init { this._rawQueryData.Set("page_number", value); }
     }
 
@@ -33,7 +41,11 @@ public sealed record class LicenseKeyInstanceListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_size");
+        }
         init { this._rawQueryData.Set("page_size", value); }
     }
 

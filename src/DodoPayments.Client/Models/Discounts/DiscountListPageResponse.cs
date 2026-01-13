@@ -18,7 +18,11 @@ public sealed record class DiscountListPageResponse : JsonModel
     /// </summary>
     public required IReadOnlyList<Discount> Items
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<Discount>>("items"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<Discount>>("items");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<Discount>>(

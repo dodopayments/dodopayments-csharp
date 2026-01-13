@@ -17,6 +17,7 @@ public sealed record class LedgerEntryListPageResponse : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<ImmutableArray<CustomerWalletTransaction>>(
                 "items"
             );

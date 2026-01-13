@@ -17,7 +17,11 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// </summary>
     public string? BrandID
     {
-        get { return this._rawQueryData.GetNullableClass<string>("brand_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("brand_id");
+        }
         init
         {
             if (value == null)
@@ -36,6 +40,7 @@ public sealed record class SubscriptionListParams : ParamsBase
     {
         get
         {
+            this._rawQueryData.Freeze();
             return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("created_at_gte");
         }
         init
@@ -56,6 +61,7 @@ public sealed record class SubscriptionListParams : ParamsBase
     {
         get
         {
+            this._rawQueryData.Freeze();
             return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("created_at_lte");
         }
         init
@@ -74,7 +80,11 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// </summary>
     public string? CustomerID
     {
-        get { return this._rawQueryData.GetNullableClass<string>("customer_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("customer_id");
+        }
         init
         {
             if (value == null)
@@ -91,7 +101,11 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_number");
+        }
         init
         {
             if (value == null)
@@ -108,7 +122,11 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_size");
+        }
         init
         {
             if (value == null)
@@ -125,7 +143,11 @@ public sealed record class SubscriptionListParams : ParamsBase
     /// </summary>
     public ApiEnum<string, Status>? Status
     {
-        get { return this._rawQueryData.GetNullableClass<ApiEnum<string, Status>>("status"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, Status>>("status");
+        }
         init
         {
             if (value == null)

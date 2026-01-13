@@ -23,7 +23,11 @@ public sealed record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 
     public required Body Body
     {
-        get { return this._rawBodyData.GetNotNullClass<Body>("body"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<Body>("body");
+        }
         init { this._rawBodyData.Set("body", value); }
     }
 
@@ -341,6 +345,7 @@ public sealed record class New : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type>
             >("type");
@@ -350,7 +355,11 @@ public sealed record class New : JsonModel
 
     public string? ReturnUrl
     {
-        get { return this._rawData.GetNullableClass<string>("return_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("return_url");
+        }
         init { this._rawData.Set("return_url", value); }
     }
 
@@ -446,13 +455,21 @@ public sealed record class Existing : JsonModel
 {
     public required string PaymentMethodID
     {
-        get { return this._rawData.GetNotNullClass<string>("payment_method_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_method_id");
+        }
         init { this._rawData.Set("payment_method_id", value); }
     }
 
     public required ApiEnum<string, ExistingType> Type
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, ExistingType>>("type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, ExistingType>>("type");
+        }
         init { this._rawData.Set("type", value); }
     }
 

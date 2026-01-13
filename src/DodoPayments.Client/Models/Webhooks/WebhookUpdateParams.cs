@@ -29,7 +29,11 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("description");
+        }
         init { this._rawBodyData.Set("description", value); }
     }
 
@@ -38,7 +42,11 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// </summary>
     public bool? Disabled
     {
-        get { return this._rawBodyData.GetNullableStruct<bool>("disabled"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("disabled");
+        }
         init { this._rawBodyData.Set("disabled", value); }
     }
 
@@ -51,6 +59,7 @@ public sealed record class WebhookUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableStruct<
                 ImmutableArray<ApiEnum<string, WebhookEventType>>
             >("filter_types");
@@ -71,6 +80,7 @@ public sealed record class WebhookUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
@@ -87,7 +97,11 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// </summary>
     public int? RateLimit
     {
-        get { return this._rawBodyData.GetNullableStruct<int>("rate_limit"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("rate_limit");
+        }
         init { this._rawBodyData.Set("rate_limit", value); }
     }
 
@@ -96,7 +110,11 @@ public sealed record class WebhookUpdateParams : ParamsBase
     /// </summary>
     public string? UrlValue
     {
-        get { return this._rawBodyData.GetNullableClass<string>("url"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("url");
+        }
         init { this._rawBodyData.Set("url", value); }
     }
 

@@ -17,7 +17,11 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
@@ -26,7 +30,11 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -35,7 +43,11 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -44,7 +56,11 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required CustomerLimitedDetails Customer
     {
-        get { return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer");
+        }
         init { this._rawData.Set("customer", value); }
     }
 
@@ -53,7 +69,11 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required string LicenseKeyID
     {
-        get { return this._rawData.GetNotNullClass<string>("license_key_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("license_key_id");
+        }
         init { this._rawData.Set("license_key_id", value); }
     }
 
@@ -62,7 +82,11 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required string Name
     {
-        get { return this._rawData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
@@ -71,7 +95,11 @@ public sealed record class LicenseActivateResponse : JsonModel
     /// </summary>
     public required Product Product
     {
-        get { return this._rawData.GetNotNullClass<Product>("product"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Product>("product");
+        }
         init { this._rawData.Set("product", value); }
     }
 
@@ -133,7 +161,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
@@ -142,7 +174,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return this._rawData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 

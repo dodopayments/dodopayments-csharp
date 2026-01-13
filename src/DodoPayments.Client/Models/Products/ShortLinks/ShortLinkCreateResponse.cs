@@ -15,7 +15,11 @@ public sealed record class ShortLinkCreateResponse : JsonModel
     /// </summary>
     public required string FullUrl
     {
-        get { return this._rawData.GetNotNullClass<string>("full_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("full_url");
+        }
         init { this._rawData.Set("full_url", value); }
     }
 
@@ -24,7 +28,11 @@ public sealed record class ShortLinkCreateResponse : JsonModel
     /// </summary>
     public required string ShortUrl
     {
-        get { return this._rawData.GetNotNullClass<string>("short_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("short_url");
+        }
         init { this._rawData.Set("short_url", value); }
     }
 

@@ -15,13 +15,21 @@ public sealed record class AddonCartResponseItem : JsonModel
 {
     public required string AddonID
     {
-        get { return this._rawData.GetNotNullClass<string>("addon_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("addon_id");
+        }
         init { this._rawData.Set("addon_id", value); }
     }
 
     public required int Quantity
     {
-        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("quantity");
+        }
         init { this._rawData.Set("quantity", value); }
     }
 

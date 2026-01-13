@@ -13,31 +13,51 @@ public sealed record class LicenseKeyInstance : JsonModel
 {
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
     public required string LicenseKeyID
     {
-        get { return this._rawData.GetNotNullClass<string>("license_key_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("license_key_id");
+        }
         init { this._rawData.Set("license_key_id", value); }
     }
 
     public required string Name
     {
-        get { return this._rawData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 

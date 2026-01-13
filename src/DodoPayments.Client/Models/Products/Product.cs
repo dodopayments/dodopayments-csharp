@@ -15,7 +15,11 @@ public sealed record class Product : JsonModel
 {
     public required string BrandID
     {
-        get { return this._rawData.GetNotNullClass<string>("brand_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
         init { this._rawData.Set("brand_id", value); }
     }
 
@@ -24,7 +28,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -33,7 +41,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -42,7 +54,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required bool IsRecurring
     {
-        get { return this._rawData.GetNotNullStruct<bool>("is_recurring"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("is_recurring");
+        }
         init { this._rawData.Set("is_recurring", value); }
     }
 
@@ -51,7 +67,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required bool LicenseKeyEnabled
     {
-        get { return this._rawData.GetNotNullStruct<bool>("license_key_enabled"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("license_key_enabled");
+        }
         init { this._rawData.Set("license_key_enabled", value); }
     }
 
@@ -60,7 +80,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>>(
@@ -75,7 +99,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required Price Price
     {
-        get { return this._rawData.GetNotNullClass<Price>("price"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Price>("price");
+        }
         init { this._rawData.Set("price", value); }
     }
 
@@ -84,7 +112,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
@@ -93,7 +125,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required ApiEnum<string, TaxCategory> TaxCategory
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category");
+        }
         init { this._rawData.Set("tax_category", value); }
     }
 
@@ -102,7 +138,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public required DateTimeOffset UpdatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at");
+        }
         init { this._rawData.Set("updated_at", value); }
     }
 
@@ -111,7 +151,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public IReadOnlyList<string>? Addons
     {
-        get { return this._rawData.GetNullableStruct<ImmutableArray<string>>("addons"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("addons");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<string>?>(
@@ -126,7 +170,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public string? Description
     {
-        get { return this._rawData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
         init { this._rawData.Set("description", value); }
     }
 
@@ -134,6 +182,7 @@ public sealed record class Product : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<ProductDigitalProductDelivery>(
                 "digital_product_delivery"
             );
@@ -146,7 +195,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public string? Image
     {
-        get { return this._rawData.GetNullableClass<string>("image"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("image");
+        }
         init { this._rawData.Set("image", value); }
     }
 
@@ -155,7 +208,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public string? LicenseKeyActivationMessage
     {
-        get { return this._rawData.GetNullableClass<string>("license_key_activation_message"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("license_key_activation_message");
+        }
         init { this._rawData.Set("license_key_activation_message", value); }
     }
 
@@ -164,7 +221,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public int? LicenseKeyActivationsLimit
     {
-        get { return this._rawData.GetNullableStruct<int>("license_key_activations_limit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("license_key_activations_limit");
+        }
         init { this._rawData.Set("license_key_activations_limit", value); }
     }
 
@@ -173,7 +234,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public LicenseKeyDuration? LicenseKeyDuration
     {
-        get { return this._rawData.GetNullableClass<LicenseKeyDuration>("license_key_duration"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<LicenseKeyDuration>("license_key_duration");
+        }
         init { this._rawData.Set("license_key_duration", value); }
     }
 
@@ -182,7 +247,11 @@ public sealed record class Product : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return this._rawData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
@@ -251,7 +320,11 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
     /// </summary>
     public string? ExternalUrl
     {
-        get { return this._rawData.GetNullableClass<string>("external_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("external_url");
+        }
         init { this._rawData.Set("external_url", value); }
     }
 
@@ -260,7 +333,11 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
     /// </summary>
     public IReadOnlyList<File>? Files
     {
-        get { return this._rawData.GetNullableStruct<ImmutableArray<File>>("files"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<File>>("files");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<File>?>(
@@ -275,7 +352,11 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
     /// </summary>
     public string? Instructions
     {
-        get { return this._rawData.GetNullableClass<string>("instructions"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("instructions");
+        }
         init { this._rawData.Set("instructions", value); }
     }
 
@@ -332,19 +413,31 @@ public sealed record class File : JsonModel
 {
     public required string FileID
     {
-        get { return this._rawData.GetNotNullClass<string>("file_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("file_id");
+        }
         init { this._rawData.Set("file_id", value); }
     }
 
     public required string FileName
     {
-        get { return this._rawData.GetNotNullClass<string>("file_name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("file_name");
+        }
         init { this._rawData.Set("file_name", value); }
     }
 
     public required string Url
     {
-        get { return this._rawData.GetNotNullClass<string>("url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("url");
+        }
         init { this._rawData.Set("url", value); }
     }
 

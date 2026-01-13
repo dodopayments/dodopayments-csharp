@@ -25,7 +25,11 @@ public sealed record class MeterFilter : JsonModel
     /// </summary>
     public required Clauses Clauses
     {
-        get { return this._rawData.GetNotNullClass<Clauses>("clauses"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Clauses>("clauses");
+        }
         init { this._rawData.Set("clauses", value); }
     }
 
@@ -36,6 +40,7 @@ public sealed record class MeterFilter : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, MeterFilterConjunction>>(
                 "conjunction"
             );
@@ -337,13 +342,21 @@ public sealed record class MeterFilterCondition : JsonModel
     /// </summary>
     public required string Key
     {
-        get { return this._rawData.GetNotNullClass<string>("key"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
         init { this._rawData.Set("key", value); }
     }
 
     public required ApiEnum<string, Operator> Operator
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Operator>>("operator"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Operator>>("operator");
+        }
         init { this._rawData.Set("operator", value); }
     }
 
@@ -352,7 +365,11 @@ public sealed record class MeterFilterCondition : JsonModel
     /// </summary>
     public required MeterFilterConditionValue Value
     {
-        get { return this._rawData.GetNotNullClass<MeterFilterConditionValue>("value"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<MeterFilterConditionValue>("value");
+        }
         init { this._rawData.Set("value", value); }
     }
 
@@ -749,7 +766,11 @@ public sealed record class ClausesMeterFilter : JsonModel
     /// </summary>
     public required ClausesMeterFilterClauses Clauses
     {
-        get { return this._rawData.GetNotNullClass<ClausesMeterFilterClauses>("clauses"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ClausesMeterFilterClauses>("clauses");
+        }
         init { this._rawData.Set("clauses", value); }
     }
 
@@ -757,6 +778,7 @@ public sealed record class ClausesMeterFilter : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ApiEnum<string, ClausesMeterFilterConjunction>>(
                 "conjunction"
             );
@@ -1083,7 +1105,11 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : JsonM
     /// </summary>
     public required string Key
     {
-        get { return this._rawData.GetNotNullClass<string>("key"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
         init { this._rawData.Set("key", value); }
     }
 
@@ -1091,6 +1117,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : JsonM
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator>
             >("operator");
@@ -1105,6 +1132,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : JsonM
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ClausesMeterFilterClausesMeterFilterConditionValue>(
                 "value"
             );
@@ -1544,6 +1572,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClauses>(
                 "clauses"
             );
@@ -1555,6 +1584,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction>
             >("conjunction");
@@ -1897,7 +1927,11 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     /// </summary>
     public required string Key
     {
-        get { return this._rawData.GetNotNullClass<string>("key"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
         init { this._rawData.Set("key", value); }
     }
 
@@ -1908,6 +1942,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
                 ApiEnum<
                     string,
@@ -1925,6 +1960,7 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullClass<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
                 "value"
             );
@@ -2380,7 +2416,11 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
     /// </summary>
     public required IReadOnlyList<Clause> Clauses
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<Clause>>("clauses"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<Clause>>("clauses");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<Clause>>(
@@ -2392,7 +2432,11 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
 
     public required ApiEnum<string, Conjunction> Conjunction
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Conjunction>>("conjunction"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Conjunction>>("conjunction");
+        }
         init { this._rawData.Set("conjunction", value); }
     }
 
@@ -2459,13 +2503,21 @@ public sealed record class Clause : JsonModel
     /// </summary>
     public required string Key
     {
-        get { return this._rawData.GetNotNullClass<string>("key"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
         init { this._rawData.Set("key", value); }
     }
 
     public required ApiEnum<string, ClauseOperator> Operator
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, ClauseOperator>>("operator"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, ClauseOperator>>("operator");
+        }
         init { this._rawData.Set("operator", value); }
     }
 
@@ -2474,7 +2526,11 @@ public sealed record class Clause : JsonModel
     /// </summary>
     public required ClauseValue Value
     {
-        get { return this._rawData.GetNotNullClass<ClauseValue>("value"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ClauseValue>("value");
+        }
         init { this._rawData.Set("value", value); }
     }
 

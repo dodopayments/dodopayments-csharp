@@ -18,13 +18,21 @@ public sealed record class DisputeWonWebhookEvent : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
     public required Dispute Data
     {
-        get { return this._rawData.GetNotNullClass<Dispute>("data"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Dispute>("data");
+        }
         init { this._rawData.Set("data", value); }
     }
 
@@ -33,7 +41,11 @@ public sealed record class DisputeWonWebhookEvent : JsonModel
     /// </summary>
     public required System::DateTimeOffset Timestamp
     {
-        get { return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp");
+        }
         init { this._rawData.Set("timestamp", value); }
     }
 
@@ -42,7 +54,11 @@ public sealed record class DisputeWonWebhookEvent : JsonModel
     /// </summary>
     public required ApiEnum<string, Type5> Type
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Type5>>("type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Type5>>("type");
+        }
         init { this._rawData.Set("type", value); }
     }
 

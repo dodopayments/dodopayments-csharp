@@ -27,13 +27,21 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public required string UrlValue
     {
-        get { return this._rawBodyData.GetNotNullClass<string>("url"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("url");
+        }
         init { this._rawBodyData.Set("url", value); }
     }
 
     public string? Description
     {
-        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("description");
+        }
         init { this._rawBodyData.Set("description", value); }
     }
 
@@ -44,7 +52,11 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public bool? Disabled
     {
-        get { return this._rawBodyData.GetNullableStruct<bool>("disabled"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("disabled");
+        }
         init { this._rawBodyData.Set("disabled", value); }
     }
 
@@ -57,6 +69,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableStruct<
                 ImmutableArray<ApiEnum<string, WebhookEventType>>
             >("filter_types");
@@ -82,6 +95,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("headers");
         }
         init
@@ -98,7 +112,11 @@ public sealed record class WebhookCreateParams : ParamsBase
     /// </summary>
     public string? IdempotencyKey
     {
-        get { return this._rawBodyData.GetNullableClass<string>("idempotency_key"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("idempotency_key");
+        }
         init { this._rawBodyData.Set("idempotency_key", value); }
     }
 
@@ -109,6 +127,7 @@ public sealed record class WebhookCreateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
@@ -122,7 +141,11 @@ public sealed record class WebhookCreateParams : ParamsBase
 
     public int? RateLimit
     {
-        get { return this._rawBodyData.GetNullableStruct<int>("rate_limit"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("rate_limit");
+        }
         init { this._rawBodyData.Set("rate_limit", value); }
     }
 

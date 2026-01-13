@@ -27,7 +27,11 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public IReadOnlyList<string>? Addons
     {
-        get { return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("addons"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("addons");
+        }
         init
         {
             this._rawBodyData.Set<ImmutableArray<string>?>(
@@ -39,7 +43,11 @@ public sealed record class ProductUpdateParams : ParamsBase
 
     public string? BrandID
     {
-        get { return this._rawBodyData.GetNullableClass<string>("brand_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("brand_id");
+        }
         init { this._rawBodyData.Set("brand_id", value); }
     }
 
@@ -48,7 +56,11 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public string? Description
     {
-        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("description");
+        }
         init { this._rawBodyData.Set("description", value); }
     }
 
@@ -59,6 +71,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<ProductUpdateParamsDigitalProductDelivery>(
                 "digital_product_delivery"
             );
@@ -71,7 +84,11 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public string? ImageID
     {
-        get { return this._rawBodyData.GetNullableClass<string>("image_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("image_id");
+        }
         init { this._rawBodyData.Set("image_id", value); }
     }
 
@@ -83,7 +100,11 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public string? LicenseKeyActivationMessage
     {
-        get { return this._rawBodyData.GetNullableClass<string>("license_key_activation_message"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("license_key_activation_message");
+        }
         init { this._rawBodyData.Set("license_key_activation_message", value); }
     }
 
@@ -95,7 +116,11 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public int? LicenseKeyActivationsLimit
     {
-        get { return this._rawBodyData.GetNullableStruct<int>("license_key_activations_limit"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("license_key_activations_limit");
+        }
         init { this._rawBodyData.Set("license_key_activations_limit", value); }
     }
 
@@ -109,6 +134,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<LicenseKeyDuration>("license_key_duration");
         }
         init { this._rawBodyData.Set("license_key_duration", value); }
@@ -122,7 +148,11 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public bool? LicenseKeyEnabled
     {
-        get { return this._rawBodyData.GetNullableStruct<bool>("license_key_enabled"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("license_key_enabled");
+        }
         init { this._rawBodyData.Set("license_key_enabled", value); }
     }
 
@@ -133,6 +163,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
@@ -149,7 +180,11 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public string? Name
     {
-        get { return this._rawBodyData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("name");
+        }
         init { this._rawBodyData.Set("name", value); }
     }
 
@@ -158,7 +193,11 @@ public sealed record class ProductUpdateParams : ParamsBase
     /// </summary>
     public Price? Price
     {
-        get { return this._rawBodyData.GetNullableClass<Price>("price"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<Price>("price");
+        }
         init { this._rawBodyData.Set("price", value); }
     }
 
@@ -169,6 +208,7 @@ public sealed record class ProductUpdateParams : ParamsBase
     {
         get
         {
+            this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<ApiEnum<string, TaxCategory>>("tax_category");
         }
         init { this._rawBodyData.Set("tax_category", value); }
@@ -268,7 +308,11 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : JsonModel
     /// </summary>
     public string? ExternalUrl
     {
-        get { return this._rawData.GetNullableClass<string>("external_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("external_url");
+        }
         init { this._rawData.Set("external_url", value); }
     }
 
@@ -277,7 +321,11 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : JsonModel
     /// </summary>
     public IReadOnlyList<string>? Files
     {
-        get { return this._rawData.GetNullableStruct<ImmutableArray<string>>("files"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("files");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<string>?>(
@@ -292,7 +340,11 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : JsonModel
     /// </summary>
     public string? Instructions
     {
-        get { return this._rawData.GetNullableClass<string>("instructions"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("instructions");
+        }
         init { this._rawData.Set("instructions", value); }
     }
 

@@ -14,7 +14,11 @@ public sealed record class WebhookRetrieveSecretResponse : JsonModel
 {
     public required string Secret
     {
-        get { return this._rawData.GetNotNullClass<string>("secret"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("secret");
+        }
         init { this._rawData.Set("secret", value); }
     }
 

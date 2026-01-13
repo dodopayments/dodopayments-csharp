@@ -22,6 +22,7 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<ImmutableArray<AddonCartResponseItem>>("addons");
         }
         init
@@ -38,7 +39,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// </summary>
     public required CustomerLimitedDetails Customer
     {
-        get { return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer");
+        }
         init { this._rawData.Set("customer", value); }
     }
 
@@ -47,7 +52,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>>(
@@ -62,7 +71,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// </summary>
     public required string PaymentID
     {
-        get { return this._rawData.GetNotNullClass<string>("payment_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_id");
+        }
         init { this._rawData.Set("payment_id", value); }
     }
 
@@ -71,7 +84,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// </summary>
     public required int RecurringPreTaxAmount
     {
-        get { return this._rawData.GetNotNullStruct<int>("recurring_pre_tax_amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("recurring_pre_tax_amount");
+        }
         init { this._rawData.Set("recurring_pre_tax_amount", value); }
     }
 
@@ -80,7 +97,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// </summary>
     public required string SubscriptionID
     {
-        get { return this._rawData.GetNotNullClass<string>("subscription_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("subscription_id");
+        }
         init { this._rawData.Set("subscription_id", value); }
     }
 
@@ -90,7 +111,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// </summary>
     public string? ClientSecret
     {
-        get { return this._rawData.GetNullableClass<string>("client_secret"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("client_secret");
+        }
         init { this._rawData.Set("client_secret", value); }
     }
 
@@ -99,7 +124,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// </summary>
     public string? DiscountID
     {
-        get { return this._rawData.GetNullableClass<string>("discount_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("discount_id");
+        }
         init { this._rawData.Set("discount_id", value); }
     }
 
@@ -108,7 +137,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// </summary>
     public DateTimeOffset? ExpiresOn
     {
-        get { return this._rawData.GetNullableStruct<DateTimeOffset>("expires_on"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_on");
+        }
         init { this._rawData.Set("expires_on", value); }
     }
 
@@ -119,6 +152,7 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableStruct<ImmutableArray<OneTimeProductCart>>(
                 "one_time_product_cart"
             );
@@ -137,7 +171,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// </summary>
     public string? PaymentLink
     {
-        get { return this._rawData.GetNullableClass<string>("payment_link"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_link");
+        }
         init { this._rawData.Set("payment_link", value); }
     }
 
@@ -203,13 +241,21 @@ public sealed record class OneTimeProductCart : JsonModel
 {
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
     public required int Quantity
     {
-        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("quantity");
+        }
         init { this._rawData.Set("quantity", value); }
     }
 

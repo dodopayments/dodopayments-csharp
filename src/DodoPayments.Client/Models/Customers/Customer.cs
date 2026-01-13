@@ -13,31 +13,51 @@ public sealed record class Customer : JsonModel
 {
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
     public required string CustomerID
     {
-        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
         init { this._rawData.Set("customer_id", value); }
     }
 
     public required string Email
     {
-        get { return this._rawData.GetNotNullClass<string>("email"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("email");
+        }
         init { this._rawData.Set("email", value); }
     }
 
     public required string Name
     {
-        get { return this._rawData.GetNotNullClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
@@ -46,7 +66,11 @@ public sealed record class Customer : JsonModel
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {
-        get { return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             if (value == null)
@@ -63,7 +87,11 @@ public sealed record class Customer : JsonModel
 
     public string? PhoneNumber
     {
-        get { return this._rawData.GetNullableClass<string>("phone_number"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("phone_number");
+        }
         init { this._rawData.Set("phone_number", value); }
     }
 

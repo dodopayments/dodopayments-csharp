@@ -17,7 +17,11 @@ public sealed record class CustomerPortalCreateParams : ParamsBase
     /// </summary>
     public bool? SendEmail
     {
-        get { return this._rawQueryData.GetNullableStruct<bool>("send_email"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<bool>("send_email");
+        }
         init
         {
             if (value == null)

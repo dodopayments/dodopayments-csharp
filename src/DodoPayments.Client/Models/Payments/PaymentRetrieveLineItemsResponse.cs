@@ -19,13 +19,21 @@ public sealed record class PaymentRetrieveLineItemsResponse : JsonModel
 {
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required IReadOnlyList<Item> Items
     {
-        get { return this._rawData.GetNotNullStruct<ImmutableArray<Item>>("items"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<Item>>("items");
+        }
         init
         {
             this._rawData.Set<ImmutableArray<Item>>(
@@ -87,37 +95,61 @@ public sealed record class Item : JsonModel
 {
     public required int Amount
     {
-        get { return this._rawData.GetNotNullStruct<int>("amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("amount");
+        }
         init { this._rawData.Set("amount", value); }
     }
 
     public required string ItemsID
     {
-        get { return this._rawData.GetNotNullClass<string>("items_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("items_id");
+        }
         init { this._rawData.Set("items_id", value); }
     }
 
     public required int RefundableAmount
     {
-        get { return this._rawData.GetNotNullStruct<int>("refundable_amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("refundable_amount");
+        }
         init { this._rawData.Set("refundable_amount", value); }
     }
 
     public required int Tax
     {
-        get { return this._rawData.GetNotNullStruct<int>("tax"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("tax");
+        }
         init { this._rawData.Set("tax", value); }
     }
 
     public string? Description
     {
-        get { return this._rawData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
         init { this._rawData.Set("description", value); }
     }
 
     public string? Name
     {
-        get { return this._rawData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 

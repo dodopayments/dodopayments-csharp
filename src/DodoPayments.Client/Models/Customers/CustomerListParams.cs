@@ -15,7 +15,11 @@ public sealed record class CustomerListParams : ParamsBase
     /// </summary>
     public string? Email
     {
-        get { return this._rawQueryData.GetNullableClass<string>("email"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("email");
+        }
         init
         {
             if (value == null)
@@ -32,7 +36,11 @@ public sealed record class CustomerListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_number");
+        }
         init
         {
             if (value == null)
@@ -49,7 +57,11 @@ public sealed record class CustomerListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_size");
+        }
         init
         {
             if (value == null)

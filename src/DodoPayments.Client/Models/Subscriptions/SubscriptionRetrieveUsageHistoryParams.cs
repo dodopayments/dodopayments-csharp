@@ -46,7 +46,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public DateTimeOffset? EndDate
     {
-        get { return this._rawQueryData.GetNullableStruct<DateTimeOffset>("end_date"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("end_date");
+        }
         init { this._rawQueryData.Set("end_date", value); }
     }
 
@@ -55,7 +59,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public string? MeterID
     {
-        get { return this._rawQueryData.GetNullableClass<string>("meter_id"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("meter_id");
+        }
         init { this._rawQueryData.Set("meter_id", value); }
     }
 
@@ -64,7 +72,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_number");
+        }
         init { this._rawQueryData.Set("page_number", value); }
     }
 
@@ -73,7 +85,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_size");
+        }
         init { this._rawQueryData.Set("page_size", value); }
     }
 
@@ -82,7 +98,11 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     /// </summary>
     public DateTimeOffset? StartDate
     {
-        get { return this._rawQueryData.GetNullableStruct<DateTimeOffset>("start_date"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("start_date");
+        }
         init { this._rawQueryData.Set("start_date", value); }
     }
 

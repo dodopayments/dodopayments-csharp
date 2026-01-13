@@ -20,6 +20,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<
                 ImmutableArray<CheckoutSessionRequestProductCart>
             >("product_cart");
@@ -45,6 +46,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableStruct<
                 ImmutableArray<ApiEnum<string, PaymentMethodTypes>>
             >("allowed_payment_method_types");
@@ -65,6 +67,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<CheckoutSessionRequestBillingAddress>(
                 "billing_address"
             );
@@ -79,6 +82,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("billing_currency");
         }
         init { this._rawData.Set("billing_currency", value); }
@@ -90,7 +94,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// </summary>
     public bool? Confirm
     {
-        get { return this._rawData.GetNullableStruct<bool>("confirm"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("confirm");
+        }
         init
         {
             if (value == null)
@@ -107,7 +115,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// </summary>
     public CustomerRequest? Customer
     {
-        get { return this._rawData.GetNullableClass<CustomerRequest>("customer"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CustomerRequest>("customer");
+        }
         init { this._rawData.Set("customer", value); }
     }
 
@@ -118,6 +130,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<CheckoutSessionRequestCustomization>(
                 "customization"
             );
@@ -135,7 +148,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
 
     public string? DiscountCode
     {
-        get { return this._rawData.GetNullableClass<string>("discount_code"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("discount_code");
+        }
         init { this._rawData.Set("discount_code", value); }
     }
 
@@ -143,6 +160,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<CheckoutSessionRequestFeatureFlags>(
                 "feature_flags"
             );
@@ -163,7 +181,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// </summary>
     public bool? Force3ds
     {
-        get { return this._rawData.GetNullableStruct<bool>("force_3ds"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("force_3ds");
+        }
         init { this._rawData.Set("force_3ds", value); }
     }
 
@@ -172,7 +194,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {
-        get { return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>?>(
@@ -188,7 +214,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// </summary>
     public bool? MinimalAddress
     {
-        get { return this._rawData.GetNullableStruct<bool>("minimal_address"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("minimal_address");
+        }
         init
         {
             if (value == null)
@@ -206,7 +236,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// </summary>
     public string? PaymentMethodID
     {
-        get { return this._rawData.GetNullableClass<string>("payment_method_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method_id");
+        }
         init { this._rawData.Set("payment_method_id", value); }
     }
 
@@ -215,7 +249,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// </summary>
     public string? ReturnUrl
     {
-        get { return this._rawData.GetNullableClass<string>("return_url"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("return_url");
+        }
         init { this._rawData.Set("return_url", value); }
     }
 
@@ -224,7 +262,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// </summary>
     public bool? ShortLink
     {
-        get { return this._rawData.GetNullableStruct<bool>("short_link"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("short_link");
+        }
         init
         {
             if (value == null)
@@ -241,7 +283,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// </summary>
     public bool? ShowSavedPaymentMethods
     {
-        get { return this._rawData.GetNullableStruct<bool>("show_saved_payment_methods"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("show_saved_payment_methods");
+        }
         init
         {
             if (value == null)
@@ -257,6 +303,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<CheckoutSessionRequestSubscriptionData>(
                 "subscription_data"
             );
@@ -347,13 +394,21 @@ public sealed record class CheckoutSessionRequestProductCart : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
     public required int Quantity
     {
-        get { return this._rawData.GetNotNullStruct<int>("quantity"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("quantity");
+        }
         init { this._rawData.Set("quantity", value); }
     }
 
@@ -364,6 +419,7 @@ public sealed record class CheckoutSessionRequestProductCart : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableStruct<ImmutableArray<Subscriptions::AttachAddon>>(
                 "addons"
             );
@@ -388,7 +444,11 @@ public sealed record class CheckoutSessionRequestProductCart : JsonModel
     /// </summary>
     public int? Amount
     {
-        get { return this._rawData.GetNullableStruct<int>("amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("amount");
+        }
         init { this._rawData.Set("amount", value); }
     }
 
@@ -457,7 +517,11 @@ public sealed record class CheckoutSessionRequestBillingAddress : JsonModel
     /// </summary>
     public required ApiEnum<string, CountryCode> Country
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, CountryCode>>("country"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, CountryCode>>("country");
+        }
         init { this._rawData.Set("country", value); }
     }
 
@@ -466,7 +530,11 @@ public sealed record class CheckoutSessionRequestBillingAddress : JsonModel
     /// </summary>
     public string? City
     {
-        get { return this._rawData.GetNullableClass<string>("city"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("city");
+        }
         init { this._rawData.Set("city", value); }
     }
 
@@ -475,7 +543,11 @@ public sealed record class CheckoutSessionRequestBillingAddress : JsonModel
     /// </summary>
     public string? State
     {
-        get { return this._rawData.GetNullableClass<string>("state"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("state");
+        }
         init { this._rawData.Set("state", value); }
     }
 
@@ -484,7 +556,11 @@ public sealed record class CheckoutSessionRequestBillingAddress : JsonModel
     /// </summary>
     public string? Street
     {
-        get { return this._rawData.GetNullableClass<string>("street"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("street");
+        }
         init { this._rawData.Set("street", value); }
     }
 
@@ -493,7 +569,11 @@ public sealed record class CheckoutSessionRequestBillingAddress : JsonModel
     /// </summary>
     public string? Zipcode
     {
-        get { return this._rawData.GetNullableClass<string>("zipcode"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("zipcode");
+        }
         init { this._rawData.Set("zipcode", value); }
     }
 
@@ -568,7 +648,11 @@ public sealed record class CheckoutSessionRequestCustomization : JsonModel
     /// </summary>
     public string? ForceLanguage
     {
-        get { return this._rawData.GetNullableClass<string>("force_language"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("force_language");
+        }
         init { this._rawData.Set("force_language", value); }
     }
 
@@ -579,7 +663,11 @@ public sealed record class CheckoutSessionRequestCustomization : JsonModel
     /// </summary>
     public bool? ShowOnDemandTag
     {
-        get { return this._rawData.GetNullableStruct<bool>("show_on_demand_tag"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("show_on_demand_tag");
+        }
         init
         {
             if (value == null)
@@ -598,7 +686,11 @@ public sealed record class CheckoutSessionRequestCustomization : JsonModel
     /// </summary>
     public bool? ShowOrderDetails
     {
-        get { return this._rawData.GetNullableStruct<bool>("show_order_details"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("show_order_details");
+        }
         init
         {
             if (value == null)
@@ -619,6 +711,7 @@ public sealed record class CheckoutSessionRequestCustomization : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<
                 ApiEnum<string, CheckoutSessionRequestCustomizationTheme>
             >("theme");
@@ -748,7 +841,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
     /// </summary>
     public bool? AllowCurrencySelection
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_currency_selection"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_currency_selection");
+        }
         init
         {
             if (value == null)
@@ -762,7 +859,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
 
     public bool? AllowCustomerEditingCity
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_city"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_editing_city");
+        }
         init
         {
             if (value == null)
@@ -776,7 +877,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
 
     public bool? AllowCustomerEditingCountry
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_country"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_editing_country");
+        }
         init
         {
             if (value == null)
@@ -790,7 +895,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
 
     public bool? AllowCustomerEditingEmail
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_email"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_editing_email");
+        }
         init
         {
             if (value == null)
@@ -804,7 +913,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
 
     public bool? AllowCustomerEditingName
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_editing_name");
+        }
         init
         {
             if (value == null)
@@ -818,7 +931,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
 
     public bool? AllowCustomerEditingState
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_state"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_editing_state");
+        }
         init
         {
             if (value == null)
@@ -832,7 +949,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
 
     public bool? AllowCustomerEditingStreet
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_street"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_editing_street");
+        }
         init
         {
             if (value == null)
@@ -846,7 +967,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
 
     public bool? AllowCustomerEditingZipcode
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_customer_editing_zipcode"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_editing_zipcode");
+        }
         init
         {
             if (value == null)
@@ -865,7 +990,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
     /// </summary>
     public bool? AllowDiscountCode
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_discount_code"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_discount_code");
+        }
         init
         {
             if (value == null)
@@ -884,7 +1013,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
     /// </summary>
     public bool? AllowPhoneNumberCollection
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_phone_number_collection"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_phone_number_collection");
+        }
         init
         {
             if (value == null)
@@ -903,7 +1036,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
     /// </summary>
     public bool? AllowTaxID
     {
-        get { return this._rawData.GetNullableStruct<bool>("allow_tax_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_tax_id");
+        }
         init
         {
             if (value == null)
@@ -923,7 +1060,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
     /// </summary>
     public bool? AlwaysCreateNewCustomer
     {
-        get { return this._rawData.GetNullableStruct<bool>("always_create_new_customer"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("always_create_new_customer");
+        }
         init
         {
             if (value == null)
@@ -942,7 +1083,11 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
     /// </summary>
     public bool? RedirectImmediately
     {
-        get { return this._rawData.GetNullableStruct<bool>("redirect_immediately"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("redirect_immediately");
+        }
         init
         {
             if (value == null)
@@ -1021,6 +1166,7 @@ public sealed record class CheckoutSessionRequestSubscriptionData : JsonModel
     {
         get
         {
+            this._rawData.Freeze();
             return this._rawData.GetNullableClass<Subscriptions::OnDemandSubscription>("on_demand");
         }
         init { this._rawData.Set("on_demand", value); }
@@ -1032,7 +1178,11 @@ public sealed record class CheckoutSessionRequestSubscriptionData : JsonModel
     /// </summary>
     public int? TrialPeriodDays
     {
-        get { return this._rawData.GetNullableStruct<int>("trial_period_days"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("trial_period_days");
+        }
         init { this._rawData.Set("trial_period_days", value); }
     }
 

@@ -15,7 +15,11 @@ public sealed record class MeterListParams : ParamsBase
     /// </summary>
     public bool? Archived
     {
-        get { return this._rawQueryData.GetNullableStruct<bool>("archived"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<bool>("archived");
+        }
         init
         {
             if (value == null)
@@ -32,7 +36,11 @@ public sealed record class MeterListParams : ParamsBase
     /// </summary>
     public int? PageNumber
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_number"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_number");
+        }
         init
         {
             if (value == null)
@@ -49,7 +57,11 @@ public sealed record class MeterListParams : ParamsBase
     /// </summary>
     public int? PageSize
     {
-        get { return this._rawQueryData.GetNullableStruct<int>("page_size"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<int>("page_size");
+        }
         init
         {
             if (value == null)

@@ -19,31 +19,51 @@ public sealed record class BrandCreateParams : ParamsBase
 
     public string? Description
     {
-        get { return this._rawBodyData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("description");
+        }
         init { this._rawBodyData.Set("description", value); }
     }
 
     public string? Name
     {
-        get { return this._rawBodyData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("name");
+        }
         init { this._rawBodyData.Set("name", value); }
     }
 
     public string? StatementDescriptor
     {
-        get { return this._rawBodyData.GetNullableClass<string>("statement_descriptor"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("statement_descriptor");
+        }
         init { this._rawBodyData.Set("statement_descriptor", value); }
     }
 
     public string? SupportEmail
     {
-        get { return this._rawBodyData.GetNullableClass<string>("support_email"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("support_email");
+        }
         init { this._rawBodyData.Set("support_email", value); }
     }
 
     public string? UrlValue
     {
-        get { return this._rawBodyData.GetNullableClass<string>("url"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("url");
+        }
         init { this._rawBodyData.Set("url", value); }
     }
 

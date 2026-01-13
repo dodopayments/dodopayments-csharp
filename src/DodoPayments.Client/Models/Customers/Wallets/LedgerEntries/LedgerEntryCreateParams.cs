@@ -24,7 +24,11 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
 
     public required long Amount
     {
-        get { return this._rawBodyData.GetNotNullStruct<long>("amount"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullStruct<long>("amount");
+        }
         init { this._rawBodyData.Set("amount", value); }
     }
 
@@ -33,7 +37,11 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     /// </summary>
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawBodyData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawBodyData.Set("currency", value); }
     }
 
@@ -42,7 +50,11 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     /// </summary>
     public required ApiEnum<string, EntryType> EntryType
     {
-        get { return this._rawBodyData.GetNotNullClass<ApiEnum<string, EntryType>>("entry_type"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<ApiEnum<string, EntryType>>("entry_type");
+        }
         init { this._rawBodyData.Set("entry_type", value); }
     }
 
@@ -51,13 +63,21 @@ public sealed record class LedgerEntryCreateParams : ParamsBase
     /// </summary>
     public string? IdempotencyKey
     {
-        get { return this._rawBodyData.GetNullableClass<string>("idempotency_key"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("idempotency_key");
+        }
         init { this._rawBodyData.Set("idempotency_key", value); }
     }
 
     public string? Reason
     {
-        get { return this._rawBodyData.GetNullableClass<string>("reason"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("reason");
+        }
         init { this._rawBodyData.Set("reason", value); }
     }
 

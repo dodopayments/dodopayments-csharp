@@ -14,7 +14,11 @@ public sealed record class ImageUpdateParams : ParamsBase
 
     public bool? ForceUpdate
     {
-        get { return this._rawQueryData.GetNullableStruct<bool>("force_update"); }
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<bool>("force_update");
+        }
         init
         {
             if (value == null)

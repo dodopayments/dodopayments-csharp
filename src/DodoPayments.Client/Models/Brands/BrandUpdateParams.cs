@@ -24,25 +24,41 @@ public sealed record class BrandUpdateParams : ParamsBase
     /// </summary>
     public string? ImageID
     {
-        get { return this._rawBodyData.GetNullableClass<string>("image_id"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("image_id");
+        }
         init { this._rawBodyData.Set("image_id", value); }
     }
 
     public string? Name
     {
-        get { return this._rawBodyData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("name");
+        }
         init { this._rawBodyData.Set("name", value); }
     }
 
     public string? StatementDescriptor
     {
-        get { return this._rawBodyData.GetNullableClass<string>("statement_descriptor"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("statement_descriptor");
+        }
         init { this._rawBodyData.Set("statement_descriptor", value); }
     }
 
     public string? SupportEmail
     {
-        get { return this._rawBodyData.GetNullableClass<string>("support_email"); }
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("support_email");
+        }
         init { this._rawBodyData.Set("support_email", value); }
     }
 

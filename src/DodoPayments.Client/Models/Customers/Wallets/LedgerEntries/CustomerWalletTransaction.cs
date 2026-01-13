@@ -17,73 +17,121 @@ public sealed record class CustomerWalletTransaction : JsonModel
 {
     public required string ID
     {
-        get { return this._rawData.GetNotNullClass<string>("id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
         init { this._rawData.Set("id", value); }
     }
 
     public required long AfterBalance
     {
-        get { return this._rawData.GetNotNullStruct<long>("after_balance"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("after_balance");
+        }
         init { this._rawData.Set("after_balance", value); }
     }
 
     public required long Amount
     {
-        get { return this._rawData.GetNotNullStruct<long>("amount"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("amount");
+        }
         init { this._rawData.Set("amount", value); }
     }
 
     public required long BeforeBalance
     {
-        get { return this._rawData.GetNotNullStruct<long>("before_balance"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("before_balance");
+        }
         init { this._rawData.Set("before_balance", value); }
     }
 
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
     public required ApiEnum<string, Currency> Currency
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
     public required string CustomerID
     {
-        get { return this._rawData.GetNotNullClass<string>("customer_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
         init { this._rawData.Set("customer_id", value); }
     }
 
     public required ApiEnum<string, EventType> EventType
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, EventType>>("event_type"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, EventType>>("event_type");
+        }
         init { this._rawData.Set("event_type", value); }
     }
 
     public required bool IsCredit
     {
-        get { return this._rawData.GetNotNullStruct<bool>("is_credit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("is_credit");
+        }
         init { this._rawData.Set("is_credit", value); }
     }
 
     public string? Reason
     {
-        get { return this._rawData.GetNullableClass<string>("reason"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("reason");
+        }
         init { this._rawData.Set("reason", value); }
     }
 
     public string? ReferenceObjectID
     {
-        get { return this._rawData.GetNullableClass<string>("reference_object_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("reference_object_id");
+        }
         init { this._rawData.Set("reference_object_id", value); }
     }
 

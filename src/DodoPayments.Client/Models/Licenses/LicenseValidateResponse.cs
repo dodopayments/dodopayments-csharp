@@ -12,7 +12,11 @@ public sealed record class LicenseValidateResponse : JsonModel
 {
     public required bool Valid
     {
-        get { return this._rawData.GetNotNullStruct<bool>("valid"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("valid");
+        }
         init { this._rawData.Set("valid", value); }
     }
 

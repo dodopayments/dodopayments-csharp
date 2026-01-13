@@ -17,7 +17,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required string BusinessID
     {
-        get { return this._rawData.GetNotNullClass<string>("business_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
         init { this._rawData.Set("business_id", value); }
     }
 
@@ -26,7 +30,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required DateTimeOffset CreatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
         init { this._rawData.Set("created_at", value); }
     }
 
@@ -35,7 +43,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required bool IsRecurring
     {
-        get { return this._rawData.GetNotNullStruct<bool>("is_recurring"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("is_recurring");
+        }
         init { this._rawData.Set("is_recurring", value); }
     }
 
@@ -44,7 +56,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
-        get { return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
         init
         {
             this._rawData.Set<FrozenDictionary<string, string>>(
@@ -59,7 +75,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required string ProductID
     {
-        get { return this._rawData.GetNotNullClass<string>("product_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
         init { this._rawData.Set("product_id", value); }
     }
 
@@ -68,7 +88,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required ApiEnum<string, TaxCategory> TaxCategory
     {
-        get { return this._rawData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, TaxCategory>>("tax_category");
+        }
         init { this._rawData.Set("tax_category", value); }
     }
 
@@ -77,7 +101,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public required DateTimeOffset UpdatedAt
     {
-        get { return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at");
+        }
         init { this._rawData.Set("updated_at", value); }
     }
 
@@ -86,7 +114,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public ApiEnum<string, Currency>? Currency
     {
-        get { return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency");
+        }
         init { this._rawData.Set("currency", value); }
     }
 
@@ -95,7 +127,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public string? Description
     {
-        get { return this._rawData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
         init { this._rawData.Set("description", value); }
     }
 
@@ -104,7 +140,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public string? Image
     {
-        get { return this._rawData.GetNullableClass<string>("image"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("image");
+        }
         init { this._rawData.Set("image", value); }
     }
 
@@ -113,7 +153,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return this._rawData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
@@ -129,7 +173,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public int? Price
     {
-        get { return this._rawData.GetNullableStruct<int>("price"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("price");
+        }
         init { this._rawData.Set("price", value); }
     }
 
@@ -138,7 +186,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public Price? PriceDetail
     {
-        get { return this._rawData.GetNullableClass<Price>("price_detail"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Price>("price_detail");
+        }
         init { this._rawData.Set("price_detail", value); }
     }
 
@@ -147,7 +199,11 @@ public sealed record class ProductListResponse : JsonModel
     /// </summary>
     public bool? TaxInclusive
     {
-        get { return this._rawData.GetNullableStruct<bool>("tax_inclusive"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("tax_inclusive");
+        }
         init { this._rawData.Set("tax_inclusive", value); }
     }
 

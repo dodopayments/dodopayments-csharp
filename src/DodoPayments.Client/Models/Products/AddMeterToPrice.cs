@@ -12,7 +12,11 @@ public sealed record class AddMeterToPrice : JsonModel
 {
     public required string MeterID
     {
-        get { return this._rawData.GetNotNullClass<string>("meter_id"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("meter_id");
+        }
         init { this._rawData.Set("meter_id", value); }
     }
 
@@ -22,7 +26,11 @@ public sealed record class AddMeterToPrice : JsonModel
     /// </summary>
     public required string PricePerUnit
     {
-        get { return this._rawData.GetNotNullClass<string>("price_per_unit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("price_per_unit");
+        }
         init { this._rawData.Set("price_per_unit", value); }
     }
 
@@ -31,13 +39,21 @@ public sealed record class AddMeterToPrice : JsonModel
     /// </summary>
     public string? Description
     {
-        get { return this._rawData.GetNullableClass<string>("description"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
         init { this._rawData.Set("description", value); }
     }
 
     public long? FreeThreshold
     {
-        get { return this._rawData.GetNullableStruct<long>("free_threshold"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("free_threshold");
+        }
         init { this._rawData.Set("free_threshold", value); }
     }
 
@@ -46,7 +62,11 @@ public sealed record class AddMeterToPrice : JsonModel
     /// </summary>
     public string? MeasurementUnit
     {
-        get { return this._rawData.GetNullableClass<string>("measurement_unit"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("measurement_unit");
+        }
         init { this._rawData.Set("measurement_unit", value); }
     }
 
@@ -55,7 +75,11 @@ public sealed record class AddMeterToPrice : JsonModel
     /// </summary>
     public string? Name
     {
-        get { return this._rawData.GetNullableClass<string>("name"); }
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
         init { this._rawData.Set("name", value); }
     }
 
