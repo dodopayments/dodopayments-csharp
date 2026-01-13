@@ -116,15 +116,12 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public async Task ChangePlan(
+    public Task ChangePlan(
         SubscriptionChangePlanParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        using var response = await this
-            .WithRawResponse.ChangePlan(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+        return this.WithRawResponse.ChangePlan(parameters, cancellationToken);
     }
 
     /// <inheritdoc/>

@@ -115,15 +115,12 @@ public sealed class WebhookService : IWebhookService
     }
 
     /// <inheritdoc/>
-    public async Task Delete(
+    public Task Delete(
         WebhookDeleteParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        using var response = await this
-            .WithRawResponse.Delete(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+        return this.WithRawResponse.Delete(parameters, cancellationToken);
     }
 
     /// <inheritdoc/>
