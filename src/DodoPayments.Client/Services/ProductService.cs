@@ -296,7 +296,7 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
 
         HttpRequest<ProductUpdateParams> request = new()
         {
-            Method = DodoPaymentsClient.PatchMethod,
+            Method = DodoPaymentsClientWithRawResponse.PatchMethod,
             Params = parameters,
         };
         return this._client.Execute(request, cancellationToken);

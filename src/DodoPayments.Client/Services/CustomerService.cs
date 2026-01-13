@@ -265,7 +265,7 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
 
         HttpRequest<CustomerUpdateParams> request = new()
         {
-            Method = DodoPaymentsClient.PatchMethod,
+            Method = DodoPaymentsClientWithRawResponse.PatchMethod,
             Params = parameters,
         };
         var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
