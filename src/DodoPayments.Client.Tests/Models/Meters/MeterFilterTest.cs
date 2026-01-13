@@ -402,28 +402,28 @@ public class MeterFilterConditionValueTest : TestBase
     [Fact]
     public void StringValidationWorks()
     {
-        MeterFilterConditionValue value = new("string");
+        MeterFilterConditionValue value = "string";
         value.Validate();
     }
 
     [Fact]
     public void DoubleValidationWorks()
     {
-        MeterFilterConditionValue value = new(0);
+        MeterFilterConditionValue value = 0;
         value.Validate();
     }
 
     [Fact]
     public void BoolValidationWorks()
     {
-        MeterFilterConditionValue value = new(true);
+        MeterFilterConditionValue value = true;
         value.Validate();
     }
 
     [Fact]
     public void StringSerializationRoundtripWorks()
     {
-        MeterFilterConditionValue value = new("string");
+        MeterFilterConditionValue value = "string";
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(element);
 
@@ -433,7 +433,7 @@ public class MeterFilterConditionValueTest : TestBase
     [Fact]
     public void DoubleSerializationRoundtripWorks()
     {
-        MeterFilterConditionValue value = new(0);
+        MeterFilterConditionValue value = 0;
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(element);
 
@@ -443,7 +443,7 @@ public class MeterFilterConditionValueTest : TestBase
     [Fact]
     public void BoolSerializationRoundtripWorks()
     {
-        MeterFilterConditionValue value = new(true);
+        MeterFilterConditionValue value = true;
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<MeterFilterConditionValue>(element);
 
@@ -815,28 +815,28 @@ public class ClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
     [Fact]
     public void StringValidationWorks()
     {
-        ClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
+        ClausesMeterFilterClausesMeterFilterConditionValue value = "string";
         value.Validate();
     }
 
     [Fact]
     public void DoubleValidationWorks()
     {
-        ClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
+        ClausesMeterFilterClausesMeterFilterConditionValue value = 0;
         value.Validate();
     }
 
     [Fact]
     public void BoolValidationWorks()
     {
-        ClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
+        ClausesMeterFilterClausesMeterFilterConditionValue value = true;
         value.Validate();
     }
 
     [Fact]
     public void StringSerializationRoundtripWorks()
     {
-        ClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
+        ClausesMeterFilterClausesMeterFilterConditionValue value = "string";
         string element = JsonSerializer.Serialize(value);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(element);
@@ -847,7 +847,7 @@ public class ClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
     [Fact]
     public void DoubleSerializationRoundtripWorks()
     {
-        ClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
+        ClausesMeterFilterClausesMeterFilterConditionValue value = 0;
         string element = JsonSerializer.Serialize(value);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(element);
@@ -858,7 +858,7 @@ public class ClausesMeterFilterClausesMeterFilterConditionValueTest : TestBase
     [Fact]
     public void BoolSerializationRoundtripWorks()
     {
-        ClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
+        ClausesMeterFilterClausesMeterFilterConditionValue value = true;
         string element = JsonSerializer.Serialize(value);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterConditionValue>(element);
@@ -1281,28 +1281,28 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
     [Fact]
     public void StringValidationWorks()
     {
-        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = "string";
         value.Validate();
     }
 
     [Fact]
     public void DoubleValidationWorks()
     {
-        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = 0;
         value.Validate();
     }
 
     [Fact]
     public void BoolValidationWorks()
     {
-        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = true;
         value.Validate();
     }
 
     [Fact]
     public void StringSerializationRoundtripWorks()
     {
-        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new("string");
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = "string";
         string element = JsonSerializer.Serialize(value);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
@@ -1315,7 +1315,7 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
     [Fact]
     public void DoubleSerializationRoundtripWorks()
     {
-        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(0);
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = 0;
         string element = JsonSerializer.Serialize(value);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
@@ -1328,7 +1328,7 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
     [Fact]
     public void BoolSerializationRoundtripWorks()
     {
-        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = new(true);
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue value = true;
         string element = JsonSerializer.Serialize(value);
         var deserialized =
             JsonSerializer.Deserialize<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue>(
@@ -1616,28 +1616,28 @@ public class ClauseValueTest : TestBase
     [Fact]
     public void StringValidationWorks()
     {
-        ClauseValue value = new("string");
+        ClauseValue value = "string";
         value.Validate();
     }
 
     [Fact]
     public void DoubleValidationWorks()
     {
-        ClauseValue value = new(0);
+        ClauseValue value = 0;
         value.Validate();
     }
 
     [Fact]
     public void BoolValidationWorks()
     {
-        ClauseValue value = new(true);
+        ClauseValue value = true;
         value.Validate();
     }
 
     [Fact]
     public void StringSerializationRoundtripWorks()
     {
-        ClauseValue value = new("string");
+        ClauseValue value = "string";
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<ClauseValue>(element);
 
@@ -1647,7 +1647,7 @@ public class ClauseValueTest : TestBase
     [Fact]
     public void DoubleSerializationRoundtripWorks()
     {
-        ClauseValue value = new(0);
+        ClauseValue value = 0;
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<ClauseValue>(element);
 
@@ -1657,7 +1657,7 @@ public class ClauseValueTest : TestBase
     [Fact]
     public void BoolSerializationRoundtripWorks()
     {
-        ClauseValue value = new(true);
+        ClauseValue value = true;
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<ClauseValue>(element);
 

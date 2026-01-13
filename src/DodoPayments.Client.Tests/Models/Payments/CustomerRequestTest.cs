@@ -8,28 +8,26 @@ public class CustomerRequestTest : TestBase
     [Fact]
     public void AttachExistingCustomerValidationWorks()
     {
-        CustomerRequest value = new(new AttachExistingCustomer("customer_id"));
+        CustomerRequest value = new AttachExistingCustomer("customer_id");
         value.Validate();
     }
 
     [Fact]
     public void NewCustomerValidationWorks()
     {
-        CustomerRequest value = new(
-            new NewCustomer()
-            {
-                Email = "email",
-                Name = "name",
-                PhoneNumber = "phone_number",
-            }
-        );
+        CustomerRequest value = new NewCustomer()
+        {
+            Email = "email",
+            Name = "name",
+            PhoneNumber = "phone_number",
+        };
         value.Validate();
     }
 
     [Fact]
     public void AttachExistingCustomerSerializationRoundtripWorks()
     {
-        CustomerRequest value = new(new AttachExistingCustomer("customer_id"));
+        CustomerRequest value = new AttachExistingCustomer("customer_id");
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<CustomerRequest>(element);
 
@@ -39,14 +37,12 @@ public class CustomerRequestTest : TestBase
     [Fact]
     public void NewCustomerSerializationRoundtripWorks()
     {
-        CustomerRequest value = new(
-            new NewCustomer()
-            {
-                Email = "email",
-                Name = "name",
-                PhoneNumber = "phone_number",
-            }
-        );
+        CustomerRequest value = new NewCustomer()
+        {
+            Email = "email",
+            Name = "name",
+            PhoneNumber = "phone_number",
+        };
         string element = JsonSerializer.Serialize(value);
         var deserialized = JsonSerializer.Deserialize<CustomerRequest>(element);
 
