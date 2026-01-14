@@ -65,7 +65,7 @@ public sealed record class CustomerListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public CustomerListPageResponse(List<Customer> items)
+    public CustomerListPageResponse(IReadOnlyList<Customer> items)
         : this()
     {
         this.Items = items;

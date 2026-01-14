@@ -78,7 +78,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : JsonMo
 
     [SetsRequiredMembers]
     public SubscriptionRetrieveUsageHistoryPageResponse(
-        List<SubscriptionRetrieveUsageHistoryResponse> items
+        IReadOnlyList<SubscriptionRetrieveUsageHistoryResponse> items
     )
         : this()
     {

@@ -63,7 +63,7 @@ public sealed record class MeterListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public MeterListPageResponse(List<Meter> items)
+    public MeterListPageResponse(IReadOnlyList<Meter> items)
         : this()
     {
         this.Items = items;

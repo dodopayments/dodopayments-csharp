@@ -63,7 +63,7 @@ public sealed record class AddonListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public AddonListPageResponse(List<AddonResponse> items)
+    public AddonListPageResponse(IReadOnlyList<AddonResponse> items)
         : this()
     {
         this.Items = items;

@@ -74,7 +74,7 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public CustomerRetrievePaymentMethodsResponse(List<Item> items)
+    public CustomerRetrievePaymentMethodsResponse(IReadOnlyList<Item> items)
         : this()
     {
         this.Items = items;

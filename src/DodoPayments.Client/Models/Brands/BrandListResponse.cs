@@ -66,7 +66,7 @@ public sealed record class BrandListResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public BrandListResponse(List<Brand> items)
+    public BrandListResponse(IReadOnlyList<Brand> items)
         : this()
     {
         this.Items = items;
