@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.LicenseKeyInstances;
 
 namespace DodoPayments.Client.Tests.Models.LicenseKeyInstances;
@@ -43,8 +44,11 @@ public class LicenseKeyInstanceTest : TestBase
             Name = "Production Server 1",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyInstance>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyInstance>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -61,8 +65,11 @@ public class LicenseKeyInstanceTest : TestBase
             Name = "Production Server 1",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyInstance>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyInstance>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "lki_123";

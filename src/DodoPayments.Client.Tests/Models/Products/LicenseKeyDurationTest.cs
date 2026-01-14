@@ -24,8 +24,11 @@ public class LicenseKeyDurationTest : TestBase
     {
         var model = new LicenseKeyDuration { Count = 0, Interval = TimeInterval.Day };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyDuration>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyDuration>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -35,8 +38,11 @@ public class LicenseKeyDurationTest : TestBase
     {
         var model = new LicenseKeyDuration { Count = 0, Interval = TimeInterval.Day };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyDuration>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<LicenseKeyDuration>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         int expectedCount = 0;
