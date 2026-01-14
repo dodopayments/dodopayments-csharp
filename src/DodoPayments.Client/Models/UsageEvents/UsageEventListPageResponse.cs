@@ -65,7 +65,7 @@ public sealed record class UsageEventListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public UsageEventListPageResponse(List<Event> items)
+    public UsageEventListPageResponse(IReadOnlyList<Event> items)
         : this()
     {
         this.Items = items;

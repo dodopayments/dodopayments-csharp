@@ -63,7 +63,7 @@ public sealed record class DisputeListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public DisputeListPageResponse(List<DisputeListResponse> items)
+    public DisputeListPageResponse(IReadOnlyList<DisputeListResponse> items)
         : this()
     {
         this.Items = items;

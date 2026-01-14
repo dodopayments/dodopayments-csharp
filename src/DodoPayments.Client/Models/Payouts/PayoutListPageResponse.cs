@@ -63,7 +63,7 @@ public sealed record class PayoutListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public PayoutListPageResponse(List<PayoutListResponse> items)
+    public PayoutListPageResponse(IReadOnlyList<PayoutListResponse> items)
         : this()
     {
         this.Items = items;

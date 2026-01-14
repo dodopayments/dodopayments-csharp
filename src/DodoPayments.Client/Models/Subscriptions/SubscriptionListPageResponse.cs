@@ -67,7 +67,7 @@ public sealed record class SubscriptionListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public SubscriptionListPageResponse(List<SubscriptionListResponse> items)
+    public SubscriptionListPageResponse(IReadOnlyList<SubscriptionListResponse> items)
         : this()
     {
         this.Items = items;

@@ -65,7 +65,7 @@ public sealed record class LicenseKeyListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public LicenseKeyListPageResponse(List<LicenseKey> items)
+    public LicenseKeyListPageResponse(IReadOnlyList<LicenseKey> items)
         : this()
     {
         this.Items = items;
