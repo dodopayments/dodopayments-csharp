@@ -96,7 +96,7 @@ public class SubscriptionRetrieveUsageHistoryParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://live.dodopayments.com/subscriptions/subscription_id/usage-history?end_date=2019-12-27T18%3a11%3a19.117Z&meter_id=meter_id&page_number=0&page_size=0&start_date=2019-12-27T18%3a11%3a19.117Z"
+                "https://live.dodopayments.com/subscriptions/subscription_id/usage-history?end_date=2019-12-27T18%3a11%3a19.117%2b00%3a00&meter_id=meter_id&page_number=0&page_size=0&start_date=2019-12-27T18%3a11%3a19.117%2b00%3a00"
             ),
             url
         );

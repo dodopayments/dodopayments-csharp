@@ -109,7 +109,7 @@ public class SubscriptionListParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://live.dodopayments.com/subscriptions?brand_id=brand_id&created_at_gte=2019-12-27T18%3a11%3a19.117Z&created_at_lte=2019-12-27T18%3a11%3a19.117Z&customer_id=customer_id&page_number=0&page_size=0&status=pending"
+                "https://live.dodopayments.com/subscriptions?brand_id=brand_id&created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&status=pending"
             ),
             url
         );
