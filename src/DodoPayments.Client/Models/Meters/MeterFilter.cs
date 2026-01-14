@@ -290,7 +290,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<ImmutableArray<MeterFilterCondition>>(
+            var deserialized = JsonSerializer.Deserialize<List<MeterFilterCondition>>(
                 element,
                 options
             );
@@ -307,7 +307,7 @@ sealed class ClausesConverter : JsonConverter<Clauses>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<ImmutableArray<ClausesMeterFilter>>(
+            var deserialized = JsonSerializer.Deserialize<List<ClausesMeterFilter>>(
                 element,
                 options
             );
@@ -1047,7 +1047,7 @@ sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilt
         try
         {
             var deserialized = JsonSerializer.Deserialize<
-                ImmutableArray<ClausesMeterFilterClausesMeterFilterCondition>
+                List<ClausesMeterFilterClausesMeterFilterCondition>
             >(element, options);
             if (deserialized != null)
             {
@@ -1063,7 +1063,7 @@ sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilt
         try
         {
             var deserialized = JsonSerializer.Deserialize<
-                ImmutableArray<ClausesMeterFilterClausesMeterFilter>
+                List<ClausesMeterFilterClausesMeterFilter>
             >(element, options);
             if (deserialized != null)
             {
@@ -1868,7 +1868,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
         try
         {
             var deserialized = JsonSerializer.Deserialize<
-                ImmutableArray<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
+                List<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>
             >(element, options);
             if (deserialized != null)
             {
@@ -1884,7 +1884,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
         try
         {
             var deserialized = JsonSerializer.Deserialize<
-                ImmutableArray<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
+                List<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>
             >(element, options);
             if (deserialized != null)
             {
