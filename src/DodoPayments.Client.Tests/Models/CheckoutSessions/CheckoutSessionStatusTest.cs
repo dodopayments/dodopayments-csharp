@@ -49,8 +49,11 @@ public class CheckoutSessionStatusTest : TestBase
             PaymentStatus = IntentStatus.Succeeded,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionStatus>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionStatus>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -68,8 +71,11 @@ public class CheckoutSessionStatusTest : TestBase
             PaymentStatus = IntentStatus.Succeeded,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionStatus>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionStatus>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";

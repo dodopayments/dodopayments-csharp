@@ -1,4 +1,5 @@
 using System.Text.Json;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Products.ShortLinks;
 
 namespace DodoPayments.Client.Tests.Models.Products.ShortLinks;
@@ -22,8 +23,11 @@ public class ShortLinkCreateResponseTest : TestBase
     {
         var model = new ShortLinkCreateResponse { FullUrl = "full_url", ShortUrl = "short_url" };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ShortLinkCreateResponse>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ShortLinkCreateResponse>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -33,8 +37,11 @@ public class ShortLinkCreateResponseTest : TestBase
     {
         var model = new ShortLinkCreateResponse { FullUrl = "full_url", ShortUrl = "short_url" };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<ShortLinkCreateResponse>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ShortLinkCreateResponse>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedFullUrl = "full_url";

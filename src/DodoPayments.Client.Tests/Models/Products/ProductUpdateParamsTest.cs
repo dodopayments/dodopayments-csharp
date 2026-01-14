@@ -238,9 +238,12 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
             Instructions = "instructions",
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<Products::ProductUpdateParamsDigitalProductDelivery>(json);
+            JsonSerializer.Deserialize<Products::ProductUpdateParamsDigitalProductDelivery>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -255,10 +258,11 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
             Instructions = "instructions",
         };
 
-        string element = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
             JsonSerializer.Deserialize<Products::ProductUpdateParamsDigitalProductDelivery>(
-                element
+                element,
+                ModelBase.SerializerOptions
             );
         Assert.NotNull(deserialized);
 
