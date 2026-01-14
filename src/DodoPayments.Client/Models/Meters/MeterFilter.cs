@@ -99,7 +99,13 @@ public record class Clauses : ModelBase
 
     public JsonElement Json
     {
-        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
+        get
+        {
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public Clauses(IReadOnlyList<MeterFilterCondition> value, JsonElement? element = null)
@@ -486,7 +492,13 @@ public record class MeterFilterConditionValue : ModelBase
 
     public JsonElement Json
     {
-        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
+        get
+        {
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public MeterFilterConditionValue(string value, JsonElement? element = null)
@@ -839,7 +851,13 @@ public record class ClausesMeterFilterClauses : ModelBase
 
     public JsonElement Json
     {
-        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
+        get
+        {
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public ClausesMeterFilterClauses(
@@ -1269,7 +1287,13 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBa
 
     public JsonElement Json
     {
-        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
+        get
+        {
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public ClausesMeterFilterClausesMeterFilterConditionValue(
@@ -1649,7 +1673,13 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
 
     public JsonElement Json
     {
-        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
+        get
+        {
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public ClausesMeterFilterClausesMeterFilterClauses(
@@ -2113,7 +2143,13 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
 
     public JsonElement Json
     {
-        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
+        get
+        {
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue(
@@ -2648,7 +2684,13 @@ public record class ClauseValue : ModelBase
 
     public JsonElement Json
     {
-        get { return this._element ??= JsonSerializer.SerializeToElement(this.Value); }
+        get
+        {
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
+        }
     }
 
     public ClauseValue(string value, JsonElement? element = null)
