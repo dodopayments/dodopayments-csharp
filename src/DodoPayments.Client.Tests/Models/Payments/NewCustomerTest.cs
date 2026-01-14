@@ -1,4 +1,5 @@
 using System.Text.Json;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Payments;
@@ -34,8 +35,11 @@ public class NewCustomerTest : TestBase
             PhoneNumber = "phone_number",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<NewCustomer>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<NewCustomer>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -50,8 +54,11 @@ public class NewCustomerTest : TestBase
             PhoneNumber = "phone_number",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<NewCustomer>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<NewCustomer>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedEmail = "email";

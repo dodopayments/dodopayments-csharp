@@ -72,8 +72,8 @@ public class BrandTest : TestBase
             Url = "url",
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Brand>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Brand>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -97,8 +97,8 @@ public class BrandTest : TestBase
             Url = "url",
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Brand>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Brand>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         string expectedBrandID = "brand_id";

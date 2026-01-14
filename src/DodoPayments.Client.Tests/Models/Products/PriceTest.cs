@@ -92,8 +92,8 @@ public class PriceTest : TestBase
             SuggestedPrice = 0,
             TaxInclusive = true,
         };
-        string element = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Price>(element);
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Price>(element, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -115,8 +115,8 @@ public class PriceTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
         };
-        string element = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Price>(element);
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Price>(element, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -149,8 +149,8 @@ public class PriceTest : TestBase
             ],
             TaxInclusive = true,
         };
-        string element = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Price>(element);
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Price>(element, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -207,8 +207,11 @@ public class OneTimePriceTest : TestBase
             TaxInclusive = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<OneTimePrice>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<OneTimePrice>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -228,8 +231,11 @@ public class OneTimePriceTest : TestBase
             TaxInclusive = true,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<OneTimePrice>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<OneTimePrice>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
@@ -543,8 +549,11 @@ public class RecurringPriceTest : TestBase
             TrialPeriodDays = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<RecurringPrice>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<RecurringPrice>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -567,8 +576,11 @@ public class RecurringPriceTest : TestBase
             TrialPeriodDays = 0,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<RecurringPrice>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<RecurringPrice>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
@@ -953,8 +965,11 @@ public class UsageBasedPriceTest : TestBase
             TaxInclusive = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UsageBasedPrice>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UsageBasedPrice>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -988,8 +1003,11 @@ public class UsageBasedPriceTest : TestBase
             TaxInclusive = true,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UsageBasedPrice>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UsageBasedPrice>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;

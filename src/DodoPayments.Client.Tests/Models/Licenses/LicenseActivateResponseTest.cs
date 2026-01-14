@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Licenses;
 using DodoPayments.Client.Models.Payments;
 
@@ -74,8 +75,11 @@ public class LicenseActivateResponseTest : TestBase
             Product = new() { ProductID = "product_id", Name = "name" },
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseActivateResponse>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<LicenseActivateResponse>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -101,8 +105,11 @@ public class LicenseActivateResponseTest : TestBase
             Product = new() { ProductID = "product_id", Name = "name" },
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<LicenseActivateResponse>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<LicenseActivateResponse>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "lki_123";
@@ -173,8 +180,8 @@ public class ProductTest : TestBase
     {
         var model = new Product { ProductID = "product_id", Name = "name" };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Product>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Product>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -184,8 +191,11 @@ public class ProductTest : TestBase
     {
         var model = new Product { ProductID = "product_id", Name = "name" };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Product>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Product>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedProductID = "product_id";

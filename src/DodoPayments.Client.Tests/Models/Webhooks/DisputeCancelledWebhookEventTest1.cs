@@ -75,8 +75,11 @@ public class DisputeCancelledWebhookEventTest1 : TestBase
             Type = TypeModel.DisputeCancelled,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEvent>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEvent>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -103,8 +106,11 @@ public class DisputeCancelledWebhookEventTest1 : TestBase
             Type = TypeModel.DisputeCancelled,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEvent>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";

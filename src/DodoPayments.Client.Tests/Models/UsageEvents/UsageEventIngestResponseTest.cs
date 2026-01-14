@@ -1,4 +1,5 @@
 using System.Text.Json;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.UsageEvents;
 
 namespace DodoPayments.Client.Tests.Models.UsageEvents;
@@ -20,8 +21,11 @@ public class UsageEventIngestResponseTest : TestBase
     {
         var model = new UsageEventIngestResponse { IngestedCount = 0 };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UsageEventIngestResponse>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UsageEventIngestResponse>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -31,8 +35,11 @@ public class UsageEventIngestResponseTest : TestBase
     {
         var model = new UsageEventIngestResponse { IngestedCount = 0 };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<UsageEventIngestResponse>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UsageEventIngestResponse>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         long expectedIngestedCount = 0;

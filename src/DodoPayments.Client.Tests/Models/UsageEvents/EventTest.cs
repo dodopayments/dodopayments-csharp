@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.UsageEvents;
 
 namespace DodoPayments.Client.Tests.Models.UsageEvents;
@@ -55,8 +56,8 @@ public class EventTest : TestBase
             Metadata = new Dictionary<string, Metadata>() { { "foo", "string" } },
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Event>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Event>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -74,8 +75,8 @@ public class EventTest : TestBase
             Metadata = new Dictionary<string, Metadata>() { { "foo", "string" } },
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<Event>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Event>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
@@ -210,8 +211,11 @@ public class MetadataTest : TestBase
     public void StringSerializationRoundtripWorks()
     {
         Metadata value = "string";
-        string element = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Metadata>(element);
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Metadata>(
+            element,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -220,8 +224,11 @@ public class MetadataTest : TestBase
     public void NumberSerializationRoundtripWorks()
     {
         Metadata value = 0;
-        string element = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Metadata>(element);
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Metadata>(
+            element,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -230,8 +237,11 @@ public class MetadataTest : TestBase
     public void BooleanSerializationRoundtripWorks()
     {
         Metadata value = true;
-        string element = JsonSerializer.Serialize(value);
-        var deserialized = JsonSerializer.Deserialize<Metadata>(element);
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Metadata>(
+            element,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }

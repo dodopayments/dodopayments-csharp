@@ -81,9 +81,10 @@ public class SubscriptionRetrieveUsageHistoryResponseTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryResponse>(
-            json
+            json,
+            ModelBase.SerializerOptions
         );
 
         Assert.Equal(model, deserialized);
@@ -112,9 +113,10 @@ public class SubscriptionRetrieveUsageHistoryResponseTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        string element = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryResponse>(
-            element
+            element,
+            ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
@@ -222,9 +224,12 @@ public class SubscriptionRetrieveUsageHistoryResponseMeterTest : TestBase
             TotalPrice = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryResponseMeter>(json);
+            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryResponseMeter>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -244,9 +249,12 @@ public class SubscriptionRetrieveUsageHistoryResponseMeterTest : TestBase
             TotalPrice = 0,
         };
 
-        string element = JsonSerializer.Serialize(model);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryResponseMeter>(element);
+            JsonSerializer.Deserialize<SubscriptionRetrieveUsageHistoryResponseMeter>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";

@@ -213,8 +213,11 @@ public class SubscriptionUpdatedWebhookEventTest : TestBase
             Type = SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -286,8 +289,11 @@ public class SubscriptionUpdatedWebhookEventTest : TestBase
             Type = SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";

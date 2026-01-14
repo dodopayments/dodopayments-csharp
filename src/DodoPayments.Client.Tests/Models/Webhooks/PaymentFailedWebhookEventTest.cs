@@ -278,8 +278,11 @@ public class PaymentFailedWebhookEventTest : TestBase
             Type = PaymentFailedWebhookEventType.PaymentFailed,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PaymentFailedWebhookEvent>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<PaymentFailedWebhookEvent>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -372,8 +375,11 @@ public class PaymentFailedWebhookEventTest : TestBase
             Type = PaymentFailedWebhookEventType.PaymentFailed,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<PaymentFailedWebhookEvent>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<PaymentFailedWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";

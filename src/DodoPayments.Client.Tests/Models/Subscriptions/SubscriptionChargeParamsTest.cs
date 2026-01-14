@@ -151,8 +151,11 @@ public class CustomerBalanceConfigTest : TestBase
             AllowCustomerCreditsUsage = true,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CustomerBalanceConfig>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomerBalanceConfig>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -166,8 +169,11 @@ public class CustomerBalanceConfigTest : TestBase
             AllowCustomerCreditsUsage = true,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<CustomerBalanceConfig>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomerBalanceConfig>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         bool expectedAllowCustomerCreditsPurchase = true;

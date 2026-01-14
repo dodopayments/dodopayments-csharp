@@ -1,4 +1,5 @@
 using System.Text.Json;
+using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Payments;
@@ -34,8 +35,11 @@ public class OneTimeProductCartItemTest : TestBase
             Amount = 0,
         };
 
-        string json = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<OneTimeProductCartItem>(json);
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<OneTimeProductCartItem>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -50,8 +54,11 @@ public class OneTimeProductCartItemTest : TestBase
             Amount = 0,
         };
 
-        string element = JsonSerializer.Serialize(model);
-        var deserialized = JsonSerializer.Deserialize<OneTimeProductCartItem>(element);
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<OneTimeProductCartItem>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedProductID = "product_id";
