@@ -106,7 +106,7 @@ public class UsageEventListParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://live.dodopayments.com/events?customer_id=customer_id&end=2019-12-27T18%3a11%3a19.117Z&event_name=event_name&meter_id=meter_id&page_number=0&page_size=0&start=2019-12-27T18%3a11%3a19.117Z"
+                "https://live.dodopayments.com/events?customer_id=customer_id&end=2019-12-27T18%3a11%3a19.117%2b00%3a00&event_name=event_name&meter_id=meter_id&page_number=0&page_size=0&start=2019-12-27T18%3a11%3a19.117%2b00%3a00"
             ),
             url
         );
