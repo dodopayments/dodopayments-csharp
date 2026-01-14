@@ -65,7 +65,7 @@ public sealed record class ShortLinkListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public ShortLinkListPageResponse(List<ShortLinkListResponse> items)
+    public ShortLinkListPageResponse(IReadOnlyList<ShortLinkListResponse> items)
         : this()
     {
         this.Items = items;

@@ -70,7 +70,7 @@ public sealed record class LicenseKeyInstanceListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public LicenseKeyInstanceListPageResponse(List<LicenseKeyInstance> items)
+    public LicenseKeyInstanceListPageResponse(IReadOnlyList<LicenseKeyInstance> items)
         : this()
     {
         this.Items = items;

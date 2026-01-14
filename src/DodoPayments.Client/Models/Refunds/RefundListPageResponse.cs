@@ -63,7 +63,7 @@ public sealed record class RefundListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public RefundListPageResponse(List<RefundListResponse> items)
+    public RefundListPageResponse(IReadOnlyList<RefundListResponse> items)
         : this()
     {
         this.Items = items;

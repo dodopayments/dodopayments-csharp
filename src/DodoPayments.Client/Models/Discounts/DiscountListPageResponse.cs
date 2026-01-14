@@ -68,7 +68,7 @@ public sealed record class DiscountListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public DiscountListPageResponse(List<Discount> items)
+    public DiscountListPageResponse(IReadOnlyList<Discount> items)
         : this()
     {
         this.Items = items;

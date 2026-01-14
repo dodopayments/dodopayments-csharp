@@ -67,7 +67,7 @@ public sealed record class LedgerEntryListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public LedgerEntryListPageResponse(List<CustomerWalletTransaction> items)
+    public LedgerEntryListPageResponse(IReadOnlyList<CustomerWalletTransaction> items)
         : this()
     {
         this.Items = items;

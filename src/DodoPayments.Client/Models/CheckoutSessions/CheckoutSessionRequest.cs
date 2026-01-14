@@ -366,7 +366,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     }
 
     [SetsRequiredMembers]
-    public CheckoutSessionRequest(List<CheckoutSessionRequestProductCart> productCart)
+    public CheckoutSessionRequest(IReadOnlyList<CheckoutSessionRequestProductCart> productCart)
         : this()
     {
         this.ProductCart = productCart;
