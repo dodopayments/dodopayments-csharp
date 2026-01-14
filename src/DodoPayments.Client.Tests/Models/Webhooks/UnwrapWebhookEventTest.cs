@@ -8,7 +8,7 @@ using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Refunds;
 using DodoPayments.Client.Models.Subscriptions;
-using Webhooks = DodoPayments.Client.Models.Webhooks;
+using DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
 
@@ -17,10 +17,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeAcceptedValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeAcceptedWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeAcceptedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -32,8 +32,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.DisputeAccepted,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeAccepted,
         };
         value.Validate();
     }
@@ -41,10 +41,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeCancelledValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeCancelledWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeCancelledWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -56,8 +56,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeCancelledWebhookEventType.DisputeCancelled,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeCancelled,
         };
         value.Validate();
     }
@@ -65,10 +65,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeChallengedValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeChallengedWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeChallengedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -80,8 +80,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeChallengedWebhookEventType.DisputeChallenged,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeChallenged,
         };
         value.Validate();
     }
@@ -89,10 +89,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeExpiredValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeExpiredWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeExpiredWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -104,8 +104,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeExpiredWebhookEventType.DisputeExpired,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeExpired,
         };
         value.Validate();
     }
@@ -113,10 +113,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeLostValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeLostWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeLostWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -128,8 +128,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeLostWebhookEventType.DisputeLost,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeLost,
         };
         value.Validate();
     }
@@ -137,10 +137,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeOpenedValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeOpenedWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeOpenedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -152,8 +152,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeOpenedWebhookEventType.DisputeOpened,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeOpened,
         };
         value.Validate();
     }
@@ -161,10 +161,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeWonValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeWonWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeWonWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -176,8 +176,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeWonWebhookEventType.DisputeWon,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeWon,
         };
         value.Validate();
     }
@@ -185,10 +185,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void LicenseKeyCreatedValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::LicenseKeyCreatedWebhookEvent()
+        UnwrapWebhookEvent value = new LicenseKeyCreatedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 ID = "lic_123",
                 BusinessID = "business_id",
@@ -203,8 +203,8 @@ public class UnwrapWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
                 SubscriptionID = "subscription_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::LicenseKeyCreatedWebhookEventType.LicenseKeyCreated,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_LicenseKeyCreated,
         };
         value.Validate();
     }
@@ -212,10 +212,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void PaymentCancelledValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::PaymentCancelledWebhookEvent()
+        UnwrapWebhookEvent value = new PaymentCancelledWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Billing = new()
                 {
@@ -293,8 +293,8 @@ public class UnwrapWebhookEventTest : TestBase
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::PaymentCancelledWebhookEventType.PaymentCancelled,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_PaymentCancelled,
         };
         value.Validate();
     }
@@ -302,10 +302,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void PaymentFailedValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::PaymentFailedWebhookEvent()
+        UnwrapWebhookEvent value = new PaymentFailedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Billing = new()
                 {
@@ -383,8 +383,8 @@ public class UnwrapWebhookEventTest : TestBase
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::PaymentFailedWebhookEventType.PaymentFailed,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_PaymentFailed,
         };
         value.Validate();
     }
@@ -392,10 +392,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void PaymentProcessingValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::PaymentProcessingWebhookEvent()
+        UnwrapWebhookEvent value = new PaymentProcessingWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Billing = new()
                 {
@@ -473,8 +473,8 @@ public class UnwrapWebhookEventTest : TestBase
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::PaymentProcessingWebhookEventType.PaymentProcessing,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_PaymentProcessing,
         };
         value.Validate();
     }
@@ -482,10 +482,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void PaymentSucceededValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::PaymentSucceededWebhookEvent()
+        UnwrapWebhookEvent value = new PaymentSucceededWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Billing = new()
                 {
@@ -563,8 +563,8 @@ public class UnwrapWebhookEventTest : TestBase
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::PaymentSucceededWebhookEventType.PaymentSucceeded,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_PaymentSucceeded,
         };
         value.Validate();
     }
@@ -572,10 +572,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void RefundFailedValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::RefundFailedWebhookEvent()
+        UnwrapWebhookEvent value = new RefundFailedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -596,8 +596,8 @@ public class UnwrapWebhookEventTest : TestBase
                 Currency = Currency.Aed,
                 Reason = "reason",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::RefundFailedWebhookEventType.RefundFailed,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_RefundFailed,
         };
         value.Validate();
     }
@@ -605,10 +605,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void RefundSucceededValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::RefundSucceededWebhookEvent()
+        UnwrapWebhookEvent value = new RefundSucceededWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -629,8 +629,8 @@ public class UnwrapWebhookEventTest : TestBase
                 Currency = Currency.Aed,
                 Reason = "reason",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::RefundSucceededWebhookEventType.RefundSucceeded,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_RefundSucceeded,
         };
         value.Validate();
     }
@@ -638,10 +638,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionActiveValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionActiveWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionActiveWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -698,8 +698,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionActiveWebhookEventType.SubscriptionActive,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionActive,
         };
         value.Validate();
     }
@@ -707,10 +707,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionCancelledValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionCancelledWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionCancelledWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -767,8 +767,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionCancelledWebhookEventType.SubscriptionCancelled,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionCancelled,
         };
         value.Validate();
     }
@@ -776,10 +776,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionExpiredValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionExpiredWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionExpiredWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -836,8 +836,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionExpiredWebhookEventType.SubscriptionExpired,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionExpired,
         };
         value.Validate();
     }
@@ -845,10 +845,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionFailedValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionFailedWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionFailedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -905,8 +905,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionFailedWebhookEventType.SubscriptionFailed,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionFailed,
         };
         value.Validate();
     }
@@ -914,10 +914,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionOnHoldValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionOnHoldWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionOnHoldWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -974,8 +974,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionOnHoldWebhookEventType.SubscriptionOnHold,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionOnHold,
         };
         value.Validate();
     }
@@ -983,10 +983,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionPlanChangedValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionPlanChangedWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionPlanChangedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -1043,8 +1043,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionPlanChangedWebhookEventType.SubscriptionPlanChanged,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionPlanChanged,
         };
         value.Validate();
     }
@@ -1052,10 +1052,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionRenewedValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionRenewedWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionRenewedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -1112,8 +1112,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionRenewedWebhookEventType.SubscriptionRenewed,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionRenewed,
         };
         value.Validate();
     }
@@ -1121,10 +1121,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionUpdatedValidationWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionUpdatedWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionUpdatedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -1181,8 +1181,8 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionUpdated,
         };
         value.Validate();
     }
@@ -1190,10 +1190,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeAcceptedSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeAcceptedWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeAcceptedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -1205,11 +1205,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.DisputeAccepted,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeAccepted,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1220,10 +1220,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeCancelledSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeCancelledWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeCancelledWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -1235,11 +1235,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeCancelledWebhookEventType.DisputeCancelled,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeCancelled,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1250,10 +1250,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeChallengedSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeChallengedWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeChallengedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -1265,11 +1265,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeChallengedWebhookEventType.DisputeChallenged,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeChallenged,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1280,10 +1280,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeExpiredSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeExpiredWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeExpiredWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -1295,11 +1295,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeExpiredWebhookEventType.DisputeExpired,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeExpired,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1310,10 +1310,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeLostSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeLostWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeLostWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -1325,11 +1325,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeLostWebhookEventType.DisputeLost,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeLost,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1340,10 +1340,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeOpenedSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeOpenedWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeOpenedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -1355,11 +1355,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeOpenedWebhookEventType.DisputeOpened,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeOpened,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1370,10 +1370,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void DisputeWonSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::DisputeWonWebhookEvent()
+        UnwrapWebhookEvent value = new DisputeWonWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
                 BusinessID = "business_id",
@@ -1385,11 +1385,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::DisputeWonWebhookEventType.DisputeWon,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeWon,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1400,10 +1400,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void LicenseKeyCreatedSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::LicenseKeyCreatedWebhookEvent()
+        UnwrapWebhookEvent value = new LicenseKeyCreatedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 ID = "lic_123",
                 BusinessID = "business_id",
@@ -1418,11 +1418,11 @@ public class UnwrapWebhookEventTest : TestBase
                 ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
                 SubscriptionID = "subscription_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::LicenseKeyCreatedWebhookEventType.LicenseKeyCreated,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_LicenseKeyCreated,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1433,10 +1433,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void PaymentCancelledSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::PaymentCancelledWebhookEvent()
+        UnwrapWebhookEvent value = new PaymentCancelledWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Billing = new()
                 {
@@ -1514,11 +1514,11 @@ public class UnwrapWebhookEventTest : TestBase
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::PaymentCancelledWebhookEventType.PaymentCancelled,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_PaymentCancelled,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1529,10 +1529,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void PaymentFailedSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::PaymentFailedWebhookEvent()
+        UnwrapWebhookEvent value = new PaymentFailedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Billing = new()
                 {
@@ -1610,11 +1610,11 @@ public class UnwrapWebhookEventTest : TestBase
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::PaymentFailedWebhookEventType.PaymentFailed,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_PaymentFailed,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1625,10 +1625,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void PaymentProcessingSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::PaymentProcessingWebhookEvent()
+        UnwrapWebhookEvent value = new PaymentProcessingWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Billing = new()
                 {
@@ -1706,11 +1706,11 @@ public class UnwrapWebhookEventTest : TestBase
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::PaymentProcessingWebhookEventType.PaymentProcessing,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_PaymentProcessing,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1721,10 +1721,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void PaymentSucceededSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::PaymentSucceededWebhookEvent()
+        UnwrapWebhookEvent value = new PaymentSucceededWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Billing = new()
                 {
@@ -1802,11 +1802,11 @@ public class UnwrapWebhookEventTest : TestBase
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::PaymentSucceededWebhookEventType.PaymentSucceeded,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_PaymentSucceeded,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1817,10 +1817,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void RefundFailedSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::RefundFailedWebhookEvent()
+        UnwrapWebhookEvent value = new RefundFailedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1841,11 +1841,11 @@ public class UnwrapWebhookEventTest : TestBase
                 Currency = Currency.Aed,
                 Reason = "reason",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::RefundFailedWebhookEventType.RefundFailed,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_RefundFailed,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1856,10 +1856,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void RefundSucceededSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::RefundSucceededWebhookEvent()
+        UnwrapWebhookEvent value = new RefundSucceededWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1880,11 +1880,11 @@ public class UnwrapWebhookEventTest : TestBase
                 Currency = Currency.Aed,
                 Reason = "reason",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::RefundSucceededWebhookEventType.RefundSucceeded,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_RefundSucceeded,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1895,10 +1895,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionActiveSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionActiveWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionActiveWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -1955,11 +1955,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionActiveWebhookEventType.SubscriptionActive,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionActive,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1970,10 +1970,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionCancelledSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionCancelledWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionCancelledWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -2030,11 +2030,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionCancelledWebhookEventType.SubscriptionCancelled,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionCancelled,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2045,10 +2045,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionExpiredSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionExpiredWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionExpiredWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -2105,11 +2105,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionExpiredWebhookEventType.SubscriptionExpired,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionExpired,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2120,10 +2120,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionFailedSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionFailedWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionFailedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -2180,11 +2180,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionFailedWebhookEventType.SubscriptionFailed,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionFailed,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2195,10 +2195,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionOnHoldSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionOnHoldWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionOnHoldWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -2255,11 +2255,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionOnHoldWebhookEventType.SubscriptionOnHold,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionOnHold,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2270,10 +2270,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionPlanChangedSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionPlanChangedWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionPlanChangedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -2330,11 +2330,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionPlanChangedWebhookEventType.SubscriptionPlanChanged,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionPlanChanged,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2345,10 +2345,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionRenewedSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionRenewedWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionRenewedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -2405,11 +2405,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionRenewedWebhookEventType.SubscriptionRenewed,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionRenewed,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2420,10 +2420,10 @@ public class UnwrapWebhookEventTest : TestBase
     [Fact]
     public void SubscriptionUpdatedSerializationRoundtripWorks()
     {
-        Webhooks::UnwrapWebhookEvent value = new Webhooks::SubscriptionUpdatedWebhookEvent()
+        UnwrapWebhookEvent value = new SubscriptionUpdatedWebhookEvent()
         {
-            BusinessID = "business_id",
-            Data = new()
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
             {
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Billing = new()
@@ -2480,11 +2480,11 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethodID = "payment_method_id",
                 TaxID = "tax_id",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_SubscriptionUpdated,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::UnwrapWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
