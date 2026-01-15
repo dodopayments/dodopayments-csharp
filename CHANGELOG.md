@@ -1,5 +1,58 @@
 # Changelog
 
+## 6.1.0 (2026-01-15)
+
+Full Changelog: [v6.0.1...v6.1.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.0.1...v6.1.0)
+
+### Features
+
+* **client:** add helper functions for raw messages ([8bb684d](https://github.com/dodopayments/dodopayments-csharp/commit/8bb684db4d3c9f0590519e610bc19cd7d81c20e0))
+* **client:** add more `ToString` implementations ([1e61d9e](https://github.com/dodopayments/dodopayments-csharp/commit/1e61d9e12bc59e51452b55af9b6b6eda2d1ce936))
+* **client:** support accessing raw responses ([7109a33](https://github.com/dodopayments/dodopayments-csharp/commit/7109a337d0b49cd8ae423692981be5adaa0faf27))
+
+
+### Bug Fixes
+
+* **ci:** don't throw an error about missing lsof ([d21d53d](https://github.com/dodopayments/dodopayments-csharp/commit/d21d53db990e0566c3d61bbe4f73b33f9085da86))
+* **client:** add missing serializer options ([10ca347](https://github.com/dodopayments/dodopayments-csharp/commit/10ca347178916251fe66452a5e603a483a7d6723))
+* **client:** bad deserialize call for void method ([fbe39f0](https://github.com/dodopayments/dodopayments-csharp/commit/fbe39f0b74370de75adfc6246d3bbfa3e847c944))
+* **client:** bad reference ([ccbc410](https://github.com/dodopayments/dodopayments-csharp/commit/ccbc41051a2fa56d61fafb5d299b6d6b96816e3b))
+* **client:** copy path params in params copy constructors ([781ef5d](https://github.com/dodopayments/dodopayments-csharp/commit/781ef5d46a519cdceac9c0e03143377150f39b9f))
+* **client:** ensure deep immutability for deep array/dict structures ([1f85dee](https://github.com/dodopayments/dodopayments-csharp/commit/1f85deefe4f752726b0617c33d3ec6e468ef4c9b))
+* **client:** freeze models on property access ([ea9a01b](https://github.com/dodopayments/dodopayments-csharp/commit/ea9a01b832350b1669854114bc764adbc43d5ed3))
+* **client:** throw api enum errors as invalid data exception ([c03f67c](https://github.com/dodopayments/dodopayments-csharp/commit/c03f67c584271ed486d0a0f729ae67fa5f2421c4))
+* **client:** union switch method type checks ([c34c01d](https://github.com/dodopayments/dodopayments-csharp/commit/c34c01dc275c067def53941001e40b7ab576961c))
+* **client:** use readonly type for param ([43701ac](https://github.com/dodopayments/dodopayments-csharp/commit/43701ac67dfffb6d756f7b4368a877cfc688106d))
+* **internal:** remove redundant line ([1a666c2](https://github.com/dodopayments/dodopayments-csharp/commit/1a666c227ccecddf18a5d340cccf694ada81dca0))
+* **internal:** remove roundtrip tests for multipart params ([46f2b9b](https://github.com/dodopayments/dodopayments-csharp/commit/46f2b9bfa4cadc1529ac3a2c231c8017fd2df70f))
+* **internal:** url query param test ([e34ce0d](https://github.com/dodopayments/dodopayments-csharp/commit/e34ce0d800d078828d9b3f96b7403071ed3b58cd))
+
+
+### Performance Improvements
+
+* **client:** add json deserialization caching ([1f85dee](https://github.com/dodopayments/dodopayments-csharp/commit/1f85deefe4f752726b0617c33d3ec6e468ef4c9b))
+
+
+### Chores
+
+* **client:** consistently use serializer options ([c10f551](https://github.com/dodopayments/dodopayments-csharp/commit/c10f551496c9d7d792372162d0e61cc875a76b0f))
+* **client:** refactor union instantiation ([929fa59](https://github.com/dodopayments/dodopayments-csharp/commit/929fa5997940a210503217b5eb562a2bdc6dd6f6))
+* **client:** use mutable collections for union deserialization ([b57b539](https://github.com/dodopayments/dodopayments-csharp/commit/b57b53915c663d40c490ce95fa67a5785b2e47de))
+* **internal:** codegen related update ([8f7f0cf](https://github.com/dodopayments/dodopayments-csharp/commit/8f7f0cfc0fe237dfc33f1aa0f107bd45dce20681))
+* **readme:** remove beta warning now that we're in ga ([713f866](https://github.com/dodopayments/dodopayments-csharp/commit/713f866af1b7654e52474617e3972d2275184ff2))
+
+
+### Documentation
+
+* add raw responses to readme ([84f452f](https://github.com/dodopayments/dodopayments-csharp/commit/84f452faf222110749efd409128c480b6c5eb3f9))
+
+
+### Refactors
+
+* **client:** add `JsonDictionary` identity methods ([e9a2f37](https://github.com/dodopayments/dodopayments-csharp/commit/e9a2f3710e5ddf156a37ef02b3fdac4d663ce62e))
+* **client:** make unions implement `ModelBase` ([b40b414](https://github.com/dodopayments/dodopayments-csharp/commit/b40b414a854b2961a1cd8028b77b7570b8e24139))
+* **internal:** `JsonElement` constant construction ([2fcdfac](https://github.com/dodopayments/dodopayments-csharp/commit/2fcdfaceed1642563823f62002ef51e3c5977928))
+
 ## 6.0.1 (2026-01-08)
 
 Full Changelog: [v6.0.0...v6.0.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.0.0...v6.0.1)
