@@ -114,6 +114,25 @@ public class DisputeListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new DisputeListParams
+        {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            DisputeStage = DisputeStage.PreDispute,
+            DisputeStatus = DisputeStatus.DisputeOpened,
+            PageNumber = 0,
+            PageSize = 0,
+        };
+
+        DisputeListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class DisputeStageTest : TestBase

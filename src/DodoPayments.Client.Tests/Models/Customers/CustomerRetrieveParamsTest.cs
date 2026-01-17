@@ -24,4 +24,14 @@ public class CustomerRetrieveParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/customers/customer_id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CustomerRetrieveParams { CustomerID = "customer_id" };
+
+        CustomerRetrieveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

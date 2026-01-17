@@ -486,6 +486,83 @@ public class CheckoutSessionCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/checkouts"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CheckoutSessionCreateParams
+        {
+            ProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                    Amount = 0,
+                },
+            ],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
+            BillingAddress = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BillingCurrency = Currency.Aed,
+            Confirm = true,
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
+            Customization = new()
+            {
+                ForceLanguage = "force_language",
+                ShowOnDemandTag = true,
+                ShowOrderDetails = true,
+                Theme = Theme.Dark,
+            },
+            DiscountCode = "discount_code",
+            FeatureFlags = new()
+            {
+                AllowCurrencySelection = true,
+                AllowCustomerEditingCity = true,
+                AllowCustomerEditingCountry = true,
+                AllowCustomerEditingEmail = true,
+                AllowCustomerEditingName = true,
+                AllowCustomerEditingState = true,
+                AllowCustomerEditingStreet = true,
+                AllowCustomerEditingZipcode = true,
+                AllowDiscountCode = true,
+                AllowPhoneNumberCollection = true,
+                AllowTaxID = true,
+                AlwaysCreateNewCustomer = true,
+                RedirectImmediately = true,
+            },
+            Force3ds = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimalAddress = true,
+            PaymentMethodID = "payment_method_id",
+            ReturnUrl = "return_url",
+            ShortLink = true,
+            ShowSavedPaymentMethods = true,
+            SubscriptionData = new()
+            {
+                OnDemand = new()
+                {
+                    MandateOnly = true,
+                    AdaptiveCurrencyFeesInclusive = true,
+                    ProductCurrency = Currency.Aed,
+                    ProductDescription = "product_description",
+                    ProductPrice = 0,
+                },
+                TrialPeriodDays = 0,
+            },
+        };
+
+        CheckoutSessionCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class ProductCartTest : TestBase

@@ -73,4 +73,19 @@ public class MeterListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new MeterListParams
+        {
+            Archived = true,
+            PageNumber = 0,
+            PageSize = 0,
+        };
+
+        MeterListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

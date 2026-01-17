@@ -104,4 +104,24 @@ public class DiscountCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/discounts"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new DiscountCreateParams
+        {
+            Amount = 0,
+            Type = DiscountType.Percentage,
+            Code = "code",
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            RestrictedTo = ["string"],
+            SubscriptionCycles = 0,
+            UsageLimit = 0,
+        };
+
+        DiscountCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

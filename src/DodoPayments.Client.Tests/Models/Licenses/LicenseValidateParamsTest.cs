@@ -59,4 +59,18 @@ public class LicenseValidateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/licenses/validate"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new LicenseValidateParams
+        {
+            LicenseKey = "2b1f8e2d-c41e-4e8f-b2d3-d9fd61c38f43",
+            LicenseKeyInstanceID = "lki_123",
+        };
+
+        LicenseValidateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

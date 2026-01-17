@@ -24,4 +24,14 @@ public class AddonRetrieveParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/addons/id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new AddonRetrieveParams { ID = "id" };
+
+        AddonRetrieveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

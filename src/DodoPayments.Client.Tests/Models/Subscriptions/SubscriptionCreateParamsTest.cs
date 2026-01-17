@@ -401,4 +401,58 @@ public class SubscriptionCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/subscriptions"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new SubscriptionCreateParams
+        {
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            Customer = new AttachExistingCustomer("customer_id"),
+            ProductID = "product_id",
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            BillingCurrency = Currency.Aed,
+            DiscountCode = "discount_code",
+            Force3ds = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            OnDemand = new()
+            {
+                MandateOnly = true,
+                AdaptiveCurrencyFeesInclusive = true,
+                ProductCurrency = Currency.Aed,
+                ProductDescription = "product_description",
+                ProductPrice = 0,
+            },
+            OneTimeProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Amount = 0,
+                },
+            ],
+            PaymentLink = true,
+            PaymentMethodID = "payment_method_id",
+            RedirectImmediately = true,
+            ReturnUrl = "return_url",
+            ShortLink = true,
+            ShowSavedPaymentMethods = true,
+            TaxID = "tax_id",
+            TrialPeriodDays = 0,
+        };
+
+        SubscriptionCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

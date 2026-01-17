@@ -24,4 +24,14 @@ public class WebhookRetrieveSecretParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/webhooks/webhook_id/secret"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new WebhookRetrieveSecretParams { WebhookID = "webhook_id" };
+
+        WebhookRetrieveSecretParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

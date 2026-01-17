@@ -24,4 +24,14 @@ public class WebhookDeleteParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/webhooks/webhook_id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new WebhookDeleteParams { WebhookID = "webhook_id" };
+
+        WebhookDeleteParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

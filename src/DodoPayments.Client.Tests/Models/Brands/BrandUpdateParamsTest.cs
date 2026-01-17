@@ -77,4 +77,21 @@ public class BrandUpdateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/brands/id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new BrandUpdateParams
+        {
+            ID = "id",
+            ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            Name = "name",
+            StatementDescriptor = "statement_descriptor",
+            SupportEmail = "support_email",
+        };
+
+        BrandUpdateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

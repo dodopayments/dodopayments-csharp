@@ -105,4 +105,20 @@ public class CustomerCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/customers"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CustomerCreateParams
+        {
+            Email = "email",
+            Name = "name",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PhoneNumber = "phone_number",
+        };
+
+        CustomerCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
