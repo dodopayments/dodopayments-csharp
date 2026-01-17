@@ -65,4 +65,19 @@ public class ShortLinkCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/products/id/short_links"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new ShortLinkCreateParams
+        {
+            ID = "id",
+            Slug = "slug",
+            StaticCheckoutParams = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        ShortLinkCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

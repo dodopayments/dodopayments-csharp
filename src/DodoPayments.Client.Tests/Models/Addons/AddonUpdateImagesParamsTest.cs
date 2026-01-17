@@ -24,4 +24,14 @@ public class AddonUpdateImagesParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/addons/id/images"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new AddonUpdateImagesParams { ID = "id" };
+
+        AddonUpdateImagesParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

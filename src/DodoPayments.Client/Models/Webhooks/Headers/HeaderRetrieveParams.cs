@@ -10,18 +10,25 @@ namespace DodoPayments.Client.Models.Webhooks.Headers;
 
 /// <summary>
 /// Get a webhook by id
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
-public sealed record class HeaderRetrieveParams : ParamsBase
+public record class HeaderRetrieveParams : ParamsBase
 {
     public string? WebhookID { get; init; }
 
     public HeaderRetrieveParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public HeaderRetrieveParams(HeaderRetrieveParams headerRetrieveParams)
         : base(headerRetrieveParams)
     {
         this.WebhookID = headerRetrieveParams.WebhookID;
     }
+#pragma warning restore CS8618
 
     public HeaderRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -56,6 +63,28 @@ public sealed record class HeaderRetrieveParams : ParamsBase
         );
     }
 
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            new Dictionary<string, object?>()
+            {
+                ["WebhookID"] = this.WebhookID,
+                ["HeaderData"] = this._rawHeaderData.Freeze(),
+                ["QueryData"] = this._rawQueryData.Freeze(),
+            },
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(HeaderRetrieveParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return (this.WebhookID?.Equals(other.WebhookID) ?? other.WebhookID == null)
+            && this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData);
+    }
+
     public override Uri Url(ClientOptions options)
     {
         return new UriBuilder(
@@ -74,5 +103,10 @@ public sealed record class HeaderRetrieveParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }

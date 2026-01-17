@@ -95,4 +95,23 @@ public class AddonUpdateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/addons/id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new AddonUpdateParams
+        {
+            ID = "id",
+            Currency = Currency.Aed,
+            Description = "description",
+            ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            Name = "name",
+            Price = 0,
+            TaxCategory = TaxCategory.DigitalProducts,
+        };
+
+        AddonUpdateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

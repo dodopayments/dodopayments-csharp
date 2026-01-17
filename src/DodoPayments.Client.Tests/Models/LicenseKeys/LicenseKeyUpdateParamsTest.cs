@@ -69,4 +69,20 @@ public class LicenseKeyUpdateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/license_keys/lic_123"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new LicenseKeyUpdateParams
+        {
+            ID = "lic_123",
+            ActivationsLimit = 0,
+            Disabled = true,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        LicenseKeyUpdateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

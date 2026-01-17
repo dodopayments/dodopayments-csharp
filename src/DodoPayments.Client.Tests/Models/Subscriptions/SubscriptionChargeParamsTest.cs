@@ -122,6 +122,29 @@ public class SubscriptionChargeParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new SubscriptionChargeParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductPrice = 0,
+            AdaptiveCurrencyFeesInclusive = true,
+            CustomerBalanceConfig = new()
+            {
+                AllowCustomerCreditsPurchase = true,
+                AllowCustomerCreditsUsage = true,
+            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            ProductCurrency = Currency.Aed,
+            ProductDescription = "product_description",
+        };
+
+        SubscriptionChargeParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class CustomerBalanceConfigTest : TestBase

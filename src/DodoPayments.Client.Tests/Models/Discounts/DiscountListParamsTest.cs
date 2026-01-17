@@ -56,4 +56,14 @@ public class DiscountListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new DiscountListParams { PageNumber = 0, PageSize = 0 };
+
+        DiscountListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
