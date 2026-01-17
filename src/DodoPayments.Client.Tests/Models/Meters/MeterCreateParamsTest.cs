@@ -127,4 +127,41 @@ public class MeterCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/meters"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new Meters::MeterCreateParams
+        {
+            Aggregation = new() { Type = Meters::Type.Count, Key = "key" },
+            EventName = "event_name",
+            MeasurementUnit = "measurement_unit",
+            Name = "name",
+            Description = "description",
+            Filter = new()
+            {
+                Clauses = new(
+                    [
+                        new Meters::MeterFilterCondition()
+                        {
+                            Key = "user_id",
+                            Operator = Meters::Operator.Equals,
+                            Value = "user123",
+                        },
+                        new Meters::MeterFilterCondition()
+                        {
+                            Key = "amount",
+                            Operator = Meters::Operator.GreaterThan,
+                            Value = 100,
+                        },
+                    ]
+                ),
+                Conjunction = Meters::MeterFilterConjunction.And,
+            },
+        };
+
+        Meters::MeterCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

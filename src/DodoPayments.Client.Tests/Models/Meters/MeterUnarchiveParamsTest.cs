@@ -24,4 +24,14 @@ public class MeterUnarchiveParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/meters/id/unarchive"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new MeterUnarchiveParams { ID = "id" };
+
+        MeterUnarchiveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

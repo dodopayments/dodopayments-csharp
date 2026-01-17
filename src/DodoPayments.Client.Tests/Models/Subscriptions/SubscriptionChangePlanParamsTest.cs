@@ -90,6 +90,23 @@ public class SubscriptionChangePlanParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new SubscriptionChangePlanParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductID = "product_id",
+            ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+        };
+
+        SubscriptionChangePlanParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class ProrationBillingModeTest : TestBase

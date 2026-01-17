@@ -54,6 +54,24 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new Subscriptions::SubscriptionUpdatePaymentMethodParams
+        {
+            SubscriptionID = "subscription_id",
+            Body = new Subscriptions::New()
+            {
+                Type = Subscriptions::Type.New,
+                ReturnUrl = "return_url",
+            },
+        };
+
+        Subscriptions::SubscriptionUpdatePaymentMethodParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class BodyTest : TestBase

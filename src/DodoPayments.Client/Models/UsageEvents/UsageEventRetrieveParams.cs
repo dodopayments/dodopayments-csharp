@@ -23,18 +23,25 @@ namespace DodoPayments.Client.Models.UsageEvents;
 /// and business association - Event name and processing information</para>
 ///
 /// <para>## Example Usage: ```text GET /events/api_call_12345 ```</para>
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
-public sealed record class UsageEventRetrieveParams : ParamsBase
+public record class UsageEventRetrieveParams : ParamsBase
 {
     public string? EventID { get; init; }
 
     public UsageEventRetrieveParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public UsageEventRetrieveParams(UsageEventRetrieveParams usageEventRetrieveParams)
         : base(usageEventRetrieveParams)
     {
         this.EventID = usageEventRetrieveParams.EventID;
     }
+#pragma warning restore CS8618
 
     public UsageEventRetrieveParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -69,6 +76,28 @@ public sealed record class UsageEventRetrieveParams : ParamsBase
         );
     }
 
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            new Dictionary<string, object?>()
+            {
+                ["EventID"] = this.EventID,
+                ["HeaderData"] = this._rawHeaderData.Freeze(),
+                ["QueryData"] = this._rawQueryData.Freeze(),
+            },
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(UsageEventRetrieveParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return (this.EventID?.Equals(other.EventID) ?? other.EventID == null)
+            && this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData);
+    }
+
     public override Uri Url(ClientOptions options)
     {
         return new UriBuilder(
@@ -86,5 +115,10 @@ public sealed record class UsageEventRetrieveParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }

@@ -24,4 +24,14 @@ public class UsageEventRetrieveParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/events/event_id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new UsageEventRetrieveParams { EventID = "event_id" };
+
+        UsageEventRetrieveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

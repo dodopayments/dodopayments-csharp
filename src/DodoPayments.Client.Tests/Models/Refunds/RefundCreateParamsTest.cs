@@ -147,6 +147,30 @@ public class RefundCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/refunds"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new RefundCreateParams
+        {
+            PaymentID = "payment_id",
+            Items =
+            [
+                new()
+                {
+                    ItemID = "item_id",
+                    Amount = 0,
+                    TaxInclusive = true,
+                },
+            ],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Reason = "reason",
+        };
+
+        RefundCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class ItemTest : TestBase

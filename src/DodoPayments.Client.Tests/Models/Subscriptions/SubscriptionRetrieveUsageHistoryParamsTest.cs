@@ -101,4 +101,22 @@ public class SubscriptionRetrieveUsageHistoryParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new SubscriptionRetrieveUsageHistoryParams
+        {
+            SubscriptionID = "subscription_id",
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            MeterID = "meter_id",
+            PageNumber = 0,
+            PageSize = 0,
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        SubscriptionRetrieveUsageHistoryParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

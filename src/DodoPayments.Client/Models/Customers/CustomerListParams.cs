@@ -8,7 +8,12 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Customers;
 
-public sealed record class CustomerListParams : ParamsBase
+/// <summary>
+/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
+/// changes in non-major versions. We may add new methods in the future that cause
+/// existing derived classes to break.
+/// </summary>
+public record class CustomerListParams : ParamsBase
 {
     /// <summary>
     /// Filter by customer email
@@ -75,8 +80,11 @@ public sealed record class CustomerListParams : ParamsBase
 
     public CustomerListParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CustomerListParams(CustomerListParams customerListParams)
         : base(customerListParams) { }
+#pragma warning restore CS8618
 
     public CustomerListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -111,6 +119,26 @@ public sealed record class CustomerListParams : ParamsBase
         );
     }
 
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            new Dictionary<string, object?>()
+            {
+                ["HeaderData"] = this._rawHeaderData.Freeze(),
+                ["QueryData"] = this._rawQueryData.Freeze(),
+            },
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(CustomerListParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData);
+    }
+
     public override Uri Url(ClientOptions options)
     {
         return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/customers")
@@ -126,5 +154,10 @@ public sealed record class CustomerListParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }
