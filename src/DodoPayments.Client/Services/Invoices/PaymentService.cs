@@ -9,12 +9,12 @@ using DodoPayments.Client.Models.Invoices.Payments;
 namespace DodoPayments.Client.Services.Invoices;
 
 /// <inheritdoc/>
-public sealed class PaymentService : global::DodoPayments.Client.Services.Invoices.IPaymentService
+public sealed class PaymentService : IPaymentService
 {
-    readonly Lazy<global::DodoPayments.Client.Services.Invoices.IPaymentServiceWithRawResponse> _withRawResponse;
+    readonly Lazy<IPaymentServiceWithRawResponse> _withRawResponse;
 
     /// <inheritdoc/>
-    public global::DodoPayments.Client.Services.Invoices.IPaymentServiceWithRawResponse WithRawResponse
+    public IPaymentServiceWithRawResponse WithRawResponse
     {
         get { return _withRawResponse.Value; }
     }
@@ -22,24 +22,16 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
     readonly IDodoPaymentsClient _client;
 
     /// <inheritdoc/>
-    public global::DodoPayments.Client.Services.Invoices.IPaymentService WithOptions(
-        Func<ClientOptions, ClientOptions> modifier
-    )
+    public IPaymentService WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
-        return new global::DodoPayments.Client.Services.Invoices.PaymentService(
-            this._client.WithOptions(modifier)
-        );
+        return new PaymentService(this._client.WithOptions(modifier));
     }
 
     public PaymentService(IDodoPaymentsClient client)
     {
         _client = client;
 
-        _withRawResponse = new(() =>
-            new global::DodoPayments.Client.Services.Invoices.PaymentServiceWithRawResponse(
-                client.WithRawResponse
-            )
-        );
+        _withRawResponse = new(() => new PaymentServiceWithRawResponse(client.WithRawResponse));
     }
 
     /// <inheritdoc/>
@@ -86,19 +78,14 @@ public sealed class PaymentService : global::DodoPayments.Client.Services.Invoic
 }
 
 /// <inheritdoc/>
-public sealed class PaymentServiceWithRawResponse
-    : global::DodoPayments.Client.Services.Invoices.IPaymentServiceWithRawResponse
+public sealed class PaymentServiceWithRawResponse : IPaymentServiceWithRawResponse
 {
     readonly IDodoPaymentsClientWithRawResponse _client;
 
     /// <inheritdoc/>
-    public global::DodoPayments.Client.Services.Invoices.IPaymentServiceWithRawResponse WithOptions(
-        Func<ClientOptions, ClientOptions> modifier
-    )
+    public IPaymentServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier)
     {
-        return new global::DodoPayments.Client.Services.Invoices.PaymentServiceWithRawResponse(
-            this._client.WithOptions(modifier)
-        );
+        return new PaymentServiceWithRawResponse(this._client.WithOptions(modifier));
     }
 
     public PaymentServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)

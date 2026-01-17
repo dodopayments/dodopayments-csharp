@@ -17,16 +17,14 @@ public interface IPaymentService
     /// Returns a view of this service that provides access to raw HTTP responses
     /// for each method.
     /// </summary>
-    global::DodoPayments.Client.Services.Invoices.IPaymentServiceWithRawResponse WithRawResponse { get; }
+    IPaymentServiceWithRawResponse WithRawResponse { get; }
 
     /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
     /// </summary>
-    global::DodoPayments.Client.Services.Invoices.IPaymentService WithOptions(
-        Func<ClientOptions, ClientOptions> modifier
-    );
+    IPaymentService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
     /// Sends a request to <c>get /invoices/payments/{payment_id}<c/>.
@@ -64,7 +62,7 @@ public interface IPaymentService
 }
 
 /// <summary>
-/// A view of <see cref="global::DodoPayments.Client.Services.Invoices.IPaymentService"/> that provides access to raw
+/// A view of <see cref="IPaymentService"/> that provides access to raw
 /// HTTP responses for each method.
 /// </summary>
 public interface IPaymentServiceWithRawResponse
@@ -74,13 +72,11 @@ public interface IPaymentServiceWithRawResponse
     ///
     /// <para>The original service is not modified.</para>
     /// </summary>
-    global::DodoPayments.Client.Services.Invoices.IPaymentServiceWithRawResponse WithOptions(
-        Func<ClientOptions, ClientOptions> modifier
-    );
+    IPaymentServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
     /// Returns a raw HTTP response for `get /invoices/payments/{payment_id}`, but is otherwise the
-    /// same as <see cref="global::DodoPayments.Client.Services.Invoices.IPaymentService.Retrieve(PaymentRetrieveParams, CancellationToken)"/>.
+    /// same as <see cref="IPaymentService.Retrieve(PaymentRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Retrieve(
         PaymentRetrieveParams parameters,
@@ -96,7 +92,7 @@ public interface IPaymentServiceWithRawResponse
 
     /// <summary>
     /// Returns a raw HTTP response for `get /invoices/refunds/{refund_id}`, but is otherwise the
-    /// same as <see cref="global::DodoPayments.Client.Services.Invoices.IPaymentService.RetrieveRefund(PaymentRetrieveRefundParams, CancellationToken)"/>.
+    /// same as <see cref="IPaymentService.RetrieveRefund(PaymentRetrieveRefundParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> RetrieveRefund(
         PaymentRetrieveRefundParams parameters,
