@@ -24,4 +24,14 @@ public class DiscountDeleteParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/discounts/discount_id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new DiscountDeleteParams { DiscountID = "discount_id" };
+
+        DiscountDeleteParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

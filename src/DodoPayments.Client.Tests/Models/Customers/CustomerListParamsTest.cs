@@ -75,4 +75,19 @@ public class CustomerListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CustomerListParams
+        {
+            Email = "email",
+            PageNumber = 0,
+            PageSize = 0,
+        };
+
+        CustomerListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

@@ -342,4 +342,46 @@ public class PaymentCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/payments"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new PaymentCreateParams
+        {
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            Customer = new AttachExistingCustomer("customer_id"),
+            ProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Amount = 0,
+                },
+            ],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            BillingCurrency = Currency.Aed,
+            DiscountCode = "discount_code",
+            Force3ds = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentLink = true,
+            PaymentMethodID = "payment_method_id",
+            RedirectImmediately = true,
+            ReturnUrl = "return_url",
+            ShortLink = true,
+            ShowSavedPaymentMethods = true,
+            TaxID = "tax_id",
+        };
+
+        PaymentCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

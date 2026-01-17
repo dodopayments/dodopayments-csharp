@@ -51,4 +51,14 @@ public class WebhookListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new WebhookListParams { Iterator = "iterator", Limit = 0 };
+
+        WebhookListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

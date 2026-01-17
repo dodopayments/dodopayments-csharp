@@ -83,4 +83,20 @@ public class LedgerEntryListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new LedgerEntryListParams
+        {
+            CustomerID = "customer_id",
+            Currency = Currency.Aed,
+            PageNumber = 0,
+            PageSize = 0,
+        };
+
+        LedgerEntryListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

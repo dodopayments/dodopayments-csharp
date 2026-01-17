@@ -12,8 +12,12 @@ namespace DodoPayments.Client.Models.Products.ShortLinks;
 /// <summary>
 /// Gives a Short Checkout URL with custom slug for a product. Uses a Static Checkout
 /// URL under the hood.
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
-public sealed record class ShortLinkCreateParams : ParamsBase
+public record class ShortLinkCreateParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
@@ -59,6 +63,8 @@ public sealed record class ShortLinkCreateParams : ParamsBase
 
     public ShortLinkCreateParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ShortLinkCreateParams(ShortLinkCreateParams shortLinkCreateParams)
         : base(shortLinkCreateParams)
     {
@@ -66,6 +72,7 @@ public sealed record class ShortLinkCreateParams : ParamsBase
 
         this._rawBodyData = new(shortLinkCreateParams._rawBodyData);
     }
+#pragma warning restore CS8618
 
     public ShortLinkCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -106,6 +113,30 @@ public sealed record class ShortLinkCreateParams : ParamsBase
         );
     }
 
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            new Dictionary<string, object?>()
+            {
+                ["ID"] = this.ID,
+                ["HeaderData"] = this._rawHeaderData.Freeze(),
+                ["QueryData"] = this._rawQueryData.Freeze(),
+                ["BodyData"] = this._rawBodyData.Freeze(),
+            },
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(ShortLinkCreateParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return (this.ID?.Equals(other.ID) ?? other.ID == null)
+            && this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData)
+            && this._rawBodyData.Equals(other._rawBodyData);
+    }
+
     public override Uri Url(ClientOptions options)
     {
         return new UriBuilder(
@@ -133,5 +164,10 @@ public sealed record class ShortLinkCreateParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }

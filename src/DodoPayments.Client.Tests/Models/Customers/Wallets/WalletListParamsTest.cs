@@ -24,4 +24,14 @@ public class WalletListParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/customers/customer_id/wallets"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new WalletListParams { CustomerID = "customer_id" };
+
+        WalletListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

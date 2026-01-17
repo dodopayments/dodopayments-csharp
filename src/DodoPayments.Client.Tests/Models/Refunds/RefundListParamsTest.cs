@@ -105,6 +105,24 @@ public class RefundListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new RefundListParams
+        {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            PageNumber = 0,
+            PageSize = 0,
+            Status = Status.Succeeded,
+        };
+
+        RefundListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class StatusTest : TestBase

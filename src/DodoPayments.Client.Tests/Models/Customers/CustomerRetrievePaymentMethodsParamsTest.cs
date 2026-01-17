@@ -27,4 +27,14 @@ public class CustomerRetrievePaymentMethodsParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CustomerRetrievePaymentMethodsParams { CustomerID = "customer_id" };
+
+        CustomerRetrievePaymentMethodsParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

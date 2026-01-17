@@ -286,6 +286,44 @@ public class ProductCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/products"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new Products::ProductCreateParams
+        {
+            Name = "name",
+            Price = new Products::OneTimePrice()
+            {
+                Currency = Currency.Aed,
+                Discount = 0,
+                Price = 0,
+                PurchasingPowerParity = true,
+                Type = Products::Type.OneTimePrice,
+                PayWhatYouWant = true,
+                SuggestedPrice = 0,
+                TaxInclusive = true,
+            },
+            TaxCategory = TaxCategory.DigitalProducts,
+            Addons = ["string"],
+            BrandID = "brand_id",
+            Description = "description",
+            DigitalProductDelivery = new()
+            {
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
+            LicenseKeyActivationMessage = "license_key_activation_message",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
+            LicenseKeyEnabled = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        Products::ProductCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class DigitalProductDeliveryTest : TestBase

@@ -28,8 +28,12 @@ namespace DodoPayments.Client.Models.UsageEvents;
 /// - Get API request events: `?event_name=api_request` - Get events from last 24
 /// hours: `?start=2024-01-14T10:30:00Z&end=2024-01-15T10:30:00Z` - Get events with
 /// meter filtering: `?meter_id=mtr_xyz789` - Paginate results: `?page_size=50&page_number=2`</para>
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
-public sealed record class UsageEventListParams : ParamsBase
+public record class UsageEventListParams : ParamsBase
 {
     /// <summary>
     /// Filter events by customer ID
@@ -182,8 +186,11 @@ public sealed record class UsageEventListParams : ParamsBase
 
     public UsageEventListParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public UsageEventListParams(UsageEventListParams usageEventListParams)
         : base(usageEventListParams) { }
+#pragma warning restore CS8618
 
     public UsageEventListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -218,6 +225,26 @@ public sealed record class UsageEventListParams : ParamsBase
         );
     }
 
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            new Dictionary<string, object?>()
+            {
+                ["HeaderData"] = this._rawHeaderData.Freeze(),
+                ["QueryData"] = this._rawQueryData.Freeze(),
+            },
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(UsageEventListParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData);
+    }
+
     public override Uri Url(ClientOptions options)
     {
         return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/events")
@@ -233,5 +260,10 @@ public sealed record class UsageEventListParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }

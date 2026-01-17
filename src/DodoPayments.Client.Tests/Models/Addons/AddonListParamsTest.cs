@@ -56,4 +56,14 @@ public class AddonListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new AddonListParams { PageNumber = 0, PageSize = 0 };
+
+        AddonListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

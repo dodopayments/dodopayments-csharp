@@ -80,4 +80,21 @@ public class BrandCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/brands"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new BrandCreateParams
+        {
+            Description = "description",
+            Name = "name",
+            StatementDescriptor = "statement_descriptor",
+            SupportEmail = "support_email",
+            UrlValue = "url",
+        };
+
+        BrandCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

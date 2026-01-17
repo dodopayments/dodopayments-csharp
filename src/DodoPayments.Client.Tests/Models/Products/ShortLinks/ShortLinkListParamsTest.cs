@@ -75,4 +75,19 @@ public class ShortLinkListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new ShortLinkListParams
+        {
+            PageNumber = 0,
+            PageSize = 0,
+            ProductID = "product_id",
+        };
+
+        ShortLinkListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

@@ -96,6 +96,23 @@ public class LicenseKeyListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new LicenseKeyListParams
+        {
+            CustomerID = "customer_id",
+            PageNumber = 0,
+            PageSize = 0,
+            ProductID = "product_id",
+            Status = Status.Active,
+        };
+
+        LicenseKeyListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class StatusTest : TestBase

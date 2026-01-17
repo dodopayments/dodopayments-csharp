@@ -24,4 +24,14 @@ public class CheckoutSessionRetrieveParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/checkouts/id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CheckoutSessionRetrieveParams { ID = "id" };
+
+        CheckoutSessionRetrieveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

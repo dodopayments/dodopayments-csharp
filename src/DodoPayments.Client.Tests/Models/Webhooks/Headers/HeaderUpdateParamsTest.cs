@@ -41,4 +41,18 @@ public class HeaderUpdateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/webhooks/webhook_id/headers"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new HeaderUpdateParams
+        {
+            WebhookID = "webhook_id",
+            Headers = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        HeaderUpdateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

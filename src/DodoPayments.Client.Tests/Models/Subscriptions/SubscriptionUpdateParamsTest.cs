@@ -137,6 +137,34 @@ public class SubscriptionUpdateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/subscriptions/subscription_id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new SubscriptionUpdateParams
+        {
+            SubscriptionID = "subscription_id",
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            CancelAtNextBillingDate = true,
+            CustomerName = "customer_name",
+            DisableOnDemand = new(DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = SubscriptionStatus.Pending,
+            TaxID = "tax_id",
+        };
+
+        SubscriptionUpdateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class DisableOnDemandTest : TestBase

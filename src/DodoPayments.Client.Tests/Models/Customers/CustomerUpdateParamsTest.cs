@@ -77,4 +77,20 @@ public class CustomerUpdateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/customers/customer_id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CustomerUpdateParams
+        {
+            CustomerID = "customer_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Name = "name",
+            PhoneNumber = "phone_number",
+        };
+
+        CustomerUpdateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

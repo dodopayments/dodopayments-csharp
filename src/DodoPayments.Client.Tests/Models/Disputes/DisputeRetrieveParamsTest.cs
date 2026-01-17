@@ -24,4 +24,14 @@ public class DisputeRetrieveParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/disputes/dispute_id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new DisputeRetrieveParams { DisputeID = "dispute_id" };
+
+        DisputeRetrieveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

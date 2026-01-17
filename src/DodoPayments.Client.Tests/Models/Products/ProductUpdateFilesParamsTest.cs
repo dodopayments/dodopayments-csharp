@@ -26,4 +26,14 @@ public class ProductUpdateFilesParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/products/id/files"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new ProductUpdateFilesParams { ID = "id", FileName = "file_name" };
+
+        ProductUpdateFilesParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

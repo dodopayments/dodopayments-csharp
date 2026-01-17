@@ -36,8 +36,12 @@ namespace DodoPayments.Client.Models.Subscriptions;
 /// <para>## Example Query Patterns: - Get last 3 months: `?start_date=2024-01-01T00:00:00Z&end_date=2024-03-31T23:59:59Z`
 /// - Filter by meter: `?meter_id=mtr_api_requests` - Paginate results: `?page_size=20&page_number=1`
 /// - Recent usage: `?start_date=2024-03-01T00:00:00Z` (from March 1st to now)</para>
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
-public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
+public record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
 {
     public string? SubscriptionID { get; init; }
 
@@ -108,6 +112,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
 
     public SubscriptionRetrieveUsageHistoryParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionRetrieveUsageHistoryParams(
         SubscriptionRetrieveUsageHistoryParams subscriptionRetrieveUsageHistoryParams
     )
@@ -115,6 +121,7 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
     {
         this.SubscriptionID = subscriptionRetrieveUsageHistoryParams.SubscriptionID;
     }
+#pragma warning restore CS8618
 
     public SubscriptionRetrieveUsageHistoryParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -149,6 +156,28 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
         );
     }
 
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            new Dictionary<string, object?>()
+            {
+                ["SubscriptionID"] = this.SubscriptionID,
+                ["HeaderData"] = this._rawHeaderData.Freeze(),
+                ["QueryData"] = this._rawQueryData.Freeze(),
+            },
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(SubscriptionRetrieveUsageHistoryParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return (this.SubscriptionID?.Equals(other.SubscriptionID) ?? other.SubscriptionID == null)
+            && this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData);
+    }
+
     public override Uri Url(ClientOptions options)
     {
         return new UriBuilder(
@@ -167,5 +196,10 @@ public sealed record class SubscriptionRetrieveUsageHistoryParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }

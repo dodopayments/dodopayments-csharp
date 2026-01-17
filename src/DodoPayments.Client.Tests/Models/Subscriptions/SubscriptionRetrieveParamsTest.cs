@@ -24,4 +24,14 @@ public class SubscriptionRetrieveParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/subscriptions/subscription_id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new SubscriptionRetrieveParams { SubscriptionID = "subscription_id" };
+
+        SubscriptionRetrieveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

@@ -34,4 +34,18 @@ public class LicenseDeactivateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/licenses/deactivate"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new LicenseDeactivateParams
+        {
+            LicenseKey = "license_key",
+            LicenseKeyInstanceID = "license_key_instance_id",
+        };
+
+        LicenseDeactivateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

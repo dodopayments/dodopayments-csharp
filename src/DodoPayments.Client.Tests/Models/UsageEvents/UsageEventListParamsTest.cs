@@ -111,4 +111,23 @@ public class UsageEventListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new UsageEventListParams
+        {
+            CustomerID = "customer_id",
+            End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EventName = "event_name",
+            MeterID = "meter_id",
+            PageNumber = 0,
+            PageSize = 0,
+            Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        UsageEventListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

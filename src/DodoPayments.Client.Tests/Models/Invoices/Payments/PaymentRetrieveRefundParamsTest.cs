@@ -24,4 +24,14 @@ public class PaymentRetrieveRefundParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/invoices/refunds/refund_id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new PaymentRetrieveRefundParams { RefundID = "refund_id" };
+
+        PaymentRetrieveRefundParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

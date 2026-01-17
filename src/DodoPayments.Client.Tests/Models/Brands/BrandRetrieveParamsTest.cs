@@ -24,4 +24,14 @@ public class BrandRetrieveParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/brands/id"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new BrandRetrieveParams { ID = "id" };
+
+        BrandRetrieveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

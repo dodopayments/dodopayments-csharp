@@ -165,4 +165,24 @@ public class WebhookCreateParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/webhooks"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new WebhookCreateParams
+        {
+            UrlValue = "url",
+            Description = "description",
+            Disabled = true,
+            FilterTypes = [WebhookEventType.PaymentSucceeded],
+            Headers = new Dictionary<string, string>() { { "foo", "string" } },
+            IdempotencyKey = "idempotency_key",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            RateLimit = 0,
+        };
+
+        WebhookCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

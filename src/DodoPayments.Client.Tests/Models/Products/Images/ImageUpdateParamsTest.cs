@@ -53,4 +53,14 @@ public class ImageUpdateParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new ImageUpdateParams { ID = "id", ForceUpdate = true };
+
+        ImageUpdateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

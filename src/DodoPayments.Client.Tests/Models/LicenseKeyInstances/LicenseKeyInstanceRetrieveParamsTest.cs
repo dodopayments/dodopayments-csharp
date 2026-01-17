@@ -24,4 +24,14 @@ public class LicenseKeyInstanceRetrieveParamsTest : TestBase
 
         Assert.Equal(new Uri("https://live.dodopayments.com/license_key_instances/lki_123"), url);
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new LicenseKeyInstanceRetrieveParams { ID = "lki_123" };
+
+        LicenseKeyInstanceRetrieveParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

@@ -63,4 +63,18 @@ public class CustomerPortalCreateParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new CustomerPortalCreateParams
+        {
+            CustomerID = "customer_id",
+            SendEmail = true,
+        };
+
+        CustomerPortalCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

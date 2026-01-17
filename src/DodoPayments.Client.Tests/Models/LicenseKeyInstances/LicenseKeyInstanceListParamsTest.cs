@@ -74,4 +74,19 @@ public class LicenseKeyInstanceListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new LicenseKeyInstanceListParams
+        {
+            LicenseKeyID = "license_key_id",
+            PageNumber = 0,
+            PageSize = 0,
+        };
+
+        LicenseKeyInstanceListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

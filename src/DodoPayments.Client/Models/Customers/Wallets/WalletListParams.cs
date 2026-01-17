@@ -8,17 +8,25 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Customers.Wallets;
 
-public sealed record class WalletListParams : ParamsBase
+/// <summary>
+/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
+/// changes in non-major versions. We may add new methods in the future that cause
+/// existing derived classes to break.
+/// </summary>
+public record class WalletListParams : ParamsBase
 {
     public string? CustomerID { get; init; }
 
     public WalletListParams() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public WalletListParams(WalletListParams walletListParams)
         : base(walletListParams)
     {
         this.CustomerID = walletListParams.CustomerID;
     }
+#pragma warning restore CS8618
 
     public WalletListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
@@ -53,6 +61,28 @@ public sealed record class WalletListParams : ParamsBase
         );
     }
 
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            new Dictionary<string, object?>()
+            {
+                ["CustomerID"] = this.CustomerID,
+                ["HeaderData"] = this._rawHeaderData.Freeze(),
+                ["QueryData"] = this._rawQueryData.Freeze(),
+            },
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(WalletListParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return (this.CustomerID?.Equals(other.CustomerID) ?? other.CustomerID == null)
+            && this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData);
+    }
+
     public override Uri Url(ClientOptions options)
     {
         return new UriBuilder(
@@ -71,5 +101,10 @@ public sealed record class WalletListParams : ParamsBase
         {
             ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }

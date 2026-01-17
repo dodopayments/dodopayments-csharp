@@ -93,4 +93,21 @@ public class ProductListParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new ProductListParams
+        {
+            Archived = true,
+            BrandID = "brand_id",
+            PageNumber = 0,
+            PageSize = 0,
+            Recurring = true,
+        };
+
+        ProductListParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }

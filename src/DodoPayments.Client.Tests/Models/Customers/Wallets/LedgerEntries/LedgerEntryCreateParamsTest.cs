@@ -92,6 +92,24 @@ public class LedgerEntryCreateParamsTest : TestBase
             url
         );
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new LedgerEntryCreateParams
+        {
+            CustomerID = "customer_id",
+            Amount = 0,
+            Currency = Currency.Aed,
+            EntryType = EntryType.Credit,
+            IdempotencyKey = "idempotency_key",
+            Reason = "reason",
+        };
+
+        LedgerEntryCreateParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
 }
 
 public class EntryTypeTest : TestBase
