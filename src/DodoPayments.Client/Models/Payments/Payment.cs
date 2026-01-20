@@ -354,6 +354,19 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// URL to download the invoice PDF for this payment.
+    /// </summary>
+    public string? InvoiceUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("invoice_url");
+        }
+        init { this._rawData.Set("invoice_url", value); }
+    }
+
+    /// <summary>
     /// Checkout URL
     /// </summary>
     public string? PaymentLink
@@ -511,6 +524,7 @@ public sealed record class Payment : JsonModel
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
         _ = this.InvoiceID;
+        _ = this.InvoiceUrl;
         _ = this.PaymentLink;
         _ = this.PaymentMethod;
         _ = this.PaymentMethodType;

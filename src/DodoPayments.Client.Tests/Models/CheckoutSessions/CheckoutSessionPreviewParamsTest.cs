@@ -5,17 +5,17 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CheckoutSessions;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
-using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.CheckoutSessions;
 
-public class CheckoutSessionCreateParamsTest : TestBase
+public class CheckoutSessionPreviewParamsTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new CheckoutSessionCreateParams
+        var parameters = new CheckoutSessionPreviewParams
         {
             ProductCart =
             [
@@ -27,7 +27,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -38,13 +38,13 @@ public class CheckoutSessionCreateParamsTest : TestBase
             },
             BillingCurrency = Currency.Aed,
             Confirm = true,
-            Customer = new Payments::AttachExistingCustomer("customer_id"),
+            Customer = new AttachExistingCustomer("customer_id"),
             Customization = new()
             {
                 ForceLanguage = "force_language",
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
-                Theme = Theme.Dark,
+                Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
             },
             DiscountCode = "discount_code",
             FeatureFlags = new()
@@ -85,7 +85,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             },
         };
 
-        List<ProductCart> expectedProductCart =
+        List<CheckoutSessionPreviewParamsProductCart> expectedProductCart =
         [
             new()
             {
@@ -95,11 +95,11 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 Amount = 0,
             },
         ];
-        List<ApiEnum<string, Payments::PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
+        List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
         [
-            Payments::PaymentMethodTypes.Credit,
+            PaymentMethodTypes.Credit,
         ];
-        BillingAddress expectedBillingAddress = new()
+        CheckoutSessionPreviewParamsBillingAddress expectedBillingAddress = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -109,18 +109,16 @@ public class CheckoutSessionCreateParamsTest : TestBase
         };
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
         bool expectedConfirm = true;
-        Payments::CustomerRequest expectedCustomer = new Payments::AttachExistingCustomer(
-            "customer_id"
-        );
-        Customization expectedCustomization = new()
+        CustomerRequest expectedCustomer = new AttachExistingCustomer("customer_id");
+        CheckoutSessionPreviewParamsCustomization expectedCustomization = new()
         {
             ForceLanguage = "force_language",
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
+            Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
         };
         string expectedDiscountCode = "discount_code";
-        FeatureFlags expectedFeatureFlags = new()
+        CheckoutSessionPreviewParamsFeatureFlags expectedFeatureFlags = new()
         {
             AllowCurrencySelection = true,
             AllowCustomerEditingCity = true,
@@ -144,7 +142,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
         string expectedReturnUrl = "return_url";
         bool expectedShortLink = true;
         bool expectedShowSavedPaymentMethods = true;
-        SubscriptionData expectedSubscriptionData = new()
+        CheckoutSessionPreviewParamsSubscriptionData expectedSubscriptionData = new()
         {
             OnDemand = new()
             {
@@ -202,7 +200,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new CheckoutSessionCreateParams
+        var parameters = new CheckoutSessionPreviewParams
         {
             ProductCart =
             [
@@ -214,7 +212,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -224,7 +222,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
-            Customer = new Payments::AttachExistingCustomer("customer_id"),
+            Customer = new AttachExistingCustomer("customer_id"),
             DiscountCode = "discount_code",
             Force3ds = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -262,7 +260,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
     {
-        var parameters = new CheckoutSessionCreateParams
+        var parameters = new CheckoutSessionPreviewParams
         {
             ProductCart =
             [
@@ -274,7 +272,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -284,7 +282,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
-            Customer = new Payments::AttachExistingCustomer("customer_id"),
+            Customer = new AttachExistingCustomer("customer_id"),
             DiscountCode = "discount_code",
             Force3ds = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -330,7 +328,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new CheckoutSessionCreateParams
+        var parameters = new CheckoutSessionPreviewParams
         {
             ProductCart =
             [
@@ -348,7 +346,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 ForceLanguage = "force_language",
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
-                Theme = Theme.Dark,
+                Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
             },
             FeatureFlags = new()
             {
@@ -398,7 +396,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsSetToNullAreSetToNull_Works()
     {
-        var parameters = new CheckoutSessionCreateParams
+        var parameters = new CheckoutSessionPreviewParams
         {
             ProductCart =
             [
@@ -416,7 +414,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 ForceLanguage = "force_language",
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
-                Theme = Theme.Dark,
+                Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
             },
             FeatureFlags = new()
             {
@@ -478,7 +476,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        CheckoutSessionCreateParams parameters = new()
+        CheckoutSessionPreviewParams parameters = new()
         {
             ProductCart =
             [
@@ -494,13 +492,13 @@ public class CheckoutSessionCreateParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/checkouts"), url);
+        Assert.Equal(new Uri("https://live.dodopayments.com/checkouts/preview"), url);
     }
 
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new CheckoutSessionCreateParams
+        var parameters = new CheckoutSessionPreviewParams
         {
             ProductCart =
             [
@@ -512,7 +510,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -523,13 +521,13 @@ public class CheckoutSessionCreateParamsTest : TestBase
             },
             BillingCurrency = Currency.Aed,
             Confirm = true,
-            Customer = new Payments::AttachExistingCustomer("customer_id"),
+            Customer = new AttachExistingCustomer("customer_id"),
             Customization = new()
             {
                 ForceLanguage = "force_language",
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
-                Theme = Theme.Dark,
+                Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
             },
             DiscountCode = "discount_code",
             FeatureFlags = new()
@@ -570,18 +568,18 @@ public class CheckoutSessionCreateParamsTest : TestBase
             },
         };
 
-        CheckoutSessionCreateParams copied = new(parameters);
+        CheckoutSessionPreviewParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }
 }
 
-public class ProductCartTest : TestBase
+public class CheckoutSessionPreviewParamsProductCartTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new ProductCart
+        var model = new CheckoutSessionPreviewParamsProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -608,7 +606,7 @@ public class ProductCartTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new ProductCart
+        var model = new CheckoutSessionPreviewParamsProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -617,7 +615,7 @@ public class ProductCartTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ProductCart>(
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewParamsProductCart>(
             json,
             ModelBase.SerializerOptions
         );
@@ -628,7 +626,7 @@ public class ProductCartTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new ProductCart
+        var model = new CheckoutSessionPreviewParamsProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -637,7 +635,7 @@ public class ProductCartTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ProductCart>(
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewParamsProductCart>(
             element,
             ModelBase.SerializerOptions
         );
@@ -662,7 +660,7 @@ public class ProductCartTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new ProductCart
+        var model = new CheckoutSessionPreviewParamsProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -676,7 +674,11 @@ public class ProductCartTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
+        var model = new CheckoutSessionPreviewParamsProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+        };
 
         Assert.Null(model.Addons);
         Assert.False(model.RawData.ContainsKey("addons"));
@@ -687,7 +689,11 @@ public class ProductCartTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
+        var model = new CheckoutSessionPreviewParamsProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+        };
 
         model.Validate();
     }
@@ -695,7 +701,7 @@ public class ProductCartTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new ProductCart
+        var model = new CheckoutSessionPreviewParamsProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -713,7 +719,7 @@ public class ProductCartTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new ProductCart
+        var model = new CheckoutSessionPreviewParamsProductCart
         {
             ProductID = "product_id",
             Quantity = 0,
@@ -726,12 +732,12 @@ public class ProductCartTest : TestBase
     }
 }
 
-public class BillingAddressTest : TestBase
+public class CheckoutSessionPreviewParamsBillingAddressTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new BillingAddress
+        var model = new CheckoutSessionPreviewParamsBillingAddress
         {
             Country = CountryCode.Af,
             City = "city",
@@ -756,7 +762,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new BillingAddress
+        var model = new CheckoutSessionPreviewParamsBillingAddress
         {
             Country = CountryCode.Af,
             City = "city",
@@ -766,7 +772,7 @@ public class BillingAddressTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<BillingAddress>(
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewParamsBillingAddress>(
             json,
             ModelBase.SerializerOptions
         );
@@ -777,7 +783,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new BillingAddress
+        var model = new CheckoutSessionPreviewParamsBillingAddress
         {
             Country = CountryCode.Af,
             City = "city",
@@ -787,7 +793,7 @@ public class BillingAddressTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<BillingAddress>(
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewParamsBillingAddress>(
             element,
             ModelBase.SerializerOptions
         );
@@ -809,7 +815,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new BillingAddress
+        var model = new CheckoutSessionPreviewParamsBillingAddress
         {
             Country = CountryCode.Af,
             City = "city",
@@ -824,7 +830,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new BillingAddress { Country = CountryCode.Af };
+        var model = new CheckoutSessionPreviewParamsBillingAddress { Country = CountryCode.Af };
 
         Assert.Null(model.City);
         Assert.False(model.RawData.ContainsKey("city"));
@@ -839,7 +845,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new BillingAddress { Country = CountryCode.Af };
+        var model = new CheckoutSessionPreviewParamsBillingAddress { Country = CountryCode.Af };
 
         model.Validate();
     }
@@ -847,7 +853,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new BillingAddress
+        var model = new CheckoutSessionPreviewParamsBillingAddress
         {
             Country = CountryCode.Af,
 
@@ -870,7 +876,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new BillingAddress
+        var model = new CheckoutSessionPreviewParamsBillingAddress
         {
             Country = CountryCode.Af,
 
@@ -884,23 +890,24 @@ public class BillingAddressTest : TestBase
     }
 }
 
-public class CustomizationTest : TestBase
+public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Customization
+        var model = new CheckoutSessionPreviewParamsCustomization
         {
             ForceLanguage = "force_language",
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
+            Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
         };
 
         string expectedForceLanguage = "force_language";
         bool expectedShowOnDemandTag = true;
         bool expectedShowOrderDetails = true;
-        ApiEnum<string, Theme> expectedTheme = Theme.Dark;
+        ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme> expectedTheme =
+            CheckoutSessionPreviewParamsCustomizationTheme.Dark;
 
         Assert.Equal(expectedForceLanguage, model.ForceLanguage);
         Assert.Equal(expectedShowOnDemandTag, model.ShowOnDemandTag);
@@ -911,16 +918,16 @@ public class CustomizationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Customization
+        var model = new CheckoutSessionPreviewParamsCustomization
         {
             ForceLanguage = "force_language",
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
+            Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Customization>(
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewParamsCustomization>(
             json,
             ModelBase.SerializerOptions
         );
@@ -931,16 +938,16 @@ public class CustomizationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Customization
+        var model = new CheckoutSessionPreviewParamsCustomization
         {
             ForceLanguage = "force_language",
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
+            Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Customization>(
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewParamsCustomization>(
             element,
             ModelBase.SerializerOptions
         );
@@ -949,7 +956,8 @@ public class CustomizationTest : TestBase
         string expectedForceLanguage = "force_language";
         bool expectedShowOnDemandTag = true;
         bool expectedShowOrderDetails = true;
-        ApiEnum<string, Theme> expectedTheme = Theme.Dark;
+        ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme> expectedTheme =
+            CheckoutSessionPreviewParamsCustomizationTheme.Dark;
 
         Assert.Equal(expectedForceLanguage, deserialized.ForceLanguage);
         Assert.Equal(expectedShowOnDemandTag, deserialized.ShowOnDemandTag);
@@ -960,12 +968,12 @@ public class CustomizationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Customization
+        var model = new CheckoutSessionPreviewParamsCustomization
         {
             ForceLanguage = "force_language",
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
+            Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
         };
 
         model.Validate();
@@ -974,7 +982,10 @@ public class CustomizationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Customization { ForceLanguage = "force_language" };
+        var model = new CheckoutSessionPreviewParamsCustomization
+        {
+            ForceLanguage = "force_language",
+        };
 
         Assert.Null(model.ShowOnDemandTag);
         Assert.False(model.RawData.ContainsKey("show_on_demand_tag"));
@@ -987,7 +998,10 @@ public class CustomizationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Customization { ForceLanguage = "force_language" };
+        var model = new CheckoutSessionPreviewParamsCustomization
+        {
+            ForceLanguage = "force_language",
+        };
 
         model.Validate();
     }
@@ -995,7 +1009,7 @@ public class CustomizationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Customization
+        var model = new CheckoutSessionPreviewParamsCustomization
         {
             ForceLanguage = "force_language",
 
@@ -1016,7 +1030,7 @@ public class CustomizationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Customization
+        var model = new CheckoutSessionPreviewParamsCustomization
         {
             ForceLanguage = "force_language",
 
@@ -1032,11 +1046,11 @@ public class CustomizationTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Customization
+        var model = new CheckoutSessionPreviewParamsCustomization
         {
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
+            Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
         };
 
         Assert.Null(model.ForceLanguage);
@@ -1046,11 +1060,11 @@ public class CustomizationTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Customization
+        var model = new CheckoutSessionPreviewParamsCustomization
         {
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
+            Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
         };
 
         model.Validate();
@@ -1059,11 +1073,11 @@ public class CustomizationTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Customization
+        var model = new CheckoutSessionPreviewParamsCustomization
         {
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
+            Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
 
             ForceLanguage = null,
         };
@@ -1075,11 +1089,11 @@ public class CustomizationTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Customization
+        var model = new CheckoutSessionPreviewParamsCustomization
         {
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
+            Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
 
             ForceLanguage = null,
         };
@@ -1088,45 +1102,45 @@ public class CustomizationTest : TestBase
     }
 }
 
-public class ThemeTest : TestBase
+public class CheckoutSessionPreviewParamsCustomizationThemeTest : TestBase
 {
     [Theory]
-    [InlineData(Theme.Dark)]
-    [InlineData(Theme.Light)]
-    [InlineData(Theme.System)]
-    public void Validation_Works(Theme rawValue)
+    [InlineData(CheckoutSessionPreviewParamsCustomizationTheme.Dark)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationTheme.Light)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationTheme.System)]
+    public void Validation_Works(CheckoutSessionPreviewParamsCustomizationTheme rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Theme> value = rawValue;
+        ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Theme>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(Theme.Dark)]
-    [InlineData(Theme.Light)]
-    [InlineData(Theme.System)]
-    public void SerializationRoundtrip_Works(Theme rawValue)
+    [InlineData(CheckoutSessionPreviewParamsCustomizationTheme.Dark)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationTheme.Light)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationTheme.System)]
+    public void SerializationRoundtrip_Works(
+        CheckoutSessionPreviewParamsCustomizationTheme rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Theme> value = rawValue;
+        ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Theme>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -1134,26 +1148,24 @@ public class ThemeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Theme>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Theme>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class FeatureFlagsTest : TestBase
+public class CheckoutSessionPreviewParamsFeatureFlagsTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new FeatureFlags
+        var model = new CheckoutSessionPreviewParamsFeatureFlags
         {
             AllowCurrencySelection = true,
             AllowCustomerEditingCity = true,
@@ -1202,7 +1214,7 @@ public class FeatureFlagsTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new FeatureFlags
+        var model = new CheckoutSessionPreviewParamsFeatureFlags
         {
             AllowCurrencySelection = true,
             AllowCustomerEditingCity = true,
@@ -1220,7 +1232,7 @@ public class FeatureFlagsTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<FeatureFlags>(
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewParamsFeatureFlags>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1231,7 +1243,7 @@ public class FeatureFlagsTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new FeatureFlags
+        var model = new CheckoutSessionPreviewParamsFeatureFlags
         {
             AllowCurrencySelection = true,
             AllowCustomerEditingCity = true,
@@ -1249,7 +1261,7 @@ public class FeatureFlagsTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<FeatureFlags>(
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewParamsFeatureFlags>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1287,7 +1299,7 @@ public class FeatureFlagsTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new FeatureFlags
+        var model = new CheckoutSessionPreviewParamsFeatureFlags
         {
             AllowCurrencySelection = true,
             AllowCustomerEditingCity = true,
@@ -1310,7 +1322,7 @@ public class FeatureFlagsTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new FeatureFlags { };
+        var model = new CheckoutSessionPreviewParamsFeatureFlags { };
 
         Assert.Null(model.AllowCurrencySelection);
         Assert.False(model.RawData.ContainsKey("allow_currency_selection"));
@@ -1343,7 +1355,7 @@ public class FeatureFlagsTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new FeatureFlags { };
+        var model = new CheckoutSessionPreviewParamsFeatureFlags { };
 
         model.Validate();
     }
@@ -1351,7 +1363,7 @@ public class FeatureFlagsTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new FeatureFlags
+        var model = new CheckoutSessionPreviewParamsFeatureFlags
         {
             // Null should be interpreted as omitted for these properties
             AllowCurrencySelection = null,
@@ -1400,7 +1412,7 @@ public class FeatureFlagsTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new FeatureFlags
+        var model = new CheckoutSessionPreviewParamsFeatureFlags
         {
             // Null should be interpreted as omitted for these properties
             AllowCurrencySelection = null,
@@ -1422,12 +1434,12 @@ public class FeatureFlagsTest : TestBase
     }
 }
 
-public class SubscriptionDataTest : TestBase
+public class CheckoutSessionPreviewParamsSubscriptionDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionData
+        var model = new CheckoutSessionPreviewParamsSubscriptionData
         {
             OnDemand = new()
             {
@@ -1457,7 +1469,7 @@ public class SubscriptionDataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionData
+        var model = new CheckoutSessionPreviewParamsSubscriptionData
         {
             OnDemand = new()
             {
@@ -1471,7 +1483,7 @@ public class SubscriptionDataTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionData>(
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewParamsSubscriptionData>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1482,7 +1494,7 @@ public class SubscriptionDataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionData
+        var model = new CheckoutSessionPreviewParamsSubscriptionData
         {
             OnDemand = new()
             {
@@ -1496,7 +1508,7 @@ public class SubscriptionDataTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionData>(
+        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewParamsSubscriptionData>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1519,7 +1531,7 @@ public class SubscriptionDataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionData
+        var model = new CheckoutSessionPreviewParamsSubscriptionData
         {
             OnDemand = new()
             {
@@ -1538,7 +1550,7 @@ public class SubscriptionDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionData { };
+        var model = new CheckoutSessionPreviewParamsSubscriptionData { };
 
         Assert.Null(model.OnDemand);
         Assert.False(model.RawData.ContainsKey("on_demand"));
@@ -1549,7 +1561,7 @@ public class SubscriptionDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionData { };
+        var model = new CheckoutSessionPreviewParamsSubscriptionData { };
 
         model.Validate();
     }
@@ -1557,7 +1569,11 @@ public class SubscriptionDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new SubscriptionData { OnDemand = null, TrialPeriodDays = null };
+        var model = new CheckoutSessionPreviewParamsSubscriptionData
+        {
+            OnDemand = null,
+            TrialPeriodDays = null,
+        };
 
         Assert.Null(model.OnDemand);
         Assert.True(model.RawData.ContainsKey("on_demand"));
@@ -1568,7 +1584,11 @@ public class SubscriptionDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionData { OnDemand = null, TrialPeriodDays = null };
+        var model = new CheckoutSessionPreviewParamsSubscriptionData
+        {
+            OnDemand = null,
+            TrialPeriodDays = null,
+        };
 
         model.Validate();
     }

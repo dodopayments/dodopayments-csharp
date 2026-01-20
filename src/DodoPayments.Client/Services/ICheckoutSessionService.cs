@@ -48,6 +48,14 @@ public interface ICheckoutSessionService
         CheckoutSessionRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
     );
+
+    /// <summary>
+    /// Sends a request to <c>post /checkouts/preview<c/>.
+    /// </summary>
+    Task<CheckoutSessionPreviewResponse> Preview(
+        CheckoutSessionPreviewParams parameters,
+        CancellationToken cancellationToken = default
+    );
 }
 
 /// <summary>
@@ -85,6 +93,15 @@ public interface ICheckoutSessionServiceWithRawResponse
     Task<HttpResponse<CheckoutSessionStatus>> Retrieve(
         string id,
         CheckoutSessionRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /checkouts/preview`, but is otherwise the
+    /// same as <see cref="ICheckoutSessionService.Preview(CheckoutSessionPreviewParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CheckoutSessionPreviewResponse>> Preview(
+        CheckoutSessionPreviewParams parameters,
         CancellationToken cancellationToken = default
     );
 }

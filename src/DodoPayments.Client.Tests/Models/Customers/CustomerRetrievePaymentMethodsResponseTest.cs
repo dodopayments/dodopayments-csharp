@@ -33,7 +33,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
                     RecurringEnabled = true,
                 },
             ],
@@ -56,7 +56,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     Last4Digits = "last4_digits",
                 },
                 LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                PaymentMethodType = Payments::PaymentMethodTypes.Credit,
                 RecurringEnabled = true,
             },
         ];
@@ -90,7 +90,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
                     RecurringEnabled = true,
                 },
             ],
@@ -127,7 +127,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
                     RecurringEnabled = true,
                 },
             ],
@@ -157,7 +157,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     Last4Digits = "last4_digits",
                 },
                 LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                PaymentMethodType = Payments::PaymentMethodTypes.Credit,
                 RecurringEnabled = true,
             },
         ];
@@ -191,7 +191,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
                     RecurringEnabled = true,
                 },
             ],
@@ -221,7 +221,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
             RecurringEnabled = true,
         };
 
@@ -239,7 +239,7 @@ public class ItemTest : TestBase
         };
         DateTimeOffset expectedLastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Payments::PaymentMethodTypes> expectedPaymentMethodType =
-            Payments::PaymentMethodTypes.Ach;
+            Payments::PaymentMethodTypes.Credit;
         bool expectedRecurringEnabled = true;
 
         Assert.Equal(expectedPaymentMethod, model.PaymentMethod);
@@ -268,7 +268,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
             RecurringEnabled = true,
         };
 
@@ -296,7 +296,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
             RecurringEnabled = true,
         };
 
@@ -318,7 +318,7 @@ public class ItemTest : TestBase
         };
         DateTimeOffset expectedLastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Payments::PaymentMethodTypes> expectedPaymentMethodType =
-            Payments::PaymentMethodTypes.Ach;
+            Payments::PaymentMethodTypes.Credit;
         bool expectedRecurringEnabled = true;
 
         Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
@@ -347,7 +347,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
             RecurringEnabled = true,
         };
 

@@ -82,6 +82,7 @@ public class PaymentTest : TestBase
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
+            InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -159,6 +160,7 @@ public class PaymentTest : TestBase
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
         string expectedInvoiceID = "invoice_id";
+        string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
@@ -207,6 +209,7 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
         Assert.Equal(expectedInvoiceID, model.InvoiceID);
+        Assert.Equal(expectedInvoiceUrl, model.InvoiceUrl);
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
         Assert.Equal(expectedPaymentMethod, model.PaymentMethod);
         Assert.Equal(expectedPaymentMethodType, model.PaymentMethodType);
@@ -294,6 +297,7 @@ public class PaymentTest : TestBase
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
+            InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -382,6 +386,7 @@ public class PaymentTest : TestBase
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
+            InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -466,6 +471,7 @@ public class PaymentTest : TestBase
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
         string expectedInvoiceID = "invoice_id";
+        string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
@@ -514,6 +520,7 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
         Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
+        Assert.Equal(expectedInvoiceUrl, deserialized.InvoiceUrl);
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
         Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
         Assert.Equal(expectedPaymentMethodType, deserialized.PaymentMethodType);
@@ -601,6 +608,7 @@ public class PaymentTest : TestBase
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
+            InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
@@ -698,6 +706,8 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("error_message"));
         Assert.Null(model.InvoiceID);
         Assert.False(model.RawData.ContainsKey("invoice_id"));
+        Assert.Null(model.InvoiceUrl);
+        Assert.False(model.RawData.ContainsKey("invoice_url"));
         Assert.Null(model.PaymentLink);
         Assert.False(model.RawData.ContainsKey("payment_link"));
         Assert.Null(model.PaymentMethod);
@@ -856,6 +866,7 @@ public class PaymentTest : TestBase
             ErrorCode = null,
             ErrorMessage = null,
             InvoiceID = null,
+            InvoiceUrl = null,
             PaymentLink = null,
             PaymentMethod = null,
             PaymentMethodType = null,
@@ -887,6 +898,8 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("error_message"));
         Assert.Null(model.InvoiceID);
         Assert.True(model.RawData.ContainsKey("invoice_id"));
+        Assert.Null(model.InvoiceUrl);
+        Assert.True(model.RawData.ContainsKey("invoice_url"));
         Assert.Null(model.PaymentLink);
         Assert.True(model.RawData.ContainsKey("payment_link"));
         Assert.Null(model.PaymentMethod);
@@ -979,6 +992,7 @@ public class PaymentTest : TestBase
             ErrorCode = null,
             ErrorMessage = null,
             InvoiceID = null,
+            InvoiceUrl = null,
             PaymentLink = null,
             PaymentMethod = null,
             PaymentMethodType = null,
