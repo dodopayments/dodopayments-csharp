@@ -26,7 +26,7 @@ public class SubscriptionCreateParamsTest : TestBase
             ProductID = "product_id",
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
@@ -72,7 +72,7 @@ public class SubscriptionCreateParamsTest : TestBase
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
         [
-            PaymentMethodTypes.Ach,
+            PaymentMethodTypes.Credit,
         ];
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
         string expectedDiscountCode = "discount_code";
@@ -171,7 +171,7 @@ public class SubscriptionCreateParamsTest : TestBase
             ProductID = "product_id",
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
@@ -225,7 +225,7 @@ public class SubscriptionCreateParamsTest : TestBase
             ProductID = "product_id",
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
@@ -419,7 +419,7 @@ public class SubscriptionCreateParamsTest : TestBase
             ProductID = "product_id",
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,

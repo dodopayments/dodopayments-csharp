@@ -84,6 +84,23 @@ public interface IDiscountService
         DiscountDeleteParams? parameters = null,
         CancellationToken cancellationToken = default
     );
+
+    /// <summary>
+    /// Validate and fetch a discount by its code name (e.g., "SAVE20"). This allows
+    /// real-time validation directly against the API using the human-readable discount
+    /// code instead of requiring the internal discount_id.
+    /// </summary>
+    Task<Discount> RetrieveByCode(
+        DiscountRetrieveByCodeParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveByCode(DiscountRetrieveByCodeParams, CancellationToken)"/>
+    Task<Discount> RetrieveByCode(
+        string code,
+        DiscountRetrieveByCodeParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }
 
 /// <summary>
@@ -162,6 +179,22 @@ public interface IDiscountServiceWithRawResponse
     Task<HttpResponse> Delete(
         string discountID,
         DiscountDeleteParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /discounts/code/{code}`, but is otherwise the
+    /// same as <see cref="IDiscountService.RetrieveByCode(DiscountRetrieveByCodeParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Discount>> RetrieveByCode(
+        DiscountRetrieveByCodeParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveByCode(DiscountRetrieveByCodeParams, CancellationToken)"/>
+    Task<HttpResponse<Discount>> RetrieveByCode(
+        string code,
+        DiscountRetrieveByCodeParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }

@@ -56,6 +56,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
+            ProductCollectionID = "product_collection_id",
         };
 
         string expectedBrandID = "brand_id";
@@ -103,6 +104,7 @@ public class ProductTest : TestBase
             Interval = TimeInterval.Day,
         };
         string expectedName = "name";
+        string expectedProductCollectionID = "product_collection_id";
 
         Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -133,6 +135,7 @@ public class ProductTest : TestBase
         Assert.Equal(expectedLicenseKeyActivationsLimit, model.LicenseKeyActivationsLimit);
         Assert.Equal(expectedLicenseKeyDuration, model.LicenseKeyDuration);
         Assert.Equal(expectedName, model.Name);
+        Assert.Equal(expectedProductCollectionID, model.ProductCollectionID);
     }
 
     [Fact]
@@ -181,6 +184,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
+            ProductCollectionID = "product_collection_id",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -238,6 +242,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
+            ProductCollectionID = "product_collection_id",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -292,6 +297,7 @@ public class ProductTest : TestBase
             Interval = TimeInterval.Day,
         };
         string expectedName = "name";
+        string expectedProductCollectionID = "product_collection_id";
 
         Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -322,6 +328,7 @@ public class ProductTest : TestBase
         Assert.Equal(expectedLicenseKeyActivationsLimit, deserialized.LicenseKeyActivationsLimit);
         Assert.Equal(expectedLicenseKeyDuration, deserialized.LicenseKeyDuration);
         Assert.Equal(expectedName, deserialized.Name);
+        Assert.Equal(expectedProductCollectionID, deserialized.ProductCollectionID);
     }
 
     [Fact]
@@ -370,6 +377,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
+            ProductCollectionID = "product_collection_id",
         };
 
         model.Validate();
@@ -418,6 +426,8 @@ public class ProductTest : TestBase
         Assert.False(model.RawData.ContainsKey("license_key_duration"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
+        Assert.Null(model.ProductCollectionID);
+        Assert.False(model.RawData.ContainsKey("product_collection_id"));
     }
 
     [Fact]
@@ -484,6 +494,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = null,
             LicenseKeyDuration = null,
             Name = null,
+            ProductCollectionID = null,
         };
 
         Assert.Null(model.Addons);
@@ -502,6 +513,8 @@ public class ProductTest : TestBase
         Assert.True(model.RawData.ContainsKey("license_key_duration"));
         Assert.Null(model.Name);
         Assert.True(model.RawData.ContainsKey("name"));
+        Assert.Null(model.ProductCollectionID);
+        Assert.True(model.RawData.ContainsKey("product_collection_id"));
     }
 
     [Fact]
@@ -538,6 +551,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = null,
             LicenseKeyDuration = null,
             Name = null,
+            ProductCollectionID = null,
         };
 
         model.Validate();

@@ -87,6 +87,26 @@ public record class SubscriptionChangePlanParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Metadata for the payment. If not passed, the metadata of the subscription
+    /// will be taken
+    /// </summary>
+    public IReadOnlyDictionary<string, string>? Metadata
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
     public SubscriptionChangePlanParams() { }
 
 #pragma warning disable CS8618

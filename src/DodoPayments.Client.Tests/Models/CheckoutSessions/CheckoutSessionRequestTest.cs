@@ -26,7 +26,7 @@ public class CheckoutSessionRequestTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -66,6 +66,7 @@ public class CheckoutSessionRequestTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
+            ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
@@ -95,7 +96,7 @@ public class CheckoutSessionRequestTest : TestBase
         ];
         List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
         [
-            PaymentMethodTypes.Ach,
+            PaymentMethodTypes.Credit,
         ];
         CheckoutSessionRequestBillingAddress expectedBillingAddress = new()
         {
@@ -136,6 +137,7 @@ public class CheckoutSessionRequestTest : TestBase
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMinimalAddress = true;
         string expectedPaymentMethodID = "payment_method_id";
+        string expectedProductCollectionID = "product_collection_id";
         string expectedReturnUrl = "return_url";
         bool expectedShortLink = true;
         bool expectedShowSavedPaymentMethods = true;
@@ -184,6 +186,7 @@ public class CheckoutSessionRequestTest : TestBase
         }
         Assert.Equal(expectedMinimalAddress, model.MinimalAddress);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
+        Assert.Equal(expectedProductCollectionID, model.ProductCollectionID);
         Assert.Equal(expectedReturnUrl, model.ReturnUrl);
         Assert.Equal(expectedShortLink, model.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, model.ShowSavedPaymentMethods);
@@ -205,7 +208,7 @@ public class CheckoutSessionRequestTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -245,6 +248,7 @@ public class CheckoutSessionRequestTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
+            ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
@@ -286,7 +290,7 @@ public class CheckoutSessionRequestTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -326,6 +330,7 @@ public class CheckoutSessionRequestTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
+            ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
@@ -362,7 +367,7 @@ public class CheckoutSessionRequestTest : TestBase
         ];
         List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
         [
-            PaymentMethodTypes.Ach,
+            PaymentMethodTypes.Credit,
         ];
         CheckoutSessionRequestBillingAddress expectedBillingAddress = new()
         {
@@ -403,6 +408,7 @@ public class CheckoutSessionRequestTest : TestBase
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMinimalAddress = true;
         string expectedPaymentMethodID = "payment_method_id";
+        string expectedProductCollectionID = "product_collection_id";
         string expectedReturnUrl = "return_url";
         bool expectedShortLink = true;
         bool expectedShowSavedPaymentMethods = true;
@@ -454,6 +460,7 @@ public class CheckoutSessionRequestTest : TestBase
         }
         Assert.Equal(expectedMinimalAddress, deserialized.MinimalAddress);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
+        Assert.Equal(expectedProductCollectionID, deserialized.ProductCollectionID);
         Assert.Equal(expectedReturnUrl, deserialized.ReturnUrl);
         Assert.Equal(expectedShortLink, deserialized.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, deserialized.ShowSavedPaymentMethods);
@@ -475,7 +482,7 @@ public class CheckoutSessionRequestTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -515,6 +522,7 @@ public class CheckoutSessionRequestTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
+            ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
@@ -550,7 +558,7 @@ public class CheckoutSessionRequestTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -565,6 +573,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "payment_method_id",
+            ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
             SubscriptionData = new()
             {
@@ -609,7 +618,7 @@ public class CheckoutSessionRequestTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -624,6 +633,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "payment_method_id",
+            ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
             SubscriptionData = new()
             {
@@ -657,7 +667,7 @@ public class CheckoutSessionRequestTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -672,6 +682,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "payment_method_id",
+            ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
             SubscriptionData = new()
             {
@@ -724,7 +735,7 @@ public class CheckoutSessionRequestTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -739,6 +750,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "payment_method_id",
+            ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
             SubscriptionData = new()
             {
@@ -825,6 +837,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.ProductCollectionID);
+        Assert.False(model.RawData.ContainsKey("product_collection_id"));
         Assert.Null(model.ReturnUrl);
         Assert.False(model.RawData.ContainsKey("return_url"));
         Assert.Null(model.SubscriptionData);
@@ -929,6 +943,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = null,
             Metadata = null,
             PaymentMethodID = null,
+            ProductCollectionID = null,
             ReturnUrl = null,
             SubscriptionData = null,
         };
@@ -949,6 +964,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.True(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.PaymentMethodID);
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.ProductCollectionID);
+        Assert.True(model.RawData.ContainsKey("product_collection_id"));
         Assert.Null(model.ReturnUrl);
         Assert.True(model.RawData.ContainsKey("return_url"));
         Assert.Null(model.SubscriptionData);
@@ -1006,6 +1023,7 @@ public class CheckoutSessionRequestTest : TestBase
             Force3ds = null,
             Metadata = null,
             PaymentMethodID = null,
+            ProductCollectionID = null,
             ReturnUrl = null,
             SubscriptionData = null,
         };
