@@ -1,5 +1,21 @@
 # Changelog
 
+## 6.2.0 (2026-01-20)
+
+Full Changelog: [v6.1.0...v6.2.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.1.0...v6.2.0)
+
+### Features
+
+* **api:** update openapi spec to v1.73.0 ([d1efbe1](https://github.com/dodopayments/dodopayments-csharp/commit/d1efbe1119c2ebed9917f8c72d11c1e5a520d065))
+* **client:** add `ToString` to `ApiEnum` ([a8a3151](https://github.com/dodopayments/dodopayments-csharp/commit/a8a3151b0c9fb339fb9a883f376770f74d807703))
+* **client:** add Equals and ToString to params ([7350ab8](https://github.com/dodopayments/dodopayments-csharp/commit/7350ab81e367154eec076377257b529916fb0f5a))
+
+
+### Chores
+
+* **internal:** simplify imports ([906a961](https://github.com/dodopayments/dodopayments-csharp/commit/906a961f4d6f83759f88952172d7454f264b1623))
+* **internal:** update `actions/checkout` version ([9a5e7f3](https://github.com/dodopayments/dodopayments-csharp/commit/9a5e7f36df6c5805f7d478b43af2aad2dc4553c1))
+
 ## 6.1.0 (2026-01-15)
 
 Full Changelog: [v6.0.1...v6.1.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.0.1...v6.1.0)
