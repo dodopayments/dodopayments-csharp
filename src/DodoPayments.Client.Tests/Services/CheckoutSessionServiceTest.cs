@@ -36,4 +36,26 @@ public class CheckoutSessionServiceTest : TestBase
         );
         checkoutSessionStatus.Validate();
     }
+
+    [Fact]
+    public async Task Preview_Works()
+    {
+        var response = await this.client.CheckoutSessions.Preview(
+            new()
+            {
+                ProductCart =
+                [
+                    new()
+                    {
+                        ProductID = "product_id",
+                        Quantity = 0,
+                        Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                        Amount = 0,
+                    },
+                ],
+            },
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
 }

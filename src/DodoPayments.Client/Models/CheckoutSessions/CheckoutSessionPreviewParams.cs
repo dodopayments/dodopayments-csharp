@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using Payments = DodoPayments.Client.Models.Payments;
+using DodoPayments.Client.Models.Payments;
 using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
@@ -20,7 +20,7 @@ namespace DodoPayments.Client.Models.CheckoutSessions;
 /// changes in non-major versions. We may add new methods in the future that cause
 /// existing derived classes to break.
 /// </summary>
-public record class CheckoutSessionCreateParams : ParamsBase
+public record class CheckoutSessionPreviewParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
@@ -28,16 +28,18 @@ public record class CheckoutSessionCreateParams : ParamsBase
         get { return this._rawBodyData.Freeze(); }
     }
 
-    public required IReadOnlyList<ProductCart> ProductCart
+    public required IReadOnlyList<CheckoutSessionPreviewParamsProductCart> ProductCart
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullStruct<ImmutableArray<ProductCart>>("product_cart");
+            return this._rawBodyData.GetNotNullStruct<
+                ImmutableArray<CheckoutSessionPreviewParamsProductCart>
+            >("product_cart");
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<ProductCart>>(
+            this._rawBodyData.Set<ImmutableArray<CheckoutSessionPreviewParamsProductCart>>(
                 "product_cart",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -52,18 +54,18 @@ public record class CheckoutSessionCreateParams : ParamsBase
     /// <para>Disclaimar: Always provide 'credit' and 'debit' as a fallback. If all
     /// payment methods are unavailable, checkout session will fail.</para>
     /// </summary>
-    public IReadOnlyList<ApiEnum<string, Payments::PaymentMethodTypes>>? AllowedPaymentMethodTypes
+    public IReadOnlyList<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
         get
         {
             this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableStruct<
-                ImmutableArray<ApiEnum<string, Payments::PaymentMethodTypes>>
+                ImmutableArray<ApiEnum<string, PaymentMethodTypes>>
             >("allowed_payment_method_types");
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<ApiEnum<string, Payments::PaymentMethodTypes>>?>(
+            this._rawBodyData.Set<ImmutableArray<ApiEnum<string, PaymentMethodTypes>>?>(
                 "allowed_payment_method_types",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -73,12 +75,14 @@ public record class CheckoutSessionCreateParams : ParamsBase
     /// <summary>
     /// Billing address information for the session
     /// </summary>
-    public BillingAddress? BillingAddress
+    public CheckoutSessionPreviewParamsBillingAddress? BillingAddress
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<BillingAddress>("billing_address");
+            return this._rawBodyData.GetNullableClass<CheckoutSessionPreviewParamsBillingAddress>(
+                "billing_address"
+            );
         }
         init { this._rawBodyData.Set("billing_address", value); }
     }
@@ -123,12 +127,12 @@ public record class CheckoutSessionCreateParams : ParamsBase
     /// <summary>
     /// Customer details for the session
     /// </summary>
-    public Payments::CustomerRequest? Customer
+    public CustomerRequest? Customer
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<Payments::CustomerRequest>("customer");
+            return this._rawBodyData.GetNullableClass<CustomerRequest>("customer");
         }
         init { this._rawBodyData.Set("customer", value); }
     }
@@ -136,12 +140,14 @@ public record class CheckoutSessionCreateParams : ParamsBase
     /// <summary>
     /// Customization for the checkout session page
     /// </summary>
-    public Customization? Customization
+    public CheckoutSessionPreviewParamsCustomization? Customization
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<Customization>("customization");
+            return this._rawBodyData.GetNullableClass<CheckoutSessionPreviewParamsCustomization>(
+                "customization"
+            );
         }
         init
         {
@@ -164,12 +170,14 @@ public record class CheckoutSessionCreateParams : ParamsBase
         init { this._rawBodyData.Set("discount_code", value); }
     }
 
-    public FeatureFlags? FeatureFlags
+    public CheckoutSessionPreviewParamsFeatureFlags? FeatureFlags
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<FeatureFlags>("feature_flags");
+            return this._rawBodyData.GetNullableClass<CheckoutSessionPreviewParamsFeatureFlags>(
+                "feature_flags"
+            );
         }
         init
         {
@@ -318,28 +326,30 @@ public record class CheckoutSessionCreateParams : ParamsBase
         }
     }
 
-    public SubscriptionData? SubscriptionData
+    public CheckoutSessionPreviewParamsSubscriptionData? SubscriptionData
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<SubscriptionData>("subscription_data");
+            return this._rawBodyData.GetNullableClass<CheckoutSessionPreviewParamsSubscriptionData>(
+                "subscription_data"
+            );
         }
         init { this._rawBodyData.Set("subscription_data", value); }
     }
 
-    public CheckoutSessionCreateParams() { }
+    public CheckoutSessionPreviewParams() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CheckoutSessionCreateParams(CheckoutSessionCreateParams checkoutSessionCreateParams)
-        : base(checkoutSessionCreateParams)
+    public CheckoutSessionPreviewParams(CheckoutSessionPreviewParams checkoutSessionPreviewParams)
+        : base(checkoutSessionPreviewParams)
     {
-        this._rawBodyData = new(checkoutSessionCreateParams._rawBodyData);
+        this._rawBodyData = new(checkoutSessionPreviewParams._rawBodyData);
     }
 #pragma warning restore CS8618
 
-    public CheckoutSessionCreateParams(
+    public CheckoutSessionPreviewParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -352,7 +362,7 @@ public record class CheckoutSessionCreateParams : ParamsBase
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CheckoutSessionCreateParams(
+    CheckoutSessionPreviewParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
         FrozenDictionary<string, JsonElement> rawBodyData
@@ -365,7 +375,7 @@ public record class CheckoutSessionCreateParams : ParamsBase
 #pragma warning restore CS8618
 
     /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
-    public static CheckoutSessionCreateParams FromRawUnchecked(
+    public static CheckoutSessionPreviewParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -389,7 +399,7 @@ public record class CheckoutSessionCreateParams : ParamsBase
             ModelBase.ToStringSerializerOptions
         );
 
-    public virtual bool Equals(CheckoutSessionCreateParams? other)
+    public virtual bool Equals(CheckoutSessionPreviewParams? other)
     {
         if (other == null)
         {
@@ -402,7 +412,7 @@ public record class CheckoutSessionCreateParams : ParamsBase
 
     public override Uri Url(ClientOptions options)
     {
-        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/checkouts")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/checkouts/preview")
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -432,8 +442,13 @@ public record class CheckoutSessionCreateParams : ParamsBase
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<ProductCart, ProductCartFromRaw>))]
-public sealed record class ProductCart : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CheckoutSessionPreviewParamsProductCart,
+        CheckoutSessionPreviewParamsProductCartFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionPreviewParamsProductCart : JsonModel
 {
     /// <summary>
     /// unique id of the product
@@ -510,43 +525,54 @@ public sealed record class ProductCart : JsonModel
         _ = this.Amount;
     }
 
-    public ProductCart() { }
+    public CheckoutSessionPreviewParamsProductCart() { }
 
-    public ProductCart(ProductCart productCart)
-        : base(productCart) { }
+    public CheckoutSessionPreviewParamsProductCart(
+        CheckoutSessionPreviewParamsProductCart checkoutSessionPreviewParamsProductCart
+    )
+        : base(checkoutSessionPreviewParamsProductCart) { }
 
-    public ProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CheckoutSessionPreviewParamsProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ProductCart(FrozenDictionary<string, JsonElement> rawData)
+    CheckoutSessionPreviewParamsProductCart(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="ProductCartFromRaw.FromRawUnchecked"/>
-    public static ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="CheckoutSessionPreviewParamsProductCartFromRaw.FromRawUnchecked"/>
+    public static CheckoutSessionPreviewParamsProductCart FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class ProductCartFromRaw : IFromRawJson<ProductCart>
+class CheckoutSessionPreviewParamsProductCartFromRaw
+    : IFromRawJson<CheckoutSessionPreviewParamsProductCart>
 {
     /// <inheritdoc/>
-    public ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        ProductCart.FromRawUnchecked(rawData);
+    public CheckoutSessionPreviewParamsProductCart FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionPreviewParamsProductCart.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Billing address information for the session
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<BillingAddress, BillingAddressFromRaw>))]
-public sealed record class BillingAddress : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CheckoutSessionPreviewParamsBillingAddress,
+        CheckoutSessionPreviewParamsBillingAddressFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionPreviewParamsBillingAddress : JsonModel
 {
     /// <summary>
     /// Two-letter ISO country code (ISO 3166-1 alpha-2)
@@ -623,50 +649,63 @@ public sealed record class BillingAddress : JsonModel
         _ = this.Zipcode;
     }
 
-    public BillingAddress() { }
+    public CheckoutSessionPreviewParamsBillingAddress() { }
 
-    public BillingAddress(BillingAddress billingAddress)
-        : base(billingAddress) { }
+    public CheckoutSessionPreviewParamsBillingAddress(
+        CheckoutSessionPreviewParamsBillingAddress checkoutSessionPreviewParamsBillingAddress
+    )
+        : base(checkoutSessionPreviewParamsBillingAddress) { }
 
-    public BillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CheckoutSessionPreviewParamsBillingAddress(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    BillingAddress(FrozenDictionary<string, JsonElement> rawData)
+    CheckoutSessionPreviewParamsBillingAddress(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="BillingAddressFromRaw.FromRawUnchecked"/>
-    public static BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="CheckoutSessionPreviewParamsBillingAddressFromRaw.FromRawUnchecked"/>
+    public static CheckoutSessionPreviewParamsBillingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]
-    public BillingAddress(ApiEnum<string, CountryCode> country)
+    public CheckoutSessionPreviewParamsBillingAddress(ApiEnum<string, CountryCode> country)
         : this()
     {
         this.Country = country;
     }
 }
 
-class BillingAddressFromRaw : IFromRawJson<BillingAddress>
+class CheckoutSessionPreviewParamsBillingAddressFromRaw
+    : IFromRawJson<CheckoutSessionPreviewParamsBillingAddress>
 {
     /// <inheritdoc/>
-    public BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        BillingAddress.FromRawUnchecked(rawData);
+    public CheckoutSessionPreviewParamsBillingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionPreviewParamsBillingAddress.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Customization for the checkout session page
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<Customization, CustomizationFromRaw>))]
-public sealed record class Customization : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CheckoutSessionPreviewParamsCustomization,
+        CheckoutSessionPreviewParamsCustomizationFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionPreviewParamsCustomization : JsonModel
 {
     /// <summary>
     /// Force the checkout interface to render in a specific language (e.g. `en`, `es`)
@@ -732,12 +771,14 @@ public sealed record class Customization : JsonModel
     ///
     /// <para>Default is `System`.</para>
     /// </summary>
-    public ApiEnum<string, Theme>? Theme
+    public ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme>? Theme
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, Theme>>("theme");
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme>
+            >("theme");
         }
         init
         {
@@ -759,36 +800,44 @@ public sealed record class Customization : JsonModel
         this.Theme?.Validate();
     }
 
-    public Customization() { }
+    public CheckoutSessionPreviewParamsCustomization() { }
 
-    public Customization(Customization customization)
-        : base(customization) { }
+    public CheckoutSessionPreviewParamsCustomization(
+        CheckoutSessionPreviewParamsCustomization checkoutSessionPreviewParamsCustomization
+    )
+        : base(checkoutSessionPreviewParamsCustomization) { }
 
-    public Customization(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CheckoutSessionPreviewParamsCustomization(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Customization(FrozenDictionary<string, JsonElement> rawData)
+    CheckoutSessionPreviewParamsCustomization(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="CustomizationFromRaw.FromRawUnchecked"/>
-    public static Customization FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="CheckoutSessionPreviewParamsCustomizationFromRaw.FromRawUnchecked"/>
+    public static CheckoutSessionPreviewParamsCustomization FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class CustomizationFromRaw : IFromRawJson<Customization>
+class CheckoutSessionPreviewParamsCustomizationFromRaw
+    : IFromRawJson<CheckoutSessionPreviewParamsCustomization>
 {
     /// <inheritdoc/>
-    public Customization FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Customization.FromRawUnchecked(rawData);
+    public CheckoutSessionPreviewParamsCustomization FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionPreviewParamsCustomization.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -796,17 +845,18 @@ class CustomizationFromRaw : IFromRawJson<Customization>
 ///
 /// <para>Default is `System`.</para>
 /// </summary>
-[JsonConverter(typeof(ThemeConverter))]
-public enum Theme
+[JsonConverter(typeof(CheckoutSessionPreviewParamsCustomizationThemeConverter))]
+public enum CheckoutSessionPreviewParamsCustomizationTheme
 {
     Dark,
     Light,
     System,
 }
 
-sealed class ThemeConverter : JsonConverter<Theme>
+sealed class CheckoutSessionPreviewParamsCustomizationThemeConverter
+    : JsonConverter<CheckoutSessionPreviewParamsCustomizationTheme>
 {
-    public override Theme Read(
+    public override CheckoutSessionPreviewParamsCustomizationTheme Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -814,22 +864,26 @@ sealed class ThemeConverter : JsonConverter<Theme>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "dark" => Theme.Dark,
-            "light" => Theme.Light,
-            "system" => Theme.System,
-            _ => (Theme)(-1),
+            "dark" => CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+            "light" => CheckoutSessionPreviewParamsCustomizationTheme.Light,
+            "system" => CheckoutSessionPreviewParamsCustomizationTheme.System,
+            _ => (CheckoutSessionPreviewParamsCustomizationTheme)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Theme value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        CheckoutSessionPreviewParamsCustomizationTheme value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Theme.Dark => "dark",
-                Theme.Light => "light",
-                Theme.System => "system",
+                CheckoutSessionPreviewParamsCustomizationTheme.Dark => "dark",
+                CheckoutSessionPreviewParamsCustomizationTheme.Light => "light",
+                CheckoutSessionPreviewParamsCustomizationTheme.System => "system",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -839,8 +893,13 @@ sealed class ThemeConverter : JsonConverter<Theme>
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<FeatureFlags, FeatureFlagsFromRaw>))]
-public sealed record class FeatureFlags : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CheckoutSessionPreviewParamsFeatureFlags,
+        CheckoutSessionPreviewParamsFeatureFlagsFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionPreviewParamsFeatureFlags : JsonModel
 {
     /// <summary>
     /// if customer is allowed to change currency, set it to true
@@ -1125,40 +1184,53 @@ public sealed record class FeatureFlags : JsonModel
         _ = this.RedirectImmediately;
     }
 
-    public FeatureFlags() { }
+    public CheckoutSessionPreviewParamsFeatureFlags() { }
 
-    public FeatureFlags(FeatureFlags featureFlags)
-        : base(featureFlags) { }
+    public CheckoutSessionPreviewParamsFeatureFlags(
+        CheckoutSessionPreviewParamsFeatureFlags checkoutSessionPreviewParamsFeatureFlags
+    )
+        : base(checkoutSessionPreviewParamsFeatureFlags) { }
 
-    public FeatureFlags(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CheckoutSessionPreviewParamsFeatureFlags(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    FeatureFlags(FrozenDictionary<string, JsonElement> rawData)
+    CheckoutSessionPreviewParamsFeatureFlags(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="FeatureFlagsFromRaw.FromRawUnchecked"/>
-    public static FeatureFlags FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="CheckoutSessionPreviewParamsFeatureFlagsFromRaw.FromRawUnchecked"/>
+    public static CheckoutSessionPreviewParamsFeatureFlags FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class FeatureFlagsFromRaw : IFromRawJson<FeatureFlags>
+class CheckoutSessionPreviewParamsFeatureFlagsFromRaw
+    : IFromRawJson<CheckoutSessionPreviewParamsFeatureFlags>
 {
     /// <inheritdoc/>
-    public FeatureFlags FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        FeatureFlags.FromRawUnchecked(rawData);
+    public CheckoutSessionPreviewParamsFeatureFlags FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionPreviewParamsFeatureFlags.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(JsonModelConverter<SubscriptionData, SubscriptionDataFromRaw>))]
-public sealed record class SubscriptionData : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CheckoutSessionPreviewParamsSubscriptionData,
+        CheckoutSessionPreviewParamsSubscriptionDataFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionPreviewParamsSubscriptionData : JsonModel
 {
     public Subscriptions::OnDemandSubscription? OnDemand
     {
@@ -1191,26 +1263,30 @@ public sealed record class SubscriptionData : JsonModel
         _ = this.TrialPeriodDays;
     }
 
-    public SubscriptionData() { }
+    public CheckoutSessionPreviewParamsSubscriptionData() { }
 
-    public SubscriptionData(SubscriptionData subscriptionData)
-        : base(subscriptionData) { }
+    public CheckoutSessionPreviewParamsSubscriptionData(
+        CheckoutSessionPreviewParamsSubscriptionData checkoutSessionPreviewParamsSubscriptionData
+    )
+        : base(checkoutSessionPreviewParamsSubscriptionData) { }
 
-    public SubscriptionData(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CheckoutSessionPreviewParamsSubscriptionData(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionData(FrozenDictionary<string, JsonElement> rawData)
+    CheckoutSessionPreviewParamsSubscriptionData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="SubscriptionDataFromRaw.FromRawUnchecked"/>
-    public static SubscriptionData FromRawUnchecked(
+    /// <inheritdoc cref="CheckoutSessionPreviewParamsSubscriptionDataFromRaw.FromRawUnchecked"/>
+    public static CheckoutSessionPreviewParamsSubscriptionData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1218,9 +1294,11 @@ public sealed record class SubscriptionData : JsonModel
     }
 }
 
-class SubscriptionDataFromRaw : IFromRawJson<SubscriptionData>
+class CheckoutSessionPreviewParamsSubscriptionDataFromRaw
+    : IFromRawJson<CheckoutSessionPreviewParamsSubscriptionData>
 {
     /// <inheritdoc/>
-    public SubscriptionData FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        SubscriptionData.FromRawUnchecked(rawData);
+    public CheckoutSessionPreviewParamsSubscriptionData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionPreviewParamsSubscriptionData.FromRawUnchecked(rawData);
 }

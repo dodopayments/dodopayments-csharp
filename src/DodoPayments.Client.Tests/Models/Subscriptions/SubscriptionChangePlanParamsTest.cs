@@ -19,6 +19,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
         string expectedSubscriptionID = "subscription_id";
@@ -27,6 +28,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             ProrationBillingMode.ProratedImmediately;
         int expectedQuantity = 0;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
         Assert.Equal(expectedProductID, parameters.ProductID);
@@ -37,6 +39,14 @@ public class SubscriptionChangePlanParamsTest : TestBase
         for (int i = 0; i < expectedAddons.Count; i++)
         {
             Assert.Equal(expectedAddons[i], parameters.Addons[i]);
+        }
+        Assert.NotNull(parameters.Metadata);
+        Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(parameters.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, parameters.Metadata[item.Key]);
         }
     }
 
@@ -53,6 +63,8 @@ public class SubscriptionChangePlanParamsTest : TestBase
 
         Assert.Null(parameters.Addons);
         Assert.False(parameters.RawBodyData.ContainsKey("addons"));
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
     }
 
     [Fact]
@@ -66,10 +78,13 @@ public class SubscriptionChangePlanParamsTest : TestBase
             Quantity = 0,
 
             Addons = null,
+            Metadata = null,
         };
 
         Assert.Null(parameters.Addons);
         Assert.True(parameters.RawBodyData.ContainsKey("addons"));
+        Assert.Null(parameters.Metadata);
+        Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
     }
 
     [Fact]
@@ -101,6 +116,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
         SubscriptionChangePlanParams copied = new(parameters);

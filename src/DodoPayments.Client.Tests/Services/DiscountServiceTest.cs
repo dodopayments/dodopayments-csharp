@@ -53,4 +53,15 @@ public class DiscountServiceTest : TestBase
             TestContext.Current.CancellationToken
         );
     }
+
+    [Fact]
+    public async Task RetrieveByCode_Works()
+    {
+        var discount = await this.client.Discounts.RetrieveByCode(
+            "code",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        discount.Validate();
+    }
 }

@@ -127,6 +127,30 @@ public sealed class DiscountService : IDiscountService
         await this.Delete(parameters with { DiscountID = discountID }, cancellationToken)
             .ConfigureAwait(false);
     }
+
+    /// <inheritdoc/>
+    public async Task<Discount> RetrieveByCode(
+        DiscountRetrieveByCodeParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.RetrieveByCode(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<Discount> RetrieveByCode(
+        string code,
+        DiscountRetrieveByCodeParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveByCode(parameters with { Code = code }, cancellationToken);
+    }
 }
 
 /// <inheritdoc/>
@@ -316,5 +340,48 @@ public sealed class DiscountServiceWithRawResponse : IDiscountServiceWithRawResp
         parameters ??= new();
 
         return this.Delete(parameters with { DiscountID = discountID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<Discount>> RetrieveByCode(
+        DiscountRetrieveByCodeParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.Code == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.Code' cannot be null");
+        }
+
+        HttpRequest<DiscountRetrieveByCodeParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var discount = await response.Deserialize<Discount>(token).ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    discount.Validate();
+                }
+                return discount;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<Discount>> RetrieveByCode(
+        string code,
+        DiscountRetrieveByCodeParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveByCode(parameters with { Code = code }, cancellationToken);
     }
 }

@@ -245,6 +245,19 @@ public sealed record class CheckoutSessionRequest : JsonModel
     }
 
     /// <summary>
+    /// Product collection ID for collection-based checkout flow
+    /// </summary>
+    public string? ProductCollectionID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("product_collection_id");
+        }
+        init { this._rawData.Set("product_collection_id", value); }
+    }
+
+    /// <summary>
     /// The url to redirect after payment failure or success.
     /// </summary>
     public string? ReturnUrl
@@ -333,6 +346,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
         _ = this.Metadata;
         _ = this.MinimalAddress;
         _ = this.PaymentMethodID;
+        _ = this.ProductCollectionID;
         _ = this.ReturnUrl;
         _ = this.ShortLink;
         _ = this.ShowSavedPaymentMethods;

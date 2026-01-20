@@ -255,6 +255,19 @@ public sealed record class Product : JsonModel
         init { this._rawData.Set("name", value); }
     }
 
+    /// <summary>
+    /// The product collection ID this product belongs to, if any
+    /// </summary>
+    public string? ProductCollectionID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("product_collection_id");
+        }
+        init { this._rawData.Set("product_collection_id", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -276,6 +289,7 @@ public sealed record class Product : JsonModel
         _ = this.LicenseKeyActivationsLimit;
         this.LicenseKeyDuration?.Validate();
         _ = this.Name;
+        _ = this.ProductCollectionID;
     }
 
     public Product() { }

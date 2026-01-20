@@ -39,6 +39,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CheckoutSessionRequestCustomizationTheme>(),
             new ApiEnumConverter<string, Currency>(),
             new ApiEnumConverter<string, Theme>(),
+            new ApiEnumConverter<string, CheckoutSessionPreviewParamsCustomizationTheme>(),
             new ApiEnumConverter<string, IntentStatus>(),
             new ApiEnumConverter<string, PaymentMethodTypes>(),
             new ApiEnumConverter<string, Status>(),
