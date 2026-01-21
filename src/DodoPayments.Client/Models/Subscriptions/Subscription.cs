@@ -340,6 +340,27 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// Customer's responses to custom fields collected during checkout
+    /// </summary>
+    public IReadOnlyList<global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse>? CustomFieldResponses
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse>
+            >("custom_field_responses");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse>?>(
+                "custom_field_responses",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Number of remaining discount cycles if discount is applied
     /// </summary>
     public int? DiscountCyclesRemaining
@@ -436,6 +457,10 @@ public sealed record class Subscription : JsonModel
         _ = this.TaxInclusive;
         _ = this.TrialPeriodDays;
         _ = this.CancelledAt;
+        foreach (var item in this.CustomFieldResponses ?? [])
+        {
+            item.Validate();
+        }
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;
         _ = this.ExpiresAt;
@@ -593,4 +618,89 @@ class MeterFromRaw : IFromRawJson<Meter>
     /// <inheritdoc/>
     public Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Meter.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Customer's response to a custom field
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse,
+        global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponseFromRaw
+    >)
+)]
+public sealed record class CustomFieldResponse : JsonModel
+{
+    /// <summary>
+    /// Key matching the custom field definition
+    /// </summary>
+    public required string Key
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
+        init { this._rawData.Set("key", value); }
+    }
+
+    /// <summary>
+    /// Value provided by customer
+    /// </summary>
+    public required string Value
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("value");
+        }
+        init { this._rawData.Set("value", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Key;
+        _ = this.Value;
+    }
+
+    public CustomFieldResponse() { }
+
+    public CustomFieldResponse(
+        global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse customFieldResponse
+    )
+        : base(customFieldResponse) { }
+
+    public CustomFieldResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CustomFieldResponse(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponseFromRaw.FromRawUnchecked"/>
+    public static global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CustomFieldResponseFromRaw
+    : IFromRawJson<global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse>
+{
+    /// <inheritdoc/>
+    public global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) =>
+        global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse.FromRawUnchecked(
+            rawData
+        );
 }

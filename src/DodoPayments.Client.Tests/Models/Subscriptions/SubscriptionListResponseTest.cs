@@ -53,6 +53,7 @@ public class SubscriptionListResponseTest : TestBase
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PaymentMethodID = "payment_method_id",
+            ProductName = "product_name",
             TaxID = "tax_id",
         };
 
@@ -96,6 +97,7 @@ public class SubscriptionListResponseTest : TestBase
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         string expectedPaymentMethodID = "payment_method_id";
+        string expectedProductName = "product_name";
         string expectedTaxID = "tax_id";
 
         Assert.Equal(expectedBilling, model.Billing);
@@ -128,6 +130,7 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
+        Assert.Equal(expectedProductName, model.ProductName);
         Assert.Equal(expectedTaxID, model.TaxID);
     }
 
@@ -174,6 +177,7 @@ public class SubscriptionListResponseTest : TestBase
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PaymentMethodID = "payment_method_id",
+            ProductName = "product_name",
             TaxID = "tax_id",
         };
 
@@ -229,6 +233,7 @@ public class SubscriptionListResponseTest : TestBase
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PaymentMethodID = "payment_method_id",
+            ProductName = "product_name",
             TaxID = "tax_id",
         };
 
@@ -279,6 +284,7 @@ public class SubscriptionListResponseTest : TestBase
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         string expectedPaymentMethodID = "payment_method_id";
+        string expectedProductName = "product_name";
         string expectedTaxID = "tax_id";
 
         Assert.Equal(expectedBilling, deserialized.Billing);
@@ -311,6 +317,7 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
+        Assert.Equal(expectedProductName, deserialized.ProductName);
         Assert.Equal(expectedTaxID, deserialized.TaxID);
     }
 
@@ -357,6 +364,7 @@ public class SubscriptionListResponseTest : TestBase
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PaymentMethodID = "payment_method_id",
+            ProductName = "product_name",
             TaxID = "tax_id",
         };
 
@@ -412,6 +420,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("discount_id"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.ProductName);
+        Assert.False(model.RawData.ContainsKey("product_name"));
         Assert.Null(model.TaxID);
         Assert.False(model.RawData.ContainsKey("tax_id"));
     }
@@ -504,6 +514,7 @@ public class SubscriptionListResponseTest : TestBase
             DiscountCyclesRemaining = null,
             DiscountID = null,
             PaymentMethodID = null,
+            ProductName = null,
             TaxID = null,
         };
 
@@ -515,6 +526,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("discount_id"));
         Assert.Null(model.PaymentMethodID);
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.ProductName);
+        Assert.True(model.RawData.ContainsKey("product_name"));
         Assert.Null(model.TaxID);
         Assert.True(model.RawData.ContainsKey("tax_id"));
     }
@@ -563,6 +576,7 @@ public class SubscriptionListResponseTest : TestBase
             DiscountCyclesRemaining = null,
             DiscountID = null,
             PaymentMethodID = null,
+            ProductName = null,
             TaxID = null,
         };
 

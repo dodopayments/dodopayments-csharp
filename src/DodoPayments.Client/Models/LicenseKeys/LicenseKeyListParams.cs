@@ -18,6 +18,48 @@ namespace DodoPayments.Client.Models.LicenseKeys;
 public record class LicenseKeyListParams : ParamsBase
 {
     /// <summary>
+    /// Filter license keys created on or after this timestamp
+    /// </summary>
+    public DateTimeOffset? CreatedAtGte
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_gte");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("created_at_gte", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter license keys created on or before this timestamp
+    /// </summary>
+    public DateTimeOffset? CreatedAtLte
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_lte");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("created_at_lte", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by customer ID
     /// </summary>
     public string? CustomerID

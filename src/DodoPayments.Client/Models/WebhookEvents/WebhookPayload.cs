@@ -932,6 +932,27 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Customer's responses to custom fields collected during checkout
+    /// </summary>
+    public IReadOnlyList<Payments::CustomFieldResponse>? CustomFieldResponses
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<Payments::CustomFieldResponse>>(
+                "custom_field_responses"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Payments::CustomFieldResponse>?>(
+                "custom_field_responses",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// The discount id if discount is applied
     /// </summary>
     public string? DiscountID
@@ -1163,6 +1184,7 @@ public sealed record class Payment : JsonModel
             CardNetwork = payment.CardNetwork,
             CardType = payment.CardType,
             CheckoutSessionID = payment.CheckoutSessionID,
+            CustomFieldResponses = payment.CustomFieldResponses,
             DiscountID = payment.DiscountID,
             ErrorCode = payment.ErrorCode,
             ErrorMessage = payment.ErrorMessage,
@@ -1208,6 +1230,10 @@ public sealed record class Payment : JsonModel
         _ = this.CardNetwork;
         _ = this.CardType;
         _ = this.CheckoutSessionID;
+        foreach (var item in this.CustomFieldResponses ?? [])
+        {
+            item.Validate();
+        }
         _ = this.DiscountID;
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
@@ -1676,6 +1702,27 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// Customer's responses to custom fields collected during checkout
+    /// </summary>
+    public IReadOnlyList<Subscriptions::CustomFieldResponse>? CustomFieldResponses
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<Subscriptions::CustomFieldResponse>
+            >("custom_field_responses");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Subscriptions::CustomFieldResponse>?>(
+                "custom_field_responses",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Number of remaining discount cycles if discount is applied
     /// </summary>
     public int? DiscountCyclesRemaining
@@ -1778,6 +1825,7 @@ public sealed record class Subscription : JsonModel
             TaxInclusive = subscription.TaxInclusive,
             TrialPeriodDays = subscription.TrialPeriodDays,
             CancelledAt = subscription.CancelledAt,
+            CustomFieldResponses = subscription.CustomFieldResponses,
             DiscountCyclesRemaining = subscription.DiscountCyclesRemaining,
             DiscountID = subscription.DiscountID,
             ExpiresAt = subscription.ExpiresAt,
@@ -1817,6 +1865,10 @@ public sealed record class Subscription : JsonModel
         _ = this.TaxInclusive;
         _ = this.TrialPeriodDays;
         _ = this.CancelledAt;
+        foreach (var item in this.CustomFieldResponses ?? [])
+        {
+            item.Validate();
+        }
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;
         _ = this.ExpiresAt;
