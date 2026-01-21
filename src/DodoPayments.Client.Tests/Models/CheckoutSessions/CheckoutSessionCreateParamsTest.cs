@@ -38,6 +38,18 @@ public class CheckoutSessionCreateParamsTest : TestBase
             },
             BillingCurrency = Currency.Aed,
             Confirm = true,
+            CustomFields =
+            [
+                new()
+                {
+                    FieldType = FieldType.Text,
+                    Key = "key",
+                    Label = "label",
+                    Options = ["string"],
+                    Placeholder = "placeholder",
+                    Required = true,
+                },
+            ],
             Customer = new Payments::AttachExistingCustomer("customer_id"),
             Customization = new()
             {
@@ -109,6 +121,18 @@ public class CheckoutSessionCreateParamsTest : TestBase
         };
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
         bool expectedConfirm = true;
+        List<CustomField> expectedCustomFields =
+        [
+            new()
+            {
+                FieldType = FieldType.Text,
+                Key = "key",
+                Label = "label",
+                Options = ["string"],
+                Placeholder = "placeholder",
+                Required = true,
+            },
+        ];
         Payments::CustomerRequest expectedCustomer = new Payments::AttachExistingCustomer(
             "customer_id"
         );
@@ -177,6 +201,12 @@ public class CheckoutSessionCreateParamsTest : TestBase
         Assert.Equal(expectedBillingAddress, parameters.BillingAddress);
         Assert.Equal(expectedBillingCurrency, parameters.BillingCurrency);
         Assert.Equal(expectedConfirm, parameters.Confirm);
+        Assert.NotNull(parameters.CustomFields);
+        Assert.Equal(expectedCustomFields.Count, parameters.CustomFields.Count);
+        for (int i = 0; i < expectedCustomFields.Count; i++)
+        {
+            Assert.Equal(expectedCustomFields[i], parameters.CustomFields[i]);
+        }
         Assert.Equal(expectedCustomer, parameters.Customer);
         Assert.Equal(expectedCustomization, parameters.Customization);
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
@@ -224,6 +254,18 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CustomFields =
+            [
+                new()
+                {
+                    FieldType = FieldType.Text,
+                    Key = "key",
+                    Label = "label",
+                    Options = ["string"],
+                    Placeholder = "placeholder",
+                    Required = true,
+                },
+            ],
             Customer = new Payments::AttachExistingCustomer("customer_id"),
             DiscountCode = "discount_code",
             Force3ds = true,
@@ -284,6 +326,18 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CustomFields =
+            [
+                new()
+                {
+                    FieldType = FieldType.Text,
+                    Key = "key",
+                    Label = "label",
+                    Options = ["string"],
+                    Placeholder = "placeholder",
+                    Required = true,
+                },
+            ],
             Customer = new Payments::AttachExistingCustomer("customer_id"),
             DiscountCode = "discount_code",
             Force3ds = true,
@@ -377,6 +431,8 @@ public class CheckoutSessionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("billing_address"));
         Assert.Null(parameters.BillingCurrency);
         Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
+        Assert.Null(parameters.CustomFields);
+        Assert.False(parameters.RawBodyData.ContainsKey("custom_fields"));
         Assert.Null(parameters.Customer);
         Assert.False(parameters.RawBodyData.ContainsKey("customer"));
         Assert.Null(parameters.DiscountCode);
@@ -441,6 +497,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = null,
             BillingAddress = null,
             BillingCurrency = null,
+            CustomFields = null,
             Customer = null,
             DiscountCode = null,
             Force3ds = null,
@@ -457,6 +514,8 @@ public class CheckoutSessionCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("billing_address"));
         Assert.Null(parameters.BillingCurrency);
         Assert.True(parameters.RawBodyData.ContainsKey("billing_currency"));
+        Assert.Null(parameters.CustomFields);
+        Assert.True(parameters.RawBodyData.ContainsKey("custom_fields"));
         Assert.Null(parameters.Customer);
         Assert.True(parameters.RawBodyData.ContainsKey("customer"));
         Assert.Null(parameters.DiscountCode);
@@ -523,6 +582,18 @@ public class CheckoutSessionCreateParamsTest : TestBase
             },
             BillingCurrency = Currency.Aed,
             Confirm = true,
+            CustomFields =
+            [
+                new()
+                {
+                    FieldType = FieldType.Text,
+                    Key = "key",
+                    Label = "label",
+                    Options = ["string"],
+                    Placeholder = "placeholder",
+                    Required = true,
+                },
+            ],
             Customer = new Payments::AttachExistingCustomer("customer_id"),
             Customization = new()
             {
@@ -881,6 +952,328 @@ public class BillingAddressTest : TestBase
         };
 
         model.Validate();
+    }
+}
+
+public class CustomFieldTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Options = ["string"],
+            Placeholder = "placeholder",
+            Required = true,
+        };
+
+        ApiEnum<string, FieldType> expectedFieldType = FieldType.Text;
+        string expectedKey = "key";
+        string expectedLabel = "label";
+        List<string> expectedOptions = ["string"];
+        string expectedPlaceholder = "placeholder";
+        bool expectedRequired = true;
+
+        Assert.Equal(expectedFieldType, model.FieldType);
+        Assert.Equal(expectedKey, model.Key);
+        Assert.Equal(expectedLabel, model.Label);
+        Assert.NotNull(model.Options);
+        Assert.Equal(expectedOptions.Count, model.Options.Count);
+        for (int i = 0; i < expectedOptions.Count; i++)
+        {
+            Assert.Equal(expectedOptions[i], model.Options[i]);
+        }
+        Assert.Equal(expectedPlaceholder, model.Placeholder);
+        Assert.Equal(expectedRequired, model.Required);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Options = ["string"],
+            Placeholder = "placeholder",
+            Required = true,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomField>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Options = ["string"],
+            Placeholder = "placeholder",
+            Required = true,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomField>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        ApiEnum<string, FieldType> expectedFieldType = FieldType.Text;
+        string expectedKey = "key";
+        string expectedLabel = "label";
+        List<string> expectedOptions = ["string"];
+        string expectedPlaceholder = "placeholder";
+        bool expectedRequired = true;
+
+        Assert.Equal(expectedFieldType, deserialized.FieldType);
+        Assert.Equal(expectedKey, deserialized.Key);
+        Assert.Equal(expectedLabel, deserialized.Label);
+        Assert.NotNull(deserialized.Options);
+        Assert.Equal(expectedOptions.Count, deserialized.Options.Count);
+        for (int i = 0; i < expectedOptions.Count; i++)
+        {
+            Assert.Equal(expectedOptions[i], deserialized.Options[i]);
+        }
+        Assert.Equal(expectedPlaceholder, deserialized.Placeholder);
+        Assert.Equal(expectedRequired, deserialized.Required);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Options = ["string"],
+            Placeholder = "placeholder",
+            Required = true,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Options = ["string"],
+            Placeholder = "placeholder",
+        };
+
+        Assert.Null(model.Required);
+        Assert.False(model.RawData.ContainsKey("required"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Options = ["string"],
+            Placeholder = "placeholder",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Options = ["string"],
+            Placeholder = "placeholder",
+
+            // Null should be interpreted as omitted for these properties
+            Required = null,
+        };
+
+        Assert.Null(model.Required);
+        Assert.False(model.RawData.ContainsKey("required"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Options = ["string"],
+            Placeholder = "placeholder",
+
+            // Null should be interpreted as omitted for these properties
+            Required = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Required = true,
+        };
+
+        Assert.Null(model.Options);
+        Assert.False(model.RawData.ContainsKey("options"));
+        Assert.Null(model.Placeholder);
+        Assert.False(model.RawData.ContainsKey("placeholder"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Required = true,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Required = true,
+
+            Options = null,
+            Placeholder = null,
+        };
+
+        Assert.Null(model.Options);
+        Assert.True(model.RawData.ContainsKey("options"));
+        Assert.Null(model.Placeholder);
+        Assert.True(model.RawData.ContainsKey("placeholder"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Required = true,
+
+            Options = null,
+            Placeholder = null,
+        };
+
+        model.Validate();
+    }
+}
+
+public class FieldTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(FieldType.Text)]
+    [InlineData(FieldType.Number)]
+    [InlineData(FieldType.Email)]
+    [InlineData(FieldType.Url)]
+    [InlineData(FieldType.Phone)]
+    [InlineData(FieldType.Date)]
+    [InlineData(FieldType.Datetime)]
+    [InlineData(FieldType.Dropdown)]
+    [InlineData(FieldType.Boolean)]
+    public void Validation_Works(FieldType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FieldType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, FieldType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(FieldType.Text)]
+    [InlineData(FieldType.Number)]
+    [InlineData(FieldType.Email)]
+    [InlineData(FieldType.Url)]
+    [InlineData(FieldType.Phone)]
+    [InlineData(FieldType.Date)]
+    [InlineData(FieldType.Datetime)]
+    [InlineData(FieldType.Dropdown)]
+    [InlineData(FieldType.Boolean)]
+    public void SerializationRoundtrip_Works(FieldType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FieldType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FieldType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, FieldType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FieldType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 

@@ -98,6 +98,32 @@ public sealed record class PaymentListResponse : JsonModel
         init { this._rawData.Set("total_amount", value); }
     }
 
+    /// <summary>
+    /// Invoice ID for this payment. Uses India-specific invoice ID if available.
+    /// </summary>
+    public string? InvoiceID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("invoice_id");
+        }
+        init { this._rawData.Set("invoice_id", value); }
+    }
+
+    /// <summary>
+    /// URL to download the invoice PDF for this payment.
+    /// </summary>
+    public string? InvoiceUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("invoice_url");
+        }
+        init { this._rawData.Set("invoice_url", value); }
+    }
+
     public string? PaymentMethod
     {
         get
@@ -149,6 +175,8 @@ public sealed record class PaymentListResponse : JsonModel
         _ = this.Metadata;
         _ = this.PaymentID;
         _ = this.TotalAmount;
+        _ = this.InvoiceID;
+        _ = this.InvoiceUrl;
         _ = this.PaymentMethod;
         _ = this.PaymentMethodType;
         this.Status?.Validate();

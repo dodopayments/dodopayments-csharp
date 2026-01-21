@@ -302,6 +302,27 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Customer's responses to custom fields collected during checkout
+    /// </summary>
+    public IReadOnlyList<CustomFieldResponse>? CustomFieldResponses
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<CustomFieldResponse>>(
+                "custom_field_responses"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<CustomFieldResponse>?>(
+                "custom_field_responses",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// The discount id if discount is applied
     /// </summary>
     public string? DiscountID
@@ -520,6 +541,10 @@ public sealed record class Payment : JsonModel
         _ = this.CardNetwork;
         _ = this.CardType;
         _ = this.CheckoutSessionID;
+        foreach (var item in this.CustomFieldResponses ?? [])
+        {
+            item.Validate();
+        }
         _ = this.DiscountID;
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
@@ -735,6 +760,79 @@ class RefundFromRaw : IFromRawJson<Refund>
     /// <inheritdoc/>
     public Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Refund.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Customer's response to a custom field
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<CustomFieldResponse, CustomFieldResponseFromRaw>))]
+public sealed record class CustomFieldResponse : JsonModel
+{
+    /// <summary>
+    /// Key matching the custom field definition
+    /// </summary>
+    public required string Key
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
+        init { this._rawData.Set("key", value); }
+    }
+
+    /// <summary>
+    /// Value provided by customer
+    /// </summary>
+    public required string Value
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("value");
+        }
+        init { this._rawData.Set("value", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Key;
+        _ = this.Value;
+    }
+
+    public CustomFieldResponse() { }
+
+    public CustomFieldResponse(CustomFieldResponse customFieldResponse)
+        : base(customFieldResponse) { }
+
+    public CustomFieldResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CustomFieldResponse(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CustomFieldResponseFromRaw.FromRawUnchecked"/>
+    public static CustomFieldResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CustomFieldResponseFromRaw : IFromRawJson<CustomFieldResponse>
+{
+    /// <inheritdoc/>
+    public CustomFieldResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CustomFieldResponse.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(JsonModelConverter<ProductCart, ProductCartFromRaw>))]

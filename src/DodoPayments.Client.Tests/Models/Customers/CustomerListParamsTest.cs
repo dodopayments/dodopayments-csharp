@@ -10,16 +10,25 @@ public class CustomerListParamsTest : TestBase
     {
         var parameters = new CustomerListParams
         {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Email = "email",
+            Name = "name",
             PageNumber = 0,
             PageSize = 0,
         };
 
+        DateTimeOffset expectedCreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedCreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEmail = "email";
+        string expectedName = "name";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
 
+        Assert.Equal(expectedCreatedAtGte, parameters.CreatedAtGte);
+        Assert.Equal(expectedCreatedAtLte, parameters.CreatedAtLte);
         Assert.Equal(expectedEmail, parameters.Email);
+        Assert.Equal(expectedName, parameters.Name);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
     }
@@ -29,8 +38,14 @@ public class CustomerListParamsTest : TestBase
     {
         var parameters = new CustomerListParams { };
 
+        Assert.Null(parameters.CreatedAtGte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_gte"));
+        Assert.Null(parameters.CreatedAtLte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_lte"));
         Assert.Null(parameters.Email);
         Assert.False(parameters.RawQueryData.ContainsKey("email"));
+        Assert.Null(parameters.Name);
+        Assert.False(parameters.RawQueryData.ContainsKey("name"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -43,13 +58,22 @@ public class CustomerListParamsTest : TestBase
         var parameters = new CustomerListParams
         {
             // Null should be interpreted as omitted for these properties
+            CreatedAtGte = null,
+            CreatedAtLte = null,
             Email = null,
+            Name = null,
             PageNumber = null,
             PageSize = null,
         };
 
+        Assert.Null(parameters.CreatedAtGte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_gte"));
+        Assert.Null(parameters.CreatedAtLte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_lte"));
         Assert.Null(parameters.Email);
         Assert.False(parameters.RawQueryData.ContainsKey("email"));
+        Assert.Null(parameters.Name);
+        Assert.False(parameters.RawQueryData.ContainsKey("name"));
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
@@ -61,7 +85,10 @@ public class CustomerListParamsTest : TestBase
     {
         CustomerListParams parameters = new()
         {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Email = "email",
+            Name = "name",
             PageNumber = 0,
             PageSize = 0,
         };
@@ -70,7 +97,7 @@ public class CustomerListParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://live.dodopayments.com/customers?email=email&page_number=0&page_size=0"
+                "https://live.dodopayments.com/customers?created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&email=email&name=name&page_number=0&page_size=0"
             ),
             url
         );
@@ -81,7 +108,10 @@ public class CustomerListParamsTest : TestBase
     {
         var parameters = new CustomerListParams
         {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Email = "email",
+            Name = "name",
             PageNumber = 0,
             PageSize = 0,
         };

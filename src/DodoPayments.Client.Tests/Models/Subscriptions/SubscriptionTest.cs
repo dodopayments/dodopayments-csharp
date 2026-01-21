@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
@@ -64,6 +64,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -72,7 +73,7 @@ public class SubscriptionTest : TestBase
         };
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -83,7 +84,7 @@ public class SubscriptionTest : TestBase
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -122,6 +123,10 @@ public class SubscriptionTest : TestBase
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<CustomFieldResponse> expectedCustomFieldResponses =
+        [
+            new() { Key = "key", Value = "value" },
+        ];
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -165,6 +170,12 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
         Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
+        Assert.NotNull(model.CustomFieldResponses);
+        Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
+        for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
+        {
+            Assert.Equal(expectedCustomFieldResponses[i], model.CustomFieldResponses[i]);
+        }
         Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
@@ -226,6 +237,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -296,6 +308,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -311,7 +324,7 @@ public class SubscriptionTest : TestBase
         Assert.NotNull(deserialized);
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -322,7 +335,7 @@ public class SubscriptionTest : TestBase
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -361,6 +374,10 @@ public class SubscriptionTest : TestBase
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<CustomFieldResponse> expectedCustomFieldResponses =
+        [
+            new() { Key = "key", Value = "value" },
+        ];
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -404,6 +421,12 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
         Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
+        Assert.NotNull(deserialized.CustomFieldResponses);
+        Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
+        for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
+        {
+            Assert.Equal(expectedCustomFieldResponses[i], deserialized.CustomFieldResponses[i]);
+        }
         Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
@@ -465,6 +488,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -532,6 +556,8 @@ public class SubscriptionTest : TestBase
 
         Assert.Null(model.CancelledAt);
         Assert.False(model.RawData.ContainsKey("cancelled_at"));
+        Assert.Null(model.CustomFieldResponses);
+        Assert.False(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.DiscountCyclesRemaining);
         Assert.False(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
@@ -657,6 +683,7 @@ public class SubscriptionTest : TestBase
             TrialPeriodDays = 0,
 
             CancelledAt = null,
+            CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             ExpiresAt = null,
@@ -666,6 +693,8 @@ public class SubscriptionTest : TestBase
 
         Assert.Null(model.CancelledAt);
         Assert.True(model.RawData.ContainsKey("cancelled_at"));
+        Assert.Null(model.CustomFieldResponses);
+        Assert.True(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.DiscountCyclesRemaining);
         Assert.True(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
@@ -733,6 +762,7 @@ public class SubscriptionTest : TestBase
             TrialPeriodDays = 0,
 
             CancelledAt = null,
+            CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             ExpiresAt = null,
@@ -915,6 +945,62 @@ public class MeterTest : TestBase
 
             Description = null,
         };
+
+        model.Validate();
+    }
+}
+
+public class CustomFieldResponseTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CustomFieldResponse { Key = "key", Value = "value" };
+
+        string expectedKey = "key";
+        string expectedValue = "value";
+
+        Assert.Equal(expectedKey, model.Key);
+        Assert.Equal(expectedValue, model.Value);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CustomFieldResponse { Key = "key", Value = "value" };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomFieldResponse>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CustomFieldResponse { Key = "key", Value = "value" };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomFieldResponse>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedKey = "key";
+        string expectedValue = "value";
+
+        Assert.Equal(expectedKey, deserialized.Key);
+        Assert.Equal(expectedValue, deserialized.Value);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CustomFieldResponse { Key = "key", Value = "value" };
 
         model.Validate();
     }

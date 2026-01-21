@@ -85,6 +85,7 @@ public class WebhookPayloadTest : TestBase
                 CardNetwork = "card_network",
                 CardType = "card_type",
                 CheckoutSessionID = "checkout_session_id",
+                CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
@@ -170,6 +171,7 @@ public class WebhookPayloadTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -265,6 +267,7 @@ public class WebhookPayloadTest : TestBase
                 CardNetwork = "card_network",
                 CardType = "card_type",
                 CheckoutSessionID = "checkout_session_id",
+                CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
@@ -364,6 +367,7 @@ public class WebhookPayloadTest : TestBase
                 CardNetwork = "card_network",
                 CardType = "card_type",
                 CheckoutSessionID = "checkout_session_id",
+                CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
@@ -456,6 +460,7 @@ public class WebhookPayloadTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -551,6 +556,7 @@ public class WebhookPayloadTest : TestBase
                 CardNetwork = "card_network",
                 CardType = "card_type",
                 CheckoutSessionID = "checkout_session_id",
+                CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
@@ -644,6 +650,7 @@ public class DataTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -717,6 +724,7 @@ public class DataTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -872,6 +880,7 @@ public class DataTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -948,6 +957,7 @@ public class DataTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1118,6 +1128,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -1197,6 +1208,10 @@ public class PaymentTest : TestBase
         string expectedCardNetwork = "card_network";
         string expectedCardType = "card_type";
         string expectedCheckoutSessionID = "checkout_session_id";
+        List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
+        [
+            new() { Key = "key", Value = "value" },
+        ];
         string expectedDiscountID = "discount_id";
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
@@ -1250,6 +1265,12 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedCardNetwork, model.CardNetwork);
         Assert.Equal(expectedCardType, model.CardType);
         Assert.Equal(expectedCheckoutSessionID, model.CheckoutSessionID);
+        Assert.NotNull(model.CustomFieldResponses);
+        Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
+        for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
+        {
+            Assert.Equal(expectedCustomFieldResponses[i], model.CustomFieldResponses[i]);
+        }
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
@@ -1339,6 +1360,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -1429,6 +1451,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -1515,6 +1538,10 @@ public class PaymentTest : TestBase
         string expectedCardNetwork = "card_network";
         string expectedCardType = "card_type";
         string expectedCheckoutSessionID = "checkout_session_id";
+        List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
+        [
+            new() { Key = "key", Value = "value" },
+        ];
         string expectedDiscountID = "discount_id";
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
@@ -1568,6 +1595,12 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedCardNetwork, deserialized.CardNetwork);
         Assert.Equal(expectedCardType, deserialized.CardType);
         Assert.Equal(expectedCheckoutSessionID, deserialized.CheckoutSessionID);
+        Assert.NotNull(deserialized.CustomFieldResponses);
+        Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
+        for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
+        {
+            Assert.Equal(expectedCustomFieldResponses[i], deserialized.CustomFieldResponses[i]);
+        }
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
@@ -1657,6 +1690,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -1743,6 +1777,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -1831,6 +1866,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -1916,6 +1952,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -2008,6 +2045,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -2107,6 +2145,8 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("card_type"));
         Assert.Null(model.CheckoutSessionID);
         Assert.False(model.RawData.ContainsKey("checkout_session_id"));
+        Assert.Null(model.CustomFieldResponses);
+        Assert.False(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.DiscountID);
         Assert.False(model.RawData.ContainsKey("discount_id"));
         Assert.Null(model.ErrorCode);
@@ -2274,6 +2314,7 @@ public class PaymentTest : TestBase
             CardNetwork = null,
             CardType = null,
             CheckoutSessionID = null,
+            CustomFieldResponses = null,
             DiscountID = null,
             ErrorCode = null,
             ErrorMessage = null,
@@ -2299,6 +2340,8 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("card_type"));
         Assert.Null(model.CheckoutSessionID);
         Assert.True(model.RawData.ContainsKey("checkout_session_id"));
+        Assert.Null(model.CustomFieldResponses);
+        Assert.True(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.DiscountID);
         Assert.True(model.RawData.ContainsKey("discount_id"));
         Assert.Null(model.ErrorCode);
@@ -2397,6 +2440,7 @@ public class PaymentTest : TestBase
             CardNetwork = null,
             CardType = null,
             CheckoutSessionID = null,
+            CustomFieldResponses = null,
             DiscountID = null,
             ErrorCode = null,
             ErrorMessage = null,
@@ -2580,6 +2624,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2645,6 +2690,10 @@ public class SubscriptionTest : TestBase
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<Subscriptions::CustomFieldResponse> expectedCustomFieldResponses =
+        [
+            new() { Key = "key", Value = "value" },
+        ];
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -2690,6 +2739,12 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
         Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
+        Assert.NotNull(model.CustomFieldResponses);
+        Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
+        for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
+        {
+            Assert.Equal(expectedCustomFieldResponses[i], model.CustomFieldResponses[i]);
+        }
         Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
@@ -2752,6 +2807,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2823,6 +2879,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2895,6 +2952,10 @@ public class SubscriptionTest : TestBase
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<Subscriptions::CustomFieldResponse> expectedCustomFieldResponses =
+        [
+            new() { Key = "key", Value = "value" },
+        ];
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -2940,6 +3001,12 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
         Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
+        Assert.NotNull(deserialized.CustomFieldResponses);
+        Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
+        for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
+        {
+            Assert.Equal(expectedCustomFieldResponses[i], deserialized.CustomFieldResponses[i]);
+        }
         Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
@@ -3002,6 +3069,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3071,6 +3139,8 @@ public class SubscriptionTest : TestBase
 
         Assert.Null(model.CancelledAt);
         Assert.False(model.RawData.ContainsKey("cancelled_at"));
+        Assert.Null(model.CustomFieldResponses);
+        Assert.False(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.DiscountCyclesRemaining);
         Assert.False(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
@@ -3198,6 +3268,7 @@ public class SubscriptionTest : TestBase
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
 
             CancelledAt = null,
+            CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             ExpiresAt = null,
@@ -3207,6 +3278,8 @@ public class SubscriptionTest : TestBase
 
         Assert.Null(model.CancelledAt);
         Assert.True(model.RawData.ContainsKey("cancelled_at"));
+        Assert.Null(model.CustomFieldResponses);
+        Assert.True(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.DiscountCyclesRemaining);
         Assert.True(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
@@ -3275,6 +3348,7 @@ public class SubscriptionTest : TestBase
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
 
             CancelledAt = null,
+            CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             ExpiresAt = null,

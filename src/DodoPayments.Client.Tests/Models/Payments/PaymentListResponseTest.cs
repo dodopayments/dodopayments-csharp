@@ -29,6 +29,8 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
+            InvoiceID = "invoice_id",
+            InvoiceUrl = "invoice_url",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             Status = IntentStatus.Succeeded,
@@ -50,6 +52,8 @@ public class PaymentListResponseTest : TestBase
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         int expectedTotalAmount = 0;
+        string expectedInvoiceID = "invoice_id";
+        string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
         ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
@@ -69,6 +73,8 @@ public class PaymentListResponseTest : TestBase
         }
         Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
+        Assert.Equal(expectedInvoiceID, model.InvoiceID);
+        Assert.Equal(expectedInvoiceUrl, model.InvoiceUrl);
         Assert.Equal(expectedPaymentMethod, model.PaymentMethod);
         Assert.Equal(expectedPaymentMethodType, model.PaymentMethodType);
         Assert.Equal(expectedStatus, model.Status);
@@ -95,6 +101,8 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
+            InvoiceID = "invoice_id",
+            InvoiceUrl = "invoice_url",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             Status = IntentStatus.Succeeded,
@@ -130,6 +138,8 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
+            InvoiceID = "invoice_id",
+            InvoiceUrl = "invoice_url",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             Status = IntentStatus.Succeeded,
@@ -158,6 +168,8 @@ public class PaymentListResponseTest : TestBase
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         int expectedTotalAmount = 0;
+        string expectedInvoiceID = "invoice_id";
+        string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
         ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
@@ -177,6 +189,8 @@ public class PaymentListResponseTest : TestBase
         }
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
+        Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
+        Assert.Equal(expectedInvoiceUrl, deserialized.InvoiceUrl);
         Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
         Assert.Equal(expectedPaymentMethodType, deserialized.PaymentMethodType);
         Assert.Equal(expectedStatus, deserialized.Status);
@@ -203,6 +217,8 @@ public class PaymentListResponseTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
+            InvoiceID = "invoice_id",
+            InvoiceUrl = "invoice_url",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             Status = IntentStatus.Succeeded,
@@ -234,6 +250,10 @@ public class PaymentListResponseTest : TestBase
             TotalAmount = 0,
         };
 
+        Assert.Null(model.InvoiceID);
+        Assert.False(model.RawData.ContainsKey("invoice_id"));
+        Assert.Null(model.InvoiceUrl);
+        Assert.False(model.RawData.ContainsKey("invoice_url"));
         Assert.Null(model.PaymentMethod);
         Assert.False(model.RawData.ContainsKey("payment_method"));
         Assert.Null(model.PaymentMethodType);
@@ -290,12 +310,18 @@ public class PaymentListResponseTest : TestBase
             PaymentID = "payment_id",
             TotalAmount = 0,
 
+            InvoiceID = null,
+            InvoiceUrl = null,
             PaymentMethod = null,
             PaymentMethodType = null,
             Status = null,
             SubscriptionID = null,
         };
 
+        Assert.Null(model.InvoiceID);
+        Assert.True(model.RawData.ContainsKey("invoice_id"));
+        Assert.Null(model.InvoiceUrl);
+        Assert.True(model.RawData.ContainsKey("invoice_url"));
         Assert.Null(model.PaymentMethod);
         Assert.True(model.RawData.ContainsKey("payment_method"));
         Assert.Null(model.PaymentMethodType);
@@ -327,6 +353,8 @@ public class PaymentListResponseTest : TestBase
             PaymentID = "payment_id",
             TotalAmount = 0,
 
+            InvoiceID = null,
+            InvoiceUrl = null,
             PaymentMethod = null,
             PaymentMethodType = null,
             Status = null,

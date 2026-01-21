@@ -125,6 +125,27 @@ public record class CheckoutSessionPreviewParams : ParamsBase
     }
 
     /// <summary>
+    /// Custom fields to collect from customer during checkout (max 5 fields)
+    /// </summary>
+    public IReadOnlyList<CheckoutSessionPreviewParamsCustomField>? CustomFields
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<
+                ImmutableArray<CheckoutSessionPreviewParamsCustomField>
+            >("custom_fields");
+        }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<CheckoutSessionPreviewParamsCustomField>?>(
+                "custom_fields",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Customer details for the session
     /// </summary>
     public CustomerRequest? Customer
@@ -694,6 +715,229 @@ class CheckoutSessionPreviewParamsBillingAddressFromRaw
     public CheckoutSessionPreviewParamsBillingAddress FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CheckoutSessionPreviewParamsBillingAddress.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Definition of a custom field for checkout
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CheckoutSessionPreviewParamsCustomField,
+        CheckoutSessionPreviewParamsCustomFieldFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionPreviewParamsCustomField : JsonModel
+{
+    /// <summary>
+    /// Type of field determining validation rules
+    /// </summary>
+    public required ApiEnum<string, CheckoutSessionPreviewParamsCustomFieldFieldType> FieldType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, CheckoutSessionPreviewParamsCustomFieldFieldType>
+            >("field_type");
+        }
+        init { this._rawData.Set("field_type", value); }
+    }
+
+    /// <summary>
+    /// Unique identifier for this field (used as key in responses)
+    /// </summary>
+    public required string Key
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
+        init { this._rawData.Set("key", value); }
+    }
+
+    /// <summary>
+    /// Display label shown to customer
+    /// </summary>
+    public required string Label
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("label");
+        }
+        init { this._rawData.Set("label", value); }
+    }
+
+    /// <summary>
+    /// Options for dropdown type (required for dropdown, ignored for others)
+    /// </summary>
+    public IReadOnlyList<string>? Options
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("options");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>?>(
+                "options",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Placeholder text for the input
+    /// </summary>
+    public string? Placeholder
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("placeholder");
+        }
+        init { this._rawData.Set("placeholder", value); }
+    }
+
+    /// <summary>
+    /// Whether this field is required
+    /// </summary>
+    public bool? Required
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("required");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("required", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.FieldType.Validate();
+        _ = this.Key;
+        _ = this.Label;
+        _ = this.Options;
+        _ = this.Placeholder;
+        _ = this.Required;
+    }
+
+    public CheckoutSessionPreviewParamsCustomField() { }
+
+    public CheckoutSessionPreviewParamsCustomField(
+        CheckoutSessionPreviewParamsCustomField checkoutSessionPreviewParamsCustomField
+    )
+        : base(checkoutSessionPreviewParamsCustomField) { }
+
+    public CheckoutSessionPreviewParamsCustomField(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CheckoutSessionPreviewParamsCustomField(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CheckoutSessionPreviewParamsCustomFieldFromRaw.FromRawUnchecked"/>
+    public static CheckoutSessionPreviewParamsCustomField FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CheckoutSessionPreviewParamsCustomFieldFromRaw
+    : IFromRawJson<CheckoutSessionPreviewParamsCustomField>
+{
+    /// <inheritdoc/>
+    public CheckoutSessionPreviewParamsCustomField FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionPreviewParamsCustomField.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Type of field determining validation rules
+/// </summary>
+[JsonConverter(typeof(CheckoutSessionPreviewParamsCustomFieldFieldTypeConverter))]
+public enum CheckoutSessionPreviewParamsCustomFieldFieldType
+{
+    Text,
+    Number,
+    Email,
+    Url,
+    Phone,
+    Date,
+    Datetime,
+    Dropdown,
+    Boolean,
+}
+
+sealed class CheckoutSessionPreviewParamsCustomFieldFieldTypeConverter
+    : JsonConverter<CheckoutSessionPreviewParamsCustomFieldFieldType>
+{
+    public override CheckoutSessionPreviewParamsCustomFieldFieldType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "text" => CheckoutSessionPreviewParamsCustomFieldFieldType.Text,
+            "number" => CheckoutSessionPreviewParamsCustomFieldFieldType.Number,
+            "email" => CheckoutSessionPreviewParamsCustomFieldFieldType.Email,
+            "url" => CheckoutSessionPreviewParamsCustomFieldFieldType.Url,
+            "phone" => CheckoutSessionPreviewParamsCustomFieldFieldType.Phone,
+            "date" => CheckoutSessionPreviewParamsCustomFieldFieldType.Date,
+            "datetime" => CheckoutSessionPreviewParamsCustomFieldFieldType.Datetime,
+            "dropdown" => CheckoutSessionPreviewParamsCustomFieldFieldType.Dropdown,
+            "boolean" => CheckoutSessionPreviewParamsCustomFieldFieldType.Boolean,
+            _ => (CheckoutSessionPreviewParamsCustomFieldFieldType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        CheckoutSessionPreviewParamsCustomFieldFieldType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CheckoutSessionPreviewParamsCustomFieldFieldType.Text => "text",
+                CheckoutSessionPreviewParamsCustomFieldFieldType.Number => "number",
+                CheckoutSessionPreviewParamsCustomFieldFieldType.Email => "email",
+                CheckoutSessionPreviewParamsCustomFieldFieldType.Url => "url",
+                CheckoutSessionPreviewParamsCustomFieldFieldType.Phone => "phone",
+                CheckoutSessionPreviewParamsCustomFieldFieldType.Date => "date",
+                CheckoutSessionPreviewParamsCustomFieldFieldType.Datetime => "datetime",
+                CheckoutSessionPreviewParamsCustomFieldFieldType.Dropdown => "dropdown",
+                CheckoutSessionPreviewParamsCustomFieldFieldType.Boolean => "boolean",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 /// <summary>

@@ -16,6 +16,48 @@ namespace DodoPayments.Client.Models.Customers;
 public record class CustomerListParams : ParamsBase
 {
     /// <summary>
+    /// Filter customers created on or after this timestamp
+    /// </summary>
+    public DateTimeOffset? CreatedAtGte
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_gte");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("created_at_gte", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter customers created on or before this timestamp
+    /// </summary>
+    public DateTimeOffset? CreatedAtLte
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_lte");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("created_at_lte", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by customer email
     /// </summary>
     public string? Email
@@ -33,6 +75,27 @@ public record class CustomerListParams : ParamsBase
             }
 
             this._rawQueryData.Set("email", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter by customer name (partial match, case-insensitive)
+    /// </summary>
+    public string? Name
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("name");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("name", value);
         }
     }
 
