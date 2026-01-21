@@ -78,6 +78,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -156,6 +157,10 @@ public class PaymentTest : TestBase
         string expectedCardNetwork = "card_network";
         string expectedCardType = "card_type";
         string expectedCheckoutSessionID = "checkout_session_id";
+        List<CustomFieldResponse> expectedCustomFieldResponses =
+        [
+            new() { Key = "key", Value = "value" },
+        ];
         string expectedDiscountID = "discount_id";
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
@@ -205,6 +210,12 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedCardNetwork, model.CardNetwork);
         Assert.Equal(expectedCardType, model.CardType);
         Assert.Equal(expectedCheckoutSessionID, model.CheckoutSessionID);
+        Assert.NotNull(model.CustomFieldResponses);
+        Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
+        for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
+        {
+            Assert.Equal(expectedCustomFieldResponses[i], model.CustomFieldResponses[i]);
+        }
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
@@ -293,6 +304,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -382,6 +394,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -467,6 +480,10 @@ public class PaymentTest : TestBase
         string expectedCardNetwork = "card_network";
         string expectedCardType = "card_type";
         string expectedCheckoutSessionID = "checkout_session_id";
+        List<CustomFieldResponse> expectedCustomFieldResponses =
+        [
+            new() { Key = "key", Value = "value" },
+        ];
         string expectedDiscountID = "discount_id";
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
@@ -516,6 +533,12 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedCardNetwork, deserialized.CardNetwork);
         Assert.Equal(expectedCardType, deserialized.CardType);
         Assert.Equal(expectedCheckoutSessionID, deserialized.CheckoutSessionID);
+        Assert.NotNull(deserialized.CustomFieldResponses);
+        Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
+        for (int i = 0; i < expectedCustomFieldResponses.Count; i++)
+        {
+            Assert.Equal(expectedCustomFieldResponses[i], deserialized.CustomFieldResponses[i]);
+        }
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
@@ -604,6 +627,7 @@ public class PaymentTest : TestBase
             CardNetwork = "card_network",
             CardType = "card_type",
             CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
@@ -698,6 +722,8 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("card_type"));
         Assert.Null(model.CheckoutSessionID);
         Assert.False(model.RawData.ContainsKey("checkout_session_id"));
+        Assert.Null(model.CustomFieldResponses);
+        Assert.False(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.DiscountID);
         Assert.False(model.RawData.ContainsKey("discount_id"));
         Assert.Null(model.ErrorCode);
@@ -862,6 +888,7 @@ public class PaymentTest : TestBase
             CardNetwork = null,
             CardType = null,
             CheckoutSessionID = null,
+            CustomFieldResponses = null,
             DiscountID = null,
             ErrorCode = null,
             ErrorMessage = null,
@@ -890,6 +917,8 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("card_type"));
         Assert.Null(model.CheckoutSessionID);
         Assert.True(model.RawData.ContainsKey("checkout_session_id"));
+        Assert.Null(model.CustomFieldResponses);
+        Assert.True(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.DiscountID);
         Assert.True(model.RawData.ContainsKey("discount_id"));
         Assert.Null(model.ErrorCode);
@@ -988,6 +1017,7 @@ public class PaymentTest : TestBase
             CardNetwork = null,
             CardType = null,
             CheckoutSessionID = null,
+            CustomFieldResponses = null,
             DiscountID = null,
             ErrorCode = null,
             ErrorMessage = null,
@@ -1207,6 +1237,62 @@ public class RefundTest : TestBase
             Currency = null,
             Reason = null,
         };
+
+        model.Validate();
+    }
+}
+
+public class CustomFieldResponseTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CustomFieldResponse { Key = "key", Value = "value" };
+
+        string expectedKey = "key";
+        string expectedValue = "value";
+
+        Assert.Equal(expectedKey, model.Key);
+        Assert.Equal(expectedValue, model.Value);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CustomFieldResponse { Key = "key", Value = "value" };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomFieldResponse>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CustomFieldResponse { Key = "key", Value = "value" };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomFieldResponse>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedKey = "key";
+        string expectedValue = "value";
+
+        Assert.Equal(expectedKey, deserialized.Key);
+        Assert.Equal(expectedValue, deserialized.Value);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CustomFieldResponse { Key = "key", Value = "value" };
 
         model.Validate();
     }

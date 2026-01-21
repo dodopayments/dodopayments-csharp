@@ -18,6 +18,71 @@ namespace DodoPayments.Client.Models.Discounts;
 public record class DiscountListParams : ParamsBase
 {
     /// <summary>
+    /// Filter by active status (true = not expired, false = expired)
+    /// </summary>
+    public bool? Active
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<bool>("active");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("active", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter by discount code (partial match, case-insensitive)
+    /// </summary>
+    public string? Code
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("code");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("code", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter by discount type (percentage)
+    /// </summary>
+    public ApiEnum<string, DiscountType>? DiscountType
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, DiscountType>>(
+                "discount_type"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("discount_type", value);
+        }
+    }
+
+    /// <summary>
     /// Page number (default = 0).
     /// </summary>
     public int? PageNumber
@@ -56,6 +121,27 @@ public record class DiscountListParams : ParamsBase
             }
 
             this._rawQueryData.Set("page_size", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter by product restriction (only discounts that apply to this product)
+    /// </summary>
+    public string? ProductID
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("product_id");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("product_id", value);
         }
     }
 

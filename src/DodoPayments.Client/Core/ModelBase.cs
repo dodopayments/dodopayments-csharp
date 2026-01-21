@@ -36,9 +36,12 @@ public abstract record class ModelBase
         Converters =
         {
             new FrozenDictionaryConverterFactory(),
+            new ApiEnumConverter<string, CheckoutSessionRequestCustomFieldFieldType>(),
             new ApiEnumConverter<string, CheckoutSessionRequestCustomizationTheme>(),
             new ApiEnumConverter<string, Currency>(),
+            new ApiEnumConverter<string, FieldType>(),
             new ApiEnumConverter<string, Theme>(),
+            new ApiEnumConverter<string, CheckoutSessionPreviewParamsCustomFieldFieldType>(),
             new ApiEnumConverter<string, CheckoutSessionPreviewParamsCustomizationTheme>(),
             new ApiEnumConverter<string, IntentStatus>(),
             new ApiEnumConverter<string, PaymentMethodTypes>(),

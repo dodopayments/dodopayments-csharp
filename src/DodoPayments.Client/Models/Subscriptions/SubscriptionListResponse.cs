@@ -342,6 +342,19 @@ public sealed record class SubscriptionListResponse : JsonModel
     }
 
     /// <summary>
+    /// Name of the product associated with this subscription
+    /// </summary>
+    public string? ProductName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("product_name");
+        }
+        init { this._rawData.Set("product_name", value); }
+    }
+
+    /// <summary>
     /// Tax identifier provided for this subscription (if applicable)
     /// </summary>
     public string? TaxID
@@ -381,6 +394,7 @@ public sealed record class SubscriptionListResponse : JsonModel
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;
         _ = this.PaymentMethodID;
+        _ = this.ProductName;
         _ = this.TaxID;
     }
 

@@ -13,6 +13,8 @@ public class LicenseKeyListParamsTest : TestBase
     {
         var parameters = new LicenseKeyListParams
         {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
@@ -20,12 +22,16 @@ public class LicenseKeyListParamsTest : TestBase
             Status = Status.Active,
         };
 
+        DateTimeOffset expectedCreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedCreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
         string expectedProductID = "product_id";
         ApiEnum<string, Status> expectedStatus = Status.Active;
 
+        Assert.Equal(expectedCreatedAtGte, parameters.CreatedAtGte);
+        Assert.Equal(expectedCreatedAtLte, parameters.CreatedAtLte);
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
@@ -38,6 +44,10 @@ public class LicenseKeyListParamsTest : TestBase
     {
         var parameters = new LicenseKeyListParams { };
 
+        Assert.Null(parameters.CreatedAtGte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_gte"));
+        Assert.Null(parameters.CreatedAtLte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_lte"));
         Assert.Null(parameters.CustomerID);
         Assert.False(parameters.RawQueryData.ContainsKey("customer_id"));
         Assert.Null(parameters.PageNumber);
@@ -56,6 +66,8 @@ public class LicenseKeyListParamsTest : TestBase
         var parameters = new LicenseKeyListParams
         {
             // Null should be interpreted as omitted for these properties
+            CreatedAtGte = null,
+            CreatedAtLte = null,
             CustomerID = null,
             PageNumber = null,
             PageSize = null,
@@ -63,6 +75,10 @@ public class LicenseKeyListParamsTest : TestBase
             Status = null,
         };
 
+        Assert.Null(parameters.CreatedAtGte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_gte"));
+        Assert.Null(parameters.CreatedAtLte);
+        Assert.False(parameters.RawQueryData.ContainsKey("created_at_lte"));
         Assert.Null(parameters.CustomerID);
         Assert.False(parameters.RawQueryData.ContainsKey("customer_id"));
         Assert.Null(parameters.PageNumber);
@@ -80,6 +96,8 @@ public class LicenseKeyListParamsTest : TestBase
     {
         LicenseKeyListParams parameters = new()
         {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
@@ -91,7 +109,7 @@ public class LicenseKeyListParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://live.dodopayments.com/license_keys?customer_id=customer_id&page_number=0&page_size=0&product_id=product_id&status=active"
+                "https://live.dodopayments.com/license_keys?created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&product_id=product_id&status=active"
             ),
             url
         );
@@ -102,6 +120,8 @@ public class LicenseKeyListParamsTest : TestBase
     {
         var parameters = new LicenseKeyListParams
         {
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
