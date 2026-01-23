@@ -159,6 +159,33 @@ public class DisputeAcceptedWebhookEventTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Webhooks::DisputeAcceptedWebhookEvent
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                Amount = "amount",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = "currency",
+                DisputeID = "dispute_id",
+                DisputeStage = DisputeDisputeStage.PreDispute,
+                DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                PaymentID = "payment_id",
+                Remarks = "remarks",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = Webhooks::Type.DisputeAccepted,
+        };
+
+        Webhooks::DisputeAcceptedWebhookEvent copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class TypeTest : TestBase

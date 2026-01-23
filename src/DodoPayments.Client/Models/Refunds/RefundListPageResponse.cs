@@ -38,8 +38,11 @@ public sealed record class RefundListPageResponse : JsonModel
 
     public RefundListPageResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public RefundListPageResponse(RefundListPageResponse refundListPageResponse)
         : base(refundListPageResponse) { }
+#pragma warning restore CS8618
 
     public RefundListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

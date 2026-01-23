@@ -38,8 +38,11 @@ public sealed record class PayoutListPageResponse : JsonModel
 
     public PayoutListPageResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public PayoutListPageResponse(PayoutListPageResponse payoutListPageResponse)
         : base(payoutListPageResponse) { }
+#pragma warning restore CS8618
 
     public PayoutListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

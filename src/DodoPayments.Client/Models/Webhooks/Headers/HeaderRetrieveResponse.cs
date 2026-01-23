@@ -63,8 +63,11 @@ public sealed record class HeaderRetrieveResponse : JsonModel
 
     public HeaderRetrieveResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public HeaderRetrieveResponse(HeaderRetrieveResponse headerRetrieveResponse)
         : base(headerRetrieveResponse) { }
+#pragma warning restore CS8618
 
     public HeaderRetrieveResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

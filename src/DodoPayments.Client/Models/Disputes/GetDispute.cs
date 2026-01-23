@@ -177,8 +177,11 @@ public sealed record class GetDispute : JsonModel
 
     public GetDispute() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public GetDispute(GetDispute getDispute)
         : base(getDispute) { }
+#pragma warning restore CS8618
 
     public GetDispute(IReadOnlyDictionary<string, JsonElement> rawData)
     {

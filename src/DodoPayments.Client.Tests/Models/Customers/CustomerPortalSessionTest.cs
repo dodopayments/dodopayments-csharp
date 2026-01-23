@@ -54,4 +54,14 @@ public class CustomerPortalSessionTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerPortalSession { Link = "link" };
+
+        CustomerPortalSession copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

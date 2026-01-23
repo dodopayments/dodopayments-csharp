@@ -180,8 +180,11 @@ public sealed record class Refund : JsonModel
 
     public Refund() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Refund(Refund refund)
         : base(refund) { }
+#pragma warning restore CS8618
 
     public Refund(IReadOnlyDictionary<string, JsonElement> rawData)
     {

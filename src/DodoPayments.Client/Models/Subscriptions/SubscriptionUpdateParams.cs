@@ -249,8 +249,11 @@ public sealed record class DisableOnDemand : JsonModel
 
     public DisableOnDemand() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public DisableOnDemand(DisableOnDemand disableOnDemand)
         : base(disableOnDemand) { }
+#pragma warning restore CS8618
 
     public DisableOnDemand(IReadOnlyDictionary<string, JsonElement> rawData)
     {

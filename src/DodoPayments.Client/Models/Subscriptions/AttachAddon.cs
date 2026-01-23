@@ -39,8 +39,11 @@ public sealed record class AttachAddon : JsonModel
 
     public AttachAddon() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AttachAddon(AttachAddon attachAddon)
         : base(attachAddon) { }
+#pragma warning restore CS8618
 
     public AttachAddon(IReadOnlyDictionary<string, JsonElement> rawData)
     {

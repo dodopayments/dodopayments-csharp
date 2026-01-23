@@ -135,8 +135,11 @@ public sealed record class Meter : JsonModel
 
     public Meter() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Meter(Meter meter)
         : base(meter) { }
+#pragma warning restore CS8618
 
     public Meter(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -83,10 +83,13 @@ public sealed record class SubscriptionRenewedWebhookEvent : JsonModel
 
     public SubscriptionRenewedWebhookEvent() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionRenewedWebhookEvent(
         SubscriptionRenewedWebhookEvent subscriptionRenewedWebhookEvent
     )
         : base(subscriptionRenewedWebhookEvent) { }
+#pragma warning restore CS8618
 
     public SubscriptionRenewedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {

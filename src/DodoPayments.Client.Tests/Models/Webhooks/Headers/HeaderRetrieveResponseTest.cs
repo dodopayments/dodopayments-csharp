@@ -95,4 +95,18 @@ public class HeaderRetrieveResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new HeaderRetrieveResponse
+        {
+            Headers = new Dictionary<string, string>() { { "foo", "string" } },
+            Sensitive = ["string"],
+        };
+
+        HeaderRetrieveResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

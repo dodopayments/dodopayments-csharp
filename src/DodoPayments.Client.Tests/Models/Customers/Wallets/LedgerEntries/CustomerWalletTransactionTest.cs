@@ -249,6 +249,30 @@ public class CustomerWalletTransactionTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerWalletTransaction
+        {
+            ID = "id",
+            AfterBalance = 0,
+            Amount = 0,
+            BeforeBalance = 0,
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            CustomerID = "customer_id",
+            EventType = EventType.Payment,
+            IsCredit = true,
+            Reason = "reason",
+            ReferenceObjectID = "reference_object_id",
+        };
+
+        CustomerWalletTransaction copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class EventTypeTest : TestBase

@@ -160,8 +160,11 @@ public sealed record class WebhookDetails : JsonModel
 
     public WebhookDetails() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public WebhookDetails(WebhookDetails webhookDetails)
         : base(webhookDetails) { }
+#pragma warning restore CS8618
 
     public WebhookDetails(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -49,8 +49,11 @@ public sealed record class MeterAggregation : JsonModel
 
     public MeterAggregation() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public MeterAggregation(MeterAggregation meterAggregation)
         : base(meterAggregation) { }
+#pragma warning restore CS8618
 
     public MeterAggregation(IReadOnlyDictionary<string, JsonElement> rawData)
     {

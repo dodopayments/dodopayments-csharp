@@ -128,4 +128,19 @@ public class OneTimeProductCartItemTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new OneTimeProductCartItem
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+            Amount = 0,
+        };
+
+        OneTimeProductCartItem copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

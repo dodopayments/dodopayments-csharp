@@ -40,8 +40,11 @@ public sealed record class LicenseKeyDuration : JsonModel
 
     public LicenseKeyDuration() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public LicenseKeyDuration(LicenseKeyDuration licenseKeyDuration)
         : base(licenseKeyDuration) { }
+#pragma warning restore CS8618
 
     public LicenseKeyDuration(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -45,8 +45,11 @@ public sealed record class ShortLinkCreateResponse : JsonModel
 
     public ShortLinkCreateResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ShortLinkCreateResponse(ShortLinkCreateResponse shortLinkCreateResponse)
         : base(shortLinkCreateResponse) { }
+#pragma warning restore CS8618
 
     public ShortLinkCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -54,4 +54,14 @@ public class UsageEventIngestResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new UsageEventIngestResponse { IngestedCount = 0 };
+
+        UsageEventIngestResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

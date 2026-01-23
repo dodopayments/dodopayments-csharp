@@ -54,4 +54,14 @@ public class LicenseValidateResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new LicenseValidateResponse { Valid = true };
+
+        LicenseValidateResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

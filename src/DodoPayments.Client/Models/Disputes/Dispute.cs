@@ -148,8 +148,11 @@ public sealed record class Dispute : JsonModel
 
     public Dispute() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Dispute(Dispute dispute)
         : base(dispute) { }
+#pragma warning restore CS8618
 
     public Dispute(IReadOnlyDictionary<string, JsonElement> rawData)
     {

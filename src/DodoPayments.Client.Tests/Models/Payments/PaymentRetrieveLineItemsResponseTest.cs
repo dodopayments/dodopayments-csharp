@@ -150,6 +150,31 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PaymentRetrieveLineItemsResponse
+        {
+            Currency = Currency.Aed,
+            Items =
+            [
+                new()
+                {
+                    Amount = 0,
+                    ItemsID = "items_id",
+                    RefundableAmount = 0,
+                    Tax = 0,
+                    Description = "description",
+                    Name = "name",
+                },
+            ],
+        };
+
+        PaymentRetrieveLineItemsResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ItemTest : TestBase
@@ -315,5 +340,23 @@ public class ItemTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Item
+        {
+            Amount = 0,
+            ItemsID = "items_id",
+            RefundableAmount = 0,
+            Tax = 0,
+            Description = "description",
+            Name = "name",
+        };
+
+        Item copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

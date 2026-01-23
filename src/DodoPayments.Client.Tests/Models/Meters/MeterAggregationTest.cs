@@ -103,6 +103,16 @@ public class MeterAggregationTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new MeterAggregation { Type = Type.Count, Key = "key" };
+
+        MeterAggregation copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class TypeTest : TestBase

@@ -533,8 +533,11 @@ public sealed record class ProductCart : JsonModel
 
     public ProductCart() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ProductCart(ProductCart productCart)
         : base(productCart) { }
+#pragma warning restore CS8618
 
     public ProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -646,8 +649,11 @@ public sealed record class BillingAddress : JsonModel
 
     public BillingAddress() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public BillingAddress(BillingAddress billingAddress)
         : base(billingAddress) { }
+#pragma warning restore CS8618
 
     public BillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -794,8 +800,11 @@ public sealed record class CustomField : JsonModel
 
     public CustomField() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CustomField(CustomField customField)
         : base(customField) { }
+#pragma warning restore CS8618
 
     public CustomField(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -991,8 +1000,11 @@ public sealed record class Customization : JsonModel
 
     public Customization() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Customization(Customization customization)
         : base(customization) { }
+#pragma warning restore CS8618
 
     public Customization(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1357,8 +1369,11 @@ public sealed record class FeatureFlags : JsonModel
 
     public FeatureFlags() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public FeatureFlags(FeatureFlags featureFlags)
         : base(featureFlags) { }
+#pragma warning restore CS8618
 
     public FeatureFlags(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1423,8 +1438,11 @@ public sealed record class SubscriptionData : JsonModel
 
     public SubscriptionData() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionData(SubscriptionData subscriptionData)
         : base(subscriptionData) { }
+#pragma warning restore CS8618
 
     public SubscriptionData(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -180,4 +180,22 @@ public class CheckoutSessionStatusTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionStatus
+        {
+            ID = "id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerEmail = "customer_email",
+            CustomerName = "customer_name",
+            PaymentID = "payment_id",
+            PaymentStatus = IntentStatus.Succeeded,
+        };
+
+        CheckoutSessionStatus copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

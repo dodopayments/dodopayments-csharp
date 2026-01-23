@@ -795,6 +795,22 @@ public class ProductCartTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Amount = 0,
+        };
+
+        ProductCart copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class BillingAddressTest : TestBase
@@ -952,6 +968,23 @@ public class BillingAddressTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new BillingAddress
+        {
+            Country = CountryCode.Af,
+            City = "city",
+            State = "state",
+            Street = "street",
+            Zipcode = "zipcode",
+        };
+
+        BillingAddress copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1202,6 +1235,24 @@ public class CustomFieldTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomField
+        {
+            FieldType = FieldType.Text,
+            Key = "key",
+            Label = "label",
+            Options = ["string"],
+            Placeholder = "placeholder",
+            Required = true,
+        };
+
+        CustomField copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1478,6 +1529,22 @@ public class CustomizationTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Customization
+        {
+            ForceLanguage = "force_language",
+            ShowOnDemandTag = true,
+            ShowOrderDetails = true,
+            Theme = Theme.Dark,
+        };
+
+        Customization copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1813,6 +1880,31 @@ public class FeatureFlagsTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FeatureFlags
+        {
+            AllowCurrencySelection = true,
+            AllowCustomerEditingCity = true,
+            AllowCustomerEditingCountry = true,
+            AllowCustomerEditingEmail = true,
+            AllowCustomerEditingName = true,
+            AllowCustomerEditingState = true,
+            AllowCustomerEditingStreet = true,
+            AllowCustomerEditingZipcode = true,
+            AllowDiscountCode = true,
+            AllowPhoneNumberCollection = true,
+            AllowTaxID = true,
+            AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
+        };
+
+        FeatureFlags copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class SubscriptionDataTest : TestBase
@@ -1964,5 +2056,26 @@ public class SubscriptionDataTest : TestBase
         var model = new SubscriptionData { OnDemand = null, TrialPeriodDays = null };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionData
+        {
+            OnDemand = new()
+            {
+                MandateOnly = true,
+                AdaptiveCurrencyFeesInclusive = true,
+                ProductCurrency = Currency.Aed,
+                ProductDescription = "product_description",
+                ProductPrice = 0,
+            },
+            TrialPeriodDays = 0,
+        };
+
+        SubscriptionData copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

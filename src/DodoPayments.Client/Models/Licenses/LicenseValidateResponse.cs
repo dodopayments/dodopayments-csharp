@@ -28,8 +28,11 @@ public sealed record class LicenseValidateResponse : JsonModel
 
     public LicenseValidateResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public LicenseValidateResponse(LicenseValidateResponse licenseValidateResponse)
         : base(licenseValidateResponse) { }
+#pragma warning restore CS8618
 
     public LicenseValidateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

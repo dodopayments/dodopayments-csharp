@@ -52,8 +52,11 @@ public sealed record class WalletListResponse : JsonModel
 
     public WalletListResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public WalletListResponse(WalletListResponse walletListResponse)
         : base(walletListResponse) { }
+#pragma warning restore CS8618
 
     public WalletListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

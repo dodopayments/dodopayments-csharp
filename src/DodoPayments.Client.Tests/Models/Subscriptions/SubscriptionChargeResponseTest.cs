@@ -54,4 +54,14 @@ public class SubscriptionChargeResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionChargeResponse { PaymentID = "payment_id" };
+
+        SubscriptionChargeResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

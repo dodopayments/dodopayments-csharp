@@ -42,8 +42,11 @@ public sealed record class AddonCartResponseItem : JsonModel
 
     public AddonCartResponseItem() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AddonCartResponseItem(AddonCartResponseItem addonCartResponseItem)
         : base(addonCartResponseItem) { }
+#pragma warning restore CS8618
 
     public AddonCartResponseItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {

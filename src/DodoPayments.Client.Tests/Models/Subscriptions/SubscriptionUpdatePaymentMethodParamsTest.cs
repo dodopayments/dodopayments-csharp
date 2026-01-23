@@ -247,6 +247,20 @@ public class NewTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::New
+        {
+            Type = Subscriptions::Type.New,
+            ReturnUrl = "return_url",
+        };
+
+        Subscriptions::New copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class TypeTest : TestBase
@@ -376,6 +390,20 @@ public class ExistingTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::Existing
+        {
+            PaymentMethodID = "payment_method_id",
+            Type = Subscriptions::ExistingType.Existing,
+        };
+
+        Subscriptions::Existing copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

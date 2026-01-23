@@ -80,8 +80,11 @@ public sealed record class WebhookPayload : JsonModel
 
     public WebhookPayload() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public WebhookPayload(WebhookPayload webhookPayload)
         : base(webhookPayload) { }
+#pragma warning restore CS8618
 
     public WebhookPayload(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1256,8 +1259,11 @@ public sealed record class Payment : JsonModel
 
     public Payment() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Payment(Payment payment)
         : base(payment) { }
+#pragma warning restore CS8618
 
     public Payment(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1307,8 +1313,11 @@ public sealed record class IntersectionMember1 : JsonModel
 
     public IntersectionMember1() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public IntersectionMember1(IntersectionMember1 intersectionMember1)
         : base(intersectionMember1) { }
+#pragma warning restore CS8618
 
     public IntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1879,8 +1888,11 @@ public sealed record class Subscription : JsonModel
 
     public Subscription() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Subscription(Subscription subscription)
         : base(subscription) { }
+#pragma warning restore CS8618
 
     public Subscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1937,10 +1949,13 @@ public sealed record class SubscriptionIntersectionMember1 : JsonModel
 
     public SubscriptionIntersectionMember1() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionIntersectionMember1(
         SubscriptionIntersectionMember1 subscriptionIntersectionMember1
     )
         : base(subscriptionIntersectionMember1) { }
+#pragma warning restore CS8618
 
     public SubscriptionIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -2221,8 +2236,11 @@ public sealed record class Refund : JsonModel
 
     public Refund() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Refund(Refund refund)
         : base(refund) { }
+#pragma warning restore CS8618
 
     public Refund(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -2276,8 +2294,11 @@ public sealed record class RefundIntersectionMember1 : JsonModel
 
     public RefundIntersectionMember1() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public RefundIntersectionMember1(RefundIntersectionMember1 refundIntersectionMember1)
         : base(refundIntersectionMember1) { }
+#pragma warning restore CS8618
 
     public RefundIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -2548,8 +2569,11 @@ public sealed record class Dispute : JsonModel
 
     public Dispute() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Dispute(Dispute dispute)
         : base(dispute) { }
+#pragma warning restore CS8618
 
     public Dispute(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -2603,8 +2627,11 @@ public sealed record class DisputeIntersectionMember1 : JsonModel
 
     public DisputeIntersectionMember1() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public DisputeIntersectionMember1(DisputeIntersectionMember1 disputeIntersectionMember1)
         : base(disputeIntersectionMember1) { }
+#pragma warning restore CS8618
 
     public DisputeIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -2895,8 +2922,11 @@ public sealed record class LicenseKey : JsonModel
 
     public LicenseKey() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public LicenseKey(LicenseKey licenseKey)
         : base(licenseKey) { }
+#pragma warning restore CS8618
 
     public LicenseKey(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -2950,10 +2980,13 @@ public sealed record class LicenseKeyIntersectionMember1 : JsonModel
 
     public LicenseKeyIntersectionMember1() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public LicenseKeyIntersectionMember1(
         LicenseKeyIntersectionMember1 licenseKeyIntersectionMember1
     )
         : base(licenseKeyIntersectionMember1) { }
+#pragma warning restore CS8618
 
     public LicenseKeyIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {

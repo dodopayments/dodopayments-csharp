@@ -30,10 +30,13 @@ public sealed record class WebhookRetrieveSecretResponse : JsonModel
 
     public WebhookRetrieveSecretResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public WebhookRetrieveSecretResponse(
         WebhookRetrieveSecretResponse webhookRetrieveSecretResponse
     )
         : base(webhookRetrieveSecretResponse) { }
+#pragma warning restore CS8618
 
     public WebhookRetrieveSecretResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

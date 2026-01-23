@@ -159,6 +159,32 @@ public class LicenseActivateResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new LicenseActivateResponse
+        {
+            ID = "lki_123",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            LicenseKeyID = "lic_123",
+            Name = "Production Server 1",
+            Product = new() { ProductID = "product_id", Name = "name" },
+        };
+
+        LicenseActivateResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ProductTest : TestBase
@@ -255,5 +281,15 @@ public class ProductTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Product { ProductID = "product_id", Name = "name" };
+
+        Product copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

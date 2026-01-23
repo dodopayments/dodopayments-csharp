@@ -100,4 +100,21 @@ public class CustomerWalletTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerWallet
+        {
+            Balance = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            CustomerID = "customer_id",
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        CustomerWallet copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

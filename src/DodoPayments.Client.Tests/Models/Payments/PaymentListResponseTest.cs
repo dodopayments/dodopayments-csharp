@@ -363,4 +363,37 @@ public class PaymentListResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PaymentListResponse
+        {
+            BrandID = "brand_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DigitalProductsDelivered = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            TotalAmount = 0,
+            InvoiceID = "invoice_id",
+            InvoiceUrl = "invoice_url",
+            PaymentMethod = "payment_method",
+            PaymentMethodType = "payment_method_type",
+            Status = IntentStatus.Succeeded,
+            SubscriptionID = "subscription_id",
+        };
+
+        PaymentListResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

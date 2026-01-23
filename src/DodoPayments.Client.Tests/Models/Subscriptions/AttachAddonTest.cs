@@ -58,4 +58,14 @@ public class AttachAddonTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new AttachAddon { AddonID = "addon_id", Quantity = 0 };
+
+        AttachAddon copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

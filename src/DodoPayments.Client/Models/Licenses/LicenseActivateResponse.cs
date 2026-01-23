@@ -117,8 +117,11 @@ public sealed record class LicenseActivateResponse : JsonModel
 
     public LicenseActivateResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public LicenseActivateResponse(LicenseActivateResponse licenseActivateResponse)
         : base(licenseActivateResponse) { }
+#pragma warning restore CS8618
 
     public LicenseActivateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -191,8 +194,11 @@ public sealed record class Product : JsonModel
 
     public Product() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Product(Product product)
         : base(product) { }
+#pragma warning restore CS8618
 
     public Product(IReadOnlyDictionary<string, JsonElement> rawData)
     {

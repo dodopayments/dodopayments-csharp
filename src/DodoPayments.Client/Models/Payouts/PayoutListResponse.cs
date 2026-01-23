@@ -234,9 +234,12 @@ public sealed record class PayoutListResponse : JsonModel
     [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
     public PayoutListResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
     public PayoutListResponse(PayoutListResponse payoutListResponse)
         : base(payoutListResponse) { }
+#pragma warning restore CS8618
 
     [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
     public PayoutListResponse(IReadOnlyDictionary<string, JsonElement> rawData)

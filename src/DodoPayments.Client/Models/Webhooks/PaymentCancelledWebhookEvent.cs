@@ -77,8 +77,11 @@ public sealed record class PaymentCancelledWebhookEvent : JsonModel
 
     public PaymentCancelledWebhookEvent() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public PaymentCancelledWebhookEvent(PaymentCancelledWebhookEvent paymentCancelledWebhookEvent)
         : base(paymentCancelledWebhookEvent) { }
+#pragma warning restore CS8618
 
     public PaymentCancelledWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {

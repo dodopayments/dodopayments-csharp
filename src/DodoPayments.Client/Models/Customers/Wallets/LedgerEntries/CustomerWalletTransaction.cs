@@ -154,8 +154,11 @@ public sealed record class CustomerWalletTransaction : JsonModel
 
     public CustomerWalletTransaction() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CustomerWalletTransaction(CustomerWalletTransaction customerWalletTransaction)
         : base(customerWalletTransaction) { }
+#pragma warning restore CS8618
 
     public CustomerWalletTransaction(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -415,8 +415,11 @@ public sealed record class New : JsonModel
 
     public New() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public New(New new_)
         : base(new_) { }
+#pragma warning restore CS8618
 
     public New(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -525,8 +528,11 @@ public sealed record class Existing : JsonModel
 
     public Existing() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Existing(Existing existing)
         : base(existing) { }
+#pragma warning restore CS8618
 
     public Existing(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -78,10 +78,13 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponse : JsonModel
 
     public SubscriptionRetrieveUsageHistoryResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionRetrieveUsageHistoryResponse(
         SubscriptionRetrieveUsageHistoryResponse subscriptionRetrieveUsageHistoryResponse
     )
         : base(subscriptionRetrieveUsageHistoryResponse) { }
+#pragma warning restore CS8618
 
     public SubscriptionRetrieveUsageHistoryResponse(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -243,10 +246,13 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
 
     public SubscriptionRetrieveUsageHistoryResponseMeter() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionRetrieveUsageHistoryResponseMeter(
         SubscriptionRetrieveUsageHistoryResponseMeter subscriptionRetrieveUsageHistoryResponseMeter
     )
         : base(subscriptionRetrieveUsageHistoryResponseMeter) { }
+#pragma warning restore CS8618
 
     public SubscriptionRetrieveUsageHistoryResponseMeter(
         IReadOnlyDictionary<string, JsonElement> rawData

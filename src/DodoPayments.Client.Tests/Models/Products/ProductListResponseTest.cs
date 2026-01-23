@@ -355,4 +355,40 @@ public class ProductListResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Products::ProductListResponse
+        {
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            IsRecurring = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            ProductID = "product_id",
+            TaxCategory = TaxCategory.DigitalProducts,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Description = "description",
+            Image = "image",
+            Name = "name",
+            Price = 0,
+            PriceDetail = new Products::OneTimePrice()
+            {
+                Currency = Currency.Aed,
+                Discount = 0,
+                Price = 0,
+                PurchasingPowerParity = true,
+                Type = Products::Type.OneTimePrice,
+                PayWhatYouWant = true,
+                SuggestedPrice = 0,
+                TaxInclusive = true,
+            },
+            TaxInclusive = true,
+        };
+
+        Products::ProductListResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

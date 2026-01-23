@@ -556,8 +556,11 @@ public sealed record class OneTimePrice : JsonModel
 
     public OneTimePrice() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public OneTimePrice(OneTimePrice oneTimePrice)
         : base(oneTimePrice) { }
+#pragma warning restore CS8618
 
     public OneTimePrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -807,8 +810,11 @@ public sealed record class RecurringPrice : JsonModel
 
     public RecurringPrice() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public RecurringPrice(RecurringPrice recurringPrice)
         : base(recurringPrice) { }
+#pragma warning restore CS8618
 
     public RecurringPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1056,8 +1062,11 @@ public sealed record class UsageBasedPrice : JsonModel
 
     public UsageBasedPrice() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public UsageBasedPrice(UsageBasedPrice usageBasedPrice)
         : base(usageBasedPrice) { }
+#pragma warning restore CS8618
 
     public UsageBasedPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
