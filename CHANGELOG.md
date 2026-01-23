@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.4.0 (2026-01-23)
+
+Full Changelog: [v6.3.0...v6.4.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.3.0...v6.4.0)
+
+### Features
+
+* **api:** updated openapi spec to v1.75.0 ([4dc012e](https://github.com/dodopayments/dodopayments-csharp/commit/4dc012e34e9a43e260b75b46ac89dea5fdb93f61))
+
+
+### Chores
+
+* **internal:** add copy constructor tests ([33f05f4](https://github.com/dodopayments/dodopayments-csharp/commit/33f05f424751169cf6b944b84d848986fcb28461))
+
 ## 6.3.0 (2026-01-21)
 
 Full Changelog: [v6.2.0...v6.3.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.2.0...v6.3.0)
