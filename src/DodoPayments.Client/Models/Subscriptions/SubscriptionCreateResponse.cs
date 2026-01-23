@@ -203,8 +203,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
 
     public SubscriptionCreateResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionCreateResponse(SubscriptionCreateResponse subscriptionCreateResponse)
         : base(subscriptionCreateResponse) { }
+#pragma warning restore CS8618
 
     public SubscriptionCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -268,8 +271,11 @@ public sealed record class OneTimeProductCart : JsonModel
 
     public OneTimeProductCart() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public OneTimeProductCart(OneTimeProductCart oneTimeProductCart)
         : base(oneTimeProductCart) { }
+#pragma warning restore CS8618
 
     public OneTimeProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {

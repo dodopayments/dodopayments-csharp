@@ -235,4 +235,25 @@ public class WebhookDetailsTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new WebhookDetails
+        {
+            ID = "id",
+            CreatedAt = "created_at",
+            Description = "description",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            UpdatedAt = "updated_at",
+            Url = "url",
+            Disabled = true,
+            FilterTypes = ["string"],
+            RateLimit = 0,
+        };
+
+        WebhookDetails copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

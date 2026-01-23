@@ -287,6 +287,33 @@ public class PayoutListResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PayoutListResponse
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            PayoutDocumentUrl = "payout_document_url",
+            Remarks = "remarks",
+        };
+
+        PayoutListResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class StatusTest : TestBase

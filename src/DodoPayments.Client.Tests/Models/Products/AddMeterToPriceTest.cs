@@ -170,4 +170,22 @@ public class AddMeterToPriceTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new AddMeterToPrice
+        {
+            MeterID = "meter_id",
+            PricePerUnit = "10.50",
+            Description = "description",
+            FreeThreshold = 0,
+            MeasurementUnit = "measurement_unit",
+            Name = "name",
+        };
+
+        AddMeterToPrice copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

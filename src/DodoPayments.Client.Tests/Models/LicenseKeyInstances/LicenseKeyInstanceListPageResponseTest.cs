@@ -136,4 +136,27 @@ public class LicenseKeyInstanceListPageResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new LicenseKeyInstanceListPageResponse
+        {
+            Items =
+            [
+                new()
+                {
+                    ID = "lki_123",
+                    BusinessID = "business_id",
+                    CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
+                    LicenseKeyID = "lic_123",
+                    Name = "Production Server 1",
+                },
+            ],
+        };
+
+        LicenseKeyInstanceListPageResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

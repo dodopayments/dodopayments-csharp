@@ -28,8 +28,11 @@ public sealed record class CustomerPortalSession : JsonModel
 
     public CustomerPortalSession() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CustomerPortalSession(CustomerPortalSession customerPortalSession)
         : base(customerPortalSession) { }
+#pragma warning restore CS8618
 
     public CustomerPortalSession(IReadOnlyDictionary<string, JsonElement> rawData)
     {

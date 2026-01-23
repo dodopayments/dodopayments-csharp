@@ -159,8 +159,11 @@ public sealed record class AddonResponse : JsonModel
 
     public AddonResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AddonResponse(AddonResponse addonResponse)
         : base(addonResponse) { }
+#pragma warning restore CS8618
 
     public AddonResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

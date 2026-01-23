@@ -163,8 +163,11 @@ public sealed record class PaymentCreateResponse : JsonModel
 
     public PaymentCreateResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public PaymentCreateResponse(PaymentCreateResponse paymentCreateResponse)
         : base(paymentCreateResponse) { }
+#pragma warning restore CS8618
 
     public PaymentCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

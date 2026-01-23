@@ -58,4 +58,14 @@ public class AddonCartResponseItemTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new AddonCartResponseItem { AddonID = "addon_id", Quantity = 0 };
+
+        AddonCartResponseItem copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

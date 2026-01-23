@@ -109,8 +109,11 @@ public sealed record class Customer : JsonModel
 
     public Customer() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Customer(Customer customer)
         : base(customer) { }
+#pragma warning restore CS8618
 
     public Customer(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -149,4 +149,20 @@ public class SubscriptionUpdatePaymentMethodResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionUpdatePaymentMethodResponse
+        {
+            ClientSecret = "client_secret",
+            ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentID = "payment_id",
+            PaymentLink = "payment_link",
+        };
+
+        SubscriptionUpdatePaymentMethodResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

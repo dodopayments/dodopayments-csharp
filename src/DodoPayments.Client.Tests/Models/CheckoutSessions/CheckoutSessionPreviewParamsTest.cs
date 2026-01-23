@@ -801,6 +801,22 @@ public class CheckoutSessionPreviewParamsProductCartTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Amount = 0,
+        };
+
+        CheckoutSessionPreviewParamsProductCart copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class CheckoutSessionPreviewParamsBillingAddressTest : TestBase
@@ -958,6 +974,23 @@ public class CheckoutSessionPreviewParamsBillingAddressTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsBillingAddress
+        {
+            Country = CountryCode.Af,
+            City = "city",
+            State = "state",
+            Street = "street",
+            Zipcode = "zipcode",
+        };
+
+        CheckoutSessionPreviewParamsBillingAddress copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1210,6 +1243,24 @@ public class CheckoutSessionPreviewParamsCustomFieldTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomField
+        {
+            FieldType = CheckoutSessionPreviewParamsCustomFieldFieldType.Text,
+            Key = "key",
+            Label = "label",
+            Options = ["string"],
+            Placeholder = "placeholder",
+            Required = true,
+        };
+
+        CheckoutSessionPreviewParamsCustomField copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1492,6 +1543,22 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomization
+        {
+            ForceLanguage = "force_language",
+            ShowOnDemandTag = true,
+            ShowOrderDetails = true,
+            Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+        };
+
+        CheckoutSessionPreviewParamsCustomization copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1825,6 +1892,31 @@ public class CheckoutSessionPreviewParamsFeatureFlagsTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsFeatureFlags
+        {
+            AllowCurrencySelection = true,
+            AllowCustomerEditingCity = true,
+            AllowCustomerEditingCountry = true,
+            AllowCustomerEditingEmail = true,
+            AllowCustomerEditingName = true,
+            AllowCustomerEditingState = true,
+            AllowCustomerEditingStreet = true,
+            AllowCustomerEditingZipcode = true,
+            AllowDiscountCode = true,
+            AllowPhoneNumberCollection = true,
+            AllowTaxID = true,
+            AlwaysCreateNewCustomer = true,
+            RedirectImmediately = true,
+        };
+
+        CheckoutSessionPreviewParamsFeatureFlags copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class CheckoutSessionPreviewParamsSubscriptionDataTest : TestBase
@@ -1984,5 +2076,26 @@ public class CheckoutSessionPreviewParamsSubscriptionDataTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsSubscriptionData
+        {
+            OnDemand = new()
+            {
+                MandateOnly = true,
+                AdaptiveCurrencyFeesInclusive = true,
+                ProductCurrency = Currency.Aed,
+                ProductDescription = "product_description",
+                ProductPrice = 0,
+            },
+            TrialPeriodDays = 0,
+        };
+
+        CheckoutSessionPreviewParamsSubscriptionData copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

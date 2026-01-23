@@ -59,4 +59,14 @@ public class LicenseKeyDurationTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new LicenseKeyDuration { Count = 0, Interval = TimeInterval.Day };
+
+        LicenseKeyDuration copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

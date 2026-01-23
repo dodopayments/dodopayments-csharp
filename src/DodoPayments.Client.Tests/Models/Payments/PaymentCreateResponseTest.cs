@@ -356,4 +356,40 @@ public class PaymentCreateResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PaymentCreateResponse
+        {
+            ClientSecret = "client_secret",
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            TotalAmount = 0,
+            DiscountID = "discount_id",
+            ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentLink = "payment_link",
+            ProductCart =
+            [
+                new()
+                {
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    Amount = 0,
+                },
+            ],
+        };
+
+        PaymentCreateResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

@@ -349,6 +349,36 @@ public class SubscriptionCreateResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionCreateResponse
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            RecurringPreTaxAmount = 0,
+            SubscriptionID = "subscription_id",
+            ClientSecret = "client_secret",
+            DiscountID = "discount_id",
+            ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            PaymentLink = "payment_link",
+        };
+
+        SubscriptionCreateResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class OneTimeProductCartTest : TestBase
@@ -404,5 +434,15 @@ public class OneTimeProductCartTest : TestBase
         var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
+
+        OneTimeProductCart copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

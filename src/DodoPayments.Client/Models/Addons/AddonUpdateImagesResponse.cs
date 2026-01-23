@@ -41,8 +41,11 @@ public sealed record class AddonUpdateImagesResponse : JsonModel
 
     public AddonUpdateImagesResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AddonUpdateImagesResponse(AddonUpdateImagesResponse addonUpdateImagesResponse)
         : base(addonUpdateImagesResponse) { }
+#pragma warning restore CS8618
 
     public AddonUpdateImagesResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

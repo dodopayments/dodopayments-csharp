@@ -556,6 +556,60 @@ public class ProductTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Products::Product
+        {
+            BrandID = "brand_id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            IsRecurring = true,
+            LicenseKeyEnabled = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Price = new Products::OneTimePrice()
+            {
+                Currency = Currency.Aed,
+                Discount = 0,
+                Price = 0,
+                PurchasingPowerParity = true,
+                Type = Products::Type.OneTimePrice,
+                PayWhatYouWant = true,
+                SuggestedPrice = 0,
+                TaxInclusive = true,
+            },
+            ProductID = "product_id",
+            TaxCategory = TaxCategory.DigitalProducts,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Addons = ["string"],
+            Description = "description",
+            DigitalProductDelivery = new()
+            {
+                ExternalUrl = "external_url",
+                Files =
+                [
+                    new()
+                    {
+                        FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                        FileName = "file_name",
+                        Url = "url",
+                    },
+                ],
+                Instructions = "instructions",
+            },
+            Image = "image",
+            LicenseKeyActivationMessage = "license_key_activation_message",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
+            Name = "name",
+            ProductCollectionID = "product_collection_id",
+        };
+
+        Products::Product copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ProductDigitalProductDeliveryTest : TestBase
@@ -746,6 +800,29 @@ public class ProductDigitalProductDeliveryTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Products::ProductDigitalProductDelivery
+        {
+            ExternalUrl = "external_url",
+            Files =
+            [
+                new()
+                {
+                    FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    FileName = "file_name",
+                    Url = "url",
+                },
+            ],
+            Instructions = "instructions",
+        };
+
+        Products::ProductDigitalProductDelivery copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class FileTest : TestBase
@@ -825,5 +902,20 @@ public class FileTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Products::File
+        {
+            FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            FileName = "file_name",
+            Url = "url",
+        };
+
+        Products::File copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

@@ -199,6 +199,39 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerRetrievePaymentMethodsResponse
+        {
+            Items =
+            [
+                new()
+                {
+                    PaymentMethod = PaymentMethod.Card,
+                    PaymentMethodID = "payment_method_id",
+                    Card = new()
+                    {
+                        CardHolderName = "card_holder_name",
+                        CardIssuingCountry = CountryCode.Af,
+                        CardNetwork = "card_network",
+                        CardType = "card_type",
+                        ExpiryMonth = "expiry_month",
+                        ExpiryYear = "expiry_year",
+                        Last4Digits = "last4_digits",
+                    },
+                    LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                    RecurringEnabled = true,
+                },
+            ],
+        };
+
+        CustomerRetrievePaymentMethodsResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ItemTest : TestBase
@@ -424,6 +457,33 @@ public class ItemTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Item
+        {
+            PaymentMethod = PaymentMethod.Card,
+            PaymentMethodID = "payment_method_id",
+            Card = new()
+            {
+                CardHolderName = "card_holder_name",
+                CardIssuingCountry = CountryCode.Af,
+                CardNetwork = "card_network",
+                CardType = "card_type",
+                ExpiryMonth = "expiry_month",
+                ExpiryYear = "expiry_year",
+                Last4Digits = "last4_digits",
+            },
+            LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+            RecurringEnabled = true,
+        };
+
+        Item copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -690,5 +750,24 @@ public class CardTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Card
+        {
+            CardHolderName = "card_holder_name",
+            CardIssuingCountry = CountryCode.Af,
+            CardNetwork = "card_network",
+            CardType = "card_type",
+            ExpiryMonth = "expiry_month",
+            ExpiryYear = "expiry_year",
+            Last4Digits = "last4_digits",
+        };
+
+        Card copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

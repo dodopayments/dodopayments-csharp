@@ -67,10 +67,13 @@ public sealed record class SubscriptionUpdatePaymentMethodResponse : JsonModel
 
     public SubscriptionUpdatePaymentMethodResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionUpdatePaymentMethodResponse(
         SubscriptionUpdatePaymentMethodResponse subscriptionUpdatePaymentMethodResponse
     )
         : base(subscriptionUpdatePaymentMethodResponse) { }
+#pragma warning restore CS8618
 
     public SubscriptionUpdatePaymentMethodResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

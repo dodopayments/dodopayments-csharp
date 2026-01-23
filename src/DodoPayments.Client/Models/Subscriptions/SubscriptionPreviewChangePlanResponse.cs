@@ -51,10 +51,13 @@ public sealed record class SubscriptionPreviewChangePlanResponse : JsonModel
 
     public SubscriptionPreviewChangePlanResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionPreviewChangePlanResponse(
         SubscriptionPreviewChangePlanResponse subscriptionPreviewChangePlanResponse
     )
         : base(subscriptionPreviewChangePlanResponse) { }
+#pragma warning restore CS8618
 
     public SubscriptionPreviewChangePlanResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -128,8 +131,11 @@ public sealed record class ImmediateCharge : JsonModel
 
     public ImmediateCharge() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ImmediateCharge(ImmediateCharge immediateCharge)
         : base(immediateCharge) { }
+#pragma warning restore CS8618
 
     public ImmediateCharge(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -709,8 +715,11 @@ public sealed record class LineItemSubscription : JsonModel
 
     public LineItemSubscription() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public LineItemSubscription(LineItemSubscription lineItemSubscription)
         : base(lineItemSubscription) { }
+#pragma warning restore CS8618
 
     public LineItemSubscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -929,8 +938,11 @@ public sealed record class Addon : JsonModel
 
     public Addon() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Addon(Addon addon)
         : base(addon) { }
+#pragma warning restore CS8618
 
     public Addon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1153,8 +1165,11 @@ public sealed record class LineItemMeter : JsonModel
 
     public LineItemMeter() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public LineItemMeter(LineItemMeter lineItemMeter)
         : base(lineItemMeter) { }
+#pragma warning restore CS8618
 
     public LineItemMeter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1311,8 +1326,11 @@ public sealed record class Summary : JsonModel
 
     public Summary() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Summary(Summary summary)
         : base(summary) { }
+#pragma warning restore CS8618
 
     public Summary(IReadOnlyDictionary<string, JsonElement> rawData)
     {

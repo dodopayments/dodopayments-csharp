@@ -802,6 +802,88 @@ public class CheckoutSessionPreviewResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewResponse
+        {
+            BillingCountry = CountryCode.Af,
+            Currency = Currency.Aed,
+            CurrentBreakup = new()
+            {
+                Discount = 0,
+                Subtotal = 0,
+                TotalAmount = 0,
+                Tax = 0,
+            },
+            ProductCart =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    DiscountedPrice = 0,
+                    IsSubscription = true,
+                    IsUsageBased = true,
+                    Meters =
+                    [
+                        new()
+                        {
+                            MeasurementUnit = "measurement_unit",
+                            Name = "name",
+                            PricePerUnit = "10.50",
+                            Description = "description",
+                            FreeThreshold = 0,
+                        },
+                    ],
+                    OgCurrency = Currency.Aed,
+                    OgPrice = 0,
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    TaxCategory = TaxCategory.DigitalProducts,
+                    TaxInclusive = true,
+                    TaxRate = 0,
+                    Addons =
+                    [
+                        new()
+                        {
+                            AddonID = "addon_id",
+                            Currency = Currency.Aed,
+                            DiscountedPrice = 0,
+                            Name = "name",
+                            OgCurrency = Currency.Aed,
+                            OgPrice = 0,
+                            Quantity = 0,
+                            TaxCategory = TaxCategory.DigitalProducts,
+                            TaxInclusive = true,
+                            TaxRate = 0,
+                            Description = "description",
+                            DiscountAmount = 0,
+                            Tax = 0,
+                        },
+                    ],
+                    Description = "description",
+                    DiscountAmount = 0,
+                    DiscountCycle = 0,
+                    Name = "name",
+                    Tax = 0,
+                },
+            ],
+            TotalPrice = 0,
+            RecurringBreakup = new()
+            {
+                Discount = 0,
+                Subtotal = 0,
+                TotalAmount = 0,
+                Tax = 0,
+            },
+            TotalTax = 0,
+        };
+
+        CheckoutSessionPreviewResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class CurrentBreakupTest : TestBase
@@ -947,6 +1029,22 @@ public class CurrentBreakupTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CurrentBreakup
+        {
+            Discount = 0,
+            Subtotal = 0,
+            TotalAmount = 0,
+            Tax = 0,
+        };
+
+        CurrentBreakup copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1498,6 +1596,64 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewResponseProductCart
+        {
+            Currency = Currency.Aed,
+            DiscountedPrice = 0,
+            IsSubscription = true,
+            IsUsageBased = true,
+            Meters =
+            [
+                new()
+                {
+                    MeasurementUnit = "measurement_unit",
+                    Name = "name",
+                    PricePerUnit = "10.50",
+                    Description = "description",
+                    FreeThreshold = 0,
+                },
+            ],
+            OgCurrency = Currency.Aed,
+            OgPrice = 0,
+            ProductID = "product_id",
+            Quantity = 0,
+            TaxCategory = TaxCategory.DigitalProducts,
+            TaxInclusive = true,
+            TaxRate = 0,
+            Addons =
+            [
+                new()
+                {
+                    AddonID = "addon_id",
+                    Currency = Currency.Aed,
+                    DiscountedPrice = 0,
+                    Name = "name",
+                    OgCurrency = Currency.Aed,
+                    OgPrice = 0,
+                    Quantity = 0,
+                    TaxCategory = TaxCategory.DigitalProducts,
+                    TaxInclusive = true,
+                    TaxRate = 0,
+                    Description = "description",
+                    DiscountAmount = 0,
+                    Tax = 0,
+                },
+            ],
+            Description = "description",
+            DiscountAmount = 0,
+            DiscountCycle = 0,
+            Name = "name",
+            Tax = 0,
+        };
+
+        CheckoutSessionPreviewResponseProductCart copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class MeterTest : TestBase
@@ -1651,6 +1807,23 @@ public class MeterTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Meter
+        {
+            MeasurementUnit = "measurement_unit",
+            Name = "name",
+            PricePerUnit = "10.50",
+            Description = "description",
+            FreeThreshold = 0,
+        };
+
+        Meter copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1904,6 +2077,31 @@ public class AddonTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Addon
+        {
+            AddonID = "addon_id",
+            Currency = Currency.Aed,
+            DiscountedPrice = 0,
+            Name = "name",
+            OgCurrency = Currency.Aed,
+            OgPrice = 0,
+            Quantity = 0,
+            TaxCategory = TaxCategory.DigitalProducts,
+            TaxInclusive = true,
+            TaxRate = 0,
+            Description = "description",
+            DiscountAmount = 0,
+            Tax = 0,
+        };
+
+        Addon copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class RecurringBreakupTest : TestBase
@@ -2049,5 +2247,21 @@ public class RecurringBreakupTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new RecurringBreakup
+        {
+            Discount = 0,
+            Subtotal = 0,
+            TotalAmount = 0,
+            Tax = 0,
+        };
+
+        RecurringBreakup copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

@@ -83,8 +83,11 @@ public sealed record class WebhookListPageResponse : JsonModel
 
     public WebhookListPageResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public WebhookListPageResponse(WebhookListPageResponse webhookListPageResponse)
         : base(webhookListPageResponse) { }
+#pragma warning restore CS8618
 
     public WebhookListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

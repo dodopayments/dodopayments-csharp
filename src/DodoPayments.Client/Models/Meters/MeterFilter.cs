@@ -57,8 +57,11 @@ public sealed record class MeterFilter : JsonModel
 
     public MeterFilter() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public MeterFilter(MeterFilter meterFilter)
         : base(meterFilter) { }
+#pragma warning restore CS8618
 
     public MeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -389,8 +392,11 @@ public sealed record class MeterFilterCondition : JsonModel
 
     public MeterFilterCondition() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public MeterFilterCondition(MeterFilterCondition meterFilterCondition)
         : base(meterFilterCondition) { }
+#pragma warning restore CS8618
 
     public MeterFilterCondition(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -807,8 +813,11 @@ public sealed record class ClausesMeterFilter : JsonModel
 
     public ClausesMeterFilter() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ClausesMeterFilter(ClausesMeterFilter clausesMeterFilter)
         : base(clausesMeterFilter) { }
+#pragma warning restore CS8618
 
     public ClausesMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1168,10 +1177,13 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : JsonM
 
     public ClausesMeterFilterClausesMeterFilterCondition() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ClausesMeterFilterClausesMeterFilterCondition(
         ClausesMeterFilterClausesMeterFilterCondition clausesMeterFilterClausesMeterFilterCondition
     )
         : base(clausesMeterFilterClausesMeterFilterCondition) { }
+#pragma warning restore CS8618
 
     public ClausesMeterFilterClausesMeterFilterCondition(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -1625,10 +1637,13 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : JsonModel
 
     public ClausesMeterFilterClausesMeterFilter() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ClausesMeterFilterClausesMeterFilter(
         ClausesMeterFilterClausesMeterFilter clausesMeterFilterClausesMeterFilter
     )
         : base(clausesMeterFilterClausesMeterFilter) { }
+#pragma warning restore CS8618
 
     public ClausesMeterFilterClausesMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -2008,10 +2023,13 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition(
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition clausesMeterFilterClausesMeterFilterClausesMeterFilterCondition
     )
         : base(clausesMeterFilterClausesMeterFilterClausesMeterFilterCondition) { }
+#pragma warning restore CS8618
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -2488,10 +2506,13 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilter() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilter(
         ClausesMeterFilterClausesMeterFilterClausesMeterFilter clausesMeterFilterClausesMeterFilterClausesMeterFilter
     )
         : base(clausesMeterFilterClausesMeterFilterClausesMeterFilter) { }
+#pragma warning restore CS8618
 
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilter(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -2580,8 +2601,11 @@ public sealed record class Clause : JsonModel
 
     public Clause() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Clause(Clause clause)
         : base(clause) { }
+#pragma warning restore CS8618
 
     public Clause(IReadOnlyDictionary<string, JsonElement> rawData)
     {

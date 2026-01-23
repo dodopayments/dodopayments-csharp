@@ -339,4 +339,19 @@ public class ItemTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Item
+        {
+            ItemID = "item_id",
+            Amount = 0,
+            TaxInclusive = true,
+        };
+
+        Item copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

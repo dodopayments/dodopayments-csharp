@@ -166,6 +166,35 @@ public class MeterFilterTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new MeterFilter
+        {
+            Clauses = new(
+                [
+                    new MeterFilterCondition()
+                    {
+                        Key = "user_id",
+                        Operator = Operator.Equals,
+                        Value = "user123",
+                    },
+                    new MeterFilterCondition()
+                    {
+                        Key = "amount",
+                        Operator = Operator.GreaterThan,
+                        Value = 100,
+                    },
+                ]
+            ),
+            Conjunction = MeterFilterConjunction.And,
+        };
+
+        MeterFilter copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ClausesTest : TestBase
@@ -342,6 +371,21 @@ public class MeterFilterConditionTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new MeterFilterCondition
+        {
+            Key = "x",
+            Operator = Operator.Equals,
+            Value = "string",
+        };
+
+        MeterFilterCondition copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -604,6 +648,29 @@ public class ClausesMeterFilterTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ClausesMeterFilter
+        {
+            Clauses = new(
+                [
+                    new ClausesMeterFilterClausesMeterFilterCondition()
+                    {
+                        Key = "x",
+                        Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+                        Value = "string",
+                    },
+                ]
+            ),
+            Conjunction = ClausesMeterFilterConjunction.And,
+        };
+
+        ClausesMeterFilter copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ClausesMeterFilterClausesTest : TestBase
@@ -784,6 +851,21 @@ public class ClausesMeterFilterClausesMeterFilterConditionTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ClausesMeterFilterClausesMeterFilterCondition
+        {
+            Key = "x",
+            Operator = ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+            Value = "string",
+        };
+
+        ClausesMeterFilterClausesMeterFilterCondition copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1053,6 +1135,30 @@ public class ClausesMeterFilterClausesMeterFilterTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ClausesMeterFilterClausesMeterFilter
+        {
+            Clauses = new(
+                [
+                    new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition()
+                    {
+                        Key = "x",
+                        Operator =
+                            ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+                        Value = "string",
+                    },
+                ]
+            ),
+            Conjunction = ClausesMeterFilterClausesMeterFilterConjunction.And,
+        };
+
+        ClausesMeterFilterClausesMeterFilter copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ClausesMeterFilterClausesMeterFilterClausesTest : TestBase
@@ -1243,6 +1349,22 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionTest
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition
+        {
+            Key = "x",
+            Operator =
+                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
+            Value = "string",
+        };
+
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1532,6 +1654,28 @@ public class ClausesMeterFilterClausesMeterFilterClausesMeterFilterTest : TestBa
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ClausesMeterFilterClausesMeterFilterClausesMeterFilter
+        {
+            Clauses =
+            [
+                new()
+                {
+                    Key = "x",
+                    Operator = ClauseOperator.Equals,
+                    Value = "string",
+                },
+            ],
+            Conjunction = Conjunction.And,
+        };
+
+        ClausesMeterFilterClausesMeterFilterClausesMeterFilter copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ClauseTest : TestBase
@@ -1605,6 +1749,21 @@ public class ClauseTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Clause
+        {
+            Key = "x",
+            Operator = ClauseOperator.Equals,
+            Value = "string",
+        };
+
+        Clause copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

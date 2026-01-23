@@ -38,8 +38,11 @@ public sealed record class AddonListPageResponse : JsonModel
 
     public AddonListPageResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AddonListPageResponse(AddonListPageResponse addonListPageResponse)
         : base(addonListPageResponse) { }
+#pragma warning restore CS8618
 
     public AddonListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

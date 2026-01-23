@@ -145,4 +145,28 @@ public class WalletListResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new WalletListResponse
+        {
+            Items =
+            [
+                new()
+                {
+                    Balance = 0,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Currency = Currency.Aed,
+                    CustomerID = "customer_id",
+                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+            TotalBalanceUsd = 0,
+        };
+
+        WalletListResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

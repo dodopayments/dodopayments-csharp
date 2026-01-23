@@ -272,8 +272,11 @@ public sealed record class CustomerBalanceConfig : JsonModel
 
     public CustomerBalanceConfig() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CustomerBalanceConfig(CustomerBalanceConfig customerBalanceConfig)
         : base(customerBalanceConfig) { }
+#pragma warning restore CS8618
 
     public CustomerBalanceConfig(IReadOnlyDictionary<string, JsonElement> rawData)
     {

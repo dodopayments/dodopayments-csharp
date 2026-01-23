@@ -98,8 +98,11 @@ public sealed record class CustomerLimitedDetails : JsonModel
 
     public CustomerLimitedDetails() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CustomerLimitedDetails(CustomerLimitedDetails customerLimitedDetails)
         : base(customerLimitedDetails) { }
+#pragma warning restore CS8618
 
     public CustomerLimitedDetails(IReadOnlyDictionary<string, JsonElement> rawData)
     {

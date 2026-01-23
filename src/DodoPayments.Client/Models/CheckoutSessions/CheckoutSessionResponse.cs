@@ -45,8 +45,11 @@ public sealed record class CheckoutSessionResponse : JsonModel
 
     public CheckoutSessionResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionResponse(CheckoutSessionResponse checkoutSessionResponse)
         : base(checkoutSessionResponse) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

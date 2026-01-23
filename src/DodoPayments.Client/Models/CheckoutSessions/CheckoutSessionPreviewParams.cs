@@ -548,10 +548,13 @@ public sealed record class CheckoutSessionPreviewParamsProductCart : JsonModel
 
     public CheckoutSessionPreviewParamsProductCart() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionPreviewParamsProductCart(
         CheckoutSessionPreviewParamsProductCart checkoutSessionPreviewParamsProductCart
     )
         : base(checkoutSessionPreviewParamsProductCart) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionPreviewParamsProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -672,10 +675,13 @@ public sealed record class CheckoutSessionPreviewParamsBillingAddress : JsonMode
 
     public CheckoutSessionPreviewParamsBillingAddress() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionPreviewParamsBillingAddress(
         CheckoutSessionPreviewParamsBillingAddress checkoutSessionPreviewParamsBillingAddress
     )
         : base(checkoutSessionPreviewParamsBillingAddress) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionPreviewParamsBillingAddress(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -835,10 +841,13 @@ public sealed record class CheckoutSessionPreviewParamsCustomField : JsonModel
 
     public CheckoutSessionPreviewParamsCustomField() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionPreviewParamsCustomField(
         CheckoutSessionPreviewParamsCustomField checkoutSessionPreviewParamsCustomField
     )
         : base(checkoutSessionPreviewParamsCustomField) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionPreviewParamsCustomField(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1046,10 +1055,13 @@ public sealed record class CheckoutSessionPreviewParamsCustomization : JsonModel
 
     public CheckoutSessionPreviewParamsCustomization() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionPreviewParamsCustomization(
         CheckoutSessionPreviewParamsCustomization checkoutSessionPreviewParamsCustomization
     )
         : base(checkoutSessionPreviewParamsCustomization) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionPreviewParamsCustomization(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -1430,10 +1442,13 @@ public sealed record class CheckoutSessionPreviewParamsFeatureFlags : JsonModel
 
     public CheckoutSessionPreviewParamsFeatureFlags() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionPreviewParamsFeatureFlags(
         CheckoutSessionPreviewParamsFeatureFlags checkoutSessionPreviewParamsFeatureFlags
     )
         : base(checkoutSessionPreviewParamsFeatureFlags) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionPreviewParamsFeatureFlags(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -1509,10 +1524,13 @@ public sealed record class CheckoutSessionPreviewParamsSubscriptionData : JsonMo
 
     public CheckoutSessionPreviewParamsSubscriptionData() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionPreviewParamsSubscriptionData(
         CheckoutSessionPreviewParamsSubscriptionData checkoutSessionPreviewParamsSubscriptionData
     )
         : base(checkoutSessionPreviewParamsSubscriptionData) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionPreviewParamsSubscriptionData(
         IReadOnlyDictionary<string, JsonElement> rawData

@@ -58,4 +58,14 @@ public class ShortLinkCreateResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ShortLinkCreateResponse { FullUrl = "full_url", ShortUrl = "short_url" };
+
+        ShortLinkCreateResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

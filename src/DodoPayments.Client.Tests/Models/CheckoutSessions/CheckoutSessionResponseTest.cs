@@ -118,4 +118,18 @@ public class CheckoutSessionResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionResponse
+        {
+            SessionID = "session_id",
+            CheckoutUrl = "checkout_url",
+        };
+
+        CheckoutSessionResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

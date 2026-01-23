@@ -280,4 +280,51 @@ public class MeterListPageResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Meters::MeterListPageResponse
+        {
+            Items =
+            [
+                new()
+                {
+                    ID = "id",
+                    Aggregation = new() { Type = Meters::Type.Count, Key = "key" },
+                    BusinessID = "business_id",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EventName = "event_name",
+                    MeasurementUnit = "measurement_unit",
+                    Name = "name",
+                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Description = "description",
+                    Filter = new()
+                    {
+                        Clauses = new(
+                            [
+                                new Meters::MeterFilterCondition()
+                                {
+                                    Key = "user_id",
+                                    Operator = Meters::Operator.Equals,
+                                    Value = "user123",
+                                },
+                                new Meters::MeterFilterCondition()
+                                {
+                                    Key = "amount",
+                                    Operator = Meters::Operator.GreaterThan,
+                                    Value = 100,
+                                },
+                            ]
+                        ),
+                        Conjunction = Meters::MeterFilterConjunction.And,
+                    },
+                },
+            ],
+        };
+
+        Meters::MeterListPageResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

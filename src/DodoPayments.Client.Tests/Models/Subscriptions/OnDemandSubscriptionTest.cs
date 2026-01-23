@@ -164,4 +164,21 @@ public class OnDemandSubscriptionTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new OnDemandSubscription
+        {
+            MandateOnly = true,
+            AdaptiveCurrencyFeesInclusive = true,
+            ProductCurrency = Currency.Aed,
+            ProductDescription = "product_description",
+            ProductPrice = 0,
+        };
+
+        OnDemandSubscription copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

@@ -77,10 +77,13 @@ public sealed record class DisputeChallengedWebhookEvent : JsonModel
 
     public DisputeChallengedWebhookEvent() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public DisputeChallengedWebhookEvent(
         DisputeChallengedWebhookEvent disputeChallengedWebhookEvent
     )
         : base(disputeChallengedWebhookEvent) { }
+#pragma warning restore CS8618
 
     public DisputeChallengedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {

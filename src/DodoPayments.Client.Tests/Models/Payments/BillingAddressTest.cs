@@ -161,4 +161,21 @@ public class BillingAddressTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new BillingAddress
+        {
+            Country = CountryCode.Af,
+            City = "city",
+            State = "state",
+            Street = "street",
+            Zipcode = "zipcode",
+        };
+
+        BillingAddress copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

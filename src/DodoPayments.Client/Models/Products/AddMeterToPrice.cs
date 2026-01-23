@@ -96,8 +96,11 @@ public sealed record class AddMeterToPrice : JsonModel
 
     public AddMeterToPrice() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AddMeterToPrice(AddMeterToPrice addMeterToPrice)
         : base(addMeterToPrice) { }
+#pragma warning restore CS8618
 
     public AddMeterToPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {

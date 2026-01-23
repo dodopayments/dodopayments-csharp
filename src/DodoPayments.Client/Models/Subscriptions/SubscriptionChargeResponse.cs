@@ -30,8 +30,11 @@ public sealed record class SubscriptionChargeResponse : JsonModel
 
     public SubscriptionChargeResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionChargeResponse(SubscriptionChargeResponse subscriptionChargeResponse)
         : base(subscriptionChargeResponse) { }
+#pragma warning restore CS8618
 
     public SubscriptionChargeResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

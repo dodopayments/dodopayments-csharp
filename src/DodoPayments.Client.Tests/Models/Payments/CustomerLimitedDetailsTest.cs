@@ -239,4 +239,21 @@ public class CustomerLimitedDetailsTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerLimitedDetails
+        {
+            CustomerID = "customer_id",
+            Email = "email",
+            Name = "name",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PhoneNumber = "phone_number",
+        };
+
+        CustomerLimitedDetails copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

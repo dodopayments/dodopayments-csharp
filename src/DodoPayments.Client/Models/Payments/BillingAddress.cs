@@ -88,8 +88,11 @@ public sealed record class BillingAddress : JsonModel
 
     public BillingAddress() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public BillingAddress(BillingAddress billingAddress)
         : base(billingAddress) { }
+#pragma warning restore CS8618
 
     public BillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
     {

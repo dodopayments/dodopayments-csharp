@@ -54,4 +54,14 @@ public class AttachExistingCustomerTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new AttachExistingCustomer { CustomerID = "customer_id" };
+
+        AttachExistingCustomer copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
