@@ -33,7 +33,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -56,7 +56,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     Last4Digits = "last4_digits",
                 },
                 LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                 RecurringEnabled = true,
             },
         ];
@@ -90,7 +90,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -127,7 +127,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -157,7 +157,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     Last4Digits = "last4_digits",
                 },
                 LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                 RecurringEnabled = true,
             },
         ];
@@ -191,7 +191,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -222,7 +222,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -254,7 +254,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
@@ -272,7 +272,7 @@ public class ItemTest : TestBase
         };
         DateTimeOffset expectedLastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Payments::PaymentMethodTypes> expectedPaymentMethodType =
-            Payments::PaymentMethodTypes.Credit;
+            Payments::PaymentMethodTypes.Ach;
         bool expectedRecurringEnabled = true;
 
         Assert.Equal(expectedPaymentMethod, model.PaymentMethod);
@@ -301,7 +301,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
@@ -329,7 +329,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
@@ -351,7 +351,7 @@ public class ItemTest : TestBase
         };
         DateTimeOffset expectedLastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Payments::PaymentMethodTypes> expectedPaymentMethodType =
-            Payments::PaymentMethodTypes.Credit;
+            Payments::PaymentMethodTypes.Ach;
         bool expectedRecurringEnabled = true;
 
         Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
@@ -380,7 +380,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
@@ -477,7 +477,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Credit,
+            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 

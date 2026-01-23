@@ -24,6 +24,16 @@ public record class BrandUpdateParams : ParamsBase
 
     public string? ID { get; init; }
 
+    public string? Description
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("description");
+        }
+        init { this._rawBodyData.Set("description", value); }
+    }
+
     /// <summary>
     /// The UUID you got back from the presigned‐upload call
     /// </summary>
@@ -65,6 +75,16 @@ public record class BrandUpdateParams : ParamsBase
             return this._rawBodyData.GetNullableClass<string>("support_email");
         }
         init { this._rawBodyData.Set("support_email", value); }
+    }
+
+    public string? UrlValue
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("url");
+        }
+        init { this._rawBodyData.Set("url", value); }
     }
 
     public BrandUpdateParams() { }

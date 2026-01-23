@@ -31,7 +31,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
@@ -65,7 +65,7 @@ public class PaymentCreateParamsTest : TestBase
         ];
         List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
         [
-            PaymentMethodTypes.Credit,
+            PaymentMethodTypes.Ach,
         ];
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
         string expectedDiscountCode = "discount_code";
@@ -141,7 +141,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
@@ -183,7 +183,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
@@ -366,7 +366,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Credit],
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
