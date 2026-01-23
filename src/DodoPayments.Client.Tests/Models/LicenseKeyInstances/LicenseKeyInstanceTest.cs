@@ -99,4 +99,21 @@ public class LicenseKeyInstanceTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new LicenseKeyInstance
+        {
+            ID = "lki_123",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
+            LicenseKeyID = "lic_123",
+            Name = "Production Server 1",
+        };
+
+        LicenseKeyInstance copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

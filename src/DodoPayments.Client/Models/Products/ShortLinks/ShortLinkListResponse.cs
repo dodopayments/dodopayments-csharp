@@ -74,8 +74,11 @@ public sealed record class ShortLinkListResponse : JsonModel
 
     public ShortLinkListResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ShortLinkListResponse(ShortLinkListResponse shortLinkListResponse)
         : base(shortLinkListResponse) { }
+#pragma warning restore CS8618
 
     public ShortLinkListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -579,6 +579,102 @@ public class WebhookPayloadTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new WebhookPayload
+        {
+            BusinessID = "business_id",
+            Data = new Payment()
+            {
+                Billing = new()
+                {
+                    Country = CountryCode.Af,
+                    City = "city",
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                BrandID = "brand_id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = Currency.Aed,
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                DigitalProductsDelivered = true,
+                Disputes =
+                [
+                    new()
+                    {
+                        Amount = "amount",
+                        BusinessID = "business_id",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Currency = "currency",
+                        DisputeID = "dispute_id",
+                        DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                        DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
+                        PaymentID = "payment_id",
+                        Remarks = "remarks",
+                    },
+                ],
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PaymentID = "payment_id",
+                Refunds =
+                [
+                    new()
+                    {
+                        BusinessID = "business_id",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        IsPartial = true,
+                        PaymentID = "payment_id",
+                        RefundID = "refund_id",
+                        Status = Refunds::RefundStatus.Succeeded,
+                        Amount = 0,
+                        Currency = Currency.Aed,
+                        Reason = "reason",
+                    },
+                ],
+                SettlementAmount = 0,
+                SettlementCurrency = Currency.Aed,
+                TotalAmount = 0,
+                CardHolderName = "card_holder_name",
+                CardIssuingCountry = CountryCode.Af,
+                CardLastFour = "card_last_four",
+                CardNetwork = "card_network",
+                CardType = "card_type",
+                CheckoutSessionID = "checkout_session_id",
+                CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+                DiscountID = "discount_id",
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                InvoiceID = "invoice_id",
+                InvoiceUrl = "invoice_url",
+                PaymentLink = "payment_link",
+                PaymentMethod = "payment_method",
+                PaymentMethodType = "payment_method_type",
+                ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                SettlementTax = 0,
+                Status = Payments::IntentStatus.Succeeded,
+                SubscriptionID = "subscription_id",
+                Tax = 0,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PayloadType = PayloadType.Payment,
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = WebhookEventType.PaymentSucceeded,
+        };
+
+        WebhookPayload copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DataTest : TestBase
@@ -2458,6 +2554,96 @@ public class PaymentTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Payment
+        {
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            BrandID = "brand_id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DigitalProductsDelivered = true,
+            Disputes =
+            [
+                new()
+                {
+                    Amount = "amount",
+                    BusinessID = "business_id",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Currency = "currency",
+                    DisputeID = "dispute_id",
+                    DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                    DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
+                    PaymentID = "payment_id",
+                    Remarks = "remarks",
+                },
+            ],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            Refunds =
+            [
+                new()
+                {
+                    BusinessID = "business_id",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    IsPartial = true,
+                    PaymentID = "payment_id",
+                    RefundID = "refund_id",
+                    Status = Refunds::RefundStatus.Succeeded,
+                    Amount = 0,
+                    Currency = Currency.Aed,
+                    Reason = "reason",
+                },
+            ],
+            SettlementAmount = 0,
+            SettlementCurrency = Currency.Aed,
+            TotalAmount = 0,
+            CardHolderName = "card_holder_name",
+            CardIssuingCountry = CountryCode.Af,
+            CardLastFour = "card_last_four",
+            CardNetwork = "card_network",
+            CardType = "card_type",
+            CheckoutSessionID = "checkout_session_id",
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            DiscountID = "discount_id",
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            InvoiceID = "invoice_id",
+            InvoiceUrl = "invoice_url",
+            PaymentLink = "payment_link",
+            PaymentMethod = "payment_method",
+            PaymentMethodType = "payment_method_type",
+            ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            SettlementTax = 0,
+            Status = Payments::IntentStatus.Succeeded,
+            SubscriptionID = "subscription_id",
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PayloadType = PayloadType.Payment,
+        };
+
+        Payment copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class IntersectionMember1Test : TestBase
@@ -2509,6 +2695,16 @@ public class IntersectionMember1Test : TestBase
         var model = new IntersectionMember1 { PayloadType = PayloadType.Payment };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new IntersectionMember1 { PayloadType = PayloadType.Payment };
+
+        IntersectionMember1 copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -3358,6 +3554,74 @@ public class SubscriptionTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscription
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    PricePerUnit = "10.50",
+                    Description = "description",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = Subscriptions::SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            TaxID = "tax_id",
+            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
+        };
+
+        Subscription copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class SubscriptionIntersectionMember1Test : TestBase
@@ -3423,6 +3687,19 @@ public class SubscriptionIntersectionMember1Test : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionIntersectionMember1
+        {
+            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
+        };
+
+        SubscriptionIntersectionMember1 copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -3918,6 +4195,37 @@ public class RefundTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Refund
+        {
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            IsPartial = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PaymentID = "payment_id",
+            RefundID = "refund_id",
+            Status = Refunds::RefundStatus.Succeeded,
+            Amount = 0,
+            Currency = Currency.Aed,
+            Reason = "reason",
+            PayloadType = RefundIntersectionMember1PayloadType.Refund,
+        };
+
+        Refund copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class RefundIntersectionMember1Test : TestBase
@@ -3983,6 +4291,19 @@ public class RefundIntersectionMember1Test : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new RefundIntersectionMember1
+        {
+            PayloadType = RefundIntersectionMember1PayloadType.Refund,
+        };
+
+        RefundIntersectionMember1 copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -4353,6 +4674,37 @@ public class DisputeTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Dispute
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DisputeID = "dispute_id",
+            DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+            DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            Reason = "reason",
+            Remarks = "remarks",
+            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
+        };
+
+        Dispute copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DisputeIntersectionMember1Test : TestBase
@@ -4418,6 +4770,19 @@ public class DisputeIntersectionMember1Test : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new DisputeIntersectionMember1
+        {
+            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
+        };
+
+        DisputeIntersectionMember1 copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -4733,6 +5098,31 @@ public class LicenseKeyTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new LicenseKey
+        {
+            ID = "lic_123",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
+            CustomerID = "cus_123",
+            InstancesCount = 0,
+            Key = "key",
+            PaymentID = "payment_id",
+            ProductID = "product_id",
+            Status = LicenseKeys::LicenseKeyStatus.Active,
+            ActivationsLimit = 5,
+            ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            SubscriptionID = "subscription_id",
+            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
+        };
+
+        LicenseKey copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class LicenseKeyIntersectionMember1Test : TestBase
@@ -4798,6 +5188,19 @@ public class LicenseKeyIntersectionMember1Test : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new LicenseKeyIntersectionMember1
+        {
+            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
+        };
+
+        LicenseKeyIntersectionMember1 copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

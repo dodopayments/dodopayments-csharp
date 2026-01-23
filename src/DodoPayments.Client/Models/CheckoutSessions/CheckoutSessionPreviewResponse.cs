@@ -136,10 +136,13 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
 
     public CheckoutSessionPreviewResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionPreviewResponse(
         CheckoutSessionPreviewResponse checkoutSessionPreviewResponse
     )
         : base(checkoutSessionPreviewResponse) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionPreviewResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -240,8 +243,11 @@ public sealed record class CurrentBreakup : JsonModel
 
     public CurrentBreakup() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CurrentBreakup(CurrentBreakup currentBreakup)
         : base(currentBreakup) { }
+#pragma warning restore CS8618
 
     public CurrentBreakup(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -543,10 +549,13 @@ public sealed record class CheckoutSessionPreviewResponseProductCart : JsonModel
 
     public CheckoutSessionPreviewResponseProductCart() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionPreviewResponseProductCart(
         CheckoutSessionPreviewResponseProductCart checkoutSessionPreviewResponseProductCart
     )
         : base(checkoutSessionPreviewResponseProductCart) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionPreviewResponseProductCart(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -646,8 +655,11 @@ public sealed record class Meter : JsonModel
 
     public Meter() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Meter(Meter meter)
         : base(meter) { }
+#pragma warning restore CS8618
 
     public Meter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -833,8 +845,11 @@ public sealed record class Addon : JsonModel
 
     public Addon() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Addon(Addon addon)
         : base(addon) { }
+#pragma warning restore CS8618
 
     public Addon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -932,8 +947,11 @@ public sealed record class RecurringBreakup : JsonModel
 
     public RecurringBreakup() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public RecurringBreakup(RecurringBreakup recurringBreakup)
         : base(recurringBreakup) { }
+#pragma warning restore CS8618
 
     public RecurringBreakup(IReadOnlyDictionary<string, JsonElement> rawData)
     {

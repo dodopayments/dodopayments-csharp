@@ -385,4 +385,19 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Products::ProductUpdateParamsDigitalProductDelivery
+        {
+            ExternalUrl = "external_url",
+            Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            Instructions = "instructions",
+        };
+
+        Products::ProductUpdateParamsDigitalProductDelivery copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

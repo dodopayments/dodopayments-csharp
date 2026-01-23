@@ -294,8 +294,11 @@ public sealed record class Product : JsonModel
 
     public Product() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Product(Product product)
         : base(product) { }
+#pragma warning restore CS8618
 
     public Product(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -387,10 +390,13 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
 
     public ProductDigitalProductDelivery() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ProductDigitalProductDelivery(
         ProductDigitalProductDelivery productDigitalProductDelivery
     )
         : base(productDigitalProductDelivery) { }
+#pragma warning restore CS8618
 
     public ProductDigitalProductDelivery(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -465,8 +471,11 @@ public sealed record class File : JsonModel
 
     public File() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public File(File file)
         : base(file) { }
+#pragma warning restore CS8618
 
     public File(IReadOnlyDictionary<string, JsonElement> rawData)
     {

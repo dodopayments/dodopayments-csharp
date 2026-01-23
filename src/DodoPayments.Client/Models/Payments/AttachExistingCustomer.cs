@@ -28,8 +28,11 @@ public sealed record class AttachExistingCustomer : JsonModel
 
     public AttachExistingCustomer() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AttachExistingCustomer(AttachExistingCustomer attachExistingCustomer)
         : base(attachExistingCustomer) { }
+#pragma warning restore CS8618
 
     public AttachExistingCustomer(IReadOnlyDictionary<string, JsonElement> rawData)
     {

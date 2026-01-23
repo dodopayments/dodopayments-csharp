@@ -95,8 +95,11 @@ public sealed record class OnDemandSubscription : JsonModel
 
     public OnDemandSubscription() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public OnDemandSubscription(OnDemandSubscription onDemandSubscription)
         : base(onDemandSubscription) { }
+#pragma warning restore CS8618
 
     public OnDemandSubscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {

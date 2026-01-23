@@ -107,8 +107,11 @@ public sealed record class CheckoutSessionStatus : JsonModel
 
     public CheckoutSessionStatus() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionStatus(CheckoutSessionStatus checkoutSessionStatus)
         : base(checkoutSessionStatus) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionStatus(IReadOnlyDictionary<string, JsonElement> rawData)
     {

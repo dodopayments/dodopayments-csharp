@@ -217,6 +217,42 @@ public class RefundSucceededWebhookEventTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new RefundSucceededWebhookEvent
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                IsPartial = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PaymentID = "payment_id",
+                RefundID = "refund_id",
+                Status = RefundStatus.Succeeded,
+                Amount = 0,
+                Currency = Currency.Aed,
+                Reason = "reason",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = RefundSucceededWebhookEventType.RefundSucceeded,
+        };
+
+        RefundSucceededWebhookEvent copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class RefundSucceededWebhookEventTypeTest : TestBase

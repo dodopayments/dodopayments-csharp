@@ -77,8 +77,11 @@ public sealed record class RefundFailedWebhookEvent : JsonModel
 
     public RefundFailedWebhookEvent() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public RefundFailedWebhookEvent(RefundFailedWebhookEvent refundFailedWebhookEvent)
         : base(refundFailedWebhookEvent) { }
+#pragma warning restore CS8618
 
     public RefundFailedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {

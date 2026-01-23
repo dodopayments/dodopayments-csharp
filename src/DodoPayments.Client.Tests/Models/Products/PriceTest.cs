@@ -426,6 +426,26 @@ public class OneTimePriceTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new OneTimePrice
+        {
+            Currency = Currency.Aed,
+            Discount = 0,
+            Price = 0,
+            PurchasingPowerParity = true,
+            Type = Type.OneTimePrice,
+            PayWhatYouWant = true,
+            SuggestedPrice = 0,
+            TaxInclusive = true,
+        };
+
+        OneTimePrice copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class TypeTest : TestBase
@@ -804,6 +824,29 @@ public class RecurringPriceTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new RecurringPrice
+        {
+            Currency = Currency.Aed,
+            Discount = 0,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            Price = 0,
+            PurchasingPowerParity = true,
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            Type = RecurringPriceType.RecurringPrice,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+        };
+
+        RecurringPrice copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class RecurringPriceTypeTest : TestBase
@@ -1171,6 +1214,40 @@ public class UsageBasedPriceTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new UsageBasedPrice
+        {
+            Currency = Currency.Aed,
+            Discount = 0,
+            FixedPrice = 0,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            PurchasingPowerParity = true,
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            Type = UsageBasedPriceType.UsageBasedPrice,
+            Meters =
+            [
+                new()
+                {
+                    MeterID = "meter_id",
+                    PricePerUnit = "10.50",
+                    Description = "description",
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    Name = "name",
+                },
+            ],
+            TaxInclusive = true,
+        };
+
+        UsageBasedPrice copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

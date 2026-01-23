@@ -74,8 +74,11 @@ public sealed record class CreateNewCustomer : JsonModel
 
     public CreateNewCustomer() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CreateNewCustomer(CreateNewCustomer createNewCustomer)
         : base(createNewCustomer) { }
+#pragma warning restore CS8618
 
     public CreateNewCustomer(IReadOnlyDictionary<string, JsonElement> rawData)
     {

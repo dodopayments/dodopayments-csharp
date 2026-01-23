@@ -442,4 +442,18 @@ public class DigitalProductDeliveryTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Products::DigitalProductDelivery
+        {
+            ExternalUrl = "external_url",
+            Instructions = "instructions",
+        };
+
+        Products::DigitalProductDelivery copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

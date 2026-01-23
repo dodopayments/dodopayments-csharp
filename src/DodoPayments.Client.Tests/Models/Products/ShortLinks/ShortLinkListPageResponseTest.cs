@@ -130,4 +130,26 @@ public class ShortLinkListPageResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ShortLinkListPageResponse
+        {
+            Items =
+            [
+                new()
+                {
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FullUrl = "full_url",
+                    ProductID = "product_id",
+                    ShortUrl = "short_url",
+                },
+            ],
+        };
+
+        ShortLinkListPageResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

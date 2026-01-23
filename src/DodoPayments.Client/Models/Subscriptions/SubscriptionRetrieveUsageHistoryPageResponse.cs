@@ -48,10 +48,13 @@ public sealed record class SubscriptionRetrieveUsageHistoryPageResponse : JsonMo
 
     public SubscriptionRetrieveUsageHistoryPageResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionRetrieveUsageHistoryPageResponse(
         SubscriptionRetrieveUsageHistoryPageResponse subscriptionRetrieveUsageHistoryPageResponse
     )
         : base(subscriptionRetrieveUsageHistoryPageResponse) { }
+#pragma warning restore CS8618
 
     public SubscriptionRetrieveUsageHistoryPageResponse(
         IReadOnlyDictionary<string, JsonElement> rawData

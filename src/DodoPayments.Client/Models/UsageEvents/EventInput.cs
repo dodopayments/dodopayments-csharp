@@ -106,8 +106,11 @@ public sealed record class EventInput : JsonModel
 
     public EventInput() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public EventInput(EventInput eventInput)
         : base(eventInput) { }
+#pragma warning restore CS8618
 
     public EventInput(IReadOnlyDictionary<string, JsonElement> rawData)
     {

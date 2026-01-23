@@ -249,6 +249,30 @@ public class BrandTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Brand
+        {
+            BrandID = "brand_id",
+            BusinessID = "business_id",
+            Enabled = true,
+            StatementDescriptor = "statement_descriptor",
+            VerificationEnabled = true,
+            VerificationStatus = VerificationStatus.Success,
+            Description = "description",
+            Image = "image",
+            Name = "name",
+            ReasonForHold = "reason_for_hold",
+            SupportEmail = "support_email",
+            Url = "url",
+        };
+
+        Brand copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class VerificationStatusTest : TestBase

@@ -74,4 +74,18 @@ public class BrandUpdateImagesResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new BrandUpdateImagesResponse
+        {
+            ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            Url = "url",
+        };
+
+        BrandUpdateImagesResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

@@ -55,8 +55,11 @@ public sealed record class OneTimeProductCartItem : JsonModel
 
     public OneTimeProductCartItem() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public OneTimeProductCartItem(OneTimeProductCartItem oneTimeProductCartItem)
         : base(oneTimeProductCartItem) { }
+#pragma warning restore CS8618
 
     public OneTimeProductCartItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {

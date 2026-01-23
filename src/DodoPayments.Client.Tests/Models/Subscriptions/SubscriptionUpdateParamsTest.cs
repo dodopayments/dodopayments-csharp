@@ -229,4 +229,17 @@ public class DisableOnDemandTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new DisableOnDemand
+        {
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        DisableOnDemand copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

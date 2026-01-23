@@ -100,8 +100,11 @@ public sealed record class Event : JsonModel
 
     public Event() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Event(Event event_)
         : base(event_) { }
+#pragma warning restore CS8618
 
     public Event(IReadOnlyDictionary<string, JsonElement> rawData)
     {

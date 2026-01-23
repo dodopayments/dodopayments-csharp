@@ -566,8 +566,11 @@ public sealed record class Payment : JsonModel
 
     public Payment() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Payment(Payment payment)
         : base(payment) { }
+#pragma warning restore CS8618
 
     public Payment(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -732,8 +735,11 @@ public sealed record class Refund : JsonModel
 
     public Refund() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Refund(Refund refund)
         : base(refund) { }
+#pragma warning restore CS8618
 
     public Refund(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -803,8 +809,11 @@ public sealed record class CustomFieldResponse : JsonModel
 
     public CustomFieldResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CustomFieldResponse(CustomFieldResponse customFieldResponse)
         : base(customFieldResponse) { }
+#pragma warning restore CS8618
 
     public CustomFieldResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -867,8 +876,11 @@ public sealed record class ProductCart : JsonModel
 
     public ProductCart() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ProductCart(ProductCart productCart)
         : base(productCart) { }
+#pragma warning restore CS8618
 
     public ProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {

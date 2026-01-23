@@ -380,8 +380,11 @@ public sealed record class CheckoutSessionRequest : JsonModel
 
     public CheckoutSessionRequest() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionRequest(CheckoutSessionRequest checkoutSessionRequest)
         : base(checkoutSessionRequest) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionRequest(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -505,10 +508,13 @@ public sealed record class CheckoutSessionRequestProductCart : JsonModel
 
     public CheckoutSessionRequestProductCart() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionRequestProductCart(
         CheckoutSessionRequestProductCart checkoutSessionRequestProductCart
     )
         : base(checkoutSessionRequestProductCart) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionRequestProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -628,10 +634,13 @@ public sealed record class CheckoutSessionRequestBillingAddress : JsonModel
 
     public CheckoutSessionRequestBillingAddress() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionRequestBillingAddress(
         CheckoutSessionRequestBillingAddress checkoutSessionRequestBillingAddress
     )
         : base(checkoutSessionRequestBillingAddress) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionRequestBillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -789,10 +798,13 @@ public sealed record class CheckoutSessionRequestCustomField : JsonModel
 
     public CheckoutSessionRequestCustomField() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionRequestCustomField(
         CheckoutSessionRequestCustomField checkoutSessionRequestCustomField
     )
         : base(checkoutSessionRequestCustomField) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionRequestCustomField(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -999,10 +1011,13 @@ public sealed record class CheckoutSessionRequestCustomization : JsonModel
 
     public CheckoutSessionRequestCustomization() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionRequestCustomization(
         CheckoutSessionRequestCustomization checkoutSessionRequestCustomization
     )
         : base(checkoutSessionRequestCustomization) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionRequestCustomization(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1380,10 +1395,13 @@ public sealed record class CheckoutSessionRequestFeatureFlags : JsonModel
 
     public CheckoutSessionRequestFeatureFlags() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionRequestFeatureFlags(
         CheckoutSessionRequestFeatureFlags checkoutSessionRequestFeatureFlags
     )
         : base(checkoutSessionRequestFeatureFlags) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionRequestFeatureFlags(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1456,10 +1474,13 @@ public sealed record class CheckoutSessionRequestSubscriptionData : JsonModel
 
     public CheckoutSessionRequestSubscriptionData() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutSessionRequestSubscriptionData(
         CheckoutSessionRequestSubscriptionData checkoutSessionRequestSubscriptionData
     )
         : base(checkoutSessionRequestSubscriptionData) { }
+#pragma warning restore CS8618
 
     public CheckoutSessionRequestSubscriptionData(IReadOnlyDictionary<string, JsonElement> rawData)
     {

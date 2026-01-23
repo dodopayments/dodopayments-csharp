@@ -77,10 +77,13 @@ public sealed record class LicenseKeyCreatedWebhookEvent : JsonModel
 
     public LicenseKeyCreatedWebhookEvent() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public LicenseKeyCreatedWebhookEvent(
         LicenseKeyCreatedWebhookEvent licenseKeyCreatedWebhookEvent
     )
         : base(licenseKeyCreatedWebhookEvent) { }
+#pragma warning restore CS8618
 
     public LicenseKeyCreatedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -600,6 +600,107 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionPreviewChangePlanResponse
+        {
+            ImmediateCharge = new()
+            {
+                LineItems =
+                [
+                    new LineItemSubscription()
+                    {
+                        ID = "id",
+                        Currency = Currency.Aed,
+                        ProductID = "product_id",
+                        ProrationFactor = 0,
+                        Quantity = 0,
+                        TaxInclusive = true,
+                        Type = LineItemSubscriptionType.Subscription,
+                        UnitPrice = 0,
+                        Description = "description",
+                        Name = "name",
+                        Tax = 0,
+                        TaxRate = 0,
+                    },
+                ],
+                Summary = new()
+                {
+                    Currency = Currency.Aed,
+                    CustomerCredits = 0,
+                    SettlementAmount = 0,
+                    SettlementCurrency = Currency.Aed,
+                    TotalAmount = 0,
+                    SettlementTax = 0,
+                    Tax = 0,
+                },
+            },
+            NewPlan = new()
+            {
+                Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+                Billing = new()
+                {
+                    Country = CountryCode.Af,
+                    City = "city",
+                    State = "state",
+                    Street = "street",
+                    Zipcode = "zipcode",
+                },
+                CancelAtNextBillingDate = true,
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Currency = Currency.Aed,
+                Customer = new()
+                {
+                    CustomerID = "customer_id",
+                    Email = "email",
+                    Name = "name",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PhoneNumber = "phone_number",
+                },
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Meters =
+                [
+                    new()
+                    {
+                        Currency = Currency.Aed,
+                        FreeThreshold = 0,
+                        MeasurementUnit = "measurement_unit",
+                        MeterID = "meter_id",
+                        Name = "name",
+                        PricePerUnit = "10.50",
+                        Description = "description",
+                    },
+                ],
+                NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OnDemand = true,
+                PaymentFrequencyCount = 0,
+                PaymentFrequencyInterval = TimeInterval.Day,
+                PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                RecurringPreTaxAmount = 0,
+                Status = SubscriptionStatus.Pending,
+                SubscriptionID = "subscription_id",
+                SubscriptionPeriodCount = 0,
+                SubscriptionPeriodInterval = TimeInterval.Day,
+                TaxInclusive = true,
+                TrialPeriodDays = 0,
+                CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+                DiscountCyclesRemaining = 0,
+                DiscountID = "discount_id",
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PaymentMethodID = "payment_method_id",
+                TaxID = "tax_id",
+            },
+        };
+
+        SubscriptionPreviewChangePlanResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ImmediateChargeTest : TestBase
@@ -835,6 +936,46 @@ public class ImmediateChargeTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ImmediateCharge
+        {
+            LineItems =
+            [
+                new LineItemSubscription()
+                {
+                    ID = "id",
+                    Currency = Currency.Aed,
+                    ProductID = "product_id",
+                    ProrationFactor = 0,
+                    Quantity = 0,
+                    TaxInclusive = true,
+                    Type = LineItemSubscriptionType.Subscription,
+                    UnitPrice = 0,
+                    Description = "description",
+                    Name = "name",
+                    Tax = 0,
+                    TaxRate = 0,
+                },
+            ],
+            Summary = new()
+            {
+                Currency = Currency.Aed,
+                CustomerCredits = 0,
+                SettlementAmount = 0,
+                SettlementCurrency = Currency.Aed,
+                TotalAmount = 0,
+                SettlementTax = 0,
+                Tax = 0,
+            },
+        };
+
+        ImmediateCharge copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1235,6 +1376,30 @@ public class LineItemSubscriptionTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new LineItemSubscription
+        {
+            ID = "id",
+            Currency = Currency.Aed,
+            ProductID = "product_id",
+            ProrationFactor = 0,
+            Quantity = 0,
+            TaxInclusive = true,
+            Type = LineItemSubscriptionType.Subscription,
+            UnitPrice = 0,
+            Description = "description",
+            Name = "name",
+            Tax = 0,
+            TaxRate = 0,
+        };
+
+        LineItemSubscription copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class LineItemSubscriptionTypeTest : TestBase
@@ -1528,6 +1693,30 @@ public class AddonTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Addon
+        {
+            ID = "id",
+            Currency = Currency.Aed,
+            Name = "name",
+            ProrationFactor = 0,
+            Quantity = 0,
+            TaxCategory = TaxCategory.DigitalProducts,
+            TaxInclusive = true,
+            TaxRate = 0,
+            Type = AddonType.Addon,
+            UnitPrice = 0,
+            Description = "description",
+            Tax = 0,
+        };
+
+        Addon copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1841,6 +2030,31 @@ public class LineItemMeterTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new LineItemMeter
+        {
+            ID = "id",
+            ChargeableUnits = "chargeable_units",
+            Currency = Currency.Aed,
+            FreeThreshold = 0,
+            Name = "name",
+            PricePerUnit = "price_per_unit",
+            Subtotal = 0,
+            TaxInclusive = true,
+            TaxRate = 0,
+            Type = LineItemMeterType.Meter,
+            UnitsConsumed = "units_consumed",
+            Description = "description",
+            Tax = 0,
+        };
+
+        LineItemMeter copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class LineItemMeterTypeTest : TestBase
@@ -2077,5 +2291,24 @@ public class SummaryTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Summary
+        {
+            Currency = Currency.Aed,
+            CustomerCredits = 0,
+            SettlementAmount = 0,
+            SettlementCurrency = Currency.Aed,
+            TotalAmount = 0,
+            SettlementTax = 0,
+            Tax = 0,
+        };
+
+        Summary copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

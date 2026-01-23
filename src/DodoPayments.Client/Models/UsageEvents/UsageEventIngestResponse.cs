@@ -30,8 +30,11 @@ public sealed record class UsageEventIngestResponse : JsonModel
 
     public UsageEventIngestResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public UsageEventIngestResponse(UsageEventIngestResponse usageEventIngestResponse)
         : base(usageEventIngestResponse) { }
+#pragma warning restore CS8618
 
     public UsageEventIngestResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

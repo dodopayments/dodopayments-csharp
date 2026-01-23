@@ -187,8 +187,11 @@ public sealed record class LicenseKey : JsonModel
 
     public LicenseKey() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public LicenseKey(LicenseKey licenseKey)
         : base(licenseKey) { }
+#pragma warning restore CS8618
 
     public LicenseKey(IReadOnlyDictionary<string, JsonElement> rawData)
     {

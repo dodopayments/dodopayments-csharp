@@ -161,4 +161,31 @@ public class RefundListPageResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new RefundListPageResponse
+        {
+            Items =
+            [
+                new()
+                {
+                    BusinessID = "business_id",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    IsPartial = true,
+                    PaymentID = "payment_id",
+                    RefundID = "refund_id",
+                    Status = RefundStatus.Succeeded,
+                    Amount = 0,
+                    Currency = Currency.Aed,
+                    Reason = "reason",
+                },
+            ],
+        };
+
+        RefundListPageResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

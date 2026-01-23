@@ -309,4 +309,34 @@ public class GetDisputeTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new GetDispute
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+            Reason = "reason",
+            Remarks = "remarks",
+        };
+
+        GetDispute copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

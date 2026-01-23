@@ -40,8 +40,11 @@ public sealed record class LicenseKeyListPageResponse : JsonModel
 
     public LicenseKeyListPageResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public LicenseKeyListPageResponse(LicenseKeyListPageResponse licenseKeyListPageResponse)
         : base(licenseKeyListPageResponse) { }
+#pragma warning restore CS8618
 
     public LicenseKeyListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

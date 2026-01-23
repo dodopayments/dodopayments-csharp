@@ -118,4 +118,18 @@ public class ImageUpdateResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ImageUpdateResponse
+        {
+            Url = "url",
+            ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        };
+
+        ImageUpdateResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

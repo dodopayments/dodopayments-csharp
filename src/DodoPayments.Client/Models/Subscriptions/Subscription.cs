@@ -470,8 +470,11 @@ public sealed record class Subscription : JsonModel
 
     public Subscription() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Subscription(Subscription subscription)
         : base(subscription) { }
+#pragma warning restore CS8618
 
     public Subscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -590,8 +593,11 @@ public sealed record class Meter : JsonModel
 
     public Meter() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Meter(Meter meter)
         : base(meter) { }
+#pragma warning restore CS8618
 
     public Meter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -666,10 +672,13 @@ public sealed record class CustomFieldResponse : JsonModel
 
     public CustomFieldResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CustomFieldResponse(
         global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse customFieldResponse
     )
         : base(customFieldResponse) { }
+#pragma warning restore CS8618
 
     public CustomFieldResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

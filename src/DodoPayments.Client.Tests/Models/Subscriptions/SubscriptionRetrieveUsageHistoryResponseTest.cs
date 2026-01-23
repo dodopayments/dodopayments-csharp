@@ -171,6 +171,34 @@ public class SubscriptionRetrieveUsageHistoryResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionRetrieveUsageHistoryResponse
+        {
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Meters =
+            [
+                new()
+                {
+                    ID = "id",
+                    ChargeableUnits = "chargeable_units",
+                    ConsumedUnits = "consumed_units",
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    Name = "name",
+                    PricePerUnit = "price_per_unit",
+                    TotalPrice = 0,
+                },
+            ],
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        SubscriptionRetrieveUsageHistoryResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class SubscriptionRetrieveUsageHistoryResponseMeterTest : TestBase
@@ -292,5 +320,25 @@ public class SubscriptionRetrieveUsageHistoryResponseMeterTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionRetrieveUsageHistoryResponseMeter
+        {
+            ID = "id",
+            ChargeableUnits = "chargeable_units",
+            ConsumedUnits = "consumed_units",
+            Currency = Currency.Aed,
+            FreeThreshold = 0,
+            Name = "name",
+            PricePerUnit = "price_per_unit",
+            TotalPrice = 0,
+        };
+
+        SubscriptionRetrieveUsageHistoryResponseMeter copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

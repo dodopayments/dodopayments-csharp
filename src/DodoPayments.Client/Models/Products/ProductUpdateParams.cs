@@ -395,10 +395,13 @@ public sealed record class ProductUpdateParamsDigitalProductDelivery : JsonModel
 
     public ProductUpdateParamsDigitalProductDelivery() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ProductUpdateParamsDigitalProductDelivery(
         ProductUpdateParamsDigitalProductDelivery productUpdateParamsDigitalProductDelivery
     )
         : base(productUpdateParamsDigitalProductDelivery) { }
+#pragma warning restore CS8618
 
     public ProductUpdateParamsDigitalProductDelivery(
         IReadOnlyDictionary<string, JsonElement> rawData

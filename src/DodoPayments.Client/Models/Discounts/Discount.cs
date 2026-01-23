@@ -198,8 +198,11 @@ public sealed record class Discount : JsonModel
 
     public Discount() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Discount(Discount discount)
         : base(discount) { }
+#pragma warning restore CS8618
 
     public Discount(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -55,10 +55,13 @@ public sealed record class PaymentRetrieveLineItemsResponse : JsonModel
 
     public PaymentRetrieveLineItemsResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public PaymentRetrieveLineItemsResponse(
         PaymentRetrieveLineItemsResponse paymentRetrieveLineItemsResponse
     )
         : base(paymentRetrieveLineItemsResponse) { }
+#pragma warning restore CS8618
 
     public PaymentRetrieveLineItemsResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -166,8 +169,11 @@ public sealed record class Item : JsonModel
 
     public Item() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Item(Item item)
         : base(item) { }
+#pragma warning restore CS8618
 
     public Item(IReadOnlyDictionary<string, JsonElement> rawData)
     {
