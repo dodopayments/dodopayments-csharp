@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -51,4 +52,16 @@ public sealed class ShortLinkListPage(
 
     public override string ToString() =>
         JsonSerializer.Serialize(this.Items, ModelBase.ToStringSerializerOptions);
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is not ShortLinkListPage other)
+        {
+            return false;
+        }
+
+        return Enumerable.SequenceEqual(this.Items, other.Items);
+    }
+
+    public override int GetHashCode() => 0;
 }
