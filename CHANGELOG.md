@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.5.0 (2026-01-24)
+
+Full Changelog: [v6.4.0...v6.5.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.4.0...v6.5.0)
+
+### Features
+
+* **client:** add `ToString` and `Equals` methods ([d5492d1](https://github.com/dodopayments/dodopayments-csharp/commit/d5492d1f3c4fbd5d54c2688698a086dfa65da110))
+
+
+### Chores
+
+* change visibility of QueryString() and AddDefaultHeaders ([8ccbc43](https://github.com/dodopayments/dodopayments-csharp/commit/8ccbc433e02c30c991ccc945c40953d5d75bd16e))
+
 ## 6.4.0 (2026-01-23)
 
 Full Changelog: [v6.3.0...v6.4.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.3.0...v6.4.0)
