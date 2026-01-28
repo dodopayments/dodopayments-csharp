@@ -742,7 +742,7 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(element, options));
+            return new(JsonSerializer.Deserialize<double>(element, options), element);
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -752,7 +752,7 @@ sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterCondi
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(element, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options), element);
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -1559,7 +1559,7 @@ sealed class ClausesMeterFilterClausesMeterFilterConditionValueConverter
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(element, options));
+            return new(JsonSerializer.Deserialize<double>(element, options), element);
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -1569,7 +1569,7 @@ sealed class ClausesMeterFilterClausesMeterFilterConditionValueConverter
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(element, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options), element);
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -2423,7 +2423,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(element, options));
+            return new(JsonSerializer.Deserialize<double>(element, options), element);
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -2433,7 +2433,7 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValu
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(element, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options), element);
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -2952,7 +2952,7 @@ sealed class ClauseValueConverter : JsonConverter<ClauseValue>
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(element, options));
+            return new(JsonSerializer.Deserialize<double>(element, options), element);
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)
@@ -2962,7 +2962,7 @@ sealed class ClauseValueConverter : JsonConverter<ClauseValue>
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(element, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options), element);
         }
         catch (System::Exception e)
             when (e is JsonException || e is DodoPaymentsInvalidDataException)

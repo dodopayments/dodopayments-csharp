@@ -380,7 +380,7 @@ sealed class MetadataConverter : JsonConverter<Metadata>
 
         try
         {
-            return new(JsonSerializer.Deserialize<double>(element, options));
+            return new(JsonSerializer.Deserialize<double>(element, options), element);
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
@@ -389,7 +389,7 @@ sealed class MetadataConverter : JsonConverter<Metadata>
 
         try
         {
-            return new(JsonSerializer.Deserialize<bool>(element, options));
+            return new(JsonSerializer.Deserialize<bool>(element, options), element);
         }
         catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
         {
