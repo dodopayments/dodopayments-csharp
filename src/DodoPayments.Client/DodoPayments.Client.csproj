@@ -7,7 +7,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 
     <Nullable>enable</Nullable>
-    <VersionPrefix>6.5.0</VersionPrefix>
+    <VersionPrefix>6.5.1</VersionPrefix>
     <TargetFrameworks>net8.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
 
