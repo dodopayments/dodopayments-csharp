@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.5.1 (2026-01-29)
+
+Full Changelog: [v6.5.0...v6.5.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.5.0...v6.5.1)
+
+### Bug Fixes
+
+* **client:** handle unions containing unknown types properly ([0aecf3b](https://github.com/dodopayments/dodopayments-csharp/commit/0aecf3b0014b868f52c235908ad897e6a89cee98))
+
+
+### Chores
+
+* **internal:** improve HttpResponse qualification ([e4c1abb](https://github.com/dodopayments/dodopayments-csharp/commit/e4c1abba20b22fa2f3870ea0bf4be1e12c9c6649))
+
 ## 6.5.0 (2026-01-24)
 
 Full Changelog: [v6.4.0...v6.5.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.4.0...v6.5.0)
