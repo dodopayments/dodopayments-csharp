@@ -274,10 +274,10 @@ public record class Clauses : ModelBase
         }
     }
 
-    public virtual bool Equals(Clauses? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(Clauses? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -286,6 +286,16 @@ public record class Clauses : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            IReadOnlyList<MeterFilterCondition> _ => 0,
+            IReadOnlyList<ClausesMeterFilter> _ => 1,
+            _ => -1,
+        };
+    }
 }
 
 sealed class ClausesConverter : JsonConverter<Clauses>
@@ -703,10 +713,10 @@ public record class MeterFilterConditionValue : ModelBase
         }
     }
 
-    public virtual bool Equals(MeterFilterConditionValue? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(MeterFilterConditionValue? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -715,6 +725,17 @@ public record class MeterFilterConditionValue : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            string _ => 0,
+            double _ => 1,
+            bool _ => 2,
+            _ => -1,
+        };
+    }
 }
 
 sealed class MeterFilterConditionValueConverter : JsonConverter<MeterFilterConditionValue>
@@ -1048,10 +1069,10 @@ public record class ClausesMeterFilterClauses : ModelBase
         }
     }
 
-    public virtual bool Equals(ClausesMeterFilterClauses? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(ClausesMeterFilterClauses? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -1060,6 +1081,16 @@ public record class ClausesMeterFilterClauses : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition> _ => 0,
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilter> _ => 1,
+            _ => -1,
+        };
+    }
 }
 
 sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilterClauses>
@@ -1519,10 +1550,10 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBa
         }
     }
 
-    public virtual bool Equals(ClausesMeterFilterClausesMeterFilterConditionValue? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(ClausesMeterFilterClausesMeterFilterConditionValue? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -1531,6 +1562,17 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBa
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            string _ => 0,
+            double _ => 1,
+            bool _ => 2,
+            _ => -1,
+        };
+    }
 }
 
 sealed class ClausesMeterFilterClausesMeterFilterConditionValueConverter
@@ -1886,10 +1928,10 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
         }
     }
 
-    public virtual bool Equals(ClausesMeterFilterClausesMeterFilterClauses? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(ClausesMeterFilterClausesMeterFilterClauses? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -1898,6 +1940,16 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> _ => 0,
+            IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> _ => 1,
+            _ => -1,
+        };
+    }
 }
 
 sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
@@ -2383,10 +2435,10 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
 
     public virtual bool Equals(
         ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValue? other
-    )
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    ) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -2395,6 +2447,17 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            string _ => 0,
+            double _ => 1,
+            bool _ => 2,
+            _ => -1,
+        };
+    }
 }
 
 sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionValueConverter
@@ -2913,10 +2976,10 @@ public record class ClauseValue : ModelBase
         }
     }
 
-    public virtual bool Equals(ClauseValue? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(ClauseValue? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -2925,6 +2988,17 @@ public record class ClauseValue : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            string _ => 0,
+            double _ => 1,
+            bool _ => 2,
+            _ => -1,
+        };
+    }
 }
 
 sealed class ClauseValueConverter : JsonConverter<ClauseValue>

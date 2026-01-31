@@ -496,10 +496,10 @@ public record class LineItem : ModelBase
         );
     }
 
-    public virtual bool Equals(LineItem? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(LineItem? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -508,6 +508,17 @@ public record class LineItem : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            LineItemSubscription _ => 0,
+            Addon _ => 1,
+            LineItemMeter _ => 2,
+            _ => -1,
+        };
+    }
 }
 
 sealed class LineItemConverter : JsonConverter<LineItem>

@@ -188,10 +188,10 @@ public record class CustomerRequest : ModelBase
         );
     }
 
-    public virtual bool Equals(CustomerRequest? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(CustomerRequest? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -200,6 +200,16 @@ public record class CustomerRequest : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            AttachExistingCustomer _ => 0,
+            NewCustomer _ => 1,
+            _ => -1,
+        };
+    }
 }
 
 sealed class CustomerRequestConverter : JsonConverter<CustomerRequest>
