@@ -340,10 +340,10 @@ public record class Price : ModelBase
         );
     }
 
-    public virtual bool Equals(Price? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(Price? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -352,6 +352,17 @@ public record class Price : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            OneTimePrice _ => 0,
+            RecurringPrice _ => 1,
+            UsageBasedPrice _ => 2,
+            _ => -1,
+        };
+    }
 }
 
 sealed class PriceConverter : JsonConverter<Price>
