@@ -1055,10 +1055,10 @@ public record class UnwrapWebhookEvent : ModelBase
         );
     }
 
-    public virtual bool Equals(UnwrapWebhookEvent? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(UnwrapWebhookEvent? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -1067,6 +1067,36 @@ public record class UnwrapWebhookEvent : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            DisputeAcceptedWebhookEvent _ => 0,
+            DisputeCancelledWebhookEvent _ => 1,
+            DisputeChallengedWebhookEvent _ => 2,
+            DisputeExpiredWebhookEvent _ => 3,
+            DisputeLostWebhookEvent _ => 4,
+            DisputeOpenedWebhookEvent _ => 5,
+            DisputeWonWebhookEvent _ => 6,
+            LicenseKeyCreatedWebhookEvent _ => 7,
+            PaymentCancelledWebhookEvent _ => 8,
+            PaymentFailedWebhookEvent _ => 9,
+            PaymentProcessingWebhookEvent _ => 10,
+            PaymentSucceededWebhookEvent _ => 11,
+            RefundFailedWebhookEvent _ => 12,
+            RefundSucceededWebhookEvent _ => 13,
+            SubscriptionActiveWebhookEvent _ => 14,
+            SubscriptionCancelledWebhookEvent _ => 15,
+            SubscriptionExpiredWebhookEvent _ => 16,
+            SubscriptionFailedWebhookEvent _ => 17,
+            SubscriptionOnHoldWebhookEvent _ => 18,
+            SubscriptionPlanChangedWebhookEvent _ => 19,
+            SubscriptionRenewedWebhookEvent _ => 20,
+            SubscriptionUpdatedWebhookEvent _ => 21,
+            _ => -1,
+        };
+    }
 }
 
 sealed class UnwrapWebhookEventConverter : JsonConverter<UnwrapWebhookEvent>

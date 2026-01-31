@@ -348,10 +348,10 @@ public record class EventInputMetadata : ModelBase
         }
     }
 
-    public virtual bool Equals(EventInputMetadata? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(EventInputMetadata? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -360,6 +360,17 @@ public record class EventInputMetadata : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            string _ => 0,
+            double _ => 1,
+            bool _ => 2,
+            _ => -1,
+        };
+    }
 }
 
 sealed class EventInputMetadataConverter : JsonConverter<EventInputMetadata>

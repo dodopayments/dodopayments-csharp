@@ -319,10 +319,10 @@ public record class Body : ModelBase
         this.Switch((new_) => new_.Validate(), (existing) => existing.Validate());
     }
 
-    public virtual bool Equals(Body? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(Body? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -331,6 +331,16 @@ public record class Body : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            New _ => 0,
+            Existing _ => 1,
+            _ => -1,
+        };
+    }
 }
 
 sealed class BodyConverter : JsonConverter<Body>
