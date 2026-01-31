@@ -549,10 +549,10 @@ public record class Data : ModelBase
         );
     }
 
-    public virtual bool Equals(Data? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(Data? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -561,6 +561,19 @@ public record class Data : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            Payment _ => 0,
+            Subscription _ => 1,
+            Refund _ => 2,
+            Dispute _ => 3,
+            LicenseKey _ => 4,
+            _ => -1,
+        };
+    }
 }
 
 sealed class DataConverter : JsonConverter<Data>
