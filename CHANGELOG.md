@@ -1,5 +1,23 @@
 # Changelog
 
+## 6.6.0 (2026-02-02)
+
+Full Changelog: [v6.5.1...v6.6.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.5.1...v6.6.0)
+
+### Features
+
+* **api:** updated openapi spec for v1.78.1 ([02f04f7](https://github.com/dodopayments/dodopayments-csharp/commit/02f04f7089195fadc2b8132c68337ce6160da496))
+
+
+### Bug Fixes
+
+* **client:** improve union equality method ([3d6ff9d](https://github.com/dodopayments/dodopayments-csharp/commit/3d6ff9d8f6aa38042322d03a3abbcbfb7f2706d9))
+
+
+### Chores
+
+* **internal:** ignore stainless-internal artifacts ([4123f78](https://github.com/dodopayments/dodopayments-csharp/commit/4123f7825ad769ee048ace66af151a5cab2697ed))
+
 ## 6.5.1 (2026-01-29)
 
 Full Changelog: [v6.5.0...v6.5.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.5.0...v6.5.1)
