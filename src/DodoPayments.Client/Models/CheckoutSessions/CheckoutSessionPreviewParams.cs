@@ -890,9 +890,7 @@ public enum CheckoutSessionPreviewParamsCustomFieldFieldType
     Number,
     Email,
     Url,
-    Phone,
     Date,
-    Datetime,
     Dropdown,
     Boolean,
 }
@@ -912,9 +910,7 @@ sealed class CheckoutSessionPreviewParamsCustomFieldFieldTypeConverter
             "number" => CheckoutSessionPreviewParamsCustomFieldFieldType.Number,
             "email" => CheckoutSessionPreviewParamsCustomFieldFieldType.Email,
             "url" => CheckoutSessionPreviewParamsCustomFieldFieldType.Url,
-            "phone" => CheckoutSessionPreviewParamsCustomFieldFieldType.Phone,
             "date" => CheckoutSessionPreviewParamsCustomFieldFieldType.Date,
-            "datetime" => CheckoutSessionPreviewParamsCustomFieldFieldType.Datetime,
             "dropdown" => CheckoutSessionPreviewParamsCustomFieldFieldType.Dropdown,
             "boolean" => CheckoutSessionPreviewParamsCustomFieldFieldType.Boolean,
             _ => (CheckoutSessionPreviewParamsCustomFieldFieldType)(-1),
@@ -935,9 +931,7 @@ sealed class CheckoutSessionPreviewParamsCustomFieldFieldTypeConverter
                 CheckoutSessionPreviewParamsCustomFieldFieldType.Number => "number",
                 CheckoutSessionPreviewParamsCustomFieldFieldType.Email => "email",
                 CheckoutSessionPreviewParamsCustomFieldFieldType.Url => "url",
-                CheckoutSessionPreviewParamsCustomFieldFieldType.Phone => "phone",
                 CheckoutSessionPreviewParamsCustomFieldFieldType.Date => "date",
-                CheckoutSessionPreviewParamsCustomFieldFieldType.Datetime => "datetime",
                 CheckoutSessionPreviewParamsCustomFieldFieldType.Dropdown => "dropdown",
                 CheckoutSessionPreviewParamsCustomFieldFieldType.Boolean => "boolean",
                 _ => throw new DodoPaymentsInvalidDataException(
@@ -1020,7 +1014,7 @@ public sealed record class CheckoutSessionPreviewParamsCustomization : JsonModel
     }
 
     /// <summary>
-    /// Theme of the page
+    /// Theme of the page (determines which mode - light/dark/system - to use)
     ///
     /// <para>Default is `System`.</para>
     /// </summary>
@@ -1044,6 +1038,21 @@ public sealed record class CheckoutSessionPreviewParamsCustomization : JsonModel
         }
     }
 
+    /// <summary>
+    /// Optional custom theme configuration with colors for light and dark modes
+    /// </summary>
+    public CheckoutSessionPreviewParamsCustomizationThemeConfig? ThemeConfig
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CheckoutSessionPreviewParamsCustomizationThemeConfig>(
+                "theme_config"
+            );
+        }
+        init { this._rawData.Set("theme_config", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -1051,6 +1060,7 @@ public sealed record class CheckoutSessionPreviewParamsCustomization : JsonModel
         _ = this.ShowOnDemandTag;
         _ = this.ShowOrderDetails;
         this.Theme?.Validate();
+        this.ThemeConfig?.Validate();
     }
 
     public CheckoutSessionPreviewParamsCustomization() { }
@@ -1097,7 +1107,7 @@ class CheckoutSessionPreviewParamsCustomizationFromRaw
 }
 
 /// <summary>
-/// Theme of the page
+/// Theme of the page (determines which mode - light/dark/system - to use)
 ///
 /// <para>Default is `System`.</para>
 /// </summary>
@@ -1147,6 +1157,851 @@ sealed class CheckoutSessionPreviewParamsCustomizationThemeConverter
             options
         );
     }
+}
+
+/// <summary>
+/// Optional custom theme configuration with colors for light and dark modes
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CheckoutSessionPreviewParamsCustomizationThemeConfig,
+        CheckoutSessionPreviewParamsCustomizationThemeConfigFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionPreviewParamsCustomizationThemeConfig : JsonModel
+{
+    /// <summary>
+    /// Dark mode color configuration
+    /// </summary>
+    public CheckoutSessionPreviewParamsCustomizationThemeConfigDark? Dark
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CheckoutSessionPreviewParamsCustomizationThemeConfigDark>(
+                "dark"
+            );
+        }
+        init { this._rawData.Set("dark", value); }
+    }
+
+    /// <summary>
+    /// Font size for the checkout UI
+    /// </summary>
+    public ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize>? FontSize
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize>
+            >("font_size");
+        }
+        init { this._rawData.Set("font_size", value); }
+    }
+
+    /// <summary>
+    /// Font weight for the checkout UI
+    /// </summary>
+    public ApiEnum<
+        string,
+        CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight
+    >? FontWeight
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight>
+            >("font_weight");
+        }
+        init { this._rawData.Set("font_weight", value); }
+    }
+
+    /// <summary>
+    /// Light mode color configuration
+    /// </summary>
+    public CheckoutSessionPreviewParamsCustomizationThemeConfigLight? Light
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CheckoutSessionPreviewParamsCustomizationThemeConfigLight>(
+                "light"
+            );
+        }
+        init { this._rawData.Set("light", value); }
+    }
+
+    /// <summary>
+    /// Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now")
+    /// </summary>
+    public string? PayButtonText
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("pay_button_text");
+        }
+        init { this._rawData.Set("pay_button_text", value); }
+    }
+
+    /// <summary>
+    /// Border radius for UI elements (e.g., "4px", "0.5rem", "8px")
+    /// </summary>
+    public string? Radius
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("radius");
+        }
+        init { this._rawData.Set("radius", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Dark?.Validate();
+        this.FontSize?.Validate();
+        this.FontWeight?.Validate();
+        this.Light?.Validate();
+        _ = this.PayButtonText;
+        _ = this.Radius;
+    }
+
+    public CheckoutSessionPreviewParamsCustomizationThemeConfig() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CheckoutSessionPreviewParamsCustomizationThemeConfig(
+        CheckoutSessionPreviewParamsCustomizationThemeConfig checkoutSessionPreviewParamsCustomizationThemeConfig
+    )
+        : base(checkoutSessionPreviewParamsCustomizationThemeConfig) { }
+#pragma warning restore CS8618
+
+    public CheckoutSessionPreviewParamsCustomizationThemeConfig(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CheckoutSessionPreviewParamsCustomizationThemeConfig(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CheckoutSessionPreviewParamsCustomizationThemeConfigFromRaw.FromRawUnchecked"/>
+    public static CheckoutSessionPreviewParamsCustomizationThemeConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CheckoutSessionPreviewParamsCustomizationThemeConfigFromRaw
+    : IFromRawJson<CheckoutSessionPreviewParamsCustomizationThemeConfig>
+{
+    /// <inheritdoc/>
+    public CheckoutSessionPreviewParamsCustomizationThemeConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionPreviewParamsCustomizationThemeConfig.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Dark mode color configuration
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CheckoutSessionPreviewParamsCustomizationThemeConfigDark,
+        CheckoutSessionPreviewParamsCustomizationThemeConfigDarkFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionPreviewParamsCustomizationThemeConfigDark : JsonModel
+{
+    /// <summary>
+    /// Background primary color
+    ///
+    /// <para>Examples: `"#ffffff"`, `"rgb(255, 255, 255)"`, `"white"`</para>
+    /// </summary>
+    public string? BgPrimary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("bg_primary");
+        }
+        init { this._rawData.Set("bg_primary", value); }
+    }
+
+    /// <summary>
+    /// Background secondary color
+    /// </summary>
+    public string? BgSecondary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("bg_secondary");
+        }
+        init { this._rawData.Set("bg_secondary", value); }
+    }
+
+    /// <summary>
+    /// Border primary color
+    /// </summary>
+    public string? BorderPrimary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("border_primary");
+        }
+        init { this._rawData.Set("border_primary", value); }
+    }
+
+    /// <summary>
+    /// Border secondary color
+    /// </summary>
+    public string? BorderSecondary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("border_secondary");
+        }
+        init { this._rawData.Set("border_secondary", value); }
+    }
+
+    /// <summary>
+    /// Primary button background color
+    /// </summary>
+    public string? ButtonPrimary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_primary");
+        }
+        init { this._rawData.Set("button_primary", value); }
+    }
+
+    /// <summary>
+    /// Primary button hover color
+    /// </summary>
+    public string? ButtonPrimaryHover
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_primary_hover");
+        }
+        init { this._rawData.Set("button_primary_hover", value); }
+    }
+
+    /// <summary>
+    /// Secondary button background color
+    /// </summary>
+    public string? ButtonSecondary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_secondary");
+        }
+        init { this._rawData.Set("button_secondary", value); }
+    }
+
+    /// <summary>
+    /// Secondary button hover color
+    /// </summary>
+    public string? ButtonSecondaryHover
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_secondary_hover");
+        }
+        init { this._rawData.Set("button_secondary_hover", value); }
+    }
+
+    /// <summary>
+    /// Primary button text color
+    /// </summary>
+    public string? ButtonTextPrimary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_text_primary");
+        }
+        init { this._rawData.Set("button_text_primary", value); }
+    }
+
+    /// <summary>
+    /// Secondary button text color
+    /// </summary>
+    public string? ButtonTextSecondary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_text_secondary");
+        }
+        init { this._rawData.Set("button_text_secondary", value); }
+    }
+
+    /// <summary>
+    /// Input focus border color
+    /// </summary>
+    public string? InputFocusBorder
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("input_focus_border");
+        }
+        init { this._rawData.Set("input_focus_border", value); }
+    }
+
+    /// <summary>
+    /// Text error color
+    /// </summary>
+    public string? TextError
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("text_error");
+        }
+        init { this._rawData.Set("text_error", value); }
+    }
+
+    /// <summary>
+    /// Text placeholder color
+    /// </summary>
+    public string? TextPlaceholder
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("text_placeholder");
+        }
+        init { this._rawData.Set("text_placeholder", value); }
+    }
+
+    /// <summary>
+    /// Text primary color
+    /// </summary>
+    public string? TextPrimary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("text_primary");
+        }
+        init { this._rawData.Set("text_primary", value); }
+    }
+
+    /// <summary>
+    /// Text secondary color
+    /// </summary>
+    public string? TextSecondary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("text_secondary");
+        }
+        init { this._rawData.Set("text_secondary", value); }
+    }
+
+    /// <summary>
+    /// Text success color
+    /// </summary>
+    public string? TextSuccess
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("text_success");
+        }
+        init { this._rawData.Set("text_success", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.BgPrimary;
+        _ = this.BgSecondary;
+        _ = this.BorderPrimary;
+        _ = this.BorderSecondary;
+        _ = this.ButtonPrimary;
+        _ = this.ButtonPrimaryHover;
+        _ = this.ButtonSecondary;
+        _ = this.ButtonSecondaryHover;
+        _ = this.ButtonTextPrimary;
+        _ = this.ButtonTextSecondary;
+        _ = this.InputFocusBorder;
+        _ = this.TextError;
+        _ = this.TextPlaceholder;
+        _ = this.TextPrimary;
+        _ = this.TextSecondary;
+        _ = this.TextSuccess;
+    }
+
+    public CheckoutSessionPreviewParamsCustomizationThemeConfigDark() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CheckoutSessionPreviewParamsCustomizationThemeConfigDark(
+        CheckoutSessionPreviewParamsCustomizationThemeConfigDark checkoutSessionPreviewParamsCustomizationThemeConfigDark
+    )
+        : base(checkoutSessionPreviewParamsCustomizationThemeConfigDark) { }
+#pragma warning restore CS8618
+
+    public CheckoutSessionPreviewParamsCustomizationThemeConfigDark(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CheckoutSessionPreviewParamsCustomizationThemeConfigDark(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CheckoutSessionPreviewParamsCustomizationThemeConfigDarkFromRaw.FromRawUnchecked"/>
+    public static CheckoutSessionPreviewParamsCustomizationThemeConfigDark FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CheckoutSessionPreviewParamsCustomizationThemeConfigDarkFromRaw
+    : IFromRawJson<CheckoutSessionPreviewParamsCustomizationThemeConfigDark>
+{
+    /// <inheritdoc/>
+    public CheckoutSessionPreviewParamsCustomizationThemeConfigDark FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionPreviewParamsCustomizationThemeConfigDark.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Font size for the checkout UI
+/// </summary>
+[JsonConverter(typeof(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSizeConverter))]
+public enum CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize
+{
+    Xs,
+    Sm,
+    Md,
+    Lg,
+    Xl,
+    V2xl,
+}
+
+sealed class CheckoutSessionPreviewParamsCustomizationThemeConfigFontSizeConverter
+    : JsonConverter<CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize>
+{
+    public override CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "xs" => CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+            "sm" => CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Sm,
+            "md" => CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Md,
+            "lg" => CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Lg,
+            "xl" => CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xl,
+            "2xl" => CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.V2xl,
+            _ => (CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs => "xs",
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Sm => "sm",
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Md => "md",
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Lg => "lg",
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xl => "xl",
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.V2xl => "2xl",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Font weight for the checkout UI
+/// </summary>
+[JsonConverter(typeof(CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeightConverter))]
+public enum CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight
+{
+    Normal,
+    Medium,
+    Bold,
+    ExtraBold,
+}
+
+sealed class CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeightConverter
+    : JsonConverter<CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight>
+{
+    public override CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "normal" => CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+            "medium" => CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Medium,
+            "bold" => CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Bold,
+            "extraBold" => CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.ExtraBold,
+            _ => (CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal => "normal",
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Medium => "medium",
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Bold => "bold",
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.ExtraBold =>
+                    "extraBold",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Light mode color configuration
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CheckoutSessionPreviewParamsCustomizationThemeConfigLight,
+        CheckoutSessionPreviewParamsCustomizationThemeConfigLightFromRaw
+    >)
+)]
+public sealed record class CheckoutSessionPreviewParamsCustomizationThemeConfigLight : JsonModel
+{
+    /// <summary>
+    /// Background primary color
+    ///
+    /// <para>Examples: `"#ffffff"`, `"rgb(255, 255, 255)"`, `"white"`</para>
+    /// </summary>
+    public string? BgPrimary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("bg_primary");
+        }
+        init { this._rawData.Set("bg_primary", value); }
+    }
+
+    /// <summary>
+    /// Background secondary color
+    /// </summary>
+    public string? BgSecondary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("bg_secondary");
+        }
+        init { this._rawData.Set("bg_secondary", value); }
+    }
+
+    /// <summary>
+    /// Border primary color
+    /// </summary>
+    public string? BorderPrimary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("border_primary");
+        }
+        init { this._rawData.Set("border_primary", value); }
+    }
+
+    /// <summary>
+    /// Border secondary color
+    /// </summary>
+    public string? BorderSecondary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("border_secondary");
+        }
+        init { this._rawData.Set("border_secondary", value); }
+    }
+
+    /// <summary>
+    /// Primary button background color
+    /// </summary>
+    public string? ButtonPrimary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_primary");
+        }
+        init { this._rawData.Set("button_primary", value); }
+    }
+
+    /// <summary>
+    /// Primary button hover color
+    /// </summary>
+    public string? ButtonPrimaryHover
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_primary_hover");
+        }
+        init { this._rawData.Set("button_primary_hover", value); }
+    }
+
+    /// <summary>
+    /// Secondary button background color
+    /// </summary>
+    public string? ButtonSecondary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_secondary");
+        }
+        init { this._rawData.Set("button_secondary", value); }
+    }
+
+    /// <summary>
+    /// Secondary button hover color
+    /// </summary>
+    public string? ButtonSecondaryHover
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_secondary_hover");
+        }
+        init { this._rawData.Set("button_secondary_hover", value); }
+    }
+
+    /// <summary>
+    /// Primary button text color
+    /// </summary>
+    public string? ButtonTextPrimary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_text_primary");
+        }
+        init { this._rawData.Set("button_text_primary", value); }
+    }
+
+    /// <summary>
+    /// Secondary button text color
+    /// </summary>
+    public string? ButtonTextSecondary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("button_text_secondary");
+        }
+        init { this._rawData.Set("button_text_secondary", value); }
+    }
+
+    /// <summary>
+    /// Input focus border color
+    /// </summary>
+    public string? InputFocusBorder
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("input_focus_border");
+        }
+        init { this._rawData.Set("input_focus_border", value); }
+    }
+
+    /// <summary>
+    /// Text error color
+    /// </summary>
+    public string? TextError
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("text_error");
+        }
+        init { this._rawData.Set("text_error", value); }
+    }
+
+    /// <summary>
+    /// Text placeholder color
+    /// </summary>
+    public string? TextPlaceholder
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("text_placeholder");
+        }
+        init { this._rawData.Set("text_placeholder", value); }
+    }
+
+    /// <summary>
+    /// Text primary color
+    /// </summary>
+    public string? TextPrimary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("text_primary");
+        }
+        init { this._rawData.Set("text_primary", value); }
+    }
+
+    /// <summary>
+    /// Text secondary color
+    /// </summary>
+    public string? TextSecondary
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("text_secondary");
+        }
+        init { this._rawData.Set("text_secondary", value); }
+    }
+
+    /// <summary>
+    /// Text success color
+    /// </summary>
+    public string? TextSuccess
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("text_success");
+        }
+        init { this._rawData.Set("text_success", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.BgPrimary;
+        _ = this.BgSecondary;
+        _ = this.BorderPrimary;
+        _ = this.BorderSecondary;
+        _ = this.ButtonPrimary;
+        _ = this.ButtonPrimaryHover;
+        _ = this.ButtonSecondary;
+        _ = this.ButtonSecondaryHover;
+        _ = this.ButtonTextPrimary;
+        _ = this.ButtonTextSecondary;
+        _ = this.InputFocusBorder;
+        _ = this.TextError;
+        _ = this.TextPlaceholder;
+        _ = this.TextPrimary;
+        _ = this.TextSecondary;
+        _ = this.TextSuccess;
+    }
+
+    public CheckoutSessionPreviewParamsCustomizationThemeConfigLight() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CheckoutSessionPreviewParamsCustomizationThemeConfigLight(
+        CheckoutSessionPreviewParamsCustomizationThemeConfigLight checkoutSessionPreviewParamsCustomizationThemeConfigLight
+    )
+        : base(checkoutSessionPreviewParamsCustomizationThemeConfigLight) { }
+#pragma warning restore CS8618
+
+    public CheckoutSessionPreviewParamsCustomizationThemeConfigLight(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CheckoutSessionPreviewParamsCustomizationThemeConfigLight(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CheckoutSessionPreviewParamsCustomizationThemeConfigLightFromRaw.FromRawUnchecked"/>
+    public static CheckoutSessionPreviewParamsCustomizationThemeConfigLight FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CheckoutSessionPreviewParamsCustomizationThemeConfigLightFromRaw
+    : IFromRawJson<CheckoutSessionPreviewParamsCustomizationThemeConfigLight>
+{
+    /// <inheritdoc/>
+    public CheckoutSessionPreviewParamsCustomizationThemeConfigLight FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CheckoutSessionPreviewParamsCustomizationThemeConfigLight.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(

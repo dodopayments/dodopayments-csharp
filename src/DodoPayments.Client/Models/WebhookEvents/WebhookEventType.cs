@@ -33,6 +33,11 @@ public enum WebhookEventType
     SubscriptionPlanChanged,
     SubscriptionUpdated,
     LicenseKeyCreated,
+    PayoutNotInitiated,
+    PayoutOnHold,
+    PayoutInProgress,
+    PayoutFailed,
+    PayoutSuccess,
 }
 
 sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
@@ -67,6 +72,11 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
             "subscription.plan_changed" => WebhookEventType.SubscriptionPlanChanged,
             "subscription.updated" => WebhookEventType.SubscriptionUpdated,
             "license_key.created" => WebhookEventType.LicenseKeyCreated,
+            "payout.not_initiated" => WebhookEventType.PayoutNotInitiated,
+            "payout.on_hold" => WebhookEventType.PayoutOnHold,
+            "payout.in_progress" => WebhookEventType.PayoutInProgress,
+            "payout.failed" => WebhookEventType.PayoutFailed,
+            "payout.success" => WebhookEventType.PayoutSuccess,
             _ => (WebhookEventType)(-1),
         };
     }
@@ -103,6 +113,11 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
                 WebhookEventType.SubscriptionPlanChanged => "subscription.plan_changed",
                 WebhookEventType.SubscriptionUpdated => "subscription.updated",
                 WebhookEventType.LicenseKeyCreated => "license_key.created",
+                WebhookEventType.PayoutNotInitiated => "payout.not_initiated",
+                WebhookEventType.PayoutOnHold => "payout.on_hold",
+                WebhookEventType.PayoutInProgress => "payout.in_progress",
+                WebhookEventType.PayoutFailed => "payout.failed",
+                WebhookEventType.PayoutSuccess => "payout.success",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

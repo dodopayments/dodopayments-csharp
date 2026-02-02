@@ -38,11 +38,26 @@ public abstract record class ModelBase
             new FrozenDictionaryConverterFactory(),
             new ApiEnumConverter<string, CheckoutSessionRequestCustomFieldFieldType>(),
             new ApiEnumConverter<string, CheckoutSessionRequestCustomizationTheme>(),
+            new ApiEnumConverter<string, CheckoutSessionRequestCustomizationThemeConfigFontSize>(),
+            new ApiEnumConverter<
+                string,
+                CheckoutSessionRequestCustomizationThemeConfigFontWeight
+            >(),
             new ApiEnumConverter<string, Currency>(),
             new ApiEnumConverter<string, FieldType>(),
             new ApiEnumConverter<string, Theme>(),
+            new ApiEnumConverter<string, FontSize>(),
+            new ApiEnumConverter<string, FontWeight>(),
             new ApiEnumConverter<string, CheckoutSessionPreviewParamsCustomFieldFieldType>(),
             new ApiEnumConverter<string, CheckoutSessionPreviewParamsCustomizationTheme>(),
+            new ApiEnumConverter<
+                string,
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize
+            >(),
+            new ApiEnumConverter<
+                string,
+                CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight
+            >(),
             new ApiEnumConverter<string, IntentStatus>(),
             new ApiEnumConverter<string, PaymentMethodTypes>(),
             new ApiEnumConverter<string, Status>(),

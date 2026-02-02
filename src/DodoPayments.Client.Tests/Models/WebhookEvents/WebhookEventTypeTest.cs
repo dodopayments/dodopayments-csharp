@@ -30,6 +30,11 @@ public class WebhookEventTypeTest : TestBase
     [InlineData(WebhookEventType.SubscriptionPlanChanged)]
     [InlineData(WebhookEventType.SubscriptionUpdated)]
     [InlineData(WebhookEventType.LicenseKeyCreated)]
+    [InlineData(WebhookEventType.PayoutNotInitiated)]
+    [InlineData(WebhookEventType.PayoutOnHold)]
+    [InlineData(WebhookEventType.PayoutInProgress)]
+    [InlineData(WebhookEventType.PayoutFailed)]
+    [InlineData(WebhookEventType.PayoutSuccess)]
     public void Validation_Works(WebhookEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -72,6 +77,11 @@ public class WebhookEventTypeTest : TestBase
     [InlineData(WebhookEventType.SubscriptionPlanChanged)]
     [InlineData(WebhookEventType.SubscriptionUpdated)]
     [InlineData(WebhookEventType.LicenseKeyCreated)]
+    [InlineData(WebhookEventType.PayoutNotInitiated)]
+    [InlineData(WebhookEventType.PayoutOnHold)]
+    [InlineData(WebhookEventType.PayoutInProgress)]
+    [InlineData(WebhookEventType.PayoutFailed)]
+    [InlineData(WebhookEventType.PayoutSuccess)]
     public void SerializationRoundtrip_Works(WebhookEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
