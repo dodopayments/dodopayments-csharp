@@ -57,6 +57,52 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+                ThemeConfig = new()
+                {
+                    Dark = new()
+                    {
+                        BgPrimary = "bg_primary",
+                        BgSecondary = "bg_secondary",
+                        BorderPrimary = "border_primary",
+                        BorderSecondary = "border_secondary",
+                        ButtonPrimary = "button_primary",
+                        ButtonPrimaryHover = "button_primary_hover",
+                        ButtonSecondary = "button_secondary",
+                        ButtonSecondaryHover = "button_secondary_hover",
+                        ButtonTextPrimary = "button_text_primary",
+                        ButtonTextSecondary = "button_text_secondary",
+                        InputFocusBorder = "input_focus_border",
+                        TextError = "text_error",
+                        TextPlaceholder = "text_placeholder",
+                        TextPrimary = "text_primary",
+                        TextSecondary = "text_secondary",
+                        TextSuccess = "text_success",
+                    },
+                    FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                    FontWeight =
+                        CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                    Light = new()
+                    {
+                        BgPrimary = "bg_primary",
+                        BgSecondary = "bg_secondary",
+                        BorderPrimary = "border_primary",
+                        BorderSecondary = "border_secondary",
+                        ButtonPrimary = "button_primary",
+                        ButtonPrimaryHover = "button_primary_hover",
+                        ButtonSecondary = "button_secondary",
+                        ButtonSecondaryHover = "button_secondary_hover",
+                        ButtonTextPrimary = "button_text_primary",
+                        ButtonTextSecondary = "button_text_secondary",
+                        InputFocusBorder = "input_focus_border",
+                        TextError = "text_error",
+                        TextPlaceholder = "text_placeholder",
+                        TextPrimary = "text_primary",
+                        TextSecondary = "text_secondary",
+                        TextSuccess = "text_success",
+                    },
+                    PayButtonText = "pay_button_text",
+                    Radius = "radius",
+                },
             },
             DiscountCode = "discount_code",
             FeatureFlags = new()
@@ -140,6 +186,51 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+            ThemeConfig = new()
+            {
+                Dark = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                Light = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                PayButtonText = "pay_button_text",
+                Radius = "radius",
+            },
         };
         string expectedDiscountCode = "discount_code";
         CheckoutSessionPreviewParamsFeatureFlags expectedFeatureFlags = new()
@@ -401,6 +492,52 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+                ThemeConfig = new()
+                {
+                    Dark = new()
+                    {
+                        BgPrimary = "bg_primary",
+                        BgSecondary = "bg_secondary",
+                        BorderPrimary = "border_primary",
+                        BorderSecondary = "border_secondary",
+                        ButtonPrimary = "button_primary",
+                        ButtonPrimaryHover = "button_primary_hover",
+                        ButtonSecondary = "button_secondary",
+                        ButtonSecondaryHover = "button_secondary_hover",
+                        ButtonTextPrimary = "button_text_primary",
+                        ButtonTextSecondary = "button_text_secondary",
+                        InputFocusBorder = "input_focus_border",
+                        TextError = "text_error",
+                        TextPlaceholder = "text_placeholder",
+                        TextPrimary = "text_primary",
+                        TextSecondary = "text_secondary",
+                        TextSuccess = "text_success",
+                    },
+                    FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                    FontWeight =
+                        CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                    Light = new()
+                    {
+                        BgPrimary = "bg_primary",
+                        BgSecondary = "bg_secondary",
+                        BorderPrimary = "border_primary",
+                        BorderSecondary = "border_secondary",
+                        ButtonPrimary = "button_primary",
+                        ButtonPrimaryHover = "button_primary_hover",
+                        ButtonSecondary = "button_secondary",
+                        ButtonSecondaryHover = "button_secondary_hover",
+                        ButtonTextPrimary = "button_text_primary",
+                        ButtonTextSecondary = "button_text_secondary",
+                        InputFocusBorder = "input_focus_border",
+                        TextError = "text_error",
+                        TextPlaceholder = "text_placeholder",
+                        TextPrimary = "text_primary",
+                        TextSecondary = "text_secondary",
+                        TextSuccess = "text_success",
+                    },
+                    PayButtonText = "pay_button_text",
+                    Radius = "radius",
+                },
             },
             FeatureFlags = new()
             {
@@ -471,6 +608,52 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+                ThemeConfig = new()
+                {
+                    Dark = new()
+                    {
+                        BgPrimary = "bg_primary",
+                        BgSecondary = "bg_secondary",
+                        BorderPrimary = "border_primary",
+                        BorderSecondary = "border_secondary",
+                        ButtonPrimary = "button_primary",
+                        ButtonPrimaryHover = "button_primary_hover",
+                        ButtonSecondary = "button_secondary",
+                        ButtonSecondaryHover = "button_secondary_hover",
+                        ButtonTextPrimary = "button_text_primary",
+                        ButtonTextSecondary = "button_text_secondary",
+                        InputFocusBorder = "input_focus_border",
+                        TextError = "text_error",
+                        TextPlaceholder = "text_placeholder",
+                        TextPrimary = "text_primary",
+                        TextSecondary = "text_secondary",
+                        TextSuccess = "text_success",
+                    },
+                    FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                    FontWeight =
+                        CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                    Light = new()
+                    {
+                        BgPrimary = "bg_primary",
+                        BgSecondary = "bg_secondary",
+                        BorderPrimary = "border_primary",
+                        BorderSecondary = "border_secondary",
+                        ButtonPrimary = "button_primary",
+                        ButtonPrimaryHover = "button_primary_hover",
+                        ButtonSecondary = "button_secondary",
+                        ButtonSecondaryHover = "button_secondary_hover",
+                        ButtonTextPrimary = "button_text_primary",
+                        ButtonTextSecondary = "button_text_secondary",
+                        InputFocusBorder = "input_focus_border",
+                        TextError = "text_error",
+                        TextPlaceholder = "text_placeholder",
+                        TextPrimary = "text_primary",
+                        TextSecondary = "text_secondary",
+                        TextSuccess = "text_success",
+                    },
+                    PayButtonText = "pay_button_text",
+                    Radius = "radius",
+                },
             },
             FeatureFlags = new()
             {
@@ -599,6 +782,52 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 ShowOnDemandTag = true,
                 ShowOrderDetails = true,
                 Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+                ThemeConfig = new()
+                {
+                    Dark = new()
+                    {
+                        BgPrimary = "bg_primary",
+                        BgSecondary = "bg_secondary",
+                        BorderPrimary = "border_primary",
+                        BorderSecondary = "border_secondary",
+                        ButtonPrimary = "button_primary",
+                        ButtonPrimaryHover = "button_primary_hover",
+                        ButtonSecondary = "button_secondary",
+                        ButtonSecondaryHover = "button_secondary_hover",
+                        ButtonTextPrimary = "button_text_primary",
+                        ButtonTextSecondary = "button_text_secondary",
+                        InputFocusBorder = "input_focus_border",
+                        TextError = "text_error",
+                        TextPlaceholder = "text_placeholder",
+                        TextPrimary = "text_primary",
+                        TextSecondary = "text_secondary",
+                        TextSuccess = "text_success",
+                    },
+                    FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                    FontWeight =
+                        CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                    Light = new()
+                    {
+                        BgPrimary = "bg_primary",
+                        BgSecondary = "bg_secondary",
+                        BorderPrimary = "border_primary",
+                        BorderSecondary = "border_secondary",
+                        ButtonPrimary = "button_primary",
+                        ButtonPrimaryHover = "button_primary_hover",
+                        ButtonSecondary = "button_secondary",
+                        ButtonSecondaryHover = "button_secondary_hover",
+                        ButtonTextPrimary = "button_text_primary",
+                        ButtonTextSecondary = "button_text_secondary",
+                        InputFocusBorder = "input_focus_border",
+                        TextError = "text_error",
+                        TextPlaceholder = "text_placeholder",
+                        TextPrimary = "text_primary",
+                        TextSecondary = "text_secondary",
+                        TextSuccess = "text_success",
+                    },
+                    PayButtonText = "pay_button_text",
+                    Radius = "radius",
+                },
             },
             DiscountCode = "discount_code",
             FeatureFlags = new()
@@ -1271,9 +1500,7 @@ public class CheckoutSessionPreviewParamsCustomFieldFieldTypeTest : TestBase
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Number)]
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Email)]
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Url)]
-    [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Phone)]
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Date)]
-    [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Datetime)]
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Dropdown)]
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Boolean)]
     public void Validation_Works(CheckoutSessionPreviewParamsCustomFieldFieldType rawValue)
@@ -1299,9 +1526,7 @@ public class CheckoutSessionPreviewParamsCustomFieldFieldTypeTest : TestBase
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Number)]
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Email)]
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Url)]
-    [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Phone)]
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Date)]
-    [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Datetime)]
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Dropdown)]
     [InlineData(CheckoutSessionPreviewParamsCustomFieldFieldType.Boolean)]
     public void SerializationRoundtrip_Works(
@@ -1345,6 +1570,51 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+            ThemeConfig = new()
+            {
+                Dark = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                Light = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                PayButtonText = "pay_button_text",
+                Radius = "radius",
+            },
         };
 
         string expectedForceLanguage = "force_language";
@@ -1352,11 +1622,57 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
         bool expectedShowOrderDetails = true;
         ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme> expectedTheme =
             CheckoutSessionPreviewParamsCustomizationTheme.Dark;
+        CheckoutSessionPreviewParamsCustomizationThemeConfig expectedThemeConfig = new()
+        {
+            Dark = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+            FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+            Light = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            PayButtonText = "pay_button_text",
+            Radius = "radius",
+        };
 
         Assert.Equal(expectedForceLanguage, model.ForceLanguage);
         Assert.Equal(expectedShowOnDemandTag, model.ShowOnDemandTag);
         Assert.Equal(expectedShowOrderDetails, model.ShowOrderDetails);
         Assert.Equal(expectedTheme, model.Theme);
+        Assert.Equal(expectedThemeConfig, model.ThemeConfig);
     }
 
     [Fact]
@@ -1368,6 +1684,51 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+            ThemeConfig = new()
+            {
+                Dark = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                Light = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                PayButtonText = "pay_button_text",
+                Radius = "radius",
+            },
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1388,6 +1749,51 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+            ThemeConfig = new()
+            {
+                Dark = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                Light = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                PayButtonText = "pay_button_text",
+                Radius = "radius",
+            },
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1402,11 +1808,57 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
         bool expectedShowOrderDetails = true;
         ApiEnum<string, CheckoutSessionPreviewParamsCustomizationTheme> expectedTheme =
             CheckoutSessionPreviewParamsCustomizationTheme.Dark;
+        CheckoutSessionPreviewParamsCustomizationThemeConfig expectedThemeConfig = new()
+        {
+            Dark = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+            FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+            Light = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            PayButtonText = "pay_button_text",
+            Radius = "radius",
+        };
 
         Assert.Equal(expectedForceLanguage, deserialized.ForceLanguage);
         Assert.Equal(expectedShowOnDemandTag, deserialized.ShowOnDemandTag);
         Assert.Equal(expectedShowOrderDetails, deserialized.ShowOrderDetails);
         Assert.Equal(expectedTheme, deserialized.Theme);
+        Assert.Equal(expectedThemeConfig, deserialized.ThemeConfig);
     }
 
     [Fact]
@@ -1418,6 +1870,51 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+            ThemeConfig = new()
+            {
+                Dark = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                Light = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                PayButtonText = "pay_button_text",
+                Radius = "radius",
+            },
         };
 
         model.Validate();
@@ -1429,6 +1926,51 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
         var model = new CheckoutSessionPreviewParamsCustomization
         {
             ForceLanguage = "force_language",
+            ThemeConfig = new()
+            {
+                Dark = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                Light = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                PayButtonText = "pay_button_text",
+                Radius = "radius",
+            },
         };
 
         Assert.Null(model.ShowOnDemandTag);
@@ -1445,6 +1987,51 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
         var model = new CheckoutSessionPreviewParamsCustomization
         {
             ForceLanguage = "force_language",
+            ThemeConfig = new()
+            {
+                Dark = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                Light = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                PayButtonText = "pay_button_text",
+                Radius = "radius",
+            },
         };
 
         model.Validate();
@@ -1456,6 +2043,51 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
         var model = new CheckoutSessionPreviewParamsCustomization
         {
             ForceLanguage = "force_language",
+            ThemeConfig = new()
+            {
+                Dark = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                Light = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                PayButtonText = "pay_button_text",
+                Radius = "radius",
+            },
 
             // Null should be interpreted as omitted for these properties
             ShowOnDemandTag = null,
@@ -1477,6 +2109,51 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
         var model = new CheckoutSessionPreviewParamsCustomization
         {
             ForceLanguage = "force_language",
+            ThemeConfig = new()
+            {
+                Dark = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                Light = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                PayButtonText = "pay_button_text",
+                Radius = "radius",
+            },
 
             // Null should be interpreted as omitted for these properties
             ShowOnDemandTag = null,
@@ -1499,6 +2176,8 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
 
         Assert.Null(model.ForceLanguage);
         Assert.False(model.RawData.ContainsKey("force_language"));
+        Assert.Null(model.ThemeConfig);
+        Assert.False(model.RawData.ContainsKey("theme_config"));
     }
 
     [Fact]
@@ -1524,10 +2203,13 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
             Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
 
             ForceLanguage = null,
+            ThemeConfig = null,
         };
 
         Assert.Null(model.ForceLanguage);
         Assert.True(model.RawData.ContainsKey("force_language"));
+        Assert.Null(model.ThemeConfig);
+        Assert.True(model.RawData.ContainsKey("theme_config"));
     }
 
     [Fact]
@@ -1540,6 +2222,7 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
             Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
 
             ForceLanguage = null,
+            ThemeConfig = null,
         };
 
         model.Validate();
@@ -1554,6 +2237,51 @@ public class CheckoutSessionPreviewParamsCustomizationTest : TestBase
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
             Theme = CheckoutSessionPreviewParamsCustomizationTheme.Dark,
+            ThemeConfig = new()
+            {
+                Dark = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+                FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+                Light = new()
+                {
+                    BgPrimary = "bg_primary",
+                    BgSecondary = "bg_secondary",
+                    BorderPrimary = "border_primary",
+                    BorderSecondary = "border_secondary",
+                    ButtonPrimary = "button_primary",
+                    ButtonPrimaryHover = "button_primary_hover",
+                    ButtonSecondary = "button_secondary",
+                    ButtonSecondaryHover = "button_secondary_hover",
+                    ButtonTextPrimary = "button_text_primary",
+                    ButtonTextSecondary = "button_text_secondary",
+                    InputFocusBorder = "input_focus_border",
+                    TextError = "text_error",
+                    TextPlaceholder = "text_placeholder",
+                    TextPrimary = "text_primary",
+                    TextSecondary = "text_secondary",
+                    TextSuccess = "text_success",
+                },
+                PayButtonText = "pay_button_text",
+                Radius = "radius",
+            },
         };
 
         CheckoutSessionPreviewParamsCustomization copied = new(model);
@@ -1617,6 +2345,1286 @@ public class CheckoutSessionPreviewParamsCustomizationThemeTest : TestBase
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
+    }
+}
+
+public class CheckoutSessionPreviewParamsCustomizationThemeConfigTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfig
+        {
+            Dark = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+            FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+            Light = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            PayButtonText = "pay_button_text",
+            Radius = "radius",
+        };
+
+        CheckoutSessionPreviewParamsCustomizationThemeConfigDark expectedDark = new()
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+        ApiEnum<
+            string,
+            CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize
+        > expectedFontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs;
+        ApiEnum<
+            string,
+            CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight
+        > expectedFontWeight =
+            CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal;
+        CheckoutSessionPreviewParamsCustomizationThemeConfigLight expectedLight = new()
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+        string expectedPayButtonText = "pay_button_text";
+        string expectedRadius = "radius";
+
+        Assert.Equal(expectedDark, model.Dark);
+        Assert.Equal(expectedFontSize, model.FontSize);
+        Assert.Equal(expectedFontWeight, model.FontWeight);
+        Assert.Equal(expectedLight, model.Light);
+        Assert.Equal(expectedPayButtonText, model.PayButtonText);
+        Assert.Equal(expectedRadius, model.Radius);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfig
+        {
+            Dark = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+            FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+            Light = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            PayButtonText = "pay_button_text",
+            Radius = "radius",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<CheckoutSessionPreviewParamsCustomizationThemeConfig>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfig
+        {
+            Dark = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+            FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+            Light = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            PayButtonText = "pay_button_text",
+            Radius = "radius",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<CheckoutSessionPreviewParamsCustomizationThemeConfig>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        CheckoutSessionPreviewParamsCustomizationThemeConfigDark expectedDark = new()
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+        ApiEnum<
+            string,
+            CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize
+        > expectedFontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs;
+        ApiEnum<
+            string,
+            CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight
+        > expectedFontWeight =
+            CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal;
+        CheckoutSessionPreviewParamsCustomizationThemeConfigLight expectedLight = new()
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+        string expectedPayButtonText = "pay_button_text";
+        string expectedRadius = "radius";
+
+        Assert.Equal(expectedDark, deserialized.Dark);
+        Assert.Equal(expectedFontSize, deserialized.FontSize);
+        Assert.Equal(expectedFontWeight, deserialized.FontWeight);
+        Assert.Equal(expectedLight, deserialized.Light);
+        Assert.Equal(expectedPayButtonText, deserialized.PayButtonText);
+        Assert.Equal(expectedRadius, deserialized.Radius);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfig
+        {
+            Dark = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+            FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+            Light = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            PayButtonText = "pay_button_text",
+            Radius = "radius",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfig { };
+
+        Assert.Null(model.Dark);
+        Assert.False(model.RawData.ContainsKey("dark"));
+        Assert.Null(model.FontSize);
+        Assert.False(model.RawData.ContainsKey("font_size"));
+        Assert.Null(model.FontWeight);
+        Assert.False(model.RawData.ContainsKey("font_weight"));
+        Assert.Null(model.Light);
+        Assert.False(model.RawData.ContainsKey("light"));
+        Assert.Null(model.PayButtonText);
+        Assert.False(model.RawData.ContainsKey("pay_button_text"));
+        Assert.Null(model.Radius);
+        Assert.False(model.RawData.ContainsKey("radius"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfig { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfig
+        {
+            Dark = null,
+            FontSize = null,
+            FontWeight = null,
+            Light = null,
+            PayButtonText = null,
+            Radius = null,
+        };
+
+        Assert.Null(model.Dark);
+        Assert.True(model.RawData.ContainsKey("dark"));
+        Assert.Null(model.FontSize);
+        Assert.True(model.RawData.ContainsKey("font_size"));
+        Assert.Null(model.FontWeight);
+        Assert.True(model.RawData.ContainsKey("font_weight"));
+        Assert.Null(model.Light);
+        Assert.True(model.RawData.ContainsKey("light"));
+        Assert.Null(model.PayButtonText);
+        Assert.True(model.RawData.ContainsKey("pay_button_text"));
+        Assert.Null(model.Radius);
+        Assert.True(model.RawData.ContainsKey("radius"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfig
+        {
+            Dark = null,
+            FontSize = null,
+            FontWeight = null,
+            Light = null,
+            PayButtonText = null,
+            Radius = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfig
+        {
+            Dark = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            FontSize = CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs,
+            FontWeight = CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal,
+            Light = new()
+            {
+                BgPrimary = "bg_primary",
+                BgSecondary = "bg_secondary",
+                BorderPrimary = "border_primary",
+                BorderSecondary = "border_secondary",
+                ButtonPrimary = "button_primary",
+                ButtonPrimaryHover = "button_primary_hover",
+                ButtonSecondary = "button_secondary",
+                ButtonSecondaryHover = "button_secondary_hover",
+                ButtonTextPrimary = "button_text_primary",
+                ButtonTextSecondary = "button_text_secondary",
+                InputFocusBorder = "input_focus_border",
+                TextError = "text_error",
+                TextPlaceholder = "text_placeholder",
+                TextPrimary = "text_primary",
+                TextSecondary = "text_secondary",
+                TextSuccess = "text_success",
+            },
+            PayButtonText = "pay_button_text",
+            Radius = "radius",
+        };
+
+        CheckoutSessionPreviewParamsCustomizationThemeConfig copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class CheckoutSessionPreviewParamsCustomizationThemeConfigDarkTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigDark
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+
+        string expectedBgPrimary = "bg_primary";
+        string expectedBgSecondary = "bg_secondary";
+        string expectedBorderPrimary = "border_primary";
+        string expectedBorderSecondary = "border_secondary";
+        string expectedButtonPrimary = "button_primary";
+        string expectedButtonPrimaryHover = "button_primary_hover";
+        string expectedButtonSecondary = "button_secondary";
+        string expectedButtonSecondaryHover = "button_secondary_hover";
+        string expectedButtonTextPrimary = "button_text_primary";
+        string expectedButtonTextSecondary = "button_text_secondary";
+        string expectedInputFocusBorder = "input_focus_border";
+        string expectedTextError = "text_error";
+        string expectedTextPlaceholder = "text_placeholder";
+        string expectedTextPrimary = "text_primary";
+        string expectedTextSecondary = "text_secondary";
+        string expectedTextSuccess = "text_success";
+
+        Assert.Equal(expectedBgPrimary, model.BgPrimary);
+        Assert.Equal(expectedBgSecondary, model.BgSecondary);
+        Assert.Equal(expectedBorderPrimary, model.BorderPrimary);
+        Assert.Equal(expectedBorderSecondary, model.BorderSecondary);
+        Assert.Equal(expectedButtonPrimary, model.ButtonPrimary);
+        Assert.Equal(expectedButtonPrimaryHover, model.ButtonPrimaryHover);
+        Assert.Equal(expectedButtonSecondary, model.ButtonSecondary);
+        Assert.Equal(expectedButtonSecondaryHover, model.ButtonSecondaryHover);
+        Assert.Equal(expectedButtonTextPrimary, model.ButtonTextPrimary);
+        Assert.Equal(expectedButtonTextSecondary, model.ButtonTextSecondary);
+        Assert.Equal(expectedInputFocusBorder, model.InputFocusBorder);
+        Assert.Equal(expectedTextError, model.TextError);
+        Assert.Equal(expectedTextPlaceholder, model.TextPlaceholder);
+        Assert.Equal(expectedTextPrimary, model.TextPrimary);
+        Assert.Equal(expectedTextSecondary, model.TextSecondary);
+        Assert.Equal(expectedTextSuccess, model.TextSuccess);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigDark
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<CheckoutSessionPreviewParamsCustomizationThemeConfigDark>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigDark
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<CheckoutSessionPreviewParamsCustomizationThemeConfigDark>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        string expectedBgPrimary = "bg_primary";
+        string expectedBgSecondary = "bg_secondary";
+        string expectedBorderPrimary = "border_primary";
+        string expectedBorderSecondary = "border_secondary";
+        string expectedButtonPrimary = "button_primary";
+        string expectedButtonPrimaryHover = "button_primary_hover";
+        string expectedButtonSecondary = "button_secondary";
+        string expectedButtonSecondaryHover = "button_secondary_hover";
+        string expectedButtonTextPrimary = "button_text_primary";
+        string expectedButtonTextSecondary = "button_text_secondary";
+        string expectedInputFocusBorder = "input_focus_border";
+        string expectedTextError = "text_error";
+        string expectedTextPlaceholder = "text_placeholder";
+        string expectedTextPrimary = "text_primary";
+        string expectedTextSecondary = "text_secondary";
+        string expectedTextSuccess = "text_success";
+
+        Assert.Equal(expectedBgPrimary, deserialized.BgPrimary);
+        Assert.Equal(expectedBgSecondary, deserialized.BgSecondary);
+        Assert.Equal(expectedBorderPrimary, deserialized.BorderPrimary);
+        Assert.Equal(expectedBorderSecondary, deserialized.BorderSecondary);
+        Assert.Equal(expectedButtonPrimary, deserialized.ButtonPrimary);
+        Assert.Equal(expectedButtonPrimaryHover, deserialized.ButtonPrimaryHover);
+        Assert.Equal(expectedButtonSecondary, deserialized.ButtonSecondary);
+        Assert.Equal(expectedButtonSecondaryHover, deserialized.ButtonSecondaryHover);
+        Assert.Equal(expectedButtonTextPrimary, deserialized.ButtonTextPrimary);
+        Assert.Equal(expectedButtonTextSecondary, deserialized.ButtonTextSecondary);
+        Assert.Equal(expectedInputFocusBorder, deserialized.InputFocusBorder);
+        Assert.Equal(expectedTextError, deserialized.TextError);
+        Assert.Equal(expectedTextPlaceholder, deserialized.TextPlaceholder);
+        Assert.Equal(expectedTextPrimary, deserialized.TextPrimary);
+        Assert.Equal(expectedTextSecondary, deserialized.TextSecondary);
+        Assert.Equal(expectedTextSuccess, deserialized.TextSuccess);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigDark
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigDark { };
+
+        Assert.Null(model.BgPrimary);
+        Assert.False(model.RawData.ContainsKey("bg_primary"));
+        Assert.Null(model.BgSecondary);
+        Assert.False(model.RawData.ContainsKey("bg_secondary"));
+        Assert.Null(model.BorderPrimary);
+        Assert.False(model.RawData.ContainsKey("border_primary"));
+        Assert.Null(model.BorderSecondary);
+        Assert.False(model.RawData.ContainsKey("border_secondary"));
+        Assert.Null(model.ButtonPrimary);
+        Assert.False(model.RawData.ContainsKey("button_primary"));
+        Assert.Null(model.ButtonPrimaryHover);
+        Assert.False(model.RawData.ContainsKey("button_primary_hover"));
+        Assert.Null(model.ButtonSecondary);
+        Assert.False(model.RawData.ContainsKey("button_secondary"));
+        Assert.Null(model.ButtonSecondaryHover);
+        Assert.False(model.RawData.ContainsKey("button_secondary_hover"));
+        Assert.Null(model.ButtonTextPrimary);
+        Assert.False(model.RawData.ContainsKey("button_text_primary"));
+        Assert.Null(model.ButtonTextSecondary);
+        Assert.False(model.RawData.ContainsKey("button_text_secondary"));
+        Assert.Null(model.InputFocusBorder);
+        Assert.False(model.RawData.ContainsKey("input_focus_border"));
+        Assert.Null(model.TextError);
+        Assert.False(model.RawData.ContainsKey("text_error"));
+        Assert.Null(model.TextPlaceholder);
+        Assert.False(model.RawData.ContainsKey("text_placeholder"));
+        Assert.Null(model.TextPrimary);
+        Assert.False(model.RawData.ContainsKey("text_primary"));
+        Assert.Null(model.TextSecondary);
+        Assert.False(model.RawData.ContainsKey("text_secondary"));
+        Assert.Null(model.TextSuccess);
+        Assert.False(model.RawData.ContainsKey("text_success"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigDark { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigDark
+        {
+            BgPrimary = null,
+            BgSecondary = null,
+            BorderPrimary = null,
+            BorderSecondary = null,
+            ButtonPrimary = null,
+            ButtonPrimaryHover = null,
+            ButtonSecondary = null,
+            ButtonSecondaryHover = null,
+            ButtonTextPrimary = null,
+            ButtonTextSecondary = null,
+            InputFocusBorder = null,
+            TextError = null,
+            TextPlaceholder = null,
+            TextPrimary = null,
+            TextSecondary = null,
+            TextSuccess = null,
+        };
+
+        Assert.Null(model.BgPrimary);
+        Assert.True(model.RawData.ContainsKey("bg_primary"));
+        Assert.Null(model.BgSecondary);
+        Assert.True(model.RawData.ContainsKey("bg_secondary"));
+        Assert.Null(model.BorderPrimary);
+        Assert.True(model.RawData.ContainsKey("border_primary"));
+        Assert.Null(model.BorderSecondary);
+        Assert.True(model.RawData.ContainsKey("border_secondary"));
+        Assert.Null(model.ButtonPrimary);
+        Assert.True(model.RawData.ContainsKey("button_primary"));
+        Assert.Null(model.ButtonPrimaryHover);
+        Assert.True(model.RawData.ContainsKey("button_primary_hover"));
+        Assert.Null(model.ButtonSecondary);
+        Assert.True(model.RawData.ContainsKey("button_secondary"));
+        Assert.Null(model.ButtonSecondaryHover);
+        Assert.True(model.RawData.ContainsKey("button_secondary_hover"));
+        Assert.Null(model.ButtonTextPrimary);
+        Assert.True(model.RawData.ContainsKey("button_text_primary"));
+        Assert.Null(model.ButtonTextSecondary);
+        Assert.True(model.RawData.ContainsKey("button_text_secondary"));
+        Assert.Null(model.InputFocusBorder);
+        Assert.True(model.RawData.ContainsKey("input_focus_border"));
+        Assert.Null(model.TextError);
+        Assert.True(model.RawData.ContainsKey("text_error"));
+        Assert.Null(model.TextPlaceholder);
+        Assert.True(model.RawData.ContainsKey("text_placeholder"));
+        Assert.Null(model.TextPrimary);
+        Assert.True(model.RawData.ContainsKey("text_primary"));
+        Assert.Null(model.TextSecondary);
+        Assert.True(model.RawData.ContainsKey("text_secondary"));
+        Assert.Null(model.TextSuccess);
+        Assert.True(model.RawData.ContainsKey("text_success"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigDark
+        {
+            BgPrimary = null,
+            BgSecondary = null,
+            BorderPrimary = null,
+            BorderSecondary = null,
+            ButtonPrimary = null,
+            ButtonPrimaryHover = null,
+            ButtonSecondary = null,
+            ButtonSecondaryHover = null,
+            ButtonTextPrimary = null,
+            ButtonTextSecondary = null,
+            InputFocusBorder = null,
+            TextError = null,
+            TextPlaceholder = null,
+            TextPrimary = null,
+            TextSecondary = null,
+            TextSuccess = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigDark
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+
+        CheckoutSessionPreviewParamsCustomizationThemeConfigDark copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class CheckoutSessionPreviewParamsCustomizationThemeConfigFontSizeTest : TestBase
+{
+    [Theory]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Sm)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Md)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Lg)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xl)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.V2xl)]
+    public void Validation_Works(
+        CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize> value =
+            rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xs)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Sm)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Md)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Lg)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.Xl)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize.V2xl)]
+    public void SerializationRoundtrip_Works(
+        CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize> value =
+            rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeightTest : TestBase
+{
+    [Theory]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Medium)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Bold)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.ExtraBold)]
+    public void Validation_Works(
+        CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight> value =
+            rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Normal)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Medium)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.Bold)]
+    [InlineData(CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight.ExtraBold)]
+    public void SerializationRoundtrip_Works(
+        CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight> value =
+            rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class CheckoutSessionPreviewParamsCustomizationThemeConfigLightTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigLight
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+
+        string expectedBgPrimary = "bg_primary";
+        string expectedBgSecondary = "bg_secondary";
+        string expectedBorderPrimary = "border_primary";
+        string expectedBorderSecondary = "border_secondary";
+        string expectedButtonPrimary = "button_primary";
+        string expectedButtonPrimaryHover = "button_primary_hover";
+        string expectedButtonSecondary = "button_secondary";
+        string expectedButtonSecondaryHover = "button_secondary_hover";
+        string expectedButtonTextPrimary = "button_text_primary";
+        string expectedButtonTextSecondary = "button_text_secondary";
+        string expectedInputFocusBorder = "input_focus_border";
+        string expectedTextError = "text_error";
+        string expectedTextPlaceholder = "text_placeholder";
+        string expectedTextPrimary = "text_primary";
+        string expectedTextSecondary = "text_secondary";
+        string expectedTextSuccess = "text_success";
+
+        Assert.Equal(expectedBgPrimary, model.BgPrimary);
+        Assert.Equal(expectedBgSecondary, model.BgSecondary);
+        Assert.Equal(expectedBorderPrimary, model.BorderPrimary);
+        Assert.Equal(expectedBorderSecondary, model.BorderSecondary);
+        Assert.Equal(expectedButtonPrimary, model.ButtonPrimary);
+        Assert.Equal(expectedButtonPrimaryHover, model.ButtonPrimaryHover);
+        Assert.Equal(expectedButtonSecondary, model.ButtonSecondary);
+        Assert.Equal(expectedButtonSecondaryHover, model.ButtonSecondaryHover);
+        Assert.Equal(expectedButtonTextPrimary, model.ButtonTextPrimary);
+        Assert.Equal(expectedButtonTextSecondary, model.ButtonTextSecondary);
+        Assert.Equal(expectedInputFocusBorder, model.InputFocusBorder);
+        Assert.Equal(expectedTextError, model.TextError);
+        Assert.Equal(expectedTextPlaceholder, model.TextPlaceholder);
+        Assert.Equal(expectedTextPrimary, model.TextPrimary);
+        Assert.Equal(expectedTextSecondary, model.TextSecondary);
+        Assert.Equal(expectedTextSuccess, model.TextSuccess);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigLight
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<CheckoutSessionPreviewParamsCustomizationThemeConfigLight>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigLight
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<CheckoutSessionPreviewParamsCustomizationThemeConfigLight>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        string expectedBgPrimary = "bg_primary";
+        string expectedBgSecondary = "bg_secondary";
+        string expectedBorderPrimary = "border_primary";
+        string expectedBorderSecondary = "border_secondary";
+        string expectedButtonPrimary = "button_primary";
+        string expectedButtonPrimaryHover = "button_primary_hover";
+        string expectedButtonSecondary = "button_secondary";
+        string expectedButtonSecondaryHover = "button_secondary_hover";
+        string expectedButtonTextPrimary = "button_text_primary";
+        string expectedButtonTextSecondary = "button_text_secondary";
+        string expectedInputFocusBorder = "input_focus_border";
+        string expectedTextError = "text_error";
+        string expectedTextPlaceholder = "text_placeholder";
+        string expectedTextPrimary = "text_primary";
+        string expectedTextSecondary = "text_secondary";
+        string expectedTextSuccess = "text_success";
+
+        Assert.Equal(expectedBgPrimary, deserialized.BgPrimary);
+        Assert.Equal(expectedBgSecondary, deserialized.BgSecondary);
+        Assert.Equal(expectedBorderPrimary, deserialized.BorderPrimary);
+        Assert.Equal(expectedBorderSecondary, deserialized.BorderSecondary);
+        Assert.Equal(expectedButtonPrimary, deserialized.ButtonPrimary);
+        Assert.Equal(expectedButtonPrimaryHover, deserialized.ButtonPrimaryHover);
+        Assert.Equal(expectedButtonSecondary, deserialized.ButtonSecondary);
+        Assert.Equal(expectedButtonSecondaryHover, deserialized.ButtonSecondaryHover);
+        Assert.Equal(expectedButtonTextPrimary, deserialized.ButtonTextPrimary);
+        Assert.Equal(expectedButtonTextSecondary, deserialized.ButtonTextSecondary);
+        Assert.Equal(expectedInputFocusBorder, deserialized.InputFocusBorder);
+        Assert.Equal(expectedTextError, deserialized.TextError);
+        Assert.Equal(expectedTextPlaceholder, deserialized.TextPlaceholder);
+        Assert.Equal(expectedTextPrimary, deserialized.TextPrimary);
+        Assert.Equal(expectedTextSecondary, deserialized.TextSecondary);
+        Assert.Equal(expectedTextSuccess, deserialized.TextSuccess);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigLight
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigLight { };
+
+        Assert.Null(model.BgPrimary);
+        Assert.False(model.RawData.ContainsKey("bg_primary"));
+        Assert.Null(model.BgSecondary);
+        Assert.False(model.RawData.ContainsKey("bg_secondary"));
+        Assert.Null(model.BorderPrimary);
+        Assert.False(model.RawData.ContainsKey("border_primary"));
+        Assert.Null(model.BorderSecondary);
+        Assert.False(model.RawData.ContainsKey("border_secondary"));
+        Assert.Null(model.ButtonPrimary);
+        Assert.False(model.RawData.ContainsKey("button_primary"));
+        Assert.Null(model.ButtonPrimaryHover);
+        Assert.False(model.RawData.ContainsKey("button_primary_hover"));
+        Assert.Null(model.ButtonSecondary);
+        Assert.False(model.RawData.ContainsKey("button_secondary"));
+        Assert.Null(model.ButtonSecondaryHover);
+        Assert.False(model.RawData.ContainsKey("button_secondary_hover"));
+        Assert.Null(model.ButtonTextPrimary);
+        Assert.False(model.RawData.ContainsKey("button_text_primary"));
+        Assert.Null(model.ButtonTextSecondary);
+        Assert.False(model.RawData.ContainsKey("button_text_secondary"));
+        Assert.Null(model.InputFocusBorder);
+        Assert.False(model.RawData.ContainsKey("input_focus_border"));
+        Assert.Null(model.TextError);
+        Assert.False(model.RawData.ContainsKey("text_error"));
+        Assert.Null(model.TextPlaceholder);
+        Assert.False(model.RawData.ContainsKey("text_placeholder"));
+        Assert.Null(model.TextPrimary);
+        Assert.False(model.RawData.ContainsKey("text_primary"));
+        Assert.Null(model.TextSecondary);
+        Assert.False(model.RawData.ContainsKey("text_secondary"));
+        Assert.Null(model.TextSuccess);
+        Assert.False(model.RawData.ContainsKey("text_success"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigLight { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigLight
+        {
+            BgPrimary = null,
+            BgSecondary = null,
+            BorderPrimary = null,
+            BorderSecondary = null,
+            ButtonPrimary = null,
+            ButtonPrimaryHover = null,
+            ButtonSecondary = null,
+            ButtonSecondaryHover = null,
+            ButtonTextPrimary = null,
+            ButtonTextSecondary = null,
+            InputFocusBorder = null,
+            TextError = null,
+            TextPlaceholder = null,
+            TextPrimary = null,
+            TextSecondary = null,
+            TextSuccess = null,
+        };
+
+        Assert.Null(model.BgPrimary);
+        Assert.True(model.RawData.ContainsKey("bg_primary"));
+        Assert.Null(model.BgSecondary);
+        Assert.True(model.RawData.ContainsKey("bg_secondary"));
+        Assert.Null(model.BorderPrimary);
+        Assert.True(model.RawData.ContainsKey("border_primary"));
+        Assert.Null(model.BorderSecondary);
+        Assert.True(model.RawData.ContainsKey("border_secondary"));
+        Assert.Null(model.ButtonPrimary);
+        Assert.True(model.RawData.ContainsKey("button_primary"));
+        Assert.Null(model.ButtonPrimaryHover);
+        Assert.True(model.RawData.ContainsKey("button_primary_hover"));
+        Assert.Null(model.ButtonSecondary);
+        Assert.True(model.RawData.ContainsKey("button_secondary"));
+        Assert.Null(model.ButtonSecondaryHover);
+        Assert.True(model.RawData.ContainsKey("button_secondary_hover"));
+        Assert.Null(model.ButtonTextPrimary);
+        Assert.True(model.RawData.ContainsKey("button_text_primary"));
+        Assert.Null(model.ButtonTextSecondary);
+        Assert.True(model.RawData.ContainsKey("button_text_secondary"));
+        Assert.Null(model.InputFocusBorder);
+        Assert.True(model.RawData.ContainsKey("input_focus_border"));
+        Assert.Null(model.TextError);
+        Assert.True(model.RawData.ContainsKey("text_error"));
+        Assert.Null(model.TextPlaceholder);
+        Assert.True(model.RawData.ContainsKey("text_placeholder"));
+        Assert.Null(model.TextPrimary);
+        Assert.True(model.RawData.ContainsKey("text_primary"));
+        Assert.Null(model.TextSecondary);
+        Assert.True(model.RawData.ContainsKey("text_secondary"));
+        Assert.Null(model.TextSuccess);
+        Assert.True(model.RawData.ContainsKey("text_success"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigLight
+        {
+            BgPrimary = null,
+            BgSecondary = null,
+            BorderPrimary = null,
+            BorderSecondary = null,
+            ButtonPrimary = null,
+            ButtonPrimaryHover = null,
+            ButtonSecondary = null,
+            ButtonSecondaryHover = null,
+            ButtonTextPrimary = null,
+            ButtonTextSecondary = null,
+            InputFocusBorder = null,
+            TextError = null,
+            TextPlaceholder = null,
+            TextPrimary = null,
+            TextSecondary = null,
+            TextSuccess = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutSessionPreviewParamsCustomizationThemeConfigLight
+        {
+            BgPrimary = "bg_primary",
+            BgSecondary = "bg_secondary",
+            BorderPrimary = "border_primary",
+            BorderSecondary = "border_secondary",
+            ButtonPrimary = "button_primary",
+            ButtonPrimaryHover = "button_primary_hover",
+            ButtonSecondary = "button_secondary",
+            ButtonSecondaryHover = "button_secondary_hover",
+            ButtonTextPrimary = "button_text_primary",
+            ButtonTextSecondary = "button_text_secondary",
+            InputFocusBorder = "input_focus_border",
+            TextError = "text_error",
+            TextPlaceholder = "text_placeholder",
+            TextPrimary = "text_primary",
+            TextSecondary = "text_secondary",
+            TextSuccess = "text_success",
+        };
+
+        CheckoutSessionPreviewParamsCustomizationThemeConfigLight copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
