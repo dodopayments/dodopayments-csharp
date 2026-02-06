@@ -5,9 +5,9 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Refunds;
 using DodoPayments.Client.Models.Webhooks;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
 
@@ -93,8 +93,9 @@ public class PaymentCancelledWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                RefundStatus = Payments::RefundStatus.Partial,
                 SettlementTax = 0,
-                Status = IntentStatus.Succeeded,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -104,7 +105,7 @@ public class PaymentCancelledWebhookEventTest : TestBase
         };
 
         string expectedBusinessID = "business_id";
-        Payment expectedData = new()
+        Payments::Payment expectedData = new()
         {
             Billing = new()
             {
@@ -178,8 +179,9 @@ public class PaymentCancelledWebhookEventTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -274,8 +276,9 @@ public class PaymentCancelledWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                RefundStatus = Payments::RefundStatus.Partial,
                 SettlementTax = 0,
-                Status = IntentStatus.Succeeded,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -373,8 +376,9 @@ public class PaymentCancelledWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                RefundStatus = Payments::RefundStatus.Partial,
                 SettlementTax = 0,
-                Status = IntentStatus.Succeeded,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -391,7 +395,7 @@ public class PaymentCancelledWebhookEventTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
-        Payment expectedData = new()
+        Payments::Payment expectedData = new()
         {
             Billing = new()
             {
@@ -465,8 +469,9 @@ public class PaymentCancelledWebhookEventTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
-            Status = IntentStatus.Succeeded,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -561,8 +566,9 @@ public class PaymentCancelledWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                RefundStatus = Payments::RefundStatus.Partial,
                 SettlementTax = 0,
-                Status = IntentStatus.Succeeded,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -654,8 +660,9 @@ public class PaymentCancelledWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                RefundStatus = Payments::RefundStatus.Partial,
                 SettlementTax = 0,
-                Status = IntentStatus.Succeeded,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

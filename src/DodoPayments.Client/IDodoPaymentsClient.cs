@@ -95,6 +95,8 @@ public interface IDodoPaymentsClient : IDisposable
     IUsageEventService UsageEvents { get; }
 
     IMeterService Meters { get; }
+
+    IBalanceService Balances { get; }
 }
 
 /// <summary>
@@ -170,6 +172,8 @@ public interface IDodoPaymentsClientWithRawResponse : IDisposable
     IUsageEventServiceWithRawResponse UsageEvents { get; }
 
     IMeterServiceWithRawResponse Meters { get; }
+
+    IBalanceServiceWithRawResponse Balances { get; }
 
     /// <summary>
     /// Sends a request to the Dodo Payments REST API.

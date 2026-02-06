@@ -62,18 +62,16 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
     /// <summary>
     /// The total product cart
     /// </summary>
-    public required IReadOnlyList<CheckoutSessionPreviewResponseProductCart> ProductCart
+    public required IReadOnlyList<ProductCart> ProductCart
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<
-                ImmutableArray<CheckoutSessionPreviewResponseProductCart>
-            >("product_cart");
+            return this._rawData.GetNotNullStruct<ImmutableArray<ProductCart>>("product_cart");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<CheckoutSessionPreviewResponseProductCart>>(
+            this._rawData.Set<ImmutableArray<ProductCart>>(
                 "product_cart",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -276,13 +274,8 @@ class CurrentBreakupFromRaw : IFromRawJson<CurrentBreakup>
         CurrentBreakup.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(
-    typeof(JsonModelConverter<
-        CheckoutSessionPreviewResponseProductCart,
-        CheckoutSessionPreviewResponseProductCartFromRaw
-    >)
-)]
-public sealed record class CheckoutSessionPreviewResponseProductCart : JsonModel
+[JsonConverter(typeof(JsonModelConverter<ProductCart, ProductCartFromRaw>))]
+public sealed record class ProductCart : JsonModel
 {
     /// <summary>
     /// the currency in which the calculatiosn were made
@@ -547,47 +540,39 @@ public sealed record class CheckoutSessionPreviewResponseProductCart : JsonModel
         _ = this.Tax;
     }
 
-    public CheckoutSessionPreviewResponseProductCart() { }
+    public ProductCart() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CheckoutSessionPreviewResponseProductCart(
-        CheckoutSessionPreviewResponseProductCart checkoutSessionPreviewResponseProductCart
-    )
-        : base(checkoutSessionPreviewResponseProductCart) { }
+    public ProductCart(ProductCart productCart)
+        : base(productCart) { }
 #pragma warning restore CS8618
 
-    public CheckoutSessionPreviewResponseProductCart(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public ProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CheckoutSessionPreviewResponseProductCart(FrozenDictionary<string, JsonElement> rawData)
+    ProductCart(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="CheckoutSessionPreviewResponseProductCartFromRaw.FromRawUnchecked"/>
-    public static CheckoutSessionPreviewResponseProductCart FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="ProductCartFromRaw.FromRawUnchecked"/>
+    public static ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class CheckoutSessionPreviewResponseProductCartFromRaw
-    : IFromRawJson<CheckoutSessionPreviewResponseProductCart>
+class ProductCartFromRaw : IFromRawJson<ProductCart>
 {
     /// <inheritdoc/>
-    public CheckoutSessionPreviewResponseProductCart FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CheckoutSessionPreviewResponseProductCart.FromRawUnchecked(rawData);
+    public ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ProductCart.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(JsonModelConverter<Meter, MeterFromRaw>))]
