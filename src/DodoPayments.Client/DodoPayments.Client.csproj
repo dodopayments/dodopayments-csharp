@@ -3,7 +3,7 @@
     <!-- Metadata -->
     <AssemblyTitle>Dodo Payments C#</AssemblyTitle>
     <AssemblyName>DodoPayments.Client</AssemblyName>
-    <VersionPrefix>6.6.0</VersionPrefix>
+    <VersionPrefix>6.7.0</VersionPrefix>
     <Description>The official .NET library for the Dodo Payments API.</Description>
     <OutputType>Library</OutputType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
