@@ -94,7 +94,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalAmount = 0,
             Tax = 0,
         };
-        List<CheckoutSessionPreviewResponseProductCart> expectedProductCart =
+        List<ProductCart> expectedProductCart =
         [
             new()
             {
@@ -348,7 +348,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalAmount = 0,
             Tax = 0,
         };
-        List<CheckoutSessionPreviewResponseProductCart> expectedProductCart =
+        List<ProductCart> expectedProductCart =
         [
             new()
             {
@@ -1048,12 +1048,12 @@ public class CurrentBreakupTest : TestBase
     }
 }
 
-public class CheckoutSessionPreviewResponseProductCartTest : TestBase
+public class ProductCartTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new CheckoutSessionPreviewResponseProductCart
+        var model = new ProductCart
         {
             Currency = Currency.Aed,
             DiscountedPrice = 0,
@@ -1182,7 +1182,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new CheckoutSessionPreviewResponseProductCart
+        var model = new ProductCart
         {
             Currency = Currency.Aed,
             DiscountedPrice = 0,
@@ -1233,7 +1233,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewResponseProductCart>(
+        var deserialized = JsonSerializer.Deserialize<ProductCart>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1244,7 +1244,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new CheckoutSessionPreviewResponseProductCart
+        var model = new ProductCart
         {
             Currency = Currency.Aed,
             DiscountedPrice = 0,
@@ -1295,7 +1295,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CheckoutSessionPreviewResponseProductCart>(
+        var deserialized = JsonSerializer.Deserialize<ProductCart>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1380,7 +1380,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new CheckoutSessionPreviewResponseProductCart
+        var model = new ProductCart
         {
             Currency = Currency.Aed,
             DiscountedPrice = 0,
@@ -1436,7 +1436,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new CheckoutSessionPreviewResponseProductCart
+        var model = new ProductCart
         {
             Currency = Currency.Aed,
             DiscountedPrice = 0,
@@ -1479,7 +1479,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new CheckoutSessionPreviewResponseProductCart
+        var model = new ProductCart
         {
             Currency = Currency.Aed,
             DiscountedPrice = 0,
@@ -1511,7 +1511,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new CheckoutSessionPreviewResponseProductCart
+        var model = new ProductCart
         {
             Currency = Currency.Aed,
             DiscountedPrice = 0,
@@ -1561,7 +1561,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new CheckoutSessionPreviewResponseProductCart
+        var model = new ProductCart
         {
             Currency = Currency.Aed,
             DiscountedPrice = 0,
@@ -1600,7 +1600,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new CheckoutSessionPreviewResponseProductCart
+        var model = new ProductCart
         {
             Currency = Currency.Aed,
             DiscountedPrice = 0,
@@ -1650,7 +1650,7 @@ public class CheckoutSessionPreviewResponseProductCartTest : TestBase
             Tax = 0,
         };
 
-        CheckoutSessionPreviewResponseProductCart copied = new(model);
+        ProductCart copied = new(model);
 
         Assert.Equal(model, copied);
     }

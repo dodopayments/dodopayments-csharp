@@ -20,6 +20,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            OnPaymentFailure = OnPaymentFailure.PreventChange,
         };
 
         string expectedSubscriptionID = "subscription_id";
@@ -29,6 +30,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
         int expectedQuantity = 0;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        ApiEnum<string, OnPaymentFailure> expectedOnPaymentFailure = OnPaymentFailure.PreventChange;
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
         Assert.Equal(expectedProductID, parameters.ProductID);
@@ -48,6 +50,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
 
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
+        Assert.Equal(expectedOnPaymentFailure, parameters.OnPaymentFailure);
     }
 
     [Fact]
@@ -65,6 +68,8 @@ public class SubscriptionChangePlanParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.OnPaymentFailure);
+        Assert.False(parameters.RawBodyData.ContainsKey("on_payment_failure"));
     }
 
     [Fact]
@@ -79,12 +84,15 @@ public class SubscriptionChangePlanParamsTest : TestBase
 
             Addons = null,
             Metadata = null,
+            OnPaymentFailure = null,
         };
 
         Assert.Null(parameters.Addons);
         Assert.True(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.Metadata);
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.OnPaymentFailure);
+        Assert.True(parameters.RawBodyData.ContainsKey("on_payment_failure"));
     }
 
     [Fact]
@@ -117,6 +125,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            OnPaymentFailure = OnPaymentFailure.PreventChange,
         };
 
         SubscriptionChangePlanParams copied = new(parameters);
@@ -177,6 +186,64 @@ public class ProrationBillingModeTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, ProrationBillingMode>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class OnPaymentFailureTest : TestBase
+{
+    [Theory]
+    [InlineData(OnPaymentFailure.PreventChange)]
+    [InlineData(OnPaymentFailure.ApplyChange)]
+    public void Validation_Works(OnPaymentFailure rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, OnPaymentFailure> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, OnPaymentFailure>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(OnPaymentFailure.PreventChange)]
+    [InlineData(OnPaymentFailure.ApplyChange)]
+    public void SerializationRoundtrip_Works(OnPaymentFailure rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, OnPaymentFailure> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, OnPaymentFailure>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, OnPaymentFailure>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, OnPaymentFailure>>(
             json,
             ModelBase.SerializerOptions
         );

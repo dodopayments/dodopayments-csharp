@@ -1094,6 +1094,21 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Summary of the refund status for this payment. None if no succeeded refunds exist.
+    /// </summary>
+    public ApiEnum<string, Payments::RefundStatus>? RefundStatus
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, Payments::RefundStatus>>(
+                "refund_status"
+            );
+        }
+        init { this._rawData.Set("refund_status", value); }
+    }
+
+    /// <summary>
     /// This represents the portion of settlement_amount that corresponds to taxes
     /// collected. Especially relevant for adaptive pricing where the tax component
     /// must be tracked separately in your Dodo balance.
@@ -1210,6 +1225,7 @@ public sealed record class Payment : JsonModel
             PaymentMethod = payment.PaymentMethod,
             PaymentMethodType = payment.PaymentMethodType,
             ProductCart = payment.ProductCart,
+            RefundStatus = payment.RefundStatus,
             SettlementTax = payment.SettlementTax,
             Status = payment.Status,
             SubscriptionID = payment.SubscriptionID,
@@ -1262,6 +1278,7 @@ public sealed record class Payment : JsonModel
         {
             item.Validate();
         }
+        this.RefundStatus?.Validate();
         _ = this.SettlementTax;
         this.Status?.Validate();
         _ = this.SubscriptionID;

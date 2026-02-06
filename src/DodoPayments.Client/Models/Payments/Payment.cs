@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
 using Refunds = DodoPayments.Client.Models.Refunds;
@@ -446,6 +447,19 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Summary of the refund status for this payment. None if no succeeded refunds exist.
+    /// </summary>
+    public ApiEnum<string, RefundStatus>? RefundStatus
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, RefundStatus>>("refund_status");
+        }
+        init { this._rawData.Set("refund_status", value); }
+    }
+
+    /// <summary>
     /// This represents the portion of settlement_amount that corresponds to taxes
     /// collected. Especially relevant for adaptive pricing where the tax component
     /// must be tracked separately in your Dodo balance.
@@ -557,6 +571,7 @@ public sealed record class Payment : JsonModel
         {
             item.Validate();
         }
+        this.RefundStatus?.Validate();
         _ = this.SettlementTax;
         this.Status?.Validate();
         _ = this.SubscriptionID;
@@ -907,4 +922,51 @@ class ProductCartFromRaw : IFromRawJson<ProductCart>
     /// <inheritdoc/>
     public ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         ProductCart.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Summary of the refund status for this payment. None if no succeeded refunds exist.
+/// </summary>
+[JsonConverter(typeof(RefundStatusConverter))]
+public enum RefundStatus
+{
+    Partial,
+    Full,
+}
+
+sealed class RefundStatusConverter : JsonConverter<RefundStatus>
+{
+    public override RefundStatus Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "partial" => RefundStatus.Partial,
+            "full" => RefundStatus.Full,
+            _ => (RefundStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        RefundStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                RefundStatus.Partial => "partial",
+                RefundStatus.Full => "full",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

@@ -110,6 +110,25 @@ public record class SubscriptionPreviewChangePlanParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Controls behavior when the plan change payment fails. - `prevent_change`:
+    /// Keep subscription on current plan until payment succeeds - `apply_change`
+    /// (default): Apply plan change immediately regardless of payment outcome
+    ///
+    /// <para>If not specified, uses the business-level default setting.</para>
+    /// </summary>
+    public ApiEnum<string, SubscriptionPreviewChangePlanParamsOnPaymentFailure>? OnPaymentFailure
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, SubscriptionPreviewChangePlanParamsOnPaymentFailure>
+            >("on_payment_failure");
+        }
+        init { this._rawBodyData.Set("on_payment_failure", value); }
+    }
+
     public SubscriptionPreviewChangePlanParams() { }
 
 #pragma warning disable CS8618
@@ -271,6 +290,59 @@ sealed class SubscriptionPreviewChangePlanParamsProrationBillingModeConverter
                     "full_immediately",
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.DifferenceImmediately =>
                     "difference_immediately",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Controls behavior when the plan change payment fails. - `prevent_change`: Keep
+/// subscription on current plan until payment succeeds - `apply_change` (default):
+/// Apply plan change immediately regardless of payment outcome
+///
+/// <para>If not specified, uses the business-level default setting.</para>
+/// </summary>
+[JsonConverter(typeof(SubscriptionPreviewChangePlanParamsOnPaymentFailureConverter))]
+public enum SubscriptionPreviewChangePlanParamsOnPaymentFailure
+{
+    PreventChange,
+    ApplyChange,
+}
+
+sealed class SubscriptionPreviewChangePlanParamsOnPaymentFailureConverter
+    : JsonConverter<SubscriptionPreviewChangePlanParamsOnPaymentFailure>
+{
+    public override SubscriptionPreviewChangePlanParamsOnPaymentFailure Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "prevent_change" => SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
+            "apply_change" => SubscriptionPreviewChangePlanParamsOnPaymentFailure.ApplyChange,
+            _ => (SubscriptionPreviewChangePlanParamsOnPaymentFailure)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionPreviewChangePlanParamsOnPaymentFailure value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange =>
+                    "prevent_change",
+                SubscriptionPreviewChangePlanParamsOnPaymentFailure.ApplyChange => "apply_change",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

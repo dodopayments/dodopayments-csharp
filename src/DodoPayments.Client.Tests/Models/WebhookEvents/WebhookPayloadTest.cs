@@ -95,6 +95,7 @@ public class WebhookPayloadTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                RefundStatus = Payments::RefundStatus.Partial,
                 SettlementTax = 0,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
@@ -181,6 +182,7 @@ public class WebhookPayloadTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -277,6 +279,7 @@ public class WebhookPayloadTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                RefundStatus = Payments::RefundStatus.Partial,
                 SettlementTax = 0,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
@@ -377,6 +380,7 @@ public class WebhookPayloadTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                RefundStatus = Payments::RefundStatus.Partial,
                 SettlementTax = 0,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
@@ -470,6 +474,7 @@ public class WebhookPayloadTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -566,6 +571,7 @@ public class WebhookPayloadTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                RefundStatus = Payments::RefundStatus.Partial,
                 SettlementTax = 0,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
@@ -660,6 +666,7 @@ public class WebhookPayloadTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+                RefundStatus = Payments::RefundStatus.Partial,
                 SettlementTax = 0,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
@@ -756,6 +763,7 @@ public class DataTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -986,6 +994,7 @@ public class DataTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1234,6 +1243,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1320,6 +1330,8 @@ public class PaymentTest : TestBase
         [
             new() { ProductID = "product_id", Quantity = 0 },
         ];
+        ApiEnum<string, Payments::RefundStatus> expectedRefundStatus =
+            Payments::RefundStatus.Partial;
         int expectedSettlementTax = 0;
         ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
@@ -1381,6 +1393,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedProductCart[i], model.ProductCart[i]);
         }
+        Assert.Equal(expectedRefundStatus, model.RefundStatus);
         Assert.Equal(expectedSettlementTax, model.SettlementTax);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
@@ -1466,6 +1479,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1557,6 +1571,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1650,6 +1665,8 @@ public class PaymentTest : TestBase
         [
             new() { ProductID = "product_id", Quantity = 0 },
         ];
+        ApiEnum<string, Payments::RefundStatus> expectedRefundStatus =
+            Payments::RefundStatus.Partial;
         int expectedSettlementTax = 0;
         ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
@@ -1711,6 +1728,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedProductCart[i], deserialized.ProductCart[i]);
         }
+        Assert.Equal(expectedRefundStatus, deserialized.RefundStatus);
         Assert.Equal(expectedSettlementTax, deserialized.SettlementTax);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
@@ -1796,6 +1814,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1883,6 +1902,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
@@ -1972,6 +1992,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
@@ -2058,6 +2079,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
@@ -2151,6 +2173,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
@@ -2261,6 +2284,8 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("payment_method_type"));
         Assert.Null(model.ProductCart);
         Assert.False(model.RawData.ContainsKey("product_cart"));
+        Assert.Null(model.RefundStatus);
+        Assert.False(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.SettlementTax);
         Assert.False(model.RawData.ContainsKey("settlement_tax"));
         Assert.Null(model.SubscriptionID);
@@ -2420,6 +2445,7 @@ public class PaymentTest : TestBase
             PaymentMethod = null,
             PaymentMethodType = null,
             ProductCart = null,
+            RefundStatus = null,
             SettlementTax = null,
             SubscriptionID = null,
             Tax = null,
@@ -2456,6 +2482,8 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("payment_method_type"));
         Assert.Null(model.ProductCart);
         Assert.True(model.RawData.ContainsKey("product_cart"));
+        Assert.Null(model.RefundStatus);
+        Assert.True(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.SettlementTax);
         Assert.True(model.RawData.ContainsKey("settlement_tax"));
         Assert.Null(model.SubscriptionID);
@@ -2546,6 +2574,7 @@ public class PaymentTest : TestBase
             PaymentMethod = null,
             PaymentMethodType = null,
             ProductCart = null,
+            RefundStatus = null,
             SettlementTax = null,
             SubscriptionID = null,
             Tax = null,
@@ -2632,6 +2661,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",

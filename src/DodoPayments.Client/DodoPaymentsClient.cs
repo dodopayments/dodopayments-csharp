@@ -199,6 +199,12 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         get { return _meters.Value; }
     }
 
+    readonly Lazy<IBalanceService> _balances;
+    public IBalanceService Balances
+    {
+        get { return _balances.Value; }
+    }
+
     public void Dispose() => this.HttpClient.Dispose();
 
     public DodoPaymentsClient()
@@ -226,6 +232,7 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         _webhookEvents = new(() => new WebhookEventService(this));
         _usageEvents = new(() => new UsageEventService(this));
         _meters = new(() => new MeterService(this));
+        _balances = new(() => new BalanceService(this));
     }
 
     public DodoPaymentsClient(ClientOptions options)
@@ -428,6 +435,12 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
     public IMeterServiceWithRawResponse Meters
     {
         get { return _meters.Value; }
+    }
+
+    readonly Lazy<IBalanceServiceWithRawResponse> _balances;
+    public IBalanceServiceWithRawResponse Balances
+    {
+        get { return _balances.Value; }
     }
 
     /// <inheritdoc/>
@@ -644,6 +657,7 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
         _webhookEvents = new(() => new WebhookEventServiceWithRawResponse(this));
         _usageEvents = new(() => new UsageEventServiceWithRawResponse(this));
         _meters = new(() => new MeterServiceWithRawResponse(this));
+        _balances = new(() => new BalanceServiceWithRawResponse(this));
     }
 
     public DodoPaymentsClientWithRawResponse(ClientOptions options)
