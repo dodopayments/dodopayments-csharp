@@ -10,6 +10,7 @@ using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.WebhookEvents;
+using Balances = DodoPayments.Client.Models.Balances;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Meters = DodoPayments.Client.Models.Meters;
 using Payouts = DodoPayments.Client.Models.Payouts;
@@ -36,29 +37,13 @@ public abstract record class ModelBase
         Converters =
         {
             new FrozenDictionaryConverterFactory(),
-            new ApiEnumConverter<string, CheckoutSessionRequestCustomFieldFieldType>(),
-            new ApiEnumConverter<string, CheckoutSessionRequestCustomizationTheme>(),
-            new ApiEnumConverter<string, CheckoutSessionRequestCustomizationThemeConfigFontSize>(),
-            new ApiEnumConverter<
-                string,
-                CheckoutSessionRequestCustomizationThemeConfigFontWeight
-            >(),
-            new ApiEnumConverter<string, Currency>(),
-            new ApiEnumConverter<string, FieldType>(),
             new ApiEnumConverter<string, Theme>(),
+            new ApiEnumConverter<string, FieldType>(),
             new ApiEnumConverter<string, FontSize>(),
             new ApiEnumConverter<string, FontWeight>(),
-            new ApiEnumConverter<string, CheckoutSessionPreviewParamsCustomFieldFieldType>(),
-            new ApiEnumConverter<string, CheckoutSessionPreviewParamsCustomizationTheme>(),
-            new ApiEnumConverter<
-                string,
-                CheckoutSessionPreviewParamsCustomizationThemeConfigFontSize
-            >(),
-            new ApiEnumConverter<
-                string,
-                CheckoutSessionPreviewParamsCustomizationThemeConfigFontWeight
-            >(),
+            new ApiEnumConverter<string, Currency>(),
             new ApiEnumConverter<string, IntentStatus>(),
+            new ApiEnumConverter<string, RefundStatus>(),
             new ApiEnumConverter<string, PaymentMethodTypes>(),
             new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
@@ -68,9 +53,14 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::LineItemMeterType>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
+            new ApiEnumConverter<string, Subscriptions::OnPaymentFailure>(),
             new ApiEnumConverter<
                 string,
                 Subscriptions::SubscriptionPreviewChangePlanParamsProrationBillingMode
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionPreviewChangePlanParamsOnPaymentFailure
             >(),
             new ApiEnumConverter<string, Subscriptions::Type>(),
             new ApiEnumConverter<string, Subscriptions::ExistingType>(),
@@ -158,6 +148,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Meters::ClausesMeterFilterClausesMeterFilterConjunction>(),
             new ApiEnumConverter<string, Meters::ClausesMeterFilterConjunction>(),
             new ApiEnumConverter<string, Meters::MeterFilterConjunction>(),
+            new ApiEnumConverter<string, Balances::BalanceLedgerEntryEventType>(),
+            new ApiEnumConverter<string, Balances::Currency>(),
+            new ApiEnumConverter<string, Balances::EventType>(),
         },
     };
 

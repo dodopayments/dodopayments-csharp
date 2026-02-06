@@ -21,6 +21,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
         };
 
         string expectedSubscriptionID = "subscription_id";
@@ -33,6 +34,11 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         int expectedQuantity = 0;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        ApiEnum<
+            string,
+            SubscriptionPreviewChangePlanParamsOnPaymentFailure
+        > expectedOnPaymentFailure =
+            SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange;
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
         Assert.Equal(expectedProductID, parameters.ProductID);
@@ -52,6 +58,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
 
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
+        Assert.Equal(expectedOnPaymentFailure, parameters.OnPaymentFailure);
     }
 
     [Fact]
@@ -70,6 +77,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.OnPaymentFailure);
+        Assert.False(parameters.RawBodyData.ContainsKey("on_payment_failure"));
     }
 
     [Fact]
@@ -85,12 +94,15 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
 
             Addons = null,
             Metadata = null,
+            OnPaymentFailure = null,
         };
 
         Assert.Null(parameters.Addons);
         Assert.True(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.Metadata);
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.OnPaymentFailure);
+        Assert.True(parameters.RawBodyData.ContainsKey("on_payment_failure"));
     }
 
     [Fact]
@@ -127,6 +139,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
         };
 
         SubscriptionPreviewChangePlanParams copied = new(parameters);
@@ -187,6 +200,62 @@ public class SubscriptionPreviewChangePlanParamsProrationBillingModeTest : TestB
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionPreviewChangePlanParamsProrationBillingMode>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionPreviewChangePlanParamsOnPaymentFailureTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange)]
+    [InlineData(SubscriptionPreviewChangePlanParamsOnPaymentFailure.ApplyChange)]
+    public void Validation_Works(SubscriptionPreviewChangePlanParamsOnPaymentFailure rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionPreviewChangePlanParamsOnPaymentFailure> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewChangePlanParamsOnPaymentFailure>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange)]
+    [InlineData(SubscriptionPreviewChangePlanParamsOnPaymentFailure.ApplyChange)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionPreviewChangePlanParamsOnPaymentFailure rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionPreviewChangePlanParamsOnPaymentFailure> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewChangePlanParamsOnPaymentFailure>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewChangePlanParamsOnPaymentFailure>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewChangePlanParamsOnPaymentFailure>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

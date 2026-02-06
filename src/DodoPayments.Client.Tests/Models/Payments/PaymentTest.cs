@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
@@ -88,6 +89,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = RefundStatus.Partial,
             SettlementTax = 0,
             Status = IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -170,6 +172,7 @@ public class PaymentTest : TestBase
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
         List<ProductCart> expectedProductCart = [new() { ProductID = "product_id", Quantity = 0 }];
+        ApiEnum<string, RefundStatus> expectedRefundStatus = RefundStatus.Partial;
         int expectedSettlementTax = 0;
         ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
@@ -230,6 +233,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedProductCart[i], model.ProductCart[i]);
         }
+        Assert.Equal(expectedRefundStatus, model.RefundStatus);
         Assert.Equal(expectedSettlementTax, model.SettlementTax);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
@@ -314,6 +318,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = RefundStatus.Partial,
             SettlementTax = 0,
             Status = IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -404,6 +409,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = RefundStatus.Partial,
             SettlementTax = 0,
             Status = IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -493,6 +499,7 @@ public class PaymentTest : TestBase
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
         List<ProductCart> expectedProductCart = [new() { ProductID = "product_id", Quantity = 0 }];
+        ApiEnum<string, RefundStatus> expectedRefundStatus = RefundStatus.Partial;
         int expectedSettlementTax = 0;
         ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
@@ -553,6 +560,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedProductCart[i], deserialized.ProductCart[i]);
         }
+        Assert.Equal(expectedRefundStatus, deserialized.RefundStatus);
         Assert.Equal(expectedSettlementTax, deserialized.SettlementTax);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
@@ -637,6 +645,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = RefundStatus.Partial,
             SettlementTax = 0,
             Status = IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -742,6 +751,8 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("payment_method_type"));
         Assert.Null(model.ProductCart);
         Assert.False(model.RawData.ContainsKey("product_cart"));
+        Assert.Null(model.RefundStatus);
+        Assert.False(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.SettlementTax);
         Assert.False(model.RawData.ContainsKey("settlement_tax"));
         Assert.Null(model.Status);
@@ -898,6 +909,7 @@ public class PaymentTest : TestBase
             PaymentMethod = null,
             PaymentMethodType = null,
             ProductCart = null,
+            RefundStatus = null,
             SettlementTax = null,
             Status = null,
             SubscriptionID = null,
@@ -937,6 +949,8 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("payment_method_type"));
         Assert.Null(model.ProductCart);
         Assert.True(model.RawData.ContainsKey("product_cart"));
+        Assert.Null(model.RefundStatus);
+        Assert.True(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.SettlementTax);
         Assert.True(model.RawData.ContainsKey("settlement_tax"));
         Assert.Null(model.Status);
@@ -1027,6 +1041,7 @@ public class PaymentTest : TestBase
             PaymentMethod = null,
             PaymentMethodType = null,
             ProductCart = null,
+            RefundStatus = null,
             SettlementTax = null,
             Status = null,
             SubscriptionID = null,
@@ -1114,6 +1129,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
+            RefundStatus = RefundStatus.Partial,
             SettlementTax = 0,
             Status = IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1481,5 +1497,63 @@ public class ProductCartTest : TestBase
         ProductCart copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class RefundStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(RefundStatus.Partial)]
+    [InlineData(RefundStatus.Full)]
+    public void Validation_Works(RefundStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, RefundStatus> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, RefundStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(RefundStatus.Partial)]
+    [InlineData(RefundStatus.Full)]
+    public void SerializationRoundtrip_Works(RefundStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, RefundStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, RefundStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, RefundStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, RefundStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
