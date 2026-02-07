@@ -19,7 +19,7 @@ public class UnwrapWebhookEventTest : TestBase
     {
         UnwrapWebhookEvent value = new DisputeAcceptedWebhookEvent()
         {
-            STAINLESS_FIXME_BusinessID = "business_id",
+            BusinessID = "business_id",
             STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
@@ -32,7 +32,7 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeAccepted,
         };
         value.Validate();
@@ -1212,7 +1212,7 @@ public class UnwrapWebhookEventTest : TestBase
     {
         UnwrapWebhookEvent value = new DisputeAcceptedWebhookEvent()
         {
-            STAINLESS_FIXME_BusinessID = "business_id",
+            BusinessID = "business_id",
             STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
@@ -1225,7 +1225,7 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeAccepted,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
