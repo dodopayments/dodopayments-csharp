@@ -17,7 +17,7 @@ public class PriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -85,7 +85,7 @@ public class PriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -165,7 +165,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -175,7 +175,7 @@ public class OneTimePriceTest : TestBase
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         long expectedDiscount = 0;
-        int expectedPrice = 0;
+        int expectedPriceValue = 0;
         bool expectedPurchasingPowerParity = true;
         ApiEnum<string, Type> expectedType = Type.OneTimePrice;
         bool expectedPayWhatYouWant = true;
@@ -184,7 +184,7 @@ public class OneTimePriceTest : TestBase
 
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedDiscount, model.Discount);
-        Assert.Equal(expectedPrice, model.Price);
+        Assert.Equal(expectedPriceValue, model.PriceValue);
         Assert.Equal(expectedPurchasingPowerParity, model.PurchasingPowerParity);
         Assert.Equal(expectedType, model.Type);
         Assert.Equal(expectedPayWhatYouWant, model.PayWhatYouWant);
@@ -199,7 +199,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -223,7 +223,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -240,7 +240,7 @@ public class OneTimePriceTest : TestBase
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         long expectedDiscount = 0;
-        int expectedPrice = 0;
+        int expectedPriceValue = 0;
         bool expectedPurchasingPowerParity = true;
         ApiEnum<string, Type> expectedType = Type.OneTimePrice;
         bool expectedPayWhatYouWant = true;
@@ -249,7 +249,7 @@ public class OneTimePriceTest : TestBase
 
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedDiscount, deserialized.Discount);
-        Assert.Equal(expectedPrice, deserialized.Price);
+        Assert.Equal(expectedPriceValue, deserialized.PriceValue);
         Assert.Equal(expectedPurchasingPowerParity, deserialized.PurchasingPowerParity);
         Assert.Equal(expectedType, deserialized.Type);
         Assert.Equal(expectedPayWhatYouWant, deserialized.PayWhatYouWant);
@@ -264,7 +264,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -282,7 +282,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             SuggestedPrice = 0,
@@ -300,7 +300,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             SuggestedPrice = 0,
@@ -317,7 +317,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             SuggestedPrice = 0,
@@ -338,7 +338,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             SuggestedPrice = 0,
@@ -358,7 +358,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -377,7 +377,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -393,7 +393,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -415,7 +415,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -434,7 +434,7 @@ public class OneTimePriceTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Type.OneTimePrice,
             PayWhatYouWant = true,
