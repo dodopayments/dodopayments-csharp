@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.7.1 (2026-02-07)
+
+Full Changelog: [v6.7.0...v6.7.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.7.0...v6.7.1)
+
+### Bug Fixes
+
+* **client:** handle edge case with renamed variable ([8b2d2a3](https://github.com/dodopayments/dodopayments-csharp/commit/8b2d2a3a9abd13a20d7fd9c95cafa474925ed1c8))
+
 ## 6.7.0 (2026-02-06)
 
 Full Changelog: [v6.6.0...v6.7.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.6.0...v6.7.0)
