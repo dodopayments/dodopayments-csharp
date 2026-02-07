@@ -57,12 +57,12 @@ public record class Price : ModelBase
         }
     }
 
-    public int? Price1
+    public int? PriceValue
     {
         get
         {
             return Match<int?>(
-                oneTime: (x) => x.Price,
+                oneTime: (x) => x.PriceValue,
                 recurring: (x) => x.Price,
                 usageBased: (_) => null
             );
@@ -467,7 +467,7 @@ public sealed record class OneTimePrice : JsonModel
     /// <para>If [`pay_what_you_want`](Self::pay_what_you_want) is set to `true`,
     /// this field represents the **minimum** amount the customer must pay.</para>
     /// </summary>
-    public required int Price
+    public required int PriceValue
     {
         get
         {
@@ -557,7 +557,7 @@ public sealed record class OneTimePrice : JsonModel
     {
         this.Currency.Validate();
         _ = this.Discount;
-        _ = this.Price;
+        _ = this.PriceValue;
         _ = this.PurchasingPowerParity;
         this.Type.Validate();
         _ = this.PayWhatYouWant;

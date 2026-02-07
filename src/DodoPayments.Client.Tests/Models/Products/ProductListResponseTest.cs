@@ -30,7 +30,7 @@ public class ProductListResponseTest : TestBase
             {
                 Currency = Currency.Aed,
                 Discount = 0,
-                Price = 0,
+                PriceValue = 0,
                 PurchasingPowerParity = true,
                 Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
@@ -56,7 +56,7 @@ public class ProductListResponseTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Products::Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -108,7 +108,7 @@ public class ProductListResponseTest : TestBase
             {
                 Currency = Currency.Aed,
                 Discount = 0,
-                Price = 0,
+                PriceValue = 0,
                 PurchasingPowerParity = true,
                 Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
@@ -148,7 +148,7 @@ public class ProductListResponseTest : TestBase
             {
                 Currency = Currency.Aed,
                 Discount = 0,
-                Price = 0,
+                PriceValue = 0,
                 PurchasingPowerParity = true,
                 Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
@@ -181,7 +181,7 @@ public class ProductListResponseTest : TestBase
         {
             Currency = Currency.Aed,
             Discount = 0,
-            Price = 0,
+            PriceValue = 0,
             PurchasingPowerParity = true,
             Type = Products::Type.OneTimePrice,
             PayWhatYouWant = true,
@@ -233,7 +233,7 @@ public class ProductListResponseTest : TestBase
             {
                 Currency = Currency.Aed,
                 Discount = 0,
-                Price = 0,
+                PriceValue = 0,
                 PurchasingPowerParity = true,
                 Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
@@ -377,7 +377,7 @@ public class ProductListResponseTest : TestBase
             {
                 Currency = Currency.Aed,
                 Discount = 0,
-                Price = 0,
+                PriceValue = 0,
                 PurchasingPowerParity = true,
                 Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,

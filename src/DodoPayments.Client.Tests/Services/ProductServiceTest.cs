@@ -17,7 +17,7 @@ public class ProductServiceTest : TestBase
                 {
                     Currency = Currency.Aed,
                     Discount = 0,
-                    Price = 0,
+                    PriceValue = 0,
                     PurchasingPowerParity = true,
                     Type = Type.OneTimePrice,
                     PayWhatYouWant = true,

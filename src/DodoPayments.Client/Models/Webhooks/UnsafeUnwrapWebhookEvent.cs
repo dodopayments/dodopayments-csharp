@@ -30,7 +30,7 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
         get
         {
             return Match(
-                disputeAccepted: (x) => x.STAINLESS_FIXME_BusinessID,
+                disputeAccepted: (x) => x.BusinessID,
                 disputeCancelled: (x) => x.STAINLESS_FIXME_BusinessID,
                 disputeChallenged: (x) => x.STAINLESS_FIXME_BusinessID,
                 disputeExpired: (x) => x.STAINLESS_FIXME_BusinessID,
@@ -61,7 +61,7 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
         get
         {
             return Match(
-                disputeAccepted: (x) => x.STAINLESS_FIXME_Timestamp,
+                disputeAccepted: (x) => x.Timestamp,
                 disputeCancelled: (x) => x.STAINLESS_FIXME_Timestamp,
                 disputeChallenged: (x) => x.STAINLESS_FIXME_Timestamp,
                 disputeExpired: (x) => x.STAINLESS_FIXME_Timestamp,
