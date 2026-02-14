@@ -1,5 +1,19 @@
 # Changelog
 
+## 6.8.0 (2026-02-14)
+
+Full Changelog: [v6.7.0...v6.8.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.7.0...v6.8.0)
+
+### Features
+
+* **client:** add equality and tostring for multipart data ([2613ab0](https://github.com/dodopayments/dodopayments-csharp/commit/2613ab0cd4bc202b74d7edbb1f0568fb86d62f15))
+
+
+### Bug Fixes
+
+* **client:** handle edge case with renamed variable ([8b2d2a3](https://github.com/dodopayments/dodopayments-csharp/commit/8b2d2a3a9abd13a20d7fd9c95cafa474925ed1c8))
+* **client:** improve behaviour for comma-delimited binary content in multipart requests ([2a28a5a](https://github.com/dodopayments/dodopayments-csharp/commit/2a28a5aa88e346cd90c23ee00c22ff0fb2f68214))
+
 ## 6.7.0 (2026-02-06)
 
 Full Changelog: [v6.6.0...v6.7.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.6.0...v6.7.0)
