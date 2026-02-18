@@ -272,6 +272,22 @@ public record class Clauses : ModelBase
         {
             throw new DodoPaymentsInvalidDataException("Data did not match any variant of Clauses");
         }
+        this.Switch(
+            (directFilterConditions) =>
+            {
+                foreach (var item in directFilterConditions)
+                {
+                    item.Validate();
+                }
+            },
+            (nestedMeterFilters) =>
+            {
+                foreach (var item in nestedMeterFilters)
+                {
+                    item.Validate();
+                }
+            }
+        );
     }
 
     public virtual bool Equals(Clauses? other) =>
@@ -318,6 +334,10 @@ sealed class ClausesConverter : JsonConverter<Clauses>
             );
             if (deserialized != null)
             {
+                foreach (var item in deserialized)
+                {
+                    item.Validate();
+                }
                 return new(deserialized, element);
             }
         }
@@ -335,6 +355,10 @@ sealed class ClausesConverter : JsonConverter<Clauses>
             );
             if (deserialized != null)
             {
+                foreach (var item in deserialized)
+                {
+                    item.Validate();
+                }
                 return new(deserialized, element);
             }
         }
@@ -1073,6 +1097,22 @@ public record class ClausesMeterFilterClauses : ModelBase
                 "Data did not match any variant of ClausesMeterFilterClauses"
             );
         }
+        this.Switch(
+            (level1FilterConditions) =>
+            {
+                foreach (var item in level1FilterConditions)
+                {
+                    item.Validate();
+                }
+            },
+            (level1NestedFilters) =>
+            {
+                foreach (var item in level1NestedFilters)
+                {
+                    item.Validate();
+                }
+            }
+        );
     }
 
     public virtual bool Equals(ClausesMeterFilterClauses? other) =>
@@ -1118,6 +1158,10 @@ sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilt
             >(element, options);
             if (deserialized != null)
             {
+                foreach (var item in deserialized)
+                {
+                    item.Validate();
+                }
                 return new(deserialized, element);
             }
         }
@@ -1134,6 +1178,10 @@ sealed class ClausesMeterFilterClausesConverter : JsonConverter<ClausesMeterFilt
             >(element, options);
             if (deserialized != null)
             {
+                foreach (var item in deserialized)
+                {
+                    item.Validate();
+                }
                 return new(deserialized, element);
             }
         }
@@ -1938,6 +1986,22 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
                 "Data did not match any variant of ClausesMeterFilterClausesMeterFilterClauses"
             );
         }
+        this.Switch(
+            (level2FilterConditions) =>
+            {
+                foreach (var item in level2FilterConditions)
+                {
+                    item.Validate();
+                }
+            },
+            (level2NestedFilters) =>
+            {
+                foreach (var item in level2NestedFilters)
+                {
+                    item.Validate();
+                }
+            }
+        );
     }
 
     public virtual bool Equals(ClausesMeterFilterClausesMeterFilterClauses? other) =>
@@ -1984,6 +2048,10 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
             >(element, options);
             if (deserialized != null)
             {
+                foreach (var item in deserialized)
+                {
+                    item.Validate();
+                }
                 return new(deserialized, element);
             }
         }
@@ -2000,6 +2068,10 @@ sealed class ClausesMeterFilterClausesMeterFilterClausesConverter
             >(element, options);
             if (deserialized != null)
             {
+                foreach (var item in deserialized)
+                {
+                    item.Validate();
+                }
                 return new(deserialized, element);
             }
         }
