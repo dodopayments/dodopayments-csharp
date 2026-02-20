@@ -112,6 +112,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -139,6 +140,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
         };
 
         List<ProductItemReq> expectedProductCart =
@@ -242,6 +244,7 @@ public class CheckoutSessionRequestTest : TestBase
             AllowCustomerEditingName = true,
             AllowCustomerEditingState = true,
             AllowCustomerEditingStreet = true,
+            AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
             AllowPhoneNumberCollection = true,
@@ -269,6 +272,7 @@ public class CheckoutSessionRequestTest : TestBase
             },
             TrialPeriodDays = 0,
         };
+        string expectedTaxID = "tax_id";
 
         Assert.Equal(expectedProductCart.Count, model.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
@@ -313,6 +317,7 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.Equal(expectedShortLink, model.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, model.ShowSavedPaymentMethods);
         Assert.Equal(expectedSubscriptionData, model.SubscriptionData);
+        Assert.Equal(expectedTaxID, model.TaxID);
     }
 
     [Fact]
@@ -418,6 +423,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -445,6 +451,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -559,6 +566,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -586,6 +594,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -696,6 +705,7 @@ public class CheckoutSessionRequestTest : TestBase
             AllowCustomerEditingName = true,
             AllowCustomerEditingState = true,
             AllowCustomerEditingStreet = true,
+            AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
             AllowPhoneNumberCollection = true,
@@ -723,6 +733,7 @@ public class CheckoutSessionRequestTest : TestBase
             },
             TrialPeriodDays = 0,
         };
+        string expectedTaxID = "tax_id";
 
         Assert.Equal(expectedProductCart.Count, deserialized.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
@@ -770,6 +781,7 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.Equal(expectedShortLink, deserialized.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, deserialized.ShowSavedPaymentMethods);
         Assert.Equal(expectedSubscriptionData, deserialized.SubscriptionData);
+        Assert.Equal(expectedTaxID, deserialized.TaxID);
     }
 
     [Fact]
@@ -875,6 +887,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -902,6 +915,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
         };
 
         model.Validate();
@@ -963,6 +977,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
         };
 
         Assert.Null(model.Confirm);
@@ -1035,6 +1050,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
         };
 
         model.Validate();
@@ -1096,6 +1112,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
 
             // Null should be interpreted as omitted for these properties
             Confirm = null,
@@ -1176,6 +1193,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
 
             // Null should be interpreted as omitted for these properties
             Confirm = null,
@@ -1268,6 +1286,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -1304,6 +1323,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("return_url"));
         Assert.Null(model.SubscriptionData);
         Assert.False(model.RawData.ContainsKey("subscription_data"));
+        Assert.Null(model.TaxID);
+        Assert.False(model.RawData.ContainsKey("tax_id"));
     }
 
     [Fact]
@@ -1385,6 +1406,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -1479,6 +1501,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -1502,6 +1525,7 @@ public class CheckoutSessionRequestTest : TestBase
             ProductCollectionID = null,
             ReturnUrl = null,
             SubscriptionData = null,
+            TaxID = null,
         };
 
         Assert.Null(model.AllowedPaymentMethodTypes);
@@ -1528,6 +1552,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.True(model.RawData.ContainsKey("return_url"));
         Assert.Null(model.SubscriptionData);
         Assert.True(model.RawData.ContainsKey("subscription_data"));
+        Assert.Null(model.TaxID);
+        Assert.True(model.RawData.ContainsKey("tax_id"));
     }
 
     [Fact]
@@ -1609,6 +1635,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -1632,6 +1659,7 @@ public class CheckoutSessionRequestTest : TestBase
             ProductCollectionID = null,
             ReturnUrl = null,
             SubscriptionData = null,
+            TaxID = null,
         };
 
         model.Validate();
@@ -1740,6 +1768,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -1767,6 +1796,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
         };
 
         CheckoutSessionRequest copied = new(model);

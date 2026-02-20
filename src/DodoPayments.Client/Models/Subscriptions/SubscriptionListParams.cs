@@ -144,6 +144,27 @@ public record class SubscriptionListParams : ParamsBase
     }
 
     /// <summary>
+    /// Filter by product id
+    /// </summary>
+    public string? ProductID
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("product_id");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("product_id", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by status
     /// </summary>
     public ApiEnum<string, Status>? Status

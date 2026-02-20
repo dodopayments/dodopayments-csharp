@@ -19,6 +19,7 @@ public class PaymentListParamsTest : TestBase
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
+            ProductID = "product_id",
             Status = Status.Succeeded,
             SubscriptionID = "subscription_id",
         };
@@ -29,6 +30,7 @@ public class PaymentListParamsTest : TestBase
         string expectedCustomerID = "customer_id";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
+        string expectedProductID = "product_id";
         ApiEnum<string, Status> expectedStatus = Status.Succeeded;
         string expectedSubscriptionID = "subscription_id";
 
@@ -38,6 +40,7 @@ public class PaymentListParamsTest : TestBase
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
+        Assert.Equal(expectedProductID, parameters.ProductID);
         Assert.Equal(expectedStatus, parameters.Status);
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
     }
@@ -59,6 +62,8 @@ public class PaymentListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
+        Assert.Null(parameters.ProductID);
+        Assert.False(parameters.RawQueryData.ContainsKey("product_id"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
         Assert.Null(parameters.SubscriptionID);
@@ -77,6 +82,7 @@ public class PaymentListParamsTest : TestBase
             CustomerID = null,
             PageNumber = null,
             PageSize = null,
+            ProductID = null,
             Status = null,
             SubscriptionID = null,
         };
@@ -93,6 +99,8 @@ public class PaymentListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
+        Assert.Null(parameters.ProductID);
+        Assert.False(parameters.RawQueryData.ContainsKey("product_id"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
         Assert.Null(parameters.SubscriptionID);
@@ -110,6 +118,7 @@ public class PaymentListParamsTest : TestBase
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
+            ProductID = "product_id",
             Status = Status.Succeeded,
             SubscriptionID = "subscription_id",
         };
@@ -118,7 +127,7 @@ public class PaymentListParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://live.dodopayments.com/payments?brand_id=brand_id&created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&status=succeeded&subscription_id=subscription_id"
+                "https://live.dodopayments.com/payments?brand_id=brand_id&created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&product_id=product_id&status=succeeded&subscription_id=subscription_id"
             ),
             url
         );
@@ -135,6 +144,7 @@ public class PaymentListParamsTest : TestBase
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
+            ProductID = "product_id",
             Status = Status.Succeeded,
             SubscriptionID = "subscription_id",
         };

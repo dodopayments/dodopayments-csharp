@@ -62,6 +62,16 @@ public sealed record class PaymentListResponse : JsonModel
         init { this._rawData.Set("digital_products_delivered", value); }
     }
 
+    public required bool HasLicenseKey
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("has_license_key");
+        }
+        init { this._rawData.Set("has_license_key", value); }
+    }
+
     public required IReadOnlyDictionary<string, string> Metadata
     {
         get
@@ -172,6 +182,7 @@ public sealed record class PaymentListResponse : JsonModel
         this.Currency.Validate();
         this.Customer.Validate();
         _ = this.DigitalProductsDelivered;
+        _ = this.HasLicenseKey;
         _ = this.Metadata;
         _ = this.PaymentID;
         _ = this.TotalAmount;

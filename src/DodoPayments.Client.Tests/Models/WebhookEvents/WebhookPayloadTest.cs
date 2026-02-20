@@ -790,6 +790,29 @@ public class DataTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -800,6 +823,17 @@ public class DataTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -918,6 +952,50 @@ public class DataTest : TestBase
     }
 
     [Fact]
+    public void CreditLedgerEntryValidationWorks()
+    {
+        Data value = new CreditLedgerEntry()
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+            Description = "description",
+            GrantID = "grant_id",
+            ReferenceID = "reference_id",
+            ReferenceType = "reference_type",
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditBalanceLowValidationWorks()
+    {
+        Data value = new CreditBalanceLow()
+        {
+            AvailableBalance = "available_balance",
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CustomerID = "customer_id",
+            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
+            SubscriptionCreditsAmount = "subscription_credits_amount",
+            SubscriptionID = "subscription_id",
+            ThresholdAmount = "threshold_amount",
+            ThresholdPercent = 0,
+        };
+        value.Validate();
+    }
+
+    [Fact]
     public void PaymentSerializationRoundtripWorks()
     {
         Data value = new Payment()
@@ -1024,6 +1102,29 @@ public class DataTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -1034,6 +1135,17 @@ public class DataTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -1156,6 +1268,56 @@ public class DataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
             SubscriptionID = "subscription_id",
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditLedgerEntrySerializationRoundtripWorks()
+    {
+        Data value = new CreditLedgerEntry()
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+            Description = "description",
+            GrantID = "grant_id",
+            ReferenceID = "reference_id",
+            ReferenceType = "reference_type",
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditBalanceLowSerializationRoundtripWorks()
+    {
+        Data value = new CreditBalanceLow()
+        {
+            AvailableBalance = "available_balance",
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CustomerID = "customer_id",
+            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
+            SubscriptionCreditsAmount = "subscription_credits_amount",
+            SubscriptionID = "subscription_id",
+            ThresholdAmount = "threshold_amount",
+            ThresholdPercent = 0,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -2812,6 +2974,29 @@ public class SubscriptionTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -2822,6 +3007,17 @@ public class SubscriptionTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -2873,6 +3069,29 @@ public class SubscriptionTest : TestBase
         };
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<Subscriptions::SubscriptionCreditEntitlementCart> expectedCreditEntitlementCart =
+        [
+            new()
+            {
+                CreditEntitlementID = "credit_entitlement_id",
+                CreditEntitlementName = "credit_entitlement_name",
+                CreditsAmount = "credits_amount",
+                OverageBalance = "overage_balance",
+                OverageChargeAtBilling = true,
+                OverageEnabled = true,
+                ProductID = "product_id",
+                RemainingBalance = "remaining_balance",
+                RolloverEnabled = true,
+                Unit = "unit",
+                ExpiresAfterDays = 0,
+                LowBalanceThresholdPercent = 0,
+                MaxRolloverCount = 0,
+                OverageLimit = "overage_limit",
+                RolloverPercentage = 0,
+                RolloverTimeframeCount = 0,
+                RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+            },
+        ];
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         Payments::CustomerLimitedDetails expectedCustomer = new()
         {
@@ -2883,6 +3102,17 @@ public class SubscriptionTest : TestBase
             PhoneNumber = "phone_number",
         };
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        List<Subscriptions::MeterCreditEntitlementCart> expectedMeterCreditEntitlementCart =
+        [
+            new()
+            {
+                CreditEntitlementID = "credit_entitlement_id",
+                MeterID = "meter_id",
+                MeterName = "meter_name",
+                MeterUnitsPerCredit = "meter_units_per_credit",
+                ProductID = "product_id",
+            },
+        ];
         List<Subscriptions::Meter> expectedMeters =
         [
             new()
@@ -2936,6 +3166,11 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedBilling, model.Billing);
         Assert.Equal(expectedCancelAtNextBillingDate, model.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedCreditEntitlementCart.Count, model.CreditEntitlementCart.Count);
+        for (int i = 0; i < expectedCreditEntitlementCart.Count; i++)
+        {
+            Assert.Equal(expectedCreditEntitlementCart[i], model.CreditEntitlementCart[i]);
+        }
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedCustomer, model.Customer);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
@@ -2944,6 +3179,17 @@ public class SubscriptionTest : TestBase
             Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
 
             Assert.Equal(value, model.Metadata[item.Key]);
+        }
+        Assert.Equal(
+            expectedMeterCreditEntitlementCart.Count,
+            model.MeterCreditEntitlementCart.Count
+        );
+        for (int i = 0; i < expectedMeterCreditEntitlementCart.Count; i++)
+        {
+            Assert.Equal(
+                expectedMeterCreditEntitlementCart[i],
+                model.MeterCreditEntitlementCart[i]
+            );
         }
         Assert.Equal(expectedMeters.Count, model.Meters.Count);
         for (int i = 0; i < expectedMeters.Count; i++)
@@ -2995,6 +3241,29 @@ public class SubscriptionTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -3005,6 +3274,17 @@ public class SubscriptionTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -3067,6 +3347,29 @@ public class SubscriptionTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -3077,6 +3380,17 @@ public class SubscriptionTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -3135,6 +3449,29 @@ public class SubscriptionTest : TestBase
         };
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<Subscriptions::SubscriptionCreditEntitlementCart> expectedCreditEntitlementCart =
+        [
+            new()
+            {
+                CreditEntitlementID = "credit_entitlement_id",
+                CreditEntitlementName = "credit_entitlement_name",
+                CreditsAmount = "credits_amount",
+                OverageBalance = "overage_balance",
+                OverageChargeAtBilling = true,
+                OverageEnabled = true,
+                ProductID = "product_id",
+                RemainingBalance = "remaining_balance",
+                RolloverEnabled = true,
+                Unit = "unit",
+                ExpiresAfterDays = 0,
+                LowBalanceThresholdPercent = 0,
+                MaxRolloverCount = 0,
+                OverageLimit = "overage_limit",
+                RolloverPercentage = 0,
+                RolloverTimeframeCount = 0,
+                RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+            },
+        ];
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         Payments::CustomerLimitedDetails expectedCustomer = new()
         {
@@ -3145,6 +3482,17 @@ public class SubscriptionTest : TestBase
             PhoneNumber = "phone_number",
         };
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        List<Subscriptions::MeterCreditEntitlementCart> expectedMeterCreditEntitlementCart =
+        [
+            new()
+            {
+                CreditEntitlementID = "credit_entitlement_id",
+                MeterID = "meter_id",
+                MeterName = "meter_name",
+                MeterUnitsPerCredit = "meter_units_per_credit",
+                ProductID = "product_id",
+            },
+        ];
         List<Subscriptions::Meter> expectedMeters =
         [
             new()
@@ -3198,6 +3546,11 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedBilling, deserialized.Billing);
         Assert.Equal(expectedCancelAtNextBillingDate, deserialized.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedCreditEntitlementCart.Count, deserialized.CreditEntitlementCart.Count);
+        for (int i = 0; i < expectedCreditEntitlementCart.Count; i++)
+        {
+            Assert.Equal(expectedCreditEntitlementCart[i], deserialized.CreditEntitlementCart[i]);
+        }
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedCustomer, deserialized.Customer);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
@@ -3206,6 +3559,17 @@ public class SubscriptionTest : TestBase
             Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
 
             Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
+        Assert.Equal(
+            expectedMeterCreditEntitlementCart.Count,
+            deserialized.MeterCreditEntitlementCart.Count
+        );
+        for (int i = 0; i < expectedMeterCreditEntitlementCart.Count; i++)
+        {
+            Assert.Equal(
+                expectedMeterCreditEntitlementCart[i],
+                deserialized.MeterCreditEntitlementCart[i]
+            );
         }
         Assert.Equal(expectedMeters.Count, deserialized.Meters.Count);
         for (int i = 0; i < expectedMeters.Count; i++)
@@ -3257,6 +3621,29 @@ public class SubscriptionTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -3267,6 +3654,17 @@ public class SubscriptionTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -3323,6 +3721,29 @@ public class SubscriptionTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -3333,6 +3754,17 @@ public class SubscriptionTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -3395,6 +3827,29 @@ public class SubscriptionTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -3405,6 +3860,17 @@ public class SubscriptionTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -3454,6 +3920,29 @@ public class SubscriptionTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -3464,6 +3953,17 @@ public class SubscriptionTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -3534,6 +4034,29 @@ public class SubscriptionTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -3544,6 +4067,17 @@ public class SubscriptionTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -3601,6 +4135,29 @@ public class SubscriptionTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -3611,6 +4168,17 @@ public class SubscriptionTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -5281,6 +5849,678 @@ public class LicenseKeyIntersectionMember1PayloadTypeTest : TestBase
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
         >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class CreditLedgerEntryTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CreditLedgerEntry
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+            Description = "description",
+            GrantID = "grant_id",
+            ReferenceID = "reference_id",
+            ReferenceType = "reference_type",
+        };
+
+        string expectedID = "id";
+        string expectedAmount = "amount";
+        string expectedBalanceAfter = "balance_after";
+        string expectedBalanceBefore = "balance_before";
+        string expectedBusinessID = "business_id";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedCreditEntitlementID = "credit_entitlement_id";
+        string expectedCustomerID = "customer_id";
+        bool expectedIsCredit = true;
+        string expectedOverageAfter = "overage_after";
+        string expectedOverageBefore = "overage_before";
+        ApiEnum<string, CreditLedgerEntryPayloadType> expectedPayloadType =
+            CreditLedgerEntryPayloadType.CreditLedgerEntry;
+        ApiEnum<string, TransactionType> expectedTransactionType = TransactionType.CreditAdded;
+        string expectedDescription = "description";
+        string expectedGrantID = "grant_id";
+        string expectedReferenceID = "reference_id";
+        string expectedReferenceType = "reference_type";
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedBalanceAfter, model.BalanceAfter);
+        Assert.Equal(expectedBalanceBefore, model.BalanceBefore);
+        Assert.Equal(expectedBusinessID, model.BusinessID);
+        Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedCreditEntitlementID, model.CreditEntitlementID);
+        Assert.Equal(expectedCustomerID, model.CustomerID);
+        Assert.Equal(expectedIsCredit, model.IsCredit);
+        Assert.Equal(expectedOverageAfter, model.OverageAfter);
+        Assert.Equal(expectedOverageBefore, model.OverageBefore);
+        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.Equal(expectedTransactionType, model.TransactionType);
+        Assert.Equal(expectedDescription, model.Description);
+        Assert.Equal(expectedGrantID, model.GrantID);
+        Assert.Equal(expectedReferenceID, model.ReferenceID);
+        Assert.Equal(expectedReferenceType, model.ReferenceType);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CreditLedgerEntry
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+            Description = "description",
+            GrantID = "grant_id",
+            ReferenceID = "reference_id",
+            ReferenceType = "reference_type",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditLedgerEntry>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CreditLedgerEntry
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+            Description = "description",
+            GrantID = "grant_id",
+            ReferenceID = "reference_id",
+            ReferenceType = "reference_type",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditLedgerEntry>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        string expectedAmount = "amount";
+        string expectedBalanceAfter = "balance_after";
+        string expectedBalanceBefore = "balance_before";
+        string expectedBusinessID = "business_id";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedCreditEntitlementID = "credit_entitlement_id";
+        string expectedCustomerID = "customer_id";
+        bool expectedIsCredit = true;
+        string expectedOverageAfter = "overage_after";
+        string expectedOverageBefore = "overage_before";
+        ApiEnum<string, CreditLedgerEntryPayloadType> expectedPayloadType =
+            CreditLedgerEntryPayloadType.CreditLedgerEntry;
+        ApiEnum<string, TransactionType> expectedTransactionType = TransactionType.CreditAdded;
+        string expectedDescription = "description";
+        string expectedGrantID = "grant_id";
+        string expectedReferenceID = "reference_id";
+        string expectedReferenceType = "reference_type";
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedBalanceAfter, deserialized.BalanceAfter);
+        Assert.Equal(expectedBalanceBefore, deserialized.BalanceBefore);
+        Assert.Equal(expectedBusinessID, deserialized.BusinessID);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedCreditEntitlementID, deserialized.CreditEntitlementID);
+        Assert.Equal(expectedCustomerID, deserialized.CustomerID);
+        Assert.Equal(expectedIsCredit, deserialized.IsCredit);
+        Assert.Equal(expectedOverageAfter, deserialized.OverageAfter);
+        Assert.Equal(expectedOverageBefore, deserialized.OverageBefore);
+        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.Equal(expectedTransactionType, deserialized.TransactionType);
+        Assert.Equal(expectedDescription, deserialized.Description);
+        Assert.Equal(expectedGrantID, deserialized.GrantID);
+        Assert.Equal(expectedReferenceID, deserialized.ReferenceID);
+        Assert.Equal(expectedReferenceType, deserialized.ReferenceType);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CreditLedgerEntry
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+            Description = "description",
+            GrantID = "grant_id",
+            ReferenceID = "reference_id",
+            ReferenceType = "reference_type",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new CreditLedgerEntry
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+        };
+
+        Assert.Null(model.Description);
+        Assert.False(model.RawData.ContainsKey("description"));
+        Assert.Null(model.GrantID);
+        Assert.False(model.RawData.ContainsKey("grant_id"));
+        Assert.Null(model.ReferenceID);
+        Assert.False(model.RawData.ContainsKey("reference_id"));
+        Assert.Null(model.ReferenceType);
+        Assert.False(model.RawData.ContainsKey("reference_type"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new CreditLedgerEntry
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new CreditLedgerEntry
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+
+            Description = null,
+            GrantID = null,
+            ReferenceID = null,
+            ReferenceType = null,
+        };
+
+        Assert.Null(model.Description);
+        Assert.True(model.RawData.ContainsKey("description"));
+        Assert.Null(model.GrantID);
+        Assert.True(model.RawData.ContainsKey("grant_id"));
+        Assert.Null(model.ReferenceID);
+        Assert.True(model.RawData.ContainsKey("reference_id"));
+        Assert.Null(model.ReferenceType);
+        Assert.True(model.RawData.ContainsKey("reference_type"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new CreditLedgerEntry
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+
+            Description = null,
+            GrantID = null,
+            ReferenceID = null,
+            ReferenceType = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CreditLedgerEntry
+        {
+            ID = "id",
+            Amount = "amount",
+            BalanceAfter = "balance_after",
+            BalanceBefore = "balance_before",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementID = "credit_entitlement_id",
+            CustomerID = "customer_id",
+            IsCredit = true,
+            OverageAfter = "overage_after",
+            OverageBefore = "overage_before",
+            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            TransactionType = TransactionType.CreditAdded,
+            Description = "description",
+            GrantID = "grant_id",
+            ReferenceID = "reference_id",
+            ReferenceType = "reference_type",
+        };
+
+        CreditLedgerEntry copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class CreditLedgerEntryPayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(CreditLedgerEntryPayloadType.CreditLedgerEntry)]
+    public void Validation_Works(CreditLedgerEntryPayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CreditLedgerEntryPayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CreditLedgerEntryPayloadType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CreditLedgerEntryPayloadType.CreditLedgerEntry)]
+    public void SerializationRoundtrip_Works(CreditLedgerEntryPayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CreditLedgerEntryPayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CreditLedgerEntryPayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CreditLedgerEntryPayloadType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CreditLedgerEntryPayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class TransactionTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(TransactionType.CreditAdded)]
+    [InlineData(TransactionType.CreditDeducted)]
+    [InlineData(TransactionType.CreditExpired)]
+    [InlineData(TransactionType.CreditRolledOver)]
+    [InlineData(TransactionType.RolloverForfeited)]
+    [InlineData(TransactionType.OverageCharged)]
+    [InlineData(TransactionType.AutoTopUp)]
+    [InlineData(TransactionType.ManualAdjustment)]
+    [InlineData(TransactionType.Refund)]
+    public void Validation_Works(TransactionType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, TransactionType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, TransactionType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(TransactionType.CreditAdded)]
+    [InlineData(TransactionType.CreditDeducted)]
+    [InlineData(TransactionType.CreditExpired)]
+    [InlineData(TransactionType.CreditRolledOver)]
+    [InlineData(TransactionType.RolloverForfeited)]
+    [InlineData(TransactionType.OverageCharged)]
+    [InlineData(TransactionType.AutoTopUp)]
+    [InlineData(TransactionType.ManualAdjustment)]
+    [InlineData(TransactionType.Refund)]
+    public void SerializationRoundtrip_Works(TransactionType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, TransactionType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, TransactionType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, TransactionType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, TransactionType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class CreditBalanceLowTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CreditBalanceLow
+        {
+            AvailableBalance = "available_balance",
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CustomerID = "customer_id",
+            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
+            SubscriptionCreditsAmount = "subscription_credits_amount",
+            SubscriptionID = "subscription_id",
+            ThresholdAmount = "threshold_amount",
+            ThresholdPercent = 0,
+        };
+
+        string expectedAvailableBalance = "available_balance";
+        string expectedCreditEntitlementID = "credit_entitlement_id";
+        string expectedCreditEntitlementName = "credit_entitlement_name";
+        string expectedCustomerID = "customer_id";
+        ApiEnum<string, CreditBalanceLowPayloadType> expectedPayloadType =
+            CreditBalanceLowPayloadType.CreditBalanceLow;
+        string expectedSubscriptionCreditsAmount = "subscription_credits_amount";
+        string expectedSubscriptionID = "subscription_id";
+        string expectedThresholdAmount = "threshold_amount";
+        int expectedThresholdPercent = 0;
+
+        Assert.Equal(expectedAvailableBalance, model.AvailableBalance);
+        Assert.Equal(expectedCreditEntitlementID, model.CreditEntitlementID);
+        Assert.Equal(expectedCreditEntitlementName, model.CreditEntitlementName);
+        Assert.Equal(expectedCustomerID, model.CustomerID);
+        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.Equal(expectedSubscriptionCreditsAmount, model.SubscriptionCreditsAmount);
+        Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
+        Assert.Equal(expectedThresholdAmount, model.ThresholdAmount);
+        Assert.Equal(expectedThresholdPercent, model.ThresholdPercent);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CreditBalanceLow
+        {
+            AvailableBalance = "available_balance",
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CustomerID = "customer_id",
+            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
+            SubscriptionCreditsAmount = "subscription_credits_amount",
+            SubscriptionID = "subscription_id",
+            ThresholdAmount = "threshold_amount",
+            ThresholdPercent = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditBalanceLow>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CreditBalanceLow
+        {
+            AvailableBalance = "available_balance",
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CustomerID = "customer_id",
+            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
+            SubscriptionCreditsAmount = "subscription_credits_amount",
+            SubscriptionID = "subscription_id",
+            ThresholdAmount = "threshold_amount",
+            ThresholdPercent = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditBalanceLow>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedAvailableBalance = "available_balance";
+        string expectedCreditEntitlementID = "credit_entitlement_id";
+        string expectedCreditEntitlementName = "credit_entitlement_name";
+        string expectedCustomerID = "customer_id";
+        ApiEnum<string, CreditBalanceLowPayloadType> expectedPayloadType =
+            CreditBalanceLowPayloadType.CreditBalanceLow;
+        string expectedSubscriptionCreditsAmount = "subscription_credits_amount";
+        string expectedSubscriptionID = "subscription_id";
+        string expectedThresholdAmount = "threshold_amount";
+        int expectedThresholdPercent = 0;
+
+        Assert.Equal(expectedAvailableBalance, deserialized.AvailableBalance);
+        Assert.Equal(expectedCreditEntitlementID, deserialized.CreditEntitlementID);
+        Assert.Equal(expectedCreditEntitlementName, deserialized.CreditEntitlementName);
+        Assert.Equal(expectedCustomerID, deserialized.CustomerID);
+        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.Equal(expectedSubscriptionCreditsAmount, deserialized.SubscriptionCreditsAmount);
+        Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
+        Assert.Equal(expectedThresholdAmount, deserialized.ThresholdAmount);
+        Assert.Equal(expectedThresholdPercent, deserialized.ThresholdPercent);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CreditBalanceLow
+        {
+            AvailableBalance = "available_balance",
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CustomerID = "customer_id",
+            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
+            SubscriptionCreditsAmount = "subscription_credits_amount",
+            SubscriptionID = "subscription_id",
+            ThresholdAmount = "threshold_amount",
+            ThresholdPercent = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CreditBalanceLow
+        {
+            AvailableBalance = "available_balance",
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CustomerID = "customer_id",
+            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
+            SubscriptionCreditsAmount = "subscription_credits_amount",
+            SubscriptionID = "subscription_id",
+            ThresholdAmount = "threshold_amount",
+            ThresholdPercent = 0,
+        };
+
+        CreditBalanceLow copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class CreditBalanceLowPayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(CreditBalanceLowPayloadType.CreditBalanceLow)]
+    public void Validation_Works(CreditBalanceLowPayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CreditBalanceLowPayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CreditBalanceLowPayloadType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CreditBalanceLowPayloadType.CreditBalanceLow)]
+    public void SerializationRoundtrip_Works(CreditBalanceLowPayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CreditBalanceLowPayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CreditBalanceLowPayloadType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CreditBalanceLowPayloadType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CreditBalanceLowPayloadType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
