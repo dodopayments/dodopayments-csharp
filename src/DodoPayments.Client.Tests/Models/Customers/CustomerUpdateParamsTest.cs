@@ -12,17 +12,20 @@ public class CustomerUpdateParamsTest : TestBase
         var parameters = new CustomerUpdateParams
         {
             CustomerID = "customer_id",
+            Email = "email",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             PhoneNumber = "phone_number",
         };
 
         string expectedCustomerID = "customer_id";
+        string expectedEmail = "email";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         string expectedPhoneNumber = "phone_number";
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
+        Assert.Equal(expectedEmail, parameters.Email);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -40,6 +43,8 @@ public class CustomerUpdateParamsTest : TestBase
     {
         var parameters = new CustomerUpdateParams { CustomerID = "customer_id" };
 
+        Assert.Null(parameters.Email);
+        Assert.False(parameters.RawBodyData.ContainsKey("email"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Name);
@@ -55,11 +60,14 @@ public class CustomerUpdateParamsTest : TestBase
         {
             CustomerID = "customer_id",
 
+            Email = null,
             Metadata = null,
             Name = null,
             PhoneNumber = null,
         };
 
+        Assert.Null(parameters.Email);
+        Assert.True(parameters.RawBodyData.ContainsKey("email"));
         Assert.Null(parameters.Metadata);
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Name);
@@ -84,6 +92,7 @@ public class CustomerUpdateParamsTest : TestBase
         var parameters = new CustomerUpdateParams
         {
             CustomerID = "customer_id",
+            Email = "email",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             PhoneNumber = "phone_number",

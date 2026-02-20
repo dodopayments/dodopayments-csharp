@@ -19,6 +19,7 @@ public class SubscriptionListParamsTest : TestBase
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
+            ProductID = "product_id",
             Status = Status.Pending,
         };
 
@@ -28,6 +29,7 @@ public class SubscriptionListParamsTest : TestBase
         string expectedCustomerID = "customer_id";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
+        string expectedProductID = "product_id";
         ApiEnum<string, Status> expectedStatus = Status.Pending;
 
         Assert.Equal(expectedBrandID, parameters.BrandID);
@@ -36,6 +38,7 @@ public class SubscriptionListParamsTest : TestBase
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
+        Assert.Equal(expectedProductID, parameters.ProductID);
         Assert.Equal(expectedStatus, parameters.Status);
     }
 
@@ -56,6 +59,8 @@ public class SubscriptionListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
+        Assert.Null(parameters.ProductID);
+        Assert.False(parameters.RawQueryData.ContainsKey("product_id"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
     }
@@ -72,6 +77,7 @@ public class SubscriptionListParamsTest : TestBase
             CustomerID = null,
             PageNumber = null,
             PageSize = null,
+            ProductID = null,
             Status = null,
         };
 
@@ -87,6 +93,8 @@ public class SubscriptionListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
         Assert.Null(parameters.PageSize);
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
+        Assert.Null(parameters.ProductID);
+        Assert.False(parameters.RawQueryData.ContainsKey("product_id"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
     }
@@ -102,6 +110,7 @@ public class SubscriptionListParamsTest : TestBase
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
+            ProductID = "product_id",
             Status = Status.Pending,
         };
 
@@ -109,7 +118,7 @@ public class SubscriptionListParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://live.dodopayments.com/subscriptions?brand_id=brand_id&created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&status=pending"
+                "https://live.dodopayments.com/subscriptions?brand_id=brand_id&created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&product_id=product_id&status=pending"
             ),
             url
         );
@@ -126,6 +135,7 @@ public class SubscriptionListParamsTest : TestBase
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
+            ProductID = "product_id",
             Status = Status.Pending,
         };
 

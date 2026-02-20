@@ -24,6 +24,16 @@ public record class CustomerUpdateParams : ParamsBase
 
     public string? CustomerID { get; init; }
 
+    public string? Email
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("email");
+        }
+        init { this._rawBodyData.Set("email", value); }
+    }
+
     /// <summary>
     /// Additional metadata for the customer
     /// </summary>

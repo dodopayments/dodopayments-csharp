@@ -76,6 +76,27 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// Credit entitlement cart settings for this subscription
+    /// </summary>
+    public required IReadOnlyList<SubscriptionCreditEntitlementCart> CreditEntitlementCart
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<SubscriptionCreditEntitlementCart>
+            >("credit_entitlement_cart");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<SubscriptionCreditEntitlementCart>>(
+                "credit_entitlement_cart",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Currency used for the subscription payments
     /// </summary>
     public required ApiEnum<string, Currency> Currency
@@ -116,6 +137,27 @@ public sealed record class Subscription : JsonModel
             this._rawData.Set<FrozenDictionary<string, string>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Meter credit entitlement cart settings for this subscription
+    /// </summary>
+    public required IReadOnlyList<MeterCreditEntitlementCart> MeterCreditEntitlementCart
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<MeterCreditEntitlementCart>>(
+                "meter_credit_entitlement_cart"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<MeterCreditEntitlementCart>>(
+                "meter_credit_entitlement_cart",
+                ImmutableArray.ToImmutableArray(value)
             );
         }
     }
@@ -435,9 +477,17 @@ public sealed record class Subscription : JsonModel
         this.Billing.Validate();
         _ = this.CancelAtNextBillingDate;
         _ = this.CreatedAt;
+        foreach (var item in this.CreditEntitlementCart)
+        {
+            item.Validate();
+        }
         this.Currency.Validate();
         this.Customer.Validate();
         _ = this.Metadata;
+        foreach (var item in this.MeterCreditEntitlementCart)
+        {
+            item.Validate();
+        }
         foreach (var item in this.Meters)
         {
             item.Validate();
@@ -501,6 +551,367 @@ class SubscriptionFromRaw : IFromRawJson<Subscription>
     /// <inheritdoc/>
     public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Subscription.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Response struct representing credit entitlement cart details for a subscription
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionCreditEntitlementCart,
+        SubscriptionCreditEntitlementCartFromRaw
+    >)
+)]
+public sealed record class SubscriptionCreditEntitlementCart : JsonModel
+{
+    public required string CreditEntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_id");
+        }
+        init { this._rawData.Set("credit_entitlement_id", value); }
+    }
+
+    public required string CreditEntitlementName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_name");
+        }
+        init { this._rawData.Set("credit_entitlement_name", value); }
+    }
+
+    public required string CreditsAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credits_amount");
+        }
+        init { this._rawData.Set("credits_amount", value); }
+    }
+
+    /// <summary>
+    /// Customer's current overage balance for this entitlement
+    /// </summary>
+    public required string OverageBalance
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("overage_balance");
+        }
+        init { this._rawData.Set("overage_balance", value); }
+    }
+
+    public required bool OverageChargeAtBilling
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("overage_charge_at_billing");
+        }
+        init { this._rawData.Set("overage_charge_at_billing", value); }
+    }
+
+    public required bool OverageEnabled
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("overage_enabled");
+        }
+        init { this._rawData.Set("overage_enabled", value); }
+    }
+
+    public required string ProductID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
+        init { this._rawData.Set("product_id", value); }
+    }
+
+    /// <summary>
+    /// Customer's current remaining credit balance for this entitlement
+    /// </summary>
+    public required string RemainingBalance
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("remaining_balance");
+        }
+        init { this._rawData.Set("remaining_balance", value); }
+    }
+
+    public required bool RolloverEnabled
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("rollover_enabled");
+        }
+        init { this._rawData.Set("rollover_enabled", value); }
+    }
+
+    /// <summary>
+    /// Unit label for the credit entitlement (e.g., "API Calls", "Tokens")
+    /// </summary>
+    public required string Unit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("unit");
+        }
+        init { this._rawData.Set("unit", value); }
+    }
+
+    public int? ExpiresAfterDays
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("expires_after_days");
+        }
+        init { this._rawData.Set("expires_after_days", value); }
+    }
+
+    public int? LowBalanceThresholdPercent
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("low_balance_threshold_percent");
+        }
+        init { this._rawData.Set("low_balance_threshold_percent", value); }
+    }
+
+    public int? MaxRolloverCount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("max_rollover_count");
+        }
+        init { this._rawData.Set("max_rollover_count", value); }
+    }
+
+    public string? OverageLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("overage_limit");
+        }
+        init { this._rawData.Set("overage_limit", value); }
+    }
+
+    public int? RolloverPercentage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("rollover_percentage");
+        }
+        init { this._rawData.Set("rollover_percentage", value); }
+    }
+
+    public int? RolloverTimeframeCount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("rollover_timeframe_count");
+        }
+        init { this._rawData.Set("rollover_timeframe_count", value); }
+    }
+
+    public ApiEnum<string, TimeInterval>? RolloverTimeframeInterval
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, TimeInterval>>(
+                "rollover_timeframe_interval"
+            );
+        }
+        init { this._rawData.Set("rollover_timeframe_interval", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.CreditEntitlementID;
+        _ = this.CreditEntitlementName;
+        _ = this.CreditsAmount;
+        _ = this.OverageBalance;
+        _ = this.OverageChargeAtBilling;
+        _ = this.OverageEnabled;
+        _ = this.ProductID;
+        _ = this.RemainingBalance;
+        _ = this.RolloverEnabled;
+        _ = this.Unit;
+        _ = this.ExpiresAfterDays;
+        _ = this.LowBalanceThresholdPercent;
+        _ = this.MaxRolloverCount;
+        _ = this.OverageLimit;
+        _ = this.RolloverPercentage;
+        _ = this.RolloverTimeframeCount;
+        this.RolloverTimeframeInterval?.Validate();
+    }
+
+    public SubscriptionCreditEntitlementCart() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionCreditEntitlementCart(
+        SubscriptionCreditEntitlementCart subscriptionCreditEntitlementCart
+    )
+        : base(subscriptionCreditEntitlementCart) { }
+#pragma warning restore CS8618
+
+    public SubscriptionCreditEntitlementCart(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionCreditEntitlementCart(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionCreditEntitlementCartFromRaw.FromRawUnchecked"/>
+    public static SubscriptionCreditEntitlementCart FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionCreditEntitlementCartFromRaw : IFromRawJson<SubscriptionCreditEntitlementCart>
+{
+    /// <inheritdoc/>
+    public SubscriptionCreditEntitlementCart FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionCreditEntitlementCart.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Response struct representing meter-credit entitlement mapping cart details for
+/// a subscription
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<MeterCreditEntitlementCart, MeterCreditEntitlementCartFromRaw>)
+)]
+public sealed record class MeterCreditEntitlementCart : JsonModel
+{
+    public required string CreditEntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_id");
+        }
+        init { this._rawData.Set("credit_entitlement_id", value); }
+    }
+
+    public required string MeterID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("meter_id");
+        }
+        init { this._rawData.Set("meter_id", value); }
+    }
+
+    public required string MeterName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("meter_name");
+        }
+        init { this._rawData.Set("meter_name", value); }
+    }
+
+    public required string MeterUnitsPerCredit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("meter_units_per_credit");
+        }
+        init { this._rawData.Set("meter_units_per_credit", value); }
+    }
+
+    public required string ProductID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
+        init { this._rawData.Set("product_id", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.CreditEntitlementID;
+        _ = this.MeterID;
+        _ = this.MeterName;
+        _ = this.MeterUnitsPerCredit;
+        _ = this.ProductID;
+    }
+
+    public MeterCreditEntitlementCart() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public MeterCreditEntitlementCart(MeterCreditEntitlementCart meterCreditEntitlementCart)
+        : base(meterCreditEntitlementCart) { }
+#pragma warning restore CS8618
+
+    public MeterCreditEntitlementCart(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    MeterCreditEntitlementCart(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="MeterCreditEntitlementCartFromRaw.FromRawUnchecked"/>
+    public static MeterCreditEntitlementCart FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class MeterCreditEntitlementCartFromRaw : IFromRawJson<MeterCreditEntitlementCart>
+{
+    /// <inheritdoc/>
+    public MeterCreditEntitlementCart FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => MeterCreditEntitlementCart.FromRawUnchecked(rawData);
 }
 
 /// <summary>

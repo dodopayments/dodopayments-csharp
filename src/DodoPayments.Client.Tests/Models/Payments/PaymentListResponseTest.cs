@@ -26,6 +26,7 @@ public class PaymentListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
+            HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
@@ -49,6 +50,7 @@ public class PaymentListResponseTest : TestBase
             PhoneNumber = "phone_number",
         };
         bool expectedDigitalProductsDelivered = true;
+        bool expectedHasLicenseKey = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         int expectedTotalAmount = 0;
@@ -64,6 +66,7 @@ public class PaymentListResponseTest : TestBase
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedCustomer, model.Customer);
         Assert.Equal(expectedDigitalProductsDelivered, model.DigitalProductsDelivered);
+        Assert.Equal(expectedHasLicenseKey, model.HasLicenseKey);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -98,6 +101,7 @@ public class PaymentListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
+            HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
@@ -135,6 +139,7 @@ public class PaymentListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
+            HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
@@ -165,6 +170,7 @@ public class PaymentListResponseTest : TestBase
             PhoneNumber = "phone_number",
         };
         bool expectedDigitalProductsDelivered = true;
+        bool expectedHasLicenseKey = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         int expectedTotalAmount = 0;
@@ -180,6 +186,7 @@ public class PaymentListResponseTest : TestBase
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedCustomer, deserialized.Customer);
         Assert.Equal(expectedDigitalProductsDelivered, deserialized.DigitalProductsDelivered);
+        Assert.Equal(expectedHasLicenseKey, deserialized.HasLicenseKey);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -214,6 +221,7 @@ public class PaymentListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
+            HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
@@ -245,6 +253,7 @@ public class PaymentListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
+            HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
@@ -281,6 +290,7 @@ public class PaymentListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
+            HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
@@ -306,6 +316,7 @@ public class PaymentListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
+            HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
@@ -349,6 +360,7 @@ public class PaymentListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
+            HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,
@@ -381,6 +393,7 @@ public class PaymentListResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
+            HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
             TotalAmount = 0,

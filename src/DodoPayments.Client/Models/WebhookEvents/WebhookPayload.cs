@@ -143,7 +143,9 @@ public record class Data : ModelBase
                 subscription: (x) => x.Billing,
                 refund: (_) => null,
                 dispute: (_) => null,
-                licenseKey: (_) => null
+                licenseKey: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null
             );
         }
     }
@@ -157,21 +159,25 @@ public record class Data : ModelBase
                 subscription: (_) => null,
                 refund: (x) => x.BusinessID,
                 dispute: (x) => x.BusinessID,
-                licenseKey: (x) => x.BusinessID
+                licenseKey: (x) => x.BusinessID,
+                creditLedgerEntry: (x) => x.BusinessID,
+                creditBalanceLow: (_) => null
             );
         }
     }
 
-    public DateTimeOffset CreatedAt
+    public DateTimeOffset? CreatedAt
     {
         get
         {
-            return Match(
+            return Match<DateTimeOffset?>(
                 payment: (x) => x.CreatedAt,
                 subscription: (x) => x.CreatedAt,
                 refund: (x) => x.CreatedAt,
                 dispute: (x) => x.CreatedAt,
-                licenseKey: (x) => x.CreatedAt
+                licenseKey: (x) => x.CreatedAt,
+                creditLedgerEntry: (x) => x.CreatedAt,
+                creditBalanceLow: (_) => null
             );
         }
     }
@@ -185,7 +191,9 @@ public record class Data : ModelBase
                 subscription: (x) => x.Customer,
                 refund: (x) => x.Customer,
                 dispute: (x) => x.Customer,
-                licenseKey: (_) => null
+                licenseKey: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null
             );
         }
     }
@@ -199,7 +207,9 @@ public record class Data : ModelBase
                 subscription: (_) => null,
                 refund: (x) => x.PaymentID,
                 dispute: (x) => x.PaymentID,
-                licenseKey: (x) => x.PaymentID
+                licenseKey: (x) => x.PaymentID,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null
             );
         }
     }
@@ -213,7 +223,9 @@ public record class Data : ModelBase
                 subscription: (x) => x.DiscountID,
                 refund: (_) => null,
                 dispute: (_) => null,
-                licenseKey: (_) => null
+                licenseKey: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null
             );
         }
     }
@@ -227,7 +239,9 @@ public record class Data : ModelBase
                 subscription: (x) => x.SubscriptionID,
                 refund: (_) => null,
                 dispute: (_) => null,
-                licenseKey: (x) => x.SubscriptionID
+                licenseKey: (x) => x.SubscriptionID,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (x) => x.SubscriptionID
             );
         }
     }
@@ -241,7 +255,9 @@ public record class Data : ModelBase
                 subscription: (x) => x.ProductID,
                 refund: (_) => null,
                 dispute: (_) => null,
-                licenseKey: (x) => x.ProductID
+                licenseKey: (x) => x.ProductID,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null
             );
         }
     }
@@ -255,7 +271,9 @@ public record class Data : ModelBase
                 subscription: (x) => x.ExpiresAt,
                 refund: (_) => null,
                 dispute: (_) => null,
-                licenseKey: (x) => x.ExpiresAt
+                licenseKey: (x) => x.ExpiresAt,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null
             );
         }
     }
@@ -269,7 +287,57 @@ public record class Data : ModelBase
                 subscription: (_) => null,
                 refund: (x) => x.Reason,
                 dispute: (x) => x.Reason,
-                licenseKey: (_) => null
+                licenseKey: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null
+            );
+        }
+    }
+
+    public string? ID
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (_) => null,
+                subscription: (_) => null,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (x) => x.ID,
+                creditLedgerEntry: (x) => x.ID,
+                creditBalanceLow: (_) => null
+            );
+        }
+    }
+
+    public string? CustomerID
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (_) => null,
+                subscription: (_) => null,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (x) => x.CustomerID,
+                creditLedgerEntry: (x) => x.CustomerID,
+                creditBalanceLow: (x) => x.CustomerID
+            );
+        }
+    }
+
+    public string? CreditEntitlementID
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (_) => null,
+                subscription: (_) => null,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                creditLedgerEntry: (x) => x.CreditEntitlementID,
+                creditBalanceLow: (x) => x.CreditEntitlementID
             );
         }
     }
@@ -299,6 +367,18 @@ public record class Data : ModelBase
     }
 
     public Data(LicenseKey value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Data(CreditLedgerEntry value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Data(CreditBalanceLow value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -415,6 +495,48 @@ public record class Data : ModelBase
     }
 
     /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditLedgerEntry"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditLedgerEntry(out var value)) {
+    ///     // `value` is of type `CreditLedgerEntry`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditLedgerEntry([NotNullWhen(true)] out CreditLedgerEntry? value)
+    {
+        value = this.Value as CreditLedgerEntry;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditBalanceLow"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditBalanceLow(out var value)) {
+    ///     // `value` is of type `CreditBalanceLow`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditBalanceLow([NotNullWhen(true)] out CreditBalanceLow? value)
+    {
+        value = this.Value as CreditBalanceLow;
+        return value != null;
+    }
+
+    /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
     /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
@@ -432,7 +554,9 @@ public record class Data : ModelBase
     ///     (Subscription value) => {...},
     ///     (Refund value) => {...},
     ///     (Dispute value) => {...},
-    ///     (LicenseKey value) => {...}
+    ///     (LicenseKey value) => {...},
+    ///     (CreditLedgerEntry value) => {...},
+    ///     (CreditBalanceLow value) => {...}
     /// );
     /// </code>
     /// </example>
@@ -442,7 +566,9 @@ public record class Data : ModelBase
         Action<Subscription> subscription,
         Action<Refund> refund,
         Action<Dispute> dispute,
-        Action<LicenseKey> licenseKey
+        Action<LicenseKey> licenseKey,
+        Action<CreditLedgerEntry> creditLedgerEntry,
+        Action<CreditBalanceLow> creditBalanceLow
     )
     {
         switch (this.Value)
@@ -461,6 +587,12 @@ public record class Data : ModelBase
                 break;
             case LicenseKey value:
                 licenseKey(value);
+                break;
+            case CreditLedgerEntry value:
+                creditLedgerEntry(value);
+                break;
+            case CreditBalanceLow value:
+                creditBalanceLow(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -488,7 +620,9 @@ public record class Data : ModelBase
     ///     (Subscription value) => {...},
     ///     (Refund value) => {...},
     ///     (Dispute value) => {...},
-    ///     (LicenseKey value) => {...}
+    ///     (LicenseKey value) => {...},
+    ///     (CreditLedgerEntry value) => {...},
+    ///     (CreditBalanceLow value) => {...}
     /// );
     /// </code>
     /// </example>
@@ -498,7 +632,9 @@ public record class Data : ModelBase
         Func<Subscription, T> subscription,
         Func<Refund, T> refund,
         Func<Dispute, T> dispute,
-        Func<LicenseKey, T> licenseKey
+        Func<LicenseKey, T> licenseKey,
+        Func<CreditLedgerEntry, T> creditLedgerEntry,
+        Func<CreditBalanceLow, T> creditBalanceLow
     )
     {
         return this.Value switch
@@ -508,6 +644,8 @@ public record class Data : ModelBase
             Refund value => refund(value),
             Dispute value => dispute(value),
             LicenseKey value => licenseKey(value),
+            CreditLedgerEntry value => creditLedgerEntry(value),
+            CreditBalanceLow value => creditBalanceLow(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Data"
             ),
@@ -523,6 +661,10 @@ public record class Data : ModelBase
     public static implicit operator Data(Dispute value) => new(value);
 
     public static implicit operator Data(LicenseKey value) => new(value);
+
+    public static implicit operator Data(CreditLedgerEntry value) => new(value);
+
+    public static implicit operator Data(CreditBalanceLow value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -545,7 +687,9 @@ public record class Data : ModelBase
             (subscription) => subscription.Validate(),
             (refund) => refund.Validate(),
             (dispute) => dispute.Validate(),
-            (licenseKey) => licenseKey.Validate()
+            (licenseKey) => licenseKey.Validate(),
+            (creditLedgerEntry) => creditLedgerEntry.Validate(),
+            (creditBalanceLow) => creditBalanceLow.Validate()
         );
     }
 
@@ -574,6 +718,8 @@ public record class Data : ModelBase
             Refund _ => 2,
             Dispute _ => 3,
             LicenseKey _ => 4,
+            CreditLedgerEntry _ => 5,
+            CreditBalanceLow _ => 6,
             _ => -1,
         };
     }
@@ -647,6 +793,34 @@ sealed class DataConverter : JsonConverter<Data>
         try
         {
             var deserialized = JsonSerializer.Deserialize<LicenseKey>(element, options);
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditLedgerEntry>(element, options);
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditBalanceLow>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -1492,6 +1666,27 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("created_at", value); }
     }
 
+    /// <summary>
+    /// Credit entitlement cart settings for this subscription
+    /// </summary>
+    public required IReadOnlyList<Subscriptions::SubscriptionCreditEntitlementCart> CreditEntitlementCart
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<Subscriptions::SubscriptionCreditEntitlementCart>
+            >("credit_entitlement_cart");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Subscriptions::SubscriptionCreditEntitlementCart>>(
+                "credit_entitlement_cart",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     public required ApiEnum<string, Currency> Currency
     {
         get
@@ -1527,6 +1722,27 @@ public sealed record class Subscription : JsonModel
             this._rawData.Set<FrozenDictionary<string, string>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Meter credit entitlement cart settings for this subscription
+    /// </summary>
+    public required IReadOnlyList<Subscriptions::MeterCreditEntitlementCart> MeterCreditEntitlementCart
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<Subscriptions::MeterCreditEntitlementCart>
+            >("meter_credit_entitlement_cart");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Subscriptions::MeterCreditEntitlementCart>>(
+                "meter_credit_entitlement_cart",
+                ImmutableArray.ToImmutableArray(value)
             );
         }
     }
@@ -1848,9 +2064,11 @@ public sealed record class Subscription : JsonModel
             Billing = subscription.Billing,
             CancelAtNextBillingDate = subscription.CancelAtNextBillingDate,
             CreatedAt = subscription.CreatedAt,
+            CreditEntitlementCart = subscription.CreditEntitlementCart,
             Currency = subscription.Currency,
             Customer = subscription.Customer,
             Metadata = subscription.Metadata,
+            MeterCreditEntitlementCart = subscription.MeterCreditEntitlementCart,
             Meters = subscription.Meters,
             NextBillingDate = subscription.NextBillingDate,
             OnDemand = subscription.OnDemand,
@@ -1885,9 +2103,17 @@ public sealed record class Subscription : JsonModel
         this.Billing.Validate();
         _ = this.CancelAtNextBillingDate;
         _ = this.CreatedAt;
+        foreach (var item in this.CreditEntitlementCart)
+        {
+            item.Validate();
+        }
         this.Currency.Validate();
         this.Customer.Validate();
         _ = this.Metadata;
+        foreach (var item in this.MeterCreditEntitlementCart)
+        {
+            item.Validate();
+        }
         foreach (var item in this.Meters)
         {
             item.Validate();
@@ -3093,6 +3319,535 @@ sealed class LicenseKeyIntersectionMember1PayloadTypeConverter
             value switch
             {
                 LicenseKeyIntersectionMember1PayloadType.LicenseKey => "LicenseKey",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(JsonModelConverter<CreditLedgerEntry, CreditLedgerEntryFromRaw>))]
+public sealed record class CreditLedgerEntry : JsonModel
+{
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    public required string Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("amount");
+        }
+        init { this._rawData.Set("amount", value); }
+    }
+
+    public required string BalanceAfter
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("balance_after");
+        }
+        init { this._rawData.Set("balance_after", value); }
+    }
+
+    public required string BalanceBefore
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("balance_before");
+        }
+        init { this._rawData.Set("balance_before", value); }
+    }
+
+    public required string BusinessID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
+        init { this._rawData.Set("business_id", value); }
+    }
+
+    public required DateTimeOffset CreatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
+        init { this._rawData.Set("created_at", value); }
+    }
+
+    public required string CreditEntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_id");
+        }
+        init { this._rawData.Set("credit_entitlement_id", value); }
+    }
+
+    public required string CustomerID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
+        init { this._rawData.Set("customer_id", value); }
+    }
+
+    public required bool IsCredit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("is_credit");
+        }
+        init { this._rawData.Set("is_credit", value); }
+    }
+
+    public required string OverageAfter
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("overage_after");
+        }
+        init { this._rawData.Set("overage_after", value); }
+    }
+
+    public required string OverageBefore
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("overage_before");
+        }
+        init { this._rawData.Set("overage_before", value); }
+    }
+
+    public required ApiEnum<string, CreditLedgerEntryPayloadType> PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, CreditLedgerEntryPayloadType>>(
+                "payload_type"
+            );
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    public required ApiEnum<string, TransactionType> TransactionType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, TransactionType>>(
+                "transaction_type"
+            );
+        }
+        init { this._rawData.Set("transaction_type", value); }
+    }
+
+    public string? Description
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
+        init { this._rawData.Set("description", value); }
+    }
+
+    public string? GrantID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("grant_id");
+        }
+        init { this._rawData.Set("grant_id", value); }
+    }
+
+    public string? ReferenceID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("reference_id");
+        }
+        init { this._rawData.Set("reference_id", value); }
+    }
+
+    public string? ReferenceType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("reference_type");
+        }
+        init { this._rawData.Set("reference_type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Amount;
+        _ = this.BalanceAfter;
+        _ = this.BalanceBefore;
+        _ = this.BusinessID;
+        _ = this.CreatedAt;
+        _ = this.CreditEntitlementID;
+        _ = this.CustomerID;
+        _ = this.IsCredit;
+        _ = this.OverageAfter;
+        _ = this.OverageBefore;
+        this.PayloadType.Validate();
+        this.TransactionType.Validate();
+        _ = this.Description;
+        _ = this.GrantID;
+        _ = this.ReferenceID;
+        _ = this.ReferenceType;
+    }
+
+    public CreditLedgerEntry() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreditLedgerEntry(CreditLedgerEntry creditLedgerEntry)
+        : base(creditLedgerEntry) { }
+#pragma warning restore CS8618
+
+    public CreditLedgerEntry(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreditLedgerEntry(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditLedgerEntryFromRaw.FromRawUnchecked"/>
+    public static CreditLedgerEntry FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreditLedgerEntryFromRaw : IFromRawJson<CreditLedgerEntry>
+{
+    /// <inheritdoc/>
+    public CreditLedgerEntry FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreditLedgerEntry.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(CreditLedgerEntryPayloadTypeConverter))]
+public enum CreditLedgerEntryPayloadType
+{
+    CreditLedgerEntry,
+}
+
+sealed class CreditLedgerEntryPayloadTypeConverter : JsonConverter<CreditLedgerEntryPayloadType>
+{
+    public override CreditLedgerEntryPayloadType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "CreditLedgerEntry" => CreditLedgerEntryPayloadType.CreditLedgerEntry,
+            _ => (CreditLedgerEntryPayloadType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        CreditLedgerEntryPayloadType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CreditLedgerEntryPayloadType.CreditLedgerEntry => "CreditLedgerEntry",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(TransactionTypeConverter))]
+public enum TransactionType
+{
+    CreditAdded,
+    CreditDeducted,
+    CreditExpired,
+    CreditRolledOver,
+    RolloverForfeited,
+    OverageCharged,
+    AutoTopUp,
+    ManualAdjustment,
+    Refund,
+}
+
+sealed class TransactionTypeConverter : JsonConverter<TransactionType>
+{
+    public override TransactionType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "credit_added" => TransactionType.CreditAdded,
+            "credit_deducted" => TransactionType.CreditDeducted,
+            "credit_expired" => TransactionType.CreditExpired,
+            "credit_rolled_over" => TransactionType.CreditRolledOver,
+            "rollover_forfeited" => TransactionType.RolloverForfeited,
+            "overage_charged" => TransactionType.OverageCharged,
+            "auto_top_up" => TransactionType.AutoTopUp,
+            "manual_adjustment" => TransactionType.ManualAdjustment,
+            "refund" => TransactionType.Refund,
+            _ => (TransactionType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        TransactionType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                TransactionType.CreditAdded => "credit_added",
+                TransactionType.CreditDeducted => "credit_deducted",
+                TransactionType.CreditExpired => "credit_expired",
+                TransactionType.CreditRolledOver => "credit_rolled_over",
+                TransactionType.RolloverForfeited => "rollover_forfeited",
+                TransactionType.OverageCharged => "overage_charged",
+                TransactionType.AutoTopUp => "auto_top_up",
+                TransactionType.ManualAdjustment => "manual_adjustment",
+                TransactionType.Refund => "refund",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(JsonModelConverter<CreditBalanceLow, CreditBalanceLowFromRaw>))]
+public sealed record class CreditBalanceLow : JsonModel
+{
+    public required string AvailableBalance
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("available_balance");
+        }
+        init { this._rawData.Set("available_balance", value); }
+    }
+
+    public required string CreditEntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_id");
+        }
+        init { this._rawData.Set("credit_entitlement_id", value); }
+    }
+
+    public required string CreditEntitlementName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_name");
+        }
+        init { this._rawData.Set("credit_entitlement_name", value); }
+    }
+
+    public required string CustomerID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
+        init { this._rawData.Set("customer_id", value); }
+    }
+
+    public required ApiEnum<string, CreditBalanceLowPayloadType> PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, CreditBalanceLowPayloadType>>(
+                "payload_type"
+            );
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    public required string SubscriptionCreditsAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("subscription_credits_amount");
+        }
+        init { this._rawData.Set("subscription_credits_amount", value); }
+    }
+
+    public required string SubscriptionID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("subscription_id");
+        }
+        init { this._rawData.Set("subscription_id", value); }
+    }
+
+    public required string ThresholdAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("threshold_amount");
+        }
+        init { this._rawData.Set("threshold_amount", value); }
+    }
+
+    public required int ThresholdPercent
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("threshold_percent");
+        }
+        init { this._rawData.Set("threshold_percent", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.AvailableBalance;
+        _ = this.CreditEntitlementID;
+        _ = this.CreditEntitlementName;
+        _ = this.CustomerID;
+        this.PayloadType.Validate();
+        _ = this.SubscriptionCreditsAmount;
+        _ = this.SubscriptionID;
+        _ = this.ThresholdAmount;
+        _ = this.ThresholdPercent;
+    }
+
+    public CreditBalanceLow() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreditBalanceLow(CreditBalanceLow creditBalanceLow)
+        : base(creditBalanceLow) { }
+#pragma warning restore CS8618
+
+    public CreditBalanceLow(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreditBalanceLow(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditBalanceLowFromRaw.FromRawUnchecked"/>
+    public static CreditBalanceLow FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreditBalanceLowFromRaw : IFromRawJson<CreditBalanceLow>
+{
+    /// <inheritdoc/>
+    public CreditBalanceLow FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreditBalanceLow.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(CreditBalanceLowPayloadTypeConverter))]
+public enum CreditBalanceLowPayloadType
+{
+    CreditBalanceLow,
+}
+
+sealed class CreditBalanceLowPayloadTypeConverter : JsonConverter<CreditBalanceLowPayloadType>
+{
+    public override CreditBalanceLowPayloadType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "CreditBalanceLow" => CreditBalanceLowPayloadType.CreditBalanceLow,
+            _ => (CreditBalanceLowPayloadType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        CreditBalanceLowPayloadType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CreditBalanceLowPayloadType.CreditBalanceLow => "CreditBalanceLow",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -330,6 +330,19 @@ public sealed record class CheckoutSessionRequest : JsonModel
         init { this._rawData.Set("subscription_data", value); }
     }
 
+    /// <summary>
+    /// Tax ID for the customer (e.g. VAT number). Requires billing_address with country.
+    /// </summary>
+    public string? TaxID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("tax_id");
+        }
+        init { this._rawData.Set("tax_id", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -361,6 +374,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
         _ = this.ShortLink;
         _ = this.ShowSavedPaymentMethods;
         this.SubscriptionData?.Validate();
+        _ = this.TaxID;
     }
 
     public CheckoutSessionRequest() { }

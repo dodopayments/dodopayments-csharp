@@ -29,7 +29,7 @@ public sealed record class ThemeConfig : JsonModel
     }
 
     /// <summary>
-    /// URL for the primary font
+    /// URL for the primary font. Must be a valid https:// URL.
     /// </summary>
     public string? FontPrimaryUrl
     {
@@ -42,7 +42,7 @@ public sealed record class ThemeConfig : JsonModel
     }
 
     /// <summary>
-    /// URL for the secondary font
+    /// URL for the secondary font. Must be a valid https:// URL.
     /// </summary>
     public string? FontSecondaryUrl
     {
@@ -94,7 +94,8 @@ public sealed record class ThemeConfig : JsonModel
     }
 
     /// <summary>
-    /// Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now")
+    /// Custom text for the pay button (e.g., "Complete Purchase", "Subscribe Now").
+    /// Max 100 characters.
     /// </summary>
     public string? PayButtonText
     {
@@ -107,7 +108,8 @@ public sealed record class ThemeConfig : JsonModel
     }
 
     /// <summary>
-    /// Border radius for UI elements (e.g., "4px", "0.5rem", "8px")
+    /// Border radius for UI elements. Must be a number followed by px, rem, or em
+    /// (e.g., "4px", "0.5rem", "1em")
     /// </summary>
     public string? Radius
     {

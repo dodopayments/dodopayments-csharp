@@ -38,6 +38,14 @@ public enum WebhookEventType
     PayoutInProgress,
     PayoutFailed,
     PayoutSuccess,
+    CreditAdded,
+    CreditDeducted,
+    CreditExpired,
+    CreditRolledOver,
+    CreditRolloverForfeited,
+    CreditOverageCharged,
+    CreditManualAdjustment,
+    CreditBalanceLow,
 }
 
 sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
@@ -77,6 +85,14 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
             "payout.in_progress" => WebhookEventType.PayoutInProgress,
             "payout.failed" => WebhookEventType.PayoutFailed,
             "payout.success" => WebhookEventType.PayoutSuccess,
+            "credit.added" => WebhookEventType.CreditAdded,
+            "credit.deducted" => WebhookEventType.CreditDeducted,
+            "credit.expired" => WebhookEventType.CreditExpired,
+            "credit.rolled_over" => WebhookEventType.CreditRolledOver,
+            "credit.rollover_forfeited" => WebhookEventType.CreditRolloverForfeited,
+            "credit.overage_charged" => WebhookEventType.CreditOverageCharged,
+            "credit.manual_adjustment" => WebhookEventType.CreditManualAdjustment,
+            "credit.balance_low" => WebhookEventType.CreditBalanceLow,
             _ => (WebhookEventType)(-1),
         };
     }
@@ -118,6 +134,14 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
                 WebhookEventType.PayoutInProgress => "payout.in_progress",
                 WebhookEventType.PayoutFailed => "payout.failed",
                 WebhookEventType.PayoutSuccess => "payout.success",
+                WebhookEventType.CreditAdded => "credit.added",
+                WebhookEventType.CreditDeducted => "credit.deducted",
+                WebhookEventType.CreditExpired => "credit.expired",
+                WebhookEventType.CreditRolledOver => "credit.rolled_over",
+                WebhookEventType.CreditRolloverForfeited => "credit.rollover_forfeited",
+                WebhookEventType.CreditOverageCharged => "credit.overage_charged",
+                WebhookEventType.CreditManualAdjustment => "credit.manual_adjustment",
+                WebhookEventType.CreditBalanceLow => "credit.balance_low",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
