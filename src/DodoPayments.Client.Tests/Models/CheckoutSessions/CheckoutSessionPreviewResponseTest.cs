@@ -26,6 +26,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             [
                 new()
                 {
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditEntitlementName = "credit_entitlement_name",
+                            CreditEntitlementUnit = "credit_entitlement_unit",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
                     IsSubscription = true,
@@ -82,6 +92,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            TaxIDErrMsg = "tax_id_err_msg",
             TotalTax = 0,
         };
 
@@ -98,6 +109,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         [
             new()
             {
+                CreditEntitlements =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        CreditEntitlementName = "credit_entitlement_name",
+                        CreditEntitlementUnit = "credit_entitlement_unit",
+                        CreditsAmount = "credits_amount",
+                    },
+                ],
                 Currency = Currency.Aed,
                 DiscountedPrice = 0,
                 IsSubscription = true,
@@ -154,6 +175,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalAmount = 0,
             Tax = 0,
         };
+        string expectedTaxIDErrMsg = "tax_id_err_msg";
         int expectedTotalTax = 0;
 
         Assert.Equal(expectedBillingCountry, model.BillingCountry);
@@ -166,6 +188,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         }
         Assert.Equal(expectedTotalPrice, model.TotalPrice);
         Assert.Equal(expectedRecurringBreakup, model.RecurringBreakup);
+        Assert.Equal(expectedTaxIDErrMsg, model.TaxIDErrMsg);
         Assert.Equal(expectedTotalTax, model.TotalTax);
     }
 
@@ -187,6 +210,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             [
                 new()
                 {
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditEntitlementName = "credit_entitlement_name",
+                            CreditEntitlementUnit = "credit_entitlement_unit",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
                     IsSubscription = true,
@@ -243,6 +276,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            TaxIDErrMsg = "tax_id_err_msg",
             TotalTax = 0,
         };
 
@@ -273,6 +307,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             [
                 new()
                 {
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditEntitlementName = "credit_entitlement_name",
+                            CreditEntitlementUnit = "credit_entitlement_unit",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
                     IsSubscription = true,
@@ -329,6 +373,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            TaxIDErrMsg = "tax_id_err_msg",
             TotalTax = 0,
         };
 
@@ -352,6 +397,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         [
             new()
             {
+                CreditEntitlements =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        CreditEntitlementName = "credit_entitlement_name",
+                        CreditEntitlementUnit = "credit_entitlement_unit",
+                        CreditsAmount = "credits_amount",
+                    },
+                ],
                 Currency = Currency.Aed,
                 DiscountedPrice = 0,
                 IsSubscription = true,
@@ -408,6 +463,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalAmount = 0,
             Tax = 0,
         };
+        string expectedTaxIDErrMsg = "tax_id_err_msg";
         int expectedTotalTax = 0;
 
         Assert.Equal(expectedBillingCountry, deserialized.BillingCountry);
@@ -420,6 +476,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         }
         Assert.Equal(expectedTotalPrice, deserialized.TotalPrice);
         Assert.Equal(expectedRecurringBreakup, deserialized.RecurringBreakup);
+        Assert.Equal(expectedTaxIDErrMsg, deserialized.TaxIDErrMsg);
         Assert.Equal(expectedTotalTax, deserialized.TotalTax);
     }
 
@@ -441,6 +498,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             [
                 new()
                 {
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditEntitlementName = "credit_entitlement_name",
+                            CreditEntitlementUnit = "credit_entitlement_unit",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
                     IsSubscription = true,
@@ -497,6 +564,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            TaxIDErrMsg = "tax_id_err_msg",
             TotalTax = 0,
         };
 
@@ -521,6 +589,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             [
                 new()
                 {
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditEntitlementName = "credit_entitlement_name",
+                            CreditEntitlementUnit = "credit_entitlement_unit",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
                     IsSubscription = true,
@@ -574,6 +652,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
 
         Assert.Null(model.RecurringBreakup);
         Assert.False(model.RawData.ContainsKey("recurring_breakup"));
+        Assert.Null(model.TaxIDErrMsg);
+        Assert.False(model.RawData.ContainsKey("tax_id_err_msg"));
         Assert.Null(model.TotalTax);
         Assert.False(model.RawData.ContainsKey("total_tax"));
     }
@@ -596,6 +676,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             [
                 new()
                 {
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditEntitlementName = "credit_entitlement_name",
+                            CreditEntitlementUnit = "credit_entitlement_unit",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
                     IsSubscription = true,
@@ -668,6 +758,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             [
                 new()
                 {
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditEntitlementName = "credit_entitlement_name",
+                            CreditEntitlementUnit = "credit_entitlement_unit",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
                     IsSubscription = true,
@@ -719,11 +819,14 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalPrice = 0,
 
             RecurringBreakup = null,
+            TaxIDErrMsg = null,
             TotalTax = null,
         };
 
         Assert.Null(model.RecurringBreakup);
         Assert.True(model.RawData.ContainsKey("recurring_breakup"));
+        Assert.Null(model.TaxIDErrMsg);
+        Assert.True(model.RawData.ContainsKey("tax_id_err_msg"));
         Assert.Null(model.TotalTax);
         Assert.True(model.RawData.ContainsKey("total_tax"));
     }
@@ -746,6 +849,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             [
                 new()
                 {
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditEntitlementName = "credit_entitlement_name",
+                            CreditEntitlementUnit = "credit_entitlement_unit",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
                     IsSubscription = true,
@@ -797,6 +910,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalPrice = 0,
 
             RecurringBreakup = null,
+            TaxIDErrMsg = null,
             TotalTax = null,
         };
 
@@ -821,6 +935,16 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             [
                 new()
                 {
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditEntitlementName = "credit_entitlement_name",
+                            CreditEntitlementUnit = "credit_entitlement_unit",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                     Currency = Currency.Aed,
                     DiscountedPrice = 0,
                     IsSubscription = true,
@@ -877,6 +1001,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            TaxIDErrMsg = "tax_id_err_msg",
             TotalTax = 0,
         };
 
@@ -1055,6 +1180,16 @@ public class ProductCartTest : TestBase
     {
         var model = new ProductCart
         {
+            CreditEntitlements =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditEntitlementUnit = "credit_entitlement_unit",
+                    CreditsAmount = "credits_amount",
+                },
+            ],
             Currency = Currency.Aed,
             DiscountedPrice = 0,
             IsSubscription = true,
@@ -1103,6 +1238,16 @@ public class ProductCartTest : TestBase
             Tax = 0,
         };
 
+        List<CreditEntitlement> expectedCreditEntitlements =
+        [
+            new()
+            {
+                CreditEntitlementID = "credit_entitlement_id",
+                CreditEntitlementName = "credit_entitlement_name",
+                CreditEntitlementUnit = "credit_entitlement_unit",
+                CreditsAmount = "credits_amount",
+            },
+        ];
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         int expectedDiscountedPrice = 0;
         bool expectedIsSubscription = true;
@@ -1150,6 +1295,11 @@ public class ProductCartTest : TestBase
         string expectedName = "name";
         int expectedTax = 0;
 
+        Assert.Equal(expectedCreditEntitlements.Count, model.CreditEntitlements.Count);
+        for (int i = 0; i < expectedCreditEntitlements.Count; i++)
+        {
+            Assert.Equal(expectedCreditEntitlements[i], model.CreditEntitlements[i]);
+        }
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedDiscountedPrice, model.DiscountedPrice);
         Assert.Equal(expectedIsSubscription, model.IsSubscription);
@@ -1184,6 +1334,16 @@ public class ProductCartTest : TestBase
     {
         var model = new ProductCart
         {
+            CreditEntitlements =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditEntitlementUnit = "credit_entitlement_unit",
+                    CreditsAmount = "credits_amount",
+                },
+            ],
             Currency = Currency.Aed,
             DiscountedPrice = 0,
             IsSubscription = true,
@@ -1246,6 +1406,16 @@ public class ProductCartTest : TestBase
     {
         var model = new ProductCart
         {
+            CreditEntitlements =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditEntitlementUnit = "credit_entitlement_unit",
+                    CreditsAmount = "credits_amount",
+                },
+            ],
             Currency = Currency.Aed,
             DiscountedPrice = 0,
             IsSubscription = true,
@@ -1301,6 +1471,16 @@ public class ProductCartTest : TestBase
         );
         Assert.NotNull(deserialized);
 
+        List<CreditEntitlement> expectedCreditEntitlements =
+        [
+            new()
+            {
+                CreditEntitlementID = "credit_entitlement_id",
+                CreditEntitlementName = "credit_entitlement_name",
+                CreditEntitlementUnit = "credit_entitlement_unit",
+                CreditsAmount = "credits_amount",
+            },
+        ];
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         int expectedDiscountedPrice = 0;
         bool expectedIsSubscription = true;
@@ -1348,6 +1528,11 @@ public class ProductCartTest : TestBase
         string expectedName = "name";
         int expectedTax = 0;
 
+        Assert.Equal(expectedCreditEntitlements.Count, deserialized.CreditEntitlements.Count);
+        for (int i = 0; i < expectedCreditEntitlements.Count; i++)
+        {
+            Assert.Equal(expectedCreditEntitlements[i], deserialized.CreditEntitlements[i]);
+        }
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedDiscountedPrice, deserialized.DiscountedPrice);
         Assert.Equal(expectedIsSubscription, deserialized.IsSubscription);
@@ -1382,6 +1567,16 @@ public class ProductCartTest : TestBase
     {
         var model = new ProductCart
         {
+            CreditEntitlements =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditEntitlementUnit = "credit_entitlement_unit",
+                    CreditsAmount = "credits_amount",
+                },
+            ],
             Currency = Currency.Aed,
             DiscountedPrice = 0,
             IsSubscription = true,
@@ -1438,6 +1633,16 @@ public class ProductCartTest : TestBase
     {
         var model = new ProductCart
         {
+            CreditEntitlements =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditEntitlementUnit = "credit_entitlement_unit",
+                    CreditsAmount = "credits_amount",
+                },
+            ],
             Currency = Currency.Aed,
             DiscountedPrice = 0,
             IsSubscription = true,
@@ -1481,6 +1686,16 @@ public class ProductCartTest : TestBase
     {
         var model = new ProductCart
         {
+            CreditEntitlements =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditEntitlementUnit = "credit_entitlement_unit",
+                    CreditsAmount = "credits_amount",
+                },
+            ],
             Currency = Currency.Aed,
             DiscountedPrice = 0,
             IsSubscription = true,
@@ -1513,6 +1728,16 @@ public class ProductCartTest : TestBase
     {
         var model = new ProductCart
         {
+            CreditEntitlements =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditEntitlementUnit = "credit_entitlement_unit",
+                    CreditsAmount = "credits_amount",
+                },
+            ],
             Currency = Currency.Aed,
             DiscountedPrice = 0,
             IsSubscription = true,
@@ -1563,6 +1788,16 @@ public class ProductCartTest : TestBase
     {
         var model = new ProductCart
         {
+            CreditEntitlements =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditEntitlementUnit = "credit_entitlement_unit",
+                    CreditsAmount = "credits_amount",
+                },
+            ],
             Currency = Currency.Aed,
             DiscountedPrice = 0,
             IsSubscription = true,
@@ -1602,6 +1837,16 @@ public class ProductCartTest : TestBase
     {
         var model = new ProductCart
         {
+            CreditEntitlements =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditEntitlementUnit = "credit_entitlement_unit",
+                    CreditsAmount = "credits_amount",
+                },
+            ],
             Currency = Currency.Aed,
             DiscountedPrice = 0,
             IsSubscription = true,
@@ -1651,6 +1896,110 @@ public class ProductCartTest : TestBase
         };
 
         ProductCart copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class CreditEntitlementTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CreditEntitlement
+        {
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CreditEntitlementUnit = "credit_entitlement_unit",
+            CreditsAmount = "credits_amount",
+        };
+
+        string expectedCreditEntitlementID = "credit_entitlement_id";
+        string expectedCreditEntitlementName = "credit_entitlement_name";
+        string expectedCreditEntitlementUnit = "credit_entitlement_unit";
+        string expectedCreditsAmount = "credits_amount";
+
+        Assert.Equal(expectedCreditEntitlementID, model.CreditEntitlementID);
+        Assert.Equal(expectedCreditEntitlementName, model.CreditEntitlementName);
+        Assert.Equal(expectedCreditEntitlementUnit, model.CreditEntitlementUnit);
+        Assert.Equal(expectedCreditsAmount, model.CreditsAmount);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CreditEntitlement
+        {
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CreditEntitlementUnit = "credit_entitlement_unit",
+            CreditsAmount = "credits_amount",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditEntitlement>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CreditEntitlement
+        {
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CreditEntitlementUnit = "credit_entitlement_unit",
+            CreditsAmount = "credits_amount",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditEntitlement>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedCreditEntitlementID = "credit_entitlement_id";
+        string expectedCreditEntitlementName = "credit_entitlement_name";
+        string expectedCreditEntitlementUnit = "credit_entitlement_unit";
+        string expectedCreditsAmount = "credits_amount";
+
+        Assert.Equal(expectedCreditEntitlementID, deserialized.CreditEntitlementID);
+        Assert.Equal(expectedCreditEntitlementName, deserialized.CreditEntitlementName);
+        Assert.Equal(expectedCreditEntitlementUnit, deserialized.CreditEntitlementUnit);
+        Assert.Equal(expectedCreditsAmount, deserialized.CreditsAmount);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CreditEntitlement
+        {
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CreditEntitlementUnit = "credit_entitlement_unit",
+            CreditsAmount = "credits_amount",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CreditEntitlement
+        {
+            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementName = "credit_entitlement_name",
+            CreditEntitlementUnit = "credit_entitlement_unit",
+            CreditsAmount = "credits_amount",
+        };
+
+        CreditEntitlement copied = new(model);
 
         Assert.Equal(model, copied);
     }

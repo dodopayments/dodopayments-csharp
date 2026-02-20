@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -6,7 +5,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Subscriptions;
+using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -39,14 +41,35 @@ public sealed record class Product : JsonModel
     /// <summary>
     /// Timestamp when the product was created.
     /// </summary>
-    public required DateTimeOffset CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("created_at");
         }
         init { this._rawData.Set("created_at", value); }
+    }
+
+    /// <summary>
+    /// Attached credit entitlements with settings
+    /// </summary>
+    public required IReadOnlyList<ProductCreditEntitlement> CreditEntitlements
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<ProductCreditEntitlement>>(
+                "credit_entitlements"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<ProductCreditEntitlement>>(
+                "credit_entitlements",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -136,12 +159,12 @@ public sealed record class Product : JsonModel
     /// <summary>
     /// Timestamp when the product was last updated.
     /// </summary>
-    public required DateTimeOffset UpdatedAt
+    public required System::DateTimeOffset UpdatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("updated_at");
         }
         init { this._rawData.Set("updated_at", value); }
     }
@@ -274,6 +297,10 @@ public sealed record class Product : JsonModel
         _ = this.BrandID;
         _ = this.BusinessID;
         _ = this.CreatedAt;
+        foreach (var item in this.CreditEntitlements)
+        {
+            item.Validate();
+        }
         _ = this.IsRecurring;
         _ = this.LicenseKeyEnabled;
         _ = this.Metadata;
@@ -325,6 +352,417 @@ class ProductFromRaw : IFromRawJson<Product>
     /// <inheritdoc/>
     public Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Product.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Response struct for credit entitlement mapping
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<ProductCreditEntitlement, ProductCreditEntitlementFromRaw>)
+)]
+public sealed record class ProductCreditEntitlement : JsonModel
+{
+    /// <summary>
+    /// Unique ID of this mapping
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// ID of the credit entitlement
+    /// </summary>
+    public required string CreditEntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_id");
+        }
+        init { this._rawData.Set("credit_entitlement_id", value); }
+    }
+
+    /// <summary>
+    /// Name of the credit entitlement
+    /// </summary>
+    public required string CreditEntitlementName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_name");
+        }
+        init { this._rawData.Set("credit_entitlement_name", value); }
+    }
+
+    /// <summary>
+    /// Unit label for the credit entitlement
+    /// </summary>
+    public required string CreditEntitlementUnit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_unit");
+        }
+        init { this._rawData.Set("credit_entitlement_unit", value); }
+    }
+
+    /// <summary>
+    /// Number of credits granted
+    /// </summary>
+    public required string CreditsAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credits_amount");
+        }
+        init { this._rawData.Set("credits_amount", value); }
+    }
+
+    /// <summary>
+    /// Whether new credit grants reduce existing overage
+    /// </summary>
+    public required bool CreditsReduceOverage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("credits_reduce_overage");
+        }
+        init { this._rawData.Set("credits_reduce_overage", value); }
+    }
+
+    /// <summary>
+    /// Whether overage is charged at billing
+    /// </summary>
+    public required bool OverageChargeAtBilling
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("overage_charge_at_billing");
+        }
+        init { this._rawData.Set("overage_charge_at_billing", value); }
+    }
+
+    /// <summary>
+    /// Whether overage is enabled
+    /// </summary>
+    public required bool OverageEnabled
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("overage_enabled");
+        }
+        init { this._rawData.Set("overage_enabled", value); }
+    }
+
+    /// <summary>
+    /// Whether to preserve overage balance when credits reset
+    /// </summary>
+    public required bool PreserveOverageAtReset
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("preserve_overage_at_reset");
+        }
+        init { this._rawData.Set("preserve_overage_at_reset", value); }
+    }
+
+    /// <summary>
+    /// Proration behavior for credit grants during plan changes
+    /// </summary>
+    public required ApiEnum<string, ProductCreditEntitlementProrationBehavior> ProrationBehavior
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, ProductCreditEntitlementProrationBehavior>
+            >("proration_behavior");
+        }
+        init { this._rawData.Set("proration_behavior", value); }
+    }
+
+    /// <summary>
+    /// Whether rollover is enabled
+    /// </summary>
+    public required bool RolloverEnabled
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("rollover_enabled");
+        }
+        init { this._rawData.Set("rollover_enabled", value); }
+    }
+
+    /// <summary>
+    /// Whether trial credits expire after trial
+    /// </summary>
+    public required bool TrialCreditsExpireAfterTrial
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("trial_credits_expire_after_trial");
+        }
+        init { this._rawData.Set("trial_credits_expire_after_trial", value); }
+    }
+
+    /// <summary>
+    /// Currency
+    /// </summary>
+    public ApiEnum<string, Currency>? Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency");
+        }
+        init { this._rawData.Set("currency", value); }
+    }
+
+    /// <summary>
+    /// Days until credits expire
+    /// </summary>
+    public int? ExpiresAfterDays
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("expires_after_days");
+        }
+        init { this._rawData.Set("expires_after_days", value); }
+    }
+
+    /// <summary>
+    /// Low balance threshold percentage
+    /// </summary>
+    public int? LowBalanceThresholdPercent
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("low_balance_threshold_percent");
+        }
+        init { this._rawData.Set("low_balance_threshold_percent", value); }
+    }
+
+    /// <summary>
+    /// Maximum rollover cycles
+    /// </summary>
+    public int? MaxRolloverCount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("max_rollover_count");
+        }
+        init { this._rawData.Set("max_rollover_count", value); }
+    }
+
+    /// <summary>
+    /// Overage limit
+    /// </summary>
+    public string? OverageLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("overage_limit");
+        }
+        init { this._rawData.Set("overage_limit", value); }
+    }
+
+    /// <summary>
+    /// Price per unit
+    /// </summary>
+    public string? PricePerUnit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("price_per_unit");
+        }
+        init { this._rawData.Set("price_per_unit", value); }
+    }
+
+    /// <summary>
+    /// Rollover percentage
+    /// </summary>
+    public int? RolloverPercentage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("rollover_percentage");
+        }
+        init { this._rawData.Set("rollover_percentage", value); }
+    }
+
+    /// <summary>
+    /// Rollover timeframe count
+    /// </summary>
+    public int? RolloverTimeframeCount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("rollover_timeframe_count");
+        }
+        init { this._rawData.Set("rollover_timeframe_count", value); }
+    }
+
+    /// <summary>
+    /// Rollover timeframe interval
+    /// </summary>
+    public ApiEnum<string, TimeInterval>? RolloverTimeframeInterval
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, TimeInterval>>(
+                "rollover_timeframe_interval"
+            );
+        }
+        init { this._rawData.Set("rollover_timeframe_interval", value); }
+    }
+
+    /// <summary>
+    /// Trial credits
+    /// </summary>
+    public string? TrialCredits
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("trial_credits");
+        }
+        init { this._rawData.Set("trial_credits", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.CreditEntitlementID;
+        _ = this.CreditEntitlementName;
+        _ = this.CreditEntitlementUnit;
+        _ = this.CreditsAmount;
+        _ = this.CreditsReduceOverage;
+        _ = this.OverageChargeAtBilling;
+        _ = this.OverageEnabled;
+        _ = this.PreserveOverageAtReset;
+        this.ProrationBehavior.Validate();
+        _ = this.RolloverEnabled;
+        _ = this.TrialCreditsExpireAfterTrial;
+        this.Currency?.Validate();
+        _ = this.ExpiresAfterDays;
+        _ = this.LowBalanceThresholdPercent;
+        _ = this.MaxRolloverCount;
+        _ = this.OverageLimit;
+        _ = this.PricePerUnit;
+        _ = this.RolloverPercentage;
+        _ = this.RolloverTimeframeCount;
+        this.RolloverTimeframeInterval?.Validate();
+        _ = this.TrialCredits;
+    }
+
+    public ProductCreditEntitlement() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public ProductCreditEntitlement(ProductCreditEntitlement productCreditEntitlement)
+        : base(productCreditEntitlement) { }
+#pragma warning restore CS8618
+
+    public ProductCreditEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    ProductCreditEntitlement(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="ProductCreditEntitlementFromRaw.FromRawUnchecked"/>
+    public static ProductCreditEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class ProductCreditEntitlementFromRaw : IFromRawJson<ProductCreditEntitlement>
+{
+    /// <inheritdoc/>
+    public ProductCreditEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => ProductCreditEntitlement.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Proration behavior for credit grants during plan changes
+/// </summary>
+[JsonConverter(typeof(ProductCreditEntitlementProrationBehaviorConverter))]
+public enum ProductCreditEntitlementProrationBehavior
+{
+    Prorate,
+    NoProrate,
+}
+
+sealed class ProductCreditEntitlementProrationBehaviorConverter
+    : JsonConverter<ProductCreditEntitlementProrationBehavior>
+{
+    public override ProductCreditEntitlementProrationBehavior Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "prorate" => ProductCreditEntitlementProrationBehavior.Prorate,
+            "no_prorate" => ProductCreditEntitlementProrationBehavior.NoProrate,
+            _ => (ProductCreditEntitlementProrationBehavior)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        ProductCreditEntitlementProrationBehavior value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                ProductCreditEntitlementProrationBehavior.Prorate => "prorate",
+                ProductCreditEntitlementProrationBehavior.NoProrate => "no_prorate",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 [JsonConverter(

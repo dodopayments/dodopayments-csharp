@@ -352,6 +352,19 @@ public record class CheckoutSessionCreateParams : ParamsBase
         init { this._rawBodyData.Set("subscription_data", value); }
     }
 
+    /// <summary>
+    /// Tax ID for the customer (e.g. VAT number). Requires billing_address with country.
+    /// </summary>
+    public string? TaxID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("tax_id");
+        }
+        init { this._rawBodyData.Set("tax_id", value); }
+    }
+
     public CheckoutSessionCreateParams() { }
 
 #pragma warning disable CS8618

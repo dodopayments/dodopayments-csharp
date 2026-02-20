@@ -35,6 +35,14 @@ public class WebhookEventTypeTest : TestBase
     [InlineData(WebhookEventType.PayoutInProgress)]
     [InlineData(WebhookEventType.PayoutFailed)]
     [InlineData(WebhookEventType.PayoutSuccess)]
+    [InlineData(WebhookEventType.CreditAdded)]
+    [InlineData(WebhookEventType.CreditDeducted)]
+    [InlineData(WebhookEventType.CreditExpired)]
+    [InlineData(WebhookEventType.CreditRolledOver)]
+    [InlineData(WebhookEventType.CreditRolloverForfeited)]
+    [InlineData(WebhookEventType.CreditOverageCharged)]
+    [InlineData(WebhookEventType.CreditManualAdjustment)]
+    [InlineData(WebhookEventType.CreditBalanceLow)]
     public void Validation_Works(WebhookEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -82,6 +90,14 @@ public class WebhookEventTypeTest : TestBase
     [InlineData(WebhookEventType.PayoutInProgress)]
     [InlineData(WebhookEventType.PayoutFailed)]
     [InlineData(WebhookEventType.PayoutSuccess)]
+    [InlineData(WebhookEventType.CreditAdded)]
+    [InlineData(WebhookEventType.CreditDeducted)]
+    [InlineData(WebhookEventType.CreditExpired)]
+    [InlineData(WebhookEventType.CreditRolledOver)]
+    [InlineData(WebhookEventType.CreditRolloverForfeited)]
+    [InlineData(WebhookEventType.CreditOverageCharged)]
+    [InlineData(WebhookEventType.CreditManualAdjustment)]
+    [InlineData(WebhookEventType.CreditBalanceLow)]
     public void SerializationRoundtrip_Works(WebhookEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

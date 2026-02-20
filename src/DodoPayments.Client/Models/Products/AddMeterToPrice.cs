@@ -35,6 +35,19 @@ public sealed record class AddMeterToPrice : JsonModel
     }
 
     /// <summary>
+    /// Optional credit entitlement ID to link this meter to for credit-based billing
+    /// </summary>
+    public string? CreditEntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("credit_entitlement_id");
+        }
+        init { this._rawData.Set("credit_entitlement_id", value); }
+    }
+
+    /// <summary>
     /// Meter description. Will ignored on Request, but will be shown in response
     /// </summary>
     public string? Description
@@ -71,6 +84,20 @@ public sealed record class AddMeterToPrice : JsonModel
     }
 
     /// <summary>
+    /// Number of meter units that equal one credit. Required when credit_entitlement_id
+    /// is set.
+    /// </summary>
+    public string? MeterUnitsPerCredit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("meter_units_per_credit");
+        }
+        init { this._rawData.Set("meter_units_per_credit", value); }
+    }
+
+    /// <summary>
     /// Meter name. Will ignored on Request, but will be shown in response
     /// </summary>
     public string? Name
@@ -88,9 +115,11 @@ public sealed record class AddMeterToPrice : JsonModel
     {
         _ = this.MeterID;
         _ = this.PricePerUnit;
+        _ = this.CreditEntitlementID;
         _ = this.Description;
         _ = this.FreeThreshold;
         _ = this.MeasurementUnit;
+        _ = this.MeterUnitsPerCredit;
         _ = this.Name;
     }
 

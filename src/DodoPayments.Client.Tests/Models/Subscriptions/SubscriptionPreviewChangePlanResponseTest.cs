@@ -59,6 +59,29 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 },
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementCart =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        CreditEntitlementName = "credit_entitlement_name",
+                        CreditsAmount = "credits_amount",
+                        OverageBalance = "overage_balance",
+                        OverageChargeAtBilling = true,
+                        OverageEnabled = true,
+                        ProductID = "product_id",
+                        RemainingBalance = "remaining_balance",
+                        RolloverEnabled = true,
+                        Unit = "unit",
+                        ExpiresAfterDays = 0,
+                        LowBalanceThresholdPercent = 0,
+                        MaxRolloverCount = 0,
+                        OverageLimit = "overage_limit",
+                        RolloverPercentage = 0,
+                        RolloverTimeframeCount = 0,
+                        RolloverTimeframeInterval = TimeInterval.Day,
+                    },
+                ],
                 Currency = Currency.Aed,
                 Customer = new()
                 {
@@ -69,6 +92,17 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     PhoneNumber = "phone_number",
                 },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MeterCreditEntitlementCart =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        MeterID = "meter_id",
+                        MeterName = "meter_name",
+                        MeterUnitsPerCredit = "meter_units_per_credit",
+                        ProductID = "product_id",
+                    },
+                ],
                 Meters =
                 [
                     new()
@@ -150,6 +184,29 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -160,6 +217,17 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -249,6 +317,29 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 },
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementCart =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        CreditEntitlementName = "credit_entitlement_name",
+                        CreditsAmount = "credits_amount",
+                        OverageBalance = "overage_balance",
+                        OverageChargeAtBilling = true,
+                        OverageEnabled = true,
+                        ProductID = "product_id",
+                        RemainingBalance = "remaining_balance",
+                        RolloverEnabled = true,
+                        Unit = "unit",
+                        ExpiresAfterDays = 0,
+                        LowBalanceThresholdPercent = 0,
+                        MaxRolloverCount = 0,
+                        OverageLimit = "overage_limit",
+                        RolloverPercentage = 0,
+                        RolloverTimeframeCount = 0,
+                        RolloverTimeframeInterval = TimeInterval.Day,
+                    },
+                ],
                 Currency = Currency.Aed,
                 Customer = new()
                 {
@@ -259,6 +350,17 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     PhoneNumber = "phone_number",
                 },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MeterCreditEntitlementCart =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        MeterID = "meter_id",
+                        MeterName = "meter_name",
+                        MeterUnitsPerCredit = "meter_units_per_credit",
+                        ProductID = "product_id",
+                    },
+                ],
                 Meters =
                 [
                     new()
@@ -354,6 +456,29 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 },
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementCart =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        CreditEntitlementName = "credit_entitlement_name",
+                        CreditsAmount = "credits_amount",
+                        OverageBalance = "overage_balance",
+                        OverageChargeAtBilling = true,
+                        OverageEnabled = true,
+                        ProductID = "product_id",
+                        RemainingBalance = "remaining_balance",
+                        RolloverEnabled = true,
+                        Unit = "unit",
+                        ExpiresAfterDays = 0,
+                        LowBalanceThresholdPercent = 0,
+                        MaxRolloverCount = 0,
+                        OverageLimit = "overage_limit",
+                        RolloverPercentage = 0,
+                        RolloverTimeframeCount = 0,
+                        RolloverTimeframeInterval = TimeInterval.Day,
+                    },
+                ],
                 Currency = Currency.Aed,
                 Customer = new()
                 {
@@ -364,6 +489,17 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     PhoneNumber = "phone_number",
                 },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MeterCreditEntitlementCart =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        MeterID = "meter_id",
+                        MeterName = "meter_name",
+                        MeterUnitsPerCredit = "meter_units_per_credit",
+                        ProductID = "product_id",
+                    },
+                ],
                 Meters =
                 [
                     new()
@@ -452,6 +588,29 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageChargeAtBilling = true,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = TimeInterval.Day,
+                },
+            ],
             Currency = Currency.Aed,
             Customer = new()
             {
@@ -462,6 +621,17 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 PhoneNumber = "phone_number",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
             Meters =
             [
                 new()
@@ -551,6 +721,29 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 },
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementCart =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        CreditEntitlementName = "credit_entitlement_name",
+                        CreditsAmount = "credits_amount",
+                        OverageBalance = "overage_balance",
+                        OverageChargeAtBilling = true,
+                        OverageEnabled = true,
+                        ProductID = "product_id",
+                        RemainingBalance = "remaining_balance",
+                        RolloverEnabled = true,
+                        Unit = "unit",
+                        ExpiresAfterDays = 0,
+                        LowBalanceThresholdPercent = 0,
+                        MaxRolloverCount = 0,
+                        OverageLimit = "overage_limit",
+                        RolloverPercentage = 0,
+                        RolloverTimeframeCount = 0,
+                        RolloverTimeframeInterval = TimeInterval.Day,
+                    },
+                ],
                 Currency = Currency.Aed,
                 Customer = new()
                 {
@@ -561,6 +754,17 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     PhoneNumber = "phone_number",
                 },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MeterCreditEntitlementCart =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        MeterID = "meter_id",
+                        MeterName = "meter_name",
+                        MeterUnitsPerCredit = "meter_units_per_credit",
+                        ProductID = "product_id",
+                    },
+                ],
                 Meters =
                 [
                     new()
@@ -650,6 +854,29 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 },
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementCart =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        CreditEntitlementName = "credit_entitlement_name",
+                        CreditsAmount = "credits_amount",
+                        OverageBalance = "overage_balance",
+                        OverageChargeAtBilling = true,
+                        OverageEnabled = true,
+                        ProductID = "product_id",
+                        RemainingBalance = "remaining_balance",
+                        RolloverEnabled = true,
+                        Unit = "unit",
+                        ExpiresAfterDays = 0,
+                        LowBalanceThresholdPercent = 0,
+                        MaxRolloverCount = 0,
+                        OverageLimit = "overage_limit",
+                        RolloverPercentage = 0,
+                        RolloverTimeframeCount = 0,
+                        RolloverTimeframeInterval = TimeInterval.Day,
+                    },
+                ],
                 Currency = Currency.Aed,
                 Customer = new()
                 {
@@ -660,6 +887,17 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     PhoneNumber = "phone_number",
                 },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MeterCreditEntitlementCart =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        MeterID = "meter_id",
+                        MeterName = "meter_name",
+                        MeterUnitsPerCredit = "meter_units_per_credit",
+                        ProductID = "product_id",
+                    },
+                ],
                 Meters =
                 [
                     new()

@@ -105,6 +105,19 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
     }
 
     /// <summary>
+    /// Error message if tax ID validation failed
+    /// </summary>
+    public string? TaxIDErrMsg
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("tax_id_err_msg");
+        }
+        init { this._rawData.Set("tax_id_err_msg", value); }
+    }
+
+    /// <summary>
     /// Total tax
     /// </summary>
     public int? TotalTax
@@ -129,6 +142,7 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
         }
         _ = this.TotalPrice;
         this.RecurringBreakup?.Validate();
+        _ = this.TaxIDErrMsg;
         _ = this.TotalTax;
     }
 
@@ -277,6 +291,27 @@ class CurrentBreakupFromRaw : IFromRawJson<CurrentBreakup>
 [JsonConverter(typeof(JsonModelConverter<ProductCart, ProductCartFromRaw>))]
 public sealed record class ProductCart : JsonModel
 {
+    /// <summary>
+    /// Credit entitlements that will be granted upon purchase
+    /// </summary>
+    public required IReadOnlyList<CreditEntitlement> CreditEntitlements
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<CreditEntitlement>>(
+                "credit_entitlements"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<CreditEntitlement>>(
+                "credit_entitlements",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <summary>
     /// the currency in which the calculatiosn were made
     /// </summary>
@@ -514,6 +549,10 @@ public sealed record class ProductCart : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        foreach (var item in this.CreditEntitlements)
+        {
+            item.Validate();
+        }
         this.Currency.Validate();
         _ = this.DiscountedPrice;
         _ = this.IsSubscription;
@@ -573,6 +612,111 @@ class ProductCartFromRaw : IFromRawJson<ProductCart>
     /// <inheritdoc/>
     public ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         ProductCart.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Minimal credit entitlement info shown at checkout — what credits the customer
+/// will receive
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<CreditEntitlement, CreditEntitlementFromRaw>))]
+public sealed record class CreditEntitlement : JsonModel
+{
+    /// <summary>
+    /// ID of the credit entitlement
+    /// </summary>
+    public required string CreditEntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_id");
+        }
+        init { this._rawData.Set("credit_entitlement_id", value); }
+    }
+
+    /// <summary>
+    /// Name of the credit entitlement
+    /// </summary>
+    public required string CreditEntitlementName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_name");
+        }
+        init { this._rawData.Set("credit_entitlement_name", value); }
+    }
+
+    /// <summary>
+    /// Unit label (e.g. "API Calls", "Tokens")
+    /// </summary>
+    public required string CreditEntitlementUnit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_unit");
+        }
+        init { this._rawData.Set("credit_entitlement_unit", value); }
+    }
+
+    /// <summary>
+    /// Number of credits granted
+    /// </summary>
+    public required string CreditsAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credits_amount");
+        }
+        init { this._rawData.Set("credits_amount", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.CreditEntitlementID;
+        _ = this.CreditEntitlementName;
+        _ = this.CreditEntitlementUnit;
+        _ = this.CreditsAmount;
+    }
+
+    public CreditEntitlement() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreditEntitlement(CreditEntitlement creditEntitlement)
+        : base(creditEntitlement) { }
+#pragma warning restore CS8618
+
+    public CreditEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreditEntitlement(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditEntitlementFromRaw.FromRawUnchecked"/>
+    public static CreditEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreditEntitlementFromRaw : IFromRawJson<CreditEntitlement>
+{
+    /// <inheritdoc/>
+    public CreditEntitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreditEntitlement.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(JsonModelConverter<Meter, MeterFromRaw>))]

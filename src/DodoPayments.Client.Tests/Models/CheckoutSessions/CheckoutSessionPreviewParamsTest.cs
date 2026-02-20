@@ -112,6 +112,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -139,6 +140,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
         };
 
         List<ProductItemReq> expectedProductCart =
@@ -242,6 +244,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             AllowCustomerEditingName = true,
             AllowCustomerEditingState = true,
             AllowCustomerEditingStreet = true,
+            AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
             AllowPhoneNumberCollection = true,
@@ -269,6 +272,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             },
             TrialPeriodDays = 0,
         };
+        string expectedTaxID = "tax_id";
 
         Assert.Equal(expectedProductCart.Count, parameters.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
@@ -316,6 +320,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
         Assert.Equal(expectedShortLink, parameters.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, parameters.ShowSavedPaymentMethods);
         Assert.Equal(expectedSubscriptionData, parameters.SubscriptionData);
+        Assert.Equal(expectedTaxID, parameters.TaxID);
     }
 
     [Fact]
@@ -374,6 +379,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
         };
 
         Assert.Null(parameters.Confirm);
@@ -446,6 +452,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
 
             // Null should be interpreted as omitted for these properties
             Confirm = null,
@@ -549,6 +556,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -585,6 +593,8 @@ public class CheckoutSessionPreviewParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("return_url"));
         Assert.Null(parameters.SubscriptionData);
         Assert.False(parameters.RawBodyData.ContainsKey("subscription_data"));
+        Assert.Null(parameters.TaxID);
+        Assert.False(parameters.RawBodyData.ContainsKey("tax_id"));
     }
 
     [Fact]
@@ -666,6 +676,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -689,6 +700,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             ProductCollectionID = null,
             ReturnUrl = null,
             SubscriptionData = null,
+            TaxID = null,
         };
 
         Assert.Null(parameters.AllowedPaymentMethodTypes);
@@ -715,6 +727,8 @@ public class CheckoutSessionPreviewParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("return_url"));
         Assert.Null(parameters.SubscriptionData);
         Assert.True(parameters.RawBodyData.ContainsKey("subscription_data"));
+        Assert.Null(parameters.TaxID);
+        Assert.True(parameters.RawBodyData.ContainsKey("tax_id"));
     }
 
     [Fact]
@@ -842,6 +856,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 AllowCustomerEditingName = true,
                 AllowCustomerEditingState = true,
                 AllowCustomerEditingStreet = true,
+                AllowCustomerEditingTaxID = true,
                 AllowCustomerEditingZipcode = true,
                 AllowDiscountCode = true,
                 AllowPhoneNumberCollection = true,
@@ -869,6 +884,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 },
                 TrialPeriodDays = 0,
             },
+            TaxID = "tax_id",
         };
 
         CheckoutSessionPreviewParams copied = new(parameters);

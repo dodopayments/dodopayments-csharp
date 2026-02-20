@@ -141,6 +141,24 @@ public sealed record class CheckoutSessionFlags : JsonModel
         }
     }
 
+    public bool? AllowCustomerEditingTaxID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_editing_tax_id");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("allow_customer_editing_tax_id", value);
+        }
+    }
+
     public bool? AllowCustomerEditingZipcode
     {
         get
@@ -285,6 +303,7 @@ public sealed record class CheckoutSessionFlags : JsonModel
         _ = this.AllowCustomerEditingName;
         _ = this.AllowCustomerEditingState;
         _ = this.AllowCustomerEditingStreet;
+        _ = this.AllowCustomerEditingTaxID;
         _ = this.AllowCustomerEditingZipcode;
         _ = this.AllowDiscountCode;
         _ = this.AllowPhoneNumberCollection;

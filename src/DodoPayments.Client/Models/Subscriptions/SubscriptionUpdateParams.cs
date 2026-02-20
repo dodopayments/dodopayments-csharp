@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -47,6 +48,27 @@ public record class SubscriptionUpdateParams : ParamsBase
             return this._rawBodyData.GetNullableStruct<bool>("cancel_at_next_billing_date");
         }
         init { this._rawBodyData.Set("cancel_at_next_billing_date", value); }
+    }
+
+    /// <summary>
+    /// Update credit entitlement cart settings
+    /// </summary>
+    public IReadOnlyList<CreditEntitlementCart>? CreditEntitlementCart
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<CreditEntitlementCart>>(
+                "credit_entitlement_cart"
+            );
+        }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<CreditEntitlementCart>?>(
+                "credit_entitlement_cart",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     public string? CustomerName
@@ -232,6 +254,193 @@ public record class SubscriptionUpdateParams : ParamsBase
     {
         return 0;
     }
+}
+
+[JsonConverter(typeof(JsonModelConverter<CreditEntitlementCart, CreditEntitlementCartFromRaw>))]
+public sealed record class CreditEntitlementCart : JsonModel
+{
+    public required string CreditEntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_id");
+        }
+        init { this._rawData.Set("credit_entitlement_id", value); }
+    }
+
+    public string? CreditsAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("credits_amount");
+        }
+        init { this._rawData.Set("credits_amount", value); }
+    }
+
+    public int? ExpiresAfterDays
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("expires_after_days");
+        }
+        init { this._rawData.Set("expires_after_days", value); }
+    }
+
+    public int? LowBalanceThresholdPercent
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("low_balance_threshold_percent");
+        }
+        init { this._rawData.Set("low_balance_threshold_percent", value); }
+    }
+
+    public int? MaxRolloverCount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("max_rollover_count");
+        }
+        init { this._rawData.Set("max_rollover_count", value); }
+    }
+
+    public bool? OverageChargeAtBilling
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("overage_charge_at_billing");
+        }
+        init { this._rawData.Set("overage_charge_at_billing", value); }
+    }
+
+    public bool? OverageEnabled
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("overage_enabled");
+        }
+        init { this._rawData.Set("overage_enabled", value); }
+    }
+
+    public string? OverageLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("overage_limit");
+        }
+        init { this._rawData.Set("overage_limit", value); }
+    }
+
+    public bool? RolloverEnabled
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("rollover_enabled");
+        }
+        init { this._rawData.Set("rollover_enabled", value); }
+    }
+
+    public int? RolloverPercentage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("rollover_percentage");
+        }
+        init { this._rawData.Set("rollover_percentage", value); }
+    }
+
+    public int? RolloverTimeframeCount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("rollover_timeframe_count");
+        }
+        init { this._rawData.Set("rollover_timeframe_count", value); }
+    }
+
+    public ApiEnum<string, TimeInterval>? RolloverTimeframeInterval
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, TimeInterval>>(
+                "rollover_timeframe_interval"
+            );
+        }
+        init { this._rawData.Set("rollover_timeframe_interval", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.CreditEntitlementID;
+        _ = this.CreditsAmount;
+        _ = this.ExpiresAfterDays;
+        _ = this.LowBalanceThresholdPercent;
+        _ = this.MaxRolloverCount;
+        _ = this.OverageChargeAtBilling;
+        _ = this.OverageEnabled;
+        _ = this.OverageLimit;
+        _ = this.RolloverEnabled;
+        _ = this.RolloverPercentage;
+        _ = this.RolloverTimeframeCount;
+        this.RolloverTimeframeInterval?.Validate();
+    }
+
+    public CreditEntitlementCart() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreditEntitlementCart(CreditEntitlementCart creditEntitlementCart)
+        : base(creditEntitlementCart) { }
+#pragma warning restore CS8618
+
+    public CreditEntitlementCart(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreditEntitlementCart(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditEntitlementCartFromRaw.FromRawUnchecked"/>
+    public static CreditEntitlementCart FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public CreditEntitlementCart(string creditEntitlementID)
+        : this()
+    {
+        this.CreditEntitlementID = creditEntitlementID;
+    }
+}
+
+class CreditEntitlementCartFromRaw : IFromRawJson<CreditEntitlementCart>
+{
+    /// <inheritdoc/>
+    public CreditEntitlementCart FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CreditEntitlementCart.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(JsonModelConverter<DisableOnDemand, DisableOnDemandFromRaw>))]

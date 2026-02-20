@@ -18,6 +18,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingName = true,
             AllowCustomerEditingState = true,
             AllowCustomerEditingStreet = true,
+            AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
             AllowPhoneNumberCollection = true,
@@ -33,6 +34,7 @@ public class CheckoutSessionFlagsTest : TestBase
         bool expectedAllowCustomerEditingName = true;
         bool expectedAllowCustomerEditingState = true;
         bool expectedAllowCustomerEditingStreet = true;
+        bool expectedAllowCustomerEditingTaxID = true;
         bool expectedAllowCustomerEditingZipcode = true;
         bool expectedAllowDiscountCode = true;
         bool expectedAllowPhoneNumberCollection = true;
@@ -47,6 +49,7 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.Equal(expectedAllowCustomerEditingName, model.AllowCustomerEditingName);
         Assert.Equal(expectedAllowCustomerEditingState, model.AllowCustomerEditingState);
         Assert.Equal(expectedAllowCustomerEditingStreet, model.AllowCustomerEditingStreet);
+        Assert.Equal(expectedAllowCustomerEditingTaxID, model.AllowCustomerEditingTaxID);
         Assert.Equal(expectedAllowCustomerEditingZipcode, model.AllowCustomerEditingZipcode);
         Assert.Equal(expectedAllowDiscountCode, model.AllowDiscountCode);
         Assert.Equal(expectedAllowPhoneNumberCollection, model.AllowPhoneNumberCollection);
@@ -67,6 +70,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingName = true,
             AllowCustomerEditingState = true,
             AllowCustomerEditingStreet = true,
+            AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
             AllowPhoneNumberCollection = true,
@@ -96,6 +100,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingName = true,
             AllowCustomerEditingState = true,
             AllowCustomerEditingStreet = true,
+            AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
             AllowPhoneNumberCollection = true,
@@ -118,6 +123,7 @@ public class CheckoutSessionFlagsTest : TestBase
         bool expectedAllowCustomerEditingName = true;
         bool expectedAllowCustomerEditingState = true;
         bool expectedAllowCustomerEditingStreet = true;
+        bool expectedAllowCustomerEditingTaxID = true;
         bool expectedAllowCustomerEditingZipcode = true;
         bool expectedAllowDiscountCode = true;
         bool expectedAllowPhoneNumberCollection = true;
@@ -132,6 +138,7 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.Equal(expectedAllowCustomerEditingName, deserialized.AllowCustomerEditingName);
         Assert.Equal(expectedAllowCustomerEditingState, deserialized.AllowCustomerEditingState);
         Assert.Equal(expectedAllowCustomerEditingStreet, deserialized.AllowCustomerEditingStreet);
+        Assert.Equal(expectedAllowCustomerEditingTaxID, deserialized.AllowCustomerEditingTaxID);
         Assert.Equal(expectedAllowCustomerEditingZipcode, deserialized.AllowCustomerEditingZipcode);
         Assert.Equal(expectedAllowDiscountCode, deserialized.AllowDiscountCode);
         Assert.Equal(expectedAllowPhoneNumberCollection, deserialized.AllowPhoneNumberCollection);
@@ -152,6 +159,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingName = true,
             AllowCustomerEditingState = true,
             AllowCustomerEditingStreet = true,
+            AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
             AllowPhoneNumberCollection = true,
@@ -182,6 +190,8 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.False(model.RawData.ContainsKey("allow_customer_editing_state"));
         Assert.Null(model.AllowCustomerEditingStreet);
         Assert.False(model.RawData.ContainsKey("allow_customer_editing_street"));
+        Assert.Null(model.AllowCustomerEditingTaxID);
+        Assert.False(model.RawData.ContainsKey("allow_customer_editing_tax_id"));
         Assert.Null(model.AllowCustomerEditingZipcode);
         Assert.False(model.RawData.ContainsKey("allow_customer_editing_zipcode"));
         Assert.Null(model.AllowDiscountCode);
@@ -217,6 +227,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingName = null,
             AllowCustomerEditingState = null,
             AllowCustomerEditingStreet = null,
+            AllowCustomerEditingTaxID = null,
             AllowCustomerEditingZipcode = null,
             AllowDiscountCode = null,
             AllowPhoneNumberCollection = null,
@@ -239,6 +250,8 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.False(model.RawData.ContainsKey("allow_customer_editing_state"));
         Assert.Null(model.AllowCustomerEditingStreet);
         Assert.False(model.RawData.ContainsKey("allow_customer_editing_street"));
+        Assert.Null(model.AllowCustomerEditingTaxID);
+        Assert.False(model.RawData.ContainsKey("allow_customer_editing_tax_id"));
         Assert.Null(model.AllowCustomerEditingZipcode);
         Assert.False(model.RawData.ContainsKey("allow_customer_editing_zipcode"));
         Assert.Null(model.AllowDiscountCode);
@@ -266,6 +279,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingName = null,
             AllowCustomerEditingState = null,
             AllowCustomerEditingStreet = null,
+            AllowCustomerEditingTaxID = null,
             AllowCustomerEditingZipcode = null,
             AllowDiscountCode = null,
             AllowPhoneNumberCollection = null,
@@ -289,6 +303,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingName = true,
             AllowCustomerEditingState = true,
             AllowCustomerEditingStreet = true,
+            AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
             AllowPhoneNumberCollection = true,
