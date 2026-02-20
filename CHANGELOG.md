@@ -1,5 +1,23 @@
 # Changelog
 
+## 6.9.0 (2026-02-20)
+
+Full Changelog: [v6.8.0...v6.9.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.8.0...v6.9.0)
+
+### Features
+
+* **api:** updated openapi spec to v1.84.0 ([3049259](https://github.com/dodopayments/dodopayments-csharp/commit/3049259b0998a1085a18810f1f71ea3c6448fc1c))
+
+
+### Bug Fixes
+
+* **client:** validate unions properly ([f7c1321](https://github.com/dodopayments/dodopayments-csharp/commit/f7c1321101bd1c7ecdd4464efc0b9c8d001af941))
+
+
+### Chores
+
+* update mock server docs ([a4efc6f](https://github.com/dodopayments/dodopayments-csharp/commit/a4efc6ff8fadf05fe8cdb00021be975655d887e2))
+
 ## 6.8.0 (2026-02-14)
 
 Full Changelog: [v6.7.0...v6.8.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.7.0...v6.8.0)
