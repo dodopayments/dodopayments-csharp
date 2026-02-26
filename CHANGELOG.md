@@ -1,5 +1,19 @@
 # Changelog
 
+## 6.9.1 (2026-02-26)
+
+Full Changelog: [v6.9.0...v6.9.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.9.0...v6.9.1)
+
+### Chores
+
+* **docs:** add proxy documentation to readme ([591f470](https://github.com/dodopayments/dodopayments-csharp/commit/591f47011713bfd046e465a000ffa8766a8559e2))
+* **docs:** add undocumented parameters to readme ([a9a1c4b](https://github.com/dodopayments/dodopayments-csharp/commit/a9a1c4be000b7bc83cc3faa26c9a9d47a8bafd0d))
+
+
+### Refactors
+
+* **internal:** default headers ([e657133](https://github.com/dodopayments/dodopayments-csharp/commit/e657133416519b87851e8d30cd30335b21fd2157))
+
 ## 6.9.0 (2026-02-20)
 
 Full Changelog: [v6.8.0...v6.9.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.8.0...v6.9.0)
