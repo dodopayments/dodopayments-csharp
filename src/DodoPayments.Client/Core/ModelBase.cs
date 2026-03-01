@@ -60,7 +60,7 @@ public abstract record class ModelBase
             >(),
             new ApiEnumConverter<string, Subscriptions::LineItemSubscriptionType>(),
             new ApiEnumConverter<string, Subscriptions::AddonType>(),
-            new ApiEnumConverter<string, Subscriptions::LineItemMeterType>(),
+            new ApiEnumConverter<string, Subscriptions::MeterType>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
             new ApiEnumConverter<string, Subscriptions::OnPaymentFailure>(),

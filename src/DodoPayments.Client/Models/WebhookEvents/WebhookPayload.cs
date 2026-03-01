@@ -1677,18 +1677,18 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Credit entitlement cart settings for this subscription
     /// </summary>
-    public required IReadOnlyList<Subscriptions::SubscriptionCreditEntitlementCart> CreditEntitlementCart
+    public required IReadOnlyList<Subscriptions::CreditEntitlementCartResponse> CreditEntitlementCart
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<
-                ImmutableArray<Subscriptions::SubscriptionCreditEntitlementCart>
+                ImmutableArray<Subscriptions::CreditEntitlementCartResponse>
             >("credit_entitlement_cart");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Subscriptions::SubscriptionCreditEntitlementCart>>(
+            this._rawData.Set<ImmutableArray<Subscriptions::CreditEntitlementCartResponse>>(
                 "credit_entitlement_cart",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -1737,18 +1737,18 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Meter credit entitlement cart settings for this subscription
     /// </summary>
-    public required IReadOnlyList<Subscriptions::MeterCreditEntitlementCart> MeterCreditEntitlementCart
+    public required IReadOnlyList<Subscriptions::MeterCreditEntitlementCartResponse> MeterCreditEntitlementCart
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<
-                ImmutableArray<Subscriptions::MeterCreditEntitlementCart>
+                ImmutableArray<Subscriptions::MeterCreditEntitlementCartResponse>
             >("meter_credit_entitlement_cart");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Subscriptions::MeterCreditEntitlementCart>>(
+            this._rawData.Set<ImmutableArray<Subscriptions::MeterCreditEntitlementCartResponse>>(
                 "meter_credit_entitlement_cart",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -1758,16 +1758,18 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Meters associated with this subscription (for usage-based billing)
     /// </summary>
-    public required IReadOnlyList<Subscriptions::Meter> Meters
+    public required IReadOnlyList<Subscriptions::MeterCartResponseItem> Meters
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<Subscriptions::Meter>>("meters");
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<Subscriptions::MeterCartResponseItem>
+            >("meters");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Subscriptions::Meter>>(
+            this._rawData.Set<ImmutableArray<Subscriptions::MeterCartResponseItem>>(
                 "meters",
                 ImmutableArray.ToImmutableArray(value)
             );

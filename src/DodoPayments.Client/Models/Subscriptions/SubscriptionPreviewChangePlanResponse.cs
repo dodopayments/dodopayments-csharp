@@ -307,7 +307,7 @@ public record class LineItem : ModelBase
         this._element = element;
     }
 
-    public LineItem(LineItemMeter value, JsonElement? element = null)
+    public LineItem(Meter value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -362,22 +362,22 @@ public record class LineItem : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="LineItemMeter"/>.
+    /// type <see cref="Meter"/>.
     ///
     /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickMeter(out var value)) {
-    ///     // `value` is of type `LineItemMeter`
+    ///     // `value` is of type `Meter`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickMeter([NotNullWhen(true)] out LineItemMeter? value)
+    public bool TryPickMeter([NotNullWhen(true)] out Meter? value)
     {
-        value = this.Value as LineItemMeter;
+        value = this.Value as Meter;
         return value != null;
     }
 
@@ -397,7 +397,7 @@ public record class LineItem : ModelBase
     /// instance.Switch(
     ///     (LineItemSubscription value) => {...},
     ///     (Addon value) => {...},
-    ///     (LineItemMeter value) => {...}
+    ///     (Meter value) => {...}
     /// );
     /// </code>
     /// </example>
@@ -405,7 +405,7 @@ public record class LineItem : ModelBase
     public void Switch(
         System::Action<LineItemSubscription> subscription,
         System::Action<Addon> addon,
-        System::Action<LineItemMeter> meter
+        System::Action<Meter> meter
     )
     {
         switch (this.Value)
@@ -416,7 +416,7 @@ public record class LineItem : ModelBase
             case Addon value:
                 addon(value);
                 break;
-            case LineItemMeter value:
+            case Meter value:
                 meter(value);
                 break;
             default:
@@ -443,7 +443,7 @@ public record class LineItem : ModelBase
     /// var result = instance.Match(
     ///     (LineItemSubscription value) => {...},
     ///     (Addon value) => {...},
-    ///     (LineItemMeter value) => {...}
+    ///     (Meter value) => {...}
     /// );
     /// </code>
     /// </example>
@@ -451,14 +451,14 @@ public record class LineItem : ModelBase
     public T Match<T>(
         System::Func<LineItemSubscription, T> subscription,
         System::Func<Addon, T> addon,
-        System::Func<LineItemMeter, T> meter
+        System::Func<Meter, T> meter
     )
     {
         return this.Value switch
         {
             LineItemSubscription value => subscription(value),
             Addon value => addon(value),
-            LineItemMeter value => meter(value),
+            Meter value => meter(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of LineItem"
             ),
@@ -469,7 +469,7 @@ public record class LineItem : ModelBase
 
     public static implicit operator LineItem(Addon value) => new(value);
 
-    public static implicit operator LineItem(LineItemMeter value) => new(value);
+    public static implicit operator LineItem(Meter value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -518,7 +518,7 @@ public record class LineItem : ModelBase
         {
             LineItemSubscription _ => 0,
             Addon _ => 1,
-            LineItemMeter _ => 2,
+            Meter _ => 2,
             _ => -1,
         };
     }
@@ -565,7 +565,7 @@ sealed class LineItemConverter : JsonConverter<LineItem>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<LineItemMeter>(element, options);
+            var deserialized = JsonSerializer.Deserialize<Meter>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -1026,8 +1026,8 @@ sealed class AddonTypeConverter : JsonConverter<AddonType>
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<LineItemMeter, LineItemMeterFromRaw>))]
-public sealed record class LineItemMeter : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Meter, MeterFromRaw>))]
+public sealed record class Meter : JsonModel
 {
     public required string ID
     {
@@ -1119,12 +1119,12 @@ public sealed record class LineItemMeter : JsonModel
         init { this._rawData.Set("tax_rate", value); }
     }
 
-    public required ApiEnum<string, LineItemMeterType> Type
+    public required ApiEnum<string, MeterType> Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, LineItemMeterType>>("type");
+            return this._rawData.GetNotNullClass<ApiEnum<string, MeterType>>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -1177,50 +1177,50 @@ public sealed record class LineItemMeter : JsonModel
         _ = this.Tax;
     }
 
-    public LineItemMeter() { }
+    public Meter() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public LineItemMeter(LineItemMeter lineItemMeter)
-        : base(lineItemMeter) { }
+    public Meter(Meter meter)
+        : base(meter) { }
 #pragma warning restore CS8618
 
-    public LineItemMeter(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Meter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    LineItemMeter(FrozenDictionary<string, JsonElement> rawData)
+    Meter(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="LineItemMeterFromRaw.FromRawUnchecked"/>
-    public static LineItemMeter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="MeterFromRaw.FromRawUnchecked"/>
+    public static Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class LineItemMeterFromRaw : IFromRawJson<LineItemMeter>
+class MeterFromRaw : IFromRawJson<Meter>
 {
     /// <inheritdoc/>
-    public LineItemMeter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        LineItemMeter.FromRawUnchecked(rawData);
+    public Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Meter.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(LineItemMeterTypeConverter))]
-public enum LineItemMeterType
+[JsonConverter(typeof(MeterTypeConverter))]
+public enum MeterType
 {
     Meter,
 }
 
-sealed class LineItemMeterTypeConverter : JsonConverter<LineItemMeterType>
+sealed class MeterTypeConverter : JsonConverter<MeterType>
 {
-    public override LineItemMeterType Read(
+    public override MeterType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1228,14 +1228,14 @@ sealed class LineItemMeterTypeConverter : JsonConverter<LineItemMeterType>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "meter" => LineItemMeterType.Meter,
-            _ => (LineItemMeterType)(-1),
+            "meter" => MeterType.Meter,
+            _ => (MeterType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        LineItemMeterType value,
+        MeterType value,
         JsonSerializerOptions options
     )
     {
@@ -1243,7 +1243,7 @@ sealed class LineItemMeterTypeConverter : JsonConverter<LineItemMeterType>
             writer,
             value switch
             {
-                LineItemMeterType.Meter => "meter",
+                MeterType.Meter => "meter",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
