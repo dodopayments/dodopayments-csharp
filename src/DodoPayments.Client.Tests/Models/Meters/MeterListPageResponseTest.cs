@@ -33,18 +33,18 @@ public class MeterListPageResponseTest : TestBase
                                 new Meters::MeterFilterCondition()
                                 {
                                     Key = "user_id",
-                                    Operator = Meters::Operator.Equals,
+                                    Operator = Meters::FilterOperator.Equals,
                                     Value = "user123",
                                 },
                                 new Meters::MeterFilterCondition()
                                 {
                                     Key = "amount",
-                                    Operator = Meters::Operator.GreaterThan,
+                                    Operator = Meters::FilterOperator.GreaterThan,
                                     Value = 100,
                                 },
                             ]
                         ),
-                        Conjunction = Meters::MeterFilterConjunction.And,
+                        Conjunction = Meters::Conjunction.And,
                     },
                 },
             ],
@@ -70,18 +70,18 @@ public class MeterListPageResponseTest : TestBase
                             new Meters::MeterFilterCondition()
                             {
                                 Key = "user_id",
-                                Operator = Meters::Operator.Equals,
+                                Operator = Meters::FilterOperator.Equals,
                                 Value = "user123",
                             },
                             new Meters::MeterFilterCondition()
                             {
                                 Key = "amount",
-                                Operator = Meters::Operator.GreaterThan,
+                                Operator = Meters::FilterOperator.GreaterThan,
                                 Value = 100,
                             },
                         ]
                     ),
-                    Conjunction = Meters::MeterFilterConjunction.And,
+                    Conjunction = Meters::Conjunction.And,
                 },
             },
         ];
@@ -118,18 +118,18 @@ public class MeterListPageResponseTest : TestBase
                                 new Meters::MeterFilterCondition()
                                 {
                                     Key = "user_id",
-                                    Operator = Meters::Operator.Equals,
+                                    Operator = Meters::FilterOperator.Equals,
                                     Value = "user123",
                                 },
                                 new Meters::MeterFilterCondition()
                                 {
                                     Key = "amount",
-                                    Operator = Meters::Operator.GreaterThan,
+                                    Operator = Meters::FilterOperator.GreaterThan,
                                     Value = 100,
                                 },
                             ]
                         ),
-                        Conjunction = Meters::MeterFilterConjunction.And,
+                        Conjunction = Meters::Conjunction.And,
                     },
                 },
             ],
@@ -169,18 +169,18 @@ public class MeterListPageResponseTest : TestBase
                                 new Meters::MeterFilterCondition()
                                 {
                                     Key = "user_id",
-                                    Operator = Meters::Operator.Equals,
+                                    Operator = Meters::FilterOperator.Equals,
                                     Value = "user123",
                                 },
                                 new Meters::MeterFilterCondition()
                                 {
                                     Key = "amount",
-                                    Operator = Meters::Operator.GreaterThan,
+                                    Operator = Meters::FilterOperator.GreaterThan,
                                     Value = 100,
                                 },
                             ]
                         ),
-                        Conjunction = Meters::MeterFilterConjunction.And,
+                        Conjunction = Meters::Conjunction.And,
                     },
                 },
             ],
@@ -213,18 +213,18 @@ public class MeterListPageResponseTest : TestBase
                             new Meters::MeterFilterCondition()
                             {
                                 Key = "user_id",
-                                Operator = Meters::Operator.Equals,
+                                Operator = Meters::FilterOperator.Equals,
                                 Value = "user123",
                             },
                             new Meters::MeterFilterCondition()
                             {
                                 Key = "amount",
-                                Operator = Meters::Operator.GreaterThan,
+                                Operator = Meters::FilterOperator.GreaterThan,
                                 Value = 100,
                             },
                         ]
                     ),
-                    Conjunction = Meters::MeterFilterConjunction.And,
+                    Conjunction = Meters::Conjunction.And,
                 },
             },
         ];
@@ -261,18 +261,18 @@ public class MeterListPageResponseTest : TestBase
                                 new Meters::MeterFilterCondition()
                                 {
                                     Key = "user_id",
-                                    Operator = Meters::Operator.Equals,
+                                    Operator = Meters::FilterOperator.Equals,
                                     Value = "user123",
                                 },
                                 new Meters::MeterFilterCondition()
                                 {
                                     Key = "amount",
-                                    Operator = Meters::Operator.GreaterThan,
+                                    Operator = Meters::FilterOperator.GreaterThan,
                                     Value = 100,
                                 },
                             ]
                         ),
-                        Conjunction = Meters::MeterFilterConjunction.And,
+                        Conjunction = Meters::Conjunction.And,
                     },
                 },
             ],
@@ -306,18 +306,18 @@ public class MeterListPageResponseTest : TestBase
                                 new Meters::MeterFilterCondition()
                                 {
                                     Key = "user_id",
-                                    Operator = Meters::Operator.Equals,
+                                    Operator = Meters::FilterOperator.Equals,
                                     Value = "user123",
                                 },
                                 new Meters::MeterFilterCondition()
                                 {
                                     Key = "amount",
-                                    Operator = Meters::Operator.GreaterThan,
+                                    Operator = Meters::FilterOperator.GreaterThan,
                                     Value = 100,
                                 },
                             ]
                         ),
-                        Conjunction = Meters::MeterFilterConjunction.And,
+                        Conjunction = Meters::Conjunction.And,
                     },
                 },
             ],

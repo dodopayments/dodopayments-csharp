@@ -54,14 +54,14 @@ public sealed record class DisputeAcceptedWebhookEvent : JsonModel
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, global::DodoPayments.Client.Models.Webhooks.Type> Type
+    public required ApiEnum<string, DisputeAcceptedWebhookEventType> Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, global::DodoPayments.Client.Models.Webhooks.Type>
-            >("type");
+            return this._rawData.GetNotNullClass<ApiEnum<string, DisputeAcceptedWebhookEventType>>(
+                "type"
+            );
         }
         init { this._rawData.Set("type", value); }
     }
@@ -116,15 +116,16 @@ class DisputeAcceptedWebhookEventFromRaw : IFromRawJson<DisputeAcceptedWebhookEv
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(TypeConverter))]
-public enum Type
+[JsonConverter(typeof(DisputeAcceptedWebhookEventTypeConverter))]
+public enum DisputeAcceptedWebhookEventType
 {
     DisputeAccepted,
 }
 
-sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.Webhooks.Type>
+sealed class DisputeAcceptedWebhookEventTypeConverter
+    : JsonConverter<DisputeAcceptedWebhookEventType>
 {
-    public override global::DodoPayments.Client.Models.Webhooks.Type Read(
+    public override DisputeAcceptedWebhookEventType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -132,14 +133,14 @@ sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.We
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "dispute.accepted" => global::DodoPayments.Client.Models.Webhooks.Type.DisputeAccepted,
-            _ => (global::DodoPayments.Client.Models.Webhooks.Type)(-1),
+            "dispute.accepted" => DisputeAcceptedWebhookEventType.DisputeAccepted,
+            _ => (DisputeAcceptedWebhookEventType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        global::DodoPayments.Client.Models.Webhooks.Type value,
+        DisputeAcceptedWebhookEventType value,
         JsonSerializerOptions options
     )
     {
@@ -147,8 +148,7 @@ sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.We
             writer,
             value switch
             {
-                global::DodoPayments.Client.Models.Webhooks.Type.DisputeAccepted =>
-                    "dispute.accepted",
+                DisputeAcceptedWebhookEventType.DisputeAccepted => "dispute.accepted",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -44,6 +44,17 @@ public class CustomerServiceTest : TestBase
     }
 
     [Fact]
+    public async Task ListCreditEntitlements_Works()
+    {
+        var response = await this.client.Customers.ListCreditEntitlements(
+            "customer_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact]
     public async Task RetrievePaymentMethods_Works()
     {
         var response = await this.client.Customers.RetrievePaymentMethods(

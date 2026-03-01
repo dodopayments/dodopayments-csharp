@@ -143,6 +143,27 @@ public record class RefundListParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Filter by subscription id
+    /// </summary>
+    public string? SubscriptionID
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("subscription_id");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("subscription_id", value);
+        }
+    }
+
     public RefundListParams() { }
 
 #pragma warning disable CS8618

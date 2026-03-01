@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
-using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
@@ -34,7 +35,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -79,8 +80,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -107,7 +108,7 @@ public class SubscriptionTest : TestBase
         };
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
-        Payments::BillingAddress expectedBilling = new()
+        BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -125,7 +126,7 @@ public class SubscriptionTest : TestBase
                 CreditEntitlementName = "credit_entitlement_name",
                 CreditsAmount = "credits_amount",
                 OverageBalance = "overage_balance",
-                OverageChargeAtBilling = true,
+                OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                 OverageEnabled = true,
                 ProductID = "product_id",
                 RemainingBalance = "remaining_balance",
@@ -141,7 +142,7 @@ public class SubscriptionTest : TestBase
             },
         ];
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        Payments::CustomerLimitedDetails expectedCustomer = new()
+        CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -170,8 +171,8 @@ public class SubscriptionTest : TestBase
                 MeasurementUnit = "measurement_unit",
                 MeterID = "meter_id",
                 Name = "name",
-                PricePerUnit = "10.50",
                 Description = "description",
+                PricePerUnit = "10.50",
             },
         ];
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -291,7 +292,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -336,8 +337,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -396,7 +397,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -441,8 +442,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -476,7 +477,7 @@ public class SubscriptionTest : TestBase
         Assert.NotNull(deserialized);
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
-        Payments::BillingAddress expectedBilling = new()
+        BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -494,7 +495,7 @@ public class SubscriptionTest : TestBase
                 CreditEntitlementName = "credit_entitlement_name",
                 CreditsAmount = "credits_amount",
                 OverageBalance = "overage_balance",
-                OverageChargeAtBilling = true,
+                OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                 OverageEnabled = true,
                 ProductID = "product_id",
                 RemainingBalance = "remaining_balance",
@@ -510,7 +511,7 @@ public class SubscriptionTest : TestBase
             },
         ];
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        Payments::CustomerLimitedDetails expectedCustomer = new()
+        CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -539,8 +540,8 @@ public class SubscriptionTest : TestBase
                 MeasurementUnit = "measurement_unit",
                 MeterID = "meter_id",
                 Name = "name",
-                PricePerUnit = "10.50",
                 Description = "description",
+                PricePerUnit = "10.50",
             },
         ];
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -660,7 +661,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -705,8 +706,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -759,7 +760,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -804,8 +805,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -864,7 +865,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -909,8 +910,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -956,7 +957,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -1001,8 +1002,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1069,7 +1070,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -1114,8 +1115,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1169,7 +1170,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -1214,8 +1215,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1258,7 +1259,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
             CreditEntitlementName = "credit_entitlement_name",
             CreditsAmount = "credits_amount",
             OverageBalance = "overage_balance",
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
             ProductID = "product_id",
             RemainingBalance = "remaining_balance",
@@ -1277,7 +1278,8 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
         string expectedCreditEntitlementName = "credit_entitlement_name";
         string expectedCreditsAmount = "credits_amount";
         string expectedOverageBalance = "overage_balance";
-        bool expectedOverageChargeAtBilling = true;
+        ApiEnum<string, CbbOverageBehavior> expectedOverageBehavior =
+            CbbOverageBehavior.ForgiveAtReset;
         bool expectedOverageEnabled = true;
         string expectedProductID = "product_id";
         string expectedRemainingBalance = "remaining_balance";
@@ -1295,7 +1297,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
         Assert.Equal(expectedCreditEntitlementName, model.CreditEntitlementName);
         Assert.Equal(expectedCreditsAmount, model.CreditsAmount);
         Assert.Equal(expectedOverageBalance, model.OverageBalance);
-        Assert.Equal(expectedOverageChargeAtBilling, model.OverageChargeAtBilling);
+        Assert.Equal(expectedOverageBehavior, model.OverageBehavior);
         Assert.Equal(expectedOverageEnabled, model.OverageEnabled);
         Assert.Equal(expectedProductID, model.ProductID);
         Assert.Equal(expectedRemainingBalance, model.RemainingBalance);
@@ -1319,7 +1321,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
             CreditEntitlementName = "credit_entitlement_name",
             CreditsAmount = "credits_amount",
             OverageBalance = "overage_balance",
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
             ProductID = "product_id",
             RemainingBalance = "remaining_balance",
@@ -1352,7 +1354,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
             CreditEntitlementName = "credit_entitlement_name",
             CreditsAmount = "credits_amount",
             OverageBalance = "overage_balance",
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
             ProductID = "product_id",
             RemainingBalance = "remaining_balance",
@@ -1378,7 +1380,8 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
         string expectedCreditEntitlementName = "credit_entitlement_name";
         string expectedCreditsAmount = "credits_amount";
         string expectedOverageBalance = "overage_balance";
-        bool expectedOverageChargeAtBilling = true;
+        ApiEnum<string, CbbOverageBehavior> expectedOverageBehavior =
+            CbbOverageBehavior.ForgiveAtReset;
         bool expectedOverageEnabled = true;
         string expectedProductID = "product_id";
         string expectedRemainingBalance = "remaining_balance";
@@ -1396,7 +1399,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
         Assert.Equal(expectedCreditEntitlementName, deserialized.CreditEntitlementName);
         Assert.Equal(expectedCreditsAmount, deserialized.CreditsAmount);
         Assert.Equal(expectedOverageBalance, deserialized.OverageBalance);
-        Assert.Equal(expectedOverageChargeAtBilling, deserialized.OverageChargeAtBilling);
+        Assert.Equal(expectedOverageBehavior, deserialized.OverageBehavior);
         Assert.Equal(expectedOverageEnabled, deserialized.OverageEnabled);
         Assert.Equal(expectedProductID, deserialized.ProductID);
         Assert.Equal(expectedRemainingBalance, deserialized.RemainingBalance);
@@ -1420,7 +1423,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
             CreditEntitlementName = "credit_entitlement_name",
             CreditsAmount = "credits_amount",
             OverageBalance = "overage_balance",
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
             ProductID = "product_id",
             RemainingBalance = "remaining_balance",
@@ -1447,7 +1450,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
             CreditEntitlementName = "credit_entitlement_name",
             CreditsAmount = "credits_amount",
             OverageBalance = "overage_balance",
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
             ProductID = "product_id",
             RemainingBalance = "remaining_balance",
@@ -1480,7 +1483,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
             CreditEntitlementName = "credit_entitlement_name",
             CreditsAmount = "credits_amount",
             OverageBalance = "overage_balance",
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
             ProductID = "product_id",
             RemainingBalance = "remaining_balance",
@@ -1500,7 +1503,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
             CreditEntitlementName = "credit_entitlement_name",
             CreditsAmount = "credits_amount",
             OverageBalance = "overage_balance",
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
             ProductID = "product_id",
             RemainingBalance = "remaining_balance",
@@ -1541,7 +1544,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
             CreditEntitlementName = "credit_entitlement_name",
             CreditsAmount = "credits_amount",
             OverageBalance = "overage_balance",
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
             ProductID = "product_id",
             RemainingBalance = "remaining_balance",
@@ -1569,7 +1572,7 @@ public class SubscriptionCreditEntitlementCartTest : TestBase
             CreditEntitlementName = "credit_entitlement_name",
             CreditsAmount = "credits_amount",
             OverageBalance = "overage_balance",
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
             ProductID = "product_id",
             RemainingBalance = "remaining_balance",
@@ -1715,8 +1718,8 @@ public class MeterTest : TestBase
             MeasurementUnit = "measurement_unit",
             MeterID = "meter_id",
             Name = "name",
-            PricePerUnit = "10.50",
             Description = "description",
+            PricePerUnit = "10.50",
         };
 
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
@@ -1724,16 +1727,16 @@ public class MeterTest : TestBase
         string expectedMeasurementUnit = "measurement_unit";
         string expectedMeterID = "meter_id";
         string expectedName = "name";
-        string expectedPricePerUnit = "10.50";
         string expectedDescription = "description";
+        string expectedPricePerUnit = "10.50";
 
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedFreeThreshold, model.FreeThreshold);
         Assert.Equal(expectedMeasurementUnit, model.MeasurementUnit);
         Assert.Equal(expectedMeterID, model.MeterID);
         Assert.Equal(expectedName, model.Name);
-        Assert.Equal(expectedPricePerUnit, model.PricePerUnit);
         Assert.Equal(expectedDescription, model.Description);
+        Assert.Equal(expectedPricePerUnit, model.PricePerUnit);
     }
 
     [Fact]
@@ -1746,8 +1749,8 @@ public class MeterTest : TestBase
             MeasurementUnit = "measurement_unit",
             MeterID = "meter_id",
             Name = "name",
-            PricePerUnit = "10.50",
             Description = "description",
+            PricePerUnit = "10.50",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1766,8 +1769,8 @@ public class MeterTest : TestBase
             MeasurementUnit = "measurement_unit",
             MeterID = "meter_id",
             Name = "name",
-            PricePerUnit = "10.50",
             Description = "description",
+            PricePerUnit = "10.50",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1779,16 +1782,16 @@ public class MeterTest : TestBase
         string expectedMeasurementUnit = "measurement_unit";
         string expectedMeterID = "meter_id";
         string expectedName = "name";
-        string expectedPricePerUnit = "10.50";
         string expectedDescription = "description";
+        string expectedPricePerUnit = "10.50";
 
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedFreeThreshold, deserialized.FreeThreshold);
         Assert.Equal(expectedMeasurementUnit, deserialized.MeasurementUnit);
         Assert.Equal(expectedMeterID, deserialized.MeterID);
         Assert.Equal(expectedName, deserialized.Name);
-        Assert.Equal(expectedPricePerUnit, deserialized.PricePerUnit);
         Assert.Equal(expectedDescription, deserialized.Description);
+        Assert.Equal(expectedPricePerUnit, deserialized.PricePerUnit);
     }
 
     [Fact]
@@ -1801,8 +1804,8 @@ public class MeterTest : TestBase
             MeasurementUnit = "measurement_unit",
             MeterID = "meter_id",
             Name = "name",
-            PricePerUnit = "10.50",
             Description = "description",
+            PricePerUnit = "10.50",
         };
 
         model.Validate();
@@ -1818,11 +1821,12 @@ public class MeterTest : TestBase
             MeasurementUnit = "measurement_unit",
             MeterID = "meter_id",
             Name = "name",
-            PricePerUnit = "10.50",
         };
 
         Assert.Null(model.Description);
         Assert.False(model.RawData.ContainsKey("description"));
+        Assert.Null(model.PricePerUnit);
+        Assert.False(model.RawData.ContainsKey("price_per_unit"));
     }
 
     [Fact]
@@ -1835,7 +1839,6 @@ public class MeterTest : TestBase
             MeasurementUnit = "measurement_unit",
             MeterID = "meter_id",
             Name = "name",
-            PricePerUnit = "10.50",
         };
 
         model.Validate();
@@ -1851,13 +1854,15 @@ public class MeterTest : TestBase
             MeasurementUnit = "measurement_unit",
             MeterID = "meter_id",
             Name = "name",
-            PricePerUnit = "10.50",
 
             Description = null,
+            PricePerUnit = null,
         };
 
         Assert.Null(model.Description);
         Assert.True(model.RawData.ContainsKey("description"));
+        Assert.Null(model.PricePerUnit);
+        Assert.True(model.RawData.ContainsKey("price_per_unit"));
     }
 
     [Fact]
@@ -1870,9 +1875,9 @@ public class MeterTest : TestBase
             MeasurementUnit = "measurement_unit",
             MeterID = "meter_id",
             Name = "name",
-            PricePerUnit = "10.50",
 
             Description = null,
+            PricePerUnit = null,
         };
 
         model.Validate();
@@ -1888,77 +1893,11 @@ public class MeterTest : TestBase
             MeasurementUnit = "measurement_unit",
             MeterID = "meter_id",
             Name = "name",
-            PricePerUnit = "10.50",
             Description = "description",
+            PricePerUnit = "10.50",
         };
 
         Meter copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class CustomFieldResponseTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new CustomFieldResponse { Key = "key", Value = "value" };
-
-        string expectedKey = "key";
-        string expectedValue = "value";
-
-        Assert.Equal(expectedKey, model.Key);
-        Assert.Equal(expectedValue, model.Value);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new CustomFieldResponse { Key = "key", Value = "value" };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomFieldResponse>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new CustomFieldResponse { Key = "key", Value = "value" };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomFieldResponse>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedKey = "key";
-        string expectedValue = "value";
-
-        Assert.Equal(expectedKey, deserialized.Key);
-        Assert.Equal(expectedValue, deserialized.Value);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new CustomFieldResponse { Key = "key", Value = "value" };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new CustomFieldResponse { Key = "key", Value = "value" };
-
-        CustomFieldResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }

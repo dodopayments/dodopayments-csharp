@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Services;
 
 namespace DodoPayments.Client.Models.Refunds;
@@ -15,10 +16,10 @@ public sealed class RefundListPage(
     IRefundServiceWithRawResponse service,
     RefundListParams parameters,
     RefundListPageResponse response
-) : IPage<RefundListResponse>
+) : IPage<RefundListItem>
 {
     /// <inheritdoc/>
-    public IReadOnlyList<RefundListResponse> Items
+    public IReadOnlyList<RefundListItem> Items
     {
         get { return response.Items; }
     }
@@ -30,7 +31,7 @@ public sealed class RefundListPage(
     }
 
     /// <inheritdoc/>
-    async Task<IPage<RefundListResponse>> IPage<RefundListResponse>.Next(
+    async Task<IPage<RefundListItem>> IPage<RefundListItem>.Next(
         CancellationToken cancellationToken
     ) => await this.Next(cancellationToken).ConfigureAwait(false);
 

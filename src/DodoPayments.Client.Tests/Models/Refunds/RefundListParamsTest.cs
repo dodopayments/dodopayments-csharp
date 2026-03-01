@@ -19,6 +19,7 @@ public class RefundListParamsTest : TestBase
             PageNumber = 0,
             PageSize = 0,
             Status = Status.Succeeded,
+            SubscriptionID = "subscription_id",
         };
 
         DateTimeOffset expectedCreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -27,6 +28,7 @@ public class RefundListParamsTest : TestBase
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
         ApiEnum<string, Status> expectedStatus = Status.Succeeded;
+        string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedCreatedAtGte, parameters.CreatedAtGte);
         Assert.Equal(expectedCreatedAtLte, parameters.CreatedAtLte);
@@ -34,6 +36,7 @@ public class RefundListParamsTest : TestBase
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
         Assert.Equal(expectedStatus, parameters.Status);
+        Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
     }
 
     [Fact]
@@ -53,6 +56,8 @@ public class RefundListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
+        Assert.Null(parameters.SubscriptionID);
+        Assert.False(parameters.RawQueryData.ContainsKey("subscription_id"));
     }
 
     [Fact]
@@ -67,6 +72,7 @@ public class RefundListParamsTest : TestBase
             PageNumber = null,
             PageSize = null,
             Status = null,
+            SubscriptionID = null,
         };
 
         Assert.Null(parameters.CreatedAtGte);
@@ -81,6 +87,8 @@ public class RefundListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
+        Assert.Null(parameters.SubscriptionID);
+        Assert.False(parameters.RawQueryData.ContainsKey("subscription_id"));
     }
 
     [Fact]
@@ -94,13 +102,14 @@ public class RefundListParamsTest : TestBase
             PageNumber = 0,
             PageSize = 0,
             Status = Status.Succeeded,
+            SubscriptionID = "subscription_id",
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.Equal(
             new Uri(
-                "https://live.dodopayments.com/refunds?created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&status=succeeded"
+                "https://live.dodopayments.com/refunds?created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&status=succeeded&subscription_id=subscription_id"
             ),
             url
         );
@@ -117,6 +126,7 @@ public class RefundListParamsTest : TestBase
             PageNumber = 0,
             PageSize = 0,
             Status = Status.Succeeded,
+            SubscriptionID = "subscription_id",
         };
 
         RefundListParams copied = new(parameters);

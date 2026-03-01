@@ -34,7 +34,6 @@ public class SubscriptionUpdateParamsTest : TestBase
                     ExpiresAfterDays = 0,
                     LowBalanceThresholdPercent = 0,
                     MaxRolloverCount = 0,
-                    OverageChargeAtBilling = true,
                     OverageEnabled = true,
                     OverageLimit = "overage_limit",
                     RolloverEnabled = true,
@@ -70,7 +69,6 @@ public class SubscriptionUpdateParamsTest : TestBase
                 ExpiresAfterDays = 0,
                 LowBalanceThresholdPercent = 0,
                 MaxRolloverCount = 0,
-                OverageChargeAtBilling = true,
                 OverageEnabled = true,
                 OverageLimit = "overage_limit",
                 RolloverEnabled = true,
@@ -209,7 +207,6 @@ public class SubscriptionUpdateParamsTest : TestBase
                     ExpiresAfterDays = 0,
                     LowBalanceThresholdPercent = 0,
                     MaxRolloverCount = 0,
-                    OverageChargeAtBilling = true,
                     OverageEnabled = true,
                     OverageLimit = "overage_limit",
                     RolloverEnabled = true,
@@ -244,7 +241,6 @@ public class CreditEntitlementCartTest : TestBase
             ExpiresAfterDays = 0,
             LowBalanceThresholdPercent = 0,
             MaxRolloverCount = 0,
-            OverageChargeAtBilling = true,
             OverageEnabled = true,
             OverageLimit = "overage_limit",
             RolloverEnabled = true,
@@ -258,7 +254,6 @@ public class CreditEntitlementCartTest : TestBase
         int expectedExpiresAfterDays = 0;
         int expectedLowBalanceThresholdPercent = 0;
         int expectedMaxRolloverCount = 0;
-        bool expectedOverageChargeAtBilling = true;
         bool expectedOverageEnabled = true;
         string expectedOverageLimit = "overage_limit";
         bool expectedRolloverEnabled = true;
@@ -271,7 +266,6 @@ public class CreditEntitlementCartTest : TestBase
         Assert.Equal(expectedExpiresAfterDays, model.ExpiresAfterDays);
         Assert.Equal(expectedLowBalanceThresholdPercent, model.LowBalanceThresholdPercent);
         Assert.Equal(expectedMaxRolloverCount, model.MaxRolloverCount);
-        Assert.Equal(expectedOverageChargeAtBilling, model.OverageChargeAtBilling);
         Assert.Equal(expectedOverageEnabled, model.OverageEnabled);
         Assert.Equal(expectedOverageLimit, model.OverageLimit);
         Assert.Equal(expectedRolloverEnabled, model.RolloverEnabled);
@@ -290,7 +284,6 @@ public class CreditEntitlementCartTest : TestBase
             ExpiresAfterDays = 0,
             LowBalanceThresholdPercent = 0,
             MaxRolloverCount = 0,
-            OverageChargeAtBilling = true,
             OverageEnabled = true,
             OverageLimit = "overage_limit",
             RolloverEnabled = true,
@@ -318,7 +311,6 @@ public class CreditEntitlementCartTest : TestBase
             ExpiresAfterDays = 0,
             LowBalanceThresholdPercent = 0,
             MaxRolloverCount = 0,
-            OverageChargeAtBilling = true,
             OverageEnabled = true,
             OverageLimit = "overage_limit",
             RolloverEnabled = true,
@@ -339,7 +331,6 @@ public class CreditEntitlementCartTest : TestBase
         int expectedExpiresAfterDays = 0;
         int expectedLowBalanceThresholdPercent = 0;
         int expectedMaxRolloverCount = 0;
-        bool expectedOverageChargeAtBilling = true;
         bool expectedOverageEnabled = true;
         string expectedOverageLimit = "overage_limit";
         bool expectedRolloverEnabled = true;
@@ -352,7 +343,6 @@ public class CreditEntitlementCartTest : TestBase
         Assert.Equal(expectedExpiresAfterDays, deserialized.ExpiresAfterDays);
         Assert.Equal(expectedLowBalanceThresholdPercent, deserialized.LowBalanceThresholdPercent);
         Assert.Equal(expectedMaxRolloverCount, deserialized.MaxRolloverCount);
-        Assert.Equal(expectedOverageChargeAtBilling, deserialized.OverageChargeAtBilling);
         Assert.Equal(expectedOverageEnabled, deserialized.OverageEnabled);
         Assert.Equal(expectedOverageLimit, deserialized.OverageLimit);
         Assert.Equal(expectedRolloverEnabled, deserialized.RolloverEnabled);
@@ -371,7 +361,6 @@ public class CreditEntitlementCartTest : TestBase
             ExpiresAfterDays = 0,
             LowBalanceThresholdPercent = 0,
             MaxRolloverCount = 0,
-            OverageChargeAtBilling = true,
             OverageEnabled = true,
             OverageLimit = "overage_limit",
             RolloverEnabled = true,
@@ -396,8 +385,6 @@ public class CreditEntitlementCartTest : TestBase
         Assert.False(model.RawData.ContainsKey("low_balance_threshold_percent"));
         Assert.Null(model.MaxRolloverCount);
         Assert.False(model.RawData.ContainsKey("max_rollover_count"));
-        Assert.Null(model.OverageChargeAtBilling);
-        Assert.False(model.RawData.ContainsKey("overage_charge_at_billing"));
         Assert.Null(model.OverageEnabled);
         Assert.False(model.RawData.ContainsKey("overage_enabled"));
         Assert.Null(model.OverageLimit);
@@ -431,7 +418,6 @@ public class CreditEntitlementCartTest : TestBase
             ExpiresAfterDays = null,
             LowBalanceThresholdPercent = null,
             MaxRolloverCount = null,
-            OverageChargeAtBilling = null,
             OverageEnabled = null,
             OverageLimit = null,
             RolloverEnabled = null,
@@ -448,8 +434,6 @@ public class CreditEntitlementCartTest : TestBase
         Assert.True(model.RawData.ContainsKey("low_balance_threshold_percent"));
         Assert.Null(model.MaxRolloverCount);
         Assert.True(model.RawData.ContainsKey("max_rollover_count"));
-        Assert.Null(model.OverageChargeAtBilling);
-        Assert.True(model.RawData.ContainsKey("overage_charge_at_billing"));
         Assert.Null(model.OverageEnabled);
         Assert.True(model.RawData.ContainsKey("overage_enabled"));
         Assert.Null(model.OverageLimit);
@@ -475,7 +459,6 @@ public class CreditEntitlementCartTest : TestBase
             ExpiresAfterDays = null,
             LowBalanceThresholdPercent = null,
             MaxRolloverCount = null,
-            OverageChargeAtBilling = null,
             OverageEnabled = null,
             OverageLimit = null,
             RolloverEnabled = null,
@@ -497,7 +480,6 @@ public class CreditEntitlementCartTest : TestBase
             ExpiresAfterDays = 0,
             LowBalanceThresholdPercent = 0,
             MaxRolloverCount = 0,
-            OverageChargeAtBilling = true,
             OverageEnabled = true,
             OverageLimit = "overage_limit",
             RolloverEnabled = true,

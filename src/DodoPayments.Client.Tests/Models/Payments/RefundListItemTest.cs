@@ -2,16 +2,17 @@ using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Refunds;
 
-namespace DodoPayments.Client.Tests.Models.Refunds;
+namespace DodoPayments.Client.Tests.Models.Payments;
 
-public class RefundListResponseTest : TestBase
+public class RefundListItemTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new RefundListResponse
+        var model = new RefundListItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -48,7 +49,7 @@ public class RefundListResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new RefundListResponse
+        var model = new RefundListItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -62,7 +63,7 @@ public class RefundListResponseTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<RefundListResponse>(
+        var deserialized = JsonSerializer.Deserialize<RefundListItem>(
             json,
             ModelBase.SerializerOptions
         );
@@ -73,7 +74,7 @@ public class RefundListResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new RefundListResponse
+        var model = new RefundListItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -87,7 +88,7 @@ public class RefundListResponseTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<RefundListResponse>(
+        var deserialized = JsonSerializer.Deserialize<RefundListItem>(
             element,
             ModelBase.SerializerOptions
         );
@@ -117,7 +118,7 @@ public class RefundListResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new RefundListResponse
+        var model = new RefundListItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -136,7 +137,7 @@ public class RefundListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new RefundListResponse
+        var model = new RefundListItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -157,7 +158,7 @@ public class RefundListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new RefundListResponse
+        var model = new RefundListItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -173,7 +174,7 @@ public class RefundListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new RefundListResponse
+        var model = new RefundListItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -198,7 +199,7 @@ public class RefundListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new RefundListResponse
+        var model = new RefundListItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -218,7 +219,7 @@ public class RefundListResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new RefundListResponse
+        var model = new RefundListItem
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -231,7 +232,7 @@ public class RefundListResponseTest : TestBase
             Reason = "reason",
         };
 
-        RefundListResponse copied = new(model);
+        RefundListItem copied = new(model);
 
         Assert.Equal(model, copied);
     }

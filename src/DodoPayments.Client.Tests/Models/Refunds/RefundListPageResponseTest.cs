@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Refunds;
 
 namespace DodoPayments.Client.Tests.Models.Refunds;
@@ -31,7 +32,7 @@ public class RefundListPageResponseTest : TestBase
             ],
         };
 
-        List<RefundListResponse> expectedItems =
+        List<RefundListItem> expectedItems =
         [
             new()
             {
@@ -114,7 +115,7 @@ public class RefundListPageResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        List<RefundListResponse> expectedItems =
+        List<RefundListItem> expectedItems =
         [
             new()
             {

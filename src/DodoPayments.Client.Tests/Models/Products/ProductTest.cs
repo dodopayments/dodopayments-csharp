@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 using Products = DodoPayments.Client.Models.Products;
@@ -28,11 +28,9 @@ public class ProductTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditEntitlementUnit = "credit_entitlement_unit",
                     CreditsAmount = "credits_amount",
-                    CreditsReduceOverage = true,
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    PreserveOverageAtReset = true,
-                    ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -91,7 +89,7 @@ public class ProductTest : TestBase
         string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<Products::ProductCreditEntitlement> expectedCreditEntitlements =
+        List<Products::CreditEntitlement> expectedCreditEntitlements =
         [
             new()
             {
@@ -100,11 +98,9 @@ public class ProductTest : TestBase
                 CreditEntitlementName = "credit_entitlement_name",
                 CreditEntitlementUnit = "credit_entitlement_unit",
                 CreditsAmount = "credits_amount",
-                CreditsReduceOverage = true,
-                OverageChargeAtBilling = true,
+                OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                 OverageEnabled = true,
-                PreserveOverageAtReset = true,
-                ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                 RolloverEnabled = true,
                 TrialCreditsExpireAfterTrial = true,
                 Currency = Currency.Aed,
@@ -217,11 +213,9 @@ public class ProductTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditEntitlementUnit = "credit_entitlement_unit",
                     CreditsAmount = "credits_amount",
-                    CreditsReduceOverage = true,
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    PreserveOverageAtReset = true,
-                    ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -303,11 +297,9 @@ public class ProductTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditEntitlementUnit = "credit_entitlement_unit",
                     CreditsAmount = "credits_amount",
-                    CreditsReduceOverage = true,
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    PreserveOverageAtReset = true,
-                    ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -373,7 +365,7 @@ public class ProductTest : TestBase
         string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<Products::ProductCreditEntitlement> expectedCreditEntitlements =
+        List<Products::CreditEntitlement> expectedCreditEntitlements =
         [
             new()
             {
@@ -382,11 +374,9 @@ public class ProductTest : TestBase
                 CreditEntitlementName = "credit_entitlement_name",
                 CreditEntitlementUnit = "credit_entitlement_unit",
                 CreditsAmount = "credits_amount",
-                CreditsReduceOverage = true,
-                OverageChargeAtBilling = true,
+                OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                 OverageEnabled = true,
-                PreserveOverageAtReset = true,
-                ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                 RolloverEnabled = true,
                 TrialCreditsExpireAfterTrial = true,
                 Currency = Currency.Aed,
@@ -499,11 +489,9 @@ public class ProductTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditEntitlementUnit = "credit_entitlement_unit",
                     CreditsAmount = "credits_amount",
-                    CreditsReduceOverage = true,
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    PreserveOverageAtReset = true,
-                    ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -579,11 +567,9 @@ public class ProductTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditEntitlementUnit = "credit_entitlement_unit",
                     CreditsAmount = "credits_amount",
-                    CreditsReduceOverage = true,
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    PreserveOverageAtReset = true,
-                    ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -654,11 +640,9 @@ public class ProductTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditEntitlementUnit = "credit_entitlement_unit",
                     CreditsAmount = "credits_amount",
-                    CreditsReduceOverage = true,
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    PreserveOverageAtReset = true,
-                    ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -712,11 +696,9 @@ public class ProductTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditEntitlementUnit = "credit_entitlement_unit",
                     CreditsAmount = "credits_amount",
-                    CreditsReduceOverage = true,
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    PreserveOverageAtReset = true,
-                    ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -797,11 +779,9 @@ public class ProductTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditEntitlementUnit = "credit_entitlement_unit",
                     CreditsAmount = "credits_amount",
-                    CreditsReduceOverage = true,
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    PreserveOverageAtReset = true,
-                    ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -865,11 +845,9 @@ public class ProductTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditEntitlementUnit = "credit_entitlement_unit",
                     CreditsAmount = "credits_amount",
-                    CreditsReduceOverage = true,
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    PreserveOverageAtReset = true,
-                    ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -931,23 +909,21 @@ public class ProductTest : TestBase
     }
 }
 
-public class ProductCreditEntitlementTest : TestBase
+public class CreditEntitlementTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Products::ProductCreditEntitlement
+        var model = new Products::CreditEntitlement
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CreditEntitlementUnit = "credit_entitlement_unit",
             CreditsAmount = "credits_amount",
-            CreditsReduceOverage = true,
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
-            PreserveOverageAtReset = true,
-            ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+            ProrationBehavior = Products::CbbProrationBehavior.Prorate,
             RolloverEnabled = true,
             TrialCreditsExpireAfterTrial = true,
             Currency = Currency.Aed,
@@ -967,14 +943,11 @@ public class ProductCreditEntitlementTest : TestBase
         string expectedCreditEntitlementName = "credit_entitlement_name";
         string expectedCreditEntitlementUnit = "credit_entitlement_unit";
         string expectedCreditsAmount = "credits_amount";
-        bool expectedCreditsReduceOverage = true;
-        bool expectedOverageChargeAtBilling = true;
+        ApiEnum<string, CbbOverageBehavior> expectedOverageBehavior =
+            CbbOverageBehavior.ForgiveAtReset;
         bool expectedOverageEnabled = true;
-        bool expectedPreserveOverageAtReset = true;
-        ApiEnum<
-            string,
-            Products::ProductCreditEntitlementProrationBehavior
-        > expectedProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate;
+        ApiEnum<string, Products::CbbProrationBehavior> expectedProrationBehavior =
+            Products::CbbProrationBehavior.Prorate;
         bool expectedRolloverEnabled = true;
         bool expectedTrialCreditsExpireAfterTrial = true;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
@@ -993,10 +966,8 @@ public class ProductCreditEntitlementTest : TestBase
         Assert.Equal(expectedCreditEntitlementName, model.CreditEntitlementName);
         Assert.Equal(expectedCreditEntitlementUnit, model.CreditEntitlementUnit);
         Assert.Equal(expectedCreditsAmount, model.CreditsAmount);
-        Assert.Equal(expectedCreditsReduceOverage, model.CreditsReduceOverage);
-        Assert.Equal(expectedOverageChargeAtBilling, model.OverageChargeAtBilling);
+        Assert.Equal(expectedOverageBehavior, model.OverageBehavior);
         Assert.Equal(expectedOverageEnabled, model.OverageEnabled);
-        Assert.Equal(expectedPreserveOverageAtReset, model.PreserveOverageAtReset);
         Assert.Equal(expectedProrationBehavior, model.ProrationBehavior);
         Assert.Equal(expectedRolloverEnabled, model.RolloverEnabled);
         Assert.Equal(expectedTrialCreditsExpireAfterTrial, model.TrialCreditsExpireAfterTrial);
@@ -1015,18 +986,16 @@ public class ProductCreditEntitlementTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Products::ProductCreditEntitlement
+        var model = new Products::CreditEntitlement
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CreditEntitlementUnit = "credit_entitlement_unit",
             CreditsAmount = "credits_amount",
-            CreditsReduceOverage = true,
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
-            PreserveOverageAtReset = true,
-            ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+            ProrationBehavior = Products::CbbProrationBehavior.Prorate,
             RolloverEnabled = true,
             TrialCreditsExpireAfterTrial = true,
             Currency = Currency.Aed,
@@ -1042,7 +1011,7 @@ public class ProductCreditEntitlementTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::ProductCreditEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<Products::CreditEntitlement>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1053,18 +1022,16 @@ public class ProductCreditEntitlementTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Products::ProductCreditEntitlement
+        var model = new Products::CreditEntitlement
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CreditEntitlementUnit = "credit_entitlement_unit",
             CreditsAmount = "credits_amount",
-            CreditsReduceOverage = true,
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
-            PreserveOverageAtReset = true,
-            ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+            ProrationBehavior = Products::CbbProrationBehavior.Prorate,
             RolloverEnabled = true,
             TrialCreditsExpireAfterTrial = true,
             Currency = Currency.Aed,
@@ -1080,7 +1047,7 @@ public class ProductCreditEntitlementTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::ProductCreditEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<Products::CreditEntitlement>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1091,14 +1058,11 @@ public class ProductCreditEntitlementTest : TestBase
         string expectedCreditEntitlementName = "credit_entitlement_name";
         string expectedCreditEntitlementUnit = "credit_entitlement_unit";
         string expectedCreditsAmount = "credits_amount";
-        bool expectedCreditsReduceOverage = true;
-        bool expectedOverageChargeAtBilling = true;
+        ApiEnum<string, CbbOverageBehavior> expectedOverageBehavior =
+            CbbOverageBehavior.ForgiveAtReset;
         bool expectedOverageEnabled = true;
-        bool expectedPreserveOverageAtReset = true;
-        ApiEnum<
-            string,
-            Products::ProductCreditEntitlementProrationBehavior
-        > expectedProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate;
+        ApiEnum<string, Products::CbbProrationBehavior> expectedProrationBehavior =
+            Products::CbbProrationBehavior.Prorate;
         bool expectedRolloverEnabled = true;
         bool expectedTrialCreditsExpireAfterTrial = true;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
@@ -1117,10 +1081,8 @@ public class ProductCreditEntitlementTest : TestBase
         Assert.Equal(expectedCreditEntitlementName, deserialized.CreditEntitlementName);
         Assert.Equal(expectedCreditEntitlementUnit, deserialized.CreditEntitlementUnit);
         Assert.Equal(expectedCreditsAmount, deserialized.CreditsAmount);
-        Assert.Equal(expectedCreditsReduceOverage, deserialized.CreditsReduceOverage);
-        Assert.Equal(expectedOverageChargeAtBilling, deserialized.OverageChargeAtBilling);
+        Assert.Equal(expectedOverageBehavior, deserialized.OverageBehavior);
         Assert.Equal(expectedOverageEnabled, deserialized.OverageEnabled);
-        Assert.Equal(expectedPreserveOverageAtReset, deserialized.PreserveOverageAtReset);
         Assert.Equal(expectedProrationBehavior, deserialized.ProrationBehavior);
         Assert.Equal(expectedRolloverEnabled, deserialized.RolloverEnabled);
         Assert.Equal(
@@ -1142,18 +1104,16 @@ public class ProductCreditEntitlementTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Products::ProductCreditEntitlement
+        var model = new Products::CreditEntitlement
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CreditEntitlementUnit = "credit_entitlement_unit",
             CreditsAmount = "credits_amount",
-            CreditsReduceOverage = true,
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
-            PreserveOverageAtReset = true,
-            ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+            ProrationBehavior = Products::CbbProrationBehavior.Prorate,
             RolloverEnabled = true,
             TrialCreditsExpireAfterTrial = true,
             Currency = Currency.Aed,
@@ -1174,18 +1134,16 @@ public class ProductCreditEntitlementTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Products::ProductCreditEntitlement
+        var model = new Products::CreditEntitlement
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CreditEntitlementUnit = "credit_entitlement_unit",
             CreditsAmount = "credits_amount",
-            CreditsReduceOverage = true,
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
-            PreserveOverageAtReset = true,
-            ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+            ProrationBehavior = Products::CbbProrationBehavior.Prorate,
             RolloverEnabled = true,
             TrialCreditsExpireAfterTrial = true,
         };
@@ -1215,18 +1173,16 @@ public class ProductCreditEntitlementTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Products::ProductCreditEntitlement
+        var model = new Products::CreditEntitlement
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CreditEntitlementUnit = "credit_entitlement_unit",
             CreditsAmount = "credits_amount",
-            CreditsReduceOverage = true,
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
-            PreserveOverageAtReset = true,
-            ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+            ProrationBehavior = Products::CbbProrationBehavior.Prorate,
             RolloverEnabled = true,
             TrialCreditsExpireAfterTrial = true,
         };
@@ -1237,18 +1193,16 @@ public class ProductCreditEntitlementTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Products::ProductCreditEntitlement
+        var model = new Products::CreditEntitlement
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CreditEntitlementUnit = "credit_entitlement_unit",
             CreditsAmount = "credits_amount",
-            CreditsReduceOverage = true,
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
-            PreserveOverageAtReset = true,
-            ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+            ProrationBehavior = Products::CbbProrationBehavior.Prorate,
             RolloverEnabled = true,
             TrialCreditsExpireAfterTrial = true,
 
@@ -1289,18 +1243,16 @@ public class ProductCreditEntitlementTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Products::ProductCreditEntitlement
+        var model = new Products::CreditEntitlement
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CreditEntitlementUnit = "credit_entitlement_unit",
             CreditsAmount = "credits_amount",
-            CreditsReduceOverage = true,
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
-            PreserveOverageAtReset = true,
-            ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+            ProrationBehavior = Products::CbbProrationBehavior.Prorate,
             RolloverEnabled = true,
             TrialCreditsExpireAfterTrial = true,
 
@@ -1322,18 +1274,16 @@ public class ProductCreditEntitlementTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Products::ProductCreditEntitlement
+        var model = new Products::CreditEntitlement
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CreditEntitlementUnit = "credit_entitlement_unit",
             CreditsAmount = "credits_amount",
-            CreditsReduceOverage = true,
-            OverageChargeAtBilling = true,
+            OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
             OverageEnabled = true,
-            PreserveOverageAtReset = true,
-            ProrationBehavior = Products::ProductCreditEntitlementProrationBehavior.Prorate,
+            ProrationBehavior = Products::CbbProrationBehavior.Prorate,
             RolloverEnabled = true,
             TrialCreditsExpireAfterTrial = true,
             Currency = Currency.Aed,
@@ -1348,65 +1298,9 @@ public class ProductCreditEntitlementTest : TestBase
             TrialCredits = "trial_credits",
         };
 
-        Products::ProductCreditEntitlement copied = new(model);
+        Products::CreditEntitlement copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class ProductCreditEntitlementProrationBehaviorTest : TestBase
-{
-    [Theory]
-    [InlineData(Products::ProductCreditEntitlementProrationBehavior.Prorate)]
-    [InlineData(Products::ProductCreditEntitlementProrationBehavior.NoProrate)]
-    public void Validation_Works(Products::ProductCreditEntitlementProrationBehavior rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Products::ProductCreditEntitlementProrationBehavior> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, Products::ProductCreditEntitlementProrationBehavior>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Products::ProductCreditEntitlementProrationBehavior.Prorate)]
-    [InlineData(Products::ProductCreditEntitlementProrationBehavior.NoProrate)]
-    public void SerializationRoundtrip_Works(
-        Products::ProductCreditEntitlementProrationBehavior rawValue
-    )
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Products::ProductCreditEntitlementProrationBehavior> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Products::ProductCreditEntitlementProrationBehavior>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, Products::ProductCreditEntitlementProrationBehavior>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Products::ProductCreditEntitlementProrationBehavior>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }
 
