@@ -3071,7 +3071,7 @@ public class SubscriptionTest : TestBase
         };
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<Subscriptions::SubscriptionCreditEntitlementCart> expectedCreditEntitlementCart =
+        List<Subscriptions::CreditEntitlementCartResponse> expectedCreditEntitlementCart =
         [
             new()
             {
@@ -3104,7 +3104,7 @@ public class SubscriptionTest : TestBase
             PhoneNumber = "phone_number",
         };
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
-        List<Subscriptions::MeterCreditEntitlementCart> expectedMeterCreditEntitlementCart =
+        List<Subscriptions::MeterCreditEntitlementCartResponse> expectedMeterCreditEntitlementCart =
         [
             new()
             {
@@ -3115,7 +3115,7 @@ public class SubscriptionTest : TestBase
                 ProductID = "product_id",
             },
         ];
-        List<Subscriptions::Meter> expectedMeters =
+        List<Subscriptions::MeterCartResponseItem> expectedMeters =
         [
             new()
             {
@@ -3451,7 +3451,7 @@ public class SubscriptionTest : TestBase
         };
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<Subscriptions::SubscriptionCreditEntitlementCart> expectedCreditEntitlementCart =
+        List<Subscriptions::CreditEntitlementCartResponse> expectedCreditEntitlementCart =
         [
             new()
             {
@@ -3484,7 +3484,7 @@ public class SubscriptionTest : TestBase
             PhoneNumber = "phone_number",
         };
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
-        List<Subscriptions::MeterCreditEntitlementCart> expectedMeterCreditEntitlementCart =
+        List<Subscriptions::MeterCreditEntitlementCartResponse> expectedMeterCreditEntitlementCart =
         [
             new()
             {
@@ -3495,7 +3495,7 @@ public class SubscriptionTest : TestBase
                 ProductID = "product_id",
             },
         ];
-        List<Subscriptions::Meter> expectedMeters =
+        List<Subscriptions::MeterCartResponseItem> expectedMeters =
         [
             new()
             {

@@ -1265,7 +1265,7 @@ public class LineItemTest : TestBase
     [Fact]
     public void MeterValidationWorks()
     {
-        LineItem value = new LineItemMeter()
+        LineItem value = new Meter()
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -1276,7 +1276,7 @@ public class LineItemTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -1341,7 +1341,7 @@ public class LineItemTest : TestBase
     [Fact]
     public void MeterSerializationRoundtripWorks()
     {
-        LineItem value = new LineItemMeter()
+        LineItem value = new Meter()
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -1352,7 +1352,7 @@ public class LineItemTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -2015,12 +2015,12 @@ public class AddonTypeTest : TestBase
     }
 }
 
-public class LineItemMeterTest : TestBase
+public class MeterTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new LineItemMeter
+        var model = new Meter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -2031,7 +2031,7 @@ public class LineItemMeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -2046,7 +2046,7 @@ public class LineItemMeterTest : TestBase
         int expectedSubtotal = 0;
         bool expectedTaxInclusive = true;
         float expectedTaxRate = 0;
-        ApiEnum<string, LineItemMeterType> expectedType = LineItemMeterType.Meter;
+        ApiEnum<string, MeterType> expectedType = MeterType.Meter;
         string expectedUnitsConsumed = "units_consumed";
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -2069,7 +2069,7 @@ public class LineItemMeterTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new LineItemMeter
+        var model = new Meter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -2080,17 +2080,14 @@ public class LineItemMeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<LineItemMeter>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Meter>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -2098,7 +2095,7 @@ public class LineItemMeterTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new LineItemMeter
+        var model = new Meter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -2109,17 +2106,14 @@ public class LineItemMeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<LineItemMeter>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Meter>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -2131,7 +2125,7 @@ public class LineItemMeterTest : TestBase
         int expectedSubtotal = 0;
         bool expectedTaxInclusive = true;
         float expectedTaxRate = 0;
-        ApiEnum<string, LineItemMeterType> expectedType = LineItemMeterType.Meter;
+        ApiEnum<string, MeterType> expectedType = MeterType.Meter;
         string expectedUnitsConsumed = "units_consumed";
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -2154,7 +2148,7 @@ public class LineItemMeterTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new LineItemMeter
+        var model = new Meter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -2165,7 +2159,7 @@ public class LineItemMeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -2177,7 +2171,7 @@ public class LineItemMeterTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new LineItemMeter
+        var model = new Meter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -2188,7 +2182,7 @@ public class LineItemMeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
         };
 
@@ -2201,7 +2195,7 @@ public class LineItemMeterTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new LineItemMeter
+        var model = new Meter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -2212,7 +2206,7 @@ public class LineItemMeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
         };
 
@@ -2222,7 +2216,7 @@ public class LineItemMeterTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new LineItemMeter
+        var model = new Meter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -2233,7 +2227,7 @@ public class LineItemMeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
 
             Description = null,
@@ -2249,7 +2243,7 @@ public class LineItemMeterTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new LineItemMeter
+        var model = new Meter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -2260,7 +2254,7 @@ public class LineItemMeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
 
             Description = null,
@@ -2273,7 +2267,7 @@ public class LineItemMeterTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new LineItemMeter
+        var model = new Meter
         {
             ID = "id",
             ChargeableUnits = "chargeable_units",
@@ -2284,33 +2278,33 @@ public class LineItemMeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemMeterType.Meter,
+            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
         };
 
-        LineItemMeter copied = new(model);
+        Meter copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class LineItemMeterTypeTest : TestBase
+public class MeterTypeTest : TestBase
 {
     [Theory]
-    [InlineData(LineItemMeterType.Meter)]
-    public void Validation_Works(LineItemMeterType rawValue)
+    [InlineData(MeterType.Meter)]
+    public void Validation_Works(MeterType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, LineItemMeterType> value = rawValue;
+        ApiEnum<string, MeterType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemMeterType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, MeterType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -2320,14 +2314,14 @@ public class LineItemMeterTypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(LineItemMeterType.Meter)]
-    public void SerializationRoundtrip_Works(LineItemMeterType rawValue)
+    [InlineData(MeterType.Meter)]
+    public void SerializationRoundtrip_Works(MeterType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, LineItemMeterType> value = rawValue;
+        ApiEnum<string, MeterType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemMeterType>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, MeterType>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2338,12 +2332,12 @@ public class LineItemMeterTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemMeterType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, MeterType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemMeterType>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, MeterType>>(
             json,
             ModelBase.SerializerOptions
         );
