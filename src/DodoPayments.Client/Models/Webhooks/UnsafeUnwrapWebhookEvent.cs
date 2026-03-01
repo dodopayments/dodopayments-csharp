@@ -30,7 +30,15 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
         get
         {
             return Match(
-                disputeAccepted: (x) => x.BusinessID,
+                creditAdded: (x) => x.BusinessID,
+                creditBalanceLow: (x) => x.STAINLESS_FIXME_BusinessID,
+                creditDeducted: (x) => x.STAINLESS_FIXME_BusinessID,
+                creditExpired: (x) => x.STAINLESS_FIXME_BusinessID,
+                creditManualAdjustment: (x) => x.STAINLESS_FIXME_BusinessID,
+                creditOverageCharged: (x) => x.STAINLESS_FIXME_BusinessID,
+                creditRolledOver: (x) => x.STAINLESS_FIXME_BusinessID,
+                creditRolloverForfeited: (x) => x.STAINLESS_FIXME_BusinessID,
+                disputeAccepted: (x) => x.STAINLESS_FIXME_BusinessID,
                 disputeCancelled: (x) => x.STAINLESS_FIXME_BusinessID,
                 disputeChallenged: (x) => x.STAINLESS_FIXME_BusinessID,
                 disputeExpired: (x) => x.STAINLESS_FIXME_BusinessID,
@@ -61,7 +69,15 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
         get
         {
             return Match(
-                disputeAccepted: (x) => x.Timestamp,
+                creditAdded: (x) => x.Timestamp,
+                creditBalanceLow: (x) => x.STAINLESS_FIXME_Timestamp,
+                creditDeducted: (x) => x.STAINLESS_FIXME_Timestamp,
+                creditExpired: (x) => x.STAINLESS_FIXME_Timestamp,
+                creditManualAdjustment: (x) => x.STAINLESS_FIXME_Timestamp,
+                creditOverageCharged: (x) => x.STAINLESS_FIXME_Timestamp,
+                creditRolledOver: (x) => x.STAINLESS_FIXME_Timestamp,
+                creditRolloverForfeited: (x) => x.STAINLESS_FIXME_Timestamp,
+                disputeAccepted: (x) => x.STAINLESS_FIXME_Timestamp,
                 disputeCancelled: (x) => x.STAINLESS_FIXME_Timestamp,
                 disputeChallenged: (x) => x.STAINLESS_FIXME_Timestamp,
                 disputeExpired: (x) => x.STAINLESS_FIXME_Timestamp,
@@ -85,6 +101,63 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
                 subscriptionUpdated: (x) => x.STAINLESS_FIXME_Timestamp
             );
         }
+    }
+
+    public UnsafeUnwrapWebhookEvent(CreditAddedWebhookEvent value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnsafeUnwrapWebhookEvent(CreditBalanceLowWebhookEvent value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnsafeUnwrapWebhookEvent(CreditDeductedWebhookEvent value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnsafeUnwrapWebhookEvent(CreditExpiredWebhookEvent value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnsafeUnwrapWebhookEvent(
+        CreditManualAdjustmentWebhookEvent value,
+        JsonElement? element = null
+    )
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnsafeUnwrapWebhookEvent(
+        CreditOverageChargedWebhookEvent value,
+        JsonElement? element = null
+    )
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnsafeUnwrapWebhookEvent(CreditRolledOverWebhookEvent value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnsafeUnwrapWebhookEvent(
+        CreditRolloverForfeitedWebhookEvent value,
+        JsonElement? element = null
+    )
+    {
+        this.Value = value;
+        this._element = element;
     }
 
     public UnsafeUnwrapWebhookEvent(DisputeAcceptedWebhookEvent value, JsonElement? element = null)
@@ -255,6 +328,180 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     public UnsafeUnwrapWebhookEvent(JsonElement element)
     {
         this._element = element;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditAddedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditAdded(out var value)) {
+    ///     // `value` is of type `CreditAddedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditAdded([NotNullWhen(true)] out CreditAddedWebhookEvent? value)
+    {
+        value = this.Value as CreditAddedWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditBalanceLowWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditBalanceLow(out var value)) {
+    ///     // `value` is of type `CreditBalanceLowWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditBalanceLow([NotNullWhen(true)] out CreditBalanceLowWebhookEvent? value)
+    {
+        value = this.Value as CreditBalanceLowWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditDeductedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditDeducted(out var value)) {
+    ///     // `value` is of type `CreditDeductedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditDeducted([NotNullWhen(true)] out CreditDeductedWebhookEvent? value)
+    {
+        value = this.Value as CreditDeductedWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditExpiredWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditExpired(out var value)) {
+    ///     // `value` is of type `CreditExpiredWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditExpired([NotNullWhen(true)] out CreditExpiredWebhookEvent? value)
+    {
+        value = this.Value as CreditExpiredWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditManualAdjustmentWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditManualAdjustment(out var value)) {
+    ///     // `value` is of type `CreditManualAdjustmentWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditManualAdjustment(
+        [NotNullWhen(true)] out CreditManualAdjustmentWebhookEvent? value
+    )
+    {
+        value = this.Value as CreditManualAdjustmentWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditOverageChargedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditOverageCharged(out var value)) {
+    ///     // `value` is of type `CreditOverageChargedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditOverageCharged(
+        [NotNullWhen(true)] out CreditOverageChargedWebhookEvent? value
+    )
+    {
+        value = this.Value as CreditOverageChargedWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditRolledOverWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditRolledOver(out var value)) {
+    ///     // `value` is of type `CreditRolledOverWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditRolledOver([NotNullWhen(true)] out CreditRolledOverWebhookEvent? value)
+    {
+        value = this.Value as CreditRolledOverWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditRolloverForfeitedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditRolloverForfeited(out var value)) {
+    ///     // `value` is of type `CreditRolloverForfeitedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditRolloverForfeited(
+        [NotNullWhen(true)] out CreditRolloverForfeitedWebhookEvent? value
+    )
+    {
+        value = this.Value as CreditRolloverForfeitedWebhookEvent;
+        return value != null;
     }
 
     /// <summary>
@@ -755,6 +1002,14 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
+    ///     (CreditAddedWebhookEvent value) => {...},
+    ///     (CreditBalanceLowWebhookEvent value) => {...},
+    ///     (CreditDeductedWebhookEvent value) => {...},
+    ///     (CreditExpiredWebhookEvent value) => {...},
+    ///     (CreditManualAdjustmentWebhookEvent value) => {...},
+    ///     (CreditOverageChargedWebhookEvent value) => {...},
+    ///     (CreditRolledOverWebhookEvent value) => {...},
+    ///     (CreditRolloverForfeitedWebhookEvent value) => {...},
     ///     (DisputeAcceptedWebhookEvent value) => {...},
     ///     (DisputeCancelledWebhookEvent value) => {...},
     ///     (DisputeChallengedWebhookEvent value) => {...},
@@ -782,6 +1037,14 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     /// </example>
     /// </summary>
     public void Switch(
+        System::Action<CreditAddedWebhookEvent> creditAdded,
+        System::Action<CreditBalanceLowWebhookEvent> creditBalanceLow,
+        System::Action<CreditDeductedWebhookEvent> creditDeducted,
+        System::Action<CreditExpiredWebhookEvent> creditExpired,
+        System::Action<CreditManualAdjustmentWebhookEvent> creditManualAdjustment,
+        System::Action<CreditOverageChargedWebhookEvent> creditOverageCharged,
+        System::Action<CreditRolledOverWebhookEvent> creditRolledOver,
+        System::Action<CreditRolloverForfeitedWebhookEvent> creditRolloverForfeited,
         System::Action<DisputeAcceptedWebhookEvent> disputeAccepted,
         System::Action<DisputeCancelledWebhookEvent> disputeCancelled,
         System::Action<DisputeChallengedWebhookEvent> disputeChallenged,
@@ -808,6 +1071,30 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     {
         switch (this.Value)
         {
+            case CreditAddedWebhookEvent value:
+                creditAdded(value);
+                break;
+            case CreditBalanceLowWebhookEvent value:
+                creditBalanceLow(value);
+                break;
+            case CreditDeductedWebhookEvent value:
+                creditDeducted(value);
+                break;
+            case CreditExpiredWebhookEvent value:
+                creditExpired(value);
+                break;
+            case CreditManualAdjustmentWebhookEvent value:
+                creditManualAdjustment(value);
+                break;
+            case CreditOverageChargedWebhookEvent value:
+                creditOverageCharged(value);
+                break;
+            case CreditRolledOverWebhookEvent value:
+                creditRolledOver(value);
+                break;
+            case CreditRolloverForfeitedWebhookEvent value:
+                creditRolloverForfeited(value);
+                break;
             case DisputeAcceptedWebhookEvent value:
                 disputeAccepted(value);
                 break;
@@ -896,6 +1183,14 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
+    ///     (CreditAddedWebhookEvent value) => {...},
+    ///     (CreditBalanceLowWebhookEvent value) => {...},
+    ///     (CreditDeductedWebhookEvent value) => {...},
+    ///     (CreditExpiredWebhookEvent value) => {...},
+    ///     (CreditManualAdjustmentWebhookEvent value) => {...},
+    ///     (CreditOverageChargedWebhookEvent value) => {...},
+    ///     (CreditRolledOverWebhookEvent value) => {...},
+    ///     (CreditRolloverForfeitedWebhookEvent value) => {...},
     ///     (DisputeAcceptedWebhookEvent value) => {...},
     ///     (DisputeCancelledWebhookEvent value) => {...},
     ///     (DisputeChallengedWebhookEvent value) => {...},
@@ -923,6 +1218,14 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     /// </example>
     /// </summary>
     public T Match<T>(
+        System::Func<CreditAddedWebhookEvent, T> creditAdded,
+        System::Func<CreditBalanceLowWebhookEvent, T> creditBalanceLow,
+        System::Func<CreditDeductedWebhookEvent, T> creditDeducted,
+        System::Func<CreditExpiredWebhookEvent, T> creditExpired,
+        System::Func<CreditManualAdjustmentWebhookEvent, T> creditManualAdjustment,
+        System::Func<CreditOverageChargedWebhookEvent, T> creditOverageCharged,
+        System::Func<CreditRolledOverWebhookEvent, T> creditRolledOver,
+        System::Func<CreditRolloverForfeitedWebhookEvent, T> creditRolloverForfeited,
         System::Func<DisputeAcceptedWebhookEvent, T> disputeAccepted,
         System::Func<DisputeCancelledWebhookEvent, T> disputeCancelled,
         System::Func<DisputeChallengedWebhookEvent, T> disputeChallenged,
@@ -949,6 +1252,14 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     {
         return this.Value switch
         {
+            CreditAddedWebhookEvent value => creditAdded(value),
+            CreditBalanceLowWebhookEvent value => creditBalanceLow(value),
+            CreditDeductedWebhookEvent value => creditDeducted(value),
+            CreditExpiredWebhookEvent value => creditExpired(value),
+            CreditManualAdjustmentWebhookEvent value => creditManualAdjustment(value),
+            CreditOverageChargedWebhookEvent value => creditOverageCharged(value),
+            CreditRolledOverWebhookEvent value => creditRolledOver(value),
+            CreditRolloverForfeitedWebhookEvent value => creditRolloverForfeited(value),
             DisputeAcceptedWebhookEvent value => disputeAccepted(value),
             DisputeCancelledWebhookEvent value => disputeCancelled(value),
             DisputeChallengedWebhookEvent value => disputeChallenged(value),
@@ -976,6 +1287,33 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
             ),
         };
     }
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(CreditAddedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(CreditBalanceLowWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(CreditDeductedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(CreditExpiredWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(
+        CreditManualAdjustmentWebhookEvent value
+    ) => new(value);
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(
+        CreditOverageChargedWebhookEvent value
+    ) => new(value);
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(CreditRolledOverWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(
+        CreditRolloverForfeitedWebhookEvent value
+    ) => new(value);
 
     public static implicit operator UnsafeUnwrapWebhookEvent(DisputeAcceptedWebhookEvent value) =>
         new(value);
@@ -1070,6 +1408,14 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
             );
         }
         this.Switch(
+            (creditAdded) => creditAdded.Validate(),
+            (creditBalanceLow) => creditBalanceLow.Validate(),
+            (creditDeducted) => creditDeducted.Validate(),
+            (creditExpired) => creditExpired.Validate(),
+            (creditManualAdjustment) => creditManualAdjustment.Validate(),
+            (creditOverageCharged) => creditOverageCharged.Validate(),
+            (creditRolledOver) => creditRolledOver.Validate(),
+            (creditRolloverForfeited) => creditRolloverForfeited.Validate(),
             (disputeAccepted) => disputeAccepted.Validate(),
             (disputeCancelled) => disputeCancelled.Validate(),
             (disputeChallenged) => disputeChallenged.Validate(),
@@ -1115,28 +1461,36 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     {
         return this.Value switch
         {
-            DisputeAcceptedWebhookEvent _ => 0,
-            DisputeCancelledWebhookEvent _ => 1,
-            DisputeChallengedWebhookEvent _ => 2,
-            DisputeExpiredWebhookEvent _ => 3,
-            DisputeLostWebhookEvent _ => 4,
-            DisputeOpenedWebhookEvent _ => 5,
-            DisputeWonWebhookEvent _ => 6,
-            LicenseKeyCreatedWebhookEvent _ => 7,
-            PaymentCancelledWebhookEvent _ => 8,
-            PaymentFailedWebhookEvent _ => 9,
-            PaymentProcessingWebhookEvent _ => 10,
-            PaymentSucceededWebhookEvent _ => 11,
-            RefundFailedWebhookEvent _ => 12,
-            RefundSucceededWebhookEvent _ => 13,
-            SubscriptionActiveWebhookEvent _ => 14,
-            SubscriptionCancelledWebhookEvent _ => 15,
-            SubscriptionExpiredWebhookEvent _ => 16,
-            SubscriptionFailedWebhookEvent _ => 17,
-            SubscriptionOnHoldWebhookEvent _ => 18,
-            SubscriptionPlanChangedWebhookEvent _ => 19,
-            SubscriptionRenewedWebhookEvent _ => 20,
-            SubscriptionUpdatedWebhookEvent _ => 21,
+            CreditAddedWebhookEvent _ => 0,
+            CreditBalanceLowWebhookEvent _ => 1,
+            CreditDeductedWebhookEvent _ => 2,
+            CreditExpiredWebhookEvent _ => 3,
+            CreditManualAdjustmentWebhookEvent _ => 4,
+            CreditOverageChargedWebhookEvent _ => 5,
+            CreditRolledOverWebhookEvent _ => 6,
+            CreditRolloverForfeitedWebhookEvent _ => 7,
+            DisputeAcceptedWebhookEvent _ => 8,
+            DisputeCancelledWebhookEvent _ => 9,
+            DisputeChallengedWebhookEvent _ => 10,
+            DisputeExpiredWebhookEvent _ => 11,
+            DisputeLostWebhookEvent _ => 12,
+            DisputeOpenedWebhookEvent _ => 13,
+            DisputeWonWebhookEvent _ => 14,
+            LicenseKeyCreatedWebhookEvent _ => 15,
+            PaymentCancelledWebhookEvent _ => 16,
+            PaymentFailedWebhookEvent _ => 17,
+            PaymentProcessingWebhookEvent _ => 18,
+            PaymentSucceededWebhookEvent _ => 19,
+            RefundFailedWebhookEvent _ => 20,
+            RefundSucceededWebhookEvent _ => 21,
+            SubscriptionActiveWebhookEvent _ => 22,
+            SubscriptionCancelledWebhookEvent _ => 23,
+            SubscriptionExpiredWebhookEvent _ => 24,
+            SubscriptionFailedWebhookEvent _ => 25,
+            SubscriptionOnHoldWebhookEvent _ => 26,
+            SubscriptionPlanChangedWebhookEvent _ => 27,
+            SubscriptionRenewedWebhookEvent _ => 28,
+            SubscriptionUpdatedWebhookEvent _ => 29,
             _ => -1,
         };
     }
@@ -1151,6 +1505,150 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditAddedWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditBalanceLowWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditDeductedWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditExpiredWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditManualAdjustmentWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditOverageChargedWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditRolledOverWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditRolloverForfeitedWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
         try
         {
             var deserialized = JsonSerializer.Deserialize<DisputeAcceptedWebhookEvent>(

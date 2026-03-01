@@ -6,11 +6,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Refunds;
 
-namespace DodoPayments.Client.Models.Refunds;
+namespace DodoPayments.Client.Models.Payments;
 
-[JsonConverter(typeof(JsonModelConverter<RefundListResponse, RefundListResponseFromRaw>))]
-public sealed record class RefundListResponse : JsonModel
+[JsonConverter(typeof(JsonModelConverter<RefundListItem, RefundListItemFromRaw>))]
+public sealed record class RefundListItem : JsonModel
 {
     /// <summary>
     /// The unique identifier of the business issuing the refund.
@@ -143,39 +144,37 @@ public sealed record class RefundListResponse : JsonModel
         _ = this.Reason;
     }
 
-    public RefundListResponse() { }
+    public RefundListItem() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public RefundListResponse(RefundListResponse refundListResponse)
-        : base(refundListResponse) { }
+    public RefundListItem(RefundListItem refundListItem)
+        : base(refundListItem) { }
 #pragma warning restore CS8618
 
-    public RefundListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    public RefundListItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    RefundListResponse(FrozenDictionary<string, JsonElement> rawData)
+    RefundListItem(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="RefundListResponseFromRaw.FromRawUnchecked"/>
-    public static RefundListResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="RefundListItemFromRaw.FromRawUnchecked"/>
+    public static RefundListItem FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class RefundListResponseFromRaw : IFromRawJson<RefundListResponse>
+class RefundListItemFromRaw : IFromRawJson<RefundListItem>
 {
     /// <inheritdoc/>
-    public RefundListResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        RefundListResponse.FromRawUnchecked(rawData);
+    public RefundListItem FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        RefundListItem.FromRawUnchecked(rawData);
 }

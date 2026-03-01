@@ -5,7 +5,7 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Customers;
 using DodoPayments.Client.Models.Misc;
-using Payments = DodoPayments.Client.Models.Payments;
+using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Customers;
 
@@ -33,13 +33,13 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                    PaymentMethodType = PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
         };
 
-        List<Item> expectedItems =
+        List<CustomerRetrievePaymentMethodsResponseItem> expectedItems =
         [
             new()
             {
@@ -56,7 +56,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     Last4Digits = "last4_digits",
                 },
                 LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                PaymentMethodType = PaymentMethodTypes.Ach,
                 RecurringEnabled = true,
             },
         ];
@@ -90,7 +90,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                    PaymentMethodType = PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -127,7 +127,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                    PaymentMethodType = PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -140,7 +140,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        List<Item> expectedItems =
+        List<CustomerRetrievePaymentMethodsResponseItem> expectedItems =
         [
             new()
             {
@@ -157,7 +157,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                     Last4Digits = "last4_digits",
                 },
                 LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                PaymentMethodType = PaymentMethodTypes.Ach,
                 RecurringEnabled = true,
             },
         ];
@@ -191,7 +191,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                    PaymentMethodType = PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -222,7 +222,7 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
                         Last4Digits = "last4_digits",
                     },
                     LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+                    PaymentMethodType = PaymentMethodTypes.Ach,
                     RecurringEnabled = true,
                 },
             ],
@@ -234,12 +234,12 @@ public class CustomerRetrievePaymentMethodsResponseTest : TestBase
     }
 }
 
-public class ItemTest : TestBase
+public class CustomerRetrievePaymentMethodsResponseItemTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Item
+        var model = new CustomerRetrievePaymentMethodsResponseItem
         {
             PaymentMethod = PaymentMethod.Card,
             PaymentMethodID = "payment_method_id",
@@ -254,7 +254,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+            PaymentMethodType = PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
@@ -271,8 +271,7 @@ public class ItemTest : TestBase
             Last4Digits = "last4_digits",
         };
         DateTimeOffset expectedLastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Payments::PaymentMethodTypes> expectedPaymentMethodType =
-            Payments::PaymentMethodTypes.Ach;
+        ApiEnum<string, PaymentMethodTypes> expectedPaymentMethodType = PaymentMethodTypes.Ach;
         bool expectedRecurringEnabled = true;
 
         Assert.Equal(expectedPaymentMethod, model.PaymentMethod);
@@ -286,7 +285,7 @@ public class ItemTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Item
+        var model = new CustomerRetrievePaymentMethodsResponseItem
         {
             PaymentMethod = PaymentMethod.Card,
             PaymentMethodID = "payment_method_id",
@@ -301,12 +300,15 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+            PaymentMethodType = PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Item>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomerRetrievePaymentMethodsResponseItem>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -314,7 +316,7 @@ public class ItemTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Item
+        var model = new CustomerRetrievePaymentMethodsResponseItem
         {
             PaymentMethod = PaymentMethod.Card,
             PaymentMethodID = "payment_method_id",
@@ -329,12 +331,15 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+            PaymentMethodType = PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Item>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomerRetrievePaymentMethodsResponseItem>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         ApiEnum<string, PaymentMethod> expectedPaymentMethod = PaymentMethod.Card;
@@ -350,8 +355,7 @@ public class ItemTest : TestBase
             Last4Digits = "last4_digits",
         };
         DateTimeOffset expectedLastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Payments::PaymentMethodTypes> expectedPaymentMethodType =
-            Payments::PaymentMethodTypes.Ach;
+        ApiEnum<string, PaymentMethodTypes> expectedPaymentMethodType = PaymentMethodTypes.Ach;
         bool expectedRecurringEnabled = true;
 
         Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
@@ -365,7 +369,7 @@ public class ItemTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Item
+        var model = new CustomerRetrievePaymentMethodsResponseItem
         {
             PaymentMethod = PaymentMethod.Card,
             PaymentMethodID = "payment_method_id",
@@ -380,7 +384,7 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+            PaymentMethodType = PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
@@ -390,7 +394,7 @@ public class ItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Item
+        var model = new CustomerRetrievePaymentMethodsResponseItem
         {
             PaymentMethod = PaymentMethod.Card,
             PaymentMethodID = "payment_method_id",
@@ -409,7 +413,7 @@ public class ItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Item
+        var model = new CustomerRetrievePaymentMethodsResponseItem
         {
             PaymentMethod = PaymentMethod.Card,
             PaymentMethodID = "payment_method_id",
@@ -421,7 +425,7 @@ public class ItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Item
+        var model = new CustomerRetrievePaymentMethodsResponseItem
         {
             PaymentMethod = PaymentMethod.Card,
             PaymentMethodID = "payment_method_id",
@@ -445,7 +449,7 @@ public class ItemTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Item
+        var model = new CustomerRetrievePaymentMethodsResponseItem
         {
             PaymentMethod = PaymentMethod.Card,
             PaymentMethodID = "payment_method_id",
@@ -462,7 +466,7 @@ public class ItemTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Item
+        var model = new CustomerRetrievePaymentMethodsResponseItem
         {
             PaymentMethod = PaymentMethod.Card,
             PaymentMethodID = "payment_method_id",
@@ -477,11 +481,11 @@ public class ItemTest : TestBase
                 Last4Digits = "last4_digits",
             },
             LastUsedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PaymentMethodType = Payments::PaymentMethodTypes.Ach,
+            PaymentMethodType = PaymentMethodTypes.Ach,
             RecurringEnabled = true,
         };
 
-        Item copied = new(model);
+        CustomerRetrievePaymentMethodsResponseItem copied = new(model);
 
         Assert.Equal(model, copied);
     }

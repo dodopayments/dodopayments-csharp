@@ -21,20 +21,6 @@ public sealed record class AddMeterToPrice : JsonModel
     }
 
     /// <summary>
-    /// The price per unit in lowest denomination. Must be greater than zero. Supports
-    /// up to 5 digits before decimal point and 12 decimal places.
-    /// </summary>
-    public required string PricePerUnit
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("price_per_unit");
-        }
-        init { this._rawData.Set("price_per_unit", value); }
-    }
-
-    /// <summary>
     /// Optional credit entitlement ID to link this meter to for credit-based billing
     /// </summary>
     public string? CreditEntitlementID
@@ -110,17 +96,31 @@ public sealed record class AddMeterToPrice : JsonModel
         init { this._rawData.Set("name", value); }
     }
 
+    /// <summary>
+    /// The price per unit in lowest denomination. Must be greater than zero. Supports
+    /// up to 5 digits before decimal point and 12 decimal places.
+    /// </summary>
+    public string? PricePerUnit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("price_per_unit");
+        }
+        init { this._rawData.Set("price_per_unit", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.MeterID;
-        _ = this.PricePerUnit;
         _ = this.CreditEntitlementID;
         _ = this.Description;
         _ = this.FreeThreshold;
         _ = this.MeasurementUnit;
         _ = this.MeterUnitsPerCredit;
         _ = this.Name;
+        _ = this.PricePerUnit;
     }
 
     public AddMeterToPrice() { }
@@ -148,6 +148,13 @@ public sealed record class AddMeterToPrice : JsonModel
     public static AddMeterToPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public AddMeterToPrice(string meterID)
+        : this()
+    {
+        this.MeterID = meterID;
     }
 }
 

@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
@@ -109,6 +110,21 @@ public sealed record class PaymentListResponse : JsonModel
     }
 
     /// <summary>
+    /// The most recent dispute status for this payment. None if no disputes exist.
+    /// </summary>
+    public ApiEnum<string, DisputeDisputeStatus>? DisputeStatus
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, DisputeDisputeStatus>>(
+                "dispute_status"
+            );
+        }
+        init { this._rawData.Set("dispute_status", value); }
+    }
+
+    /// <summary>
     /// Invoice ID for this payment. Uses India-specific invoice ID if available.
     /// </summary>
     public string? InvoiceID
@@ -154,6 +170,21 @@ public sealed record class PaymentListResponse : JsonModel
         init { this._rawData.Set("payment_method_type", value); }
     }
 
+    /// <summary>
+    /// Summary of the refund status for this payment. None if no succeeded refunds exist.
+    /// </summary>
+    public ApiEnum<string, PaymentRefundStatus>? RefundStatus
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, PaymentRefundStatus>>(
+                "refund_status"
+            );
+        }
+        init { this._rawData.Set("refund_status", value); }
+    }
+
     public ApiEnum<string, IntentStatus>? Status
     {
         get
@@ -186,10 +217,12 @@ public sealed record class PaymentListResponse : JsonModel
         _ = this.Metadata;
         _ = this.PaymentID;
         _ = this.TotalAmount;
+        this.DisputeStatus?.Validate();
         _ = this.InvoiceID;
         _ = this.InvoiceUrl;
         _ = this.PaymentMethod;
         _ = this.PaymentMethodType;
+        this.RefundStatus?.Validate();
         this.Status?.Validate();
         _ = this.SubscriptionID;
     }

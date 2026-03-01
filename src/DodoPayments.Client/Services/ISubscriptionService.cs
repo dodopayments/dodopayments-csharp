@@ -119,6 +119,21 @@ public interface ISubscriptionService
     );
 
     /// <summary>
+    /// Sends a request to <c>get /subscriptions/{subscription_id}/credit-usage<c/>.
+    /// </summary>
+    Task<SubscriptionRetrieveCreditUsageResponse> RetrieveCreditUsage(
+        SubscriptionRetrieveCreditUsageParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveCreditUsage(SubscriptionRetrieveCreditUsageParams, CancellationToken)"/>
+    Task<SubscriptionRetrieveCreditUsageResponse> RetrieveCreditUsage(
+        string subscriptionID,
+        SubscriptionRetrieveCreditUsageParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Get detailed usage history for a subscription that includes usage-based billing
     /// (metered components). This endpoint provides insights into customer usage
     /// patterns and billing calculations over time.
@@ -285,6 +300,22 @@ public interface ISubscriptionServiceWithRawResponse
     Task<HttpResponse<SubscriptionPreviewChangePlanResponse>> PreviewChangePlan(
         string subscriptionID,
         SubscriptionPreviewChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /subscriptions/{subscription_id}/credit-usage`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.RetrieveCreditUsage(SubscriptionRetrieveCreditUsageParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionRetrieveCreditUsageResponse>> RetrieveCreditUsage(
+        SubscriptionRetrieveCreditUsageParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveCreditUsage(SubscriptionRetrieveCreditUsageParams, CancellationToken)"/>
+    Task<HttpResponse<SubscriptionRetrieveCreditUsageResponse>> RetrieveCreditUsage(
+        string subscriptionID,
+        SubscriptionRetrieveCreditUsageParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

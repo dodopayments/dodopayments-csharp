@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using Payments = DodoPayments.Client.Models.Payments;
+using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Customers;
 
@@ -20,16 +20,18 @@ namespace DodoPayments.Client.Models.Customers;
 )]
 public sealed record class CustomerRetrievePaymentMethodsResponse : JsonModel
 {
-    public required IReadOnlyList<Item> Items
+    public required IReadOnlyList<CustomerRetrievePaymentMethodsResponseItem> Items
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<Item>>("items");
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<CustomerRetrievePaymentMethodsResponseItem>
+            >("items");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Item>>(
+            this._rawData.Set<ImmutableArray<CustomerRetrievePaymentMethodsResponseItem>>(
                 "items",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -77,7 +79,9 @@ public sealed record class CustomerRetrievePaymentMethodsResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public CustomerRetrievePaymentMethodsResponse(IReadOnlyList<Item> items)
+    public CustomerRetrievePaymentMethodsResponse(
+        IReadOnlyList<CustomerRetrievePaymentMethodsResponseItem> items
+    )
         : this()
     {
         this.Items = items;
@@ -93,8 +97,13 @@ class CustomerRetrievePaymentMethodsResponseFromRaw
     ) => CustomerRetrievePaymentMethodsResponse.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(JsonModelConverter<Item, ItemFromRaw>))]
-public sealed record class Item : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerRetrievePaymentMethodsResponseItem,
+        CustomerRetrievePaymentMethodsResponseItemFromRaw
+    >)
+)]
+public sealed record class CustomerRetrievePaymentMethodsResponseItem : JsonModel
 {
     public required ApiEnum<string, PaymentMethod> PaymentMethod
     {
@@ -136,12 +145,12 @@ public sealed record class Item : JsonModel
         init { this._rawData.Set("last_used_at", value); }
     }
 
-    public ApiEnum<string, Payments::PaymentMethodTypes>? PaymentMethodType
+    public ApiEnum<string, PaymentMethodTypes>? PaymentMethodType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, Payments::PaymentMethodTypes>>(
+            return this._rawData.GetNullableClass<ApiEnum<string, PaymentMethodTypes>>(
                 "payment_method_type"
             );
         }
@@ -169,39 +178,47 @@ public sealed record class Item : JsonModel
         _ = this.RecurringEnabled;
     }
 
-    public Item() { }
+    public CustomerRetrievePaymentMethodsResponseItem() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Item(Item item)
-        : base(item) { }
+    public CustomerRetrievePaymentMethodsResponseItem(
+        CustomerRetrievePaymentMethodsResponseItem customerRetrievePaymentMethodsResponseItem
+    )
+        : base(customerRetrievePaymentMethodsResponseItem) { }
 #pragma warning restore CS8618
 
-    public Item(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerRetrievePaymentMethodsResponseItem(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Item(FrozenDictionary<string, JsonElement> rawData)
+    CustomerRetrievePaymentMethodsResponseItem(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="ItemFromRaw.FromRawUnchecked"/>
-    public static Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="CustomerRetrievePaymentMethodsResponseItemFromRaw.FromRawUnchecked"/>
+    public static CustomerRetrievePaymentMethodsResponseItem FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class ItemFromRaw : IFromRawJson<Item>
+class CustomerRetrievePaymentMethodsResponseItemFromRaw
+    : IFromRawJson<CustomerRetrievePaymentMethodsResponseItem>
 {
     /// <inheritdoc/>
-    public Item FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Item.FromRawUnchecked(rawData);
+    public CustomerRetrievePaymentMethodsResponseItem FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerRetrievePaymentMethodsResponseItem.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(PaymentMethodConverter))]

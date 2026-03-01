@@ -6,10 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
-using Refunds = DodoPayments.Client.Models.Refunds;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -161,16 +159,16 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// List of refunds issued for this payment
     /// </summary>
-    public required IReadOnlyList<Refund> Refunds
+    public required IReadOnlyList<RefundListItem> Refunds
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<Refund>>("refunds");
+            return this._rawData.GetNotNullStruct<ImmutableArray<RefundListItem>>("refunds");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Refund>>(
+            this._rawData.Set<ImmutableArray<RefundListItem>>(
                 "refunds",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -430,16 +428,18 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// List of products purchased in a one-time payment
     /// </summary>
-    public IReadOnlyList<ProductCart>? ProductCart
+    public IReadOnlyList<OneTimeProductCartItem>? ProductCart
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<ProductCart>>("product_cart");
+            return this._rawData.GetNullableStruct<ImmutableArray<OneTimeProductCartItem>>(
+                "product_cart"
+            );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<ProductCart>?>(
+            this._rawData.Set<ImmutableArray<OneTimeProductCartItem>?>(
                 "product_cart",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -449,12 +449,14 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// Summary of the refund status for this payment. None if no succeeded refunds exist.
     /// </summary>
-    public ApiEnum<string, RefundStatus>? RefundStatus
+    public ApiEnum<string, PaymentRefundStatus>? RefundStatus
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, RefundStatus>>("refund_status");
+            return this._rawData.GetNullableClass<ApiEnum<string, PaymentRefundStatus>>(
+                "refund_status"
+            );
         }
         init { this._rawData.Set("refund_status", value); }
     }
@@ -612,361 +614,4 @@ class PaymentFromRaw : IFromRawJson<Payment>
     /// <inheritdoc/>
     public Payment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Payment.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(JsonModelConverter<Refund, RefundFromRaw>))]
-public sealed record class Refund : JsonModel
-{
-    /// <summary>
-    /// The unique identifier of the business issuing the refund.
-    /// </summary>
-    public required string BusinessID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("business_id");
-        }
-        init { this._rawData.Set("business_id", value); }
-    }
-
-    /// <summary>
-    /// The timestamp of when the refund was created in UTC.
-    /// </summary>
-    public required DateTimeOffset CreatedAt
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
-        }
-        init { this._rawData.Set("created_at", value); }
-    }
-
-    /// <summary>
-    /// If true the refund is a partial refund
-    /// </summary>
-    public required bool IsPartial
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<bool>("is_partial");
-        }
-        init { this._rawData.Set("is_partial", value); }
-    }
-
-    /// <summary>
-    /// The unique identifier of the payment associated with the refund.
-    /// </summary>
-    public required string PaymentID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("payment_id");
-        }
-        init { this._rawData.Set("payment_id", value); }
-    }
-
-    /// <summary>
-    /// The unique identifier of the refund.
-    /// </summary>
-    public required string RefundID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("refund_id");
-        }
-        init { this._rawData.Set("refund_id", value); }
-    }
-
-    /// <summary>
-    /// The current status of the refund.
-    /// </summary>
-    public required ApiEnum<string, Refunds::RefundStatus> Status
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Refunds::RefundStatus>>("status");
-        }
-        init { this._rawData.Set("status", value); }
-    }
-
-    /// <summary>
-    /// The refunded amount.
-    /// </summary>
-    public int? Amount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("amount");
-        }
-        init { this._rawData.Set("amount", value); }
-    }
-
-    /// <summary>
-    /// The currency of the refund, represented as an ISO 4217 currency code.
-    /// </summary>
-    public ApiEnum<string, Currency>? Currency
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency");
-        }
-        init { this._rawData.Set("currency", value); }
-    }
-
-    /// <summary>
-    /// The reason provided for the refund, if any. Optional.
-    /// </summary>
-    public string? Reason
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("reason");
-        }
-        init { this._rawData.Set("reason", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.BusinessID;
-        _ = this.CreatedAt;
-        _ = this.IsPartial;
-        _ = this.PaymentID;
-        _ = this.RefundID;
-        this.Status.Validate();
-        _ = this.Amount;
-        this.Currency?.Validate();
-        _ = this.Reason;
-    }
-
-    public Refund() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public Refund(Refund refund)
-        : base(refund) { }
-#pragma warning restore CS8618
-
-    public Refund(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Refund(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="RefundFromRaw.FromRawUnchecked"/>
-    public static Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class RefundFromRaw : IFromRawJson<Refund>
-{
-    /// <inheritdoc/>
-    public Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Refund.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Customer's response to a custom field
-/// </summary>
-[JsonConverter(typeof(JsonModelConverter<CustomFieldResponse, CustomFieldResponseFromRaw>))]
-public sealed record class CustomFieldResponse : JsonModel
-{
-    /// <summary>
-    /// Key matching the custom field definition
-    /// </summary>
-    public required string Key
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("key");
-        }
-        init { this._rawData.Set("key", value); }
-    }
-
-    /// <summary>
-    /// Value provided by customer
-    /// </summary>
-    public required string Value
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("value");
-        }
-        init { this._rawData.Set("value", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.Key;
-        _ = this.Value;
-    }
-
-    public CustomFieldResponse() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public CustomFieldResponse(CustomFieldResponse customFieldResponse)
-        : base(customFieldResponse) { }
-#pragma warning restore CS8618
-
-    public CustomFieldResponse(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    CustomFieldResponse(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="CustomFieldResponseFromRaw.FromRawUnchecked"/>
-    public static CustomFieldResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class CustomFieldResponseFromRaw : IFromRawJson<CustomFieldResponse>
-{
-    /// <inheritdoc/>
-    public CustomFieldResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        CustomFieldResponse.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(JsonModelConverter<ProductCart, ProductCartFromRaw>))]
-public sealed record class ProductCart : JsonModel
-{
-    public required string ProductID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("product_id");
-        }
-        init { this._rawData.Set("product_id", value); }
-    }
-
-    public required int Quantity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<int>("quantity");
-        }
-        init { this._rawData.Set("quantity", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.ProductID;
-        _ = this.Quantity;
-    }
-
-    public ProductCart() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public ProductCart(ProductCart productCart)
-        : base(productCart) { }
-#pragma warning restore CS8618
-
-    public ProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    ProductCart(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="ProductCartFromRaw.FromRawUnchecked"/>
-    public static ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class ProductCartFromRaw : IFromRawJson<ProductCart>
-{
-    /// <inheritdoc/>
-    public ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        ProductCart.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Summary of the refund status for this payment. None if no succeeded refunds exist.
-/// </summary>
-[JsonConverter(typeof(RefundStatusConverter))]
-public enum RefundStatus
-{
-    Partial,
-    Full,
-}
-
-sealed class RefundStatusConverter : JsonConverter<RefundStatus>
-{
-    public override RefundStatus Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "partial" => RefundStatus.Partial,
-            "full" => RefundStatus.Full,
-            _ => (RefundStatus)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        RefundStatus value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                RefundStatus.Partial => "partial",
-                RefundStatus.Full => "full",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
