@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -5,10 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
-using System = System;
+using CreditEntitlements = DodoPayments.Client.Models.CreditEntitlements;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -41,12 +41,12 @@ public sealed record class Product : JsonModel
     /// <summary>
     /// Timestamp when the product was created.
     /// </summary>
-    public required System::DateTimeOffset CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("created_at");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
         }
         init { this._rawData.Set("created_at", value); }
     }
@@ -54,18 +54,18 @@ public sealed record class Product : JsonModel
     /// <summary>
     /// Attached credit entitlements with settings
     /// </summary>
-    public required IReadOnlyList<ProductCreditEntitlement> CreditEntitlements
+    public required IReadOnlyList<CreditEntitlement> CreditEntitlements
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<ProductCreditEntitlement>>(
+            return this._rawData.GetNotNullStruct<ImmutableArray<CreditEntitlement>>(
                 "credit_entitlements"
             );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<ProductCreditEntitlement>>(
+            this._rawData.Set<ImmutableArray<CreditEntitlement>>(
                 "credit_entitlements",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -159,12 +159,12 @@ public sealed record class Product : JsonModel
     /// <summary>
     /// Timestamp when the product was last updated.
     /// </summary>
-    public required System::DateTimeOffset UpdatedAt
+    public required DateTimeOffset UpdatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("updated_at");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at");
         }
         init { this._rawData.Set("updated_at", value); }
     }
@@ -357,10 +357,8 @@ class ProductFromRaw : IFromRawJson<Product>
 /// <summary>
 /// Response struct for credit entitlement mapping
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<ProductCreditEntitlement, ProductCreditEntitlementFromRaw>)
-)]
-public sealed record class ProductCreditEntitlement : JsonModel
+[JsonConverter(typeof(JsonModelConverter<CreditEntitlement, CreditEntitlementFromRaw>))]
+public sealed record class CreditEntitlement : JsonModel
 {
     /// <summary>
     /// Unique ID of this mapping
@@ -428,29 +426,18 @@ public sealed record class ProductCreditEntitlement : JsonModel
     }
 
     /// <summary>
-    /// Whether new credit grants reduce existing overage
+    /// Controls how overage is handled at billing cycle end.
     /// </summary>
-    public required bool CreditsReduceOverage
+    public required ApiEnum<string, CreditEntitlements::CbbOverageBehavior> OverageBehavior
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<bool>("credits_reduce_overage");
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, CreditEntitlements::CbbOverageBehavior>
+            >("overage_behavior");
         }
-        init { this._rawData.Set("credits_reduce_overage", value); }
-    }
-
-    /// <summary>
-    /// Whether overage is charged at billing
-    /// </summary>
-    public required bool OverageChargeAtBilling
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<bool>("overage_charge_at_billing");
-        }
-        init { this._rawData.Set("overage_charge_at_billing", value); }
+        init { this._rawData.Set("overage_behavior", value); }
     }
 
     /// <summary>
@@ -467,29 +454,16 @@ public sealed record class ProductCreditEntitlement : JsonModel
     }
 
     /// <summary>
-    /// Whether to preserve overage balance when credits reset
-    /// </summary>
-    public required bool PreserveOverageAtReset
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<bool>("preserve_overage_at_reset");
-        }
-        init { this._rawData.Set("preserve_overage_at_reset", value); }
-    }
-
-    /// <summary>
     /// Proration behavior for credit grants during plan changes
     /// </summary>
-    public required ApiEnum<string, ProductCreditEntitlementProrationBehavior> ProrationBehavior
+    public required ApiEnum<string, CbbProrationBehavior> ProrationBehavior
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, ProductCreditEntitlementProrationBehavior>
-            >("proration_behavior");
+            return this._rawData.GetNotNullClass<ApiEnum<string, CbbProrationBehavior>>(
+                "proration_behavior"
+            );
         }
         init { this._rawData.Set("proration_behavior", value); }
     }
@@ -660,10 +634,8 @@ public sealed record class ProductCreditEntitlement : JsonModel
         _ = this.CreditEntitlementName;
         _ = this.CreditEntitlementUnit;
         _ = this.CreditsAmount;
-        _ = this.CreditsReduceOverage;
-        _ = this.OverageChargeAtBilling;
+        this.OverageBehavior.Validate();
         _ = this.OverageEnabled;
-        _ = this.PreserveOverageAtReset;
         this.ProrationBehavior.Validate();
         _ = this.RolloverEnabled;
         _ = this.TrialCreditsExpireAfterTrial;
@@ -679,29 +651,29 @@ public sealed record class ProductCreditEntitlement : JsonModel
         _ = this.TrialCredits;
     }
 
-    public ProductCreditEntitlement() { }
+    public CreditEntitlement() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public ProductCreditEntitlement(ProductCreditEntitlement productCreditEntitlement)
-        : base(productCreditEntitlement) { }
+    public CreditEntitlement(CreditEntitlement creditEntitlement)
+        : base(creditEntitlement) { }
 #pragma warning restore CS8618
 
-    public ProductCreditEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CreditEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ProductCreditEntitlement(FrozenDictionary<string, JsonElement> rawData)
+    CreditEntitlement(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="ProductCreditEntitlementFromRaw.FromRawUnchecked"/>
-    public static ProductCreditEntitlement FromRawUnchecked(
+    /// <inheritdoc cref="CreditEntitlementFromRaw.FromRawUnchecked"/>
+    public static CreditEntitlement FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -709,60 +681,11 @@ public sealed record class ProductCreditEntitlement : JsonModel
     }
 }
 
-class ProductCreditEntitlementFromRaw : IFromRawJson<ProductCreditEntitlement>
+class CreditEntitlementFromRaw : IFromRawJson<CreditEntitlement>
 {
     /// <inheritdoc/>
-    public ProductCreditEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => ProductCreditEntitlement.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Proration behavior for credit grants during plan changes
-/// </summary>
-[JsonConverter(typeof(ProductCreditEntitlementProrationBehaviorConverter))]
-public enum ProductCreditEntitlementProrationBehavior
-{
-    Prorate,
-    NoProrate,
-}
-
-sealed class ProductCreditEntitlementProrationBehaviorConverter
-    : JsonConverter<ProductCreditEntitlementProrationBehavior>
-{
-    public override ProductCreditEntitlementProrationBehavior Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "prorate" => ProductCreditEntitlementProrationBehavior.Prorate,
-            "no_prorate" => ProductCreditEntitlementProrationBehavior.NoProrate,
-            _ => (ProductCreditEntitlementProrationBehavior)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ProductCreditEntitlementProrationBehavior value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ProductCreditEntitlementProrationBehavior.Prorate => "prorate",
-                ProductCreditEntitlementProrationBehavior.NoProrate => "no_prorate",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
+    public CreditEntitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreditEntitlement.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(

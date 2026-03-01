@@ -2,6 +2,7 @@ using System.Text.Json;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Brands;
 using DodoPayments.Client.Models.CheckoutSessions;
+using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Customers;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Discounts;
@@ -11,6 +12,7 @@ using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.WebhookEvents;
 using Balances = DodoPayments.Client.Models.Balances;
+using CreditEntitlementsBalances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Meters = DodoPayments.Client.Models.Meters;
 using Payouts = DodoPayments.Client.Models.Payouts;
@@ -43,11 +45,19 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, FontWeight>(),
             new ApiEnumConverter<string, Currency>(),
             new ApiEnumConverter<string, IntentStatus>(),
-            new ApiEnumConverter<string, RefundStatus>(),
             new ApiEnumConverter<string, PaymentMethodTypes>(),
+            new ApiEnumConverter<string, PaymentRefundStatus>(),
             new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
             new ApiEnumConverter<string, Subscriptions::TimeInterval>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::UpdateSubscriptionPlanReqProrationBillingMode
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::UpdateSubscriptionPlanReqOnPaymentFailure
+            >(),
             new ApiEnumConverter<string, Subscriptions::LineItemSubscriptionType>(),
             new ApiEnumConverter<string, Subscriptions::AddonType>(),
             new ApiEnumConverter<string, Subscriptions::LineItemMeterType>(),
@@ -76,13 +86,11 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, DisputeStage>(),
             new ApiEnumConverter<string, DisputeStatus>(),
             new ApiEnumConverter<string, Payouts::Status>(),
+            new ApiEnumConverter<string, CbbProrationBehavior>(),
             new ApiEnumConverter<string, Type>(),
             new ApiEnumConverter<string, RecurringPriceType>(),
             new ApiEnumConverter<string, UsageBasedPriceType>(),
-            new ApiEnumConverter<string, ProductCreditEntitlementProrationBehavior>(),
             new ApiEnumConverter<string, TaxCategory>(),
-            new ApiEnumConverter<string, ProrationBehavior>(),
-            new ApiEnumConverter<string, ProductUpdateParamsCreditEntitlementProrationBehavior>(),
             new ApiEnumConverter<string, CountryCode>(),
             new ApiEnumConverter<string, DiscountType>(),
             new ApiEnumConverter<string, VerificationStatus>(),
@@ -108,7 +116,23 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
             new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
             new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
+            new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
+            new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
+            new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
+            new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
+            new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
+            new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
+            new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
+            new ApiEnumConverter<string, STAINLESS_FIXME_Type>(),
             new ApiEnumConverter<string, Webhooks::Type>(),
+            new ApiEnumConverter<string, Webhooks::CreditBalanceLowWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::CreditDeductedWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::CreditExpiredWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::CreditManualAdjustmentWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::CreditOverageChargedWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::CreditRolledOverWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::CreditRolloverForfeitedWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::DisputeAcceptedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::DisputeCancelledWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::DisputeChallengedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::DisputeExpiredWebhookEventType>(),
@@ -136,27 +160,19 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, RefundIntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, DisputeIntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, LicenseKeyIntersectionMember1PayloadType>(),
-            new ApiEnumConverter<string, CreditLedgerEntryPayloadType>(),
-            new ApiEnumConverter<string, TransactionType>(),
+            new ApiEnumConverter<string, CreditLedgerEntryIntersectionMember1PayloadType>(),
             new ApiEnumConverter<string, CreditBalanceLowPayloadType>(),
-            new ApiEnumConverter<string, Meters::Type>(),
-            new ApiEnumConverter<string, Meters::Operator>(),
-            new ApiEnumConverter<
-                string,
-                Meters::ClausesMeterFilterClausesMeterFilterConditionOperator
-            >(),
-            new ApiEnumConverter<
-                string,
-                Meters::ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
-            >(),
-            new ApiEnumConverter<string, Meters::ClauseOperator>(),
             new ApiEnumConverter<string, Meters::Conjunction>(),
-            new ApiEnumConverter<string, Meters::ClausesMeterFilterClausesMeterFilterConjunction>(),
-            new ApiEnumConverter<string, Meters::ClausesMeterFilterConjunction>(),
-            new ApiEnumConverter<string, Meters::MeterFilterConjunction>(),
+            new ApiEnumConverter<string, Meters::FilterOperator>(),
+            new ApiEnumConverter<string, Meters::Type>(),
             new ApiEnumConverter<string, Balances::BalanceLedgerEntryEventType>(),
             new ApiEnumConverter<string, Balances::Currency>(),
             new ApiEnumConverter<string, Balances::EventType>(),
+            new ApiEnumConverter<string, CbbOverageBehavior>(),
+            new ApiEnumConverter<string, CreditEntitlementsBalances::TransactionType>(),
+            new ApiEnumConverter<string, CreditEntitlementsBalances::LedgerEntryType>(),
+            new ApiEnumConverter<string, CreditEntitlementsBalances::SourceType>(),
+            new ApiEnumConverter<string, CreditEntitlementsBalances::Status>(),
         },
     };
 

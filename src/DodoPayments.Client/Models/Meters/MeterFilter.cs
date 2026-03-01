@@ -36,14 +36,12 @@ public sealed record class MeterFilter : JsonModel
     /// <summary>
     /// Logical conjunction to apply between clauses (and/or)
     /// </summary>
-    public required ApiEnum<string, MeterFilterConjunction> Conjunction
+    public required ApiEnum<string, Conjunction> Conjunction
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, MeterFilterConjunction>>(
-                "conjunction"
-            );
+            return this._rawData.GetNotNullClass<ApiEnum<string, Conjunction>>("conjunction");
         }
         init { this._rawData.Set("conjunction", value); }
     }
@@ -396,12 +394,12 @@ public sealed record class MeterFilterCondition : JsonModel
         init { this._rawData.Set("key", value); }
     }
 
-    public required ApiEnum<string, Operator> Operator
+    public required ApiEnum<string, FilterOperator> Operator
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Operator>>("operator");
+            return this._rawData.GetNotNullClass<ApiEnum<string, FilterOperator>>("operator");
         }
         init { this._rawData.Set("operator", value); }
     }
@@ -463,64 +461,6 @@ class MeterFilterConditionFromRaw : IFromRawJson<MeterFilterCondition>
     public MeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => MeterFilterCondition.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(OperatorConverter))]
-public enum Operator
-{
-    Equals,
-    NotEquals,
-    GreaterThan,
-    GreaterThanOrEquals,
-    LessThan,
-    LessThanOrEquals,
-    Contains,
-    DoesNotContain,
-}
-
-sealed class OperatorConverter : JsonConverter<Operator>
-{
-    public override Operator Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "equals" => Operator.Equals,
-            "not_equals" => Operator.NotEquals,
-            "greater_than" => Operator.GreaterThan,
-            "greater_than_or_equals" => Operator.GreaterThanOrEquals,
-            "less_than" => Operator.LessThan,
-            "less_than_or_equals" => Operator.LessThanOrEquals,
-            "contains" => Operator.Contains,
-            "does_not_contain" => Operator.DoesNotContain,
-            _ => (Operator)(-1),
-        };
-    }
-
-    public override void Write(Utf8JsonWriter writer, Operator value, JsonSerializerOptions options)
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                Operator.Equals => "equals",
-                Operator.NotEquals => "not_equals",
-                Operator.GreaterThan => "greater_than",
-                Operator.GreaterThanOrEquals => "greater_than_or_equals",
-                Operator.LessThan => "less_than",
-                Operator.LessThanOrEquals => "less_than_or_equals",
-                Operator.Contains => "contains",
-                Operator.DoesNotContain => "does_not_contain",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 /// <summary>
@@ -843,14 +783,12 @@ public sealed record class ClausesMeterFilter : JsonModel
         init { this._rawData.Set("clauses", value); }
     }
 
-    public required ApiEnum<string, ClausesMeterFilterConjunction> Conjunction
+    public required ApiEnum<string, Conjunction> Conjunction
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, ClausesMeterFilterConjunction>>(
-                "conjunction"
-            );
+            return this._rawData.GetNotNullClass<ApiEnum<string, Conjunction>>("conjunction");
         }
         init { this._rawData.Set("conjunction", value); }
     }
@@ -1228,14 +1166,12 @@ public sealed record class ClausesMeterFilterClausesMeterFilterCondition : JsonM
         init { this._rawData.Set("key", value); }
     }
 
-    public required ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator> Operator
+    public required ApiEnum<string, FilterOperator> Operator
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, ClausesMeterFilterClausesMeterFilterConditionOperator>
-            >("operator");
+            return this._rawData.GetNotNullClass<ApiEnum<string, FilterOperator>>("operator");
         }
         init { this._rawData.Set("operator", value); }
     }
@@ -1304,75 +1240,6 @@ class ClausesMeterFilterClausesMeterFilterConditionFromRaw
     public ClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ClausesMeterFilterClausesMeterFilterCondition.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(ClausesMeterFilterClausesMeterFilterConditionOperatorConverter))]
-public enum ClausesMeterFilterClausesMeterFilterConditionOperator
-{
-    Equals,
-    NotEquals,
-    GreaterThan,
-    GreaterThanOrEquals,
-    LessThan,
-    LessThanOrEquals,
-    Contains,
-    DoesNotContain,
-}
-
-sealed class ClausesMeterFilterClausesMeterFilterConditionOperatorConverter
-    : JsonConverter<ClausesMeterFilterClausesMeterFilterConditionOperator>
-{
-    public override ClausesMeterFilterClausesMeterFilterConditionOperator Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "equals" => ClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
-            "not_equals" => ClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals,
-            "greater_than" => ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan,
-            "greater_than_or_equals" =>
-                ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals,
-            "less_than" => ClausesMeterFilterClausesMeterFilterConditionOperator.LessThan,
-            "less_than_or_equals" =>
-                ClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals,
-            "contains" => ClausesMeterFilterClausesMeterFilterConditionOperator.Contains,
-            "does_not_contain" =>
-                ClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain,
-            _ => (ClausesMeterFilterClausesMeterFilterConditionOperator)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ClausesMeterFilterClausesMeterFilterConditionOperator value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ClausesMeterFilterClausesMeterFilterConditionOperator.Equals => "equals",
-                ClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals => "not_equals",
-                ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan => "greater_than",
-                ClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals =>
-                    "greater_than_or_equals",
-                ClausesMeterFilterClausesMeterFilterConditionOperator.LessThan => "less_than",
-                ClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals =>
-                    "less_than_or_equals",
-                ClausesMeterFilterClausesMeterFilterConditionOperator.Contains => "contains",
-                ClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain =>
-                    "does_not_contain",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 /// <summary>
@@ -1718,14 +1585,12 @@ public sealed record class ClausesMeterFilterClausesMeterFilter : JsonModel
         init { this._rawData.Set("clauses", value); }
     }
 
-    public required ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction> Conjunction
+    public required ApiEnum<string, Conjunction> Conjunction
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, ClausesMeterFilterClausesMeterFilterConjunction>
-            >("conjunction");
+            return this._rawData.GetNotNullClass<ApiEnum<string, Conjunction>>("conjunction");
         }
         init { this._rawData.Set("conjunction", value); }
     }
@@ -2119,20 +1984,12 @@ public sealed record class ClausesMeterFilterClausesMeterFilterClausesMeterFilte
         init { this._rawData.Set("key", value); }
     }
 
-    public required ApiEnum<
-        string,
-        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
-    > Operator
+    public required ApiEnum<string, FilterOperator> Operator
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<
-                    string,
-                    ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
-                >
-            >("operator");
+            return this._rawData.GetNotNullClass<ApiEnum<string, FilterOperator>>("operator");
         }
         init { this._rawData.Set("operator", value); }
     }
@@ -2203,87 +2060,6 @@ class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionFromRaw
     public ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(
-    typeof(ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperatorConverter)
-)]
-public enum ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator
-{
-    Equals,
-    NotEquals,
-    GreaterThan,
-    GreaterThanOrEquals,
-    LessThan,
-    LessThanOrEquals,
-    Contains,
-    DoesNotContain,
-}
-
-sealed class ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperatorConverter
-    : JsonConverter<ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator>
-{
-    public override ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "equals" =>
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals,
-            "not_equals" =>
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals,
-            "greater_than" =>
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan,
-            "greater_than_or_equals" =>
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals,
-            "less_than" =>
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThan,
-            "less_than_or_equals" =>
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals,
-            "contains" =>
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Contains,
-            "does_not_contain" =>
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain,
-            _ => (ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Equals =>
-                    "equals",
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.NotEquals =>
-                    "not_equals",
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThan =>
-                    "greater_than",
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.GreaterThanOrEquals =>
-                    "greater_than_or_equals",
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThan =>
-                    "less_than",
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.LessThanOrEquals =>
-                    "less_than_or_equals",
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.Contains =>
-                    "contains",
-                ClausesMeterFilterClausesMeterFilterClausesMeterFilterConditionOperator.DoesNotContain =>
-                    "does_not_contain",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 /// <summary>
@@ -2721,12 +2497,12 @@ public sealed record class Clause : JsonModel
         init { this._rawData.Set("key", value); }
     }
 
-    public required ApiEnum<string, ClauseOperator> Operator
+    public required ApiEnum<string, FilterOperator> Operator
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, ClauseOperator>>("operator");
+            return this._rawData.GetNotNullClass<ApiEnum<string, FilterOperator>>("operator");
         }
         init { this._rawData.Set("operator", value); }
     }
@@ -2785,68 +2561,6 @@ class ClauseFromRaw : IFromRawJson<Clause>
     /// <inheritdoc/>
     public Clause FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Clause.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(ClauseOperatorConverter))]
-public enum ClauseOperator
-{
-    Equals,
-    NotEquals,
-    GreaterThan,
-    GreaterThanOrEquals,
-    LessThan,
-    LessThanOrEquals,
-    Contains,
-    DoesNotContain,
-}
-
-sealed class ClauseOperatorConverter : JsonConverter<ClauseOperator>
-{
-    public override ClauseOperator Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "equals" => ClauseOperator.Equals,
-            "not_equals" => ClauseOperator.NotEquals,
-            "greater_than" => ClauseOperator.GreaterThan,
-            "greater_than_or_equals" => ClauseOperator.GreaterThanOrEquals,
-            "less_than" => ClauseOperator.LessThan,
-            "less_than_or_equals" => ClauseOperator.LessThanOrEquals,
-            "contains" => ClauseOperator.Contains,
-            "does_not_contain" => ClauseOperator.DoesNotContain,
-            _ => (ClauseOperator)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ClauseOperator value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ClauseOperator.Equals => "equals",
-                ClauseOperator.NotEquals => "not_equals",
-                ClauseOperator.GreaterThan => "greater_than",
-                ClauseOperator.GreaterThanOrEquals => "greater_than_or_equals",
-                ClauseOperator.LessThan => "less_than",
-                ClauseOperator.LessThanOrEquals => "less_than_or_equals",
-                ClauseOperator.Contains => "contains",
-                ClauseOperator.DoesNotContain => "does_not_contain",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 /// <summary>
@@ -3147,185 +2861,5 @@ sealed class ClauseValueConverter : JsonConverter<ClauseValue>
     )
     {
         JsonSerializer.Serialize(writer, value.Json, options);
-    }
-}
-
-[JsonConverter(typeof(ConjunctionConverter))]
-public enum Conjunction
-{
-    And,
-    Or,
-}
-
-sealed class ConjunctionConverter : JsonConverter<Conjunction>
-{
-    public override Conjunction Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "and" => Conjunction.And,
-            "or" => Conjunction.Or,
-            _ => (Conjunction)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        Conjunction value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                Conjunction.And => "and",
-                Conjunction.Or => "or",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-[JsonConverter(typeof(ClausesMeterFilterClausesMeterFilterConjunctionConverter))]
-public enum ClausesMeterFilterClausesMeterFilterConjunction
-{
-    And,
-    Or,
-}
-
-sealed class ClausesMeterFilterClausesMeterFilterConjunctionConverter
-    : JsonConverter<ClausesMeterFilterClausesMeterFilterConjunction>
-{
-    public override ClausesMeterFilterClausesMeterFilterConjunction Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "and" => ClausesMeterFilterClausesMeterFilterConjunction.And,
-            "or" => ClausesMeterFilterClausesMeterFilterConjunction.Or,
-            _ => (ClausesMeterFilterClausesMeterFilterConjunction)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ClausesMeterFilterClausesMeterFilterConjunction value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ClausesMeterFilterClausesMeterFilterConjunction.And => "and",
-                ClausesMeterFilterClausesMeterFilterConjunction.Or => "or",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-[JsonConverter(typeof(ClausesMeterFilterConjunctionConverter))]
-public enum ClausesMeterFilterConjunction
-{
-    And,
-    Or,
-}
-
-sealed class ClausesMeterFilterConjunctionConverter : JsonConverter<ClausesMeterFilterConjunction>
-{
-    public override ClausesMeterFilterConjunction Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "and" => ClausesMeterFilterConjunction.And,
-            "or" => ClausesMeterFilterConjunction.Or,
-            _ => (ClausesMeterFilterConjunction)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ClausesMeterFilterConjunction value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ClausesMeterFilterConjunction.And => "and",
-                ClausesMeterFilterConjunction.Or => "or",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-/// <summary>
-/// Logical conjunction to apply between clauses (and/or)
-/// </summary>
-[JsonConverter(typeof(MeterFilterConjunctionConverter))]
-public enum MeterFilterConjunction
-{
-    And,
-    Or,
-}
-
-sealed class MeterFilterConjunctionConverter : JsonConverter<MeterFilterConjunction>
-{
-    public override MeterFilterConjunction Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "and" => MeterFilterConjunction.And,
-            "or" => MeterFilterConjunction.Or,
-            _ => (MeterFilterConjunction)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        MeterFilterConjunction value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                MeterFilterConjunction.And => "and",
-                MeterFilterConjunction.Or => "or",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
     }
 }

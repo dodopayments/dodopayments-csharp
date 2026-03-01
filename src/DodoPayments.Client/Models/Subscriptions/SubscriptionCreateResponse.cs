@@ -148,18 +148,18 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// <summary>
     /// One time products associated with the purchase of subscription
     /// </summary>
-    public IReadOnlyList<OneTimeProductCart>? OneTimeProductCart
+    public IReadOnlyList<OneTimeProductCartItem>? OneTimeProductCart
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<OneTimeProductCart>>(
+            return this._rawData.GetNullableStruct<ImmutableArray<OneTimeProductCartItem>>(
                 "one_time_product_cart"
             );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<OneTimeProductCart>?>(
+            this._rawData.Set<ImmutableArray<OneTimeProductCartItem>?>(
                 "one_time_product_cart",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -237,71 +237,4 @@ class SubscriptionCreateResponseFromRaw : IFromRawJson<SubscriptionCreateRespons
     public SubscriptionCreateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionCreateResponse.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(JsonModelConverter<OneTimeProductCart, OneTimeProductCartFromRaw>))]
-public sealed record class OneTimeProductCart : JsonModel
-{
-    public required string ProductID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("product_id");
-        }
-        init { this._rawData.Set("product_id", value); }
-    }
-
-    public required int Quantity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<int>("quantity");
-        }
-        init { this._rawData.Set("quantity", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.ProductID;
-        _ = this.Quantity;
-    }
-
-    public OneTimeProductCart() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public OneTimeProductCart(OneTimeProductCart oneTimeProductCart)
-        : base(oneTimeProductCart) { }
-#pragma warning restore CS8618
-
-    public OneTimeProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    OneTimeProductCart(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="OneTimeProductCartFromRaw.FromRawUnchecked"/>
-    public static OneTimeProductCart FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class OneTimeProductCartFromRaw : IFromRawJson<OneTimeProductCart>
-{
-    /// <inheritdoc/>
-    public OneTimeProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        OneTimeProductCart.FromRawUnchecked(rawData);
 }

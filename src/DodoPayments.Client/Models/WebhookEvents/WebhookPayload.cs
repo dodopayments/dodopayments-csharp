@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Disputes = DodoPayments.Client.Models.Disputes;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Payments = DodoPayments.Client.Models.Payments;
@@ -980,16 +981,18 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// List of refunds issued for this payment
     /// </summary>
-    public required IReadOnlyList<Payments::Refund> Refunds
+    public required IReadOnlyList<Payments::RefundListItem> Refunds
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<Payments::Refund>>("refunds");
+            return this._rawData.GetNotNullStruct<ImmutableArray<Payments::RefundListItem>>(
+                "refunds"
+            );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Payments::Refund>>(
+            this._rawData.Set<ImmutableArray<Payments::RefundListItem>>(
                 "refunds",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -1252,37 +1255,42 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// List of products purchased in a one-time payment
     /// </summary>
-    public IReadOnlyList<Payments::ProductCart>? ProductCart
+    public IReadOnlyList<Payments::OneTimeProductCartItem>? ProductCart
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<Payments::ProductCart>>(
-                "product_cart"
-            );
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<Payments::OneTimeProductCartItem>
+            >("product_cart");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Payments::ProductCart>?>(
+            this._rawData.Set<ImmutableArray<Payments::OneTimeProductCartItem>?>(
                 "product_cart",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
         }
     }
 
-    /// <summary>
-    /// Summary of the refund status for this payment. None if no succeeded refunds exist.
-    /// </summary>
-    public ApiEnum<string, Payments::RefundStatus>? RefundStatus
+    public ApiEnum<string, Payments::PaymentRefundStatus>? RefundStatus
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, Payments::RefundStatus>>(
+            return this._rawData.GetNullableClass<ApiEnum<string, Payments::PaymentRefundStatus>>(
                 "refund_status"
             );
         }
-        init { this._rawData.Set("refund_status", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("refund_status", value);
+        }
     }
 
     /// <summary>
@@ -1962,18 +1970,18 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Customer's responses to custom fields collected during checkout
     /// </summary>
-    public IReadOnlyList<Subscriptions::CustomFieldResponse>? CustomFieldResponses
+    public IReadOnlyList<Payments::CustomFieldResponse>? CustomFieldResponses
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<
-                ImmutableArray<Subscriptions::CustomFieldResponse>
-            >("custom_field_responses");
+            return this._rawData.GetNullableStruct<ImmutableArray<Payments::CustomFieldResponse>>(
+                "custom_field_responses"
+            );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Subscriptions::CustomFieldResponse>?>(
+            this._rawData.Set<ImmutableArray<Payments::CustomFieldResponse>?>(
                 "custom_field_responses",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -3328,6 +3336,9 @@ sealed class LicenseKeyIntersectionMember1PayloadTypeConverter
     }
 }
 
+/// <summary>
+/// Response for a ledger entry
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<CreditLedgerEntry, CreditLedgerEntryFromRaw>))]
 public sealed record class CreditLedgerEntry : JsonModel
 {
@@ -3441,24 +3452,12 @@ public sealed record class CreditLedgerEntry : JsonModel
         init { this._rawData.Set("overage_before", value); }
     }
 
-    public required ApiEnum<string, CreditLedgerEntryPayloadType> PayloadType
+    public required ApiEnum<string, Balances::TransactionType> TransactionType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, CreditLedgerEntryPayloadType>>(
-                "payload_type"
-            );
-        }
-        init { this._rawData.Set("payload_type", value); }
-    }
-
-    public required ApiEnum<string, TransactionType> TransactionType
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, TransactionType>>(
+            return this._rawData.GetNotNullClass<ApiEnum<string, Balances::TransactionType>>(
                 "transaction_type"
             );
         }
@@ -3505,6 +3504,41 @@ public sealed record class CreditLedgerEntry : JsonModel
         init { this._rawData.Set("reference_type", value); }
     }
 
+    public required ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
+            >("payload_type");
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    public static implicit operator Balances::CreditLedgerEntry(
+        CreditLedgerEntry creditLedgerEntry
+    ) =>
+        new()
+        {
+            ID = creditLedgerEntry.ID,
+            Amount = creditLedgerEntry.Amount,
+            BalanceAfter = creditLedgerEntry.BalanceAfter,
+            BalanceBefore = creditLedgerEntry.BalanceBefore,
+            BusinessID = creditLedgerEntry.BusinessID,
+            CreatedAt = creditLedgerEntry.CreatedAt,
+            CreditEntitlementID = creditLedgerEntry.CreditEntitlementID,
+            CustomerID = creditLedgerEntry.CustomerID,
+            IsCredit = creditLedgerEntry.IsCredit,
+            OverageAfter = creditLedgerEntry.OverageAfter,
+            OverageBefore = creditLedgerEntry.OverageBefore,
+            TransactionType = creditLedgerEntry.TransactionType,
+            Description = creditLedgerEntry.Description,
+            GrantID = creditLedgerEntry.GrantID,
+            ReferenceID = creditLedgerEntry.ReferenceID,
+            ReferenceType = creditLedgerEntry.ReferenceType,
+        };
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -3519,12 +3553,12 @@ public sealed record class CreditLedgerEntry : JsonModel
         _ = this.IsCredit;
         _ = this.OverageAfter;
         _ = this.OverageBefore;
-        this.PayloadType.Validate();
         this.TransactionType.Validate();
         _ = this.Description;
         _ = this.GrantID;
         _ = this.ReferenceID;
         _ = this.ReferenceType;
+        this.PayloadType.Validate();
     }
 
     public CreditLedgerEntry() { }
@@ -3564,15 +3598,92 @@ class CreditLedgerEntryFromRaw : IFromRawJson<CreditLedgerEntry>
         CreditLedgerEntry.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(CreditLedgerEntryPayloadTypeConverter))]
-public enum CreditLedgerEntryPayloadType
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CreditLedgerEntryIntersectionMember1,
+        CreditLedgerEntryIntersectionMember1FromRaw
+    >)
+)]
+public sealed record class CreditLedgerEntryIntersectionMember1 : JsonModel
+{
+    public required ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
+            >("payload_type");
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.PayloadType.Validate();
+    }
+
+    public CreditLedgerEntryIntersectionMember1() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreditLedgerEntryIntersectionMember1(
+        CreditLedgerEntryIntersectionMember1 creditLedgerEntryIntersectionMember1
+    )
+        : base(creditLedgerEntryIntersectionMember1) { }
+#pragma warning restore CS8618
+
+    public CreditLedgerEntryIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreditLedgerEntryIntersectionMember1(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditLedgerEntryIntersectionMember1FromRaw.FromRawUnchecked"/>
+    public static CreditLedgerEntryIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public CreditLedgerEntryIntersectionMember1(
+        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> payloadType
+    )
+        : this()
+    {
+        this.PayloadType = payloadType;
+    }
+}
+
+class CreditLedgerEntryIntersectionMember1FromRaw
+    : IFromRawJson<CreditLedgerEntryIntersectionMember1>
+{
+    /// <inheritdoc/>
+    public CreditLedgerEntryIntersectionMember1 FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CreditLedgerEntryIntersectionMember1.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(CreditLedgerEntryIntersectionMember1PayloadTypeConverter))]
+public enum CreditLedgerEntryIntersectionMember1PayloadType
 {
     CreditLedgerEntry,
 }
 
-sealed class CreditLedgerEntryPayloadTypeConverter : JsonConverter<CreditLedgerEntryPayloadType>
+sealed class CreditLedgerEntryIntersectionMember1PayloadTypeConverter
+    : JsonConverter<CreditLedgerEntryIntersectionMember1PayloadType>
 {
-    public override CreditLedgerEntryPayloadType Read(
+    public override CreditLedgerEntryIntersectionMember1PayloadType Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -3580,14 +3691,15 @@ sealed class CreditLedgerEntryPayloadTypeConverter : JsonConverter<CreditLedgerE
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "CreditLedgerEntry" => CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            _ => (CreditLedgerEntryPayloadType)(-1),
+            "CreditLedgerEntry" =>
+                CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
+            _ => (CreditLedgerEntryIntersectionMember1PayloadType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        CreditLedgerEntryPayloadType value,
+        CreditLedgerEntryIntersectionMember1PayloadType value,
         JsonSerializerOptions options
     )
     {
@@ -3595,72 +3707,8 @@ sealed class CreditLedgerEntryPayloadTypeConverter : JsonConverter<CreditLedgerE
             writer,
             value switch
             {
-                CreditLedgerEntryPayloadType.CreditLedgerEntry => "CreditLedgerEntry",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-[JsonConverter(typeof(TransactionTypeConverter))]
-public enum TransactionType
-{
-    CreditAdded,
-    CreditDeducted,
-    CreditExpired,
-    CreditRolledOver,
-    RolloverForfeited,
-    OverageCharged,
-    AutoTopUp,
-    ManualAdjustment,
-    Refund,
-}
-
-sealed class TransactionTypeConverter : JsonConverter<TransactionType>
-{
-    public override TransactionType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "credit_added" => TransactionType.CreditAdded,
-            "credit_deducted" => TransactionType.CreditDeducted,
-            "credit_expired" => TransactionType.CreditExpired,
-            "credit_rolled_over" => TransactionType.CreditRolledOver,
-            "rollover_forfeited" => TransactionType.RolloverForfeited,
-            "overage_charged" => TransactionType.OverageCharged,
-            "auto_top_up" => TransactionType.AutoTopUp,
-            "manual_adjustment" => TransactionType.ManualAdjustment,
-            "refund" => TransactionType.Refund,
-            _ => (TransactionType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        TransactionType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                TransactionType.CreditAdded => "credit_added",
-                TransactionType.CreditDeducted => "credit_deducted",
-                TransactionType.CreditExpired => "credit_expired",
-                TransactionType.CreditRolledOver => "credit_rolled_over",
-                TransactionType.RolloverForfeited => "rollover_forfeited",
-                TransactionType.OverageCharged => "overage_charged",
-                TransactionType.AutoTopUp => "auto_top_up",
-                TransactionType.ManualAdjustment => "manual_adjustment",
-                TransactionType.Refund => "refund",
+                CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry =>
+                    "CreditLedgerEntry",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.WebhookEvents;
+using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Disputes = DodoPayments.Client.Models.Disputes;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Payments = DodoPayments.Client.Models.Payments;
@@ -95,7 +97,7 @@ public class WebhookPayloadTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = Payments::PaymentRefundStatus.Partial,
                 SettlementTax = 0,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
@@ -182,7 +184,7 @@ public class WebhookPayloadTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -279,7 +281,7 @@ public class WebhookPayloadTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = Payments::PaymentRefundStatus.Partial,
                 SettlementTax = 0,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
@@ -380,7 +382,7 @@ public class WebhookPayloadTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = Payments::PaymentRefundStatus.Partial,
                 SettlementTax = 0,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
@@ -474,7 +476,7 @@ public class WebhookPayloadTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -571,7 +573,7 @@ public class WebhookPayloadTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = Payments::PaymentRefundStatus.Partial,
                 SettlementTax = 0,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
@@ -666,7 +668,7 @@ public class WebhookPayloadTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = Payments::PaymentRefundStatus.Partial,
                 SettlementTax = 0,
                 Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
@@ -763,7 +765,7 @@ public class DataTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -798,7 +800,7 @@ public class DataTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -843,8 +845,8 @@ public class DataTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -967,12 +969,12 @@ public class DataTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
             Description = "description",
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
         value.Validate();
     }
@@ -1072,7 +1074,7 @@ public class DataTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1110,7 +1112,7 @@ public class DataTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -1155,8 +1157,8 @@ public class DataTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1291,12 +1293,12 @@ public class DataTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
             Description = "description",
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -1405,7 +1407,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1452,7 +1454,7 @@ public class PaymentTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
-        List<Payments::Refund> expectedRefunds =
+        List<Payments::RefundListItem> expectedRefunds =
         [
             new()
             {
@@ -1488,12 +1490,12 @@ public class PaymentTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<Payments::ProductCart> expectedProductCart =
+        List<Payments::OneTimeProductCartItem> expectedProductCart =
         [
             new() { ProductID = "product_id", Quantity = 0 },
         ];
-        ApiEnum<string, Payments::RefundStatus> expectedRefundStatus =
-            Payments::RefundStatus.Partial;
+        ApiEnum<string, Payments::PaymentRefundStatus> expectedRefundStatus =
+            Payments::PaymentRefundStatus.Partial;
         int expectedSettlementTax = 0;
         ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
@@ -1641,7 +1643,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1733,7 +1735,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1787,7 +1789,7 @@ public class PaymentTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
-        List<Payments::Refund> expectedRefunds =
+        List<Payments::RefundListItem> expectedRefunds =
         [
             new()
             {
@@ -1823,12 +1825,12 @@ public class PaymentTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<Payments::ProductCart> expectedProductCart =
+        List<Payments::OneTimeProductCartItem> expectedProductCart =
         [
             new() { ProductID = "product_id", Quantity = 0 },
         ];
-        ApiEnum<string, Payments::RefundStatus> expectedRefundStatus =
-            Payments::RefundStatus.Partial;
+        ApiEnum<string, Payments::PaymentRefundStatus> expectedRefundStatus =
+            Payments::PaymentRefundStatus.Partial;
         int expectedSettlementTax = 0;
         ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
@@ -1976,7 +1978,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -2064,7 +2066,6 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
@@ -2074,6 +2075,8 @@ public class PaymentTest : TestBase
 
         Assert.Null(model.CardIssuingCountry);
         Assert.False(model.RawData.ContainsKey("card_issuing_country"));
+        Assert.Null(model.RefundStatus);
+        Assert.False(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.Status);
         Assert.False(model.RawData.ContainsKey("status"));
     }
@@ -2154,7 +2157,6 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
@@ -2241,7 +2243,6 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
@@ -2250,11 +2251,14 @@ public class PaymentTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             CardIssuingCountry = null,
+            RefundStatus = null,
             Status = null,
         };
 
         Assert.Null(model.CardIssuingCountry);
         Assert.False(model.RawData.ContainsKey("card_issuing_country"));
+        Assert.Null(model.RefundStatus);
+        Assert.False(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.Status);
         Assert.False(model.RawData.ContainsKey("status"));
     }
@@ -2335,7 +2339,6 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
             SettlementTax = 0,
             SubscriptionID = "subscription_id",
             Tax = 0,
@@ -2344,6 +2347,7 @@ public class PaymentTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             CardIssuingCountry = null,
+            RefundStatus = null,
             Status = null,
         };
 
@@ -2412,6 +2416,7 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
             PayloadType = PayloadType.Payment,
         };
@@ -2446,8 +2451,6 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("payment_method_type"));
         Assert.Null(model.ProductCart);
         Assert.False(model.RawData.ContainsKey("product_cart"));
-        Assert.Null(model.RefundStatus);
-        Assert.False(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.SettlementTax);
         Assert.False(model.RawData.ContainsKey("settlement_tax"));
         Assert.Null(model.SubscriptionID);
@@ -2520,6 +2523,7 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
             PayloadType = PayloadType.Payment,
         };
@@ -2589,6 +2593,7 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
             PayloadType = PayloadType.Payment,
 
@@ -2607,7 +2612,6 @@ public class PaymentTest : TestBase
             PaymentMethod = null,
             PaymentMethodType = null,
             ProductCart = null,
-            RefundStatus = null,
             SettlementTax = null,
             SubscriptionID = null,
             Tax = null,
@@ -2644,8 +2648,6 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("payment_method_type"));
         Assert.Null(model.ProductCart);
         Assert.True(model.RawData.ContainsKey("product_cart"));
-        Assert.Null(model.RefundStatus);
-        Assert.True(model.RawData.ContainsKey("refund_status"));
         Assert.Null(model.SettlementTax);
         Assert.True(model.RawData.ContainsKey("settlement_tax"));
         Assert.Null(model.SubscriptionID);
@@ -2718,6 +2720,7 @@ public class PaymentTest : TestBase
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
             CardIssuingCountry = CountryCode.Af,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
             PayloadType = PayloadType.Payment,
 
@@ -2736,7 +2739,6 @@ public class PaymentTest : TestBase
             PaymentMethod = null,
             PaymentMethodType = null,
             ProductCart = null,
-            RefundStatus = null,
             SettlementTax = null,
             SubscriptionID = null,
             Tax = null,
@@ -2823,7 +2825,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = Payments::RefundStatus.Partial,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -2982,7 +2984,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -3027,8 +3029,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3077,7 +3079,7 @@ public class SubscriptionTest : TestBase
                 CreditEntitlementName = "credit_entitlement_name",
                 CreditsAmount = "credits_amount",
                 OverageBalance = "overage_balance",
-                OverageChargeAtBilling = true,
+                OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                 OverageEnabled = true,
                 ProductID = "product_id",
                 RemainingBalance = "remaining_balance",
@@ -3122,8 +3124,8 @@ public class SubscriptionTest : TestBase
                 MeasurementUnit = "measurement_unit",
                 MeterID = "meter_id",
                 Name = "name",
-                PricePerUnit = "10.50",
                 Description = "description",
+                PricePerUnit = "10.50",
             },
         ];
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -3146,7 +3148,7 @@ public class SubscriptionTest : TestBase
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<Subscriptions::CustomFieldResponse> expectedCustomFieldResponses =
+        List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
         ];
@@ -3249,7 +3251,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -3294,8 +3296,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3355,7 +3357,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -3400,8 +3402,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3457,7 +3459,7 @@ public class SubscriptionTest : TestBase
                 CreditEntitlementName = "credit_entitlement_name",
                 CreditsAmount = "credits_amount",
                 OverageBalance = "overage_balance",
-                OverageChargeAtBilling = true,
+                OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                 OverageEnabled = true,
                 ProductID = "product_id",
                 RemainingBalance = "remaining_balance",
@@ -3502,8 +3504,8 @@ public class SubscriptionTest : TestBase
                 MeasurementUnit = "measurement_unit",
                 MeterID = "meter_id",
                 Name = "name",
-                PricePerUnit = "10.50",
                 Description = "description",
+                PricePerUnit = "10.50",
             },
         ];
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -3526,7 +3528,7 @@ public class SubscriptionTest : TestBase
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<Subscriptions::CustomFieldResponse> expectedCustomFieldResponses =
+        List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
         ];
@@ -3629,7 +3631,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -3674,8 +3676,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3729,7 +3731,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -3774,8 +3776,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3835,7 +3837,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -3880,8 +3882,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3928,7 +3930,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -3973,8 +3975,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -4042,7 +4044,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -4087,8 +4089,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -4143,7 +4145,7 @@ public class SubscriptionTest : TestBase
                     CreditEntitlementName = "credit_entitlement_name",
                     CreditsAmount = "credits_amount",
                     OverageBalance = "overage_balance",
-                    OverageChargeAtBilling = true,
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
                     ProductID = "product_id",
                     RemainingBalance = "remaining_balance",
@@ -4188,8 +4190,8 @@ public class SubscriptionTest : TestBase
                     MeasurementUnit = "measurement_unit",
                     MeterID = "meter_id",
                     Name = "name",
-                    PricePerUnit = "10.50",
                     Description = "description",
+                    PricePerUnit = "10.50",
                 },
             ],
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -5872,12 +5874,12 @@ public class CreditLedgerEntryTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
             Description = "description",
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         string expectedID = "id";
@@ -5891,13 +5893,14 @@ public class CreditLedgerEntryTest : TestBase
         bool expectedIsCredit = true;
         string expectedOverageAfter = "overage_after";
         string expectedOverageBefore = "overage_before";
-        ApiEnum<string, CreditLedgerEntryPayloadType> expectedPayloadType =
-            CreditLedgerEntryPayloadType.CreditLedgerEntry;
-        ApiEnum<string, TransactionType> expectedTransactionType = TransactionType.CreditAdded;
+        ApiEnum<string, Balances::TransactionType> expectedTransactionType =
+            Balances::TransactionType.CreditAdded;
         string expectedDescription = "description";
         string expectedGrantID = "grant_id";
         string expectedReferenceID = "reference_id";
         string expectedReferenceType = "reference_type";
+        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> expectedPayloadType =
+            CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedAmount, model.Amount);
@@ -5910,12 +5913,12 @@ public class CreditLedgerEntryTest : TestBase
         Assert.Equal(expectedIsCredit, model.IsCredit);
         Assert.Equal(expectedOverageAfter, model.OverageAfter);
         Assert.Equal(expectedOverageBefore, model.OverageBefore);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
         Assert.Equal(expectedTransactionType, model.TransactionType);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedGrantID, model.GrantID);
         Assert.Equal(expectedReferenceID, model.ReferenceID);
         Assert.Equal(expectedReferenceType, model.ReferenceType);
+        Assert.Equal(expectedPayloadType, model.PayloadType);
     }
 
     [Fact]
@@ -5934,12 +5937,12 @@ public class CreditLedgerEntryTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
             Description = "description",
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -5967,12 +5970,12 @@ public class CreditLedgerEntryTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
             Description = "description",
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -5993,13 +5996,14 @@ public class CreditLedgerEntryTest : TestBase
         bool expectedIsCredit = true;
         string expectedOverageAfter = "overage_after";
         string expectedOverageBefore = "overage_before";
-        ApiEnum<string, CreditLedgerEntryPayloadType> expectedPayloadType =
-            CreditLedgerEntryPayloadType.CreditLedgerEntry;
-        ApiEnum<string, TransactionType> expectedTransactionType = TransactionType.CreditAdded;
+        ApiEnum<string, Balances::TransactionType> expectedTransactionType =
+            Balances::TransactionType.CreditAdded;
         string expectedDescription = "description";
         string expectedGrantID = "grant_id";
         string expectedReferenceID = "reference_id";
         string expectedReferenceType = "reference_type";
+        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> expectedPayloadType =
+            CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedAmount, deserialized.Amount);
@@ -6012,12 +6016,12 @@ public class CreditLedgerEntryTest : TestBase
         Assert.Equal(expectedIsCredit, deserialized.IsCredit);
         Assert.Equal(expectedOverageAfter, deserialized.OverageAfter);
         Assert.Equal(expectedOverageBefore, deserialized.OverageBefore);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
         Assert.Equal(expectedTransactionType, deserialized.TransactionType);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedGrantID, deserialized.GrantID);
         Assert.Equal(expectedReferenceID, deserialized.ReferenceID);
         Assert.Equal(expectedReferenceType, deserialized.ReferenceType);
+        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
     }
 
     [Fact]
@@ -6036,12 +6040,12 @@ public class CreditLedgerEntryTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
             Description = "description",
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         model.Validate();
@@ -6063,8 +6067,8 @@ public class CreditLedgerEntryTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         Assert.Null(model.Description);
@@ -6093,8 +6097,8 @@ public class CreditLedgerEntryTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         model.Validate();
@@ -6116,8 +6120,8 @@ public class CreditLedgerEntryTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
 
             Description = null,
             GrantID = null,
@@ -6151,8 +6155,8 @@ public class CreditLedgerEntryTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
 
             Description = null,
             GrantID = null,
@@ -6179,12 +6183,12 @@ public class CreditLedgerEntryTest : TestBase
             IsCredit = true,
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
-            PayloadType = CreditLedgerEntryPayloadType.CreditLedgerEntry,
-            TransactionType = TransactionType.CreditAdded,
+            TransactionType = Balances::TransactionType.CreditAdded,
             Description = "description",
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         CreditLedgerEntry copied = new(model);
@@ -6193,111 +6197,120 @@ public class CreditLedgerEntryTest : TestBase
     }
 }
 
-public class CreditLedgerEntryPayloadTypeTest : TestBase
+public class CreditLedgerEntryIntersectionMember1Test : TestBase
 {
-    [Theory]
-    [InlineData(CreditLedgerEntryPayloadType.CreditLedgerEntry)]
-    public void Validation_Works(CreditLedgerEntryPayloadType rawValue)
+    [Fact]
+    public void FieldRoundtrip_Works()
     {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CreditLedgerEntryPayloadType> value = rawValue;
-        value.Validate();
+        var model = new CreditLedgerEntryIntersectionMember1
+        {
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
+        };
+
+        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> expectedPayloadType =
+            CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry;
+
+        Assert.Equal(expectedPayloadType, model.PayloadType);
     }
 
     [Fact]
-    public void InvalidEnumValidationThrows_Works()
+    public void SerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CreditLedgerEntryPayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
+        var model = new CreditLedgerEntryIntersectionMember1
+        {
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditLedgerEntryIntersectionMember1>(
+            json,
             ModelBase.SerializerOptions
         );
 
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(CreditLedgerEntryPayloadType.CreditLedgerEntry)]
-    public void SerializationRoundtrip_Works(CreditLedgerEntryPayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CreditLedgerEntryPayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CreditLedgerEntryPayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
+        Assert.Equal(model, deserialized);
     }
 
     [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
+    public void FieldRoundtripThroughSerialization_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CreditLedgerEntryPayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
+        var model = new CreditLedgerEntryIntersectionMember1
+        {
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditLedgerEntryIntersectionMember1>(
+            element,
             ModelBase.SerializerOptions
         );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CreditLedgerEntryPayloadType>
-        >(json, ModelBase.SerializerOptions);
+        Assert.NotNull(deserialized);
 
-        Assert.Equal(value, deserialized);
+        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> expectedPayloadType =
+            CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry;
+
+        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CreditLedgerEntryIntersectionMember1
+        {
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CreditLedgerEntryIntersectionMember1
+        {
+            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
+        };
+
+        CreditLedgerEntryIntersectionMember1 copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
-public class TransactionTypeTest : TestBase
+public class CreditLedgerEntryIntersectionMember1PayloadTypeTest : TestBase
 {
     [Theory]
-    [InlineData(TransactionType.CreditAdded)]
-    [InlineData(TransactionType.CreditDeducted)]
-    [InlineData(TransactionType.CreditExpired)]
-    [InlineData(TransactionType.CreditRolledOver)]
-    [InlineData(TransactionType.RolloverForfeited)]
-    [InlineData(TransactionType.OverageCharged)]
-    [InlineData(TransactionType.AutoTopUp)]
-    [InlineData(TransactionType.ManualAdjustment)]
-    [InlineData(TransactionType.Refund)]
-    public void Validation_Works(TransactionType rawValue)
+    [InlineData(CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry)]
+    public void Validation_Works(CreditLedgerEntryIntersectionMember1PayloadType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, TransactionType> value = rawValue;
+        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, TransactionType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(TransactionType.CreditAdded)]
-    [InlineData(TransactionType.CreditDeducted)]
-    [InlineData(TransactionType.CreditExpired)]
-    [InlineData(TransactionType.CreditRolledOver)]
-    [InlineData(TransactionType.RolloverForfeited)]
-    [InlineData(TransactionType.OverageCharged)]
-    [InlineData(TransactionType.AutoTopUp)]
-    [InlineData(TransactionType.ManualAdjustment)]
-    [InlineData(TransactionType.Refund)]
-    public void SerializationRoundtrip_Works(TransactionType rawValue)
+    [InlineData(CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry)]
+    public void SerializationRoundtrip_Works(
+        CreditLedgerEntryIntersectionMember1PayloadType rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, TransactionType> value = rawValue;
+        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, TransactionType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -6305,15 +6318,13 @@ public class TransactionTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, TransactionType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, TransactionType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }

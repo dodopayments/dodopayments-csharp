@@ -3,7 +3,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
-using Webhooks = DodoPayments.Client.Models.Webhooks;
+using DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
 
@@ -12,7 +12,7 @@ public class DisputeAcceptedWebhookEventTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Webhooks::DisputeAcceptedWebhookEvent
+        var model = new DisputeAcceptedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -28,7 +28,7 @@ public class DisputeAcceptedWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.DisputeAccepted,
+            Type = DisputeAcceptedWebhookEventType.DisputeAccepted,
         };
 
         string expectedBusinessID = "business_id";
@@ -45,7 +45,8 @@ public class DisputeAcceptedWebhookEventTest : TestBase
             Remarks = "remarks",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Webhooks::Type> expectedType = Webhooks::Type.DisputeAccepted;
+        ApiEnum<string, DisputeAcceptedWebhookEventType> expectedType =
+            DisputeAcceptedWebhookEventType.DisputeAccepted;
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
@@ -56,7 +57,7 @@ public class DisputeAcceptedWebhookEventTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Webhooks::DisputeAcceptedWebhookEvent
+        var model = new DisputeAcceptedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -72,11 +73,11 @@ public class DisputeAcceptedWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.DisputeAccepted,
+            Type = DisputeAcceptedWebhookEventType.DisputeAccepted,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::DisputeAcceptedWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<DisputeAcceptedWebhookEvent>(
             json,
             ModelBase.SerializerOptions
         );
@@ -87,7 +88,7 @@ public class DisputeAcceptedWebhookEventTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Webhooks::DisputeAcceptedWebhookEvent
+        var model = new DisputeAcceptedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -103,11 +104,11 @@ public class DisputeAcceptedWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.DisputeAccepted,
+            Type = DisputeAcceptedWebhookEventType.DisputeAccepted,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::DisputeAcceptedWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<DisputeAcceptedWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -127,7 +128,8 @@ public class DisputeAcceptedWebhookEventTest : TestBase
             Remarks = "remarks",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Webhooks::Type> expectedType = Webhooks::Type.DisputeAccepted;
+        ApiEnum<string, DisputeAcceptedWebhookEventType> expectedType =
+            DisputeAcceptedWebhookEventType.DisputeAccepted;
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
@@ -138,7 +140,7 @@ public class DisputeAcceptedWebhookEventTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Webhooks::DisputeAcceptedWebhookEvent
+        var model = new DisputeAcceptedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -154,7 +156,7 @@ public class DisputeAcceptedWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.DisputeAccepted,
+            Type = DisputeAcceptedWebhookEventType.DisputeAccepted,
         };
 
         model.Validate();
@@ -163,7 +165,7 @@ public class DisputeAcceptedWebhookEventTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Webhooks::DisputeAcceptedWebhookEvent
+        var model = new DisputeAcceptedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -179,30 +181,30 @@ public class DisputeAcceptedWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.DisputeAccepted,
+            Type = DisputeAcceptedWebhookEventType.DisputeAccepted,
         };
 
-        Webhooks::DisputeAcceptedWebhookEvent copied = new(model);
+        DisputeAcceptedWebhookEvent copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class TypeTest : TestBase
+public class DisputeAcceptedWebhookEventTypeTest : TestBase
 {
     [Theory]
-    [InlineData(Webhooks::Type.DisputeAccepted)]
-    public void Validation_Works(Webhooks::Type rawValue)
+    [InlineData(DisputeAcceptedWebhookEventType.DisputeAccepted)]
+    public void Validation_Works(DisputeAcceptedWebhookEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Webhooks::Type> value = rawValue;
+        ApiEnum<string, DisputeAcceptedWebhookEventType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DisputeAcceptedWebhookEventType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -212,17 +214,16 @@ public class TypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(Webhooks::Type.DisputeAccepted)]
-    public void SerializationRoundtrip_Works(Webhooks::Type rawValue)
+    [InlineData(DisputeAcceptedWebhookEventType.DisputeAccepted)]
+    public void SerializationRoundtrip_Works(DisputeAcceptedWebhookEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Webhooks::Type> value = rawValue;
+        ApiEnum<string, DisputeAcceptedWebhookEventType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Type>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, DisputeAcceptedWebhookEventType>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -230,15 +231,14 @@ public class TypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DisputeAcceptedWebhookEventType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Type>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, DisputeAcceptedWebhookEventType>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }

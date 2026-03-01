@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 
@@ -384,18 +385,18 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Customer's responses to custom fields collected during checkout
     /// </summary>
-    public IReadOnlyList<global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse>? CustomFieldResponses
+    public IReadOnlyList<CustomFieldResponse>? CustomFieldResponses
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<
-                ImmutableArray<global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse>
-            >("custom_field_responses");
+            return this._rawData.GetNullableStruct<ImmutableArray<CustomFieldResponse>>(
+                "custom_field_responses"
+            );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse>?>(
+            this._rawData.Set<ImmutableArray<CustomFieldResponse>?>(
                 "custom_field_responses",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -607,14 +608,28 @@ public sealed record class SubscriptionCreditEntitlementCart : JsonModel
         init { this._rawData.Set("overage_balance", value); }
     }
 
-    public required bool OverageChargeAtBilling
+    /// <summary>
+    /// Controls how overage is handled at the end of a billing cycle.
+    ///
+    /// <para>| Preset                  | Charge at billing | Credits reduce overage
+    /// | Preserve overage at reset | |-------------------------|:-----------------:|:---------------------:|:-------------------------:|
+    /// | `forgive_at_reset`      | No                | No                    | No
+    ///                        | | `invoice_at_billing`    | Yes               | No
+    ///                    | No                        | | `carry_deficit`
+    ///  | No                | No                    | Yes                       |
+    /// | `carry_deficit_auto_repay` | No             | Yes                   | Yes
+    ///                       |</para>
+    /// </summary>
+    public required ApiEnum<string, CbbOverageBehavior> OverageBehavior
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<bool>("overage_charge_at_billing");
+            return this._rawData.GetNotNullClass<ApiEnum<string, CbbOverageBehavior>>(
+                "overage_behavior"
+            );
         }
-        init { this._rawData.Set("overage_charge_at_billing", value); }
+        init { this._rawData.Set("overage_behavior", value); }
     }
 
     public required bool OverageEnabled
@@ -752,7 +767,7 @@ public sealed record class SubscriptionCreditEntitlementCart : JsonModel
         _ = this.CreditEntitlementName;
         _ = this.CreditsAmount;
         _ = this.OverageBalance;
-        _ = this.OverageChargeAtBilling;
+        this.OverageBehavior.Validate();
         _ = this.OverageEnabled;
         _ = this.ProductID;
         _ = this.RemainingBalance;
@@ -970,16 +985,6 @@ public sealed record class Meter : JsonModel
         init { this._rawData.Set("name", value); }
     }
 
-    public required string PricePerUnit
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("price_per_unit");
-        }
-        init { this._rawData.Set("price_per_unit", value); }
-    }
-
     public string? Description
     {
         get
@@ -990,6 +995,16 @@ public sealed record class Meter : JsonModel
         init { this._rawData.Set("description", value); }
     }
 
+    public string? PricePerUnit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("price_per_unit");
+        }
+        init { this._rawData.Set("price_per_unit", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -998,8 +1013,8 @@ public sealed record class Meter : JsonModel
         _ = this.MeasurementUnit;
         _ = this.MeterID;
         _ = this.Name;
-        _ = this.PricePerUnit;
         _ = this.Description;
+        _ = this.PricePerUnit;
     }
 
     public Meter() { }
@@ -1035,92 +1050,4 @@ class MeterFromRaw : IFromRawJson<Meter>
     /// <inheritdoc/>
     public Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Meter.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Customer's response to a custom field
-/// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse,
-        global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponseFromRaw
-    >)
-)]
-public sealed record class CustomFieldResponse : JsonModel
-{
-    /// <summary>
-    /// Key matching the custom field definition
-    /// </summary>
-    public required string Key
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("key");
-        }
-        init { this._rawData.Set("key", value); }
-    }
-
-    /// <summary>
-    /// Value provided by customer
-    /// </summary>
-    public required string Value
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("value");
-        }
-        init { this._rawData.Set("value", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.Key;
-        _ = this.Value;
-    }
-
-    public CustomFieldResponse() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public CustomFieldResponse(
-        global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse customFieldResponse
-    )
-        : base(customFieldResponse) { }
-#pragma warning restore CS8618
-
-    public CustomFieldResponse(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    CustomFieldResponse(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponseFromRaw.FromRawUnchecked"/>
-    public static global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class CustomFieldResponseFromRaw
-    : IFromRawJson<global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse>
-{
-    /// <inheritdoc/>
-    public global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) =>
-        global::DodoPayments.Client.Models.Subscriptions.CustomFieldResponse.FromRawUnchecked(
-            rawData
-        );
 }

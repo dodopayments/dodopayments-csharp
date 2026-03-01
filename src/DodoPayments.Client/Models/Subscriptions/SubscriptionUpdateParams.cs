@@ -309,16 +309,6 @@ public sealed record class CreditEntitlementCart : JsonModel
         init { this._rawData.Set("max_rollover_count", value); }
     }
 
-    public bool? OverageChargeAtBilling
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("overage_charge_at_billing");
-        }
-        init { this._rawData.Set("overage_charge_at_billing", value); }
-    }
-
     public bool? OverageEnabled
     {
         get
@@ -389,7 +379,6 @@ public sealed record class CreditEntitlementCart : JsonModel
         _ = this.ExpiresAfterDays;
         _ = this.LowBalanceThresholdPercent;
         _ = this.MaxRolloverCount;
-        _ = this.OverageChargeAtBilling;
         _ = this.OverageEnabled;
         _ = this.OverageLimit;
         _ = this.RolloverEnabled;

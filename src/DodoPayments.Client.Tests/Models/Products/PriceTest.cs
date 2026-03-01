@@ -66,13 +66,13 @@ public class PriceTest : TestBase
                 new()
                 {
                     MeterID = "meter_id",
-                    PricePerUnit = "10.50",
                     CreditEntitlementID = "credit_entitlement_id",
                     Description = "description",
                     FreeThreshold = 0,
                     MeasurementUnit = "measurement_unit",
                     MeterUnitsPerCredit = "meter_units_per_credit",
                     Name = "name",
+                    PricePerUnit = "10.50",
                 },
             ],
             TaxInclusive = true,
@@ -142,13 +142,13 @@ public class PriceTest : TestBase
                 new()
                 {
                     MeterID = "meter_id",
-                    PricePerUnit = "10.50",
                     CreditEntitlementID = "credit_entitlement_id",
                     Description = "description",
                     FreeThreshold = 0,
                     MeasurementUnit = "measurement_unit",
                     MeterUnitsPerCredit = "meter_units_per_credit",
                     Name = "name",
+                    PricePerUnit = "10.50",
                 },
             ],
             TaxInclusive = true,
@@ -930,13 +930,13 @@ public class UsageBasedPriceTest : TestBase
                 new()
                 {
                     MeterID = "meter_id",
-                    PricePerUnit = "10.50",
                     CreditEntitlementID = "credit_entitlement_id",
                     Description = "description",
                     FreeThreshold = 0,
                     MeasurementUnit = "measurement_unit",
                     MeterUnitsPerCredit = "meter_units_per_credit",
                     Name = "name",
+                    PricePerUnit = "10.50",
                 },
             ],
             TaxInclusive = true,
@@ -958,13 +958,13 @@ public class UsageBasedPriceTest : TestBase
             new()
             {
                 MeterID = "meter_id",
-                PricePerUnit = "10.50",
                 CreditEntitlementID = "credit_entitlement_id",
                 Description = "description",
                 FreeThreshold = 0,
                 MeasurementUnit = "measurement_unit",
                 MeterUnitsPerCredit = "meter_units_per_credit",
                 Name = "name",
+                PricePerUnit = "10.50",
             },
         ];
         bool expectedTaxInclusive = true;
@@ -1006,13 +1006,13 @@ public class UsageBasedPriceTest : TestBase
                 new()
                 {
                     MeterID = "meter_id",
-                    PricePerUnit = "10.50",
                     CreditEntitlementID = "credit_entitlement_id",
                     Description = "description",
                     FreeThreshold = 0,
                     MeasurementUnit = "measurement_unit",
                     MeterUnitsPerCredit = "meter_units_per_credit",
                     Name = "name",
+                    PricePerUnit = "10.50",
                 },
             ],
             TaxInclusive = true,
@@ -1046,13 +1046,13 @@ public class UsageBasedPriceTest : TestBase
                 new()
                 {
                     MeterID = "meter_id",
-                    PricePerUnit = "10.50",
                     CreditEntitlementID = "credit_entitlement_id",
                     Description = "description",
                     FreeThreshold = 0,
                     MeasurementUnit = "measurement_unit",
                     MeterUnitsPerCredit = "meter_units_per_credit",
                     Name = "name",
+                    PricePerUnit = "10.50",
                 },
             ],
             TaxInclusive = true,
@@ -1081,13 +1081,13 @@ public class UsageBasedPriceTest : TestBase
             new()
             {
                 MeterID = "meter_id",
-                PricePerUnit = "10.50",
                 CreditEntitlementID = "credit_entitlement_id",
                 Description = "description",
                 FreeThreshold = 0,
                 MeasurementUnit = "measurement_unit",
                 MeterUnitsPerCredit = "meter_units_per_credit",
                 Name = "name",
+                PricePerUnit = "10.50",
             },
         ];
         bool expectedTaxInclusive = true;
@@ -1129,13 +1129,13 @@ public class UsageBasedPriceTest : TestBase
                 new()
                 {
                     MeterID = "meter_id",
-                    PricePerUnit = "10.50",
                     CreditEntitlementID = "credit_entitlement_id",
                     Description = "description",
                     FreeThreshold = 0,
                     MeasurementUnit = "measurement_unit",
                     MeterUnitsPerCredit = "meter_units_per_credit",
                     Name = "name",
+                    PricePerUnit = "10.50",
                 },
             ],
             TaxInclusive = true,
@@ -1251,13 +1251,13 @@ public class UsageBasedPriceTest : TestBase
                 new()
                 {
                     MeterID = "meter_id",
-                    PricePerUnit = "10.50",
                     CreditEntitlementID = "credit_entitlement_id",
                     Description = "description",
                     FreeThreshold = 0,
                     MeasurementUnit = "measurement_unit",
                     MeterUnitsPerCredit = "meter_units_per_credit",
                     Name = "name",
+                    PricePerUnit = "10.50",
                 },
             ],
             TaxInclusive = true,

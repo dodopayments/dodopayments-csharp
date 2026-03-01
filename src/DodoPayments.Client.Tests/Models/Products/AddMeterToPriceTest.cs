@@ -12,32 +12,32 @@ public class AddMeterToPriceTest : TestBase
         var model = new AddMeterToPrice
         {
             MeterID = "meter_id",
-            PricePerUnit = "10.50",
             CreditEntitlementID = "credit_entitlement_id",
             Description = "description",
             FreeThreshold = 0,
             MeasurementUnit = "measurement_unit",
             MeterUnitsPerCredit = "meter_units_per_credit",
             Name = "name",
+            PricePerUnit = "10.50",
         };
 
         string expectedMeterID = "meter_id";
-        string expectedPricePerUnit = "10.50";
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedDescription = "description";
         long expectedFreeThreshold = 0;
         string expectedMeasurementUnit = "measurement_unit";
         string expectedMeterUnitsPerCredit = "meter_units_per_credit";
         string expectedName = "name";
+        string expectedPricePerUnit = "10.50";
 
         Assert.Equal(expectedMeterID, model.MeterID);
-        Assert.Equal(expectedPricePerUnit, model.PricePerUnit);
         Assert.Equal(expectedCreditEntitlementID, model.CreditEntitlementID);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedFreeThreshold, model.FreeThreshold);
         Assert.Equal(expectedMeasurementUnit, model.MeasurementUnit);
         Assert.Equal(expectedMeterUnitsPerCredit, model.MeterUnitsPerCredit);
         Assert.Equal(expectedName, model.Name);
+        Assert.Equal(expectedPricePerUnit, model.PricePerUnit);
     }
 
     [Fact]
@@ -46,13 +46,13 @@ public class AddMeterToPriceTest : TestBase
         var model = new AddMeterToPrice
         {
             MeterID = "meter_id",
-            PricePerUnit = "10.50",
             CreditEntitlementID = "credit_entitlement_id",
             Description = "description",
             FreeThreshold = 0,
             MeasurementUnit = "measurement_unit",
             MeterUnitsPerCredit = "meter_units_per_credit",
             Name = "name",
+            PricePerUnit = "10.50",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -70,13 +70,13 @@ public class AddMeterToPriceTest : TestBase
         var model = new AddMeterToPrice
         {
             MeterID = "meter_id",
-            PricePerUnit = "10.50",
             CreditEntitlementID = "credit_entitlement_id",
             Description = "description",
             FreeThreshold = 0,
             MeasurementUnit = "measurement_unit",
             MeterUnitsPerCredit = "meter_units_per_credit",
             Name = "name",
+            PricePerUnit = "10.50",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -87,22 +87,22 @@ public class AddMeterToPriceTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedMeterID = "meter_id";
-        string expectedPricePerUnit = "10.50";
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedDescription = "description";
         long expectedFreeThreshold = 0;
         string expectedMeasurementUnit = "measurement_unit";
         string expectedMeterUnitsPerCredit = "meter_units_per_credit";
         string expectedName = "name";
+        string expectedPricePerUnit = "10.50";
 
         Assert.Equal(expectedMeterID, deserialized.MeterID);
-        Assert.Equal(expectedPricePerUnit, deserialized.PricePerUnit);
         Assert.Equal(expectedCreditEntitlementID, deserialized.CreditEntitlementID);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedFreeThreshold, deserialized.FreeThreshold);
         Assert.Equal(expectedMeasurementUnit, deserialized.MeasurementUnit);
         Assert.Equal(expectedMeterUnitsPerCredit, deserialized.MeterUnitsPerCredit);
         Assert.Equal(expectedName, deserialized.Name);
+        Assert.Equal(expectedPricePerUnit, deserialized.PricePerUnit);
     }
 
     [Fact]
@@ -111,13 +111,13 @@ public class AddMeterToPriceTest : TestBase
         var model = new AddMeterToPrice
         {
             MeterID = "meter_id",
-            PricePerUnit = "10.50",
             CreditEntitlementID = "credit_entitlement_id",
             Description = "description",
             FreeThreshold = 0,
             MeasurementUnit = "measurement_unit",
             MeterUnitsPerCredit = "meter_units_per_credit",
             Name = "name",
+            PricePerUnit = "10.50",
         };
 
         model.Validate();
@@ -126,7 +126,7 @@ public class AddMeterToPriceTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new AddMeterToPrice { MeterID = "meter_id", PricePerUnit = "10.50" };
+        var model = new AddMeterToPrice { MeterID = "meter_id" };
 
         Assert.Null(model.CreditEntitlementID);
         Assert.False(model.RawData.ContainsKey("credit_entitlement_id"));
@@ -140,12 +140,14 @@ public class AddMeterToPriceTest : TestBase
         Assert.False(model.RawData.ContainsKey("meter_units_per_credit"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
+        Assert.Null(model.PricePerUnit);
+        Assert.False(model.RawData.ContainsKey("price_per_unit"));
     }
 
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new AddMeterToPrice { MeterID = "meter_id", PricePerUnit = "10.50" };
+        var model = new AddMeterToPrice { MeterID = "meter_id" };
 
         model.Validate();
     }
@@ -156,7 +158,6 @@ public class AddMeterToPriceTest : TestBase
         var model = new AddMeterToPrice
         {
             MeterID = "meter_id",
-            PricePerUnit = "10.50",
 
             CreditEntitlementID = null,
             Description = null,
@@ -164,6 +165,7 @@ public class AddMeterToPriceTest : TestBase
             MeasurementUnit = null,
             MeterUnitsPerCredit = null,
             Name = null,
+            PricePerUnit = null,
         };
 
         Assert.Null(model.CreditEntitlementID);
@@ -178,6 +180,8 @@ public class AddMeterToPriceTest : TestBase
         Assert.True(model.RawData.ContainsKey("meter_units_per_credit"));
         Assert.Null(model.Name);
         Assert.True(model.RawData.ContainsKey("name"));
+        Assert.Null(model.PricePerUnit);
+        Assert.True(model.RawData.ContainsKey("price_per_unit"));
     }
 
     [Fact]
@@ -186,7 +190,6 @@ public class AddMeterToPriceTest : TestBase
         var model = new AddMeterToPrice
         {
             MeterID = "meter_id",
-            PricePerUnit = "10.50",
 
             CreditEntitlementID = null,
             Description = null,
@@ -194,6 +197,7 @@ public class AddMeterToPriceTest : TestBase
             MeasurementUnit = null,
             MeterUnitsPerCredit = null,
             Name = null,
+            PricePerUnit = null,
         };
 
         model.Validate();
@@ -205,13 +209,13 @@ public class AddMeterToPriceTest : TestBase
         var model = new AddMeterToPrice
         {
             MeterID = "meter_id",
-            PricePerUnit = "10.50",
             CreditEntitlementID = "credit_entitlement_id",
             Description = "description",
             FreeThreshold = 0,
             MeasurementUnit = "measurement_unit",
             MeterUnitsPerCredit = "meter_units_per_credit",
             Name = "name",
+            PricePerUnit = "10.50",
         };
 
         AddMeterToPrice copied = new(model);

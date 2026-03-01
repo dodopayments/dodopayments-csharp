@@ -106,6 +106,17 @@ public class SubscriptionServiceTest : TestBase
     }
 
     [Fact]
+    public async Task RetrieveCreditUsage_Works()
+    {
+        var response = await this.client.Subscriptions.RetrieveCreditUsage(
+            "subscription_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact]
     public async Task RetrieveUsageHistory_Works()
     {
         var page = await this.client.Subscriptions.RetrieveUsageHistory(

@@ -50,7 +50,7 @@ public class SubscriptionCreateResponseTest : TestBase
         string expectedClientSecret = "client_secret";
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<OneTimeProductCart> expectedOneTimeProductCart =
+        List<OneTimeProductCartItem> expectedOneTimeProductCart =
         [
             new() { ProductID = "product_id", Quantity = 0 },
         ];
@@ -166,7 +166,7 @@ public class SubscriptionCreateResponseTest : TestBase
         string expectedClientSecret = "client_secret";
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<OneTimeProductCart> expectedOneTimeProductCart =
+        List<OneTimeProductCartItem> expectedOneTimeProductCart =
         [
             new() { ProductID = "product_id", Quantity = 0 },
         ];
@@ -376,72 +376,6 @@ public class SubscriptionCreateResponseTest : TestBase
         };
 
         SubscriptionCreateResponse copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class OneTimeProductCartTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
-
-        string expectedProductID = "product_id";
-        int expectedQuantity = 0;
-
-        Assert.Equal(expectedProductID, model.ProductID);
-        Assert.Equal(expectedQuantity, model.Quantity);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<OneTimeProductCart>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<OneTimeProductCart>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedProductID = "product_id";
-        int expectedQuantity = 0;
-
-        Assert.Equal(expectedProductID, deserialized.ProductID);
-        Assert.Equal(expectedQuantity, deserialized.Quantity);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new OneTimeProductCart { ProductID = "product_id", Quantity = 0 };
-
-        OneTimeProductCart copied = new(model);
 
         Assert.Equal(model, copied);
     }

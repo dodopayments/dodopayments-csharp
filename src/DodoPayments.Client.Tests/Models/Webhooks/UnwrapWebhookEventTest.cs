@@ -2,24 +2,266 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.CreditEntitlements;
+using DodoPayments.Client.Models.CreditEntitlements.Balances;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.LicenseKeys;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Refunds;
 using DodoPayments.Client.Models.Subscriptions;
 using DodoPayments.Client.Models.Webhooks;
-using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
 
 public class UnwrapWebhookEventTest : TestBase
 {
     [Fact]
+    public void CreditAddedValidationWorks()
+    {
+        UnwrapWebhookEvent value = new CreditAddedWebhookEvent()
+        {
+            BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditAdded,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditBalanceLowValidationWorks()
+    {
+        UnwrapWebhookEvent value = new CreditBalanceLowWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                STAINLESS_FIXME_AvailableBalance = "available_balance",
+                STAINLESS_FIXME_CreditEntitlementID = "credit_entitlement_id",
+                STAINLESS_FIXME_CreditEntitlementName = "credit_entitlement_name",
+                STAINLESS_FIXME_CustomerID = "customer_id",
+                STAINLESS_FIXME_SubscriptionCreditsAmount = "subscription_credits_amount",
+                STAINLESS_FIXME_SubscriptionID = "subscription_id",
+                STAINLESS_FIXME_ThresholdAmount = "threshold_amount",
+                STAINLESS_FIXME_ThresholdPercent = 0,
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditBalanceLow,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditDeductedValidationWorks()
+    {
+        UnwrapWebhookEvent value = new CreditDeductedWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditDeducted,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditExpiredValidationWorks()
+    {
+        UnwrapWebhookEvent value = new CreditExpiredWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditExpired,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditManualAdjustmentValidationWorks()
+    {
+        UnwrapWebhookEvent value = new CreditManualAdjustmentWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditManualAdjustment,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditOverageChargedValidationWorks()
+    {
+        UnwrapWebhookEvent value = new CreditOverageChargedWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditOverageCharged,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditRolledOverValidationWorks()
+    {
+        UnwrapWebhookEvent value = new CreditRolledOverWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditRolledOver,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditRolloverForfeitedValidationWorks()
+    {
+        UnwrapWebhookEvent value = new CreditRolloverForfeitedWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditRolloverForfeited,
+        };
+        value.Validate();
+    }
+
+    [Fact]
     public void DisputeAcceptedValidationWorks()
     {
         UnwrapWebhookEvent value = new DisputeAcceptedWebhookEvent()
         {
-            BusinessID = "business_id",
+            STAINLESS_FIXME_BusinessID = "business_id",
             STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
@@ -32,7 +274,7 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeAccepted,
         };
         value.Validate();
@@ -289,9 +531,9 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = PaymentRefundStatus.Partial,
                 SettlementTax = 0,
-                Status = Payments::IntentStatus.Succeeded,
+                Status = IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -382,9 +624,9 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = PaymentRefundStatus.Partial,
                 SettlementTax = 0,
-                Status = Payments::IntentStatus.Succeeded,
+                Status = IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -475,9 +717,9 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = PaymentRefundStatus.Partial,
                 SettlementTax = 0,
-                Status = Payments::IntentStatus.Succeeded,
+                Status = IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -568,9 +810,9 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = PaymentRefundStatus.Partial,
                 SettlementTax = 0,
-                Status = Payments::IntentStatus.Succeeded,
+                Status = IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -674,7 +916,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -719,8 +961,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -778,7 +1020,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -823,8 +1065,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -882,7 +1124,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -927,8 +1169,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -986,7 +1228,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -1031,8 +1273,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1090,7 +1332,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -1135,8 +1377,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1194,7 +1436,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -1239,8 +1481,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1298,7 +1540,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -1343,8 +1585,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1402,7 +1644,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -1447,8 +1689,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1480,11 +1722,299 @@ public class UnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
+    public void CreditAddedSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new CreditAddedWebhookEvent()
+        {
+            BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditAdded,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditBalanceLowSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new CreditBalanceLowWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                STAINLESS_FIXME_AvailableBalance = "available_balance",
+                STAINLESS_FIXME_CreditEntitlementID = "credit_entitlement_id",
+                STAINLESS_FIXME_CreditEntitlementName = "credit_entitlement_name",
+                STAINLESS_FIXME_CustomerID = "customer_id",
+                STAINLESS_FIXME_SubscriptionCreditsAmount = "subscription_credits_amount",
+                STAINLESS_FIXME_SubscriptionID = "subscription_id",
+                STAINLESS_FIXME_ThresholdAmount = "threshold_amount",
+                STAINLESS_FIXME_ThresholdPercent = 0,
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditBalanceLow,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditDeductedSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new CreditDeductedWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditDeducted,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditExpiredSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new CreditExpiredWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditExpired,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditManualAdjustmentSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new CreditManualAdjustmentWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditManualAdjustment,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditOverageChargedSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new CreditOverageChargedWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditOverageCharged,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditRolledOverSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new CreditRolledOverWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditRolledOver,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditRolloverForfeitedSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new CreditRolloverForfeitedWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditRolloverForfeited,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
     public void DisputeAcceptedSerializationRoundtripWorks()
     {
         UnwrapWebhookEvent value = new DisputeAcceptedWebhookEvent()
         {
-            BusinessID = "business_id",
+            STAINLESS_FIXME_BusinessID = "business_id",
             STAINLESS_FIXME_Data = new()
             {
                 Amount = "amount",
@@ -1497,7 +2027,7 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
                 Remarks = "remarks",
             },
-            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DisputeAccepted,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
@@ -1802,9 +2332,9 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = PaymentRefundStatus.Partial,
                 SettlementTax = 0,
-                Status = Payments::IntentStatus.Succeeded,
+                Status = IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1901,9 +2431,9 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = PaymentRefundStatus.Partial,
                 SettlementTax = 0,
-                Status = Payments::IntentStatus.Succeeded,
+                Status = IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2000,9 +2530,9 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = PaymentRefundStatus.Partial,
                 SettlementTax = 0,
-                Status = Payments::IntentStatus.Succeeded,
+                Status = IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2099,9 +2629,9 @@ public class UnwrapWebhookEventTest : TestBase
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
                 ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-                RefundStatus = Payments::RefundStatus.Partial,
+                RefundStatus = PaymentRefundStatus.Partial,
                 SettlementTax = 0,
-                Status = Payments::IntentStatus.Succeeded,
+                Status = IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2223,7 +2753,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -2268,8 +2798,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2333,7 +2863,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -2378,8 +2908,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2443,7 +2973,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -2488,8 +3018,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2553,7 +3083,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -2598,8 +3128,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2663,7 +3193,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -2708,8 +3238,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2773,7 +3303,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -2818,8 +3348,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2883,7 +3413,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -2928,8 +3458,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2993,7 +3523,7 @@ public class UnwrapWebhookEventTest : TestBase
                         CreditEntitlementName = "credit_entitlement_name",
                         CreditsAmount = "credits_amount",
                         OverageBalance = "overage_balance",
-                        OverageChargeAtBilling = true,
+                        OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                         OverageEnabled = true,
                         ProductID = "product_id",
                         RemainingBalance = "remaining_balance",
@@ -3038,8 +3568,8 @@ public class UnwrapWebhookEventTest : TestBase
                         MeasurementUnit = "measurement_unit",
                         MeterID = "meter_id",
                         Name = "name",
-                        PricePerUnit = "10.50",
                         Description = "description",
+                        PricePerUnit = "10.50",
                     },
                 ],
                 NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

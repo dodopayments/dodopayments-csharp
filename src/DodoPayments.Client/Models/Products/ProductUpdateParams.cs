@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -7,10 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Subscriptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -62,18 +60,18 @@ public record class ProductUpdateParams : ParamsBase
     /// Credit entitlements to update (replaces all existing when present) Send empty
     /// array to remove all, omit field to leave unchanged
     /// </summary>
-    public IReadOnlyList<ProductUpdateParamsCreditEntitlement>? CreditEntitlements
+    public IReadOnlyList<AttachCreditEntitlement>? CreditEntitlements
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<
-                ImmutableArray<ProductUpdateParamsCreditEntitlement>
-            >("credit_entitlements");
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<AttachCreditEntitlement>>(
+                "credit_entitlements"
+            );
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<ProductUpdateParamsCreditEntitlement>?>(
+            this._rawBodyData.Set<ImmutableArray<AttachCreditEntitlement>?>(
                 "credit_entitlements",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -325,9 +323,9 @@ public record class ProductUpdateParams : ParamsBase
             && this._rawBodyData.Equals(other._rawBodyData);
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(
+        return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/') + string.Format("/products/{0}", this.ID)
         )
         {
@@ -356,381 +354,6 @@ public record class ProductUpdateParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
-    }
-}
-
-/// <summary>
-/// Request struct for attaching a credit entitlement to a product
-/// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        ProductUpdateParamsCreditEntitlement,
-        ProductUpdateParamsCreditEntitlementFromRaw
-    >)
-)]
-public sealed record class ProductUpdateParamsCreditEntitlement : JsonModel
-{
-    /// <summary>
-    /// ID of the credit entitlement to attach
-    /// </summary>
-    public required string CreditEntitlementID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("credit_entitlement_id");
-        }
-        init { this._rawData.Set("credit_entitlement_id", value); }
-    }
-
-    /// <summary>
-    /// Number of credits to grant when this product is purchased
-    /// </summary>
-    public required string CreditsAmount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("credits_amount");
-        }
-        init { this._rawData.Set("credits_amount", value); }
-    }
-
-    /// <summary>
-    /// Whether new credit grants reduce existing overage
-    /// </summary>
-    public bool? CreditsReduceOverage
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("credits_reduce_overage");
-        }
-        init { this._rawData.Set("credits_reduce_overage", value); }
-    }
-
-    /// <summary>
-    /// Currency for credit-related pricing
-    /// </summary>
-    public ApiEnum<string, Currency>? Currency
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency");
-        }
-        init { this._rawData.Set("currency", value); }
-    }
-
-    /// <summary>
-    /// Number of days after which credits expire
-    /// </summary>
-    public int? ExpiresAfterDays
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("expires_after_days");
-        }
-        init { this._rawData.Set("expires_after_days", value); }
-    }
-
-    /// <summary>
-    /// Balance threshold percentage for low balance notifications (0-100)
-    /// </summary>
-    public int? LowBalanceThresholdPercent
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("low_balance_threshold_percent");
-        }
-        init { this._rawData.Set("low_balance_threshold_percent", value); }
-    }
-
-    /// <summary>
-    /// Maximum number of rollover cycles allowed
-    /// </summary>
-    public int? MaxRolloverCount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("max_rollover_count");
-        }
-        init { this._rawData.Set("max_rollover_count", value); }
-    }
-
-    /// <summary>
-    /// Whether overage charges are applied at billing time
-    /// </summary>
-    public bool? OverageChargeAtBilling
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("overage_charge_at_billing");
-        }
-        init { this._rawData.Set("overage_charge_at_billing", value); }
-    }
-
-    /// <summary>
-    /// Whether overage usage is allowed beyond credit balance
-    /// </summary>
-    public bool? OverageEnabled
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("overage_enabled");
-        }
-        init { this._rawData.Set("overage_enabled", value); }
-    }
-
-    /// <summary>
-    /// Maximum amount of overage allowed
-    /// </summary>
-    public string? OverageLimit
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("overage_limit");
-        }
-        init { this._rawData.Set("overage_limit", value); }
-    }
-
-    /// <summary>
-    /// Whether to preserve overage balance when credits reset
-    /// </summary>
-    public bool? PreserveOverageAtReset
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("preserve_overage_at_reset");
-        }
-        init { this._rawData.Set("preserve_overage_at_reset", value); }
-    }
-
-    /// <summary>
-    /// Price per credit unit for purchasing additional credits
-    /// </summary>
-    public string? PricePerUnit
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("price_per_unit");
-        }
-        init { this._rawData.Set("price_per_unit", value); }
-    }
-
-    /// <summary>
-    /// Proration behavior for credit grants during plan changes
-    /// </summary>
-    public ApiEnum<string, ProductUpdateParamsCreditEntitlementProrationBehavior>? ProrationBehavior
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, ProductUpdateParamsCreditEntitlementProrationBehavior>
-            >("proration_behavior");
-        }
-        init { this._rawData.Set("proration_behavior", value); }
-    }
-
-    /// <summary>
-    /// Whether unused credits can roll over to the next billing period
-    /// </summary>
-    public bool? RolloverEnabled
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("rollover_enabled");
-        }
-        init { this._rawData.Set("rollover_enabled", value); }
-    }
-
-    /// <summary>
-    /// Percentage of unused credits that can roll over (0-100)
-    /// </summary>
-    public int? RolloverPercentage
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("rollover_percentage");
-        }
-        init { this._rawData.Set("rollover_percentage", value); }
-    }
-
-    /// <summary>
-    /// Number of timeframe units for rollover window
-    /// </summary>
-    public int? RolloverTimeframeCount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("rollover_timeframe_count");
-        }
-        init { this._rawData.Set("rollover_timeframe_count", value); }
-    }
-
-    /// <summary>
-    /// Time interval for rollover window (day, week, month, year)
-    /// </summary>
-    public ApiEnum<string, TimeInterval>? RolloverTimeframeInterval
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, TimeInterval>>(
-                "rollover_timeframe_interval"
-            );
-        }
-        init { this._rawData.Set("rollover_timeframe_interval", value); }
-    }
-
-    /// <summary>
-    /// Credits granted during trial period
-    /// </summary>
-    public string? TrialCredits
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("trial_credits");
-        }
-        init { this._rawData.Set("trial_credits", value); }
-    }
-
-    /// <summary>
-    /// Whether trial credits expire when trial ends
-    /// </summary>
-    public bool? TrialCreditsExpireAfterTrial
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("trial_credits_expire_after_trial");
-        }
-        init { this._rawData.Set("trial_credits_expire_after_trial", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.CreditEntitlementID;
-        _ = this.CreditsAmount;
-        _ = this.CreditsReduceOverage;
-        this.Currency?.Validate();
-        _ = this.ExpiresAfterDays;
-        _ = this.LowBalanceThresholdPercent;
-        _ = this.MaxRolloverCount;
-        _ = this.OverageChargeAtBilling;
-        _ = this.OverageEnabled;
-        _ = this.OverageLimit;
-        _ = this.PreserveOverageAtReset;
-        _ = this.PricePerUnit;
-        this.ProrationBehavior?.Validate();
-        _ = this.RolloverEnabled;
-        _ = this.RolloverPercentage;
-        _ = this.RolloverTimeframeCount;
-        this.RolloverTimeframeInterval?.Validate();
-        _ = this.TrialCredits;
-        _ = this.TrialCreditsExpireAfterTrial;
-    }
-
-    public ProductUpdateParamsCreditEntitlement() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public ProductUpdateParamsCreditEntitlement(
-        ProductUpdateParamsCreditEntitlement productUpdateParamsCreditEntitlement
-    )
-        : base(productUpdateParamsCreditEntitlement) { }
-#pragma warning restore CS8618
-
-    public ProductUpdateParamsCreditEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    ProductUpdateParamsCreditEntitlement(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="ProductUpdateParamsCreditEntitlementFromRaw.FromRawUnchecked"/>
-    public static ProductUpdateParamsCreditEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class ProductUpdateParamsCreditEntitlementFromRaw
-    : IFromRawJson<ProductUpdateParamsCreditEntitlement>
-{
-    /// <inheritdoc/>
-    public ProductUpdateParamsCreditEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => ProductUpdateParamsCreditEntitlement.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Proration behavior for credit grants during plan changes
-/// </summary>
-[JsonConverter(typeof(ProductUpdateParamsCreditEntitlementProrationBehaviorConverter))]
-public enum ProductUpdateParamsCreditEntitlementProrationBehavior
-{
-    Prorate,
-    NoProrate,
-}
-
-sealed class ProductUpdateParamsCreditEntitlementProrationBehaviorConverter
-    : JsonConverter<ProductUpdateParamsCreditEntitlementProrationBehavior>
-{
-    public override ProductUpdateParamsCreditEntitlementProrationBehavior Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "prorate" => ProductUpdateParamsCreditEntitlementProrationBehavior.Prorate,
-            "no_prorate" => ProductUpdateParamsCreditEntitlementProrationBehavior.NoProrate,
-            _ => (ProductUpdateParamsCreditEntitlementProrationBehavior)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ProductUpdateParamsCreditEntitlementProrationBehavior value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ProductUpdateParamsCreditEntitlementProrationBehavior.Prorate => "prorate",
-                ProductUpdateParamsCreditEntitlementProrationBehavior.NoProrate => "no_prorate",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
     }
 }
 

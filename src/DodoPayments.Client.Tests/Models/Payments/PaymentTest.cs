@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
-using Refunds = DodoPayments.Client.Models.Refunds;
+using DodoPayments.Client.Models.Refunds;
 
 namespace DodoPayments.Client.Tests.Models.Payments;
 
@@ -64,7 +63,7 @@ public class PaymentTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -89,7 +88,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = RefundStatus.Partial,
+            RefundStatus = PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -135,7 +134,7 @@ public class PaymentTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
-        List<Refund> expectedRefunds =
+        List<RefundListItem> expectedRefunds =
         [
             new()
             {
@@ -144,7 +143,7 @@ public class PaymentTest : TestBase
                 IsPartial = true,
                 PaymentID = "payment_id",
                 RefundID = "refund_id",
-                Status = Refunds::RefundStatus.Succeeded,
+                Status = RefundStatus.Succeeded,
                 Amount = 0,
                 Currency = Currency.Aed,
                 Reason = "reason",
@@ -171,8 +170,11 @@ public class PaymentTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<ProductCart> expectedProductCart = [new() { ProductID = "product_id", Quantity = 0 }];
-        ApiEnum<string, RefundStatus> expectedRefundStatus = RefundStatus.Partial;
+        List<OneTimeProductCartItem> expectedProductCart =
+        [
+            new() { ProductID = "product_id", Quantity = 0 },
+        ];
+        ApiEnum<string, PaymentRefundStatus> expectedRefundStatus = PaymentRefundStatus.Partial;
         int expectedSettlementTax = 0;
         ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
@@ -293,7 +295,7 @@ public class PaymentTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -318,7 +320,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = RefundStatus.Partial,
+            RefundStatus = PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -384,7 +386,7 @@ public class PaymentTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -409,7 +411,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = RefundStatus.Partial,
+            RefundStatus = PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -462,7 +464,7 @@ public class PaymentTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
-        List<Refund> expectedRefunds =
+        List<RefundListItem> expectedRefunds =
         [
             new()
             {
@@ -471,7 +473,7 @@ public class PaymentTest : TestBase
                 IsPartial = true,
                 PaymentID = "payment_id",
                 RefundID = "refund_id",
-                Status = Refunds::RefundStatus.Succeeded,
+                Status = RefundStatus.Succeeded,
                 Amount = 0,
                 Currency = Currency.Aed,
                 Reason = "reason",
@@ -498,8 +500,11 @@ public class PaymentTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<ProductCart> expectedProductCart = [new() { ProductID = "product_id", Quantity = 0 }];
-        ApiEnum<string, RefundStatus> expectedRefundStatus = RefundStatus.Partial;
+        List<OneTimeProductCartItem> expectedProductCart =
+        [
+            new() { ProductID = "product_id", Quantity = 0 },
+        ];
+        ApiEnum<string, PaymentRefundStatus> expectedRefundStatus = PaymentRefundStatus.Partial;
         int expectedSettlementTax = 0;
         ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
@@ -620,7 +625,7 @@ public class PaymentTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -645,7 +650,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = RefundStatus.Partial,
+            RefundStatus = PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -708,7 +713,7 @@ public class PaymentTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -817,7 +822,7 @@ public class PaymentTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -883,7 +888,7 @@ public class PaymentTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1015,7 +1020,7 @@ public class PaymentTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1104,7 +1109,7 @@ public class PaymentTest : TestBase
                     IsPartial = true,
                     PaymentID = "payment_id",
                     RefundID = "refund_id",
-                    Status = Refunds::RefundStatus.Succeeded,
+                    Status = RefundStatus.Succeeded,
                     Amount = 0,
                     Currency = Currency.Aed,
                     Reason = "reason",
@@ -1129,7 +1134,7 @@ public class PaymentTest : TestBase
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
-            RefundStatus = RefundStatus.Partial,
+            RefundStatus = PaymentRefundStatus.Partial,
             SettlementTax = 0,
             Status = IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
@@ -1140,420 +1145,5 @@ public class PaymentTest : TestBase
         Payment copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class RefundTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new Refund
-        {
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IsPartial = true,
-            PaymentID = "payment_id",
-            RefundID = "refund_id",
-            Status = Refunds::RefundStatus.Succeeded,
-            Amount = 0,
-            Currency = Currency.Aed,
-            Reason = "reason",
-        };
-
-        string expectedBusinessID = "business_id";
-        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        bool expectedIsPartial = true;
-        string expectedPaymentID = "payment_id";
-        string expectedRefundID = "refund_id";
-        ApiEnum<string, Refunds::RefundStatus> expectedStatus = Refunds::RefundStatus.Succeeded;
-        int expectedAmount = 0;
-        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        string expectedReason = "reason";
-
-        Assert.Equal(expectedBusinessID, model.BusinessID);
-        Assert.Equal(expectedCreatedAt, model.CreatedAt);
-        Assert.Equal(expectedIsPartial, model.IsPartial);
-        Assert.Equal(expectedPaymentID, model.PaymentID);
-        Assert.Equal(expectedRefundID, model.RefundID);
-        Assert.Equal(expectedStatus, model.Status);
-        Assert.Equal(expectedAmount, model.Amount);
-        Assert.Equal(expectedCurrency, model.Currency);
-        Assert.Equal(expectedReason, model.Reason);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new Refund
-        {
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IsPartial = true,
-            PaymentID = "payment_id",
-            RefundID = "refund_id",
-            Status = Refunds::RefundStatus.Succeeded,
-            Amount = 0,
-            Currency = Currency.Aed,
-            Reason = "reason",
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Refund>(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new Refund
-        {
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IsPartial = true,
-            PaymentID = "payment_id",
-            RefundID = "refund_id",
-            Status = Refunds::RefundStatus.Succeeded,
-            Amount = 0,
-            Currency = Currency.Aed,
-            Reason = "reason",
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Refund>(element, ModelBase.SerializerOptions);
-        Assert.NotNull(deserialized);
-
-        string expectedBusinessID = "business_id";
-        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        bool expectedIsPartial = true;
-        string expectedPaymentID = "payment_id";
-        string expectedRefundID = "refund_id";
-        ApiEnum<string, Refunds::RefundStatus> expectedStatus = Refunds::RefundStatus.Succeeded;
-        int expectedAmount = 0;
-        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        string expectedReason = "reason";
-
-        Assert.Equal(expectedBusinessID, deserialized.BusinessID);
-        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
-        Assert.Equal(expectedIsPartial, deserialized.IsPartial);
-        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
-        Assert.Equal(expectedRefundID, deserialized.RefundID);
-        Assert.Equal(expectedStatus, deserialized.Status);
-        Assert.Equal(expectedAmount, deserialized.Amount);
-        Assert.Equal(expectedCurrency, deserialized.Currency);
-        Assert.Equal(expectedReason, deserialized.Reason);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new Refund
-        {
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IsPartial = true,
-            PaymentID = "payment_id",
-            RefundID = "refund_id",
-            Status = Refunds::RefundStatus.Succeeded,
-            Amount = 0,
-            Currency = Currency.Aed,
-            Reason = "reason",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new Refund
-        {
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IsPartial = true,
-            PaymentID = "payment_id",
-            RefundID = "refund_id",
-            Status = Refunds::RefundStatus.Succeeded,
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-        Assert.Null(model.Reason);
-        Assert.False(model.RawData.ContainsKey("reason"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new Refund
-        {
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IsPartial = true,
-            PaymentID = "payment_id",
-            RefundID = "refund_id",
-            Status = Refunds::RefundStatus.Succeeded,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new Refund
-        {
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IsPartial = true,
-            PaymentID = "payment_id",
-            RefundID = "refund_id",
-            Status = Refunds::RefundStatus.Succeeded,
-
-            Amount = null,
-            Currency = null,
-            Reason = null,
-        };
-
-        Assert.Null(model.Amount);
-        Assert.True(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.True(model.RawData.ContainsKey("currency"));
-        Assert.Null(model.Reason);
-        Assert.True(model.RawData.ContainsKey("reason"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new Refund
-        {
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IsPartial = true,
-            PaymentID = "payment_id",
-            RefundID = "refund_id",
-            Status = Refunds::RefundStatus.Succeeded,
-
-            Amount = null,
-            Currency = null,
-            Reason = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new Refund
-        {
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IsPartial = true,
-            PaymentID = "payment_id",
-            RefundID = "refund_id",
-            Status = Refunds::RefundStatus.Succeeded,
-            Amount = 0,
-            Currency = Currency.Aed,
-            Reason = "reason",
-        };
-
-        Refund copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class CustomFieldResponseTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new CustomFieldResponse { Key = "key", Value = "value" };
-
-        string expectedKey = "key";
-        string expectedValue = "value";
-
-        Assert.Equal(expectedKey, model.Key);
-        Assert.Equal(expectedValue, model.Value);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new CustomFieldResponse { Key = "key", Value = "value" };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomFieldResponse>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new CustomFieldResponse { Key = "key", Value = "value" };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomFieldResponse>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedKey = "key";
-        string expectedValue = "value";
-
-        Assert.Equal(expectedKey, deserialized.Key);
-        Assert.Equal(expectedValue, deserialized.Value);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new CustomFieldResponse { Key = "key", Value = "value" };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new CustomFieldResponse { Key = "key", Value = "value" };
-
-        CustomFieldResponse copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class ProductCartTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
-
-        string expectedProductID = "product_id";
-        int expectedQuantity = 0;
-
-        Assert.Equal(expectedProductID, model.ProductID);
-        Assert.Equal(expectedQuantity, model.Quantity);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ProductCart>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ProductCart>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedProductID = "product_id";
-        int expectedQuantity = 0;
-
-        Assert.Equal(expectedProductID, deserialized.ProductID);
-        Assert.Equal(expectedQuantity, deserialized.Quantity);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
-
-        ProductCart copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class RefundStatusTest : TestBase
-{
-    [Theory]
-    [InlineData(RefundStatus.Partial)]
-    [InlineData(RefundStatus.Full)]
-    public void Validation_Works(RefundStatus rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, RefundStatus> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, RefundStatus>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(RefundStatus.Partial)]
-    [InlineData(RefundStatus.Full)]
-    public void SerializationRoundtrip_Works(RefundStatus rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, RefundStatus> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, RefundStatus>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, RefundStatus>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, RefundStatus>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }

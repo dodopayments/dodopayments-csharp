@@ -30,27 +30,11 @@ public sealed record class OneTimeProductCartItem : JsonModel
         init { this._rawData.Set("quantity", value); }
     }
 
-    /// <summary>
-    /// Amount the customer pays if pay_what_you_want is enabled. If disabled then
-    /// amount will be ignored Represented in the lowest denomination of the currency
-    /// (e.g., cents for USD). For example, to charge $1.00, pass `100`.
-    /// </summary>
-    public int? Amount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("amount");
-        }
-        init { this._rawData.Set("amount", value); }
-    }
-
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ProductID;
         _ = this.Quantity;
-        _ = this.Amount;
     }
 
     public OneTimeProductCartItem() { }

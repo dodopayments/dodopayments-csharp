@@ -122,6 +122,36 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
+    public async Task<CustomerListCreditEntitlementsResponse> ListCreditEntitlements(
+        CustomerListCreditEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListCreditEntitlements(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<CustomerListCreditEntitlementsResponse> ListCreditEntitlements(
+        string customerID,
+        CustomerListCreditEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListCreditEntitlements(
+            parameters with
+            {
+                CustomerID = customerID,
+            },
+            cancellationToken
+        );
+    }
+
+    /// <inheritdoc/>
     public async Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
         CustomerRetrievePaymentMethodsParams parameters,
         CancellationToken cancellationToken = default
@@ -322,6 +352,57 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
                 }
                 return new CustomerListPage(this, parameters, page);
             }
+        );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerListCreditEntitlementsResponse>> ListCreditEntitlements(
+        CustomerListCreditEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.CustomerID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.CustomerID' cannot be null");
+        }
+
+        HttpRequest<CustomerListCreditEntitlementsParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<CustomerListCreditEntitlementsResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<CustomerListCreditEntitlementsResponse>> ListCreditEntitlements(
+        string customerID,
+        CustomerListCreditEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListCreditEntitlements(
+            parameters with
+            {
+                CustomerID = customerID,
+            },
+            cancellationToken
         );
     }
 

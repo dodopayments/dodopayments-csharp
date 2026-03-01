@@ -5,22 +5,23 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Refunds;
 
 [JsonConverter(typeof(JsonModelConverter<RefundListPageResponse, RefundListPageResponseFromRaw>))]
 public sealed record class RefundListPageResponse : JsonModel
 {
-    public required IReadOnlyList<RefundListResponse> Items
+    public required IReadOnlyList<RefundListItem> Items
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<RefundListResponse>>("items");
+            return this._rawData.GetNotNullStruct<ImmutableArray<RefundListItem>>("items");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<RefundListResponse>>(
+            this._rawData.Set<ImmutableArray<RefundListItem>>(
                 "items",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -66,7 +67,7 @@ public sealed record class RefundListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public RefundListPageResponse(IReadOnlyList<RefundListResponse> items)
+    public RefundListPageResponse(IReadOnlyList<RefundListItem> items)
         : this()
     {
         this.Items = items;
