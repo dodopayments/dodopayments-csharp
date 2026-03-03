@@ -1,5 +1,19 @@
 # Changelog
 
+## 6.10.1 (2026-03-03)
+
+Full Changelog: [v6.10.0...v6.10.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.10.0...v6.10.1)
+
+### Chores
+
+* send Accept header in more places ([167760c](https://github.com/dodopayments/dodopayments-csharp/commit/167760c8854033c4238f9df3fa1252688a08c27d))
+* **tests:** add tests for retry logic ([4ed2f3a](https://github.com/dodopayments/dodopayments-csharp/commit/4ed2f3a73e6553b16ae56f634a71255c7bdba979))
+
+
+### Documentation
+
+* remove typo in README.md ([f61be47](https://github.com/dodopayments/dodopayments-csharp/commit/f61be473584bb7bb22067d85311462d7b3c2cbad))
+
 ## 6.10.0 (2026-03-01)
 
 Full Changelog: [v6.9.1...v6.10.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.9.1...v6.10.0)
