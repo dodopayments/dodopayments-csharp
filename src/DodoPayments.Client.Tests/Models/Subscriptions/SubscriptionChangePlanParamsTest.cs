@@ -19,6 +19,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
         };
@@ -29,6 +30,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             ProrationBillingMode.ProratedImmediately;
         int expectedQuantity = 0;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        string expectedDiscountCode = "discount_code";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, OnPaymentFailure> expectedOnPaymentFailure = OnPaymentFailure.PreventChange;
 
@@ -42,6 +44,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
         {
             Assert.Equal(expectedAddons[i], parameters.Addons[i]);
         }
+        Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -66,6 +69,8 @@ public class SubscriptionChangePlanParamsTest : TestBase
 
         Assert.Null(parameters.Addons);
         Assert.False(parameters.RawBodyData.ContainsKey("addons"));
+        Assert.Null(parameters.DiscountCode);
+        Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.OnPaymentFailure);
@@ -83,12 +88,15 @@ public class SubscriptionChangePlanParamsTest : TestBase
             Quantity = 0,
 
             Addons = null,
+            DiscountCode = null,
             Metadata = null,
             OnPaymentFailure = null,
         };
 
         Assert.Null(parameters.Addons);
         Assert.True(parameters.RawBodyData.ContainsKey("addons"));
+        Assert.Null(parameters.DiscountCode);
+        Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
         Assert.Null(parameters.Metadata);
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.OnPaymentFailure);
@@ -124,6 +132,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
         };

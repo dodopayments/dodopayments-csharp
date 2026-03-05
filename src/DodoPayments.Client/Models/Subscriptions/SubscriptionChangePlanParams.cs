@@ -88,6 +88,22 @@ public record class SubscriptionChangePlanParams : ParamsBase
     }
 
     /// <summary>
+    /// Optional discount code to apply to the new plan. If provided, validates and
+    /// applies the discount to the plan change. If not provided and the subscription
+    /// has an existing discount with `preserve_on_plan_change=true`, the existing
+    /// discount will be preserved (if applicable to the new product).
+    /// </summary>
+    public string? DiscountCode
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("discount_code");
+        }
+        init { this._rawBodyData.Set("discount_code", value); }
+    }
+
+    /// <summary>
     /// Metadata for the payment. If not passed, the metadata of the subscription
     /// will be taken
     /// </summary>
