@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.11.1 (2026-03-05)
+
+Full Changelog: [v6.11.0...v6.11.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.11.0...v6.11.1)
+
+### Bug Fixes
+
+* **build:** remove TargetFrameworks override that broke CI ([28de23f](https://github.com/dodopayments/dodopayments-csharp/commit/28de23f096e2484d0eefb0950912f0935a35fd52))
+* **build:** resolve STAINLESS_FIXME placeholders breaking compilation ([b22fdce](https://github.com/dodopayments/dodopayments-csharp/commit/b22fdce5dfcf37a166a95ff25854adc9c1608b2a))
+
 ## 6.11.0 (2026-03-05)
 
 Full Changelog: [v6.10.1...v6.11.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.10.1...v6.11.0)
