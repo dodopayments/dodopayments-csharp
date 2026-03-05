@@ -8,7 +8,6 @@
 
     <Nullable>enable</Nullable>
     <VersionPrefix>6.11.0</VersionPrefix>
-    <TargetFrameworks>net8.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
 
     <!-- Generate an XML documentation file for the project. -->
