@@ -17,6 +17,7 @@ public class DiscountUpdateParamsTest : TestBase
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             SubscriptionCycles = 0,
             Type = DiscountType.Percentage,
@@ -28,6 +29,7 @@ public class DiscountUpdateParamsTest : TestBase
         string expectedCode = "code";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedName = "name";
+        bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
         int expectedSubscriptionCycles = 0;
         ApiEnum<string, DiscountType> expectedType = DiscountType.Percentage;
@@ -38,6 +40,7 @@ public class DiscountUpdateParamsTest : TestBase
         Assert.Equal(expectedCode, parameters.Code);
         Assert.Equal(expectedExpiresAt, parameters.ExpiresAt);
         Assert.Equal(expectedName, parameters.Name);
+        Assert.Equal(expectedPreserveOnPlanChange, parameters.PreserveOnPlanChange);
         Assert.NotNull(parameters.RestrictedTo);
         Assert.Equal(expectedRestrictedTo.Count, parameters.RestrictedTo.Count);
         for (int i = 0; i < expectedRestrictedTo.Count; i++)
@@ -62,6 +65,8 @@ public class DiscountUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("expires_at"));
         Assert.Null(parameters.Name);
         Assert.False(parameters.RawBodyData.ContainsKey("name"));
+        Assert.Null(parameters.PreserveOnPlanChange);
+        Assert.False(parameters.RawBodyData.ContainsKey("preserve_on_plan_change"));
         Assert.Null(parameters.RestrictedTo);
         Assert.False(parameters.RawBodyData.ContainsKey("restricted_to"));
         Assert.Null(parameters.SubscriptionCycles);
@@ -83,6 +88,7 @@ public class DiscountUpdateParamsTest : TestBase
             Code = null,
             ExpiresAt = null,
             Name = null,
+            PreserveOnPlanChange = null,
             RestrictedTo = null,
             SubscriptionCycles = null,
             Type = null,
@@ -97,6 +103,8 @@ public class DiscountUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("expires_at"));
         Assert.Null(parameters.Name);
         Assert.True(parameters.RawBodyData.ContainsKey("name"));
+        Assert.Null(parameters.PreserveOnPlanChange);
+        Assert.True(parameters.RawBodyData.ContainsKey("preserve_on_plan_change"));
         Assert.Null(parameters.RestrictedTo);
         Assert.True(parameters.RawBodyData.ContainsKey("restricted_to"));
         Assert.Null(parameters.SubscriptionCycles);
@@ -127,6 +135,7 @@ public class DiscountUpdateParamsTest : TestBase
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             SubscriptionCycles = 0,
             Type = DiscountType.Percentage,

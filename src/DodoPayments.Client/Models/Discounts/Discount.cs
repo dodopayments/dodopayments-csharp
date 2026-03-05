@@ -81,6 +81,20 @@ public sealed record class Discount : JsonModel
     }
 
     /// <summary>
+    /// Whether this discount should be preserved when a subscription changes plans.
+    /// Default: false (discount is removed on plan change)
+    /// </summary>
+    public required bool PreserveOnPlanChange
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("preserve_on_plan_change");
+        }
+        init { this._rawData.Set("preserve_on_plan_change", value); }
+    }
+
+    /// <summary>
     /// List of product IDs to which this discount is restricted.
     /// </summary>
     public required IReadOnlyList<string> RestrictedTo
@@ -187,6 +201,7 @@ public sealed record class Discount : JsonModel
         _ = this.Code;
         _ = this.CreatedAt;
         _ = this.DiscountID;
+        _ = this.PreserveOnPlanChange;
         _ = this.RestrictedTo;
         _ = this.TimesUsed;
         this.Type.Validate();

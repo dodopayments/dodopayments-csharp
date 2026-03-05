@@ -17,6 +17,7 @@ public class DiscountCreateParamsTest : TestBase
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             SubscriptionCycles = 0,
             UsageLimit = 0,
@@ -27,6 +28,7 @@ public class DiscountCreateParamsTest : TestBase
         string expectedCode = "code";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedName = "name";
+        bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
         int expectedSubscriptionCycles = 0;
         int expectedUsageLimit = 0;
@@ -36,6 +38,7 @@ public class DiscountCreateParamsTest : TestBase
         Assert.Equal(expectedCode, parameters.Code);
         Assert.Equal(expectedExpiresAt, parameters.ExpiresAt);
         Assert.Equal(expectedName, parameters.Name);
+        Assert.Equal(expectedPreserveOnPlanChange, parameters.PreserveOnPlanChange);
         Assert.NotNull(parameters.RestrictedTo);
         Assert.Equal(expectedRestrictedTo.Count, parameters.RestrictedTo.Count);
         for (int i = 0; i < expectedRestrictedTo.Count; i++)
@@ -47,9 +50,55 @@ public class DiscountCreateParamsTest : TestBase
     }
 
     [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new DiscountCreateParams
+        {
+            Amount = 0,
+            Type = DiscountType.Percentage,
+            Code = "code",
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            RestrictedTo = ["string"],
+            SubscriptionCycles = 0,
+            UsageLimit = 0,
+        };
+
+        Assert.Null(parameters.PreserveOnPlanChange);
+        Assert.False(parameters.RawBodyData.ContainsKey("preserve_on_plan_change"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new DiscountCreateParams
+        {
+            Amount = 0,
+            Type = DiscountType.Percentage,
+            Code = "code",
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            RestrictedTo = ["string"],
+            SubscriptionCycles = 0,
+            UsageLimit = 0,
+
+            // Null should be interpreted as omitted for these properties
+            PreserveOnPlanChange = null,
+        };
+
+        Assert.Null(parameters.PreserveOnPlanChange);
+        Assert.False(parameters.RawBodyData.ContainsKey("preserve_on_plan_change"));
+    }
+
+    [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new DiscountCreateParams { Amount = 0, Type = DiscountType.Percentage };
+        var parameters = new DiscountCreateParams
+        {
+            Amount = 0,
+            Type = DiscountType.Percentage,
+            PreserveOnPlanChange = true,
+        };
 
         Assert.Null(parameters.Code);
         Assert.False(parameters.RawBodyData.ContainsKey("code"));
@@ -72,6 +121,7 @@ public class DiscountCreateParamsTest : TestBase
         {
             Amount = 0,
             Type = DiscountType.Percentage,
+            PreserveOnPlanChange = true,
 
             Code = null,
             ExpiresAt = null,
@@ -115,6 +165,7 @@ public class DiscountCreateParamsTest : TestBase
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             SubscriptionCycles = 0,
             UsageLimit = 0,

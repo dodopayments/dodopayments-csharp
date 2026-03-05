@@ -18,6 +18,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
             Type = DiscountType.Percentage,
@@ -32,6 +33,7 @@ public class DiscountTest : TestBase
         string expectedCode = "code";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDiscountID = "discount_id";
+        bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
         int expectedTimesUsed = 0;
         ApiEnum<string, DiscountType> expectedType = DiscountType.Percentage;
@@ -45,6 +47,7 @@ public class DiscountTest : TestBase
         Assert.Equal(expectedCode, model.Code);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.Equal(expectedPreserveOnPlanChange, model.PreserveOnPlanChange);
         Assert.Equal(expectedRestrictedTo.Count, model.RestrictedTo.Count);
         for (int i = 0; i < expectedRestrictedTo.Count; i++)
         {
@@ -68,6 +71,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
             Type = DiscountType.Percentage,
@@ -93,6 +97,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
             Type = DiscountType.Percentage,
@@ -114,6 +119,7 @@ public class DiscountTest : TestBase
         string expectedCode = "code";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDiscountID = "discount_id";
+        bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
         int expectedTimesUsed = 0;
         ApiEnum<string, DiscountType> expectedType = DiscountType.Percentage;
@@ -127,6 +133,7 @@ public class DiscountTest : TestBase
         Assert.Equal(expectedCode, deserialized.Code);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.Equal(expectedPreserveOnPlanChange, deserialized.PreserveOnPlanChange);
         Assert.Equal(expectedRestrictedTo.Count, deserialized.RestrictedTo.Count);
         for (int i = 0; i < expectedRestrictedTo.Count; i++)
         {
@@ -150,6 +157,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
             Type = DiscountType.Percentage,
@@ -172,6 +180,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
             Type = DiscountType.Percentage,
@@ -197,6 +206,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
             Type = DiscountType.Percentage,
@@ -215,6 +225,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
             Type = DiscountType.Percentage,
@@ -245,6 +256,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
             Type = DiscountType.Percentage,
@@ -268,6 +280,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
             Type = DiscountType.Percentage,
