@@ -96,6 +96,28 @@ public record class DiscountCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Whether this discount should be preserved when a subscription changes plans.
+    /// Default: false (discount is removed on plan change)
+    /// </summary>
+    public bool? PreserveOnPlanChange
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("preserve_on_plan_change");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("preserve_on_plan_change", value);
+        }
+    }
+
+    /// <summary>
     /// List of product IDs to restrict usage (if any).
     /// </summary>
     public IReadOnlyList<string>? RestrictedTo

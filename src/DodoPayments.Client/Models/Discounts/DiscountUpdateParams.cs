@@ -78,6 +78,20 @@ public record class DiscountUpdateParams : ParamsBase
     }
 
     /// <summary>
+    /// Whether this discount should be preserved when a subscription changes plans.
+    /// If not provided, the existing value is kept.
+    /// </summary>
+    public bool? PreserveOnPlanChange
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("preserve_on_plan_change");
+        }
+        init { this._rawBodyData.Set("preserve_on_plan_change", value); }
+    }
+
+    /// <summary>
     /// If present, replaces all restricted product IDs with this new set. To remove
     /// all restrictions, send empty array
     /// </summary>

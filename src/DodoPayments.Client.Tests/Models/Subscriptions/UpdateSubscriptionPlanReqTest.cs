@@ -18,6 +18,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
@@ -30,6 +31,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately;
         int expectedQuantity = 0;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        string expectedDiscountCode = "discount_code";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, UpdateSubscriptionPlanReqOnPaymentFailure> expectedOnPaymentFailure =
             UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange;
@@ -43,6 +45,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         {
             Assert.Equal(expectedAddons[i], model.Addons[i]);
         }
+        Assert.Equal(expectedDiscountCode, model.DiscountCode);
         Assert.NotNull(model.Metadata);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -64,6 +67,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
@@ -87,6 +91,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
@@ -106,6 +111,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately;
         int expectedQuantity = 0;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        string expectedDiscountCode = "discount_code";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, UpdateSubscriptionPlanReqOnPaymentFailure> expectedOnPaymentFailure =
             UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange;
@@ -119,6 +125,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         {
             Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
         }
+        Assert.Equal(expectedDiscountCode, deserialized.DiscountCode);
         Assert.NotNull(deserialized.Metadata);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -140,6 +147,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
@@ -160,6 +168,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
 
         Assert.Null(model.Addons);
         Assert.False(model.RawData.ContainsKey("addons"));
+        Assert.Null(model.DiscountCode);
+        Assert.False(model.RawData.ContainsKey("discount_code"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.OnPaymentFailure);
@@ -191,12 +201,15 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
 
             Addons = null,
+            DiscountCode = null,
             Metadata = null,
             OnPaymentFailure = null,
         };
 
         Assert.Null(model.Addons);
         Assert.True(model.RawData.ContainsKey("addons"));
+        Assert.Null(model.DiscountCode);
+        Assert.True(model.RawData.ContainsKey("discount_code"));
         Assert.Null(model.Metadata);
         Assert.True(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.OnPaymentFailure);
@@ -214,6 +227,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
 
             Addons = null,
+            DiscountCode = null,
             Metadata = null,
             OnPaymentFailure = null,
         };
@@ -231,6 +245,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
