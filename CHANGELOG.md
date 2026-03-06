@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.11.2 (2026-03-06)
+
+Full Changelog: [v6.11.1...v6.11.2](https://github.com/dodopayments/dodopayments-csharp/compare/v6.11.1...v6.11.2)
+
+### Chores
+
+* **test:** do not count install time for mock server timeout ([62c7485](https://github.com/dodopayments/dodopayments-csharp/commit/62c74850649b83096289b51b2e55e9e2063255db))
+
 ## 6.11.1 (2026-03-05)
 
 Full Changelog: [v6.11.0...v6.11.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.11.0...v6.11.1)
