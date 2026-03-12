@@ -78,7 +78,7 @@ public record struct ClientOptions()
     /// <para>Defaults to 2 when null. Set to 0 to
     /// disable retries, which also ignores API instructions to retry.</para>
     /// </summary>
-    public int? MaxRetries { get; set; }
+    public int? MaxRetries { get; set; } = null;
 
     /// <summary>
     /// Sets the maximum time allowed for a complete HTTP call, not including retries.
@@ -88,7 +88,7 @@ public record struct ClientOptions()
     ///
     /// <para>Defaults to <c>TimeSpan.FromMinutes(1)</c> when null.</para>
     /// </summary>
-    public TimeSpan? Timeout { get; set; }
+    public TimeSpan? Timeout { get; set; } = null;
 
     /// <summary>
     /// Bearer Token for API authentication
