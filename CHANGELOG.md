@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.11.3 (2026-03-12)
+
+Full Changelog: [v6.11.2...v6.11.3](https://github.com/dodopayments/dodopayments-csharp/compare/v6.11.2...v6.11.3)
+
+### Bug Fixes
+
+* **test:** resolve CI test failures for SubscriptionService ([762b353](https://github.com/dodopayments/dodopayments-csharp/commit/762b353d141ca884d192076ca227ce7efbf4763f))
+
+
+### Chores
+
+* **client:** update formatting ([028c7f3](https://github.com/dodopayments/dodopayments-csharp/commit/028c7f3233c39c76363a4f29c184d9790ec68578))
+
 ## 6.11.2 (2026-03-06)
 
 Full Changelog: [v6.11.1...v6.11.2](https://github.com/dodopayments/dodopayments-csharp/compare/v6.11.1...v6.11.2)
