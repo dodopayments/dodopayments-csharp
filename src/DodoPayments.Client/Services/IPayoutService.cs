@@ -27,7 +27,7 @@ public interface IPayoutService
     IPayoutService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>get /payouts<c/>.
+    /// Sends a request to <c>get /payouts</c>.
     /// </summary>
     Task<PayoutListPage> List(
         PayoutListParams? parameters = null,
@@ -49,7 +49,7 @@ public interface IPayoutServiceWithRawResponse
     IPayoutServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /payouts`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /payouts</c>, but is otherwise the
     /// same as <see cref="IPayoutService.List(PayoutListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PayoutListPage>> List(

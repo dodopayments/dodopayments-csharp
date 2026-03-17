@@ -28,7 +28,7 @@ public interface IMiscService
     IMiscService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>get /checkout/supported_countries<c/>.
+    /// Sends a request to <c>get /checkout/supported_countries</c>.
     /// </summary>
     Task<List<ApiEnum<string, CountryCode>>> ListSupportedCountries(
         MiscListSupportedCountriesParams? parameters = null,
@@ -50,7 +50,7 @@ public interface IMiscServiceWithRawResponse
     IMiscServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /checkout/supported_countries`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /checkout/supported_countries</c>, but is otherwise the
     /// same as <see cref="IMiscService.ListSupportedCountries(MiscListSupportedCountriesParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<List<ApiEnum<string, CountryCode>>>> ListSupportedCountries(

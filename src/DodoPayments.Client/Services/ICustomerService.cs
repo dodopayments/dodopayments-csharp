@@ -32,7 +32,7 @@ public interface ICustomerService
     IWalletService Wallets { get; }
 
     /// <summary>
-    /// Sends a request to <c>post /customers<c/>.
+    /// Sends a request to <c>post /customers</c>.
     /// </summary>
     Task<Customer> Create(
         CustomerCreateParams parameters,
@@ -40,7 +40,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /customers/{customer_id}<c/>.
+    /// Sends a request to <c>get /customers/{customer_id}</c>.
     /// </summary>
     Task<Customer> Retrieve(
         CustomerRetrieveParams parameters,
@@ -55,7 +55,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Sends a request to <c>patch /customers/{customer_id}<c/>.
+    /// Sends a request to <c>patch /customers/{customer_id}</c>.
     /// </summary>
     Task<Customer> Update(
         CustomerUpdateParams parameters,
@@ -70,7 +70,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /customers<c/>.
+    /// Sends a request to <c>get /customers</c>.
     /// </summary>
     Task<CustomerListPage> List(
         CustomerListParams? parameters = null,
@@ -93,7 +93,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /customers/{customer_id}/payment-methods<c/>.
+    /// Sends a request to <c>get /customers/{customer_id}/payment-methods</c>.
     /// </summary>
     Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
         CustomerRetrievePaymentMethodsParams parameters,
@@ -126,7 +126,7 @@ public interface ICustomerServiceWithRawResponse
     IWalletServiceWithRawResponse Wallets { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /customers`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /customers</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Create(CustomerCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Customer>> Create(
@@ -135,7 +135,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /customers/{customer_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /customers/{customer_id}</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Retrieve(CustomerRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Customer>> Retrieve(
@@ -151,7 +151,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /customers/{customer_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /customers/{customer_id}</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Update(CustomerUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Customer>> Update(
@@ -167,7 +167,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /customers`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /customers</c>, but is otherwise the
     /// same as <see cref="ICustomerService.List(CustomerListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerListPage>> List(
@@ -176,7 +176,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /customers/{customer_id}/credit-entitlements`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /customers/{customer_id}/credit-entitlements</c>, but is otherwise the
     /// same as <see cref="ICustomerService.ListCreditEntitlements(CustomerListCreditEntitlementsParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerListCreditEntitlementsResponse>> ListCreditEntitlements(
@@ -192,7 +192,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /customers/{customer_id}/payment-methods`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /customers/{customer_id}/payment-methods</c>, but is otherwise the
     /// same as <see cref="ICustomerService.RetrievePaymentMethods(CustomerRetrievePaymentMethodsParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerRetrievePaymentMethodsResponse>> RetrievePaymentMethods(

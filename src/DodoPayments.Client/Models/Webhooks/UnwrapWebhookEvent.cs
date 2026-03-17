@@ -298,7 +298,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="CreditAddedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -319,7 +319,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="CreditBalanceLowWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -340,7 +340,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="CreditDeductedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -361,7 +361,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="CreditExpiredWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -382,7 +382,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="CreditManualAdjustmentWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -405,7 +405,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="CreditOverageChargedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -428,7 +428,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="CreditRolledOverWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -449,7 +449,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="CreditRolloverForfeitedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -472,7 +472,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="DisputeAcceptedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -493,7 +493,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="DisputeCancelledWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -514,7 +514,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="DisputeChallengedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -537,7 +537,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="DisputeExpiredWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -558,7 +558,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="DisputeLostWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -579,7 +579,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="DisputeOpenedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -600,7 +600,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="DisputeWonWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -621,7 +621,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="LicenseKeyCreatedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -644,7 +644,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="PaymentCancelledWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -665,7 +665,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="PaymentFailedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -686,7 +686,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="PaymentProcessingWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -709,7 +709,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="PaymentSucceededWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -730,7 +730,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="RefundFailedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -751,7 +751,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="RefundSucceededWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -772,7 +772,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="SubscriptionActiveWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -795,7 +795,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="SubscriptionCancelledWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -818,7 +818,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="SubscriptionExpiredWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -841,7 +841,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="SubscriptionFailedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -864,7 +864,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="SubscriptionOnHoldWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -887,7 +887,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="SubscriptionPlanChangedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -910,7 +910,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="SubscriptionRenewedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -933,7 +933,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="SubscriptionUpdatedWebhookEvent"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -955,7 +955,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -966,36 +966,36 @@ public record class UnwrapWebhookEvent : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (CreditAddedWebhookEvent value) => {...},
-    ///     (CreditBalanceLowWebhookEvent value) => {...},
-    ///     (CreditDeductedWebhookEvent value) => {...},
-    ///     (CreditExpiredWebhookEvent value) => {...},
-    ///     (CreditManualAdjustmentWebhookEvent value) => {...},
-    ///     (CreditOverageChargedWebhookEvent value) => {...},
-    ///     (CreditRolledOverWebhookEvent value) => {...},
-    ///     (CreditRolloverForfeitedWebhookEvent value) => {...},
-    ///     (DisputeAcceptedWebhookEvent value) => {...},
-    ///     (DisputeCancelledWebhookEvent value) => {...},
-    ///     (DisputeChallengedWebhookEvent value) => {...},
-    ///     (DisputeExpiredWebhookEvent value) => {...},
-    ///     (DisputeLostWebhookEvent value) => {...},
-    ///     (DisputeOpenedWebhookEvent value) => {...},
-    ///     (DisputeWonWebhookEvent value) => {...},
-    ///     (LicenseKeyCreatedWebhookEvent value) => {...},
-    ///     (PaymentCancelledWebhookEvent value) => {...},
-    ///     (PaymentFailedWebhookEvent value) => {...},
-    ///     (PaymentProcessingWebhookEvent value) => {...},
-    ///     (PaymentSucceededWebhookEvent value) => {...},
-    ///     (RefundFailedWebhookEvent value) => {...},
-    ///     (RefundSucceededWebhookEvent value) => {...},
-    ///     (SubscriptionActiveWebhookEvent value) => {...},
-    ///     (SubscriptionCancelledWebhookEvent value) => {...},
-    ///     (SubscriptionExpiredWebhookEvent value) => {...},
-    ///     (SubscriptionFailedWebhookEvent value) => {...},
-    ///     (SubscriptionOnHoldWebhookEvent value) => {...},
-    ///     (SubscriptionPlanChangedWebhookEvent value) => {...},
-    ///     (SubscriptionRenewedWebhookEvent value) => {...},
-    ///     (SubscriptionUpdatedWebhookEvent value) => {...}
+    ///     (CreditAddedWebhookEvent value) =&gt; {...},
+    ///     (CreditBalanceLowWebhookEvent value) =&gt; {...},
+    ///     (CreditDeductedWebhookEvent value) =&gt; {...},
+    ///     (CreditExpiredWebhookEvent value) =&gt; {...},
+    ///     (CreditManualAdjustmentWebhookEvent value) =&gt; {...},
+    ///     (CreditOverageChargedWebhookEvent value) =&gt; {...},
+    ///     (CreditRolledOverWebhookEvent value) =&gt; {...},
+    ///     (CreditRolloverForfeitedWebhookEvent value) =&gt; {...},
+    ///     (DisputeAcceptedWebhookEvent value) =&gt; {...},
+    ///     (DisputeCancelledWebhookEvent value) =&gt; {...},
+    ///     (DisputeChallengedWebhookEvent value) =&gt; {...},
+    ///     (DisputeExpiredWebhookEvent value) =&gt; {...},
+    ///     (DisputeLostWebhookEvent value) =&gt; {...},
+    ///     (DisputeOpenedWebhookEvent value) =&gt; {...},
+    ///     (DisputeWonWebhookEvent value) =&gt; {...},
+    ///     (LicenseKeyCreatedWebhookEvent value) =&gt; {...},
+    ///     (PaymentCancelledWebhookEvent value) =&gt; {...},
+    ///     (PaymentFailedWebhookEvent value) =&gt; {...},
+    ///     (PaymentProcessingWebhookEvent value) =&gt; {...},
+    ///     (PaymentSucceededWebhookEvent value) =&gt; {...},
+    ///     (RefundFailedWebhookEvent value) =&gt; {...},
+    ///     (RefundSucceededWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionActiveWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionCancelledWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionExpiredWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionFailedWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionOnHoldWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionPlanChangedWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionRenewedWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionUpdatedWebhookEvent value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -1136,7 +1136,7 @@ public record class UnwrapWebhookEvent : ModelBase
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -1147,36 +1147,36 @@ public record class UnwrapWebhookEvent : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (CreditAddedWebhookEvent value) => {...},
-    ///     (CreditBalanceLowWebhookEvent value) => {...},
-    ///     (CreditDeductedWebhookEvent value) => {...},
-    ///     (CreditExpiredWebhookEvent value) => {...},
-    ///     (CreditManualAdjustmentWebhookEvent value) => {...},
-    ///     (CreditOverageChargedWebhookEvent value) => {...},
-    ///     (CreditRolledOverWebhookEvent value) => {...},
-    ///     (CreditRolloverForfeitedWebhookEvent value) => {...},
-    ///     (DisputeAcceptedWebhookEvent value) => {...},
-    ///     (DisputeCancelledWebhookEvent value) => {...},
-    ///     (DisputeChallengedWebhookEvent value) => {...},
-    ///     (DisputeExpiredWebhookEvent value) => {...},
-    ///     (DisputeLostWebhookEvent value) => {...},
-    ///     (DisputeOpenedWebhookEvent value) => {...},
-    ///     (DisputeWonWebhookEvent value) => {...},
-    ///     (LicenseKeyCreatedWebhookEvent value) => {...},
-    ///     (PaymentCancelledWebhookEvent value) => {...},
-    ///     (PaymentFailedWebhookEvent value) => {...},
-    ///     (PaymentProcessingWebhookEvent value) => {...},
-    ///     (PaymentSucceededWebhookEvent value) => {...},
-    ///     (RefundFailedWebhookEvent value) => {...},
-    ///     (RefundSucceededWebhookEvent value) => {...},
-    ///     (SubscriptionActiveWebhookEvent value) => {...},
-    ///     (SubscriptionCancelledWebhookEvent value) => {...},
-    ///     (SubscriptionExpiredWebhookEvent value) => {...},
-    ///     (SubscriptionFailedWebhookEvent value) => {...},
-    ///     (SubscriptionOnHoldWebhookEvent value) => {...},
-    ///     (SubscriptionPlanChangedWebhookEvent value) => {...},
-    ///     (SubscriptionRenewedWebhookEvent value) => {...},
-    ///     (SubscriptionUpdatedWebhookEvent value) => {...}
+    ///     (CreditAddedWebhookEvent value) =&gt; {...},
+    ///     (CreditBalanceLowWebhookEvent value) =&gt; {...},
+    ///     (CreditDeductedWebhookEvent value) =&gt; {...},
+    ///     (CreditExpiredWebhookEvent value) =&gt; {...},
+    ///     (CreditManualAdjustmentWebhookEvent value) =&gt; {...},
+    ///     (CreditOverageChargedWebhookEvent value) =&gt; {...},
+    ///     (CreditRolledOverWebhookEvent value) =&gt; {...},
+    ///     (CreditRolloverForfeitedWebhookEvent value) =&gt; {...},
+    ///     (DisputeAcceptedWebhookEvent value) =&gt; {...},
+    ///     (DisputeCancelledWebhookEvent value) =&gt; {...},
+    ///     (DisputeChallengedWebhookEvent value) =&gt; {...},
+    ///     (DisputeExpiredWebhookEvent value) =&gt; {...},
+    ///     (DisputeLostWebhookEvent value) =&gt; {...},
+    ///     (DisputeOpenedWebhookEvent value) =&gt; {...},
+    ///     (DisputeWonWebhookEvent value) =&gt; {...},
+    ///     (LicenseKeyCreatedWebhookEvent value) =&gt; {...},
+    ///     (PaymentCancelledWebhookEvent value) =&gt; {...},
+    ///     (PaymentFailedWebhookEvent value) =&gt; {...},
+    ///     (PaymentProcessingWebhookEvent value) =&gt; {...},
+    ///     (PaymentSucceededWebhookEvent value) =&gt; {...},
+    ///     (RefundFailedWebhookEvent value) =&gt; {...},
+    ///     (RefundSucceededWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionActiveWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionCancelledWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionExpiredWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionFailedWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionOnHoldWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionPlanChangedWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionRenewedWebhookEvent value) =&gt; {...},
+    ///     (SubscriptionUpdatedWebhookEvent value) =&gt; {...}
     /// );
     /// </code>
     /// </example>

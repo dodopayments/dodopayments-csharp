@@ -27,8 +27,8 @@ public interface IDiscountService
     IDiscountService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// POST /discounts If `code` is omitted or empty, a random 16-char uppercase
-    /// code is generated.
+    /// POST /discounts If `code` is omitted or empty, a random 16-char uppercase code
+    /// is generated.
     /// </summary>
     Task<Discount> Create(
         DiscountCreateParams parameters,
@@ -117,7 +117,7 @@ public interface IDiscountServiceWithRawResponse
     IDiscountServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /discounts`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /discounts</c>, but is otherwise the
     /// same as <see cref="IDiscountService.Create(DiscountCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Discount>> Create(
@@ -126,7 +126,7 @@ public interface IDiscountServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /discounts/{discount_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /discounts/{discount_id}</c>, but is otherwise the
     /// same as <see cref="IDiscountService.Retrieve(DiscountRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Discount>> Retrieve(
@@ -142,7 +142,7 @@ public interface IDiscountServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /discounts/{discount_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /discounts/{discount_id}</c>, but is otherwise the
     /// same as <see cref="IDiscountService.Update(DiscountUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Discount>> Update(
@@ -158,7 +158,7 @@ public interface IDiscountServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /discounts`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /discounts</c>, but is otherwise the
     /// same as <see cref="IDiscountService.List(DiscountListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<DiscountListPage>> List(
@@ -167,7 +167,7 @@ public interface IDiscountServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /discounts/{discount_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /discounts/{discount_id}</c>, but is otherwise the
     /// same as <see cref="IDiscountService.Delete(DiscountDeleteParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Delete(
@@ -183,7 +183,7 @@ public interface IDiscountServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /discounts/code/{code}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /discounts/code/{code}</c>, but is otherwise the
     /// same as <see cref="IDiscountService.RetrieveByCode(DiscountRetrieveByCodeParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Discount>> RetrieveByCode(

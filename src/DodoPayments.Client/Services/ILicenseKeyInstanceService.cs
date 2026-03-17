@@ -27,7 +27,7 @@ public interface ILicenseKeyInstanceService
     ILicenseKeyInstanceService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>get /license_key_instances/{id}<c/>.
+    /// Sends a request to <c>get /license_key_instances/{id}</c>.
     /// </summary>
     Task<LicenseKeyInstance> Retrieve(
         LicenseKeyInstanceRetrieveParams parameters,
@@ -42,7 +42,7 @@ public interface ILicenseKeyInstanceService
     );
 
     /// <summary>
-    /// Sends a request to <c>patch /license_key_instances/{id}<c/>.
+    /// Sends a request to <c>patch /license_key_instances/{id}</c>.
     /// </summary>
     Task<LicenseKeyInstance> Update(
         LicenseKeyInstanceUpdateParams parameters,
@@ -57,7 +57,7 @@ public interface ILicenseKeyInstanceService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /license_key_instances<c/>.
+    /// Sends a request to <c>get /license_key_instances</c>.
     /// </summary>
     Task<LicenseKeyInstanceListPage> List(
         LicenseKeyInstanceListParams? parameters = null,
@@ -81,7 +81,7 @@ public interface ILicenseKeyInstanceServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /license_key_instances/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /license_key_instances/{id}</c>, but is otherwise the
     /// same as <see cref="ILicenseKeyInstanceService.Retrieve(LicenseKeyInstanceRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<LicenseKeyInstance>> Retrieve(
@@ -97,7 +97,7 @@ public interface ILicenseKeyInstanceServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /license_key_instances/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /license_key_instances/{id}</c>, but is otherwise the
     /// same as <see cref="ILicenseKeyInstanceService.Update(LicenseKeyInstanceUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<LicenseKeyInstance>> Update(
@@ -113,7 +113,7 @@ public interface ILicenseKeyInstanceServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /license_key_instances`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /license_key_instances</c>, but is otherwise the
     /// same as <see cref="ILicenseKeyInstanceService.List(LicenseKeyInstanceListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<LicenseKeyInstanceListPage>> List(

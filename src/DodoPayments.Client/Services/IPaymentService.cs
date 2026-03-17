@@ -27,7 +27,7 @@ public interface IPaymentService
     IPaymentService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>post /payments<c/>.
+    /// Sends a request to <c>post /payments</c>.
     /// </summary>
     [Obsolete("deprecated")]
     Task<PaymentCreateResponse> Create(
@@ -36,7 +36,7 @@ public interface IPaymentService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /payments/{payment_id}<c/>.
+    /// Sends a request to <c>get /payments/{payment_id}</c>.
     /// </summary>
     Task<Payment> Retrieve(
         PaymentRetrieveParams parameters,
@@ -51,7 +51,7 @@ public interface IPaymentService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /payments<c/>.
+    /// Sends a request to <c>get /payments</c>.
     /// </summary>
     Task<PaymentListPage> List(
         PaymentListParams? parameters = null,
@@ -59,7 +59,7 @@ public interface IPaymentService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /payments/{payment_id}/line-items<c/>.
+    /// Sends a request to <c>get /payments/{payment_id}/line-items</c>.
     /// </summary>
     Task<PaymentRetrieveLineItemsResponse> RetrieveLineItems(
         PaymentRetrieveLineItemsParams parameters,
@@ -88,7 +88,7 @@ public interface IPaymentServiceWithRawResponse
     IPaymentServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /payments`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /payments</c>, but is otherwise the
     /// same as <see cref="IPaymentService.Create(PaymentCreateParams, CancellationToken)"/>.
     /// </summary>
     [Obsolete("deprecated")]
@@ -98,7 +98,7 @@ public interface IPaymentServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /payments/{payment_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /payments/{payment_id}</c>, but is otherwise the
     /// same as <see cref="IPaymentService.Retrieve(PaymentRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Payment>> Retrieve(
@@ -114,7 +114,7 @@ public interface IPaymentServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /payments`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /payments</c>, but is otherwise the
     /// same as <see cref="IPaymentService.List(PaymentListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PaymentListPage>> List(
@@ -123,7 +123,7 @@ public interface IPaymentServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /payments/{payment_id}/line-items`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /payments/{payment_id}/line-items</c>, but is otherwise the
     /// same as <see cref="IPaymentService.RetrieveLineItems(PaymentRetrieveLineItemsParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PaymentRetrieveLineItemsResponse>> RetrieveLineItems(

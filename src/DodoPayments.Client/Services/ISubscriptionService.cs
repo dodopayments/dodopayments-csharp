@@ -27,7 +27,7 @@ public interface ISubscriptionService
     ISubscriptionService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>post /subscriptions<c/>.
+    /// Sends a request to <c>post /subscriptions</c>.
     /// </summary>
     [Obsolete("deprecated")]
     Task<SubscriptionCreateResponse> Create(
@@ -36,7 +36,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /subscriptions/{subscription_id}<c/>.
+    /// Sends a request to <c>get /subscriptions/{subscription_id}</c>.
     /// </summary>
     Task<Subscription> Retrieve(
         SubscriptionRetrieveParams parameters,
@@ -51,7 +51,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Sends a request to <c>patch /subscriptions/{subscription_id}<c/>.
+    /// Sends a request to <c>patch /subscriptions/{subscription_id}</c>.
     /// </summary>
     Task<Subscription> Update(
         SubscriptionUpdateParams parameters,
@@ -66,7 +66,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /subscriptions<c/>.
+    /// Sends a request to <c>get /subscriptions</c>.
     /// </summary>
     Task<SubscriptionListPage> List(
         SubscriptionListParams? parameters = null,
@@ -74,7 +74,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Sends a request to <c>post /subscriptions/{subscription_id}/change-plan<c/>.
+    /// Sends a request to <c>post /subscriptions/{subscription_id}/change-plan</c>.
     /// </summary>
     Task ChangePlan(
         SubscriptionChangePlanParams parameters,
@@ -89,7 +89,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Sends a request to <c>post /subscriptions/{subscription_id}/charge<c/>.
+    /// Sends a request to <c>post /subscriptions/{subscription_id}/charge</c>.
     /// </summary>
     Task<SubscriptionChargeResponse> Charge(
         SubscriptionChargeParams parameters,
@@ -104,7 +104,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Sends a request to <c>post /subscriptions/{subscription_id}/change-plan/preview<c/>.
+    /// Sends a request to <c>post /subscriptions/{subscription_id}/change-plan/preview</c>.
     /// </summary>
     Task<SubscriptionPreviewChangePlanResponse> PreviewChangePlan(
         SubscriptionPreviewChangePlanParams parameters,
@@ -119,7 +119,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /subscriptions/{subscription_id}/credit-usage<c/>.
+    /// Sends a request to <c>get /subscriptions/{subscription_id}/credit-usage</c>.
     /// </summary>
     Task<SubscriptionRetrieveCreditUsageResponse> RetrieveCreditUsage(
         SubscriptionRetrieveCreditUsageParams parameters,
@@ -144,24 +144,28 @@ public interface ISubscriptionService
     /// units consumed, free threshold units, and chargeable units - **Historical
     /// tracking**: Complete audit trail of usage-based charges</para>
     ///
-    /// <para>## Use Cases: - **Customer support**: Investigate billing questions
-    /// and usage discrepancies - **Usage analytics**: Analyze customer consumption
-    /// patterns over time - **Billing transparency**: Provide customers with detailed
-    /// usage breakdowns - **Revenue optimization**: Identify usage trends to optimize
-    /// pricing strategies</para>
+    /// <para>## Use Cases: - **Customer support**: Investigate billing questions and
+    /// usage discrepancies - **Usage analytics**: Analyze customer consumption patterns
+    /// over time - **Billing transparency**: Provide customers with detailed usage
+    /// breakdowns - **Revenue optimization**: Identify usage trends to optimize pricing
+    /// strategies</para>
     ///
-    /// <para>## Filtering Options: - **Date range filtering**: Get usage history
-    /// for specific time periods - **Meter-specific filtering**: Focus on usage
-    /// for a particular meter - **Pagination**: Navigate through large usage histories efficiently</para>
+    /// <para>## Filtering Options: - **Date range filtering**: Get usage history for
+    /// specific time periods - **Meter-specific filtering**: Focus on usage for a
+    /// particular meter - **Pagination**: Navigate through large usage histories
+    /// efficiently</para>
     ///
     /// <para>## Important Notes: - Only returns data for subscriptions with usage-based
-    /// (metered) components - Usage history is organized by billing periods (subscription
-    /// cycles) - Free threshold units are calculated and displayed separately from
-    /// chargeable units - Historical data is preserved even if meter configurations change</para>
+    /// (metered) components - Usage history is organized by billing periods
+    /// (subscription cycles) - Free threshold units are calculated and displayed
+    /// separately from chargeable units - Historical data is preserved even if meter
+    /// configurations change</para>
     ///
-    /// <para>## Example Query Patterns: - Get last 3 months: `?start_date=2024-01-01T00:00:00Z&end_date=2024-03-31T23:59:59Z`
-    /// - Filter by meter: `?meter_id=mtr_api_requests` - Paginate results: `?page_size=20&page_number=1`
-    /// - Recent usage: `?start_date=2024-03-01T00:00:00Z` (from March 1st to now)</para>
+    /// <para>## Example Query Patterns: - Get last 3 months:
+    /// `?start_date=2024-01-01T00:00:00Z&end_date=2024-03-31T23:59:59Z` - Filter by
+    /// meter: `?meter_id=mtr_api_requests` - Paginate results:
+    /// `?page_size=20&page_number=1` - Recent usage: `?start_date=2024-03-01T00:00:00Z`
+    /// (from March 1st to now)</para>
     /// </summary>
     Task<SubscriptionRetrieveUsageHistoryPage> RetrieveUsageHistory(
         SubscriptionRetrieveUsageHistoryParams parameters,
@@ -176,7 +180,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Sends a request to <c>post /subscriptions/{subscription_id}/update-payment-method<c/>.
+    /// Sends a request to <c>post /subscriptions/{subscription_id}/update-payment-method</c>.
     /// </summary>
     Task<SubscriptionUpdatePaymentMethodResponse> UpdatePaymentMethod(
         SubscriptionUpdatePaymentMethodParams parameters,
@@ -205,7 +209,7 @@ public interface ISubscriptionServiceWithRawResponse
     ISubscriptionServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /subscriptions`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /subscriptions</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Create(SubscriptionCreateParams, CancellationToken)"/>.
     /// </summary>
     [Obsolete("deprecated")]
@@ -215,7 +219,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /subscriptions/{subscription_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /subscriptions/{subscription_id}</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Retrieve(SubscriptionRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Subscription>> Retrieve(
@@ -231,7 +235,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /subscriptions/{subscription_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /subscriptions/{subscription_id}</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Update(SubscriptionUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Subscription>> Update(
@@ -247,7 +251,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /subscriptions`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /subscriptions</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.List(SubscriptionListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionListPage>> List(
@@ -256,7 +260,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /subscriptions/{subscription_id}/change-plan`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /subscriptions/{subscription_id}/change-plan</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.ChangePlan(SubscriptionChangePlanParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> ChangePlan(
@@ -272,7 +276,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /subscriptions/{subscription_id}/charge`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /subscriptions/{subscription_id}/charge</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Charge(SubscriptionChargeParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionChargeResponse>> Charge(
@@ -288,7 +292,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /subscriptions/{subscription_id}/change-plan/preview`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /subscriptions/{subscription_id}/change-plan/preview</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.PreviewChangePlan(SubscriptionPreviewChangePlanParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionPreviewChangePlanResponse>> PreviewChangePlan(
@@ -304,7 +308,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /subscriptions/{subscription_id}/credit-usage`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /subscriptions/{subscription_id}/credit-usage</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.RetrieveCreditUsage(SubscriptionRetrieveCreditUsageParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionRetrieveCreditUsageResponse>> RetrieveCreditUsage(
@@ -320,7 +324,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /subscriptions/{subscription_id}/usage-history`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /subscriptions/{subscription_id}/usage-history</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.RetrieveUsageHistory(SubscriptionRetrieveUsageHistoryParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionRetrieveUsageHistoryPage>> RetrieveUsageHistory(
@@ -336,7 +340,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /subscriptions/{subscription_id}/update-payment-method`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /subscriptions/{subscription_id}/update-payment-method</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.UpdatePaymentMethod(SubscriptionUpdatePaymentMethodParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionUpdatePaymentMethodResponse>> UpdatePaymentMethod(

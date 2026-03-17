@@ -27,7 +27,7 @@ public interface IBalanceService
     IBalanceService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>get /balances/ledger<c/>.
+    /// Sends a request to <c>get /balances/ledger</c>.
     /// </summary>
     Task<BalanceRetrieveLedgerPage> RetrieveLedger(
         BalanceRetrieveLedgerParams? parameters = null,
@@ -49,7 +49,7 @@ public interface IBalanceServiceWithRawResponse
     IBalanceServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /balances/ledger`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /balances/ledger</c>, but is otherwise the
     /// same as <see cref="IBalanceService.RetrieveLedger(BalanceRetrieveLedgerParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<BalanceRetrieveLedgerPage>> RetrieveLedger(

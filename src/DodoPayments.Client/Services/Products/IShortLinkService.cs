@@ -65,7 +65,7 @@ public interface IShortLinkServiceWithRawResponse
     IShortLinkServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /products/{id}/short_links`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /products/{id}/short_links</c>, but is otherwise the
     /// same as <see cref="IShortLinkService.Create(ShortLinkCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<ShortLinkCreateResponse>> Create(
@@ -81,7 +81,7 @@ public interface IShortLinkServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /products/short_links`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /products/short_links</c>, but is otherwise the
     /// same as <see cref="IShortLinkService.List(ShortLinkListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<ShortLinkListPage>> List(

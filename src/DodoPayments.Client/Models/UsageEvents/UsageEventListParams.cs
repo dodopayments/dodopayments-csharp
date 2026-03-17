@@ -26,8 +26,8 @@ namespace DodoPayments.Client.Models.UsageEvents;
 ///
 /// <para>## Example Queries: - Get all events for a customer: `?customer_id=cus_abc123`
 /// - Get API request events: `?event_name=api_request` - Get events from last 24
-/// hours: `?start=2024-01-14T10:30:00Z&end=2024-01-15T10:30:00Z` - Get events with
-/// meter filtering: `?meter_id=mtr_xyz789` - Paginate results: `?page_size=50&page_number=2`</para>
+/// hours: `?start=2024-01-14T10:30:00Z&amp;end=2024-01-15T10:30:00Z` - Get events
+/// with meter filtering: `?meter_id=mtr_xyz789` - Paginate results: `?page_size=50&amp;page_number=2`</para>
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -213,7 +213,7 @@ public record class UsageEventListParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static UsageEventListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

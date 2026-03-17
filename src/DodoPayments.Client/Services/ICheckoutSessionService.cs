@@ -27,7 +27,7 @@ public interface ICheckoutSessionService
     ICheckoutSessionService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>post /checkouts<c/>.
+    /// Sends a request to <c>post /checkouts</c>.
     /// </summary>
     Task<CheckoutSessionResponse> Create(
         CheckoutSessionCreateParams parameters,
@@ -35,7 +35,7 @@ public interface ICheckoutSessionService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /checkouts/{id}<c/>.
+    /// Sends a request to <c>get /checkouts/{id}</c>.
     /// </summary>
     Task<CheckoutSessionStatus> Retrieve(
         CheckoutSessionRetrieveParams parameters,
@@ -50,7 +50,7 @@ public interface ICheckoutSessionService
     );
 
     /// <summary>
-    /// Sends a request to <c>post /checkouts/preview<c/>.
+    /// Sends a request to <c>post /checkouts/preview</c>.
     /// </summary>
     Task<CheckoutSessionPreviewResponse> Preview(
         CheckoutSessionPreviewParams parameters,
@@ -72,7 +72,7 @@ public interface ICheckoutSessionServiceWithRawResponse
     ICheckoutSessionServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /checkouts`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /checkouts</c>, but is otherwise the
     /// same as <see cref="ICheckoutSessionService.Create(CheckoutSessionCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CheckoutSessionResponse>> Create(
@@ -81,7 +81,7 @@ public interface ICheckoutSessionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /checkouts/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /checkouts/{id}</c>, but is otherwise the
     /// same as <see cref="ICheckoutSessionService.Retrieve(CheckoutSessionRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CheckoutSessionStatus>> Retrieve(
@@ -97,7 +97,7 @@ public interface ICheckoutSessionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /checkouts/preview`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /checkouts/preview</c>, but is otherwise the
     /// same as <see cref="ICheckoutSessionService.Preview(CheckoutSessionPreviewParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CheckoutSessionPreviewResponse>> Preview(

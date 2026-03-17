@@ -27,12 +27,12 @@ public interface IMeterService
     IMeterService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>post /meters<c/>.
+    /// Sends a request to <c>post /meters</c>.
     /// </summary>
     Task<Meter> Create(MeterCreateParams parameters, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Sends a request to <c>get /meters/{id}<c/>.
+    /// Sends a request to <c>get /meters/{id}</c>.
     /// </summary>
     Task<Meter> Retrieve(
         MeterRetrieveParams parameters,
@@ -47,7 +47,7 @@ public interface IMeterService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /meters<c/>.
+    /// Sends a request to <c>get /meters</c>.
     /// </summary>
     Task<MeterListPage> List(
         MeterListParams? parameters = null,
@@ -55,7 +55,7 @@ public interface IMeterService
     );
 
     /// <summary>
-    /// Sends a request to <c>delete /meters/{id}<c/>.
+    /// Sends a request to <c>delete /meters/{id}</c>.
     /// </summary>
     Task Archive(MeterArchiveParams parameters, CancellationToken cancellationToken = default);
 
@@ -67,7 +67,7 @@ public interface IMeterService
     );
 
     /// <summary>
-    /// Sends a request to <c>post /meters/{id}/unarchive<c/>.
+    /// Sends a request to <c>post /meters/{id}/unarchive</c>.
     /// </summary>
     Task Unarchive(MeterUnarchiveParams parameters, CancellationToken cancellationToken = default);
 
@@ -93,7 +93,7 @@ public interface IMeterServiceWithRawResponse
     IMeterServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /meters`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /meters</c>, but is otherwise the
     /// same as <see cref="IMeterService.Create(MeterCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Meter>> Create(
@@ -102,7 +102,7 @@ public interface IMeterServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /meters/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /meters/{id}</c>, but is otherwise the
     /// same as <see cref="IMeterService.Retrieve(MeterRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Meter>> Retrieve(
@@ -118,7 +118,7 @@ public interface IMeterServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /meters`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /meters</c>, but is otherwise the
     /// same as <see cref="IMeterService.List(MeterListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<MeterListPage>> List(
@@ -127,7 +127,7 @@ public interface IMeterServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /meters/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /meters/{id}</c>, but is otherwise the
     /// same as <see cref="IMeterService.Archive(MeterArchiveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Archive(
@@ -143,7 +143,7 @@ public interface IMeterServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /meters/{id}/unarchive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /meters/{id}/unarchive</c>, but is otherwise the
     /// same as <see cref="IMeterService.Unarchive(MeterUnarchiveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Unarchive(

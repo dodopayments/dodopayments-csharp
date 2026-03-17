@@ -28,7 +28,7 @@ public interface ILedgerEntryService
     ILedgerEntryService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>post /customers/{customer_id}/wallets/ledger-entries<c/>.
+    /// Sends a request to <c>post /customers/{customer_id}/wallets/ledger-entries</c>.
     /// </summary>
     Task<CustomerWallet> Create(
         LedgerEntryCreateParams parameters,
@@ -43,7 +43,7 @@ public interface ILedgerEntryService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /customers/{customer_id}/wallets/ledger-entries<c/>.
+    /// Sends a request to <c>get /customers/{customer_id}/wallets/ledger-entries</c>.
     /// </summary>
     Task<LedgerEntryListPage> List(
         LedgerEntryListParams parameters,
@@ -72,7 +72,7 @@ public interface ILedgerEntryServiceWithRawResponse
     ILedgerEntryServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /customers/{customer_id}/wallets/ledger-entries`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /customers/{customer_id}/wallets/ledger-entries</c>, but is otherwise the
     /// same as <see cref="ILedgerEntryService.Create(LedgerEntryCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerWallet>> Create(
@@ -88,7 +88,7 @@ public interface ILedgerEntryServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /customers/{customer_id}/wallets/ledger-entries`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /customers/{customer_id}/wallets/ledger-entries</c>, but is otherwise the
     /// same as <see cref="ILedgerEntryService.List(LedgerEntryListParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<LedgerEntryListPage>> List(

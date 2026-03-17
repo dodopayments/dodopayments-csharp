@@ -152,7 +152,7 @@ public record class DiscountCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// How many times this discount can be used (if any). Must be >= 1 if provided.
+    /// How many times this discount can be used (if any). Must be &gt;= 1 if provided.
     /// </summary>
     public int? UsageLimit
     {
@@ -200,7 +200,7 @@ public record class DiscountCreateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static DiscountCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,

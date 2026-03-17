@@ -27,7 +27,7 @@ public interface IBrandService
     IBrandService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>post /brands<c/>.
+    /// Sends a request to <c>post /brands</c>.
     /// </summary>
     Task<Brand> Create(
         BrandCreateParams? parameters = null,
@@ -50,7 +50,7 @@ public interface IBrandService
     );
 
     /// <summary>
-    /// Sends a request to <c>patch /brands/{id}<c/>.
+    /// Sends a request to <c>patch /brands/{id}</c>.
     /// </summary>
     Task<Brand> Update(BrandUpdateParams parameters, CancellationToken cancellationToken = default);
 
@@ -62,7 +62,7 @@ public interface IBrandService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /brands<c/>.
+    /// Sends a request to <c>get /brands</c>.
     /// </summary>
     Task<BrandListResponse> List(
         BrandListParams? parameters = null,
@@ -70,7 +70,7 @@ public interface IBrandService
     );
 
     /// <summary>
-    /// Sends a request to <c>put /brands/{id}/images<c/>.
+    /// Sends a request to <c>put /brands/{id}/images</c>.
     /// </summary>
     Task<BrandUpdateImagesResponse> UpdateImages(
         BrandUpdateImagesParams parameters,
@@ -99,7 +99,7 @@ public interface IBrandServiceWithRawResponse
     IBrandServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /brands`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /brands</c>, but is otherwise the
     /// same as <see cref="IBrandService.Create(BrandCreateParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Brand>> Create(
@@ -108,7 +108,7 @@ public interface IBrandServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /brands/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /brands/{id}</c>, but is otherwise the
     /// same as <see cref="IBrandService.Retrieve(BrandRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Brand>> Retrieve(
@@ -124,7 +124,7 @@ public interface IBrandServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /brands/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /brands/{id}</c>, but is otherwise the
     /// same as <see cref="IBrandService.Update(BrandUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Brand>> Update(
@@ -140,7 +140,7 @@ public interface IBrandServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /brands`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /brands</c>, but is otherwise the
     /// same as <see cref="IBrandService.List(BrandListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<BrandListResponse>> List(
@@ -149,7 +149,7 @@ public interface IBrandServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `put /brands/{id}/images`, but is otherwise the
+    /// Returns a raw HTTP response for <c>put /brands/{id}/images</c>, but is otherwise the
     /// same as <see cref="IBrandService.UpdateImages(BrandUpdateImagesParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<BrandUpdateImagesResponse>> UpdateImages(
