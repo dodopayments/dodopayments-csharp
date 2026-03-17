@@ -32,7 +32,7 @@ public interface IProductService
     IShortLinkService ShortLinks { get; }
 
     /// <summary>
-    /// Sends a request to <c>post /products<c/>.
+    /// Sends a request to <c>post /products</c>.
     /// </summary>
     Task<Product> Create(
         ProductCreateParams parameters,
@@ -40,7 +40,7 @@ public interface IProductService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /products/{id}<c/>.
+    /// Sends a request to <c>get /products/{id}</c>.
     /// </summary>
     Task<Product> Retrieve(
         ProductRetrieveParams parameters,
@@ -55,7 +55,7 @@ public interface IProductService
     );
 
     /// <summary>
-    /// Sends a request to <c>patch /products/{id}<c/>.
+    /// Sends a request to <c>patch /products/{id}</c>.
     /// </summary>
     Task Update(ProductUpdateParams parameters, CancellationToken cancellationToken = default);
 
@@ -67,7 +67,7 @@ public interface IProductService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /products<c/>.
+    /// Sends a request to <c>get /products</c>.
     /// </summary>
     Task<ProductListPage> List(
         ProductListParams? parameters = null,
@@ -75,7 +75,7 @@ public interface IProductService
     );
 
     /// <summary>
-    /// Sends a request to <c>delete /products/{id}<c/>.
+    /// Sends a request to <c>delete /products/{id}</c>.
     /// </summary>
     Task Archive(ProductArchiveParams parameters, CancellationToken cancellationToken = default);
 
@@ -87,7 +87,7 @@ public interface IProductService
     );
 
     /// <summary>
-    /// Sends a request to <c>post /products/{id}/unarchive<c/>.
+    /// Sends a request to <c>post /products/{id}/unarchive</c>.
     /// </summary>
     Task Unarchive(
         ProductUnarchiveParams parameters,
@@ -102,7 +102,7 @@ public interface IProductService
     );
 
     /// <summary>
-    /// Sends a request to <c>put /products/{id}/files<c/>.
+    /// Sends a request to <c>put /products/{id}/files</c>.
     /// </summary>
     Task<ProductUpdateFilesResponse> UpdateFiles(
         ProductUpdateFilesParams parameters,
@@ -135,7 +135,7 @@ public interface IProductServiceWithRawResponse
     IShortLinkServiceWithRawResponse ShortLinks { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /products`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /products</c>, but is otherwise the
     /// same as <see cref="IProductService.Create(ProductCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Product>> Create(
@@ -144,7 +144,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /products/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /products/{id}</c>, but is otherwise the
     /// same as <see cref="IProductService.Retrieve(ProductRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Product>> Retrieve(
@@ -160,7 +160,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /products/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /products/{id}</c>, but is otherwise the
     /// same as <see cref="IProductService.Update(ProductUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Update(
@@ -176,7 +176,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /products`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /products</c>, but is otherwise the
     /// same as <see cref="IProductService.List(ProductListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<ProductListPage>> List(
@@ -185,7 +185,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /products/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /products/{id}</c>, but is otherwise the
     /// same as <see cref="IProductService.Archive(ProductArchiveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Archive(
@@ -201,7 +201,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /products/{id}/unarchive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /products/{id}/unarchive</c>, but is otherwise the
     /// same as <see cref="IProductService.Unarchive(ProductUnarchiveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Unarchive(
@@ -217,7 +217,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `put /products/{id}/files`, but is otherwise the
+    /// Returns a raw HTTP response for <c>put /products/{id}/files</c>, but is otherwise the
     /// same as <see cref="IProductService.UpdateFiles(ProductUpdateFilesParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<ProductUpdateFilesResponse>> UpdateFiles(

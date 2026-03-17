@@ -68,7 +68,7 @@ public interface IHeaderServiceWithRawResponse
     IHeaderServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /webhooks/{webhook_id}/headers`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /webhooks/{webhook_id}/headers</c>, but is otherwise the
     /// same as <see cref="IHeaderService.Retrieve(HeaderRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<HeaderRetrieveResponse>> Retrieve(
@@ -84,7 +84,7 @@ public interface IHeaderServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /webhooks/{webhook_id}/headers`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /webhooks/{webhook_id}/headers</c>, but is otherwise the
     /// same as <see cref="IHeaderService.Update(HeaderUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Update(

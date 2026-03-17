@@ -27,7 +27,7 @@ public interface IRefundService
     IRefundService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>post /refunds<c/>.
+    /// Sends a request to <c>post /refunds</c>.
     /// </summary>
     Task<Refund> Create(
         RefundCreateParams parameters,
@@ -35,7 +35,7 @@ public interface IRefundService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /refunds/{refund_id}<c/>.
+    /// Sends a request to <c>get /refunds/{refund_id}</c>.
     /// </summary>
     Task<Refund> Retrieve(
         RefundRetrieveParams parameters,
@@ -50,7 +50,7 @@ public interface IRefundService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /refunds<c/>.
+    /// Sends a request to <c>get /refunds</c>.
     /// </summary>
     Task<RefundListPage> List(
         RefundListParams? parameters = null,
@@ -72,7 +72,7 @@ public interface IRefundServiceWithRawResponse
     IRefundServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /refunds`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /refunds</c>, but is otherwise the
     /// same as <see cref="IRefundService.Create(RefundCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Refund>> Create(
@@ -81,7 +81,7 @@ public interface IRefundServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /refunds/{refund_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /refunds/{refund_id}</c>, but is otherwise the
     /// same as <see cref="IRefundService.Retrieve(RefundRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Refund>> Retrieve(
@@ -97,7 +97,7 @@ public interface IRefundServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /refunds`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /refunds</c>, but is otherwise the
     /// same as <see cref="IRefundService.List(RefundListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<RefundListPage>> List(

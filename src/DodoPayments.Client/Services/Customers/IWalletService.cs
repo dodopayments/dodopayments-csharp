@@ -30,7 +30,7 @@ public interface IWalletService
     ILedgerEntryService LedgerEntries { get; }
 
     /// <summary>
-    /// Sends a request to <c>get /customers/{customer_id}/wallets<c/>.
+    /// Sends a request to <c>get /customers/{customer_id}/wallets</c>.
     /// </summary>
     Task<WalletListResponse> List(
         WalletListParams parameters,
@@ -61,7 +61,7 @@ public interface IWalletServiceWithRawResponse
     ILedgerEntryServiceWithRawResponse LedgerEntries { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /customers/{customer_id}/wallets`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /customers/{customer_id}/wallets</c>, but is otherwise the
     /// same as <see cref="IWalletService.List(WalletListParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<WalletListResponse>> List(

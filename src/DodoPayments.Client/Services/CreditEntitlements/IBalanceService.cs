@@ -27,16 +27,17 @@ public interface IBalanceService
     IBalanceService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns the credit balance details for a specific customer and credit entitlement.
+    /// Returns the credit balance details for a specific customer and credit
+    /// entitlement.
     ///
     /// <para># Authentication Requires an API key with `Viewer` role or higher.</para>
     ///
-    /// <para># Path Parameters - `credit_entitlement_id` - The unique identifier
-    /// of the credit entitlement - `customer_id` - The unique identifier of the customer</para>
+    /// <para># Path Parameters - `credit_entitlement_id` - The unique identifier of the
+    /// credit entitlement - `customer_id` - The unique identifier of the customer</para>
     ///
     /// <para># Responses - `200 OK` - Returns the customer's balance - `404 Not Found`
-    /// - Credit entitlement or customer balance not found - `500 Internal Server
-    /// Error` - Database or server error</para>
+    /// - Credit entitlement or customer balance not found - `500 Internal Server Error`
+    /// - Database or server error</para>
     /// </summary>
     Task<CustomerCreditBalance> Retrieve(
         BalanceRetrieveParams parameters,
@@ -51,15 +52,16 @@ public interface IBalanceService
     );
 
     /// <summary>
-    /// Returns a paginated list of customer credit balances for the given credit entitlement.
+    /// Returns a paginated list of customer credit balances for the given credit
+    /// entitlement.
     ///
     /// <para># Authentication Requires an API key with `Viewer` role or higher.</para>
     ///
-    /// <para># Path Parameters - `credit_entitlement_id` - The unique identifier
-    /// of the credit entitlement</para>
+    /// <para># Path Parameters - `credit_entitlement_id` - The unique identifier of the
+    /// credit entitlement</para>
     ///
-    /// <para># Query Parameters - `page_size` - Number of items per page (default:
-    /// 10, max: 100) - `page_number` - Zero-based page number (default: 0) - `customer_id`
+    /// <para># Query Parameters - `page_size` - Number of items per page (default: 10,
+    /// max: 100) - `page_number` - Zero-based page number (default: 0) - `customer_id`
     /// - Optional filter by specific customer</para>
     ///
     /// <para># Responses - `200 OK` - Returns list of customer balances - `404 Not
@@ -84,17 +86,17 @@ public interface IBalanceService
     ///
     /// <para># Authentication Requires an API key with `Editor` role.</para>
     ///
-    /// <para># Path Parameters - `credit_entitlement_id` - The unique identifier
-    /// of the credit entitlement - `customer_id` - The unique identifier of the customer</para>
+    /// <para># Path Parameters - `credit_entitlement_id` - The unique identifier of the
+    /// credit entitlement - `customer_id` - The unique identifier of the customer</para>
     ///
-    /// <para># Request Body - `entry_type` - "credit" or "debit" - `amount` - Amount
-    /// to credit or debit - `reason` - Optional human-readable reason - `expires_at`
-    /// - Optional expiration for credited amount (only for credit type) - `idempotency_key`
-    /// - Optional key to prevent duplicate entries</para>
+    /// <para># Request Body - `entry_type` - "credit" or "debit" - `amount` - Amount to
+    /// credit or debit - `reason` - Optional human-readable reason - `expires_at` -
+    /// Optional expiration for credited amount (only for credit type) -
+    /// `idempotency_key` - Optional key to prevent duplicate entries</para>
     ///
-    /// <para># Responses - `201 Created` - Ledger entry created successfully - `400
-    /// Bad Request` - Invalid request (e.g., debit with insufficient balance) - `404
-    /// Not Found` - Credit entitlement or customer not found - `409 Conflict` - Idempotency
+    /// <para># Responses - `201 Created` - Ledger entry created successfully - `400 Bad
+    /// Request` - Invalid request (e.g., debit with insufficient balance) - `404 Not
+    /// Found` - Credit entitlement or customer not found - `409 Conflict` - Idempotency
     /// key already exists - `500 Internal Server Error` - Database or server error</para>
     /// </summary>
     Task<BalanceCreateLedgerEntryResponse> CreateLedgerEntry(
@@ -114,15 +116,15 @@ public interface IBalanceService
     ///
     /// <para># Authentication Requires an API key with `Viewer` role or higher.</para>
     ///
-    /// <para># Path Parameters - `credit_entitlement_id` - The unique identifier
-    /// of the credit entitlement - `customer_id` - The unique identifier of the customer</para>
+    /// <para># Path Parameters - `credit_entitlement_id` - The unique identifier of the
+    /// credit entitlement - `customer_id` - The unique identifier of the customer</para>
     ///
-    /// <para># Query Parameters - `page_size` - Number of items per page (default:
-    /// 10, max: 100) - `page_number` - Zero-based page number (default: 0) - `status`
-    /// - Filter by status: active, expired, depleted</para>
+    /// <para># Query Parameters - `page_size` - Number of items per page (default: 10,
+    /// max: 100) - `page_number` - Zero-based page number (default: 0) - `status` -
+    /// Filter by status: active, expired, depleted</para>
     ///
-    /// <para># Responses - `200 OK` - Returns list of grants - `404 Not Found` -
-    /// Credit entitlement not found - `500 Internal Server Error` - Database or server error</para>
+    /// <para># Responses - `200 OK` - Returns list of grants - `404 Not Found` - Credit
+    /// entitlement not found - `500 Internal Server Error` - Database or server error</para>
     /// </summary>
     Task<BalanceListGrantsPage> ListGrants(
         BalanceListGrantsParams parameters,
@@ -141,17 +143,17 @@ public interface IBalanceService
     ///
     /// <para># Authentication Requires an API key with `Viewer` role or higher.</para>
     ///
-    /// <para># Path Parameters - `credit_entitlement_id` - The unique identifier
-    /// of the credit entitlement - `customer_id` - The unique identifier of the customer</para>
+    /// <para># Path Parameters - `credit_entitlement_id` - The unique identifier of the
+    /// credit entitlement - `customer_id` - The unique identifier of the customer</para>
     ///
-    /// <para># Query Parameters - `page_size` - Number of items per page (default:
-    /// 10, max: 100) - `page_number` - Zero-based page number (default: 0) - `transaction_type`
-    /// - Filter by transaction type - `start_date` - Filter entries from this date
-    /// - `end_date` - Filter entries until this date</para>
+    /// <para># Query Parameters - `page_size` - Number of items per page (default: 10,
+    /// max: 100) - `page_number` - Zero-based page number (default: 0) -
+    /// `transaction_type` - Filter by transaction type - `start_date` - Filter entries
+    /// from this date - `end_date` - Filter entries until this date</para>
     ///
-    /// <para># Responses - `200 OK` - Returns list of ledger entries - `404 Not
-    /// Found` - Credit entitlement not found - `500 Internal Server Error` - Database
-    /// or server error</para>
+    /// <para># Responses - `200 OK` - Returns list of ledger entries - `404 Not Found`
+    /// - Credit entitlement not found - `500 Internal Server Error` - Database or
+    /// server error</para>
     /// </summary>
     Task<BalanceListLedgerPage> ListLedger(
         BalanceListLedgerParams parameters,
@@ -180,7 +182,7 @@ public interface IBalanceServiceWithRawResponse
     IBalanceServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /credit-entitlements/{credit_entitlement_id}/balances/{customer_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /credit-entitlements/{credit_entitlement_id}/balances/{customer_id}</c>, but is otherwise the
     /// same as <see cref="IBalanceService.Retrieve(BalanceRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerCreditBalance>> Retrieve(
@@ -196,7 +198,7 @@ public interface IBalanceServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /credit-entitlements/{credit_entitlement_id}/balances`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /credit-entitlements/{credit_entitlement_id}/balances</c>, but is otherwise the
     /// same as <see cref="IBalanceService.List(BalanceListParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<BalanceListPage>> List(
@@ -212,7 +214,7 @@ public interface IBalanceServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /credit-entitlements/{credit_entitlement_id}/balances/{customer_id}/ledger-entries`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /credit-entitlements/{credit_entitlement_id}/balances/{customer_id}/ledger-entries</c>, but is otherwise the
     /// same as <see cref="IBalanceService.CreateLedgerEntry(BalanceCreateLedgerEntryParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<BalanceCreateLedgerEntryResponse>> CreateLedgerEntry(
@@ -228,7 +230,7 @@ public interface IBalanceServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /credit-entitlements/{credit_entitlement_id}/balances/{customer_id}/grants`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /credit-entitlements/{credit_entitlement_id}/balances/{customer_id}/grants</c>, but is otherwise the
     /// same as <see cref="IBalanceService.ListGrants(BalanceListGrantsParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<BalanceListGrantsPage>> ListGrants(
@@ -244,7 +246,7 @@ public interface IBalanceServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /credit-entitlements/{credit_entitlement_id}/balances/{customer_id}/ledger`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /credit-entitlements/{credit_entitlement_id}/balances/{customer_id}/ledger</c>, but is otherwise the
     /// same as <see cref="IBalanceService.ListLedger(BalanceListLedgerParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<BalanceListLedgerPage>> ListLedger(

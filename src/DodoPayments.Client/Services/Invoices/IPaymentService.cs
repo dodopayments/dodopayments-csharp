@@ -27,7 +27,7 @@ public interface IPaymentService
     IPaymentService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>get /invoices/payments/{payment_id}<c/>.
+    /// Sends a request to <c>get /invoices/payments/{payment_id}</c>.
     ///
     /// <para>It's the caller's responsibility to dispose the returned response.</para>
     /// </summary>
@@ -44,7 +44,7 @@ public interface IPaymentService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /invoices/refunds/{refund_id}<c/>.
+    /// Sends a request to <c>get /invoices/refunds/{refund_id}</c>.
     ///
     /// <para>It's the caller's responsibility to dispose the returned response.</para>
     /// </summary>
@@ -75,7 +75,7 @@ public interface IPaymentServiceWithRawResponse
     IPaymentServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /invoices/payments/{payment_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /invoices/payments/{payment_id}</c>, but is otherwise the
     /// same as <see cref="IPaymentService.Retrieve(PaymentRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Retrieve(
@@ -91,7 +91,7 @@ public interface IPaymentServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /invoices/refunds/{refund_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /invoices/refunds/{refund_id}</c>, but is otherwise the
     /// same as <see cref="IPaymentService.RetrieveRefund(PaymentRetrieveRefundParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> RetrieveRefund(

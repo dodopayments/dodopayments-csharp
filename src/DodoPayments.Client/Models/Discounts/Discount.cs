@@ -16,7 +16,7 @@ public sealed record class Discount : JsonModel
     /// The discount amount.
     ///
     /// <para>- If `discount_type` is `percentage`, this is in **basis points**
-    ///  (e.g., 540 => 5.4%). - Otherwise, this is **USD cents** (e.g., 100 => `$1.00`).</para>
+    ///  (e.g., 540 =&gt; 5.4%). - Otherwise, this is **USD cents** (e.g., 100 =&gt; `$1.00`).</para>
     /// </summary>
     public required int Amount
     {

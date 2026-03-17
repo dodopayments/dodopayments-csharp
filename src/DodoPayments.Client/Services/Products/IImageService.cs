@@ -27,7 +27,7 @@ public interface IImageService
     IImageService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>put /products/{id}/images<c/>.
+    /// Sends a request to <c>put /products/{id}/images</c>.
     /// </summary>
     Task<ImageUpdateResponse> Update(
         ImageUpdateParams parameters,
@@ -56,7 +56,7 @@ public interface IImageServiceWithRawResponse
     IImageServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `put /products/{id}/images`, but is otherwise the
+    /// Returns a raw HTTP response for <c>put /products/{id}/images</c>, but is otherwise the
     /// same as <see cref="IImageService.Update(ImageUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<ImageUpdateResponse>> Update(

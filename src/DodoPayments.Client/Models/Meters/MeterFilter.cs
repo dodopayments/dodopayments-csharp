@@ -128,14 +128,14 @@ public record class Clauses : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IReadOnlyList<MeterFilterCondition>"/>.
+    /// type <see cref="List{T}"/> where <c>T</c> is a <c>MeterFilterCondition</c>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickDirectFilterConditions(out var value)) {
-    ///     // `value` is of type `IReadOnlyList<MeterFilterCondition>`
+    ///     // `value` is of type `IReadOnlyList&lt;MeterFilterCondition&gt;`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
@@ -151,14 +151,14 @@ public record class Clauses : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IReadOnlyList<ClausesMeterFilter>"/>.
+    /// type <see cref="List{T}"/> where <c>T</c> is a <c>ClausesMeterFilter</c>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickNestedMeterFilters(out var value)) {
-    ///     // `value` is of type `IReadOnlyList<ClausesMeterFilter>`
+    ///     // `value` is of type `IReadOnlyList&lt;ClausesMeterFilter&gt;`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
@@ -175,7 +175,7 @@ public record class Clauses : ModelBase
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -186,8 +186,8 @@ public record class Clauses : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (IReadOnlyList<MeterFilterCondition> value) => {...},
-    ///     (IReadOnlyList<ClausesMeterFilter> value) => {...}
+    ///     (IReadOnlyList&lt;MeterFilterCondition&gt; value) =&gt; {...},
+    ///     (IReadOnlyList&lt;ClausesMeterFilter&gt; value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -216,7 +216,7 @@ public record class Clauses : ModelBase
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -227,8 +227,8 @@ public record class Clauses : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (IReadOnlyList<MeterFilterCondition> value) => {...},
-    ///     (IReadOnlyList<ClausesMeterFilter> value) => {...}
+    ///     (IReadOnlyList&lt;MeterFilterCondition&gt; value) =&gt; {...},
+    ///     (IReadOnlyList&lt;ClausesMeterFilter&gt; value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -511,7 +511,7 @@ public record class MeterFilterConditionValue : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="string"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -532,7 +532,7 @@ public record class MeterFilterConditionValue : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="double"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -553,7 +553,7 @@ public record class MeterFilterConditionValue : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="bool"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -573,7 +573,7 @@ public record class MeterFilterConditionValue : ModelBase
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -584,9 +584,9 @@ public record class MeterFilterConditionValue : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (string value) => {...},
-    ///     (double value) => {...},
-    ///     (bool value) => {...}
+    ///     (string value) =&gt; {...},
+    ///     (double value) =&gt; {...},
+    ///     (bool value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -619,7 +619,7 @@ public record class MeterFilterConditionValue : ModelBase
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -630,9 +630,9 @@ public record class MeterFilterConditionValue : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (string value) => {...},
-    ///     (double value) => {...},
-    ///     (bool value) => {...}
+    ///     (string value) =&gt; {...},
+    ///     (double value) =&gt; {...},
+    ///     (bool value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -883,14 +883,14 @@ public record class ClausesMeterFilterClauses : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>"/>.
+    /// type <see cref="List{T}"/> where <c>T</c> is a <c>ClausesMeterFilterClausesMeterFilterCondition</c>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickLevel1FilterConditions(out var value)) {
-    ///     // `value` is of type `IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition>`
+    ///     // `value` is of type `IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilterCondition&gt;`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
@@ -906,14 +906,14 @@ public record class ClausesMeterFilterClauses : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IReadOnlyList<ClausesMeterFilterClausesMeterFilter>"/>.
+    /// type <see cref="List{T}"/> where <c>T</c> is a <c>ClausesMeterFilterClausesMeterFilter</c>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickLevel1NestedFilters(out var value)) {
-    ///     // `value` is of type `IReadOnlyList<ClausesMeterFilterClausesMeterFilter>`
+    ///     // `value` is of type `IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilter&gt;`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
@@ -930,7 +930,7 @@ public record class ClausesMeterFilterClauses : ModelBase
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -941,8 +941,8 @@ public record class ClausesMeterFilterClauses : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition> value) => {...},
-    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilter> value) => {...}
+    ///     (IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilterCondition&gt; value) =&gt; {...},
+    ///     (IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilter&gt; value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -973,7 +973,7 @@ public record class ClausesMeterFilterClauses : ModelBase
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -984,8 +984,8 @@ public record class ClausesMeterFilterClauses : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterCondition> value) => {...},
-    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilter> value) => {...}
+    ///     (IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilterCondition&gt; value) =&gt; {...},
+    ///     (IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilter&gt; value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -1299,7 +1299,7 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBa
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="string"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -1320,7 +1320,7 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBa
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="double"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -1341,7 +1341,7 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBa
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="bool"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -1361,7 +1361,7 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBa
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -1372,9 +1372,9 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBa
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (string value) => {...},
-    ///     (double value) => {...},
-    ///     (bool value) => {...}
+    ///     (string value) =&gt; {...},
+    ///     (double value) =&gt; {...},
+    ///     (bool value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -1407,7 +1407,7 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBa
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -1418,9 +1418,9 @@ public record class ClausesMeterFilterClausesMeterFilterConditionValue : ModelBa
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (string value) => {...},
-    ///     (double value) => {...},
-    ///     (bool value) => {...}
+    ///     (string value) =&gt; {...},
+    ///     (double value) =&gt; {...},
+    ///     (bool value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -1689,14 +1689,14 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>"/>.
+    /// type <see cref="List{T}"/> where <c>T</c> is a <c>ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition</c>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickLevel2FilterConditions(out var value)) {
-    ///     // `value` is of type `IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition>`
+    ///     // `value` is of type `IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition&gt;`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
@@ -1715,14 +1715,14 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>"/>.
+    /// type <see cref="List{T}"/> where <c>T</c> is a <c>ClausesMeterFilterClausesMeterFilterClausesMeterFilter</c>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickLevel2NestedFilters(out var value)) {
-    ///     // `value` is of type `IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter>`
+    ///     // `value` is of type `IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilterClausesMeterFilter&gt;`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
@@ -1740,7 +1740,7 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -1751,8 +1751,8 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value) => {...},
-    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value) => {...}
+    ///     (IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition&gt; value) =&gt; {...},
+    ///     (IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilterClausesMeterFilter&gt; value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -1785,7 +1785,7 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -1796,8 +1796,8 @@ public record class ClausesMeterFilterClausesMeterFilterClauses : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition> value) => {...},
-    ///     (IReadOnlyList<ClausesMeterFilterClausesMeterFilterClausesMeterFilter> value) => {...}
+    ///     (IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondition&gt; value) =&gt; {...},
+    ///     (IReadOnlyList&lt;ClausesMeterFilterClausesMeterFilterClausesMeterFilter&gt; value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -2121,7 +2121,7 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="string"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -2142,7 +2142,7 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="double"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -2163,7 +2163,7 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="bool"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -2183,7 +2183,7 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -2194,9 +2194,9 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (string value) => {...},
-    ///     (double value) => {...},
-    ///     (bool value) => {...}
+    ///     (string value) =&gt; {...},
+    ///     (double value) =&gt; {...},
+    ///     (bool value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -2229,7 +2229,7 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -2240,9 +2240,9 @@ public record class ClausesMeterFilterClausesMeterFilterClausesMeterFilterCondit
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (string value) => {...},
-    ///     (double value) => {...},
-    ///     (bool value) => {...}
+    ///     (string value) =&gt; {...},
+    ///     (double value) =&gt; {...},
+    ///     (bool value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -2611,7 +2611,7 @@ public record class ClauseValue : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="string"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -2632,7 +2632,7 @@ public record class ClauseValue : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="double"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -2653,7 +2653,7 @@ public record class ClauseValue : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="bool"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -2673,7 +2673,7 @@ public record class ClauseValue : ModelBase
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -2684,9 +2684,9 @@ public record class ClauseValue : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (string value) => {...},
-    ///     (double value) => {...},
-    ///     (bool value) => {...}
+    ///     (string value) =&gt; {...},
+    ///     (double value) =&gt; {...},
+    ///     (bool value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -2719,7 +2719,7 @@ public record class ClauseValue : ModelBase
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="DodoPaymentsInvalidDataException">
@@ -2730,9 +2730,9 @@ public record class ClauseValue : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (string value) => {...},
-    ///     (double value) => {...},
-    ///     (bool value) => {...}
+    ///     (string value) =&gt; {...},
+    ///     (double value) =&gt; {...},
+    ///     (bool value) =&gt; {...}
     /// );
     /// </code>
     /// </example>

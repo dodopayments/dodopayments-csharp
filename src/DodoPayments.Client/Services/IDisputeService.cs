@@ -27,7 +27,7 @@ public interface IDisputeService
     IDisputeService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>get /disputes/{dispute_id}<c/>.
+    /// Sends a request to <c>get /disputes/{dispute_id}</c>.
     /// </summary>
     Task<GetDispute> Retrieve(
         DisputeRetrieveParams parameters,
@@ -42,7 +42,7 @@ public interface IDisputeService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /disputes<c/>.
+    /// Sends a request to <c>get /disputes</c>.
     /// </summary>
     Task<DisputeListPage> List(
         DisputeListParams? parameters = null,
@@ -64,7 +64,7 @@ public interface IDisputeServiceWithRawResponse
     IDisputeServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /disputes/{dispute_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /disputes/{dispute_id}</c>, but is otherwise the
     /// same as <see cref="IDisputeService.Retrieve(DisputeRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<GetDispute>> Retrieve(
@@ -80,7 +80,7 @@ public interface IDisputeServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /disputes`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /disputes</c>, but is otherwise the
     /// same as <see cref="IDisputeService.List(DisputeListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<DisputeListPage>> List(

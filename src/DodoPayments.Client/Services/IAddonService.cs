@@ -27,7 +27,7 @@ public interface IAddonService
     IAddonService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>post /addons<c/>.
+    /// Sends a request to <c>post /addons</c>.
     /// </summary>
     Task<AddonResponse> Create(
         AddonCreateParams parameters,
@@ -35,7 +35,7 @@ public interface IAddonService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /addons/{id}<c/>.
+    /// Sends a request to <c>get /addons/{id}</c>.
     /// </summary>
     Task<AddonResponse> Retrieve(
         AddonRetrieveParams parameters,
@@ -50,7 +50,7 @@ public interface IAddonService
     );
 
     /// <summary>
-    /// Sends a request to <c>patch /addons/{id}<c/>.
+    /// Sends a request to <c>patch /addons/{id}</c>.
     /// </summary>
     Task<AddonResponse> Update(
         AddonUpdateParams parameters,
@@ -65,7 +65,7 @@ public interface IAddonService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /addons<c/>.
+    /// Sends a request to <c>get /addons</c>.
     /// </summary>
     Task<AddonListPage> List(
         AddonListParams? parameters = null,
@@ -73,7 +73,7 @@ public interface IAddonService
     );
 
     /// <summary>
-    /// Sends a request to <c>put /addons/{id}/images<c/>.
+    /// Sends a request to <c>put /addons/{id}/images</c>.
     /// </summary>
     Task<AddonUpdateImagesResponse> UpdateImages(
         AddonUpdateImagesParams parameters,
@@ -102,7 +102,7 @@ public interface IAddonServiceWithRawResponse
     IAddonServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /addons`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /addons</c>, but is otherwise the
     /// same as <see cref="IAddonService.Create(AddonCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<AddonResponse>> Create(
@@ -111,7 +111,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /addons/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /addons/{id}</c>, but is otherwise the
     /// same as <see cref="IAddonService.Retrieve(AddonRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<AddonResponse>> Retrieve(
@@ -127,7 +127,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /addons/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /addons/{id}</c>, but is otherwise the
     /// same as <see cref="IAddonService.Update(AddonUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<AddonResponse>> Update(
@@ -143,7 +143,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /addons`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /addons</c>, but is otherwise the
     /// same as <see cref="IAddonService.List(AddonListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<AddonListPage>> List(
@@ -152,7 +152,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `put /addons/{id}/images`, but is otherwise the
+    /// Returns a raw HTTP response for <c>put /addons/{id}/images</c>, but is otherwise the
     /// same as <see cref="IAddonService.UpdateImages(AddonUpdateImagesParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<AddonUpdateImagesResponse>> UpdateImages(

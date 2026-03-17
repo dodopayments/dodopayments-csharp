@@ -119,7 +119,7 @@ public interface IWebhookServiceWithRawResponse
     IHeaderServiceWithRawResponse Headers { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /webhooks`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /webhooks</c>, but is otherwise the
     /// same as <see cref="IWebhookService.Create(WebhookCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<WebhookDetails>> Create(
@@ -128,7 +128,7 @@ public interface IWebhookServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /webhooks/{webhook_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /webhooks/{webhook_id}</c>, but is otherwise the
     /// same as <see cref="IWebhookService.Retrieve(WebhookRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<WebhookDetails>> Retrieve(
@@ -144,7 +144,7 @@ public interface IWebhookServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /webhooks/{webhook_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /webhooks/{webhook_id}</c>, but is otherwise the
     /// same as <see cref="IWebhookService.Update(WebhookUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<WebhookDetails>> Update(
@@ -160,7 +160,7 @@ public interface IWebhookServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /webhooks`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /webhooks</c>, but is otherwise the
     /// same as <see cref="IWebhookService.List(WebhookListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<WebhookListPage>> List(
@@ -169,7 +169,7 @@ public interface IWebhookServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /webhooks/{webhook_id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /webhooks/{webhook_id}</c>, but is otherwise the
     /// same as <see cref="IWebhookService.Delete(WebhookDeleteParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Delete(
@@ -185,7 +185,7 @@ public interface IWebhookServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /webhooks/{webhook_id}/secret`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /webhooks/{webhook_id}/secret</c>, but is otherwise the
     /// same as <see cref="IWebhookService.RetrieveSecret(WebhookRetrieveSecretParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<WebhookRetrieveSecretResponse>> RetrieveSecret(

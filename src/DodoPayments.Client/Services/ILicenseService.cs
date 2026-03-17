@@ -27,7 +27,7 @@ public interface ILicenseService
     ILicenseService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>post /licenses/activate<c/>.
+    /// Sends a request to <c>post /licenses/activate</c>.
     /// </summary>
     Task<LicenseActivateResponse> Activate(
         LicenseActivateParams parameters,
@@ -35,7 +35,7 @@ public interface ILicenseService
     );
 
     /// <summary>
-    /// Sends a request to <c>post /licenses/deactivate<c/>.
+    /// Sends a request to <c>post /licenses/deactivate</c>.
     /// </summary>
     Task Deactivate(
         LicenseDeactivateParams parameters,
@@ -43,7 +43,7 @@ public interface ILicenseService
     );
 
     /// <summary>
-    /// Sends a request to <c>post /licenses/validate<c/>.
+    /// Sends a request to <c>post /licenses/validate</c>.
     /// </summary>
     Task<LicenseValidateResponse> Validate(
         LicenseValidateParams parameters,
@@ -65,7 +65,7 @@ public interface ILicenseServiceWithRawResponse
     ILicenseServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /licenses/activate`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /licenses/activate</c>, but is otherwise the
     /// same as <see cref="ILicenseService.Activate(LicenseActivateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<LicenseActivateResponse>> Activate(
@@ -74,7 +74,7 @@ public interface ILicenseServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /licenses/deactivate`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /licenses/deactivate</c>, but is otherwise the
     /// same as <see cref="ILicenseService.Deactivate(LicenseDeactivateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse> Deactivate(
@@ -83,7 +83,7 @@ public interface ILicenseServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /licenses/validate`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /licenses/validate</c>, but is otherwise the
     /// same as <see cref="ILicenseService.Validate(LicenseValidateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<LicenseValidateResponse>> Validate(

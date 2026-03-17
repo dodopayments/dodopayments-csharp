@@ -28,7 +28,7 @@ public interface ICustomerPortalService
     ICustomerPortalService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>post /customers/{customer_id}/customer-portal/session<c/>.
+    /// Sends a request to <c>post /customers/{customer_id}/customer-portal/session</c>.
     /// </summary>
     Task<CustomerPortalSession> Create(
         CustomerPortalCreateParams parameters,
@@ -57,7 +57,7 @@ public interface ICustomerPortalServiceWithRawResponse
     ICustomerPortalServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /customers/{customer_id}/customer-portal/session`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /customers/{customer_id}/customer-portal/session</c>, but is otherwise the
     /// same as <see cref="ICustomerPortalService.Create(CustomerPortalCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerPortalSession>> Create(

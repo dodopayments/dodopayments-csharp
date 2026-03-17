@@ -20,7 +20,7 @@ namespace DodoPayments.Client.Models.CreditEntitlements;
 ///
 /// <para># Responses - `200 OK` - Returns a list of credit entitlements wrapped in
 /// a response object - `422 Unprocessable Entity` - Invalid query parameters (e.g.,
-/// page_size > 100) - `500 Internal Server Error` - Database or server error</para>
+/// page_size &gt; 100) - `500 Internal Server Error` - Database or server error</para>
 ///
 /// <para># Business Logic - Results are ordered by creation date in descending order
 /// (newest first) - Only entitlements belonging to the authenticated business are
@@ -125,7 +125,7 @@ public record class CreditEntitlementListParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static CreditEntitlementListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData

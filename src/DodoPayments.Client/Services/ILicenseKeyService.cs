@@ -27,7 +27,7 @@ public interface ILicenseKeyService
     ILicenseKeyService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Sends a request to <c>get /license_keys/{id}<c/>.
+    /// Sends a request to <c>get /license_keys/{id}</c>.
     /// </summary>
     Task<LicenseKey> Retrieve(
         LicenseKeyRetrieveParams parameters,
@@ -42,7 +42,7 @@ public interface ILicenseKeyService
     );
 
     /// <summary>
-    /// Sends a request to <c>patch /license_keys/{id}<c/>.
+    /// Sends a request to <c>patch /license_keys/{id}</c>.
     /// </summary>
     Task<LicenseKey> Update(
         LicenseKeyUpdateParams parameters,
@@ -57,7 +57,7 @@ public interface ILicenseKeyService
     );
 
     /// <summary>
-    /// Sends a request to <c>get /license_keys<c/>.
+    /// Sends a request to <c>get /license_keys</c>.
     /// </summary>
     Task<LicenseKeyListPage> List(
         LicenseKeyListParams? parameters = null,
@@ -79,7 +79,7 @@ public interface ILicenseKeyServiceWithRawResponse
     ILicenseKeyServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /license_keys/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /license_keys/{id}</c>, but is otherwise the
     /// same as <see cref="ILicenseKeyService.Retrieve(LicenseKeyRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<LicenseKey>> Retrieve(
@@ -95,7 +95,7 @@ public interface ILicenseKeyServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /license_keys/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /license_keys/{id}</c>, but is otherwise the
     /// same as <see cref="ILicenseKeyService.Update(LicenseKeyUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<LicenseKey>> Update(
@@ -111,7 +111,7 @@ public interface ILicenseKeyServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /license_keys`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /license_keys</c>, but is otherwise the
     /// same as <see cref="ILicenseKeyService.List(LicenseKeyListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<LicenseKeyListPage>> List(
