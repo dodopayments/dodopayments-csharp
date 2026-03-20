@@ -4,7 +4,7 @@ namespace DodoPayments.Client.Tests.Services.Invoices;
 
 public class PaymentServiceTest : TestBase
 {
-    [Fact(Skip = "Mock server doesn't support application/pdf responses")]
+    [Fact]
     public async Task Retrieve_Works()
     {
         await this.client.Invoices.Payments.Retrieve(
@@ -14,7 +14,7 @@ public class PaymentServiceTest : TestBase
         );
     }
 
-    [Fact(Skip = "Mock server doesn't support application/pdf responses")]
+    [Fact]
     public async Task RetrieveRefund_Works()
     {
         await this.client.Invoices.Payments.RetrieveRefund(
