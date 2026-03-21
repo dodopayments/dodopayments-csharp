@@ -7,7 +7,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 
     <Nullable>enable</Nullable>
-    <VersionPrefix>6.11.2</VersionPrefix>
+    <VersionPrefix>6.11.3</VersionPrefix>
     <LangVersion>latest</LangVersion>
 
     <!-- Generate an XML documentation file for the project. -->

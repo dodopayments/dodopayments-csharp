@@ -1,5 +1,29 @@
 # Changelog
 
+## 6.11.3 (2026-03-21)
+
+Full Changelog: [v6.11.2...v6.11.3](https://github.com/dodopayments/dodopayments-csharp/compare/v6.11.2...v6.11.3)
+
+### Bug Fixes
+
+* **client:** handle path params correctly in `FromRawUnchecked` ([f45db85](https://github.com/dodopayments/dodopayments-csharp/commit/f45db859fb26e8a5c7a5e5213fea3c46960e86c5))
+* **client:** handle root bodies in requests properly ([11b6e32](https://github.com/dodopayments/dodopayments-csharp/commit/11b6e325943092493ba4d42a5e3d64b13130b724))
+* **docs:** make xml syntactically correct ([9ca4895](https://github.com/dodopayments/dodopayments-csharp/commit/9ca4895887d668c14783f0aa3fc7d8d6e1482c4f))
+* **test:** resolve CI test failures for SubscriptionService ([762b353](https://github.com/dodopayments/dodopayments-csharp/commit/762b353d141ca884d192076ca227ce7efbf4763f))
+
+
+### Chores
+
+* **client:** update formatting ([028c7f3](https://github.com/dodopayments/dodopayments-csharp/commit/028c7f3233c39c76363a4f29c184d9790ec68578))
+* **internal:** tweak CI branches ([c78ca69](https://github.com/dodopayments/dodopayments-csharp/commit/c78ca69dba835da7cdebcb4486f8105029f364f6))
+* **tests:** bump steady to v0.19.4 ([4758500](https://github.com/dodopayments/dodopayments-csharp/commit/475850091beca887269dbe372bade8d935d652cf))
+* **tests:** bump steady to v0.19.5 ([1186e8f](https://github.com/dodopayments/dodopayments-csharp/commit/1186e8f459c3a91f983db5efe5c668e35ed76db2))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([a1a29f0](https://github.com/dodopayments/dodopayments-csharp/commit/a1a29f02f90109d7484af305507d161e15ccb9b6))
+
 ## 6.11.2 (2026-03-06)
 
 Full Changelog: [v6.11.1...v6.11.2](https://github.com/dodopayments/dodopayments-csharp/compare/v6.11.1...v6.11.2)
