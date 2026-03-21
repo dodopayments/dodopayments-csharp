@@ -18,22 +18,14 @@ namespace DodoPayments.Client.Models.Subscriptions;
 /// </summary>
 public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 {
-    readonly JsonDictionary _rawBodyData = new();
-    public IReadOnlyDictionary<string, JsonElement> RawBodyData
-    {
-        get { return this._rawBodyData.Freeze(); }
-    }
+    public JsonElement RawBodyData { get; private init; }
 
     public string? SubscriptionID { get; init; }
 
     public required Body Body
     {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<Body>("body");
-        }
-        init { this._rawBodyData.Set("body", value); }
+        get { return WrappedJsonSerializer.GetNotNullClass<Body>(this.RawBodyData, "RawBodyData"); }
+        init { this.RawBodyData = JsonSerializer.SerializeToElement(value); }
     }
 
     public SubscriptionUpdatePaymentMethodParams() { }
@@ -47,19 +39,19 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     {
         this.SubscriptionID = subscriptionUpdatePaymentMethodParams.SubscriptionID;
 
-        this._rawBodyData = new(subscriptionUpdatePaymentMethodParams._rawBodyData);
+        this.RawBodyData = subscriptionUpdatePaymentMethodParams.RawBodyData;
     }
 #pragma warning restore CS8618
 
     public SubscriptionUpdatePaymentMethodParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        IReadOnlyDictionary<string, JsonElement> rawBodyData
+        JsonElement rawBodyData
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
-        this._rawBodyData = new(rawBodyData);
+        this.RawBodyData = rawBodyData;
     }
 
 #pragma warning disable CS8618
@@ -67,13 +59,13 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     SubscriptionUpdatePaymentMethodParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
-        FrozenDictionary<string, JsonElement> rawBodyData,
+        JsonElement rawBodyData,
         string subscriptionID
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
-        this._rawBodyData = new(rawBodyData);
+        this.RawBodyData = rawBodyData;
         this.SubscriptionID = subscriptionID;
     }
 #pragma warning restore CS8618
@@ -82,14 +74,14 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     public static SubscriptionUpdatePaymentMethodParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        IReadOnlyDictionary<string, JsonElement> rawBodyData,
+        JsonElement rawBodyData,
         string subscriptionID
     )
     {
         return new(
             FrozenDictionary.ToFrozenDictionary(rawHeaderData),
             FrozenDictionary.ToFrozenDictionary(rawQueryData),
-            FrozenDictionary.ToFrozenDictionary(rawBodyData),
+            rawBodyData,
             subscriptionID
         );
     }
@@ -106,7 +98,7 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
                     ["QueryData"] = FriendlyJsonPrinter.PrintValue(
                         JsonSerializer.SerializeToElement(this._rawQueryData.Freeze())
                     ),
-                    ["BodyData"] = FriendlyJsonPrinter.PrintValue(this._rawBodyData.Freeze()),
+                    ["BodyData"] = FriendlyJsonPrinter.PrintValue(this.RawBodyData),
                 }
             ),
             ModelBase.ToStringSerializerOptions
@@ -121,7 +113,7 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
         return (this.SubscriptionID?.Equals(other.SubscriptionID) ?? other.SubscriptionID == null)
             && this._rawHeaderData.Equals(other._rawHeaderData)
             && this._rawQueryData.Equals(other._rawQueryData)
-            && this._rawBodyData.Equals(other._rawBodyData);
+            && this.RawBodyData.Equals(other.RawBodyData);
     }
 
     public override System::Uri Url(ClientOptions options)
