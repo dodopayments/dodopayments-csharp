@@ -131,10 +131,15 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     {
         // The "body" key wraps the union type; the API expects the union content directly.
         var rawBody = this.RawBodyData;
-        object content =
-            rawBody.Count == 1 && rawBody.TryGetValue("body", out var bodyElement)
-                ? (object)bodyElement
-                : rawBody;
+        object content = rawBody;
+        if (rawBody.ValueKind == JsonValueKind.Object
+            && rawBody.TryGetProperty("body", out var bodyElement))
+        {
+            var enumerator = rawBody.EnumerateObject();
+            enumerator.MoveNext(); // Skip first (we know at least "body" exists)
+            if (!enumerator.MoveNext()) // No second property means count == 1
+                content = bodyElement;
+        }
         return new StringContent(
             JsonSerializer.Serialize(content, ModelBase.SerializerOptions),
             Encoding.UTF8,
