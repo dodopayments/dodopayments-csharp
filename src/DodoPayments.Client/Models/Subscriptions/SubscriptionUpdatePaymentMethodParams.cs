@@ -132,8 +132,10 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
         // The "body" key wraps the union type; the API expects the union content directly.
         var rawBody = this.RawBodyData;
         object content = rawBody;
-        if (rawBody.ValueKind == JsonValueKind.Object
-            && rawBody.TryGetProperty("body", out var bodyElement))
+        if (
+            rawBody.ValueKind == JsonValueKind.Object
+            && rawBody.TryGetProperty("body", out var bodyElement)
+        )
         {
             var enumerator = rawBody.EnumerateObject();
             enumerator.MoveNext(); // Skip first (we know at least "body" exists)
