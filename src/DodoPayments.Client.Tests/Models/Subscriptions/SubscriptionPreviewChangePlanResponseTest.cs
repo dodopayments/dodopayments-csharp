@@ -18,6 +18,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
         {
             ImmediateCharge = new()
             {
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 LineItems =
                 [
                     new LineItemSubscription()
@@ -137,12 +138,32 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 DiscountID = "discount_id",
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                ScheduledChange = new()
+                {
+                    ID = "id",
+                    Addons =
+                    [
+                        new()
+                        {
+                            AddonID = "addon_id",
+                            Name = "name",
+                            Quantity = 0,
+                        },
+                    ],
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    ProductDescription = "product_description",
+                    ProductName = "product_name",
+                },
                 TaxID = "tax_id",
             },
         };
 
         ImmediateCharge expectedImmediateCharge = new()
         {
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             LineItems =
             [
                 new LineItemSubscription()
@@ -262,6 +283,25 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             TaxID = "tax_id",
         };
 
@@ -276,6 +316,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
         {
             ImmediateCharge = new()
             {
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 LineItems =
                 [
                     new LineItemSubscription()
@@ -395,6 +436,25 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 DiscountID = "discount_id",
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                ScheduledChange = new()
+                {
+                    ID = "id",
+                    Addons =
+                    [
+                        new()
+                        {
+                            AddonID = "addon_id",
+                            Name = "name",
+                            Quantity = 0,
+                        },
+                    ],
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    ProductDescription = "product_description",
+                    ProductName = "product_name",
+                },
                 TaxID = "tax_id",
             },
         };
@@ -415,6 +475,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
         {
             ImmediateCharge = new()
             {
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 LineItems =
                 [
                     new LineItemSubscription()
@@ -534,6 +595,25 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 DiscountID = "discount_id",
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                ScheduledChange = new()
+                {
+                    ID = "id",
+                    Addons =
+                    [
+                        new()
+                        {
+                            AddonID = "addon_id",
+                            Name = "name",
+                            Quantity = 0,
+                        },
+                    ],
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    ProductDescription = "product_description",
+                    ProductName = "product_name",
+                },
                 TaxID = "tax_id",
             },
         };
@@ -547,6 +627,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
 
         ImmediateCharge expectedImmediateCharge = new()
         {
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             LineItems =
             [
                 new LineItemSubscription()
@@ -666,6 +747,25 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             TaxID = "tax_id",
         };
 
@@ -680,6 +780,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
         {
             ImmediateCharge = new()
             {
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 LineItems =
                 [
                     new LineItemSubscription()
@@ -799,6 +900,25 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 DiscountID = "discount_id",
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                ScheduledChange = new()
+                {
+                    ID = "id",
+                    Addons =
+                    [
+                        new()
+                        {
+                            AddonID = "addon_id",
+                            Name = "name",
+                            Quantity = 0,
+                        },
+                    ],
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    ProductDescription = "product_description",
+                    ProductName = "product_name",
+                },
                 TaxID = "tax_id",
             },
         };
@@ -813,6 +933,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
         {
             ImmediateCharge = new()
             {
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 LineItems =
                 [
                     new LineItemSubscription()
@@ -932,6 +1053,25 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 DiscountID = "discount_id",
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
+                ScheduledChange = new()
+                {
+                    ID = "id",
+                    Addons =
+                    [
+                        new()
+                        {
+                            AddonID = "addon_id",
+                            Name = "name",
+                            Quantity = 0,
+                        },
+                    ],
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    ProductDescription = "product_description",
+                    ProductName = "product_name",
+                },
                 TaxID = "tax_id",
             },
         };
@@ -949,6 +1089,7 @@ public class ImmediateChargeTest : TestBase
     {
         var model = new ImmediateCharge
         {
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             LineItems =
             [
                 new LineItemSubscription()
@@ -979,6 +1120,7 @@ public class ImmediateChargeTest : TestBase
             },
         };
 
+        DateTimeOffset expectedEffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<LineItem> expectedLineItems =
         [
             new LineItemSubscription()
@@ -1008,6 +1150,7 @@ public class ImmediateChargeTest : TestBase
             Tax = 0,
         };
 
+        Assert.Equal(expectedEffectiveAt, model.EffectiveAt);
         Assert.Equal(expectedLineItems.Count, model.LineItems.Count);
         for (int i = 0; i < expectedLineItems.Count; i++)
         {
@@ -1021,6 +1164,7 @@ public class ImmediateChargeTest : TestBase
     {
         var model = new ImmediateCharge
         {
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             LineItems =
             [
                 new LineItemSubscription()
@@ -1065,6 +1209,7 @@ public class ImmediateChargeTest : TestBase
     {
         var model = new ImmediateCharge
         {
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             LineItems =
             [
                 new LineItemSubscription()
@@ -1102,6 +1247,7 @@ public class ImmediateChargeTest : TestBase
         );
         Assert.NotNull(deserialized);
 
+        DateTimeOffset expectedEffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<LineItem> expectedLineItems =
         [
             new LineItemSubscription()
@@ -1131,6 +1277,7 @@ public class ImmediateChargeTest : TestBase
             Tax = 0,
         };
 
+        Assert.Equal(expectedEffectiveAt, deserialized.EffectiveAt);
         Assert.Equal(expectedLineItems.Count, deserialized.LineItems.Count);
         for (int i = 0; i < expectedLineItems.Count; i++)
         {
@@ -1144,6 +1291,7 @@ public class ImmediateChargeTest : TestBase
     {
         var model = new ImmediateCharge
         {
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             LineItems =
             [
                 new LineItemSubscription()
@@ -1182,6 +1330,7 @@ public class ImmediateChargeTest : TestBase
     {
         var model = new ImmediateCharge
         {
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             LineItems =
             [
                 new LineItemSubscription()
@@ -1244,7 +1393,7 @@ public class LineItemTest : TestBase
     [Fact]
     public void AddonValidationWorks()
     {
-        LineItem value = new Addon()
+        LineItem value = new LineItemAddon()
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1254,7 +1403,7 @@ public class LineItemTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -1314,7 +1463,7 @@ public class LineItemTest : TestBase
     [Fact]
     public void AddonSerializationRoundtripWorks()
     {
-        LineItem value = new Addon()
+        LineItem value = new LineItemAddon()
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1324,7 +1473,7 @@ public class LineItemTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -1697,12 +1846,12 @@ public class LineItemSubscriptionTypeTest : TestBase
     }
 }
 
-public class AddonTest : TestBase
+public class LineItemAddonTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Addon
+        var model = new LineItemAddon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1712,7 +1861,7 @@ public class AddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -1726,7 +1875,7 @@ public class AddonTest : TestBase
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         bool expectedTaxInclusive = true;
         double expectedTaxRate = 0;
-        ApiEnum<string, AddonType> expectedType = AddonType.Addon;
+        ApiEnum<string, LineItemAddonType> expectedType = LineItemAddonType.Addon;
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -1748,7 +1897,7 @@ public class AddonTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Addon
+        var model = new LineItemAddon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1758,14 +1907,17 @@ public class AddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Addon>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<LineItemAddon>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -1773,7 +1925,7 @@ public class AddonTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Addon
+        var model = new LineItemAddon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1783,14 +1935,17 @@ public class AddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Addon>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<LineItemAddon>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -1801,7 +1956,7 @@ public class AddonTest : TestBase
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         bool expectedTaxInclusive = true;
         double expectedTaxRate = 0;
-        ApiEnum<string, AddonType> expectedType = AddonType.Addon;
+        ApiEnum<string, LineItemAddonType> expectedType = LineItemAddonType.Addon;
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -1823,7 +1978,7 @@ public class AddonTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Addon
+        var model = new LineItemAddon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1833,7 +1988,7 @@ public class AddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -1845,7 +2000,7 @@ public class AddonTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Addon
+        var model = new LineItemAddon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1855,7 +2010,7 @@ public class AddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
         };
 
@@ -1868,7 +2023,7 @@ public class AddonTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Addon
+        var model = new LineItemAddon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1878,7 +2033,7 @@ public class AddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
         };
 
@@ -1888,7 +2043,7 @@ public class AddonTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Addon
+        var model = new LineItemAddon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1898,7 +2053,7 @@ public class AddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
 
             Description = null,
@@ -1914,7 +2069,7 @@ public class AddonTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Addon
+        var model = new LineItemAddon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1924,7 +2079,7 @@ public class AddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
 
             Description = null,
@@ -1937,7 +2092,7 @@ public class AddonTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Addon
+        var model = new LineItemAddon
         {
             ID = "id",
             Currency = Currency.Aed,
@@ -1947,33 +2102,33 @@ public class AddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = AddonType.Addon,
+            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
         };
 
-        Addon copied = new(model);
+        LineItemAddon copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class AddonTypeTest : TestBase
+public class LineItemAddonTypeTest : TestBase
 {
     [Theory]
-    [InlineData(AddonType.Addon)]
-    public void Validation_Works(AddonType rawValue)
+    [InlineData(LineItemAddonType.Addon)]
+    public void Validation_Works(LineItemAddonType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AddonType> value = rawValue;
+        ApiEnum<string, LineItemAddonType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, AddonType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemAddonType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1983,14 +2138,14 @@ public class AddonTypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(AddonType.Addon)]
-    public void SerializationRoundtrip_Works(AddonType rawValue)
+    [InlineData(LineItemAddonType.Addon)]
+    public void SerializationRoundtrip_Works(LineItemAddonType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AddonType> value = rawValue;
+        ApiEnum<string, LineItemAddonType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AddonType>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemAddonType>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2001,12 +2156,12 @@ public class AddonTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, AddonType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemAddonType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AddonType>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemAddonType>>(
             json,
             ModelBase.SerializerOptions
         );

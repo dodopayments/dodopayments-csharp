@@ -76,7 +76,7 @@ public sealed record class CheckoutSessionCustomization : JsonModel
     /// <summary>
     /// Theme of the page (determines which mode - light/dark/system - to use)
     ///
-    /// <para>Default is `System`.</para>
+    /// <para>If not provided, uses the business-configured theme from business_themes table.</para>
     /// </summary>
     public ApiEnum<string, Theme>? Theme
     {
@@ -85,15 +85,7 @@ public sealed record class CheckoutSessionCustomization : JsonModel
             this._rawData.Freeze();
             return this._rawData.GetNullableClass<ApiEnum<string, Theme>>("theme");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("theme", value);
-        }
+        init { this._rawData.Set("theme", value); }
     }
 
     /// <summary>
@@ -160,7 +152,7 @@ class CheckoutSessionCustomizationFromRaw : IFromRawJson<CheckoutSessionCustomiz
 /// <summary>
 /// Theme of the page (determines which mode - light/dark/system - to use)
 ///
-/// <para>Default is `System`.</para>
+/// <para>If not provided, uses the business-configured theme from business_themes table.</para>
 /// </summary>
 [JsonConverter(typeof(ThemeConverter))]
 public enum Theme

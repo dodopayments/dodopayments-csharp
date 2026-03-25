@@ -11,13 +11,16 @@ public class CustomerPortalCreateParamsTest : TestBase
         var parameters = new CustomerPortalCreateParams
         {
             CustomerID = "customer_id",
+            ReturnUrl = "return_url",
             SendEmail = true,
         };
 
         string expectedCustomerID = "customer_id";
+        string expectedReturnUrl = "return_url";
         bool expectedSendEmail = true;
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
+        Assert.Equal(expectedReturnUrl, parameters.ReturnUrl);
         Assert.Equal(expectedSendEmail, parameters.SendEmail);
     }
 
@@ -26,6 +29,8 @@ public class CustomerPortalCreateParamsTest : TestBase
     {
         var parameters = new CustomerPortalCreateParams { CustomerID = "customer_id" };
 
+        Assert.Null(parameters.ReturnUrl);
+        Assert.False(parameters.RawQueryData.ContainsKey("return_url"));
         Assert.Null(parameters.SendEmail);
         Assert.False(parameters.RawQueryData.ContainsKey("send_email"));
     }
@@ -38,9 +43,12 @@ public class CustomerPortalCreateParamsTest : TestBase
             CustomerID = "customer_id",
 
             // Null should be interpreted as omitted for these properties
+            ReturnUrl = null,
             SendEmail = null,
         };
 
+        Assert.Null(parameters.ReturnUrl);
+        Assert.False(parameters.RawQueryData.ContainsKey("return_url"));
         Assert.Null(parameters.SendEmail);
         Assert.False(parameters.RawQueryData.ContainsKey("send_email"));
     }
@@ -51,6 +59,7 @@ public class CustomerPortalCreateParamsTest : TestBase
         CustomerPortalCreateParams parameters = new()
         {
             CustomerID = "customer_id",
+            ReturnUrl = "return_url",
             SendEmail = true,
         };
 
@@ -58,7 +67,7 @@ public class CustomerPortalCreateParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://live.dodopayments.com/customers/customer_id/customer-portal/session?send_email=true"
+                "https://live.dodopayments.com/customers/customer_id/customer-portal/session?return_url=return_url&send_email=true"
             ),
             url
         );
@@ -70,6 +79,7 @@ public class CustomerPortalCreateParamsTest : TestBase
         var parameters = new CustomerPortalCreateParams
         {
             CustomerID = "customer_id",
+            ReturnUrl = "return_url",
             SendEmail = true,
         };
 

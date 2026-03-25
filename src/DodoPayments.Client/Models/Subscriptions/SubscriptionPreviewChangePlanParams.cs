@@ -107,6 +107,31 @@ public record class SubscriptionPreviewChangePlanParams : ParamsBase
     }
 
     /// <summary>
+    /// When to apply the plan change. - `immediately` (default): Apply the plan
+    /// change right away - `next_billing_date`: Schedule the change for the next
+    /// billing date
+    /// </summary>
+    public ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt>? EffectiveAt
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt>
+            >("effective_at");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("effective_at", value);
+        }
+    }
+
+    /// <summary>
     /// Metadata for the payment. If not passed, the metadata of the subscription
     /// will be taken
     /// </summary>
@@ -277,6 +302,7 @@ public enum SubscriptionPreviewChangePlanParamsProrationBillingMode
     ProratedImmediately,
     FullImmediately,
     DifferenceImmediately,
+    DoNotBill,
 }
 
 sealed class SubscriptionPreviewChangePlanParamsProrationBillingModeConverter
@@ -296,6 +322,7 @@ sealed class SubscriptionPreviewChangePlanParamsProrationBillingModeConverter
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.FullImmediately,
             "difference_immediately" =>
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.DifferenceImmediately,
+            "do_not_bill" => SubscriptionPreviewChangePlanParamsProrationBillingMode.DoNotBill,
             _ => (SubscriptionPreviewChangePlanParamsProrationBillingMode)(-1),
         };
     }
@@ -316,6 +343,57 @@ sealed class SubscriptionPreviewChangePlanParamsProrationBillingModeConverter
                     "full_immediately",
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.DifferenceImmediately =>
                     "difference_immediately",
+                SubscriptionPreviewChangePlanParamsProrationBillingMode.DoNotBill => "do_not_bill",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// When to apply the plan change. - `immediately` (default): Apply the plan change
+/// right away - `next_billing_date`: Schedule the change for the next billing date
+/// </summary>
+[JsonConverter(typeof(SubscriptionPreviewChangePlanParamsEffectiveAtConverter))]
+public enum SubscriptionPreviewChangePlanParamsEffectiveAt
+{
+    Immediately,
+    NextBillingDate,
+}
+
+sealed class SubscriptionPreviewChangePlanParamsEffectiveAtConverter
+    : JsonConverter<SubscriptionPreviewChangePlanParamsEffectiveAt>
+{
+    public override SubscriptionPreviewChangePlanParamsEffectiveAt Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "immediately" => SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
+            "next_billing_date" => SubscriptionPreviewChangePlanParamsEffectiveAt.NextBillingDate,
+            _ => (SubscriptionPreviewChangePlanParamsEffectiveAt)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionPreviewChangePlanParamsEffectiveAt value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately => "immediately",
+                SubscriptionPreviewChangePlanParamsEffectiveAt.NextBillingDate =>
+                    "next_billing_date",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

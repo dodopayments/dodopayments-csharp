@@ -100,6 +100,20 @@ public record class CheckoutSessionCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// The URL to redirect the customer if they cancel or go back from the checkout.
+    /// If not provided, the back button will not be displayed.
+    /// </summary>
+    public string? CancelUrl
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("cancel_url");
+        }
+        init { this._rawBodyData.Set("cancel_url", value); }
+    }
+
+    /// <summary>
     /// If confirm is true, all the details will be finalized. If required data is
     /// missing, an API error is thrown.
     /// </summary>

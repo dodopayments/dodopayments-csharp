@@ -145,6 +145,11 @@ public sealed record class CustomerRetrievePaymentMethodsResponseItem : JsonMode
         init { this._rawData.Set("last_used_at", value); }
     }
 
+    /// <summary>
+    /// All supported payment method types (from Hyperswitch).
+    ///
+    /// <para>Used for disabled-payment-methods filtering and validation.</para>
+    /// </summary>
     public ApiEnum<string, PaymentMethodTypes>? PaymentMethodType
     {
         get

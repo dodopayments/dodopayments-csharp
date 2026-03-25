@@ -57,6 +57,25 @@ public class SubscriptionListPageResponseTest : TestBase
                     DiscountID = "discount_id",
                     PaymentMethodID = "payment_method_id",
                     ProductName = "product_name",
+                    ScheduledChange = new()
+                    {
+                        ID = "id",
+                        Addons =
+                        [
+                            new()
+                            {
+                                AddonID = "addon_id",
+                                Name = "name",
+                                Quantity = 0,
+                            },
+                        ],
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ProductID = "product_id",
+                        Quantity = 0,
+                        ProductDescription = "product_description",
+                        ProductName = "product_name",
+                    },
                     TaxID = "tax_id",
                 },
             ],
@@ -105,6 +124,25 @@ public class SubscriptionListPageResponseTest : TestBase
                 DiscountID = "discount_id",
                 PaymentMethodID = "payment_method_id",
                 ProductName = "product_name",
+                ScheduledChange = new()
+                {
+                    ID = "id",
+                    Addons =
+                    [
+                        new()
+                        {
+                            AddonID = "addon_id",
+                            Name = "name",
+                            Quantity = 0,
+                        },
+                    ],
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    ProductDescription = "product_description",
+                    ProductName = "product_name",
+                },
                 TaxID = "tax_id",
             },
         ];
@@ -164,6 +202,25 @@ public class SubscriptionListPageResponseTest : TestBase
                     DiscountID = "discount_id",
                     PaymentMethodID = "payment_method_id",
                     ProductName = "product_name",
+                    ScheduledChange = new()
+                    {
+                        ID = "id",
+                        Addons =
+                        [
+                            new()
+                            {
+                                AddonID = "addon_id",
+                                Name = "name",
+                                Quantity = 0,
+                            },
+                        ],
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ProductID = "product_id",
+                        Quantity = 0,
+                        ProductDescription = "product_description",
+                        ProductName = "product_name",
+                    },
                     TaxID = "tax_id",
                 },
             ],
@@ -226,6 +283,25 @@ public class SubscriptionListPageResponseTest : TestBase
                     DiscountID = "discount_id",
                     PaymentMethodID = "payment_method_id",
                     ProductName = "product_name",
+                    ScheduledChange = new()
+                    {
+                        ID = "id",
+                        Addons =
+                        [
+                            new()
+                            {
+                                AddonID = "addon_id",
+                                Name = "name",
+                                Quantity = 0,
+                            },
+                        ],
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ProductID = "product_id",
+                        Quantity = 0,
+                        ProductDescription = "product_description",
+                        ProductName = "product_name",
+                    },
                     TaxID = "tax_id",
                 },
             ],
@@ -281,6 +357,25 @@ public class SubscriptionListPageResponseTest : TestBase
                 DiscountID = "discount_id",
                 PaymentMethodID = "payment_method_id",
                 ProductName = "product_name",
+                ScheduledChange = new()
+                {
+                    ID = "id",
+                    Addons =
+                    [
+                        new()
+                        {
+                            AddonID = "addon_id",
+                            Name = "name",
+                            Quantity = 0,
+                        },
+                    ],
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductID = "product_id",
+                    Quantity = 0,
+                    ProductDescription = "product_description",
+                    ProductName = "product_name",
+                },
                 TaxID = "tax_id",
             },
         ];
@@ -340,6 +435,25 @@ public class SubscriptionListPageResponseTest : TestBase
                     DiscountID = "discount_id",
                     PaymentMethodID = "payment_method_id",
                     ProductName = "product_name",
+                    ScheduledChange = new()
+                    {
+                        ID = "id",
+                        Addons =
+                        [
+                            new()
+                            {
+                                AddonID = "addon_id",
+                                Name = "name",
+                                Quantity = 0,
+                            },
+                        ],
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ProductID = "product_id",
+                        Quantity = 0,
+                        ProductDescription = "product_description",
+                        ProductName = "product_name",
+                    },
                     TaxID = "tax_id",
                 },
             ],
@@ -396,6 +510,25 @@ public class SubscriptionListPageResponseTest : TestBase
                     DiscountID = "discount_id",
                     PaymentMethodID = "payment_method_id",
                     ProductName = "product_name",
+                    ScheduledChange = new()
+                    {
+                        ID = "id",
+                        Addons =
+                        [
+                            new()
+                            {
+                                AddonID = "addon_id",
+                                Name = "name",
+                                Quantity = 0,
+                            },
+                        ],
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ProductID = "product_id",
+                        Quantity = 0,
+                        ProductDescription = "product_description",
+                        ProductName = "product_name",
+                    },
                     TaxID = "tax_id",
                 },
             ],

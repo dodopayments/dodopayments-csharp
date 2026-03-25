@@ -382,6 +382,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            Theme = Theme.Dark,
             ThemeConfig = new()
             {
                 Dark = new()
@@ -435,8 +436,6 @@ public class CheckoutSessionCustomizationTest : TestBase
         Assert.False(model.RawData.ContainsKey("show_on_demand_tag"));
         Assert.Null(model.ShowOrderDetails);
         Assert.False(model.RawData.ContainsKey("show_order_details"));
-        Assert.Null(model.Theme);
-        Assert.False(model.RawData.ContainsKey("theme"));
     }
 
     [Fact]
@@ -445,6 +444,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            Theme = Theme.Dark,
             ThemeConfig = new()
             {
                 Dark = new()
@@ -503,6 +503,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            Theme = Theme.Dark,
             ThemeConfig = new()
             {
                 Dark = new()
@@ -554,15 +555,12 @@ public class CheckoutSessionCustomizationTest : TestBase
             // Null should be interpreted as omitted for these properties
             ShowOnDemandTag = null,
             ShowOrderDetails = null,
-            Theme = null,
         };
 
         Assert.Null(model.ShowOnDemandTag);
         Assert.False(model.RawData.ContainsKey("show_on_demand_tag"));
         Assert.Null(model.ShowOrderDetails);
         Assert.False(model.RawData.ContainsKey("show_order_details"));
-        Assert.Null(model.Theme);
-        Assert.False(model.RawData.ContainsKey("theme"));
     }
 
     [Fact]
@@ -571,6 +569,7 @@ public class CheckoutSessionCustomizationTest : TestBase
         var model = new CheckoutSessionCustomization
         {
             ForceLanguage = "force_language",
+            Theme = Theme.Dark,
             ThemeConfig = new()
             {
                 Dark = new()
@@ -622,7 +621,6 @@ public class CheckoutSessionCustomizationTest : TestBase
             // Null should be interpreted as omitted for these properties
             ShowOnDemandTag = null,
             ShowOrderDetails = null,
-            Theme = null,
         };
 
         model.Validate();
@@ -635,11 +633,12 @@ public class CheckoutSessionCustomizationTest : TestBase
         {
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
         };
 
         Assert.Null(model.ForceLanguage);
         Assert.False(model.RawData.ContainsKey("force_language"));
+        Assert.Null(model.Theme);
+        Assert.False(model.RawData.ContainsKey("theme"));
         Assert.Null(model.ThemeConfig);
         Assert.False(model.RawData.ContainsKey("theme_config"));
     }
@@ -651,7 +650,6 @@ public class CheckoutSessionCustomizationTest : TestBase
         {
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
         };
 
         model.Validate();
@@ -664,14 +662,16 @@ public class CheckoutSessionCustomizationTest : TestBase
         {
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
 
             ForceLanguage = null,
+            Theme = null,
             ThemeConfig = null,
         };
 
         Assert.Null(model.ForceLanguage);
         Assert.True(model.RawData.ContainsKey("force_language"));
+        Assert.Null(model.Theme);
+        Assert.True(model.RawData.ContainsKey("theme"));
         Assert.Null(model.ThemeConfig);
         Assert.True(model.RawData.ContainsKey("theme_config"));
     }
@@ -683,9 +683,9 @@ public class CheckoutSessionCustomizationTest : TestBase
         {
             ShowOnDemandTag = true,
             ShowOrderDetails = true,
-            Theme = Theme.Dark,
 
             ForceLanguage = null,
+            Theme = null,
             ThemeConfig = null,
         };
 

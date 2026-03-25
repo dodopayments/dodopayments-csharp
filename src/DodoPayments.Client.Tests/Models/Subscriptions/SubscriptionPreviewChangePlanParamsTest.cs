@@ -21,6 +21,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
         };
@@ -35,6 +36,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         int expectedQuantity = 0;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         string expectedDiscountCode = "discount_code";
+        ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt> expectedEffectiveAt =
+            SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<
             string,
@@ -53,6 +56,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Assert.Equal(expectedAddons[i], parameters.Addons[i]);
         }
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
+        Assert.Equal(expectedEffectiveAt, parameters.EffectiveAt);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -65,6 +69,49 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
     }
 
     [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new SubscriptionPreviewChangePlanParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductID = "product_id",
+            ProrationBillingMode =
+                SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
+        };
+
+        Assert.Null(parameters.EffectiveAt);
+        Assert.False(parameters.RawBodyData.ContainsKey("effective_at"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new SubscriptionPreviewChangePlanParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductID = "product_id",
+            ProrationBillingMode =
+                SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
+
+            // Null should be interpreted as omitted for these properties
+            EffectiveAt = null,
+        };
+
+        Assert.Null(parameters.EffectiveAt);
+        Assert.False(parameters.RawBodyData.ContainsKey("effective_at"));
+    }
+
+    [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
         var parameters = new SubscriptionPreviewChangePlanParams
@@ -74,6 +121,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
         };
 
         Assert.Null(parameters.Addons);
@@ -96,6 +144,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
 
             Addons = null,
             DiscountCode = null,
@@ -147,6 +196,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
         };
@@ -163,6 +213,7 @@ public class SubscriptionPreviewChangePlanParamsProrationBillingModeTest : TestB
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately)]
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.FullImmediately)]
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.DifferenceImmediately)]
+    [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.DoNotBill)]
     public void Validation_Works(SubscriptionPreviewChangePlanParamsProrationBillingMode rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -185,6 +236,7 @@ public class SubscriptionPreviewChangePlanParamsProrationBillingModeTest : TestB
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately)]
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.FullImmediately)]
     [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.DifferenceImmediately)]
+    [InlineData(SubscriptionPreviewChangePlanParamsProrationBillingMode.DoNotBill)]
     public void SerializationRoundtrip_Works(
         SubscriptionPreviewChangePlanParamsProrationBillingMode rawValue
     )
@@ -209,6 +261,62 @@ public class SubscriptionPreviewChangePlanParamsProrationBillingModeTest : TestB
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionPreviewChangePlanParamsProrationBillingMode>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionPreviewChangePlanParamsEffectiveAtTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately)]
+    [InlineData(SubscriptionPreviewChangePlanParamsEffectiveAt.NextBillingDate)]
+    public void Validation_Works(SubscriptionPreviewChangePlanParamsEffectiveAt rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately)]
+    [InlineData(SubscriptionPreviewChangePlanParamsEffectiveAt.NextBillingDate)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionPreviewChangePlanParamsEffectiveAt rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

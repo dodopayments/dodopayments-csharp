@@ -82,6 +82,20 @@ public sealed record class CheckoutSessionRequest : JsonModel
     }
 
     /// <summary>
+    /// The URL to redirect the customer if they cancel or go back from the checkout.
+    /// If not provided, the back button will not be displayed.
+    /// </summary>
+    public string? CancelUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("cancel_url");
+        }
+        init { this._rawData.Set("cancel_url", value); }
+    }
+
+    /// <summary>
     /// If confirm is true, all the details will be finalized. If required data is
     /// missing, an API error is thrown.
     /// </summary>
@@ -356,6 +370,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
         }
         this.BillingAddress?.Validate();
         this.BillingCurrency?.Validate();
+        _ = this.CancelUrl;
         _ = this.Confirm;
         foreach (var item in this.CustomFields ?? [])
         {

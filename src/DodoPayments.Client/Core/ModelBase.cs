@@ -54,19 +54,25 @@ public abstract record class ModelBase
                 string,
                 Subscriptions::UpdateSubscriptionPlanReqProrationBillingMode
             >(),
+            new ApiEnumConverter<string, Subscriptions::UpdateSubscriptionPlanReqEffectiveAt>(),
             new ApiEnumConverter<
                 string,
                 Subscriptions::UpdateSubscriptionPlanReqOnPaymentFailure
             >(),
             new ApiEnumConverter<string, Subscriptions::LineItemSubscriptionType>(),
-            new ApiEnumConverter<string, Subscriptions::AddonType>(),
+            new ApiEnumConverter<string, Subscriptions::LineItemAddonType>(),
             new ApiEnumConverter<string, Subscriptions::MeterType>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
+            new ApiEnumConverter<string, Subscriptions::EffectiveAt>(),
             new ApiEnumConverter<string, Subscriptions::OnPaymentFailure>(),
             new ApiEnumConverter<
                 string,
                 Subscriptions::SubscriptionPreviewChangePlanParamsProrationBillingMode
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionPreviewChangePlanParamsEffectiveAt
             >(),
             new ApiEnumConverter<
                 string,

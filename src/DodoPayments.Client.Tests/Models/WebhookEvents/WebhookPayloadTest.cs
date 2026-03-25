@@ -869,6 +869,25 @@ public class DataTest : TestBase
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             TaxID = "tax_id",
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
@@ -1181,6 +1200,25 @@ public class DataTest : TestBase
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             TaxID = "tax_id",
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
@@ -3053,6 +3091,25 @@ public class SubscriptionTest : TestBase
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             TaxID = "tax_id",
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
@@ -3156,6 +3213,25 @@ public class SubscriptionTest : TestBase
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
+        Subscriptions::ScheduledChange expectedScheduledChange = new()
+        {
+            ID = "id",
+            Addons =
+            [
+                new()
+                {
+                    AddonID = "addon_id",
+                    Name = "name",
+                    Quantity = 0,
+                },
+            ],
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            ProductDescription = "product_description",
+            ProductName = "product_name",
+        };
         string expectedTaxID = "tax_id";
         ApiEnum<string, SubscriptionIntersectionMember1PayloadType> expectedPayloadType =
             SubscriptionIntersectionMember1PayloadType.Subscription;
@@ -3223,6 +3299,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
+        Assert.Equal(expectedScheduledChange, model.ScheduledChange);
         Assert.Equal(expectedTaxID, model.TaxID);
         Assert.Equal(expectedPayloadType, model.PayloadType);
     }
@@ -3320,6 +3397,25 @@ public class SubscriptionTest : TestBase
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             TaxID = "tax_id",
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
@@ -3426,6 +3522,25 @@ public class SubscriptionTest : TestBase
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             TaxID = "tax_id",
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
@@ -3536,6 +3651,25 @@ public class SubscriptionTest : TestBase
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
+        Subscriptions::ScheduledChange expectedScheduledChange = new()
+        {
+            ID = "id",
+            Addons =
+            [
+                new()
+                {
+                    AddonID = "addon_id",
+                    Name = "name",
+                    Quantity = 0,
+                },
+            ],
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            ProductDescription = "product_description",
+            ProductName = "product_name",
+        };
         string expectedTaxID = "tax_id";
         ApiEnum<string, SubscriptionIntersectionMember1PayloadType> expectedPayloadType =
             SubscriptionIntersectionMember1PayloadType.Subscription;
@@ -3603,6 +3737,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
+        Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
         Assert.Equal(expectedTaxID, deserialized.TaxID);
         Assert.Equal(expectedPayloadType, deserialized.PayloadType);
     }
@@ -3700,6 +3835,25 @@ public class SubscriptionTest : TestBase
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             TaxID = "tax_id",
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
@@ -3809,6 +3963,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("expires_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.ScheduledChange);
+        Assert.False(model.RawData.ContainsKey("scheduled_change"));
         Assert.Null(model.TaxID);
         Assert.False(model.RawData.ContainsKey("tax_id"));
     }
@@ -4001,6 +4157,7 @@ public class SubscriptionTest : TestBase
             DiscountID = null,
             ExpiresAt = null,
             PaymentMethodID = null,
+            ScheduledChange = null,
             TaxID = null,
         };
 
@@ -4016,6 +4173,8 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("expires_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
+        Assert.Null(model.ScheduledChange);
+        Assert.True(model.RawData.ContainsKey("scheduled_change"));
         Assert.Null(model.TaxID);
         Assert.True(model.RawData.ContainsKey("tax_id"));
     }
@@ -4115,6 +4274,7 @@ public class SubscriptionTest : TestBase
             DiscountID = null,
             ExpiresAt = null,
             PaymentMethodID = null,
+            ScheduledChange = null,
             TaxID = null,
         };
 
@@ -4214,6 +4374,25 @@ public class SubscriptionTest : TestBase
             DiscountID = "discount_id",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             TaxID = "tax_id",
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
