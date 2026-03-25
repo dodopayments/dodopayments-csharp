@@ -44,6 +44,23 @@ public interface IPaymentService
     );
 
     /// <summary>
+    /// Sends a request to <c>get /invoices/payouts/{payout_id}</c>.
+    ///
+    /// <para>It's the caller's responsibility to dispose the returned response.</para>
+    /// </summary>
+    Task<HttpResponse> RetrievePayout(
+        PaymentRetrievePayoutParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrievePayout(PaymentRetrievePayoutParams, CancellationToken)"/>
+    Task<HttpResponse> RetrievePayout(
+        string payoutID,
+        PaymentRetrievePayoutParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Sends a request to <c>get /invoices/refunds/{refund_id}</c>.
     ///
     /// <para>It's the caller's responsibility to dispose the returned response.</para>
@@ -87,6 +104,22 @@ public interface IPaymentServiceWithRawResponse
     Task<HttpResponse> Retrieve(
         string paymentID,
         PaymentRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /invoices/payouts/{payout_id}</c>, but is otherwise the
+    /// same as <see cref="IPaymentService.RetrievePayout(PaymentRetrievePayoutParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse> RetrievePayout(
+        PaymentRetrievePayoutParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrievePayout(PaymentRetrievePayoutParams, CancellationToken)"/>
+    Task<HttpResponse> RetrievePayout(
+        string payoutID,
+        PaymentRetrievePayoutParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

@@ -116,6 +116,34 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
+    public Task CancelChangePlan(
+        SubscriptionCancelChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.WithRawResponse.CancelChangePlan(parameters, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task CancelChangePlan(
+        string subscriptionID,
+        SubscriptionCancelChangePlanParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        await this.CancelChangePlan(
+                parameters with
+                {
+                    SubscriptionID = subscriptionID,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
     public Task ChangePlan(
         SubscriptionChangePlanParams parameters,
         CancellationToken cancellationToken = default
@@ -454,6 +482,45 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
                 }
                 return new SubscriptionListPage(this, parameters, page);
             }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> CancelChangePlan(
+        SubscriptionCancelChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.SubscriptionID == null)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "'parameters.SubscriptionID' cannot be null"
+            );
+        }
+
+        HttpRequest<SubscriptionCancelChangePlanParams> request = new()
+        {
+            Method = HttpMethod.Delete,
+            Params = parameters,
+        };
+        return this._client.Execute(request, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> CancelChangePlan(
+        string subscriptionID,
+        SubscriptionCancelChangePlanParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.CancelChangePlan(
+            parameters with
+            {
+                SubscriptionID = subscriptionID,
+            },
+            cancellationToken
         );
     }
 

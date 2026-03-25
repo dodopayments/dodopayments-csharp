@@ -74,6 +74,21 @@ public interface ISubscriptionService
     );
 
     /// <summary>
+    /// Sends a request to <c>delete /subscriptions/{subscription_id}/change-plan/scheduled</c>.
+    /// </summary>
+    Task CancelChangePlan(
+        SubscriptionCancelChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="CancelChangePlan(SubscriptionCancelChangePlanParams, CancellationToken)"/>
+    Task CancelChangePlan(
+        string subscriptionID,
+        SubscriptionCancelChangePlanParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Sends a request to <c>post /subscriptions/{subscription_id}/change-plan</c>.
     /// </summary>
     Task ChangePlan(
@@ -256,6 +271,22 @@ public interface ISubscriptionServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<SubscriptionListPage>> List(
         SubscriptionListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>delete /subscriptions/{subscription_id}/change-plan/scheduled</c>, but is otherwise the
+    /// same as <see cref="ISubscriptionService.CancelChangePlan(SubscriptionCancelChangePlanParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse> CancelChangePlan(
+        SubscriptionCancelChangePlanParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="CancelChangePlan(SubscriptionCancelChangePlanParams, CancellationToken)"/>
+    Task<HttpResponse> CancelChangePlan(
+        string subscriptionID,
+        SubscriptionCancelChangePlanParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
