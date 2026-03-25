@@ -1,5 +1,24 @@
 # Changelog
 
+## 6.12.0 (2026-03-25)
+
+Full Changelog: [v6.11.3...v6.12.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.11.3...v6.12.0)
+
+### Features
+
+* **api:** added cancel change plan endpoint ([6124cd3](https://github.com/dodopayments/dodopayments-csharp/commit/6124cd3440cb31017f0f1981979d89938b4855fa))
+* **api:** manual updates ([f662312](https://github.com/dodopayments/dodopayments-csharp/commit/f662312b351b5f55a359597504b8040c583affb3))
+* **api:** updated openapi spec to 1.92.1 ([7a2dd6d](https://github.com/dodopayments/dodopayments-csharp/commit/7a2dd6d13593741c43d38a5243c7d2e08abbdfe8))
+* **api:** updated openapi spec to v1.92.3 ([c952461](https://github.com/dodopayments/dodopayments-csharp/commit/c9524614e21ca37ac07a9c95ab8cb9dcd08621b0))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([0597442](https://github.com/dodopayments/dodopayments-csharp/commit/0597442a062df6009ed8d9e07c4668246bb93355))
+* **internal:** update gitignore ([607486a](https://github.com/dodopayments/dodopayments-csharp/commit/607486a0b0a03ff5577f3341bd865e1556bb695a))
+* **tests:** bump steady to v0.19.6 ([621c97c](https://github.com/dodopayments/dodopayments-csharp/commit/621c97cf1f23b0cecb9749b234503efe4e5e5d0d))
+* **tests:** bump steady to v0.19.7 ([6bfa02d](https://github.com/dodopayments/dodopayments-csharp/commit/6bfa02d1abdab6434e11f8ea08c58da86fb01c1c))
+
 ## 6.11.3 (2026-03-21)
 
 Full Changelog: [v6.11.2...v6.11.3](https://github.com/dodopayments/dodopayments-csharp/compare/v6.11.2...v6.11.3)
