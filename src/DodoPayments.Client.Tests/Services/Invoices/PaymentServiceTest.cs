@@ -15,16 +15,6 @@ public class PaymentServiceTest : TestBase
     }
 
     [Fact]
-    public async Task RetrievePayout_Works()
-    {
-        await this.client.Invoices.Payments.RetrievePayout(
-            "payout_id",
-            new(),
-            TestContext.Current.CancellationToken
-        );
-    }
-
-    [Fact]
     public async Task RetrieveRefund_Works()
     {
         await this.client.Invoices.Payments.RetrieveRefund(

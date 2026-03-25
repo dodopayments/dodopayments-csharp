@@ -19,7 +19,6 @@ using Payouts = DodoPayments.Client.Models.Payouts;
 using Refunds = DodoPayments.Client.Models.Refunds;
 using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 using Webhooks = DodoPayments.Client.Models.Webhooks;
-using YourWebhookUrl = DodoPayments.Client.Models.YourWebhookUrl;
 
 namespace DodoPayments.Client.Core;
 
@@ -150,22 +149,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CreditEntitlementsBalances::LedgerEntryType>(),
             new ApiEnumConverter<string, CreditEntitlementsBalances::SourceType>(),
             new ApiEnumConverter<string, CreditEntitlementsBalances::Status>(),
-            new ApiEnumConverter<string, YourWebhookUrl::PayloadType>(),
-            new ApiEnumConverter<
-                string,
-                YourWebhookUrl::SubscriptionIntersectionMember1PayloadType
-            >(),
-            new ApiEnumConverter<string, YourWebhookUrl::RefundIntersectionMember1PayloadType>(),
-            new ApiEnumConverter<string, YourWebhookUrl::DisputeIntersectionMember1PayloadType>(),
-            new ApiEnumConverter<
-                string,
-                YourWebhookUrl::LicenseKeyIntersectionMember1PayloadType
-            >(),
-            new ApiEnumConverter<
-                string,
-                YourWebhookUrl::CreditLedgerEntryIntersectionMember1PayloadType
-            >(),
-            new ApiEnumConverter<string, YourWebhookUrl::CreditBalanceLowPayloadType>(),
         },
     };
 

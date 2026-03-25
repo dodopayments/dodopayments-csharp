@@ -211,18 +211,6 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         get { return _creditEntitlements.Value; }
     }
 
-    readonly Lazy<IProductCollectionService> _productCollections;
-    public IProductCollectionService ProductCollections
-    {
-        get { return _productCollections.Value; }
-    }
-
-    readonly Lazy<IYourWebhookUrlService> _yourWebhookUrl;
-    public IYourWebhookUrlService YourWebhookUrl
-    {
-        get { return _yourWebhookUrl.Value; }
-    }
-
     public void Dispose() => this.HttpClient.Dispose();
 
     public DodoPaymentsClient()
@@ -252,8 +240,6 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         _meters = new(() => new MeterService(this));
         _balances = new(() => new BalanceService(this));
         _creditEntitlements = new(() => new CreditEntitlementService(this));
-        _productCollections = new(() => new ProductCollectionService(this));
-        _yourWebhookUrl = new(() => new YourWebhookUrlService(this));
     }
 
     public DodoPaymentsClient(ClientOptions options)
@@ -468,18 +454,6 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
     public ICreditEntitlementServiceWithRawResponse CreditEntitlements
     {
         get { return _creditEntitlements.Value; }
-    }
-
-    readonly Lazy<IProductCollectionServiceWithRawResponse> _productCollections;
-    public IProductCollectionServiceWithRawResponse ProductCollections
-    {
-        get { return _productCollections.Value; }
-    }
-
-    readonly Lazy<IYourWebhookUrlServiceWithRawResponse> _yourWebhookUrl;
-    public IYourWebhookUrlServiceWithRawResponse YourWebhookUrl
-    {
-        get { return _yourWebhookUrl.Value; }
     }
 
     /// <inheritdoc/>
@@ -702,8 +676,6 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
         _meters = new(() => new MeterServiceWithRawResponse(this));
         _balances = new(() => new BalanceServiceWithRawResponse(this));
         _creditEntitlements = new(() => new CreditEntitlementServiceWithRawResponse(this));
-        _productCollections = new(() => new ProductCollectionServiceWithRawResponse(this));
-        _yourWebhookUrl = new(() => new YourWebhookUrlServiceWithRawResponse(this));
     }
 
     public DodoPaymentsClientWithRawResponse(ClientOptions options)

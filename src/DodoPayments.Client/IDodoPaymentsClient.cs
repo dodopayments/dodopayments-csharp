@@ -99,10 +99,6 @@ public interface IDodoPaymentsClient : IDisposable
     IBalanceService Balances { get; }
 
     ICreditEntitlementService CreditEntitlements { get; }
-
-    IProductCollectionService ProductCollections { get; }
-
-    IYourWebhookUrlService YourWebhookUrl { get; }
 }
 
 /// <summary>
@@ -182,10 +178,6 @@ public interface IDodoPaymentsClientWithRawResponse : IDisposable
     IBalanceServiceWithRawResponse Balances { get; }
 
     ICreditEntitlementServiceWithRawResponse CreditEntitlements { get; }
-
-    IProductCollectionServiceWithRawResponse ProductCollections { get; }
-
-    IYourWebhookUrlServiceWithRawResponse YourWebhookUrl { get; }
 
     /// <summary>
     /// Sends a request to the Dodo Payments REST API.
