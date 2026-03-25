@@ -122,6 +122,32 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
+    public Task DeletePaymentMethod(
+        CustomerDeletePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.WithRawResponse.DeletePaymentMethod(parameters, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task DeletePaymentMethod(
+        string paymentMethodID,
+        CustomerDeletePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        await this.DeletePaymentMethod(
+                parameters with
+                {
+                    PaymentMethodID = paymentMethodID,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
     public async Task<CustomerListCreditEntitlementsResponse> ListCreditEntitlements(
         CustomerListCreditEntitlementsParams parameters,
         CancellationToken cancellationToken = default
@@ -352,6 +378,43 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
                 }
                 return new CustomerListPage(this, parameters, page);
             }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> DeletePaymentMethod(
+        CustomerDeletePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.PaymentMethodID == null)
+        {
+            throw new DodoPaymentsInvalidDataException(
+                "'parameters.PaymentMethodID' cannot be null"
+            );
+        }
+
+        HttpRequest<CustomerDeletePaymentMethodParams> request = new()
+        {
+            Method = HttpMethod.Delete,
+            Params = parameters,
+        };
+        return this._client.Execute(request, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> DeletePaymentMethod(
+        string paymentMethodID,
+        CustomerDeletePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.DeletePaymentMethod(
+            parameters with
+            {
+                PaymentMethodID = paymentMethodID,
+            },
+            cancellationToken
         );
     }
 

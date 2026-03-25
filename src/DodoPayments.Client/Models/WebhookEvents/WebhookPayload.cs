@@ -2783,6 +2783,19 @@ public sealed record class Dispute : JsonModel
     }
 
     /// <summary>
+    /// Whether the dispute was resolved by Rapid Dispute Resolution
+    /// </summary>
+    public bool? IsResolvedByRdr
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("is_resolved_by_rdr");
+        }
+        init { this._rawData.Set("is_resolved_by_rdr", value); }
+    }
+
+    /// <summary>
     /// Reason for the dispute
     /// </summary>
     public string? Reason
@@ -2832,6 +2845,7 @@ public sealed record class Dispute : JsonModel
             DisputeStage = dispute.DisputeStage,
             DisputeStatus = dispute.DisputeStatus,
             PaymentID = dispute.PaymentID,
+            IsResolvedByRdr = dispute.IsResolvedByRdr,
             Reason = dispute.Reason,
             Remarks = dispute.Remarks,
         };
@@ -2848,6 +2862,7 @@ public sealed record class Dispute : JsonModel
         this.DisputeStage.Validate();
         this.DisputeStatus.Validate();
         _ = this.PaymentID;
+        _ = this.IsResolvedByRdr;
         _ = this.Reason;
         _ = this.Remarks;
         this.PayloadType.Validate();

@@ -25,6 +25,7 @@ public class DisputeExpiredWebhookEventTest : TestBase
                 DisputeStage = DisputeDisputeStage.PreDispute,
                 DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
+                IsResolvedByRdr = true,
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -42,6 +43,7 @@ public class DisputeExpiredWebhookEventTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Remarks = "remarks",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -70,6 +72,7 @@ public class DisputeExpiredWebhookEventTest : TestBase
                 DisputeStage = DisputeDisputeStage.PreDispute,
                 DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
+                IsResolvedByRdr = true,
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -101,6 +104,7 @@ public class DisputeExpiredWebhookEventTest : TestBase
                 DisputeStage = DisputeDisputeStage.PreDispute,
                 DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
+                IsResolvedByRdr = true,
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -125,6 +129,7 @@ public class DisputeExpiredWebhookEventTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Remarks = "remarks",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -153,6 +158,7 @@ public class DisputeExpiredWebhookEventTest : TestBase
                 DisputeStage = DisputeDisputeStage.PreDispute,
                 DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
+                IsResolvedByRdr = true,
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -178,6 +184,7 @@ public class DisputeExpiredWebhookEventTest : TestBase
                 DisputeStage = DisputeDisputeStage.PreDispute,
                 DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
+                IsResolvedByRdr = true,
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

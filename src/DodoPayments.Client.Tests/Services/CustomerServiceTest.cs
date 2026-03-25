@@ -44,6 +44,16 @@ public class CustomerServiceTest : TestBase
     }
 
     [Fact]
+    public async Task DeletePaymentMethod_Works()
+    {
+        await this.client.Customers.DeletePaymentMethod(
+            "payment_method_id",
+            new() { CustomerID = "customer_id" },
+            TestContext.Current.CancellationToken
+        );
+    }
+
+    [Fact]
     public async Task ListCreditEntitlements_Works()
     {
         var response = await this.client.Customers.ListCreditEntitlements(

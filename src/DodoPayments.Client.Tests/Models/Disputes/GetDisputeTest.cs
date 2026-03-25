@@ -30,6 +30,7 @@ public class GetDisputeTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
         };
@@ -51,6 +52,7 @@ public class GetDisputeTest : TestBase
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        bool expectedIsResolvedByRdr = true;
         string expectedReason = "reason";
         string expectedRemarks = "remarks";
 
@@ -63,6 +65,7 @@ public class GetDisputeTest : TestBase
         Assert.Equal(expectedDisputeStage, model.DisputeStage);
         Assert.Equal(expectedDisputeStatus, model.DisputeStatus);
         Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedIsResolvedByRdr, model.IsResolvedByRdr);
         Assert.Equal(expectedReason, model.Reason);
         Assert.Equal(expectedRemarks, model.Remarks);
     }
@@ -88,6 +91,7 @@ public class GetDisputeTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
         };
@@ -122,6 +126,7 @@ public class GetDisputeTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
         };
@@ -150,6 +155,7 @@ public class GetDisputeTest : TestBase
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        bool expectedIsResolvedByRdr = true;
         string expectedReason = "reason";
         string expectedRemarks = "remarks";
 
@@ -162,6 +168,7 @@ public class GetDisputeTest : TestBase
         Assert.Equal(expectedDisputeStage, deserialized.DisputeStage);
         Assert.Equal(expectedDisputeStatus, deserialized.DisputeStatus);
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedIsResolvedByRdr, deserialized.IsResolvedByRdr);
         Assert.Equal(expectedReason, deserialized.Reason);
         Assert.Equal(expectedRemarks, deserialized.Remarks);
     }
@@ -187,6 +194,7 @@ public class GetDisputeTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
         };
@@ -217,6 +225,8 @@ public class GetDisputeTest : TestBase
             PaymentID = "payment_id",
         };
 
+        Assert.Null(model.IsResolvedByRdr);
+        Assert.False(model.RawData.ContainsKey("is_resolved_by_rdr"));
         Assert.Null(model.Reason);
         Assert.False(model.RawData.ContainsKey("reason"));
         Assert.Null(model.Remarks);
@@ -271,10 +281,13 @@ public class GetDisputeTest : TestBase
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
 
+            IsResolvedByRdr = null,
             Reason = null,
             Remarks = null,
         };
 
+        Assert.Null(model.IsResolvedByRdr);
+        Assert.True(model.RawData.ContainsKey("is_resolved_by_rdr"));
         Assert.Null(model.Reason);
         Assert.True(model.RawData.ContainsKey("reason"));
         Assert.Null(model.Remarks);
@@ -303,6 +316,7 @@ public class GetDisputeTest : TestBase
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
 
+            IsResolvedByRdr = null,
             Reason = null,
             Remarks = null,
         };
@@ -331,6 +345,7 @@ public class GetDisputeTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
         };
