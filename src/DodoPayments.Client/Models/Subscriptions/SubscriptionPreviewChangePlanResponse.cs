@@ -93,6 +93,19 @@ class SubscriptionPreviewChangePlanResponseFromRaw
 [JsonConverter(typeof(JsonModelConverter<ImmediateCharge, ImmediateChargeFromRaw>))]
 public sealed record class ImmediateCharge : JsonModel
 {
+    /// <summary>
+    /// When the plan change will be effective
+    /// </summary>
+    public required System::DateTimeOffset EffectiveAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("effective_at");
+        }
+        init { this._rawData.Set("effective_at", value); }
+    }
+
     public required IReadOnlyList<LineItem> LineItems
     {
         get
@@ -122,6 +135,7 @@ public sealed record class ImmediateCharge : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.EffectiveAt;
         foreach (var item in this.LineItems)
         {
             item.Validate();
@@ -301,7 +315,7 @@ public record class LineItem : ModelBase
         this._element = element;
     }
 
-    public LineItem(Addon value, JsonElement? element = null)
+    public LineItem(LineItemAddon value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -341,22 +355,22 @@ public record class LineItem : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="Addon"/>.
+    /// type <see cref="LineItemAddon"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickAddon(out var value)) {
-    ///     // `value` is of type `Addon`
+    ///     // `value` is of type `LineItemAddon`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickAddon([NotNullWhen(true)] out Addon? value)
+    public bool TryPickAddon([NotNullWhen(true)] out LineItemAddon? value)
     {
-        value = this.Value as Addon;
+        value = this.Value as LineItemAddon;
         return value != null;
     }
 
@@ -396,7 +410,7 @@ public record class LineItem : ModelBase
     /// <code>
     /// instance.Switch(
     ///     (LineItemSubscription value) =&gt; {...},
-    ///     (Addon value) =&gt; {...},
+    ///     (LineItemAddon value) =&gt; {...},
     ///     (Meter value) =&gt; {...}
     /// );
     /// </code>
@@ -404,7 +418,7 @@ public record class LineItem : ModelBase
     /// </summary>
     public void Switch(
         System::Action<LineItemSubscription> subscription,
-        System::Action<Addon> addon,
+        System::Action<LineItemAddon> addon,
         System::Action<Meter> meter
     )
     {
@@ -413,7 +427,7 @@ public record class LineItem : ModelBase
             case LineItemSubscription value:
                 subscription(value);
                 break;
-            case Addon value:
+            case LineItemAddon value:
                 addon(value);
                 break;
             case Meter value:
@@ -442,7 +456,7 @@ public record class LineItem : ModelBase
     /// <code>
     /// var result = instance.Match(
     ///     (LineItemSubscription value) =&gt; {...},
-    ///     (Addon value) =&gt; {...},
+    ///     (LineItemAddon value) =&gt; {...},
     ///     (Meter value) =&gt; {...}
     /// );
     /// </code>
@@ -450,14 +464,14 @@ public record class LineItem : ModelBase
     /// </summary>
     public T Match<T>(
         System::Func<LineItemSubscription, T> subscription,
-        System::Func<Addon, T> addon,
+        System::Func<LineItemAddon, T> addon,
         System::Func<Meter, T> meter
     )
     {
         return this.Value switch
         {
             LineItemSubscription value => subscription(value),
-            Addon value => addon(value),
+            LineItemAddon value => addon(value),
             Meter value => meter(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of LineItem"
@@ -467,7 +481,7 @@ public record class LineItem : ModelBase
 
     public static implicit operator LineItem(LineItemSubscription value) => new(value);
 
-    public static implicit operator LineItem(Addon value) => new(value);
+    public static implicit operator LineItem(LineItemAddon value) => new(value);
 
     public static implicit operator LineItem(Meter value) => new(value);
 
@@ -517,7 +531,7 @@ public record class LineItem : ModelBase
         return this.Value switch
         {
             LineItemSubscription _ => 0,
-            Addon _ => 1,
+            LineItemAddon _ => 1,
             Meter _ => 2,
             _ => -1,
         };
@@ -550,7 +564,7 @@ sealed class LineItemConverter : JsonConverter<LineItem>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Addon>(element, options);
+            var deserialized = JsonSerializer.Deserialize<LineItemAddon>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -806,8 +820,8 @@ sealed class LineItemSubscriptionTypeConverter : JsonConverter<LineItemSubscript
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<Addon, AddonFromRaw>))]
-public sealed record class Addon : JsonModel
+[JsonConverter(typeof(JsonModelConverter<LineItemAddon, LineItemAddonFromRaw>))]
+public sealed record class LineItemAddon : JsonModel
 {
     public required string ID
     {
@@ -893,12 +907,12 @@ public sealed record class Addon : JsonModel
         init { this._rawData.Set("tax_rate", value); }
     }
 
-    public required ApiEnum<string, AddonType> Type
+    public required ApiEnum<string, LineItemAddonType> Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, AddonType>>("type");
+            return this._rawData.GetNotNullClass<ApiEnum<string, LineItemAddonType>>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -950,50 +964,50 @@ public sealed record class Addon : JsonModel
         _ = this.Tax;
     }
 
-    public Addon() { }
+    public LineItemAddon() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Addon(Addon addon)
-        : base(addon) { }
+    public LineItemAddon(LineItemAddon lineItemAddon)
+        : base(lineItemAddon) { }
 #pragma warning restore CS8618
 
-    public Addon(IReadOnlyDictionary<string, JsonElement> rawData)
+    public LineItemAddon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Addon(FrozenDictionary<string, JsonElement> rawData)
+    LineItemAddon(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="AddonFromRaw.FromRawUnchecked"/>
-    public static Addon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="LineItemAddonFromRaw.FromRawUnchecked"/>
+    public static LineItemAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class AddonFromRaw : IFromRawJson<Addon>
+class LineItemAddonFromRaw : IFromRawJson<LineItemAddon>
 {
     /// <inheritdoc/>
-    public Addon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Addon.FromRawUnchecked(rawData);
+    public LineItemAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        LineItemAddon.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(AddonTypeConverter))]
-public enum AddonType
+[JsonConverter(typeof(LineItemAddonTypeConverter))]
+public enum LineItemAddonType
 {
     Addon,
 }
 
-sealed class AddonTypeConverter : JsonConverter<AddonType>
+sealed class LineItemAddonTypeConverter : JsonConverter<LineItemAddonType>
 {
-    public override AddonType Read(
+    public override LineItemAddonType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1001,14 +1015,14 @@ sealed class AddonTypeConverter : JsonConverter<AddonType>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "addon" => AddonType.Addon,
-            _ => (AddonType)(-1),
+            "addon" => LineItemAddonType.Addon,
+            _ => (LineItemAddonType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        AddonType value,
+        LineItemAddonType value,
         JsonSerializerOptions options
     )
     {
@@ -1016,7 +1030,7 @@ sealed class AddonTypeConverter : JsonConverter<AddonType>
             writer,
             value switch
             {
-                AddonType.Addon => "addon",
+                LineItemAddonType.Addon => "addon",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

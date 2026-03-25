@@ -18,6 +18,28 @@ public record class CustomerPortalCreateParams : ParamsBase
     public string? CustomerID { get; init; }
 
     /// <summary>
+    /// Optional return URL for this session. Overrides the business-level default.
+    /// This URL will be shown as a "Return to {business}" back button in the portal.
+    /// </summary>
+    public string? ReturnUrl
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("return_url");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("return_url", value);
+        }
+    }
+
+    /// <summary>
     /// If true, will send link to user.
     /// </summary>
     public bool? SendEmail

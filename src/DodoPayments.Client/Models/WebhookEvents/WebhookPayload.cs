@@ -2043,6 +2043,21 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// Scheduled plan change details, if any
+    /// </summary>
+    public Subscriptions::ScheduledChange? ScheduledChange
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Subscriptions::ScheduledChange>(
+                "scheduled_change"
+            );
+        }
+        init { this._rawData.Set("scheduled_change", value); }
+    }
+
+    /// <summary>
     /// Tax identifier provided for this subscription (if applicable)
     /// </summary>
     public string? TaxID
@@ -2100,6 +2115,7 @@ public sealed record class Subscription : JsonModel
             DiscountID = subscription.DiscountID,
             ExpiresAt = subscription.ExpiresAt,
             PaymentMethodID = subscription.PaymentMethodID,
+            ScheduledChange = subscription.ScheduledChange,
             TaxID = subscription.TaxID,
         };
 
@@ -2151,6 +2167,7 @@ public sealed record class Subscription : JsonModel
         _ = this.DiscountID;
         _ = this.ExpiresAt;
         _ = this.PaymentMethodID;
+        this.ScheduledChange?.Validate();
         _ = this.TaxID;
         this.PayloadType.Validate();
     }

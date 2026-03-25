@@ -5,6 +5,11 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Payments;
 
+/// <summary>
+/// All supported payment method types (from Hyperswitch).
+///
+/// <para>Used for disabled-payment-methods filtering and validation.</para>
+/// </summary>
 [JsonConverter(typeof(PaymentMethodTypesConverter))]
 public enum PaymentMethodTypes
 {

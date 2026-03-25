@@ -34,6 +34,7 @@ public class CheckoutSessionRequestTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CancelUrl = "cancel_url",
             Confirm = true,
             CustomFields =
             [
@@ -166,6 +167,7 @@ public class CheckoutSessionRequestTest : TestBase
             Zipcode = "zipcode",
         };
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
+        string expectedCancelUrl = "cancel_url";
         bool expectedConfirm = true;
         List<CustomField> expectedCustomFields =
         [
@@ -290,6 +292,7 @@ public class CheckoutSessionRequestTest : TestBase
         }
         Assert.Equal(expectedBillingAddress, model.BillingAddress);
         Assert.Equal(expectedBillingCurrency, model.BillingCurrency);
+        Assert.Equal(expectedCancelUrl, model.CancelUrl);
         Assert.Equal(expectedConfirm, model.Confirm);
         Assert.NotNull(model.CustomFields);
         Assert.Equal(expectedCustomFields.Count, model.CustomFields.Count);
@@ -345,6 +348,7 @@ public class CheckoutSessionRequestTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CancelUrl = "cancel_url",
             Confirm = true,
             CustomFields =
             [
@@ -488,6 +492,7 @@ public class CheckoutSessionRequestTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CancelUrl = "cancel_url",
             Confirm = true,
             CustomFields =
             [
@@ -627,6 +632,7 @@ public class CheckoutSessionRequestTest : TestBase
             Zipcode = "zipcode",
         };
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
+        string expectedCancelUrl = "cancel_url";
         bool expectedConfirm = true;
         List<CustomField> expectedCustomFields =
         [
@@ -754,6 +760,7 @@ public class CheckoutSessionRequestTest : TestBase
         }
         Assert.Equal(expectedBillingAddress, deserialized.BillingAddress);
         Assert.Equal(expectedBillingCurrency, deserialized.BillingCurrency);
+        Assert.Equal(expectedCancelUrl, deserialized.CancelUrl);
         Assert.Equal(expectedConfirm, deserialized.Confirm);
         Assert.NotNull(deserialized.CustomFields);
         Assert.Equal(expectedCustomFields.Count, deserialized.CustomFields.Count);
@@ -809,6 +816,7 @@ public class CheckoutSessionRequestTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CancelUrl = "cancel_url",
             Confirm = true,
             CustomFields =
             [
@@ -946,6 +954,7 @@ public class CheckoutSessionRequestTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CancelUrl = "cancel_url",
             CustomFields =
             [
                 new()
@@ -1019,6 +1028,7 @@ public class CheckoutSessionRequestTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CancelUrl = "cancel_url",
             CustomFields =
             [
                 new()
@@ -1081,6 +1091,7 @@ public class CheckoutSessionRequestTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CancelUrl = "cancel_url",
             CustomFields =
             [
                 new()
@@ -1162,6 +1173,7 @@ public class CheckoutSessionRequestTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CancelUrl = "cancel_url",
             CustomFields =
             [
                 new()
@@ -1305,6 +1317,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("billing_address"));
         Assert.Null(model.BillingCurrency);
         Assert.False(model.RawData.ContainsKey("billing_currency"));
+        Assert.Null(model.CancelUrl);
+        Assert.False(model.RawData.ContainsKey("cancel_url"));
         Assert.Null(model.CustomFields);
         Assert.False(model.RawData.ContainsKey("custom_fields"));
         Assert.Null(model.Customer);
@@ -1516,6 +1530,7 @@ public class CheckoutSessionRequestTest : TestBase
             AllowedPaymentMethodTypes = null,
             BillingAddress = null,
             BillingCurrency = null,
+            CancelUrl = null,
             CustomFields = null,
             Customer = null,
             DiscountCode = null,
@@ -1534,6 +1549,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.True(model.RawData.ContainsKey("billing_address"));
         Assert.Null(model.BillingCurrency);
         Assert.True(model.RawData.ContainsKey("billing_currency"));
+        Assert.Null(model.CancelUrl);
+        Assert.True(model.RawData.ContainsKey("cancel_url"));
         Assert.Null(model.CustomFields);
         Assert.True(model.RawData.ContainsKey("custom_fields"));
         Assert.Null(model.Customer);
@@ -1650,6 +1667,7 @@ public class CheckoutSessionRequestTest : TestBase
             AllowedPaymentMethodTypes = null,
             BillingAddress = null,
             BillingCurrency = null,
+            CancelUrl = null,
             CustomFields = null,
             Customer = null,
             DiscountCode = null,
@@ -1690,6 +1708,7 @@ public class CheckoutSessionRequestTest : TestBase
                 Zipcode = "zipcode",
             },
             BillingCurrency = Currency.Aed,
+            CancelUrl = "cancel_url",
             Confirm = true,
             CustomFields =
             [

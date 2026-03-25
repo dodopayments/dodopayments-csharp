@@ -95,6 +95,31 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
     }
 
     /// <summary>
+    /// When to apply the plan change. - `immediately` (default): Apply the plan
+    /// change right away - `next_billing_date`: Schedule the change for the next
+    /// billing date
+    /// </summary>
+    public ApiEnum<string, UpdateSubscriptionPlanReqEffectiveAt>? EffectiveAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, UpdateSubscriptionPlanReqEffectiveAt>
+            >("effective_at");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("effective_at", value);
+        }
+    }
+
+    /// <summary>
     /// Metadata for the payment. If not passed, the metadata of the subscription
     /// will be taken
     /// </summary>
@@ -144,6 +169,7 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
             item.Validate();
         }
         _ = this.DiscountCode;
+        this.EffectiveAt?.Validate();
         _ = this.Metadata;
         this.OnPaymentFailure?.Validate();
     }
@@ -195,6 +221,7 @@ public enum UpdateSubscriptionPlanReqProrationBillingMode
     ProratedImmediately,
     FullImmediately,
     DifferenceImmediately,
+    DoNotBill,
 }
 
 sealed class UpdateSubscriptionPlanReqProrationBillingModeConverter
@@ -213,6 +240,7 @@ sealed class UpdateSubscriptionPlanReqProrationBillingModeConverter
             "full_immediately" => UpdateSubscriptionPlanReqProrationBillingMode.FullImmediately,
             "difference_immediately" =>
                 UpdateSubscriptionPlanReqProrationBillingMode.DifferenceImmediately,
+            "do_not_bill" => UpdateSubscriptionPlanReqProrationBillingMode.DoNotBill,
             _ => (UpdateSubscriptionPlanReqProrationBillingMode)(-1),
         };
     }
@@ -232,6 +260,56 @@ sealed class UpdateSubscriptionPlanReqProrationBillingModeConverter
                 UpdateSubscriptionPlanReqProrationBillingMode.FullImmediately => "full_immediately",
                 UpdateSubscriptionPlanReqProrationBillingMode.DifferenceImmediately =>
                     "difference_immediately",
+                UpdateSubscriptionPlanReqProrationBillingMode.DoNotBill => "do_not_bill",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// When to apply the plan change. - `immediately` (default): Apply the plan change
+/// right away - `next_billing_date`: Schedule the change for the next billing date
+/// </summary>
+[JsonConverter(typeof(UpdateSubscriptionPlanReqEffectiveAtConverter))]
+public enum UpdateSubscriptionPlanReqEffectiveAt
+{
+    Immediately,
+    NextBillingDate,
+}
+
+sealed class UpdateSubscriptionPlanReqEffectiveAtConverter
+    : JsonConverter<UpdateSubscriptionPlanReqEffectiveAt>
+{
+    public override UpdateSubscriptionPlanReqEffectiveAt Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "immediately" => UpdateSubscriptionPlanReqEffectiveAt.Immediately,
+            "next_billing_date" => UpdateSubscriptionPlanReqEffectiveAt.NextBillingDate,
+            _ => (UpdateSubscriptionPlanReqEffectiveAt)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        UpdateSubscriptionPlanReqEffectiveAt value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                UpdateSubscriptionPlanReqEffectiveAt.Immediately => "immediately",
+                UpdateSubscriptionPlanReqEffectiveAt.NextBillingDate => "next_billing_date",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

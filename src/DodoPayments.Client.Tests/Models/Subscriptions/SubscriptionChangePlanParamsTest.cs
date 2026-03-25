@@ -20,6 +20,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            EffectiveAt = EffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
         };
@@ -31,6 +32,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
         int expectedQuantity = 0;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         string expectedDiscountCode = "discount_code";
+        ApiEnum<string, EffectiveAt> expectedEffectiveAt = EffectiveAt.Immediately;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, OnPaymentFailure> expectedOnPaymentFailure = OnPaymentFailure.PreventChange;
 
@@ -45,6 +47,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             Assert.Equal(expectedAddons[i], parameters.Addons[i]);
         }
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
+        Assert.Equal(expectedEffectiveAt, parameters.EffectiveAt);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -57,6 +60,47 @@ public class SubscriptionChangePlanParamsTest : TestBase
     }
 
     [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new SubscriptionChangePlanParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductID = "product_id",
+            ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            OnPaymentFailure = OnPaymentFailure.PreventChange,
+        };
+
+        Assert.Null(parameters.EffectiveAt);
+        Assert.False(parameters.RawBodyData.ContainsKey("effective_at"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new SubscriptionChangePlanParams
+        {
+            SubscriptionID = "subscription_id",
+            ProductID = "product_id",
+            ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
+            Quantity = 0,
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            DiscountCode = "discount_code",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            OnPaymentFailure = OnPaymentFailure.PreventChange,
+
+            // Null should be interpreted as omitted for these properties
+            EffectiveAt = null,
+        };
+
+        Assert.Null(parameters.EffectiveAt);
+        Assert.False(parameters.RawBodyData.ContainsKey("effective_at"));
+    }
+
+    [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
         var parameters = new SubscriptionChangePlanParams
@@ -65,6 +109,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             ProductID = "product_id",
             ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            EffectiveAt = EffectiveAt.Immediately,
         };
 
         Assert.Null(parameters.Addons);
@@ -86,6 +131,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             ProductID = "product_id",
             ProrationBillingMode = ProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            EffectiveAt = EffectiveAt.Immediately,
 
             Addons = null,
             DiscountCode = null,
@@ -133,6 +179,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            EffectiveAt = EffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
         };
@@ -149,6 +196,7 @@ public class ProrationBillingModeTest : TestBase
     [InlineData(ProrationBillingMode.ProratedImmediately)]
     [InlineData(ProrationBillingMode.FullImmediately)]
     [InlineData(ProrationBillingMode.DifferenceImmediately)]
+    [InlineData(ProrationBillingMode.DoNotBill)]
     public void Validation_Works(ProrationBillingMode rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -172,6 +220,7 @@ public class ProrationBillingModeTest : TestBase
     [InlineData(ProrationBillingMode.ProratedImmediately)]
     [InlineData(ProrationBillingMode.FullImmediately)]
     [InlineData(ProrationBillingMode.DifferenceImmediately)]
+    [InlineData(ProrationBillingMode.DoNotBill)]
     public void SerializationRoundtrip_Works(ProrationBillingMode rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -195,6 +244,64 @@ public class ProrationBillingModeTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, ProrationBillingMode>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class EffectiveAtTest : TestBase
+{
+    [Theory]
+    [InlineData(EffectiveAt.Immediately)]
+    [InlineData(EffectiveAt.NextBillingDate)]
+    public void Validation_Works(EffectiveAt rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EffectiveAt> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EffectiveAt>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(EffectiveAt.Immediately)]
+    [InlineData(EffectiveAt.NextBillingDate)]
+    public void SerializationRoundtrip_Works(EffectiveAt rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EffectiveAt> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EffectiveAt>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EffectiveAt>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EffectiveAt>>(
             json,
             ModelBase.SerializerOptions
         );
