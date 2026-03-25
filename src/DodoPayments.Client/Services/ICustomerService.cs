@@ -78,6 +78,21 @@ public interface ICustomerService
     );
 
     /// <summary>
+    /// Sends a request to <c>delete /customers/{customer_id}/payment-methods/{payment_method_id}</c>.
+    /// </summary>
+    Task DeletePaymentMethod(
+        CustomerDeletePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="DeletePaymentMethod(CustomerDeletePaymentMethodParams, CancellationToken)"/>
+    Task DeletePaymentMethod(
+        string paymentMethodID,
+        CustomerDeletePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// List all credit entitlements for a customer with their current balances
     /// </summary>
     Task<CustomerListCreditEntitlementsResponse> ListCreditEntitlements(
@@ -172,6 +187,22 @@ public interface ICustomerServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<CustomerListPage>> List(
         CustomerListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>delete /customers/{customer_id}/payment-methods/{payment_method_id}</c>, but is otherwise the
+    /// same as <see cref="ICustomerService.DeletePaymentMethod(CustomerDeletePaymentMethodParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse> DeletePaymentMethod(
+        CustomerDeletePaymentMethodParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="DeletePaymentMethod(CustomerDeletePaymentMethodParams, CancellationToken)"/>
+    Task<HttpResponse> DeletePaymentMethod(
+        string paymentMethodID,
+        CustomerDeletePaymentMethodParams parameters,
         CancellationToken cancellationToken = default
     );
 

@@ -119,6 +119,19 @@ public sealed record class DisputeListResponse : JsonModel
         init { this._rawData.Set("payment_id", value); }
     }
 
+    /// <summary>
+    /// Whether the dispute was resolved by Rapid Dispute Resolution
+    /// </summary>
+    public bool? IsResolvedByRdr
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("is_resolved_by_rdr");
+        }
+        init { this._rawData.Set("is_resolved_by_rdr", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -130,6 +143,7 @@ public sealed record class DisputeListResponse : JsonModel
         this.DisputeStage.Validate();
         this.DisputeStatus.Validate();
         _ = this.PaymentID;
+        _ = this.IsResolvedByRdr;
     }
 
     public DisputeListResponse() { }

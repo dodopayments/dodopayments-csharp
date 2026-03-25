@@ -58,6 +58,7 @@ public class WebhookPayloadTest : TestBase
                         DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                         DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                         PaymentID = "payment_id",
+                        IsResolvedByRdr = true,
                         Remarks = "remarks",
                     },
                 ],
@@ -145,6 +146,7 @@ public class WebhookPayloadTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -242,6 +244,7 @@ public class WebhookPayloadTest : TestBase
                         DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                         DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                         PaymentID = "payment_id",
+                        IsResolvedByRdr = true,
                         Remarks = "remarks",
                     },
                 ],
@@ -343,6 +346,7 @@ public class WebhookPayloadTest : TestBase
                         DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                         DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                         PaymentID = "payment_id",
+                        IsResolvedByRdr = true,
                         Remarks = "remarks",
                     },
                 ],
@@ -437,6 +441,7 @@ public class WebhookPayloadTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -534,6 +539,7 @@ public class WebhookPayloadTest : TestBase
                         DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                         DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                         PaymentID = "payment_id",
+                        IsResolvedByRdr = true,
                         Remarks = "remarks",
                     },
                 ],
@@ -629,6 +635,7 @@ public class WebhookPayloadTest : TestBase
                         DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                         DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                         PaymentID = "payment_id",
+                        IsResolvedByRdr = true,
                         Remarks = "remarks",
                     },
                 ],
@@ -726,6 +733,7 @@ public class DataTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -943,6 +951,7 @@ public class DataTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
@@ -1054,6 +1063,7 @@ public class DataTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -1280,6 +1290,7 @@ public class DataTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
@@ -1406,6 +1417,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -1487,6 +1499,7 @@ public class PaymentTest : TestBase
                 DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                 DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
+                IsResolvedByRdr = true,
                 Remarks = "remarks",
             },
         ];
@@ -1642,6 +1655,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -1734,6 +1748,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -1822,6 +1837,7 @@ public class PaymentTest : TestBase
                 DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                 DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
+                IsResolvedByRdr = true,
                 Remarks = "remarks",
             },
         ];
@@ -1977,6 +1993,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -2066,6 +2083,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -2157,6 +2175,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -2243,6 +2262,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -2339,6 +2359,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -2430,6 +2451,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -2537,6 +2559,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -2607,6 +2630,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -2734,6 +2758,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -2824,6 +2849,7 @@ public class PaymentTest : TestBase
                     DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
                     DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                     Remarks = "remarks",
                 },
             ],
@@ -5161,6 +5187,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
@@ -5184,6 +5211,7 @@ public class DisputeTest : TestBase
         ApiEnum<string, Disputes::DisputeDisputeStatus> expectedDisputeStatus =
             Disputes::DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        bool expectedIsResolvedByRdr = true;
         string expectedReason = "reason";
         string expectedRemarks = "remarks";
         ApiEnum<string, DisputeIntersectionMember1PayloadType> expectedPayloadType =
@@ -5198,6 +5226,7 @@ public class DisputeTest : TestBase
         Assert.Equal(expectedDisputeStage, model.DisputeStage);
         Assert.Equal(expectedDisputeStatus, model.DisputeStatus);
         Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedIsResolvedByRdr, model.IsResolvedByRdr);
         Assert.Equal(expectedReason, model.Reason);
         Assert.Equal(expectedRemarks, model.Remarks);
         Assert.Equal(expectedPayloadType, model.PayloadType);
@@ -5224,6 +5253,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
@@ -5256,6 +5286,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
@@ -5286,6 +5317,7 @@ public class DisputeTest : TestBase
         ApiEnum<string, Disputes::DisputeDisputeStatus> expectedDisputeStatus =
             Disputes::DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        bool expectedIsResolvedByRdr = true;
         string expectedReason = "reason";
         string expectedRemarks = "remarks";
         ApiEnum<string, DisputeIntersectionMember1PayloadType> expectedPayloadType =
@@ -5300,6 +5332,7 @@ public class DisputeTest : TestBase
         Assert.Equal(expectedDisputeStage, deserialized.DisputeStage);
         Assert.Equal(expectedDisputeStatus, deserialized.DisputeStatus);
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedIsResolvedByRdr, deserialized.IsResolvedByRdr);
         Assert.Equal(expectedReason, deserialized.Reason);
         Assert.Equal(expectedRemarks, deserialized.Remarks);
         Assert.Equal(expectedPayloadType, deserialized.PayloadType);
@@ -5326,6 +5359,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
@@ -5358,6 +5392,8 @@ public class DisputeTest : TestBase
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
 
+        Assert.Null(model.IsResolvedByRdr);
+        Assert.False(model.RawData.ContainsKey("is_resolved_by_rdr"));
         Assert.Null(model.Reason);
         Assert.False(model.RawData.ContainsKey("reason"));
         Assert.Null(model.Remarks);
@@ -5414,10 +5450,13 @@ public class DisputeTest : TestBase
             PaymentID = "payment_id",
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
 
+            IsResolvedByRdr = null,
             Reason = null,
             Remarks = null,
         };
 
+        Assert.Null(model.IsResolvedByRdr);
+        Assert.True(model.RawData.ContainsKey("is_resolved_by_rdr"));
         Assert.Null(model.Reason);
         Assert.True(model.RawData.ContainsKey("reason"));
         Assert.Null(model.Remarks);
@@ -5447,6 +5486,7 @@ public class DisputeTest : TestBase
             PaymentID = "payment_id",
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
 
+            IsResolvedByRdr = null,
             Reason = null,
             Remarks = null,
         };
@@ -5475,6 +5515,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
             PayloadType = DisputeIntersectionMember1PayloadType.Dispute,

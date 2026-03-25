@@ -20,6 +20,7 @@ public class DisputeTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Remarks = "remarks",
         };
 
@@ -32,6 +33,7 @@ public class DisputeTest : TestBase
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        bool expectedIsResolvedByRdr = true;
         string expectedRemarks = "remarks";
 
         Assert.Equal(expectedAmount, model.Amount);
@@ -42,6 +44,7 @@ public class DisputeTest : TestBase
         Assert.Equal(expectedDisputeStage, model.DisputeStage);
         Assert.Equal(expectedDisputeStatus, model.DisputeStatus);
         Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedIsResolvedByRdr, model.IsResolvedByRdr);
         Assert.Equal(expectedRemarks, model.Remarks);
     }
 
@@ -58,6 +61,7 @@ public class DisputeTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Remarks = "remarks",
         };
 
@@ -80,6 +84,7 @@ public class DisputeTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Remarks = "remarks",
         };
 
@@ -99,6 +104,7 @@ public class DisputeTest : TestBase
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        bool expectedIsResolvedByRdr = true;
         string expectedRemarks = "remarks";
 
         Assert.Equal(expectedAmount, deserialized.Amount);
@@ -109,6 +115,7 @@ public class DisputeTest : TestBase
         Assert.Equal(expectedDisputeStage, deserialized.DisputeStage);
         Assert.Equal(expectedDisputeStatus, deserialized.DisputeStatus);
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedIsResolvedByRdr, deserialized.IsResolvedByRdr);
         Assert.Equal(expectedRemarks, deserialized.Remarks);
     }
 
@@ -125,6 +132,7 @@ public class DisputeTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Remarks = "remarks",
         };
 
@@ -146,6 +154,8 @@ public class DisputeTest : TestBase
             PaymentID = "payment_id",
         };
 
+        Assert.Null(model.IsResolvedByRdr);
+        Assert.False(model.RawData.ContainsKey("is_resolved_by_rdr"));
         Assert.Null(model.Remarks);
         Assert.False(model.RawData.ContainsKey("remarks"));
     }
@@ -182,9 +192,12 @@ public class DisputeTest : TestBase
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
 
+            IsResolvedByRdr = null,
             Remarks = null,
         };
 
+        Assert.Null(model.IsResolvedByRdr);
+        Assert.True(model.RawData.ContainsKey("is_resolved_by_rdr"));
         Assert.Null(model.Remarks);
         Assert.True(model.RawData.ContainsKey("remarks"));
     }
@@ -203,6 +216,7 @@ public class DisputeTest : TestBase
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
 
+            IsResolvedByRdr = null,
             Remarks = null,
         };
 
@@ -222,6 +236,7 @@ public class DisputeTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
             Remarks = "remarks",
         };
 

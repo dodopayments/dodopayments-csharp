@@ -25,6 +25,7 @@ public class DisputeListPageResponseTest : TestBase
                     DisputeStage = DisputeDisputeStage.PreDispute,
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                 },
             ],
         };
@@ -41,6 +42,7 @@ public class DisputeListPageResponseTest : TestBase
                 DisputeStage = DisputeDisputeStage.PreDispute,
                 DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
+                IsResolvedByRdr = true,
             },
         ];
 
@@ -68,6 +70,7 @@ public class DisputeListPageResponseTest : TestBase
                     DisputeStage = DisputeDisputeStage.PreDispute,
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                 },
             ],
         };
@@ -98,6 +101,7 @@ public class DisputeListPageResponseTest : TestBase
                     DisputeStage = DisputeDisputeStage.PreDispute,
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                 },
             ],
         };
@@ -121,6 +125,7 @@ public class DisputeListPageResponseTest : TestBase
                 DisputeStage = DisputeDisputeStage.PreDispute,
                 DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
+                IsResolvedByRdr = true,
             },
         ];
 
@@ -148,6 +153,7 @@ public class DisputeListPageResponseTest : TestBase
                     DisputeStage = DisputeDisputeStage.PreDispute,
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                 },
             ],
         };
@@ -172,6 +178,7 @@ public class DisputeListPageResponseTest : TestBase
                     DisputeStage = DisputeDisputeStage.PreDispute,
                     DisputeStatus = DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
+                    IsResolvedByRdr = true,
                 },
             ],
         };

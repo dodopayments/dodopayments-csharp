@@ -20,6 +20,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
         };
 
         string expectedAmount = "amount";
@@ -31,6 +32,7 @@ public class DisputeListResponseTest : TestBase
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        bool expectedIsResolvedByRdr = true;
 
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -40,6 +42,7 @@ public class DisputeListResponseTest : TestBase
         Assert.Equal(expectedDisputeStage, model.DisputeStage);
         Assert.Equal(expectedDisputeStatus, model.DisputeStatus);
         Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedIsResolvedByRdr, model.IsResolvedByRdr);
     }
 
     [Fact]
@@ -55,6 +58,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -79,6 +83,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -97,6 +102,7 @@ public class DisputeListResponseTest : TestBase
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        bool expectedIsResolvedByRdr = true;
 
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -106,6 +112,7 @@ public class DisputeListResponseTest : TestBase
         Assert.Equal(expectedDisputeStage, deserialized.DisputeStage);
         Assert.Equal(expectedDisputeStatus, deserialized.DisputeStatus);
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedIsResolvedByRdr, deserialized.IsResolvedByRdr);
     }
 
     [Fact]
@@ -121,6 +128,85 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new DisputeListResponse
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+        };
+
+        Assert.Null(model.IsResolvedByRdr);
+        Assert.False(model.RawData.ContainsKey("is_resolved_by_rdr"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new DisputeListResponse
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new DisputeListResponse
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+
+            IsResolvedByRdr = null,
+        };
+
+        Assert.Null(model.IsResolvedByRdr);
+        Assert.True(model.RawData.ContainsKey("is_resolved_by_rdr"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new DisputeListResponse
+        {
+            Amount = "amount",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = "currency",
+            DisputeID = "dispute_id",
+            DisputeStage = DisputeDisputeStage.PreDispute,
+            DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+            PaymentID = "payment_id",
+
+            IsResolvedByRdr = null,
         };
 
         model.Validate();
@@ -139,6 +225,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            IsResolvedByRdr = true,
         };
 
         DisputeListResponse copied = new(model);
