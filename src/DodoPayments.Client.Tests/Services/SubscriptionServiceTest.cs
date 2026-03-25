@@ -63,6 +63,16 @@ public class SubscriptionServiceTest : TestBase
     }
 
     [Fact]
+    public async Task CancelChangePlan_Works()
+    {
+        await this.client.Subscriptions.CancelChangePlan(
+            "subscription_id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+    }
+
+    [Fact]
     public async Task ChangePlan_Works()
     {
         await this.client.Subscriptions.ChangePlan(
