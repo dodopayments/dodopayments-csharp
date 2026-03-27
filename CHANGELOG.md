@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.12.1 (2026-03-27)
+
+Full Changelog: [v6.12.0...v6.12.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.12.0...v6.12.1)
+
+### Chores
+
+* **internal:** update multipart form array serialization ([9266cc0](https://github.com/dodopayments/dodopayments-csharp/commit/9266cc0852c5b6fcf6470594f1ab1e64bbf3a59c))
+
 ## 6.12.0 (2026-03-25)
 
 Full Changelog: [v6.11.3...v6.12.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.11.3...v6.12.0)
