@@ -31,7 +31,7 @@ public record class UnwrapWebhookEvent : ModelBase
         {
             return Match(
                 abandonedCheckoutDetected: (x) => x.BusinessID,
-                abandonedCheckoutRecovered: (x) => x.STAINLESS_FIXME_BusinessID,
+                abandonedCheckoutRecovered: (x) => x.BusinessID,
                 creditAdded: (x) => x.BusinessID,
                 creditBalanceLow: (x) => x.BusinessID,
                 creditDeducted: (x) => x.BusinessID,
@@ -47,8 +47,8 @@ public record class UnwrapWebhookEvent : ModelBase
                 disputeLost: (x) => x.BusinessID,
                 disputeOpened: (x) => x.BusinessID,
                 disputeWon: (x) => x.BusinessID,
-                dunningRecovered: (x) => x.STAINLESS_FIXME_BusinessID,
-                dunningStarted: (x) => x.STAINLESS_FIXME_BusinessID,
+                dunningRecovered: (x) => x.BusinessID,
+                dunningStarted: (x) => x.BusinessID,
                 licenseKeyCreated: (x) => x.BusinessID,
                 paymentCancelled: (x) => x.BusinessID,
                 paymentFailed: (x) => x.BusinessID,
@@ -74,7 +74,7 @@ public record class UnwrapWebhookEvent : ModelBase
         {
             return Match(
                 abandonedCheckoutDetected: (x) => x.Timestamp,
-                abandonedCheckoutRecovered: (x) => x.STAINLESS_FIXME_Timestamp,
+                abandonedCheckoutRecovered: (x) => x.Timestamp,
                 creditAdded: (x) => x.Timestamp,
                 creditBalanceLow: (x) => x.Timestamp,
                 creditDeducted: (x) => x.Timestamp,
@@ -90,8 +90,8 @@ public record class UnwrapWebhookEvent : ModelBase
                 disputeLost: (x) => x.Timestamp,
                 disputeOpened: (x) => x.Timestamp,
                 disputeWon: (x) => x.Timestamp,
-                dunningRecovered: (x) => x.STAINLESS_FIXME_Timestamp,
-                dunningStarted: (x) => x.STAINLESS_FIXME_Timestamp,
+                dunningRecovered: (x) => x.Timestamp,
+                dunningStarted: (x) => x.Timestamp,
                 licenseKeyCreated: (x) => x.Timestamp,
                 paymentCancelled: (x) => x.Timestamp,
                 paymentFailed: (x) => x.Timestamp,
