@@ -1,5 +1,25 @@
 # Changelog
 
+## 6.13.0 (2026-04-01)
+
+Full Changelog: [v6.12.1...v6.13.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.12.1...v6.13.0)
+
+### Features
+
+* **api:** updated openapi spec to v1.93.0 ([0c6d1f9](https://github.com/dodopayments/dodopayments-csharp/commit/0c6d1f9104ecaedff3645a84f38e1eb16c6fd5b2))
+* **client:** enable gzip decompression ([73ee730](https://github.com/dodopayments/dodopayments-csharp/commit/73ee730370eae81662a2828189e7c7aec9a9cfd4))
+
+
+### Bug Fixes
+
+* **client:** allow cancelling when enumerating over an http response ([03b5291](https://github.com/dodopayments/dodopayments-csharp/commit/03b529122f8ebaa9576aed36a5d9a73de1fb4709))
+
+
+### Chores
+
+* **tests:** bump steady to v0.20.1 ([e3d5a25](https://github.com/dodopayments/dodopayments-csharp/commit/e3d5a25084a8227fb0098b288a10f5ff6ebc0324))
+* **tests:** bump steady to v0.20.2 ([0ac9381](https://github.com/dodopayments/dodopayments-csharp/commit/0ac9381e14ea5bf8c5ba08101ad0cac98168bf79))
+
 ## 6.12.1 (2026-03-27)
 
 Full Changelog: [v6.12.0...v6.12.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.12.0...v6.12.1)
