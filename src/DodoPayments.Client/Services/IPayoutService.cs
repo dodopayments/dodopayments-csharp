@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Payouts;
+using DodoPayments.Client.Services.Payouts;
 
 namespace DodoPayments.Client.Services;
 
@@ -26,6 +27,8 @@ public interface IPayoutService
     /// </summary>
     IPayoutService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    IBreakupService Breakup { get; }
+
     /// <summary>
     /// Sends a request to <c>get /payouts</c>.
     /// </summary>
@@ -47,6 +50,8 @@ public interface IPayoutServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IPayoutServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    IBreakupServiceWithRawResponse Breakup { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>get /payouts</c>, but is otherwise the

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -8,7 +7,9 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Payments;
+using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -48,6 +49,18 @@ public record class SubscriptionUpdateParams : ParamsBase
             return this._rawBodyData.GetNullableStruct<bool>("cancel_at_next_billing_date");
         }
         init { this._rawBodyData.Set("cancel_at_next_billing_date", value); }
+    }
+
+    public ApiEnum<string, CancelReason>? CancelReason
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, CancelReason>>(
+                "cancel_reason"
+            );
+        }
+        init { this._rawBodyData.Set("cancel_reason", value); }
     }
 
     /// <summary>
@@ -107,12 +120,12 @@ public record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
-    public DateTimeOffset? NextBillingDate
+    public System::DateTimeOffset? NextBillingDate
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<DateTimeOffset>("next_billing_date");
+            return this._rawBodyData.GetNullableStruct<System::DateTimeOffset>("next_billing_date");
         }
         init { this._rawBodyData.Set("next_billing_date", value); }
     }
@@ -225,9 +238,9 @@ public record class SubscriptionUpdateParams : ParamsBase
             && this._rawBodyData.Equals(other._rawBodyData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/subscriptions/{0}", this.SubscriptionID)
         )
@@ -257,6 +270,53 @@ public record class SubscriptionUpdateParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
+    }
+}
+
+[JsonConverter(typeof(CancelReasonConverter))]
+public enum CancelReason
+{
+    CancelledByCustomer,
+    CancelledByMerchant,
+    CancelledByMerchantSendDunning,
+}
+
+sealed class CancelReasonConverter : JsonConverter<CancelReason>
+{
+    public override CancelReason Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "cancelled_by_customer" => CancelReason.CancelledByCustomer,
+            "cancelled_by_merchant" => CancelReason.CancelledByMerchant,
+            "cancelled_by_merchant_send_dunning" => CancelReason.CancelledByMerchantSendDunning,
+            _ => (CancelReason)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        CancelReason value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CancelReason.CancelledByCustomer => "cancelled_by_customer",
+                CancelReason.CancelledByMerchant => "cancelled_by_merchant",
+                CancelReason.CancelledByMerchantSendDunning => "cancelled_by_merchant_send_dunning",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }
 
@@ -439,12 +499,12 @@ class CreditEntitlementCartFromRaw : IFromRawJson<CreditEntitlementCart>
 [JsonConverter(typeof(JsonModelConverter<DisableOnDemand, DisableOnDemandFromRaw>))]
 public sealed record class DisableOnDemand : JsonModel
 {
-    public required DateTimeOffset NextBillingDate
+    public required System::DateTimeOffset NextBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("next_billing_date");
         }
         init { this._rawData.Set("next_billing_date", value); }
     }
@@ -483,7 +543,7 @@ public sealed record class DisableOnDemand : JsonModel
     }
 
     [SetsRequiredMembers]
-    public DisableOnDemand(DateTimeOffset nextBillingDate)
+    public DisableOnDemand(System::DateTimeOffset nextBillingDate)
         : this()
     {
         this.NextBillingDate = nextBillingDate;

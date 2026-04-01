@@ -43,6 +43,12 @@ public class WebhookEventTypeTest : TestBase
     [InlineData(WebhookEventType.CreditOverageCharged)]
     [InlineData(WebhookEventType.CreditManualAdjustment)]
     [InlineData(WebhookEventType.CreditBalanceLow)]
+    [InlineData(WebhookEventType.AbandonedCheckoutDetected)]
+    [InlineData(WebhookEventType.AbandonedCheckoutRecovered)]
+    [InlineData(WebhookEventType.DunningStarted)]
+    [InlineData(WebhookEventType.DunningRecovered)]
+    [InlineData(WebhookEventType.AcrEmail)]
+    [InlineData(WebhookEventType.DunningEmail)]
     public void Validation_Works(WebhookEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -98,6 +104,12 @@ public class WebhookEventTypeTest : TestBase
     [InlineData(WebhookEventType.CreditOverageCharged)]
     [InlineData(WebhookEventType.CreditManualAdjustment)]
     [InlineData(WebhookEventType.CreditBalanceLow)]
+    [InlineData(WebhookEventType.AbandonedCheckoutDetected)]
+    [InlineData(WebhookEventType.AbandonedCheckoutRecovered)]
+    [InlineData(WebhookEventType.DunningStarted)]
+    [InlineData(WebhookEventType.DunningRecovered)]
+    [InlineData(WebhookEventType.AcrEmail)]
+    [InlineData(WebhookEventType.DunningEmail)]
     public void SerializationRoundtrip_Works(WebhookEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

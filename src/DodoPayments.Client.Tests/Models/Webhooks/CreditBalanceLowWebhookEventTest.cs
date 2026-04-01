@@ -30,7 +30,7 @@ public class CreditBalanceLowWebhookEventTest : TestBase
         };
 
         string expectedBusinessID = "business_id";
-        Data expectedData = new()
+        CreditBalanceLowWebhookEventData expectedData = new()
         {
             AvailableBalance = "available_balance",
             CreditEntitlementID = "credit_entitlement_id",
@@ -110,7 +110,7 @@ public class CreditBalanceLowWebhookEventTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
-        Data expectedData = new()
+        CreditBalanceLowWebhookEventData expectedData = new()
         {
             AvailableBalance = "available_balance",
             CreditEntitlementID = "credit_entitlement_id",
@@ -182,12 +182,12 @@ public class CreditBalanceLowWebhookEventTest : TestBase
     }
 }
 
-public class DataTest : TestBase
+public class CreditBalanceLowWebhookEventDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Data
+        var model = new CreditBalanceLowWebhookEventData
         {
             AvailableBalance = "available_balance",
             CreditEntitlementID = "credit_entitlement_id",
@@ -221,7 +221,7 @@ public class DataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Data
+        var model = new CreditBalanceLowWebhookEventData
         {
             AvailableBalance = "available_balance",
             CreditEntitlementID = "credit_entitlement_id",
@@ -234,7 +234,10 @@ public class DataTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Data>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditBalanceLowWebhookEventData>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -242,7 +245,7 @@ public class DataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Data
+        var model = new CreditBalanceLowWebhookEventData
         {
             AvailableBalance = "available_balance",
             CreditEntitlementID = "credit_entitlement_id",
@@ -255,7 +258,10 @@ public class DataTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditBalanceLowWebhookEventData>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedAvailableBalance = "available_balance";
@@ -280,7 +286,7 @@ public class DataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Data
+        var model = new CreditBalanceLowWebhookEventData
         {
             AvailableBalance = "available_balance",
             CreditEntitlementID = "credit_entitlement_id",
@@ -298,7 +304,7 @@ public class DataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Data
+        var model = new CreditBalanceLowWebhookEventData
         {
             AvailableBalance = "available_balance",
             CreditEntitlementID = "credit_entitlement_id",
@@ -310,7 +316,7 @@ public class DataTest : TestBase
             ThresholdPercent = 0,
         };
 
-        Data copied = new(model);
+        CreditBalanceLowWebhookEventData copied = new(model);
 
         Assert.Equal(model, copied);
     }

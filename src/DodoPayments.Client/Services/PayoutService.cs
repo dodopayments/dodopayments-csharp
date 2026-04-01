@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Payouts;
+using DodoPayments.Client.Services.Payouts;
 
 namespace DodoPayments.Client.Services;
 
@@ -31,6 +32,13 @@ public sealed class PayoutService : IPayoutService
         _client = client;
 
         _withRawResponse = new(() => new PayoutServiceWithRawResponse(client.WithRawResponse));
+        _breakup = new(() => new BreakupService(client));
+    }
+
+    readonly Lazy<IBreakupService> _breakup;
+    public IBreakupService Breakup
+    {
+        get { return _breakup.Value; }
     }
 
     /// <inheritdoc/>
@@ -60,6 +68,14 @@ public sealed class PayoutServiceWithRawResponse : IPayoutServiceWithRawResponse
     public PayoutServiceWithRawResponse(IDodoPaymentsClientWithRawResponse client)
     {
         _client = client;
+
+        _breakup = new(() => new BreakupServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<IBreakupServiceWithRawResponse> _breakup;
+    public IBreakupServiceWithRawResponse Breakup
+    {
+        get { return _breakup.Value; }
     }
 
     /// <inheritdoc/>

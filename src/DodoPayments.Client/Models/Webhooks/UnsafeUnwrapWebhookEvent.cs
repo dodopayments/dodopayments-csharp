@@ -30,6 +30,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
         get
         {
             return Match(
+                abandonedCheckoutDetected: (x) => x.BusinessID,
+                abandonedCheckoutRecovered: (x) => x.STAINLESS_FIXME_BusinessID,
                 creditAdded: (x) => x.BusinessID,
                 creditBalanceLow: (x) => x.BusinessID,
                 creditDeducted: (x) => x.BusinessID,
@@ -45,6 +47,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
                 disputeLost: (x) => x.BusinessID,
                 disputeOpened: (x) => x.BusinessID,
                 disputeWon: (x) => x.BusinessID,
+                dunningRecovered: (x) => x.STAINLESS_FIXME_BusinessID,
+                dunningStarted: (x) => x.STAINLESS_FIXME_BusinessID,
                 licenseKeyCreated: (x) => x.BusinessID,
                 paymentCancelled: (x) => x.BusinessID,
                 paymentFailed: (x) => x.BusinessID,
@@ -69,6 +73,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
         get
         {
             return Match(
+                abandonedCheckoutDetected: (x) => x.Timestamp,
+                abandonedCheckoutRecovered: (x) => x.STAINLESS_FIXME_Timestamp,
                 creditAdded: (x) => x.Timestamp,
                 creditBalanceLow: (x) => x.Timestamp,
                 creditDeducted: (x) => x.Timestamp,
@@ -84,6 +90,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
                 disputeLost: (x) => x.Timestamp,
                 disputeOpened: (x) => x.Timestamp,
                 disputeWon: (x) => x.Timestamp,
+                dunningRecovered: (x) => x.STAINLESS_FIXME_Timestamp,
+                dunningStarted: (x) => x.STAINLESS_FIXME_Timestamp,
                 licenseKeyCreated: (x) => x.Timestamp,
                 paymentCancelled: (x) => x.Timestamp,
                 paymentFailed: (x) => x.Timestamp,
@@ -101,6 +109,24 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
                 subscriptionUpdated: (x) => x.Timestamp
             );
         }
+    }
+
+    public UnsafeUnwrapWebhookEvent(
+        AbandonedCheckoutDetectedWebhookEvent value,
+        JsonElement? element = null
+    )
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnsafeUnwrapWebhookEvent(
+        AbandonedCheckoutRecoveredWebhookEvent value,
+        JsonElement? element = null
+    )
+    {
+        this.Value = value;
+        this._element = element;
     }
 
     public UnsafeUnwrapWebhookEvent(CreditAddedWebhookEvent value, JsonElement? element = null)
@@ -200,6 +226,18 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     }
 
     public UnsafeUnwrapWebhookEvent(DisputeWonWebhookEvent value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnsafeUnwrapWebhookEvent(DunningRecoveredWebhookEvent value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnsafeUnwrapWebhookEvent(DunningStartedWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -328,6 +366,52 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     public UnsafeUnwrapWebhookEvent(JsonElement element)
     {
         this._element = element;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="AbandonedCheckoutDetectedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickAbandonedCheckoutDetected(out var value)) {
+    ///     // `value` is of type `AbandonedCheckoutDetectedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickAbandonedCheckoutDetected(
+        [NotNullWhen(true)] out AbandonedCheckoutDetectedWebhookEvent? value
+    )
+    {
+        value = this.Value as AbandonedCheckoutDetectedWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="AbandonedCheckoutRecoveredWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickAbandonedCheckoutRecovered(out var value)) {
+    ///     // `value` is of type `AbandonedCheckoutRecoveredWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickAbandonedCheckoutRecovered(
+        [NotNullWhen(true)] out AbandonedCheckoutRecoveredWebhookEvent? value
+    )
+    {
+        value = this.Value as AbandonedCheckoutRecoveredWebhookEvent;
+        return value != null;
     }
 
     /// <summary>
@@ -650,6 +734,48 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     public bool TryPickDisputeWon([NotNullWhen(true)] out DisputeWonWebhookEvent? value)
     {
         value = this.Value as DisputeWonWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DunningRecoveredWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDunningRecovered(out var value)) {
+    ///     // `value` is of type `DunningRecoveredWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickDunningRecovered([NotNullWhen(true)] out DunningRecoveredWebhookEvent? value)
+    {
+        value = this.Value as DunningRecoveredWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DunningStartedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDunningStarted(out var value)) {
+    ///     // `value` is of type `DunningStartedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickDunningStarted([NotNullWhen(true)] out DunningStartedWebhookEvent? value)
+    {
+        value = this.Value as DunningStartedWebhookEvent;
         return value != null;
     }
 
@@ -1002,6 +1128,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
+    ///     (AbandonedCheckoutDetectedWebhookEvent value) =&gt; {...},
+    ///     (AbandonedCheckoutRecoveredWebhookEvent value) =&gt; {...},
     ///     (CreditAddedWebhookEvent value) =&gt; {...},
     ///     (CreditBalanceLowWebhookEvent value) =&gt; {...},
     ///     (CreditDeductedWebhookEvent value) =&gt; {...},
@@ -1017,6 +1145,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     ///     (DisputeLostWebhookEvent value) =&gt; {...},
     ///     (DisputeOpenedWebhookEvent value) =&gt; {...},
     ///     (DisputeWonWebhookEvent value) =&gt; {...},
+    ///     (DunningRecoveredWebhookEvent value) =&gt; {...},
+    ///     (DunningStartedWebhookEvent value) =&gt; {...},
     ///     (LicenseKeyCreatedWebhookEvent value) =&gt; {...},
     ///     (PaymentCancelledWebhookEvent value) =&gt; {...},
     ///     (PaymentFailedWebhookEvent value) =&gt; {...},
@@ -1037,6 +1167,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     /// </example>
     /// </summary>
     public void Switch(
+        System::Action<AbandonedCheckoutDetectedWebhookEvent> abandonedCheckoutDetected,
+        System::Action<AbandonedCheckoutRecoveredWebhookEvent> abandonedCheckoutRecovered,
         System::Action<CreditAddedWebhookEvent> creditAdded,
         System::Action<CreditBalanceLowWebhookEvent> creditBalanceLow,
         System::Action<CreditDeductedWebhookEvent> creditDeducted,
@@ -1052,6 +1184,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
         System::Action<DisputeLostWebhookEvent> disputeLost,
         System::Action<DisputeOpenedWebhookEvent> disputeOpened,
         System::Action<DisputeWonWebhookEvent> disputeWon,
+        System::Action<DunningRecoveredWebhookEvent> dunningRecovered,
+        System::Action<DunningStartedWebhookEvent> dunningStarted,
         System::Action<LicenseKeyCreatedWebhookEvent> licenseKeyCreated,
         System::Action<PaymentCancelledWebhookEvent> paymentCancelled,
         System::Action<PaymentFailedWebhookEvent> paymentFailed,
@@ -1071,6 +1205,12 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     {
         switch (this.Value)
         {
+            case AbandonedCheckoutDetectedWebhookEvent value:
+                abandonedCheckoutDetected(value);
+                break;
+            case AbandonedCheckoutRecoveredWebhookEvent value:
+                abandonedCheckoutRecovered(value);
+                break;
             case CreditAddedWebhookEvent value:
                 creditAdded(value);
                 break;
@@ -1115,6 +1255,12 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
                 break;
             case DisputeWonWebhookEvent value:
                 disputeWon(value);
+                break;
+            case DunningRecoveredWebhookEvent value:
+                dunningRecovered(value);
+                break;
+            case DunningStartedWebhookEvent value:
+                dunningStarted(value);
                 break;
             case LicenseKeyCreatedWebhookEvent value:
                 licenseKeyCreated(value);
@@ -1183,6 +1329,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
+    ///     (AbandonedCheckoutDetectedWebhookEvent value) =&gt; {...},
+    ///     (AbandonedCheckoutRecoveredWebhookEvent value) =&gt; {...},
     ///     (CreditAddedWebhookEvent value) =&gt; {...},
     ///     (CreditBalanceLowWebhookEvent value) =&gt; {...},
     ///     (CreditDeductedWebhookEvent value) =&gt; {...},
@@ -1198,6 +1346,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     ///     (DisputeLostWebhookEvent value) =&gt; {...},
     ///     (DisputeOpenedWebhookEvent value) =&gt; {...},
     ///     (DisputeWonWebhookEvent value) =&gt; {...},
+    ///     (DunningRecoveredWebhookEvent value) =&gt; {...},
+    ///     (DunningStartedWebhookEvent value) =&gt; {...},
     ///     (LicenseKeyCreatedWebhookEvent value) =&gt; {...},
     ///     (PaymentCancelledWebhookEvent value) =&gt; {...},
     ///     (PaymentFailedWebhookEvent value) =&gt; {...},
@@ -1218,6 +1368,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     /// </example>
     /// </summary>
     public T Match<T>(
+        System::Func<AbandonedCheckoutDetectedWebhookEvent, T> abandonedCheckoutDetected,
+        System::Func<AbandonedCheckoutRecoveredWebhookEvent, T> abandonedCheckoutRecovered,
         System::Func<CreditAddedWebhookEvent, T> creditAdded,
         System::Func<CreditBalanceLowWebhookEvent, T> creditBalanceLow,
         System::Func<CreditDeductedWebhookEvent, T> creditDeducted,
@@ -1233,6 +1385,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
         System::Func<DisputeLostWebhookEvent, T> disputeLost,
         System::Func<DisputeOpenedWebhookEvent, T> disputeOpened,
         System::Func<DisputeWonWebhookEvent, T> disputeWon,
+        System::Func<DunningRecoveredWebhookEvent, T> dunningRecovered,
+        System::Func<DunningStartedWebhookEvent, T> dunningStarted,
         System::Func<LicenseKeyCreatedWebhookEvent, T> licenseKeyCreated,
         System::Func<PaymentCancelledWebhookEvent, T> paymentCancelled,
         System::Func<PaymentFailedWebhookEvent, T> paymentFailed,
@@ -1252,6 +1406,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     {
         return this.Value switch
         {
+            AbandonedCheckoutDetectedWebhookEvent value => abandonedCheckoutDetected(value),
+            AbandonedCheckoutRecoveredWebhookEvent value => abandonedCheckoutRecovered(value),
             CreditAddedWebhookEvent value => creditAdded(value),
             CreditBalanceLowWebhookEvent value => creditBalanceLow(value),
             CreditDeductedWebhookEvent value => creditDeducted(value),
@@ -1267,6 +1423,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
             DisputeLostWebhookEvent value => disputeLost(value),
             DisputeOpenedWebhookEvent value => disputeOpened(value),
             DisputeWonWebhookEvent value => disputeWon(value),
+            DunningRecoveredWebhookEvent value => dunningRecovered(value),
+            DunningStartedWebhookEvent value => dunningStarted(value),
             LicenseKeyCreatedWebhookEvent value => licenseKeyCreated(value),
             PaymentCancelledWebhookEvent value => paymentCancelled(value),
             PaymentFailedWebhookEvent value => paymentFailed(value),
@@ -1287,6 +1445,14 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
             ),
         };
     }
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(
+        AbandonedCheckoutDetectedWebhookEvent value
+    ) => new(value);
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(
+        AbandonedCheckoutRecoveredWebhookEvent value
+    ) => new(value);
 
     public static implicit operator UnsafeUnwrapWebhookEvent(CreditAddedWebhookEvent value) =>
         new(value);
@@ -1334,6 +1500,12 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
         new(value);
 
     public static implicit operator UnsafeUnwrapWebhookEvent(DisputeWonWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(DunningRecoveredWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnsafeUnwrapWebhookEvent(DunningStartedWebhookEvent value) =>
         new(value);
 
     public static implicit operator UnsafeUnwrapWebhookEvent(LicenseKeyCreatedWebhookEvent value) =>
@@ -1408,6 +1580,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
             );
         }
         this.Switch(
+            (abandonedCheckoutDetected) => abandonedCheckoutDetected.Validate(),
+            (abandonedCheckoutRecovered) => abandonedCheckoutRecovered.Validate(),
             (creditAdded) => creditAdded.Validate(),
             (creditBalanceLow) => creditBalanceLow.Validate(),
             (creditDeducted) => creditDeducted.Validate(),
@@ -1423,6 +1597,8 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
             (disputeLost) => disputeLost.Validate(),
             (disputeOpened) => disputeOpened.Validate(),
             (disputeWon) => disputeWon.Validate(),
+            (dunningRecovered) => dunningRecovered.Validate(),
+            (dunningStarted) => dunningStarted.Validate(),
             (licenseKeyCreated) => licenseKeyCreated.Validate(),
             (paymentCancelled) => paymentCancelled.Validate(),
             (paymentFailed) => paymentFailed.Validate(),
@@ -1461,36 +1637,40 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     {
         return this.Value switch
         {
-            CreditAddedWebhookEvent _ => 0,
-            CreditBalanceLowWebhookEvent _ => 1,
-            CreditDeductedWebhookEvent _ => 2,
-            CreditExpiredWebhookEvent _ => 3,
-            CreditManualAdjustmentWebhookEvent _ => 4,
-            CreditOverageChargedWebhookEvent _ => 5,
-            CreditRolledOverWebhookEvent _ => 6,
-            CreditRolloverForfeitedWebhookEvent _ => 7,
-            DisputeAcceptedWebhookEvent _ => 8,
-            DisputeCancelledWebhookEvent _ => 9,
-            DisputeChallengedWebhookEvent _ => 10,
-            DisputeExpiredWebhookEvent _ => 11,
-            DisputeLostWebhookEvent _ => 12,
-            DisputeOpenedWebhookEvent _ => 13,
-            DisputeWonWebhookEvent _ => 14,
-            LicenseKeyCreatedWebhookEvent _ => 15,
-            PaymentCancelledWebhookEvent _ => 16,
-            PaymentFailedWebhookEvent _ => 17,
-            PaymentProcessingWebhookEvent _ => 18,
-            PaymentSucceededWebhookEvent _ => 19,
-            RefundFailedWebhookEvent _ => 20,
-            RefundSucceededWebhookEvent _ => 21,
-            SubscriptionActiveWebhookEvent _ => 22,
-            SubscriptionCancelledWebhookEvent _ => 23,
-            SubscriptionExpiredWebhookEvent _ => 24,
-            SubscriptionFailedWebhookEvent _ => 25,
-            SubscriptionOnHoldWebhookEvent _ => 26,
-            SubscriptionPlanChangedWebhookEvent _ => 27,
-            SubscriptionRenewedWebhookEvent _ => 28,
-            SubscriptionUpdatedWebhookEvent _ => 29,
+            AbandonedCheckoutDetectedWebhookEvent _ => 0,
+            AbandonedCheckoutRecoveredWebhookEvent _ => 1,
+            CreditAddedWebhookEvent _ => 2,
+            CreditBalanceLowWebhookEvent _ => 3,
+            CreditDeductedWebhookEvent _ => 4,
+            CreditExpiredWebhookEvent _ => 5,
+            CreditManualAdjustmentWebhookEvent _ => 6,
+            CreditOverageChargedWebhookEvent _ => 7,
+            CreditRolledOverWebhookEvent _ => 8,
+            CreditRolloverForfeitedWebhookEvent _ => 9,
+            DisputeAcceptedWebhookEvent _ => 10,
+            DisputeCancelledWebhookEvent _ => 11,
+            DisputeChallengedWebhookEvent _ => 12,
+            DisputeExpiredWebhookEvent _ => 13,
+            DisputeLostWebhookEvent _ => 14,
+            DisputeOpenedWebhookEvent _ => 15,
+            DisputeWonWebhookEvent _ => 16,
+            DunningRecoveredWebhookEvent _ => 17,
+            DunningStartedWebhookEvent _ => 18,
+            LicenseKeyCreatedWebhookEvent _ => 19,
+            PaymentCancelledWebhookEvent _ => 20,
+            PaymentFailedWebhookEvent _ => 21,
+            PaymentProcessingWebhookEvent _ => 22,
+            PaymentSucceededWebhookEvent _ => 23,
+            RefundFailedWebhookEvent _ => 24,
+            RefundSucceededWebhookEvent _ => 25,
+            SubscriptionActiveWebhookEvent _ => 26,
+            SubscriptionCancelledWebhookEvent _ => 27,
+            SubscriptionExpiredWebhookEvent _ => 28,
+            SubscriptionFailedWebhookEvent _ => 29,
+            SubscriptionOnHoldWebhookEvent _ => 30,
+            SubscriptionPlanChangedWebhookEvent _ => 31,
+            SubscriptionRenewedWebhookEvent _ => 32,
+            SubscriptionUpdatedWebhookEvent _ => 33,
             _ => -1,
         };
     }
@@ -1505,6 +1685,42 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<AbandonedCheckoutDetectedWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<AbandonedCheckoutRecoveredWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
         try
         {
             var deserialized = JsonSerializer.Deserialize<CreditAddedWebhookEvent>(
@@ -1760,6 +1976,42 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
         try
         {
             var deserialized = JsonSerializer.Deserialize<DisputeWonWebhookEvent>(element, options);
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<DunningRecoveredWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<DunningStartedWebhookEvent>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();

@@ -17,6 +17,50 @@ namespace DodoPayments.Client.Tests.Models.Webhooks;
 public class UnwrapWebhookEventTest : TestBase
 {
     [Fact]
+    public void AbandonedCheckoutDetectedValidationWorks()
+    {
+        UnwrapWebhookEvent value = new AbandonedCheckoutDetectedWebhookEvent()
+        {
+            BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                STAINLESS_FIXME_AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                STAINLESS_FIXME_AbandonmentReason =
+                    STAINLESS_FIXME_AbandonmentReason.STAINLESS_FIXME_PaymentFailed,
+                STAINLESS_FIXME_CustomerID = "customer_id",
+                STAINLESS_FIXME_PaymentID = "payment_id",
+                STAINLESS_FIXME_Status = STAINLESS_FIXME_Status.STAINLESS_FIXME_Abandoned,
+                STAINLESS_FIXME_RecoveredPaymentID = "recovered_payment_id",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_AbandonedCheckoutDetected,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void AbandonedCheckoutRecoveredValidationWorks()
+    {
+        UnwrapWebhookEvent value = new AbandonedCheckoutRecoveredWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                STAINLESS_FIXME_AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                STAINLESS_FIXME_AbandonmentReason =
+                    STAINLESS_FIXME_AbandonmentReason.STAINLESS_FIXME_PaymentFailed,
+                STAINLESS_FIXME_CustomerID = "customer_id",
+                STAINLESS_FIXME_PaymentID = "payment_id",
+                STAINLESS_FIXME_Status = STAINLESS_FIXME_Status.STAINLESS_FIXME_Abandoned,
+                STAINLESS_FIXME_RecoveredPaymentID = "recovered_payment_id",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_AbandonedCheckoutRecovered,
+        };
+        value.Validate();
+    }
+
+    [Fact]
     public void CreditAddedValidationWorks()
     {
         UnwrapWebhookEvent value = new CreditAddedWebhookEvent()
@@ -427,6 +471,48 @@ public class UnwrapWebhookEventTest : TestBase
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = DisputeWonWebhookEventType.DisputeWon,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void DunningRecoveredValidationWorks()
+    {
+        UnwrapWebhookEvent value = new DunningRecoveredWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                STAINLESS_FIXME_CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                STAINLESS_FIXME_CustomerID = "customer_id",
+                STAINLESS_FIXME_Status = STAINLESS_FIXME_Status.STAINLESS_FIXME_Recovering,
+                STAINLESS_FIXME_SubscriptionID = "subscription_id",
+                STAINLESS_FIXME_TriggerState = STAINLESS_FIXME_TriggerState.STAINLESS_FIXME_OnHold,
+                STAINLESS_FIXME_PaymentID = "payment_id",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DunningRecovered,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void DunningStartedValidationWorks()
+    {
+        UnwrapWebhookEvent value = new DunningStartedWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                STAINLESS_FIXME_CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                STAINLESS_FIXME_CustomerID = "customer_id",
+                STAINLESS_FIXME_Status = STAINLESS_FIXME_Status.STAINLESS_FIXME_Recovering,
+                STAINLESS_FIXME_SubscriptionID = "subscription_id",
+                STAINLESS_FIXME_TriggerState = STAINLESS_FIXME_TriggerState.STAINLESS_FIXME_OnHold,
+                STAINLESS_FIXME_PaymentID = "payment_id",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DunningStarted,
         };
         value.Validate();
     }
@@ -1885,12 +1971,73 @@ public class UnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
+    public void AbandonedCheckoutDetectedSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new AbandonedCheckoutDetectedWebhookEvent()
+        {
+            BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                STAINLESS_FIXME_AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                STAINLESS_FIXME_AbandonmentReason =
+                    STAINLESS_FIXME_AbandonmentReason.STAINLESS_FIXME_PaymentFailed,
+                STAINLESS_FIXME_CustomerID = "customer_id",
+                STAINLESS_FIXME_PaymentID = "payment_id",
+                STAINLESS_FIXME_Status = STAINLESS_FIXME_Status.STAINLESS_FIXME_Abandoned,
+                STAINLESS_FIXME_RecoveredPaymentID = "recovered_payment_id",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_AbandonedCheckoutDetected,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void AbandonedCheckoutRecoveredSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new AbandonedCheckoutRecoveredWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                STAINLESS_FIXME_AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                STAINLESS_FIXME_AbandonmentReason =
+                    STAINLESS_FIXME_AbandonmentReason.STAINLESS_FIXME_PaymentFailed,
+                STAINLESS_FIXME_CustomerID = "customer_id",
+                STAINLESS_FIXME_PaymentID = "payment_id",
+                STAINLESS_FIXME_Status = STAINLESS_FIXME_Status.STAINLESS_FIXME_Abandoned,
+                STAINLESS_FIXME_RecoveredPaymentID = "recovered_payment_id",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_AbandonedCheckoutRecovered,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
     public void CreditAddedSerializationRoundtripWorks()
     {
         UnwrapWebhookEvent value = new CreditAddedWebhookEvent()
         {
+<<<<<<< HEAD
             BusinessID = "business_id",
             Data = new()
+=======
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+>>>>>>> origin/generated--merge-conflict
             {
                 ID = "id",
                 Amount = "amount",
@@ -1909,8 +2056,13 @@ public class UnwrapWebhookEventTest : TestBase
                 ReferenceID = "reference_id",
                 ReferenceType = "reference_type",
             },
+<<<<<<< HEAD
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = global::DodoPayments.Client.Models.Webhooks.Type.CreditAdded,
+=======
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_CreditAdded,
+>>>>>>> origin/generated--merge-conflict
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
@@ -2379,6 +2531,60 @@ public class UnwrapWebhookEventTest : TestBase
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = DisputeWonWebhookEventType.DisputeWon,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void DunningRecoveredSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new DunningRecoveredWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                STAINLESS_FIXME_CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                STAINLESS_FIXME_CustomerID = "customer_id",
+                STAINLESS_FIXME_Status = STAINLESS_FIXME_Status.STAINLESS_FIXME_Recovering,
+                STAINLESS_FIXME_SubscriptionID = "subscription_id",
+                STAINLESS_FIXME_TriggerState = STAINLESS_FIXME_TriggerState.STAINLESS_FIXME_OnHold,
+                STAINLESS_FIXME_PaymentID = "payment_id",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DunningRecovered,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void DunningStartedSerializationRoundtripWorks()
+    {
+        UnwrapWebhookEvent value = new DunningStartedWebhookEvent()
+        {
+            STAINLESS_FIXME_BusinessID = "business_id",
+            STAINLESS_FIXME_Data = new()
+            {
+                STAINLESS_FIXME_CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                STAINLESS_FIXME_CustomerID = "customer_id",
+                STAINLESS_FIXME_Status = STAINLESS_FIXME_Status.STAINLESS_FIXME_Recovering,
+                STAINLESS_FIXME_SubscriptionID = "subscription_id",
+                STAINLESS_FIXME_TriggerState = STAINLESS_FIXME_TriggerState.STAINLESS_FIXME_OnHold,
+                STAINLESS_FIXME_PaymentID = "payment_id",
+            },
+            STAINLESS_FIXME_Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            STAINLESS_FIXME_Type = STAINLESS_FIXME_Type.STAINLESS_FIXME_DunningStarted,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnwrapWebhookEvent>(
