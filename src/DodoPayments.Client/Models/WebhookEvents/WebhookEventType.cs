@@ -46,6 +46,12 @@ public enum WebhookEventType
     CreditOverageCharged,
     CreditManualAdjustment,
     CreditBalanceLow,
+    AbandonedCheckoutDetected,
+    AbandonedCheckoutRecovered,
+    DunningStarted,
+    DunningRecovered,
+    AcrEmail,
+    DunningEmail,
 }
 
 sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
@@ -93,6 +99,12 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
             "credit.overage_charged" => WebhookEventType.CreditOverageCharged,
             "credit.manual_adjustment" => WebhookEventType.CreditManualAdjustment,
             "credit.balance_low" => WebhookEventType.CreditBalanceLow,
+            "abandoned_checkout.detected" => WebhookEventType.AbandonedCheckoutDetected,
+            "abandoned_checkout.recovered" => WebhookEventType.AbandonedCheckoutRecovered,
+            "dunning.started" => WebhookEventType.DunningStarted,
+            "dunning.recovered" => WebhookEventType.DunningRecovered,
+            "acr.email" => WebhookEventType.AcrEmail,
+            "dunning.email" => WebhookEventType.DunningEmail,
             _ => (WebhookEventType)(-1),
         };
     }
@@ -142,6 +154,12 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
                 WebhookEventType.CreditOverageCharged => "credit.overage_charged",
                 WebhookEventType.CreditManualAdjustment => "credit.manual_adjustment",
                 WebhookEventType.CreditBalanceLow => "credit.balance_low",
+                WebhookEventType.AbandonedCheckoutDetected => "abandoned_checkout.detected",
+                WebhookEventType.AbandonedCheckoutRecovered => "abandoned_checkout.recovered",
+                WebhookEventType.DunningStarted => "dunning.started",
+                WebhookEventType.DunningRecovered => "dunning.recovered",
+                WebhookEventType.AcrEmail => "acr.email",
+                WebhookEventType.DunningEmail => "dunning.email",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

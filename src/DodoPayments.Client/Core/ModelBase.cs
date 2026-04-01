@@ -10,7 +10,6 @@ using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Products;
-using DodoPayments.Client.Models.WebhookEvents;
 using Balances = DodoPayments.Client.Models.Balances;
 using CreditEntitlementsBalances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
@@ -18,6 +17,7 @@ using Meters = DodoPayments.Client.Models.Meters;
 using Payouts = DodoPayments.Client.Models.Payouts;
 using Refunds = DodoPayments.Client.Models.Refunds;
 using Subscriptions = DodoPayments.Client.Models.Subscriptions;
+using WebhookEvents = DodoPayments.Client.Models.WebhookEvents;
 using Webhooks = DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Core;
@@ -62,6 +62,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::LineItemSubscriptionType>(),
             new ApiEnumConverter<string, Subscriptions::LineItemAddonType>(),
             new ApiEnumConverter<string, Subscriptions::MeterType>(),
+            new ApiEnumConverter<string, Subscriptions::CancelReason>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
             new ApiEnumConverter<string, Subscriptions::EffectiveAt>(),
@@ -100,7 +101,19 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CountryCode>(),
             new ApiEnumConverter<string, DiscountType>(),
             new ApiEnumConverter<string, VerificationStatus>(),
+            new ApiEnumConverter<string, Webhooks::AbandonmentReason>(),
+            new ApiEnumConverter<string, Webhooks::Status>(),
             new ApiEnumConverter<string, Webhooks::Type>(),
+            new ApiEnumConverter<
+                string,
+                Webhooks::AbandonedCheckoutRecoveredWebhookEventDataAbandonmentReason
+            >(),
+            new ApiEnumConverter<
+                string,
+                Webhooks::AbandonedCheckoutRecoveredWebhookEventDataStatus
+            >(),
+            new ApiEnumConverter<string, Webhooks::AbandonedCheckoutRecoveredWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::CreditAddedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::CreditBalanceLowWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::CreditDeductedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::CreditExpiredWebhookEventType>(),
@@ -115,6 +128,12 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Webhooks::DisputeLostWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::DisputeOpenedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::DisputeWonWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::DunningRecoveredWebhookEventDataStatus>(),
+            new ApiEnumConverter<string, Webhooks::TriggerState>(),
+            new ApiEnumConverter<string, Webhooks::DunningRecoveredWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventDataStatus>(),
+            new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventDataTriggerState>(),
+            new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::LicenseKeyCreatedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::PaymentCancelledWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::PaymentFailedWebhookEventType>(),
@@ -130,14 +149,26 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Webhooks::SubscriptionPlanChangedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::SubscriptionRenewedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::SubscriptionUpdatedWebhookEventType>(),
-            new ApiEnumConverter<string, WebhookEventType>(),
-            new ApiEnumConverter<string, PayloadType>(),
-            new ApiEnumConverter<string, SubscriptionIntersectionMember1PayloadType>(),
-            new ApiEnumConverter<string, RefundIntersectionMember1PayloadType>(),
-            new ApiEnumConverter<string, DisputeIntersectionMember1PayloadType>(),
-            new ApiEnumConverter<string, LicenseKeyIntersectionMember1PayloadType>(),
-            new ApiEnumConverter<string, CreditLedgerEntryIntersectionMember1PayloadType>(),
-            new ApiEnumConverter<string, CreditBalanceLowPayloadType>(),
+            new ApiEnumConverter<string, WebhookEvents::WebhookEventType>(),
+            new ApiEnumConverter<string, WebhookEvents::PayloadType>(),
+            new ApiEnumConverter<
+                string,
+                WebhookEvents::SubscriptionIntersectionMember1PayloadType
+            >(),
+            new ApiEnumConverter<string, WebhookEvents::RefundIntersectionMember1PayloadType>(),
+            new ApiEnumConverter<string, WebhookEvents::DisputeIntersectionMember1PayloadType>(),
+            new ApiEnumConverter<string, WebhookEvents::LicenseKeyIntersectionMember1PayloadType>(),
+            new ApiEnumConverter<
+                string,
+                WebhookEvents::CreditLedgerEntryIntersectionMember1PayloadType
+            >(),
+            new ApiEnumConverter<string, WebhookEvents::CreditBalanceLowPayloadType>(),
+            new ApiEnumConverter<string, WebhookEvents::AbandonmentReason>(),
+            new ApiEnumConverter<string, WebhookEvents::AbandonedCheckoutPayloadType>(),
+            new ApiEnumConverter<string, WebhookEvents::Status>(),
+            new ApiEnumConverter<string, WebhookEvents::DunningAttemptPayloadType>(),
+            new ApiEnumConverter<string, WebhookEvents::DunningAttemptStatus>(),
+            new ApiEnumConverter<string, WebhookEvents::TriggerState>(),
             new ApiEnumConverter<string, Meters::Conjunction>(),
             new ApiEnumConverter<string, Meters::FilterOperator>(),
             new ApiEnumConverter<string, Meters::Type>(),

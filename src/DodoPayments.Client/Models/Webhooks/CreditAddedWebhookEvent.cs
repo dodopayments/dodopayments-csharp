@@ -55,14 +55,14 @@ public sealed record class CreditAddedWebhookEvent : JsonModel
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, global::DodoPayments.Client.Models.Webhooks.Type> Type
+    public required ApiEnum<string, CreditAddedWebhookEventType> Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, global::DodoPayments.Client.Models.Webhooks.Type>
-            >("type");
+            return this._rawData.GetNotNullClass<ApiEnum<string, CreditAddedWebhookEventType>>(
+                "type"
+            );
         }
         init { this._rawData.Set("type", value); }
     }
@@ -117,15 +117,15 @@ class CreditAddedWebhookEventFromRaw : IFromRawJson<CreditAddedWebhookEvent>
 /// <summary>
 /// The event type
 /// </summary>
-[JsonConverter(typeof(TypeConverter))]
-public enum Type
+[JsonConverter(typeof(CreditAddedWebhookEventTypeConverter))]
+public enum CreditAddedWebhookEventType
 {
     CreditAdded,
 }
 
-sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.Webhooks.Type>
+sealed class CreditAddedWebhookEventTypeConverter : JsonConverter<CreditAddedWebhookEventType>
 {
-    public override global::DodoPayments.Client.Models.Webhooks.Type Read(
+    public override CreditAddedWebhookEventType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -133,14 +133,14 @@ sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.We
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "credit.added" => global::DodoPayments.Client.Models.Webhooks.Type.CreditAdded,
-            _ => (global::DodoPayments.Client.Models.Webhooks.Type)(-1),
+            "credit.added" => CreditAddedWebhookEventType.CreditAdded,
+            _ => (CreditAddedWebhookEventType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        global::DodoPayments.Client.Models.Webhooks.Type value,
+        CreditAddedWebhookEventType value,
         JsonSerializerOptions options
     )
     {
@@ -148,7 +148,7 @@ sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.We
             writer,
             value switch
             {
-                global::DodoPayments.Client.Models.Webhooks.Type.CreditAdded => "credit.added",
+                CreditAddedWebhookEventType.CreditAdded => "credit.added",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

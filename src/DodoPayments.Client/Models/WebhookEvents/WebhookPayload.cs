@@ -146,7 +146,9 @@ public record class Data : ModelBase
                 dispute: (_) => null,
                 licenseKey: (_) => null,
                 creditLedgerEntry: (_) => null,
-                creditBalanceLow: (_) => null
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null
             );
         }
     }
@@ -162,7 +164,9 @@ public record class Data : ModelBase
                 dispute: (x) => x.BusinessID,
                 licenseKey: (x) => x.BusinessID,
                 creditLedgerEntry: (x) => x.BusinessID,
-                creditBalanceLow: (_) => null
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null
             );
         }
     }
@@ -178,7 +182,9 @@ public record class Data : ModelBase
                 dispute: (x) => x.CreatedAt,
                 licenseKey: (x) => x.CreatedAt,
                 creditLedgerEntry: (x) => x.CreatedAt,
-                creditBalanceLow: (_) => null
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (x) => x.CreatedAt
             );
         }
     }
@@ -194,7 +200,9 @@ public record class Data : ModelBase
                 dispute: (x) => x.Customer,
                 licenseKey: (_) => null,
                 creditLedgerEntry: (_) => null,
-                creditBalanceLow: (_) => null
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null
             );
         }
     }
@@ -210,7 +218,9 @@ public record class Data : ModelBase
                 dispute: (x) => x.PaymentID,
                 licenseKey: (x) => x.PaymentID,
                 creditLedgerEntry: (_) => null,
-                creditBalanceLow: (_) => null
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (x) => x.PaymentID,
+                dunningAttempt: (x) => x.PaymentID
             );
         }
     }
@@ -226,7 +236,9 @@ public record class Data : ModelBase
                 dispute: (_) => null,
                 licenseKey: (_) => null,
                 creditLedgerEntry: (_) => null,
-                creditBalanceLow: (_) => null
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null
             );
         }
     }
@@ -242,7 +254,9 @@ public record class Data : ModelBase
                 dispute: (_) => null,
                 licenseKey: (x) => x.SubscriptionID,
                 creditLedgerEntry: (_) => null,
-                creditBalanceLow: (x) => x.SubscriptionID
+                creditBalanceLow: (x) => x.SubscriptionID,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (x) => x.SubscriptionID
             );
         }
     }
@@ -258,7 +272,9 @@ public record class Data : ModelBase
                 dispute: (_) => null,
                 licenseKey: (x) => x.ProductID,
                 creditLedgerEntry: (_) => null,
-                creditBalanceLow: (_) => null
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null
             );
         }
     }
@@ -274,7 +290,9 @@ public record class Data : ModelBase
                 dispute: (_) => null,
                 licenseKey: (x) => x.ExpiresAt,
                 creditLedgerEntry: (_) => null,
-                creditBalanceLow: (_) => null
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null
             );
         }
     }
@@ -290,7 +308,9 @@ public record class Data : ModelBase
                 dispute: (x) => x.Reason,
                 licenseKey: (_) => null,
                 creditLedgerEntry: (_) => null,
-                creditBalanceLow: (_) => null
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null
             );
         }
     }
@@ -306,7 +326,9 @@ public record class Data : ModelBase
                 dispute: (_) => null,
                 licenseKey: (x) => x.ID,
                 creditLedgerEntry: (x) => x.ID,
-                creditBalanceLow: (_) => null
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null
             );
         }
     }
@@ -322,7 +344,9 @@ public record class Data : ModelBase
                 dispute: (_) => null,
                 licenseKey: (x) => x.CustomerID,
                 creditLedgerEntry: (x) => x.CustomerID,
-                creditBalanceLow: (x) => x.CustomerID
+                creditBalanceLow: (x) => x.CustomerID,
+                abandonedCheckout: (x) => x.CustomerID,
+                dunningAttempt: (x) => x.CustomerID
             );
         }
     }
@@ -338,7 +362,9 @@ public record class Data : ModelBase
                 dispute: (_) => null,
                 licenseKey: (_) => null,
                 creditLedgerEntry: (x) => x.CreditEntitlementID,
-                creditBalanceLow: (x) => x.CreditEntitlementID
+                creditBalanceLow: (x) => x.CreditEntitlementID,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null
             );
         }
     }
@@ -380,6 +406,18 @@ public record class Data : ModelBase
     }
 
     public Data(CreditBalanceLow value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Data(AbandonedCheckout value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Data(DunningAttempt value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -538,6 +576,48 @@ public record class Data : ModelBase
     }
 
     /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="AbandonedCheckout"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickAbandonedCheckout(out var value)) {
+    ///     // `value` is of type `AbandonedCheckout`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickAbandonedCheckout([NotNullWhen(true)] out AbandonedCheckout? value)
+    {
+        value = this.Value as AbandonedCheckout;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="DunningAttempt"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickDunningAttempt(out var value)) {
+    ///     // `value` is of type `DunningAttempt`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickDunningAttempt([NotNullWhen(true)] out DunningAttempt? value)
+    {
+        value = this.Value as DunningAttempt;
+        return value != null;
+    }
+
+    /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
     /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
@@ -557,7 +637,9 @@ public record class Data : ModelBase
     ///     (Dispute value) =&gt; {...},
     ///     (LicenseKey value) =&gt; {...},
     ///     (CreditLedgerEntry value) =&gt; {...},
-    ///     (CreditBalanceLow value) =&gt; {...}
+    ///     (CreditBalanceLow value) =&gt; {...},
+    ///     (AbandonedCheckout value) =&gt; {...},
+    ///     (DunningAttempt value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -569,7 +651,9 @@ public record class Data : ModelBase
         Action<Dispute> dispute,
         Action<LicenseKey> licenseKey,
         Action<CreditLedgerEntry> creditLedgerEntry,
-        Action<CreditBalanceLow> creditBalanceLow
+        Action<CreditBalanceLow> creditBalanceLow,
+        Action<AbandonedCheckout> abandonedCheckout,
+        Action<DunningAttempt> dunningAttempt
     )
     {
         switch (this.Value)
@@ -594,6 +678,12 @@ public record class Data : ModelBase
                 break;
             case CreditBalanceLow value:
                 creditBalanceLow(value);
+                break;
+            case AbandonedCheckout value:
+                abandonedCheckout(value);
+                break;
+            case DunningAttempt value:
+                dunningAttempt(value);
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
@@ -623,7 +713,9 @@ public record class Data : ModelBase
     ///     (Dispute value) =&gt; {...},
     ///     (LicenseKey value) =&gt; {...},
     ///     (CreditLedgerEntry value) =&gt; {...},
-    ///     (CreditBalanceLow value) =&gt; {...}
+    ///     (CreditBalanceLow value) =&gt; {...},
+    ///     (AbandonedCheckout value) =&gt; {...},
+    ///     (DunningAttempt value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -635,7 +727,9 @@ public record class Data : ModelBase
         Func<Dispute, T> dispute,
         Func<LicenseKey, T> licenseKey,
         Func<CreditLedgerEntry, T> creditLedgerEntry,
-        Func<CreditBalanceLow, T> creditBalanceLow
+        Func<CreditBalanceLow, T> creditBalanceLow,
+        Func<AbandonedCheckout, T> abandonedCheckout,
+        Func<DunningAttempt, T> dunningAttempt
     )
     {
         return this.Value switch
@@ -647,6 +741,8 @@ public record class Data : ModelBase
             LicenseKey value => licenseKey(value),
             CreditLedgerEntry value => creditLedgerEntry(value),
             CreditBalanceLow value => creditBalanceLow(value),
+            AbandonedCheckout value => abandonedCheckout(value),
+            DunningAttempt value => dunningAttempt(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Data"
             ),
@@ -666,6 +762,10 @@ public record class Data : ModelBase
     public static implicit operator Data(CreditLedgerEntry value) => new(value);
 
     public static implicit operator Data(CreditBalanceLow value) => new(value);
+
+    public static implicit operator Data(AbandonedCheckout value) => new(value);
+
+    public static implicit operator Data(DunningAttempt value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -690,7 +790,9 @@ public record class Data : ModelBase
             (dispute) => dispute.Validate(),
             (licenseKey) => licenseKey.Validate(),
             (creditLedgerEntry) => creditLedgerEntry.Validate(),
-            (creditBalanceLow) => creditBalanceLow.Validate()
+            (creditBalanceLow) => creditBalanceLow.Validate(),
+            (abandonedCheckout) => abandonedCheckout.Validate(),
+            (dunningAttempt) => dunningAttempt.Validate()
         );
     }
 
@@ -721,6 +823,8 @@ public record class Data : ModelBase
             LicenseKey _ => 4,
             CreditLedgerEntry _ => 5,
             CreditBalanceLow _ => 6,
+            AbandonedCheckout _ => 7,
+            DunningAttempt _ => 8,
             _ => -1,
         };
     }
@@ -822,6 +926,34 @@ sealed class DataConverter : JsonConverter<Data>
         try
         {
             var deserialized = JsonSerializer.Deserialize<CreditBalanceLow>(element, options);
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<AbandonedCheckout>(element, options);
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<DunningAttempt>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -3930,6 +4062,520 @@ sealed class CreditBalanceLowPayloadTypeConverter : JsonConverter<CreditBalanceL
             value switch
             {
                 CreditBalanceLowPayloadType.CreditBalanceLow => "CreditBalanceLow",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(JsonModelConverter<AbandonedCheckout, AbandonedCheckoutFromRaw>))]
+public sealed record class AbandonedCheckout : JsonModel
+{
+    public required DateTimeOffset AbandonedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("abandoned_at");
+        }
+        init { this._rawData.Set("abandoned_at", value); }
+    }
+
+    public required ApiEnum<string, AbandonmentReason> AbandonmentReason
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, AbandonmentReason>>(
+                "abandonment_reason"
+            );
+        }
+        init { this._rawData.Set("abandonment_reason", value); }
+    }
+
+    public required string CustomerID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
+        init { this._rawData.Set("customer_id", value); }
+    }
+
+    public required ApiEnum<string, AbandonedCheckoutPayloadType> PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, AbandonedCheckoutPayloadType>>(
+                "payload_type"
+            );
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    public required string PaymentID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_id");
+        }
+        init { this._rawData.Set("payment_id", value); }
+    }
+
+    public required ApiEnum<string, Status> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    public string? RecoveredPaymentID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("recovered_payment_id");
+        }
+        init { this._rawData.Set("recovered_payment_id", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.AbandonedAt;
+        this.AbandonmentReason.Validate();
+        _ = this.CustomerID;
+        this.PayloadType.Validate();
+        _ = this.PaymentID;
+        this.Status.Validate();
+        _ = this.RecoveredPaymentID;
+    }
+
+    public AbandonedCheckout() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public AbandonedCheckout(AbandonedCheckout abandonedCheckout)
+        : base(abandonedCheckout) { }
+#pragma warning restore CS8618
+
+    public AbandonedCheckout(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    AbandonedCheckout(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="AbandonedCheckoutFromRaw.FromRawUnchecked"/>
+    public static AbandonedCheckout FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class AbandonedCheckoutFromRaw : IFromRawJson<AbandonedCheckout>
+{
+    /// <inheritdoc/>
+    public AbandonedCheckout FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        AbandonedCheckout.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(AbandonmentReasonConverter))]
+public enum AbandonmentReason
+{
+    PaymentFailed,
+    CheckoutIncomplete,
+}
+
+sealed class AbandonmentReasonConverter : JsonConverter<AbandonmentReason>
+{
+    public override AbandonmentReason Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "payment_failed" => AbandonmentReason.PaymentFailed,
+            "checkout_incomplete" => AbandonmentReason.CheckoutIncomplete,
+            _ => (AbandonmentReason)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        AbandonmentReason value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                AbandonmentReason.PaymentFailed => "payment_failed",
+                AbandonmentReason.CheckoutIncomplete => "checkout_incomplete",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(AbandonedCheckoutPayloadTypeConverter))]
+public enum AbandonedCheckoutPayloadType
+{
+    AbandonedCheckout,
+}
+
+sealed class AbandonedCheckoutPayloadTypeConverter : JsonConverter<AbandonedCheckoutPayloadType>
+{
+    public override AbandonedCheckoutPayloadType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "AbandonedCheckout" => AbandonedCheckoutPayloadType.AbandonedCheckout,
+            _ => (AbandonedCheckoutPayloadType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        AbandonedCheckoutPayloadType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                AbandonedCheckoutPayloadType.AbandonedCheckout => "AbandonedCheckout",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Abandoned,
+    Recovering,
+    Recovered,
+    Exhausted,
+    OptedOut,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "abandoned" => Status.Abandoned,
+            "recovering" => Status.Recovering,
+            "recovered" => Status.Recovered,
+            "exhausted" => Status.Exhausted,
+            "opted_out" => Status.OptedOut,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Abandoned => "abandoned",
+                Status.Recovering => "recovering",
+                Status.Recovered => "recovered",
+                Status.Exhausted => "exhausted",
+                Status.OptedOut => "opted_out",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(JsonModelConverter<DunningAttempt, DunningAttemptFromRaw>))]
+public sealed record class DunningAttempt : JsonModel
+{
+    public required DateTimeOffset CreatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
+        init { this._rawData.Set("created_at", value); }
+    }
+
+    public required string CustomerID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
+        init { this._rawData.Set("customer_id", value); }
+    }
+
+    public required ApiEnum<string, DunningAttemptPayloadType> PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, DunningAttemptPayloadType>>(
+                "payload_type"
+            );
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    public required ApiEnum<string, DunningAttemptStatus> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, DunningAttemptStatus>>("status");
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    public required string SubscriptionID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("subscription_id");
+        }
+        init { this._rawData.Set("subscription_id", value); }
+    }
+
+    public required ApiEnum<string, TriggerState> TriggerState
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, TriggerState>>("trigger_state");
+        }
+        init { this._rawData.Set("trigger_state", value); }
+    }
+
+    public string? PaymentID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_id");
+        }
+        init { this._rawData.Set("payment_id", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.CreatedAt;
+        _ = this.CustomerID;
+        this.PayloadType.Validate();
+        this.Status.Validate();
+        _ = this.SubscriptionID;
+        this.TriggerState.Validate();
+        _ = this.PaymentID;
+    }
+
+    public DunningAttempt() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DunningAttempt(DunningAttempt dunningAttempt)
+        : base(dunningAttempt) { }
+#pragma warning restore CS8618
+
+    public DunningAttempt(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DunningAttempt(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DunningAttemptFromRaw.FromRawUnchecked"/>
+    public static DunningAttempt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class DunningAttemptFromRaw : IFromRawJson<DunningAttempt>
+{
+    /// <inheritdoc/>
+    public DunningAttempt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        DunningAttempt.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(DunningAttemptPayloadTypeConverter))]
+public enum DunningAttemptPayloadType
+{
+    DunningAttempt,
+}
+
+sealed class DunningAttemptPayloadTypeConverter : JsonConverter<DunningAttemptPayloadType>
+{
+    public override DunningAttemptPayloadType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DunningAttempt" => DunningAttemptPayloadType.DunningAttempt,
+            _ => (DunningAttemptPayloadType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DunningAttemptPayloadType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DunningAttemptPayloadType.DunningAttempt => "DunningAttempt",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(DunningAttemptStatusConverter))]
+public enum DunningAttemptStatus
+{
+    Recovering,
+    Recovered,
+    Exhausted,
+}
+
+sealed class DunningAttemptStatusConverter : JsonConverter<DunningAttemptStatus>
+{
+    public override DunningAttemptStatus Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "recovering" => DunningAttemptStatus.Recovering,
+            "recovered" => DunningAttemptStatus.Recovered,
+            "exhausted" => DunningAttemptStatus.Exhausted,
+            _ => (DunningAttemptStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DunningAttemptStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DunningAttemptStatus.Recovering => "recovering",
+                DunningAttemptStatus.Recovered => "recovered",
+                DunningAttemptStatus.Exhausted => "exhausted",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(TriggerStateConverter))]
+public enum TriggerState
+{
+    OnHold,
+    Cancelled,
+}
+
+sealed class TriggerStateConverter : JsonConverter<TriggerState>
+{
+    public override TriggerState Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "on_hold" => TriggerState.OnHold,
+            "cancelled" => TriggerState.Cancelled,
+            _ => (TriggerState)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        TriggerState value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                TriggerState.OnHold => "on_hold",
+                TriggerState.Cancelled => "cancelled",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
