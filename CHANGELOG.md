@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.14.0 (2026-04-08)
+
+Full Changelog: [v6.13.0...v6.14.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.13.0...v6.14.0)
+
+### Features
+
+* **api:** updated openapi spec to v1.94.2 ([f8a549a](https://github.com/dodopayments/dodopayments-csharp/commit/f8a549a9a03a23c63512dcb89c94ac8dd96129a7))
+
 ## 6.13.0 (2026-04-01)
 
 Full Changelog: [v6.12.1...v6.13.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.12.1...v6.13.0)
