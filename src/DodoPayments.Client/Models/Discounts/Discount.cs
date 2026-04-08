@@ -80,6 +80,22 @@ public sealed record class Discount : JsonModel
         init { this._rawData.Set("discount_id", value); }
     }
 
+    public required IReadOnlyDictionary<string, string> Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
     /// <summary>
     /// Whether this discount should be preserved when a subscription changes plans.
     /// Default: false (discount is removed on plan change)
@@ -201,6 +217,7 @@ public sealed record class Discount : JsonModel
         _ = this.Code;
         _ = this.CreatedAt;
         _ = this.DiscountID;
+        _ = this.Metadata;
         _ = this.PreserveOnPlanChange;
         _ = this.RestrictedTo;
         _ = this.TimesUsed;
