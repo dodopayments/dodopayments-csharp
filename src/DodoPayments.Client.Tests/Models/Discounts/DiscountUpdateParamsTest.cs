@@ -16,6 +16,7 @@ public class DiscountUpdateParamsTest : TestBase
             Amount = 0,
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
@@ -28,6 +29,7 @@ public class DiscountUpdateParamsTest : TestBase
         int expectedAmount = 0;
         string expectedCode = "code";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
@@ -39,6 +41,14 @@ public class DiscountUpdateParamsTest : TestBase
         Assert.Equal(expectedAmount, parameters.Amount);
         Assert.Equal(expectedCode, parameters.Code);
         Assert.Equal(expectedExpiresAt, parameters.ExpiresAt);
+        Assert.NotNull(parameters.Metadata);
+        Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(parameters.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, parameters.Metadata[item.Key]);
+        }
         Assert.Equal(expectedName, parameters.Name);
         Assert.Equal(expectedPreserveOnPlanChange, parameters.PreserveOnPlanChange);
         Assert.NotNull(parameters.RestrictedTo);
@@ -63,6 +73,8 @@ public class DiscountUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("code"));
         Assert.Null(parameters.ExpiresAt);
         Assert.False(parameters.RawBodyData.ContainsKey("expires_at"));
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Name);
         Assert.False(parameters.RawBodyData.ContainsKey("name"));
         Assert.Null(parameters.PreserveOnPlanChange);
@@ -87,6 +99,7 @@ public class DiscountUpdateParamsTest : TestBase
             Amount = null,
             Code = null,
             ExpiresAt = null,
+            Metadata = null,
             Name = null,
             PreserveOnPlanChange = null,
             RestrictedTo = null,
@@ -101,6 +114,8 @@ public class DiscountUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("code"));
         Assert.Null(parameters.ExpiresAt);
         Assert.True(parameters.RawBodyData.ContainsKey("expires_at"));
+        Assert.Null(parameters.Metadata);
+        Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Name);
         Assert.True(parameters.RawBodyData.ContainsKey("name"));
         Assert.Null(parameters.PreserveOnPlanChange);
@@ -134,6 +149,7 @@ public class DiscountUpdateParamsTest : TestBase
             Amount = 0,
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],

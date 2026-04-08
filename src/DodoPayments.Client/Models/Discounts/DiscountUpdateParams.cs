@@ -67,6 +67,25 @@ public record class DiscountUpdateParams : ParamsBase
         init { this._rawBodyData.Set("expires_at", value); }
     }
 
+    /// <summary>
+    /// Additional metadata for the discount
+    /// </summary>
+    public IReadOnlyDictionary<string, string>? Metadata
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
     public string? Name
     {
         get

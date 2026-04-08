@@ -18,6 +18,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
@@ -33,6 +34,7 @@ public class DiscountTest : TestBase
         string expectedCode = "code";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDiscountID = "discount_id";
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
         int expectedTimesUsed = 0;
@@ -47,6 +49,13 @@ public class DiscountTest : TestBase
         Assert.Equal(expectedCode, model.Code);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
         Assert.Equal(expectedPreserveOnPlanChange, model.PreserveOnPlanChange);
         Assert.Equal(expectedRestrictedTo.Count, model.RestrictedTo.Count);
         for (int i = 0; i < expectedRestrictedTo.Count; i++)
@@ -71,6 +80,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
@@ -97,6 +107,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
@@ -119,6 +130,7 @@ public class DiscountTest : TestBase
         string expectedCode = "code";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDiscountID = "discount_id";
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
         int expectedTimesUsed = 0;
@@ -133,6 +145,13 @@ public class DiscountTest : TestBase
         Assert.Equal(expectedCode, deserialized.Code);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
         Assert.Equal(expectedPreserveOnPlanChange, deserialized.PreserveOnPlanChange);
         Assert.Equal(expectedRestrictedTo.Count, deserialized.RestrictedTo.Count);
         for (int i = 0; i < expectedRestrictedTo.Count; i++)
@@ -157,6 +176,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
@@ -180,6 +200,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
@@ -206,6 +227,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
@@ -225,6 +247,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
@@ -256,6 +279,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
@@ -280,6 +304,7 @@ public class DiscountTest : TestBase
             Code = "code",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,

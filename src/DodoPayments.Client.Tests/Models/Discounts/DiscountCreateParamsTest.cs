@@ -16,6 +16,7 @@ public class DiscountCreateParamsTest : TestBase
             Type = DiscountType.Percentage,
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
@@ -27,6 +28,7 @@ public class DiscountCreateParamsTest : TestBase
         ApiEnum<string, DiscountType> expectedType = DiscountType.Percentage;
         string expectedCode = "code";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
@@ -37,6 +39,14 @@ public class DiscountCreateParamsTest : TestBase
         Assert.Equal(expectedType, parameters.Type);
         Assert.Equal(expectedCode, parameters.Code);
         Assert.Equal(expectedExpiresAt, parameters.ExpiresAt);
+        Assert.NotNull(parameters.Metadata);
+        Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(parameters.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, parameters.Metadata[item.Key]);
+        }
         Assert.Equal(expectedName, parameters.Name);
         Assert.Equal(expectedPreserveOnPlanChange, parameters.PreserveOnPlanChange);
         Assert.NotNull(parameters.RestrictedTo);
@@ -64,6 +74,8 @@ public class DiscountCreateParamsTest : TestBase
             UsageLimit = 0,
         };
 
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.PreserveOnPlanChange);
         Assert.False(parameters.RawBodyData.ContainsKey("preserve_on_plan_change"));
     }
@@ -83,9 +95,12 @@ public class DiscountCreateParamsTest : TestBase
             UsageLimit = 0,
 
             // Null should be interpreted as omitted for these properties
+            Metadata = null,
             PreserveOnPlanChange = null,
         };
 
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.PreserveOnPlanChange);
         Assert.False(parameters.RawBodyData.ContainsKey("preserve_on_plan_change"));
     }
@@ -97,6 +112,7 @@ public class DiscountCreateParamsTest : TestBase
         {
             Amount = 0,
             Type = DiscountType.Percentage,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
         };
 
@@ -121,6 +137,7 @@ public class DiscountCreateParamsTest : TestBase
         {
             Amount = 0,
             Type = DiscountType.Percentage,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
 
             Code = null,
@@ -164,6 +181,7 @@ public class DiscountCreateParamsTest : TestBase
             Type = DiscountType.Percentage,
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
