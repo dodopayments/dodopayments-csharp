@@ -52,6 +52,10 @@ public enum WebhookEventType
     DunningRecovered,
     AcrEmail,
     DunningEmail,
+    EntitlementGrantCreated,
+    EntitlementGrantDelivered,
+    EntitlementGrantFailed,
+    EntitlementGrantRevoked,
 }
 
 sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
@@ -105,6 +109,10 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
             "dunning.recovered" => WebhookEventType.DunningRecovered,
             "acr.email" => WebhookEventType.AcrEmail,
             "dunning.email" => WebhookEventType.DunningEmail,
+            "entitlement_grant.created" => WebhookEventType.EntitlementGrantCreated,
+            "entitlement_grant.delivered" => WebhookEventType.EntitlementGrantDelivered,
+            "entitlement_grant.failed" => WebhookEventType.EntitlementGrantFailed,
+            "entitlement_grant.revoked" => WebhookEventType.EntitlementGrantRevoked,
             _ => (WebhookEventType)(-1),
         };
     }
@@ -160,6 +168,10 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
                 WebhookEventType.DunningRecovered => "dunning.recovered",
                 WebhookEventType.AcrEmail => "acr.email",
                 WebhookEventType.DunningEmail => "dunning.email",
+                WebhookEventType.EntitlementGrantCreated => "entitlement_grant.created",
+                WebhookEventType.EntitlementGrantDelivered => "entitlement_grant.delivered",
+                WebhookEventType.EntitlementGrantFailed => "entitlement_grant.failed",
+                WebhookEventType.EntitlementGrantRevoked => "entitlement_grant.revoked",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

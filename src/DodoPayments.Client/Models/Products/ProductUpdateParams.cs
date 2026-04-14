@@ -107,6 +107,26 @@ public record class ProductUpdateParams : ParamsBase
     }
 
     /// <summary>
+    /// Entitlement IDs to attach (replaces all existing when present) Send empty
+    /// array to remove all, omit field to leave unchanged
+    /// </summary>
+    public IReadOnlyList<string>? EntitlementIds
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("entitlement_ids");
+        }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<string>?>(
+                "entitlement_ids",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Product image id after its uploaded to S3
     /// </summary>
     public string? ImageID
@@ -125,6 +145,7 @@ public record class ProductUpdateParams : ParamsBase
     /// <para>Only applicable if `license_key_enabled` is `true`. This message contains
     /// instructions for activating the license key.</para>
     /// </summary>
+    [Obsolete("deprecated")]
     public string? LicenseKeyActivationMessage
     {
         get
@@ -141,6 +162,7 @@ public record class ProductUpdateParams : ParamsBase
     /// <para>Only applicable if `license_key_enabled` is `true`. Represents the
     /// maximum number of times the license key can be activated.</para>
     /// </summary>
+    [Obsolete("deprecated")]
     public int? LicenseKeyActivationsLimit
     {
         get
@@ -173,6 +195,7 @@ public record class ProductUpdateParams : ParamsBase
     /// <para>If `true`, additional fields related to license key (duration, activations
     /// limit, activation message) become applicable.</para>
     /// </summary>
+    [Obsolete("deprecated")]
     public bool? LicenseKeyEnabled
     {
         get

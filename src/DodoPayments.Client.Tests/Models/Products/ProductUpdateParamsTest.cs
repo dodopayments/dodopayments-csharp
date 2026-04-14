@@ -49,6 +49,7 @@ public class ProductUpdateParamsTest : TestBase
                 Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 Instructions = "instructions",
             },
+            EntitlementIds = ["string"],
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             LicenseKeyActivationMessage = "license_key_activation_message",
             LicenseKeyActivationsLimit = 0,
@@ -103,6 +104,7 @@ public class ProductUpdateParamsTest : TestBase
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             Instructions = "instructions",
         };
+        List<string> expectedEntitlementIds = ["string"];
         string expectedImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         string expectedLicenseKeyActivationMessage = "license_key_activation_message";
         int expectedLicenseKeyActivationsLimit = 0;
@@ -143,6 +145,12 @@ public class ProductUpdateParamsTest : TestBase
         }
         Assert.Equal(expectedDescription, parameters.Description);
         Assert.Equal(expectedDigitalProductDelivery, parameters.DigitalProductDelivery);
+        Assert.NotNull(parameters.EntitlementIds);
+        Assert.Equal(expectedEntitlementIds.Count, parameters.EntitlementIds.Count);
+        for (int i = 0; i < expectedEntitlementIds.Count; i++)
+        {
+            Assert.Equal(expectedEntitlementIds[i], parameters.EntitlementIds[i]);
+        }
         Assert.Equal(expectedImageID, parameters.ImageID);
         Assert.Equal(expectedLicenseKeyActivationMessage, parameters.LicenseKeyActivationMessage);
         Assert.Equal(expectedLicenseKeyActivationsLimit, parameters.LicenseKeyActivationsLimit);
@@ -176,6 +184,8 @@ public class ProductUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("description"));
         Assert.Null(parameters.DigitalProductDelivery);
         Assert.False(parameters.RawBodyData.ContainsKey("digital_product_delivery"));
+        Assert.Null(parameters.EntitlementIds);
+        Assert.False(parameters.RawBodyData.ContainsKey("entitlement_ids"));
         Assert.Null(parameters.ImageID);
         Assert.False(parameters.RawBodyData.ContainsKey("image_id"));
         Assert.Null(parameters.LicenseKeyActivationMessage);
@@ -208,6 +218,7 @@ public class ProductUpdateParamsTest : TestBase
             CreditEntitlements = null,
             Description = null,
             DigitalProductDelivery = null,
+            EntitlementIds = null,
             ImageID = null,
             LicenseKeyActivationMessage = null,
             LicenseKeyActivationsLimit = null,
@@ -229,6 +240,8 @@ public class ProductUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("description"));
         Assert.Null(parameters.DigitalProductDelivery);
         Assert.True(parameters.RawBodyData.ContainsKey("digital_product_delivery"));
+        Assert.Null(parameters.EntitlementIds);
+        Assert.True(parameters.RawBodyData.ContainsKey("entitlement_ids"));
         Assert.Null(parameters.ImageID);
         Assert.True(parameters.RawBodyData.ContainsKey("image_id"));
         Assert.Null(parameters.LicenseKeyActivationMessage);
@@ -297,6 +310,7 @@ public class ProductUpdateParamsTest : TestBase
                 Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 Instructions = "instructions",
             },
+            EntitlementIds = ["string"],
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             LicenseKeyActivationMessage = "license_key_activation_message",
             LicenseKeyActivationsLimit = 0,

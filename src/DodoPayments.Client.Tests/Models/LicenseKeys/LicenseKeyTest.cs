@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.LicenseKeys;
 
 namespace DodoPayments.Client.Tests.Models.LicenseKeys;
@@ -18,11 +19,12 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeySource.Auto,
             Status = LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
         };
 
@@ -32,11 +34,12 @@ public class LicenseKeyTest : TestBase
         string expectedCustomerID = "cus_123";
         int expectedInstancesCount = 0;
         string expectedKey = "key";
-        string expectedPaymentID = "payment_id";
         string expectedProductID = "product_id";
+        ApiEnum<string, LicenseKeySource> expectedSource = LicenseKeySource.Auto;
         ApiEnum<string, LicenseKeyStatus> expectedStatus = LicenseKeyStatus.Active;
         int expectedActivationsLimit = 5;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z");
+        string expectedPaymentID = "payment_id";
         string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedID, model.ID);
@@ -45,11 +48,12 @@ public class LicenseKeyTest : TestBase
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedInstancesCount, model.InstancesCount);
         Assert.Equal(expectedKey, model.Key);
-        Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedProductID, model.ProductID);
+        Assert.Equal(expectedSource, model.Source);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedActivationsLimit, model.ActivationsLimit);
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
+        Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
     }
 
@@ -64,11 +68,12 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeySource.Auto,
             Status = LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
         };
 
@@ -92,11 +97,12 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeySource.Auto,
             Status = LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
         };
 
@@ -113,11 +119,12 @@ public class LicenseKeyTest : TestBase
         string expectedCustomerID = "cus_123";
         int expectedInstancesCount = 0;
         string expectedKey = "key";
-        string expectedPaymentID = "payment_id";
         string expectedProductID = "product_id";
+        ApiEnum<string, LicenseKeySource> expectedSource = LicenseKeySource.Auto;
         ApiEnum<string, LicenseKeyStatus> expectedStatus = LicenseKeyStatus.Active;
         int expectedActivationsLimit = 5;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z");
+        string expectedPaymentID = "payment_id";
         string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -126,11 +133,12 @@ public class LicenseKeyTest : TestBase
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedInstancesCount, deserialized.InstancesCount);
         Assert.Equal(expectedKey, deserialized.Key);
-        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedProductID, deserialized.ProductID);
+        Assert.Equal(expectedSource, deserialized.Source);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedActivationsLimit, deserialized.ActivationsLimit);
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
+        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
     }
 
@@ -145,11 +153,12 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeySource.Auto,
             Status = LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
         };
 
@@ -167,8 +176,8 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeySource.Auto,
             Status = LicenseKeyStatus.Active,
         };
 
@@ -176,6 +185,8 @@ public class LicenseKeyTest : TestBase
         Assert.False(model.RawData.ContainsKey("activations_limit"));
         Assert.Null(model.ExpiresAt);
         Assert.False(model.RawData.ContainsKey("expires_at"));
+        Assert.Null(model.PaymentID);
+        Assert.False(model.RawData.ContainsKey("payment_id"));
         Assert.Null(model.SubscriptionID);
         Assert.False(model.RawData.ContainsKey("subscription_id"));
     }
@@ -191,8 +202,8 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeySource.Auto,
             Status = LicenseKeyStatus.Active,
         };
 
@@ -210,12 +221,13 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeySource.Auto,
             Status = LicenseKeyStatus.Active,
 
             ActivationsLimit = null,
             ExpiresAt = null,
+            PaymentID = null,
             SubscriptionID = null,
         };
 
@@ -223,6 +235,8 @@ public class LicenseKeyTest : TestBase
         Assert.True(model.RawData.ContainsKey("activations_limit"));
         Assert.Null(model.ExpiresAt);
         Assert.True(model.RawData.ContainsKey("expires_at"));
+        Assert.Null(model.PaymentID);
+        Assert.True(model.RawData.ContainsKey("payment_id"));
         Assert.Null(model.SubscriptionID);
         Assert.True(model.RawData.ContainsKey("subscription_id"));
     }
@@ -238,12 +252,13 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeySource.Auto,
             Status = LicenseKeyStatus.Active,
 
             ActivationsLimit = null,
             ExpiresAt = null,
+            PaymentID = null,
             SubscriptionID = null,
         };
 
@@ -261,16 +276,75 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeySource.Auto,
             Status = LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
         };
 
         LicenseKey copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class LicenseKeySourceTest : TestBase
+{
+    [Theory]
+    [InlineData(LicenseKeySource.Auto)]
+    [InlineData(LicenseKeySource.Import)]
+    public void Validation_Works(LicenseKeySource rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, LicenseKeySource> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, LicenseKeySource>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(LicenseKeySource.Auto)]
+    [InlineData(LicenseKeySource.Import)]
+    public void SerializationRoundtrip_Works(LicenseKeySource rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, LicenseKeySource> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LicenseKeySource>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, LicenseKeySource>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LicenseKeySource>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

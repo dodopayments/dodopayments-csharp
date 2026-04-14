@@ -60,6 +60,7 @@ public class ProductCreateParamsTest : TestBase
                 ExternalUrl = "external_url",
                 Instructions = "instructions",
             },
+            EntitlementIds = ["string"],
             LicenseKeyActivationMessage = "license_key_activation_message",
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
@@ -111,6 +112,7 @@ public class ProductCreateParamsTest : TestBase
             ExternalUrl = "external_url",
             Instructions = "instructions",
         };
+        List<string> expectedEntitlementIds = ["string"];
         string expectedLicenseKeyActivationMessage = "license_key_activation_message";
         int expectedLicenseKeyActivationsLimit = 0;
         Products::LicenseKeyDuration expectedLicenseKeyDuration = new()
@@ -139,6 +141,12 @@ public class ProductCreateParamsTest : TestBase
         }
         Assert.Equal(expectedDescription, parameters.Description);
         Assert.Equal(expectedDigitalProductDelivery, parameters.DigitalProductDelivery);
+        Assert.NotNull(parameters.EntitlementIds);
+        Assert.Equal(expectedEntitlementIds.Count, parameters.EntitlementIds.Count);
+        for (int i = 0; i < expectedEntitlementIds.Count; i++)
+        {
+            Assert.Equal(expectedEntitlementIds[i], parameters.EntitlementIds[i]);
+        }
         Assert.Equal(expectedLicenseKeyActivationMessage, parameters.LicenseKeyActivationMessage);
         Assert.Equal(expectedLicenseKeyActivationsLimit, parameters.LicenseKeyActivationsLimit);
         Assert.Equal(expectedLicenseKeyDuration, parameters.LicenseKeyDuration);
@@ -202,6 +210,7 @@ public class ProductCreateParamsTest : TestBase
                 ExternalUrl = "external_url",
                 Instructions = "instructions",
             },
+            EntitlementIds = ["string"],
             LicenseKeyActivationMessage = "license_key_activation_message",
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
@@ -261,6 +270,7 @@ public class ProductCreateParamsTest : TestBase
                 ExternalUrl = "external_url",
                 Instructions = "instructions",
             },
+            EntitlementIds = ["string"],
             LicenseKeyActivationMessage = "license_key_activation_message",
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
@@ -305,6 +315,8 @@ public class ProductCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("description"));
         Assert.Null(parameters.DigitalProductDelivery);
         Assert.False(parameters.RawBodyData.ContainsKey("digital_product_delivery"));
+        Assert.Null(parameters.EntitlementIds);
+        Assert.False(parameters.RawBodyData.ContainsKey("entitlement_ids"));
         Assert.Null(parameters.LicenseKeyActivationMessage);
         Assert.False(parameters.RawBodyData.ContainsKey("license_key_activation_message"));
         Assert.Null(parameters.LicenseKeyActivationsLimit);
@@ -340,6 +352,7 @@ public class ProductCreateParamsTest : TestBase
             CreditEntitlements = null,
             Description = null,
             DigitalProductDelivery = null,
+            EntitlementIds = null,
             LicenseKeyActivationMessage = null,
             LicenseKeyActivationsLimit = null,
             LicenseKeyDuration = null,
@@ -356,6 +369,8 @@ public class ProductCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("description"));
         Assert.Null(parameters.DigitalProductDelivery);
         Assert.True(parameters.RawBodyData.ContainsKey("digital_product_delivery"));
+        Assert.Null(parameters.EntitlementIds);
+        Assert.True(parameters.RawBodyData.ContainsKey("entitlement_ids"));
         Assert.Null(parameters.LicenseKeyActivationMessage);
         Assert.True(parameters.RawBodyData.ContainsKey("license_key_activation_message"));
         Assert.Null(parameters.LicenseKeyActivationsLimit);
@@ -440,6 +455,7 @@ public class ProductCreateParamsTest : TestBase
                 ExternalUrl = "external_url",
                 Instructions = "instructions",
             },
+            EntitlementIds = ["string"],
             LicenseKeyActivationMessage = "license_key_activation_message",
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },

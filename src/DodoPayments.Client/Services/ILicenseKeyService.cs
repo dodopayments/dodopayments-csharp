@@ -27,14 +27,24 @@ public interface ILicenseKeyService
     ILicenseKeyService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
+    /// Sends a request to <c>post /license_keys</c>.
+    /// </summary>
+    Task<LicenseKey> Create(
+        LicenseKeyCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Sends a request to <c>get /license_keys/{id}</c>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<LicenseKey> Retrieve(
         LicenseKeyRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(LicenseKeyRetrieveParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<LicenseKey> Retrieve(
         string id,
         LicenseKeyRetrieveParams? parameters = null,
@@ -44,12 +54,14 @@ public interface ILicenseKeyService
     /// <summary>
     /// Sends a request to <c>patch /license_keys/{id}</c>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<LicenseKey> Update(
         LicenseKeyUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Update(LicenseKeyUpdateParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<LicenseKey> Update(
         string id,
         LicenseKeyUpdateParams? parameters = null,
@@ -59,6 +71,7 @@ public interface ILicenseKeyService
     /// <summary>
     /// Sends a request to <c>get /license_keys</c>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<LicenseKeyListPage> List(
         LicenseKeyListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -79,15 +92,26 @@ public interface ILicenseKeyServiceWithRawResponse
     ILicenseKeyServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
+    /// Returns a raw HTTP response for <c>post /license_keys</c>, but is otherwise the
+    /// same as <see cref="ILicenseKeyService.Create(LicenseKeyCreateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<LicenseKey>> Create(
+        LicenseKeyCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Returns a raw HTTP response for <c>get /license_keys/{id}</c>, but is otherwise the
     /// same as <see cref="ILicenseKeyService.Retrieve(LicenseKeyRetrieveParams, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<LicenseKey>> Retrieve(
         LicenseKeyRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(LicenseKeyRetrieveParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<HttpResponse<LicenseKey>> Retrieve(
         string id,
         LicenseKeyRetrieveParams? parameters = null,
@@ -98,12 +122,14 @@ public interface ILicenseKeyServiceWithRawResponse
     /// Returns a raw HTTP response for <c>patch /license_keys/{id}</c>, but is otherwise the
     /// same as <see cref="ILicenseKeyService.Update(LicenseKeyUpdateParams, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<LicenseKey>> Update(
         LicenseKeyUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Update(LicenseKeyUpdateParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<HttpResponse<LicenseKey>> Update(
         string id,
         LicenseKeyUpdateParams? parameters = null,
@@ -114,6 +140,7 @@ public interface ILicenseKeyServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /license_keys</c>, but is otherwise the
     /// same as <see cref="ILicenseKeyService.List(LicenseKeyListParams?, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<LicenseKeyListPage>> List(
         LicenseKeyListParams? parameters = null,
         CancellationToken cancellationToken = default

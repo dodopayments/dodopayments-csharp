@@ -14,8 +14,7 @@ namespace DodoPayments.Client.Models.LicenseKeys;
 /// changes in non-major versions. We may add new methods in the future that cause
 /// existing derived classes to break.
 /// </summary>
-[Obsolete("deprecated")]
-public record class LicenseKeyUpdateParams : ParamsBase
+public record class LicenseKeyCreateParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
@@ -23,11 +22,47 @@ public record class LicenseKeyUpdateParams : ParamsBase
         get { return this._rawBodyData.Freeze(); }
     }
 
-    public string? ID { get; init; }
+    /// <summary>
+    /// The customer this license key belongs to.
+    /// </summary>
+    public required string CustomerID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("customer_id");
+        }
+        init { this._rawBodyData.Set("customer_id", value); }
+    }
 
     /// <summary>
-    /// The updated activation limit for the license key. Use `null` to remove the
-    /// limit, or omit this field to leave it unchanged.
+    /// The license key string to import.
+    /// </summary>
+    public required string Key
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("key");
+        }
+        init { this._rawBodyData.Set("key", value); }
+    }
+
+    /// <summary>
+    /// The product this license key is for.
+    /// </summary>
+    public required string ProductID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("product_id");
+        }
+        init { this._rawBodyData.Set("product_id", value); }
+    }
+
+    /// <summary>
+    /// Maximum number of activations allowed. Null means unlimited.
     /// </summary>
     public int? ActivationsLimit
     {
@@ -40,22 +75,7 @@ public record class LicenseKeyUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Indicates whether the license key should be disabled. A value of `true` disables
-    /// the key, while `false` enables it. Omit this field to leave it unchanged.
-    /// </summary>
-    public bool? Disabled
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<bool>("disabled");
-        }
-        init { this._rawBodyData.Set("disabled", value); }
-    }
-
-    /// <summary>
-    /// The updated expiration timestamp for the license key in UTC. Use `null` to
-    /// remove the expiration date, or omit this field to leave it unchanged.
+    /// Expiration timestamp. Null means the key never expires.
     /// </summary>
     public DateTimeOffset? ExpiresAt
     {
@@ -67,20 +87,18 @@ public record class LicenseKeyUpdateParams : ParamsBase
         init { this._rawBodyData.Set("expires_at", value); }
     }
 
-    public LicenseKeyUpdateParams() { }
+    public LicenseKeyCreateParams() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public LicenseKeyUpdateParams(LicenseKeyUpdateParams licenseKeyUpdateParams)
-        : base(licenseKeyUpdateParams)
+    public LicenseKeyCreateParams(LicenseKeyCreateParams licenseKeyCreateParams)
+        : base(licenseKeyCreateParams)
     {
-        this.ID = licenseKeyUpdateParams.ID;
-
-        this._rawBodyData = new(licenseKeyUpdateParams._rawBodyData);
+        this._rawBodyData = new(licenseKeyCreateParams._rawBodyData);
     }
 #pragma warning restore CS8618
 
-    public LicenseKeyUpdateParams(
+    public LicenseKeyCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -93,33 +111,29 @@ public record class LicenseKeyUpdateParams : ParamsBase
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    LicenseKeyUpdateParams(
+    LicenseKeyCreateParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
-        FrozenDictionary<string, JsonElement> rawBodyData,
-        string id
+        FrozenDictionary<string, JsonElement> rawBodyData
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
         this._rawBodyData = new(rawBodyData);
-        this.ID = id;
     }
 #pragma warning restore CS8618
 
     /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
-    public static LicenseKeyUpdateParams FromRawUnchecked(
+    public static LicenseKeyCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        IReadOnlyDictionary<string, JsonElement> rawBodyData,
-        string id
+        IReadOnlyDictionary<string, JsonElement> rawBodyData
     )
     {
         return new(
             FrozenDictionary.ToFrozenDictionary(rawHeaderData),
             FrozenDictionary.ToFrozenDictionary(rawQueryData),
-            FrozenDictionary.ToFrozenDictionary(rawBodyData),
-            id
+            FrozenDictionary.ToFrozenDictionary(rawBodyData)
         );
     }
 
@@ -128,7 +142,6 @@ public record class LicenseKeyUpdateParams : ParamsBase
             FriendlyJsonPrinter.PrintValue(
                 new Dictionary<string, JsonElement>()
                 {
-                    ["ID"] = JsonSerializer.SerializeToElement(this.ID),
                     ["HeaderData"] = FriendlyJsonPrinter.PrintValue(
                         JsonSerializer.SerializeToElement(this._rawHeaderData.Freeze())
                     ),
@@ -141,23 +154,20 @@ public record class LicenseKeyUpdateParams : ParamsBase
             ModelBase.ToStringSerializerOptions
         );
 
-    public virtual bool Equals(LicenseKeyUpdateParams? other)
+    public virtual bool Equals(LicenseKeyCreateParams? other)
     {
         if (other == null)
         {
             return false;
         }
-        return (this.ID?.Equals(other.ID) ?? other.ID == null)
-            && this._rawHeaderData.Equals(other._rawHeaderData)
+        return this._rawHeaderData.Equals(other._rawHeaderData)
             && this._rawQueryData.Equals(other._rawQueryData)
             && this._rawBodyData.Equals(other._rawBodyData);
     }
 
     public override Uri Url(ClientOptions options)
     {
-        return new UriBuilder(
-            options.BaseUrl.ToString().TrimEnd('/') + string.Format("/license_keys/{0}", this.ID)
-        )
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/license_keys")
         {
             Query = this.QueryString(options),
         }.Uri;

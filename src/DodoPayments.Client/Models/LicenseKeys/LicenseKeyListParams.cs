@@ -15,6 +15,7 @@ namespace DodoPayments.Client.Models.LicenseKeys;
 /// changes in non-major versions. We may add new methods in the future that cause
 /// existing derived classes to break.
 /// </summary>
+[Obsolete("deprecated")]
 public record class LicenseKeyListParams : ParamsBase
 {
     /// <summary>
@@ -144,6 +145,27 @@ public record class LicenseKeyListParams : ParamsBase
     }
 
     /// <summary>
+    /// Filter by license key source
+    /// </summary>
+    public ApiEnum<string, Source>? Source
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, Source>>("source");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("source", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by license key status
     /// </summary>
     public ApiEnum<string, Status>? Status
@@ -251,6 +273,49 @@ public record class LicenseKeyListParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
+    }
+}
+
+/// <summary>
+/// Filter by license key source
+/// </summary>
+[JsonConverter(typeof(SourceConverter))]
+public enum Source
+{
+    Auto,
+    Import,
+}
+
+sealed class SourceConverter : JsonConverter<Source>
+{
+    public override Source Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "auto" => Source.Auto,
+            "import" => Source.Import,
+            _ => (Source)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Source value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Source.Auto => "auto",
+                Source.Import => "import",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }
 

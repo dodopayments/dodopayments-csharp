@@ -35,6 +35,19 @@ public sealed class LicenseKeyService : ILicenseKeyService
     }
 
     /// <inheritdoc/>
+    public async Task<LicenseKey> Create(
+        LicenseKeyCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Create(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<LicenseKey> Retrieve(
         LicenseKeyRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -47,6 +60,7 @@ public sealed class LicenseKeyService : ILicenseKeyService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<LicenseKey> Retrieve(
         string id,
         LicenseKeyRetrieveParams? parameters = null,
@@ -59,6 +73,7 @@ public sealed class LicenseKeyService : ILicenseKeyService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<LicenseKey> Update(
         LicenseKeyUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -71,6 +86,7 @@ public sealed class LicenseKeyService : ILicenseKeyService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<LicenseKey> Update(
         string id,
         LicenseKeyUpdateParams? parameters = null,
@@ -83,6 +99,7 @@ public sealed class LicenseKeyService : ILicenseKeyService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<LicenseKeyListPage> List(
         LicenseKeyListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -114,6 +131,35 @@ public sealed class LicenseKeyServiceWithRawResponse : ILicenseKeyServiceWithRaw
     }
 
     /// <inheritdoc/>
+    public async Task<HttpResponse<LicenseKey>> Create(
+        LicenseKeyCreateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HttpRequest<LicenseKeyCreateParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var licenseKey = await response
+                    .Deserialize<LicenseKey>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    licenseKey.Validate();
+                }
+                return licenseKey;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<LicenseKey>> Retrieve(
         LicenseKeyRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -147,6 +193,7 @@ public sealed class LicenseKeyServiceWithRawResponse : ILicenseKeyServiceWithRaw
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<HttpResponse<LicenseKey>> Retrieve(
         string id,
         LicenseKeyRetrieveParams? parameters = null,
@@ -159,6 +206,7 @@ public sealed class LicenseKeyServiceWithRawResponse : ILicenseKeyServiceWithRaw
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<LicenseKey>> Update(
         LicenseKeyUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -192,6 +240,7 @@ public sealed class LicenseKeyServiceWithRawResponse : ILicenseKeyServiceWithRaw
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<HttpResponse<LicenseKey>> Update(
         string id,
         LicenseKeyUpdateParams? parameters = null,
@@ -204,6 +253,7 @@ public sealed class LicenseKeyServiceWithRawResponse : ILicenseKeyServiceWithRaw
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<LicenseKeyListPage>> List(
         LicenseKeyListParams? parameters = null,
         CancellationToken cancellationToken = default

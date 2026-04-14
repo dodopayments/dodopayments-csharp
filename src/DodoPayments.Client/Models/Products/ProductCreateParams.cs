@@ -146,8 +146,28 @@ public record class ProductCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Optional entitlement IDs to attach to this product (max 20)
+    /// </summary>
+    public IReadOnlyList<string>? EntitlementIds
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("entitlement_ids");
+        }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<string>?>(
+                "entitlement_ids",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Optional message displayed during license key activation
     /// </summary>
+    [Obsolete("deprecated")]
     public string? LicenseKeyActivationMessage
     {
         get
@@ -161,6 +181,7 @@ public record class ProductCreateParams : ParamsBase
     /// <summary>
     /// The number of times the license key can be activated. Must be 0 or greater
     /// </summary>
+    [Obsolete("deprecated")]
     public int? LicenseKeyActivationsLimit
     {
         get
@@ -189,6 +210,7 @@ public record class ProductCreateParams : ParamsBase
     /// <summary>
     /// When true, generates and sends a license key to your customer. Defaults to false
     /// </summary>
+    [Obsolete("deprecated")]
     public bool? LicenseKeyEnabled
     {
         get
