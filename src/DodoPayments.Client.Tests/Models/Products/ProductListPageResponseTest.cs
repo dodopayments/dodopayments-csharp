@@ -20,6 +20,23 @@ public class ProductListPageResponseTest : TestBase
                 {
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Entitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            IntegrationConfig =
+                                new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
+                                {
+                                    Permission = "permission",
+                                    TargetID = "target_id",
+                                },
+                            IntegrationType =
+                                Products::ProductListResponseEntitlementIntegrationType.Discord,
+                            Name = "name",
+                            Description = "description",
+                        },
+                    ],
                     IsRecurring = true,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     ProductID = "product_id",
@@ -52,6 +69,23 @@ public class ProductListPageResponseTest : TestBase
             {
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Entitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        IntegrationConfig =
+                            new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
+                            {
+                                Permission = "permission",
+                                TargetID = "target_id",
+                            },
+                        IntegrationType =
+                            Products::ProductListResponseEntitlementIntegrationType.Discord,
+                        Name = "name",
+                        Description = "description",
+                    },
+                ],
                 IsRecurring = true,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 ProductID = "product_id",
@@ -95,6 +129,23 @@ public class ProductListPageResponseTest : TestBase
                 {
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Entitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            IntegrationConfig =
+                                new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
+                                {
+                                    Permission = "permission",
+                                    TargetID = "target_id",
+                                },
+                            IntegrationType =
+                                Products::ProductListResponseEntitlementIntegrationType.Discord,
+                            Name = "name",
+                            Description = "description",
+                        },
+                    ],
                     IsRecurring = true,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     ProductID = "product_id",
@@ -141,6 +192,23 @@ public class ProductListPageResponseTest : TestBase
                 {
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Entitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            IntegrationConfig =
+                                new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
+                                {
+                                    Permission = "permission",
+                                    TargetID = "target_id",
+                                },
+                            IntegrationType =
+                                Products::ProductListResponseEntitlementIntegrationType.Discord,
+                            Name = "name",
+                            Description = "description",
+                        },
+                    ],
                     IsRecurring = true,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     ProductID = "product_id",
@@ -180,6 +248,23 @@ public class ProductListPageResponseTest : TestBase
             {
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Entitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        IntegrationConfig =
+                            new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
+                            {
+                                Permission = "permission",
+                                TargetID = "target_id",
+                            },
+                        IntegrationType =
+                            Products::ProductListResponseEntitlementIntegrationType.Discord,
+                        Name = "name",
+                        Description = "description",
+                    },
+                ],
                 IsRecurring = true,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 ProductID = "product_id",
@@ -223,6 +308,23 @@ public class ProductListPageResponseTest : TestBase
                 {
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Entitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            IntegrationConfig =
+                                new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
+                                {
+                                    Permission = "permission",
+                                    TargetID = "target_id",
+                                },
+                            IntegrationType =
+                                Products::ProductListResponseEntitlementIntegrationType.Discord,
+                            Name = "name",
+                            Description = "description",
+                        },
+                    ],
                     IsRecurring = true,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     ProductID = "product_id",
@@ -263,6 +365,23 @@ public class ProductListPageResponseTest : TestBase
                 {
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Entitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            IntegrationConfig =
+                                new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
+                                {
+                                    Permission = "permission",
+                                    TargetID = "target_id",
+                                },
+                            IntegrationType =
+                                Products::ProductListResponseEntitlementIntegrationType.Discord,
+                            Name = "name",
+                            Description = "description",
+                        },
+                    ],
                     IsRecurring = true,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     ProductID = "product_id",

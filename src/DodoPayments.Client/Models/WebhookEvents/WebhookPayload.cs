@@ -148,7 +148,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null
             );
         }
     }
@@ -166,7 +167,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (x) => x.BusinessID,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null
+                dunningAttempt: (_) => null,
+                entitlementGrant: (x) => x.BusinessID
             );
         }
     }
@@ -184,7 +186,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (x) => x.CreatedAt,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (x) => x.CreatedAt
+                dunningAttempt: (x) => x.CreatedAt,
+                entitlementGrant: (x) => x.CreatedAt
             );
         }
     }
@@ -202,7 +205,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null
             );
         }
     }
@@ -220,7 +224,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (x) => x.PaymentID,
-                dunningAttempt: (x) => x.PaymentID
+                dunningAttempt: (x) => x.PaymentID,
+                entitlementGrant: (x) => x.PaymentID
             );
         }
     }
@@ -238,7 +243,46 @@ public record class Data : ModelBase
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null
+            );
+        }
+    }
+
+    public string? ErrorCode
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (x) => x.ErrorCode,
+                subscription: (_) => null,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (x) => x.ErrorCode
+            );
+        }
+    }
+
+    public string? ErrorMessage
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (x) => x.ErrorMessage,
+                subscription: (_) => null,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (x) => x.ErrorMessage
             );
         }
     }
@@ -256,7 +300,27 @@ public record class Data : ModelBase
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (x) => x.SubscriptionID,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (x) => x.SubscriptionID
+                dunningAttempt: (x) => x.SubscriptionID,
+                entitlementGrant: (x) => x.SubscriptionID
+            );
+        }
+    }
+
+    public DateTimeOffset? UpdatedAt
+    {
+        get
+        {
+            return Match<DateTimeOffset?>(
+                payment: (x) => x.UpdatedAt,
+                subscription: (_) => null,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (x) => x.UpdatedAt
             );
         }
     }
@@ -274,7 +338,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null
             );
         }
     }
@@ -292,7 +357,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null
             );
         }
     }
@@ -310,7 +376,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null
             );
         }
     }
@@ -328,7 +395,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (x) => x.ID,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null
+                dunningAttempt: (_) => null,
+                entitlementGrant: (x) => x.ID
             );
         }
     }
@@ -346,7 +414,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (x) => x.CustomerID,
                 creditBalanceLow: (x) => x.CustomerID,
                 abandonedCheckout: (x) => x.CustomerID,
-                dunningAttempt: (x) => x.CustomerID
+                dunningAttempt: (x) => x.CustomerID,
+                entitlementGrant: (x) => x.CustomerID
             );
         }
     }
@@ -364,7 +433,8 @@ public record class Data : ModelBase
                 creditLedgerEntry: (x) => x.CreditEntitlementID,
                 creditBalanceLow: (x) => x.CreditEntitlementID,
                 abandonedCheckout: (_) => null,
-                dunningAttempt: (_) => null
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null
             );
         }
     }
@@ -418,6 +488,12 @@ public record class Data : ModelBase
     }
 
     public Data(DunningAttempt value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Data(EntitlementGrant value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -618,6 +694,27 @@ public record class Data : ModelBase
     }
 
     /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="EntitlementGrant"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickEntitlementGrant(out var value)) {
+    ///     // `value` is of type `EntitlementGrant`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickEntitlementGrant([NotNullWhen(true)] out EntitlementGrant? value)
+    {
+        value = this.Value as EntitlementGrant;
+        return value != null;
+    }
+
+    /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
     /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
@@ -639,7 +736,8 @@ public record class Data : ModelBase
     ///     (CreditLedgerEntry value) =&gt; {...},
     ///     (CreditBalanceLow value) =&gt; {...},
     ///     (AbandonedCheckout value) =&gt; {...},
-    ///     (DunningAttempt value) =&gt; {...}
+    ///     (DunningAttempt value) =&gt; {...},
+    ///     (EntitlementGrant value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -653,7 +751,8 @@ public record class Data : ModelBase
         Action<CreditLedgerEntry> creditLedgerEntry,
         Action<CreditBalanceLow> creditBalanceLow,
         Action<AbandonedCheckout> abandonedCheckout,
-        Action<DunningAttempt> dunningAttempt
+        Action<DunningAttempt> dunningAttempt,
+        Action<EntitlementGrant> entitlementGrant
     )
     {
         switch (this.Value)
@@ -685,6 +784,9 @@ public record class Data : ModelBase
             case DunningAttempt value:
                 dunningAttempt(value);
                 break;
+            case EntitlementGrant value:
+                entitlementGrant(value);
+                break;
             default:
                 throw new DodoPaymentsInvalidDataException(
                     "Data did not match any variant of Data"
@@ -715,7 +817,8 @@ public record class Data : ModelBase
     ///     (CreditLedgerEntry value) =&gt; {...},
     ///     (CreditBalanceLow value) =&gt; {...},
     ///     (AbandonedCheckout value) =&gt; {...},
-    ///     (DunningAttempt value) =&gt; {...}
+    ///     (DunningAttempt value) =&gt; {...},
+    ///     (EntitlementGrant value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -729,7 +832,8 @@ public record class Data : ModelBase
         Func<CreditLedgerEntry, T> creditLedgerEntry,
         Func<CreditBalanceLow, T> creditBalanceLow,
         Func<AbandonedCheckout, T> abandonedCheckout,
-        Func<DunningAttempt, T> dunningAttempt
+        Func<DunningAttempt, T> dunningAttempt,
+        Func<EntitlementGrant, T> entitlementGrant
     )
     {
         return this.Value switch
@@ -743,6 +847,7 @@ public record class Data : ModelBase
             CreditBalanceLow value => creditBalanceLow(value),
             AbandonedCheckout value => abandonedCheckout(value),
             DunningAttempt value => dunningAttempt(value),
+            EntitlementGrant value => entitlementGrant(value),
             _ => throw new DodoPaymentsInvalidDataException(
                 "Data did not match any variant of Data"
             ),
@@ -766,6 +871,8 @@ public record class Data : ModelBase
     public static implicit operator Data(AbandonedCheckout value) => new(value);
 
     public static implicit operator Data(DunningAttempt value) => new(value);
+
+    public static implicit operator Data(EntitlementGrant value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -792,7 +899,8 @@ public record class Data : ModelBase
             (creditLedgerEntry) => creditLedgerEntry.Validate(),
             (creditBalanceLow) => creditBalanceLow.Validate(),
             (abandonedCheckout) => abandonedCheckout.Validate(),
-            (dunningAttempt) => dunningAttempt.Validate()
+            (dunningAttempt) => dunningAttempt.Validate(),
+            (entitlementGrant) => entitlementGrant.Validate()
         );
     }
 
@@ -825,6 +933,7 @@ public record class Data : ModelBase
             CreditBalanceLow _ => 6,
             AbandonedCheckout _ => 7,
             DunningAttempt _ => 8,
+            EntitlementGrant _ => 9,
             _ => -1,
         };
     }
@@ -954,6 +1063,20 @@ sealed class DataConverter : JsonConverter<Data>
         try
         {
             var deserialized = JsonSerializer.Deserialize<DunningAttempt>(element, options);
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<EntitlementGrant>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -3229,19 +3352,6 @@ public sealed record class LicenseKey : JsonModel
     }
 
     /// <summary>
-    /// The unique identifier of the payment associated with the license key.
-    /// </summary>
-    public required string PaymentID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("payment_id");
-        }
-        init { this._rawData.Set("payment_id", value); }
-    }
-
-    /// <summary>
     /// The unique identifier of the product associated with the license key.
     /// </summary>
     public required string ProductID
@@ -3252,6 +3362,22 @@ public sealed record class LicenseKey : JsonModel
             return this._rawData.GetNotNullClass<string>("product_id");
         }
         init { this._rawData.Set("product_id", value); }
+    }
+
+    /// <summary>
+    /// The source of the license key - 'auto' for keys generated by payment/subscription
+    /// flows, 'import' for merchant-imported keys.
+    /// </summary>
+    public required ApiEnum<string, LicenseKeys::LicenseKeySource> Source
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, LicenseKeys::LicenseKeySource>>(
+                "source"
+            );
+        }
+        init { this._rawData.Set("source", value); }
     }
 
     public required ApiEnum<string, LicenseKeys::LicenseKeyStatus> Status
@@ -3293,6 +3419,19 @@ public sealed record class LicenseKey : JsonModel
     }
 
     /// <summary>
+    /// The unique identifier of the payment associated with the license key, if any.
+    /// </summary>
+    public string? PaymentID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_id");
+        }
+        init { this._rawData.Set("payment_id", value); }
+    }
+
+    /// <summary>
     /// The unique identifier of the subscription associated with the license key,
     /// if any.
     /// </summary>
@@ -3327,11 +3466,12 @@ public sealed record class LicenseKey : JsonModel
             CustomerID = licenseKey.CustomerID,
             InstancesCount = licenseKey.InstancesCount,
             Key = licenseKey.Key,
-            PaymentID = licenseKey.PaymentID,
             ProductID = licenseKey.ProductID,
+            Source = licenseKey.Source,
             Status = licenseKey.Status,
             ActivationsLimit = licenseKey.ActivationsLimit,
             ExpiresAt = licenseKey.ExpiresAt,
+            PaymentID = licenseKey.PaymentID,
             SubscriptionID = licenseKey.SubscriptionID,
         };
 
@@ -3344,11 +3484,12 @@ public sealed record class LicenseKey : JsonModel
         _ = this.CustomerID;
         _ = this.InstancesCount;
         _ = this.Key;
-        _ = this.PaymentID;
         _ = this.ProductID;
+        this.Source.Validate();
         this.Status.Validate();
         _ = this.ActivationsLimit;
         _ = this.ExpiresAt;
+        _ = this.PaymentID;
         _ = this.SubscriptionID;
         this.PayloadType.Validate();
     }
@@ -4576,6 +4717,416 @@ sealed class TriggerStateConverter : JsonConverter<TriggerState>
             {
                 TriggerState.OnHold => "on_hold",
                 TriggerState.Cancelled => "cancelled",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(JsonModelConverter<EntitlementGrant, EntitlementGrantFromRaw>))]
+public sealed record class EntitlementGrant : JsonModel
+{
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    public required string BusinessID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
+        init { this._rawData.Set("business_id", value); }
+    }
+
+    public required DateTimeOffset CreatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
+        init { this._rawData.Set("created_at", value); }
+    }
+
+    public required string CustomerID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customer_id");
+        }
+        init { this._rawData.Set("customer_id", value); }
+    }
+
+    public required string EntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("entitlement_id");
+        }
+        init { this._rawData.Set("entitlement_id", value); }
+    }
+
+    public required string ExternalID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("external_id");
+        }
+        init { this._rawData.Set("external_id", value); }
+    }
+
+    public required ApiEnum<string, EntitlementGrantPayloadType> PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, EntitlementGrantPayloadType>>(
+                "payload_type"
+            );
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    public required ApiEnum<string, EntitlementGrantStatus> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, EntitlementGrantStatus>>("status");
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    public required DateTimeOffset UpdatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at");
+        }
+        init { this._rawData.Set("updated_at", value); }
+    }
+
+    public DateTimeOffset? DeliveredAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("delivered_at");
+        }
+        init { this._rawData.Set("delivered_at", value); }
+    }
+
+    public string? ErrorCode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("error_code");
+        }
+        init { this._rawData.Set("error_code", value); }
+    }
+
+    public string? ErrorMessage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("error_message");
+        }
+        init { this._rawData.Set("error_message", value); }
+    }
+
+    public string? LicenseKey
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("license_key");
+        }
+        init { this._rawData.Set("license_key", value); }
+    }
+
+    public int? LicenseKeyActivationsLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("license_key_activations_limit");
+        }
+        init { this._rawData.Set("license_key_activations_limit", value); }
+    }
+
+    public int? LicenseKeyActivationsUsed
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("license_key_activations_used");
+        }
+        init { this._rawData.Set("license_key_activations_used", value); }
+    }
+
+    public DateTimeOffset? LicenseKeyExpiresAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("license_key_expires_at");
+        }
+        init { this._rawData.Set("license_key_expires_at", value); }
+    }
+
+    public string? LicenseKeyStatus
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("license_key_status");
+        }
+        init { this._rawData.Set("license_key_status", value); }
+    }
+
+    public JsonElement? Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<JsonElement>("metadata");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("metadata", value);
+        }
+    }
+
+    public DateTimeOffset? OAuthExpiresAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("oauth_expires_at");
+        }
+        init { this._rawData.Set("oauth_expires_at", value); }
+    }
+
+    public string? OAuthUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("oauth_url");
+        }
+        init { this._rawData.Set("oauth_url", value); }
+    }
+
+    public string? PaymentID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_id");
+        }
+        init { this._rawData.Set("payment_id", value); }
+    }
+
+    public string? RevocationReason
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("revocation_reason");
+        }
+        init { this._rawData.Set("revocation_reason", value); }
+    }
+
+    public DateTimeOffset? RevokedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("revoked_at");
+        }
+        init { this._rawData.Set("revoked_at", value); }
+    }
+
+    public string? SubscriptionID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("subscription_id");
+        }
+        init { this._rawData.Set("subscription_id", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.BusinessID;
+        _ = this.CreatedAt;
+        _ = this.CustomerID;
+        _ = this.EntitlementID;
+        _ = this.ExternalID;
+        this.PayloadType.Validate();
+        this.Status.Validate();
+        _ = this.UpdatedAt;
+        _ = this.DeliveredAt;
+        _ = this.ErrorCode;
+        _ = this.ErrorMessage;
+        _ = this.LicenseKey;
+        _ = this.LicenseKeyActivationsLimit;
+        _ = this.LicenseKeyActivationsUsed;
+        _ = this.LicenseKeyExpiresAt;
+        _ = this.LicenseKeyStatus;
+        _ = this.Metadata;
+        _ = this.OAuthExpiresAt;
+        _ = this.OAuthUrl;
+        _ = this.PaymentID;
+        _ = this.RevocationReason;
+        _ = this.RevokedAt;
+        _ = this.SubscriptionID;
+    }
+
+    public EntitlementGrant() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public EntitlementGrant(EntitlementGrant entitlementGrant)
+        : base(entitlementGrant) { }
+#pragma warning restore CS8618
+
+    public EntitlementGrant(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    EntitlementGrant(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="EntitlementGrantFromRaw.FromRawUnchecked"/>
+    public static EntitlementGrant FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class EntitlementGrantFromRaw : IFromRawJson<EntitlementGrant>
+{
+    /// <inheritdoc/>
+    public EntitlementGrant FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        EntitlementGrant.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(EntitlementGrantPayloadTypeConverter))]
+public enum EntitlementGrantPayloadType
+{
+    EntitlementGrant,
+}
+
+sealed class EntitlementGrantPayloadTypeConverter : JsonConverter<EntitlementGrantPayloadType>
+{
+    public override EntitlementGrantPayloadType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "EntitlementGrant" => EntitlementGrantPayloadType.EntitlementGrant,
+            _ => (EntitlementGrantPayloadType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        EntitlementGrantPayloadType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                EntitlementGrantPayloadType.EntitlementGrant => "EntitlementGrant",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(EntitlementGrantStatusConverter))]
+public enum EntitlementGrantStatus
+{
+    Pending,
+    Delivered,
+    Failed,
+    Revoked,
+}
+
+sealed class EntitlementGrantStatusConverter : JsonConverter<EntitlementGrantStatus>
+{
+    public override EntitlementGrantStatus Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "Pending" => EntitlementGrantStatus.Pending,
+            "Delivered" => EntitlementGrantStatus.Delivered,
+            "Failed" => EntitlementGrantStatus.Failed,
+            "Revoked" => EntitlementGrantStatus.Revoked,
+            _ => (EntitlementGrantStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        EntitlementGrantStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                EntitlementGrantStatus.Pending => "Pending",
+                EntitlementGrantStatus.Delivered => "Delivered",
+                EntitlementGrantStatus.Failed => "Failed",
+                EntitlementGrantStatus.Revoked => "Revoked",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

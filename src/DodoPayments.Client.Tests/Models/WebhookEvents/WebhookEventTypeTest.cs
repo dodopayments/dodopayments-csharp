@@ -49,6 +49,10 @@ public class WebhookEventTypeTest : TestBase
     [InlineData(WebhookEventType.DunningRecovered)]
     [InlineData(WebhookEventType.AcrEmail)]
     [InlineData(WebhookEventType.DunningEmail)]
+    [InlineData(WebhookEventType.EntitlementGrantCreated)]
+    [InlineData(WebhookEventType.EntitlementGrantDelivered)]
+    [InlineData(WebhookEventType.EntitlementGrantFailed)]
+    [InlineData(WebhookEventType.EntitlementGrantRevoked)]
     public void Validation_Works(WebhookEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -110,6 +114,10 @@ public class WebhookEventTypeTest : TestBase
     [InlineData(WebhookEventType.DunningRecovered)]
     [InlineData(WebhookEventType.AcrEmail)]
     [InlineData(WebhookEventType.DunningEmail)]
+    [InlineData(WebhookEventType.EntitlementGrantCreated)]
+    [InlineData(WebhookEventType.EntitlementGrantDelivered)]
+    [InlineData(WebhookEventType.EntitlementGrantFailed)]
+    [InlineData(WebhookEventType.EntitlementGrantRevoked)]
     public void SerializationRoundtrip_Works(WebhookEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

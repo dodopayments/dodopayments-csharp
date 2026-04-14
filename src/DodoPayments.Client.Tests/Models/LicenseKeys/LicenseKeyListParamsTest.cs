@@ -19,6 +19,7 @@ public class LicenseKeyListParamsTest : TestBase
             PageNumber = 0,
             PageSize = 0,
             ProductID = "product_id",
+            Source = Source.Auto,
             Status = Status.Active,
         };
 
@@ -28,6 +29,7 @@ public class LicenseKeyListParamsTest : TestBase
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
         string expectedProductID = "product_id";
+        ApiEnum<string, Source> expectedSource = Source.Auto;
         ApiEnum<string, Status> expectedStatus = Status.Active;
 
         Assert.Equal(expectedCreatedAtGte, parameters.CreatedAtGte);
@@ -36,6 +38,7 @@ public class LicenseKeyListParamsTest : TestBase
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
         Assert.Equal(expectedProductID, parameters.ProductID);
+        Assert.Equal(expectedSource, parameters.Source);
         Assert.Equal(expectedStatus, parameters.Status);
     }
 
@@ -56,6 +59,8 @@ public class LicenseKeyListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
         Assert.Null(parameters.ProductID);
         Assert.False(parameters.RawQueryData.ContainsKey("product_id"));
+        Assert.Null(parameters.Source);
+        Assert.False(parameters.RawQueryData.ContainsKey("source"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
     }
@@ -72,6 +77,7 @@ public class LicenseKeyListParamsTest : TestBase
             PageNumber = null,
             PageSize = null,
             ProductID = null,
+            Source = null,
             Status = null,
         };
 
@@ -87,6 +93,8 @@ public class LicenseKeyListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("page_size"));
         Assert.Null(parameters.ProductID);
         Assert.False(parameters.RawQueryData.ContainsKey("product_id"));
+        Assert.Null(parameters.Source);
+        Assert.False(parameters.RawQueryData.ContainsKey("source"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
     }
@@ -102,6 +110,7 @@ public class LicenseKeyListParamsTest : TestBase
             PageNumber = 0,
             PageSize = 0,
             ProductID = "product_id",
+            Source = Source.Auto,
             Status = Status.Active,
         };
 
@@ -109,7 +118,7 @@ public class LicenseKeyListParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://live.dodopayments.com/license_keys?created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&product_id=product_id&status=active"
+                "https://live.dodopayments.com/license_keys?created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&product_id=product_id&source=auto&status=active"
             ),
             url
         );
@@ -126,12 +135,71 @@ public class LicenseKeyListParamsTest : TestBase
             PageNumber = 0,
             PageSize = 0,
             ProductID = "product_id",
+            Source = Source.Auto,
             Status = Status.Active,
         };
 
         LicenseKeyListParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
+    }
+}
+
+public class SourceTest : TestBase
+{
+    [Theory]
+    [InlineData(Source.Auto)]
+    [InlineData(Source.Import)]
+    public void Validation_Works(Source rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Source> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Source>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Source.Auto)]
+    [InlineData(Source.Import)]
+    public void SerializationRoundtrip_Works(Source rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Source> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Source>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Source>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Source>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 

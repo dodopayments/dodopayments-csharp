@@ -970,11 +970,12 @@ public class DataTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
@@ -1053,6 +1054,39 @@ public class DataTest : TestBase
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
             PaymentID = "payment_id",
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void EntitlementGrantValidationWorks()
+    {
+        Data value = new EntitlementGrant()
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
         };
         value.Validate();
     }
@@ -1344,11 +1378,12 @@ public class DataTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
@@ -1439,6 +1474,42 @@ public class DataTest : TestBase
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
             PaymentID = "payment_id",
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void EntitlementGrantSerializationRoundtripWorks()
+    {
+        Data value = new EntitlementGrant()
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -5741,11 +5812,12 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
@@ -5756,12 +5828,14 @@ public class LicenseKeyTest : TestBase
         string expectedCustomerID = "cus_123";
         int expectedInstancesCount = 0;
         string expectedKey = "key";
-        string expectedPaymentID = "payment_id";
         string expectedProductID = "product_id";
+        ApiEnum<string, LicenseKeys::LicenseKeySource> expectedSource =
+            LicenseKeys::LicenseKeySource.Auto;
         ApiEnum<string, LicenseKeys::LicenseKeyStatus> expectedStatus =
             LicenseKeys::LicenseKeyStatus.Active;
         int expectedActivationsLimit = 5;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z");
+        string expectedPaymentID = "payment_id";
         string expectedSubscriptionID = "subscription_id";
         ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> expectedPayloadType =
             LicenseKeyIntersectionMember1PayloadType.LicenseKey;
@@ -5772,11 +5846,12 @@ public class LicenseKeyTest : TestBase
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedInstancesCount, model.InstancesCount);
         Assert.Equal(expectedKey, model.Key);
-        Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedProductID, model.ProductID);
+        Assert.Equal(expectedSource, model.Source);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedActivationsLimit, model.ActivationsLimit);
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
+        Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
         Assert.Equal(expectedPayloadType, model.PayloadType);
     }
@@ -5792,11 +5867,12 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
@@ -5821,11 +5897,12 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
@@ -5843,12 +5920,14 @@ public class LicenseKeyTest : TestBase
         string expectedCustomerID = "cus_123";
         int expectedInstancesCount = 0;
         string expectedKey = "key";
-        string expectedPaymentID = "payment_id";
         string expectedProductID = "product_id";
+        ApiEnum<string, LicenseKeys::LicenseKeySource> expectedSource =
+            LicenseKeys::LicenseKeySource.Auto;
         ApiEnum<string, LicenseKeys::LicenseKeyStatus> expectedStatus =
             LicenseKeys::LicenseKeyStatus.Active;
         int expectedActivationsLimit = 5;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z");
+        string expectedPaymentID = "payment_id";
         string expectedSubscriptionID = "subscription_id";
         ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> expectedPayloadType =
             LicenseKeyIntersectionMember1PayloadType.LicenseKey;
@@ -5859,11 +5938,12 @@ public class LicenseKeyTest : TestBase
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedInstancesCount, deserialized.InstancesCount);
         Assert.Equal(expectedKey, deserialized.Key);
-        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedProductID, deserialized.ProductID);
+        Assert.Equal(expectedSource, deserialized.Source);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedActivationsLimit, deserialized.ActivationsLimit);
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
+        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
         Assert.Equal(expectedPayloadType, deserialized.PayloadType);
     }
@@ -5879,11 +5959,12 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
@@ -5902,8 +5983,8 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
@@ -5912,6 +5993,8 @@ public class LicenseKeyTest : TestBase
         Assert.False(model.RawData.ContainsKey("activations_limit"));
         Assert.Null(model.ExpiresAt);
         Assert.False(model.RawData.ContainsKey("expires_at"));
+        Assert.Null(model.PaymentID);
+        Assert.False(model.RawData.ContainsKey("payment_id"));
         Assert.Null(model.SubscriptionID);
         Assert.False(model.RawData.ContainsKey("subscription_id"));
     }
@@ -5927,8 +6010,8 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
@@ -5947,13 +6030,14 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
 
             ActivationsLimit = null,
             ExpiresAt = null,
+            PaymentID = null,
             SubscriptionID = null,
         };
 
@@ -5961,6 +6045,8 @@ public class LicenseKeyTest : TestBase
         Assert.True(model.RawData.ContainsKey("activations_limit"));
         Assert.Null(model.ExpiresAt);
         Assert.True(model.RawData.ContainsKey("expires_at"));
+        Assert.Null(model.PaymentID);
+        Assert.True(model.RawData.ContainsKey("payment_id"));
         Assert.Null(model.SubscriptionID);
         Assert.True(model.RawData.ContainsKey("subscription_id"));
     }
@@ -5976,13 +6062,14 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
 
             ActivationsLimit = null,
             ExpiresAt = null,
+            PaymentID = null,
             SubscriptionID = null,
         };
 
@@ -6000,11 +6087,12 @@ public class LicenseKeyTest : TestBase
             CustomerID = "cus_123",
             InstancesCount = 0,
             Key = "key",
-            PaymentID = "payment_id",
             ProductID = "product_id",
+            Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
+            PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
             PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
@@ -7577,6 +7665,720 @@ public class TriggerStateTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, TriggerState>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class EntitlementGrantTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
+        };
+
+        string expectedID = "id";
+        string expectedBusinessID = "business_id";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedCustomerID = "customer_id";
+        string expectedEntitlementID = "entitlement_id";
+        string expectedExternalID = "external_id";
+        ApiEnum<string, EntitlementGrantPayloadType> expectedPayloadType =
+            EntitlementGrantPayloadType.EntitlementGrant;
+        ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
+        DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedErrorCode = "error_code";
+        string expectedErrorMessage = "error_message";
+        string expectedLicenseKey = "license_key";
+        int expectedLicenseKeyActivationsLimit = 0;
+        int expectedLicenseKeyActivationsUsed = 0;
+        DateTimeOffset expectedLicenseKeyExpiresAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        string expectedLicenseKeyStatus = "license_key_status";
+        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
+        DateTimeOffset expectedOAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedOAuthUrl = "oauth_url";
+        string expectedPaymentID = "payment_id";
+        string expectedRevocationReason = "revocation_reason";
+        DateTimeOffset expectedRevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedSubscriptionID = "subscription_id";
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedBusinessID, model.BusinessID);
+        Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedCustomerID, model.CustomerID);
+        Assert.Equal(expectedEntitlementID, model.EntitlementID);
+        Assert.Equal(expectedExternalID, model.ExternalID);
+        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.Equal(expectedStatus, model.Status);
+        Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
+        Assert.Equal(expectedDeliveredAt, model.DeliveredAt);
+        Assert.Equal(expectedErrorCode, model.ErrorCode);
+        Assert.Equal(expectedErrorMessage, model.ErrorMessage);
+        Assert.Equal(expectedLicenseKey, model.LicenseKey);
+        Assert.Equal(expectedLicenseKeyActivationsLimit, model.LicenseKeyActivationsLimit);
+        Assert.Equal(expectedLicenseKeyActivationsUsed, model.LicenseKeyActivationsUsed);
+        Assert.Equal(expectedLicenseKeyExpiresAt, model.LicenseKeyExpiresAt);
+        Assert.Equal(expectedLicenseKeyStatus, model.LicenseKeyStatus);
+        Assert.NotNull(model.Metadata);
+        Assert.True(JsonElement.DeepEquals(expectedMetadata, model.Metadata.Value));
+        Assert.Equal(expectedOAuthExpiresAt, model.OAuthExpiresAt);
+        Assert.Equal(expectedOAuthUrl, model.OAuthUrl);
+        Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedRevocationReason, model.RevocationReason);
+        Assert.Equal(expectedRevokedAt, model.RevokedAt);
+        Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementGrant>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementGrant>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        string expectedBusinessID = "business_id";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedCustomerID = "customer_id";
+        string expectedEntitlementID = "entitlement_id";
+        string expectedExternalID = "external_id";
+        ApiEnum<string, EntitlementGrantPayloadType> expectedPayloadType =
+            EntitlementGrantPayloadType.EntitlementGrant;
+        ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
+        DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedErrorCode = "error_code";
+        string expectedErrorMessage = "error_message";
+        string expectedLicenseKey = "license_key";
+        int expectedLicenseKeyActivationsLimit = 0;
+        int expectedLicenseKeyActivationsUsed = 0;
+        DateTimeOffset expectedLicenseKeyExpiresAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        string expectedLicenseKeyStatus = "license_key_status";
+        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
+        DateTimeOffset expectedOAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedOAuthUrl = "oauth_url";
+        string expectedPaymentID = "payment_id";
+        string expectedRevocationReason = "revocation_reason";
+        DateTimeOffset expectedRevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedSubscriptionID = "subscription_id";
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedBusinessID, deserialized.BusinessID);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedCustomerID, deserialized.CustomerID);
+        Assert.Equal(expectedEntitlementID, deserialized.EntitlementID);
+        Assert.Equal(expectedExternalID, deserialized.ExternalID);
+        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+        Assert.Equal(expectedDeliveredAt, deserialized.DeliveredAt);
+        Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
+        Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
+        Assert.Equal(expectedLicenseKey, deserialized.LicenseKey);
+        Assert.Equal(expectedLicenseKeyActivationsLimit, deserialized.LicenseKeyActivationsLimit);
+        Assert.Equal(expectedLicenseKeyActivationsUsed, deserialized.LicenseKeyActivationsUsed);
+        Assert.Equal(expectedLicenseKeyExpiresAt, deserialized.LicenseKeyExpiresAt);
+        Assert.Equal(expectedLicenseKeyStatus, deserialized.LicenseKeyStatus);
+        Assert.NotNull(deserialized.Metadata);
+        Assert.True(JsonElement.DeepEquals(expectedMetadata, deserialized.Metadata.Value));
+        Assert.Equal(expectedOAuthExpiresAt, deserialized.OAuthExpiresAt);
+        Assert.Equal(expectedOAuthUrl, deserialized.OAuthUrl);
+        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedRevocationReason, deserialized.RevocationReason);
+        Assert.Equal(expectedRevokedAt, deserialized.RevokedAt);
+        Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
+        };
+
+        Assert.Null(model.Metadata);
+        Assert.False(model.RawData.ContainsKey("metadata"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
+
+            // Null should be interpreted as omitted for these properties
+            Metadata = null,
+        };
+
+        Assert.Null(model.Metadata);
+        Assert.False(model.RawData.ContainsKey("metadata"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
+
+            // Null should be interpreted as omitted for these properties
+            Metadata = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+        };
+
+        Assert.Null(model.DeliveredAt);
+        Assert.False(model.RawData.ContainsKey("delivered_at"));
+        Assert.Null(model.ErrorCode);
+        Assert.False(model.RawData.ContainsKey("error_code"));
+        Assert.Null(model.ErrorMessage);
+        Assert.False(model.RawData.ContainsKey("error_message"));
+        Assert.Null(model.LicenseKey);
+        Assert.False(model.RawData.ContainsKey("license_key"));
+        Assert.Null(model.LicenseKeyActivationsLimit);
+        Assert.False(model.RawData.ContainsKey("license_key_activations_limit"));
+        Assert.Null(model.LicenseKeyActivationsUsed);
+        Assert.False(model.RawData.ContainsKey("license_key_activations_used"));
+        Assert.Null(model.LicenseKeyExpiresAt);
+        Assert.False(model.RawData.ContainsKey("license_key_expires_at"));
+        Assert.Null(model.LicenseKeyStatus);
+        Assert.False(model.RawData.ContainsKey("license_key_status"));
+        Assert.Null(model.OAuthExpiresAt);
+        Assert.False(model.RawData.ContainsKey("oauth_expires_at"));
+        Assert.Null(model.OAuthUrl);
+        Assert.False(model.RawData.ContainsKey("oauth_url"));
+        Assert.Null(model.PaymentID);
+        Assert.False(model.RawData.ContainsKey("payment_id"));
+        Assert.Null(model.RevocationReason);
+        Assert.False(model.RawData.ContainsKey("revocation_reason"));
+        Assert.Null(model.RevokedAt);
+        Assert.False(model.RawData.ContainsKey("revoked_at"));
+        Assert.Null(model.SubscriptionID);
+        Assert.False(model.RawData.ContainsKey("subscription_id"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+
+            DeliveredAt = null,
+            ErrorCode = null,
+            ErrorMessage = null,
+            LicenseKey = null,
+            LicenseKeyActivationsLimit = null,
+            LicenseKeyActivationsUsed = null,
+            LicenseKeyExpiresAt = null,
+            LicenseKeyStatus = null,
+            OAuthExpiresAt = null,
+            OAuthUrl = null,
+            PaymentID = null,
+            RevocationReason = null,
+            RevokedAt = null,
+            SubscriptionID = null,
+        };
+
+        Assert.Null(model.DeliveredAt);
+        Assert.True(model.RawData.ContainsKey("delivered_at"));
+        Assert.Null(model.ErrorCode);
+        Assert.True(model.RawData.ContainsKey("error_code"));
+        Assert.Null(model.ErrorMessage);
+        Assert.True(model.RawData.ContainsKey("error_message"));
+        Assert.Null(model.LicenseKey);
+        Assert.True(model.RawData.ContainsKey("license_key"));
+        Assert.Null(model.LicenseKeyActivationsLimit);
+        Assert.True(model.RawData.ContainsKey("license_key_activations_limit"));
+        Assert.Null(model.LicenseKeyActivationsUsed);
+        Assert.True(model.RawData.ContainsKey("license_key_activations_used"));
+        Assert.Null(model.LicenseKeyExpiresAt);
+        Assert.True(model.RawData.ContainsKey("license_key_expires_at"));
+        Assert.Null(model.LicenseKeyStatus);
+        Assert.True(model.RawData.ContainsKey("license_key_status"));
+        Assert.Null(model.OAuthExpiresAt);
+        Assert.True(model.RawData.ContainsKey("oauth_expires_at"));
+        Assert.Null(model.OAuthUrl);
+        Assert.True(model.RawData.ContainsKey("oauth_url"));
+        Assert.Null(model.PaymentID);
+        Assert.True(model.RawData.ContainsKey("payment_id"));
+        Assert.Null(model.RevocationReason);
+        Assert.True(model.RawData.ContainsKey("revocation_reason"));
+        Assert.Null(model.RevokedAt);
+        Assert.True(model.RawData.ContainsKey("revoked_at"));
+        Assert.Null(model.SubscriptionID);
+        Assert.True(model.RawData.ContainsKey("subscription_id"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+
+            DeliveredAt = null,
+            ErrorCode = null,
+            ErrorMessage = null,
+            LicenseKey = null,
+            LicenseKeyActivationsLimit = null,
+            LicenseKeyActivationsUsed = null,
+            LicenseKeyExpiresAt = null,
+            LicenseKeyStatus = null,
+            OAuthExpiresAt = null,
+            OAuthUrl = null,
+            PaymentID = null,
+            RevocationReason = null,
+            RevokedAt = null,
+            SubscriptionID = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new EntitlementGrant
+        {
+            ID = "id",
+            BusinessID = "business_id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customer_id",
+            EntitlementID = "entitlement_id",
+            ExternalID = "external_id",
+            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
+            Status = EntitlementGrantStatus.Pending,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ErrorCode = "error_code",
+            ErrorMessage = "error_message",
+            LicenseKey = "license_key",
+            LicenseKeyActivationsLimit = 0,
+            LicenseKeyActivationsUsed = 0,
+            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LicenseKeyStatus = "license_key_status",
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OAuthUrl = "oauth_url",
+            PaymentID = "payment_id",
+            RevocationReason = "revocation_reason",
+            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            SubscriptionID = "subscription_id",
+        };
+
+        EntitlementGrant copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class EntitlementGrantPayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(EntitlementGrantPayloadType.EntitlementGrant)]
+    public void Validation_Works(EntitlementGrantPayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementGrantPayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantPayloadType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(EntitlementGrantPayloadType.EntitlementGrant)]
+    public void SerializationRoundtrip_Works(EntitlementGrantPayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementGrantPayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantPayloadType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantPayloadType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantPayloadType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class EntitlementGrantStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(EntitlementGrantStatus.Pending)]
+    [InlineData(EntitlementGrantStatus.Delivered)]
+    [InlineData(EntitlementGrantStatus.Failed)]
+    [InlineData(EntitlementGrantStatus.Revoked)]
+    public void Validation_Works(EntitlementGrantStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementGrantStatus> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(EntitlementGrantStatus.Pending)]
+    [InlineData(EntitlementGrantStatus.Delivered)]
+    [InlineData(EntitlementGrantStatus.Failed)]
+    [InlineData(EntitlementGrantStatus.Revoked)]
+    public void SerializationRoundtrip_Works(EntitlementGrantStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementGrantStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
             json,
             ModelBase.SerializerOptions
         );

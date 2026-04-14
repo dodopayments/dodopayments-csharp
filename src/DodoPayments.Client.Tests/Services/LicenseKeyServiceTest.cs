@@ -5,6 +5,21 @@ namespace DodoPayments.Client.Tests.Services;
 public class LicenseKeyServiceTest : TestBase
 {
     [Fact]
+    public async Task Create_Works()
+    {
+        var licenseKey = await this.client.LicenseKeys.Create(
+            new()
+            {
+                CustomerID = "customer_id",
+                Key = "key",
+                ProductID = "product_id",
+            },
+            TestContext.Current.CancellationToken
+        );
+        licenseKey.Validate();
+    }
+
+    [Fact]
     public async Task Retrieve_Works()
     {
         var licenseKey = await this.client.LicenseKeys.Retrieve(

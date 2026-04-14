@@ -13,6 +13,7 @@ namespace DodoPayments.Client.Models.LicenseKeys;
 /// changes in non-major versions. We may add new methods in the future that cause
 /// existing derived classes to break.
 /// </summary>
+[Obsolete("deprecated")]
 public record class LicenseKeyRetrieveParams : ParamsBase
 {
     public string? ID { get; init; }
