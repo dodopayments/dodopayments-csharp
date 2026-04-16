@@ -28,9 +28,11 @@ public class SubscriptionRetrieveCreditUsageParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri("https://live.dodopayments.com/subscriptions/subscription_id/credit-usage"),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/subscriptions/subscription_id/credit-usage"),
+                url
+            )
         );
     }
 

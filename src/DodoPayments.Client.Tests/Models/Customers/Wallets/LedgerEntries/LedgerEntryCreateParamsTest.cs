@@ -87,9 +87,13 @@ public class LedgerEntryCreateParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri("https://live.dodopayments.com/customers/customer_id/wallets/ledger-entries"),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://live.dodopayments.com/customers/customer_id/wallets/ledger-entries"
+                ),
+                url
+            )
         );
     }
 

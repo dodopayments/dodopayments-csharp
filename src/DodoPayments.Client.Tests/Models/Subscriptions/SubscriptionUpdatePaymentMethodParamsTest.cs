@@ -47,11 +47,13 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri(
-                "https://live.dodopayments.com/subscriptions/subscription_id/update-payment-method"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://live.dodopayments.com/subscriptions/subscription_id/update-payment-method"
+                ),
+                url
+            )
         );
     }
 

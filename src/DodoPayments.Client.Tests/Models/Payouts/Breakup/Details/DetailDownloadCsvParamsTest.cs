@@ -22,9 +22,11 @@ public class DetailDownloadCsvParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri("https://live.dodopayments.com/payouts/payout_id/breakup/details/csv"),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/payouts/payout_id/breakup/details/csv"),
+                url
+            )
         );
     }
 

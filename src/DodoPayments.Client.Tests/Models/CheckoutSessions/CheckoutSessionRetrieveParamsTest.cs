@@ -22,7 +22,7 @@ public class CheckoutSessionRetrieveParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/checkouts/id"), url);
+        Assert.True(TestBase.UrisEqual(new Uri("https://live.dodopayments.com/checkouts/id"), url));
     }
 
     [Fact]

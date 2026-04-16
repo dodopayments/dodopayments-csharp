@@ -24,7 +24,9 @@ public class ProductUpdateFilesParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/products/id/files"), url);
+        Assert.True(
+            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/products/id/files"), url)
+        );
     }
 
     [Fact]

@@ -24,7 +24,9 @@ public class LicenseActivateParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/licenses/activate"), url);
+        Assert.True(
+            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/licenses/activate"), url)
+        );
     }
 
     [Fact]

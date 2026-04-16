@@ -169,7 +169,7 @@ public class DiscountCreateParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/discounts"), url);
+        Assert.True(TestBase.UrisEqual(new Uri("https://live.dodopayments.com/discounts"), url));
     }
 
     [Fact]

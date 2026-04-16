@@ -86,11 +86,13 @@ public class ProductListParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri(
-                "https://live.dodopayments.com/products?archived=true&brand_id=brand_id&page_number=0&page_size=0&recurring=true"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://live.dodopayments.com/products?archived=true&brand_id=brand_id&page_number=0&page_size=0&recurring=true"
+                ),
+                url
+            )
         );
     }
 

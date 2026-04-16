@@ -92,20 +92,22 @@ public class BalanceListLedgerParamsTest : TestBase
         {
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
-            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             PageNumber = 0,
             PageSize = 0,
-            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             TransactionType = "transaction_type",
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri(
-                "https://live.dodopayments.com/credit-entitlements/credit_entitlement_id/balances/customer_id/ledger?end_date=2019-12-27T18%3a11%3a19.117%2b00%3a00&page_number=0&page_size=0&start_date=2019-12-27T18%3a11%3a19.117%2b00%3a00&transaction_type=transaction_type"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://live.dodopayments.com/credit-entitlements/credit_entitlement_id/balances/customer_id/ledger?end_date=2019-12-27T18%3a11%3a19.117%2b00%3a00&page_number=0&page_size=0&start_date=2019-12-27T18%3a11%3a19.117%2b00%3a00&transaction_type=transaction_type"
+                ),
+                url
+            )
         );
     }
 

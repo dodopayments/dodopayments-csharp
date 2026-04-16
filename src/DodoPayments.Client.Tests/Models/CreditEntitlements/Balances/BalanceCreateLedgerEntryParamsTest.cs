@@ -108,11 +108,13 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri(
-                "https://live.dodopayments.com/credit-entitlements/credit_entitlement_id/balances/customer_id/ledger-entries"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://live.dodopayments.com/credit-entitlements/credit_entitlement_id/balances/customer_id/ledger-entries"
+                ),
+                url
+            )
         );
     }
 

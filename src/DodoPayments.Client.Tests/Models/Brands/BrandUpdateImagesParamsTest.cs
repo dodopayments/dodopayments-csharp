@@ -22,7 +22,9 @@ public class BrandUpdateImagesParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/brands/id/images"), url);
+        Assert.True(
+            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/brands/id/images"), url)
+        );
     }
 
     [Fact]

@@ -63,7 +63,12 @@ public class ShortLinkCreateParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/products/id/short_links"), url);
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/products/id/short_links"),
+                url
+            )
+        );
     }
 
     [Fact]

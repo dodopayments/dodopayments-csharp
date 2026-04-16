@@ -22,7 +22,12 @@ public class WalletListParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/customers/customer_id/wallets"), url);
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/customers/customer_id/wallets"),
+                url
+            )
+        );
     }
 
     [Fact]
