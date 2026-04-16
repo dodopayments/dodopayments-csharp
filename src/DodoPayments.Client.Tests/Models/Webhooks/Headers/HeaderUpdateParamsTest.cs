@@ -39,7 +39,12 @@ public class HeaderUpdateParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/webhooks/webhook_id/headers"), url);
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/webhooks/webhook_id/headers"),
+                url
+            )
+        );
     }
 
     [Fact]

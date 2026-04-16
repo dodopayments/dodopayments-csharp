@@ -760,7 +760,9 @@ public class CheckoutSessionPreviewParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/checkouts/preview"), url);
+        Assert.True(
+            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/checkouts/preview"), url)
+        );
     }
 
     [Fact]

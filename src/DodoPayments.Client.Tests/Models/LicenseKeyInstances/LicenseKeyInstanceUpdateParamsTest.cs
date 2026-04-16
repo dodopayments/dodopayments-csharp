@@ -24,7 +24,12 @@ public class LicenseKeyInstanceUpdateParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/license_key_instances/lki_123"), url);
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/license_key_instances/lki_123"),
+                url
+            )
+        );
     }
 
     [Fact]

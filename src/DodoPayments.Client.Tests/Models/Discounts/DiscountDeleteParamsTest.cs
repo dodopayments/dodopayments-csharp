@@ -22,7 +22,9 @@ public class DiscountDeleteParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/discounts/discount_id"), url);
+        Assert.True(
+            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/discounts/discount_id"), url)
+        );
     }
 
     [Fact]

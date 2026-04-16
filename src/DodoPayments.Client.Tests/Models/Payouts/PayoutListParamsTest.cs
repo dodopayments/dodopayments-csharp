@@ -69,19 +69,21 @@ public class PayoutListParamsTest : TestBase
     {
         PayoutListParams parameters = new()
         {
-            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             PageNumber = 0,
             PageSize = 0,
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri(
-                "https://live.dodopayments.com/payouts?created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&page_number=0&page_size=0"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://live.dodopayments.com/payouts?created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&page_number=0&page_size=0"
+                ),
+                url
+            )
         );
     }
 

@@ -104,8 +104,8 @@ public class BalanceRetrieveLedgerParamsTest : TestBase
     {
         BalanceRetrieveLedgerParams parameters = new()
         {
-            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+            CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             Currency = Currency.Aed,
             EventType = EventType.Payment,
             Limit = 0,
@@ -116,11 +116,13 @@ public class BalanceRetrieveLedgerParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri(
-                "https://live.dodopayments.com/balances/ledger?created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&currency=AED&event_type=payment&limit=0&page_number=0&page_size=0&reference_object_id=reference_object_id"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://live.dodopayments.com/balances/ledger?created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&currency=AED&event_type=payment&limit=0&page_number=0&page_size=0&reference_object_id=reference_object_id"
+                ),
+                url
+            )
         );
     }
 

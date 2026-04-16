@@ -22,7 +22,12 @@ public class WebhookRetrieveSecretParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/webhooks/webhook_id/secret"), url);
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/webhooks/webhook_id/secret"),
+                url
+            )
+        );
     }
 
     [Fact]

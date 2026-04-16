@@ -51,9 +51,11 @@ public class AddonListParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri("https://live.dodopayments.com/addons?page_number=0&page_size=0"),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/addons?page_number=0&page_size=0"),
+                url
+            )
         );
     }
 

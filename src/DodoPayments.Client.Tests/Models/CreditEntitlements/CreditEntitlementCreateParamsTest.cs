@@ -157,7 +157,9 @@ public class CreditEntitlementCreateParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/credit-entitlements"), url);
+        Assert.True(
+            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/credit-entitlements"), url)
+        );
     }
 
     [Fact]

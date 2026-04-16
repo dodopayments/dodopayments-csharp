@@ -65,11 +65,13 @@ public class CustomerPortalCreateParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(
-            new Uri(
-                "https://live.dodopayments.com/customers/customer_id/customer-portal/session?return_url=return_url&send_email=true"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://live.dodopayments.com/customers/customer_id/customer-portal/session?return_url=return_url&send_email=true"
+                ),
+                url
+            )
         );
     }
 

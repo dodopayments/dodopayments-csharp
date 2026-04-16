@@ -22,7 +22,12 @@ public class PaymentRetrieveRefundParamsTest : TestBase
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.Equal(new Uri("https://live.dodopayments.com/invoices/refunds/refund_id"), url);
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/invoices/refunds/refund_id"),
+                url
+            )
+        );
     }
 
     [Fact]
