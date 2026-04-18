@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.15.1 (2026-04-18)
+
+Full Changelog: [v6.15.0...v6.15.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.15.0...v6.15.1)
+
+### Bug Fixes
+
+* **tests:** round-trip urls correctly ([e207943](https://github.com/dodopayments/dodopayments-csharp/commit/e20794370c9fce37dac80e9a2afb339620605010))
+
+
+### Chores
+
+* **tests:** bump steady to v0.22.1 ([899fc2a](https://github.com/dodopayments/dodopayments-csharp/commit/899fc2aec64ab05c7d04d5251c1db67bfb2952f8))
+
 ## 6.15.0 (2026-04-14)
 
 Full Changelog: [v6.14.0...v6.15.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.14.0...v6.15.0)
