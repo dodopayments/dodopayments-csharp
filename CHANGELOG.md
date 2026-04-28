@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.16.0 (2026-04-28)
+
+Full Changelog: [v6.15.1...v6.16.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.15.1...v6.16.0)
+
+### Features
+
+* support setting headers via env ([33f4c26](https://github.com/dodopayments/dodopayments-csharp/commit/33f4c26e323309fe594cc16d374b3f9eb21b4ce2))
+
 ## 6.15.1 (2026-04-18)
 
 Full Changelog: [v6.15.0...v6.15.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.15.0...v6.15.1)
