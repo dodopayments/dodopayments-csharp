@@ -59,7 +59,7 @@ public sealed class GrantService : IGrantService
     }
 
     /// <inheritdoc/>
-    public async Task<GrantRevokeResponse> Revoke(
+    public async Task<EntitlementGrant> Revoke(
         GrantRevokeParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -71,7 +71,7 @@ public sealed class GrantService : IGrantService
     }
 
     /// <inheritdoc/>
-    public Task<GrantRevokeResponse> Revoke(
+    public Task<EntitlementGrant> Revoke(
         string grantID,
         GrantRevokeParams parameters,
         CancellationToken cancellationToken = default
@@ -143,7 +143,7 @@ public sealed class GrantServiceWithRawResponse : IGrantServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<GrantRevokeResponse>> Revoke(
+    public async Task<HttpResponse<EntitlementGrant>> Revoke(
         GrantRevokeParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -163,20 +163,20 @@ public sealed class GrantServiceWithRawResponse : IGrantServiceWithRawResponse
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<GrantRevokeResponse>(token)
+                var entitlementGrant = await response
+                    .Deserialize<EntitlementGrant>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    entitlementGrant.Validate();
                 }
-                return deserializedResponse;
+                return entitlementGrant;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<GrantRevokeResponse>> Revoke(
+    public Task<HttpResponse<EntitlementGrant>> Revoke(
         string grantID,
         GrantRevokeParams parameters,
         CancellationToken cancellationToken = default

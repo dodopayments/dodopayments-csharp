@@ -11,16 +11,16 @@ namespace DodoPayments.Client.Models.Entitlements.Grants;
 [JsonConverter(typeof(JsonModelConverter<GrantListPageResponse, GrantListPageResponseFromRaw>))]
 public sealed record class GrantListPageResponse : JsonModel
 {
-    public required IReadOnlyList<GrantListResponse> Items
+    public required IReadOnlyList<EntitlementGrant> Items
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<GrantListResponse>>("items");
+            return this._rawData.GetNotNullStruct<ImmutableArray<EntitlementGrant>>("items");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<GrantListResponse>>(
+            this._rawData.Set<ImmutableArray<EntitlementGrant>>(
                 "items",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -66,7 +66,7 @@ public sealed record class GrantListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public GrantListPageResponse(IReadOnlyList<GrantListResponse> items)
+    public GrantListPageResponse(IReadOnlyList<EntitlementGrant> items)
         : this()
     {
         this.Items = items;

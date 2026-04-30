@@ -7,12 +7,12 @@ using DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Tests.Models.Entitlements.Grants;
 
-public class GrantRevokeResponseTest : TestBase
+public class EntitlementGrantTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -20,7 +20,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -64,8 +64,7 @@ public class GrantRevokeResponseTest : TestBase
         string expectedCustomerID = "customer_id";
         string expectedEntitlementID = "entitlement_id";
         string expectedExternalID = "external_id";
-        ApiEnum<string, GrantRevokeResponseStatus> expectedStatus =
-            GrantRevokeResponseStatus.Pending;
+        ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ProductDigitalProductDelivery expectedDigitalProductDelivery = new()
@@ -87,7 +86,7 @@ public class GrantRevokeResponseTest : TestBase
         };
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
-        GrantRevokeResponseLicenseKey expectedLicenseKey = new()
+        LicenseKeyGrant expectedLicenseKey = new()
         {
             ActivationsUsed = 0,
             Key = "key",
@@ -128,7 +127,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -136,7 +135,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -175,7 +174,7 @@ public class GrantRevokeResponseTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<GrantRevokeResponse>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementGrant>(
             json,
             ModelBase.SerializerOptions
         );
@@ -186,7 +185,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -194,7 +193,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -233,7 +232,7 @@ public class GrantRevokeResponseTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<GrantRevokeResponse>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementGrant>(
             element,
             ModelBase.SerializerOptions
         );
@@ -245,8 +244,7 @@ public class GrantRevokeResponseTest : TestBase
         string expectedCustomerID = "customer_id";
         string expectedEntitlementID = "entitlement_id";
         string expectedExternalID = "external_id";
-        ApiEnum<string, GrantRevokeResponseStatus> expectedStatus =
-            GrantRevokeResponseStatus.Pending;
+        ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ProductDigitalProductDelivery expectedDigitalProductDelivery = new()
@@ -268,7 +266,7 @@ public class GrantRevokeResponseTest : TestBase
         };
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
-        GrantRevokeResponseLicenseKey expectedLicenseKey = new()
+        LicenseKeyGrant expectedLicenseKey = new()
         {
             ActivationsUsed = 0,
             Key = "key",
@@ -309,7 +307,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -317,7 +315,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -361,7 +359,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -369,7 +367,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -413,7 +411,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -421,7 +419,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -464,7 +462,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -472,7 +470,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -519,7 +517,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -527,7 +525,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -573,7 +571,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -581,7 +579,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
@@ -613,7 +611,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -621,7 +619,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
@@ -632,7 +630,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -640,7 +638,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
 
@@ -684,7 +682,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -692,7 +690,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
 
@@ -715,7 +713,7 @@ public class GrantRevokeResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new GrantRevokeResponse
+        var model = new EntitlementGrant
         {
             ID = "id",
             BusinessID = "business_id",
@@ -723,7 +721,7 @@ public class GrantRevokeResponseTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            Status = GrantRevokeResponseStatus.Pending,
+            Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -761,30 +759,30 @@ public class GrantRevokeResponseTest : TestBase
             SubscriptionID = "subscription_id",
         };
 
-        GrantRevokeResponse copied = new(model);
+        EntitlementGrant copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class GrantRevokeResponseStatusTest : TestBase
+public class EntitlementGrantStatusTest : TestBase
 {
     [Theory]
-    [InlineData(GrantRevokeResponseStatus.Pending)]
-    [InlineData(GrantRevokeResponseStatus.Delivered)]
-    [InlineData(GrantRevokeResponseStatus.Failed)]
-    [InlineData(GrantRevokeResponseStatus.Revoked)]
-    public void Validation_Works(GrantRevokeResponseStatus rawValue)
+    [InlineData(EntitlementGrantStatus.Pending)]
+    [InlineData(EntitlementGrantStatus.Delivered)]
+    [InlineData(EntitlementGrantStatus.Failed)]
+    [InlineData(EntitlementGrantStatus.Revoked)]
+    public void Validation_Works(EntitlementGrantStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, GrantRevokeResponseStatus> value = rawValue;
+        ApiEnum<string, EntitlementGrantStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, GrantRevokeResponseStatus>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -794,17 +792,17 @@ public class GrantRevokeResponseStatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(GrantRevokeResponseStatus.Pending)]
-    [InlineData(GrantRevokeResponseStatus.Delivered)]
-    [InlineData(GrantRevokeResponseStatus.Failed)]
-    [InlineData(GrantRevokeResponseStatus.Revoked)]
-    public void SerializationRoundtrip_Works(GrantRevokeResponseStatus rawValue)
+    [InlineData(EntitlementGrantStatus.Pending)]
+    [InlineData(EntitlementGrantStatus.Delivered)]
+    [InlineData(EntitlementGrantStatus.Failed)]
+    [InlineData(EntitlementGrantStatus.Revoked)]
+    public void SerializationRoundtrip_Works(EntitlementGrantStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, GrantRevokeResponseStatus> value = rawValue;
+        ApiEnum<string, EntitlementGrantStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, GrantRevokeResponseStatus>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -815,172 +813,16 @@ public class GrantRevokeResponseStatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, GrantRevokeResponseStatus>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, GrantRevokeResponseStatus>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
             json,
             ModelBase.SerializerOptions
         );
 
         Assert.Equal(value, deserialized);
-    }
-}
-
-public class GrantRevokeResponseLicenseKeyTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new GrantRevokeResponseLicenseKey
-        {
-            ActivationsUsed = 0,
-            Key = "key",
-            ActivationsLimit = 0,
-            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-        };
-
-        int expectedActivationsUsed = 0;
-        string expectedKey = "key";
-        int expectedActivationsLimit = 0;
-        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-
-        Assert.Equal(expectedActivationsUsed, model.ActivationsUsed);
-        Assert.Equal(expectedKey, model.Key);
-        Assert.Equal(expectedActivationsLimit, model.ActivationsLimit);
-        Assert.Equal(expectedExpiresAt, model.ExpiresAt);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new GrantRevokeResponseLicenseKey
-        {
-            ActivationsUsed = 0,
-            Key = "key",
-            ActivationsLimit = 0,
-            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<GrantRevokeResponseLicenseKey>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new GrantRevokeResponseLicenseKey
-        {
-            ActivationsUsed = 0,
-            Key = "key",
-            ActivationsLimit = 0,
-            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<GrantRevokeResponseLicenseKey>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        int expectedActivationsUsed = 0;
-        string expectedKey = "key";
-        int expectedActivationsLimit = 0;
-        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-
-        Assert.Equal(expectedActivationsUsed, deserialized.ActivationsUsed);
-        Assert.Equal(expectedKey, deserialized.Key);
-        Assert.Equal(expectedActivationsLimit, deserialized.ActivationsLimit);
-        Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new GrantRevokeResponseLicenseKey
-        {
-            ActivationsUsed = 0,
-            Key = "key",
-            ActivationsLimit = 0,
-            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new GrantRevokeResponseLicenseKey { ActivationsUsed = 0, Key = "key" };
-
-        Assert.Null(model.ActivationsLimit);
-        Assert.False(model.RawData.ContainsKey("activations_limit"));
-        Assert.Null(model.ExpiresAt);
-        Assert.False(model.RawData.ContainsKey("expires_at"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new GrantRevokeResponseLicenseKey { ActivationsUsed = 0, Key = "key" };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new GrantRevokeResponseLicenseKey
-        {
-            ActivationsUsed = 0,
-            Key = "key",
-
-            ActivationsLimit = null,
-            ExpiresAt = null,
-        };
-
-        Assert.Null(model.ActivationsLimit);
-        Assert.True(model.RawData.ContainsKey("activations_limit"));
-        Assert.Null(model.ExpiresAt);
-        Assert.True(model.RawData.ContainsKey("expires_at"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new GrantRevokeResponseLicenseKey
-        {
-            ActivationsUsed = 0,
-            Key = "key",
-
-            ActivationsLimit = null,
-            ExpiresAt = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new GrantRevokeResponseLicenseKey
-        {
-            ActivationsUsed = 0,
-            Key = "key",
-            ActivationsLimit = 0,
-            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-        };
-
-        GrantRevokeResponseLicenseKey copied = new(model);
-
-        Assert.Equal(model, copied);
     }
 }

@@ -13,16 +13,16 @@ namespace DodoPayments.Client.Models.Entitlements;
 )]
 public sealed record class EntitlementListPageResponse : JsonModel
 {
-    public required IReadOnlyList<EntitlementListResponse> Items
+    public required IReadOnlyList<Entitlement> Items
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<EntitlementListResponse>>("items");
+            return this._rawData.GetNotNullStruct<ImmutableArray<Entitlement>>("items");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<EntitlementListResponse>>(
+            this._rawData.Set<ImmutableArray<Entitlement>>(
                 "items",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -68,7 +68,7 @@ public sealed record class EntitlementListPageResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public EntitlementListPageResponse(IReadOnlyList<EntitlementListResponse> items)
+    public EntitlementListPageResponse(IReadOnlyList<Entitlement> items)
         : this()
     {
         this.Items = items;

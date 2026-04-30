@@ -2,8 +2,8 @@ using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.LicenseKeys;
 using DodoPayments.Client.Models.Webhooks;
-using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
 
@@ -24,8 +24,8 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
                 InstancesCount = 0,
                 Key = "key",
                 ProductID = "product_id",
-                Source = LicenseKeys::LicenseKeySource.Auto,
-                Status = LicenseKeys::LicenseKeyStatus.Active,
+                Source = LicenseKeySource.Auto,
+                Status = LicenseKeyStatus.Active,
                 ActivationsLimit = 5,
                 ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
                 PaymentID = "payment_id",
@@ -36,7 +36,7 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
         };
 
         string expectedBusinessID = "business_id";
-        LicenseKeys::LicenseKey expectedData = new()
+        LicenseKey expectedData = new()
         {
             ID = "lic_123",
             BusinessID = "business_id",
@@ -45,8 +45,8 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
             InstancesCount = 0,
             Key = "key",
             ProductID = "product_id",
-            Source = LicenseKeys::LicenseKeySource.Auto,
-            Status = LicenseKeys::LicenseKeyStatus.Active,
+            Source = LicenseKeySource.Auto,
+            Status = LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
             PaymentID = "payment_id",
@@ -77,8 +77,8 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
                 InstancesCount = 0,
                 Key = "key",
                 ProductID = "product_id",
-                Source = LicenseKeys::LicenseKeySource.Auto,
-                Status = LicenseKeys::LicenseKeyStatus.Active,
+                Source = LicenseKeySource.Auto,
+                Status = LicenseKeyStatus.Active,
                 ActivationsLimit = 5,
                 ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
                 PaymentID = "payment_id",
@@ -112,8 +112,8 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
                 InstancesCount = 0,
                 Key = "key",
                 ProductID = "product_id",
-                Source = LicenseKeys::LicenseKeySource.Auto,
-                Status = LicenseKeys::LicenseKeyStatus.Active,
+                Source = LicenseKeySource.Auto,
+                Status = LicenseKeyStatus.Active,
                 ActivationsLimit = 5,
                 ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
                 PaymentID = "payment_id",
@@ -131,7 +131,7 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
-        LicenseKeys::LicenseKey expectedData = new()
+        LicenseKey expectedData = new()
         {
             ID = "lic_123",
             BusinessID = "business_id",
@@ -140,8 +140,8 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
             InstancesCount = 0,
             Key = "key",
             ProductID = "product_id",
-            Source = LicenseKeys::LicenseKeySource.Auto,
-            Status = LicenseKeys::LicenseKeyStatus.Active,
+            Source = LicenseKeySource.Auto,
+            Status = LicenseKeyStatus.Active,
             ActivationsLimit = 5,
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
             PaymentID = "payment_id",
@@ -172,8 +172,8 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
                 InstancesCount = 0,
                 Key = "key",
                 ProductID = "product_id",
-                Source = LicenseKeys::LicenseKeySource.Auto,
-                Status = LicenseKeys::LicenseKeyStatus.Active,
+                Source = LicenseKeySource.Auto,
+                Status = LicenseKeyStatus.Active,
                 ActivationsLimit = 5,
                 ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
                 PaymentID = "payment_id",
@@ -201,8 +201,8 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
                 InstancesCount = 0,
                 Key = "key",
                 ProductID = "product_id",
-                Source = LicenseKeys::LicenseKeySource.Auto,
-                Status = LicenseKeys::LicenseKeyStatus.Active,
+                Source = LicenseKeySource.Auto,
+                Status = LicenseKeyStatus.Active,
                 ActivationsLimit = 5,
                 ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
                 PaymentID = "payment_id",

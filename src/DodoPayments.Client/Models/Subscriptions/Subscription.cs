@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -5,10 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
-using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -66,12 +65,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp when the subscription was created
     /// </summary>
-    public required System::DateTimeOffset CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("created_at");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
         }
         init { this._rawData.Set("created_at", value); }
     }
@@ -185,12 +184,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp of the next scheduled billing. Indicates the end of current billing period
     /// </summary>
-    public required System::DateTimeOffset NextBillingDate
+    public required DateTimeOffset NextBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("next_billing_date");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date");
         }
         init { this._rawData.Set("next_billing_date", value); }
     }
@@ -239,12 +238,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp of the last payment. Indicates the start of current billing period
     /// </summary>
-    public required System::DateTimeOffset PreviousBillingDate
+    public required DateTimeOffset PreviousBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("previous_billing_date");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("previous_billing_date");
         }
         init { this._rawData.Set("previous_billing_date", value); }
     }
@@ -385,14 +384,14 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Customer-supplied churn reason, if any
     /// </summary>
-    public ApiEnum<string, SubscriptionCancellationFeedback>? CancellationFeedback
+    public ApiEnum<string, CancellationFeedback>? CancellationFeedback
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, SubscriptionCancellationFeedback>
-            >("cancellation_feedback");
+            return this._rawData.GetNullableClass<ApiEnum<string, CancellationFeedback>>(
+                "cancellation_feedback"
+            );
         }
         init { this._rawData.Set("cancellation_feedback", value); }
     }
@@ -400,12 +399,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Cancelled timestamp if the subscription is cancelled
     /// </summary>
-    public System::DateTimeOffset? CancelledAt
+    public DateTimeOffset? CancelledAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("cancelled_at");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("cancelled_at");
         }
         init { this._rawData.Set("cancelled_at", value); }
     }
@@ -460,12 +459,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp when the subscription will expire
     /// </summary>
-    public System::DateTimeOffset? ExpiresAt
+    public DateTimeOffset? ExpiresAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("expires_at");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
         }
         init { this._rawData.Set("expires_at", value); }
     }
@@ -486,12 +485,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Scheduled plan change details, if any
     /// </summary>
-    public ScheduledChange? ScheduledChange
+    public ScheduledPlanChange? ScheduledChange
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ScheduledChange>("scheduled_change");
+            return this._rawData.GetNullableClass<ScheduledPlanChange>("scheduled_change");
         }
         init { this._rawData.Set("scheduled_change", value); }
     }
@@ -596,322 +595,4 @@ class SubscriptionFromRaw : IFromRawJson<Subscription>
     /// <inheritdoc/>
     public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Subscription.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Customer-supplied churn reason, if any
-/// </summary>
-[JsonConverter(typeof(SubscriptionCancellationFeedbackConverter))]
-public enum SubscriptionCancellationFeedback
-{
-    TooExpensive,
-    MissingFeatures,
-    SwitchedService,
-    Unused,
-    CustomerService,
-    LowQuality,
-    TooComplex,
-    Other,
-}
-
-sealed class SubscriptionCancellationFeedbackConverter
-    : JsonConverter<SubscriptionCancellationFeedback>
-{
-    public override SubscriptionCancellationFeedback Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "too_expensive" => SubscriptionCancellationFeedback.TooExpensive,
-            "missing_features" => SubscriptionCancellationFeedback.MissingFeatures,
-            "switched_service" => SubscriptionCancellationFeedback.SwitchedService,
-            "unused" => SubscriptionCancellationFeedback.Unused,
-            "customer_service" => SubscriptionCancellationFeedback.CustomerService,
-            "low_quality" => SubscriptionCancellationFeedback.LowQuality,
-            "too_complex" => SubscriptionCancellationFeedback.TooComplex,
-            "other" => SubscriptionCancellationFeedback.Other,
-            _ => (SubscriptionCancellationFeedback)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        SubscriptionCancellationFeedback value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                SubscriptionCancellationFeedback.TooExpensive => "too_expensive",
-                SubscriptionCancellationFeedback.MissingFeatures => "missing_features",
-                SubscriptionCancellationFeedback.SwitchedService => "switched_service",
-                SubscriptionCancellationFeedback.Unused => "unused",
-                SubscriptionCancellationFeedback.CustomerService => "customer_service",
-                SubscriptionCancellationFeedback.LowQuality => "low_quality",
-                SubscriptionCancellationFeedback.TooComplex => "too_complex",
-                SubscriptionCancellationFeedback.Other => "other",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-/// <summary>
-/// Scheduled plan change details, if any
-/// </summary>
-[JsonConverter(typeof(JsonModelConverter<ScheduledChange, ScheduledChangeFromRaw>))]
-public sealed record class ScheduledChange : JsonModel
-{
-    /// <summary>
-    /// The scheduled plan change ID
-    /// </summary>
-    public required string ID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("id");
-        }
-        init { this._rawData.Set("id", value); }
-    }
-
-    /// <summary>
-    /// Addons included in the scheduled change
-    /// </summary>
-    public required IReadOnlyList<Addon> Addons
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<Addon>>("addons");
-        }
-        init
-        {
-            this._rawData.Set<ImmutableArray<Addon>>(
-                "addons",
-                ImmutableArray.ToImmutableArray(value)
-            );
-        }
-    }
-
-    /// <summary>
-    /// When this scheduled change was created
-    /// </summary>
-    public required System::DateTimeOffset CreatedAt
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("created_at");
-        }
-        init { this._rawData.Set("created_at", value); }
-    }
-
-    /// <summary>
-    /// When the change will be applied
-    /// </summary>
-    public required System::DateTimeOffset EffectiveAt
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("effective_at");
-        }
-        init { this._rawData.Set("effective_at", value); }
-    }
-
-    /// <summary>
-    /// The product ID the subscription will change to
-    /// </summary>
-    public required string ProductID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("product_id");
-        }
-        init { this._rawData.Set("product_id", value); }
-    }
-
-    /// <summary>
-    /// Quantity for the new plan
-    /// </summary>
-    public required int Quantity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<int>("quantity");
-        }
-        init { this._rawData.Set("quantity", value); }
-    }
-
-    /// <summary>
-    /// Description of the product being changed to
-    /// </summary>
-    public string? ProductDescription
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("product_description");
-        }
-        init { this._rawData.Set("product_description", value); }
-    }
-
-    /// <summary>
-    /// Name of the product being changed to
-    /// </summary>
-    public string? ProductName
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("product_name");
-        }
-        init { this._rawData.Set("product_name", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.ID;
-        foreach (var item in this.Addons)
-        {
-            item.Validate();
-        }
-        _ = this.CreatedAt;
-        _ = this.EffectiveAt;
-        _ = this.ProductID;
-        _ = this.Quantity;
-        _ = this.ProductDescription;
-        _ = this.ProductName;
-    }
-
-    public ScheduledChange() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public ScheduledChange(ScheduledChange scheduledChange)
-        : base(scheduledChange) { }
-#pragma warning restore CS8618
-
-    public ScheduledChange(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    ScheduledChange(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="ScheduledChangeFromRaw.FromRawUnchecked"/>
-    public static ScheduledChange FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class ScheduledChangeFromRaw : IFromRawJson<ScheduledChange>
-{
-    /// <inheritdoc/>
-    public ScheduledChange FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        ScheduledChange.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(JsonModelConverter<Addon, AddonFromRaw>))]
-public sealed record class Addon : JsonModel
-{
-    /// <summary>
-    /// The addon ID
-    /// </summary>
-    public required string AddonID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("addon_id");
-        }
-        init { this._rawData.Set("addon_id", value); }
-    }
-
-    /// <summary>
-    /// Name of the addon
-    /// </summary>
-    public required string Name
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("name");
-        }
-        init { this._rawData.Set("name", value); }
-    }
-
-    /// <summary>
-    /// Quantity of the addon
-    /// </summary>
-    public required int Quantity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<int>("quantity");
-        }
-        init { this._rawData.Set("quantity", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.AddonID;
-        _ = this.Name;
-        _ = this.Quantity;
-    }
-
-    public Addon() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public Addon(Addon addon)
-        : base(addon) { }
-#pragma warning restore CS8618
-
-    public Addon(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Addon(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="AddonFromRaw.FromRawUnchecked"/>
-    public static Addon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class AddonFromRaw : IFromRawJson<Addon>
-{
-    /// <inheritdoc/>
-    public Addon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Addon.FromRawUnchecked(rawData);
 }

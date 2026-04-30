@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
 using Products = DodoPayments.Client.Models.Products;
 
@@ -25,14 +26,12 @@ public class ProductListPageResponseTest : TestBase
                         new()
                         {
                             ID = "id",
-                            IntegrationConfig =
-                                new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
-                                {
-                                    Permission = "permission",
-                                    TargetID = "target_id",
-                                },
-                            IntegrationType =
-                                Products::ProductListResponseEntitlementIntegrationType.Discord,
+                            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                            {
+                                Permission = "permission",
+                                TargetID = "target_id",
+                            },
+                            IntegrationType = EntitlementIntegrationType.Discord,
                             Name = "name",
                             Description = "description",
                         },
@@ -74,14 +73,12 @@ public class ProductListPageResponseTest : TestBase
                     new()
                     {
                         ID = "id",
-                        IntegrationConfig =
-                            new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
-                            {
-                                Permission = "permission",
-                                TargetID = "target_id",
-                            },
-                        IntegrationType =
-                            Products::ProductListResponseEntitlementIntegrationType.Discord,
+                        IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                        {
+                            Permission = "permission",
+                            TargetID = "target_id",
+                        },
+                        IntegrationType = EntitlementIntegrationType.Discord,
                         Name = "name",
                         Description = "description",
                     },
@@ -134,14 +131,12 @@ public class ProductListPageResponseTest : TestBase
                         new()
                         {
                             ID = "id",
-                            IntegrationConfig =
-                                new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
-                                {
-                                    Permission = "permission",
-                                    TargetID = "target_id",
-                                },
-                            IntegrationType =
-                                Products::ProductListResponseEntitlementIntegrationType.Discord,
+                            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                            {
+                                Permission = "permission",
+                                TargetID = "target_id",
+                            },
+                            IntegrationType = EntitlementIntegrationType.Discord,
                             Name = "name",
                             Description = "description",
                         },
@@ -197,14 +192,12 @@ public class ProductListPageResponseTest : TestBase
                         new()
                         {
                             ID = "id",
-                            IntegrationConfig =
-                                new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
-                                {
-                                    Permission = "permission",
-                                    TargetID = "target_id",
-                                },
-                            IntegrationType =
-                                Products::ProductListResponseEntitlementIntegrationType.Discord,
+                            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                            {
+                                Permission = "permission",
+                                TargetID = "target_id",
+                            },
+                            IntegrationType = EntitlementIntegrationType.Discord,
                             Name = "name",
                             Description = "description",
                         },
@@ -253,14 +246,12 @@ public class ProductListPageResponseTest : TestBase
                     new()
                     {
                         ID = "id",
-                        IntegrationConfig =
-                            new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
-                            {
-                                Permission = "permission",
-                                TargetID = "target_id",
-                            },
-                        IntegrationType =
-                            Products::ProductListResponseEntitlementIntegrationType.Discord,
+                        IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                        {
+                            Permission = "permission",
+                            TargetID = "target_id",
+                        },
+                        IntegrationType = EntitlementIntegrationType.Discord,
                         Name = "name",
                         Description = "description",
                     },
@@ -313,14 +304,12 @@ public class ProductListPageResponseTest : TestBase
                         new()
                         {
                             ID = "id",
-                            IntegrationConfig =
-                                new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
-                                {
-                                    Permission = "permission",
-                                    TargetID = "target_id",
-                                },
-                            IntegrationType =
-                                Products::ProductListResponseEntitlementIntegrationType.Discord,
+                            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                            {
+                                Permission = "permission",
+                                TargetID = "target_id",
+                            },
+                            IntegrationType = EntitlementIntegrationType.Discord,
                             Name = "name",
                             Description = "description",
                         },
@@ -370,14 +359,12 @@ public class ProductListPageResponseTest : TestBase
                         new()
                         {
                             ID = "id",
-                            IntegrationConfig =
-                                new Products::ProductListResponseEntitlementIntegrationConfigGitHubConfig()
-                                {
-                                    Permission = "permission",
-                                    TargetID = "target_id",
-                                },
-                            IntegrationType =
-                                Products::ProductListResponseEntitlementIntegrationType.Discord,
+                            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                            {
+                                Permission = "permission",
+                                TargetID = "target_id",
+                            },
+                            IntegrationType = EntitlementIntegrationType.Discord,
                             Name = "name",
                             Description = "description",
                         },

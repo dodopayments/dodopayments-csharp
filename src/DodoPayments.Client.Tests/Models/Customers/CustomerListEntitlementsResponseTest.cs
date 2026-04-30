@@ -4,6 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Customers;
+using DodoPayments.Client.Models.Entitlements;
 
 namespace DodoPayments.Client.Tests.Models.Customers;
 
@@ -22,7 +23,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                     EntitlementID = "entitlement_id",
                     EntitlementName = "entitlement_name",
                     GrantID = "grant_id",
-                    IntegrationType = IntegrationType.Discord,
+                    IntegrationType = EntitlementIntegrationType.Discord,
                     Status = Status.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -40,7 +41,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                 EntitlementID = "entitlement_id",
                 EntitlementName = "entitlement_name",
                 GrantID = "grant_id",
-                IntegrationType = IntegrationType.Discord,
+                IntegrationType = EntitlementIntegrationType.Discord,
                 Status = Status.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -69,7 +70,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                     EntitlementID = "entitlement_id",
                     EntitlementName = "entitlement_name",
                     GrantID = "grant_id",
-                    IntegrationType = IntegrationType.Discord,
+                    IntegrationType = EntitlementIntegrationType.Discord,
                     Status = Status.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -101,7 +102,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                     EntitlementID = "entitlement_id",
                     EntitlementName = "entitlement_name",
                     GrantID = "grant_id",
-                    IntegrationType = IntegrationType.Discord,
+                    IntegrationType = EntitlementIntegrationType.Discord,
                     Status = Status.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -126,7 +127,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                 EntitlementID = "entitlement_id",
                 EntitlementName = "entitlement_name",
                 GrantID = "grant_id",
-                IntegrationType = IntegrationType.Discord,
+                IntegrationType = EntitlementIntegrationType.Discord,
                 Status = Status.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -155,7 +156,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                     EntitlementID = "entitlement_id",
                     EntitlementName = "entitlement_name",
                     GrantID = "grant_id",
-                    IntegrationType = IntegrationType.Discord,
+                    IntegrationType = EntitlementIntegrationType.Discord,
                     Status = Status.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -181,7 +182,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                     EntitlementID = "entitlement_id",
                     EntitlementName = "entitlement_name",
                     GrantID = "grant_id",
-                    IntegrationType = IntegrationType.Discord,
+                    IntegrationType = EntitlementIntegrationType.Discord,
                     Status = Status.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -208,7 +209,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementID = "entitlement_id",
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
-            IntegrationType = IntegrationType.Discord,
+            IntegrationType = EntitlementIntegrationType.Discord,
             Status = Status.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -220,7 +221,8 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
         string expectedEntitlementID = "entitlement_id";
         string expectedEntitlementName = "entitlement_name";
         string expectedGrantID = "grant_id";
-        ApiEnum<string, IntegrationType> expectedIntegrationType = IntegrationType.Discord;
+        ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
+            EntitlementIntegrationType.Discord;
         ApiEnum<string, Status> expectedStatus = Status.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -248,7 +250,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementID = "entitlement_id",
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
-            IntegrationType = IntegrationType.Discord,
+            IntegrationType = EntitlementIntegrationType.Discord,
             Status = Status.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -274,7 +276,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementID = "entitlement_id",
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
-            IntegrationType = IntegrationType.Discord,
+            IntegrationType = EntitlementIntegrationType.Discord,
             Status = Status.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -293,7 +295,8 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
         string expectedEntitlementID = "entitlement_id";
         string expectedEntitlementName = "entitlement_name";
         string expectedGrantID = "grant_id";
-        ApiEnum<string, IntegrationType> expectedIntegrationType = IntegrationType.Discord;
+        ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
+            EntitlementIntegrationType.Discord;
         ApiEnum<string, Status> expectedStatus = Status.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -321,7 +324,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementID = "entitlement_id",
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
-            IntegrationType = IntegrationType.Discord,
+            IntegrationType = EntitlementIntegrationType.Discord,
             Status = Status.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -341,7 +344,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementID = "entitlement_id",
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
-            IntegrationType = IntegrationType.Discord,
+            IntegrationType = EntitlementIntegrationType.Discord,
             Status = Status.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -363,7 +366,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementID = "entitlement_id",
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
-            IntegrationType = IntegrationType.Discord,
+            IntegrationType = EntitlementIntegrationType.Discord,
             Status = Status.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -380,7 +383,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementID = "entitlement_id",
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
-            IntegrationType = IntegrationType.Discord,
+            IntegrationType = EntitlementIntegrationType.Discord,
             Status = Status.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
@@ -406,7 +409,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementID = "entitlement_id",
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
-            IntegrationType = IntegrationType.Discord,
+            IntegrationType = EntitlementIntegrationType.Discord,
             Status = Status.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
@@ -427,7 +430,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementID = "entitlement_id",
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
-            IntegrationType = IntegrationType.Discord,
+            IntegrationType = EntitlementIntegrationType.Discord,
             Status = Status.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -438,76 +441,6 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
         CustomerListEntitlementsResponseItem copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class IntegrationTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(IntegrationType.Discord)]
-    [InlineData(IntegrationType.Telegram)]
-    [InlineData(IntegrationType.GitHub)]
-    [InlineData(IntegrationType.Figma)]
-    [InlineData(IntegrationType.Framer)]
-    [InlineData(IntegrationType.Notion)]
-    [InlineData(IntegrationType.DigitalFiles)]
-    [InlineData(IntegrationType.LicenseKey)]
-    public void Validation_Works(IntegrationType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, IntegrationType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, IntegrationType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(IntegrationType.Discord)]
-    [InlineData(IntegrationType.Telegram)]
-    [InlineData(IntegrationType.GitHub)]
-    [InlineData(IntegrationType.Figma)]
-    [InlineData(IntegrationType.Framer)]
-    [InlineData(IntegrationType.Notion)]
-    [InlineData(IntegrationType.DigitalFiles)]
-    [InlineData(IntegrationType.LicenseKey)]
-    public void SerializationRoundtrip_Works(IntegrationType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, IntegrationType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, IntegrationType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, IntegrationType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, IntegrationType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
 

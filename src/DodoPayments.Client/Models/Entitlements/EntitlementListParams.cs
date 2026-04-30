@@ -22,14 +22,14 @@ public record class EntitlementListParams : ParamsBase
     /// <summary>
     /// Filter by integration type
     /// </summary>
-    public ApiEnum<string, EntitlementListParamsIntegrationType>? IntegrationType
+    public ApiEnum<string, IntegrationType>? IntegrationType
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<
-                ApiEnum<string, EntitlementListParamsIntegrationType>
-            >("integration_type");
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, IntegrationType>>(
+                "integration_type"
+            );
         }
         init
         {
@@ -177,8 +177,8 @@ public record class EntitlementListParams : ParamsBase
 /// <summary>
 /// Filter by integration type
 /// </summary>
-[JsonConverter(typeof(EntitlementListParamsIntegrationTypeConverter))]
-public enum EntitlementListParamsIntegrationType
+[JsonConverter(typeof(IntegrationTypeConverter))]
+public enum IntegrationType
 {
     Discord,
     Telegram,
@@ -190,10 +190,9 @@ public enum EntitlementListParamsIntegrationType
     LicenseKey,
 }
 
-sealed class EntitlementListParamsIntegrationTypeConverter
-    : JsonConverter<EntitlementListParamsIntegrationType>
+sealed class IntegrationTypeConverter : JsonConverter<IntegrationType>
 {
-    public override EntitlementListParamsIntegrationType Read(
+    public override IntegrationType Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -201,21 +200,21 @@ sealed class EntitlementListParamsIntegrationTypeConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "discord" => EntitlementListParamsIntegrationType.Discord,
-            "telegram" => EntitlementListParamsIntegrationType.Telegram,
-            "github" => EntitlementListParamsIntegrationType.GitHub,
-            "figma" => EntitlementListParamsIntegrationType.Figma,
-            "framer" => EntitlementListParamsIntegrationType.Framer,
-            "notion" => EntitlementListParamsIntegrationType.Notion,
-            "digital_files" => EntitlementListParamsIntegrationType.DigitalFiles,
-            "license_key" => EntitlementListParamsIntegrationType.LicenseKey,
-            _ => (EntitlementListParamsIntegrationType)(-1),
+            "discord" => IntegrationType.Discord,
+            "telegram" => IntegrationType.Telegram,
+            "github" => IntegrationType.GitHub,
+            "figma" => IntegrationType.Figma,
+            "framer" => IntegrationType.Framer,
+            "notion" => IntegrationType.Notion,
+            "digital_files" => IntegrationType.DigitalFiles,
+            "license_key" => IntegrationType.LicenseKey,
+            _ => (IntegrationType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementListParamsIntegrationType value,
+        IntegrationType value,
         JsonSerializerOptions options
     )
     {
@@ -223,14 +222,14 @@ sealed class EntitlementListParamsIntegrationTypeConverter
             writer,
             value switch
             {
-                EntitlementListParamsIntegrationType.Discord => "discord",
-                EntitlementListParamsIntegrationType.Telegram => "telegram",
-                EntitlementListParamsIntegrationType.GitHub => "github",
-                EntitlementListParamsIntegrationType.Figma => "figma",
-                EntitlementListParamsIntegrationType.Framer => "framer",
-                EntitlementListParamsIntegrationType.Notion => "notion",
-                EntitlementListParamsIntegrationType.DigitalFiles => "digital_files",
-                EntitlementListParamsIntegrationType.LicenseKey => "license_key",
+                IntegrationType.Discord => "discord",
+                IntegrationType.Telegram => "telegram",
+                IntegrationType.GitHub => "github",
+                IntegrationType.Figma => "figma",
+                IntegrationType.Framer => "framer",
+                IntegrationType.Notion => "notion",
+                IntegrationType.DigitalFiles => "digital_files",
+                IntegrationType.LicenseKey => "license_key",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

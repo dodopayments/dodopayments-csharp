@@ -6,13 +6,13 @@ using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Disputes;
+using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Products;
 using Balances = DodoPayments.Client.Models.Balances;
 using CreditEntitlementsBalances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Customers = DodoPayments.Client.Models.Customers;
-using Entitlements = DodoPayments.Client.Models.Entitlements;
 using Grants = DodoPayments.Client.Models.Entitlements.Grants;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Meters = DodoPayments.Client.Models.Meters;
@@ -50,7 +50,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, PaymentMethodTypes>(),
             new ApiEnumConverter<string, PaymentRefundStatus>(),
             new ApiEnumConverter<string, Status>(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionCancellationFeedback>(),
+            new ApiEnumConverter<string, Subscriptions::CancellationFeedback>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
             new ApiEnumConverter<string, Subscriptions::TimeInterval>(),
             new ApiEnumConverter<
@@ -66,7 +66,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::LineItemAddonType>(),
             new ApiEnumConverter<string, Subscriptions::MeterType>(),
             new ApiEnumConverter<string, Subscriptions::CancelReason>(),
-            new ApiEnumConverter<string, Subscriptions::CancellationFeedback>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
             new ApiEnumConverter<string, Subscriptions::EffectiveAt>(),
@@ -89,7 +88,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, LicenseKeys::LicenseKeyStatus>(),
             new ApiEnumConverter<string, LicenseKeys::Source>(),
             new ApiEnumConverter<string, LicenseKeys::Status>(),
-            new ApiEnumConverter<string, Customers::IntegrationType>(),
             new ApiEnumConverter<string, Customers::Status>(),
             new ApiEnumConverter<string, Customers::PaymentMethod>(),
             new ApiEnumConverter<string, EventType>(),
@@ -105,8 +103,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Type>(),
             new ApiEnumConverter<string, RecurringPriceType>(),
             new ApiEnumConverter<string, UsageBasedPriceType>(),
-            new ApiEnumConverter<string, IntegrationType>(),
-            new ApiEnumConverter<string, ProductListResponseEntitlementIntegrationType>(),
             new ApiEnumConverter<string, TaxCategory>(),
             new ApiEnumConverter<string, CountryCode>(),
             new ApiEnumConverter<string, DiscountType>(),
@@ -145,16 +141,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventDataStatus>(),
             new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventDataTriggerState>(),
             new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventType>(),
-            new ApiEnumConverter<string, Webhooks::EntitlementGrantCreatedWebhookEventDataStatus>(),
             new ApiEnumConverter<string, Webhooks::EntitlementGrantCreatedWebhookEventType>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::EntitlementGrantDeliveredWebhookEventDataStatus
-            >(),
             new ApiEnumConverter<string, Webhooks::EntitlementGrantDeliveredWebhookEventType>(),
-            new ApiEnumConverter<string, Webhooks::EntitlementGrantFailedWebhookEventDataStatus>(),
             new ApiEnumConverter<string, Webhooks::EntitlementGrantFailedWebhookEventType>(),
-            new ApiEnumConverter<string, Webhooks::EntitlementGrantRevokedWebhookEventDataStatus>(),
             new ApiEnumConverter<string, Webhooks::EntitlementGrantRevokedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::LicenseKeyCreatedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::PaymentCancelledWebhookEventType>(),
@@ -191,8 +180,10 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, WebhookEvents::DunningAttemptPayloadType>(),
             new ApiEnumConverter<string, WebhookEvents::DunningAttemptStatus>(),
             new ApiEnumConverter<string, WebhookEvents::TriggerState>(),
-            new ApiEnumConverter<string, WebhookEvents::EntitlementGrantPayloadType>(),
-            new ApiEnumConverter<string, WebhookEvents::EntitlementGrantStatus>(),
+            new ApiEnumConverter<
+                string,
+                WebhookEvents::EntitlementGrantIntersectionMember1PayloadType
+            >(),
             new ApiEnumConverter<string, Meters::Conjunction>(),
             new ApiEnumConverter<string, Meters::FilterOperator>(),
             new ApiEnumConverter<string, Meters::Type>(),
@@ -204,17 +195,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CreditEntitlementsBalances::LedgerEntryType>(),
             new ApiEnumConverter<string, CreditEntitlementsBalances::SourceType>(),
             new ApiEnumConverter<string, CreditEntitlementsBalances::Status>(),
-            new ApiEnumConverter<string, Entitlements::EntitlementCreateResponseIntegrationType>(),
-            new ApiEnumConverter<
-                string,
-                Entitlements::EntitlementRetrieveResponseIntegrationType
-            >(),
-            new ApiEnumConverter<string, Entitlements::EntitlementUpdateResponseIntegrationType>(),
-            new ApiEnumConverter<string, Entitlements::EntitlementListResponseIntegrationType>(),
-            new ApiEnumConverter<string, Entitlements::IntegrationType>(),
-            new ApiEnumConverter<string, Entitlements::EntitlementListParamsIntegrationType>(),
-            new ApiEnumConverter<string, Grants::GrantListResponseStatus>(),
-            new ApiEnumConverter<string, Grants::GrantRevokeResponseStatus>(),
+            new ApiEnumConverter<string, EntitlementIntegrationType>(),
+            new ApiEnumConverter<string, IntegrationType>(),
+            new ApiEnumConverter<string, Grants::EntitlementGrantStatus>(),
             new ApiEnumConverter<string, Grants::Status>(),
         },
     };

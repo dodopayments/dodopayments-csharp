@@ -15,10 +15,10 @@ public sealed class GrantListPage(
     IGrantServiceWithRawResponse service,
     GrantListParams parameters,
     GrantListPageResponse response
-) : IPage<GrantListResponse>
+) : IPage<EntitlementGrant>
 {
     /// <inheritdoc/>
-    public IReadOnlyList<GrantListResponse> Items
+    public IReadOnlyList<EntitlementGrant> Items
     {
         get { return response.Items; }
     }
@@ -30,7 +30,7 @@ public sealed class GrantListPage(
     }
 
     /// <inheritdoc/>
-    async Task<IPage<GrantListResponse>> IPage<GrantListResponse>.Next(
+    async Task<IPage<EntitlementGrant>> IPage<EntitlementGrant>.Next(
         CancellationToken cancellationToken
     ) => await this.Next(cancellationToken).ConfigureAwait(false);
 

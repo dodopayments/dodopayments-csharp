@@ -112,18 +112,18 @@ public record class ProductUpdateParams : ParamsBase
     /// Entitlements to attach (replaces all existing when present) Send empty array
     /// to remove all, omit field to leave unchanged
     /// </summary>
-    public IReadOnlyList<ProductUpdateParamsEntitlement>? Entitlements
+    public IReadOnlyList<AttachProductEntitlement>? Entitlements
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<
-                ImmutableArray<ProductUpdateParamsEntitlement>
-            >("entitlements");
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<AttachProductEntitlement>>(
+                "entitlements"
+            );
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<ProductUpdateParamsEntitlement>?>(
+            this._rawBodyData.Set<ImmutableArray<AttachProductEntitlement>?>(
                 "entitlements",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -503,85 +503,4 @@ class ProductUpdateParamsDigitalProductDeliveryFromRaw
     public ProductUpdateParamsDigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ProductUpdateParamsDigitalProductDelivery.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Request struct for attaching an entitlement to a product.
-///
-/// <para>Mirrors the `credit_entitlements` attach shape — every "attach something
-/// to a product" array takes objects, not bare IDs. Uniform shape leaves room for
-/// per-attachment settings later without another API break.</para>
-/// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        ProductUpdateParamsEntitlement,
-        ProductUpdateParamsEntitlementFromRaw
-    >)
-)]
-public sealed record class ProductUpdateParamsEntitlement : JsonModel
-{
-    /// <summary>
-    /// ID of the entitlement to attach to the product
-    /// </summary>
-    public required string EntitlementID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("entitlement_id");
-        }
-        init { this._rawData.Set("entitlement_id", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.EntitlementID;
-    }
-
-    public ProductUpdateParamsEntitlement() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public ProductUpdateParamsEntitlement(
-        ProductUpdateParamsEntitlement productUpdateParamsEntitlement
-    )
-        : base(productUpdateParamsEntitlement) { }
-#pragma warning restore CS8618
-
-    public ProductUpdateParamsEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    ProductUpdateParamsEntitlement(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="ProductUpdateParamsEntitlementFromRaw.FromRawUnchecked"/>
-    public static ProductUpdateParamsEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public ProductUpdateParamsEntitlement(string entitlementID)
-        : this()
-    {
-        this.EntitlementID = entitlementID;
-    }
-}
-
-class ProductUpdateParamsEntitlementFromRaw : IFromRawJson<ProductUpdateParamsEntitlement>
-{
-    /// <inheritdoc/>
-    public ProductUpdateParamsEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => ProductUpdateParamsEntitlement.FromRawUnchecked(rawData);
 }

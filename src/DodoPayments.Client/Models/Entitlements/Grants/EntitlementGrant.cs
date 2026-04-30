@@ -10,8 +10,8 @@ using Products = DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Models.Entitlements.Grants;
 
-[JsonConverter(typeof(JsonModelConverter<GrantListResponse, GrantListResponseFromRaw>))]
-public sealed record class GrantListResponse : JsonModel
+[JsonConverter(typeof(JsonModelConverter<EntitlementGrant, EntitlementGrantFromRaw>))]
+public sealed record class EntitlementGrant : JsonModel
 {
     public required string ID
     {
@@ -73,14 +73,12 @@ public sealed record class GrantListResponse : JsonModel
         init { this._rawData.Set("external_id", value); }
     }
 
-    public required ApiEnum<string, GrantListResponseStatus> Status
+    public required ApiEnum<string, EntitlementGrantStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, GrantListResponseStatus>>(
-                "status"
-            );
+            return this._rawData.GetNotNullClass<ApiEnum<string, EntitlementGrantStatus>>("status");
         }
         init { this._rawData.Set("status", value); }
     }
@@ -144,12 +142,12 @@ public sealed record class GrantListResponse : JsonModel
     /// <summary>
     /// Present only when the entitlement integration_type is `license_key`.
     /// </summary>
-    public LicenseKey? LicenseKey
+    public LicenseKeyGrant? LicenseKey
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<LicenseKey>("license_key");
+            return this._rawData.GetNullableClass<LicenseKeyGrant>("license_key");
         }
         init { this._rawData.Set("license_key", value); }
     }
@@ -257,29 +255,29 @@ public sealed record class GrantListResponse : JsonModel
         _ = this.SubscriptionID;
     }
 
-    public GrantListResponse() { }
+    public EntitlementGrant() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public GrantListResponse(GrantListResponse grantListResponse)
-        : base(grantListResponse) { }
+    public EntitlementGrant(EntitlementGrant entitlementGrant)
+        : base(entitlementGrant) { }
 #pragma warning restore CS8618
 
-    public GrantListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    public EntitlementGrant(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    GrantListResponse(FrozenDictionary<string, JsonElement> rawData)
+    EntitlementGrant(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="GrantListResponseFromRaw.FromRawUnchecked"/>
-    public static GrantListResponse FromRawUnchecked(
+    /// <inheritdoc cref="EntitlementGrantFromRaw.FromRawUnchecked"/>
+    public static EntitlementGrant FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -287,15 +285,15 @@ public sealed record class GrantListResponse : JsonModel
     }
 }
 
-class GrantListResponseFromRaw : IFromRawJson<GrantListResponse>
+class EntitlementGrantFromRaw : IFromRawJson<EntitlementGrant>
 {
     /// <inheritdoc/>
-    public GrantListResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        GrantListResponse.FromRawUnchecked(rawData);
+    public EntitlementGrant FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        EntitlementGrant.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(GrantListResponseStatusConverter))]
-public enum GrantListResponseStatus
+[JsonConverter(typeof(EntitlementGrantStatusConverter))]
+public enum EntitlementGrantStatus
 {
     Pending,
     Delivered,
@@ -303,9 +301,9 @@ public enum GrantListResponseStatus
     Revoked,
 }
 
-sealed class GrantListResponseStatusConverter : JsonConverter<GrantListResponseStatus>
+sealed class EntitlementGrantStatusConverter : JsonConverter<EntitlementGrantStatus>
 {
-    public override GrantListResponseStatus Read(
+    public override EntitlementGrantStatus Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -313,17 +311,17 @@ sealed class GrantListResponseStatusConverter : JsonConverter<GrantListResponseS
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Pending" => GrantListResponseStatus.Pending,
-            "Delivered" => GrantListResponseStatus.Delivered,
-            "Failed" => GrantListResponseStatus.Failed,
-            "Revoked" => GrantListResponseStatus.Revoked,
-            _ => (GrantListResponseStatus)(-1),
+            "Pending" => EntitlementGrantStatus.Pending,
+            "Delivered" => EntitlementGrantStatus.Delivered,
+            "Failed" => EntitlementGrantStatus.Failed,
+            "Revoked" => EntitlementGrantStatus.Revoked,
+            _ => (EntitlementGrantStatus)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        GrantListResponseStatus value,
+        EntitlementGrantStatus value,
         JsonSerializerOptions options
     )
     {
@@ -331,10 +329,10 @@ sealed class GrantListResponseStatusConverter : JsonConverter<GrantListResponseS
             writer,
             value switch
             {
-                GrantListResponseStatus.Pending => "Pending",
-                GrantListResponseStatus.Delivered => "Delivered",
-                GrantListResponseStatus.Failed => "Failed",
-                GrantListResponseStatus.Revoked => "Revoked",
+                EntitlementGrantStatus.Pending => "Pending",
+                EntitlementGrantStatus.Delivered => "Delivered",
+                EntitlementGrantStatus.Failed => "Failed",
+                EntitlementGrantStatus.Revoked => "Revoked",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -342,94 +340,4 @@ sealed class GrantListResponseStatusConverter : JsonConverter<GrantListResponseS
             options
         );
     }
-}
-
-/// <summary>
-/// Present only when the entitlement integration_type is `license_key`.
-/// </summary>
-[JsonConverter(typeof(JsonModelConverter<LicenseKey, LicenseKeyFromRaw>))]
-public sealed record class LicenseKey : JsonModel
-{
-    public required int ActivationsUsed
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<int>("activations_used");
-        }
-        init { this._rawData.Set("activations_used", value); }
-    }
-
-    public required string Key
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("key");
-        }
-        init { this._rawData.Set("key", value); }
-    }
-
-    public int? ActivationsLimit
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("activations_limit");
-        }
-        init { this._rawData.Set("activations_limit", value); }
-    }
-
-    public DateTimeOffset? ExpiresAt
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
-        }
-        init { this._rawData.Set("expires_at", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.ActivationsUsed;
-        _ = this.Key;
-        _ = this.ActivationsLimit;
-        _ = this.ExpiresAt;
-    }
-
-    public LicenseKey() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public LicenseKey(LicenseKey licenseKey)
-        : base(licenseKey) { }
-#pragma warning restore CS8618
-
-    public LicenseKey(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    LicenseKey(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="LicenseKeyFromRaw.FromRawUnchecked"/>
-    public static LicenseKey FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class LicenseKeyFromRaw : IFromRawJson<LicenseKey>
-{
-    /// <inheritdoc/>
-    public LicenseKey FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        LicenseKey.FromRawUnchecked(rawData);
 }

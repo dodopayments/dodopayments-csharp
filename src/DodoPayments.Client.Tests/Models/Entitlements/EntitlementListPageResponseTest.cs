@@ -20,12 +20,12 @@ public class EntitlementListPageResponseTest : TestBase
                     ID = "id",
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    IntegrationConfig = new EntitlementListResponseIntegrationConfigGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
                         Permission = "permission",
                         TargetID = "target_id",
                     },
-                    IntegrationType = EntitlementListResponseIntegrationType.Discord,
+                    IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -35,19 +35,19 @@ public class EntitlementListPageResponseTest : TestBase
             ],
         };
 
-        List<EntitlementListResponse> expectedItems =
+        List<Entitlement> expectedItems =
         [
             new()
             {
                 ID = "id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                IntegrationConfig = new EntitlementListResponseIntegrationConfigGitHubConfig()
+                IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                 {
                     Permission = "permission",
                     TargetID = "target_id",
                 },
-                IntegrationType = EntitlementListResponseIntegrationType.Discord,
+                IntegrationType = EntitlementIntegrationType.Discord,
                 IsActive = true,
                 Name = "name",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -75,12 +75,12 @@ public class EntitlementListPageResponseTest : TestBase
                     ID = "id",
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    IntegrationConfig = new EntitlementListResponseIntegrationConfigGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
                         Permission = "permission",
                         TargetID = "target_id",
                     },
-                    IntegrationType = EntitlementListResponseIntegrationType.Discord,
+                    IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -111,12 +111,12 @@ public class EntitlementListPageResponseTest : TestBase
                     ID = "id",
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    IntegrationConfig = new EntitlementListResponseIntegrationConfigGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
                         Permission = "permission",
                         TargetID = "target_id",
                     },
-                    IntegrationType = EntitlementListResponseIntegrationType.Discord,
+                    IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -133,19 +133,19 @@ public class EntitlementListPageResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        List<EntitlementListResponse> expectedItems =
+        List<Entitlement> expectedItems =
         [
             new()
             {
                 ID = "id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                IntegrationConfig = new EntitlementListResponseIntegrationConfigGitHubConfig()
+                IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                 {
                     Permission = "permission",
                     TargetID = "target_id",
                 },
-                IntegrationType = EntitlementListResponseIntegrationType.Discord,
+                IntegrationType = EntitlementIntegrationType.Discord,
                 IsActive = true,
                 Name = "name",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -173,12 +173,12 @@ public class EntitlementListPageResponseTest : TestBase
                     ID = "id",
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    IntegrationConfig = new EntitlementListResponseIntegrationConfigGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
                         Permission = "permission",
                         TargetID = "target_id",
                     },
-                    IntegrationType = EntitlementListResponseIntegrationType.Discord,
+                    IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -203,12 +203,12 @@ public class EntitlementListPageResponseTest : TestBase
                     ID = "id",
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    IntegrationConfig = new EntitlementListResponseIntegrationConfigGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
                         Permission = "permission",
                         TargetID = "target_id",
                     },
-                    IntegrationType = EntitlementListResponseIntegrationType.Discord,
+                    IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
