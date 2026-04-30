@@ -72,6 +72,20 @@ public record class PaymentCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Whether adaptive currency fees should be included in the price (true) or
+    /// added on top (false). If not specified, defaults to the business-level setting.
+    /// </summary>
+    public bool? AdaptiveCurrencyFeesInclusive
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("adaptive_currency_fees_inclusive");
+        }
+        init { this._rawBodyData.Set("adaptive_currency_fees_inclusive", value); }
+    }
+
+    /// <summary>
     /// List of payment methods allowed during checkout.
     ///
     /// <para>Customers will **never** see payment methods that are **not** in this
@@ -210,6 +224,29 @@ public record class PaymentCreateParams : ParamsBase
             }
 
             this._rawBodyData.Set("redirect_immediately", value);
+        }
+    }
+
+    /// <summary>
+    /// If true, the customer's phone number is required to create this payment.
+    /// Typically set alongside `payment_link=true` so merchants can enforce phone
+    /// collection on the hosted payment page. Defaults to false.
+    /// </summary>
+    public bool? RequirePhoneNumber
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("require_phone_number");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("require_phone_number", value);
         }
     }
 

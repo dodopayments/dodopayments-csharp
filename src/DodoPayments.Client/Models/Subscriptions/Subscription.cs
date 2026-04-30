@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -6,8 +5,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
+using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -65,12 +66,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp when the subscription was created
     /// </summary>
-    public required DateTimeOffset CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("created_at");
         }
         init { this._rawData.Set("created_at", value); }
     }
@@ -184,12 +185,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp of the next scheduled billing. Indicates the end of current billing period
     /// </summary>
-    public required DateTimeOffset NextBillingDate
+    public required System::DateTimeOffset NextBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("next_billing_date");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("next_billing_date");
         }
         init { this._rawData.Set("next_billing_date", value); }
     }
@@ -238,12 +239,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp of the last payment. Indicates the start of current billing period
     /// </summary>
-    public required DateTimeOffset PreviousBillingDate
+    public required System::DateTimeOffset PreviousBillingDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("previous_billing_date");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("previous_billing_date");
         }
         init { this._rawData.Set("previous_billing_date", value); }
     }
@@ -369,14 +370,42 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
-    /// Cancelled timestamp if the subscription is cancelled
+    /// Free-text cancellation comment, if any
     /// </summary>
-    public DateTimeOffset? CancelledAt
+    public string? CancellationComment
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("cancelled_at");
+            return this._rawData.GetNullableClass<string>("cancellation_comment");
+        }
+        init { this._rawData.Set("cancellation_comment", value); }
+    }
+
+    /// <summary>
+    /// Customer-supplied churn reason, if any
+    /// </summary>
+    public ApiEnum<string, SubscriptionCancellationFeedback>? CancellationFeedback
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, SubscriptionCancellationFeedback>
+            >("cancellation_feedback");
+        }
+        init { this._rawData.Set("cancellation_feedback", value); }
+    }
+
+    /// <summary>
+    /// Cancelled timestamp if the subscription is cancelled
+    /// </summary>
+    public System::DateTimeOffset? CancelledAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("cancelled_at");
         }
         init { this._rawData.Set("cancelled_at", value); }
     }
@@ -431,12 +460,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Timestamp when the subscription will expire
     /// </summary>
-    public DateTimeOffset? ExpiresAt
+    public System::DateTimeOffset? ExpiresAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("expires_at");
         }
         init { this._rawData.Set("expires_at", value); }
     }
@@ -519,6 +548,8 @@ public sealed record class Subscription : JsonModel
         this.SubscriptionPeriodInterval.Validate();
         _ = this.TaxInclusive;
         _ = this.TrialPeriodDays;
+        _ = this.CancellationComment;
+        this.CancellationFeedback?.Validate();
         _ = this.CancelledAt;
         foreach (var item in this.CustomFieldResponses ?? [])
         {
@@ -568,6 +599,72 @@ class SubscriptionFromRaw : IFromRawJson<Subscription>
 }
 
 /// <summary>
+/// Customer-supplied churn reason, if any
+/// </summary>
+[JsonConverter(typeof(SubscriptionCancellationFeedbackConverter))]
+public enum SubscriptionCancellationFeedback
+{
+    TooExpensive,
+    MissingFeatures,
+    SwitchedService,
+    Unused,
+    CustomerService,
+    LowQuality,
+    TooComplex,
+    Other,
+}
+
+sealed class SubscriptionCancellationFeedbackConverter
+    : JsonConverter<SubscriptionCancellationFeedback>
+{
+    public override SubscriptionCancellationFeedback Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "too_expensive" => SubscriptionCancellationFeedback.TooExpensive,
+            "missing_features" => SubscriptionCancellationFeedback.MissingFeatures,
+            "switched_service" => SubscriptionCancellationFeedback.SwitchedService,
+            "unused" => SubscriptionCancellationFeedback.Unused,
+            "customer_service" => SubscriptionCancellationFeedback.CustomerService,
+            "low_quality" => SubscriptionCancellationFeedback.LowQuality,
+            "too_complex" => SubscriptionCancellationFeedback.TooComplex,
+            "other" => SubscriptionCancellationFeedback.Other,
+            _ => (SubscriptionCancellationFeedback)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionCancellationFeedback value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionCancellationFeedback.TooExpensive => "too_expensive",
+                SubscriptionCancellationFeedback.MissingFeatures => "missing_features",
+                SubscriptionCancellationFeedback.SwitchedService => "switched_service",
+                SubscriptionCancellationFeedback.Unused => "unused",
+                SubscriptionCancellationFeedback.CustomerService => "customer_service",
+                SubscriptionCancellationFeedback.LowQuality => "low_quality",
+                SubscriptionCancellationFeedback.TooComplex => "too_complex",
+                SubscriptionCancellationFeedback.Other => "other",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
 /// Scheduled plan change details, if any
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<ScheduledChange, ScheduledChangeFromRaw>))]
@@ -608,12 +705,12 @@ public sealed record class ScheduledChange : JsonModel
     /// <summary>
     /// When this scheduled change was created
     /// </summary>
-    public required DateTimeOffset CreatedAt
+    public required System::DateTimeOffset CreatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("created_at");
         }
         init { this._rawData.Set("created_at", value); }
     }
@@ -621,12 +718,12 @@ public sealed record class ScheduledChange : JsonModel
     /// <summary>
     /// When the change will be applied
     /// </summary>
-    public required DateTimeOffset EffectiveAt
+    public required System::DateTimeOffset EffectiveAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<DateTimeOffset>("effective_at");
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("effective_at");
         }
         init { this._rawData.Set("effective_at", value); }
     }

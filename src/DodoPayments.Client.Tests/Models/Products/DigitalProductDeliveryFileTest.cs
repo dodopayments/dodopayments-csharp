@@ -11,18 +11,27 @@ public class DigitalProductDeliveryFileTest : TestBase
     {
         var model = new DigitalProductDeliveryFile
         {
-            FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            FileName = "file_name",
-            Url = "url",
+            DownloadUrl = "download_url",
+            ExpiresIn = 0,
+            FileID = "file_id",
+            Filename = "filename",
+            ContentType = "content_type",
+            FileSize = 0,
         };
 
-        string expectedFileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedFileName = "file_name";
-        string expectedUrl = "url";
+        string expectedDownloadUrl = "download_url";
+        long expectedExpiresIn = 0;
+        string expectedFileID = "file_id";
+        string expectedFilename = "filename";
+        string expectedContentType = "content_type";
+        long expectedFileSize = 0;
 
+        Assert.Equal(expectedDownloadUrl, model.DownloadUrl);
+        Assert.Equal(expectedExpiresIn, model.ExpiresIn);
         Assert.Equal(expectedFileID, model.FileID);
-        Assert.Equal(expectedFileName, model.FileName);
-        Assert.Equal(expectedUrl, model.Url);
+        Assert.Equal(expectedFilename, model.Filename);
+        Assert.Equal(expectedContentType, model.ContentType);
+        Assert.Equal(expectedFileSize, model.FileSize);
     }
 
     [Fact]
@@ -30,9 +39,12 @@ public class DigitalProductDeliveryFileTest : TestBase
     {
         var model = new DigitalProductDeliveryFile
         {
-            FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            FileName = "file_name",
-            Url = "url",
+            DownloadUrl = "download_url",
+            ExpiresIn = 0,
+            FileID = "file_id",
+            Filename = "filename",
+            ContentType = "content_type",
+            FileSize = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -49,9 +61,12 @@ public class DigitalProductDeliveryFileTest : TestBase
     {
         var model = new DigitalProductDeliveryFile
         {
-            FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            FileName = "file_name",
-            Url = "url",
+            DownloadUrl = "download_url",
+            ExpiresIn = 0,
+            FileID = "file_id",
+            Filename = "filename",
+            ContentType = "content_type",
+            FileSize = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -61,13 +76,19 @@ public class DigitalProductDeliveryFileTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        string expectedFileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedFileName = "file_name";
-        string expectedUrl = "url";
+        string expectedDownloadUrl = "download_url";
+        long expectedExpiresIn = 0;
+        string expectedFileID = "file_id";
+        string expectedFilename = "filename";
+        string expectedContentType = "content_type";
+        long expectedFileSize = 0;
 
+        Assert.Equal(expectedDownloadUrl, deserialized.DownloadUrl);
+        Assert.Equal(expectedExpiresIn, deserialized.ExpiresIn);
         Assert.Equal(expectedFileID, deserialized.FileID);
-        Assert.Equal(expectedFileName, deserialized.FileName);
-        Assert.Equal(expectedUrl, deserialized.Url);
+        Assert.Equal(expectedFilename, deserialized.Filename);
+        Assert.Equal(expectedContentType, deserialized.ContentType);
+        Assert.Equal(expectedFileSize, deserialized.FileSize);
     }
 
     [Fact]
@@ -75,9 +96,80 @@ public class DigitalProductDeliveryFileTest : TestBase
     {
         var model = new DigitalProductDeliveryFile
         {
-            FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            FileName = "file_name",
-            Url = "url",
+            DownloadUrl = "download_url",
+            ExpiresIn = 0,
+            FileID = "file_id",
+            Filename = "filename",
+            ContentType = "content_type",
+            FileSize = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new DigitalProductDeliveryFile
+        {
+            DownloadUrl = "download_url",
+            ExpiresIn = 0,
+            FileID = "file_id",
+            Filename = "filename",
+        };
+
+        Assert.Null(model.ContentType);
+        Assert.False(model.RawData.ContainsKey("content_type"));
+        Assert.Null(model.FileSize);
+        Assert.False(model.RawData.ContainsKey("file_size"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new DigitalProductDeliveryFile
+        {
+            DownloadUrl = "download_url",
+            ExpiresIn = 0,
+            FileID = "file_id",
+            Filename = "filename",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new DigitalProductDeliveryFile
+        {
+            DownloadUrl = "download_url",
+            ExpiresIn = 0,
+            FileID = "file_id",
+            Filename = "filename",
+
+            ContentType = null,
+            FileSize = null,
+        };
+
+        Assert.Null(model.ContentType);
+        Assert.True(model.RawData.ContainsKey("content_type"));
+        Assert.Null(model.FileSize);
+        Assert.True(model.RawData.ContainsKey("file_size"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new DigitalProductDeliveryFile
+        {
+            DownloadUrl = "download_url",
+            ExpiresIn = 0,
+            FileID = "file_id",
+            Filename = "filename",
+
+            ContentType = null,
+            FileSize = null,
         };
 
         model.Validate();
@@ -88,9 +180,12 @@ public class DigitalProductDeliveryFileTest : TestBase
     {
         var model = new DigitalProductDeliveryFile
         {
-            FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            FileName = "file_name",
-            Url = "url",
+            DownloadUrl = "download_url",
+            ExpiresIn = 0,
+            FileID = "file_id",
+            Filename = "filename",
+            ContentType = "content_type",
+            FileSize = 0,
         };
 
         DigitalProductDeliveryFile copied = new(model);

@@ -32,6 +32,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
+            AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
@@ -40,6 +41,7 @@ public class PaymentCreateParamsTest : TestBase
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
             ReturnUrl = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
@@ -64,6 +66,7 @@ public class PaymentCreateParamsTest : TestBase
                 Amount = 0,
             },
         ];
+        bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
         [
             PaymentMethodTypes.Ach,
@@ -75,6 +78,7 @@ public class PaymentCreateParamsTest : TestBase
         bool expectedPaymentLink = true;
         string expectedPaymentMethodID = "payment_method_id";
         bool expectedRedirectImmediately = true;
+        bool expectedRequirePhoneNumber = true;
         string expectedReturnUrl = "return_url";
         bool expectedShortLink = true;
         bool expectedShowSavedPaymentMethods = true;
@@ -87,6 +91,10 @@ public class PaymentCreateParamsTest : TestBase
         {
             Assert.Equal(expectedProductCart[i], parameters.ProductCart[i]);
         }
+        Assert.Equal(
+            expectedAdaptiveCurrencyFeesInclusive,
+            parameters.AdaptiveCurrencyFeesInclusive
+        );
         Assert.NotNull(parameters.AllowedPaymentMethodTypes);
         Assert.Equal(
             expectedAllowedPaymentMethodTypes.Count,
@@ -113,6 +121,7 @@ public class PaymentCreateParamsTest : TestBase
         Assert.Equal(expectedPaymentLink, parameters.PaymentLink);
         Assert.Equal(expectedPaymentMethodID, parameters.PaymentMethodID);
         Assert.Equal(expectedRedirectImmediately, parameters.RedirectImmediately);
+        Assert.Equal(expectedRequirePhoneNumber, parameters.RequirePhoneNumber);
         Assert.Equal(expectedReturnUrl, parameters.ReturnUrl);
         Assert.Equal(expectedShortLink, parameters.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, parameters.ShowSavedPaymentMethods);
@@ -142,6 +151,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
+            AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
@@ -157,6 +167,8 @@ public class PaymentCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.RedirectImmediately);
         Assert.False(parameters.RawBodyData.ContainsKey("redirect_immediately"));
+        Assert.Null(parameters.RequirePhoneNumber);
+        Assert.False(parameters.RawBodyData.ContainsKey("require_phone_number"));
         Assert.Null(parameters.ShowSavedPaymentMethods);
         Assert.False(parameters.RawBodyData.ContainsKey("show_saved_payment_methods"));
     }
@@ -184,6 +196,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
+            AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
@@ -197,6 +210,7 @@ public class PaymentCreateParamsTest : TestBase
             // Null should be interpreted as omitted for these properties
             Metadata = null,
             RedirectImmediately = null,
+            RequirePhoneNumber = null,
             ShowSavedPaymentMethods = null,
         };
 
@@ -204,6 +218,8 @@ public class PaymentCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.RedirectImmediately);
         Assert.False(parameters.RawBodyData.ContainsKey("redirect_immediately"));
+        Assert.Null(parameters.RequirePhoneNumber);
+        Assert.False(parameters.RawBodyData.ContainsKey("require_phone_number"));
         Assert.Null(parameters.ShowSavedPaymentMethods);
         Assert.False(parameters.RawBodyData.ContainsKey("show_saved_payment_methods"));
     }
@@ -233,9 +249,12 @@ public class PaymentCreateParamsTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
             ShowSavedPaymentMethods = true,
         };
 
+        Assert.Null(parameters.AdaptiveCurrencyFeesInclusive);
+        Assert.False(parameters.RawBodyData.ContainsKey("adaptive_currency_fees_inclusive"));
         Assert.Null(parameters.AllowedPaymentMethodTypes);
         Assert.False(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
         Assert.Null(parameters.BillingCurrency);
@@ -281,8 +300,10 @@ public class PaymentCreateParamsTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
             ShowSavedPaymentMethods = true,
 
+            AdaptiveCurrencyFeesInclusive = null,
             AllowedPaymentMethodTypes = null,
             BillingCurrency = null,
             DiscountCode = null,
@@ -294,6 +315,8 @@ public class PaymentCreateParamsTest : TestBase
             TaxID = null,
         };
 
+        Assert.Null(parameters.AdaptiveCurrencyFeesInclusive);
+        Assert.True(parameters.RawBodyData.ContainsKey("adaptive_currency_fees_inclusive"));
         Assert.Null(parameters.AllowedPaymentMethodTypes);
         Assert.True(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
         Assert.Null(parameters.BillingCurrency);
@@ -367,6 +390,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
+            AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
@@ -375,6 +399,7 @@ public class PaymentCreateParamsTest : TestBase
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
             ReturnUrl = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,

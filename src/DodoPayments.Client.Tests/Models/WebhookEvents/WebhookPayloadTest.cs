@@ -5,6 +5,7 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.WebhookEvents;
 using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Disputes = DodoPayments.Client.Models.Disputes;
@@ -871,6 +872,8 @@ public class DataTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -1073,13 +1076,32 @@ public class DataTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
@@ -1270,6 +1292,8 @@ public class DataTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -1496,13 +1520,32 @@ public class DataTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
@@ -3252,6 +3295,8 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -3371,6 +3416,12 @@ public class SubscriptionTest : TestBase
             Subscriptions::TimeInterval.Day;
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
+        string expectedCancellationComment = "cancellation_comment";
+        ApiEnum<
+            string,
+            Subscriptions::SubscriptionCancellationFeedback
+        > expectedCancellationFeedback =
+            Subscriptions::SubscriptionCancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
@@ -3455,6 +3506,8 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedSubscriptionPeriodInterval, model.SubscriptionPeriodInterval);
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
         Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
+        Assert.Equal(expectedCancellationComment, model.CancellationComment);
+        Assert.Equal(expectedCancellationFeedback, model.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
         Assert.NotNull(model.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
@@ -3558,6 +3611,8 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -3683,6 +3738,8 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -3809,6 +3866,12 @@ public class SubscriptionTest : TestBase
             Subscriptions::TimeInterval.Day;
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
+        string expectedCancellationComment = "cancellation_comment";
+        ApiEnum<
+            string,
+            Subscriptions::SubscriptionCancellationFeedback
+        > expectedCancellationFeedback =
+            Subscriptions::SubscriptionCancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
@@ -3893,6 +3956,8 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedSubscriptionPeriodInterval, deserialized.SubscriptionPeriodInterval);
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
         Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
+        Assert.Equal(expectedCancellationComment, deserialized.CancellationComment);
+        Assert.Equal(expectedCancellationFeedback, deserialized.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
         Assert.NotNull(deserialized.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
@@ -3996,6 +4061,8 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -4118,6 +4185,10 @@ public class SubscriptionTest : TestBase
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
+        Assert.Null(model.CancellationComment);
+        Assert.False(model.RawData.ContainsKey("cancellation_comment"));
+        Assert.Null(model.CancellationFeedback);
+        Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledAt);
         Assert.False(model.RawData.ContainsKey("cancelled_at"));
         Assert.Null(model.CustomFieldResponses);
@@ -4318,6 +4389,8 @@ public class SubscriptionTest : TestBase
             TrialPeriodDays = 0,
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
 
+            CancellationComment = null,
+            CancellationFeedback = null,
             CancelledAt = null,
             CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
@@ -4328,6 +4401,10 @@ public class SubscriptionTest : TestBase
             TaxID = null,
         };
 
+        Assert.Null(model.CancellationComment);
+        Assert.True(model.RawData.ContainsKey("cancellation_comment"));
+        Assert.Null(model.CancellationFeedback);
+        Assert.True(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledAt);
         Assert.True(model.RawData.ContainsKey("cancelled_at"));
         Assert.Null(model.CustomFieldResponses);
@@ -4435,6 +4512,8 @@ public class SubscriptionTest : TestBase
             TrialPeriodDays = 0,
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
 
+            CancellationComment = null,
+            CancellationFeedback = null,
             CancelledAt = null,
             CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
@@ -4535,6 +4614,8 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -7690,13 +7771,32 @@ public class EntitlementGrantTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
@@ -7717,15 +7817,32 @@ public class EntitlementGrantTest : TestBase
         ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ProductDigitalProductDelivery expectedDigitalProductDelivery = new()
+        {
+            Files =
+            [
+                new()
+                {
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
+                },
+            ],
+            ExternalUrl = "external_url",
+            Instructions = "instructions",
+        };
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
-        string expectedLicenseKey = "license_key";
-        int expectedLicenseKeyActivationsLimit = 0;
-        int expectedLicenseKeyActivationsUsed = 0;
-        DateTimeOffset expectedLicenseKeyExpiresAt = DateTimeOffset.Parse(
-            "2019-12-27T18:11:19.117Z"
-        );
-        string expectedLicenseKeyStatus = "license_key_status";
+        EntitlementGrantLicenseKey expectedLicenseKey = new()
+        {
+            ActivationsUsed = 0,
+            Key = "key",
+            ActivationsLimit = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
         JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
         DateTimeOffset expectedOAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedOAuthUrl = "oauth_url";
@@ -7744,13 +7861,10 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedDeliveredAt, model.DeliveredAt);
+        Assert.Equal(expectedDigitalProductDelivery, model.DigitalProductDelivery);
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
         Assert.Equal(expectedLicenseKey, model.LicenseKey);
-        Assert.Equal(expectedLicenseKeyActivationsLimit, model.LicenseKeyActivationsLimit);
-        Assert.Equal(expectedLicenseKeyActivationsUsed, model.LicenseKeyActivationsUsed);
-        Assert.Equal(expectedLicenseKeyExpiresAt, model.LicenseKeyExpiresAt);
-        Assert.Equal(expectedLicenseKeyStatus, model.LicenseKeyStatus);
         Assert.NotNull(model.Metadata);
         Assert.True(JsonElement.DeepEquals(expectedMetadata, model.Metadata.Value));
         Assert.Equal(expectedOAuthExpiresAt, model.OAuthExpiresAt);
@@ -7776,13 +7890,32 @@ public class EntitlementGrantTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
@@ -7816,13 +7949,32 @@ public class EntitlementGrantTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
@@ -7850,15 +8002,32 @@ public class EntitlementGrantTest : TestBase
         ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ProductDigitalProductDelivery expectedDigitalProductDelivery = new()
+        {
+            Files =
+            [
+                new()
+                {
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
+                },
+            ],
+            ExternalUrl = "external_url",
+            Instructions = "instructions",
+        };
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
-        string expectedLicenseKey = "license_key";
-        int expectedLicenseKeyActivationsLimit = 0;
-        int expectedLicenseKeyActivationsUsed = 0;
-        DateTimeOffset expectedLicenseKeyExpiresAt = DateTimeOffset.Parse(
-            "2019-12-27T18:11:19.117Z"
-        );
-        string expectedLicenseKeyStatus = "license_key_status";
+        EntitlementGrantLicenseKey expectedLicenseKey = new()
+        {
+            ActivationsUsed = 0,
+            Key = "key",
+            ActivationsLimit = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
         JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
         DateTimeOffset expectedOAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedOAuthUrl = "oauth_url";
@@ -7877,13 +8046,10 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedDeliveredAt, deserialized.DeliveredAt);
+        Assert.Equal(expectedDigitalProductDelivery, deserialized.DigitalProductDelivery);
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
         Assert.Equal(expectedLicenseKey, deserialized.LicenseKey);
-        Assert.Equal(expectedLicenseKeyActivationsLimit, deserialized.LicenseKeyActivationsLimit);
-        Assert.Equal(expectedLicenseKeyActivationsUsed, deserialized.LicenseKeyActivationsUsed);
-        Assert.Equal(expectedLicenseKeyExpiresAt, deserialized.LicenseKeyExpiresAt);
-        Assert.Equal(expectedLicenseKeyStatus, deserialized.LicenseKeyStatus);
         Assert.NotNull(deserialized.Metadata);
         Assert.True(JsonElement.DeepEquals(expectedMetadata, deserialized.Metadata.Value));
         Assert.Equal(expectedOAuthExpiresAt, deserialized.OAuthExpiresAt);
@@ -7909,13 +8075,32 @@ public class EntitlementGrantTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
@@ -7943,13 +8128,32 @@ public class EntitlementGrantTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -7977,13 +8181,32 @@ public class EntitlementGrantTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -8010,13 +8233,32 @@ public class EntitlementGrantTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -8047,13 +8289,32 @@ public class EntitlementGrantTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -8087,20 +8348,14 @@ public class EntitlementGrantTest : TestBase
 
         Assert.Null(model.DeliveredAt);
         Assert.False(model.RawData.ContainsKey("delivered_at"));
+        Assert.Null(model.DigitalProductDelivery);
+        Assert.False(model.RawData.ContainsKey("digital_product_delivery"));
         Assert.Null(model.ErrorCode);
         Assert.False(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.False(model.RawData.ContainsKey("error_message"));
         Assert.Null(model.LicenseKey);
         Assert.False(model.RawData.ContainsKey("license_key"));
-        Assert.Null(model.LicenseKeyActivationsLimit);
-        Assert.False(model.RawData.ContainsKey("license_key_activations_limit"));
-        Assert.Null(model.LicenseKeyActivationsUsed);
-        Assert.False(model.RawData.ContainsKey("license_key_activations_used"));
-        Assert.Null(model.LicenseKeyExpiresAt);
-        Assert.False(model.RawData.ContainsKey("license_key_expires_at"));
-        Assert.Null(model.LicenseKeyStatus);
-        Assert.False(model.RawData.ContainsKey("license_key_status"));
         Assert.Null(model.OAuthExpiresAt);
         Assert.False(model.RawData.ContainsKey("oauth_expires_at"));
         Assert.Null(model.OAuthUrl);
@@ -8152,13 +8407,10 @@ public class EntitlementGrantTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
 
             DeliveredAt = null,
+            DigitalProductDelivery = null,
             ErrorCode = null,
             ErrorMessage = null,
             LicenseKey = null,
-            LicenseKeyActivationsLimit = null,
-            LicenseKeyActivationsUsed = null,
-            LicenseKeyExpiresAt = null,
-            LicenseKeyStatus = null,
             OAuthExpiresAt = null,
             OAuthUrl = null,
             PaymentID = null,
@@ -8169,20 +8421,14 @@ public class EntitlementGrantTest : TestBase
 
         Assert.Null(model.DeliveredAt);
         Assert.True(model.RawData.ContainsKey("delivered_at"));
+        Assert.Null(model.DigitalProductDelivery);
+        Assert.True(model.RawData.ContainsKey("digital_product_delivery"));
         Assert.Null(model.ErrorCode);
         Assert.True(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.True(model.RawData.ContainsKey("error_message"));
         Assert.Null(model.LicenseKey);
         Assert.True(model.RawData.ContainsKey("license_key"));
-        Assert.Null(model.LicenseKeyActivationsLimit);
-        Assert.True(model.RawData.ContainsKey("license_key_activations_limit"));
-        Assert.Null(model.LicenseKeyActivationsUsed);
-        Assert.True(model.RawData.ContainsKey("license_key_activations_used"));
-        Assert.Null(model.LicenseKeyExpiresAt);
-        Assert.True(model.RawData.ContainsKey("license_key_expires_at"));
-        Assert.Null(model.LicenseKeyStatus);
-        Assert.True(model.RawData.ContainsKey("license_key_status"));
         Assert.Null(model.OAuthExpiresAt);
         Assert.True(model.RawData.ContainsKey("oauth_expires_at"));
         Assert.Null(model.OAuthUrl);
@@ -8214,13 +8460,10 @@ public class EntitlementGrantTest : TestBase
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
 
             DeliveredAt = null,
+            DigitalProductDelivery = null,
             ErrorCode = null,
             ErrorMessage = null,
             LicenseKey = null,
-            LicenseKeyActivationsLimit = null,
-            LicenseKeyActivationsUsed = null,
-            LicenseKeyExpiresAt = null,
-            LicenseKeyStatus = null,
             OAuthExpiresAt = null,
             OAuthUrl = null,
             PaymentID = null,
@@ -8247,13 +8490,32 @@ public class EntitlementGrantTest : TestBase
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = "license_key",
-            LicenseKeyActivationsLimit = 0,
-            LicenseKeyActivationsUsed = 0,
-            LicenseKeyExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            LicenseKeyStatus = "license_key_status",
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
@@ -8384,5 +8646,161 @@ public class EntitlementGrantStatusTest : TestBase
         );
 
         Assert.Equal(value, deserialized);
+    }
+}
+
+public class EntitlementGrantLicenseKeyTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new EntitlementGrantLicenseKey
+        {
+            ActivationsUsed = 0,
+            Key = "key",
+            ActivationsLimit = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        int expectedActivationsUsed = 0;
+        string expectedKey = "key";
+        int expectedActivationsLimit = 0;
+        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedActivationsUsed, model.ActivationsUsed);
+        Assert.Equal(expectedKey, model.Key);
+        Assert.Equal(expectedActivationsLimit, model.ActivationsLimit);
+        Assert.Equal(expectedExpiresAt, model.ExpiresAt);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new EntitlementGrantLicenseKey
+        {
+            ActivationsUsed = 0,
+            Key = "key",
+            ActivationsLimit = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementGrantLicenseKey>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new EntitlementGrantLicenseKey
+        {
+            ActivationsUsed = 0,
+            Key = "key",
+            ActivationsLimit = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementGrantLicenseKey>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        int expectedActivationsUsed = 0;
+        string expectedKey = "key";
+        int expectedActivationsLimit = 0;
+        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedActivationsUsed, deserialized.ActivationsUsed);
+        Assert.Equal(expectedKey, deserialized.Key);
+        Assert.Equal(expectedActivationsLimit, deserialized.ActivationsLimit);
+        Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new EntitlementGrantLicenseKey
+        {
+            ActivationsUsed = 0,
+            Key = "key",
+            ActivationsLimit = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new EntitlementGrantLicenseKey { ActivationsUsed = 0, Key = "key" };
+
+        Assert.Null(model.ActivationsLimit);
+        Assert.False(model.RawData.ContainsKey("activations_limit"));
+        Assert.Null(model.ExpiresAt);
+        Assert.False(model.RawData.ContainsKey("expires_at"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new EntitlementGrantLicenseKey { ActivationsUsed = 0, Key = "key" };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new EntitlementGrantLicenseKey
+        {
+            ActivationsUsed = 0,
+            Key = "key",
+
+            ActivationsLimit = null,
+            ExpiresAt = null,
+        };
+
+        Assert.Null(model.ActivationsLimit);
+        Assert.True(model.RawData.ContainsKey("activations_limit"));
+        Assert.Null(model.ExpiresAt);
+        Assert.True(model.RawData.ContainsKey("expires_at"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new EntitlementGrantLicenseKey
+        {
+            ActivationsUsed = 0,
+            Key = "key",
+
+            ActivationsLimit = null,
+            ExpiresAt = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new EntitlementGrantLicenseKey
+        {
+            ActivationsUsed = 0,
+            Key = "key",
+            ActivationsLimit = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        EntitlementGrantLicenseKey copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

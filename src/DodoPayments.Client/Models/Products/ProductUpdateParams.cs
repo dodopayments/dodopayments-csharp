@@ -93,6 +93,8 @@ public record class ProductUpdateParams : ParamsBase
 
     /// <summary>
     /// Choose how you would like you digital product delivered
+    ///
+    /// <para>deprecated: use entitlements instead</para>
     /// </summary>
     public ProductUpdateParamsDigitalProductDelivery? DigitalProductDelivery
     {
@@ -107,20 +109,22 @@ public record class ProductUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Entitlement IDs to attach (replaces all existing when present) Send empty
-    /// array to remove all, omit field to leave unchanged
+    /// Entitlements to attach (replaces all existing when present) Send empty array
+    /// to remove all, omit field to leave unchanged
     /// </summary>
-    public IReadOnlyList<string>? EntitlementIds
+    public IReadOnlyList<ProductUpdateParamsEntitlement>? Entitlements
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("entitlement_ids");
+            return this._rawBodyData.GetNullableStruct<
+                ImmutableArray<ProductUpdateParamsEntitlement>
+            >("entitlements");
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<string>?>(
-                "entitlement_ids",
+            this._rawBodyData.Set<ImmutableArray<ProductUpdateParamsEntitlement>?>(
+                "entitlements",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
         }
@@ -144,6 +148,8 @@ public record class ProductUpdateParams : ParamsBase
     ///
     /// <para>Only applicable if `license_key_enabled` is `true`. This message contains
     /// instructions for activating the license key.</para>
+    ///
+    /// <para>deprecated: use entitlements instead</para>
     /// </summary>
     [Obsolete("deprecated")]
     public string? LicenseKeyActivationMessage
@@ -161,6 +167,8 @@ public record class ProductUpdateParams : ParamsBase
     ///
     /// <para>Only applicable if `license_key_enabled` is `true`. Represents the
     /// maximum number of times the license key can be activated.</para>
+    ///
+    /// <para>deprecated: use entitlements instead</para>
     /// </summary>
     [Obsolete("deprecated")]
     public int? LicenseKeyActivationsLimit
@@ -178,6 +186,8 @@ public record class ProductUpdateParams : ParamsBase
     ///
     /// <para>Only applicable if `license_key_enabled` is `true`. Represents the
     /// duration in days for which the license key is valid.</para>
+    ///
+    /// <para>deprecated: use entitlements instead</para>
     /// </summary>
     public LicenseKeyDuration? LicenseKeyDuration
     {
@@ -194,6 +204,8 @@ public record class ProductUpdateParams : ParamsBase
     ///
     /// <para>If `true`, additional fields related to license key (duration, activations
     /// limit, activation message) become applicable.</para>
+    ///
+    /// <para>deprecated: use entitlements instead</para>
     /// </summary>
     [Obsolete("deprecated")]
     public bool? LicenseKeyEnabled
@@ -386,6 +398,8 @@ public record class ProductUpdateParams : ParamsBase
 
 /// <summary>
 /// Choose how you would like you digital product delivered
+///
+/// <para>deprecated: use entitlements instead</para>
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
@@ -489,4 +503,85 @@ class ProductUpdateParamsDigitalProductDeliveryFromRaw
     public ProductUpdateParamsDigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ProductUpdateParamsDigitalProductDelivery.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Request struct for attaching an entitlement to a product.
+///
+/// <para>Mirrors the `credit_entitlements` attach shape — every "attach something
+/// to a product" array takes objects, not bare IDs. Uniform shape leaves room for
+/// per-attachment settings later without another API break.</para>
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        ProductUpdateParamsEntitlement,
+        ProductUpdateParamsEntitlementFromRaw
+    >)
+)]
+public sealed record class ProductUpdateParamsEntitlement : JsonModel
+{
+    /// <summary>
+    /// ID of the entitlement to attach to the product
+    /// </summary>
+    public required string EntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("entitlement_id");
+        }
+        init { this._rawData.Set("entitlement_id", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.EntitlementID;
+    }
+
+    public ProductUpdateParamsEntitlement() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public ProductUpdateParamsEntitlement(
+        ProductUpdateParamsEntitlement productUpdateParamsEntitlement
+    )
+        : base(productUpdateParamsEntitlement) { }
+#pragma warning restore CS8618
+
+    public ProductUpdateParamsEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    ProductUpdateParamsEntitlement(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="ProductUpdateParamsEntitlementFromRaw.FromRawUnchecked"/>
+    public static ProductUpdateParamsEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public ProductUpdateParamsEntitlement(string entitlementID)
+        : this()
+    {
+        this.EntitlementID = entitlementID;
+    }
+}
+
+class ProductUpdateParamsEntitlementFromRaw : IFromRawJson<ProductUpdateParamsEntitlement>
+{
+    /// <inheritdoc/>
+    public ProductUpdateParamsEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => ProductUpdateParamsEntitlement.FromRawUnchecked(rawData);
 }

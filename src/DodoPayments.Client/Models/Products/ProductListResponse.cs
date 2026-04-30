@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Subscriptions;
 using System = System;
 
 namespace DodoPayments.Client.Models.Products;
@@ -291,7 +292,12 @@ class ProductListResponseFromRaw : IFromRawJson<ProductListResponse>
 }
 
 /// <summary>
-/// Summary of an entitlement attached to a product
+/// Summary of an entitlement attached to a product.
+///
+/// <para>`integration_config` uses [`IntegrationConfigResponse`] (NOT the persisted
+/// [`IntegrationConfig`]) so digital_files entitlements embed the resolved `digital_files`
+/// object — matching what `GET /entitlements/{id}` returns. All other variants pass
+/// through unchanged via `#[serde(untagged)]`.</para>
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
@@ -312,8 +318,10 @@ public sealed record class ProductListResponseEntitlement : JsonModel
     }
 
     /// <summary>
-    /// Platform-specific configuration for an entitlement. Each variant uses unique
-    /// field names so `#[serde(untagged)]` can disambiguate correctly.
+    /// Public-facing variant of [`IntegrationConfig`].  Mirrors every variant shape
+    /// on the wire EXCEPT `DigitalFiles`, which is replaced with a hydrated `digital_files`
+    /// object (resolved download URLs etc.).  The persisted JSONB stays ID-only
+    /// via [`IntegrationConfig`]; this enum is response-only.
     /// </summary>
     public required ProductListResponseEntitlementIntegrationConfig IntegrationConfig
     {
@@ -410,8 +418,10 @@ class ProductListResponseEntitlementFromRaw : IFromRawJson<ProductListResponseEn
 }
 
 /// <summary>
-/// Platform-specific configuration for an entitlement. Each variant uses unique field
-/// names so `#[serde(untagged)]` can disambiguate correctly.
+/// Public-facing variant of [`IntegrationConfig`].  Mirrors every variant shape
+/// on the wire EXCEPT `DigitalFiles`, which is replaced with a hydrated `digital_files`
+/// object (resolved download URLs etc.).  The persisted JSONB stays ID-only via [`IntegrationConfig`];
+/// this enum is response-only.
 /// </summary>
 [JsonConverter(typeof(ProductListResponseEntitlementIntegrationConfigConverter))]
 public record class ProductListResponseEntitlementIntegrationConfig : ModelBase
@@ -1103,9 +1113,6 @@ sealed class ProductListResponseEntitlementIntegrationConfigConverter
 )]
 public sealed record class ProductListResponseEntitlementIntegrationConfigGitHubConfig : JsonModel
 {
-    /// <summary>
-    /// One of: pull, push, admin, maintain, triage
-    /// </summary>
     public required string Permission
     {
         get
@@ -1578,48 +1585,27 @@ class ProductListResponseEntitlementIntegrationConfigNotionConfigFromRaw
 public sealed record class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig
     : JsonModel
 {
-    public required IReadOnlyList<string> DigitalFileIds
+    /// <summary>
+    /// Populated digital-files payload for entitlement read surfaces. Mirrors `DigitalProductDelivery`
+    /// but is sourced from an entitlement's `integration_config` (not a grant) and
+    /// tags each file with its origin (`legacy` vs `ee`).
+    /// </summary>
+    public required ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles DigitalFiles
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("digital_file_ids");
-        }
-        init
-        {
-            this._rawData.Set<ImmutableArray<string>>(
-                "digital_file_ids",
-                ImmutableArray.ToImmutableArray(value)
+            return this._rawData.GetNotNullClass<ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles>(
+                "digital_files"
             );
         }
-    }
-
-    public string? ExternalUrl
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("external_url");
-        }
-        init { this._rawData.Set("external_url", value); }
-    }
-
-    public string? Instructions
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("instructions");
-        }
-        init { this._rawData.Set("instructions", value); }
+        init { this._rawData.Set("digital_files", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.DigitalFileIds;
-        _ = this.ExternalUrl;
-        _ = this.Instructions;
+        this.DigitalFiles.Validate();
     }
 
     public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig() { }
@@ -1659,11 +1645,11 @@ public sealed record class ProductListResponseEntitlementIntegrationConfigDigita
 
     [SetsRequiredMembers]
     public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig(
-        IReadOnlyList<string> digitalFileIds
+        ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles digitalFiles
     )
         : this()
     {
-        this.DigitalFileIds = digitalFileIds;
+        this.DigitalFiles = digitalFiles;
     }
 }
 
@@ -1675,6 +1661,271 @@ class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigFromRaw
         IReadOnlyDictionary<string, JsonElement> rawData
     ) =>
         ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Populated digital-files payload for entitlement read surfaces. Mirrors `DigitalProductDelivery`
+/// but is sourced from an entitlement's `integration_config` (not a grant) and tags
+/// each file with its origin (`legacy` vs `ee`).
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles,
+        ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFromRaw
+    >)
+)]
+public sealed record class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+    : JsonModel
+{
+    public required IReadOnlyList<ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile> Files
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile>
+            >("files");
+        }
+        init
+        {
+            this._rawData.Set<
+                ImmutableArray<ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile>
+            >("files", ImmutableArray.ToImmutableArray(value));
+        }
+    }
+
+    public string? ExternalUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("external_url");
+        }
+        init { this._rawData.Set("external_url", value); }
+    }
+
+    public string? Instructions
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("instructions");
+        }
+        init { this._rawData.Set("instructions", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        foreach (var item in this.Files)
+        {
+            item.Validate();
+        }
+        _ = this.ExternalUrl;
+        _ = this.Instructions;
+    }
+
+    public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles(
+        ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles productListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+    )
+        : base(productListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles) { }
+#pragma warning restore CS8618
+
+    public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFromRaw.FromRawUnchecked"/>
+    public static ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles(
+        IReadOnlyList<ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile> files
+    )
+        : this()
+    {
+        this.Files = files;
+    }
+}
+
+class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFromRaw
+    : IFromRawJson<ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles>
+{
+    /// <inheritdoc/>
+    public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) =>
+        ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles.FromRawUnchecked(
+            rawData
+        );
+}
+
+[JsonConverter(
+    typeof(JsonModelConverter<
+        ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile,
+        ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFileFromRaw
+    >)
+)]
+public sealed record class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+    : JsonModel
+{
+    public required string DownloadUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("download_url");
+        }
+        init { this._rawData.Set("download_url", value); }
+    }
+
+    /// <summary>
+    /// Seconds until `download_url` expires.
+    /// </summary>
+    public required long ExpiresIn
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("expires_in");
+        }
+        init { this._rawData.Set("expires_in", value); }
+    }
+
+    public required string FileID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("file_id");
+        }
+        init { this._rawData.Set("file_id", value); }
+    }
+
+    public required string Filename
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("filename");
+        }
+        init { this._rawData.Set("filename", value); }
+    }
+
+    /// <summary>
+    /// `"legacy"` for files in `product_files`, `"ee"` for files managed by the Entitlements Engine.
+    /// </summary>
+    public required string Source
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("source");
+        }
+        init { this._rawData.Set("source", value); }
+    }
+
+    public string? ContentType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("content_type");
+        }
+        init { this._rawData.Set("content_type", value); }
+    }
+
+    public long? FileSize
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("file_size");
+        }
+        init { this._rawData.Set("file_size", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.DownloadUrl;
+        _ = this.ExpiresIn;
+        _ = this.FileID;
+        _ = this.Filename;
+        _ = this.Source;
+        _ = this.ContentType;
+        _ = this.FileSize;
+    }
+
+    public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile(
+        ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile productListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+    )
+        : base(productListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile)
+    { }
+#pragma warning restore CS8618
+
+    public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFileFromRaw.FromRawUnchecked"/>
+    public static ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFileFromRaw
+    : IFromRawJson<ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile>
+{
+    /// <inheritdoc/>
+    public ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) =>
+        ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile.FromRawUnchecked(
+            rawData
+        );
 }
 
 [JsonConverter(
@@ -1716,12 +1967,14 @@ public sealed record class ProductListResponseEntitlementIntegrationConfigLicens
         init { this._rawData.Set("duration_count", value); }
     }
 
-    public string? DurationInterval
+    public ApiEnum<string, TimeInterval>? DurationInterval
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("duration_interval");
+            return this._rawData.GetNullableClass<ApiEnum<string, TimeInterval>>(
+                "duration_interval"
+            );
         }
         init { this._rawData.Set("duration_interval", value); }
     }
@@ -1732,7 +1985,7 @@ public sealed record class ProductListResponseEntitlementIntegrationConfigLicens
         _ = this.ActivationMessage;
         _ = this.ActivationsLimit;
         _ = this.DurationCount;
-        _ = this.DurationInterval;
+        this.DurationInterval?.Validate();
     }
 
     public ProductListResponseEntitlementIntegrationConfigLicenseKeyConfig() { }

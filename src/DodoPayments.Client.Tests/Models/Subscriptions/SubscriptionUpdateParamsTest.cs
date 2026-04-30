@@ -27,6 +27,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CancelReason = CancelReason.CancelledByCustomer,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = CancellationFeedback.TooExpensive,
             CreditEntitlementCart =
             [
                 new()
@@ -63,6 +65,9 @@ public class SubscriptionUpdateParamsTest : TestBase
         };
         bool expectedCancelAtNextBillingDate = true;
         ApiEnum<string, CancelReason> expectedCancelReason = CancelReason.CancelledByCustomer;
+        string expectedCancellationComment = "cancellation_comment";
+        ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
+            CancellationFeedback.TooExpensive;
         List<CreditEntitlementCart> expectedCreditEntitlementCart =
         [
             new()
@@ -93,6 +98,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.Equal(expectedBilling, parameters.Billing);
         Assert.Equal(expectedCancelAtNextBillingDate, parameters.CancelAtNextBillingDate);
         Assert.Equal(expectedCancelReason, parameters.CancelReason);
+        Assert.Equal(expectedCancellationComment, parameters.CancellationComment);
+        Assert.Equal(expectedCancellationFeedback, parameters.CancellationFeedback);
         Assert.NotNull(parameters.CreditEntitlementCart);
         Assert.Equal(expectedCreditEntitlementCart.Count, parameters.CreditEntitlementCart.Count);
         for (int i = 0; i < expectedCreditEntitlementCart.Count; i++)
@@ -125,6 +132,10 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("cancel_at_next_billing_date"));
         Assert.Null(parameters.CancelReason);
         Assert.False(parameters.RawBodyData.ContainsKey("cancel_reason"));
+        Assert.Null(parameters.CancellationComment);
+        Assert.False(parameters.RawBodyData.ContainsKey("cancellation_comment"));
+        Assert.Null(parameters.CancellationFeedback);
+        Assert.False(parameters.RawBodyData.ContainsKey("cancellation_feedback"));
         Assert.Null(parameters.CreditEntitlementCart);
         Assert.False(parameters.RawBodyData.ContainsKey("credit_entitlement_cart"));
         Assert.Null(parameters.CustomerName);
@@ -151,6 +162,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             Billing = null,
             CancelAtNextBillingDate = null,
             CancelReason = null,
+            CancellationComment = null,
+            CancellationFeedback = null,
             CreditEntitlementCart = null,
             CustomerName = null,
             DisableOnDemand = null,
@@ -166,6 +179,10 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("cancel_at_next_billing_date"));
         Assert.Null(parameters.CancelReason);
         Assert.True(parameters.RawBodyData.ContainsKey("cancel_reason"));
+        Assert.Null(parameters.CancellationComment);
+        Assert.True(parameters.RawBodyData.ContainsKey("cancellation_comment"));
+        Assert.Null(parameters.CancellationFeedback);
+        Assert.True(parameters.RawBodyData.ContainsKey("cancellation_feedback"));
         Assert.Null(parameters.CreditEntitlementCart);
         Assert.True(parameters.RawBodyData.ContainsKey("credit_entitlement_cart"));
         Assert.Null(parameters.CustomerName);
@@ -213,6 +230,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             },
             CancelAtNextBillingDate = true,
             CancelReason = CancelReason.CancelledByCustomer,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = CancellationFeedback.TooExpensive,
             CreditEntitlementCart =
             [
                 new()
@@ -250,6 +269,7 @@ public class CancelReasonTest : TestBase
     [InlineData(CancelReason.CancelledByCustomer)]
     [InlineData(CancelReason.CancelledByMerchant)]
     [InlineData(CancelReason.CancelledByMerchantSendDunning)]
+    [InlineData(CancelReason.DodoTeam)]
     public void Validation_Works(CancelReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -273,6 +293,7 @@ public class CancelReasonTest : TestBase
     [InlineData(CancelReason.CancelledByCustomer)]
     [InlineData(CancelReason.CancelledByMerchant)]
     [InlineData(CancelReason.CancelledByMerchantSendDunning)]
+    [InlineData(CancelReason.DodoTeam)]
     public void SerializationRoundtrip_Works(CancelReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -296,6 +317,76 @@ public class CancelReasonTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CancelReason>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class CancellationFeedbackTest : TestBase
+{
+    [Theory]
+    [InlineData(CancellationFeedback.TooExpensive)]
+    [InlineData(CancellationFeedback.MissingFeatures)]
+    [InlineData(CancellationFeedback.SwitchedService)]
+    [InlineData(CancellationFeedback.Unused)]
+    [InlineData(CancellationFeedback.CustomerService)]
+    [InlineData(CancellationFeedback.LowQuality)]
+    [InlineData(CancellationFeedback.TooComplex)]
+    [InlineData(CancellationFeedback.Other)]
+    public void Validation_Works(CancellationFeedback rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CancellationFeedback> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CancellationFeedback>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CancellationFeedback.TooExpensive)]
+    [InlineData(CancellationFeedback.MissingFeatures)]
+    [InlineData(CancellationFeedback.SwitchedService)]
+    [InlineData(CancellationFeedback.Unused)]
+    [InlineData(CancellationFeedback.CustomerService)]
+    [InlineData(CancellationFeedback.LowQuality)]
+    [InlineData(CancellationFeedback.TooComplex)]
+    [InlineData(CancellationFeedback.Other)]
+    public void SerializationRoundtrip_Works(CancellationFeedback rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CancellationFeedback> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CancellationFeedback>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CancellationFeedback>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CancellationFeedback>>(
             json,
             ModelBase.SerializerOptions
         );

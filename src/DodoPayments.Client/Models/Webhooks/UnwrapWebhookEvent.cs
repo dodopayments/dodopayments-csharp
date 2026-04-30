@@ -38,6 +38,7 @@ public record class UnwrapWebhookEvent : ModelBase
                 creditExpired: (x) => x.BusinessID,
                 creditManualAdjustment: (x) => x.BusinessID,
                 creditOverageCharged: (x) => x.BusinessID,
+                creditOverageReset: (x) => x.BusinessID,
                 creditRolledOver: (x) => x.BusinessID,
                 creditRolloverForfeited: (x) => x.BusinessID,
                 disputeAccepted: (x) => x.BusinessID,
@@ -49,6 +50,10 @@ public record class UnwrapWebhookEvent : ModelBase
                 disputeWon: (x) => x.BusinessID,
                 dunningRecovered: (x) => x.BusinessID,
                 dunningStarted: (x) => x.BusinessID,
+                entitlementGrantCreated: (x) => x.BusinessID,
+                entitlementGrantDelivered: (x) => x.BusinessID,
+                entitlementGrantFailed: (x) => x.BusinessID,
+                entitlementGrantRevoked: (x) => x.BusinessID,
                 licenseKeyCreated: (x) => x.BusinessID,
                 paymentCancelled: (x) => x.BusinessID,
                 paymentFailed: (x) => x.BusinessID,
@@ -81,6 +86,7 @@ public record class UnwrapWebhookEvent : ModelBase
                 creditExpired: (x) => x.Timestamp,
                 creditManualAdjustment: (x) => x.Timestamp,
                 creditOverageCharged: (x) => x.Timestamp,
+                creditOverageReset: (x) => x.Timestamp,
                 creditRolledOver: (x) => x.Timestamp,
                 creditRolloverForfeited: (x) => x.Timestamp,
                 disputeAccepted: (x) => x.Timestamp,
@@ -92,6 +98,10 @@ public record class UnwrapWebhookEvent : ModelBase
                 disputeWon: (x) => x.Timestamp,
                 dunningRecovered: (x) => x.Timestamp,
                 dunningStarted: (x) => x.Timestamp,
+                entitlementGrantCreated: (x) => x.Timestamp,
+                entitlementGrantDelivered: (x) => x.Timestamp,
+                entitlementGrantFailed: (x) => x.Timestamp,
+                entitlementGrantRevoked: (x) => x.Timestamp,
                 licenseKeyCreated: (x) => x.Timestamp,
                 paymentCancelled: (x) => x.Timestamp,
                 paymentFailed: (x) => x.Timestamp,
@@ -165,6 +175,12 @@ public record class UnwrapWebhookEvent : ModelBase
         this._element = element;
     }
 
+    public UnwrapWebhookEvent(CreditOverageResetWebhookEvent value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
     public UnwrapWebhookEvent(CreditRolledOverWebhookEvent value, JsonElement? element = null)
     {
         this.Value = value;
@@ -229,6 +245,39 @@ public record class UnwrapWebhookEvent : ModelBase
     }
 
     public UnwrapWebhookEvent(DunningStartedWebhookEvent value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnwrapWebhookEvent(
+        EntitlementGrantCreatedWebhookEvent value,
+        JsonElement? element = null
+    )
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnwrapWebhookEvent(
+        EntitlementGrantDeliveredWebhookEvent value,
+        JsonElement? element = null
+    )
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnwrapWebhookEvent(EntitlementGrantFailedWebhookEvent value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public UnwrapWebhookEvent(
+        EntitlementGrantRevokedWebhookEvent value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
         this._element = element;
@@ -510,6 +559,29 @@ public record class UnwrapWebhookEvent : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="CreditOverageResetWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCreditOverageReset(out var value)) {
+    ///     // `value` is of type `CreditOverageResetWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCreditOverageReset(
+        [NotNullWhen(true)] out CreditOverageResetWebhookEvent? value
+    )
+    {
+        value = this.Value as CreditOverageResetWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="CreditRolledOverWebhookEvent"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
@@ -740,6 +812,98 @@ public record class UnwrapWebhookEvent : ModelBase
     public bool TryPickDunningStarted([NotNullWhen(true)] out DunningStartedWebhookEvent? value)
     {
         value = this.Value as DunningStartedWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="EntitlementGrantCreatedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickEntitlementGrantCreated(out var value)) {
+    ///     // `value` is of type `EntitlementGrantCreatedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickEntitlementGrantCreated(
+        [NotNullWhen(true)] out EntitlementGrantCreatedWebhookEvent? value
+    )
+    {
+        value = this.Value as EntitlementGrantCreatedWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="EntitlementGrantDeliveredWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickEntitlementGrantDelivered(out var value)) {
+    ///     // `value` is of type `EntitlementGrantDeliveredWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickEntitlementGrantDelivered(
+        [NotNullWhen(true)] out EntitlementGrantDeliveredWebhookEvent? value
+    )
+    {
+        value = this.Value as EntitlementGrantDeliveredWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="EntitlementGrantFailedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickEntitlementGrantFailed(out var value)) {
+    ///     // `value` is of type `EntitlementGrantFailedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickEntitlementGrantFailed(
+        [NotNullWhen(true)] out EntitlementGrantFailedWebhookEvent? value
+    )
+    {
+        value = this.Value as EntitlementGrantFailedWebhookEvent;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="EntitlementGrantRevokedWebhookEvent"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickEntitlementGrantRevoked(out var value)) {
+    ///     // `value` is of type `EntitlementGrantRevokedWebhookEvent`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickEntitlementGrantRevoked(
+        [NotNullWhen(true)] out EntitlementGrantRevokedWebhookEvent? value
+    )
+    {
+        value = this.Value as EntitlementGrantRevokedWebhookEvent;
         return value != null;
     }
 
@@ -1100,6 +1264,7 @@ public record class UnwrapWebhookEvent : ModelBase
     ///     (CreditExpiredWebhookEvent value) =&gt; {...},
     ///     (CreditManualAdjustmentWebhookEvent value) =&gt; {...},
     ///     (CreditOverageChargedWebhookEvent value) =&gt; {...},
+    ///     (CreditOverageResetWebhookEvent value) =&gt; {...},
     ///     (CreditRolledOverWebhookEvent value) =&gt; {...},
     ///     (CreditRolloverForfeitedWebhookEvent value) =&gt; {...},
     ///     (DisputeAcceptedWebhookEvent value) =&gt; {...},
@@ -1111,6 +1276,10 @@ public record class UnwrapWebhookEvent : ModelBase
     ///     (DisputeWonWebhookEvent value) =&gt; {...},
     ///     (DunningRecoveredWebhookEvent value) =&gt; {...},
     ///     (DunningStartedWebhookEvent value) =&gt; {...},
+    ///     (EntitlementGrantCreatedWebhookEvent value) =&gt; {...},
+    ///     (EntitlementGrantDeliveredWebhookEvent value) =&gt; {...},
+    ///     (EntitlementGrantFailedWebhookEvent value) =&gt; {...},
+    ///     (EntitlementGrantRevokedWebhookEvent value) =&gt; {...},
     ///     (LicenseKeyCreatedWebhookEvent value) =&gt; {...},
     ///     (PaymentCancelledWebhookEvent value) =&gt; {...},
     ///     (PaymentFailedWebhookEvent value) =&gt; {...},
@@ -1139,6 +1308,7 @@ public record class UnwrapWebhookEvent : ModelBase
         System::Action<CreditExpiredWebhookEvent> creditExpired,
         System::Action<CreditManualAdjustmentWebhookEvent> creditManualAdjustment,
         System::Action<CreditOverageChargedWebhookEvent> creditOverageCharged,
+        System::Action<CreditOverageResetWebhookEvent> creditOverageReset,
         System::Action<CreditRolledOverWebhookEvent> creditRolledOver,
         System::Action<CreditRolloverForfeitedWebhookEvent> creditRolloverForfeited,
         System::Action<DisputeAcceptedWebhookEvent> disputeAccepted,
@@ -1150,6 +1320,10 @@ public record class UnwrapWebhookEvent : ModelBase
         System::Action<DisputeWonWebhookEvent> disputeWon,
         System::Action<DunningRecoveredWebhookEvent> dunningRecovered,
         System::Action<DunningStartedWebhookEvent> dunningStarted,
+        System::Action<EntitlementGrantCreatedWebhookEvent> entitlementGrantCreated,
+        System::Action<EntitlementGrantDeliveredWebhookEvent> entitlementGrantDelivered,
+        System::Action<EntitlementGrantFailedWebhookEvent> entitlementGrantFailed,
+        System::Action<EntitlementGrantRevokedWebhookEvent> entitlementGrantRevoked,
         System::Action<LicenseKeyCreatedWebhookEvent> licenseKeyCreated,
         System::Action<PaymentCancelledWebhookEvent> paymentCancelled,
         System::Action<PaymentFailedWebhookEvent> paymentFailed,
@@ -1193,6 +1367,9 @@ public record class UnwrapWebhookEvent : ModelBase
             case CreditOverageChargedWebhookEvent value:
                 creditOverageCharged(value);
                 break;
+            case CreditOverageResetWebhookEvent value:
+                creditOverageReset(value);
+                break;
             case CreditRolledOverWebhookEvent value:
                 creditRolledOver(value);
                 break;
@@ -1225,6 +1402,18 @@ public record class UnwrapWebhookEvent : ModelBase
                 break;
             case DunningStartedWebhookEvent value:
                 dunningStarted(value);
+                break;
+            case EntitlementGrantCreatedWebhookEvent value:
+                entitlementGrantCreated(value);
+                break;
+            case EntitlementGrantDeliveredWebhookEvent value:
+                entitlementGrantDelivered(value);
+                break;
+            case EntitlementGrantFailedWebhookEvent value:
+                entitlementGrantFailed(value);
+                break;
+            case EntitlementGrantRevokedWebhookEvent value:
+                entitlementGrantRevoked(value);
                 break;
             case LicenseKeyCreatedWebhookEvent value:
                 licenseKeyCreated(value);
@@ -1301,6 +1490,7 @@ public record class UnwrapWebhookEvent : ModelBase
     ///     (CreditExpiredWebhookEvent value) =&gt; {...},
     ///     (CreditManualAdjustmentWebhookEvent value) =&gt; {...},
     ///     (CreditOverageChargedWebhookEvent value) =&gt; {...},
+    ///     (CreditOverageResetWebhookEvent value) =&gt; {...},
     ///     (CreditRolledOverWebhookEvent value) =&gt; {...},
     ///     (CreditRolloverForfeitedWebhookEvent value) =&gt; {...},
     ///     (DisputeAcceptedWebhookEvent value) =&gt; {...},
@@ -1312,6 +1502,10 @@ public record class UnwrapWebhookEvent : ModelBase
     ///     (DisputeWonWebhookEvent value) =&gt; {...},
     ///     (DunningRecoveredWebhookEvent value) =&gt; {...},
     ///     (DunningStartedWebhookEvent value) =&gt; {...},
+    ///     (EntitlementGrantCreatedWebhookEvent value) =&gt; {...},
+    ///     (EntitlementGrantDeliveredWebhookEvent value) =&gt; {...},
+    ///     (EntitlementGrantFailedWebhookEvent value) =&gt; {...},
+    ///     (EntitlementGrantRevokedWebhookEvent value) =&gt; {...},
     ///     (LicenseKeyCreatedWebhookEvent value) =&gt; {...},
     ///     (PaymentCancelledWebhookEvent value) =&gt; {...},
     ///     (PaymentFailedWebhookEvent value) =&gt; {...},
@@ -1340,6 +1534,7 @@ public record class UnwrapWebhookEvent : ModelBase
         System::Func<CreditExpiredWebhookEvent, T> creditExpired,
         System::Func<CreditManualAdjustmentWebhookEvent, T> creditManualAdjustment,
         System::Func<CreditOverageChargedWebhookEvent, T> creditOverageCharged,
+        System::Func<CreditOverageResetWebhookEvent, T> creditOverageReset,
         System::Func<CreditRolledOverWebhookEvent, T> creditRolledOver,
         System::Func<CreditRolloverForfeitedWebhookEvent, T> creditRolloverForfeited,
         System::Func<DisputeAcceptedWebhookEvent, T> disputeAccepted,
@@ -1351,6 +1546,10 @@ public record class UnwrapWebhookEvent : ModelBase
         System::Func<DisputeWonWebhookEvent, T> disputeWon,
         System::Func<DunningRecoveredWebhookEvent, T> dunningRecovered,
         System::Func<DunningStartedWebhookEvent, T> dunningStarted,
+        System::Func<EntitlementGrantCreatedWebhookEvent, T> entitlementGrantCreated,
+        System::Func<EntitlementGrantDeliveredWebhookEvent, T> entitlementGrantDelivered,
+        System::Func<EntitlementGrantFailedWebhookEvent, T> entitlementGrantFailed,
+        System::Func<EntitlementGrantRevokedWebhookEvent, T> entitlementGrantRevoked,
         System::Func<LicenseKeyCreatedWebhookEvent, T> licenseKeyCreated,
         System::Func<PaymentCancelledWebhookEvent, T> paymentCancelled,
         System::Func<PaymentFailedWebhookEvent, T> paymentFailed,
@@ -1378,6 +1577,7 @@ public record class UnwrapWebhookEvent : ModelBase
             CreditExpiredWebhookEvent value => creditExpired(value),
             CreditManualAdjustmentWebhookEvent value => creditManualAdjustment(value),
             CreditOverageChargedWebhookEvent value => creditOverageCharged(value),
+            CreditOverageResetWebhookEvent value => creditOverageReset(value),
             CreditRolledOverWebhookEvent value => creditRolledOver(value),
             CreditRolloverForfeitedWebhookEvent value => creditRolloverForfeited(value),
             DisputeAcceptedWebhookEvent value => disputeAccepted(value),
@@ -1389,6 +1589,10 @@ public record class UnwrapWebhookEvent : ModelBase
             DisputeWonWebhookEvent value => disputeWon(value),
             DunningRecoveredWebhookEvent value => dunningRecovered(value),
             DunningStartedWebhookEvent value => dunningStarted(value),
+            EntitlementGrantCreatedWebhookEvent value => entitlementGrantCreated(value),
+            EntitlementGrantDeliveredWebhookEvent value => entitlementGrantDelivered(value),
+            EntitlementGrantFailedWebhookEvent value => entitlementGrantFailed(value),
+            EntitlementGrantRevokedWebhookEvent value => entitlementGrantRevoked(value),
             LicenseKeyCreatedWebhookEvent value => licenseKeyCreated(value),
             PaymentCancelledWebhookEvent value => paymentCancelled(value),
             PaymentFailedWebhookEvent value => paymentFailed(value),
@@ -1435,6 +1639,9 @@ public record class UnwrapWebhookEvent : ModelBase
     public static implicit operator UnwrapWebhookEvent(CreditOverageChargedWebhookEvent value) =>
         new(value);
 
+    public static implicit operator UnwrapWebhookEvent(CreditOverageResetWebhookEvent value) =>
+        new(value);
+
     public static implicit operator UnwrapWebhookEvent(CreditRolledOverWebhookEvent value) =>
         new(value);
 
@@ -1464,6 +1671,19 @@ public record class UnwrapWebhookEvent : ModelBase
         new(value);
 
     public static implicit operator UnwrapWebhookEvent(DunningStartedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(EntitlementGrantCreatedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(
+        EntitlementGrantDeliveredWebhookEvent value
+    ) => new(value);
+
+    public static implicit operator UnwrapWebhookEvent(EntitlementGrantFailedWebhookEvent value) =>
+        new(value);
+
+    public static implicit operator UnwrapWebhookEvent(EntitlementGrantRevokedWebhookEvent value) =>
         new(value);
 
     public static implicit operator UnwrapWebhookEvent(LicenseKeyCreatedWebhookEvent value) =>
@@ -1538,6 +1758,7 @@ public record class UnwrapWebhookEvent : ModelBase
             (creditExpired) => creditExpired.Validate(),
             (creditManualAdjustment) => creditManualAdjustment.Validate(),
             (creditOverageCharged) => creditOverageCharged.Validate(),
+            (creditOverageReset) => creditOverageReset.Validate(),
             (creditRolledOver) => creditRolledOver.Validate(),
             (creditRolloverForfeited) => creditRolloverForfeited.Validate(),
             (disputeAccepted) => disputeAccepted.Validate(),
@@ -1549,6 +1770,10 @@ public record class UnwrapWebhookEvent : ModelBase
             (disputeWon) => disputeWon.Validate(),
             (dunningRecovered) => dunningRecovered.Validate(),
             (dunningStarted) => dunningStarted.Validate(),
+            (entitlementGrantCreated) => entitlementGrantCreated.Validate(),
+            (entitlementGrantDelivered) => entitlementGrantDelivered.Validate(),
+            (entitlementGrantFailed) => entitlementGrantFailed.Validate(),
+            (entitlementGrantRevoked) => entitlementGrantRevoked.Validate(),
             (licenseKeyCreated) => licenseKeyCreated.Validate(),
             (paymentCancelled) => paymentCancelled.Validate(),
             (paymentFailed) => paymentFailed.Validate(),
@@ -1595,32 +1820,37 @@ public record class UnwrapWebhookEvent : ModelBase
             CreditExpiredWebhookEvent _ => 5,
             CreditManualAdjustmentWebhookEvent _ => 6,
             CreditOverageChargedWebhookEvent _ => 7,
-            CreditRolledOverWebhookEvent _ => 8,
-            CreditRolloverForfeitedWebhookEvent _ => 9,
-            DisputeAcceptedWebhookEvent _ => 10,
-            DisputeCancelledWebhookEvent _ => 11,
-            DisputeChallengedWebhookEvent _ => 12,
-            DisputeExpiredWebhookEvent _ => 13,
-            DisputeLostWebhookEvent _ => 14,
-            DisputeOpenedWebhookEvent _ => 15,
-            DisputeWonWebhookEvent _ => 16,
-            DunningRecoveredWebhookEvent _ => 17,
-            DunningStartedWebhookEvent _ => 18,
-            LicenseKeyCreatedWebhookEvent _ => 19,
-            PaymentCancelledWebhookEvent _ => 20,
-            PaymentFailedWebhookEvent _ => 21,
-            PaymentProcessingWebhookEvent _ => 22,
-            PaymentSucceededWebhookEvent _ => 23,
-            RefundFailedWebhookEvent _ => 24,
-            RefundSucceededWebhookEvent _ => 25,
-            SubscriptionActiveWebhookEvent _ => 26,
-            SubscriptionCancelledWebhookEvent _ => 27,
-            SubscriptionExpiredWebhookEvent _ => 28,
-            SubscriptionFailedWebhookEvent _ => 29,
-            SubscriptionOnHoldWebhookEvent _ => 30,
-            SubscriptionPlanChangedWebhookEvent _ => 31,
-            SubscriptionRenewedWebhookEvent _ => 32,
-            SubscriptionUpdatedWebhookEvent _ => 33,
+            CreditOverageResetWebhookEvent _ => 8,
+            CreditRolledOverWebhookEvent _ => 9,
+            CreditRolloverForfeitedWebhookEvent _ => 10,
+            DisputeAcceptedWebhookEvent _ => 11,
+            DisputeCancelledWebhookEvent _ => 12,
+            DisputeChallengedWebhookEvent _ => 13,
+            DisputeExpiredWebhookEvent _ => 14,
+            DisputeLostWebhookEvent _ => 15,
+            DisputeOpenedWebhookEvent _ => 16,
+            DisputeWonWebhookEvent _ => 17,
+            DunningRecoveredWebhookEvent _ => 18,
+            DunningStartedWebhookEvent _ => 19,
+            EntitlementGrantCreatedWebhookEvent _ => 20,
+            EntitlementGrantDeliveredWebhookEvent _ => 21,
+            EntitlementGrantFailedWebhookEvent _ => 22,
+            EntitlementGrantRevokedWebhookEvent _ => 23,
+            LicenseKeyCreatedWebhookEvent _ => 24,
+            PaymentCancelledWebhookEvent _ => 25,
+            PaymentFailedWebhookEvent _ => 26,
+            PaymentProcessingWebhookEvent _ => 27,
+            PaymentSucceededWebhookEvent _ => 28,
+            RefundFailedWebhookEvent _ => 29,
+            RefundSucceededWebhookEvent _ => 30,
+            SubscriptionActiveWebhookEvent _ => 31,
+            SubscriptionCancelledWebhookEvent _ => 32,
+            SubscriptionExpiredWebhookEvent _ => 33,
+            SubscriptionFailedWebhookEvent _ => 34,
+            SubscriptionOnHoldWebhookEvent _ => 35,
+            SubscriptionPlanChangedWebhookEvent _ => 36,
+            SubscriptionRenewedWebhookEvent _ => 37,
+            SubscriptionUpdatedWebhookEvent _ => 38,
             _ => -1,
         };
     }
@@ -1764,6 +1994,24 @@ sealed class UnwrapWebhookEventConverter : JsonConverter<UnwrapWebhookEvent>
         try
         {
             var deserialized = JsonSerializer.Deserialize<CreditOverageChargedWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<CreditOverageResetWebhookEvent>(
                 element,
                 options
             );
@@ -1959,6 +2207,78 @@ sealed class UnwrapWebhookEventConverter : JsonConverter<UnwrapWebhookEvent>
         try
         {
             var deserialized = JsonSerializer.Deserialize<DunningStartedWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<EntitlementGrantCreatedWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<EntitlementGrantDeliveredWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<EntitlementGrantFailedWebhookEvent>(
+                element,
+                options
+            );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (System::Exception e)
+            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<EntitlementGrantRevokedWebhookEvent>(
                 element,
                 options
             );

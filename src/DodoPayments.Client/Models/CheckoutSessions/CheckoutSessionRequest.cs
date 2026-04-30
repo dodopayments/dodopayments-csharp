@@ -212,6 +212,23 @@ public sealed record class CheckoutSessionRequest : JsonModel
     }
 
     /// <summary>
+    /// Override the merchant-level mandate floor (in INR paise) for INR e-mandates
+    /// on Indian-card recurring payments. The mandate amount sent to the processor
+    /// is `max(this_floor, actual_billing_amount)`, so this is effectively the customer-facing
+    /// authorization ceiling whenever billing is lower. When unset, the merchant
+    /// setting applies; when that's also unset, the system default of ₹15,000 applies.
+    /// </summary>
+    public int? MandateMinAmountInrPaise
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("mandate_min_amount_inr_paise");
+        }
+        init { this._rawData.Set("mandate_min_amount_inr_paise", value); }
+    }
+
+    /// <summary>
     /// Additional metadata associated with the payment. Defaults to empty if not provided.
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
@@ -381,6 +398,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
         _ = this.DiscountCode;
         this.FeatureFlags?.Validate();
         _ = this.Force3ds;
+        _ = this.MandateMinAmountInrPaise;
         _ = this.Metadata;
         _ = this.MinimalAddress;
         _ = this.PaymentMethodID;

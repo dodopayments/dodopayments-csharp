@@ -49,7 +49,7 @@ public class ProductUpdateParamsTest : TestBase
                 Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 Instructions = "instructions",
             },
-            EntitlementIds = ["string"],
+            Entitlements = [new("entitlement_id")],
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             LicenseKeyActivationMessage = "license_key_activation_message",
             LicenseKeyActivationsLimit = 0,
@@ -104,7 +104,10 @@ public class ProductUpdateParamsTest : TestBase
             Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             Instructions = "instructions",
         };
-        List<string> expectedEntitlementIds = ["string"];
+        List<Products::ProductUpdateParamsEntitlement> expectedEntitlements =
+        [
+            new("entitlement_id"),
+        ];
         string expectedImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         string expectedLicenseKeyActivationMessage = "license_key_activation_message";
         int expectedLicenseKeyActivationsLimit = 0;
@@ -145,11 +148,11 @@ public class ProductUpdateParamsTest : TestBase
         }
         Assert.Equal(expectedDescription, parameters.Description);
         Assert.Equal(expectedDigitalProductDelivery, parameters.DigitalProductDelivery);
-        Assert.NotNull(parameters.EntitlementIds);
-        Assert.Equal(expectedEntitlementIds.Count, parameters.EntitlementIds.Count);
-        for (int i = 0; i < expectedEntitlementIds.Count; i++)
+        Assert.NotNull(parameters.Entitlements);
+        Assert.Equal(expectedEntitlements.Count, parameters.Entitlements.Count);
+        for (int i = 0; i < expectedEntitlements.Count; i++)
         {
-            Assert.Equal(expectedEntitlementIds[i], parameters.EntitlementIds[i]);
+            Assert.Equal(expectedEntitlements[i], parameters.Entitlements[i]);
         }
         Assert.Equal(expectedImageID, parameters.ImageID);
         Assert.Equal(expectedLicenseKeyActivationMessage, parameters.LicenseKeyActivationMessage);
@@ -184,8 +187,8 @@ public class ProductUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("description"));
         Assert.Null(parameters.DigitalProductDelivery);
         Assert.False(parameters.RawBodyData.ContainsKey("digital_product_delivery"));
-        Assert.Null(parameters.EntitlementIds);
-        Assert.False(parameters.RawBodyData.ContainsKey("entitlement_ids"));
+        Assert.Null(parameters.Entitlements);
+        Assert.False(parameters.RawBodyData.ContainsKey("entitlements"));
         Assert.Null(parameters.ImageID);
         Assert.False(parameters.RawBodyData.ContainsKey("image_id"));
         Assert.Null(parameters.LicenseKeyActivationMessage);
@@ -218,7 +221,7 @@ public class ProductUpdateParamsTest : TestBase
             CreditEntitlements = null,
             Description = null,
             DigitalProductDelivery = null,
-            EntitlementIds = null,
+            Entitlements = null,
             ImageID = null,
             LicenseKeyActivationMessage = null,
             LicenseKeyActivationsLimit = null,
@@ -240,8 +243,8 @@ public class ProductUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("description"));
         Assert.Null(parameters.DigitalProductDelivery);
         Assert.True(parameters.RawBodyData.ContainsKey("digital_product_delivery"));
-        Assert.Null(parameters.EntitlementIds);
-        Assert.True(parameters.RawBodyData.ContainsKey("entitlement_ids"));
+        Assert.Null(parameters.Entitlements);
+        Assert.True(parameters.RawBodyData.ContainsKey("entitlements"));
         Assert.Null(parameters.ImageID);
         Assert.True(parameters.RawBodyData.ContainsKey("image_id"));
         Assert.Null(parameters.LicenseKeyActivationMessage);
@@ -310,7 +313,7 @@ public class ProductUpdateParamsTest : TestBase
                 Files = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 Instructions = "instructions",
             },
-            EntitlementIds = ["string"],
+            Entitlements = [new("entitlement_id")],
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             LicenseKeyActivationMessage = "license_key_activation_message",
             LicenseKeyActivationsLimit = 0,
@@ -492,6 +495,83 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
         };
 
         Products::ProductUpdateParamsDigitalProductDelivery copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class ProductUpdateParamsEntitlementTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Products::ProductUpdateParamsEntitlement
+        {
+            EntitlementID = "entitlement_id",
+        };
+
+        string expectedEntitlementID = "entitlement_id";
+
+        Assert.Equal(expectedEntitlementID, model.EntitlementID);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Products::ProductUpdateParamsEntitlement
+        {
+            EntitlementID = "entitlement_id",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Products::ProductUpdateParamsEntitlement>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Products::ProductUpdateParamsEntitlement
+        {
+            EntitlementID = "entitlement_id",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Products::ProductUpdateParamsEntitlement>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedEntitlementID = "entitlement_id";
+
+        Assert.Equal(expectedEntitlementID, deserialized.EntitlementID);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Products::ProductUpdateParamsEntitlement
+        {
+            EntitlementID = "entitlement_id",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Products::ProductUpdateParamsEntitlement
+        {
+            EntitlementID = "entitlement_id",
+        };
+
+        Products::ProductUpdateParamsEntitlement copied = new(model);
 
         Assert.Equal(model, copied);
     }

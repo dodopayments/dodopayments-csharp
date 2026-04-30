@@ -8,14 +8,35 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Products;
 
+/// <summary>
+/// Digital-product-delivery payload for a grant. Populated for grants whose entitlement
+/// has `integration_type = 'digital_files'`. `files` carries presigned download
+/// URLs; the source (EE service or legacy in-process S3 presigning) is opaque to
+/// the caller.
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<ProductDigitalProductDelivery, ProductDigitalProductDeliveryFromRaw>)
 )]
 public sealed record class ProductDigitalProductDelivery : JsonModel
 {
-    /// <summary>
-    /// External URL to digital product
-    /// </summary>
+    public required IReadOnlyList<DigitalProductDeliveryFile> Files
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<DigitalProductDeliveryFile>>(
+                "files"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<DigitalProductDeliveryFile>>(
+                "files",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     public string? ExternalUrl
     {
         get
@@ -26,30 +47,6 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
         init { this._rawData.Set("external_url", value); }
     }
 
-    /// <summary>
-    /// Uploaded files ids of digital product
-    /// </summary>
-    public IReadOnlyList<DigitalProductDeliveryFile>? Files
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<DigitalProductDeliveryFile>>(
-                "files"
-            );
-        }
-        init
-        {
-            this._rawData.Set<ImmutableArray<DigitalProductDeliveryFile>?>(
-                "files",
-                value == null ? null : ImmutableArray.ToImmutableArray(value)
-            );
-        }
-    }
-
-    /// <summary>
-    /// Instructions to download and use the digital product
-    /// </summary>
     public string? Instructions
     {
         get
@@ -63,11 +60,11 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.ExternalUrl;
-        foreach (var item in this.Files ?? [])
+        foreach (var item in this.Files)
         {
             item.Validate();
         }
+        _ = this.ExternalUrl;
         _ = this.Instructions;
     }
 
@@ -100,6 +97,13 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
     )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public ProductDigitalProductDelivery(IReadOnlyList<DigitalProductDeliveryFile> files)
+        : this()
+    {
+        this.Files = files;
     }
 }
 

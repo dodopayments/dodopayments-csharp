@@ -4,6 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Subscriptions;
 using Products = DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Tests.Models.Products;
@@ -893,12 +894,26 @@ public class ProductListResponseEntitlementIntegrationConfigTest : TestBase
     public void DigitalFilesValidationWorks()
     {
         Products::ProductListResponseEntitlementIntegrationConfig value =
-            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig()
-            {
-                DigitalFileIds = ["string"],
-                ExternalUrl = "external_url",
-                Instructions = "instructions",
-            };
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig(
+                new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles()
+                {
+                    Files =
+                    [
+                        new()
+                        {
+                            DownloadUrl = "download_url",
+                            ExpiresIn = 0,
+                            FileID = "file_id",
+                            Filename = "filename",
+                            Source = "source",
+                            ContentType = "content_type",
+                            FileSize = 0,
+                        },
+                    ],
+                    ExternalUrl = "external_url",
+                    Instructions = "instructions",
+                }
+            );
         value.Validate();
     }
 
@@ -911,7 +926,7 @@ public class ProductListResponseEntitlementIntegrationConfigTest : TestBase
                 ActivationMessage = "activation_message",
                 ActivationsLimit = 0,
                 DurationCount = 0,
-                DurationInterval = "duration_interval",
+                DurationInterval = TimeInterval.Day,
             };
         value.Validate();
     }
@@ -1024,12 +1039,26 @@ public class ProductListResponseEntitlementIntegrationConfigTest : TestBase
     public void DigitalFilesSerializationRoundtripWorks()
     {
         Products::ProductListResponseEntitlementIntegrationConfig value =
-            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig()
-            {
-                DigitalFileIds = ["string"],
-                ExternalUrl = "external_url",
-                Instructions = "instructions",
-            };
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig(
+                new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles()
+                {
+                    Files =
+                    [
+                        new()
+                        {
+                            DownloadUrl = "download_url",
+                            ExpiresIn = 0,
+                            FileID = "file_id",
+                            Filename = "filename",
+                            Source = "source",
+                            ContentType = "content_type",
+                            FileSize = 0,
+                        },
+                    ],
+                    ExternalUrl = "external_url",
+                    Instructions = "instructions",
+                }
+            );
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized =
             JsonSerializer.Deserialize<Products::ProductListResponseEntitlementIntegrationConfig>(
@@ -1049,7 +1078,7 @@ public class ProductListResponseEntitlementIntegrationConfigTest : TestBase
                 ActivationMessage = "activation_message",
                 ActivationsLimit = 0,
                 DurationCount = 0,
-                DurationInterval = "duration_interval",
+                DurationInterval = TimeInterval.Day,
             };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized =
@@ -1611,22 +1640,47 @@ public class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigTe
     {
         var model = new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig
         {
-            DigitalFileIds = ["string"],
-            ExternalUrl = "external_url",
-            Instructions = "instructions",
+            DigitalFiles = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
         };
 
-        List<string> expectedDigitalFileIds = ["string"];
-        string expectedExternalUrl = "external_url";
-        string expectedInstructions = "instructions";
+        Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles expectedDigitalFiles =
+            new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            };
 
-        Assert.Equal(expectedDigitalFileIds.Count, model.DigitalFileIds.Count);
-        for (int i = 0; i < expectedDigitalFileIds.Count; i++)
-        {
-            Assert.Equal(expectedDigitalFileIds[i], model.DigitalFileIds[i]);
-        }
-        Assert.Equal(expectedExternalUrl, model.ExternalUrl);
-        Assert.Equal(expectedInstructions, model.Instructions);
+        Assert.Equal(expectedDigitalFiles, model.DigitalFiles);
     }
 
     [Fact]
@@ -1634,9 +1688,24 @@ public class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigTe
     {
         var model = new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig
         {
-            DigitalFileIds = ["string"],
-            ExternalUrl = "external_url",
-            Instructions = "instructions",
+            DigitalFiles = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1654,9 +1723,24 @@ public class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigTe
     {
         var model = new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig
         {
-            DigitalFileIds = ["string"],
-            ExternalUrl = "external_url",
-            Instructions = "instructions",
+            DigitalFiles = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1667,17 +1751,27 @@ public class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigTe
             );
         Assert.NotNull(deserialized);
 
-        List<string> expectedDigitalFileIds = ["string"];
-        string expectedExternalUrl = "external_url";
-        string expectedInstructions = "instructions";
+        Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles expectedDigitalFiles =
+            new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            };
 
-        Assert.Equal(expectedDigitalFileIds.Count, deserialized.DigitalFileIds.Count);
-        for (int i = 0; i < expectedDigitalFileIds.Count; i++)
-        {
-            Assert.Equal(expectedDigitalFileIds[i], deserialized.DigitalFileIds[i]);
-        }
-        Assert.Equal(expectedExternalUrl, deserialized.ExternalUrl);
-        Assert.Equal(expectedInstructions, deserialized.Instructions);
+        Assert.Equal(expectedDigitalFiles, deserialized.DigitalFiles);
     }
 
     [Fact]
@@ -1685,65 +1779,24 @@ public class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigTe
     {
         var model = new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig
         {
-            DigitalFileIds = ["string"],
-            ExternalUrl = "external_url",
-            Instructions = "instructions",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig
-        {
-            DigitalFileIds = ["string"],
-        };
-
-        Assert.Null(model.ExternalUrl);
-        Assert.False(model.RawData.ContainsKey("external_url"));
-        Assert.Null(model.Instructions);
-        Assert.False(model.RawData.ContainsKey("instructions"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig
-        {
-            DigitalFileIds = ["string"],
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig
-        {
-            DigitalFileIds = ["string"],
-
-            ExternalUrl = null,
-            Instructions = null,
-        };
-
-        Assert.Null(model.ExternalUrl);
-        Assert.True(model.RawData.ContainsKey("external_url"));
-        Assert.Null(model.Instructions);
-        Assert.True(model.RawData.ContainsKey("instructions"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig
-        {
-            DigitalFileIds = ["string"],
-
-            ExternalUrl = null,
-            Instructions = null,
+            DigitalFiles = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
         };
 
         model.Validate();
@@ -1754,14 +1807,549 @@ public class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigTe
     {
         var model = new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig
         {
-            DigitalFileIds = ["string"],
-            ExternalUrl = "external_url",
-            Instructions = "instructions",
+            DigitalFiles = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
         };
 
         Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfig copied = new(
             model
         );
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesTest
+    : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            };
+
+        List<Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile> expectedFiles =
+        [
+            new()
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+                ContentType = "content_type",
+                FileSize = 0,
+            },
+        ];
+        string expectedExternalUrl = "external_url";
+        string expectedInstructions = "instructions";
+
+        Assert.Equal(expectedFiles.Count, model.Files.Count);
+        for (int i = 0; i < expectedFiles.Count; i++)
+        {
+            Assert.Equal(expectedFiles[i], model.Files[i]);
+        }
+        Assert.Equal(expectedExternalUrl, model.ExternalUrl);
+        Assert.Equal(expectedInstructions, model.Instructions);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        List<Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile> expectedFiles =
+        [
+            new()
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+                ContentType = "content_type",
+                FileSize = 0,
+            },
+        ];
+        string expectedExternalUrl = "external_url";
+        string expectedInstructions = "instructions";
+
+        Assert.Equal(expectedFiles.Count, deserialized.Files.Count);
+        for (int i = 0; i < expectedFiles.Count; i++)
+        {
+            Assert.Equal(expectedFiles[i], deserialized.Files[i]);
+        }
+        Assert.Equal(expectedExternalUrl, deserialized.ExternalUrl);
+        Assert.Equal(expectedInstructions, deserialized.Instructions);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+            };
+
+        Assert.Null(model.ExternalUrl);
+        Assert.False(model.RawData.ContainsKey("external_url"));
+        Assert.Null(model.Instructions);
+        Assert.False(model.RawData.ContainsKey("instructions"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+            };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+
+                ExternalUrl = null,
+                Instructions = null,
+            };
+
+        Assert.Null(model.ExternalUrl);
+        Assert.True(model.RawData.ContainsKey("external_url"));
+        Assert.Null(model.Instructions);
+        Assert.True(model.RawData.ContainsKey("instructions"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+
+                ExternalUrl = null,
+                Instructions = null,
+            };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        Source = "source",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            };
+
+        Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFiles copied =
+            new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFileTest
+    : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+                ContentType = "content_type",
+                FileSize = 0,
+            };
+
+        string expectedDownloadUrl = "download_url";
+        long expectedExpiresIn = 0;
+        string expectedFileID = "file_id";
+        string expectedFilename = "filename";
+        string expectedSource = "source";
+        string expectedContentType = "content_type";
+        long expectedFileSize = 0;
+
+        Assert.Equal(expectedDownloadUrl, model.DownloadUrl);
+        Assert.Equal(expectedExpiresIn, model.ExpiresIn);
+        Assert.Equal(expectedFileID, model.FileID);
+        Assert.Equal(expectedFilename, model.Filename);
+        Assert.Equal(expectedSource, model.Source);
+        Assert.Equal(expectedContentType, model.ContentType);
+        Assert.Equal(expectedFileSize, model.FileSize);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+                ContentType = "content_type",
+                FileSize = 0,
+            };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+                ContentType = "content_type",
+                FileSize = 0,
+            };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        string expectedDownloadUrl = "download_url";
+        long expectedExpiresIn = 0;
+        string expectedFileID = "file_id";
+        string expectedFilename = "filename";
+        string expectedSource = "source";
+        string expectedContentType = "content_type";
+        long expectedFileSize = 0;
+
+        Assert.Equal(expectedDownloadUrl, deserialized.DownloadUrl);
+        Assert.Equal(expectedExpiresIn, deserialized.ExpiresIn);
+        Assert.Equal(expectedFileID, deserialized.FileID);
+        Assert.Equal(expectedFilename, deserialized.Filename);
+        Assert.Equal(expectedSource, deserialized.Source);
+        Assert.Equal(expectedContentType, deserialized.ContentType);
+        Assert.Equal(expectedFileSize, deserialized.FileSize);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+                ContentType = "content_type",
+                FileSize = 0,
+            };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+            };
+
+        Assert.Null(model.ContentType);
+        Assert.False(model.RawData.ContainsKey("content_type"));
+        Assert.Null(model.FileSize);
+        Assert.False(model.RawData.ContainsKey("file_size"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+            };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+
+                ContentType = null,
+                FileSize = null,
+            };
+
+        Assert.Null(model.ContentType);
+        Assert.True(model.RawData.ContainsKey("content_type"));
+        Assert.Null(model.FileSize);
+        Assert.True(model.RawData.ContainsKey("file_size"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+
+                ContentType = null,
+                FileSize = null,
+            };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model =
+            new Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile
+            {
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                Source = "source",
+                ContentType = "content_type",
+                FileSize = 0,
+            };
+
+        Products::ProductListResponseEntitlementIntegrationConfigDigitalFilesConfigDigitalFilesFile copied =
+            new(model);
 
         Assert.Equal(model, copied);
     }
@@ -1777,13 +2365,13 @@ public class ProductListResponseEntitlementIntegrationConfigLicenseKeyConfigTest
             ActivationMessage = "activation_message",
             ActivationsLimit = 0,
             DurationCount = 0,
-            DurationInterval = "duration_interval",
+            DurationInterval = TimeInterval.Day,
         };
 
         string expectedActivationMessage = "activation_message";
         int expectedActivationsLimit = 0;
         int expectedDurationCount = 0;
-        string expectedDurationInterval = "duration_interval";
+        ApiEnum<string, TimeInterval> expectedDurationInterval = TimeInterval.Day;
 
         Assert.Equal(expectedActivationMessage, model.ActivationMessage);
         Assert.Equal(expectedActivationsLimit, model.ActivationsLimit);
@@ -1799,7 +2387,7 @@ public class ProductListResponseEntitlementIntegrationConfigLicenseKeyConfigTest
             ActivationMessage = "activation_message",
             ActivationsLimit = 0,
             DurationCount = 0,
-            DurationInterval = "duration_interval",
+            DurationInterval = TimeInterval.Day,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1820,7 +2408,7 @@ public class ProductListResponseEntitlementIntegrationConfigLicenseKeyConfigTest
             ActivationMessage = "activation_message",
             ActivationsLimit = 0,
             DurationCount = 0,
-            DurationInterval = "duration_interval",
+            DurationInterval = TimeInterval.Day,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1834,7 +2422,7 @@ public class ProductListResponseEntitlementIntegrationConfigLicenseKeyConfigTest
         string expectedActivationMessage = "activation_message";
         int expectedActivationsLimit = 0;
         int expectedDurationCount = 0;
-        string expectedDurationInterval = "duration_interval";
+        ApiEnum<string, TimeInterval> expectedDurationInterval = TimeInterval.Day;
 
         Assert.Equal(expectedActivationMessage, deserialized.ActivationMessage);
         Assert.Equal(expectedActivationsLimit, deserialized.ActivationsLimit);
@@ -1850,7 +2438,7 @@ public class ProductListResponseEntitlementIntegrationConfigLicenseKeyConfigTest
             ActivationMessage = "activation_message",
             ActivationsLimit = 0,
             DurationCount = 0,
-            DurationInterval = "duration_interval",
+            DurationInterval = TimeInterval.Day,
         };
 
         model.Validate();
@@ -1924,7 +2512,7 @@ public class ProductListResponseEntitlementIntegrationConfigLicenseKeyConfigTest
             ActivationMessage = "activation_message",
             ActivationsLimit = 0,
             DurationCount = 0,
-            DurationInterval = "duration_interval",
+            DurationInterval = TimeInterval.Day,
         };
 
         Products::ProductListResponseEntitlementIntegrationConfigLicenseKeyConfig copied = new(

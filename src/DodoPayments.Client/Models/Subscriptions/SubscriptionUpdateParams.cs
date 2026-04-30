@@ -64,6 +64,34 @@ public record class SubscriptionUpdateParams : ParamsBase
     }
 
     /// <summary>
+    /// Free-text cancellation comment (only valid when cancelling or scheduling cancellation).
+    /// </summary>
+    public string? CancellationComment
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("cancellation_comment");
+        }
+        init { this._rawBodyData.Set("cancellation_comment", value); }
+    }
+
+    /// <summary>
+    /// Customer-supplied churn reason (only valid when cancelling or scheduling cancellation).
+    /// </summary>
+    public ApiEnum<string, CancellationFeedback>? CancellationFeedback
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, CancellationFeedback>>(
+                "cancellation_feedback"
+            );
+        }
+        init { this._rawBodyData.Set("cancellation_feedback", value); }
+    }
+
+    /// <summary>
     /// Update credit entitlement cart settings
     /// </summary>
     public IReadOnlyList<CreditEntitlementCart>? CreditEntitlementCart
@@ -279,6 +307,7 @@ public enum CancelReason
     CancelledByCustomer,
     CancelledByMerchant,
     CancelledByMerchantSendDunning,
+    DodoTeam,
 }
 
 sealed class CancelReasonConverter : JsonConverter<CancelReason>
@@ -294,6 +323,7 @@ sealed class CancelReasonConverter : JsonConverter<CancelReason>
             "cancelled_by_customer" => CancelReason.CancelledByCustomer,
             "cancelled_by_merchant" => CancelReason.CancelledByMerchant,
             "cancelled_by_merchant_send_dunning" => CancelReason.CancelledByMerchantSendDunning,
+            "dodo_team" => CancelReason.DodoTeam,
             _ => (CancelReason)(-1),
         };
     }
@@ -311,6 +341,72 @@ sealed class CancelReasonConverter : JsonConverter<CancelReason>
                 CancelReason.CancelledByCustomer => "cancelled_by_customer",
                 CancelReason.CancelledByMerchant => "cancelled_by_merchant",
                 CancelReason.CancelledByMerchantSendDunning => "cancelled_by_merchant_send_dunning",
+                CancelReason.DodoTeam => "dodo_team",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Customer-supplied churn reason (only valid when cancelling or scheduling cancellation).
+/// </summary>
+[JsonConverter(typeof(CancellationFeedbackConverter))]
+public enum CancellationFeedback
+{
+    TooExpensive,
+    MissingFeatures,
+    SwitchedService,
+    Unused,
+    CustomerService,
+    LowQuality,
+    TooComplex,
+    Other,
+}
+
+sealed class CancellationFeedbackConverter : JsonConverter<CancellationFeedback>
+{
+    public override CancellationFeedback Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "too_expensive" => CancellationFeedback.TooExpensive,
+            "missing_features" => CancellationFeedback.MissingFeatures,
+            "switched_service" => CancellationFeedback.SwitchedService,
+            "unused" => CancellationFeedback.Unused,
+            "customer_service" => CancellationFeedback.CustomerService,
+            "low_quality" => CancellationFeedback.LowQuality,
+            "too_complex" => CancellationFeedback.TooComplex,
+            "other" => CancellationFeedback.Other,
+            _ => (CancellationFeedback)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        CancellationFeedback value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CancellationFeedback.TooExpensive => "too_expensive",
+                CancellationFeedback.MissingFeatures => "missing_features",
+                CancellationFeedback.SwitchedService => "switched_service",
+                CancellationFeedback.Unused => "unused",
+                CancellationFeedback.CustomerService => "customer_service",
+                CancellationFeedback.LowQuality => "low_quality",
+                CancellationFeedback.TooComplex => "too_complex",
+                CancellationFeedback.Other => "other",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -120,8 +120,10 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
+                RequirePhoneNumber = true,
             },
             Force3ds = true,
+            MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
@@ -253,8 +255,10 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
         };
         bool expectedForce3ds = true;
+        int expectedMandateMinAmountInrPaise = 0;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMinimalAddress = true;
         string expectedPaymentMethodID = "payment_method_id";
@@ -308,6 +312,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
         Assert.Equal(expectedFeatureFlags, parameters.FeatureFlags);
         Assert.Equal(expectedForce3ds, parameters.Force3ds);
+        Assert.Equal(expectedMandateMinAmountInrPaise, parameters.MandateMinAmountInrPaise);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -367,6 +372,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             Customer = new AttachExistingCustomer("customer_id"),
             DiscountCode = "discount_code",
             Force3ds = true,
+            MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
@@ -441,6 +447,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             Customer = new AttachExistingCustomer("customer_id"),
             DiscountCode = "discount_code",
             Force3ds = true,
+            MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
@@ -568,6 +575,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
+                RequirePhoneNumber = true,
             },
             MinimalAddress = true,
             ShortLink = true,
@@ -590,6 +598,8 @@ public class CheckoutSessionPreviewParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
         Assert.Null(parameters.Force3ds);
         Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
+        Assert.Null(parameters.MandateMinAmountInrPaise);
+        Assert.False(parameters.RawBodyData.ContainsKey("mandate_min_amount_inr_paise"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.PaymentMethodID);
@@ -690,6 +700,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
+                RequirePhoneNumber = true,
             },
             MinimalAddress = true,
             ShortLink = true,
@@ -703,6 +714,7 @@ public class CheckoutSessionPreviewParamsTest : TestBase
             Customer = null,
             DiscountCode = null,
             Force3ds = null,
+            MandateMinAmountInrPaise = null,
             Metadata = null,
             PaymentMethodID = null,
             ProductCollectionID = null,
@@ -727,6 +739,8 @@ public class CheckoutSessionPreviewParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
         Assert.Null(parameters.Force3ds);
         Assert.True(parameters.RawBodyData.ContainsKey("force_3ds"));
+        Assert.Null(parameters.MandateMinAmountInrPaise);
+        Assert.True(parameters.RawBodyData.ContainsKey("mandate_min_amount_inr_paise"));
         Assert.Null(parameters.Metadata);
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.PaymentMethodID);
@@ -876,8 +890,10 @@ public class CheckoutSessionPreviewParamsTest : TestBase
                 AllowTaxID = true,
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
+                RequirePhoneNumber = true,
             },
             Force3ds = true,
+            MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimalAddress = true,
             PaymentMethodID = "payment_method_id",

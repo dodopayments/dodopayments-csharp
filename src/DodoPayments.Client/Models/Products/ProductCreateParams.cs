@@ -132,6 +132,8 @@ public record class ProductCreateParams : ParamsBase
 
     /// <summary>
     /// Choose how you would like you digital product delivered
+    ///
+    /// <para>deprecated: use entitlements instead</para>
     /// </summary>
     public DigitalProductDelivery? DigitalProductDelivery
     {
@@ -146,19 +148,19 @@ public record class ProductCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Optional entitlement IDs to attach to this product (max 20)
+    /// Optional entitlements to attach to this product (max 20)
     /// </summary>
-    public IReadOnlyList<string>? EntitlementIds
+    public IReadOnlyList<Entitlement>? Entitlements
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("entitlement_ids");
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<Entitlement>>("entitlements");
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<string>?>(
-                "entitlement_ids",
+            this._rawBodyData.Set<ImmutableArray<Entitlement>?>(
+                "entitlements",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
         }
@@ -166,6 +168,9 @@ public record class ProductCreateParams : ParamsBase
 
     /// <summary>
     /// Optional message displayed during license key activation
+    ///
+    /// <para>deprecated: use entitlements instead. Ignored when a `license_key`
+    /// entitlement is attached via the `entitlements` field.</para>
     /// </summary>
     [Obsolete("deprecated")]
     public string? LicenseKeyActivationMessage
@@ -180,6 +185,9 @@ public record class ProductCreateParams : ParamsBase
 
     /// <summary>
     /// The number of times the license key can be activated. Must be 0 or greater
+    ///
+    /// <para>deprecated: use entitlements instead. Ignored when a `license_key`
+    /// entitlement is attached via the `entitlements` field.</para>
     /// </summary>
     [Obsolete("deprecated")]
     public int? LicenseKeyActivationsLimit
@@ -196,6 +204,9 @@ public record class ProductCreateParams : ParamsBase
     /// Duration configuration for the license key. Set to null if you don't want
     /// the license key to expire. For subscriptions, the lifetime of the license
     /// key is tied to the subscription period
+    ///
+    /// <para>deprecated: use entitlements instead. Ignored when a `license_key`
+    /// entitlement is attached via the `entitlements` field.</para>
     /// </summary>
     public LicenseKeyDuration? LicenseKeyDuration
     {
@@ -209,6 +220,11 @@ public record class ProductCreateParams : ParamsBase
 
     /// <summary>
     /// When true, generates and sends a license key to your customer. Defaults to false
+    ///
+    /// <para>deprecated: use entitlements instead. If a `license_key` entitlement
+    /// is also attached via the `entitlements` field, the `license_key_*` config
+    /// fields below are ignored — the attached entitlement's config is the source
+    /// of truth.</para>
     /// </summary>
     [Obsolete("deprecated")]
     public bool? LicenseKeyEnabled
@@ -357,6 +373,8 @@ public record class ProductCreateParams : ParamsBase
 
 /// <summary>
 /// Choose how you would like you digital product delivered
+///
+/// <para>deprecated: use entitlements instead</para>
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<DigitalProductDelivery, DigitalProductDeliveryFromRaw>))]
 public sealed record class DigitalProductDelivery : JsonModel
@@ -430,4 +448,75 @@ class DigitalProductDeliveryFromRaw : IFromRawJson<DigitalProductDelivery>
     public DigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => DigitalProductDelivery.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Request struct for attaching an entitlement to a product.
+///
+/// <para>Mirrors the `credit_entitlements` attach shape — every "attach something
+/// to a product" array takes objects, not bare IDs. Uniform shape leaves room for
+/// per-attachment settings later without another API break.</para>
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Entitlement, EntitlementFromRaw>))]
+public sealed record class Entitlement : JsonModel
+{
+    /// <summary>
+    /// ID of the entitlement to attach to the product
+    /// </summary>
+    public required string EntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("entitlement_id");
+        }
+        init { this._rawData.Set("entitlement_id", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.EntitlementID;
+    }
+
+    public Entitlement() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Entitlement(Entitlement entitlement)
+        : base(entitlement) { }
+#pragma warning restore CS8618
+
+    public Entitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Entitlement(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="EntitlementFromRaw.FromRawUnchecked"/>
+    public static Entitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public Entitlement(string entitlementID)
+        : this()
+    {
+        this.EntitlementID = entitlementID;
+    }
+}
+
+class EntitlementFromRaw : IFromRawJson<Entitlement>
+{
+    /// <inheritdoc/>
+    public Entitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Entitlement.FromRawUnchecked(rawData);
 }

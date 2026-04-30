@@ -1,0 +1,134 @@
+using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Net.Http;
+using System.Text.Json;
+using DodoPayments.Client.Core;
+
+namespace DodoPayments.Client.Models.Entitlements.Files;
+
+/// <summary>
+/// Companion to `post_entitlement_file`. Deletes the file from the Entitlements Engine
+/// (force=true) and atomically removes the `file_id` from the entitlement's `integration_config.digital_file_ids`
+/// JSONB array. EE delete happens first; if it fails we surface the error and leave
+/// local state untouched.
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
+/// </summary>
+public record class FileDeleteParams : ParamsBase
+{
+    public required string ID { get; init; }
+
+    public string? FileID { get; init; }
+
+    public FileDeleteParams() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public FileDeleteParams(FileDeleteParams fileDeleteParams)
+        : base(fileDeleteParams)
+    {
+        this.ID = fileDeleteParams.ID;
+        this.FileID = fileDeleteParams.FileID;
+    }
+#pragma warning restore CS8618
+
+    public FileDeleteParams(
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData
+    )
+    {
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    FileDeleteParams(
+        FrozenDictionary<string, JsonElement> rawHeaderData,
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        string id,
+        string fileID
+    )
+    {
+        this._rawHeaderData = new(rawHeaderData);
+        this._rawQueryData = new(rawQueryData);
+        this.ID = id;
+        this.FileID = fileID;
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
+    public static FileDeleteParams FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawHeaderData,
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        string id,
+        string fileID
+    )
+    {
+        return new(
+            FrozenDictionary.ToFrozenDictionary(rawHeaderData),
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            id,
+            fileID
+        );
+    }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            FriendlyJsonPrinter.PrintValue(
+                new Dictionary<string, JsonElement>()
+                {
+                    ["ID"] = JsonSerializer.SerializeToElement(this.ID),
+                    ["FileID"] = JsonSerializer.SerializeToElement(this.FileID),
+                    ["HeaderData"] = FriendlyJsonPrinter.PrintValue(
+                        JsonSerializer.SerializeToElement(this._rawHeaderData.Freeze())
+                    ),
+                    ["QueryData"] = FriendlyJsonPrinter.PrintValue(
+                        JsonSerializer.SerializeToElement(this._rawQueryData.Freeze())
+                    ),
+                }
+            ),
+            ModelBase.ToStringSerializerOptions
+        );
+
+    public virtual bool Equals(FileDeleteParams? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return this.ID.Equals(other.ID)
+            && (this.FileID?.Equals(other.FileID) ?? other.FileID == null)
+            && this._rawHeaderData.Equals(other._rawHeaderData)
+            && this._rawQueryData.Equals(other._rawQueryData);
+    }
+
+    public override Uri Url(ClientOptions options)
+    {
+        return new UriBuilder(
+            options.BaseUrl.ToString().TrimEnd('/')
+                + string.Format("/entitlements/{0}/files/{1}", this.ID, this.FileID)
+        )
+        {
+            Query = this.QueryString(options),
+        }.Uri;
+    }
+
+    internal override void AddHeadersToRequest(HttpRequestMessage request, ClientOptions options)
+    {
+        ParamsBase.AddDefaultHeaders(request, options);
+        foreach (var item in this.RawHeaderData)
+        {
+            ParamsBase.AddHeaderElementToRequest(request, item.Key, item.Value);
+        }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
+}

@@ -10,15 +10,18 @@ public class LicenseKeyInstanceListParamsTest : TestBase
     {
         var parameters = new LicenseKeyInstanceListParams
         {
+            GrantID = "grant_id",
             LicenseKeyID = "license_key_id",
             PageNumber = 0,
             PageSize = 0,
         };
 
+        string expectedGrantID = "grant_id";
         string expectedLicenseKeyID = "license_key_id";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
 
+        Assert.Equal(expectedGrantID, parameters.GrantID);
         Assert.Equal(expectedLicenseKeyID, parameters.LicenseKeyID);
         Assert.Equal(expectedPageNumber, parameters.PageNumber);
         Assert.Equal(expectedPageSize, parameters.PageSize);
@@ -29,6 +32,8 @@ public class LicenseKeyInstanceListParamsTest : TestBase
     {
         var parameters = new LicenseKeyInstanceListParams { };
 
+        Assert.Null(parameters.GrantID);
+        Assert.False(parameters.RawQueryData.ContainsKey("grant_id"));
         Assert.Null(parameters.LicenseKeyID);
         Assert.False(parameters.RawQueryData.ContainsKey("license_key_id"));
         Assert.Null(parameters.PageNumber);
@@ -42,11 +47,14 @@ public class LicenseKeyInstanceListParamsTest : TestBase
     {
         var parameters = new LicenseKeyInstanceListParams
         {
+            GrantID = null,
             LicenseKeyID = null,
             PageNumber = null,
             PageSize = null,
         };
 
+        Assert.Null(parameters.GrantID);
+        Assert.True(parameters.RawQueryData.ContainsKey("grant_id"));
         Assert.Null(parameters.LicenseKeyID);
         Assert.True(parameters.RawQueryData.ContainsKey("license_key_id"));
         Assert.Null(parameters.PageNumber);
@@ -60,6 +68,7 @@ public class LicenseKeyInstanceListParamsTest : TestBase
     {
         LicenseKeyInstanceListParams parameters = new()
         {
+            GrantID = "grant_id",
             LicenseKeyID = "license_key_id",
             PageNumber = 0,
             PageSize = 0,
@@ -70,7 +79,7 @@ public class LicenseKeyInstanceListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/license_key_instances?license_key_id=license_key_id&page_number=0&page_size=0"
+                    "https://live.dodopayments.com/license_key_instances?grant_id=grant_id&license_key_id=license_key_id&page_number=0&page_size=0"
                 ),
                 url
             )
@@ -82,6 +91,7 @@ public class LicenseKeyInstanceListParamsTest : TestBase
     {
         var parameters = new LicenseKeyInstanceListParams
         {
+            GrantID = "grant_id",
             LicenseKeyID = "license_key_id",
             PageNumber = 0,
             PageSize = 0,

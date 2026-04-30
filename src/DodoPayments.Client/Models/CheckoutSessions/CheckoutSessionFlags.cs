@@ -293,6 +293,30 @@ public sealed record class CheckoutSessionFlags : JsonModel
         }
     }
 
+    /// <summary>
+    /// If true, the customer must provide a phone number to complete checkout. Requires
+    /// `allow_phone_number_collection` to also be true.
+    ///
+    /// <para>Default is false</para>
+    /// </summary>
+    public bool? RequirePhoneNumber
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("require_phone_number");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("require_phone_number", value);
+        }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -310,6 +334,7 @@ public sealed record class CheckoutSessionFlags : JsonModel
         _ = this.AllowTaxID;
         _ = this.AlwaysCreateNewCustomer;
         _ = this.RedirectImmediately;
+        _ = this.RequirePhoneNumber;
     }
 
     public CheckoutSessionFlags() { }
