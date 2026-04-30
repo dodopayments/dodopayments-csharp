@@ -10,6 +10,7 @@ using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Disputes = DodoPayments.Client.Models.Disputes;
+using Grants = DodoPayments.Client.Models.Entitlements.Grants;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Payments = DodoPayments.Client.Models.Payments;
 using Products = DodoPayments.Client.Models.Products;
@@ -1511,18 +1512,18 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// List of products purchased in a one-time payment
     /// </summary>
-    public IReadOnlyList<Payments::OneTimeProductCartItem>? ProductCart
+    public IReadOnlyList<Payments::ProductCart>? ProductCart
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<
-                ImmutableArray<Payments::OneTimeProductCartItem>
-            >("product_cart");
+            return this._rawData.GetNullableStruct<ImmutableArray<Payments::ProductCart>>(
+                "product_cart"
+            );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Payments::OneTimeProductCartItem>?>(
+            this._rawData.Set<ImmutableArray<Payments::ProductCart>?>(
                 "product_cart",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -2225,19 +2226,24 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("cancellation_comment", value); }
     }
 
-    /// <summary>
-    /// Customer-supplied churn reason, if any
-    /// </summary>
-    public ApiEnum<string, Subscriptions::SubscriptionCancellationFeedback>? CancellationFeedback
+    public ApiEnum<string, Subscriptions::CancellationFeedback>? CancellationFeedback
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNullableClass<
-                ApiEnum<string, Subscriptions::SubscriptionCancellationFeedback>
+                ApiEnum<string, Subscriptions::CancellationFeedback>
             >("cancellation_feedback");
         }
-        init { this._rawData.Set("cancellation_feedback", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("cancellation_feedback", value);
+        }
     }
 
     /// <summary>
@@ -2326,19 +2332,24 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("payment_method_id", value); }
     }
 
-    /// <summary>
-    /// Scheduled plan change details, if any
-    /// </summary>
-    public Subscriptions::ScheduledChange? ScheduledChange
+    public Subscriptions::ScheduledPlanChange? ScheduledChange
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Subscriptions::ScheduledChange>(
+            return this._rawData.GetNullableClass<Subscriptions::ScheduledPlanChange>(
                 "scheduled_change"
             );
         }
-        init { this._rawData.Set("scheduled_change", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("scheduled_change", value);
+        }
     }
 
     /// <summary>
@@ -4822,24 +4833,14 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("external_id", value); }
     }
 
-    public required ApiEnum<string, EntitlementGrantPayloadType> PayloadType
+    public required ApiEnum<string, Grants::EntitlementGrantStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, EntitlementGrantPayloadType>>(
-                "payload_type"
+            return this._rawData.GetNotNullClass<ApiEnum<string, Grants::EntitlementGrantStatus>>(
+                "status"
             );
-        }
-        init { this._rawData.Set("payload_type", value); }
-    }
-
-    public required ApiEnum<string, EntitlementGrantStatus> Status
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, EntitlementGrantStatus>>("status");
         }
         init { this._rawData.Set("status", value); }
     }
@@ -4865,8 +4866,10 @@ public sealed record class EntitlementGrant : JsonModel
     }
 
     /// <summary>
-    /// Present only when the entitlement integration_type is `digital_files`. Populated
-    /// eagerly on every list and single-record endpoint.
+    /// Digital-product-delivery payload for a grant. Populated for grants whose entitlement
+    /// has `integration_type = 'digital_files'`. `files` carries presigned download
+    /// URLs; the source (EE service or legacy in-process S3 presigning) is opaque
+    /// to the caller.
     /// </summary>
     public Products::ProductDigitalProductDelivery? DigitalProductDelivery
     {
@@ -4877,7 +4880,15 @@ public sealed record class EntitlementGrant : JsonModel
                 "digital_product_delivery"
             );
         }
-        init { this._rawData.Set("digital_product_delivery", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("digital_product_delivery", value);
+        }
     }
 
     public string? ErrorCode
@@ -4901,16 +4912,27 @@ public sealed record class EntitlementGrant : JsonModel
     }
 
     /// <summary>
-    /// Present only when the entitlement integration_type is `license_key`.
+    /// Nested representation of license-key grant fields. Present only when the
+    /// grant's entitlement has `integration_type = 'license_key'` and a row exists
+    /// in `license_keys`. The grant's top-level `status` is the source of truth for
+    /// the grant's lifecycle — no per-license-key status is exposed here.
     /// </summary>
-    public EntitlementGrantLicenseKey? LicenseKey
+    public Grants::LicenseKeyGrant? LicenseKey
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<EntitlementGrantLicenseKey>("license_key");
+            return this._rawData.GetNullableClass<Grants::LicenseKeyGrant>("license_key");
         }
-        init { this._rawData.Set("license_key", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("license_key", value);
+        }
     }
 
     public JsonElement? Metadata
@@ -4991,6 +5013,43 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("subscription_id", value); }
     }
 
+    public required ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
+            >("payload_type");
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    public static implicit operator Grants::EntitlementGrant(EntitlementGrant entitlementGrant) =>
+        new()
+        {
+            ID = entitlementGrant.ID,
+            BusinessID = entitlementGrant.BusinessID,
+            CreatedAt = entitlementGrant.CreatedAt,
+            CustomerID = entitlementGrant.CustomerID,
+            EntitlementID = entitlementGrant.EntitlementID,
+            ExternalID = entitlementGrant.ExternalID,
+            Status = entitlementGrant.Status,
+            UpdatedAt = entitlementGrant.UpdatedAt,
+            DeliveredAt = entitlementGrant.DeliveredAt,
+            DigitalProductDelivery = entitlementGrant.DigitalProductDelivery,
+            ErrorCode = entitlementGrant.ErrorCode,
+            ErrorMessage = entitlementGrant.ErrorMessage,
+            LicenseKey = entitlementGrant.LicenseKey,
+            Metadata = entitlementGrant.Metadata,
+            OAuthExpiresAt = entitlementGrant.OAuthExpiresAt,
+            OAuthUrl = entitlementGrant.OAuthUrl,
+            PaymentID = entitlementGrant.PaymentID,
+            RevocationReason = entitlementGrant.RevocationReason,
+            RevokedAt = entitlementGrant.RevokedAt,
+            SubscriptionID = entitlementGrant.SubscriptionID,
+        };
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -5000,7 +5059,6 @@ public sealed record class EntitlementGrant : JsonModel
         _ = this.CustomerID;
         _ = this.EntitlementID;
         _ = this.ExternalID;
-        this.PayloadType.Validate();
         this.Status.Validate();
         _ = this.UpdatedAt;
         _ = this.DeliveredAt;
@@ -5015,6 +5073,7 @@ public sealed record class EntitlementGrant : JsonModel
         _ = this.RevocationReason;
         _ = this.RevokedAt;
         _ = this.SubscriptionID;
+        this.PayloadType.Validate();
     }
 
     public EntitlementGrant() { }
@@ -5054,188 +5113,120 @@ class EntitlementGrantFromRaw : IFromRawJson<EntitlementGrant>
         EntitlementGrant.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(EntitlementGrantPayloadTypeConverter))]
-public enum EntitlementGrantPayloadType
-{
-    EntitlementGrant,
-}
-
-sealed class EntitlementGrantPayloadTypeConverter : JsonConverter<EntitlementGrantPayloadType>
-{
-    public override EntitlementGrantPayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "EntitlementGrant" => EntitlementGrantPayloadType.EntitlementGrant,
-            _ => (EntitlementGrantPayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        EntitlementGrantPayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                EntitlementGrantPayloadType.EntitlementGrant => "EntitlementGrant",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-[JsonConverter(typeof(EntitlementGrantStatusConverter))]
-public enum EntitlementGrantStatus
-{
-    Pending,
-    Delivered,
-    Failed,
-    Revoked,
-}
-
-sealed class EntitlementGrantStatusConverter : JsonConverter<EntitlementGrantStatus>
-{
-    public override EntitlementGrantStatus Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "Pending" => EntitlementGrantStatus.Pending,
-            "Delivered" => EntitlementGrantStatus.Delivered,
-            "Failed" => EntitlementGrantStatus.Failed,
-            "Revoked" => EntitlementGrantStatus.Revoked,
-            _ => (EntitlementGrantStatus)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        EntitlementGrantStatus value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                EntitlementGrantStatus.Pending => "Pending",
-                EntitlementGrantStatus.Delivered => "Delivered",
-                EntitlementGrantStatus.Failed => "Failed",
-                EntitlementGrantStatus.Revoked => "Revoked",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-/// <summary>
-/// Present only when the entitlement integration_type is `license_key`.
-/// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<EntitlementGrantLicenseKey, EntitlementGrantLicenseKeyFromRaw>)
+    typeof(JsonModelConverter<
+        EntitlementGrantIntersectionMember1,
+        EntitlementGrantIntersectionMember1FromRaw
+    >)
 )]
-public sealed record class EntitlementGrantLicenseKey : JsonModel
+public sealed record class EntitlementGrantIntersectionMember1 : JsonModel
 {
-    public required int ActivationsUsed
+    public required ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<int>("activations_used");
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
+            >("payload_type");
         }
-        init { this._rawData.Set("activations_used", value); }
-    }
-
-    public required string Key
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("key");
-        }
-        init { this._rawData.Set("key", value); }
-    }
-
-    public int? ActivationsLimit
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("activations_limit");
-        }
-        init { this._rawData.Set("activations_limit", value); }
-    }
-
-    public DateTimeOffset? ExpiresAt
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
-        }
-        init { this._rawData.Set("expires_at", value); }
+        init { this._rawData.Set("payload_type", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.ActivationsUsed;
-        _ = this.Key;
-        _ = this.ActivationsLimit;
-        _ = this.ExpiresAt;
+        this.PayloadType.Validate();
     }
 
-    public EntitlementGrantLicenseKey() { }
+    public EntitlementGrantIntersectionMember1() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EntitlementGrantLicenseKey(EntitlementGrantLicenseKey entitlementGrantLicenseKey)
-        : base(entitlementGrantLicenseKey) { }
+    public EntitlementGrantIntersectionMember1(
+        EntitlementGrantIntersectionMember1 entitlementGrantIntersectionMember1
+    )
+        : base(entitlementGrantIntersectionMember1) { }
 #pragma warning restore CS8618
 
-    public EntitlementGrantLicenseKey(IReadOnlyDictionary<string, JsonElement> rawData)
+    public EntitlementGrantIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EntitlementGrantLicenseKey(FrozenDictionary<string, JsonElement> rawData)
+    EntitlementGrantIntersectionMember1(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="EntitlementGrantLicenseKeyFromRaw.FromRawUnchecked"/>
-    public static EntitlementGrantLicenseKey FromRawUnchecked(
+    /// <inheritdoc cref="EntitlementGrantIntersectionMember1FromRaw.FromRawUnchecked"/>
+    public static EntitlementGrantIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+
+    [SetsRequiredMembers]
+    public EntitlementGrantIntersectionMember1(
+        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> payloadType
+    )
+        : this()
+    {
+        this.PayloadType = payloadType;
+    }
 }
 
-class EntitlementGrantLicenseKeyFromRaw : IFromRawJson<EntitlementGrantLicenseKey>
+class EntitlementGrantIntersectionMember1FromRaw : IFromRawJson<EntitlementGrantIntersectionMember1>
 {
     /// <inheritdoc/>
-    public EntitlementGrantLicenseKey FromRawUnchecked(
+    public EntitlementGrantIntersectionMember1 FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => EntitlementGrantLicenseKey.FromRawUnchecked(rawData);
+    ) => EntitlementGrantIntersectionMember1.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(EntitlementGrantIntersectionMember1PayloadTypeConverter))]
+public enum EntitlementGrantIntersectionMember1PayloadType
+{
+    EntitlementGrant,
+}
+
+sealed class EntitlementGrantIntersectionMember1PayloadTypeConverter
+    : JsonConverter<EntitlementGrantIntersectionMember1PayloadType>
+{
+    public override EntitlementGrantIntersectionMember1PayloadType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "EntitlementGrant" => EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
+            _ => (EntitlementGrantIntersectionMember1PayloadType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        EntitlementGrantIntersectionMember1PayloadType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant =>
+                    "EntitlementGrant",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

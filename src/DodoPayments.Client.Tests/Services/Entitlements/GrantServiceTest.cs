@@ -18,11 +18,11 @@ public class GrantServiceTest : TestBase
     [Fact]
     public async Task Revoke_Works()
     {
-        var response = await this.client.Entitlements.Grants.Revoke(
+        var entitlementGrant = await this.client.Entitlements.Grants.Revoke(
             "grant_id",
             new() { ID = "id" },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        entitlementGrant.Validate();
     }
 }

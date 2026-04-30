@@ -16,7 +16,7 @@ public class EntitlementServiceTest : TestBase
                     Permission = "permission",
                     TargetID = "target_id",
                 },
-                IntegrationType = IntegrationType.Discord,
+                IntegrationType = EntitlementIntegrationType.Discord,
                 Name = "name",
             },
             TestContext.Current.CancellationToken

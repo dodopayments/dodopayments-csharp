@@ -34,7 +34,7 @@ public interface IEntitlementService
     /// <summary>
     /// POST /entitlements
     /// </summary>
-    Task<EntitlementCreateResponse> Create(
+    Task<Entitlement> Create(
         EntitlementCreateParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -42,13 +42,13 @@ public interface IEntitlementService
     /// <summary>
     /// GET /entitlements/{id}
     /// </summary>
-    Task<EntitlementRetrieveResponse> Retrieve(
+    Task<Entitlement> Retrieve(
         EntitlementRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(EntitlementRetrieveParams, CancellationToken)"/>
-    Task<EntitlementRetrieveResponse> Retrieve(
+    Task<Entitlement> Retrieve(
         string id,
         EntitlementRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -57,13 +57,13 @@ public interface IEntitlementService
     /// <summary>
     /// PATCH /entitlements/{id}
     /// </summary>
-    Task<EntitlementUpdateResponse> Update(
+    Task<Entitlement> Update(
         EntitlementUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Update(EntitlementUpdateParams, CancellationToken)"/>
-    Task<EntitlementUpdateResponse> Update(
+    Task<Entitlement> Update(
         string id,
         EntitlementUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -111,7 +111,7 @@ public interface IEntitlementServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /entitlements</c>, but is otherwise the
     /// same as <see cref="IEntitlementService.Create(EntitlementCreateParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EntitlementCreateResponse>> Create(
+    Task<HttpResponse<Entitlement>> Create(
         EntitlementCreateParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -120,13 +120,13 @@ public interface IEntitlementServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /entitlements/{id}</c>, but is otherwise the
     /// same as <see cref="IEntitlementService.Retrieve(EntitlementRetrieveParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EntitlementRetrieveResponse>> Retrieve(
+    Task<HttpResponse<Entitlement>> Retrieve(
         EntitlementRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(EntitlementRetrieveParams, CancellationToken)"/>
-    Task<HttpResponse<EntitlementRetrieveResponse>> Retrieve(
+    Task<HttpResponse<Entitlement>> Retrieve(
         string id,
         EntitlementRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -136,13 +136,13 @@ public interface IEntitlementServiceWithRawResponse
     /// Returns a raw HTTP response for <c>patch /entitlements/{id}</c>, but is otherwise the
     /// same as <see cref="IEntitlementService.Update(EntitlementUpdateParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EntitlementUpdateResponse>> Update(
+    Task<HttpResponse<Entitlement>> Update(
         EntitlementUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Update(EntitlementUpdateParams, CancellationToken)"/>
-    Task<HttpResponse<EntitlementUpdateResponse>> Update(
+    Task<HttpResponse<Entitlement>> Update(
         string id,
         EntitlementUpdateParams? parameters = null,
         CancellationToken cancellationToken = default

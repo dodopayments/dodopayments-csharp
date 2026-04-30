@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
+using DodoPayments.Client.Models.LicenseKeys;
 using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
@@ -28,12 +28,12 @@ public sealed record class LicenseKeyCreatedWebhookEvent : JsonModel
         init { this._rawData.Set("business_id", value); }
     }
 
-    public required LicenseKeys::LicenseKey Data
+    public required LicenseKey Data
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<LicenseKeys::LicenseKey>("data");
+            return this._rawData.GetNotNullClass<LicenseKey>("data");
         }
         init { this._rawData.Set("data", value); }
     }

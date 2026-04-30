@@ -50,7 +50,7 @@ public sealed class EntitlementService : IEntitlementService
     }
 
     /// <inheritdoc/>
-    public async Task<EntitlementCreateResponse> Create(
+    public async Task<Entitlement> Create(
         EntitlementCreateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -62,7 +62,7 @@ public sealed class EntitlementService : IEntitlementService
     }
 
     /// <inheritdoc/>
-    public async Task<EntitlementRetrieveResponse> Retrieve(
+    public async Task<Entitlement> Retrieve(
         EntitlementRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -74,7 +74,7 @@ public sealed class EntitlementService : IEntitlementService
     }
 
     /// <inheritdoc/>
-    public Task<EntitlementRetrieveResponse> Retrieve(
+    public Task<Entitlement> Retrieve(
         string id,
         EntitlementRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -86,7 +86,7 @@ public sealed class EntitlementService : IEntitlementService
     }
 
     /// <inheritdoc/>
-    public async Task<EntitlementUpdateResponse> Update(
+    public async Task<Entitlement> Update(
         EntitlementUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -98,7 +98,7 @@ public sealed class EntitlementService : IEntitlementService
     }
 
     /// <inheritdoc/>
-    public Task<EntitlementUpdateResponse> Update(
+    public Task<Entitlement> Update(
         string id,
         EntitlementUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -177,7 +177,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<EntitlementCreateResponse>> Create(
+    public async Task<HttpResponse<Entitlement>> Create(
         EntitlementCreateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -193,7 +193,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
             async (token) =>
             {
                 var entitlement = await response
-                    .Deserialize<EntitlementCreateResponse>(token)
+                    .Deserialize<Entitlement>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
@@ -205,7 +205,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<EntitlementRetrieveResponse>> Retrieve(
+    public async Task<HttpResponse<Entitlement>> Retrieve(
         EntitlementRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -226,7 +226,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
             async (token) =>
             {
                 var entitlement = await response
-                    .Deserialize<EntitlementRetrieveResponse>(token)
+                    .Deserialize<Entitlement>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
@@ -238,7 +238,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<EntitlementRetrieveResponse>> Retrieve(
+    public Task<HttpResponse<Entitlement>> Retrieve(
         string id,
         EntitlementRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -250,7 +250,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<EntitlementUpdateResponse>> Update(
+    public async Task<HttpResponse<Entitlement>> Update(
         EntitlementUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -271,7 +271,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
             async (token) =>
             {
                 var entitlement = await response
-                    .Deserialize<EntitlementUpdateResponse>(token)
+                    .Deserialize<Entitlement>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
@@ -283,7 +283,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<EntitlementUpdateResponse>> Update(
+    public Task<HttpResponse<Entitlement>> Update(
         string id,
         EntitlementUpdateParams? parameters = null,
         CancellationToken cancellationToken = default

@@ -15,10 +15,10 @@ public sealed class EntitlementListPage(
     IEntitlementServiceWithRawResponse service,
     EntitlementListParams parameters,
     EntitlementListPageResponse response
-) : IPage<EntitlementListResponse>
+) : IPage<Entitlement>
 {
     /// <inheritdoc/>
-    public IReadOnlyList<EntitlementListResponse> Items
+    public IReadOnlyList<Entitlement> Items
     {
         get { return response.Items; }
     }
@@ -30,9 +30,8 @@ public sealed class EntitlementListPage(
     }
 
     /// <inheritdoc/>
-    async Task<IPage<EntitlementListResponse>> IPage<EntitlementListResponse>.Next(
-        CancellationToken cancellationToken
-    ) => await this.Next(cancellationToken).ConfigureAwait(false);
+    async Task<IPage<Entitlement>> IPage<Entitlement>.Next(CancellationToken cancellationToken) =>
+        await this.Next(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc cref="IPage{T}.Next"/>
     public async Task<EntitlementListPage> Next(CancellationToken cancellationToken = default)

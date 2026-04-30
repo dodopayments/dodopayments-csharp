@@ -13,13 +13,12 @@ public class EntitlementListParamsTest : TestBase
     {
         var parameters = new EntitlementListParams
         {
-            IntegrationType = EntitlementListParamsIntegrationType.Discord,
+            IntegrationType = IntegrationType.Discord,
             PageNumber = 0,
             PageSize = 0,
         };
 
-        ApiEnum<string, EntitlementListParamsIntegrationType> expectedIntegrationType =
-            EntitlementListParamsIntegrationType.Discord;
+        ApiEnum<string, IntegrationType> expectedIntegrationType = IntegrationType.Discord;
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
 
@@ -65,7 +64,7 @@ public class EntitlementListParamsTest : TestBase
     {
         EntitlementListParams parameters = new()
         {
-            IntegrationType = EntitlementListParamsIntegrationType.Discord,
+            IntegrationType = IntegrationType.Discord,
             PageNumber = 0,
             PageSize = 0,
         };
@@ -87,7 +86,7 @@ public class EntitlementListParamsTest : TestBase
     {
         var parameters = new EntitlementListParams
         {
-            IntegrationType = EntitlementListParamsIntegrationType.Discord,
+            IntegrationType = IntegrationType.Discord,
             PageNumber = 0,
             PageSize = 0,
         };
@@ -98,53 +97,55 @@ public class EntitlementListParamsTest : TestBase
     }
 }
 
-public class EntitlementListParamsIntegrationTypeTest : TestBase
+public class IntegrationTypeTest : TestBase
 {
     [Theory]
-    [InlineData(EntitlementListParamsIntegrationType.Discord)]
-    [InlineData(EntitlementListParamsIntegrationType.Telegram)]
-    [InlineData(EntitlementListParamsIntegrationType.GitHub)]
-    [InlineData(EntitlementListParamsIntegrationType.Figma)]
-    [InlineData(EntitlementListParamsIntegrationType.Framer)]
-    [InlineData(EntitlementListParamsIntegrationType.Notion)]
-    [InlineData(EntitlementListParamsIntegrationType.DigitalFiles)]
-    [InlineData(EntitlementListParamsIntegrationType.LicenseKey)]
-    public void Validation_Works(EntitlementListParamsIntegrationType rawValue)
+    [InlineData(IntegrationType.Discord)]
+    [InlineData(IntegrationType.Telegram)]
+    [InlineData(IntegrationType.GitHub)]
+    [InlineData(IntegrationType.Figma)]
+    [InlineData(IntegrationType.Framer)]
+    [InlineData(IntegrationType.Notion)]
+    [InlineData(IntegrationType.DigitalFiles)]
+    [InlineData(IntegrationType.LicenseKey)]
+    public void Validation_Works(IntegrationType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementListParamsIntegrationType> value = rawValue;
+        ApiEnum<string, IntegrationType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementListParamsIntegrationType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, IntegrationType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
 
         Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(EntitlementListParamsIntegrationType.Discord)]
-    [InlineData(EntitlementListParamsIntegrationType.Telegram)]
-    [InlineData(EntitlementListParamsIntegrationType.GitHub)]
-    [InlineData(EntitlementListParamsIntegrationType.Figma)]
-    [InlineData(EntitlementListParamsIntegrationType.Framer)]
-    [InlineData(EntitlementListParamsIntegrationType.Notion)]
-    [InlineData(EntitlementListParamsIntegrationType.DigitalFiles)]
-    [InlineData(EntitlementListParamsIntegrationType.LicenseKey)]
-    public void SerializationRoundtrip_Works(EntitlementListParamsIntegrationType rawValue)
+    [InlineData(IntegrationType.Discord)]
+    [InlineData(IntegrationType.Telegram)]
+    [InlineData(IntegrationType.GitHub)]
+    [InlineData(IntegrationType.Figma)]
+    [InlineData(IntegrationType.Framer)]
+    [InlineData(IntegrationType.Notion)]
+    [InlineData(IntegrationType.DigitalFiles)]
+    [InlineData(IntegrationType.LicenseKey)]
+    public void SerializationRoundtrip_Works(IntegrationType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementListParamsIntegrationType> value = rawValue;
+        ApiEnum<string, IntegrationType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementListParamsIntegrationType>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, IntegrationType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -152,13 +153,15 @@ public class EntitlementListParamsIntegrationTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementListParamsIntegrationType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, IntegrationType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementListParamsIntegrationType>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, IntegrationType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }

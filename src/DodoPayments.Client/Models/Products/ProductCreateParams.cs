@@ -150,16 +150,18 @@ public record class ProductCreateParams : ParamsBase
     /// <summary>
     /// Optional entitlements to attach to this product (max 20)
     /// </summary>
-    public IReadOnlyList<Entitlement>? Entitlements
+    public IReadOnlyList<AttachProductEntitlement>? Entitlements
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<ImmutableArray<Entitlement>>("entitlements");
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<AttachProductEntitlement>>(
+                "entitlements"
+            );
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<Entitlement>?>(
+            this._rawBodyData.Set<ImmutableArray<AttachProductEntitlement>?>(
                 "entitlements",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -448,75 +450,4 @@ class DigitalProductDeliveryFromRaw : IFromRawJson<DigitalProductDelivery>
     public DigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => DigitalProductDelivery.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Request struct for attaching an entitlement to a product.
-///
-/// <para>Mirrors the `credit_entitlements` attach shape — every "attach something
-/// to a product" array takes objects, not bare IDs. Uniform shape leaves room for
-/// per-attachment settings later without another API break.</para>
-/// </summary>
-[JsonConverter(typeof(JsonModelConverter<Entitlement, EntitlementFromRaw>))]
-public sealed record class Entitlement : JsonModel
-{
-    /// <summary>
-    /// ID of the entitlement to attach to the product
-    /// </summary>
-    public required string EntitlementID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("entitlement_id");
-        }
-        init { this._rawData.Set("entitlement_id", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.EntitlementID;
-    }
-
-    public Entitlement() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public Entitlement(Entitlement entitlement)
-        : base(entitlement) { }
-#pragma warning restore CS8618
-
-    public Entitlement(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Entitlement(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="EntitlementFromRaw.FromRawUnchecked"/>
-    public static Entitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public Entitlement(string entitlementID)
-        : this()
-    {
-        this.EntitlementID = entitlementID;
-    }
-}
-
-class EntitlementFromRaw : IFromRawJson<Entitlement>
-{
-    /// <inheritdoc/>
-    public Entitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Entitlement.FromRawUnchecked(rawData);
 }

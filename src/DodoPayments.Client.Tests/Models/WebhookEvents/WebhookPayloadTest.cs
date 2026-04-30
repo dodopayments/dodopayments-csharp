@@ -9,6 +9,7 @@ using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.WebhookEvents;
 using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Disputes = DodoPayments.Client.Models.Disputes;
+using Grants = DodoPayments.Client.Models.Entitlements.Grants;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Payments = DodoPayments.Client.Models.Payments;
 using Refunds = DodoPayments.Client.Models.Refunds;
@@ -873,7 +874,7 @@ public class DataTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationComment = "cancellation_comment",
-            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -1072,8 +1073,7 @@ public class DataTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -1109,6 +1109,7 @@ public class DataTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
         value.Validate();
     }
@@ -1293,7 +1294,7 @@ public class DataTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationComment = "cancellation_comment",
-            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -1516,8 +1517,7 @@ public class DataTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -1553,6 +1553,7 @@ public class DataTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -1725,7 +1726,7 @@ public class PaymentTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<Payments::OneTimeProductCartItem> expectedProductCart =
+        List<Payments::ProductCart> expectedProductCart =
         [
             new() { ProductID = "product_id", Quantity = 0 },
         ];
@@ -2063,7 +2064,7 @@ public class PaymentTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<Payments::OneTimeProductCartItem> expectedProductCart =
+        List<Payments::ProductCart> expectedProductCart =
         [
             new() { ProductID = "product_id", Quantity = 0 },
         ];
@@ -3296,7 +3297,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationComment = "cancellation_comment",
-            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -3417,11 +3418,8 @@ public class SubscriptionTest : TestBase
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
         string expectedCancellationComment = "cancellation_comment";
-        ApiEnum<
-            string,
-            Subscriptions::SubscriptionCancellationFeedback
-        > expectedCancellationFeedback =
-            Subscriptions::SubscriptionCancellationFeedback.TooExpensive;
+        ApiEnum<string, Subscriptions::CancellationFeedback> expectedCancellationFeedback =
+            Subscriptions::CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
@@ -3431,7 +3429,7 @@ public class SubscriptionTest : TestBase
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
-        Subscriptions::ScheduledChange expectedScheduledChange = new()
+        Subscriptions::ScheduledPlanChange expectedScheduledChange = new()
         {
             ID = "id",
             Addons =
@@ -3612,7 +3610,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationComment = "cancellation_comment",
-            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -3739,7 +3737,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationComment = "cancellation_comment",
-            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -3867,11 +3865,8 @@ public class SubscriptionTest : TestBase
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
         string expectedCancellationComment = "cancellation_comment";
-        ApiEnum<
-            string,
-            Subscriptions::SubscriptionCancellationFeedback
-        > expectedCancellationFeedback =
-            Subscriptions::SubscriptionCancellationFeedback.TooExpensive;
+        ApiEnum<string, Subscriptions::CancellationFeedback> expectedCancellationFeedback =
+            Subscriptions::CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
@@ -3881,7 +3876,7 @@ public class SubscriptionTest : TestBase
         string expectedDiscountID = "discount_id";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
-        Subscriptions::ScheduledChange expectedScheduledChange = new()
+        Subscriptions::ScheduledPlanChange expectedScheduledChange = new()
         {
             ID = "id",
             Addons =
@@ -4062,7 +4057,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationComment = "cancellation_comment",
-            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -4090,6 +4085,424 @@ public class SubscriptionTest : TestBase
             },
             TaxID = "tax_id",
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Subscription
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = Subscriptions::SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            TaxID = "tax_id",
+            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
+        };
+
+        Assert.Null(model.CancellationFeedback);
+        Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
+        Assert.Null(model.ScheduledChange);
+        Assert.False(model.RawData.ContainsKey("scheduled_change"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Subscription
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = Subscriptions::SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            TaxID = "tax_id",
+            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new Subscription
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = Subscriptions::SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            TaxID = "tax_id",
+            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
+
+            // Null should be interpreted as omitted for these properties
+            CancellationFeedback = null,
+            ScheduledChange = null,
+        };
+
+        Assert.Null(model.CancellationFeedback);
+        Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
+        Assert.Null(model.ScheduledChange);
+        Assert.False(model.RawData.ContainsKey("scheduled_change"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Subscription
+        {
+            Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            Billing = new()
+            {
+                Country = CountryCode.Af,
+                City = "city",
+                State = "state",
+                Street = "street",
+                Zipcode = "zipcode",
+            },
+            CancelAtNextBillingDate = true,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    CreditEntitlementName = "credit_entitlement_name",
+                    CreditsAmount = "credits_amount",
+                    OverageBalance = "overage_balance",
+                    OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
+                    OverageEnabled = true,
+                    ProductID = "product_id",
+                    RemainingBalance = "remaining_balance",
+                    RolloverEnabled = true,
+                    Unit = "unit",
+                    ExpiresAfterDays = 0,
+                    LowBalanceThresholdPercent = 0,
+                    MaxRolloverCount = 0,
+                    OverageLimit = "overage_limit",
+                    RolloverPercentage = 0,
+                    RolloverTimeframeCount = 0,
+                    RolloverTimeframeInterval = Subscriptions::TimeInterval.Day,
+                },
+            ],
+            Currency = Currency.Aed,
+            Customer = new()
+            {
+                CustomerID = "customer_id",
+                Email = "email",
+                Name = "name",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PhoneNumber = "phone_number",
+            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MeterCreditEntitlementCart =
+            [
+                new()
+                {
+                    CreditEntitlementID = "credit_entitlement_id",
+                    MeterID = "meter_id",
+                    MeterName = "meter_name",
+                    MeterUnitsPerCredit = "meter_units_per_credit",
+                    ProductID = "product_id",
+                },
+            ],
+            Meters =
+            [
+                new()
+                {
+                    Currency = Currency.Aed,
+                    FreeThreshold = 0,
+                    MeasurementUnit = "measurement_unit",
+                    MeterID = "meter_id",
+                    Name = "name",
+                    Description = "description",
+                    PricePerUnit = "10.50",
+                },
+            ],
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            OnDemand = true,
+            PaymentFrequencyCount = 0,
+            PaymentFrequencyInterval = Subscriptions::TimeInterval.Day,
+            PreviousBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductID = "product_id",
+            Quantity = 0,
+            RecurringPreTaxAmount = 0,
+            Status = Subscriptions::SubscriptionStatus.Pending,
+            SubscriptionID = "subscription_id",
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
+            TaxInclusive = true,
+            TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            DiscountCyclesRemaining = 0,
+            DiscountID = "discount_id",
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PaymentMethodID = "payment_method_id",
+            TaxID = "tax_id",
+            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
+
+            // Null should be interpreted as omitted for these properties
+            CancellationFeedback = null,
+            ScheduledChange = null,
         };
 
         model.Validate();
@@ -4182,13 +4595,31 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
         Assert.Null(model.CancellationComment);
         Assert.False(model.RawData.ContainsKey("cancellation_comment"));
-        Assert.Null(model.CancellationFeedback);
-        Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledAt);
         Assert.False(model.RawData.ContainsKey("cancelled_at"));
         Assert.Null(model.CustomFieldResponses);
@@ -4201,8 +4632,6 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("expires_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
-        Assert.Null(model.ScheduledChange);
-        Assert.False(model.RawData.ContainsKey("scheduled_change"));
         Assert.Null(model.TaxID);
         Assert.False(model.RawData.ContainsKey("tax_id"));
     }
@@ -4294,6 +4723,26 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
@@ -4387,24 +4836,40 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
 
             CancellationComment = null,
-            CancellationFeedback = null,
             CancelledAt = null,
             CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             ExpiresAt = null,
             PaymentMethodID = null,
-            ScheduledChange = null,
             TaxID = null,
         };
 
         Assert.Null(model.CancellationComment);
         Assert.True(model.RawData.ContainsKey("cancellation_comment"));
-        Assert.Null(model.CancellationFeedback);
-        Assert.True(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledAt);
         Assert.True(model.RawData.ContainsKey("cancelled_at"));
         Assert.Null(model.CustomFieldResponses);
@@ -4417,8 +4882,6 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("expires_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
-        Assert.Null(model.ScheduledChange);
-        Assert.True(model.RawData.ContainsKey("scheduled_change"));
         Assert.Null(model.TaxID);
         Assert.True(model.RawData.ContainsKey("tax_id"));
     }
@@ -4510,17 +4973,35 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = Subscriptions::TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
+            ScheduledChange = new()
+            {
+                ID = "id",
+                Addons =
+                [
+                    new()
+                    {
+                        AddonID = "addon_id",
+                        Name = "name",
+                        Quantity = 0,
+                    },
+                ],
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductID = "product_id",
+                Quantity = 0,
+                ProductDescription = "product_description",
+                ProductName = "product_name",
+            },
             PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
 
             CancellationComment = null,
-            CancellationFeedback = null,
             CancelledAt = null,
             CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             ExpiresAt = null,
             PaymentMethodID = null,
-            ScheduledChange = null,
             TaxID = null,
         };
 
@@ -4615,7 +5096,7 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancellationComment = "cancellation_comment",
-            CancellationFeedback = Subscriptions::SubscriptionCancellationFeedback.TooExpensive,
+            CancellationFeedback = Subscriptions::CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -7767,8 +8248,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -7804,6 +8284,7 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         string expectedID = "id";
@@ -7812,9 +8293,8 @@ public class EntitlementGrantTest : TestBase
         string expectedCustomerID = "customer_id";
         string expectedEntitlementID = "entitlement_id";
         string expectedExternalID = "external_id";
-        ApiEnum<string, EntitlementGrantPayloadType> expectedPayloadType =
-            EntitlementGrantPayloadType.EntitlementGrant;
-        ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
+        ApiEnum<string, Grants::EntitlementGrantStatus> expectedStatus =
+            Grants::EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ProductDigitalProductDelivery expectedDigitalProductDelivery = new()
@@ -7836,7 +8316,7 @@ public class EntitlementGrantTest : TestBase
         };
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
-        EntitlementGrantLicenseKey expectedLicenseKey = new()
+        Grants::LicenseKeyGrant expectedLicenseKey = new()
         {
             ActivationsUsed = 0,
             Key = "key",
@@ -7850,6 +8330,8 @@ public class EntitlementGrantTest : TestBase
         string expectedRevocationReason = "revocation_reason";
         DateTimeOffset expectedRevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedSubscriptionID = "subscription_id";
+        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> expectedPayloadType =
+            EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -7857,7 +8339,6 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedEntitlementID, model.EntitlementID);
         Assert.Equal(expectedExternalID, model.ExternalID);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedDeliveredAt, model.DeliveredAt);
@@ -7873,6 +8354,7 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedRevocationReason, model.RevocationReason);
         Assert.Equal(expectedRevokedAt, model.RevokedAt);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
+        Assert.Equal(expectedPayloadType, model.PayloadType);
     }
 
     [Fact]
@@ -7886,8 +8368,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -7923,6 +8404,7 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -7945,8 +8427,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -7982,6 +8463,7 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -7997,9 +8479,8 @@ public class EntitlementGrantTest : TestBase
         string expectedCustomerID = "customer_id";
         string expectedEntitlementID = "entitlement_id";
         string expectedExternalID = "external_id";
-        ApiEnum<string, EntitlementGrantPayloadType> expectedPayloadType =
-            EntitlementGrantPayloadType.EntitlementGrant;
-        ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
+        ApiEnum<string, Grants::EntitlementGrantStatus> expectedStatus =
+            Grants::EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ProductDigitalProductDelivery expectedDigitalProductDelivery = new()
@@ -8021,7 +8502,7 @@ public class EntitlementGrantTest : TestBase
         };
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
-        EntitlementGrantLicenseKey expectedLicenseKey = new()
+        Grants::LicenseKeyGrant expectedLicenseKey = new()
         {
             ActivationsUsed = 0,
             Key = "key",
@@ -8035,6 +8516,8 @@ public class EntitlementGrantTest : TestBase
         string expectedRevocationReason = "revocation_reason";
         DateTimeOffset expectedRevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedSubscriptionID = "subscription_id";
+        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> expectedPayloadType =
+            EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -8042,7 +8525,6 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedEntitlementID, deserialized.EntitlementID);
         Assert.Equal(expectedExternalID, deserialized.ExternalID);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedDeliveredAt, deserialized.DeliveredAt);
@@ -8058,6 +8540,7 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedRevocationReason, deserialized.RevocationReason);
         Assert.Equal(expectedRevokedAt, deserialized.RevokedAt);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
+        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
     }
 
     [Fact]
@@ -8071,8 +8554,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -8108,6 +8590,7 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         model.Validate();
@@ -8124,44 +8607,24 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DigitalProductDelivery = new()
-            {
-                Files =
-                [
-                    new()
-                    {
-                        DownloadUrl = "download_url",
-                        ExpiresIn = 0,
-                        FileID = "file_id",
-                        Filename = "filename",
-                        ContentType = "content_type",
-                        FileSize = 0,
-                    },
-                ],
-                ExternalUrl = "external_url",
-                Instructions = "instructions",
-            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = new()
-            {
-                ActivationsUsed = 0,
-                Key = "key",
-                ActivationsLimit = 0,
-                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
+        Assert.Null(model.DigitalProductDelivery);
+        Assert.False(model.RawData.ContainsKey("digital_product_delivery"));
+        Assert.Null(model.LicenseKey);
+        Assert.False(model.RawData.ContainsKey("license_key"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
     }
@@ -8177,42 +8640,18 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DigitalProductDelivery = new()
-            {
-                Files =
-                [
-                    new()
-                    {
-                        DownloadUrl = "download_url",
-                        ExpiresIn = 0,
-                        FileID = "file_id",
-                        Filename = "filename",
-                        ContentType = "content_type",
-                        FileSize = 0,
-                    },
-                ],
-                ExternalUrl = "external_url",
-                Instructions = "instructions",
-            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = new()
-            {
-                ActivationsUsed = 0,
-                Key = "key",
-                ActivationsLimit = 0,
-                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         model.Validate();
@@ -8229,47 +8668,29 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DigitalProductDelivery = new()
-            {
-                Files =
-                [
-                    new()
-                    {
-                        DownloadUrl = "download_url",
-                        ExpiresIn = 0,
-                        FileID = "file_id",
-                        Filename = "filename",
-                        ContentType = "content_type",
-                        FileSize = 0,
-                    },
-                ],
-                ExternalUrl = "external_url",
-                Instructions = "instructions",
-            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = new()
-            {
-                ActivationsUsed = 0,
-                Key = "key",
-                ActivationsLimit = 0,
-                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
 
             // Null should be interpreted as omitted for these properties
+            DigitalProductDelivery = null,
+            LicenseKey = null,
             Metadata = null,
         };
 
+        Assert.Null(model.DigitalProductDelivery);
+        Assert.False(model.RawData.ContainsKey("digital_product_delivery"));
+        Assert.Null(model.LicenseKey);
+        Assert.False(model.RawData.ContainsKey("license_key"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
     }
@@ -8285,44 +8706,22 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DigitalProductDelivery = new()
-            {
-                Files =
-                [
-                    new()
-                    {
-                        DownloadUrl = "download_url",
-                        ExpiresIn = 0,
-                        FileID = "file_id",
-                        Filename = "filename",
-                        ContentType = "content_type",
-                        FileSize = 0,
-                    },
-                ],
-                ExternalUrl = "external_url",
-                Instructions = "instructions",
-            },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            LicenseKey = new()
-            {
-                ActivationsUsed = 0,
-                Key = "key",
-                ActivationsLimit = 0,
-                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
 
             // Null should be interpreted as omitted for these properties
+            DigitalProductDelivery = null,
+            LicenseKey = null,
             Metadata = null,
         };
 
@@ -8340,22 +8739,42 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         Assert.Null(model.DeliveredAt);
         Assert.False(model.RawData.ContainsKey("delivered_at"));
-        Assert.Null(model.DigitalProductDelivery);
-        Assert.False(model.RawData.ContainsKey("digital_product_delivery"));
         Assert.Null(model.ErrorCode);
         Assert.False(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.False(model.RawData.ContainsKey("error_message"));
-        Assert.Null(model.LicenseKey);
-        Assert.False(model.RawData.ContainsKey("license_key"));
         Assert.Null(model.OAuthExpiresAt);
         Assert.False(model.RawData.ContainsKey("oauth_expires_at"));
         Assert.Null(model.OAuthUrl);
@@ -8381,10 +8800,34 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         model.Validate();
@@ -8401,16 +8844,38 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
 
             DeliveredAt = null,
-            DigitalProductDelivery = null,
             ErrorCode = null,
             ErrorMessage = null,
-            LicenseKey = null,
             OAuthExpiresAt = null,
             OAuthUrl = null,
             PaymentID = null,
@@ -8421,14 +8886,10 @@ public class EntitlementGrantTest : TestBase
 
         Assert.Null(model.DeliveredAt);
         Assert.True(model.RawData.ContainsKey("delivered_at"));
-        Assert.Null(model.DigitalProductDelivery);
-        Assert.True(model.RawData.ContainsKey("digital_product_delivery"));
         Assert.Null(model.ErrorCode);
         Assert.True(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.True(model.RawData.ContainsKey("error_message"));
-        Assert.Null(model.LicenseKey);
-        Assert.True(model.RawData.ContainsKey("license_key"));
         Assert.Null(model.OAuthExpiresAt);
         Assert.True(model.RawData.ContainsKey("oauth_expires_at"));
         Assert.Null(model.OAuthUrl);
@@ -8454,16 +8915,38 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DigitalProductDelivery = new()
+            {
+                Files =
+                [
+                    new()
+                    {
+                        DownloadUrl = "download_url",
+                        ExpiresIn = 0,
+                        FileID = "file_id",
+                        Filename = "filename",
+                        ContentType = "content_type",
+                        FileSize = 0,
+                    },
+                ],
+                ExternalUrl = "external_url",
+                Instructions = "instructions",
+            },
+            LicenseKey = new()
+            {
+                ActivationsUsed = 0,
+                Key = "key",
+                ActivationsLimit = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
 
             DeliveredAt = null,
-            DigitalProductDelivery = null,
             ErrorCode = null,
             ErrorMessage = null,
-            LicenseKey = null,
             OAuthExpiresAt = null,
             OAuthUrl = null,
             PaymentID = null,
@@ -8486,8 +8969,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             ExternalID = "external_id",
-            PayloadType = EntitlementGrantPayloadType.EntitlementGrant,
-            Status = EntitlementGrantStatus.Pending,
+            Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -8523,6 +9005,7 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         EntitlementGrant copied = new(model);
@@ -8531,161 +9014,32 @@ public class EntitlementGrantTest : TestBase
     }
 }
 
-public class EntitlementGrantPayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(EntitlementGrantPayloadType.EntitlementGrant)]
-    public void Validation_Works(EntitlementGrantPayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementGrantPayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantPayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(EntitlementGrantPayloadType.EntitlementGrant)]
-    public void SerializationRoundtrip_Works(EntitlementGrantPayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementGrantPayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantPayloadType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantPayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantPayloadType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class EntitlementGrantStatusTest : TestBase
-{
-    [Theory]
-    [InlineData(EntitlementGrantStatus.Pending)]
-    [InlineData(EntitlementGrantStatus.Delivered)]
-    [InlineData(EntitlementGrantStatus.Failed)]
-    [InlineData(EntitlementGrantStatus.Revoked)]
-    public void Validation_Works(EntitlementGrantStatus rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementGrantStatus> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(EntitlementGrantStatus.Pending)]
-    [InlineData(EntitlementGrantStatus.Delivered)]
-    [InlineData(EntitlementGrantStatus.Failed)]
-    [InlineData(EntitlementGrantStatus.Revoked)]
-    public void SerializationRoundtrip_Works(EntitlementGrantStatus rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementGrantStatus> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementGrantStatus>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class EntitlementGrantLicenseKeyTest : TestBase
+public class EntitlementGrantIntersectionMember1Test : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new EntitlementGrantLicenseKey
+        var model = new EntitlementGrantIntersectionMember1
         {
-            ActivationsUsed = 0,
-            Key = "key",
-            ActivationsLimit = 0,
-            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
-        int expectedActivationsUsed = 0;
-        string expectedKey = "key";
-        int expectedActivationsLimit = 0;
-        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> expectedPayloadType =
+            EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant;
 
-        Assert.Equal(expectedActivationsUsed, model.ActivationsUsed);
-        Assert.Equal(expectedKey, model.Key);
-        Assert.Equal(expectedActivationsLimit, model.ActivationsLimit);
-        Assert.Equal(expectedExpiresAt, model.ExpiresAt);
+        Assert.Equal(expectedPayloadType, model.PayloadType);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new EntitlementGrantLicenseKey
+        var model = new EntitlementGrantIntersectionMember1
         {
-            ActivationsUsed = 0,
-            Key = "key",
-            ActivationsLimit = 0,
-            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EntitlementGrantLicenseKey>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementGrantIntersectionMember1>(
             json,
             ModelBase.SerializerOptions
         );
@@ -8696,93 +9050,30 @@ public class EntitlementGrantLicenseKeyTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new EntitlementGrantLicenseKey
+        var model = new EntitlementGrantIntersectionMember1
         {
-            ActivationsUsed = 0,
-            Key = "key",
-            ActivationsLimit = 0,
-            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EntitlementGrantLicenseKey>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementGrantIntersectionMember1>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        int expectedActivationsUsed = 0;
-        string expectedKey = "key";
-        int expectedActivationsLimit = 0;
-        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> expectedPayloadType =
+            EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant;
 
-        Assert.Equal(expectedActivationsUsed, deserialized.ActivationsUsed);
-        Assert.Equal(expectedKey, deserialized.Key);
-        Assert.Equal(expectedActivationsLimit, deserialized.ActivationsLimit);
-        Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
+        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new EntitlementGrantLicenseKey
+        var model = new EntitlementGrantIntersectionMember1
         {
-            ActivationsUsed = 0,
-            Key = "key",
-            ActivationsLimit = 0,
-            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new EntitlementGrantLicenseKey { ActivationsUsed = 0, Key = "key" };
-
-        Assert.Null(model.ActivationsLimit);
-        Assert.False(model.RawData.ContainsKey("activations_limit"));
-        Assert.Null(model.ExpiresAt);
-        Assert.False(model.RawData.ContainsKey("expires_at"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new EntitlementGrantLicenseKey { ActivationsUsed = 0, Key = "key" };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new EntitlementGrantLicenseKey
-        {
-            ActivationsUsed = 0,
-            Key = "key",
-
-            ActivationsLimit = null,
-            ExpiresAt = null,
-        };
-
-        Assert.Null(model.ActivationsLimit);
-        Assert.True(model.RawData.ContainsKey("activations_limit"));
-        Assert.Null(model.ExpiresAt);
-        Assert.True(model.RawData.ContainsKey("expires_at"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new EntitlementGrantLicenseKey
-        {
-            ActivationsUsed = 0,
-            Key = "key",
-
-            ActivationsLimit = null,
-            ExpiresAt = null,
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         model.Validate();
@@ -8791,16 +9082,67 @@ public class EntitlementGrantLicenseKeyTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new EntitlementGrantLicenseKey
+        var model = new EntitlementGrantIntersectionMember1
         {
-            ActivationsUsed = 0,
-            Key = "key",
-            ActivationsLimit = 0,
-            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
-        EntitlementGrantLicenseKey copied = new(model);
+        EntitlementGrantIntersectionMember1 copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class EntitlementGrantIntersectionMember1PayloadTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant)]
+    public void Validation_Works(EntitlementGrantIntersectionMember1PayloadType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant)]
+    public void SerializationRoundtrip_Works(
+        EntitlementGrantIntersectionMember1PayloadType rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }

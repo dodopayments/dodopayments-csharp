@@ -112,7 +112,7 @@ public class ProductCreateParamsTest : TestBase
             ExternalUrl = "external_url",
             Instructions = "instructions",
         };
-        List<Products::Entitlement> expectedEntitlements = [new("entitlement_id")];
+        List<Products::AttachProductEntitlement> expectedEntitlements = [new("entitlement_id")];
         string expectedLicenseKeyActivationMessage = "license_key_activation_message";
         int expectedLicenseKeyActivationsLimit = 0;
         Products::LicenseKeyDuration expectedLicenseKeyDuration = new()
@@ -596,68 +596,6 @@ public class DigitalProductDeliveryTest : TestBase
         };
 
         Products::DigitalProductDelivery copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class EntitlementTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new Products::Entitlement { EntitlementID = "entitlement_id" };
-
-        string expectedEntitlementID = "entitlement_id";
-
-        Assert.Equal(expectedEntitlementID, model.EntitlementID);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new Products::Entitlement { EntitlementID = "entitlement_id" };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::Entitlement>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new Products::Entitlement { EntitlementID = "entitlement_id" };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::Entitlement>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedEntitlementID = "entitlement_id";
-
-        Assert.Equal(expectedEntitlementID, deserialized.EntitlementID);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new Products::Entitlement { EntitlementID = "entitlement_id" };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new Products::Entitlement { EntitlementID = "entitlement_id" };
-
-        Products::Entitlement copied = new(model);
 
         Assert.Equal(model, copied);
     }

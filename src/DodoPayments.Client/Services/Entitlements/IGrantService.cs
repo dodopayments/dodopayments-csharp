@@ -47,13 +47,13 @@ public interface IGrantService
     /// already-revoked grant returns 200 with current state. The revocation reason is
     /// always set to "manual" for API-initiated revocations.
     /// </summary>
-    Task<GrantRevokeResponse> Revoke(
+    Task<EntitlementGrant> Revoke(
         GrantRevokeParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Revoke(GrantRevokeParams, CancellationToken)"/>
-    Task<GrantRevokeResponse> Revoke(
+    Task<EntitlementGrant> Revoke(
         string grantID,
         GrantRevokeParams parameters,
         CancellationToken cancellationToken = default
@@ -93,13 +93,13 @@ public interface IGrantServiceWithRawResponse
     /// Returns a raw HTTP response for <c>delete /entitlements/{id}/grants/{grant_id}</c>, but is otherwise the
     /// same as <see cref="IGrantService.Revoke(GrantRevokeParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<GrantRevokeResponse>> Revoke(
+    Task<HttpResponse<EntitlementGrant>> Revoke(
         GrantRevokeParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Revoke(GrantRevokeParams, CancellationToken)"/>
-    Task<HttpResponse<GrantRevokeResponse>> Revoke(
+    Task<HttpResponse<EntitlementGrant>> Revoke(
         string grantID,
         GrantRevokeParams parameters,
         CancellationToken cancellationToken = default

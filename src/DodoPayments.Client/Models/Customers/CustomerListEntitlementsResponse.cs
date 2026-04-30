@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Entitlements;
 
 namespace DodoPayments.Client.Models.Customers;
 
@@ -148,12 +149,12 @@ public sealed record class CustomerListEntitlementsResponseItem : JsonModel
         init { this._rawData.Set("grant_id", value); }
     }
 
-    public required ApiEnum<string, IntegrationType> IntegrationType
+    public required ApiEnum<string, EntitlementIntegrationType> IntegrationType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, IntegrationType>>(
+            return this._rawData.GetNotNullClass<ApiEnum<string, EntitlementIntegrationType>>(
                 "integration_type"
             );
         }
@@ -264,68 +265,6 @@ class CustomerListEntitlementsResponseItemFromRaw
     public CustomerListEntitlementsResponseItem FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => CustomerListEntitlementsResponseItem.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(IntegrationTypeConverter))]
-public enum IntegrationType
-{
-    Discord,
-    Telegram,
-    GitHub,
-    Figma,
-    Framer,
-    Notion,
-    DigitalFiles,
-    LicenseKey,
-}
-
-sealed class IntegrationTypeConverter : JsonConverter<IntegrationType>
-{
-    public override IntegrationType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "discord" => IntegrationType.Discord,
-            "telegram" => IntegrationType.Telegram,
-            "github" => IntegrationType.GitHub,
-            "figma" => IntegrationType.Figma,
-            "framer" => IntegrationType.Framer,
-            "notion" => IntegrationType.Notion,
-            "digital_files" => IntegrationType.DigitalFiles,
-            "license_key" => IntegrationType.LicenseKey,
-            _ => (IntegrationType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        IntegrationType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                IntegrationType.Discord => "discord",
-                IntegrationType.Telegram => "telegram",
-                IntegrationType.GitHub => "github",
-                IntegrationType.Figma => "figma",
-                IntegrationType.Framer => "framer",
-                IntegrationType.Notion => "notion",
-                IntegrationType.DigitalFiles => "digital_files",
-                IntegrationType.LicenseKey => "license_key",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(StatusConverter))]

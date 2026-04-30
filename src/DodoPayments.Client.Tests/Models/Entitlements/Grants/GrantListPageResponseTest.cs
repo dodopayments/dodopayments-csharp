@@ -23,7 +23,7 @@ public class GrantListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     EntitlementID = "entitlement_id",
                     ExternalID = "external_id",
-                    Status = GrantListResponseStatus.Pending,
+                    Status = EntitlementGrantStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DigitalProductDelivery = new()
@@ -63,7 +63,7 @@ public class GrantListPageResponseTest : TestBase
             ],
         };
 
-        List<GrantListResponse> expectedItems =
+        List<EntitlementGrant> expectedItems =
         [
             new()
             {
@@ -73,7 +73,7 @@ public class GrantListPageResponseTest : TestBase
                 CustomerID = "customer_id",
                 EntitlementID = "entitlement_id",
                 ExternalID = "external_id",
-                Status = GrantListResponseStatus.Pending,
+                Status = EntitlementGrantStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DigitalProductDelivery = new()
@@ -134,7 +134,7 @@ public class GrantListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     EntitlementID = "entitlement_id",
                     ExternalID = "external_id",
-                    Status = GrantListResponseStatus.Pending,
+                    Status = EntitlementGrantStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DigitalProductDelivery = new()
@@ -198,7 +198,7 @@ public class GrantListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     EntitlementID = "entitlement_id",
                     ExternalID = "external_id",
-                    Status = GrantListResponseStatus.Pending,
+                    Status = EntitlementGrantStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DigitalProductDelivery = new()
@@ -245,7 +245,7 @@ public class GrantListPageResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        List<GrantListResponse> expectedItems =
+        List<EntitlementGrant> expectedItems =
         [
             new()
             {
@@ -255,7 +255,7 @@ public class GrantListPageResponseTest : TestBase
                 CustomerID = "customer_id",
                 EntitlementID = "entitlement_id",
                 ExternalID = "external_id",
-                Status = GrantListResponseStatus.Pending,
+                Status = EntitlementGrantStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DigitalProductDelivery = new()
@@ -316,7 +316,7 @@ public class GrantListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     EntitlementID = "entitlement_id",
                     ExternalID = "external_id",
-                    Status = GrantListResponseStatus.Pending,
+                    Status = EntitlementGrantStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DigitalProductDelivery = new()
@@ -374,7 +374,7 @@ public class GrantListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     EntitlementID = "entitlement_id",
                     ExternalID = "external_id",
-                    Status = GrantListResponseStatus.Pending,
+                    Status = EntitlementGrantStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DigitalProductDelivery = new()
