@@ -31,6 +31,7 @@ public class SubscriptionCreateParamsTest : TestBase
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
+            MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnDemand = new()
             {
@@ -52,6 +53,7 @@ public class SubscriptionCreateParamsTest : TestBase
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
             ReturnUrl = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,
@@ -78,6 +80,7 @@ public class SubscriptionCreateParamsTest : TestBase
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
         string expectedDiscountCode = "discount_code";
         bool expectedForce3ds = true;
+        int expectedMandateMinAmountInrPaise = 0;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         OnDemandSubscription expectedOnDemand = new()
         {
@@ -99,6 +102,7 @@ public class SubscriptionCreateParamsTest : TestBase
         bool expectedPaymentLink = true;
         string expectedPaymentMethodID = "payment_method_id";
         bool expectedRedirectImmediately = true;
+        bool expectedRequirePhoneNumber = true;
         string expectedReturnUrl = "return_url";
         bool expectedShortLink = true;
         bool expectedShowSavedPaymentMethods = true;
@@ -130,6 +134,7 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.Equal(expectedBillingCurrency, parameters.BillingCurrency);
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
         Assert.Equal(expectedForce3ds, parameters.Force3ds);
+        Assert.Equal(expectedMandateMinAmountInrPaise, parameters.MandateMinAmountInrPaise);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -148,6 +153,7 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.Equal(expectedPaymentLink, parameters.PaymentLink);
         Assert.Equal(expectedPaymentMethodID, parameters.PaymentMethodID);
         Assert.Equal(expectedRedirectImmediately, parameters.RedirectImmediately);
+        Assert.Equal(expectedRequirePhoneNumber, parameters.RequirePhoneNumber);
         Assert.Equal(expectedReturnUrl, parameters.ReturnUrl);
         Assert.Equal(expectedShortLink, parameters.ShortLink);
         Assert.Equal(expectedShowSavedPaymentMethods, parameters.ShowSavedPaymentMethods);
@@ -176,6 +182,7 @@ public class SubscriptionCreateParamsTest : TestBase
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
+            MandateMinAmountInrPaise = 0,
             OnDemand = new()
             {
                 MandateOnly = true,
@@ -205,6 +212,8 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.RedirectImmediately);
         Assert.False(parameters.RawBodyData.ContainsKey("redirect_immediately"));
+        Assert.Null(parameters.RequirePhoneNumber);
+        Assert.False(parameters.RawBodyData.ContainsKey("require_phone_number"));
         Assert.Null(parameters.ShowSavedPaymentMethods);
         Assert.False(parameters.RawBodyData.ContainsKey("show_saved_payment_methods"));
     }
@@ -230,6 +239,7 @@ public class SubscriptionCreateParamsTest : TestBase
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
+            MandateMinAmountInrPaise = 0,
             OnDemand = new()
             {
                 MandateOnly = true,
@@ -257,6 +267,7 @@ public class SubscriptionCreateParamsTest : TestBase
             // Null should be interpreted as omitted for these properties
             Metadata = null,
             RedirectImmediately = null,
+            RequirePhoneNumber = null,
             ShowSavedPaymentMethods = null,
         };
 
@@ -264,6 +275,8 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.RedirectImmediately);
         Assert.False(parameters.RawBodyData.ContainsKey("redirect_immediately"));
+        Assert.Null(parameters.RequirePhoneNumber);
+        Assert.False(parameters.RawBodyData.ContainsKey("require_phone_number"));
         Assert.Null(parameters.ShowSavedPaymentMethods);
         Assert.False(parameters.RawBodyData.ContainsKey("show_saved_payment_methods"));
     }
@@ -286,6 +299,7 @@ public class SubscriptionCreateParamsTest : TestBase
             Quantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
             ShowSavedPaymentMethods = true,
         };
 
@@ -299,6 +313,8 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
         Assert.Null(parameters.Force3ds);
         Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
+        Assert.Null(parameters.MandateMinAmountInrPaise);
+        Assert.False(parameters.RawBodyData.ContainsKey("mandate_min_amount_inr_paise"));
         Assert.Null(parameters.OnDemand);
         Assert.False(parameters.RawBodyData.ContainsKey("on_demand"));
         Assert.Null(parameters.OneTimeProductCart);
@@ -335,6 +351,7 @@ public class SubscriptionCreateParamsTest : TestBase
             Quantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
             ShowSavedPaymentMethods = true,
 
             Addons = null,
@@ -342,6 +359,7 @@ public class SubscriptionCreateParamsTest : TestBase
             BillingCurrency = null,
             DiscountCode = null,
             Force3ds = null,
+            MandateMinAmountInrPaise = null,
             OnDemand = null,
             OneTimeProductCart = null,
             PaymentLink = null,
@@ -362,6 +380,8 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
         Assert.Null(parameters.Force3ds);
         Assert.True(parameters.RawBodyData.ContainsKey("force_3ds"));
+        Assert.Null(parameters.MandateMinAmountInrPaise);
+        Assert.True(parameters.RawBodyData.ContainsKey("mandate_min_amount_inr_paise"));
         Assert.Null(parameters.OnDemand);
         Assert.True(parameters.RawBodyData.ContainsKey("on_demand"));
         Assert.Null(parameters.OneTimeProductCart);
@@ -426,6 +446,7 @@ public class SubscriptionCreateParamsTest : TestBase
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
             Force3ds = true,
+            MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnDemand = new()
             {
@@ -447,6 +468,7 @@ public class SubscriptionCreateParamsTest : TestBase
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
             ReturnUrl = "return_url",
             ShortLink = true,
             ShowSavedPaymentMethods = true,

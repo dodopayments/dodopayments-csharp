@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
@@ -98,6 +99,8 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -210,6 +213,9 @@ public class SubscriptionTest : TestBase
         ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
+        string expectedCancellationComment = "cancellation_comment";
+        ApiEnum<string, SubscriptionCancellationFeedback> expectedCancellationFeedback =
+            SubscriptionCancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<CustomFieldResponse> expectedCustomFieldResponses =
         [
@@ -292,6 +298,8 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedSubscriptionPeriodInterval, model.SubscriptionPeriodInterval);
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
         Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
+        Assert.Equal(expectedCancellationComment, model.CancellationComment);
+        Assert.Equal(expectedCancellationFeedback, model.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
         Assert.NotNull(model.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, model.CustomFieldResponses.Count);
@@ -394,6 +402,8 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -518,6 +528,8 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -637,6 +649,9 @@ public class SubscriptionTest : TestBase
         ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
+        string expectedCancellationComment = "cancellation_comment";
+        ApiEnum<string, SubscriptionCancellationFeedback> expectedCancellationFeedback =
+            SubscriptionCancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<CustomFieldResponse> expectedCustomFieldResponses =
         [
@@ -719,6 +734,8 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedSubscriptionPeriodInterval, deserialized.SubscriptionPeriodInterval);
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
         Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
+        Assert.Equal(expectedCancellationComment, deserialized.CancellationComment);
+        Assert.Equal(expectedCancellationFeedback, deserialized.CancellationFeedback);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
         Assert.NotNull(deserialized.CustomFieldResponses);
         Assert.Equal(expectedCustomFieldResponses.Count, deserialized.CustomFieldResponses.Count);
@@ -821,6 +838,8 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -941,6 +960,10 @@ public class SubscriptionTest : TestBase
             TrialPeriodDays = 0,
         };
 
+        Assert.Null(model.CancellationComment);
+        Assert.False(model.RawData.ContainsKey("cancellation_comment"));
+        Assert.Null(model.CancellationFeedback);
+        Assert.False(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledAt);
         Assert.False(model.RawData.ContainsKey("cancelled_at"));
         Assert.Null(model.CustomFieldResponses);
@@ -1139,6 +1162,8 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
 
+            CancellationComment = null,
+            CancellationFeedback = null,
             CancelledAt = null,
             CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
@@ -1149,6 +1174,10 @@ public class SubscriptionTest : TestBase
             TaxID = null,
         };
 
+        Assert.Null(model.CancellationComment);
+        Assert.True(model.RawData.ContainsKey("cancellation_comment"));
+        Assert.Null(model.CancellationFeedback);
+        Assert.True(model.RawData.ContainsKey("cancellation_feedback"));
         Assert.Null(model.CancelledAt);
         Assert.True(model.RawData.ContainsKey("cancelled_at"));
         Assert.Null(model.CustomFieldResponses);
@@ -1255,6 +1284,8 @@ public class SubscriptionTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
 
+            CancellationComment = null,
+            CancellationFeedback = null,
             CancelledAt = null,
             CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
@@ -1355,6 +1386,8 @@ public class SubscriptionTest : TestBase
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
             TrialPeriodDays = 0,
+            CancellationComment = "cancellation_comment",
+            CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
@@ -1386,6 +1419,74 @@ public class SubscriptionTest : TestBase
         Subscription copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionCancellationFeedbackTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionCancellationFeedback.TooExpensive)]
+    [InlineData(SubscriptionCancellationFeedback.MissingFeatures)]
+    [InlineData(SubscriptionCancellationFeedback.SwitchedService)]
+    [InlineData(SubscriptionCancellationFeedback.Unused)]
+    [InlineData(SubscriptionCancellationFeedback.CustomerService)]
+    [InlineData(SubscriptionCancellationFeedback.LowQuality)]
+    [InlineData(SubscriptionCancellationFeedback.TooComplex)]
+    [InlineData(SubscriptionCancellationFeedback.Other)]
+    public void Validation_Works(SubscriptionCancellationFeedback rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionCancellationFeedback> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionCancellationFeedback>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionCancellationFeedback.TooExpensive)]
+    [InlineData(SubscriptionCancellationFeedback.MissingFeatures)]
+    [InlineData(SubscriptionCancellationFeedback.SwitchedService)]
+    [InlineData(SubscriptionCancellationFeedback.Unused)]
+    [InlineData(SubscriptionCancellationFeedback.CustomerService)]
+    [InlineData(SubscriptionCancellationFeedback.LowQuality)]
+    [InlineData(SubscriptionCancellationFeedback.TooComplex)]
+    [InlineData(SubscriptionCancellationFeedback.Other)]
+    public void SerializationRoundtrip_Works(SubscriptionCancellationFeedback rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionCancellationFeedback> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionCancellationFeedback>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionCancellationFeedback>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionCancellationFeedback>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }
 

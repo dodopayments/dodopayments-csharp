@@ -12,6 +12,7 @@ using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Disputes = DodoPayments.Client.Models.Disputes;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Payments = DodoPayments.Client.Models.Payments;
+using Products = DodoPayments.Client.Models.Products;
 using Refunds = DodoPayments.Client.Models.Refunds;
 using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 
@@ -2212,6 +2213,34 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// Free-text cancellation comment, if any
+    /// </summary>
+    public string? CancellationComment
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("cancellation_comment");
+        }
+        init { this._rawData.Set("cancellation_comment", value); }
+    }
+
+    /// <summary>
+    /// Customer-supplied churn reason, if any
+    /// </summary>
+    public ApiEnum<string, Subscriptions::SubscriptionCancellationFeedback>? CancellationFeedback
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, Subscriptions::SubscriptionCancellationFeedback>
+            >("cancellation_feedback");
+        }
+        init { this._rawData.Set("cancellation_feedback", value); }
+    }
+
+    /// <summary>
     /// Cancelled timestamp if the subscription is cancelled
     /// </summary>
     public DateTimeOffset? CancelledAt
@@ -2364,6 +2393,8 @@ public sealed record class Subscription : JsonModel
             SubscriptionPeriodInterval = subscription.SubscriptionPeriodInterval,
             TaxInclusive = subscription.TaxInclusive,
             TrialPeriodDays = subscription.TrialPeriodDays,
+            CancellationComment = subscription.CancellationComment,
+            CancellationFeedback = subscription.CancellationFeedback,
             CancelledAt = subscription.CancelledAt,
             CustomFieldResponses = subscription.CustomFieldResponses,
             DiscountCyclesRemaining = subscription.DiscountCyclesRemaining,
@@ -2413,6 +2444,8 @@ public sealed record class Subscription : JsonModel
         this.SubscriptionPeriodInterval.Validate();
         _ = this.TaxInclusive;
         _ = this.TrialPeriodDays;
+        _ = this.CancellationComment;
+        this.CancellationFeedback?.Validate();
         _ = this.CancelledAt;
         foreach (var item in this.CustomFieldResponses ?? [])
         {
@@ -4831,6 +4864,22 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("delivered_at", value); }
     }
 
+    /// <summary>
+    /// Present only when the entitlement integration_type is `digital_files`. Populated
+    /// eagerly on every list and single-record endpoint.
+    /// </summary>
+    public Products::ProductDigitalProductDelivery? DigitalProductDelivery
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Products::ProductDigitalProductDelivery>(
+                "digital_product_delivery"
+            );
+        }
+        init { this._rawData.Set("digital_product_delivery", value); }
+    }
+
     public string? ErrorCode
     {
         get
@@ -4851,54 +4900,17 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("error_message", value); }
     }
 
-    public string? LicenseKey
+    /// <summary>
+    /// Present only when the entitlement integration_type is `license_key`.
+    /// </summary>
+    public EntitlementGrantLicenseKey? LicenseKey
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("license_key");
+            return this._rawData.GetNullableClass<EntitlementGrantLicenseKey>("license_key");
         }
         init { this._rawData.Set("license_key", value); }
-    }
-
-    public int? LicenseKeyActivationsLimit
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("license_key_activations_limit");
-        }
-        init { this._rawData.Set("license_key_activations_limit", value); }
-    }
-
-    public int? LicenseKeyActivationsUsed
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<int>("license_key_activations_used");
-        }
-        init { this._rawData.Set("license_key_activations_used", value); }
-    }
-
-    public DateTimeOffset? LicenseKeyExpiresAt
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("license_key_expires_at");
-        }
-        init { this._rawData.Set("license_key_expires_at", value); }
-    }
-
-    public string? LicenseKeyStatus
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("license_key_status");
-        }
-        init { this._rawData.Set("license_key_status", value); }
     }
 
     public JsonElement? Metadata
@@ -4992,13 +5004,10 @@ public sealed record class EntitlementGrant : JsonModel
         this.Status.Validate();
         _ = this.UpdatedAt;
         _ = this.DeliveredAt;
+        this.DigitalProductDelivery?.Validate();
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
-        _ = this.LicenseKey;
-        _ = this.LicenseKeyActivationsLimit;
-        _ = this.LicenseKeyActivationsUsed;
-        _ = this.LicenseKeyExpiresAt;
-        _ = this.LicenseKeyStatus;
+        this.LicenseKey?.Validate();
         _ = this.Metadata;
         _ = this.OAuthExpiresAt;
         _ = this.OAuthUrl;
@@ -5134,4 +5143,99 @@ sealed class EntitlementGrantStatusConverter : JsonConverter<EntitlementGrantSta
             options
         );
     }
+}
+
+/// <summary>
+/// Present only when the entitlement integration_type is `license_key`.
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<EntitlementGrantLicenseKey, EntitlementGrantLicenseKeyFromRaw>)
+)]
+public sealed record class EntitlementGrantLicenseKey : JsonModel
+{
+    public required int ActivationsUsed
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("activations_used");
+        }
+        init { this._rawData.Set("activations_used", value); }
+    }
+
+    public required string Key
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
+        init { this._rawData.Set("key", value); }
+    }
+
+    public int? ActivationsLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("activations_limit");
+        }
+        init { this._rawData.Set("activations_limit", value); }
+    }
+
+    public DateTimeOffset? ExpiresAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("expires_at");
+        }
+        init { this._rawData.Set("expires_at", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ActivationsUsed;
+        _ = this.Key;
+        _ = this.ActivationsLimit;
+        _ = this.ExpiresAt;
+    }
+
+    public EntitlementGrantLicenseKey() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public EntitlementGrantLicenseKey(EntitlementGrantLicenseKey entitlementGrantLicenseKey)
+        : base(entitlementGrantLicenseKey) { }
+#pragma warning restore CS8618
+
+    public EntitlementGrantLicenseKey(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    EntitlementGrantLicenseKey(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="EntitlementGrantLicenseKeyFromRaw.FromRawUnchecked"/>
+    public static EntitlementGrantLicenseKey FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class EntitlementGrantLicenseKeyFromRaw : IFromRawJson<EntitlementGrantLicenseKey>
+{
+    /// <inheritdoc/>
+    public EntitlementGrantLicenseKey FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => EntitlementGrantLicenseKey.FromRawUnchecked(rawData);
 }

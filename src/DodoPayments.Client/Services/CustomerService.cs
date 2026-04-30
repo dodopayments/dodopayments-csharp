@@ -178,6 +178,36 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
+    public async Task<CustomerListEntitlementsResponse> ListEntitlements(
+        CustomerListEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListEntitlements(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<CustomerListEntitlementsResponse> ListEntitlements(
+        string customerID,
+        CustomerListEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListEntitlements(
+            parameters with
+            {
+                CustomerID = customerID,
+            },
+            cancellationToken
+        );
+    }
+
+    /// <inheritdoc/>
     public async Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
         CustomerRetrievePaymentMethodsParams parameters,
         CancellationToken cancellationToken = default
@@ -461,6 +491,57 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
         parameters ??= new();
 
         return this.ListCreditEntitlements(
+            parameters with
+            {
+                CustomerID = customerID,
+            },
+            cancellationToken
+        );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerListEntitlementsResponse>> ListEntitlements(
+        CustomerListEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.CustomerID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.CustomerID' cannot be null");
+        }
+
+        HttpRequest<CustomerListEntitlementsParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<CustomerListEntitlementsResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<CustomerListEntitlementsResponse>> ListEntitlements(
+        string customerID,
+        CustomerListEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListEntitlements(
             parameters with
             {
                 CustomerID = customerID,

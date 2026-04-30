@@ -16,6 +16,19 @@ namespace DodoPayments.Client.Models.LicenseKeyInstances;
 public record class LicenseKeyInstanceListParams : ParamsBase
 {
     /// <summary>
+    /// Filter instances by entitlement grant ID
+    /// </summary>
+    public string? GrantID
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("grant_id");
+        }
+        init { this._rawQueryData.Set("grant_id", value); }
+    }
+
+    /// <summary>
     /// Filter by license key ID
     /// </summary>
     public string? LicenseKeyID

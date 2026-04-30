@@ -25,6 +25,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
         };
 
         bool expectedAllowCurrencySelection = true;
@@ -41,6 +42,7 @@ public class CheckoutSessionFlagsTest : TestBase
         bool expectedAllowTaxID = true;
         bool expectedAlwaysCreateNewCustomer = true;
         bool expectedRedirectImmediately = true;
+        bool expectedRequirePhoneNumber = true;
 
         Assert.Equal(expectedAllowCurrencySelection, model.AllowCurrencySelection);
         Assert.Equal(expectedAllowCustomerEditingCity, model.AllowCustomerEditingCity);
@@ -56,6 +58,7 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.Equal(expectedAllowTaxID, model.AllowTaxID);
         Assert.Equal(expectedAlwaysCreateNewCustomer, model.AlwaysCreateNewCustomer);
         Assert.Equal(expectedRedirectImmediately, model.RedirectImmediately);
+        Assert.Equal(expectedRequirePhoneNumber, model.RequirePhoneNumber);
     }
 
     [Fact]
@@ -77,6 +80,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -107,6 +111,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -130,6 +135,7 @@ public class CheckoutSessionFlagsTest : TestBase
         bool expectedAllowTaxID = true;
         bool expectedAlwaysCreateNewCustomer = true;
         bool expectedRedirectImmediately = true;
+        bool expectedRequirePhoneNumber = true;
 
         Assert.Equal(expectedAllowCurrencySelection, deserialized.AllowCurrencySelection);
         Assert.Equal(expectedAllowCustomerEditingCity, deserialized.AllowCustomerEditingCity);
@@ -145,6 +151,7 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.Equal(expectedAllowTaxID, deserialized.AllowTaxID);
         Assert.Equal(expectedAlwaysCreateNewCustomer, deserialized.AlwaysCreateNewCustomer);
         Assert.Equal(expectedRedirectImmediately, deserialized.RedirectImmediately);
+        Assert.Equal(expectedRequirePhoneNumber, deserialized.RequirePhoneNumber);
     }
 
     [Fact]
@@ -166,6 +173,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
         };
 
         model.Validate();
@@ -204,6 +212,8 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.False(model.RawData.ContainsKey("always_create_new_customer"));
         Assert.Null(model.RedirectImmediately);
         Assert.False(model.RawData.ContainsKey("redirect_immediately"));
+        Assert.Null(model.RequirePhoneNumber);
+        Assert.False(model.RawData.ContainsKey("require_phone_number"));
     }
 
     [Fact]
@@ -234,6 +244,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowTaxID = null,
             AlwaysCreateNewCustomer = null,
             RedirectImmediately = null,
+            RequirePhoneNumber = null,
         };
 
         Assert.Null(model.AllowCurrencySelection);
@@ -264,6 +275,8 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.False(model.RawData.ContainsKey("always_create_new_customer"));
         Assert.Null(model.RedirectImmediately);
         Assert.False(model.RawData.ContainsKey("redirect_immediately"));
+        Assert.Null(model.RequirePhoneNumber);
+        Assert.False(model.RawData.ContainsKey("require_phone_number"));
     }
 
     [Fact]
@@ -286,6 +299,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowTaxID = null,
             AlwaysCreateNewCustomer = null,
             RedirectImmediately = null,
+            RequirePhoneNumber = null,
         };
 
         model.Validate();
@@ -310,6 +324,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
             RedirectImmediately = true,
+            RequirePhoneNumber = true,
         };
 
         CheckoutSessionFlags copied = new(model);

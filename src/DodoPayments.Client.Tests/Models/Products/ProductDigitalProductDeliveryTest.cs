@@ -12,38 +12,43 @@ public class ProductDigitalProductDeliveryTest : TestBase
     {
         var model = new ProductDigitalProductDelivery
         {
-            ExternalUrl = "external_url",
             Files =
             [
                 new()
                 {
-                    FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    FileName = "file_name",
-                    Url = "url",
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
                 },
             ],
+            ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
-        string expectedExternalUrl = "external_url";
         List<DigitalProductDeliveryFile> expectedFiles =
         [
             new()
             {
-                FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                FileName = "file_name",
-                Url = "url",
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                ContentType = "content_type",
+                FileSize = 0,
             },
         ];
+        string expectedExternalUrl = "external_url";
         string expectedInstructions = "instructions";
 
-        Assert.Equal(expectedExternalUrl, model.ExternalUrl);
-        Assert.NotNull(model.Files);
         Assert.Equal(expectedFiles.Count, model.Files.Count);
         for (int i = 0; i < expectedFiles.Count; i++)
         {
             Assert.Equal(expectedFiles[i], model.Files[i]);
         }
+        Assert.Equal(expectedExternalUrl, model.ExternalUrl);
         Assert.Equal(expectedInstructions, model.Instructions);
     }
 
@@ -52,16 +57,19 @@ public class ProductDigitalProductDeliveryTest : TestBase
     {
         var model = new ProductDigitalProductDelivery
         {
-            ExternalUrl = "external_url",
             Files =
             [
                 new()
                 {
-                    FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    FileName = "file_name",
-                    Url = "url",
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
                 },
             ],
+            ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
@@ -79,16 +87,19 @@ public class ProductDigitalProductDeliveryTest : TestBase
     {
         var model = new ProductDigitalProductDelivery
         {
-            ExternalUrl = "external_url",
             Files =
             [
                 new()
                 {
-                    FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    FileName = "file_name",
-                    Url = "url",
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
                 },
             ],
+            ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
@@ -99,25 +110,27 @@ public class ProductDigitalProductDeliveryTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        string expectedExternalUrl = "external_url";
         List<DigitalProductDeliveryFile> expectedFiles =
         [
             new()
             {
-                FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                FileName = "file_name",
-                Url = "url",
+                DownloadUrl = "download_url",
+                ExpiresIn = 0,
+                FileID = "file_id",
+                Filename = "filename",
+                ContentType = "content_type",
+                FileSize = 0,
             },
         ];
+        string expectedExternalUrl = "external_url";
         string expectedInstructions = "instructions";
 
-        Assert.Equal(expectedExternalUrl, deserialized.ExternalUrl);
-        Assert.NotNull(deserialized.Files);
         Assert.Equal(expectedFiles.Count, deserialized.Files.Count);
         for (int i = 0; i < expectedFiles.Count; i++)
         {
             Assert.Equal(expectedFiles[i], deserialized.Files[i]);
         }
+        Assert.Equal(expectedExternalUrl, deserialized.ExternalUrl);
         Assert.Equal(expectedInstructions, deserialized.Instructions);
     }
 
@@ -126,16 +139,19 @@ public class ProductDigitalProductDeliveryTest : TestBase
     {
         var model = new ProductDigitalProductDelivery
         {
-            ExternalUrl = "external_url",
             Files =
             [
                 new()
                 {
-                    FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    FileName = "file_name",
-                    Url = "url",
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
                 },
             ],
+            ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
@@ -145,12 +161,24 @@ public class ProductDigitalProductDeliveryTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new ProductDigitalProductDelivery { };
+        var model = new ProductDigitalProductDelivery
+        {
+            Files =
+            [
+                new()
+                {
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
+                },
+            ],
+        };
 
         Assert.Null(model.ExternalUrl);
         Assert.False(model.RawData.ContainsKey("external_url"));
-        Assert.Null(model.Files);
-        Assert.False(model.RawData.ContainsKey("files"));
         Assert.Null(model.Instructions);
         Assert.False(model.RawData.ContainsKey("instructions"));
     }
@@ -158,7 +186,21 @@ public class ProductDigitalProductDeliveryTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new ProductDigitalProductDelivery { };
+        var model = new ProductDigitalProductDelivery
+        {
+            Files =
+            [
+                new()
+                {
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
+                },
+            ],
+        };
 
         model.Validate();
     }
@@ -168,15 +210,25 @@ public class ProductDigitalProductDeliveryTest : TestBase
     {
         var model = new ProductDigitalProductDelivery
         {
+            Files =
+            [
+                new()
+                {
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
+                },
+            ],
+
             ExternalUrl = null,
-            Files = null,
             Instructions = null,
         };
 
         Assert.Null(model.ExternalUrl);
         Assert.True(model.RawData.ContainsKey("external_url"));
-        Assert.Null(model.Files);
-        Assert.True(model.RawData.ContainsKey("files"));
         Assert.Null(model.Instructions);
         Assert.True(model.RawData.ContainsKey("instructions"));
     }
@@ -186,8 +238,20 @@ public class ProductDigitalProductDeliveryTest : TestBase
     {
         var model = new ProductDigitalProductDelivery
         {
+            Files =
+            [
+                new()
+                {
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
+                },
+            ],
+
             ExternalUrl = null,
-            Files = null,
             Instructions = null,
         };
 
@@ -199,16 +263,19 @@ public class ProductDigitalProductDeliveryTest : TestBase
     {
         var model = new ProductDigitalProductDelivery
         {
-            ExternalUrl = "external_url",
             Files =
             [
                 new()
                 {
-                    FileID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    FileName = "file_name",
-                    Url = "url",
+                    DownloadUrl = "download_url",
+                    ExpiresIn = 0,
+                    FileID = "file_id",
+                    Filename = "filename",
+                    ContentType = "content_type",
+                    FileSize = 0,
                 },
             ],
+            ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 

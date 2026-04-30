@@ -238,6 +238,37 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
     }
 
     [Fact]
+    public void CreditOverageResetValidationWorks()
+    {
+        UnsafeUnwrapWebhookEvent value = new CreditOverageResetWebhookEvent()
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = CreditOverageResetWebhookEventType.CreditOverageReset,
+        };
+        value.Validate();
+    }
+
+    [Fact]
     public void CreditRolledOverValidationWorks()
     {
         UnsafeUnwrapWebhookEvent value = new CreditRolledOverWebhookEvent()
@@ -512,6 +543,234 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = DunningStartedWebhookEventType.DunningStarted,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void EntitlementGrantCreatedValidationWorks()
+    {
+        UnsafeUnwrapWebhookEvent value = new EntitlementGrantCreatedWebhookEvent()
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                ID = "id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CustomerID = "customer_id",
+                EntitlementID = "entitlement_id",
+                ExternalID = "external_id",
+                Status = EntitlementGrantCreatedWebhookEventDataStatus.Pending,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DigitalProductDelivery = new()
+                {
+                    Files =
+                    [
+                        new()
+                        {
+                            DownloadUrl = "download_url",
+                            ExpiresIn = 0,
+                            FileID = "file_id",
+                            Filename = "filename",
+                            ContentType = "content_type",
+                            FileSize = 0,
+                        },
+                    ],
+                    ExternalUrl = "external_url",
+                    Instructions = "instructions",
+                },
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                LicenseKey = new()
+                {
+                    ActivationsUsed = 0,
+                    Key = "key",
+                    ActivationsLimit = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OAuthUrl = "oauth_url",
+                PaymentID = "payment_id",
+                RevocationReason = "revocation_reason",
+                RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void EntitlementGrantDeliveredValidationWorks()
+    {
+        UnsafeUnwrapWebhookEvent value = new EntitlementGrantDeliveredWebhookEvent()
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                ID = "id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CustomerID = "customer_id",
+                EntitlementID = "entitlement_id",
+                ExternalID = "external_id",
+                Status = EntitlementGrantDeliveredWebhookEventDataStatus.Pending,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DigitalProductDelivery = new()
+                {
+                    Files =
+                    [
+                        new()
+                        {
+                            DownloadUrl = "download_url",
+                            ExpiresIn = 0,
+                            FileID = "file_id",
+                            Filename = "filename",
+                            ContentType = "content_type",
+                            FileSize = 0,
+                        },
+                    ],
+                    ExternalUrl = "external_url",
+                    Instructions = "instructions",
+                },
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                LicenseKey = new()
+                {
+                    ActivationsUsed = 0,
+                    Key = "key",
+                    ActivationsLimit = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OAuthUrl = "oauth_url",
+                PaymentID = "payment_id",
+                RevocationReason = "revocation_reason",
+                RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = EntitlementGrantDeliveredWebhookEventType.EntitlementGrantDelivered,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void EntitlementGrantFailedValidationWorks()
+    {
+        UnsafeUnwrapWebhookEvent value = new EntitlementGrantFailedWebhookEvent()
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                ID = "id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CustomerID = "customer_id",
+                EntitlementID = "entitlement_id",
+                ExternalID = "external_id",
+                Status = EntitlementGrantFailedWebhookEventDataStatus.Pending,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DigitalProductDelivery = new()
+                {
+                    Files =
+                    [
+                        new()
+                        {
+                            DownloadUrl = "download_url",
+                            ExpiresIn = 0,
+                            FileID = "file_id",
+                            Filename = "filename",
+                            ContentType = "content_type",
+                            FileSize = 0,
+                        },
+                    ],
+                    ExternalUrl = "external_url",
+                    Instructions = "instructions",
+                },
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                LicenseKey = new()
+                {
+                    ActivationsUsed = 0,
+                    Key = "key",
+                    ActivationsLimit = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OAuthUrl = "oauth_url",
+                PaymentID = "payment_id",
+                RevocationReason = "revocation_reason",
+                RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = EntitlementGrantFailedWebhookEventType.EntitlementGrantFailed,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void EntitlementGrantRevokedValidationWorks()
+    {
+        UnsafeUnwrapWebhookEvent value = new EntitlementGrantRevokedWebhookEvent()
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                ID = "id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CustomerID = "customer_id",
+                EntitlementID = "entitlement_id",
+                ExternalID = "external_id",
+                Status = EntitlementGrantRevokedWebhookEventDataStatus.Pending,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DigitalProductDelivery = new()
+                {
+                    Files =
+                    [
+                        new()
+                        {
+                            DownloadUrl = "download_url",
+                            ExpiresIn = 0,
+                            FileID = "file_id",
+                            Filename = "filename",
+                            ContentType = "content_type",
+                            FileSize = 0,
+                        },
+                    ],
+                    ExternalUrl = "external_url",
+                    Instructions = "instructions",
+                },
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                LicenseKey = new()
+                {
+                    ActivationsUsed = 0,
+                    Key = "key",
+                    ActivationsLimit = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OAuthUrl = "oauth_url",
+                PaymentID = "payment_id",
+                RevocationReason = "revocation_reason",
+                RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = EntitlementGrantRevokedWebhookEventType.EntitlementGrantRevoked,
         };
         value.Validate();
     }
@@ -1076,6 +1335,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -1199,6 +1460,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -1322,6 +1585,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -1445,6 +1710,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -1568,6 +1835,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -1691,6 +1960,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -1814,6 +2085,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -1937,6 +2210,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -2229,6 +2504,43 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = CreditOverageChargedWebhookEventType.CreditOverageCharged,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditOverageResetSerializationRoundtripWorks()
+    {
+        UnsafeUnwrapWebhookEvent value = new CreditOverageResetWebhookEvent()
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                ID = "id",
+                Amount = "amount",
+                BalanceAfter = "balance_after",
+                BalanceBefore = "balance_before",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreditEntitlementID = "credit_entitlement_id",
+                CustomerID = "customer_id",
+                IsCredit = true,
+                OverageAfter = "overage_after",
+                OverageBefore = "overage_before",
+                TransactionType = TransactionType.CreditAdded,
+                Description = "description",
+                GrantID = "grant_id",
+                ReferenceID = "reference_id",
+                ReferenceType = "reference_type",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = CreditOverageResetWebhookEventType.CreditOverageReset,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2574,6 +2886,258 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = DunningStartedWebhookEventType.DunningStarted,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void EntitlementGrantCreatedSerializationRoundtripWorks()
+    {
+        UnsafeUnwrapWebhookEvent value = new EntitlementGrantCreatedWebhookEvent()
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                ID = "id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CustomerID = "customer_id",
+                EntitlementID = "entitlement_id",
+                ExternalID = "external_id",
+                Status = EntitlementGrantCreatedWebhookEventDataStatus.Pending,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DigitalProductDelivery = new()
+                {
+                    Files =
+                    [
+                        new()
+                        {
+                            DownloadUrl = "download_url",
+                            ExpiresIn = 0,
+                            FileID = "file_id",
+                            Filename = "filename",
+                            ContentType = "content_type",
+                            FileSize = 0,
+                        },
+                    ],
+                    ExternalUrl = "external_url",
+                    Instructions = "instructions",
+                },
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                LicenseKey = new()
+                {
+                    ActivationsUsed = 0,
+                    Key = "key",
+                    ActivationsLimit = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OAuthUrl = "oauth_url",
+                PaymentID = "payment_id",
+                RevocationReason = "revocation_reason",
+                RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void EntitlementGrantDeliveredSerializationRoundtripWorks()
+    {
+        UnsafeUnwrapWebhookEvent value = new EntitlementGrantDeliveredWebhookEvent()
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                ID = "id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CustomerID = "customer_id",
+                EntitlementID = "entitlement_id",
+                ExternalID = "external_id",
+                Status = EntitlementGrantDeliveredWebhookEventDataStatus.Pending,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DigitalProductDelivery = new()
+                {
+                    Files =
+                    [
+                        new()
+                        {
+                            DownloadUrl = "download_url",
+                            ExpiresIn = 0,
+                            FileID = "file_id",
+                            Filename = "filename",
+                            ContentType = "content_type",
+                            FileSize = 0,
+                        },
+                    ],
+                    ExternalUrl = "external_url",
+                    Instructions = "instructions",
+                },
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                LicenseKey = new()
+                {
+                    ActivationsUsed = 0,
+                    Key = "key",
+                    ActivationsLimit = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OAuthUrl = "oauth_url",
+                PaymentID = "payment_id",
+                RevocationReason = "revocation_reason",
+                RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = EntitlementGrantDeliveredWebhookEventType.EntitlementGrantDelivered,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void EntitlementGrantFailedSerializationRoundtripWorks()
+    {
+        UnsafeUnwrapWebhookEvent value = new EntitlementGrantFailedWebhookEvent()
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                ID = "id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CustomerID = "customer_id",
+                EntitlementID = "entitlement_id",
+                ExternalID = "external_id",
+                Status = EntitlementGrantFailedWebhookEventDataStatus.Pending,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DigitalProductDelivery = new()
+                {
+                    Files =
+                    [
+                        new()
+                        {
+                            DownloadUrl = "download_url",
+                            ExpiresIn = 0,
+                            FileID = "file_id",
+                            Filename = "filename",
+                            ContentType = "content_type",
+                            FileSize = 0,
+                        },
+                    ],
+                    ExternalUrl = "external_url",
+                    Instructions = "instructions",
+                },
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                LicenseKey = new()
+                {
+                    ActivationsUsed = 0,
+                    Key = "key",
+                    ActivationsLimit = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OAuthUrl = "oauth_url",
+                PaymentID = "payment_id",
+                RevocationReason = "revocation_reason",
+                RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = EntitlementGrantFailedWebhookEventType.EntitlementGrantFailed,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void EntitlementGrantRevokedSerializationRoundtripWorks()
+    {
+        UnsafeUnwrapWebhookEvent value = new EntitlementGrantRevokedWebhookEvent()
+        {
+            BusinessID = "business_id",
+            Data = new()
+            {
+                ID = "id",
+                BusinessID = "business_id",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CustomerID = "customer_id",
+                EntitlementID = "entitlement_id",
+                ExternalID = "external_id",
+                Status = EntitlementGrantRevokedWebhookEventDataStatus.Pending,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DigitalProductDelivery = new()
+                {
+                    Files =
+                    [
+                        new()
+                        {
+                            DownloadUrl = "download_url",
+                            ExpiresIn = 0,
+                            FileID = "file_id",
+                            Filename = "filename",
+                            ContentType = "content_type",
+                            FileSize = 0,
+                        },
+                    ],
+                    ExternalUrl = "external_url",
+                    Instructions = "instructions",
+                },
+                ErrorCode = "error_code",
+                ErrorMessage = "error_message",
+                LicenseKey = new()
+                {
+                    ActivationsUsed = 0,
+                    Key = "key",
+                    ActivationsLimit = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                OAuthUrl = "oauth_url",
+                PaymentID = "payment_id",
+                RevocationReason = "revocation_reason",
+                RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                SubscriptionID = "subscription_id",
+            },
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = EntitlementGrantRevokedWebhookEventType.EntitlementGrantRevoked,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3186,6 +3750,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -3315,6 +3881,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -3444,6 +4012,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -3573,6 +4143,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -3702,6 +4274,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -3831,6 +4405,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -3960,6 +4536,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
@@ -4089,6 +4667,8 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionPeriodInterval = TimeInterval.Day,
                 TaxInclusive = true,
                 TrialPeriodDays = 0,
+                CancellationComment = "cancellation_comment",
+                CancellationFeedback = SubscriptionCancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,

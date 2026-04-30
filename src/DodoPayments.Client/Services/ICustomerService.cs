@@ -108,6 +108,21 @@ public interface ICustomerService
     );
 
     /// <summary>
+    /// List all entitlement grants delivered (or in flight) to a customer.
+    /// </summary>
+    Task<CustomerListEntitlementsResponse> ListEntitlements(
+        CustomerListEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListEntitlements(CustomerListEntitlementsParams, CancellationToken)"/>
+    Task<CustomerListEntitlementsResponse> ListEntitlements(
+        string customerID,
+        CustomerListEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Sends a request to <c>get /customers/{customer_id}/payment-methods</c>.
     /// </summary>
     Task<CustomerRetrievePaymentMethodsResponse> RetrievePaymentMethods(
@@ -219,6 +234,22 @@ public interface ICustomerServiceWithRawResponse
     Task<HttpResponse<CustomerListCreditEntitlementsResponse>> ListCreditEntitlements(
         string customerID,
         CustomerListCreditEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /customers/{customer_id}/entitlements</c>, but is otherwise the
+    /// same as <see cref="ICustomerService.ListEntitlements(CustomerListEntitlementsParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerListEntitlementsResponse>> ListEntitlements(
+        CustomerListEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListEntitlements(CustomerListEntitlementsParams, CancellationToken)"/>
+    Task<HttpResponse<CustomerListEntitlementsResponse>> ListEntitlements(
+        string customerID,
+        CustomerListEntitlementsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

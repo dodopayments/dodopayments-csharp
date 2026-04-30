@@ -17,6 +17,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -31,6 +32,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         > expectedProrationBillingMode =
             UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately;
         int expectedQuantity = 0;
+        bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         string expectedDiscountCode = "discount_code";
         ApiEnum<string, UpdateSubscriptionPlanReqEffectiveAt> expectedEffectiveAt =
@@ -42,6 +44,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         Assert.Equal(expectedProductID, model.ProductID);
         Assert.Equal(expectedProrationBillingMode, model.ProrationBillingMode);
         Assert.Equal(expectedQuantity, model.Quantity);
+        Assert.Equal(expectedAdaptiveCurrencyFeesInclusive, model.AdaptiveCurrencyFeesInclusive);
         Assert.NotNull(model.Addons);
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -70,6 +73,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -95,6 +99,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -116,6 +121,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         > expectedProrationBillingMode =
             UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately;
         int expectedQuantity = 0;
+        bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         string expectedDiscountCode = "discount_code";
         ApiEnum<string, UpdateSubscriptionPlanReqEffectiveAt> expectedEffectiveAt =
@@ -127,6 +133,10 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         Assert.Equal(expectedProductID, deserialized.ProductID);
         Assert.Equal(expectedProrationBillingMode, deserialized.ProrationBillingMode);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
+        Assert.Equal(
+            expectedAdaptiveCurrencyFeesInclusive,
+            deserialized.AdaptiveCurrencyFeesInclusive
+        );
         Assert.NotNull(deserialized.Addons);
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -155,6 +165,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -174,6 +185,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -193,6 +205,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -211,6 +224,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -233,6 +247,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -257,6 +272,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
         };
 
+        Assert.Null(model.AdaptiveCurrencyFeesInclusive);
+        Assert.False(model.RawData.ContainsKey("adaptive_currency_fees_inclusive"));
         Assert.Null(model.Addons);
         Assert.False(model.RawData.ContainsKey("addons"));
         Assert.Null(model.DiscountCode);
@@ -293,12 +310,15 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
 
+            AdaptiveCurrencyFeesInclusive = null,
             Addons = null,
             DiscountCode = null,
             Metadata = null,
             OnPaymentFailure = null,
         };
 
+        Assert.Null(model.AdaptiveCurrencyFeesInclusive);
+        Assert.True(model.RawData.ContainsKey("adaptive_currency_fees_inclusive"));
         Assert.Null(model.Addons);
         Assert.True(model.RawData.ContainsKey("addons"));
         Assert.Null(model.DiscountCode);
@@ -320,6 +340,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
 
+            AdaptiveCurrencyFeesInclusive = null,
             Addons = null,
             DiscountCode = null,
             Metadata = null,
@@ -338,6 +359,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,

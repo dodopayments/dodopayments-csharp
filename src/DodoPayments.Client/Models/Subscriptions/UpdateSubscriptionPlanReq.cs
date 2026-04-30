@@ -60,6 +60,20 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
     }
 
     /// <summary>
+    /// Whether adaptive currency fees should be included in the price (true) or
+    /// added on top (false). If not specified, uses the subscription's stored setting.
+    /// </summary>
+    public bool? AdaptiveCurrencyFeesInclusive
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("adaptive_currency_fees_inclusive");
+        }
+        init { this._rawData.Set("adaptive_currency_fees_inclusive", value); }
+    }
+
+    /// <summary>
     /// Addons for the new plan. Note : Leaving this empty would remove any existing addons
     /// </summary>
     public IReadOnlyList<AttachAddon>? Addons
@@ -164,6 +178,7 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
         _ = this.ProductID;
         this.ProrationBillingMode.Validate();
         _ = this.Quantity;
+        _ = this.AdaptiveCurrencyFeesInclusive;
         foreach (var item in this.Addons ?? [])
         {
             item.Validate();

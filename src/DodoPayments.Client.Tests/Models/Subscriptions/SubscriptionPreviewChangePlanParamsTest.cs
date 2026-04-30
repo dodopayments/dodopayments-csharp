@@ -19,6 +19,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
@@ -34,6 +35,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         > expectedProrationBillingMode =
             SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately;
         int expectedQuantity = 0;
+        bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         string expectedDiscountCode = "discount_code";
         ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt> expectedEffectiveAt =
@@ -49,6 +51,10 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         Assert.Equal(expectedProductID, parameters.ProductID);
         Assert.Equal(expectedProrationBillingMode, parameters.ProrationBillingMode);
         Assert.Equal(expectedQuantity, parameters.Quantity);
+        Assert.Equal(
+            expectedAdaptiveCurrencyFeesInclusive,
+            parameters.AdaptiveCurrencyFeesInclusive
+        );
         Assert.NotNull(parameters.Addons);
         Assert.Equal(expectedAddons.Count, parameters.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -78,6 +84,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -98,6 +105,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -124,6 +132,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
         };
 
+        Assert.Null(parameters.AdaptiveCurrencyFeesInclusive);
+        Assert.False(parameters.RawBodyData.ContainsKey("adaptive_currency_fees_inclusive"));
         Assert.Null(parameters.Addons);
         Assert.False(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.DiscountCode);
@@ -146,12 +156,15 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Quantity = 0,
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
 
+            AdaptiveCurrencyFeesInclusive = null,
             Addons = null,
             DiscountCode = null,
             Metadata = null,
             OnPaymentFailure = null,
         };
 
+        Assert.Null(parameters.AdaptiveCurrencyFeesInclusive);
+        Assert.True(parameters.RawBodyData.ContainsKey("adaptive_currency_fees_inclusive"));
         Assert.Null(parameters.Addons);
         Assert.True(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.DiscountCode);
@@ -196,6 +209,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,

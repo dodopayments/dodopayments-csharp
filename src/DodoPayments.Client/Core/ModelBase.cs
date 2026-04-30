@@ -3,7 +3,6 @@ using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Brands;
 using DodoPayments.Client.Models.CheckoutSessions;
 using DodoPayments.Client.Models.CreditEntitlements;
-using DodoPayments.Client.Models.Customers;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Disputes;
@@ -12,6 +11,9 @@ using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Products;
 using Balances = DodoPayments.Client.Models.Balances;
 using CreditEntitlementsBalances = DodoPayments.Client.Models.CreditEntitlements.Balances;
+using Customers = DodoPayments.Client.Models.Customers;
+using Entitlements = DodoPayments.Client.Models.Entitlements;
+using Grants = DodoPayments.Client.Models.Entitlements.Grants;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Meters = DodoPayments.Client.Models.Meters;
 using Payouts = DodoPayments.Client.Models.Payouts;
@@ -48,6 +50,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, PaymentMethodTypes>(),
             new ApiEnumConverter<string, PaymentRefundStatus>(),
             new ApiEnumConverter<string, Status>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionCancellationFeedback>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
             new ApiEnumConverter<string, Subscriptions::TimeInterval>(),
             new ApiEnumConverter<
@@ -63,6 +66,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::LineItemAddonType>(),
             new ApiEnumConverter<string, Subscriptions::MeterType>(),
             new ApiEnumConverter<string, Subscriptions::CancelReason>(),
+            new ApiEnumConverter<string, Subscriptions::CancellationFeedback>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
             new ApiEnumConverter<string, Subscriptions::EffectiveAt>(),
@@ -85,7 +89,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, LicenseKeys::LicenseKeyStatus>(),
             new ApiEnumConverter<string, LicenseKeys::Source>(),
             new ApiEnumConverter<string, LicenseKeys::Status>(),
-            new ApiEnumConverter<string, PaymentMethod>(),
+            new ApiEnumConverter<string, Customers::IntegrationType>(),
+            new ApiEnumConverter<string, Customers::Status>(),
+            new ApiEnumConverter<string, Customers::PaymentMethod>(),
             new ApiEnumConverter<string, EventType>(),
             new ApiEnumConverter<string, EntryType>(),
             new ApiEnumConverter<string, Refunds::RefundStatus>(),
@@ -123,6 +129,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Webhooks::CreditExpiredWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::CreditManualAdjustmentWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::CreditOverageChargedWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::CreditOverageResetWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::CreditRolledOverWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::CreditRolloverForfeitedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::DisputeAcceptedWebhookEventType>(),
@@ -138,6 +145,17 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventDataStatus>(),
             new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventDataTriggerState>(),
             new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::EntitlementGrantCreatedWebhookEventDataStatus>(),
+            new ApiEnumConverter<string, Webhooks::EntitlementGrantCreatedWebhookEventType>(),
+            new ApiEnumConverter<
+                string,
+                Webhooks::EntitlementGrantDeliveredWebhookEventDataStatus
+            >(),
+            new ApiEnumConverter<string, Webhooks::EntitlementGrantDeliveredWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::EntitlementGrantFailedWebhookEventDataStatus>(),
+            new ApiEnumConverter<string, Webhooks::EntitlementGrantFailedWebhookEventType>(),
+            new ApiEnumConverter<string, Webhooks::EntitlementGrantRevokedWebhookEventDataStatus>(),
+            new ApiEnumConverter<string, Webhooks::EntitlementGrantRevokedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::LicenseKeyCreatedWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::PaymentCancelledWebhookEventType>(),
             new ApiEnumConverter<string, Webhooks::PaymentFailedWebhookEventType>(),
@@ -186,6 +204,18 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CreditEntitlementsBalances::LedgerEntryType>(),
             new ApiEnumConverter<string, CreditEntitlementsBalances::SourceType>(),
             new ApiEnumConverter<string, CreditEntitlementsBalances::Status>(),
+            new ApiEnumConverter<string, Entitlements::EntitlementCreateResponseIntegrationType>(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementRetrieveResponseIntegrationType
+            >(),
+            new ApiEnumConverter<string, Entitlements::EntitlementUpdateResponseIntegrationType>(),
+            new ApiEnumConverter<string, Entitlements::EntitlementListResponseIntegrationType>(),
+            new ApiEnumConverter<string, Entitlements::IntegrationType>(),
+            new ApiEnumConverter<string, Entitlements::EntitlementListParamsIntegrationType>(),
+            new ApiEnumConverter<string, Grants::GrantListResponseStatus>(),
+            new ApiEnumConverter<string, Grants::GrantRevokeResponseStatus>(),
+            new ApiEnumConverter<string, Grants::Status>(),
         },
     };
 

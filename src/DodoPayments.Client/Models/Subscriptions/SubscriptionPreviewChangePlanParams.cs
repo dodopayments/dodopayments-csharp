@@ -72,6 +72,20 @@ public record class SubscriptionPreviewChangePlanParams : ParamsBase
     }
 
     /// <summary>
+    /// Whether adaptive currency fees should be included in the price (true) or
+    /// added on top (false). If not specified, uses the subscription's stored setting.
+    /// </summary>
+    public bool? AdaptiveCurrencyFeesInclusive
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("adaptive_currency_fees_inclusive");
+        }
+        init { this._rawBodyData.Set("adaptive_currency_fees_inclusive", value); }
+    }
+
+    /// <summary>
     /// Addons for the new plan. Note : Leaving this empty would remove any existing addons
     /// </summary>
     public IReadOnlyList<AttachAddon>? Addons
