@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.17.0 (2026-04-30)
+
+Full Changelog: [v6.16.0...v6.17.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.16.0...v6.17.0)
+
+### Features
+
+* **api:** added more models to make the dx easy ([481d0bc](https://github.com/dodopayments/dodopayments-csharp/commit/481d0bc7d2d9d5a6c0bbddf5cd6dd71803703e07))
+* **api:** updated openapi spec to v1.97.5 ([c6ff296](https://github.com/dodopayments/dodopayments-csharp/commit/c6ff296665fde9e7906aa45ef32362185dea9f4b))
+
 ## 6.16.0 (2026-04-28)
 
 Full Changelog: [v6.15.1...v6.16.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.15.1...v6.16.0)
