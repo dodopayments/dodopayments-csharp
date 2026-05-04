@@ -9,10 +9,7 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.Entitlements.Files;
 
 /// <summary>
-/// Companion to `post_entitlement_file`. Deletes the file from the Entitlements Engine
-/// (force=true) and atomically removes the `file_id` from the entitlement's `integration_config.digital_file_ids`
-/// JSONB array. EE delete happens first; if it fails we surface the error and leave
-/// local state untouched.
+/// Detach a previously-attached file from a `digital_files` entitlement.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

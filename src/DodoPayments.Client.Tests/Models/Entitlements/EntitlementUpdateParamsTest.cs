@@ -15,7 +15,7 @@ public class EntitlementUpdateParamsTest : TestBase
             Description = "description",
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = "permission",
+                Permission = Permission.Pull,
                 TargetID = "target_id",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -26,7 +26,7 @@ public class EntitlementUpdateParamsTest : TestBase
         string expectedDescription = "description";
         IntegrationConfig expectedIntegrationConfig = new GitHubConfig()
         {
-            Permission = "permission",
+            Permission = Permission.Pull,
             TargetID = "target_id",
         };
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
@@ -105,7 +105,7 @@ public class EntitlementUpdateParamsTest : TestBase
             Description = "description",
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = "permission",
+                Permission = Permission.Pull,
                 TargetID = "target_id",
             },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },

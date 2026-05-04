@@ -22,15 +22,15 @@ public class EntitlementListPageResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
-                        Permission = "permission",
+                        Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                         TargetID = "target_id",
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
-                    Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 },
             ],
         };
@@ -44,15 +44,15 @@ public class EntitlementListPageResponseTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                 {
-                    Permission = "permission",
+                    Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                     TargetID = "target_id",
                 },
                 IntegrationType = EntitlementIntegrationType.Discord,
                 IsActive = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
-                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             },
         ];
 
@@ -77,15 +77,15 @@ public class EntitlementListPageResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
-                        Permission = "permission",
+                        Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                         TargetID = "target_id",
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
-                    Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 },
             ],
         };
@@ -113,15 +113,15 @@ public class EntitlementListPageResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
-                        Permission = "permission",
+                        Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                         TargetID = "target_id",
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
-                    Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 },
             ],
         };
@@ -142,15 +142,15 @@ public class EntitlementListPageResponseTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                 {
-                    Permission = "permission",
+                    Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                     TargetID = "target_id",
                 },
                 IntegrationType = EntitlementIntegrationType.Discord,
                 IsActive = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
-                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             },
         ];
 
@@ -175,15 +175,15 @@ public class EntitlementListPageResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
-                        Permission = "permission",
+                        Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                         TargetID = "target_id",
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
-                    Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 },
             ],
         };
@@ -205,15 +205,15 @@ public class EntitlementListPageResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
-                        Permission = "permission",
+                        Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                         TargetID = "target_id",
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
-                    Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
                 },
             ],
         };

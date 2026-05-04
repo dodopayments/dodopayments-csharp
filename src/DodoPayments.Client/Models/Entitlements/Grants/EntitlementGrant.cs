@@ -10,9 +10,16 @@ using Products = DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Models.Entitlements.Grants;
 
+/// <summary>
+/// Detailed view of a single entitlement grant: who it's for, its lifecycle state,
+/// and any integration-specific delivery payload.
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<EntitlementGrant, EntitlementGrantFromRaw>))]
 public sealed record class EntitlementGrant : JsonModel
 {
+    /// <summary>
+    /// Unique identifier of the grant.
+    /// </summary>
     public required string ID
     {
         get
@@ -23,6 +30,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("id", value); }
     }
 
+    /// <summary>
+    /// Identifier of the business that owns the grant.
+    /// </summary>
     public required string BusinessID
     {
         get
@@ -33,6 +43,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("business_id", value); }
     }
 
+    /// <summary>
+    /// Timestamp when the grant was created.
+    /// </summary>
     public required DateTimeOffset CreatedAt
     {
         get
@@ -43,6 +56,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("created_at", value); }
     }
 
+    /// <summary>
+    /// Identifier of the customer the grant was issued to.
+    /// </summary>
     public required string CustomerID
     {
         get
@@ -53,6 +69,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("customer_id", value); }
     }
 
+    /// <summary>
+    /// Identifier of the entitlement this grant was issued from.
+    /// </summary>
     public required string EntitlementID
     {
         get
@@ -63,16 +82,28 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("entitlement_id", value); }
     }
 
-    public required string ExternalID
+    /// <summary>
+    /// Arbitrary key-value metadata recorded on the grant.
+    /// </summary>
+    public required IReadOnlyDictionary<string, string> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("external_id");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
         }
-        init { this._rawData.Set("external_id", value); }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
     }
 
+    /// <summary>
+    /// Lifecycle status of the grant.
+    /// </summary>
     public required ApiEnum<string, EntitlementGrantStatus> Status
     {
         get
@@ -83,6 +114,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("status", value); }
     }
 
+    /// <summary>
+    /// Timestamp when the grant was last modified.
+    /// </summary>
     public required DateTimeOffset UpdatedAt
     {
         get
@@ -93,6 +127,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("updated_at", value); }
     }
 
+    /// <summary>
+    /// Timestamp when the grant transitioned to `delivered`, when applicable.
+    /// </summary>
     public DateTimeOffset? DeliveredAt
     {
         get
@@ -104,8 +141,8 @@ public sealed record class EntitlementGrant : JsonModel
     }
 
     /// <summary>
-    /// Present only when the entitlement integration_type is `digital_files`. Populated
-    /// eagerly on every list and single-record endpoint.
+    /// Digital-product-delivery payload, present when the entitlement integration
+    /// is `digital_files`.
     /// </summary>
     public Products::ProductDigitalProductDelivery? DigitalProductDelivery
     {
@@ -119,6 +156,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("digital_product_delivery", value); }
     }
 
+    /// <summary>
+    /// Machine-readable code reported when delivery failed, when applicable.
+    /// </summary>
     public string? ErrorCode
     {
         get
@@ -129,6 +169,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("error_code", value); }
     }
 
+    /// <summary>
+    /// Human-readable message reported when delivery failed, when applicable.
+    /// </summary>
     public string? ErrorMessage
     {
         get
@@ -140,7 +183,7 @@ public sealed record class EntitlementGrant : JsonModel
     }
 
     /// <summary>
-    /// Present only when the entitlement integration_type is `license_key`.
+    /// License-key delivery payload, present when the entitlement integration is `license_key`.
     /// </summary>
     public LicenseKeyGrant? LicenseKey
     {
@@ -152,24 +195,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("license_key", value); }
     }
 
-    public JsonElement? Metadata
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<JsonElement>("metadata");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("metadata", value);
-        }
-    }
-
+    /// <summary>
+    /// Timestamp when `oauth_url` stops being valid, when applicable.
+    /// </summary>
     public DateTimeOffset? OAuthExpiresAt
     {
         get
@@ -180,6 +208,11 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("oauth_expires_at", value); }
     }
 
+    /// <summary>
+    /// Customer-facing OAuth URL for OAuth-style integrations. Populated during
+    /// the customer-portal accept flow; `null` until the customer completes that
+    /// step, and on grants for non-OAuth integrations.
+    /// </summary>
     public string? OAuthUrl
     {
         get
@@ -190,6 +223,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("oauth_url", value); }
     }
 
+    /// <summary>
+    /// Identifier of the payment that triggered this grant, when applicable.
+    /// </summary>
     public string? PaymentID
     {
         get
@@ -200,6 +236,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("payment_id", value); }
     }
 
+    /// <summary>
+    /// Reason recorded when the grant was revoked, when applicable.
+    /// </summary>
     public string? RevocationReason
     {
         get
@@ -210,6 +249,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("revocation_reason", value); }
     }
 
+    /// <summary>
+    /// Timestamp when the grant transitioned to `revoked`, when applicable.
+    /// </summary>
     public DateTimeOffset? RevokedAt
     {
         get
@@ -220,6 +262,9 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("revoked_at", value); }
     }
 
+    /// <summary>
+    /// Identifier of the subscription that triggered this grant, when applicable.
+    /// </summary>
     public string? SubscriptionID
     {
         get
@@ -238,7 +283,7 @@ public sealed record class EntitlementGrant : JsonModel
         _ = this.CreatedAt;
         _ = this.CustomerID;
         _ = this.EntitlementID;
-        _ = this.ExternalID;
+        _ = this.Metadata;
         this.Status.Validate();
         _ = this.UpdatedAt;
         _ = this.DeliveredAt;
@@ -246,7 +291,6 @@ public sealed record class EntitlementGrant : JsonModel
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
         this.LicenseKey?.Validate();
-        _ = this.Metadata;
         _ = this.OAuthExpiresAt;
         _ = this.OAuthUrl;
         _ = this.PaymentID;
@@ -292,6 +336,9 @@ class EntitlementGrantFromRaw : IFromRawJson<EntitlementGrant>
         EntitlementGrant.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Lifecycle status of the grant.
+/// </summary>
 [JsonConverter(typeof(EntitlementGrantStatusConverter))]
 public enum EntitlementGrantStatus
 {

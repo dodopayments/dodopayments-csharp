@@ -14,7 +14,7 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = "permission",
+                Permission = Permission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -25,7 +25,7 @@ public class EntitlementCreateParamsTest : TestBase
 
         IntegrationConfig expectedIntegrationConfig = new GitHubConfig()
         {
-            Permission = "permission",
+            Permission = Permission.Pull,
             TargetID = "target_id",
         };
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
@@ -49,23 +49,63 @@ public class EntitlementCreateParamsTest : TestBase
     }
 
     [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new EntitlementCreateParams
+        {
+            IntegrationConfig = new GitHubConfig()
+            {
+                Permission = Permission.Pull,
+                TargetID = "target_id",
+            },
+            IntegrationType = EntitlementIntegrationType.Discord,
+            Name = "name",
+            Description = "description",
+        };
+
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new EntitlementCreateParams
+        {
+            IntegrationConfig = new GitHubConfig()
+            {
+                Permission = Permission.Pull,
+                TargetID = "target_id",
+            },
+            IntegrationType = EntitlementIntegrationType.Discord,
+            Name = "name",
+            Description = "description",
+
+            // Null should be interpreted as omitted for these properties
+            Metadata = null,
+        };
+
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+    }
+
+    [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
         var parameters = new EntitlementCreateParams
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = "permission",
+                Permission = Permission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
         Assert.Null(parameters.Description);
         Assert.False(parameters.RawBodyData.ContainsKey("description"));
-        Assert.Null(parameters.Metadata);
-        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
     }
 
     [Fact]
@@ -75,20 +115,18 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = "permission",
+                Permission = Permission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
             Description = null,
-            Metadata = null,
         };
 
         Assert.Null(parameters.Description);
         Assert.True(parameters.RawBodyData.ContainsKey("description"));
-        Assert.Null(parameters.Metadata);
-        Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
     }
 
     [Fact]
@@ -98,7 +136,7 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = "permission",
+                Permission = Permission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -117,7 +155,7 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = "permission",
+                Permission = Permission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,

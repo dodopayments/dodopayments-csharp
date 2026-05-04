@@ -12,10 +12,10 @@ using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 namespace DodoPayments.Client.Models.Entitlements;
 
 /// <summary>
-/// Public-facing variant of [`IntegrationConfig`].  Mirrors every variant shape
-/// on the wire EXCEPT `DigitalFiles`, which is replaced with a hydrated `digital_files`
-/// object (resolved download URLs etc.).  The persisted JSONB stays ID-only via [`IntegrationConfig`];
-/// this enum is response-only.
+/// Integration-specific configuration on an entitlement read response.
+///
+/// <para>For `digital_files` entitlements the response includes presigned download
+/// URLs for each attached file; other integrations match the shape supplied at creation.</para>
 /// </summary>
 [JsonConverter(typeof(IntegrationConfigResponseConverter))]
 public record class IntegrationConfigResponse : ModelBase
@@ -683,16 +683,24 @@ sealed class IntegrationConfigResponseConverter : JsonConverter<IntegrationConfi
 )]
 public sealed record class IntegrationConfigResponseGitHubConfig : JsonModel
 {
-    public required string Permission
+    /// <summary>
+    /// Permission to grant on the repository.
+    /// </summary>
+    public required ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission> Permission
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("permission");
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission>
+            >("permission");
         }
         init { this._rawData.Set("permission", value); }
     }
 
+    /// <summary>
+    /// Repository or organisation slug to grant access to.
+    /// </summary>
     public required string TargetID
     {
         get
@@ -706,7 +714,7 @@ public sealed record class IntegrationConfigResponseGitHubConfig : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.Permission;
+        this.Permission.Validate();
         _ = this.TargetID;
     }
 
@@ -751,6 +759,63 @@ class IntegrationConfigResponseGitHubConfigFromRaw
     ) => IntegrationConfigResponseGitHubConfig.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Permission to grant on the repository.
+/// </summary>
+[JsonConverter(typeof(IntegrationConfigResponseGitHubConfigPermissionConverter))]
+public enum IntegrationConfigResponseGitHubConfigPermission
+{
+    Pull,
+    Push,
+    Admin,
+    Maintain,
+    Triage,
+}
+
+sealed class IntegrationConfigResponseGitHubConfigPermissionConverter
+    : JsonConverter<IntegrationConfigResponseGitHubConfigPermission>
+{
+    public override IntegrationConfigResponseGitHubConfigPermission Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "pull" => IntegrationConfigResponseGitHubConfigPermission.Pull,
+            "push" => IntegrationConfigResponseGitHubConfigPermission.Push,
+            "admin" => IntegrationConfigResponseGitHubConfigPermission.Admin,
+            "maintain" => IntegrationConfigResponseGitHubConfigPermission.Maintain,
+            "triage" => IntegrationConfigResponseGitHubConfigPermission.Triage,
+            _ => (IntegrationConfigResponseGitHubConfigPermission)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        IntegrationConfigResponseGitHubConfigPermission value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                IntegrationConfigResponseGitHubConfigPermission.Pull => "pull",
+                IntegrationConfigResponseGitHubConfigPermission.Push => "push",
+                IntegrationConfigResponseGitHubConfigPermission.Admin => "admin",
+                IntegrationConfigResponseGitHubConfigPermission.Maintain => "maintain",
+                IntegrationConfigResponseGitHubConfigPermission.Triage => "triage",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
 [JsonConverter(
     typeof(JsonModelConverter<
         IntegrationConfigResponseDiscordConfig,
@@ -759,6 +824,9 @@ class IntegrationConfigResponseGitHubConfigFromRaw
 )]
 public sealed record class IntegrationConfigResponseDiscordConfig : JsonModel
 {
+    /// <summary>
+    /// Discord guild (server) ID.
+    /// </summary>
     public required string GuildID
     {
         get
@@ -769,6 +837,9 @@ public sealed record class IntegrationConfigResponseDiscordConfig : JsonModel
         init { this._rawData.Set("guild_id", value); }
     }
 
+    /// <summary>
+    /// Optional Discord role to assign within the guild.
+    /// </summary>
     public string? RoleID
     {
         get
@@ -842,6 +913,9 @@ class IntegrationConfigResponseDiscordConfigFromRaw
 )]
 public sealed record class IntegrationConfigResponseTelegramConfig : JsonModel
 {
+    /// <summary>
+    /// Telegram chat ID. For groups this is typically a negative integer.
+    /// </summary>
     public required string ChatID
     {
         get
@@ -914,6 +988,9 @@ class IntegrationConfigResponseTelegramConfigFromRaw
 )]
 public sealed record class IntegrationConfigResponseFigmaConfig : JsonModel
 {
+    /// <summary>
+    /// Figma file identifier to grant access to.
+    /// </summary>
     public required string FigmaFileID
     {
         get
@@ -986,6 +1063,9 @@ class IntegrationConfigResponseFigmaConfigFromRaw
 )]
 public sealed record class IntegrationConfigResponseFramerConfig : JsonModel
 {
+    /// <summary>
+    /// Framer template identifier to grant access to.
+    /// </summary>
     public required string FramerTemplateID
     {
         get
@@ -1058,6 +1138,9 @@ class IntegrationConfigResponseFramerConfigFromRaw
 )]
 public sealed record class IntegrationConfigResponseNotionConfig : JsonModel
 {
+    /// <summary>
+    /// Notion template identifier to grant access to.
+    /// </summary>
     public required string NotionTemplateID
     {
         get
@@ -1131,9 +1214,8 @@ class IntegrationConfigResponseNotionConfigFromRaw
 public sealed record class IntegrationConfigResponseDigitalFilesConfig : JsonModel
 {
     /// <summary>
-    /// Populated digital-files payload for entitlement read surfaces. Mirrors `DigitalProductDelivery`
-    /// but is sourced from an entitlement's `integration_config` (not a grant) and
-    /// tags each file with its origin (`legacy` vs `ee`).
+    /// Populated digital-files payload with each file's metadata and a short-lived
+    /// presigned download URL.
     /// </summary>
     public required DigitalFiles DigitalFiles
     {
@@ -1202,13 +1284,15 @@ class IntegrationConfigResponseDigitalFilesConfigFromRaw
 }
 
 /// <summary>
-/// Populated digital-files payload for entitlement read surfaces. Mirrors `DigitalProductDelivery`
-/// but is sourced from an entitlement's `integration_config` (not a grant) and tags
-/// each file with its origin (`legacy` vs `ee`).
+/// Populated digital-files payload with each file's metadata and a short-lived presigned
+/// download URL.
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<DigitalFiles, DigitalFilesFromRaw>))]
 public sealed record class DigitalFiles : JsonModel
 {
+    /// <summary>
+    /// One entry per attached file.
+    /// </summary>
     public required IReadOnlyList<File> Files
     {
         get
@@ -1225,6 +1309,9 @@ public sealed record class DigitalFiles : JsonModel
         }
     }
 
+    /// <summary>
+    /// Optional external URL, passed through from the entitlement configuration.
+    /// </summary>
     public string? ExternalUrl
     {
         get
@@ -1235,6 +1322,9 @@ public sealed record class DigitalFiles : JsonModel
         init { this._rawData.Set("external_url", value); }
     }
 
+    /// <summary>
+    /// Optional human-readable delivery instructions, passed through from the entitlement configuration.
+    /// </summary>
     public string? Instructions
     {
         get
@@ -1298,9 +1388,15 @@ class DigitalFilesFromRaw : IFromRawJson<DigitalFiles>
         DigitalFiles.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// One file in a resolved digital-files payload.
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<File, FileFromRaw>))]
 public sealed record class File : JsonModel
 {
+    /// <summary>
+    /// Short-lived presigned URL for downloading the file.
+    /// </summary>
     public required string DownloadUrl
     {
         get
@@ -1324,6 +1420,9 @@ public sealed record class File : JsonModel
         init { this._rawData.Set("expires_in", value); }
     }
 
+    /// <summary>
+    /// Identifier of the attached file.
+    /// </summary>
     public required string FileID
     {
         get
@@ -1334,6 +1433,9 @@ public sealed record class File : JsonModel
         init { this._rawData.Set("file_id", value); }
     }
 
+    /// <summary>
+    /// Original filename of the attached file.
+    /// </summary>
     public required string Filename
     {
         get
@@ -1345,18 +1447,8 @@ public sealed record class File : JsonModel
     }
 
     /// <summary>
-    /// `"legacy"` for files in `product_files`, `"ee"` for files managed by the Entitlements Engine.
+    /// Optional content-type declared at upload.
     /// </summary>
-    public required string Source
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("source");
-        }
-        init { this._rawData.Set("source", value); }
-    }
-
     public string? ContentType
     {
         get
@@ -1367,6 +1459,9 @@ public sealed record class File : JsonModel
         init { this._rawData.Set("content_type", value); }
     }
 
+    /// <summary>
+    /// Optional size of the file in bytes.
+    /// </summary>
     public long? FileSize
     {
         get
@@ -1384,7 +1479,6 @@ public sealed record class File : JsonModel
         _ = this.ExpiresIn;
         _ = this.FileID;
         _ = this.Filename;
-        _ = this.Source;
         _ = this.ContentType;
         _ = this.FileSize;
     }
@@ -1432,6 +1526,9 @@ class FileFromRaw : IFromRawJson<File>
 )]
 public sealed record class IntegrationConfigResponseLicenseKeyConfig : JsonModel
 {
+    /// <summary>
+    /// Optional message displayed when a customer activates the license key (≤ 2500 characters).
+    /// </summary>
     public string? ActivationMessage
     {
         get
@@ -1442,6 +1539,9 @@ public sealed record class IntegrationConfigResponseLicenseKeyConfig : JsonModel
         init { this._rawData.Set("activation_message", value); }
     }
 
+    /// <summary>
+    /// Maximum activations allowed per issued license key. Omit for unlimited.
+    /// </summary>
     public int? ActivationsLimit
     {
         get
@@ -1452,6 +1552,10 @@ public sealed record class IntegrationConfigResponseLicenseKeyConfig : JsonModel
         init { this._rawData.Set("activations_limit", value); }
     }
 
+    /// <summary>
+    /// Validity duration of issued license keys. Provide both `duration_count` and
+    /// `duration_interval` together for a fixed duration; omit both for non-expiring keys.
+    /// </summary>
     public int? DurationCount
     {
         get
@@ -1462,6 +1566,9 @@ public sealed record class IntegrationConfigResponseLicenseKeyConfig : JsonModel
         init { this._rawData.Set("duration_count", value); }
     }
 
+    /// <summary>
+    /// Unit of `duration_count`.
+    /// </summary>
     public ApiEnum<string, Subscriptions::TimeInterval>? DurationInterval
     {
         get

@@ -79,7 +79,7 @@ public record class EntitlementCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Optional user-facing metadata
+    /// Additional metadata for the entitlement
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {
@@ -90,6 +90,11 @@ public record class EntitlementCreateParams : ParamsBase
         }
         init
         {
+            if (value == null)
+            {
+                return;
+            }
+
             this._rawBodyData.Set<FrozenDictionary<string, string>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)

@@ -15,7 +15,7 @@ public class ProductEntitlementSummaryTest : TestBase
             ID = "id",
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -27,7 +27,7 @@ public class ProductEntitlementSummaryTest : TestBase
         IntegrationConfigResponse expectedIntegrationConfig =
             new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             };
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
@@ -50,7 +50,7 @@ public class ProductEntitlementSummaryTest : TestBase
             ID = "id",
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -75,7 +75,7 @@ public class ProductEntitlementSummaryTest : TestBase
             ID = "id",
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -94,7 +94,7 @@ public class ProductEntitlementSummaryTest : TestBase
         IntegrationConfigResponse expectedIntegrationConfig =
             new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             };
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
@@ -117,7 +117,7 @@ public class ProductEntitlementSummaryTest : TestBase
             ID = "id",
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -136,7 +136,7 @@ public class ProductEntitlementSummaryTest : TestBase
             ID = "id",
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -155,7 +155,7 @@ public class ProductEntitlementSummaryTest : TestBase
             ID = "id",
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -173,7 +173,7 @@ public class ProductEntitlementSummaryTest : TestBase
             ID = "id",
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -194,7 +194,7 @@ public class ProductEntitlementSummaryTest : TestBase
             ID = "id",
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -214,7 +214,7 @@ public class ProductEntitlementSummaryTest : TestBase
             ID = "id",
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,

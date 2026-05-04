@@ -9,14 +9,15 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.Entitlements.Grants;
 
 /// <summary>
-/// Nested representation of license-key grant fields. Present only when the grant's
-/// entitlement has `integration_type = 'license_key'` and a row exists in `license_keys`.
-/// The grant's top-level `status` is the source of truth for the grant's lifecycle
-/// — no per-license-key status is exposed here.
+/// License-key delivery payload, present on grants for `license_key` entitlements.
+/// The grant's top-level `status` is the source of truth for the grant's lifecycle.
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<LicenseKeyGrant, LicenseKeyGrantFromRaw>))]
 public sealed record class LicenseKeyGrant : JsonModel
 {
+    /// <summary>
+    /// Number of activations consumed so far.
+    /// </summary>
     public required int ActivationsUsed
     {
         get
@@ -27,6 +28,9 @@ public sealed record class LicenseKeyGrant : JsonModel
         init { this._rawData.Set("activations_used", value); }
     }
 
+    /// <summary>
+    /// Issued license key.
+    /// </summary>
     public required string Key
     {
         get
@@ -37,6 +41,9 @@ public sealed record class LicenseKeyGrant : JsonModel
         init { this._rawData.Set("key", value); }
     }
 
+    /// <summary>
+    /// Maximum activations allowed by the entitlement, when set.
+    /// </summary>
     public int? ActivationsLimit
     {
         get
@@ -47,6 +54,9 @@ public sealed record class LicenseKeyGrant : JsonModel
         init { this._rawData.Set("activations_limit", value); }
     }
 
+    /// <summary>
+    /// When the license key expires, when applicable.
+    /// </summary>
     public DateTimeOffset? ExpiresAt
     {
         get
