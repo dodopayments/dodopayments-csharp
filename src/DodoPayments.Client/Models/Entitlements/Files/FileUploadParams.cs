@@ -9,10 +9,7 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.Entitlements.Files;
 
 /// <summary>
-/// Streams a multipart/form-data body to the Entitlements Engine (`POST /api/digital-files/dodo/files/upload`)
-/// and appends the returned `file_id` to the entitlement's `integration_config.digital_file_ids`
-/// using a JSONB array append. Compensates EE-side on local DB write failure (best-effort
-/// delete of the just-uploaded file).
+/// Attach a file to a `digital_files` entitlement. Per-file size cap: 500 MiB.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

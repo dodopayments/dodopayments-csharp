@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
@@ -19,7 +20,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -49,7 +50,6 @@ public class EntitlementGrantTest : TestBase
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -63,7 +63,7 @@ public class EntitlementGrantTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
         string expectedEntitlementID = "entitlement_id";
-        string expectedExternalID = "external_id";
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -93,7 +93,6 @@ public class EntitlementGrantTest : TestBase
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
-        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
         DateTimeOffset expectedOAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedOAuthUrl = "oauth_url";
         string expectedPaymentID = "payment_id";
@@ -106,7 +105,13 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedEntitlementID, model.EntitlementID);
-        Assert.Equal(expectedExternalID, model.ExternalID);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedDeliveredAt, model.DeliveredAt);
@@ -114,8 +119,6 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
         Assert.Equal(expectedLicenseKey, model.LicenseKey);
-        Assert.NotNull(model.Metadata);
-        Assert.True(JsonElement.DeepEquals(expectedMetadata, model.Metadata.Value));
         Assert.Equal(expectedOAuthExpiresAt, model.OAuthExpiresAt);
         Assert.Equal(expectedOAuthUrl, model.OAuthUrl);
         Assert.Equal(expectedPaymentID, model.PaymentID);
@@ -134,7 +137,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -164,7 +167,6 @@ public class EntitlementGrantTest : TestBase
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -192,7 +194,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -222,7 +224,6 @@ public class EntitlementGrantTest : TestBase
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -243,7 +244,7 @@ public class EntitlementGrantTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
         string expectedEntitlementID = "entitlement_id";
-        string expectedExternalID = "external_id";
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -273,7 +274,6 @@ public class EntitlementGrantTest : TestBase
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
-        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
         DateTimeOffset expectedOAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedOAuthUrl = "oauth_url";
         string expectedPaymentID = "payment_id";
@@ -286,7 +286,13 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedEntitlementID, deserialized.EntitlementID);
-        Assert.Equal(expectedExternalID, deserialized.ExternalID);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedDeliveredAt, deserialized.DeliveredAt);
@@ -294,8 +300,6 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
         Assert.Equal(expectedLicenseKey, deserialized.LicenseKey);
-        Assert.NotNull(deserialized.Metadata);
-        Assert.True(JsonElement.DeepEquals(expectedMetadata, deserialized.Metadata.Value));
         Assert.Equal(expectedOAuthExpiresAt, deserialized.OAuthExpiresAt);
         Assert.Equal(expectedOAuthUrl, deserialized.OAuthUrl);
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
@@ -314,59 +318,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
-            Status = EntitlementGrantStatus.Pending,
-            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DigitalProductDelivery = new()
-            {
-                Files =
-                [
-                    new()
-                    {
-                        DownloadUrl = "download_url",
-                        ExpiresIn = 0,
-                        FileID = "file_id",
-                        Filename = "filename",
-                        ContentType = "content_type",
-                        FileSize = 0,
-                    },
-                ],
-                ExternalUrl = "external_url",
-                Instructions = "instructions",
-            },
-            ErrorCode = "error_code",
-            ErrorMessage = "error_message",
-            LicenseKey = new()
-            {
-                ActivationsUsed = 0,
-                Key = "key",
-                ActivationsLimit = 0,
-                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
-            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            OAuthUrl = "oauth_url",
-            PaymentID = "payment_id",
-            RevocationReason = "revocation_reason",
-            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            SubscriptionID = "subscription_id",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new EntitlementGrant
-        {
-            ID = "id",
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomerID = "customer_id",
-            EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -402,167 +354,6 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-        };
-
-        Assert.Null(model.Metadata);
-        Assert.False(model.RawData.ContainsKey("metadata"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new EntitlementGrant
-        {
-            ID = "id",
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomerID = "customer_id",
-            EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
-            Status = EntitlementGrantStatus.Pending,
-            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DigitalProductDelivery = new()
-            {
-                Files =
-                [
-                    new()
-                    {
-                        DownloadUrl = "download_url",
-                        ExpiresIn = 0,
-                        FileID = "file_id",
-                        Filename = "filename",
-                        ContentType = "content_type",
-                        FileSize = 0,
-                    },
-                ],
-                ExternalUrl = "external_url",
-                Instructions = "instructions",
-            },
-            ErrorCode = "error_code",
-            ErrorMessage = "error_message",
-            LicenseKey = new()
-            {
-                ActivationsUsed = 0,
-                Key = "key",
-                ActivationsLimit = 0,
-                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
-            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            OAuthUrl = "oauth_url",
-            PaymentID = "payment_id",
-            RevocationReason = "revocation_reason",
-            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            SubscriptionID = "subscription_id",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new EntitlementGrant
-        {
-            ID = "id",
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomerID = "customer_id",
-            EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
-            Status = EntitlementGrantStatus.Pending,
-            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DigitalProductDelivery = new()
-            {
-                Files =
-                [
-                    new()
-                    {
-                        DownloadUrl = "download_url",
-                        ExpiresIn = 0,
-                        FileID = "file_id",
-                        Filename = "filename",
-                        ContentType = "content_type",
-                        FileSize = 0,
-                    },
-                ],
-                ExternalUrl = "external_url",
-                Instructions = "instructions",
-            },
-            ErrorCode = "error_code",
-            ErrorMessage = "error_message",
-            LicenseKey = new()
-            {
-                ActivationsUsed = 0,
-                Key = "key",
-                ActivationsLimit = 0,
-                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
-            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            OAuthUrl = "oauth_url",
-            PaymentID = "payment_id",
-            RevocationReason = "revocation_reason",
-            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            SubscriptionID = "subscription_id",
-
-            // Null should be interpreted as omitted for these properties
-            Metadata = null,
-        };
-
-        Assert.Null(model.Metadata);
-        Assert.False(model.RawData.ContainsKey("metadata"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new EntitlementGrant
-        {
-            ID = "id",
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomerID = "customer_id",
-            EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
-            Status = EntitlementGrantStatus.Pending,
-            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            DigitalProductDelivery = new()
-            {
-                Files =
-                [
-                    new()
-                    {
-                        DownloadUrl = "download_url",
-                        ExpiresIn = 0,
-                        FileID = "file_id",
-                        Filename = "filename",
-                        ContentType = "content_type",
-                        FileSize = 0,
-                    },
-                ],
-                ExternalUrl = "external_url",
-                Instructions = "instructions",
-            },
-            ErrorCode = "error_code",
-            ErrorMessage = "error_message",
-            LicenseKey = new()
-            {
-                ActivationsUsed = 0,
-                Key = "key",
-                ActivationsLimit = 0,
-                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
-            OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            OAuthUrl = "oauth_url",
-            PaymentID = "payment_id",
-            RevocationReason = "revocation_reason",
-            RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            SubscriptionID = "subscription_id",
-
-            // Null should be interpreted as omitted for these properties
-            Metadata = null,
         };
 
         model.Validate();
@@ -578,10 +369,9 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         Assert.Null(model.DeliveredAt);
@@ -618,10 +408,9 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         model.Validate();
@@ -637,10 +426,9 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
 
             DeliveredAt = null,
             DigitalProductDelivery = null,
@@ -689,10 +477,9 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
 
             DeliveredAt = null,
             DigitalProductDelivery = null,
@@ -720,7 +507,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
-            ExternalID = "external_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -750,7 +537,6 @@ public class EntitlementGrantTest : TestBase
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",

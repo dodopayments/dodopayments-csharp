@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Subscriptions;
 
@@ -13,7 +14,7 @@ public class IntegrationConfigTest : TestBase
     {
         IntegrationConfig value = new GitHubConfig()
         {
-            Permission = "permission",
+            Permission = Permission.Pull,
             TargetID = "target_id",
         };
         value.Validate();
@@ -85,7 +86,7 @@ public class IntegrationConfigTest : TestBase
     {
         IntegrationConfig value = new GitHubConfig()
         {
-            Permission = "permission",
+            Permission = Permission.Pull,
             TargetID = "target_id",
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
@@ -206,9 +207,9 @@ public class GitHubConfigTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new GitHubConfig { Permission = "permission", TargetID = "target_id" };
+        var model = new GitHubConfig { Permission = Permission.Pull, TargetID = "target_id" };
 
-        string expectedPermission = "permission";
+        ApiEnum<string, Permission> expectedPermission = Permission.Pull;
         string expectedTargetID = "target_id";
 
         Assert.Equal(expectedPermission, model.Permission);
@@ -218,7 +219,7 @@ public class GitHubConfigTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new GitHubConfig { Permission = "permission", TargetID = "target_id" };
+        var model = new GitHubConfig { Permission = Permission.Pull, TargetID = "target_id" };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<GitHubConfig>(
@@ -232,7 +233,7 @@ public class GitHubConfigTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new GitHubConfig { Permission = "permission", TargetID = "target_id" };
+        var model = new GitHubConfig { Permission = Permission.Pull, TargetID = "target_id" };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<GitHubConfig>(
@@ -241,7 +242,7 @@ public class GitHubConfigTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        string expectedPermission = "permission";
+        ApiEnum<string, Permission> expectedPermission = Permission.Pull;
         string expectedTargetID = "target_id";
 
         Assert.Equal(expectedPermission, deserialized.Permission);
@@ -251,7 +252,7 @@ public class GitHubConfigTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new GitHubConfig { Permission = "permission", TargetID = "target_id" };
+        var model = new GitHubConfig { Permission = Permission.Pull, TargetID = "target_id" };
 
         model.Validate();
     }
@@ -259,11 +260,75 @@ public class GitHubConfigTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new GitHubConfig { Permission = "permission", TargetID = "target_id" };
+        var model = new GitHubConfig { Permission = Permission.Pull, TargetID = "target_id" };
 
         GitHubConfig copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class PermissionTest : TestBase
+{
+    [Theory]
+    [InlineData(Permission.Pull)]
+    [InlineData(Permission.Push)]
+    [InlineData(Permission.Admin)]
+    [InlineData(Permission.Maintain)]
+    [InlineData(Permission.Triage)]
+    public void Validation_Works(Permission rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Permission> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Permission>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Permission.Pull)]
+    [InlineData(Permission.Push)]
+    [InlineData(Permission.Admin)]
+    [InlineData(Permission.Maintain)]
+    [InlineData(Permission.Triage)]
+    public void SerializationRoundtrip_Works(Permission rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Permission> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Permission>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Permission>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Permission>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 

@@ -12,8 +12,8 @@ using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 namespace DodoPayments.Client.Models.Entitlements;
 
 /// <summary>
-/// Platform-specific configuration for an entitlement. Each variant uses unique field
-/// names so `#[serde(untagged)]` can disambiguate correctly.
+/// Integration-specific configuration supplied when creating or updating an entitlement.
+/// The shape required matches the entitlement's `integration_type`.
 /// </summary>
 [JsonConverter(typeof(IntegrationConfigConverter))]
 public record class IntegrationConfig : ModelBase
@@ -595,18 +595,21 @@ sealed class IntegrationConfigConverter : JsonConverter<IntegrationConfig>
 public sealed record class GitHubConfig : JsonModel
 {
     /// <summary>
-    /// One of: pull, push, admin, maintain, triage
+    /// Permission to grant on the repository.
     /// </summary>
-    public required string Permission
+    public required ApiEnum<string, Permission> Permission
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("permission");
+            return this._rawData.GetNotNullClass<ApiEnum<string, Permission>>("permission");
         }
         init { this._rawData.Set("permission", value); }
     }
 
+    /// <summary>
+    /// Repository or organisation slug to grant access to.
+    /// </summary>
     public required string TargetID
     {
         get
@@ -620,7 +623,7 @@ public sealed record class GitHubConfig : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.Permission;
+        this.Permission.Validate();
         _ = this.TargetID;
     }
 
@@ -659,9 +662,68 @@ class GitHubConfigFromRaw : IFromRawJson<GitHubConfig>
         GitHubConfig.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Permission to grant on the repository.
+/// </summary>
+[JsonConverter(typeof(PermissionConverter))]
+public enum Permission
+{
+    Pull,
+    Push,
+    Admin,
+    Maintain,
+    Triage,
+}
+
+sealed class PermissionConverter : JsonConverter<Permission>
+{
+    public override Permission Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "pull" => Permission.Pull,
+            "push" => Permission.Push,
+            "admin" => Permission.Admin,
+            "maintain" => Permission.Maintain,
+            "triage" => Permission.Triage,
+            _ => (Permission)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        Permission value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Permission.Pull => "pull",
+                Permission.Push => "push",
+                Permission.Admin => "admin",
+                Permission.Maintain => "maintain",
+                Permission.Triage => "triage",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
 [JsonConverter(typeof(JsonModelConverter<DiscordConfig, DiscordConfigFromRaw>))]
 public sealed record class DiscordConfig : JsonModel
 {
+    /// <summary>
+    /// Discord guild (server) ID.
+    /// </summary>
     public required string GuildID
     {
         get
@@ -672,6 +734,9 @@ public sealed record class DiscordConfig : JsonModel
         init { this._rawData.Set("guild_id", value); }
     }
 
+    /// <summary>
+    /// Optional Discord role to assign within the guild.
+    /// </summary>
     public string? RoleID
     {
         get
@@ -734,6 +799,9 @@ class DiscordConfigFromRaw : IFromRawJson<DiscordConfig>
 [JsonConverter(typeof(JsonModelConverter<TelegramConfig, TelegramConfigFromRaw>))]
 public sealed record class TelegramConfig : JsonModel
 {
+    /// <summary>
+    /// Telegram chat ID. For groups this is typically a negative integer.
+    /// </summary>
     public required string ChatID
     {
         get
@@ -795,6 +863,9 @@ class TelegramConfigFromRaw : IFromRawJson<TelegramConfig>
 [JsonConverter(typeof(JsonModelConverter<FigmaConfig, FigmaConfigFromRaw>))]
 public sealed record class FigmaConfig : JsonModel
 {
+    /// <summary>
+    /// Figma file identifier to grant access to.
+    /// </summary>
     public required string FigmaFileID
     {
         get
@@ -856,6 +927,9 @@ class FigmaConfigFromRaw : IFromRawJson<FigmaConfig>
 [JsonConverter(typeof(JsonModelConverter<FramerConfig, FramerConfigFromRaw>))]
 public sealed record class FramerConfig : JsonModel
 {
+    /// <summary>
+    /// Framer template identifier to grant access to.
+    /// </summary>
     public required string FramerTemplateID
     {
         get
@@ -917,6 +991,9 @@ class FramerConfigFromRaw : IFromRawJson<FramerConfig>
 [JsonConverter(typeof(JsonModelConverter<NotionConfig, NotionConfigFromRaw>))]
 public sealed record class NotionConfig : JsonModel
 {
+    /// <summary>
+    /// Notion template identifier to grant access to.
+    /// </summary>
     public required string NotionTemplateID
     {
         get
@@ -978,6 +1055,10 @@ class NotionConfigFromRaw : IFromRawJson<NotionConfig>
 [JsonConverter(typeof(JsonModelConverter<DigitalFilesConfig, DigitalFilesConfigFromRaw>))]
 public sealed record class DigitalFilesConfig : JsonModel
 {
+    /// <summary>
+    /// Files attached to this entitlement. Add files via `POST /entitlements/{id}/files`
+    /// and remove them via `DELETE /entitlements/{id}/files/{file_id}`.
+    /// </summary>
     public required IReadOnlyList<string> DigitalFileIds
     {
         get
@@ -994,6 +1075,9 @@ public sealed record class DigitalFilesConfig : JsonModel
         }
     }
 
+    /// <summary>
+    /// Optional external URL shown to the customer alongside the files.
+    /// </summary>
     public string? ExternalUrl
     {
         get
@@ -1004,6 +1088,10 @@ public sealed record class DigitalFilesConfig : JsonModel
         init { this._rawData.Set("external_url", value); }
     }
 
+    /// <summary>
+    /// Optional human-readable delivery instructions shown to the customer alongside
+    /// the files.
+    /// </summary>
     public string? Instructions
     {
         get
@@ -1015,13 +1103,12 @@ public sealed record class DigitalFilesConfig : JsonModel
     }
 
     /// <summary>
-    /// Three-way patchable field (mirrors the credit_entitlements pattern):
+    /// Three-way patchable list of legacy file identifiers:
     ///
-    /// <para>* omitted → preserve persisted (`None`) * `null`  → clear
-    ///     (`Some(None)`) * `[...]` → replace            (`Some(Some(...))`)</para>
+    /// <para>* omitted → preserve the current value * `null`  → clear * `[...]` → replace</para>
     ///
-    /// <para>On Create / storage we collapse "clear" and empty-array to `None` so
-    /// the persisted JSONB never carries a `null` legacy_file_ids key.</para>
+    /// <para>On create, an omitted field, an explicit `null`, or an empty array
+    /// all result in no legacy files attached.</para>
     /// </summary>
     public IReadOnlyList<string>? LegacyFileIds
     {
@@ -1095,6 +1182,9 @@ class DigitalFilesConfigFromRaw : IFromRawJson<DigitalFilesConfig>
 [JsonConverter(typeof(JsonModelConverter<LicenseKeyConfig, LicenseKeyConfigFromRaw>))]
 public sealed record class LicenseKeyConfig : JsonModel
 {
+    /// <summary>
+    /// Optional message displayed when a customer activates the license key (≤ 2500 characters).
+    /// </summary>
     public string? ActivationMessage
     {
         get
@@ -1105,6 +1195,9 @@ public sealed record class LicenseKeyConfig : JsonModel
         init { this._rawData.Set("activation_message", value); }
     }
 
+    /// <summary>
+    /// Maximum activations allowed per issued license key. Omit for unlimited.
+    /// </summary>
     public int? ActivationsLimit
     {
         get
@@ -1115,6 +1208,10 @@ public sealed record class LicenseKeyConfig : JsonModel
         init { this._rawData.Set("activations_limit", value); }
     }
 
+    /// <summary>
+    /// Validity duration of issued license keys. Provide both `duration_count` and
+    /// `duration_interval` together for a fixed duration; omit both for non-expiring keys.
+    /// </summary>
     public int? DurationCount
     {
         get
@@ -1125,6 +1222,9 @@ public sealed record class LicenseKeyConfig : JsonModel
         init { this._rawData.Set("duration_count", value); }
     }
 
+    /// <summary>
+    /// Unit of `duration_count`.
+    /// </summary>
     public ApiEnum<string, Subscriptions::TimeInterval>? DurationInterval
     {
         get

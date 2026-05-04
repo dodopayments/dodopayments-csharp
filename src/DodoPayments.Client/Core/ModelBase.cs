@@ -196,6 +196,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CreditEntitlementsBalances::SourceType>(),
             new ApiEnumConverter<string, CreditEntitlementsBalances::Status>(),
             new ApiEnumConverter<string, EntitlementIntegrationType>(),
+            new ApiEnumConverter<string, Permission>(),
+            new ApiEnumConverter<string, IntegrationConfigResponseGitHubConfigPermission>(),
             new ApiEnumConverter<string, IntegrationType>(),
             new ApiEnumConverter<string, Grants::EntitlementGrantStatus>(),
             new ApiEnumConverter<string, Grants::Status>(),

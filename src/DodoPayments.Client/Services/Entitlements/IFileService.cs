@@ -27,10 +27,7 @@ public interface IFileService
     IFileService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Companion to `post_entitlement_file`. Deletes the file from the Entitlements
-    /// Engine (force=true) and atomically removes the `file_id` from the entitlement's
-    /// `integration_config.digital_file_ids` JSONB array. EE delete happens first; if
-    /// it fails we surface the error and leave local state untouched.
+    /// Detach a previously-attached file from a `digital_files` entitlement.
     /// </summary>
     Task Delete(FileDeleteParams parameters, CancellationToken cancellationToken = default);
 
@@ -42,11 +39,7 @@ public interface IFileService
     );
 
     /// <summary>
-    /// Streams a multipart/form-data body to the Entitlements Engine (`POST
-    /// /api/digital-files/dodo/files/upload`) and appends the returned `file_id` to the
-    /// entitlement's `integration_config.digital_file_ids` using a JSONB array append.
-    /// Compensates EE-side on local DB write failure (best-effort delete of the
-    /// just-uploaded file).
+    /// Attach a file to a `digital_files` entitlement. Per-file size cap: 500 MiB.
     /// </summary>
     Task<FileUploadResponse> Upload(
         FileUploadParams parameters,

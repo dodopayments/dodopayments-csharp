@@ -9,16 +9,17 @@ using DodoPayments.Client.Core;
 namespace DodoPayments.Client.Models.Products;
 
 /// <summary>
-/// Digital-product-delivery payload for a grant. Populated for grants whose entitlement
-/// has `integration_type = 'digital_files'`. `files` carries presigned download
-/// URLs; the source (EE service or legacy in-process S3 presigning) is opaque to
-/// the caller.
+/// Digital-product-delivery payload, present on grants for `digital_files` entitlements.
+/// Each file carries a short-lived presigned download URL.
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<ProductDigitalProductDelivery, ProductDigitalProductDeliveryFromRaw>)
 )]
 public sealed record class ProductDigitalProductDelivery : JsonModel
 {
+    /// <summary>
+    /// One entry per attached file.
+    /// </summary>
     public required IReadOnlyList<DigitalProductDeliveryFile> Files
     {
         get
@@ -37,6 +38,9 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
         }
     }
 
+    /// <summary>
+    /// Optional external URL, passed through from the entitlement configuration.
+    /// </summary>
     public string? ExternalUrl
     {
         get
@@ -47,6 +51,9 @@ public sealed record class ProductDigitalProductDelivery : JsonModel
         init { this._rawData.Set("external_url", value); }
     }
 
+    /// <summary>
+    /// Optional human-readable delivery instructions, passed through from the entitlement configuration.
+    /// </summary>
     public string? Instructions
     {
         get

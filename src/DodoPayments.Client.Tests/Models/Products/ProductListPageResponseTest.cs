@@ -28,7 +28,7 @@ public class ProductListPageResponseTest : TestBase
                             ID = "id",
                             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                             {
-                                Permission = "permission",
+                                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                                 TargetID = "target_id",
                             },
                             IntegrationType = EntitlementIntegrationType.Discord,
@@ -75,7 +75,7 @@ public class ProductListPageResponseTest : TestBase
                         ID = "id",
                         IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                         {
-                            Permission = "permission",
+                            Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                             TargetID = "target_id",
                         },
                         IntegrationType = EntitlementIntegrationType.Discord,
@@ -133,7 +133,7 @@ public class ProductListPageResponseTest : TestBase
                             ID = "id",
                             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                             {
-                                Permission = "permission",
+                                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                                 TargetID = "target_id",
                             },
                             IntegrationType = EntitlementIntegrationType.Discord,
@@ -194,7 +194,7 @@ public class ProductListPageResponseTest : TestBase
                             ID = "id",
                             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                             {
-                                Permission = "permission",
+                                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                                 TargetID = "target_id",
                             },
                             IntegrationType = EntitlementIntegrationType.Discord,
@@ -248,7 +248,7 @@ public class ProductListPageResponseTest : TestBase
                         ID = "id",
                         IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                         {
-                            Permission = "permission",
+                            Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                             TargetID = "target_id",
                         },
                         IntegrationType = EntitlementIntegrationType.Discord,
@@ -306,7 +306,7 @@ public class ProductListPageResponseTest : TestBase
                             ID = "id",
                             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                             {
-                                Permission = "permission",
+                                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                                 TargetID = "target_id",
                             },
                             IntegrationType = EntitlementIntegrationType.Discord,
@@ -361,7 +361,7 @@ public class ProductListPageResponseTest : TestBase
                             ID = "id",
                             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                             {
-                                Permission = "permission",
+                                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                                 TargetID = "target_id",
                             },
                             IntegrationType = EntitlementIntegrationType.Discord,

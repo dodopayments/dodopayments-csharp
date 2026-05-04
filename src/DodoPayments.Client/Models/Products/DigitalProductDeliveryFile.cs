@@ -7,11 +7,17 @@ using DodoPayments.Client.Core;
 
 namespace DodoPayments.Client.Models.Products;
 
+/// <summary>
+/// One file in a digital-product delivery payload.
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<DigitalProductDeliveryFile, DigitalProductDeliveryFileFromRaw>)
 )]
 public sealed record class DigitalProductDeliveryFile : JsonModel
 {
+    /// <summary>
+    /// Short-lived presigned URL for downloading the file.
+    /// </summary>
     public required string DownloadUrl
     {
         get
@@ -35,6 +41,9 @@ public sealed record class DigitalProductDeliveryFile : JsonModel
         init { this._rawData.Set("expires_in", value); }
     }
 
+    /// <summary>
+    /// Identifier of the attached file.
+    /// </summary>
     public required string FileID
     {
         get
@@ -45,6 +54,9 @@ public sealed record class DigitalProductDeliveryFile : JsonModel
         init { this._rawData.Set("file_id", value); }
     }
 
+    /// <summary>
+    /// Original filename of the attached file.
+    /// </summary>
     public required string Filename
     {
         get
@@ -55,6 +67,9 @@ public sealed record class DigitalProductDeliveryFile : JsonModel
         init { this._rawData.Set("filename", value); }
     }
 
+    /// <summary>
+    /// Optional content-type declared at upload.
+    /// </summary>
     public string? ContentType
     {
         get
@@ -65,6 +80,9 @@ public sealed record class DigitalProductDeliveryFile : JsonModel
         init { this._rawData.Set("content_type", value); }
     }
 
+    /// <summary>
+    /// Optional size of the file in bytes.
+    /// </summary>
     public long? FileSize
     {
         get

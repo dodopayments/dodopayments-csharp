@@ -31,6 +31,10 @@ public sealed record class EntitlementGrantFailedWebhookEvent : JsonModel
         init { this._rawData.Set("business_id", value); }
     }
 
+    /// <summary>
+    /// Detailed view of a single entitlement grant: who it's for, its lifecycle
+    /// state, and any integration-specific delivery payload.
+    /// </summary>
     public required EntitlementGrant Data
     {
         get

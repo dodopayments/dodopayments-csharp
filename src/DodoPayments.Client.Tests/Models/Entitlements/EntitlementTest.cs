@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Entitlements;
@@ -17,15 +18,15 @@ public class EntitlementTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         string expectedID = "id";
@@ -34,16 +35,16 @@ public class EntitlementTest : TestBase
         IntegrationConfigResponse expectedIntegrationConfig =
             new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             };
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
         bool expectedIsActive = true;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
-        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -51,11 +52,16 @@ public class EntitlementTest : TestBase
         Assert.Equal(expectedIntegrationConfig, model.IntegrationConfig);
         Assert.Equal(expectedIntegrationType, model.IntegrationType);
         Assert.Equal(expectedIsActive, model.IsActive);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedDescription, model.Description);
-        Assert.NotNull(model.Metadata);
-        Assert.True(JsonElement.DeepEquals(expectedMetadata, model.Metadata.Value));
     }
 
     [Fact]
@@ -68,15 +74,15 @@ public class EntitlementTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -98,15 +104,15 @@ public class EntitlementTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -122,16 +128,16 @@ public class EntitlementTest : TestBase
         IntegrationConfigResponse expectedIntegrationConfig =
             new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             };
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
         bool expectedIsActive = true;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
-        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -139,11 +145,16 @@ public class EntitlementTest : TestBase
         Assert.Equal(expectedIntegrationConfig, deserialized.IntegrationConfig);
         Assert.Equal(expectedIntegrationType, deserialized.IntegrationType);
         Assert.Equal(expectedIsActive, deserialized.IsActive);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedDescription, deserialized.Description);
-        Assert.NotNull(deserialized.Metadata);
-        Assert.True(JsonElement.DeepEquals(expectedMetadata, deserialized.Metadata.Value));
     }
 
     [Fact]
@@ -156,115 +167,15 @@ public class EntitlementTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new Entitlement
-        {
-            ID = "id",
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = "permission",
-                TargetID = "target_id",
-            },
-            IntegrationType = EntitlementIntegrationType.Discord,
-            IsActive = true,
-            Name = "name",
-            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Description = "description",
-        };
-
-        Assert.Null(model.Metadata);
-        Assert.False(model.RawData.ContainsKey("metadata"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new Entitlement
-        {
-            ID = "id",
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = "permission",
-                TargetID = "target_id",
-            },
-            IntegrationType = EntitlementIntegrationType.Discord,
-            IsActive = true,
-            Name = "name",
-            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Description = "description",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new Entitlement
-        {
-            ID = "id",
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = "permission",
-                TargetID = "target_id",
-            },
-            IntegrationType = EntitlementIntegrationType.Discord,
-            IsActive = true,
-            Name = "name",
-            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Description = "description",
-
-            // Null should be interpreted as omitted for these properties
-            Metadata = null,
-        };
-
-        Assert.Null(model.Metadata);
-        Assert.False(model.RawData.ContainsKey("metadata"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new Entitlement
-        {
-            ID = "id",
-            BusinessID = "business_id",
-            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = "permission",
-                TargetID = "target_id",
-            },
-            IntegrationType = EntitlementIntegrationType.Discord,
-            IsActive = true,
-            Name = "name",
-            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Description = "description",
-
-            // Null should be interpreted as omitted for these properties
-            Metadata = null,
         };
 
         model.Validate();
@@ -280,14 +191,14 @@ public class EntitlementTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         Assert.Null(model.Description);
@@ -304,14 +215,14 @@ public class EntitlementTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         model.Validate();
@@ -327,14 +238,14 @@ public class EntitlementTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
 
             Description = null,
         };
@@ -353,14 +264,14 @@ public class EntitlementTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
 
             Description = null,
         };
@@ -378,15 +289,15 @@ public class EntitlementTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
             {
-                Permission = "permission",
+                Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         Entitlement copied = new(model);
