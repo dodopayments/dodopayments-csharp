@@ -29,6 +29,7 @@ public class SubscriptionCreateResponseTest : TestBase
             SubscriptionID = "subscription_id",
             ClientSecret = "client_secret",
             DiscountID = "discount_id",
+            DiscountIds = ["string"],
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
@@ -49,6 +50,7 @@ public class SubscriptionCreateResponseTest : TestBase
         string expectedSubscriptionID = "subscription_id";
         string expectedClientSecret = "client_secret";
         string expectedDiscountID = "discount_id";
+        List<string> expectedDiscountIds = ["string"];
         DateTimeOffset expectedExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<OneTimeProductCart> expectedOneTimeProductCart =
         [
@@ -74,6 +76,12 @@ public class SubscriptionCreateResponseTest : TestBase
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
         Assert.Equal(expectedClientSecret, model.ClientSecret);
         Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.NotNull(model.DiscountIds);
+        Assert.Equal(expectedDiscountIds.Count, model.DiscountIds.Count);
+        for (int i = 0; i < expectedDiscountIds.Count; i++)
+        {
+            Assert.Equal(expectedDiscountIds[i], model.DiscountIds[i]);
+        }
         Assert.Equal(expectedExpiresOn, model.ExpiresOn);
         Assert.NotNull(model.OneTimeProductCart);
         Assert.Equal(expectedOneTimeProductCart.Count, model.OneTimeProductCart.Count);
@@ -104,6 +112,7 @@ public class SubscriptionCreateResponseTest : TestBase
             SubscriptionID = "subscription_id",
             ClientSecret = "client_secret",
             DiscountID = "discount_id",
+            DiscountIds = ["string"],
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
@@ -138,6 +147,7 @@ public class SubscriptionCreateResponseTest : TestBase
             SubscriptionID = "subscription_id",
             ClientSecret = "client_secret",
             DiscountID = "discount_id",
+            DiscountIds = ["string"],
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
@@ -165,6 +175,7 @@ public class SubscriptionCreateResponseTest : TestBase
         string expectedSubscriptionID = "subscription_id";
         string expectedClientSecret = "client_secret";
         string expectedDiscountID = "discount_id";
+        List<string> expectedDiscountIds = ["string"];
         DateTimeOffset expectedExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<OneTimeProductCart> expectedOneTimeProductCart =
         [
@@ -190,6 +201,12 @@ public class SubscriptionCreateResponseTest : TestBase
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
         Assert.Equal(expectedClientSecret, deserialized.ClientSecret);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.NotNull(deserialized.DiscountIds);
+        Assert.Equal(expectedDiscountIds.Count, deserialized.DiscountIds.Count);
+        for (int i = 0; i < expectedDiscountIds.Count; i++)
+        {
+            Assert.Equal(expectedDiscountIds[i], deserialized.DiscountIds[i]);
+        }
         Assert.Equal(expectedExpiresOn, deserialized.ExpiresOn);
         Assert.NotNull(deserialized.OneTimeProductCart);
         Assert.Equal(expectedOneTimeProductCart.Count, deserialized.OneTimeProductCart.Count);
@@ -220,6 +237,7 @@ public class SubscriptionCreateResponseTest : TestBase
             SubscriptionID = "subscription_id",
             ClientSecret = "client_secret",
             DiscountID = "discount_id",
+            DiscountIds = ["string"],
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
@@ -252,6 +270,8 @@ public class SubscriptionCreateResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("client_secret"));
         Assert.Null(model.DiscountID);
         Assert.False(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.DiscountIds);
+        Assert.False(model.RawData.ContainsKey("discount_ids"));
         Assert.Null(model.ExpiresOn);
         Assert.False(model.RawData.ContainsKey("expires_on"));
         Assert.Null(model.OneTimeProductCart);
@@ -304,6 +324,7 @@ public class SubscriptionCreateResponseTest : TestBase
 
             ClientSecret = null,
             DiscountID = null,
+            DiscountIds = null,
             ExpiresOn = null,
             OneTimeProductCart = null,
             PaymentLink = null,
@@ -313,6 +334,8 @@ public class SubscriptionCreateResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("client_secret"));
         Assert.Null(model.DiscountID);
         Assert.True(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.DiscountIds);
+        Assert.True(model.RawData.ContainsKey("discount_ids"));
         Assert.Null(model.ExpiresOn);
         Assert.True(model.RawData.ContainsKey("expires_on"));
         Assert.Null(model.OneTimeProductCart);
@@ -342,6 +365,7 @@ public class SubscriptionCreateResponseTest : TestBase
 
             ClientSecret = null,
             DiscountID = null,
+            DiscountIds = null,
             ExpiresOn = null,
             OneTimeProductCart = null,
             PaymentLink = null,
@@ -370,6 +394,7 @@ public class SubscriptionCreateResponseTest : TestBase
             SubscriptionID = "subscription_id",
             ClientSecret = "client_secret",
             DiscountID = "discount_id",
+            DiscountIds = ["string"],
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",

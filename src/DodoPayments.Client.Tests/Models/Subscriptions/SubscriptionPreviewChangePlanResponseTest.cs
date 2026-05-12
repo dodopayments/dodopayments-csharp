@@ -4,6 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
+using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 
@@ -138,6 +139,28 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -285,6 +308,28 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -440,6 +485,28 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -601,6 +668,28 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -755,6 +844,28 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -910,6 +1021,28 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -1065,6 +1198,28 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()

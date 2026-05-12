@@ -4,6 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
+using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.WebhookEvents;
@@ -92,6 +93,28 @@ public class WebhookPayloadTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -180,6 +203,28 @@ public class WebhookPayloadTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -278,6 +323,28 @@ public class WebhookPayloadTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -380,6 +447,28 @@ public class WebhookPayloadTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -475,6 +564,28 @@ public class WebhookPayloadTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -573,6 +684,28 @@ public class WebhookPayloadTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -669,6 +802,28 @@ public class WebhookPayloadTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -767,6 +922,28 @@ public class DataTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -879,6 +1056,28 @@ public class DataTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -1183,6 +1382,28 @@ public class DataTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -1298,6 +1519,28 @@ public class DataTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -1632,6 +1875,28 @@ public class PaymentTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -1717,6 +1982,28 @@ public class PaymentTest : TestBase
             new() { Key = "key", Value = "value" },
         ];
         string expectedDiscountID = "discount_id";
+        List<Payments::Discount> expectedDiscounts =
+        [
+            new()
+            {
+                Amount = 0,
+                BusinessID = "business_id",
+                Code = "code",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DiscountID = "discount_id",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Position = 0,
+                PreserveOnPlanChange = true,
+                RestrictedTo = ["string"],
+                TimesUsed = 0,
+                Type = DiscountType.Percentage,
+                CyclesRemaining = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Name = "name",
+                SubscriptionCycles = 0,
+                UsageLimit = 0,
+            },
+        ];
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
         string expectedInvoiceID = "invoice_id";
@@ -1778,6 +2065,12 @@ public class PaymentTest : TestBase
             Assert.Equal(expectedCustomFieldResponses[i], model.CustomFieldResponses[i]);
         }
         Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.NotNull(model.Discounts);
+        Assert.Equal(expectedDiscounts.Count, model.Discounts.Count);
+        for (int i = 0; i < expectedDiscounts.Count; i++)
+        {
+            Assert.Equal(expectedDiscounts[i], model.Discounts[i]);
+        }
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
         Assert.Equal(expectedInvoiceID, model.InvoiceID);
@@ -1870,6 +2163,28 @@ public class PaymentTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -1963,6 +2278,28 @@ public class PaymentTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -2055,6 +2392,28 @@ public class PaymentTest : TestBase
             new() { Key = "key", Value = "value" },
         ];
         string expectedDiscountID = "discount_id";
+        List<Payments::Discount> expectedDiscounts =
+        [
+            new()
+            {
+                Amount = 0,
+                BusinessID = "business_id",
+                Code = "code",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DiscountID = "discount_id",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Position = 0,
+                PreserveOnPlanChange = true,
+                RestrictedTo = ["string"],
+                TimesUsed = 0,
+                Type = DiscountType.Percentage,
+                CyclesRemaining = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Name = "name",
+                SubscriptionCycles = 0,
+                UsageLimit = 0,
+            },
+        ];
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
         string expectedInvoiceID = "invoice_id";
@@ -2116,6 +2475,12 @@ public class PaymentTest : TestBase
             Assert.Equal(expectedCustomFieldResponses[i], deserialized.CustomFieldResponses[i]);
         }
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.NotNull(deserialized.Discounts);
+        Assert.Equal(expectedDiscounts.Count, deserialized.Discounts.Count);
+        for (int i = 0; i < expectedDiscounts.Count; i++)
+        {
+            Assert.Equal(expectedDiscounts[i], deserialized.Discounts[i]);
+        }
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
         Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
@@ -2208,6 +2573,28 @@ public class PaymentTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -2297,6 +2684,28 @@ public class PaymentTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -2389,6 +2798,28 @@ public class PaymentTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -2476,6 +2907,28 @@ public class PaymentTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -2573,6 +3026,28 @@ public class PaymentTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -2678,6 +3153,8 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.DiscountID);
         Assert.False(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.Discounts);
+        Assert.False(model.RawData.ContainsKey("discounts"));
         Assert.Null(model.ErrorCode);
         Assert.False(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
@@ -2849,6 +3326,7 @@ public class PaymentTest : TestBase
             CheckoutSessionID = null,
             CustomFieldResponses = null,
             DiscountID = null,
+            Discounts = null,
             ErrorCode = null,
             ErrorMessage = null,
             InvoiceID = null,
@@ -2877,6 +3355,8 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("custom_field_responses"));
         Assert.Null(model.DiscountID);
         Assert.True(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.Discounts);
+        Assert.True(model.RawData.ContainsKey("discounts"));
         Assert.Null(model.ErrorCode);
         Assert.True(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
@@ -2977,6 +3457,7 @@ public class PaymentTest : TestBase
             CheckoutSessionID = null,
             CustomFieldResponses = null,
             DiscountID = null,
+            Discounts = null,
             ErrorCode = null,
             ErrorMessage = null,
             InvoiceID = null,
@@ -3064,6 +3545,28 @@ public class PaymentTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -3300,6 +3803,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -3425,6 +3950,28 @@ public class SubscriptionTest : TestBase
         ];
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
+        List<Subscriptions::Discount> expectedDiscounts =
+        [
+            new()
+            {
+                Amount = 0,
+                BusinessID = "business_id",
+                Code = "code",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DiscountID = "discount_id",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Position = 0,
+                PreserveOnPlanChange = true,
+                RestrictedTo = ["string"],
+                TimesUsed = 0,
+                Type = DiscountType.Percentage,
+                CyclesRemaining = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Name = "name",
+                SubscriptionCycles = 0,
+                UsageLimit = 0,
+            },
+        ];
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
         Subscriptions::ScheduledPlanChange expectedScheduledChange = new()
@@ -3513,6 +4060,12 @@ public class SubscriptionTest : TestBase
         }
         Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.NotNull(model.Discounts);
+        Assert.Equal(expectedDiscounts.Count, model.Discounts.Count);
+        for (int i = 0; i < expectedDiscounts.Count; i++)
+        {
+            Assert.Equal(expectedDiscounts[i], model.Discounts[i]);
+        }
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
@@ -3613,6 +4166,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -3740,6 +4315,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -3872,6 +4469,28 @@ public class SubscriptionTest : TestBase
         ];
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
+        List<Subscriptions::Discount> expectedDiscounts =
+        [
+            new()
+            {
+                Amount = 0,
+                BusinessID = "business_id",
+                Code = "code",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DiscountID = "discount_id",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Position = 0,
+                PreserveOnPlanChange = true,
+                RestrictedTo = ["string"],
+                TimesUsed = 0,
+                Type = DiscountType.Percentage,
+                CyclesRemaining = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Name = "name",
+                SubscriptionCycles = 0,
+                UsageLimit = 0,
+            },
+        ];
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
         Subscriptions::ScheduledPlanChange expectedScheduledChange = new()
@@ -3960,6 +4579,12 @@ public class SubscriptionTest : TestBase
         }
         Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.NotNull(deserialized.Discounts);
+        Assert.Equal(expectedDiscounts.Count, deserialized.Discounts.Count);
+        for (int i = 0; i < expectedDiscounts.Count; i++)
+        {
+            Assert.Equal(expectedDiscounts[i], deserialized.Discounts[i]);
+        }
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
@@ -4060,6 +4685,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -4180,6 +4827,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
@@ -4284,6 +4953,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
@@ -4385,6 +5076,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
@@ -4493,6 +5206,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
@@ -4626,6 +5361,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
         Assert.False(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.Discounts);
+        Assert.False(model.RawData.ContainsKey("discounts"));
         Assert.Null(model.ExpiresAt);
         Assert.False(model.RawData.ContainsKey("expires_at"));
         Assert.Null(model.PaymentMethodID);
@@ -4861,6 +5598,7 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
+            Discounts = null,
             ExpiresAt = null,
             PaymentMethodID = null,
             TaxID = null,
@@ -4876,6 +5614,8 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
         Assert.True(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.Discounts);
+        Assert.True(model.RawData.ContainsKey("discounts"));
         Assert.Null(model.ExpiresAt);
         Assert.True(model.RawData.ContainsKey("expires_at"));
         Assert.Null(model.PaymentMethodID);
@@ -4998,6 +5738,7 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
+            Discounts = null,
             ExpiresAt = null,
             PaymentMethodID = null,
             TaxID = null,
@@ -5099,6 +5840,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()

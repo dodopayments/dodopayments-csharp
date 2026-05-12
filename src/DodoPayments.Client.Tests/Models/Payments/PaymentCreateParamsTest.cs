@@ -35,6 +35,7 @@ public class PaymentCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Force3ds = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentLink = true,
@@ -72,6 +73,7 @@ public class PaymentCreateParamsTest : TestBase
         ];
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
         string expectedDiscountCode = "discount_code";
+        List<string> expectedDiscountCodes = ["string"];
         bool expectedForce3ds = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedPaymentLink = true;
@@ -108,6 +110,12 @@ public class PaymentCreateParamsTest : TestBase
         }
         Assert.Equal(expectedBillingCurrency, parameters.BillingCurrency);
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
+        Assert.NotNull(parameters.DiscountCodes);
+        Assert.Equal(expectedDiscountCodes.Count, parameters.DiscountCodes.Count);
+        for (int i = 0; i < expectedDiscountCodes.Count; i++)
+        {
+            Assert.Equal(expectedDiscountCodes[i], parameters.DiscountCodes[i]);
+        }
         Assert.Equal(expectedForce3ds, parameters.Force3ds);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
@@ -154,6 +162,7 @@ public class PaymentCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Force3ds = true,
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
@@ -199,6 +208,7 @@ public class PaymentCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Force3ds = true,
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
@@ -260,6 +270,8 @@ public class PaymentCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
         Assert.Null(parameters.DiscountCode);
         Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.DiscountCodes);
+        Assert.False(parameters.RawBodyData.ContainsKey("discount_codes"));
         Assert.Null(parameters.Force3ds);
         Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.PaymentLink);
@@ -306,6 +318,7 @@ public class PaymentCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = null,
             BillingCurrency = null,
             DiscountCode = null,
+            DiscountCodes = null,
             Force3ds = null,
             PaymentLink = null,
             PaymentMethodID = null,
@@ -322,6 +335,8 @@ public class PaymentCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("billing_currency"));
         Assert.Null(parameters.DiscountCode);
         Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.DiscountCodes);
+        Assert.True(parameters.RawBodyData.ContainsKey("discount_codes"));
         Assert.Null(parameters.Force3ds);
         Assert.True(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.PaymentLink);
@@ -393,6 +408,7 @@ public class PaymentCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Force3ds = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentLink = true,

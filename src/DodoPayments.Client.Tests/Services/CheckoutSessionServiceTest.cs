@@ -18,6 +18,14 @@ public class CheckoutSessionServiceTest : TestBase
                         Quantity = 0,
                         Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                         Amount = 0,
+                        CreditEntitlements =
+                        [
+                            new()
+                            {
+                                CreditEntitlementID = "credit_entitlement_id",
+                                CreditsAmount = "credits_amount",
+                            },
+                        ],
                     },
                 ],
             },
@@ -51,6 +59,14 @@ public class CheckoutSessionServiceTest : TestBase
                         Quantity = 0,
                         Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                         Amount = 0,
+                        CreditEntitlements =
+                        [
+                            new()
+                            {
+                                CreditEntitlementID = "credit_entitlement_id",
+                                CreditsAmount = "credits_amount",
+                            },
+                        ],
                     },
                 ],
             },

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
@@ -86,6 +87,28 @@ public class PaymentSucceededWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -173,6 +196,28 @@ public class PaymentSucceededWebhookEventTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -271,6 +316,28 @@ public class PaymentSucceededWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -372,6 +439,28 @@ public class PaymentSucceededWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -466,6 +555,28 @@ public class PaymentSucceededWebhookEventTest : TestBase
             CheckoutSessionID = "checkout_session_id",
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
             InvoiceID = "invoice_id",
@@ -564,6 +675,28 @@ public class PaymentSucceededWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -659,6 +792,28 @@ public class PaymentSucceededWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",

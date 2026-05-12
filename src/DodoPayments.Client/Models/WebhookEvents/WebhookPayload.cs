@@ -1406,8 +1406,9 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// The discount id if discount is applied
+    /// DEPRECATED: Use discounts instead. Returns the first discount's ID if present.
     /// </summary>
+    [Obsolete("deprecated")]
     public string? DiscountID
     {
         get
@@ -1416,6 +1417,25 @@ public sealed record class Payment : JsonModel
             return this._rawData.GetNullableClass<string>("discount_id");
         }
         init { this._rawData.Set("discount_id", value); }
+    }
+
+    /// <summary>
+    /// All stacked discounts applied, ordered by position
+    /// </summary>
+    public IReadOnlyList<Payments::Discount>? Discounts
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<Payments::Discount>>("discounts");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Payments::Discount>?>(
+                "discounts",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -1659,6 +1679,7 @@ public sealed record class Payment : JsonModel
             CheckoutSessionID = payment.CheckoutSessionID,
             CustomFieldResponses = payment.CustomFieldResponses,
             DiscountID = payment.DiscountID,
+            Discounts = payment.Discounts,
             ErrorCode = payment.ErrorCode,
             ErrorMessage = payment.ErrorMessage,
             InvoiceID = payment.InvoiceID,
@@ -1709,6 +1730,10 @@ public sealed record class Payment : JsonModel
             item.Validate();
         }
         _ = this.DiscountID;
+        foreach (var item in this.Discounts ?? [])
+        {
+            item.Validate();
+        }
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
         _ = this.InvoiceID;
@@ -2281,7 +2306,7 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
-    /// Number of remaining discount cycles if discount is applied
+    /// DEPRECATED: Use discounts[].cycles_remaining instead.
     /// </summary>
     public int? DiscountCyclesRemaining
     {
@@ -2294,7 +2319,7 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
-    /// The discount id if discount is applied
+    /// DEPRECATED: Use discounts instead. Returns the first discount's ID if present.
     /// </summary>
     public string? DiscountID
     {
@@ -2304,6 +2329,27 @@ public sealed record class Subscription : JsonModel
             return this._rawData.GetNullableClass<string>("discount_id");
         }
         init { this._rawData.Set("discount_id", value); }
+    }
+
+    /// <summary>
+    /// All stacked discounts applied, ordered by position
+    /// </summary>
+    public IReadOnlyList<Subscriptions::Discount>? Discounts
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<Subscriptions::Discount>>(
+                "discounts"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Subscriptions::Discount>?>(
+                "discounts",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -2410,6 +2456,7 @@ public sealed record class Subscription : JsonModel
             CustomFieldResponses = subscription.CustomFieldResponses,
             DiscountCyclesRemaining = subscription.DiscountCyclesRemaining,
             DiscountID = subscription.DiscountID,
+            Discounts = subscription.Discounts,
             ExpiresAt = subscription.ExpiresAt,
             PaymentMethodID = subscription.PaymentMethodID,
             ScheduledChange = subscription.ScheduledChange,
@@ -2464,6 +2511,10 @@ public sealed record class Subscription : JsonModel
         }
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;
+        foreach (var item in this.Discounts ?? [])
+        {
+            item.Validate();
+        }
         _ = this.ExpiresAt;
         _ = this.PaymentMethodID;
         this.ScheduledChange?.Validate();

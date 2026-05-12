@@ -294,18 +294,18 @@ public sealed record class ProductCart : JsonModel
     /// <summary>
     /// Credit entitlements that will be granted upon purchase
     /// </summary>
-    public required IReadOnlyList<CreditEntitlement> CreditEntitlements
+    public required IReadOnlyList<ProductCartCreditEntitlement> CreditEntitlements
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<CreditEntitlement>>(
+            return this._rawData.GetNotNullStruct<ImmutableArray<ProductCartCreditEntitlement>>(
                 "credit_entitlements"
             );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<CreditEntitlement>>(
+            this._rawData.Set<ImmutableArray<ProductCartCreditEntitlement>>(
                 "credit_entitlements",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -618,8 +618,10 @@ class ProductCartFromRaw : IFromRawJson<ProductCart>
 /// Minimal credit entitlement info shown at checkout — what credits the customer
 /// will receive
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<CreditEntitlement, CreditEntitlementFromRaw>))]
-public sealed record class CreditEntitlement : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<ProductCartCreditEntitlement, ProductCartCreditEntitlementFromRaw>)
+)]
+public sealed record class ProductCartCreditEntitlement : JsonModel
 {
     /// <summary>
     /// ID of the credit entitlement
@@ -682,29 +684,29 @@ public sealed record class CreditEntitlement : JsonModel
         _ = this.CreditsAmount;
     }
 
-    public CreditEntitlement() { }
+    public ProductCartCreditEntitlement() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CreditEntitlement(CreditEntitlement creditEntitlement)
-        : base(creditEntitlement) { }
+    public ProductCartCreditEntitlement(ProductCartCreditEntitlement productCartCreditEntitlement)
+        : base(productCartCreditEntitlement) { }
 #pragma warning restore CS8618
 
-    public CreditEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    public ProductCartCreditEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CreditEntitlement(FrozenDictionary<string, JsonElement> rawData)
+    ProductCartCreditEntitlement(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="CreditEntitlementFromRaw.FromRawUnchecked"/>
-    public static CreditEntitlement FromRawUnchecked(
+    /// <inheritdoc cref="ProductCartCreditEntitlementFromRaw.FromRawUnchecked"/>
+    public static ProductCartCreditEntitlement FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -712,11 +714,12 @@ public sealed record class CreditEntitlement : JsonModel
     }
 }
 
-class CreditEntitlementFromRaw : IFromRawJson<CreditEntitlement>
+class ProductCartCreditEntitlementFromRaw : IFromRawJson<ProductCartCreditEntitlement>
 {
     /// <inheritdoc/>
-    public CreditEntitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        CreditEntitlement.FromRawUnchecked(rawData);
+    public ProductCartCreditEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => ProductCartCreditEntitlement.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(JsonModelConverter<Meter, MeterFromRaw>))]

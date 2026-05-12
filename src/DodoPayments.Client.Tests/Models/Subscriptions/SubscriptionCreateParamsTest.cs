@@ -29,6 +29,7 @@ public class SubscriptionCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -78,6 +79,7 @@ public class SubscriptionCreateParamsTest : TestBase
         ];
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
         string expectedDiscountCode = "discount_code";
+        List<string> expectedDiscountCodes = ["string"];
         bool expectedForce3ds = true;
         int expectedMandateMinAmountInrPaise = 0;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
@@ -132,6 +134,12 @@ public class SubscriptionCreateParamsTest : TestBase
         }
         Assert.Equal(expectedBillingCurrency, parameters.BillingCurrency);
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
+        Assert.NotNull(parameters.DiscountCodes);
+        Assert.Equal(expectedDiscountCodes.Count, parameters.DiscountCodes.Count);
+        for (int i = 0; i < expectedDiscountCodes.Count; i++)
+        {
+            Assert.Equal(expectedDiscountCodes[i], parameters.DiscountCodes[i]);
+        }
         Assert.Equal(expectedForce3ds, parameters.Force3ds);
         Assert.Equal(expectedMandateMinAmountInrPaise, parameters.MandateMinAmountInrPaise);
         Assert.NotNull(parameters.Metadata);
@@ -180,6 +188,7 @@ public class SubscriptionCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             OnDemand = new()
@@ -237,6 +246,7 @@ public class SubscriptionCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             OnDemand = new()
@@ -310,6 +320,8 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
         Assert.Null(parameters.DiscountCode);
         Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.DiscountCodes);
+        Assert.False(parameters.RawBodyData.ContainsKey("discount_codes"));
         Assert.Null(parameters.Force3ds);
         Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.MandateMinAmountInrPaise);
@@ -357,6 +369,7 @@ public class SubscriptionCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = null,
             BillingCurrency = null,
             DiscountCode = null,
+            DiscountCodes = null,
             Force3ds = null,
             MandateMinAmountInrPaise = null,
             OnDemand = null,
@@ -377,6 +390,8 @@ public class SubscriptionCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("billing_currency"));
         Assert.Null(parameters.DiscountCode);
         Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.DiscountCodes);
+        Assert.True(parameters.RawBodyData.ContainsKey("discount_codes"));
         Assert.Null(parameters.Force3ds);
         Assert.True(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.MandateMinAmountInrPaise);
@@ -444,6 +459,7 @@ public class SubscriptionCreateParamsTest : TestBase
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },

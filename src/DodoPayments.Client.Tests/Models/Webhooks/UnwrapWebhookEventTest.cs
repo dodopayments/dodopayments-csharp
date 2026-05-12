@@ -4,6 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.CreditEntitlements.Balances;
+using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Entitlements.Grants;
 using DodoPayments.Client.Models.LicenseKeys;
@@ -873,6 +874,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -967,6 +990,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -1061,6 +1106,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -1155,6 +1222,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -1338,6 +1427,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -1463,6 +1574,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -1588,6 +1721,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -1713,6 +1868,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -1838,6 +2015,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -1963,6 +2162,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -2088,6 +2309,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -2213,6 +2456,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -3248,6 +3513,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -3348,6 +3635,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -3448,6 +3757,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -3548,6 +3879,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CheckoutSessionID = "checkout_session_id",
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
                 InvoiceID = "invoice_id",
@@ -3749,6 +4102,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -3880,6 +4255,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -4011,6 +4408,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -4142,6 +4561,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -4273,6 +4714,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -4404,6 +4867,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -4535,6 +5020,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
@@ -4666,6 +5173,28 @@ public class UnwrapWebhookEventTest : TestBase
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        BusinessID = "business_id",
+                        Code = "code",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        DiscountID = "discount_id",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Position = 0,
+                        PreserveOnPlanChange = true,
+                        RestrictedTo = ["string"],
+                        TimesUsed = 0,
+                        Type = DiscountType.Percentage,
+                        CyclesRemaining = 0,
+                        ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Name = "name",
+                        SubscriptionCycles = 0,
+                        UsageLimit = 0,
+                    },
+                ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()

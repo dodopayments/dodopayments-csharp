@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -170,6 +171,10 @@ public sealed record class CheckoutSessionRequest : JsonModel
         }
     }
 
+    /// <summary>
+    /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
+    /// </summary>
+    [Obsolete("deprecated")]
     public string? DiscountCode
     {
         get
@@ -178,6 +183,26 @@ public sealed record class CheckoutSessionRequest : JsonModel
             return this._rawData.GetNullableClass<string>("discount_code");
         }
         init { this._rawData.Set("discount_code", value); }
+    }
+
+    /// <summary>
+    /// Stacked discount codes to apply, in order. Max 20. Cannot be used together
+    /// with discount_code.
+    /// </summary>
+    public IReadOnlyList<string>? DiscountCodes
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("discount_codes");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>?>(
+                "discount_codes",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     public CheckoutSessionFlags? FeatureFlags
@@ -396,6 +421,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
         this.Customer?.Validate();
         this.Customization?.Validate();
         _ = this.DiscountCode;
+        _ = this.DiscountCodes;
         this.FeatureFlags?.Validate();
         _ = this.Force3ds;
         _ = this.MandateMinAmountInrPaise;
