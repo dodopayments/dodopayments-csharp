@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -81,6 +82,27 @@ public sealed record class SubscriptionListResponse : JsonModel
             return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer");
         }
         init { this._rawData.Set("customer", value); }
+    }
+
+    /// <summary>
+    /// All stacked discounts applied, in order of application
+    /// </summary>
+    public required IReadOnlyList<SubscriptionListResponseDiscount> Discounts
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<SubscriptionListResponseDiscount>>(
+                "discounts"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<SubscriptionListResponseDiscount>>(
+                "discounts",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -303,7 +325,7 @@ public sealed record class SubscriptionListResponse : JsonModel
     }
 
     /// <summary>
-    /// Number of remaining discount cycles if discount is applied
+    /// DEPRECATED: Use discounts[].cycles_remaining instead.
     /// </summary>
     public int? DiscountCyclesRemaining
     {
@@ -316,7 +338,7 @@ public sealed record class SubscriptionListResponse : JsonModel
     }
 
     /// <summary>
-    /// The discount id if discount is applied
+    /// DEPRECATED: Use discounts instead.
     /// </summary>
     public string? DiscountID
     {
@@ -388,6 +410,10 @@ public sealed record class SubscriptionListResponse : JsonModel
         _ = this.CreatedAt;
         this.Currency.Validate();
         this.Customer.Validate();
+        foreach (var item in this.Discounts)
+        {
+            item.Validate();
+        }
         _ = this.Metadata;
         _ = this.NextBillingDate;
         _ = this.OnDemand;
@@ -448,4 +474,96 @@ class SubscriptionListResponseFromRaw : IFromRawJson<SubscriptionListResponse>
     public SubscriptionListResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionListResponse.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Lightweight discount info for list endpoints. Array order represents position
+/// (no explicit position field).
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionListResponseDiscount,
+        SubscriptionListResponseDiscountFromRaw
+    >)
+)]
+public sealed record class SubscriptionListResponseDiscount : JsonModel
+{
+    /// <summary>
+    /// The unique discount ID
+    /// </summary>
+    public required string DiscountID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("discount_id");
+        }
+        init { this._rawData.Set("discount_id", value); }
+    }
+
+    /// <summary>
+    /// Remaining billing cycles for this discount on this subscription
+    /// </summary>
+    public int? DiscountCyclesRemaining
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("discount_cycles_remaining");
+        }
+        init { this._rawData.Set("discount_cycles_remaining", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.DiscountID;
+        _ = this.DiscountCyclesRemaining;
+    }
+
+    public SubscriptionListResponseDiscount() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionListResponseDiscount(
+        SubscriptionListResponseDiscount subscriptionListResponseDiscount
+    )
+        : base(subscriptionListResponseDiscount) { }
+#pragma warning restore CS8618
+
+    public SubscriptionListResponseDiscount(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionListResponseDiscount(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionListResponseDiscountFromRaw.FromRawUnchecked"/>
+    public static SubscriptionListResponseDiscount FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public SubscriptionListResponseDiscount(string discountID)
+        : this()
+    {
+        this.DiscountID = discountID;
+    }
+}
+
+class SubscriptionListResponseDiscountFromRaw : IFromRawJson<SubscriptionListResponseDiscount>
+{
+    /// <inheritdoc/>
+    public SubscriptionListResponseDiscount FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionListResponseDiscount.FromRawUnchecked(rawData);
 }

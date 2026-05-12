@@ -4,8 +4,9 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
+using Discounts = DodoPayments.Client.Models.Discounts;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
@@ -104,6 +105,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = Discounts::DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -129,7 +152,7 @@ public class SubscriptionTest : TestBase
         };
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -163,7 +186,7 @@ public class SubscriptionTest : TestBase
             },
         ];
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -216,12 +239,34 @@ public class SubscriptionTest : TestBase
         ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
             CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<CustomFieldResponse> expectedCustomFieldResponses =
+        List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
         ];
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
+        List<Discount> expectedDiscounts =
+        [
+            new()
+            {
+                Amount = 0,
+                BusinessID = "business_id",
+                Code = "code",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DiscountID = "discount_id",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Position = 0,
+                PreserveOnPlanChange = true,
+                RestrictedTo = ["string"],
+                TimesUsed = 0,
+                Type = Discounts::DiscountType.Percentage,
+                CyclesRemaining = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Name = "name",
+                SubscriptionCycles = 0,
+                UsageLimit = 0,
+            },
+        ];
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
         ScheduledPlanChange expectedScheduledChange = new()
@@ -308,6 +353,12 @@ public class SubscriptionTest : TestBase
         }
         Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.NotNull(model.Discounts);
+        Assert.Equal(expectedDiscounts.Count, model.Discounts.Count);
+        for (int i = 0; i < expectedDiscounts.Count; i++)
+        {
+            Assert.Equal(expectedDiscounts[i], model.Discounts[i]);
+        }
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
@@ -407,6 +458,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = Discounts::DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -533,6 +606,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = Discounts::DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -565,7 +660,7 @@ public class SubscriptionTest : TestBase
         Assert.NotNull(deserialized);
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -599,7 +694,7 @@ public class SubscriptionTest : TestBase
             },
         ];
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -652,12 +747,34 @@ public class SubscriptionTest : TestBase
         ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
             CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<CustomFieldResponse> expectedCustomFieldResponses =
+        List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
         ];
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
+        List<Discount> expectedDiscounts =
+        [
+            new()
+            {
+                Amount = 0,
+                BusinessID = "business_id",
+                Code = "code",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DiscountID = "discount_id",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Position = 0,
+                PreserveOnPlanChange = true,
+                RestrictedTo = ["string"],
+                TimesUsed = 0,
+                Type = Discounts::DiscountType.Percentage,
+                CyclesRemaining = 0,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Name = "name",
+                SubscriptionCycles = 0,
+                UsageLimit = 0,
+            },
+        ];
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
         ScheduledPlanChange expectedScheduledChange = new()
@@ -744,6 +861,12 @@ public class SubscriptionTest : TestBase
         }
         Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.NotNull(deserialized.Discounts);
+        Assert.Equal(expectedDiscounts.Count, deserialized.Discounts.Count);
+        for (int i = 0; i < expectedDiscounts.Count; i++)
+        {
+            Assert.Equal(expectedDiscounts[i], deserialized.Discounts[i]);
+        }
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
@@ -843,6 +966,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = Discounts::DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -971,6 +1116,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
         Assert.False(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.Discounts);
+        Assert.False(model.RawData.ContainsKey("discounts"));
         Assert.Null(model.ExpiresAt);
         Assert.False(model.RawData.ContainsKey("expires_at"));
         Assert.Null(model.PaymentMethodID);
@@ -1167,6 +1314,7 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
+            Discounts = null,
             ExpiresAt = null,
             PaymentMethodID = null,
             ScheduledChange = null,
@@ -1185,6 +1333,8 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
         Assert.True(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.Discounts);
+        Assert.True(model.RawData.ContainsKey("discounts"));
         Assert.Null(model.ExpiresAt);
         Assert.True(model.RawData.ContainsKey("expires_at"));
         Assert.Null(model.PaymentMethodID);
@@ -1289,6 +1439,7 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
+            Discounts = null,
             ExpiresAt = null,
             PaymentMethodID = null,
             ScheduledChange = null,
@@ -1391,6 +1542,28 @@ public class SubscriptionTest : TestBase
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    BusinessID = "business_id",
+                    Code = "code",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DiscountID = "discount_id",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Position = 0,
+                    PreserveOnPlanChange = true,
+                    RestrictedTo = ["string"],
+                    TimesUsed = 0,
+                    Type = Discounts::DiscountType.Percentage,
+                    CyclesRemaining = 0,
+                    ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Name = "name",
+                    SubscriptionCycles = 0,
+                    UsageLimit = 0,
+                },
+            ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
@@ -1416,6 +1589,349 @@ public class SubscriptionTest : TestBase
         };
 
         Subscription copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class DiscountTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Discount
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Code = "code",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Position = 0,
+            PreserveOnPlanChange = true,
+            RestrictedTo = ["string"],
+            TimesUsed = 0,
+            Type = Discounts::DiscountType.Percentage,
+            CyclesRemaining = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            SubscriptionCycles = 0,
+            UsageLimit = 0,
+        };
+
+        int expectedAmount = 0;
+        string expectedBusinessID = "business_id";
+        string expectedCode = "code";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDiscountID = "discount_id";
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        int expectedPosition = 0;
+        bool expectedPreserveOnPlanChange = true;
+        List<string> expectedRestrictedTo = ["string"];
+        int expectedTimesUsed = 0;
+        ApiEnum<string, Discounts::DiscountType> expectedType = Discounts::DiscountType.Percentage;
+        int expectedCyclesRemaining = 0;
+        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedName = "name";
+        int expectedSubscriptionCycles = 0;
+        int expectedUsageLimit = 0;
+
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedBusinessID, model.BusinessID);
+        Assert.Equal(expectedCode, model.Code);
+        Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
+        Assert.Equal(expectedPosition, model.Position);
+        Assert.Equal(expectedPreserveOnPlanChange, model.PreserveOnPlanChange);
+        Assert.Equal(expectedRestrictedTo.Count, model.RestrictedTo.Count);
+        for (int i = 0; i < expectedRestrictedTo.Count; i++)
+        {
+            Assert.Equal(expectedRestrictedTo[i], model.RestrictedTo[i]);
+        }
+        Assert.Equal(expectedTimesUsed, model.TimesUsed);
+        Assert.Equal(expectedType, model.Type);
+        Assert.Equal(expectedCyclesRemaining, model.CyclesRemaining);
+        Assert.Equal(expectedExpiresAt, model.ExpiresAt);
+        Assert.Equal(expectedName, model.Name);
+        Assert.Equal(expectedSubscriptionCycles, model.SubscriptionCycles);
+        Assert.Equal(expectedUsageLimit, model.UsageLimit);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Discount
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Code = "code",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Position = 0,
+            PreserveOnPlanChange = true,
+            RestrictedTo = ["string"],
+            TimesUsed = 0,
+            Type = Discounts::DiscountType.Percentage,
+            CyclesRemaining = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            SubscriptionCycles = 0,
+            UsageLimit = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Discount>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Discount
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Code = "code",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Position = 0,
+            PreserveOnPlanChange = true,
+            RestrictedTo = ["string"],
+            TimesUsed = 0,
+            Type = Discounts::DiscountType.Percentage,
+            CyclesRemaining = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            SubscriptionCycles = 0,
+            UsageLimit = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Discount>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        int expectedAmount = 0;
+        string expectedBusinessID = "business_id";
+        string expectedCode = "code";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDiscountID = "discount_id";
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        int expectedPosition = 0;
+        bool expectedPreserveOnPlanChange = true;
+        List<string> expectedRestrictedTo = ["string"];
+        int expectedTimesUsed = 0;
+        ApiEnum<string, Discounts::DiscountType> expectedType = Discounts::DiscountType.Percentage;
+        int expectedCyclesRemaining = 0;
+        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedName = "name";
+        int expectedSubscriptionCycles = 0;
+        int expectedUsageLimit = 0;
+
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedBusinessID, deserialized.BusinessID);
+        Assert.Equal(expectedCode, deserialized.Code);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
+        Assert.Equal(expectedPosition, deserialized.Position);
+        Assert.Equal(expectedPreserveOnPlanChange, deserialized.PreserveOnPlanChange);
+        Assert.Equal(expectedRestrictedTo.Count, deserialized.RestrictedTo.Count);
+        for (int i = 0; i < expectedRestrictedTo.Count; i++)
+        {
+            Assert.Equal(expectedRestrictedTo[i], deserialized.RestrictedTo[i]);
+        }
+        Assert.Equal(expectedTimesUsed, deserialized.TimesUsed);
+        Assert.Equal(expectedType, deserialized.Type);
+        Assert.Equal(expectedCyclesRemaining, deserialized.CyclesRemaining);
+        Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
+        Assert.Equal(expectedName, deserialized.Name);
+        Assert.Equal(expectedSubscriptionCycles, deserialized.SubscriptionCycles);
+        Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Discount
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Code = "code",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Position = 0,
+            PreserveOnPlanChange = true,
+            RestrictedTo = ["string"],
+            TimesUsed = 0,
+            Type = Discounts::DiscountType.Percentage,
+            CyclesRemaining = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            SubscriptionCycles = 0,
+            UsageLimit = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Discount
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Code = "code",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Position = 0,
+            PreserveOnPlanChange = true,
+            RestrictedTo = ["string"],
+            TimesUsed = 0,
+            Type = Discounts::DiscountType.Percentage,
+        };
+
+        Assert.Null(model.CyclesRemaining);
+        Assert.False(model.RawData.ContainsKey("cycles_remaining"));
+        Assert.Null(model.ExpiresAt);
+        Assert.False(model.RawData.ContainsKey("expires_at"));
+        Assert.Null(model.Name);
+        Assert.False(model.RawData.ContainsKey("name"));
+        Assert.Null(model.SubscriptionCycles);
+        Assert.False(model.RawData.ContainsKey("subscription_cycles"));
+        Assert.Null(model.UsageLimit);
+        Assert.False(model.RawData.ContainsKey("usage_limit"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Discount
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Code = "code",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Position = 0,
+            PreserveOnPlanChange = true,
+            RestrictedTo = ["string"],
+            TimesUsed = 0,
+            Type = Discounts::DiscountType.Percentage,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new Discount
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Code = "code",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Position = 0,
+            PreserveOnPlanChange = true,
+            RestrictedTo = ["string"],
+            TimesUsed = 0,
+            Type = Discounts::DiscountType.Percentage,
+
+            CyclesRemaining = null,
+            ExpiresAt = null,
+            Name = null,
+            SubscriptionCycles = null,
+            UsageLimit = null,
+        };
+
+        Assert.Null(model.CyclesRemaining);
+        Assert.True(model.RawData.ContainsKey("cycles_remaining"));
+        Assert.Null(model.ExpiresAt);
+        Assert.True(model.RawData.ContainsKey("expires_at"));
+        Assert.Null(model.Name);
+        Assert.True(model.RawData.ContainsKey("name"));
+        Assert.Null(model.SubscriptionCycles);
+        Assert.True(model.RawData.ContainsKey("subscription_cycles"));
+        Assert.Null(model.UsageLimit);
+        Assert.True(model.RawData.ContainsKey("usage_limit"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Discount
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Code = "code",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Position = 0,
+            PreserveOnPlanChange = true,
+            RestrictedTo = ["string"],
+            TimesUsed = 0,
+            Type = Discounts::DiscountType.Percentage,
+
+            CyclesRemaining = null,
+            ExpiresAt = null,
+            Name = null,
+            SubscriptionCycles = null,
+            UsageLimit = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Discount
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Code = "code",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DiscountID = "discount_id",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Position = 0,
+            PreserveOnPlanChange = true,
+            RestrictedTo = ["string"],
+            TimesUsed = 0,
+            Type = Discounts::DiscountType.Percentage,
+            CyclesRemaining = 0,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            SubscriptionCycles = 0,
+            UsageLimit = 0,
+        };
+
+        Discount copied = new(model);
 
         Assert.Equal(model, copied);
     }

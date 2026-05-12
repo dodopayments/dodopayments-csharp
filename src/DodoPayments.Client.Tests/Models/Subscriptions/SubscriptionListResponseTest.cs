@@ -34,6 +34,7 @@ public class SubscriptionListResponseTest : TestBase
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -95,6 +96,10 @@ public class SubscriptionListResponseTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
+        List<SubscriptionListResponseDiscount> expectedDiscounts =
+        [
+            new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 },
+        ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         bool expectedOnDemand = true;
@@ -143,6 +148,11 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedCustomer, model.Customer);
+        Assert.Equal(expectedDiscounts.Count, model.Discounts.Count);
+        for (int i = 0; i < expectedDiscounts.Count; i++)
+        {
+            Assert.Equal(expectedDiscounts[i], model.Discounts[i]);
+        }
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -197,6 +207,7 @@ public class SubscriptionListResponseTest : TestBase
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -272,6 +283,7 @@ public class SubscriptionListResponseTest : TestBase
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -340,6 +352,10 @@ public class SubscriptionListResponseTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
+        List<SubscriptionListResponseDiscount> expectedDiscounts =
+        [
+            new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 },
+        ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         bool expectedOnDemand = true;
@@ -388,6 +404,11 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedCustomer, deserialized.Customer);
+        Assert.Equal(expectedDiscounts.Count, deserialized.Discounts.Count);
+        for (int i = 0; i < expectedDiscounts.Count; i++)
+        {
+            Assert.Equal(expectedDiscounts[i], deserialized.Discounts[i]);
+        }
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -442,6 +463,7 @@ public class SubscriptionListResponseTest : TestBase
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -511,6 +533,7 @@ public class SubscriptionListResponseTest : TestBase
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -568,6 +591,7 @@ public class SubscriptionListResponseTest : TestBase
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -612,6 +636,7 @@ public class SubscriptionListResponseTest : TestBase
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -677,6 +702,7 @@ public class SubscriptionListResponseTest : TestBase
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -729,6 +755,7 @@ public class SubscriptionListResponseTest : TestBase
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
+            Discounts = [new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OnDemand = true,
@@ -772,6 +799,136 @@ public class SubscriptionListResponseTest : TestBase
         };
 
         SubscriptionListResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionListResponseDiscountTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionListResponseDiscount
+        {
+            DiscountID = "discount_id",
+            DiscountCyclesRemaining = 0,
+        };
+
+        string expectedDiscountID = "discount_id";
+        int expectedDiscountCyclesRemaining = 0;
+
+        Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionListResponseDiscount
+        {
+            DiscountID = "discount_id",
+            DiscountCyclesRemaining = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionListResponseDiscount>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionListResponseDiscount
+        {
+            DiscountID = "discount_id",
+            DiscountCyclesRemaining = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionListResponseDiscount>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedDiscountID = "discount_id";
+        int expectedDiscountCyclesRemaining = 0;
+
+        Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionListResponseDiscount
+        {
+            DiscountID = "discount_id",
+            DiscountCyclesRemaining = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionListResponseDiscount { DiscountID = "discount_id" };
+
+        Assert.Null(model.DiscountCyclesRemaining);
+        Assert.False(model.RawData.ContainsKey("discount_cycles_remaining"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionListResponseDiscount { DiscountID = "discount_id" };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new SubscriptionListResponseDiscount
+        {
+            DiscountID = "discount_id",
+
+            DiscountCyclesRemaining = null,
+        };
+
+        Assert.Null(model.DiscountCyclesRemaining);
+        Assert.True(model.RawData.ContainsKey("discount_cycles_remaining"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionListResponseDiscount
+        {
+            DiscountID = "discount_id",
+
+            DiscountCyclesRemaining = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionListResponseDiscount
+        {
+            DiscountID = "discount_id",
+            DiscountCyclesRemaining = 0,
+        };
+
+        SubscriptionListResponseDiscount copied = new(model);
 
         Assert.Equal(model, copied);
     }

@@ -105,11 +105,9 @@ public record class SubscriptionPreviewChangePlanParams : ParamsBase
     }
 
     /// <summary>
-    /// Optional discount code to apply to the new plan. If provided, validates and
-    /// applies the discount to the plan change. If not provided and the subscription
-    /// has an existing discount with `preserve_on_plan_change=true`, the existing
-    /// discount will be preserved (if applicable to the new product).
+    /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
     /// </summary>
+    [System::Obsolete("deprecated")]
     public string? DiscountCode
     {
         get
@@ -118,6 +116,28 @@ public record class SubscriptionPreviewChangePlanParams : ParamsBase
             return this._rawBodyData.GetNullableClass<string>("discount_code");
         }
         init { this._rawBodyData.Set("discount_code", value); }
+    }
+
+    /// <summary>
+    /// Stacked discount codes to apply to the new plan. Max 20. Cannot be used together
+    /// with discount_code. If provided, replaces any existing discount codes. Empty
+    /// array removes all discounts. If not provided (None), existing discounts with
+    /// preserve_on_plan_change=true are preserved.
+    /// </summary>
+    public IReadOnlyList<string>? DiscountCodes
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("discount_codes");
+        }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<string>?>(
+                "discount_codes",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>

@@ -1238,7 +1238,7 @@ public class ProductCartTest : TestBase
             Tax = 0,
         };
 
-        List<CreditEntitlement> expectedCreditEntitlements =
+        List<ProductCartCreditEntitlement> expectedCreditEntitlements =
         [
             new()
             {
@@ -1471,7 +1471,7 @@ public class ProductCartTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        List<CreditEntitlement> expectedCreditEntitlements =
+        List<ProductCartCreditEntitlement> expectedCreditEntitlements =
         [
             new()
             {
@@ -1901,12 +1901,12 @@ public class ProductCartTest : TestBase
     }
 }
 
-public class CreditEntitlementTest : TestBase
+public class ProductCartCreditEntitlementTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new CreditEntitlement
+        var model = new ProductCartCreditEntitlement
         {
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
@@ -1928,7 +1928,7 @@ public class CreditEntitlementTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new CreditEntitlement
+        var model = new ProductCartCreditEntitlement
         {
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
@@ -1937,7 +1937,7 @@ public class CreditEntitlementTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CreditEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<ProductCartCreditEntitlement>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1948,7 +1948,7 @@ public class CreditEntitlementTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new CreditEntitlement
+        var model = new ProductCartCreditEntitlement
         {
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
@@ -1957,7 +1957,7 @@ public class CreditEntitlementTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CreditEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<ProductCartCreditEntitlement>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1977,7 +1977,7 @@ public class CreditEntitlementTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new CreditEntitlement
+        var model = new ProductCartCreditEntitlement
         {
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
@@ -1991,7 +1991,7 @@ public class CreditEntitlementTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new CreditEntitlement
+        var model = new ProductCartCreditEntitlement
         {
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
@@ -1999,7 +1999,7 @@ public class CreditEntitlementTest : TestBase
             CreditsAmount = "credits_amount",
         };
 
-        CreditEntitlement copied = new(model);
+        ProductCartCreditEntitlement copied = new(model);
 
         Assert.Equal(model, copied);
     }

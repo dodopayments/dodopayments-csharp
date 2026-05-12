@@ -73,6 +73,30 @@ public sealed record class ProductItemReq : JsonModel
         init { this._rawData.Set("amount", value); }
     }
 
+    /// <summary>
+    /// Per-checkout-session overrides for credit entitlements already attached to
+    /// this product. Each entry overrides the `credits_amount` granted by the referenced
+    /// credit entitlement when this checkout session is fulfilled. The credit_entitlement_id
+    /// must already be attached to the product.
+    /// </summary>
+    public IReadOnlyList<CreditEntitlement>? CreditEntitlements
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<CreditEntitlement>>(
+                "credit_entitlements"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<CreditEntitlement>?>(
+                "credit_entitlements",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -83,6 +107,10 @@ public sealed record class ProductItemReq : JsonModel
             item.Validate();
         }
         _ = this.Amount;
+        foreach (var item in this.CreditEntitlements ?? [])
+        {
+            item.Validate();
+        }
     }
 
     public ProductItemReq() { }
@@ -118,4 +146,81 @@ class ProductItemReqFromRaw : IFromRawJson<ProductItemReq>
     /// <inheritdoc/>
     public ProductItemReq FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         ProductItemReq.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Per-checkout-session override for a single credit entitlement attached to a product.
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<CreditEntitlement, CreditEntitlementFromRaw>))]
+public sealed record class CreditEntitlement : JsonModel
+{
+    /// <summary>
+    /// ID of the credit entitlement to override. Must already be attached to the product.
+    /// </summary>
+    public required string CreditEntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credit_entitlement_id");
+        }
+        init { this._rawData.Set("credit_entitlement_id", value); }
+    }
+
+    /// <summary>
+    /// Number of credits to grant for this checkout session, overriding the product-level
+    /// `credits_amount` set on the credit entitlement mapping. Must be greater than zero.
+    /// </summary>
+    public required string CreditsAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("credits_amount");
+        }
+        init { this._rawData.Set("credits_amount", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.CreditEntitlementID;
+        _ = this.CreditsAmount;
+    }
+
+    public CreditEntitlement() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreditEntitlement(CreditEntitlement creditEntitlement)
+        : base(creditEntitlement) { }
+#pragma warning restore CS8618
+
+    public CreditEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreditEntitlement(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditEntitlementFromRaw.FromRawUnchecked"/>
+    public static CreditEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreditEntitlementFromRaw : IFromRawJson<CreditEntitlement>
+{
+    /// <inheritdoc/>
+    public CreditEntitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreditEntitlement.FromRawUnchecked(rawData);
 }

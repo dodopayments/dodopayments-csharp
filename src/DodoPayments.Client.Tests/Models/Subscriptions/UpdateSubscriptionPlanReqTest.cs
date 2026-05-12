@@ -20,6 +20,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -35,6 +36,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         string expectedDiscountCode = "discount_code";
+        List<string> expectedDiscountCodes = ["string"];
         ApiEnum<string, UpdateSubscriptionPlanReqEffectiveAt> expectedEffectiveAt =
             UpdateSubscriptionPlanReqEffectiveAt.Immediately;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
@@ -52,6 +54,12 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Assert.Equal(expectedAddons[i], model.Addons[i]);
         }
         Assert.Equal(expectedDiscountCode, model.DiscountCode);
+        Assert.NotNull(model.DiscountCodes);
+        Assert.Equal(expectedDiscountCodes.Count, model.DiscountCodes.Count);
+        for (int i = 0; i < expectedDiscountCodes.Count; i++)
+        {
+            Assert.Equal(expectedDiscountCodes[i], model.DiscountCodes[i]);
+        }
         Assert.Equal(expectedEffectiveAt, model.EffectiveAt);
         Assert.NotNull(model.Metadata);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
@@ -76,6 +84,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -102,6 +111,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -124,6 +134,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         string expectedDiscountCode = "discount_code";
+        List<string> expectedDiscountCodes = ["string"];
         ApiEnum<string, UpdateSubscriptionPlanReqEffectiveAt> expectedEffectiveAt =
             UpdateSubscriptionPlanReqEffectiveAt.Immediately;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
@@ -144,6 +155,12 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
         }
         Assert.Equal(expectedDiscountCode, deserialized.DiscountCode);
+        Assert.NotNull(deserialized.DiscountCodes);
+        Assert.Equal(expectedDiscountCodes.Count, deserialized.DiscountCodes.Count);
+        for (int i = 0; i < expectedDiscountCodes.Count; i++)
+        {
+            Assert.Equal(expectedDiscountCodes[i], deserialized.DiscountCodes[i]);
+        }
         Assert.Equal(expectedEffectiveAt, deserialized.EffectiveAt);
         Assert.NotNull(deserialized.Metadata);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
@@ -168,6 +185,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
@@ -188,6 +206,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
@@ -208,6 +227,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
@@ -227,6 +247,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
 
@@ -250,6 +271,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
 
@@ -278,6 +300,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         Assert.False(model.RawData.ContainsKey("addons"));
         Assert.Null(model.DiscountCode);
         Assert.False(model.RawData.ContainsKey("discount_code"));
+        Assert.Null(model.DiscountCodes);
+        Assert.False(model.RawData.ContainsKey("discount_codes"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.OnPaymentFailure);
@@ -313,6 +337,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = null,
             Addons = null,
             DiscountCode = null,
+            DiscountCodes = null,
             Metadata = null,
             OnPaymentFailure = null,
         };
@@ -323,6 +348,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         Assert.True(model.RawData.ContainsKey("addons"));
         Assert.Null(model.DiscountCode);
         Assert.True(model.RawData.ContainsKey("discount_code"));
+        Assert.Null(model.DiscountCodes);
+        Assert.True(model.RawData.ContainsKey("discount_codes"));
         Assert.Null(model.Metadata);
         Assert.True(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.OnPaymentFailure);
@@ -343,6 +370,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = null,
             Addons = null,
             DiscountCode = null,
+            DiscountCodes = null,
             Metadata = null,
             OnPaymentFailure = null,
         };
@@ -362,6 +390,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,

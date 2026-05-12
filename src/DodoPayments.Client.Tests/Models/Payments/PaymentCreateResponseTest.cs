@@ -26,6 +26,7 @@ public class PaymentCreateResponseTest : TestBase
             PaymentID = "payment_id",
             TotalAmount = 0,
             DiscountID = "discount_id",
+            DiscountIds = ["string"],
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentLink = "payment_link",
             ProductCart =
@@ -52,6 +53,7 @@ public class PaymentCreateResponseTest : TestBase
         string expectedPaymentID = "payment_id";
         int expectedTotalAmount = 0;
         string expectedDiscountID = "discount_id";
+        List<string> expectedDiscountIds = ["string"];
         DateTimeOffset expectedExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentLink = "payment_link";
         List<OneTimeProductCartItem> expectedProductCart =
@@ -76,6 +78,12 @@ public class PaymentCreateResponseTest : TestBase
         Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
         Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.NotNull(model.DiscountIds);
+        Assert.Equal(expectedDiscountIds.Count, model.DiscountIds.Count);
+        for (int i = 0; i < expectedDiscountIds.Count; i++)
+        {
+            Assert.Equal(expectedDiscountIds[i], model.DiscountIds[i]);
+        }
         Assert.Equal(expectedExpiresOn, model.ExpiresOn);
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
         Assert.NotNull(model.ProductCart);
@@ -104,6 +112,7 @@ public class PaymentCreateResponseTest : TestBase
             PaymentID = "payment_id",
             TotalAmount = 0,
             DiscountID = "discount_id",
+            DiscountIds = ["string"],
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentLink = "payment_link",
             ProductCart =
@@ -144,6 +153,7 @@ public class PaymentCreateResponseTest : TestBase
             PaymentID = "payment_id",
             TotalAmount = 0,
             DiscountID = "discount_id",
+            DiscountIds = ["string"],
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentLink = "payment_link",
             ProductCart =
@@ -177,6 +187,7 @@ public class PaymentCreateResponseTest : TestBase
         string expectedPaymentID = "payment_id";
         int expectedTotalAmount = 0;
         string expectedDiscountID = "discount_id";
+        List<string> expectedDiscountIds = ["string"];
         DateTimeOffset expectedExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentLink = "payment_link";
         List<OneTimeProductCartItem> expectedProductCart =
@@ -201,6 +212,12 @@ public class PaymentCreateResponseTest : TestBase
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.NotNull(deserialized.DiscountIds);
+        Assert.Equal(expectedDiscountIds.Count, deserialized.DiscountIds.Count);
+        for (int i = 0; i < expectedDiscountIds.Count; i++)
+        {
+            Assert.Equal(expectedDiscountIds[i], deserialized.DiscountIds[i]);
+        }
         Assert.Equal(expectedExpiresOn, deserialized.ExpiresOn);
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
         Assert.NotNull(deserialized.ProductCart);
@@ -229,6 +246,7 @@ public class PaymentCreateResponseTest : TestBase
             PaymentID = "payment_id",
             TotalAmount = 0,
             DiscountID = "discount_id",
+            DiscountIds = ["string"],
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentLink = "payment_link",
             ProductCart =
@@ -266,6 +284,8 @@ public class PaymentCreateResponseTest : TestBase
 
         Assert.Null(model.DiscountID);
         Assert.False(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.DiscountIds);
+        Assert.False(model.RawData.ContainsKey("discount_ids"));
         Assert.Null(model.ExpiresOn);
         Assert.False(model.RawData.ContainsKey("expires_on"));
         Assert.Null(model.PaymentLink);
@@ -315,6 +335,7 @@ public class PaymentCreateResponseTest : TestBase
             TotalAmount = 0,
 
             DiscountID = null,
+            DiscountIds = null,
             ExpiresOn = null,
             PaymentLink = null,
             ProductCart = null,
@@ -322,6 +343,8 @@ public class PaymentCreateResponseTest : TestBase
 
         Assert.Null(model.DiscountID);
         Assert.True(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.DiscountIds);
+        Assert.True(model.RawData.ContainsKey("discount_ids"));
         Assert.Null(model.ExpiresOn);
         Assert.True(model.RawData.ContainsKey("expires_on"));
         Assert.Null(model.PaymentLink);
@@ -349,6 +372,7 @@ public class PaymentCreateResponseTest : TestBase
             TotalAmount = 0,
 
             DiscountID = null,
+            DiscountIds = null,
             ExpiresOn = null,
             PaymentLink = null,
             ProductCart = null,
@@ -375,6 +399,7 @@ public class PaymentCreateResponseTest : TestBase
             PaymentID = "payment_id",
             TotalAmount = 0,
             DiscountID = "discount_id",
+            DiscountIds = ["string"],
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentLink = "payment_link",
             ProductCart =

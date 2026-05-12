@@ -192,6 +192,10 @@ public record class CheckoutSessionCreateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
+    /// </summary>
+    [Obsolete("deprecated")]
     public string? DiscountCode
     {
         get
@@ -200,6 +204,26 @@ public record class CheckoutSessionCreateParams : ParamsBase
             return this._rawBodyData.GetNullableClass<string>("discount_code");
         }
         init { this._rawBodyData.Set("discount_code", value); }
+    }
+
+    /// <summary>
+    /// Stacked discount codes to apply, in order. Max 20. Cannot be used together
+    /// with discount_code.
+    /// </summary>
+    public IReadOnlyList<string>? DiscountCodes
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("discount_codes");
+        }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<string>?>(
+                "discount_codes",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     public CheckoutSessionFlags? FeatureFlags

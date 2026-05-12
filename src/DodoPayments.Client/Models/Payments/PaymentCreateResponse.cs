@@ -85,8 +85,9 @@ public sealed record class PaymentCreateResponse : JsonModel
     }
 
     /// <summary>
-    /// The discount id if discount is applied
+    /// DEPRECATED: Use discount_ids instead. Returns the first discount's ID if present.
     /// </summary>
+    [Obsolete("deprecated")]
     public string? DiscountID
     {
         get
@@ -95,6 +96,25 @@ public sealed record class PaymentCreateResponse : JsonModel
             return this._rawData.GetNullableClass<string>("discount_id");
         }
         init { this._rawData.Set("discount_id", value); }
+    }
+
+    /// <summary>
+    /// All stacked discount IDs applied, in order of application
+    /// </summary>
+    public IReadOnlyList<string>? DiscountIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("discount_ids");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>?>(
+                "discount_ids",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -153,6 +173,7 @@ public sealed record class PaymentCreateResponse : JsonModel
         _ = this.PaymentID;
         _ = this.TotalAmount;
         _ = this.DiscountID;
+        _ = this.DiscountIds;
         _ = this.ExpiresOn;
         _ = this.PaymentLink;
         foreach (var item in this.ProductCart ?? [])

@@ -21,6 +21,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             EffectiveAt = EffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
@@ -34,6 +35,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
         bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
         string expectedDiscountCode = "discount_code";
+        List<string> expectedDiscountCodes = ["string"];
         ApiEnum<string, EffectiveAt> expectedEffectiveAt = EffectiveAt.Immediately;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, OnPaymentFailure> expectedOnPaymentFailure = OnPaymentFailure.PreventChange;
@@ -53,6 +55,12 @@ public class SubscriptionChangePlanParamsTest : TestBase
             Assert.Equal(expectedAddons[i], parameters.Addons[i]);
         }
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
+        Assert.NotNull(parameters.DiscountCodes);
+        Assert.Equal(expectedDiscountCodes.Count, parameters.DiscountCodes.Count);
+        for (int i = 0; i < expectedDiscountCodes.Count; i++)
+        {
+            Assert.Equal(expectedDiscountCodes[i], parameters.DiscountCodes[i]);
+        }
         Assert.Equal(expectedEffectiveAt, parameters.EffectiveAt);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
@@ -77,6 +85,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
         };
@@ -97,6 +106,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
 
@@ -126,6 +136,8 @@ public class SubscriptionChangePlanParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.DiscountCode);
         Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.DiscountCodes);
+        Assert.False(parameters.RawBodyData.ContainsKey("discount_codes"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.OnPaymentFailure);
@@ -146,6 +158,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             AdaptiveCurrencyFeesInclusive = null,
             Addons = null,
             DiscountCode = null,
+            DiscountCodes = null,
             Metadata = null,
             OnPaymentFailure = null,
         };
@@ -156,6 +169,8 @@ public class SubscriptionChangePlanParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.DiscountCode);
         Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.DiscountCodes);
+        Assert.True(parameters.RawBodyData.ContainsKey("discount_codes"));
         Assert.Null(parameters.Metadata);
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.OnPaymentFailure);
@@ -195,6 +210,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             EffectiveAt = EffectiveAt.Immediately,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,

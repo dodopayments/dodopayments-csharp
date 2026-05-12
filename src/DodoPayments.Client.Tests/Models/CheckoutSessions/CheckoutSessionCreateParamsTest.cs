@@ -22,6 +22,14 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Quantity = 0,
                     Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                     Amount = 0,
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                 },
             ],
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
@@ -104,6 +112,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 },
             },
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
@@ -154,6 +163,14 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 Quantity = 0,
                 Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                 Amount = 0,
+                CreditEntitlements =
+                [
+                    new()
+                    {
+                        CreditEntitlementID = "credit_entitlement_id",
+                        CreditsAmount = "credits_amount",
+                    },
+                ],
             },
         ];
         List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
@@ -239,6 +256,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             },
         };
         string expectedDiscountCode = "discount_code";
+        List<string> expectedDiscountCodes = ["string"];
         CheckoutSessionFlags expectedFeatureFlags = new()
         {
             AllowCurrencySelection = true,
@@ -310,6 +328,12 @@ public class CheckoutSessionCreateParamsTest : TestBase
         Assert.Equal(expectedCustomer, parameters.Customer);
         Assert.Equal(expectedCustomization, parameters.Customization);
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
+        Assert.NotNull(parameters.DiscountCodes);
+        Assert.Equal(expectedDiscountCodes.Count, parameters.DiscountCodes.Count);
+        for (int i = 0; i < expectedDiscountCodes.Count; i++)
+        {
+            Assert.Equal(expectedDiscountCodes[i], parameters.DiscountCodes[i]);
+        }
         Assert.Equal(expectedFeatureFlags, parameters.FeatureFlags);
         Assert.Equal(expectedForce3ds, parameters.Force3ds);
         Assert.Equal(expectedMandateMinAmountInrPaise, parameters.MandateMinAmountInrPaise);
@@ -344,6 +368,14 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Quantity = 0,
                     Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                     Amount = 0,
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                 },
             ],
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
@@ -371,6 +403,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             ],
             Customer = new AttachExistingCustomer("customer_id"),
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -419,6 +452,14 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Quantity = 0,
                     Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                     Amount = 0,
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                 },
             ],
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
@@ -446,6 +487,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             ],
             Customer = new AttachExistingCustomer("customer_id"),
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -502,6 +544,14 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Quantity = 0,
                     Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                     Amount = 0,
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                 },
             ],
             Confirm = true,
@@ -596,6 +646,8 @@ public class CheckoutSessionCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("customer"));
         Assert.Null(parameters.DiscountCode);
         Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.DiscountCodes);
+        Assert.False(parameters.RawBodyData.ContainsKey("discount_codes"));
         Assert.Null(parameters.Force3ds);
         Assert.False(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.MandateMinAmountInrPaise);
@@ -627,6 +679,14 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Quantity = 0,
                     Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                     Amount = 0,
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                 },
             ],
             Confirm = true,
@@ -713,6 +773,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             CustomFields = null,
             Customer = null,
             DiscountCode = null,
+            DiscountCodes = null,
             Force3ds = null,
             MandateMinAmountInrPaise = null,
             Metadata = null,
@@ -737,6 +798,8 @@ public class CheckoutSessionCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("customer"));
         Assert.Null(parameters.DiscountCode);
         Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
+        Assert.Null(parameters.DiscountCodes);
+        Assert.True(parameters.RawBodyData.ContainsKey("discount_codes"));
         Assert.Null(parameters.Force3ds);
         Assert.True(parameters.RawBodyData.ContainsKey("force_3ds"));
         Assert.Null(parameters.MandateMinAmountInrPaise);
@@ -768,6 +831,14 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Quantity = 0,
                     Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                     Amount = 0,
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                 },
             ],
         };
@@ -790,6 +861,14 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Quantity = 0,
                     Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
                     Amount = 0,
+                    CreditEntitlements =
+                    [
+                        new()
+                        {
+                            CreditEntitlementID = "credit_entitlement_id",
+                            CreditsAmount = "credits_amount",
+                        },
+                    ],
                 },
             ],
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
@@ -872,6 +951,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 },
             },
             DiscountCode = "discount_code",
+            DiscountCodes = ["string"],
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
