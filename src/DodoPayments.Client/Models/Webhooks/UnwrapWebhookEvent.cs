@@ -1865,706 +1865,813 @@ sealed class UnwrapWebhookEventConverter : JsonConverter<UnwrapWebhookEvent>
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
         try
         {
-            var deserialized = JsonSerializer.Deserialize<AbandonedCheckoutDetectedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            type = element.GetProperty("type").GetString();
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            type = null;
         }
 
-        try
+        switch (type)
         {
-            var deserialized = JsonSerializer.Deserialize<AbandonedCheckoutRecoveredWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
+            case "abandoned_checkout.detected":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<AbandonedCheckoutDetectedWebhookEvent>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "abandoned_checkout.recovered":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<AbandonedCheckoutRecoveredWebhookEvent>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "credit.added":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<CreditAddedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "credit.balance_low":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<CreditBalanceLowWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "credit.deducted":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<CreditDeductedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "credit.expired":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<CreditExpiredWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "credit.manual_adjustment":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<CreditManualAdjustmentWebhookEvent>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "credit.overage_charged":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<CreditOverageChargedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "credit.overage_reset":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<CreditOverageResetWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "credit.rolled_over":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<CreditRolledOverWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "credit.rollover_forfeited":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<CreditRolloverForfeitedWebhookEvent>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "dispute.accepted":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DisputeAcceptedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "dispute.cancelled":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "dispute.challenged":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DisputeChallengedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "dispute.expired":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DisputeExpiredWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "dispute.lost":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DisputeLostWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "dispute.opened":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DisputeOpenedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "dispute.won":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DisputeWonWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "dunning.recovered":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DunningRecoveredWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "dunning.started":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DunningStartedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "entitlement_grant.created":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<EntitlementGrantCreatedWebhookEvent>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "entitlement_grant.delivered":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<EntitlementGrantDeliveredWebhookEvent>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "entitlement_grant.failed":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<EntitlementGrantFailedWebhookEvent>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "entitlement_grant.revoked":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<EntitlementGrantRevokedWebhookEvent>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "license_key.created":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "payment.cancelled":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<PaymentCancelledWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "payment.failed":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<PaymentFailedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "payment.processing":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<PaymentProcessingWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "payment.succeeded":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<PaymentSucceededWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "refund.failed":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<RefundFailedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "refund.succeeded":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<RefundSucceededWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "subscription.active":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<SubscriptionActiveWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "subscription.cancelled":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<SubscriptionCancelledWebhookEvent>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "subscription.expired":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "subscription.failed":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<SubscriptionFailedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "subscription.on_hold":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<SubscriptionOnHoldWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "subscription.plan_changed":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<SubscriptionPlanChangedWebhookEvent>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "subscription.renewed":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<SubscriptionRenewedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "subscription.updated":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new UnwrapWebhookEvent(element);
             }
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditAddedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditBalanceLowWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditDeductedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditExpiredWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditManualAdjustmentWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditOverageChargedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditOverageResetWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditRolledOverWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditRolloverForfeitedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<DisputeAcceptedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<DisputeCancelledWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<DisputeChallengedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<DisputeExpiredWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<DisputeLostWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<DisputeOpenedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<DisputeWonWebhookEvent>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<DunningRecoveredWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<DunningStartedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<EntitlementGrantCreatedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<EntitlementGrantDeliveredWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<EntitlementGrantFailedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<EntitlementGrantRevokedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<LicenseKeyCreatedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<PaymentCancelledWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<PaymentFailedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<PaymentProcessingWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<PaymentSucceededWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<RefundFailedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<RefundSucceededWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<SubscriptionActiveWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<SubscriptionCancelledWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<SubscriptionExpiredWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<SubscriptionFailedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<SubscriptionOnHoldWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<SubscriptionPlanChangedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<SubscriptionRenewedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<SubscriptionUpdatedWebhookEvent>(
-                element,
-                options
-            );
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(
