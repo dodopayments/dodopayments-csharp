@@ -142,7 +142,7 @@ public class SubscriptionServiceTest : TestBase
     {
         var response = await this.client.Subscriptions.UpdatePaymentMethod(
             "subscription_id",
-            new() { Body = new New() { ReturnUrl = "return_url" } },
+            new() { PaymentMethod = new New() { ReturnUrl = "return_url" } },
             TestContext.Current.CancellationToken
         );
         response.Validate();

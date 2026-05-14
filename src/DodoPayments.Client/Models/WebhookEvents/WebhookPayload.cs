@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
 using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
@@ -1499,16 +1500,16 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// All stacked discounts applied, ordered by position
     /// </summary>
-    public IReadOnlyList<Payments::Discount>? Discounts
+    public IReadOnlyList<DiscountDetail>? Discounts
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<Payments::Discount>>("discounts");
+            return this._rawData.GetNullableStruct<ImmutableArray<DiscountDetail>>("discounts");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Payments::Discount>?>(
+            this._rawData.Set<ImmutableArray<DiscountDetail>?>(
                 "discounts",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -2315,18 +2316,16 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// All stacked discounts applied, ordered by position
     /// </summary>
-    public IReadOnlyList<Subscriptions::Discount>? Discounts
+    public IReadOnlyList<DiscountDetail>? Discounts
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<Subscriptions::Discount>>(
-                "discounts"
-            );
+            return this._rawData.GetNullableStruct<ImmutableArray<DiscountDetail>>("discounts");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Subscriptions::Discount>?>(
+            this._rawData.Set<ImmutableArray<DiscountDetail>?>(
                 "discounts",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );

@@ -1954,7 +1954,7 @@ public class PaymentTest : TestBase
             new() { Key = "key", Value = "value" },
         ];
         string expectedDiscountID = "discount_id";
-        List<Payments::Discount> expectedDiscounts =
+        List<DiscountDetail> expectedDiscounts =
         [
             new()
             {
@@ -2362,7 +2362,7 @@ public class PaymentTest : TestBase
             new() { Key = "key", Value = "value" },
         ];
         string expectedDiscountID = "discount_id";
-        List<Payments::Discount> expectedDiscounts =
+        List<DiscountDetail> expectedDiscounts =
         [
             new()
             {
@@ -3791,7 +3791,7 @@ public class SubscriptionTest : TestBase
         ];
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
-        List<Subscriptions::Discount> expectedDiscounts =
+        List<DiscountDetail> expectedDiscounts =
         [
             new()
             {
@@ -4307,7 +4307,7 @@ public class SubscriptionTest : TestBase
         ];
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
-        List<Subscriptions::Discount> expectedDiscounts =
+        List<DiscountDetail> expectedDiscounts =
         [
             new()
             {
