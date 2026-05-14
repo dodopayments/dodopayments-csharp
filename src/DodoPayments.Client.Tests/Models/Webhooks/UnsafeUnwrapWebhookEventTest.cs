@@ -27,8 +27,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
             Data = new()
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                AbandonmentReason =
-                    AbandonmentReason.PaymentFailed,
+                AbandonmentReason = AbandonmentReason.PaymentFailed,
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
                 Status = global::DodoPayments.Client.Models.Webhooks.Status.Abandoned,
@@ -2478,8 +2477,7 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
             Data = new()
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                AbandonmentReason =
-                    AbandonmentReason.PaymentFailed,
+                AbandonmentReason = AbandonmentReason.PaymentFailed,
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
                 Status = global::DodoPayments.Client.Models.Webhooks.Status.Abandoned,
