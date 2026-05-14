@@ -1,8 +1,7 @@
 using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
-using Subscriptions = DodoPayments.Client.Models.Subscriptions;
+using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
@@ -11,22 +10,14 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new Subscriptions::SubscriptionUpdatePaymentMethodParams
+        var parameters = new SubscriptionUpdatePaymentMethodParams
         {
             SubscriptionID = "subscription_id",
-            Body = new Subscriptions::New()
-            {
-                Type = Subscriptions::Type.New,
-                ReturnUrl = "return_url",
-            },
+            Body = new New() { ReturnUrl = "return_url" },
         };
 
         string expectedSubscriptionID = "subscription_id";
-        Subscriptions::Body expectedBody = new Subscriptions::New()
-        {
-            Type = Subscriptions::Type.New,
-            ReturnUrl = "return_url",
-        };
+        Body expectedBody = new New() { ReturnUrl = "return_url" };
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
         Assert.Equal(expectedBody, parameters.Body);
@@ -35,14 +26,10 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        Subscriptions::SubscriptionUpdatePaymentMethodParams parameters = new()
+        SubscriptionUpdatePaymentMethodParams parameters = new()
         {
             SubscriptionID = "subscription_id",
-            Body = new Subscriptions::New()
-            {
-                Type = Subscriptions::Type.New,
-                ReturnUrl = "return_url",
-            },
+            Body = new New() { ReturnUrl = "return_url" },
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
@@ -60,17 +47,13 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new Subscriptions::SubscriptionUpdatePaymentMethodParams
+        var parameters = new SubscriptionUpdatePaymentMethodParams
         {
             SubscriptionID = "subscription_id",
-            Body = new Subscriptions::New()
-            {
-                Type = Subscriptions::Type.New,
-                ReturnUrl = "return_url",
-            },
+            Body = new New() { ReturnUrl = "return_url" },
         };
 
-        Subscriptions::SubscriptionUpdatePaymentMethodParams copied = new(parameters);
+        SubscriptionUpdatePaymentMethodParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }
@@ -81,38 +64,23 @@ public class BodyTest : TestBase
     [Fact]
     public void NewValidationWorks()
     {
-        Subscriptions::Body value = new Subscriptions::New()
-        {
-            Type = Subscriptions::Type.New,
-            ReturnUrl = "return_url",
-        };
+        Body value = new New() { ReturnUrl = "return_url" };
         value.Validate();
     }
 
     [Fact]
     public void ExistingValidationWorks()
     {
-        Subscriptions::Body value = new Subscriptions::Existing()
-        {
-            PaymentMethodID = "payment_method_id",
-            Type = Subscriptions::ExistingType.Existing,
-        };
+        Body value = new Existing("payment_method_id");
         value.Validate();
     }
 
     [Fact]
     public void NewSerializationRoundtripWorks()
     {
-        Subscriptions::Body value = new Subscriptions::New()
-        {
-            Type = Subscriptions::Type.New,
-            ReturnUrl = "return_url",
-        };
+        Body value = new New() { ReturnUrl = "return_url" };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Body>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Body>(element, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -120,16 +88,9 @@ public class BodyTest : TestBase
     [Fact]
     public void ExistingSerializationRoundtripWorks()
     {
-        Subscriptions::Body value = new Subscriptions::Existing()
-        {
-            PaymentMethodID = "payment_method_id",
-            Type = Subscriptions::ExistingType.Existing,
-        };
+        Body value = new Existing("payment_method_id");
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Body>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Body>(element, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -140,33 +101,22 @@ public class NewTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::New
-        {
-            Type = Subscriptions::Type.New,
-            ReturnUrl = "return_url",
-        };
+        var model = new New { ReturnUrl = "return_url" };
 
-        ApiEnum<string, Subscriptions::Type> expectedType = Subscriptions::Type.New;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("new");
         string expectedReturnUrl = "return_url";
 
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedReturnUrl, model.ReturnUrl);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::New
-        {
-            Type = Subscriptions::Type.New,
-            ReturnUrl = "return_url",
-        };
+        var model = new New { ReturnUrl = "return_url" };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::New>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<New>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -174,34 +124,23 @@ public class NewTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::New
-        {
-            Type = Subscriptions::Type.New,
-            ReturnUrl = "return_url",
-        };
+        var model = new New { ReturnUrl = "return_url" };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::New>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<New>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, Subscriptions::Type> expectedType = Subscriptions::Type.New;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("new");
         string expectedReturnUrl = "return_url";
 
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedReturnUrl, deserialized.ReturnUrl);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::New
-        {
-            Type = Subscriptions::Type.New,
-            ReturnUrl = "return_url",
-        };
+        var model = new New { ReturnUrl = "return_url" };
 
         model.Validate();
     }
@@ -209,7 +148,7 @@ public class NewTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::New { Type = Subscriptions::Type.New };
+        var model = new New { };
 
         Assert.Null(model.ReturnUrl);
         Assert.False(model.RawData.ContainsKey("return_url"));
@@ -218,7 +157,7 @@ public class NewTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::New { Type = Subscriptions::Type.New };
+        var model = new New { };
 
         model.Validate();
     }
@@ -226,12 +165,7 @@ public class NewTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Subscriptions::New
-        {
-            Type = Subscriptions::Type.New,
-
-            ReturnUrl = null,
-        };
+        var model = new New { ReturnUrl = null };
 
         Assert.Null(model.ReturnUrl);
         Assert.True(model.RawData.ContainsKey("return_url"));
@@ -240,12 +174,7 @@ public class NewTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Subscriptions::New
-        {
-            Type = Subscriptions::Type.New,
-
-            ReturnUrl = null,
-        };
+        var model = new New { ReturnUrl = null };
 
         model.Validate();
     }
@@ -253,71 +182,11 @@ public class NewTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::New
-        {
-            Type = Subscriptions::Type.New,
-            ReturnUrl = "return_url",
-        };
+        var model = new New { ReturnUrl = "return_url" };
 
-        Subscriptions::New copied = new(model);
+        New copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class TypeTest : TestBase
-{
-    [Theory]
-    [InlineData(Subscriptions::Type.New)]
-    public void Validation_Works(Subscriptions::Type rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::Type> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Type>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Subscriptions::Type.New)]
-    public void SerializationRoundtrip_Works(Subscriptions::Type rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::Type> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Type>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Type>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Type>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -326,34 +195,22 @@ public class ExistingTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::Existing
-        {
-            PaymentMethodID = "payment_method_id",
-            Type = Subscriptions::ExistingType.Existing,
-        };
+        var model = new Existing { PaymentMethodID = "payment_method_id" };
 
         string expectedPaymentMethodID = "payment_method_id";
-        ApiEnum<string, Subscriptions::ExistingType> expectedType =
-            Subscriptions::ExistingType.Existing;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("existing");
 
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::Existing
-        {
-            PaymentMethodID = "payment_method_id",
-            Type = Subscriptions::ExistingType.Existing,
-        };
+        var model = new Existing { PaymentMethodID = "payment_method_id" };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Existing>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Existing>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -361,35 +218,26 @@ public class ExistingTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::Existing
-        {
-            PaymentMethodID = "payment_method_id",
-            Type = Subscriptions::ExistingType.Existing,
-        };
+        var model = new Existing { PaymentMethodID = "payment_method_id" };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Existing>(
+        var deserialized = JsonSerializer.Deserialize<Existing>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
         string expectedPaymentMethodID = "payment_method_id";
-        ApiEnum<string, Subscriptions::ExistingType> expectedType =
-            Subscriptions::ExistingType.Existing;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("existing");
 
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::Existing
-        {
-            PaymentMethodID = "payment_method_id",
-            Type = Subscriptions::ExistingType.Existing,
-        };
+        var model = new Existing { PaymentMethodID = "payment_method_id" };
 
         model.Validate();
     }
@@ -397,70 +245,10 @@ public class ExistingTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::Existing
-        {
-            PaymentMethodID = "payment_method_id",
-            Type = Subscriptions::ExistingType.Existing,
-        };
+        var model = new Existing { PaymentMethodID = "payment_method_id" };
 
-        Subscriptions::Existing copied = new(model);
+        Existing copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class ExistingTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(Subscriptions::ExistingType.Existing)]
-    public void Validation_Works(Subscriptions::ExistingType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::ExistingType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ExistingType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Subscriptions::ExistingType.Existing)]
-    public void SerializationRoundtrip_Works(Subscriptions::ExistingType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::ExistingType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ExistingType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ExistingType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ExistingType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }

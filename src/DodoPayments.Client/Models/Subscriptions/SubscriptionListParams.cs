@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -41,12 +41,12 @@ public record class SubscriptionListParams : ParamsBase
     /// <summary>
     /// Get events after this created time
     /// </summary>
-    public System::DateTimeOffset? CreatedAtGte
+    public DateTimeOffset? CreatedAtGte
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("created_at_gte");
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_gte");
         }
         init
         {
@@ -62,12 +62,12 @@ public record class SubscriptionListParams : ParamsBase
     /// <summary>
     /// Get events created before this time
     /// </summary>
-    public System::DateTimeOffset? CreatedAtLte
+    public DateTimeOffset? CreatedAtLte
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<System::DateTimeOffset>("created_at_lte");
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("created_at_lte");
         }
         init
         {
@@ -252,9 +252,9 @@ public record class SubscriptionListParams : ParamsBase
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/subscriptions")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/subscriptions")
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -293,7 +293,7 @@ sealed class StatusConverter : JsonConverter<Status>
 {
     public override Status Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

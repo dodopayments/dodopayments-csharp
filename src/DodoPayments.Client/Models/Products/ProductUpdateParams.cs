@@ -151,7 +151,7 @@ public record class ProductUpdateParams : ParamsBase
     ///
     /// <para>deprecated: use entitlements instead</para>
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the dedicated entitlements API to configure license-key delivery.")]
     public string? LicenseKeyActivationMessage
     {
         get
@@ -170,7 +170,7 @@ public record class ProductUpdateParams : ParamsBase
     ///
     /// <para>deprecated: use entitlements instead</para>
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the dedicated entitlements API to configure license-key delivery.")]
     public int? LicenseKeyActivationsLimit
     {
         get
@@ -207,7 +207,7 @@ public record class ProductUpdateParams : ParamsBase
     ///
     /// <para>deprecated: use entitlements instead</para>
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the dedicated entitlements API to configure license-key delivery.")]
     public bool? LicenseKeyEnabled
     {
         get

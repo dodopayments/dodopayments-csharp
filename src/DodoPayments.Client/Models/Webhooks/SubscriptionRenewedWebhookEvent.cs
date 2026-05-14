@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,6 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Subscriptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -47,12 +47,12 @@ public sealed record class SubscriptionRenewedWebhookEvent : JsonModel
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTimeOffset Timestamp
+    public required DateTimeOffset Timestamp
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp");
         }
         init { this._rawData.Set("timestamp", value); }
     }
@@ -60,14 +60,12 @@ public sealed record class SubscriptionRenewedWebhookEvent : JsonModel
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, SubscriptionRenewedWebhookEventType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, SubscriptionRenewedWebhookEventType>
-            >("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -78,10 +76,21 @@ public sealed record class SubscriptionRenewedWebhookEvent : JsonModel
         _ = this.BusinessID;
         this.Data.Validate();
         _ = this.Timestamp;
-        this.Type.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.Type,
+                JsonSerializer.SerializeToElement("subscription.renewed")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public SubscriptionRenewedWebhookEvent() { }
+    public SubscriptionRenewedWebhookEvent()
+    {
+        this.Type = JsonSerializer.SerializeToElement("subscription.renewed");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -94,6 +103,8 @@ public sealed record class SubscriptionRenewedWebhookEvent : JsonModel
     public SubscriptionRenewedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("subscription.renewed");
     }
 
 #pragma warning disable CS8618
@@ -119,49 +130,4 @@ class SubscriptionRenewedWebhookEventFromRaw : IFromRawJson<SubscriptionRenewedW
     public SubscriptionRenewedWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => SubscriptionRenewedWebhookEvent.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// The event type
-/// </summary>
-[JsonConverter(typeof(SubscriptionRenewedWebhookEventTypeConverter))]
-public enum SubscriptionRenewedWebhookEventType
-{
-    SubscriptionRenewed,
-}
-
-sealed class SubscriptionRenewedWebhookEventTypeConverter
-    : JsonConverter<SubscriptionRenewedWebhookEventType>
-{
-    public override SubscriptionRenewedWebhookEventType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "subscription.renewed" => SubscriptionRenewedWebhookEventType.SubscriptionRenewed,
-            _ => (SubscriptionRenewedWebhookEventType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        SubscriptionRenewedWebhookEventType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                SubscriptionRenewedWebhookEventType.SubscriptionRenewed => "subscription.renewed",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }

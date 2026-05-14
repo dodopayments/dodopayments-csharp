@@ -131,7 +131,7 @@ public record class PaymentCreateParams : ParamsBase
     /// <summary>
     /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `discount_id` instead.")]
     public string? DiscountCode
     {
         get

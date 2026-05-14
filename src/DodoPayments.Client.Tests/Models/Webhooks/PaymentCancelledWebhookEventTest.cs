@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
@@ -125,7 +124,6 @@ public class PaymentCancelledWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentCancelledWebhookEventType.PaymentCancelled,
         };
 
         string expectedBusinessID = "business_id";
@@ -234,13 +232,12 @@ public class PaymentCancelledWebhookEventTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, PaymentCancelledWebhookEventType> expectedType =
-            PaymentCancelledWebhookEventType.PaymentCancelled;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("payment.cancelled");
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
         Assert.Equal(expectedTimestamp, model.Timestamp);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
     }
 
     [Fact]
@@ -354,7 +351,6 @@ public class PaymentCancelledWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentCancelledWebhookEventType.PaymentCancelled,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -477,7 +473,6 @@ public class PaymentCancelledWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentCancelledWebhookEventType.PaymentCancelled,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -593,13 +588,12 @@ public class PaymentCancelledWebhookEventTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, PaymentCancelledWebhookEventType> expectedType =
-            PaymentCancelledWebhookEventType.PaymentCancelled;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("payment.cancelled");
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
     }
 
     [Fact]
@@ -713,7 +707,6 @@ public class PaymentCancelledWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentCancelledWebhookEventType.PaymentCancelled,
         };
 
         model.Validate();
@@ -830,65 +823,10 @@ public class PaymentCancelledWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentCancelledWebhookEventType.PaymentCancelled,
         };
 
         PaymentCancelledWebhookEvent copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class PaymentCancelledWebhookEventTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(PaymentCancelledWebhookEventType.PaymentCancelled)]
-    public void Validation_Works(PaymentCancelledWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PaymentCancelledWebhookEventType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentCancelledWebhookEventType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(PaymentCancelledWebhookEventType.PaymentCancelled)]
-    public void SerializationRoundtrip_Works(PaymentCancelledWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PaymentCancelledWebhookEventType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, PaymentCancelledWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentCancelledWebhookEventType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, PaymentCancelledWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }

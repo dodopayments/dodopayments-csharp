@@ -42,7 +42,7 @@ public sealed record class PayoutListResponse : JsonModel
     /// <summary>
     /// The total value of chargebacks associated with the payout.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the v3 payout breakup endpoints instead. Will be removed in a future release.")]
     public required long Chargebacks
     {
         get
@@ -121,7 +121,7 @@ public sealed record class PayoutListResponse : JsonModel
     /// <summary>
     /// The total value of refunds associated with the payout.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the v3 payout breakup endpoints instead. Will be removed in a future release.")]
     public required long Refunds
     {
         get
@@ -148,7 +148,7 @@ public sealed record class PayoutListResponse : JsonModel
     /// <summary>
     /// The tax applied to the payout.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the v3 payout breakup endpoints instead. Will be removed in a future release.")]
     public required long Tax
     {
         get

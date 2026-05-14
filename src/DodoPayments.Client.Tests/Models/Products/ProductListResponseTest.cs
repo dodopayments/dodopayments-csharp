@@ -4,7 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
-using Products = DodoPayments.Client.Models.Products;
+using DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Tests.Models.Products;
 
@@ -13,7 +13,7 @@ public class ProductListResponseTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Products::ProductListResponse
+        var model = new ProductListResponse
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -42,13 +42,12 @@ public class ProductListResponseTest : TestBase
             Image = "image",
             Name = "name",
             Price = 0,
-            PriceDetail = new Products::OneTimePrice()
+            PriceDetail = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -58,7 +57,7 @@ public class ProductListResponseTest : TestBase
 
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<Products::ProductEntitlementSummary> expectedEntitlements =
+        List<ProductEntitlementSummary> expectedEntitlements =
         [
             new()
             {
@@ -83,13 +82,12 @@ public class ProductListResponseTest : TestBase
         string expectedImage = "image";
         string expectedName = "name";
         int expectedPrice = 0;
-        Products::Price expectedPriceDetail = new Products::OneTimePrice()
+        Price expectedPriceDetail = new OneTimePrice()
         {
             Currency = Currency.Aed,
             Discount = 0,
             PriceValue = 0,
             PurchasingPowerParity = true,
-            Type = Products::Type.OneTimePrice,
             PayWhatYouWant = true,
             SuggestedPrice = 0,
             TaxInclusive = true,
@@ -126,7 +124,7 @@ public class ProductListResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Products::ProductListResponse
+        var model = new ProductListResponse
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -155,13 +153,12 @@ public class ProductListResponseTest : TestBase
             Image = "image",
             Name = "name",
             Price = 0,
-            PriceDetail = new Products::OneTimePrice()
+            PriceDetail = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -170,7 +167,7 @@ public class ProductListResponseTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::ProductListResponse>(
+        var deserialized = JsonSerializer.Deserialize<ProductListResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -181,7 +178,7 @@ public class ProductListResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Products::ProductListResponse
+        var model = new ProductListResponse
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -210,13 +207,12 @@ public class ProductListResponseTest : TestBase
             Image = "image",
             Name = "name",
             Price = 0,
-            PriceDetail = new Products::OneTimePrice()
+            PriceDetail = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -225,7 +221,7 @@ public class ProductListResponseTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::ProductListResponse>(
+        var deserialized = JsonSerializer.Deserialize<ProductListResponse>(
             element,
             ModelBase.SerializerOptions
         );
@@ -233,7 +229,7 @@ public class ProductListResponseTest : TestBase
 
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<Products::ProductEntitlementSummary> expectedEntitlements =
+        List<ProductEntitlementSummary> expectedEntitlements =
         [
             new()
             {
@@ -258,13 +254,12 @@ public class ProductListResponseTest : TestBase
         string expectedImage = "image";
         string expectedName = "name";
         int expectedPrice = 0;
-        Products::Price expectedPriceDetail = new Products::OneTimePrice()
+        Price expectedPriceDetail = new OneTimePrice()
         {
             Currency = Currency.Aed,
             Discount = 0,
             PriceValue = 0,
             PurchasingPowerParity = true,
-            Type = Products::Type.OneTimePrice,
             PayWhatYouWant = true,
             SuggestedPrice = 0,
             TaxInclusive = true,
@@ -301,7 +296,7 @@ public class ProductListResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Products::ProductListResponse
+        var model = new ProductListResponse
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -330,13 +325,12 @@ public class ProductListResponseTest : TestBase
             Image = "image",
             Name = "name",
             Price = 0,
-            PriceDetail = new Products::OneTimePrice()
+            PriceDetail = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -350,7 +344,7 @@ public class ProductListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Products::ProductListResponse
+        var model = new ProductListResponse
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -395,7 +389,7 @@ public class ProductListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Products::ProductListResponse
+        var model = new ProductListResponse
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -427,7 +421,7 @@ public class ProductListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Products::ProductListResponse
+        var model = new ProductListResponse
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -480,7 +474,7 @@ public class ProductListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Products::ProductListResponse
+        var model = new ProductListResponse
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -520,7 +514,7 @@ public class ProductListResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Products::ProductListResponse
+        var model = new ProductListResponse
         {
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -549,13 +543,12 @@ public class ProductListResponseTest : TestBase
             Image = "image",
             Name = "name",
             Price = 0,
-            PriceDetail = new Products::OneTimePrice()
+            PriceDetail = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -563,7 +556,7 @@ public class ProductListResponseTest : TestBase
             TaxInclusive = true,
         };
 
-        Products::ProductListResponse copied = new(model);
+        ProductListResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }

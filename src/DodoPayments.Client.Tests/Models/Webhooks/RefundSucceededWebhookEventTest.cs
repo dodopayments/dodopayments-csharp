@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Refunds;
 using DodoPayments.Client.Models.Webhooks;
@@ -39,7 +38,6 @@ public class RefundSucceededWebhookEventTest : TestBase
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = RefundSucceededWebhookEventType.RefundSucceeded,
         };
 
         string expectedBusinessID = "business_id";
@@ -65,13 +63,12 @@ public class RefundSucceededWebhookEventTest : TestBase
             Reason = "reason",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, RefundSucceededWebhookEventType> expectedType =
-            RefundSucceededWebhookEventType.RefundSucceeded;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("refund.succeeded");
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
         Assert.Equal(expectedTimestamp, model.Timestamp);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
     }
 
     [Fact]
@@ -102,7 +99,6 @@ public class RefundSucceededWebhookEventTest : TestBase
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = RefundSucceededWebhookEventType.RefundSucceeded,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -142,7 +138,6 @@ public class RefundSucceededWebhookEventTest : TestBase
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = RefundSucceededWebhookEventType.RefundSucceeded,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -175,13 +170,12 @@ public class RefundSucceededWebhookEventTest : TestBase
             Reason = "reason",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, RefundSucceededWebhookEventType> expectedType =
-            RefundSucceededWebhookEventType.RefundSucceeded;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("refund.succeeded");
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
     }
 
     [Fact]
@@ -212,7 +206,6 @@ public class RefundSucceededWebhookEventTest : TestBase
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = RefundSucceededWebhookEventType.RefundSucceeded,
         };
 
         model.Validate();
@@ -246,65 +239,10 @@ public class RefundSucceededWebhookEventTest : TestBase
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = RefundSucceededWebhookEventType.RefundSucceeded,
         };
 
         RefundSucceededWebhookEvent copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class RefundSucceededWebhookEventTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(RefundSucceededWebhookEventType.RefundSucceeded)]
-    public void Validation_Works(RefundSucceededWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, RefundSucceededWebhookEventType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, RefundSucceededWebhookEventType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(RefundSucceededWebhookEventType.RefundSucceeded)]
-    public void SerializationRoundtrip_Works(RefundSucceededWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, RefundSucceededWebhookEventType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, RefundSucceededWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, RefundSucceededWebhookEventType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, RefundSucceededWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }

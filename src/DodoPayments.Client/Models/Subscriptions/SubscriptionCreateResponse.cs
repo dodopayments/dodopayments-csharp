@@ -122,7 +122,7 @@ public sealed record class SubscriptionCreateResponse : JsonModel
     /// <summary>
     /// DEPRECATED: Use discount_ids instead. Returns the first discount's ID if present.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `discounts` instead.")]
     public string? DiscountID
     {
         get

@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using Subscriptions = DodoPayments.Client.Models.Subscriptions;
+using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Models.Entitlements;
 
@@ -1225,12 +1225,12 @@ public sealed record class LicenseKeyConfig : JsonModel
     /// <summary>
     /// Unit of `duration_count`.
     /// </summary>
-    public ApiEnum<string, Subscriptions::TimeInterval>? DurationInterval
+    public ApiEnum<string, TimeInterval>? DurationInterval
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, Subscriptions::TimeInterval>>(
+            return this._rawData.GetNullableClass<ApiEnum<string, TimeInterval>>(
                 "duration_interval"
             );
         }

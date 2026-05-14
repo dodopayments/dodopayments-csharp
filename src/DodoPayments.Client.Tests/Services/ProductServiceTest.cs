@@ -19,7 +19,6 @@ public class ProductServiceTest : TestBase
                     Discount = 0,
                     PriceValue = 0,
                     PurchasingPowerParity = true,
-                    Type = Type.OneTimePrice,
                     PayWhatYouWant = true,
                     SuggestedPrice = 0,
                     TaxInclusive = true,

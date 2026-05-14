@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
@@ -155,7 +154,6 @@ public class SubscriptionUpdatedWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
         };
 
         string expectedBusinessID = "business_id";
@@ -295,13 +293,12 @@ public class SubscriptionUpdatedWebhookEventTest : TestBase
             TaxID = "tax_id",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, SubscriptionUpdatedWebhookEventType> expectedType =
-            SubscriptionUpdatedWebhookEventType.SubscriptionUpdated;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.updated");
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
         Assert.Equal(expectedTimestamp, model.Timestamp);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
     }
 
     [Fact]
@@ -446,7 +443,6 @@ public class SubscriptionUpdatedWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -600,7 +596,6 @@ public class SubscriptionUpdatedWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -747,13 +742,12 @@ public class SubscriptionUpdatedWebhookEventTest : TestBase
             TaxID = "tax_id",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, SubscriptionUpdatedWebhookEventType> expectedType =
-            SubscriptionUpdatedWebhookEventType.SubscriptionUpdated;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.updated");
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
     }
 
     [Fact]
@@ -898,7 +892,6 @@ public class SubscriptionUpdatedWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
         };
 
         model.Validate();
@@ -1046,63 +1039,10 @@ public class SubscriptionUpdatedWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
         };
 
         SubscriptionUpdatedWebhookEvent copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class SubscriptionUpdatedWebhookEventTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(SubscriptionUpdatedWebhookEventType.SubscriptionUpdated)]
-    public void Validation_Works(SubscriptionUpdatedWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionUpdatedWebhookEventType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionUpdatedWebhookEventType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(SubscriptionUpdatedWebhookEventType.SubscriptionUpdated)]
-    public void SerializationRoundtrip_Works(SubscriptionUpdatedWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionUpdatedWebhookEventType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionUpdatedWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionUpdatedWebhookEventType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionUpdatedWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }

@@ -174,7 +174,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// <summary>
     /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `discount_id` instead.")]
     public string? DiscountCode
     {
         get

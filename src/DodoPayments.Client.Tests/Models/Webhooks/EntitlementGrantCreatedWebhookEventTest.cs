@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Entitlements.Grants;
 using DodoPayments.Client.Models.Webhooks;
 
@@ -61,7 +60,6 @@ public class EntitlementGrantCreatedWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated,
         };
 
         string expectedBusinessID = "business_id";
@@ -110,13 +108,12 @@ public class EntitlementGrantCreatedWebhookEventTest : TestBase
             SubscriptionID = "subscription_id",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, EntitlementGrantCreatedWebhookEventType> expectedType =
-            EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("entitlement_grant.created");
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
         Assert.Equal(expectedTimestamp, model.Timestamp);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
     }
 
     [Fact]
@@ -170,7 +167,6 @@ public class EntitlementGrantCreatedWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -233,7 +229,6 @@ public class EntitlementGrantCreatedWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -289,13 +284,12 @@ public class EntitlementGrantCreatedWebhookEventTest : TestBase
             SubscriptionID = "subscription_id",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, EntitlementGrantCreatedWebhookEventType> expectedType =
-            EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("entitlement_grant.created");
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
     }
 
     [Fact]
@@ -349,7 +343,6 @@ public class EntitlementGrantCreatedWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated,
         };
 
         model.Validate();
@@ -406,63 +399,10 @@ public class EntitlementGrantCreatedWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated,
         };
 
         EntitlementGrantCreatedWebhookEvent copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class EntitlementGrantCreatedWebhookEventTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated)]
-    public void Validation_Works(EntitlementGrantCreatedWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementGrantCreatedWebhookEventType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementGrantCreatedWebhookEventType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated)]
-    public void SerializationRoundtrip_Works(EntitlementGrantCreatedWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementGrantCreatedWebhookEventType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementGrantCreatedWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementGrantCreatedWebhookEventType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementGrantCreatedWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }

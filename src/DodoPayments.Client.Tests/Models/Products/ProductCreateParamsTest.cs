@@ -4,8 +4,8 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.Subscriptions;
-using Products = DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Tests.Models.Products;
 
@@ -14,16 +14,15 @@ public class ProductCreateParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new Products::ProductCreateParams
+        var parameters = new ProductCreateParams
         {
             Name = "name",
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -45,7 +44,7 @@ public class ProductCreateParamsTest : TestBase
                     OverageEnabled = true,
                     OverageLimit = "overage_limit",
                     PricePerUnit = "price_per_unit",
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     RolloverPercentage = 0,
                     RolloverTimeframeCount = 0,
@@ -69,13 +68,12 @@ public class ProductCreateParamsTest : TestBase
         };
 
         string expectedName = "name";
-        Products::Price expectedPrice = new Products::OneTimePrice()
+        Price expectedPrice = new OneTimePrice()
         {
             Currency = Currency.Aed,
             Discount = 0,
             PriceValue = 0,
             PurchasingPowerParity = true,
-            Type = Products::Type.OneTimePrice,
             PayWhatYouWant = true,
             SuggestedPrice = 0,
             TaxInclusive = true,
@@ -83,7 +81,7 @@ public class ProductCreateParamsTest : TestBase
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         List<string> expectedAddons = ["string"];
         string expectedBrandID = "brand_id";
-        List<Products::AttachCreditEntitlement> expectedCreditEntitlements =
+        List<AttachCreditEntitlement> expectedCreditEntitlements =
         [
             new()
             {
@@ -97,7 +95,7 @@ public class ProductCreateParamsTest : TestBase
                 OverageEnabled = true,
                 OverageLimit = "overage_limit",
                 PricePerUnit = "price_per_unit",
-                ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                ProrationBehavior = CbbProrationBehavior.Prorate,
                 RolloverEnabled = true,
                 RolloverPercentage = 0,
                 RolloverTimeframeCount = 0,
@@ -107,15 +105,15 @@ public class ProductCreateParamsTest : TestBase
             },
         ];
         string expectedDescription = "description";
-        Products::DigitalProductDelivery expectedDigitalProductDelivery = new()
+        DigitalProductDelivery expectedDigitalProductDelivery = new()
         {
             ExternalUrl = "external_url",
             Instructions = "instructions",
         };
-        List<Products::AttachProductEntitlement> expectedEntitlements = [new("entitlement_id")];
+        List<AttachProductEntitlement> expectedEntitlements = [new("entitlement_id")];
         string expectedLicenseKeyActivationMessage = "license_key_activation_message";
         int expectedLicenseKeyActivationsLimit = 0;
-        Products::LicenseKeyDuration expectedLicenseKeyDuration = new()
+        LicenseKeyDuration expectedLicenseKeyDuration = new()
         {
             Count = 0,
             Interval = TimeInterval.Day,
@@ -164,16 +162,15 @@ public class ProductCreateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new Products::ProductCreateParams
+        var parameters = new ProductCreateParams
         {
             Name = "name",
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -195,7 +192,7 @@ public class ProductCreateParamsTest : TestBase
                     OverageEnabled = true,
                     OverageLimit = "overage_limit",
                     PricePerUnit = "price_per_unit",
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     RolloverPercentage = 0,
                     RolloverTimeframeCount = 0,
@@ -224,16 +221,15 @@ public class ProductCreateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
     {
-        var parameters = new Products::ProductCreateParams
+        var parameters = new ProductCreateParams
         {
             Name = "name",
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -255,7 +251,7 @@ public class ProductCreateParamsTest : TestBase
                     OverageEnabled = true,
                     OverageLimit = "overage_limit",
                     PricePerUnit = "price_per_unit",
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     RolloverPercentage = 0,
                     RolloverTimeframeCount = 0,
@@ -287,16 +283,15 @@ public class ProductCreateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new Products::ProductCreateParams
+        var parameters = new ProductCreateParams
         {
             Name = "name",
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -330,16 +325,15 @@ public class ProductCreateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsSetToNullAreSetToNull_Works()
     {
-        var parameters = new Products::ProductCreateParams
+        var parameters = new ProductCreateParams
         {
             Name = "name",
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -384,16 +378,15 @@ public class ProductCreateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        Products::ProductCreateParams parameters = new()
+        ProductCreateParams parameters = new()
         {
             Name = "name",
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -409,16 +402,15 @@ public class ProductCreateParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new Products::ProductCreateParams
+        var parameters = new ProductCreateParams
         {
             Name = "name",
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -440,7 +432,7 @@ public class ProductCreateParamsTest : TestBase
                     OverageEnabled = true,
                     OverageLimit = "overage_limit",
                     PricePerUnit = "price_per_unit",
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     RolloverPercentage = 0,
                     RolloverTimeframeCount = 0,
@@ -463,7 +455,7 @@ public class ProductCreateParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
-        Products::ProductCreateParams copied = new(parameters);
+        ProductCreateParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }
@@ -474,7 +466,7 @@ public class DigitalProductDeliveryTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Products::DigitalProductDelivery
+        var model = new DigitalProductDelivery
         {
             ExternalUrl = "external_url",
             Instructions = "instructions",
@@ -490,14 +482,14 @@ public class DigitalProductDeliveryTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Products::DigitalProductDelivery
+        var model = new DigitalProductDelivery
         {
             ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::DigitalProductDelivery>(
+        var deserialized = JsonSerializer.Deserialize<DigitalProductDelivery>(
             json,
             ModelBase.SerializerOptions
         );
@@ -508,14 +500,14 @@ public class DigitalProductDeliveryTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Products::DigitalProductDelivery
+        var model = new DigitalProductDelivery
         {
             ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::DigitalProductDelivery>(
+        var deserialized = JsonSerializer.Deserialize<DigitalProductDelivery>(
             element,
             ModelBase.SerializerOptions
         );
@@ -531,7 +523,7 @@ public class DigitalProductDeliveryTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Products::DigitalProductDelivery
+        var model = new DigitalProductDelivery
         {
             ExternalUrl = "external_url",
             Instructions = "instructions",
@@ -543,7 +535,7 @@ public class DigitalProductDeliveryTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Products::DigitalProductDelivery { };
+        var model = new DigitalProductDelivery { };
 
         Assert.Null(model.ExternalUrl);
         Assert.False(model.RawData.ContainsKey("external_url"));
@@ -554,7 +546,7 @@ public class DigitalProductDeliveryTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Products::DigitalProductDelivery { };
+        var model = new DigitalProductDelivery { };
 
         model.Validate();
     }
@@ -562,11 +554,7 @@ public class DigitalProductDeliveryTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Products::DigitalProductDelivery
-        {
-            ExternalUrl = null,
-            Instructions = null,
-        };
+        var model = new DigitalProductDelivery { ExternalUrl = null, Instructions = null };
 
         Assert.Null(model.ExternalUrl);
         Assert.True(model.RawData.ContainsKey("external_url"));
@@ -577,11 +565,7 @@ public class DigitalProductDeliveryTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Products::DigitalProductDelivery
-        {
-            ExternalUrl = null,
-            Instructions = null,
-        };
+        var model = new DigitalProductDelivery { ExternalUrl = null, Instructions = null };
 
         model.Validate();
     }
@@ -589,13 +573,13 @@ public class DigitalProductDeliveryTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Products::DigitalProductDelivery
+        var model = new DigitalProductDelivery
         {
             ExternalUrl = "external_url",
             Instructions = "instructions",
         };
 
-        Products::DigitalProductDelivery copied = new(model);
+        DigitalProductDelivery copied = new(model);
 
         Assert.Equal(model, copied);
     }

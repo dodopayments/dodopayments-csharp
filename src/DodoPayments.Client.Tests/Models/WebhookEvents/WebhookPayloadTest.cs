@@ -129,7 +129,6 @@ public class WebhookPayloadTest : TestBase
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PayloadType = PayloadType.Payment,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = WebhookEventType.PaymentSucceeded,
@@ -239,7 +238,6 @@ public class WebhookPayloadTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, WebhookEventType> expectedType = WebhookEventType.PaymentSucceeded;
@@ -359,7 +357,6 @@ public class WebhookPayloadTest : TestBase
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PayloadType = PayloadType.Payment,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = WebhookEventType.PaymentSucceeded,
@@ -483,7 +480,6 @@ public class WebhookPayloadTest : TestBase
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PayloadType = PayloadType.Payment,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = WebhookEventType.PaymentSucceeded,
@@ -600,7 +596,6 @@ public class WebhookPayloadTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, WebhookEventType> expectedType = WebhookEventType.PaymentSucceeded;
@@ -720,7 +715,6 @@ public class WebhookPayloadTest : TestBase
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PayloadType = PayloadType.Payment,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = WebhookEventType.PaymentSucceeded,
@@ -838,7 +832,6 @@ public class WebhookPayloadTest : TestBase
                 SubscriptionID = "subscription_id",
                 Tax = 0,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                PayloadType = PayloadType.Payment,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Type = WebhookEventType.PaymentSucceeded,
@@ -958,7 +951,6 @@ public class DataTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
         value.Validate();
     }
@@ -1100,7 +1092,6 @@ public class DataTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
         value.Validate();
     }
@@ -1128,7 +1119,6 @@ public class DataTest : TestBase
             Amount = 0,
             Currency = Currency.Aed,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
         value.Validate();
     }
@@ -1157,7 +1147,6 @@ public class DataTest : TestBase
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
         value.Validate();
     }
@@ -1180,7 +1169,6 @@ public class DataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
             PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
         value.Validate();
     }
@@ -1206,7 +1194,6 @@ public class DataTest : TestBase
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
         value.Validate();
     }
@@ -1220,7 +1207,6 @@ public class DataTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
-            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
             SubscriptionCreditsAmount = "subscription_credits_amount",
             SubscriptionID = "subscription_id",
             ThresholdAmount = "threshold_amount",
@@ -1237,7 +1223,6 @@ public class DataTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
@@ -1252,7 +1237,6 @@ public class DataTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -1307,7 +1291,6 @@ public class DataTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
         value.Validate();
     }
@@ -1418,7 +1401,6 @@ public class DataTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -1563,7 +1545,6 @@ public class DataTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -1594,7 +1575,6 @@ public class DataTest : TestBase
             Amount = 0,
             Currency = Currency.Aed,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -1626,7 +1606,6 @@ public class DataTest : TestBase
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -1652,7 +1631,6 @@ public class DataTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
             PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -1681,7 +1659,6 @@ public class DataTest : TestBase
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -1698,7 +1675,6 @@ public class DataTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
-            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
             SubscriptionCreditsAmount = "subscription_credits_amount",
             SubscriptionID = "subscription_id",
             ThresholdAmount = "threshold_amount",
@@ -1718,7 +1694,6 @@ public class DataTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
@@ -1736,7 +1711,6 @@ public class DataTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -1794,7 +1768,6 @@ public class DataTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -1911,7 +1884,6 @@ public class PaymentTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
 
         Payments::BillingAddress expectedBilling = new()
@@ -2022,7 +1994,7 @@ public class PaymentTest : TestBase
         string expectedSubscriptionID = "subscription_id";
         int expectedTax = 0;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, PayloadType> expectedPayloadType = PayloadType.Payment;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Payment");
 
         Assert.Equal(expectedBilling, model.Billing);
         Assert.Equal(expectedBrandID, model.BrandID);
@@ -2090,7 +2062,7 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
         Assert.Equal(expectedTax, model.Tax);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
     }
 
     [Fact]
@@ -2199,7 +2171,6 @@ public class PaymentTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -2314,7 +2285,6 @@ public class PaymentTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -2432,7 +2402,7 @@ public class PaymentTest : TestBase
         string expectedSubscriptionID = "subscription_id";
         int expectedTax = 0;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, PayloadType> expectedPayloadType = PayloadType.Payment;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Payment");
 
         Assert.Equal(expectedBilling, deserialized.Billing);
         Assert.Equal(expectedBrandID, deserialized.BrandID);
@@ -2500,7 +2470,7 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
         Assert.Equal(expectedTax, deserialized.Tax);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
     }
 
     [Fact]
@@ -2609,7 +2579,6 @@ public class PaymentTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
 
         model.Validate();
@@ -2718,7 +2687,6 @@ public class PaymentTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
 
         Assert.Null(model.CardIssuingCountry);
@@ -2832,7 +2800,6 @@ public class PaymentTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
 
         model.Validate();
@@ -2941,7 +2908,6 @@ public class PaymentTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
 
             // Null should be interpreted as omitted for these properties
             CardIssuingCountry = null,
@@ -3060,7 +3026,6 @@ public class PaymentTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
 
             // Null should be interpreted as omitted for these properties
             CardIssuingCountry = null,
@@ -3136,7 +3101,6 @@ public class PaymentTest : TestBase
             CardIssuingCountry = CountryCode.Af,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
-            PayloadType = PayloadType.Payment,
         };
 
         Assert.Null(model.CardHolderName);
@@ -3246,7 +3210,6 @@ public class PaymentTest : TestBase
             CardIssuingCountry = CountryCode.Af,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
-            PayloadType = PayloadType.Payment,
         };
 
         model.Validate();
@@ -3317,7 +3280,6 @@ public class PaymentTest : TestBase
             CardIssuingCountry = CountryCode.Af,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
-            PayloadType = PayloadType.Payment,
 
             CardHolderName = null,
             CardLastFour = null,
@@ -3448,7 +3410,6 @@ public class PaymentTest : TestBase
             CardIssuingCountry = CountryCode.Af,
             RefundStatus = Payments::PaymentRefundStatus.Partial,
             Status = Payments::IntentStatus.Succeeded,
-            PayloadType = PayloadType.Payment,
 
             CardHolderName = null,
             CardLastFour = null,
@@ -3581,130 +3542,11 @@ public class PaymentTest : TestBase
             SubscriptionID = "subscription_id",
             Tax = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            PayloadType = PayloadType.Payment,
         };
 
         Payment copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class IntersectionMember1Test : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new IntersectionMember1 { PayloadType = PayloadType.Payment };
-
-        ApiEnum<string, PayloadType> expectedPayloadType = PayloadType.Payment;
-
-        Assert.Equal(expectedPayloadType, model.PayloadType);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new IntersectionMember1 { PayloadType = PayloadType.Payment };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<IntersectionMember1>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new IntersectionMember1 { PayloadType = PayloadType.Payment };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<IntersectionMember1>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        ApiEnum<string, PayloadType> expectedPayloadType = PayloadType.Payment;
-
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new IntersectionMember1 { PayloadType = PayloadType.Payment };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new IntersectionMember1 { PayloadType = PayloadType.Payment };
-
-        IntersectionMember1 copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class PayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(PayloadType.Payment)]
-    public void Validation_Works(PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(PayloadType.Payment)]
-    public void SerializationRoundtrip_Works(PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PayloadType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -3847,7 +3689,6 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
         List<Subscriptions::AddonCartResponseItem> expectedAddons =
@@ -3994,8 +3835,7 @@ public class SubscriptionTest : TestBase
             ProductName = "product_name",
         };
         string expectedTaxID = "tax_id";
-        ApiEnum<string, SubscriptionIntersectionMember1PayloadType> expectedPayloadType =
-            SubscriptionIntersectionMember1PayloadType.Subscription;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Subscription");
 
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -4070,7 +3910,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
         Assert.Equal(expectedTaxID, model.TaxID);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
     }
 
     [Fact]
@@ -4210,7 +4050,6 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -4359,7 +4198,6 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -4513,8 +4351,7 @@ public class SubscriptionTest : TestBase
             ProductName = "product_name",
         };
         string expectedTaxID = "tax_id";
-        ApiEnum<string, SubscriptionIntersectionMember1PayloadType> expectedPayloadType =
-            SubscriptionIntersectionMember1PayloadType.Subscription;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Subscription");
 
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -4589,7 +4426,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
         Assert.Equal(expectedTaxID, deserialized.TaxID);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
     }
 
     [Fact]
@@ -4729,7 +4566,6 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
         model.Validate();
@@ -4852,7 +4688,6 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
         Assert.Null(model.CancellationFeedback);
@@ -4978,7 +4813,6 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
         model.Validate();
@@ -5101,7 +4935,6 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
@@ -5231,7 +5064,6 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
@@ -5348,7 +5180,6 @@ public class SubscriptionTest : TestBase
                 ProductDescription = "product_description",
                 ProductName = "product_name",
             },
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
         Assert.Null(model.CancellationComment);
@@ -5478,7 +5309,6 @@ public class SubscriptionTest : TestBase
                 ProductDescription = "product_description",
                 ProductName = "product_name",
             },
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
         model.Validate();
@@ -5591,7 +5421,6 @@ public class SubscriptionTest : TestBase
                 ProductDescription = "product_description",
                 ProductName = "product_name",
             },
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
 
             CancellationComment = null,
             CancelledAt = null,
@@ -5731,7 +5560,6 @@ public class SubscriptionTest : TestBase
                 ProductDescription = "product_description",
                 ProductName = "product_name",
             },
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
 
             CancellationComment = null,
             CancelledAt = null,
@@ -5884,143 +5712,11 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
         };
 
         Subscription copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class SubscriptionIntersectionMember1Test : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new SubscriptionIntersectionMember1
-        {
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
-        };
-
-        ApiEnum<string, SubscriptionIntersectionMember1PayloadType> expectedPayloadType =
-            SubscriptionIntersectionMember1PayloadType.Subscription;
-
-        Assert.Equal(expectedPayloadType, model.PayloadType);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new SubscriptionIntersectionMember1
-        {
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionIntersectionMember1>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new SubscriptionIntersectionMember1
-        {
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionIntersectionMember1>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        ApiEnum<string, SubscriptionIntersectionMember1PayloadType> expectedPayloadType =
-            SubscriptionIntersectionMember1PayloadType.Subscription;
-
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new SubscriptionIntersectionMember1
-        {
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new SubscriptionIntersectionMember1
-        {
-            PayloadType = SubscriptionIntersectionMember1PayloadType.Subscription,
-        };
-
-        SubscriptionIntersectionMember1 copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class SubscriptionIntersectionMember1PayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(SubscriptionIntersectionMember1PayloadType.Subscription)]
-    public void Validation_Works(SubscriptionIntersectionMember1PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionIntersectionMember1PayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(SubscriptionIntersectionMember1PayloadType.Subscription)]
-    public void SerializationRoundtrip_Works(SubscriptionIntersectionMember1PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionIntersectionMember1PayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -6049,7 +5745,6 @@ public class RefundTest : TestBase
             Amount = 0,
             Currency = Currency.Aed,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
         string expectedBusinessID = "business_id";
@@ -6070,8 +5765,7 @@ public class RefundTest : TestBase
         int expectedAmount = 0;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         string expectedReason = "reason";
-        ApiEnum<string, RefundIntersectionMember1PayloadType> expectedPayloadType =
-            RefundIntersectionMember1PayloadType.Refund;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Refund");
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
@@ -6090,7 +5784,7 @@ public class RefundTest : TestBase
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedReason, model.Reason);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
     }
 
     [Fact]
@@ -6116,7 +5810,6 @@ public class RefundTest : TestBase
             Amount = 0,
             Currency = Currency.Aed,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -6148,7 +5841,6 @@ public class RefundTest : TestBase
             Amount = 0,
             Currency = Currency.Aed,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -6173,8 +5865,7 @@ public class RefundTest : TestBase
         int expectedAmount = 0;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         string expectedReason = "reason";
-        ApiEnum<string, RefundIntersectionMember1PayloadType> expectedPayloadType =
-            RefundIntersectionMember1PayloadType.Refund;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Refund");
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
@@ -6193,7 +5884,7 @@ public class RefundTest : TestBase
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedReason, deserialized.Reason);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
     }
 
     [Fact]
@@ -6219,7 +5910,6 @@ public class RefundTest : TestBase
             Amount = 0,
             Currency = Currency.Aed,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
         model.Validate();
@@ -6247,7 +5937,6 @@ public class RefundTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
         Assert.Null(model.Currency);
@@ -6276,7 +5965,6 @@ public class RefundTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
         model.Validate();
@@ -6304,7 +5992,6 @@ public class RefundTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
 
             // Null should be interpreted as omitted for these properties
             Currency = null,
@@ -6336,7 +6023,6 @@ public class RefundTest : TestBase
             Status = Refunds::RefundStatus.Succeeded,
             Amount = 0,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
 
             // Null should be interpreted as omitted for these properties
             Currency = null,
@@ -6366,7 +6052,6 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Currency = Currency.Aed,
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
         Assert.Null(model.Amount);
@@ -6396,7 +6081,6 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Currency = Currency.Aed,
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
         model.Validate();
@@ -6423,7 +6107,6 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Currency = Currency.Aed,
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
 
             Amount = null,
             Reason = null,
@@ -6456,7 +6139,6 @@ public class RefundTest : TestBase
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
             Currency = Currency.Aed,
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
 
             Amount = null,
             Reason = null,
@@ -6488,143 +6170,11 @@ public class RefundTest : TestBase
             Amount = 0,
             Currency = Currency.Aed,
             Reason = "reason",
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
         };
 
         Refund copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class RefundIntersectionMember1Test : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new RefundIntersectionMember1
-        {
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
-        };
-
-        ApiEnum<string, RefundIntersectionMember1PayloadType> expectedPayloadType =
-            RefundIntersectionMember1PayloadType.Refund;
-
-        Assert.Equal(expectedPayloadType, model.PayloadType);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new RefundIntersectionMember1
-        {
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<RefundIntersectionMember1>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new RefundIntersectionMember1
-        {
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<RefundIntersectionMember1>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        ApiEnum<string, RefundIntersectionMember1PayloadType> expectedPayloadType =
-            RefundIntersectionMember1PayloadType.Refund;
-
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new RefundIntersectionMember1
-        {
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new RefundIntersectionMember1
-        {
-            PayloadType = RefundIntersectionMember1PayloadType.Refund,
-        };
-
-        RefundIntersectionMember1 copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class RefundIntersectionMember1PayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(RefundIntersectionMember1PayloadType.Refund)]
-    public void Validation_Works(RefundIntersectionMember1PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, RefundIntersectionMember1PayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, RefundIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(RefundIntersectionMember1PayloadType.Refund)]
-    public void SerializationRoundtrip_Works(RefundIntersectionMember1PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, RefundIntersectionMember1PayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, RefundIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, RefundIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, RefundIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -6654,7 +6204,6 @@ public class DisputeTest : TestBase
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
 
         string expectedAmount = "amount";
@@ -6678,8 +6227,7 @@ public class DisputeTest : TestBase
         bool expectedIsResolvedByRdr = true;
         string expectedReason = "reason";
         string expectedRemarks = "remarks";
-        ApiEnum<string, DisputeIntersectionMember1PayloadType> expectedPayloadType =
-            DisputeIntersectionMember1PayloadType.Dispute;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Dispute");
 
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -6693,7 +6241,7 @@ public class DisputeTest : TestBase
         Assert.Equal(expectedIsResolvedByRdr, model.IsResolvedByRdr);
         Assert.Equal(expectedReason, model.Reason);
         Assert.Equal(expectedRemarks, model.Remarks);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
     }
 
     [Fact]
@@ -6720,7 +6268,6 @@ public class DisputeTest : TestBase
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -6753,7 +6300,6 @@ public class DisputeTest : TestBase
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -6784,8 +6330,7 @@ public class DisputeTest : TestBase
         bool expectedIsResolvedByRdr = true;
         string expectedReason = "reason";
         string expectedRemarks = "remarks";
-        ApiEnum<string, DisputeIntersectionMember1PayloadType> expectedPayloadType =
-            DisputeIntersectionMember1PayloadType.Dispute;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Dispute");
 
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -6799,7 +6344,7 @@ public class DisputeTest : TestBase
         Assert.Equal(expectedIsResolvedByRdr, deserialized.IsResolvedByRdr);
         Assert.Equal(expectedReason, deserialized.Reason);
         Assert.Equal(expectedRemarks, deserialized.Remarks);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
     }
 
     [Fact]
@@ -6826,7 +6371,6 @@ public class DisputeTest : TestBase
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
 
         model.Validate();
@@ -6853,7 +6397,6 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
 
         Assert.Null(model.IsResolvedByRdr);
@@ -6885,7 +6428,6 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
 
         model.Validate();
@@ -6912,7 +6454,6 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
 
             IsResolvedByRdr = null,
             Reason = null,
@@ -6948,7 +6489,6 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
 
             IsResolvedByRdr = null,
             Reason = null,
@@ -6982,143 +6522,11 @@ public class DisputeTest : TestBase
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
         };
 
         Dispute copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class DisputeIntersectionMember1Test : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new DisputeIntersectionMember1
-        {
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
-        };
-
-        ApiEnum<string, DisputeIntersectionMember1PayloadType> expectedPayloadType =
-            DisputeIntersectionMember1PayloadType.Dispute;
-
-        Assert.Equal(expectedPayloadType, model.PayloadType);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new DisputeIntersectionMember1
-        {
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DisputeIntersectionMember1>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new DisputeIntersectionMember1
-        {
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DisputeIntersectionMember1>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        ApiEnum<string, DisputeIntersectionMember1PayloadType> expectedPayloadType =
-            DisputeIntersectionMember1PayloadType.Dispute;
-
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new DisputeIntersectionMember1
-        {
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new DisputeIntersectionMember1
-        {
-            PayloadType = DisputeIntersectionMember1PayloadType.Dispute,
-        };
-
-        DisputeIntersectionMember1 copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class DisputeIntersectionMember1PayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(DisputeIntersectionMember1PayloadType.Dispute)]
-    public void Validation_Works(DisputeIntersectionMember1PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DisputeIntersectionMember1PayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, DisputeIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(DisputeIntersectionMember1PayloadType.Dispute)]
-    public void SerializationRoundtrip_Works(DisputeIntersectionMember1PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DisputeIntersectionMember1PayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, DisputeIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, DisputeIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, DisputeIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -7142,7 +6550,6 @@ public class LicenseKeyTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
             PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
 
         string expectedID = "lic_123";
@@ -7160,8 +6567,7 @@ public class LicenseKeyTest : TestBase
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z");
         string expectedPaymentID = "payment_id";
         string expectedSubscriptionID = "subscription_id";
-        ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> expectedPayloadType =
-            LicenseKeyIntersectionMember1PayloadType.LicenseKey;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("LicenseKey");
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -7176,7 +6582,7 @@ public class LicenseKeyTest : TestBase
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
         Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
     }
 
     [Fact]
@@ -7197,7 +6603,6 @@ public class LicenseKeyTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
             PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -7227,7 +6632,6 @@ public class LicenseKeyTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
             PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -7252,8 +6656,7 @@ public class LicenseKeyTest : TestBase
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z");
         string expectedPaymentID = "payment_id";
         string expectedSubscriptionID = "subscription_id";
-        ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> expectedPayloadType =
-            LicenseKeyIntersectionMember1PayloadType.LicenseKey;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("LicenseKey");
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -7268,7 +6671,7 @@ public class LicenseKeyTest : TestBase
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
     }
 
     [Fact]
@@ -7289,7 +6692,6 @@ public class LicenseKeyTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
             PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
 
         model.Validate();
@@ -7309,7 +6711,6 @@ public class LicenseKeyTest : TestBase
             ProductID = "product_id",
             Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
 
         Assert.Null(model.ActivationsLimit);
@@ -7336,7 +6737,6 @@ public class LicenseKeyTest : TestBase
             ProductID = "product_id",
             Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
 
         model.Validate();
@@ -7356,7 +6756,6 @@ public class LicenseKeyTest : TestBase
             ProductID = "product_id",
             Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
 
             ActivationsLimit = null,
             ExpiresAt = null,
@@ -7388,7 +6787,6 @@ public class LicenseKeyTest : TestBase
             ProductID = "product_id",
             Source = LicenseKeys::LicenseKeySource.Auto,
             Status = LicenseKeys::LicenseKeyStatus.Active,
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
 
             ActivationsLimit = null,
             ExpiresAt = null,
@@ -7417,143 +6815,11 @@ public class LicenseKeyTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2024-12-31T23:59:59Z"),
             PaymentID = "payment_id",
             SubscriptionID = "subscription_id",
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
         };
 
         LicenseKey copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class LicenseKeyIntersectionMember1Test : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new LicenseKeyIntersectionMember1
-        {
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
-        };
-
-        ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> expectedPayloadType =
-            LicenseKeyIntersectionMember1PayloadType.LicenseKey;
-
-        Assert.Equal(expectedPayloadType, model.PayloadType);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new LicenseKeyIntersectionMember1
-        {
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyIntersectionMember1>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new LicenseKeyIntersectionMember1
-        {
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<LicenseKeyIntersectionMember1>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> expectedPayloadType =
-            LicenseKeyIntersectionMember1PayloadType.LicenseKey;
-
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new LicenseKeyIntersectionMember1
-        {
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new LicenseKeyIntersectionMember1
-        {
-            PayloadType = LicenseKeyIntersectionMember1PayloadType.LicenseKey,
-        };
-
-        LicenseKeyIntersectionMember1 copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class LicenseKeyIntersectionMember1PayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(LicenseKeyIntersectionMember1PayloadType.LicenseKey)]
-    public void Validation_Works(LicenseKeyIntersectionMember1PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(LicenseKeyIntersectionMember1PayloadType.LicenseKey)]
-    public void SerializationRoundtrip_Works(LicenseKeyIntersectionMember1PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -7580,7 +6846,6 @@ public class CreditLedgerEntryTest : TestBase
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         string expectedID = "id";
@@ -7600,8 +6865,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedGrantID = "grant_id";
         string expectedReferenceID = "reference_id";
         string expectedReferenceType = "reference_type";
-        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> expectedPayloadType =
-            CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("CreditLedgerEntry");
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedAmount, model.Amount);
@@ -7619,7 +6883,7 @@ public class CreditLedgerEntryTest : TestBase
         Assert.Equal(expectedGrantID, model.GrantID);
         Assert.Equal(expectedReferenceID, model.ReferenceID);
         Assert.Equal(expectedReferenceType, model.ReferenceType);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
     }
 
     [Fact]
@@ -7643,7 +6907,6 @@ public class CreditLedgerEntryTest : TestBase
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -7676,7 +6939,6 @@ public class CreditLedgerEntryTest : TestBase
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -7703,8 +6965,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedGrantID = "grant_id";
         string expectedReferenceID = "reference_id";
         string expectedReferenceType = "reference_type";
-        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> expectedPayloadType =
-            CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("CreditLedgerEntry");
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedAmount, deserialized.Amount);
@@ -7722,7 +6983,7 @@ public class CreditLedgerEntryTest : TestBase
         Assert.Equal(expectedGrantID, deserialized.GrantID);
         Assert.Equal(expectedReferenceID, deserialized.ReferenceID);
         Assert.Equal(expectedReferenceType, deserialized.ReferenceType);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
     }
 
     [Fact]
@@ -7746,7 +7007,6 @@ public class CreditLedgerEntryTest : TestBase
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         model.Validate();
@@ -7769,7 +7029,6 @@ public class CreditLedgerEntryTest : TestBase
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         Assert.Null(model.Description);
@@ -7799,7 +7058,6 @@ public class CreditLedgerEntryTest : TestBase
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         model.Validate();
@@ -7822,7 +7080,6 @@ public class CreditLedgerEntryTest : TestBase
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
 
             Description = null,
             GrantID = null,
@@ -7857,7 +7114,6 @@ public class CreditLedgerEntryTest : TestBase
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
 
             Description = null,
             GrantID = null,
@@ -7889,145 +7145,11 @@ public class CreditLedgerEntryTest : TestBase
             GrantID = "grant_id",
             ReferenceID = "reference_id",
             ReferenceType = "reference_type",
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
         };
 
         CreditLedgerEntry copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class CreditLedgerEntryIntersectionMember1Test : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new CreditLedgerEntryIntersectionMember1
-        {
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
-        };
-
-        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> expectedPayloadType =
-            CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry;
-
-        Assert.Equal(expectedPayloadType, model.PayloadType);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new CreditLedgerEntryIntersectionMember1
-        {
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CreditLedgerEntryIntersectionMember1>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new CreditLedgerEntryIntersectionMember1
-        {
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CreditLedgerEntryIntersectionMember1>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> expectedPayloadType =
-            CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry;
-
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new CreditLedgerEntryIntersectionMember1
-        {
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new CreditLedgerEntryIntersectionMember1
-        {
-            PayloadType = CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
-        };
-
-        CreditLedgerEntryIntersectionMember1 copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class CreditLedgerEntryIntersectionMember1PayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry)]
-    public void Validation_Works(CreditLedgerEntryIntersectionMember1PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry)]
-    public void SerializationRoundtrip_Works(
-        CreditLedgerEntryIntersectionMember1PayloadType rawValue
-    )
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -8042,7 +7164,6 @@ public class CreditBalanceLowTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
-            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
             SubscriptionCreditsAmount = "subscription_credits_amount",
             SubscriptionID = "subscription_id",
             ThresholdAmount = "threshold_amount",
@@ -8053,8 +7174,7 @@ public class CreditBalanceLowTest : TestBase
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCreditEntitlementName = "credit_entitlement_name";
         string expectedCustomerID = "customer_id";
-        ApiEnum<string, CreditBalanceLowPayloadType> expectedPayloadType =
-            CreditBalanceLowPayloadType.CreditBalanceLow;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("CreditBalanceLow");
         string expectedSubscriptionCreditsAmount = "subscription_credits_amount";
         string expectedSubscriptionID = "subscription_id";
         string expectedThresholdAmount = "threshold_amount";
@@ -8064,7 +7184,7 @@ public class CreditBalanceLowTest : TestBase
         Assert.Equal(expectedCreditEntitlementID, model.CreditEntitlementID);
         Assert.Equal(expectedCreditEntitlementName, model.CreditEntitlementName);
         Assert.Equal(expectedCustomerID, model.CustomerID);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
         Assert.Equal(expectedSubscriptionCreditsAmount, model.SubscriptionCreditsAmount);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
         Assert.Equal(expectedThresholdAmount, model.ThresholdAmount);
@@ -8080,7 +7200,6 @@ public class CreditBalanceLowTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
-            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
             SubscriptionCreditsAmount = "subscription_credits_amount",
             SubscriptionID = "subscription_id",
             ThresholdAmount = "threshold_amount",
@@ -8105,7 +7224,6 @@ public class CreditBalanceLowTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
-            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
             SubscriptionCreditsAmount = "subscription_credits_amount",
             SubscriptionID = "subscription_id",
             ThresholdAmount = "threshold_amount",
@@ -8123,8 +7241,7 @@ public class CreditBalanceLowTest : TestBase
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCreditEntitlementName = "credit_entitlement_name";
         string expectedCustomerID = "customer_id";
-        ApiEnum<string, CreditBalanceLowPayloadType> expectedPayloadType =
-            CreditBalanceLowPayloadType.CreditBalanceLow;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("CreditBalanceLow");
         string expectedSubscriptionCreditsAmount = "subscription_credits_amount";
         string expectedSubscriptionID = "subscription_id";
         string expectedThresholdAmount = "threshold_amount";
@@ -8134,7 +7251,7 @@ public class CreditBalanceLowTest : TestBase
         Assert.Equal(expectedCreditEntitlementID, deserialized.CreditEntitlementID);
         Assert.Equal(expectedCreditEntitlementName, deserialized.CreditEntitlementName);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
         Assert.Equal(expectedSubscriptionCreditsAmount, deserialized.SubscriptionCreditsAmount);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
         Assert.Equal(expectedThresholdAmount, deserialized.ThresholdAmount);
@@ -8150,7 +7267,6 @@ public class CreditBalanceLowTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
-            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
             SubscriptionCreditsAmount = "subscription_credits_amount",
             SubscriptionID = "subscription_id",
             ThresholdAmount = "threshold_amount",
@@ -8169,7 +7285,6 @@ public class CreditBalanceLowTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
-            PayloadType = CreditBalanceLowPayloadType.CreditBalanceLow,
             SubscriptionCreditsAmount = "subscription_credits_amount",
             SubscriptionID = "subscription_id",
             ThresholdAmount = "threshold_amount",
@@ -8179,62 +7294,6 @@ public class CreditBalanceLowTest : TestBase
         CreditBalanceLow copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class CreditBalanceLowPayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(CreditBalanceLowPayloadType.CreditBalanceLow)]
-    public void Validation_Works(CreditBalanceLowPayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CreditBalanceLowPayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CreditBalanceLowPayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(CreditBalanceLowPayloadType.CreditBalanceLow)]
-    public void SerializationRoundtrip_Works(CreditBalanceLowPayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CreditBalanceLowPayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CreditBalanceLowPayloadType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CreditBalanceLowPayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CreditBalanceLowPayloadType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -8248,7 +7307,6 @@ public class AbandonedCheckoutTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
@@ -8258,8 +7316,7 @@ public class AbandonedCheckoutTest : TestBase
         ApiEnum<string, AbandonmentReason> expectedAbandonmentReason =
             AbandonmentReason.PaymentFailed;
         string expectedCustomerID = "customer_id";
-        ApiEnum<string, AbandonedCheckoutPayloadType> expectedPayloadType =
-            AbandonedCheckoutPayloadType.AbandonedCheckout;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("AbandonedCheckout");
         string expectedPaymentID = "payment_id";
         ApiEnum<string, Status> expectedStatus = Status.Abandoned;
         string expectedRecoveredPaymentID = "recovered_payment_id";
@@ -8267,7 +7324,7 @@ public class AbandonedCheckoutTest : TestBase
         Assert.Equal(expectedAbandonedAt, model.AbandonedAt);
         Assert.Equal(expectedAbandonmentReason, model.AbandonmentReason);
         Assert.Equal(expectedCustomerID, model.CustomerID);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
         Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedRecoveredPaymentID, model.RecoveredPaymentID);
@@ -8281,7 +7338,6 @@ public class AbandonedCheckoutTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
@@ -8304,7 +7360,6 @@ public class AbandonedCheckoutTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
@@ -8321,8 +7376,7 @@ public class AbandonedCheckoutTest : TestBase
         ApiEnum<string, AbandonmentReason> expectedAbandonmentReason =
             AbandonmentReason.PaymentFailed;
         string expectedCustomerID = "customer_id";
-        ApiEnum<string, AbandonedCheckoutPayloadType> expectedPayloadType =
-            AbandonedCheckoutPayloadType.AbandonedCheckout;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("AbandonedCheckout");
         string expectedPaymentID = "payment_id";
         ApiEnum<string, Status> expectedStatus = Status.Abandoned;
         string expectedRecoveredPaymentID = "recovered_payment_id";
@@ -8330,7 +7384,7 @@ public class AbandonedCheckoutTest : TestBase
         Assert.Equal(expectedAbandonedAt, deserialized.AbandonedAt);
         Assert.Equal(expectedAbandonmentReason, deserialized.AbandonmentReason);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedRecoveredPaymentID, deserialized.RecoveredPaymentID);
@@ -8344,7 +7398,6 @@ public class AbandonedCheckoutTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
@@ -8361,7 +7414,6 @@ public class AbandonedCheckoutTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
         };
@@ -8378,7 +7430,6 @@ public class AbandonedCheckoutTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
         };
@@ -8394,7 +7445,6 @@ public class AbandonedCheckoutTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
 
@@ -8413,7 +7463,6 @@ public class AbandonedCheckoutTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
 
@@ -8431,7 +7480,6 @@ public class AbandonedCheckoutTest : TestBase
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
-            PayloadType = AbandonedCheckoutPayloadType.AbandonedCheckout,
             PaymentID = "payment_id",
             Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
@@ -8496,60 +7544,6 @@ public class AbandonmentReasonTest : TestBase
             json,
             ModelBase.SerializerOptions
         );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class AbandonedCheckoutPayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(AbandonedCheckoutPayloadType.AbandonedCheckout)]
-    public void Validation_Works(AbandonedCheckoutPayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AbandonedCheckoutPayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, AbandonedCheckoutPayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(AbandonedCheckoutPayloadType.AbandonedCheckout)]
-    public void SerializationRoundtrip_Works(AbandonedCheckoutPayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AbandonedCheckoutPayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, AbandonedCheckoutPayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, AbandonedCheckoutPayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, AbandonedCheckoutPayloadType>
-        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -8628,7 +7622,6 @@ public class DunningAttemptTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -8637,8 +7630,7 @@ public class DunningAttemptTest : TestBase
 
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
-        ApiEnum<string, DunningAttemptPayloadType> expectedPayloadType =
-            DunningAttemptPayloadType.DunningAttempt;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("DunningAttempt");
         ApiEnum<string, DunningAttemptStatus> expectedStatus = DunningAttemptStatus.Recovering;
         string expectedSubscriptionID = "subscription_id";
         ApiEnum<string, TriggerState> expectedTriggerState = TriggerState.OnHold;
@@ -8646,7 +7638,7 @@ public class DunningAttemptTest : TestBase
 
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerID, model.CustomerID);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
         Assert.Equal(expectedTriggerState, model.TriggerState);
@@ -8660,7 +7652,6 @@ public class DunningAttemptTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -8683,7 +7674,6 @@ public class DunningAttemptTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -8699,8 +7689,7 @@ public class DunningAttemptTest : TestBase
 
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
-        ApiEnum<string, DunningAttemptPayloadType> expectedPayloadType =
-            DunningAttemptPayloadType.DunningAttempt;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("DunningAttempt");
         ApiEnum<string, DunningAttemptStatus> expectedStatus = DunningAttemptStatus.Recovering;
         string expectedSubscriptionID = "subscription_id";
         ApiEnum<string, TriggerState> expectedTriggerState = TriggerState.OnHold;
@@ -8708,7 +7697,7 @@ public class DunningAttemptTest : TestBase
 
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
         Assert.Equal(expectedTriggerState, deserialized.TriggerState);
@@ -8722,7 +7711,6 @@ public class DunningAttemptTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -8739,7 +7727,6 @@ public class DunningAttemptTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -8756,7 +7743,6 @@ public class DunningAttemptTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -8772,7 +7758,6 @@ public class DunningAttemptTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -8791,7 +7776,6 @@ public class DunningAttemptTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -8809,7 +7793,6 @@ public class DunningAttemptTest : TestBase
         {
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
-            PayloadType = DunningAttemptPayloadType.DunningAttempt,
             Status = DunningAttemptStatus.Recovering,
             SubscriptionID = "subscription_id",
             TriggerState = TriggerState.OnHold,
@@ -8819,62 +7802,6 @@ public class DunningAttemptTest : TestBase
         DunningAttempt copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class DunningAttemptPayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(DunningAttemptPayloadType.DunningAttempt)]
-    public void Validation_Works(DunningAttemptPayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DunningAttemptPayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DunningAttemptPayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(DunningAttemptPayloadType.DunningAttempt)]
-    public void SerializationRoundtrip_Works(DunningAttemptPayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DunningAttemptPayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DunningAttemptPayloadType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DunningAttemptPayloadType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DunningAttemptPayloadType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -9044,7 +7971,6 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         string expectedID = "id";
@@ -9089,8 +8015,7 @@ public class EntitlementGrantTest : TestBase
         string expectedRevocationReason = "revocation_reason";
         DateTimeOffset expectedRevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedSubscriptionID = "subscription_id";
-        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> expectedPayloadType =
-            EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("EntitlementGrant");
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -9117,7 +8042,7 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedRevocationReason, model.RevocationReason);
         Assert.Equal(expectedRevokedAt, model.RevokedAt);
         Assert.Equal(expectedSubscriptionID, model.SubscriptionID);
-        Assert.Equal(expectedPayloadType, model.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
     }
 
     [Fact]
@@ -9166,7 +8091,6 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -9224,7 +8148,6 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -9276,8 +8199,7 @@ public class EntitlementGrantTest : TestBase
         string expectedRevocationReason = "revocation_reason";
         DateTimeOffset expectedRevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedSubscriptionID = "subscription_id";
-        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> expectedPayloadType =
-            EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("EntitlementGrant");
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -9304,7 +8226,7 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedRevocationReason, deserialized.RevocationReason);
         Assert.Equal(expectedRevokedAt, deserialized.RevokedAt);
         Assert.Equal(expectedSubscriptionID, deserialized.SubscriptionID);
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
     }
 
     [Fact]
@@ -9353,7 +8275,6 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         model.Validate();
@@ -9381,7 +8302,6 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         Assert.Null(model.DigitalProductDelivery);
@@ -9412,7 +8332,6 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         model.Validate();
@@ -9440,7 +8359,6 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
 
             // Null should be interpreted as omitted for these properties
             DigitalProductDelivery = null,
@@ -9475,7 +8393,6 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
 
             // Null should be interpreted as omitted for these properties
             DigitalProductDelivery = null,
@@ -9522,7 +8439,6 @@ public class EntitlementGrantTest : TestBase
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         Assert.Null(model.DeliveredAt);
@@ -9582,7 +8498,6 @@ public class EntitlementGrantTest : TestBase
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         model.Validate();
@@ -9625,7 +8540,6 @@ public class EntitlementGrantTest : TestBase
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
 
             DeliveredAt = null,
             ErrorCode = null,
@@ -9695,7 +8609,6 @@ public class EntitlementGrantTest : TestBase
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
 
             DeliveredAt = null,
             ErrorCode = null,
@@ -9757,144 +8670,10 @@ public class EntitlementGrantTest : TestBase
             RevocationReason = "revocation_reason",
             RevokedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             SubscriptionID = "subscription_id",
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
         };
 
         EntitlementGrant copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class EntitlementGrantIntersectionMember1Test : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new EntitlementGrantIntersectionMember1
-        {
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
-        };
-
-        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> expectedPayloadType =
-            EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant;
-
-        Assert.Equal(expectedPayloadType, model.PayloadType);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new EntitlementGrantIntersectionMember1
-        {
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EntitlementGrantIntersectionMember1>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new EntitlementGrantIntersectionMember1
-        {
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EntitlementGrantIntersectionMember1>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> expectedPayloadType =
-            EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant;
-
-        Assert.Equal(expectedPayloadType, deserialized.PayloadType);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new EntitlementGrantIntersectionMember1
-        {
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new EntitlementGrantIntersectionMember1
-        {
-            PayloadType = EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
-        };
-
-        EntitlementGrantIntersectionMember1 copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class EntitlementGrantIntersectionMember1PayloadTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant)]
-    public void Validation_Works(EntitlementGrantIntersectionMember1PayloadType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant)]
-    public void SerializationRoundtrip_Works(
-        EntitlementGrantIntersectionMember1PayloadType rawValue
-    )
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }

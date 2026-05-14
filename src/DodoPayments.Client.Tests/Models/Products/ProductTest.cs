@@ -5,8 +5,8 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.Subscriptions;
-using Products = DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Tests.Models.Products;
 
@@ -15,7 +15,7 @@ public class ProductTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Products::Product
+        var model = new Product
         {
             BrandID = "brand_id",
             BusinessID = "business_id",
@@ -31,7 +31,7 @@ public class ProductTest : TestBase
                     CreditsAmount = "credits_amount",
                     OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -64,13 +64,12 @@ public class ProductTest : TestBase
             IsRecurring = true,
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -108,7 +107,7 @@ public class ProductTest : TestBase
         string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<Products::CreditEntitlementMappingResponse> expectedCreditEntitlements =
+        List<CreditEntitlementMappingResponse> expectedCreditEntitlements =
         [
             new()
             {
@@ -119,7 +118,7 @@ public class ProductTest : TestBase
                 CreditsAmount = "credits_amount",
                 OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                 OverageEnabled = true,
-                ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                ProrationBehavior = CbbProrationBehavior.Prorate,
                 RolloverEnabled = true,
                 TrialCreditsExpireAfterTrial = true,
                 Currency = Currency.Aed,
@@ -134,7 +133,7 @@ public class ProductTest : TestBase
                 TrialCredits = "trial_credits",
             },
         ];
-        List<Products::ProductEntitlementSummary> expectedEntitlements =
+        List<ProductEntitlementSummary> expectedEntitlements =
         [
             new()
             {
@@ -152,13 +151,12 @@ public class ProductTest : TestBase
         bool expectedIsRecurring = true;
         bool expectedLicenseKeyEnabled = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
-        Products::Price expectedPrice = new Products::OneTimePrice()
+        Price expectedPrice = new OneTimePrice()
         {
             Currency = Currency.Aed,
             Discount = 0,
             PriceValue = 0,
             PurchasingPowerParity = true,
-            Type = Products::Type.OneTimePrice,
             PayWhatYouWant = true,
             SuggestedPrice = 0,
             TaxInclusive = true,
@@ -168,7 +166,7 @@ public class ProductTest : TestBase
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<string> expectedAddons = ["string"];
         string expectedDescription = "description";
-        Products::ProductDigitalProductDelivery expectedDigitalProductDelivery = new()
+        ProductDigitalProductDelivery expectedDigitalProductDelivery = new()
         {
             Files =
             [
@@ -188,7 +186,7 @@ public class ProductTest : TestBase
         string expectedImage = "image";
         string expectedLicenseKeyActivationMessage = "license_key_activation_message";
         int expectedLicenseKeyActivationsLimit = 0;
-        Products::LicenseKeyDuration expectedLicenseKeyDuration = new()
+        LicenseKeyDuration expectedLicenseKeyDuration = new()
         {
             Count = 0,
             Interval = TimeInterval.Day,
@@ -241,7 +239,7 @@ public class ProductTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Products::Product
+        var model = new Product
         {
             BrandID = "brand_id",
             BusinessID = "business_id",
@@ -257,7 +255,7 @@ public class ProductTest : TestBase
                     CreditsAmount = "credits_amount",
                     OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -290,13 +288,12 @@ public class ProductTest : TestBase
             IsRecurring = true,
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -332,10 +329,7 @@ public class ProductTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::Product>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Product>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -343,7 +337,7 @@ public class ProductTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Products::Product
+        var model = new Product
         {
             BrandID = "brand_id",
             BusinessID = "business_id",
@@ -359,7 +353,7 @@ public class ProductTest : TestBase
                     CreditsAmount = "credits_amount",
                     OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -392,13 +386,12 @@ public class ProductTest : TestBase
             IsRecurring = true,
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -434,7 +427,7 @@ public class ProductTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::Product>(
+        var deserialized = JsonSerializer.Deserialize<Product>(
             element,
             ModelBase.SerializerOptions
         );
@@ -443,7 +436,7 @@ public class ProductTest : TestBase
         string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<Products::CreditEntitlementMappingResponse> expectedCreditEntitlements =
+        List<CreditEntitlementMappingResponse> expectedCreditEntitlements =
         [
             new()
             {
@@ -454,7 +447,7 @@ public class ProductTest : TestBase
                 CreditsAmount = "credits_amount",
                 OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                 OverageEnabled = true,
-                ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                ProrationBehavior = CbbProrationBehavior.Prorate,
                 RolloverEnabled = true,
                 TrialCreditsExpireAfterTrial = true,
                 Currency = Currency.Aed,
@@ -469,7 +462,7 @@ public class ProductTest : TestBase
                 TrialCredits = "trial_credits",
             },
         ];
-        List<Products::ProductEntitlementSummary> expectedEntitlements =
+        List<ProductEntitlementSummary> expectedEntitlements =
         [
             new()
             {
@@ -487,13 +480,12 @@ public class ProductTest : TestBase
         bool expectedIsRecurring = true;
         bool expectedLicenseKeyEnabled = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
-        Products::Price expectedPrice = new Products::OneTimePrice()
+        Price expectedPrice = new OneTimePrice()
         {
             Currency = Currency.Aed,
             Discount = 0,
             PriceValue = 0,
             PurchasingPowerParity = true,
-            Type = Products::Type.OneTimePrice,
             PayWhatYouWant = true,
             SuggestedPrice = 0,
             TaxInclusive = true,
@@ -503,7 +495,7 @@ public class ProductTest : TestBase
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<string> expectedAddons = ["string"];
         string expectedDescription = "description";
-        Products::ProductDigitalProductDelivery expectedDigitalProductDelivery = new()
+        ProductDigitalProductDelivery expectedDigitalProductDelivery = new()
         {
             Files =
             [
@@ -523,7 +515,7 @@ public class ProductTest : TestBase
         string expectedImage = "image";
         string expectedLicenseKeyActivationMessage = "license_key_activation_message";
         int expectedLicenseKeyActivationsLimit = 0;
-        Products::LicenseKeyDuration expectedLicenseKeyDuration = new()
+        LicenseKeyDuration expectedLicenseKeyDuration = new()
         {
             Count = 0,
             Interval = TimeInterval.Day,
@@ -576,7 +568,7 @@ public class ProductTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Products::Product
+        var model = new Product
         {
             BrandID = "brand_id",
             BusinessID = "business_id",
@@ -592,7 +584,7 @@ public class ProductTest : TestBase
                     CreditsAmount = "credits_amount",
                     OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -625,13 +617,12 @@ public class ProductTest : TestBase
             IsRecurring = true,
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -672,7 +663,7 @@ public class ProductTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Products::Product
+        var model = new Product
         {
             BrandID = "brand_id",
             BusinessID = "business_id",
@@ -688,7 +679,7 @@ public class ProductTest : TestBase
                     CreditsAmount = "credits_amount",
                     OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -721,13 +712,12 @@ public class ProductTest : TestBase
             IsRecurring = true,
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -760,7 +750,7 @@ public class ProductTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Products::Product
+        var model = new Product
         {
             BrandID = "brand_id",
             BusinessID = "business_id",
@@ -776,7 +766,7 @@ public class ProductTest : TestBase
                     CreditsAmount = "credits_amount",
                     OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -809,13 +799,12 @@ public class ProductTest : TestBase
             IsRecurring = true,
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -831,7 +820,7 @@ public class ProductTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Products::Product
+        var model = new Product
         {
             BrandID = "brand_id",
             BusinessID = "business_id",
@@ -847,7 +836,7 @@ public class ProductTest : TestBase
                     CreditsAmount = "credits_amount",
                     OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -880,13 +869,12 @@ public class ProductTest : TestBase
             IsRecurring = true,
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -929,7 +917,7 @@ public class ProductTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Products::Product
+        var model = new Product
         {
             BrandID = "brand_id",
             BusinessID = "business_id",
@@ -945,7 +933,7 @@ public class ProductTest : TestBase
                     CreditsAmount = "credits_amount",
                     OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -978,13 +966,12 @@ public class ProductTest : TestBase
             IsRecurring = true,
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -1010,7 +997,7 @@ public class ProductTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Products::Product
+        var model = new Product
         {
             BrandID = "brand_id",
             BusinessID = "business_id",
@@ -1026,7 +1013,7 @@ public class ProductTest : TestBase
                     CreditsAmount = "credits_amount",
                     OverageBehavior = CbbOverageBehavior.ForgiveAtReset,
                     OverageEnabled = true,
-                    ProrationBehavior = Products::CbbProrationBehavior.Prorate,
+                    ProrationBehavior = CbbProrationBehavior.Prorate,
                     RolloverEnabled = true,
                     TrialCreditsExpireAfterTrial = true,
                     Currency = Currency.Aed,
@@ -1059,13 +1046,12 @@ public class ProductTest : TestBase
             IsRecurring = true,
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            Price = new Products::OneTimePrice()
+            Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
                 Discount = 0,
                 PriceValue = 0,
                 PurchasingPowerParity = true,
-                Type = Products::Type.OneTimePrice,
                 PayWhatYouWant = true,
                 SuggestedPrice = 0,
                 TaxInclusive = true,
@@ -1100,7 +1086,7 @@ public class ProductTest : TestBase
             ProductCollectionID = "product_collection_id",
         };
 
-        Products::Product copied = new(model);
+        Product copied = new(model);
 
         Assert.Equal(model, copied);
     }

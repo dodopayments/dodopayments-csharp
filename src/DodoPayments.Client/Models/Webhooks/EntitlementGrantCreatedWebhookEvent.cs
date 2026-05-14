@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,6 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Entitlements.Grants;
-using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -48,12 +48,12 @@ public sealed record class EntitlementGrantCreatedWebhookEvent : JsonModel
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTimeOffset Timestamp
+    public required DateTimeOffset Timestamp
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp");
         }
         init { this._rawData.Set("timestamp", value); }
     }
@@ -61,14 +61,12 @@ public sealed record class EntitlementGrantCreatedWebhookEvent : JsonModel
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, EntitlementGrantCreatedWebhookEventType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, EntitlementGrantCreatedWebhookEventType>
-            >("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -79,10 +77,21 @@ public sealed record class EntitlementGrantCreatedWebhookEvent : JsonModel
         _ = this.BusinessID;
         this.Data.Validate();
         _ = this.Timestamp;
-        this.Type.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.Type,
+                JsonSerializer.SerializeToElement("entitlement_grant.created")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public EntitlementGrantCreatedWebhookEvent() { }
+    public EntitlementGrantCreatedWebhookEvent()
+    {
+        this.Type = JsonSerializer.SerializeToElement("entitlement_grant.created");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -95,6 +104,8 @@ public sealed record class EntitlementGrantCreatedWebhookEvent : JsonModel
     public EntitlementGrantCreatedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("entitlement_grant.created");
     }
 
 #pragma warning disable CS8618
@@ -120,51 +131,4 @@ class EntitlementGrantCreatedWebhookEventFromRaw : IFromRawJson<EntitlementGrant
     public EntitlementGrantCreatedWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => EntitlementGrantCreatedWebhookEvent.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// The event type
-/// </summary>
-[JsonConverter(typeof(EntitlementGrantCreatedWebhookEventTypeConverter))]
-public enum EntitlementGrantCreatedWebhookEventType
-{
-    EntitlementGrantCreated,
-}
-
-sealed class EntitlementGrantCreatedWebhookEventTypeConverter
-    : JsonConverter<EntitlementGrantCreatedWebhookEventType>
-{
-    public override EntitlementGrantCreatedWebhookEventType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "entitlement_grant.created" =>
-                EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated,
-            _ => (EntitlementGrantCreatedWebhookEventType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        EntitlementGrantCreatedWebhookEventType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated =>
-                    "entitlement_grant.created",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }

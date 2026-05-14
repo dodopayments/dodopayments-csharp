@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -7,7 +8,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -116,9 +116,9 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
             && this.RawBodyData.Equals(other.RawBodyData);
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(
+        return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/subscriptions/{0}/update-payment-method", this.SubscriptionID)
         )
@@ -180,6 +180,11 @@ public record class Body : ModelBase
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public JsonElement Type
+    {
+        get { return Match(new_: (x) => x.Type, existing: (x) => x.Type); }
     }
 
     public Body(New value, JsonElement? element = null)
@@ -261,7 +266,7 @@ public record class Body : ModelBase
     /// </code>
     /// </example>
     /// </summary>
-    public void Switch(System::Action<New> new_, System::Action<Existing> existing)
+    public void Switch(Action<New> new_, Action<Existing> existing)
     {
         switch (this.Value)
         {
@@ -299,7 +304,7 @@ public record class Body : ModelBase
     /// </code>
     /// </example>
     /// </summary>
-    public T Match<T>(System::Func<New, T> new_, System::Func<Existing, T> existing)
+    public T Match<T>(Func<New, T> new_, Func<Existing, T> existing)
     {
         return this.Value switch
         {
@@ -365,42 +370,62 @@ sealed class BodyConverter : JsonConverter<Body>
 {
     public override Body? Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
         try
         {
-            var deserialized = JsonSerializer.Deserialize<New>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            type = element.GetProperty("type").GetString();
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            type = null;
         }
 
-        try
+        switch (type)
         {
-            var deserialized = JsonSerializer.Deserialize<Existing>(element, options);
-            if (deserialized != null)
+            case "new":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<New>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "existing":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Existing>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new Body(element);
             }
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(Utf8JsonWriter writer, Body value, JsonSerializerOptions options)
@@ -412,14 +437,12 @@ sealed class BodyConverter : JsonConverter<Body>
 [JsonConverter(typeof(JsonModelConverter<New, NewFromRaw>))]
 public sealed record class New : JsonModel
 {
-    public required ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type>
-            >("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -437,11 +460,17 @@ public sealed record class New : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        this.Type.Validate();
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("new")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
         _ = this.ReturnUrl;
     }
 
-    public New() { }
+    public New()
+    {
+        this.Type = JsonSerializer.SerializeToElement("new");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -452,6 +481,8 @@ public sealed record class New : JsonModel
     public New(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("new");
     }
 
 #pragma warning disable CS8618
@@ -467,13 +498,6 @@ public sealed record class New : JsonModel
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
-
-    [SetsRequiredMembers]
-    public New(ApiEnum<string, global::DodoPayments.Client.Models.Subscriptions.Type> type)
-        : this()
-    {
-        this.Type = type;
-    }
 }
 
 class NewFromRaw : IFromRawJson<New>
@@ -481,47 +505,6 @@ class NewFromRaw : IFromRawJson<New>
     /// <inheritdoc/>
     public New FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         New.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(TypeConverter))]
-public enum Type
-{
-    New,
-}
-
-sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.Subscriptions.Type>
-{
-    public override global::DodoPayments.Client.Models.Subscriptions.Type Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "new" => global::DodoPayments.Client.Models.Subscriptions.Type.New,
-            _ => (global::DodoPayments.Client.Models.Subscriptions.Type)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        global::DodoPayments.Client.Models.Subscriptions.Type value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                global::DodoPayments.Client.Models.Subscriptions.Type.New => "new",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<Existing, ExistingFromRaw>))]
@@ -537,12 +520,12 @@ public sealed record class Existing : JsonModel
         init { this._rawData.Set("payment_method_id", value); }
     }
 
-    public required ApiEnum<string, ExistingType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, ExistingType>>("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -551,10 +534,16 @@ public sealed record class Existing : JsonModel
     public override void Validate()
     {
         _ = this.PaymentMethodID;
-        this.Type.Validate();
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("existing")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public Existing() { }
+    public Existing()
+    {
+        this.Type = JsonSerializer.SerializeToElement("existing");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -565,6 +554,8 @@ public sealed record class Existing : JsonModel
     public Existing(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("existing");
     }
 
 #pragma warning disable CS8618
@@ -580,6 +571,13 @@ public sealed record class Existing : JsonModel
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+
+    [SetsRequiredMembers]
+    public Existing(string paymentMethodID)
+        : this()
+    {
+        this.PaymentMethodID = paymentMethodID;
+    }
 }
 
 class ExistingFromRaw : IFromRawJson<Existing>
@@ -587,45 +585,4 @@ class ExistingFromRaw : IFromRawJson<Existing>
     /// <inheritdoc/>
     public Existing FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Existing.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(ExistingTypeConverter))]
-public enum ExistingType
-{
-    Existing,
-}
-
-sealed class ExistingTypeConverter : JsonConverter<ExistingType>
-{
-    public override ExistingType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "existing" => ExistingType.Existing,
-            _ => (ExistingType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ExistingType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ExistingType.Existing => "existing",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }

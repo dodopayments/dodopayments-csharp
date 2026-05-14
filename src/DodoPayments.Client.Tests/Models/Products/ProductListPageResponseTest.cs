@@ -4,7 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
-using Products = DodoPayments.Client.Models.Products;
+using DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Tests.Models.Products;
 
@@ -13,7 +13,7 @@ public class ProductListPageResponseTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Products::ProductListPageResponse
+        var model = new ProductListPageResponse
         {
             Items =
             [
@@ -46,13 +46,12 @@ public class ProductListPageResponseTest : TestBase
                     Image = "image",
                     Name = "name",
                     Price = 0,
-                    PriceDetail = new Products::OneTimePrice()
+                    PriceDetail = new OneTimePrice()
                     {
                         Currency = Currency.Aed,
                         Discount = 0,
                         PriceValue = 0,
                         PurchasingPowerParity = true,
-                        Type = Products::Type.OneTimePrice,
                         PayWhatYouWant = true,
                         SuggestedPrice = 0,
                         TaxInclusive = true,
@@ -62,7 +61,7 @@ public class ProductListPageResponseTest : TestBase
             ],
         };
 
-        List<Products::ProductListResponse> expectedItems =
+        List<ProductListResponse> expectedItems =
         [
             new()
             {
@@ -93,13 +92,12 @@ public class ProductListPageResponseTest : TestBase
                 Image = "image",
                 Name = "name",
                 Price = 0,
-                PriceDetail = new Products::OneTimePrice()
+                PriceDetail = new OneTimePrice()
                 {
                     Currency = Currency.Aed,
                     Discount = 0,
                     PriceValue = 0,
                     PurchasingPowerParity = true,
-                    Type = Products::Type.OneTimePrice,
                     PayWhatYouWant = true,
                     SuggestedPrice = 0,
                     TaxInclusive = true,
@@ -118,7 +116,7 @@ public class ProductListPageResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Products::ProductListPageResponse
+        var model = new ProductListPageResponse
         {
             Items =
             [
@@ -151,13 +149,12 @@ public class ProductListPageResponseTest : TestBase
                     Image = "image",
                     Name = "name",
                     Price = 0,
-                    PriceDetail = new Products::OneTimePrice()
+                    PriceDetail = new OneTimePrice()
                     {
                         Currency = Currency.Aed,
                         Discount = 0,
                         PriceValue = 0,
                         PurchasingPowerParity = true,
-                        Type = Products::Type.OneTimePrice,
                         PayWhatYouWant = true,
                         SuggestedPrice = 0,
                         TaxInclusive = true,
@@ -168,7 +165,7 @@ public class ProductListPageResponseTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::ProductListPageResponse>(
+        var deserialized = JsonSerializer.Deserialize<ProductListPageResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -179,7 +176,7 @@ public class ProductListPageResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Products::ProductListPageResponse
+        var model = new ProductListPageResponse
         {
             Items =
             [
@@ -212,13 +209,12 @@ public class ProductListPageResponseTest : TestBase
                     Image = "image",
                     Name = "name",
                     Price = 0,
-                    PriceDetail = new Products::OneTimePrice()
+                    PriceDetail = new OneTimePrice()
                     {
                         Currency = Currency.Aed,
                         Discount = 0,
                         PriceValue = 0,
                         PurchasingPowerParity = true,
-                        Type = Products::Type.OneTimePrice,
                         PayWhatYouWant = true,
                         SuggestedPrice = 0,
                         TaxInclusive = true,
@@ -229,13 +225,13 @@ public class ProductListPageResponseTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Products::ProductListPageResponse>(
+        var deserialized = JsonSerializer.Deserialize<ProductListPageResponse>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        List<Products::ProductListResponse> expectedItems =
+        List<ProductListResponse> expectedItems =
         [
             new()
             {
@@ -266,13 +262,12 @@ public class ProductListPageResponseTest : TestBase
                 Image = "image",
                 Name = "name",
                 Price = 0,
-                PriceDetail = new Products::OneTimePrice()
+                PriceDetail = new OneTimePrice()
                 {
                     Currency = Currency.Aed,
                     Discount = 0,
                     PriceValue = 0,
                     PurchasingPowerParity = true,
-                    Type = Products::Type.OneTimePrice,
                     PayWhatYouWant = true,
                     SuggestedPrice = 0,
                     TaxInclusive = true,
@@ -291,7 +286,7 @@ public class ProductListPageResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Products::ProductListPageResponse
+        var model = new ProductListPageResponse
         {
             Items =
             [
@@ -324,13 +319,12 @@ public class ProductListPageResponseTest : TestBase
                     Image = "image",
                     Name = "name",
                     Price = 0,
-                    PriceDetail = new Products::OneTimePrice()
+                    PriceDetail = new OneTimePrice()
                     {
                         Currency = Currency.Aed,
                         Discount = 0,
                         PriceValue = 0,
                         PurchasingPowerParity = true,
-                        Type = Products::Type.OneTimePrice,
                         PayWhatYouWant = true,
                         SuggestedPrice = 0,
                         TaxInclusive = true,
@@ -346,7 +340,7 @@ public class ProductListPageResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Products::ProductListPageResponse
+        var model = new ProductListPageResponse
         {
             Items =
             [
@@ -379,13 +373,12 @@ public class ProductListPageResponseTest : TestBase
                     Image = "image",
                     Name = "name",
                     Price = 0,
-                    PriceDetail = new Products::OneTimePrice()
+                    PriceDetail = new OneTimePrice()
                     {
                         Currency = Currency.Aed,
                         Discount = 0,
                         PriceValue = 0,
                         PurchasingPowerParity = true,
-                        Type = Products::Type.OneTimePrice,
                         PayWhatYouWant = true,
                         SuggestedPrice = 0,
                         TaxInclusive = true,
@@ -395,7 +388,7 @@ public class ProductListPageResponseTest : TestBase
             ],
         };
 
-        Products::ProductListPageResponse copied = new(model);
+        ProductListPageResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }

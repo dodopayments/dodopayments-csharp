@@ -25,7 +25,6 @@ public class AbandonedCheckoutRecoveredWebhookEventTest : TestBase
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered,
         };
 
         string expectedBusinessID = "business_id";
@@ -40,13 +39,14 @@ public class AbandonedCheckoutRecoveredWebhookEventTest : TestBase
             RecoveredPaymentID = "recovered_payment_id",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, AbandonedCheckoutRecoveredWebhookEventType> expectedType =
-            AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered;
+        JsonElement expectedType = JsonSerializer.SerializeToElement(
+            "abandoned_checkout.recovered"
+        );
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
         Assert.Equal(expectedTimestamp, model.Timestamp);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
     }
 
     [Fact]
@@ -66,7 +66,6 @@ public class AbandonedCheckoutRecoveredWebhookEventTest : TestBase
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -95,7 +94,6 @@ public class AbandonedCheckoutRecoveredWebhookEventTest : TestBase
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -117,13 +115,14 @@ public class AbandonedCheckoutRecoveredWebhookEventTest : TestBase
             RecoveredPaymentID = "recovered_payment_id",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, AbandonedCheckoutRecoveredWebhookEventType> expectedType =
-            AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered;
+        JsonElement expectedType = JsonSerializer.SerializeToElement(
+            "abandoned_checkout.recovered"
+        );
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
     }
 
     [Fact]
@@ -143,7 +142,6 @@ public class AbandonedCheckoutRecoveredWebhookEventTest : TestBase
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered,
         };
 
         model.Validate();
@@ -166,7 +164,6 @@ public class AbandonedCheckoutRecoveredWebhookEventTest : TestBase
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered,
         };
 
         AbandonedCheckoutRecoveredWebhookEvent copied = new(model);
@@ -498,58 +495,6 @@ public class AbandonedCheckoutRecoveredWebhookEventDataStatusTest : TestBase
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, AbandonedCheckoutRecoveredWebhookEventDataStatus>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class AbandonedCheckoutRecoveredWebhookEventTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered)]
-    public void Validation_Works(AbandonedCheckoutRecoveredWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AbandonedCheckoutRecoveredWebhookEventType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, AbandonedCheckoutRecoveredWebhookEventType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered)]
-    public void SerializationRoundtrip_Works(AbandonedCheckoutRecoveredWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AbandonedCheckoutRecoveredWebhookEventType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, AbandonedCheckoutRecoveredWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, AbandonedCheckoutRecoveredWebhookEventType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, AbandonedCheckoutRecoveredWebhookEventType>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

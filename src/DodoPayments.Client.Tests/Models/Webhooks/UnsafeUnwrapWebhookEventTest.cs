@@ -27,14 +27,14 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
             Data = new()
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                AbandonmentReason = AbandonmentReason.PaymentFailed,
+                AbandonmentReason =
+                    AbandonmentReason.PaymentFailed,
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
                 Status = global::DodoPayments.Client.Models.Webhooks.Status.Abandoned,
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = global::DodoPayments.Client.Models.Webhooks.Type.AbandonedCheckoutDetected,
         };
         value.Validate();
     }
@@ -56,7 +56,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered,
         };
         value.Validate();
     }
@@ -87,7 +86,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditAddedWebhookEventType.CreditAdded,
         };
         value.Validate();
     }
@@ -110,7 +108,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ThresholdPercent = 0,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditBalanceLowWebhookEventType.CreditBalanceLow,
         };
         value.Validate();
     }
@@ -141,7 +138,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditDeductedWebhookEventType.CreditDeducted,
         };
         value.Validate();
     }
@@ -172,7 +168,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditExpiredWebhookEventType.CreditExpired,
         };
         value.Validate();
     }
@@ -203,7 +198,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditManualAdjustmentWebhookEventType.CreditManualAdjustment,
         };
         value.Validate();
     }
@@ -234,7 +228,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditOverageChargedWebhookEventType.CreditOverageCharged,
         };
         value.Validate();
     }
@@ -265,7 +258,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditOverageResetWebhookEventType.CreditOverageReset,
         };
         value.Validate();
     }
@@ -296,7 +288,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditRolledOverWebhookEventType.CreditRolledOver,
         };
         value.Validate();
     }
@@ -327,7 +318,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited,
         };
         value.Validate();
     }
@@ -352,7 +342,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeAcceptedWebhookEventType.DisputeAccepted,
         };
         value.Validate();
     }
@@ -377,7 +366,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeCancelledWebhookEventType.DisputeCancelled,
         };
         value.Validate();
     }
@@ -402,7 +390,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeChallengedWebhookEventType.DisputeChallenged,
         };
         value.Validate();
     }
@@ -427,7 +414,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeExpiredWebhookEventType.DisputeExpired,
         };
         value.Validate();
     }
@@ -452,7 +438,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeLostWebhookEventType.DisputeLost,
         };
         value.Validate();
     }
@@ -477,7 +462,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeOpenedWebhookEventType.DisputeOpened,
         };
         value.Validate();
     }
@@ -502,7 +486,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeWonWebhookEventType.DisputeWon,
         };
         value.Validate();
     }
@@ -523,7 +506,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DunningRecoveredWebhookEventType.DunningRecovered,
         };
         value.Validate();
     }
@@ -544,7 +526,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DunningStartedWebhookEventType.DunningStarted,
         };
         value.Validate();
     }
@@ -600,7 +581,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated,
         };
         value.Validate();
     }
@@ -656,7 +636,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantDeliveredWebhookEventType.EntitlementGrantDelivered,
         };
         value.Validate();
     }
@@ -712,7 +691,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantFailedWebhookEventType.EntitlementGrantFailed,
         };
         value.Validate();
     }
@@ -768,7 +746,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantRevokedWebhookEventType.EntitlementGrantRevoked,
         };
         value.Validate();
     }
@@ -796,7 +773,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = LicenseKeyCreatedWebhookEventType.LicenseKeyCreated,
         };
         value.Validate();
     }
@@ -912,7 +888,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentCancelledWebhookEventType.PaymentCancelled,
         };
         value.Validate();
     }
@@ -1028,7 +1003,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentFailedWebhookEventType.PaymentFailed,
         };
         value.Validate();
     }
@@ -1144,7 +1118,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentProcessingWebhookEventType.PaymentProcessing,
         };
         value.Validate();
     }
@@ -1260,7 +1233,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentSucceededWebhookEventType.PaymentSucceeded,
         };
         value.Validate();
     }
@@ -1293,7 +1265,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = RefundFailedWebhookEventType.RefundFailed,
         };
         value.Validate();
     }
@@ -1326,7 +1297,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = RefundSucceededWebhookEventType.RefundSucceeded,
         };
         value.Validate();
     }
@@ -1473,7 +1443,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionActiveWebhookEventType.SubscriptionActive,
         };
         value.Validate();
     }
@@ -1620,7 +1589,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionCancelledWebhookEventType.SubscriptionCancelled,
         };
         value.Validate();
     }
@@ -1767,7 +1735,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionExpiredWebhookEventType.SubscriptionExpired,
         };
         value.Validate();
     }
@@ -1914,7 +1881,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionFailedWebhookEventType.SubscriptionFailed,
         };
         value.Validate();
     }
@@ -2061,7 +2027,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionOnHoldWebhookEventType.SubscriptionOnHold,
         };
         value.Validate();
     }
@@ -2208,7 +2173,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionPlanChangedWebhookEventType.SubscriptionPlanChanged,
         };
         value.Validate();
     }
@@ -2355,7 +2319,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionRenewedWebhookEventType.SubscriptionRenewed,
         };
         value.Validate();
     }
@@ -2502,7 +2465,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
         };
         value.Validate();
     }
@@ -2516,14 +2478,14 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
             Data = new()
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                AbandonmentReason = AbandonmentReason.PaymentFailed,
+                AbandonmentReason =
+                    AbandonmentReason.PaymentFailed,
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
                 Status = global::DodoPayments.Client.Models.Webhooks.Status.Abandoned,
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = global::DodoPayments.Client.Models.Webhooks.Type.AbandonedCheckoutDetected,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2551,7 +2513,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = AbandonedCheckoutRecoveredWebhookEventType.AbandonedCheckoutRecovered,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2588,7 +2549,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditAddedWebhookEventType.CreditAdded,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2617,7 +2577,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ThresholdPercent = 0,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditBalanceLowWebhookEventType.CreditBalanceLow,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2654,7 +2613,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditDeductedWebhookEventType.CreditDeducted,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2691,7 +2649,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditExpiredWebhookEventType.CreditExpired,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2728,7 +2685,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditManualAdjustmentWebhookEventType.CreditManualAdjustment,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2765,7 +2721,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditOverageChargedWebhookEventType.CreditOverageCharged,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2802,7 +2757,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditOverageResetWebhookEventType.CreditOverageReset,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2839,7 +2793,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditRolledOverWebhookEventType.CreditRolledOver,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2876,7 +2829,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2907,7 +2859,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeAcceptedWebhookEventType.DisputeAccepted,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2938,7 +2889,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeCancelledWebhookEventType.DisputeCancelled,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -2969,7 +2919,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeChallengedWebhookEventType.DisputeChallenged,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3000,7 +2949,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeExpiredWebhookEventType.DisputeExpired,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3031,7 +2979,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeLostWebhookEventType.DisputeLost,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3062,7 +3009,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeOpenedWebhookEventType.DisputeOpened,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3093,7 +3039,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeWonWebhookEventType.DisputeWon,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3120,7 +3065,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DunningRecoveredWebhookEventType.DunningRecovered,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3147,7 +3091,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 PaymentID = "payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DunningStartedWebhookEventType.DunningStarted,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3209,7 +3152,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantCreatedWebhookEventType.EntitlementGrantCreated,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3271,7 +3213,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantDeliveredWebhookEventType.EntitlementGrantDelivered,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3333,7 +3274,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantFailedWebhookEventType.EntitlementGrantFailed,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3395,7 +3335,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = EntitlementGrantRevokedWebhookEventType.EntitlementGrantRevoked,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3429,7 +3368,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 SubscriptionID = "subscription_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = LicenseKeyCreatedWebhookEventType.LicenseKeyCreated,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3551,7 +3489,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentCancelledWebhookEventType.PaymentCancelled,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3673,7 +3610,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentFailedWebhookEventType.PaymentFailed,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3795,7 +3731,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentProcessingWebhookEventType.PaymentProcessing,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3917,7 +3852,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = PaymentSucceededWebhookEventType.PaymentSucceeded,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3956,7 +3890,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = RefundFailedWebhookEventType.RefundFailed,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -3995,7 +3928,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 Reason = "reason",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = RefundSucceededWebhookEventType.RefundSucceeded,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -4148,7 +4080,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionActiveWebhookEventType.SubscriptionActive,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -4301,7 +4232,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionCancelledWebhookEventType.SubscriptionCancelled,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -4454,7 +4384,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionExpiredWebhookEventType.SubscriptionExpired,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -4607,7 +4536,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionFailedWebhookEventType.SubscriptionFailed,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -4760,7 +4688,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionOnHoldWebhookEventType.SubscriptionOnHold,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -4913,7 +4840,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionPlanChangedWebhookEventType.SubscriptionPlanChanged,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -5066,7 +4992,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionRenewedWebhookEventType.SubscriptionRenewed,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
@@ -5219,7 +5144,6 @@ public class UnsafeUnwrapWebhookEventTest : TestBase
                 TaxID = "tax_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = SubscriptionUpdatedWebhookEventType.SubscriptionUpdated,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnsafeUnwrapWebhookEvent>(
