@@ -174,7 +174,7 @@ public record class ProductCreateParams : ParamsBase
     /// <para>deprecated: use entitlements instead. Ignored when a `license_key`
     /// entitlement is attached via the `entitlements` field.</para>
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the dedicated entitlements API to configure license-key delivery.")]
     public string? LicenseKeyActivationMessage
     {
         get
@@ -191,7 +191,7 @@ public record class ProductCreateParams : ParamsBase
     /// <para>deprecated: use entitlements instead. Ignored when a `license_key`
     /// entitlement is attached via the `entitlements` field.</para>
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the dedicated entitlements API to configure license-key delivery.")]
     public int? LicenseKeyActivationsLimit
     {
         get
@@ -228,7 +228,7 @@ public record class ProductCreateParams : ParamsBase
     /// fields below are ignored — the attached entitlement's config is the source
     /// of truth.</para>
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the dedicated entitlements API to configure license-key delivery.")]
     public bool? LicenseKeyEnabled
     {
         get

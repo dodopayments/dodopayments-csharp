@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -6,7 +7,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -95,7 +95,7 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
     /// <summary>
     /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
     /// </summary>
-    [System::Obsolete("deprecated")]
+    [Obsolete("Use `discount_id` instead.")]
     public string? DiscountCode
     {
         get
@@ -265,7 +265,7 @@ sealed class UpdateSubscriptionPlanReqProrationBillingModeConverter
 {
     public override UpdateSubscriptionPlanReqProrationBillingMode Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -322,7 +322,7 @@ sealed class UpdateSubscriptionPlanReqEffectiveAtConverter
 {
     public override UpdateSubscriptionPlanReqEffectiveAt Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -374,7 +374,7 @@ sealed class UpdateSubscriptionPlanReqOnPaymentFailureConverter
 {
     public override UpdateSubscriptionPlanReqOnPaymentFailure Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,7 +6,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -43,12 +43,12 @@ public sealed record class DunningRecoveredWebhookEvent : JsonModel
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTimeOffset Timestamp
+    public required DateTimeOffset Timestamp
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp");
         }
         init { this._rawData.Set("timestamp", value); }
     }
@@ -56,14 +56,12 @@ public sealed record class DunningRecoveredWebhookEvent : JsonModel
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, DunningRecoveredWebhookEventType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, DunningRecoveredWebhookEventType>>(
-                "type"
-            );
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -74,10 +72,21 @@ public sealed record class DunningRecoveredWebhookEvent : JsonModel
         _ = this.BusinessID;
         this.Data.Validate();
         _ = this.Timestamp;
-        this.Type.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.Type,
+                JsonSerializer.SerializeToElement("dunning.recovered")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public DunningRecoveredWebhookEvent() { }
+    public DunningRecoveredWebhookEvent()
+    {
+        this.Type = JsonSerializer.SerializeToElement("dunning.recovered");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -88,6 +97,8 @@ public sealed record class DunningRecoveredWebhookEvent : JsonModel
     public DunningRecoveredWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("dunning.recovered");
     }
 
 #pragma warning disable CS8618
@@ -126,12 +137,12 @@ class DunningRecoveredWebhookEventFromRaw : IFromRawJson<DunningRecoveredWebhook
 )]
 public sealed record class DunningRecoveredWebhookEventData : JsonModel
 {
-    public required System::DateTimeOffset CreatedAt
+    public required DateTimeOffset CreatedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("created_at");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
         }
         init { this._rawData.Set("created_at", value); }
     }
@@ -252,7 +263,7 @@ sealed class DunningRecoveredWebhookEventDataStatusConverter
 {
     public override DunningRecoveredWebhookEventDataStatus Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -298,7 +309,7 @@ sealed class TriggerStateConverter : JsonConverter<TriggerState>
 {
     public override TriggerState Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -322,51 +333,6 @@ sealed class TriggerStateConverter : JsonConverter<TriggerState>
             {
                 TriggerState.OnHold => "on_hold",
                 TriggerState.Cancelled => "cancelled",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-/// <summary>
-/// The event type
-/// </summary>
-[JsonConverter(typeof(DunningRecoveredWebhookEventTypeConverter))]
-public enum DunningRecoveredWebhookEventType
-{
-    DunningRecovered,
-}
-
-sealed class DunningRecoveredWebhookEventTypeConverter
-    : JsonConverter<DunningRecoveredWebhookEventType>
-{
-    public override DunningRecoveredWebhookEventType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "dunning.recovered" => DunningRecoveredWebhookEventType.DunningRecovered,
-            _ => (DunningRecoveredWebhookEventType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        DunningRecoveredWebhookEventType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                DunningRecoveredWebhookEventType.DunningRecovered => "dunning.recovered",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

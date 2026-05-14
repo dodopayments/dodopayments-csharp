@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,6 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Refunds;
-using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -41,12 +41,12 @@ public sealed record class RefundSucceededWebhookEvent : JsonModel
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTimeOffset Timestamp
+    public required DateTimeOffset Timestamp
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp");
         }
         init { this._rawData.Set("timestamp", value); }
     }
@@ -54,14 +54,12 @@ public sealed record class RefundSucceededWebhookEvent : JsonModel
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, RefundSucceededWebhookEventType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, RefundSucceededWebhookEventType>>(
-                "type"
-            );
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -72,10 +70,21 @@ public sealed record class RefundSucceededWebhookEvent : JsonModel
         _ = this.BusinessID;
         this.Data.Validate();
         _ = this.Timestamp;
-        this.Type.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.Type,
+                JsonSerializer.SerializeToElement("refund.succeeded")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public RefundSucceededWebhookEvent() { }
+    public RefundSucceededWebhookEvent()
+    {
+        this.Type = JsonSerializer.SerializeToElement("refund.succeeded");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -86,6 +95,8 @@ public sealed record class RefundSucceededWebhookEvent : JsonModel
     public RefundSucceededWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("refund.succeeded");
     }
 
 #pragma warning disable CS8618
@@ -111,49 +122,4 @@ class RefundSucceededWebhookEventFromRaw : IFromRawJson<RefundSucceededWebhookEv
     public RefundSucceededWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => RefundSucceededWebhookEvent.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// The event type
-/// </summary>
-[JsonConverter(typeof(RefundSucceededWebhookEventTypeConverter))]
-public enum RefundSucceededWebhookEventType
-{
-    RefundSucceeded,
-}
-
-sealed class RefundSucceededWebhookEventTypeConverter
-    : JsonConverter<RefundSucceededWebhookEventType>
-{
-    public override RefundSucceededWebhookEventType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "refund.succeeded" => RefundSucceededWebhookEventType.RefundSucceeded,
-            _ => (RefundSucceededWebhookEventType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        RefundSucceededWebhookEventType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                RefundSucceededWebhookEventType.RefundSucceeded => "refund.succeeded",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }

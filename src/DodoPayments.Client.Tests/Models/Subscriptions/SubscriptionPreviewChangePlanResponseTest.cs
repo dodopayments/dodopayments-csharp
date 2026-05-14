@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
@@ -30,7 +29,6 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                         ProrationFactor = 0,
                         Quantity = 0,
                         TaxInclusive = true,
-                        Type = LineItemSubscriptionType.Subscription,
                         UnitPrice = 0,
                         Description = "description",
                         Name = "name",
@@ -199,7 +197,6 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -376,7 +373,6 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                         ProrationFactor = 0,
                         Quantity = 0,
                         TaxInclusive = true,
-                        Type = LineItemSubscriptionType.Subscription,
                         UnitPrice = 0,
                         Description = "description",
                         Name = "name",
@@ -559,7 +555,6 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                         ProrationFactor = 0,
                         Quantity = 0,
                         TaxInclusive = true,
-                        Type = LineItemSubscriptionType.Subscription,
                         UnitPrice = 0,
                         Description = "description",
                         Name = "name",
@@ -735,7 +730,6 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -912,7 +906,6 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                         ProrationFactor = 0,
                         Quantity = 0,
                         TaxInclusive = true,
-                        Type = LineItemSubscriptionType.Subscription,
                         UnitPrice = 0,
                         Description = "description",
                         Name = "name",
@@ -1089,7 +1082,6 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                         ProrationFactor = 0,
                         Quantity = 0,
                         TaxInclusive = true,
-                        Type = LineItemSubscriptionType.Subscription,
                         UnitPrice = 0,
                         Description = "description",
                         Name = "name",
@@ -1269,7 +1261,6 @@ public class ImmediateChargeTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -1300,7 +1291,6 @@ public class ImmediateChargeTest : TestBase
                 ProrationFactor = 0,
                 Quantity = 0,
                 TaxInclusive = true,
-                Type = LineItemSubscriptionType.Subscription,
                 UnitPrice = 0,
                 Description = "description",
                 Name = "name",
@@ -1344,7 +1334,6 @@ public class ImmediateChargeTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -1389,7 +1378,6 @@ public class ImmediateChargeTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -1427,7 +1415,6 @@ public class ImmediateChargeTest : TestBase
                 ProrationFactor = 0,
                 Quantity = 0,
                 TaxInclusive = true,
-                Type = LineItemSubscriptionType.Subscription,
                 UnitPrice = 0,
                 Description = "description",
                 Name = "name",
@@ -1471,7 +1458,6 @@ public class ImmediateChargeTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -1510,7 +1496,6 @@ public class ImmediateChargeTest : TestBase
                     ProrationFactor = 0,
                     Quantity = 0,
                     TaxInclusive = true,
-                    Type = LineItemSubscriptionType.Subscription,
                     UnitPrice = 0,
                     Description = "description",
                     Name = "name",
@@ -1549,7 +1534,6 @@ public class LineItemTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -1572,7 +1556,6 @@ public class LineItemTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -1594,7 +1577,6 @@ public class LineItemTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -1613,7 +1595,6 @@ public class LineItemTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -1642,7 +1623,6 @@ public class LineItemTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -1670,7 +1650,6 @@ public class LineItemTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -1698,7 +1677,6 @@ public class LineItemSubscriptionTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -1712,8 +1690,7 @@ public class LineItemSubscriptionTest : TestBase
         double expectedProrationFactor = 0;
         int expectedQuantity = 0;
         bool expectedTaxInclusive = true;
-        ApiEnum<string, LineItemSubscriptionType> expectedType =
-            LineItemSubscriptionType.Subscription;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("subscription");
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
         string expectedName = "name";
@@ -1726,7 +1703,7 @@ public class LineItemSubscriptionTest : TestBase
         Assert.Equal(expectedProrationFactor, model.ProrationFactor);
         Assert.Equal(expectedQuantity, model.Quantity);
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedUnitPrice, model.UnitPrice);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedName, model.Name);
@@ -1745,7 +1722,6 @@ public class LineItemSubscriptionTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -1773,7 +1749,6 @@ public class LineItemSubscriptionTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -1794,8 +1769,7 @@ public class LineItemSubscriptionTest : TestBase
         double expectedProrationFactor = 0;
         int expectedQuantity = 0;
         bool expectedTaxInclusive = true;
-        ApiEnum<string, LineItemSubscriptionType> expectedType =
-            LineItemSubscriptionType.Subscription;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("subscription");
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
         string expectedName = "name";
@@ -1808,7 +1782,7 @@ public class LineItemSubscriptionTest : TestBase
         Assert.Equal(expectedProrationFactor, deserialized.ProrationFactor);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedUnitPrice, deserialized.UnitPrice);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedName, deserialized.Name);
@@ -1827,7 +1801,6 @@ public class LineItemSubscriptionTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -1849,7 +1822,6 @@ public class LineItemSubscriptionTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
         };
 
@@ -1874,7 +1846,6 @@ public class LineItemSubscriptionTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
         };
 
@@ -1892,7 +1863,6 @@ public class LineItemSubscriptionTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
 
             Description = null,
@@ -1922,7 +1892,6 @@ public class LineItemSubscriptionTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
 
             Description = null,
@@ -1945,7 +1914,6 @@ public class LineItemSubscriptionTest : TestBase
             ProrationFactor = 0,
             Quantity = 0,
             TaxInclusive = true,
-            Type = LineItemSubscriptionType.Subscription,
             UnitPrice = 0,
             Description = "description",
             Name = "name",
@@ -1956,62 +1924,6 @@ public class LineItemSubscriptionTest : TestBase
         LineItemSubscription copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class LineItemSubscriptionTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(LineItemSubscriptionType.Subscription)]
-    public void Validation_Works(LineItemSubscriptionType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, LineItemSubscriptionType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemSubscriptionType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(LineItemSubscriptionType.Subscription)]
-    public void SerializationRoundtrip_Works(LineItemSubscriptionType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, LineItemSubscriptionType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemSubscriptionType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemSubscriptionType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemSubscriptionType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -2030,7 +1942,6 @@ public class LineItemAddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -2044,7 +1955,7 @@ public class LineItemAddonTest : TestBase
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         bool expectedTaxInclusive = true;
         double expectedTaxRate = 0;
-        ApiEnum<string, LineItemAddonType> expectedType = LineItemAddonType.Addon;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("addon");
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -2057,7 +1968,7 @@ public class LineItemAddonTest : TestBase
         Assert.Equal(expectedTaxCategory, model.TaxCategory);
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
         Assert.Equal(expectedTaxRate, model.TaxRate);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedUnitPrice, model.UnitPrice);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedTax, model.Tax);
@@ -2076,7 +1987,6 @@ public class LineItemAddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -2104,7 +2014,6 @@ public class LineItemAddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -2125,7 +2034,7 @@ public class LineItemAddonTest : TestBase
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         bool expectedTaxInclusive = true;
         double expectedTaxRate = 0;
-        ApiEnum<string, LineItemAddonType> expectedType = LineItemAddonType.Addon;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("addon");
         int expectedUnitPrice = 0;
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -2138,7 +2047,7 @@ public class LineItemAddonTest : TestBase
         Assert.Equal(expectedTaxCategory, deserialized.TaxCategory);
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
         Assert.Equal(expectedTaxRate, deserialized.TaxRate);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedUnitPrice, deserialized.UnitPrice);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedTax, deserialized.Tax);
@@ -2157,7 +2066,6 @@ public class LineItemAddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -2179,7 +2087,6 @@ public class LineItemAddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
         };
 
@@ -2202,7 +2109,6 @@ public class LineItemAddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
         };
 
@@ -2222,7 +2128,6 @@ public class LineItemAddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
 
             Description = null,
@@ -2248,7 +2153,6 @@ public class LineItemAddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
 
             Description = null,
@@ -2271,7 +2175,6 @@ public class LineItemAddonTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = LineItemAddonType.Addon,
             UnitPrice = 0,
             Description = "description",
             Tax = 0,
@@ -2280,62 +2183,6 @@ public class LineItemAddonTest : TestBase
         LineItemAddon copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class LineItemAddonTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(LineItemAddonType.Addon)]
-    public void Validation_Works(LineItemAddonType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, LineItemAddonType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemAddonType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(LineItemAddonType.Addon)]
-    public void SerializationRoundtrip_Works(LineItemAddonType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, LineItemAddonType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemAddonType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, LineItemAddonType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LineItemAddonType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -2355,7 +2202,6 @@ public class MeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -2370,7 +2216,7 @@ public class MeterTest : TestBase
         int expectedSubtotal = 0;
         bool expectedTaxInclusive = true;
         double expectedTaxRate = 0;
-        ApiEnum<string, MeterType> expectedType = MeterType.Meter;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("meter");
         string expectedUnitsConsumed = "units_consumed";
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -2384,7 +2230,7 @@ public class MeterTest : TestBase
         Assert.Equal(expectedSubtotal, model.Subtotal);
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
         Assert.Equal(expectedTaxRate, model.TaxRate);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedUnitsConsumed, model.UnitsConsumed);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedTax, model.Tax);
@@ -2404,7 +2250,6 @@ public class MeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -2430,7 +2275,6 @@ public class MeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -2449,7 +2293,7 @@ public class MeterTest : TestBase
         int expectedSubtotal = 0;
         bool expectedTaxInclusive = true;
         double expectedTaxRate = 0;
-        ApiEnum<string, MeterType> expectedType = MeterType.Meter;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("meter");
         string expectedUnitsConsumed = "units_consumed";
         string expectedDescription = "description";
         int expectedTax = 0;
@@ -2463,7 +2307,7 @@ public class MeterTest : TestBase
         Assert.Equal(expectedSubtotal, deserialized.Subtotal);
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
         Assert.Equal(expectedTaxRate, deserialized.TaxRate);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedUnitsConsumed, deserialized.UnitsConsumed);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedTax, deserialized.Tax);
@@ -2483,7 +2327,6 @@ public class MeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -2506,7 +2349,6 @@ public class MeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
         };
 
@@ -2530,7 +2372,6 @@ public class MeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
         };
 
@@ -2551,7 +2392,6 @@ public class MeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
 
             Description = null,
@@ -2578,7 +2418,6 @@ public class MeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
 
             Description = null,
@@ -2602,7 +2441,6 @@ public class MeterTest : TestBase
             Subtotal = 0,
             TaxInclusive = true,
             TaxRate = 0,
-            Type = MeterType.Meter,
             UnitsConsumed = "units_consumed",
             Description = "description",
             Tax = 0,
@@ -2611,62 +2449,6 @@ public class MeterTest : TestBase
         Meter copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class MeterTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(MeterType.Meter)]
-    public void Validation_Works(MeterType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, MeterType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, MeterType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(MeterType.Meter)]
-    public void SerializationRoundtrip_Works(MeterType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, MeterType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, MeterType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, MeterType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, MeterType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
 

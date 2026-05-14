@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -8,7 +9,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -104,7 +104,7 @@ public record class SubscriptionChangePlanParams : ParamsBase
     /// <summary>
     /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
     /// </summary>
-    [System::Obsolete("deprecated")]
+    [Obsolete("Use `discount_id` instead.")]
     public string? DiscountCode
     {
         get
@@ -285,9 +285,9 @@ public record class SubscriptionChangePlanParams : ParamsBase
             && this._rawBodyData.Equals(other._rawBodyData);
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(
+        return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/subscriptions/{0}/change-plan", this.SubscriptionID)
         )
@@ -336,7 +336,7 @@ sealed class ProrationBillingModeConverter : JsonConverter<ProrationBillingMode>
 {
     public override ProrationBillingMode Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -388,7 +388,7 @@ sealed class EffectiveAtConverter : JsonConverter<EffectiveAt>
 {
     public override EffectiveAt Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -439,7 +439,7 @@ sealed class OnPaymentFailureConverter : JsonConverter<OnPaymentFailure>
 {
     public override OnPaymentFailure Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

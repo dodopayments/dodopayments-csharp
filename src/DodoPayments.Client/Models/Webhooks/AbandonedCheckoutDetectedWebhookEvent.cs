@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,7 +6,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -46,12 +46,12 @@ public sealed record class AbandonedCheckoutDetectedWebhookEvent : JsonModel
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTimeOffset Timestamp
+    public required DateTimeOffset Timestamp
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp");
         }
         init { this._rawData.Set("timestamp", value); }
     }
@@ -59,14 +59,12 @@ public sealed record class AbandonedCheckoutDetectedWebhookEvent : JsonModel
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, global::DodoPayments.Client.Models.Webhooks.Type> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, global::DodoPayments.Client.Models.Webhooks.Type>
-            >("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -77,10 +75,21 @@ public sealed record class AbandonedCheckoutDetectedWebhookEvent : JsonModel
         _ = this.BusinessID;
         this.Data.Validate();
         _ = this.Timestamp;
-        this.Type.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.Type,
+                JsonSerializer.SerializeToElement("abandoned_checkout.detected")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public AbandonedCheckoutDetectedWebhookEvent() { }
+    public AbandonedCheckoutDetectedWebhookEvent()
+    {
+        this.Type = JsonSerializer.SerializeToElement("abandoned_checkout.detected");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -93,6 +102,8 @@ public sealed record class AbandonedCheckoutDetectedWebhookEvent : JsonModel
     public AbandonedCheckoutDetectedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("abandoned_checkout.detected");
     }
 
 #pragma warning disable CS8618
@@ -127,12 +138,12 @@ class AbandonedCheckoutDetectedWebhookEventFromRaw
 [JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
 public sealed record class Data : JsonModel
 {
-    public required System::DateTimeOffset AbandonedAt
+    public required DateTimeOffset AbandonedAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("abandoned_at");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("abandoned_at");
         }
         init { this._rawData.Set("abandoned_at", value); }
     }
@@ -246,7 +257,7 @@ sealed class AbandonmentReasonConverter : JsonConverter<AbandonmentReason>
 {
     public override AbandonmentReason Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -293,7 +304,7 @@ sealed class StatusConverter : JsonConverter<Status>
 {
     public override Status Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -319,56 +330,6 @@ sealed class StatusConverter : JsonConverter<Status>
                 Status.Recovered => "recovered",
                 Status.Exhausted => "exhausted",
                 Status.OptedOut => "opted_out",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-/// <summary>
-/// The event type
-/// </summary>
-[JsonConverter(typeof(TypeConverter))]
-public enum Type
-{
-    AbandonedCheckoutDetected,
-}
-
-sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.Webhooks.Type>
-{
-    public override global::DodoPayments.Client.Models.Webhooks.Type Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "abandoned_checkout.detected" => global::DodoPayments
-                .Client
-                .Models
-                .Webhooks
-                .Type
-                .AbandonedCheckoutDetected,
-            _ => (global::DodoPayments.Client.Models.Webhooks.Type)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        global::DodoPayments.Client.Models.Webhooks.Type value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                global::DodoPayments.Client.Models.Webhooks.Type.AbandonedCheckoutDetected =>
-                    "abandoned_checkout.detected",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

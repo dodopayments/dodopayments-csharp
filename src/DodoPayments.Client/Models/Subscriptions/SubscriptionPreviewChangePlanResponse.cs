@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -7,7 +8,6 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
-using System = System;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -96,12 +96,12 @@ public sealed record class ImmediateCharge : JsonModel
     /// <summary>
     /// When the plan change will be effective
     /// </summary>
-    public required System::DateTimeOffset EffectiveAt
+    public required DateTimeOffset EffectiveAt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("effective_at");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("effective_at");
         }
         init { this._rawData.Set("effective_at", value); }
     }
@@ -246,6 +246,14 @@ public record class LineItem : ModelBase
                 addon: (x) => x.TaxInclusive,
                 meter: (x) => x.TaxInclusive
             );
+        }
+    }
+
+    public JsonElement Type
+    {
+        get
+        {
+            return Match(subscription: (x) => x.Type, addon: (x) => x.Type, meter: (x) => x.Type);
         }
     }
 
@@ -417,9 +425,9 @@ public record class LineItem : ModelBase
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<LineItemSubscription> subscription,
-        System::Action<LineItemAddon> addon,
-        System::Action<Meter> meter
+        Action<LineItemSubscription> subscription,
+        Action<LineItemAddon> addon,
+        Action<Meter> meter
     )
     {
         switch (this.Value)
@@ -463,9 +471,9 @@ public record class LineItem : ModelBase
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<LineItemSubscription, T> subscription,
-        System::Func<LineItemAddon, T> addon,
-        System::Func<Meter, T> meter
+        Func<LineItemSubscription, T> subscription,
+        Func<LineItemAddon, T> addon,
+        Func<Meter, T> meter
     )
     {
         return this.Value switch
@@ -542,57 +550,82 @@ sealed class LineItemConverter : JsonConverter<LineItem>
 {
     public override LineItem? Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
         try
         {
-            var deserialized = JsonSerializer.Deserialize<LineItemSubscription>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            type = element.GetProperty("type").GetString();
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            type = null;
         }
 
-        try
+        switch (type)
         {
-            var deserialized = JsonSerializer.Deserialize<LineItemAddon>(element, options);
-            if (deserialized != null)
+            case "subscription":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<LineItemSubscription>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "addon":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<LineItemAddon>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "meter":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Meter>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new LineItem(element);
             }
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<Meter>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(Utf8JsonWriter writer, LineItem value, JsonSerializerOptions options)
@@ -664,12 +697,12 @@ public sealed record class LineItemSubscription : JsonModel
         init { this._rawData.Set("tax_inclusive", value); }
     }
 
-    public required ApiEnum<string, LineItemSubscriptionType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, LineItemSubscriptionType>>("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -733,7 +766,10 @@ public sealed record class LineItemSubscription : JsonModel
         _ = this.ProrationFactor;
         _ = this.Quantity;
         _ = this.TaxInclusive;
-        this.Type.Validate();
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("subscription")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
         _ = this.UnitPrice;
         _ = this.Description;
         _ = this.Name;
@@ -741,7 +777,10 @@ public sealed record class LineItemSubscription : JsonModel
         _ = this.TaxRate;
     }
 
-    public LineItemSubscription() { }
+    public LineItemSubscription()
+    {
+        this.Type = JsonSerializer.SerializeToElement("subscription");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -752,6 +791,8 @@ public sealed record class LineItemSubscription : JsonModel
     public LineItemSubscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("subscription");
     }
 
 #pragma warning disable CS8618
@@ -777,47 +818,6 @@ class LineItemSubscriptionFromRaw : IFromRawJson<LineItemSubscription>
     public LineItemSubscription FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => LineItemSubscription.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(LineItemSubscriptionTypeConverter))]
-public enum LineItemSubscriptionType
-{
-    Subscription,
-}
-
-sealed class LineItemSubscriptionTypeConverter : JsonConverter<LineItemSubscriptionType>
-{
-    public override LineItemSubscriptionType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "subscription" => LineItemSubscriptionType.Subscription,
-            _ => (LineItemSubscriptionType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        LineItemSubscriptionType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                LineItemSubscriptionType.Subscription => "subscription",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<LineItemAddon, LineItemAddonFromRaw>))]
@@ -907,12 +907,12 @@ public sealed record class LineItemAddon : JsonModel
         init { this._rawData.Set("tax_rate", value); }
     }
 
-    public required ApiEnum<string, LineItemAddonType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, LineItemAddonType>>("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -958,13 +958,19 @@ public sealed record class LineItemAddon : JsonModel
         this.TaxCategory.Validate();
         _ = this.TaxInclusive;
         _ = this.TaxRate;
-        this.Type.Validate();
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("addon")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
         _ = this.UnitPrice;
         _ = this.Description;
         _ = this.Tax;
     }
 
-    public LineItemAddon() { }
+    public LineItemAddon()
+    {
+        this.Type = JsonSerializer.SerializeToElement("addon");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -975,6 +981,8 @@ public sealed record class LineItemAddon : JsonModel
     public LineItemAddon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("addon");
     }
 
 #pragma warning disable CS8618
@@ -997,47 +1005,6 @@ class LineItemAddonFromRaw : IFromRawJson<LineItemAddon>
     /// <inheritdoc/>
     public LineItemAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         LineItemAddon.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(LineItemAddonTypeConverter))]
-public enum LineItemAddonType
-{
-    Addon,
-}
-
-sealed class LineItemAddonTypeConverter : JsonConverter<LineItemAddonType>
-{
-    public override LineItemAddonType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "addon" => LineItemAddonType.Addon,
-            _ => (LineItemAddonType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        LineItemAddonType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                LineItemAddonType.Addon => "addon",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<Meter, MeterFromRaw>))]
@@ -1133,12 +1100,12 @@ public sealed record class Meter : JsonModel
         init { this._rawData.Set("tax_rate", value); }
     }
 
-    public required ApiEnum<string, MeterType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, MeterType>>("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -1185,13 +1152,19 @@ public sealed record class Meter : JsonModel
         _ = this.Subtotal;
         _ = this.TaxInclusive;
         _ = this.TaxRate;
-        this.Type.Validate();
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("meter")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
         _ = this.UnitsConsumed;
         _ = this.Description;
         _ = this.Tax;
     }
 
-    public Meter() { }
+    public Meter()
+    {
+        this.Type = JsonSerializer.SerializeToElement("meter");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -1202,6 +1175,8 @@ public sealed record class Meter : JsonModel
     public Meter(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("meter");
     }
 
 #pragma warning disable CS8618
@@ -1224,47 +1199,6 @@ class MeterFromRaw : IFromRawJson<Meter>
     /// <inheritdoc/>
     public Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Meter.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(MeterTypeConverter))]
-public enum MeterType
-{
-    Meter,
-}
-
-sealed class MeterTypeConverter : JsonConverter<MeterType>
-{
-    public override MeterType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "meter" => MeterType.Meter,
-            _ => (MeterType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        MeterType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                MeterType.Meter => "meter",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<Summary, SummaryFromRaw>))]

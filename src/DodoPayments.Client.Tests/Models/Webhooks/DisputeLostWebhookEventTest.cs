@@ -1,7 +1,6 @@
 using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Webhooks;
 
@@ -29,7 +28,6 @@ public class DisputeLostWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeLostWebhookEventType.DisputeLost,
         };
 
         string expectedBusinessID = "business_id";
@@ -47,13 +45,12 @@ public class DisputeLostWebhookEventTest : TestBase
             Remarks = "remarks",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, DisputeLostWebhookEventType> expectedType =
-            DisputeLostWebhookEventType.DisputeLost;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("dispute.lost");
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
         Assert.Equal(expectedTimestamp, model.Timestamp);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
     }
 
     [Fact]
@@ -76,7 +73,6 @@ public class DisputeLostWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeLostWebhookEventType.DisputeLost,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -108,7 +104,6 @@ public class DisputeLostWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeLostWebhookEventType.DisputeLost,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -133,13 +128,12 @@ public class DisputeLostWebhookEventTest : TestBase
             Remarks = "remarks",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, DisputeLostWebhookEventType> expectedType =
-            DisputeLostWebhookEventType.DisputeLost;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("dispute.lost");
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
     }
 
     [Fact]
@@ -162,7 +156,6 @@ public class DisputeLostWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeLostWebhookEventType.DisputeLost,
         };
 
         model.Validate();
@@ -188,67 +181,10 @@ public class DisputeLostWebhookEventTest : TestBase
                 Remarks = "remarks",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = DisputeLostWebhookEventType.DisputeLost,
         };
 
         DisputeLostWebhookEvent copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class DisputeLostWebhookEventTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(DisputeLostWebhookEventType.DisputeLost)]
-    public void Validation_Works(DisputeLostWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DisputeLostWebhookEventType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DisputeLostWebhookEventType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(DisputeLostWebhookEventType.DisputeLost)]
-    public void SerializationRoundtrip_Works(DisputeLostWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DisputeLostWebhookEventType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DisputeLostWebhookEventType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DisputeLostWebhookEventType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DisputeLostWebhookEventType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }

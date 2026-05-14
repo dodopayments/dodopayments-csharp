@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using Products = DodoPayments.Client.Models.Products;
+using DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Models.Entitlements.Grants;
 
@@ -144,12 +144,12 @@ public sealed record class EntitlementGrant : JsonModel
     /// Digital-product-delivery payload, present when the entitlement integration
     /// is `digital_files`.
     /// </summary>
-    public Products::ProductDigitalProductDelivery? DigitalProductDelivery
+    public ProductDigitalProductDelivery? DigitalProductDelivery
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Products::ProductDigitalProductDelivery>(
+            return this._rawData.GetNullableClass<ProductDigitalProductDelivery>(
                 "digital_product_delivery"
             );
         }

@@ -2,7 +2,7 @@ using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using Webhooks = DodoPayments.Client.Models.Webhooks;
+using DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
 
@@ -11,66 +11,63 @@ public class AbandonedCheckoutDetectedWebhookEventTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Webhooks::AbandonedCheckoutDetectedWebhookEvent
+        var model = new AbandonedCheckoutDetectedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+                AbandonmentReason = AbandonmentReason.PaymentFailed,
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
-                Status = Webhooks::Status.Abandoned,
+                Status = Status.Abandoned,
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.AbandonedCheckoutDetected,
         };
 
         string expectedBusinessID = "business_id";
-        Webhooks::Data expectedData = new()
+        Data expectedData = new()
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Webhooks::Type> expectedType = Webhooks::Type.AbandonedCheckoutDetected;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("abandoned_checkout.detected");
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
         Assert.Equal(expectedTimestamp, model.Timestamp);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Webhooks::AbandonedCheckoutDetectedWebhookEvent
+        var model = new AbandonedCheckoutDetectedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+                AbandonmentReason = AbandonmentReason.PaymentFailed,
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
-                Status = Webhooks::Status.Abandoned,
+                Status = Status.Abandoned,
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.AbandonedCheckoutDetected,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<Webhooks::AbandonedCheckoutDetectedWebhookEvent>(
-                json,
-                ModelBase.SerializerOptions
-            );
+        var deserialized = JsonSerializer.Deserialize<AbandonedCheckoutDetectedWebhookEvent>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -78,66 +75,63 @@ public class AbandonedCheckoutDetectedWebhookEventTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Webhooks::AbandonedCheckoutDetectedWebhookEvent
+        var model = new AbandonedCheckoutDetectedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+                AbandonmentReason = AbandonmentReason.PaymentFailed,
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
-                Status = Webhooks::Status.Abandoned,
+                Status = Status.Abandoned,
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.AbandonedCheckoutDetected,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<Webhooks::AbandonedCheckoutDetectedWebhookEvent>(
-                element,
-                ModelBase.SerializerOptions
-            );
+        var deserialized = JsonSerializer.Deserialize<AbandonedCheckoutDetectedWebhookEvent>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedBusinessID = "business_id";
-        Webhooks::Data expectedData = new()
+        Data expectedData = new()
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Webhooks::Type> expectedType = Webhooks::Type.AbandonedCheckoutDetected;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("abandoned_checkout.detected");
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new Webhooks::AbandonedCheckoutDetectedWebhookEvent
+        var model = new AbandonedCheckoutDetectedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+                AbandonmentReason = AbandonmentReason.PaymentFailed,
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
-                Status = Webhooks::Status.Abandoned,
+                Status = Status.Abandoned,
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.AbandonedCheckoutDetected,
         };
 
         model.Validate();
@@ -146,23 +140,22 @@ public class AbandonedCheckoutDetectedWebhookEventTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Webhooks::AbandonedCheckoutDetectedWebhookEvent
+        var model = new AbandonedCheckoutDetectedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+                AbandonmentReason = AbandonmentReason.PaymentFailed,
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
-                Status = Webhooks::Status.Abandoned,
+                Status = Status.Abandoned,
                 RecoveredPaymentID = "recovered_payment_id",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = Webhooks::Type.AbandonedCheckoutDetected,
         };
 
-        Webhooks::AbandonedCheckoutDetectedWebhookEvent copied = new(model);
+        AbandonedCheckoutDetectedWebhookEvent copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -173,22 +166,22 @@ public class DataTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Webhooks::Data
+        var model = new Data
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
 
         DateTimeOffset expectedAbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Webhooks::AbandonmentReason> expectedAbandonmentReason =
-            Webhooks::AbandonmentReason.PaymentFailed;
+        ApiEnum<string, AbandonmentReason> expectedAbandonmentReason =
+            AbandonmentReason.PaymentFailed;
         string expectedCustomerID = "customer_id";
         string expectedPaymentID = "payment_id";
-        ApiEnum<string, Webhooks::Status> expectedStatus = Webhooks::Status.Abandoned;
+        ApiEnum<string, Status> expectedStatus = Status.Abandoned;
         string expectedRecoveredPaymentID = "recovered_payment_id";
 
         Assert.Equal(expectedAbandonedAt, model.AbandonedAt);
@@ -202,21 +195,18 @@ public class DataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Webhooks::Data
+        var model = new Data
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::Data>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Data>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -224,29 +214,26 @@ public class DataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Webhooks::Data
+        var model = new Data
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Webhooks::Data>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         DateTimeOffset expectedAbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Webhooks::AbandonmentReason> expectedAbandonmentReason =
-            Webhooks::AbandonmentReason.PaymentFailed;
+        ApiEnum<string, AbandonmentReason> expectedAbandonmentReason =
+            AbandonmentReason.PaymentFailed;
         string expectedCustomerID = "customer_id";
         string expectedPaymentID = "payment_id";
-        ApiEnum<string, Webhooks::Status> expectedStatus = Webhooks::Status.Abandoned;
+        ApiEnum<string, Status> expectedStatus = Status.Abandoned;
         string expectedRecoveredPaymentID = "recovered_payment_id";
 
         Assert.Equal(expectedAbandonedAt, deserialized.AbandonedAt);
@@ -260,13 +247,13 @@ public class DataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Webhooks::Data
+        var model = new Data
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
 
@@ -276,13 +263,13 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Webhooks::Data
+        var model = new Data
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
         };
 
         Assert.Null(model.RecoveredPaymentID);
@@ -292,13 +279,13 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Webhooks::Data
+        var model = new Data
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
         };
 
         model.Validate();
@@ -307,13 +294,13 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Webhooks::Data
+        var model = new Data
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
 
             RecoveredPaymentID = null,
         };
@@ -325,13 +312,13 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Webhooks::Data
+        var model = new Data
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
 
             RecoveredPaymentID = null,
         };
@@ -342,17 +329,17 @@ public class DataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Webhooks::Data
+        var model = new Data
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            AbandonmentReason = Webhooks::AbandonmentReason.PaymentFailed,
+            AbandonmentReason = AbandonmentReason.PaymentFailed,
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Webhooks::Status.Abandoned,
+            Status = Status.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
 
-        Webhooks::Data copied = new(model);
+        Data copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -361,19 +348,19 @@ public class DataTest : TestBase
 public class AbandonmentReasonTest : TestBase
 {
     [Theory]
-    [InlineData(Webhooks::AbandonmentReason.PaymentFailed)]
-    [InlineData(Webhooks::AbandonmentReason.CheckoutIncomplete)]
-    public void Validation_Works(Webhooks::AbandonmentReason rawValue)
+    [InlineData(AbandonmentReason.PaymentFailed)]
+    [InlineData(AbandonmentReason.CheckoutIncomplete)]
+    public void Validation_Works(AbandonmentReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Webhooks::AbandonmentReason> value = rawValue;
+        ApiEnum<string, AbandonmentReason> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::AbandonmentReason>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AbandonmentReason>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -383,15 +370,15 @@ public class AbandonmentReasonTest : TestBase
     }
 
     [Theory]
-    [InlineData(Webhooks::AbandonmentReason.PaymentFailed)]
-    [InlineData(Webhooks::AbandonmentReason.CheckoutIncomplete)]
-    public void SerializationRoundtrip_Works(Webhooks::AbandonmentReason rawValue)
+    [InlineData(AbandonmentReason.PaymentFailed)]
+    [InlineData(AbandonmentReason.CheckoutIncomplete)]
+    public void SerializationRoundtrip_Works(AbandonmentReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Webhooks::AbandonmentReason> value = rawValue;
+        ApiEnum<string, AbandonmentReason> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::AbandonmentReason>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AbandonmentReason>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -402,12 +389,12 @@ public class AbandonmentReasonTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::AbandonmentReason>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AbandonmentReason>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::AbandonmentReason>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AbandonmentReason>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -419,22 +406,22 @@ public class AbandonmentReasonTest : TestBase
 public class StatusTest : TestBase
 {
     [Theory]
-    [InlineData(Webhooks::Status.Abandoned)]
-    [InlineData(Webhooks::Status.Recovering)]
-    [InlineData(Webhooks::Status.Recovered)]
-    [InlineData(Webhooks::Status.Exhausted)]
-    [InlineData(Webhooks::Status.OptedOut)]
-    public void Validation_Works(Webhooks::Status rawValue)
+    [InlineData(Status.Abandoned)]
+    [InlineData(Status.Recovering)]
+    [InlineData(Status.Recovered)]
+    [InlineData(Status.Exhausted)]
+    [InlineData(Status.OptedOut)]
+    public void Validation_Works(Status rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Webhooks::Status> value = rawValue;
+        ApiEnum<string, Status> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -444,18 +431,18 @@ public class StatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(Webhooks::Status.Abandoned)]
-    [InlineData(Webhooks::Status.Recovering)]
-    [InlineData(Webhooks::Status.Recovered)]
-    [InlineData(Webhooks::Status.Exhausted)]
-    [InlineData(Webhooks::Status.OptedOut)]
-    public void SerializationRoundtrip_Works(Webhooks::Status rawValue)
+    [InlineData(Status.Abandoned)]
+    [InlineData(Status.Recovering)]
+    [InlineData(Status.Recovered)]
+    [InlineData(Status.Exhausted)]
+    [InlineData(Status.OptedOut)]
+    public void SerializationRoundtrip_Works(Status rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Webhooks::Status> value = rawValue;
+        ApiEnum<string, Status> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -466,68 +453,12 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Status>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class TypeTest : TestBase
-{
-    [Theory]
-    [InlineData(Webhooks::Type.AbandonedCheckoutDetected)]
-    public void Validation_Works(Webhooks::Type rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Webhooks::Type> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Type>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Webhooks::Type.AbandonedCheckoutDetected)]
-    public void SerializationRoundtrip_Works(Webhooks::Type rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Webhooks::Type> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Type>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Type>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Webhooks::Type>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
             json,
             ModelBase.SerializerOptions
         );

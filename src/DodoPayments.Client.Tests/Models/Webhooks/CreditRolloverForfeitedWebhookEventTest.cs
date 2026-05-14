@@ -1,7 +1,6 @@
 using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements.Balances;
 using DodoPayments.Client.Models.Webhooks;
 
@@ -35,7 +34,6 @@ public class CreditRolloverForfeitedWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited,
         };
 
         string expectedBusinessID = "business_id";
@@ -59,13 +57,12 @@ public class CreditRolloverForfeitedWebhookEventTest : TestBase
             ReferenceType = "reference_type",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, CreditRolloverForfeitedWebhookEventType> expectedType =
-            CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("credit.rollover_forfeited");
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
         Assert.Equal(expectedTimestamp, model.Timestamp);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
     }
 
     [Fact]
@@ -94,7 +91,6 @@ public class CreditRolloverForfeitedWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -132,7 +128,6 @@ public class CreditRolloverForfeitedWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -163,13 +158,12 @@ public class CreditRolloverForfeitedWebhookEventTest : TestBase
             ReferenceType = "reference_type",
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, CreditRolloverForfeitedWebhookEventType> expectedType =
-            CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("credit.rollover_forfeited");
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
     }
 
     [Fact]
@@ -198,7 +192,6 @@ public class CreditRolloverForfeitedWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited,
         };
 
         model.Validate();
@@ -230,63 +223,10 @@ public class CreditRolloverForfeitedWebhookEventTest : TestBase
                 ReferenceType = "reference_type",
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Type = CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited,
         };
 
         CreditRolloverForfeitedWebhookEvent copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class CreditRolloverForfeitedWebhookEventTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited)]
-    public void Validation_Works(CreditRolloverForfeitedWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CreditRolloverForfeitedWebhookEventType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CreditRolloverForfeitedWebhookEventType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(CreditRolloverForfeitedWebhookEventType.CreditRolloverForfeited)]
-    public void SerializationRoundtrip_Works(CreditRolloverForfeitedWebhookEventType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CreditRolloverForfeitedWebhookEventType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CreditRolloverForfeitedWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CreditRolloverForfeitedWebhookEventType>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CreditRolloverForfeitedWebhookEventType>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }

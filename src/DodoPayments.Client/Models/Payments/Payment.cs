@@ -325,7 +325,7 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// DEPRECATED: Use discounts instead. Returns the first discount's ID if present.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `discounts` instead.")]
     public string? DiscountID
     {
         get

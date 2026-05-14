@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -8,7 +9,6 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -77,6 +77,18 @@ public record class Price : ModelBase
                 oneTime: (x) => x.PurchasingPowerParity,
                 recurring: (x) => x.PurchasingPowerParity,
                 usageBased: (x) => x.PurchasingPowerParity
+            );
+        }
+    }
+
+    public JsonElement Type
+    {
+        get
+        {
+            return Match(
+                oneTime: (x) => x.Type,
+                recurring: (x) => x.Type,
+                usageBased: (x) => x.Type
             );
         }
     }
@@ -249,9 +261,9 @@ public record class Price : ModelBase
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<OneTimePrice> oneTime,
-        System::Action<RecurringPrice> recurring,
-        System::Action<UsageBasedPrice> usageBased
+        Action<OneTimePrice> oneTime,
+        Action<RecurringPrice> recurring,
+        Action<UsageBasedPrice> usageBased
     )
     {
         switch (this.Value)
@@ -295,9 +307,9 @@ public record class Price : ModelBase
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<OneTimePrice, T> oneTime,
-        System::Func<RecurringPrice, T> recurring,
-        System::Func<UsageBasedPrice, T> usageBased
+        Func<OneTimePrice, T> oneTime,
+        Func<RecurringPrice, T> recurring,
+        Func<UsageBasedPrice, T> usageBased
     )
     {
         return this.Value switch
@@ -372,57 +384,82 @@ sealed class PriceConverter : JsonConverter<Price>
 {
     public override Price? Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
         try
         {
-            var deserialized = JsonSerializer.Deserialize<OneTimePrice>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            type = element.GetProperty("type").GetString();
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            type = null;
         }
 
-        try
+        switch (type)
         {
-            var deserialized = JsonSerializer.Deserialize<RecurringPrice>(element, options);
-            if (deserialized != null)
+            case "one_time_price":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<OneTimePrice>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "recurring_price":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<RecurringPrice>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "usage_based_price":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<UsageBasedPrice>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new Price(element);
             }
         }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<UsageBasedPrice>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (System::Exception e)
-            when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(Utf8JsonWriter writer, Price value, JsonSerializerOptions options)
@@ -494,14 +531,12 @@ public sealed record class OneTimePrice : JsonModel
         init { this._rawData.Set("purchasing_power_parity", value); }
     }
 
-    public required ApiEnum<string, global::DodoPayments.Client.Models.Products.Type> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, global::DodoPayments.Client.Models.Products.Type>
-            >("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -562,13 +597,19 @@ public sealed record class OneTimePrice : JsonModel
         _ = this.Discount;
         _ = this.PriceValue;
         _ = this.PurchasingPowerParity;
-        this.Type.Validate();
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("one_time_price")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
         _ = this.PayWhatYouWant;
         _ = this.SuggestedPrice;
         _ = this.TaxInclusive;
     }
 
-    public OneTimePrice() { }
+    public OneTimePrice()
+    {
+        this.Type = JsonSerializer.SerializeToElement("one_time_price");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -579,6 +620,8 @@ public sealed record class OneTimePrice : JsonModel
     public OneTimePrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("one_time_price");
     }
 
 #pragma warning disable CS8618
@@ -601,47 +644,6 @@ class OneTimePriceFromRaw : IFromRawJson<OneTimePrice>
     /// <inheritdoc/>
     public OneTimePrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         OneTimePrice.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(global::DodoPayments.Client.Models.Products.TypeConverter))]
-public enum Type
-{
-    OneTimePrice,
-}
-
-sealed class TypeConverter : JsonConverter<global::DodoPayments.Client.Models.Products.Type>
-{
-    public override global::DodoPayments.Client.Models.Products.Type Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "one_time_price" => global::DodoPayments.Client.Models.Products.Type.OneTimePrice,
-            _ => (global::DodoPayments.Client.Models.Products.Type)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        global::DodoPayments.Client.Models.Products.Type value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                global::DodoPayments.Client.Models.Products.Type.OneTimePrice => "one_time_price",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 /// <summary>
@@ -762,12 +764,12 @@ public sealed record class RecurringPrice : JsonModel
         init { this._rawData.Set("subscription_period_interval", value); }
     }
 
-    public required ApiEnum<string, RecurringPriceType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, RecurringPriceType>>("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -817,12 +819,20 @@ public sealed record class RecurringPrice : JsonModel
         _ = this.PurchasingPowerParity;
         _ = this.SubscriptionPeriodCount;
         this.SubscriptionPeriodInterval.Validate();
-        this.Type.Validate();
+        if (
+            !JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("recurring_price"))
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
         _ = this.TaxInclusive;
         _ = this.TrialPeriodDays;
     }
 
-    public RecurringPrice() { }
+    public RecurringPrice()
+    {
+        this.Type = JsonSerializer.SerializeToElement("recurring_price");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -833,6 +843,8 @@ public sealed record class RecurringPrice : JsonModel
     public RecurringPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("recurring_price");
     }
 
 #pragma warning disable CS8618
@@ -855,47 +867,6 @@ class RecurringPriceFromRaw : IFromRawJson<RecurringPrice>
     /// <inheritdoc/>
     public RecurringPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         RecurringPrice.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(RecurringPriceTypeConverter))]
-public enum RecurringPriceType
-{
-    RecurringPrice,
-}
-
-sealed class RecurringPriceTypeConverter : JsonConverter<RecurringPriceType>
-{
-    public override RecurringPriceType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "recurring_price" => RecurringPriceType.RecurringPrice,
-            _ => (RecurringPriceType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        RecurringPriceType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                RecurringPriceType.RecurringPrice => "recurring_price",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 /// <summary>
@@ -1016,12 +987,12 @@ public sealed record class UsageBasedPrice : JsonModel
         init { this._rawData.Set("subscription_period_interval", value); }
     }
 
-    public required ApiEnum<string, UsageBasedPriceType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, UsageBasedPriceType>>("type");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -1066,7 +1037,15 @@ public sealed record class UsageBasedPrice : JsonModel
         _ = this.PurchasingPowerParity;
         _ = this.SubscriptionPeriodCount;
         this.SubscriptionPeriodInterval.Validate();
-        this.Type.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.Type,
+                JsonSerializer.SerializeToElement("usage_based_price")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
         foreach (var item in this.Meters ?? [])
         {
             item.Validate();
@@ -1074,7 +1053,10 @@ public sealed record class UsageBasedPrice : JsonModel
         _ = this.TaxInclusive;
     }
 
-    public UsageBasedPrice() { }
+    public UsageBasedPrice()
+    {
+        this.Type = JsonSerializer.SerializeToElement("usage_based_price");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -1085,6 +1067,8 @@ public sealed record class UsageBasedPrice : JsonModel
     public UsageBasedPrice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("usage_based_price");
     }
 
 #pragma warning disable CS8618
@@ -1107,45 +1091,4 @@ class UsageBasedPriceFromRaw : IFromRawJson<UsageBasedPrice>
     /// <inheritdoc/>
     public UsageBasedPrice FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         UsageBasedPrice.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(UsageBasedPriceTypeConverter))]
-public enum UsageBasedPriceType
-{
-    UsageBasedPrice,
-}
-
-sealed class UsageBasedPriceTypeConverter : JsonConverter<UsageBasedPriceType>
-{
-    public override UsageBasedPriceType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "usage_based_price" => UsageBasedPriceType.UsageBasedPrice,
-            _ => (UsageBasedPriceType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        UsageBasedPriceType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                UsageBasedPriceType.UsageBasedPrice => "usage_based_price",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }

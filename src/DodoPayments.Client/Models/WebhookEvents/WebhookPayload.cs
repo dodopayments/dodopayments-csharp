@@ -8,12 +8,12 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Products;
 using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Disputes = DodoPayments.Client.Models.Disputes;
 using Grants = DodoPayments.Client.Models.Entitlements.Grants;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Payments = DodoPayments.Client.Models.Payments;
-using Products = DodoPayments.Client.Models.Products;
 using Refunds = DodoPayments.Client.Models.Refunds;
 using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 
@@ -323,6 +323,25 @@ public record class Data : ModelBase
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
                 entitlementGrant: (x) => x.UpdatedAt
+            );
+        }
+    }
+
+    public JsonElement PayloadType
+    {
+        get
+        {
+            return Match(
+                payment: (x) => x.PayloadType,
+                subscription: (x) => x.PayloadType,
+                refund: (x) => x.PayloadType,
+                dispute: (x) => x.PayloadType,
+                licenseKey: (x) => x.PayloadType,
+                creditLedgerEntry: (x) => x.PayloadType,
+                creditBalanceLow: (x) => x.PayloadType,
+                abandonedCheckout: (x) => x.PayloadType,
+                dunningAttempt: (x) => x.PayloadType,
+                entitlementGrant: (x) => x.PayloadType
             );
         }
     }
@@ -950,147 +969,205 @@ sealed class DataConverter : JsonConverter<Data>
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? payloadType;
         try
         {
-            var deserialized = JsonSerializer.Deserialize<Payment>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
+            payloadType = element.GetProperty("payload_type").GetString();
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        catch
         {
-            // ignore
+            payloadType = null;
         }
 
-        try
+        switch (payloadType)
         {
-            var deserialized = JsonSerializer.Deserialize<Subscription>(element, options);
-            if (deserialized != null)
+            case "Payment":
             {
-                deserialized.Validate();
-                return new(deserialized, element);
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Payment>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "Subscription":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Subscription>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "Refund":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Refund>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "Dispute":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Dispute>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "LicenseKey":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<LicenseKey>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "CreditLedgerEntry":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<CreditLedgerEntry>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "CreditBalanceLow":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<CreditBalanceLow>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "AbandonedCheckout":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<AbandonedCheckout>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "DunningAttempt":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<DunningAttempt>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "EntitlementGrant":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<EntitlementGrant>(
+                        element,
+                        options
+                    );
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new Data(element);
             }
         }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<Refund>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<Dispute>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<LicenseKey>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditLedgerEntry>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<CreditBalanceLow>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<AbandonedCheckout>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<DunningAttempt>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        try
-        {
-            var deserialized = JsonSerializer.Deserialize<EntitlementGrant>(element, options);
-            if (deserialized != null)
-            {
-                deserialized.Validate();
-                return new(deserialized, element);
-            }
-        }
-        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
-        {
-            // ignore
-        }
-
-        return new(element);
     }
 
     public override void Write(Utf8JsonWriter writer, Data value, JsonSerializerOptions options)
@@ -1408,7 +1485,7 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// DEPRECATED: Use discounts instead. Returns the first discount's ID if present.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `discounts` instead.")]
     public string? DiscountID
     {
         get
@@ -1644,12 +1721,12 @@ public sealed record class Payment : JsonModel
         init { this._rawData.Set("updated_at", value); }
     }
 
-    public required ApiEnum<string, PayloadType> PayloadType
+    public JsonElement PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, PayloadType>>("payload_type");
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
         }
         init { this._rawData.Set("payload_type", value); }
     }
@@ -1751,10 +1828,16 @@ public sealed record class Payment : JsonModel
         _ = this.SubscriptionID;
         _ = this.Tax;
         _ = this.UpdatedAt;
-        this.PayloadType.Validate();
+        if (!JsonElement.DeepEquals(this.PayloadType, JsonSerializer.SerializeToElement("Payment")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public Payment() { }
+    public Payment()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("Payment");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -1765,6 +1848,8 @@ public sealed record class Payment : JsonModel
     public Payment(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("Payment");
     }
 
 #pragma warning disable CS8618
@@ -1787,110 +1872,6 @@ class PaymentFromRaw : IFromRawJson<Payment>
     /// <inheritdoc/>
     public Payment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Payment.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(JsonModelConverter<IntersectionMember1, IntersectionMember1FromRaw>))]
-public sealed record class IntersectionMember1 : JsonModel
-{
-    public required ApiEnum<string, PayloadType> PayloadType
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, PayloadType>>("payload_type");
-        }
-        init { this._rawData.Set("payload_type", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        this.PayloadType.Validate();
-    }
-
-    public IntersectionMember1() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public IntersectionMember1(IntersectionMember1 intersectionMember1)
-        : base(intersectionMember1) { }
-#pragma warning restore CS8618
-
-    public IntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    IntersectionMember1(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="IntersectionMember1FromRaw.FromRawUnchecked"/>
-    public static IntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public IntersectionMember1(ApiEnum<string, PayloadType> payloadType)
-        : this()
-    {
-        this.PayloadType = payloadType;
-    }
-}
-
-class IntersectionMember1FromRaw : IFromRawJson<IntersectionMember1>
-{
-    /// <inheritdoc/>
-    public IntersectionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        IntersectionMember1.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(PayloadTypeConverter))]
-public enum PayloadType
-{
-    Payment,
-}
-
-sealed class PayloadTypeConverter : JsonConverter<PayloadType>
-{
-    public override PayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "Payment" => PayloadType.Payment,
-            _ => (PayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        PayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                PayloadType.Payment => "Payment",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 /// <summary>
@@ -2411,14 +2392,12 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("tax_id", value); }
     }
 
-    public required ApiEnum<string, SubscriptionIntersectionMember1PayloadType> PayloadType
+    public JsonElement PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
-            >("payload_type");
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
         }
         init { this._rawData.Set("payload_type", value); }
     }
@@ -2519,10 +2498,21 @@ public sealed record class Subscription : JsonModel
         _ = this.PaymentMethodID;
         this.ScheduledChange?.Validate();
         _ = this.TaxID;
-        this.PayloadType.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.PayloadType,
+                JsonSerializer.SerializeToElement("Subscription")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public Subscription() { }
+    public Subscription()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("Subscription");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -2533,6 +2523,8 @@ public sealed record class Subscription : JsonModel
     public Subscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("Subscription");
     }
 
 #pragma warning disable CS8618
@@ -2555,123 +2547,6 @@ class SubscriptionFromRaw : IFromRawJson<Subscription>
     /// <inheritdoc/>
     public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Subscription.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(
-    typeof(JsonModelConverter<
-        SubscriptionIntersectionMember1,
-        SubscriptionIntersectionMember1FromRaw
-    >)
-)]
-public sealed record class SubscriptionIntersectionMember1 : JsonModel
-{
-    public required ApiEnum<string, SubscriptionIntersectionMember1PayloadType> PayloadType
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, SubscriptionIntersectionMember1PayloadType>
-            >("payload_type");
-        }
-        init { this._rawData.Set("payload_type", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        this.PayloadType.Validate();
-    }
-
-    public SubscriptionIntersectionMember1() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public SubscriptionIntersectionMember1(
-        SubscriptionIntersectionMember1 subscriptionIntersectionMember1
-    )
-        : base(subscriptionIntersectionMember1) { }
-#pragma warning restore CS8618
-
-    public SubscriptionIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    SubscriptionIntersectionMember1(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="SubscriptionIntersectionMember1FromRaw.FromRawUnchecked"/>
-    public static SubscriptionIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public SubscriptionIntersectionMember1(
-        ApiEnum<string, SubscriptionIntersectionMember1PayloadType> payloadType
-    )
-        : this()
-    {
-        this.PayloadType = payloadType;
-    }
-}
-
-class SubscriptionIntersectionMember1FromRaw : IFromRawJson<SubscriptionIntersectionMember1>
-{
-    /// <inheritdoc/>
-    public SubscriptionIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionIntersectionMember1.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(SubscriptionIntersectionMember1PayloadTypeConverter))]
-public enum SubscriptionIntersectionMember1PayloadType
-{
-    Subscription,
-}
-
-sealed class SubscriptionIntersectionMember1PayloadTypeConverter
-    : JsonConverter<SubscriptionIntersectionMember1PayloadType>
-{
-    public override SubscriptionIntersectionMember1PayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "Subscription" => SubscriptionIntersectionMember1PayloadType.Subscription,
-            _ => (SubscriptionIntersectionMember1PayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        SubscriptionIntersectionMember1PayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                SubscriptionIntersectionMember1PayloadType.Subscription => "Subscription",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<Refund, RefundFromRaw>))]
@@ -2825,14 +2700,12 @@ public sealed record class Refund : JsonModel
         init { this._rawData.Set("reason", value); }
     }
 
-    public required ApiEnum<string, RefundIntersectionMember1PayloadType> PayloadType
+    public JsonElement PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, RefundIntersectionMember1PayloadType>
-            >("payload_type");
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
         }
         init { this._rawData.Set("payload_type", value); }
     }
@@ -2867,10 +2740,16 @@ public sealed record class Refund : JsonModel
         _ = this.Amount;
         this.Currency?.Validate();
         _ = this.Reason;
-        this.PayloadType.Validate();
+        if (!JsonElement.DeepEquals(this.PayloadType, JsonSerializer.SerializeToElement("Refund")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public Refund() { }
+    public Refund()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("Refund");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -2881,6 +2760,8 @@ public sealed record class Refund : JsonModel
     public Refund(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("Refund");
     }
 
 #pragma warning disable CS8618
@@ -2903,118 +2784,6 @@ class RefundFromRaw : IFromRawJson<Refund>
     /// <inheritdoc/>
     public Refund FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Refund.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(
-    typeof(JsonModelConverter<RefundIntersectionMember1, RefundIntersectionMember1FromRaw>)
-)]
-public sealed record class RefundIntersectionMember1 : JsonModel
-{
-    public required ApiEnum<string, RefundIntersectionMember1PayloadType> PayloadType
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, RefundIntersectionMember1PayloadType>
-            >("payload_type");
-        }
-        init { this._rawData.Set("payload_type", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        this.PayloadType.Validate();
-    }
-
-    public RefundIntersectionMember1() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public RefundIntersectionMember1(RefundIntersectionMember1 refundIntersectionMember1)
-        : base(refundIntersectionMember1) { }
-#pragma warning restore CS8618
-
-    public RefundIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    RefundIntersectionMember1(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="RefundIntersectionMember1FromRaw.FromRawUnchecked"/>
-    public static RefundIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public RefundIntersectionMember1(
-        ApiEnum<string, RefundIntersectionMember1PayloadType> payloadType
-    )
-        : this()
-    {
-        this.PayloadType = payloadType;
-    }
-}
-
-class RefundIntersectionMember1FromRaw : IFromRawJson<RefundIntersectionMember1>
-{
-    /// <inheritdoc/>
-    public RefundIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => RefundIntersectionMember1.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(RefundIntersectionMember1PayloadTypeConverter))]
-public enum RefundIntersectionMember1PayloadType
-{
-    Refund,
-}
-
-sealed class RefundIntersectionMember1PayloadTypeConverter
-    : JsonConverter<RefundIntersectionMember1PayloadType>
-{
-    public override RefundIntersectionMember1PayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "Refund" => RefundIntersectionMember1PayloadType.Refund,
-            _ => (RefundIntersectionMember1PayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        RefundIntersectionMember1PayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                RefundIntersectionMember1PayloadType.Refund => "Refund",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<Dispute, DisputeFromRaw>))]
@@ -3171,14 +2940,12 @@ public sealed record class Dispute : JsonModel
         init { this._rawData.Set("remarks", value); }
     }
 
-    public required ApiEnum<string, DisputeIntersectionMember1PayloadType> PayloadType
+    public JsonElement PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, DisputeIntersectionMember1PayloadType>
-            >("payload_type");
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
         }
         init { this._rawData.Set("payload_type", value); }
     }
@@ -3215,10 +2982,16 @@ public sealed record class Dispute : JsonModel
         _ = this.IsResolvedByRdr;
         _ = this.Reason;
         _ = this.Remarks;
-        this.PayloadType.Validate();
+        if (!JsonElement.DeepEquals(this.PayloadType, JsonSerializer.SerializeToElement("Dispute")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public Dispute() { }
+    public Dispute()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("Dispute");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -3229,6 +3002,8 @@ public sealed record class Dispute : JsonModel
     public Dispute(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("Dispute");
     }
 
 #pragma warning disable CS8618
@@ -3251,118 +3026,6 @@ class DisputeFromRaw : IFromRawJson<Dispute>
     /// <inheritdoc/>
     public Dispute FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Dispute.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(
-    typeof(JsonModelConverter<DisputeIntersectionMember1, DisputeIntersectionMember1FromRaw>)
-)]
-public sealed record class DisputeIntersectionMember1 : JsonModel
-{
-    public required ApiEnum<string, DisputeIntersectionMember1PayloadType> PayloadType
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, DisputeIntersectionMember1PayloadType>
-            >("payload_type");
-        }
-        init { this._rawData.Set("payload_type", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        this.PayloadType.Validate();
-    }
-
-    public DisputeIntersectionMember1() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public DisputeIntersectionMember1(DisputeIntersectionMember1 disputeIntersectionMember1)
-        : base(disputeIntersectionMember1) { }
-#pragma warning restore CS8618
-
-    public DisputeIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    DisputeIntersectionMember1(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="DisputeIntersectionMember1FromRaw.FromRawUnchecked"/>
-    public static DisputeIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public DisputeIntersectionMember1(
-        ApiEnum<string, DisputeIntersectionMember1PayloadType> payloadType
-    )
-        : this()
-    {
-        this.PayloadType = payloadType;
-    }
-}
-
-class DisputeIntersectionMember1FromRaw : IFromRawJson<DisputeIntersectionMember1>
-{
-    /// <inheritdoc/>
-    public DisputeIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DisputeIntersectionMember1.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(DisputeIntersectionMember1PayloadTypeConverter))]
-public enum DisputeIntersectionMember1PayloadType
-{
-    Dispute,
-}
-
-sealed class DisputeIntersectionMember1PayloadTypeConverter
-    : JsonConverter<DisputeIntersectionMember1PayloadType>
-{
-    public override DisputeIntersectionMember1PayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "Dispute" => DisputeIntersectionMember1PayloadType.Dispute,
-            _ => (DisputeIntersectionMember1PayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        DisputeIntersectionMember1PayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                DisputeIntersectionMember1PayloadType.Dispute => "Dispute",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<LicenseKey, LicenseKeyFromRaw>))]
@@ -3540,14 +3203,12 @@ public sealed record class LicenseKey : JsonModel
         init { this._rawData.Set("subscription_id", value); }
     }
 
-    public required ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> PayloadType
+    public JsonElement PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
-            >("payload_type");
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
         }
         init { this._rawData.Set("payload_type", value); }
     }
@@ -3586,10 +3247,21 @@ public sealed record class LicenseKey : JsonModel
         _ = this.ExpiresAt;
         _ = this.PaymentID;
         _ = this.SubscriptionID;
-        this.PayloadType.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.PayloadType,
+                JsonSerializer.SerializeToElement("LicenseKey")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public LicenseKey() { }
+    public LicenseKey()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("LicenseKey");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -3600,6 +3272,8 @@ public sealed record class LicenseKey : JsonModel
     public LicenseKey(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("LicenseKey");
     }
 
 #pragma warning disable CS8618
@@ -3622,120 +3296,6 @@ class LicenseKeyFromRaw : IFromRawJson<LicenseKey>
     /// <inheritdoc/>
     public LicenseKey FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         LicenseKey.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(
-    typeof(JsonModelConverter<LicenseKeyIntersectionMember1, LicenseKeyIntersectionMember1FromRaw>)
-)]
-public sealed record class LicenseKeyIntersectionMember1 : JsonModel
-{
-    public required ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> PayloadType
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, LicenseKeyIntersectionMember1PayloadType>
-            >("payload_type");
-        }
-        init { this._rawData.Set("payload_type", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        this.PayloadType.Validate();
-    }
-
-    public LicenseKeyIntersectionMember1() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public LicenseKeyIntersectionMember1(
-        LicenseKeyIntersectionMember1 licenseKeyIntersectionMember1
-    )
-        : base(licenseKeyIntersectionMember1) { }
-#pragma warning restore CS8618
-
-    public LicenseKeyIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    LicenseKeyIntersectionMember1(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="LicenseKeyIntersectionMember1FromRaw.FromRawUnchecked"/>
-    public static LicenseKeyIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public LicenseKeyIntersectionMember1(
-        ApiEnum<string, LicenseKeyIntersectionMember1PayloadType> payloadType
-    )
-        : this()
-    {
-        this.PayloadType = payloadType;
-    }
-}
-
-class LicenseKeyIntersectionMember1FromRaw : IFromRawJson<LicenseKeyIntersectionMember1>
-{
-    /// <inheritdoc/>
-    public LicenseKeyIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => LicenseKeyIntersectionMember1.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(LicenseKeyIntersectionMember1PayloadTypeConverter))]
-public enum LicenseKeyIntersectionMember1PayloadType
-{
-    LicenseKey,
-}
-
-sealed class LicenseKeyIntersectionMember1PayloadTypeConverter
-    : JsonConverter<LicenseKeyIntersectionMember1PayloadType>
-{
-    public override LicenseKeyIntersectionMember1PayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "LicenseKey" => LicenseKeyIntersectionMember1PayloadType.LicenseKey,
-            _ => (LicenseKeyIntersectionMember1PayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        LicenseKeyIntersectionMember1PayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                LicenseKeyIntersectionMember1PayloadType.LicenseKey => "LicenseKey",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 /// <summary>
@@ -3906,14 +3466,12 @@ public sealed record class CreditLedgerEntry : JsonModel
         init { this._rawData.Set("reference_type", value); }
     }
 
-    public required ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> PayloadType
+    public JsonElement PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
-            >("payload_type");
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
         }
         init { this._rawData.Set("payload_type", value); }
     }
@@ -3960,10 +3518,21 @@ public sealed record class CreditLedgerEntry : JsonModel
         _ = this.GrantID;
         _ = this.ReferenceID;
         _ = this.ReferenceType;
-        this.PayloadType.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.PayloadType,
+                JsonSerializer.SerializeToElement("CreditLedgerEntry")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public CreditLedgerEntry() { }
+    public CreditLedgerEntry()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("CreditLedgerEntry");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -3974,6 +3543,8 @@ public sealed record class CreditLedgerEntry : JsonModel
     public CreditLedgerEntry(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("CreditLedgerEntry");
     }
 
 #pragma warning disable CS8618
@@ -3998,126 +3569,6 @@ class CreditLedgerEntryFromRaw : IFromRawJson<CreditLedgerEntry>
     /// <inheritdoc/>
     public CreditLedgerEntry FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreditLedgerEntry.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(
-    typeof(JsonModelConverter<
-        CreditLedgerEntryIntersectionMember1,
-        CreditLedgerEntryIntersectionMember1FromRaw
-    >)
-)]
-public sealed record class CreditLedgerEntryIntersectionMember1 : JsonModel
-{
-    public required ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> PayloadType
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType>
-            >("payload_type");
-        }
-        init { this._rawData.Set("payload_type", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        this.PayloadType.Validate();
-    }
-
-    public CreditLedgerEntryIntersectionMember1() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public CreditLedgerEntryIntersectionMember1(
-        CreditLedgerEntryIntersectionMember1 creditLedgerEntryIntersectionMember1
-    )
-        : base(creditLedgerEntryIntersectionMember1) { }
-#pragma warning restore CS8618
-
-    public CreditLedgerEntryIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    CreditLedgerEntryIntersectionMember1(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="CreditLedgerEntryIntersectionMember1FromRaw.FromRawUnchecked"/>
-    public static CreditLedgerEntryIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public CreditLedgerEntryIntersectionMember1(
-        ApiEnum<string, CreditLedgerEntryIntersectionMember1PayloadType> payloadType
-    )
-        : this()
-    {
-        this.PayloadType = payloadType;
-    }
-}
-
-class CreditLedgerEntryIntersectionMember1FromRaw
-    : IFromRawJson<CreditLedgerEntryIntersectionMember1>
-{
-    /// <inheritdoc/>
-    public CreditLedgerEntryIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CreditLedgerEntryIntersectionMember1.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(CreditLedgerEntryIntersectionMember1PayloadTypeConverter))]
-public enum CreditLedgerEntryIntersectionMember1PayloadType
-{
-    CreditLedgerEntry,
-}
-
-sealed class CreditLedgerEntryIntersectionMember1PayloadTypeConverter
-    : JsonConverter<CreditLedgerEntryIntersectionMember1PayloadType>
-{
-    public override CreditLedgerEntryIntersectionMember1PayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "CreditLedgerEntry" =>
-                CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry,
-            _ => (CreditLedgerEntryIntersectionMember1PayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        CreditLedgerEntryIntersectionMember1PayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                CreditLedgerEntryIntersectionMember1PayloadType.CreditLedgerEntry =>
-                    "CreditLedgerEntry",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<CreditBalanceLow, CreditBalanceLowFromRaw>))]
@@ -4163,14 +3614,12 @@ public sealed record class CreditBalanceLow : JsonModel
         init { this._rawData.Set("customer_id", value); }
     }
 
-    public required ApiEnum<string, CreditBalanceLowPayloadType> PayloadType
+    public JsonElement PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, CreditBalanceLowPayloadType>>(
-                "payload_type"
-            );
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
         }
         init { this._rawData.Set("payload_type", value); }
     }
@@ -4222,14 +3671,25 @@ public sealed record class CreditBalanceLow : JsonModel
         _ = this.CreditEntitlementID;
         _ = this.CreditEntitlementName;
         _ = this.CustomerID;
-        this.PayloadType.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.PayloadType,
+                JsonSerializer.SerializeToElement("CreditBalanceLow")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
         _ = this.SubscriptionCreditsAmount;
         _ = this.SubscriptionID;
         _ = this.ThresholdAmount;
         _ = this.ThresholdPercent;
     }
 
-    public CreditBalanceLow() { }
+    public CreditBalanceLow()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("CreditBalanceLow");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -4240,6 +3700,8 @@ public sealed record class CreditBalanceLow : JsonModel
     public CreditBalanceLow(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("CreditBalanceLow");
     }
 
 #pragma warning disable CS8618
@@ -4264,47 +3726,6 @@ class CreditBalanceLowFromRaw : IFromRawJson<CreditBalanceLow>
     /// <inheritdoc/>
     public CreditBalanceLow FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreditBalanceLow.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(CreditBalanceLowPayloadTypeConverter))]
-public enum CreditBalanceLowPayloadType
-{
-    CreditBalanceLow,
-}
-
-sealed class CreditBalanceLowPayloadTypeConverter : JsonConverter<CreditBalanceLowPayloadType>
-{
-    public override CreditBalanceLowPayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "CreditBalanceLow" => CreditBalanceLowPayloadType.CreditBalanceLow,
-            _ => (CreditBalanceLowPayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        CreditBalanceLowPayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                CreditBalanceLowPayloadType.CreditBalanceLow => "CreditBalanceLow",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<AbandonedCheckout, AbandonedCheckoutFromRaw>))]
@@ -4342,14 +3763,12 @@ public sealed record class AbandonedCheckout : JsonModel
         init { this._rawData.Set("customer_id", value); }
     }
 
-    public required ApiEnum<string, AbandonedCheckoutPayloadType> PayloadType
+    public JsonElement PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, AbandonedCheckoutPayloadType>>(
-                "payload_type"
-            );
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
         }
         init { this._rawData.Set("payload_type", value); }
     }
@@ -4390,13 +3809,24 @@ public sealed record class AbandonedCheckout : JsonModel
         _ = this.AbandonedAt;
         this.AbandonmentReason.Validate();
         _ = this.CustomerID;
-        this.PayloadType.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.PayloadType,
+                JsonSerializer.SerializeToElement("AbandonedCheckout")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
         _ = this.PaymentID;
         this.Status.Validate();
         _ = this.RecoveredPaymentID;
     }
 
-    public AbandonedCheckout() { }
+    public AbandonedCheckout()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("AbandonedCheckout");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -4407,6 +3837,8 @@ public sealed record class AbandonedCheckout : JsonModel
     public AbandonedCheckout(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("AbandonedCheckout");
     }
 
 #pragma warning disable CS8618
@@ -4468,47 +3900,6 @@ sealed class AbandonmentReasonConverter : JsonConverter<AbandonmentReason>
             {
                 AbandonmentReason.PaymentFailed => "payment_failed",
                 AbandonmentReason.CheckoutIncomplete => "checkout_incomplete",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-[JsonConverter(typeof(AbandonedCheckoutPayloadTypeConverter))]
-public enum AbandonedCheckoutPayloadType
-{
-    AbandonedCheckout,
-}
-
-sealed class AbandonedCheckoutPayloadTypeConverter : JsonConverter<AbandonedCheckoutPayloadType>
-{
-    public override AbandonedCheckoutPayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "AbandonedCheckout" => AbandonedCheckoutPayloadType.AbandonedCheckout,
-            _ => (AbandonedCheckoutPayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        AbandonedCheckoutPayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                AbandonedCheckoutPayloadType.AbandonedCheckout => "AbandonedCheckout",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -4590,14 +3981,12 @@ public sealed record class DunningAttempt : JsonModel
         init { this._rawData.Set("customer_id", value); }
     }
 
-    public required ApiEnum<string, DunningAttemptPayloadType> PayloadType
+    public JsonElement PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, DunningAttemptPayloadType>>(
-                "payload_type"
-            );
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
         }
         init { this._rawData.Set("payload_type", value); }
     }
@@ -4647,14 +4036,25 @@ public sealed record class DunningAttempt : JsonModel
     {
         _ = this.CreatedAt;
         _ = this.CustomerID;
-        this.PayloadType.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.PayloadType,
+                JsonSerializer.SerializeToElement("DunningAttempt")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
         this.Status.Validate();
         _ = this.SubscriptionID;
         this.TriggerState.Validate();
         _ = this.PaymentID;
     }
 
-    public DunningAttempt() { }
+    public DunningAttempt()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("DunningAttempt");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -4665,6 +4065,8 @@ public sealed record class DunningAttempt : JsonModel
     public DunningAttempt(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("DunningAttempt");
     }
 
 #pragma warning disable CS8618
@@ -4687,47 +4089,6 @@ class DunningAttemptFromRaw : IFromRawJson<DunningAttempt>
     /// <inheritdoc/>
     public DunningAttempt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         DunningAttempt.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(DunningAttemptPayloadTypeConverter))]
-public enum DunningAttemptPayloadType
-{
-    DunningAttempt,
-}
-
-sealed class DunningAttemptPayloadTypeConverter : JsonConverter<DunningAttemptPayloadType>
-{
-    public override DunningAttemptPayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "DunningAttempt" => DunningAttemptPayloadType.DunningAttempt,
-            _ => (DunningAttemptPayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        DunningAttemptPayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                DunningAttemptPayloadType.DunningAttempt => "DunningAttempt",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(DunningAttemptStatusConverter))]
@@ -4957,12 +4318,12 @@ public sealed record class EntitlementGrant : JsonModel
     /// Digital-product-delivery payload, present on grants for `digital_files` entitlements.
     /// Each file carries a short-lived presigned download URL.
     /// </summary>
-    public Products::ProductDigitalProductDelivery? DigitalProductDelivery
+    public ProductDigitalProductDelivery? DigitalProductDelivery
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Products::ProductDigitalProductDelivery>(
+            return this._rawData.GetNullableClass<ProductDigitalProductDelivery>(
                 "digital_product_delivery"
             );
         }
@@ -5105,14 +4466,12 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("subscription_id", value); }
     }
 
-    public required ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> PayloadType
+    public JsonElement PayloadType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
-            >("payload_type");
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
         }
         init { this._rawData.Set("payload_type", value); }
     }
@@ -5163,10 +4522,21 @@ public sealed record class EntitlementGrant : JsonModel
         _ = this.RevocationReason;
         _ = this.RevokedAt;
         _ = this.SubscriptionID;
-        this.PayloadType.Validate();
+        if (
+            !JsonElement.DeepEquals(
+                this.PayloadType,
+                JsonSerializer.SerializeToElement("EntitlementGrant")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public EntitlementGrant() { }
+    public EntitlementGrant()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("EntitlementGrant");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -5177,6 +4547,8 @@ public sealed record class EntitlementGrant : JsonModel
     public EntitlementGrant(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("EntitlementGrant");
     }
 
 #pragma warning disable CS8618
@@ -5201,122 +4573,4 @@ class EntitlementGrantFromRaw : IFromRawJson<EntitlementGrant>
     /// <inheritdoc/>
     public EntitlementGrant FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         EntitlementGrant.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(
-    typeof(JsonModelConverter<
-        EntitlementGrantIntersectionMember1,
-        EntitlementGrantIntersectionMember1FromRaw
-    >)
-)]
-public sealed record class EntitlementGrantIntersectionMember1 : JsonModel
-{
-    public required ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> PayloadType
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType>
-            >("payload_type");
-        }
-        init { this._rawData.Set("payload_type", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        this.PayloadType.Validate();
-    }
-
-    public EntitlementGrantIntersectionMember1() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public EntitlementGrantIntersectionMember1(
-        EntitlementGrantIntersectionMember1 entitlementGrantIntersectionMember1
-    )
-        : base(entitlementGrantIntersectionMember1) { }
-#pragma warning restore CS8618
-
-    public EntitlementGrantIntersectionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    EntitlementGrantIntersectionMember1(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="EntitlementGrantIntersectionMember1FromRaw.FromRawUnchecked"/>
-    public static EntitlementGrantIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public EntitlementGrantIntersectionMember1(
-        ApiEnum<string, EntitlementGrantIntersectionMember1PayloadType> payloadType
-    )
-        : this()
-    {
-        this.PayloadType = payloadType;
-    }
-}
-
-class EntitlementGrantIntersectionMember1FromRaw : IFromRawJson<EntitlementGrantIntersectionMember1>
-{
-    /// <inheritdoc/>
-    public EntitlementGrantIntersectionMember1 FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => EntitlementGrantIntersectionMember1.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(EntitlementGrantIntersectionMember1PayloadTypeConverter))]
-public enum EntitlementGrantIntersectionMember1PayloadType
-{
-    EntitlementGrant,
-}
-
-sealed class EntitlementGrantIntersectionMember1PayloadTypeConverter
-    : JsonConverter<EntitlementGrantIntersectionMember1PayloadType>
-{
-    public override EntitlementGrantIntersectionMember1PayloadType Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "EntitlementGrant" => EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant,
-            _ => (EntitlementGrantIntersectionMember1PayloadType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        EntitlementGrantIntersectionMember1PayloadType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                EntitlementGrantIntersectionMember1PayloadType.EntitlementGrant =>
-                    "EntitlementGrant",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }

@@ -107,7 +107,7 @@ public sealed record class Product : JsonModel
     /// <summary>
     /// Indicates whether the product requires a license key.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the dedicated entitlements API to configure license-key delivery.")]
     public required bool LicenseKeyEnabled
     {
         get
@@ -253,7 +253,7 @@ public sealed record class Product : JsonModel
     /// <summary>
     /// Message sent upon license key activation, if applicable.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the dedicated entitlements API to configure license-key delivery.")]
     public string? LicenseKeyActivationMessage
     {
         get
@@ -267,7 +267,7 @@ public sealed record class Product : JsonModel
     /// <summary>
     /// Limit on the number of activations for the license key, if enabled.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use the dedicated entitlements API to configure license-key delivery.")]
     public int? LicenseKeyActivationsLimit
     {
         get

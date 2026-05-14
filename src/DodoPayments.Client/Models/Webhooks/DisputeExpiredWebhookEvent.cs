@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,6 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
-using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -41,12 +41,12 @@ public sealed record class DisputeExpiredWebhookEvent : JsonModel
     /// <summary>
     /// The timestamp of when the event occurred
     /// </summary>
-    public required System::DateTimeOffset Timestamp
+    public required DateTimeOffset Timestamp
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("timestamp");
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp");
         }
         init { this._rawData.Set("timestamp", value); }
     }
@@ -54,14 +54,12 @@ public sealed record class DisputeExpiredWebhookEvent : JsonModel
     /// <summary>
     /// The event type
     /// </summary>
-    public required ApiEnum<string, DisputeExpiredWebhookEventType> Type
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, DisputeExpiredWebhookEventType>>(
-                "type"
-            );
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -72,10 +70,18 @@ public sealed record class DisputeExpiredWebhookEvent : JsonModel
         _ = this.BusinessID;
         this.Data.Validate();
         _ = this.Timestamp;
-        this.Type.Validate();
+        if (
+            !JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("dispute.expired"))
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
     }
 
-    public DisputeExpiredWebhookEvent() { }
+    public DisputeExpiredWebhookEvent()
+    {
+        this.Type = JsonSerializer.SerializeToElement("dispute.expired");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -86,6 +92,8 @@ public sealed record class DisputeExpiredWebhookEvent : JsonModel
     public DisputeExpiredWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("dispute.expired");
     }
 
 #pragma warning disable CS8618
@@ -111,48 +119,4 @@ class DisputeExpiredWebhookEventFromRaw : IFromRawJson<DisputeExpiredWebhookEven
     public DisputeExpiredWebhookEvent FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => DisputeExpiredWebhookEvent.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// The event type
-/// </summary>
-[JsonConverter(typeof(DisputeExpiredWebhookEventTypeConverter))]
-public enum DisputeExpiredWebhookEventType
-{
-    DisputeExpired,
-}
-
-sealed class DisputeExpiredWebhookEventTypeConverter : JsonConverter<DisputeExpiredWebhookEventType>
-{
-    public override DisputeExpiredWebhookEventType Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "dispute.expired" => DisputeExpiredWebhookEventType.DisputeExpired,
-            _ => (DisputeExpiredWebhookEventType)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        DisputeExpiredWebhookEventType value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                DisputeExpiredWebhookEventType.DisputeExpired => "dispute.expired",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }

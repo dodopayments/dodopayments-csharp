@@ -1,9 +1,9 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
-using System = System;
 
 namespace DodoPayments.Client.Models.Webhooks;
 
@@ -73,7 +73,7 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
         }
     }
 
-    public System::DateTimeOffset Timestamp
+    public DateTimeOffset Timestamp
     {
         get
         {
@@ -117,6 +117,54 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
                 subscriptionPlanChanged: (x) => x.Timestamp,
                 subscriptionRenewed: (x) => x.Timestamp,
                 subscriptionUpdated: (x) => x.Timestamp
+            );
+        }
+    }
+
+    public JsonElement Type
+    {
+        get
+        {
+            return Match(
+                abandonedCheckoutDetected: (x) => x.Type,
+                abandonedCheckoutRecovered: (x) => x.Type,
+                creditAdded: (x) => x.Type,
+                creditBalanceLow: (x) => x.Type,
+                creditDeducted: (x) => x.Type,
+                creditExpired: (x) => x.Type,
+                creditManualAdjustment: (x) => x.Type,
+                creditOverageCharged: (x) => x.Type,
+                creditOverageReset: (x) => x.Type,
+                creditRolledOver: (x) => x.Type,
+                creditRolloverForfeited: (x) => x.Type,
+                disputeAccepted: (x) => x.Type,
+                disputeCancelled: (x) => x.Type,
+                disputeChallenged: (x) => x.Type,
+                disputeExpired: (x) => x.Type,
+                disputeLost: (x) => x.Type,
+                disputeOpened: (x) => x.Type,
+                disputeWon: (x) => x.Type,
+                dunningRecovered: (x) => x.Type,
+                dunningStarted: (x) => x.Type,
+                entitlementGrantCreated: (x) => x.Type,
+                entitlementGrantDelivered: (x) => x.Type,
+                entitlementGrantFailed: (x) => x.Type,
+                entitlementGrantRevoked: (x) => x.Type,
+                licenseKeyCreated: (x) => x.Type,
+                paymentCancelled: (x) => x.Type,
+                paymentFailed: (x) => x.Type,
+                paymentProcessing: (x) => x.Type,
+                paymentSucceeded: (x) => x.Type,
+                refundFailed: (x) => x.Type,
+                refundSucceeded: (x) => x.Type,
+                subscriptionActive: (x) => x.Type,
+                subscriptionCancelled: (x) => x.Type,
+                subscriptionExpired: (x) => x.Type,
+                subscriptionFailed: (x) => x.Type,
+                subscriptionOnHold: (x) => x.Type,
+                subscriptionPlanChanged: (x) => x.Type,
+                subscriptionRenewed: (x) => x.Type,
+                subscriptionUpdated: (x) => x.Type
             );
         }
     }
@@ -1342,45 +1390,45 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<AbandonedCheckoutDetectedWebhookEvent> abandonedCheckoutDetected,
-        System::Action<AbandonedCheckoutRecoveredWebhookEvent> abandonedCheckoutRecovered,
-        System::Action<CreditAddedWebhookEvent> creditAdded,
-        System::Action<CreditBalanceLowWebhookEvent> creditBalanceLow,
-        System::Action<CreditDeductedWebhookEvent> creditDeducted,
-        System::Action<CreditExpiredWebhookEvent> creditExpired,
-        System::Action<CreditManualAdjustmentWebhookEvent> creditManualAdjustment,
-        System::Action<CreditOverageChargedWebhookEvent> creditOverageCharged,
-        System::Action<CreditOverageResetWebhookEvent> creditOverageReset,
-        System::Action<CreditRolledOverWebhookEvent> creditRolledOver,
-        System::Action<CreditRolloverForfeitedWebhookEvent> creditRolloverForfeited,
-        System::Action<DisputeAcceptedWebhookEvent> disputeAccepted,
-        System::Action<DisputeCancelledWebhookEvent> disputeCancelled,
-        System::Action<DisputeChallengedWebhookEvent> disputeChallenged,
-        System::Action<DisputeExpiredWebhookEvent> disputeExpired,
-        System::Action<DisputeLostWebhookEvent> disputeLost,
-        System::Action<DisputeOpenedWebhookEvent> disputeOpened,
-        System::Action<DisputeWonWebhookEvent> disputeWon,
-        System::Action<DunningRecoveredWebhookEvent> dunningRecovered,
-        System::Action<DunningStartedWebhookEvent> dunningStarted,
-        System::Action<EntitlementGrantCreatedWebhookEvent> entitlementGrantCreated,
-        System::Action<EntitlementGrantDeliveredWebhookEvent> entitlementGrantDelivered,
-        System::Action<EntitlementGrantFailedWebhookEvent> entitlementGrantFailed,
-        System::Action<EntitlementGrantRevokedWebhookEvent> entitlementGrantRevoked,
-        System::Action<LicenseKeyCreatedWebhookEvent> licenseKeyCreated,
-        System::Action<PaymentCancelledWebhookEvent> paymentCancelled,
-        System::Action<PaymentFailedWebhookEvent> paymentFailed,
-        System::Action<PaymentProcessingWebhookEvent> paymentProcessing,
-        System::Action<PaymentSucceededWebhookEvent> paymentSucceeded,
-        System::Action<RefundFailedWebhookEvent> refundFailed,
-        System::Action<RefundSucceededWebhookEvent> refundSucceeded,
-        System::Action<SubscriptionActiveWebhookEvent> subscriptionActive,
-        System::Action<SubscriptionCancelledWebhookEvent> subscriptionCancelled,
-        System::Action<SubscriptionExpiredWebhookEvent> subscriptionExpired,
-        System::Action<SubscriptionFailedWebhookEvent> subscriptionFailed,
-        System::Action<SubscriptionOnHoldWebhookEvent> subscriptionOnHold,
-        System::Action<SubscriptionPlanChangedWebhookEvent> subscriptionPlanChanged,
-        System::Action<SubscriptionRenewedWebhookEvent> subscriptionRenewed,
-        System::Action<SubscriptionUpdatedWebhookEvent> subscriptionUpdated
+        Action<AbandonedCheckoutDetectedWebhookEvent> abandonedCheckoutDetected,
+        Action<AbandonedCheckoutRecoveredWebhookEvent> abandonedCheckoutRecovered,
+        Action<CreditAddedWebhookEvent> creditAdded,
+        Action<CreditBalanceLowWebhookEvent> creditBalanceLow,
+        Action<CreditDeductedWebhookEvent> creditDeducted,
+        Action<CreditExpiredWebhookEvent> creditExpired,
+        Action<CreditManualAdjustmentWebhookEvent> creditManualAdjustment,
+        Action<CreditOverageChargedWebhookEvent> creditOverageCharged,
+        Action<CreditOverageResetWebhookEvent> creditOverageReset,
+        Action<CreditRolledOverWebhookEvent> creditRolledOver,
+        Action<CreditRolloverForfeitedWebhookEvent> creditRolloverForfeited,
+        Action<DisputeAcceptedWebhookEvent> disputeAccepted,
+        Action<DisputeCancelledWebhookEvent> disputeCancelled,
+        Action<DisputeChallengedWebhookEvent> disputeChallenged,
+        Action<DisputeExpiredWebhookEvent> disputeExpired,
+        Action<DisputeLostWebhookEvent> disputeLost,
+        Action<DisputeOpenedWebhookEvent> disputeOpened,
+        Action<DisputeWonWebhookEvent> disputeWon,
+        Action<DunningRecoveredWebhookEvent> dunningRecovered,
+        Action<DunningStartedWebhookEvent> dunningStarted,
+        Action<EntitlementGrantCreatedWebhookEvent> entitlementGrantCreated,
+        Action<EntitlementGrantDeliveredWebhookEvent> entitlementGrantDelivered,
+        Action<EntitlementGrantFailedWebhookEvent> entitlementGrantFailed,
+        Action<EntitlementGrantRevokedWebhookEvent> entitlementGrantRevoked,
+        Action<LicenseKeyCreatedWebhookEvent> licenseKeyCreated,
+        Action<PaymentCancelledWebhookEvent> paymentCancelled,
+        Action<PaymentFailedWebhookEvent> paymentFailed,
+        Action<PaymentProcessingWebhookEvent> paymentProcessing,
+        Action<PaymentSucceededWebhookEvent> paymentSucceeded,
+        Action<RefundFailedWebhookEvent> refundFailed,
+        Action<RefundSucceededWebhookEvent> refundSucceeded,
+        Action<SubscriptionActiveWebhookEvent> subscriptionActive,
+        Action<SubscriptionCancelledWebhookEvent> subscriptionCancelled,
+        Action<SubscriptionExpiredWebhookEvent> subscriptionExpired,
+        Action<SubscriptionFailedWebhookEvent> subscriptionFailed,
+        Action<SubscriptionOnHoldWebhookEvent> subscriptionOnHold,
+        Action<SubscriptionPlanChangedWebhookEvent> subscriptionPlanChanged,
+        Action<SubscriptionRenewedWebhookEvent> subscriptionRenewed,
+        Action<SubscriptionUpdatedWebhookEvent> subscriptionUpdated
     )
     {
         switch (this.Value)
@@ -1568,45 +1616,45 @@ public record class UnsafeUnwrapWebhookEvent : ModelBase
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<AbandonedCheckoutDetectedWebhookEvent, T> abandonedCheckoutDetected,
-        System::Func<AbandonedCheckoutRecoveredWebhookEvent, T> abandonedCheckoutRecovered,
-        System::Func<CreditAddedWebhookEvent, T> creditAdded,
-        System::Func<CreditBalanceLowWebhookEvent, T> creditBalanceLow,
-        System::Func<CreditDeductedWebhookEvent, T> creditDeducted,
-        System::Func<CreditExpiredWebhookEvent, T> creditExpired,
-        System::Func<CreditManualAdjustmentWebhookEvent, T> creditManualAdjustment,
-        System::Func<CreditOverageChargedWebhookEvent, T> creditOverageCharged,
-        System::Func<CreditOverageResetWebhookEvent, T> creditOverageReset,
-        System::Func<CreditRolledOverWebhookEvent, T> creditRolledOver,
-        System::Func<CreditRolloverForfeitedWebhookEvent, T> creditRolloverForfeited,
-        System::Func<DisputeAcceptedWebhookEvent, T> disputeAccepted,
-        System::Func<DisputeCancelledWebhookEvent, T> disputeCancelled,
-        System::Func<DisputeChallengedWebhookEvent, T> disputeChallenged,
-        System::Func<DisputeExpiredWebhookEvent, T> disputeExpired,
-        System::Func<DisputeLostWebhookEvent, T> disputeLost,
-        System::Func<DisputeOpenedWebhookEvent, T> disputeOpened,
-        System::Func<DisputeWonWebhookEvent, T> disputeWon,
-        System::Func<DunningRecoveredWebhookEvent, T> dunningRecovered,
-        System::Func<DunningStartedWebhookEvent, T> dunningStarted,
-        System::Func<EntitlementGrantCreatedWebhookEvent, T> entitlementGrantCreated,
-        System::Func<EntitlementGrantDeliveredWebhookEvent, T> entitlementGrantDelivered,
-        System::Func<EntitlementGrantFailedWebhookEvent, T> entitlementGrantFailed,
-        System::Func<EntitlementGrantRevokedWebhookEvent, T> entitlementGrantRevoked,
-        System::Func<LicenseKeyCreatedWebhookEvent, T> licenseKeyCreated,
-        System::Func<PaymentCancelledWebhookEvent, T> paymentCancelled,
-        System::Func<PaymentFailedWebhookEvent, T> paymentFailed,
-        System::Func<PaymentProcessingWebhookEvent, T> paymentProcessing,
-        System::Func<PaymentSucceededWebhookEvent, T> paymentSucceeded,
-        System::Func<RefundFailedWebhookEvent, T> refundFailed,
-        System::Func<RefundSucceededWebhookEvent, T> refundSucceeded,
-        System::Func<SubscriptionActiveWebhookEvent, T> subscriptionActive,
-        System::Func<SubscriptionCancelledWebhookEvent, T> subscriptionCancelled,
-        System::Func<SubscriptionExpiredWebhookEvent, T> subscriptionExpired,
-        System::Func<SubscriptionFailedWebhookEvent, T> subscriptionFailed,
-        System::Func<SubscriptionOnHoldWebhookEvent, T> subscriptionOnHold,
-        System::Func<SubscriptionPlanChangedWebhookEvent, T> subscriptionPlanChanged,
-        System::Func<SubscriptionRenewedWebhookEvent, T> subscriptionRenewed,
-        System::Func<SubscriptionUpdatedWebhookEvent, T> subscriptionUpdated
+        Func<AbandonedCheckoutDetectedWebhookEvent, T> abandonedCheckoutDetected,
+        Func<AbandonedCheckoutRecoveredWebhookEvent, T> abandonedCheckoutRecovered,
+        Func<CreditAddedWebhookEvent, T> creditAdded,
+        Func<CreditBalanceLowWebhookEvent, T> creditBalanceLow,
+        Func<CreditDeductedWebhookEvent, T> creditDeducted,
+        Func<CreditExpiredWebhookEvent, T> creditExpired,
+        Func<CreditManualAdjustmentWebhookEvent, T> creditManualAdjustment,
+        Func<CreditOverageChargedWebhookEvent, T> creditOverageCharged,
+        Func<CreditOverageResetWebhookEvent, T> creditOverageReset,
+        Func<CreditRolledOverWebhookEvent, T> creditRolledOver,
+        Func<CreditRolloverForfeitedWebhookEvent, T> creditRolloverForfeited,
+        Func<DisputeAcceptedWebhookEvent, T> disputeAccepted,
+        Func<DisputeCancelledWebhookEvent, T> disputeCancelled,
+        Func<DisputeChallengedWebhookEvent, T> disputeChallenged,
+        Func<DisputeExpiredWebhookEvent, T> disputeExpired,
+        Func<DisputeLostWebhookEvent, T> disputeLost,
+        Func<DisputeOpenedWebhookEvent, T> disputeOpened,
+        Func<DisputeWonWebhookEvent, T> disputeWon,
+        Func<DunningRecoveredWebhookEvent, T> dunningRecovered,
+        Func<DunningStartedWebhookEvent, T> dunningStarted,
+        Func<EntitlementGrantCreatedWebhookEvent, T> entitlementGrantCreated,
+        Func<EntitlementGrantDeliveredWebhookEvent, T> entitlementGrantDelivered,
+        Func<EntitlementGrantFailedWebhookEvent, T> entitlementGrantFailed,
+        Func<EntitlementGrantRevokedWebhookEvent, T> entitlementGrantRevoked,
+        Func<LicenseKeyCreatedWebhookEvent, T> licenseKeyCreated,
+        Func<PaymentCancelledWebhookEvent, T> paymentCancelled,
+        Func<PaymentFailedWebhookEvent, T> paymentFailed,
+        Func<PaymentProcessingWebhookEvent, T> paymentProcessing,
+        Func<PaymentSucceededWebhookEvent, T> paymentSucceeded,
+        Func<RefundFailedWebhookEvent, T> refundFailed,
+        Func<RefundSucceededWebhookEvent, T> refundSucceeded,
+        Func<SubscriptionActiveWebhookEvent, T> subscriptionActive,
+        Func<SubscriptionCancelledWebhookEvent, T> subscriptionCancelled,
+        Func<SubscriptionExpiredWebhookEvent, T> subscriptionExpired,
+        Func<SubscriptionFailedWebhookEvent, T> subscriptionFailed,
+        Func<SubscriptionOnHoldWebhookEvent, T> subscriptionOnHold,
+        Func<SubscriptionPlanChangedWebhookEvent, T> subscriptionPlanChanged,
+        Func<SubscriptionRenewedWebhookEvent, T> subscriptionRenewed,
+        Func<SubscriptionUpdatedWebhookEvent, T> subscriptionUpdated
     )
     {
         return this.Value switch
@@ -1920,7 +1968,7 @@ sealed class UnsafeUnwrapWebhookEventConverter : JsonConverter<UnsafeUnwrapWebho
 {
     public override UnsafeUnwrapWebhookEvent? Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
