@@ -1,5 +1,20 @@
 # Changelog
 
+## 6.18.1 (2026-05-14)
+
+Full Changelog: [v6.18.0...v6.18.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.18.0...v6.18.1)
+
+### Features
+
+* **api:** manual updates ([e67f31c](https://github.com/dodopayments/dodopayments-csharp/commit/e67f31cfba9276e857de55098d9aab7adbbec2c9))
+* **api:** updated openapi spec to 1.98.0 ([be400a1](https://github.com/dodopayments/dodopayments-csharp/commit/be400a11415c44bbd1c9b2e54901e89bf4d2e860))
+* **api:** updated openapi spec to v1.97.10 ([da79062](https://github.com/dodopayments/dodopayments-csharp/commit/da790621206aa9cad295113e823d2797b88dc210))
+
+
+### Bug Fixes
+
+* **internal:** disable default HttpClient timeout as we have our own ([c30d9a4](https://github.com/dodopayments/dodopayments-csharp/commit/c30d9a4a5124f6105c62f4fb4db10ac45ac67b01))
+
 ## 6.18.0 (2026-05-04)
 
 Full Changelog: [v6.17.0...v6.18.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.17.0...v6.18.0)
