@@ -22,9 +22,15 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 
     public string? SubscriptionID { get; init; }
 
-    public required Body Body
+    public required PaymentMethod PaymentMethod
     {
-        get { return WrappedJsonSerializer.GetNotNullClass<Body>(this.RawBodyData, "RawBodyData"); }
+        get
+        {
+            return WrappedJsonSerializer.GetNotNullClass<PaymentMethod>(
+                this.RawBodyData,
+                "RawBodyData"
+            );
+        }
         init { this.RawBodyData = JsonSerializer.SerializeToElement(value); }
     }
 
@@ -164,8 +170,8 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
     }
 }
 
-[JsonConverter(typeof(BodyConverter))]
-public record class Body : ModelBase
+[JsonConverter(typeof(PaymentMethodConverter))]
+public record class PaymentMethod : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -187,19 +193,19 @@ public record class Body : ModelBase
         get { return Match(new_: (x) => x.Type, existing: (x) => x.Type); }
     }
 
-    public Body(New value, JsonElement? element = null)
+    public PaymentMethod(New value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Body(Existing value, JsonElement? element = null)
+    public PaymentMethod(Existing value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Body(JsonElement element)
+    public PaymentMethod(JsonElement element)
     {
         this._element = element;
     }
@@ -278,7 +284,7 @@ public record class Body : ModelBase
                 break;
             default:
                 throw new DodoPaymentsInvalidDataException(
-                    "Data did not match any variant of Body"
+                    "Data did not match any variant of PaymentMethod"
                 );
         }
     }
@@ -311,14 +317,14 @@ public record class Body : ModelBase
             New value => new_(value),
             Existing value => existing(value),
             _ => throw new DodoPaymentsInvalidDataException(
-                "Data did not match any variant of Body"
+                "Data did not match any variant of PaymentMethod"
             ),
         };
     }
 
-    public static implicit operator Body(New value) => new(value);
+    public static implicit operator PaymentMethod(New value) => new(value);
 
-    public static implicit operator Body(Existing value) => new(value);
+    public static implicit operator PaymentMethod(Existing value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -334,12 +340,14 @@ public record class Body : ModelBase
     {
         if (this.Value == null)
         {
-            throw new DodoPaymentsInvalidDataException("Data did not match any variant of Body");
+            throw new DodoPaymentsInvalidDataException(
+                "Data did not match any variant of PaymentMethod"
+            );
         }
         this.Switch((new_) => new_.Validate(), (existing) => existing.Validate());
     }
 
-    public virtual bool Equals(Body? other) =>
+    public virtual bool Equals(PaymentMethod? other) =>
         other != null
         && this.VariantIndex() == other.VariantIndex()
         && JsonElement.DeepEquals(this.Json, other.Json);
@@ -366,9 +374,9 @@ public record class Body : ModelBase
     }
 }
 
-sealed class BodyConverter : JsonConverter<Body>
+sealed class PaymentMethodConverter : JsonConverter<PaymentMethod>
 {
-    public override Body? Read(
+    public override PaymentMethod? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -423,12 +431,16 @@ sealed class BodyConverter : JsonConverter<Body>
             }
             default:
             {
-                return new Body(element);
+                return new PaymentMethod(element);
             }
         }
     }
 
-    public override void Write(Utf8JsonWriter writer, Body value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        PaymentMethod value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(writer, value.Json, options);
     }

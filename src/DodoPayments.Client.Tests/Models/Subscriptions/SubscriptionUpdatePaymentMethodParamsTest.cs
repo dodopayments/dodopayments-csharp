@@ -13,14 +13,14 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
         var parameters = new SubscriptionUpdatePaymentMethodParams
         {
             SubscriptionID = "subscription_id",
-            Body = new New() { ReturnUrl = "return_url" },
+            PaymentMethod = new New() { ReturnUrl = "return_url" },
         };
 
         string expectedSubscriptionID = "subscription_id";
-        Body expectedBody = new New() { ReturnUrl = "return_url" };
+        PaymentMethod expectedPaymentMethod = new New() { ReturnUrl = "return_url" };
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
-        Assert.Equal(expectedBody, parameters.Body);
+        Assert.Equal(expectedPaymentMethod, parameters.PaymentMethod);
     }
 
     [Fact]
@@ -29,7 +29,7 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
         SubscriptionUpdatePaymentMethodParams parameters = new()
         {
             SubscriptionID = "subscription_id",
-            Body = new New() { ReturnUrl = "return_url" },
+            PaymentMethod = new New() { ReturnUrl = "return_url" },
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
@@ -50,7 +50,7 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
         var parameters = new SubscriptionUpdatePaymentMethodParams
         {
             SubscriptionID = "subscription_id",
-            Body = new New() { ReturnUrl = "return_url" },
+            PaymentMethod = new New() { ReturnUrl = "return_url" },
         };
 
         SubscriptionUpdatePaymentMethodParams copied = new(parameters);
@@ -59,28 +59,31 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
     }
 }
 
-public class BodyTest : TestBase
+public class PaymentMethodTest : TestBase
 {
     [Fact]
     public void NewValidationWorks()
     {
-        Body value = new New() { ReturnUrl = "return_url" };
+        PaymentMethod value = new New() { ReturnUrl = "return_url" };
         value.Validate();
     }
 
     [Fact]
     public void ExistingValidationWorks()
     {
-        Body value = new Existing("payment_method_id");
+        PaymentMethod value = new Existing("payment_method_id");
         value.Validate();
     }
 
     [Fact]
     public void NewSerializationRoundtripWorks()
     {
-        Body value = new New() { ReturnUrl = "return_url" };
+        PaymentMethod value = new New() { ReturnUrl = "return_url" };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Body>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<PaymentMethod>(
+            element,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -88,9 +91,12 @@ public class BodyTest : TestBase
     [Fact]
     public void ExistingSerializationRoundtripWorks()
     {
-        Body value = new Existing("payment_method_id");
+        PaymentMethod value = new Existing("payment_method_id");
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Body>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<PaymentMethod>(
+            element,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }

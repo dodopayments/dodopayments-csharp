@@ -35,8 +35,8 @@ CheckoutSessionCreateParams parameters = new()
     [
         new()
         {
-            ProductID = "product_id",
-            Quantity = 0,
+            ProductID = "pdt_example",
+            Quantity = 1,
         },
     ],
 };

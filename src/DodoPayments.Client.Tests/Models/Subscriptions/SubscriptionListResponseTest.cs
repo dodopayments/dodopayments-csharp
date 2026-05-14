@@ -96,7 +96,7 @@ public class SubscriptionListResponseTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
-        List<SubscriptionListResponseDiscount> expectedDiscounts =
+        List<Discount> expectedDiscounts =
         [
             new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 },
         ];
@@ -352,7 +352,7 @@ public class SubscriptionListResponseTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
-        List<SubscriptionListResponseDiscount> expectedDiscounts =
+        List<Discount> expectedDiscounts =
         [
             new() { DiscountID = "discount_id", DiscountCyclesRemaining = 0 },
         ];
@@ -804,16 +804,12 @@ public class SubscriptionListResponseTest : TestBase
     }
 }
 
-public class SubscriptionListResponseDiscountTest : TestBase
+public class DiscountTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionListResponseDiscount
-        {
-            DiscountID = "discount_id",
-            DiscountCyclesRemaining = 0,
-        };
+        var model = new Discount { DiscountID = "discount_id", DiscountCyclesRemaining = 0 };
 
         string expectedDiscountID = "discount_id";
         int expectedDiscountCyclesRemaining = 0;
@@ -825,17 +821,10 @@ public class SubscriptionListResponseDiscountTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionListResponseDiscount
-        {
-            DiscountID = "discount_id",
-            DiscountCyclesRemaining = 0,
-        };
+        var model = new Discount { DiscountID = "discount_id", DiscountCyclesRemaining = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionListResponseDiscount>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Discount>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -843,14 +832,10 @@ public class SubscriptionListResponseDiscountTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionListResponseDiscount
-        {
-            DiscountID = "discount_id",
-            DiscountCyclesRemaining = 0,
-        };
+        var model = new Discount { DiscountID = "discount_id", DiscountCyclesRemaining = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionListResponseDiscount>(
+        var deserialized = JsonSerializer.Deserialize<Discount>(
             element,
             ModelBase.SerializerOptions
         );
@@ -866,11 +851,7 @@ public class SubscriptionListResponseDiscountTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionListResponseDiscount
-        {
-            DiscountID = "discount_id",
-            DiscountCyclesRemaining = 0,
-        };
+        var model = new Discount { DiscountID = "discount_id", DiscountCyclesRemaining = 0 };
 
         model.Validate();
     }
@@ -878,7 +859,7 @@ public class SubscriptionListResponseDiscountTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionListResponseDiscount { DiscountID = "discount_id" };
+        var model = new Discount { DiscountID = "discount_id" };
 
         Assert.Null(model.DiscountCyclesRemaining);
         Assert.False(model.RawData.ContainsKey("discount_cycles_remaining"));
@@ -887,7 +868,7 @@ public class SubscriptionListResponseDiscountTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionListResponseDiscount { DiscountID = "discount_id" };
+        var model = new Discount { DiscountID = "discount_id" };
 
         model.Validate();
     }
@@ -895,7 +876,7 @@ public class SubscriptionListResponseDiscountTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new SubscriptionListResponseDiscount
+        var model = new Discount
         {
             DiscountID = "discount_id",
 
@@ -909,7 +890,7 @@ public class SubscriptionListResponseDiscountTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionListResponseDiscount
+        var model = new Discount
         {
             DiscountID = "discount_id",
 
@@ -922,13 +903,9 @@ public class SubscriptionListResponseDiscountTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionListResponseDiscount
-        {
-            DiscountID = "discount_id",
-            DiscountCyclesRemaining = 0,
-        };
+        var model = new Discount { DiscountID = "discount_id", DiscountCyclesRemaining = 0 };
 
-        SubscriptionListResponseDiscount copied = new(model);
+        Discount copied = new(model);
 
         Assert.Equal(model, copied);
     }
