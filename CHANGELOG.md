@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.19.0 (2026-05-21)
+
+Full Changelog: [v6.18.1...v6.19.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.18.1...v6.19.0)
+
+### Features
+
+* **api:** fixed a breaking modal change ([e6909d6](https://github.com/dodopayments/dodopayments-csharp/commit/e6909d6aa8b8a705945f7b491ad3546cef1289af))
+* **api:** stainless fixes ([271a972](https://github.com/dodopayments/dodopayments-csharp/commit/271a972d7df22673c9f904125cf23b2b28f72d18))
+* **api:** updated openapi spec to v1.99.0 and added missing endpoints as well ([2b3d6d0](https://github.com/dodopayments/dodopayments-csharp/commit/2b3d6d04bb85314fbaf1857962bc3d158e7fb76d))
+
 ## 6.18.1 (2026-05-14)
 
 Full Changelog: [v6.18.0...v6.18.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.18.0...v6.18.1)
