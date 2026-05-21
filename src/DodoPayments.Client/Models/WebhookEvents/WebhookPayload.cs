@@ -1610,18 +1610,18 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// List of products purchased in a one-time payment
     /// </summary>
-    public IReadOnlyList<Payments::OneTimeProductCartItem>? ProductCart
+    public IReadOnlyList<Payments::ProductCart>? ProductCart
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<
-                ImmutableArray<Payments::OneTimeProductCartItem>
-            >("product_cart");
+            return this._rawData.GetNullableStruct<ImmutableArray<Payments::ProductCart>>(
+                "product_cart"
+            );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Payments::OneTimeProductCartItem>?>(
+            this._rawData.Set<ImmutableArray<Payments::ProductCart>?>(
                 "product_cart",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
