@@ -1985,7 +1985,7 @@ public class PaymentTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<Payments::OneTimeProductCartItem> expectedProductCart =
+        List<Payments::ProductCart> expectedProductCart =
         [
             new() { ProductID = "product_id", Quantity = 0 },
         ];
@@ -2393,7 +2393,7 @@ public class PaymentTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<Payments::OneTimeProductCartItem> expectedProductCart =
+        List<Payments::ProductCart> expectedProductCart =
         [
             new() { ProductID = "product_id", Quantity = 0 },
         ];
