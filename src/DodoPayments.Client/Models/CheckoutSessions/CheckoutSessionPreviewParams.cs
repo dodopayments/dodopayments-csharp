@@ -170,6 +170,21 @@ public record class CheckoutSessionPreviewParams : ParamsBase
     }
 
     /// <summary>
+    /// Optional business / legal name associated with the tax id. When provided
+    /// together with a valid tax id for a B2B purchase, this name is rendered on
+    /// the invoice instead of the customer's personal name.
+    /// </summary>
+    public string? CustomerBusinessName
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("customer_business_name");
+        }
+        init { this._rawBodyData.Set("customer_business_name", value); }
+    }
+
+    /// <summary>
     /// Customization for the checkout session page
     /// </summary>
     public CheckoutSessionCustomization? Customization

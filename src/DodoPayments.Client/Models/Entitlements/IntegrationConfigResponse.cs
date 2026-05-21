@@ -686,14 +686,12 @@ public sealed record class IntegrationConfigResponseGitHubConfig : JsonModel
     /// <summary>
     /// Permission to grant on the repository.
     /// </summary>
-    public required ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission> Permission
+    public required ApiEnum<string, GitHubPermission> Permission
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission>
-            >("permission");
+            return this._rawData.GetNotNullClass<ApiEnum<string, GitHubPermission>>("permission");
         }
         init { this._rawData.Set("permission", value); }
     }
@@ -757,63 +755,6 @@ class IntegrationConfigResponseGitHubConfigFromRaw
     public IntegrationConfigResponseGitHubConfig FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => IntegrationConfigResponseGitHubConfig.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Permission to grant on the repository.
-/// </summary>
-[JsonConverter(typeof(IntegrationConfigResponseGitHubConfigPermissionConverter))]
-public enum IntegrationConfigResponseGitHubConfigPermission
-{
-    Pull,
-    Push,
-    Admin,
-    Maintain,
-    Triage,
-}
-
-sealed class IntegrationConfigResponseGitHubConfigPermissionConverter
-    : JsonConverter<IntegrationConfigResponseGitHubConfigPermission>
-{
-    public override IntegrationConfigResponseGitHubConfigPermission Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "pull" => IntegrationConfigResponseGitHubConfigPermission.Pull,
-            "push" => IntegrationConfigResponseGitHubConfigPermission.Push,
-            "admin" => IntegrationConfigResponseGitHubConfigPermission.Admin,
-            "maintain" => IntegrationConfigResponseGitHubConfigPermission.Maintain,
-            "triage" => IntegrationConfigResponseGitHubConfigPermission.Triage,
-            _ => (IntegrationConfigResponseGitHubConfigPermission)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        IntegrationConfigResponseGitHubConfigPermission value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                IntegrationConfigResponseGitHubConfigPermission.Pull => "pull",
-                IntegrationConfigResponseGitHubConfigPermission.Push => "push",
-                IntegrationConfigResponseGitHubConfigPermission.Admin => "admin",
-                IntegrationConfigResponseGitHubConfigPermission.Maintain => "maintain",
-                IntegrationConfigResponseGitHubConfigPermission.Triage => "triage",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(

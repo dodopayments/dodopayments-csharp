@@ -597,12 +597,12 @@ public sealed record class GitHubConfig : JsonModel
     /// <summary>
     /// Permission to grant on the repository.
     /// </summary>
-    public required ApiEnum<string, Permission> Permission
+    public required ApiEnum<string, GitHubPermission> Permission
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Permission>>("permission");
+            return this._rawData.GetNotNullClass<ApiEnum<string, GitHubPermission>>("permission");
         }
         init { this._rawData.Set("permission", value); }
     }
@@ -660,62 +660,6 @@ class GitHubConfigFromRaw : IFromRawJson<GitHubConfig>
     /// <inheritdoc/>
     public GitHubConfig FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         GitHubConfig.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Permission to grant on the repository.
-/// </summary>
-[JsonConverter(typeof(PermissionConverter))]
-public enum Permission
-{
-    Pull,
-    Push,
-    Admin,
-    Maintain,
-    Triage,
-}
-
-sealed class PermissionConverter : JsonConverter<Permission>
-{
-    public override Permission Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "pull" => Permission.Pull,
-            "push" => Permission.Push,
-            "admin" => Permission.Admin,
-            "maintain" => Permission.Maintain,
-            "triage" => Permission.Triage,
-            _ => (Permission)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        Permission value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                Permission.Pull => "pull",
-                Permission.Push => "push",
-                Permission.Admin => "admin",
-                Permission.Maintain => "maintain",
-                Permission.Triage => "triage",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<DiscordConfig, DiscordConfigFromRaw>))]

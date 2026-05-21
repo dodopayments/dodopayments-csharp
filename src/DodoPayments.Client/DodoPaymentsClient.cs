@@ -217,6 +217,12 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         get { return _entitlements.Value; }
     }
 
+    readonly Lazy<IProductCollectionService> _productCollections;
+    public IProductCollectionService ProductCollections
+    {
+        get { return _productCollections.Value; }
+    }
+
     public void Dispose() => this.HttpClient.Dispose();
 
     public DodoPaymentsClient()
@@ -247,6 +253,7 @@ public sealed class DodoPaymentsClient : IDodoPaymentsClient
         _balances = new(() => new BalanceService(this));
         _creditEntitlements = new(() => new CreditEntitlementService(this));
         _entitlements = new(() => new EntitlementService(this));
+        _productCollections = new(() => new ProductCollectionService(this));
     }
 
     public DodoPaymentsClient(ClientOptions options)
@@ -467,6 +474,12 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
     public IEntitlementServiceWithRawResponse Entitlements
     {
         get { return _entitlements.Value; }
+    }
+
+    readonly Lazy<IProductCollectionServiceWithRawResponse> _productCollections;
+    public IProductCollectionServiceWithRawResponse ProductCollections
+    {
+        get { return _productCollections.Value; }
     }
 
     /// <inheritdoc/>
@@ -690,6 +703,7 @@ public sealed class DodoPaymentsClientWithRawResponse : IDodoPaymentsClientWithR
         _balances = new(() => new BalanceServiceWithRawResponse(this));
         _creditEntitlements = new(() => new CreditEntitlementServiceWithRawResponse(this));
         _entitlements = new(() => new EntitlementServiceWithRawResponse(this));
+        _productCollections = new(() => new ProductCollectionServiceWithRawResponse(this));
     }
 
     public DodoPaymentsClientWithRawResponse(ClientOptions options)

@@ -13,7 +13,7 @@ public class EntitlementServiceTest : TestBase
             {
                 IntegrationConfig = new GitHubConfig()
                 {
-                    Permission = Permission.Pull,
+                    Permission = GitHubPermission.Pull,
                     TargetID = "target_id",
                 },
                 IntegrationType = EntitlementIntegrationType.Discord,

@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
@@ -140,6 +141,21 @@ public record class SubscriptionCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Optional business / legal name associated with the tax id. When provided
+    /// together with a valid tax id for a B2B purchase, this name is rendered on
+    /// the invoice instead of the customer's personal name.
+    /// </summary>
+    public string? CustomerBusinessName
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("customer_business_name");
+        }
+        init { this._rawBodyData.Set("customer_business_name", value); }
+    }
+
+    /// <summary>
     /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
     /// </summary>
     [Obsolete("Use `discount_id` instead.")]
@@ -241,18 +257,18 @@ public record class SubscriptionCreateParams : ParamsBase
     /// List of one time products that will be bundled with the first payment for
     /// this subscription
     /// </summary>
-    public IReadOnlyList<OneTimeProductCartItem>? OneTimeProductCart
+    public IReadOnlyList<OneTimeProductCart>? OneTimeProductCart
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<ImmutableArray<OneTimeProductCartItem>>(
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<OneTimeProductCart>>(
                 "one_time_product_cart"
             );
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<OneTimeProductCartItem>?>(
+            this._rawBodyData.Set<ImmutableArray<OneTimeProductCart>?>(
                 "one_time_product_cart",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -515,4 +531,87 @@ public record class SubscriptionCreateParams : ParamsBase
     {
         return 0;
     }
+}
+
+[JsonConverter(typeof(JsonModelConverter<OneTimeProductCart, OneTimeProductCartFromRaw>))]
+public sealed record class OneTimeProductCart : JsonModel
+{
+    public required string ProductID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("product_id");
+        }
+        init { this._rawData.Set("product_id", value); }
+    }
+
+    public required int Quantity
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("quantity");
+        }
+        init { this._rawData.Set("quantity", value); }
+    }
+
+    /// <summary>
+    /// Amount the customer pays if pay_what_you_want is enabled. If disabled then
+    /// amount will be ignored Represented in the lowest denomination of the currency
+    /// (e.g., cents for USD). For example, to charge $1.00, pass `100`.
+    /// </summary>
+    public int? Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("amount");
+        }
+        init { this._rawData.Set("amount", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ProductID;
+        _ = this.Quantity;
+        _ = this.Amount;
+    }
+
+    public OneTimeProductCart() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public OneTimeProductCart(OneTimeProductCart oneTimeProductCart)
+        : base(oneTimeProductCart) { }
+#pragma warning restore CS8618
+
+    public OneTimeProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    OneTimeProductCart(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="OneTimeProductCartFromRaw.FromRawUnchecked"/>
+    public static OneTimeProductCart FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class OneTimeProductCartFromRaw : IFromRawJson<OneTimeProductCart>
+{
+    /// <inheritdoc/>
+    public OneTimeProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        OneTimeProductCart.FromRawUnchecked(rawData);
 }

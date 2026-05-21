@@ -1610,18 +1610,18 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// List of products purchased in a one-time payment
     /// </summary>
-    public IReadOnlyList<Payments::ProductCart>? ProductCart
+    public IReadOnlyList<Payments::OneTimeProductCartItem>? ProductCart
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<Payments::ProductCart>>(
-                "product_cart"
-            );
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<Payments::OneTimeProductCartItem>
+            >("product_cart");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Payments::ProductCart>?>(
+            this._rawData.Set<ImmutableArray<Payments::OneTimeProductCartItem>?>(
                 "product_cart",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -2288,6 +2288,20 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// Business / legal name associated with the tax id (B2B). When set this is
+    /// used on the invoice in place of the customer's personal name.
+    /// </summary>
+    public string? CustomerBusinessName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("customer_business_name");
+        }
+        init { this._rawData.Set("customer_business_name", value); }
+    }
+
+    /// <summary>
     /// DEPRECATED: Use discounts[].cycles_remaining instead.
     /// </summary>
     public int? DiscountCyclesRemaining
@@ -2432,6 +2446,7 @@ public sealed record class Subscription : JsonModel
             CancellationFeedback = subscription.CancellationFeedback,
             CancelledAt = subscription.CancelledAt,
             CustomFieldResponses = subscription.CustomFieldResponses,
+            CustomerBusinessName = subscription.CustomerBusinessName,
             DiscountCyclesRemaining = subscription.DiscountCyclesRemaining,
             DiscountID = subscription.DiscountID,
             Discounts = subscription.Discounts,
@@ -2487,6 +2502,7 @@ public sealed record class Subscription : JsonModel
         {
             item.Validate();
         }
+        _ = this.CustomerBusinessName;
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;
         foreach (var item in this.Discounts ?? [])

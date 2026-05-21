@@ -51,6 +51,7 @@ public class SubscriptionListResponseTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PaymentMethodID = "payment_method_id",
@@ -118,6 +119,7 @@ public class SubscriptionListResponseTest : TestBase
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedCustomerBusinessName = "customer_business_name";
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         string expectedPaymentMethodID = "payment_method_id";
@@ -175,6 +177,7 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
         Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
         Assert.Equal(expectedCancelledAt, model.CancelledAt);
+        Assert.Equal(expectedCustomerBusinessName, model.CustomerBusinessName);
         Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
@@ -224,6 +227,7 @@ public class SubscriptionListResponseTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PaymentMethodID = "payment_method_id",
@@ -300,6 +304,7 @@ public class SubscriptionListResponseTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PaymentMethodID = "payment_method_id",
@@ -374,6 +379,7 @@ public class SubscriptionListResponseTest : TestBase
         bool expectedTaxInclusive = true;
         int expectedTrialPeriodDays = 0;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedCustomerBusinessName = "customer_business_name";
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         string expectedPaymentMethodID = "payment_method_id";
@@ -431,6 +437,7 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
         Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
         Assert.Equal(expectedCancelledAt, deserialized.CancelledAt);
+        Assert.Equal(expectedCustomerBusinessName, deserialized.CustomerBusinessName);
         Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
@@ -480,6 +487,7 @@ public class SubscriptionListResponseTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PaymentMethodID = "payment_method_id",
@@ -553,6 +561,8 @@ public class SubscriptionListResponseTest : TestBase
 
         Assert.Null(model.CancelledAt);
         Assert.False(model.RawData.ContainsKey("cancelled_at"));
+        Assert.Null(model.CustomerBusinessName);
+        Assert.False(model.RawData.ContainsKey("customer_business_name"));
         Assert.Null(model.DiscountCyclesRemaining);
         Assert.False(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
@@ -654,6 +664,7 @@ public class SubscriptionListResponseTest : TestBase
             TrialPeriodDays = 0,
 
             CancelledAt = null,
+            CustomerBusinessName = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             PaymentMethodID = null,
@@ -664,6 +675,8 @@ public class SubscriptionListResponseTest : TestBase
 
         Assert.Null(model.CancelledAt);
         Assert.True(model.RawData.ContainsKey("cancelled_at"));
+        Assert.Null(model.CustomerBusinessName);
+        Assert.True(model.RawData.ContainsKey("customer_business_name"));
         Assert.Null(model.DiscountCyclesRemaining);
         Assert.True(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
@@ -720,6 +733,7 @@ public class SubscriptionListResponseTest : TestBase
             TrialPeriodDays = 0,
 
             CancelledAt = null,
+            CustomerBusinessName = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             PaymentMethodID = null,
@@ -772,6 +786,7 @@ public class SubscriptionListResponseTest : TestBase
             TaxInclusive = true,
             TrialPeriodDays = 0,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             PaymentMethodID = "payment_method_id",

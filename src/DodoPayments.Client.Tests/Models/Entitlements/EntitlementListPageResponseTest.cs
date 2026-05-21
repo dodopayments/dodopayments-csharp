@@ -22,7 +22,7 @@ public class EntitlementListPageResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
-                        Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+                        Permission = GitHubPermission.Pull,
                         TargetID = "target_id",
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
@@ -44,7 +44,7 @@ public class EntitlementListPageResponseTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                 {
-                    Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+                    Permission = GitHubPermission.Pull,
                     TargetID = "target_id",
                 },
                 IntegrationType = EntitlementIntegrationType.Discord,
@@ -77,7 +77,7 @@ public class EntitlementListPageResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
-                        Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+                        Permission = GitHubPermission.Pull,
                         TargetID = "target_id",
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
@@ -113,7 +113,7 @@ public class EntitlementListPageResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
-                        Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+                        Permission = GitHubPermission.Pull,
                         TargetID = "target_id",
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
@@ -142,7 +142,7 @@ public class EntitlementListPageResponseTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                 {
-                    Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+                    Permission = GitHubPermission.Pull,
                     TargetID = "target_id",
                 },
                 IntegrationType = EntitlementIntegrationType.Discord,
@@ -175,7 +175,7 @@ public class EntitlementListPageResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
-                        Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+                        Permission = GitHubPermission.Pull,
                         TargetID = "target_id",
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
@@ -205,7 +205,7 @@ public class EntitlementListPageResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
                     {
-                        Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+                        Permission = GitHubPermission.Pull,
                         TargetID = "target_id",
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
