@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
@@ -34,6 +35,7 @@ public class PaymentCreateParamsTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
+            CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
@@ -57,7 +59,7 @@ public class PaymentCreateParamsTest : TestBase
             Zipcode = "zipcode",
         };
         CustomerRequest expectedCustomer = new AttachExistingCustomer("customer_id");
-        List<OneTimeProductCartItem> expectedProductCart =
+        List<ProductCart> expectedProductCart =
         [
             new()
             {
@@ -72,6 +74,7 @@ public class PaymentCreateParamsTest : TestBase
             PaymentMethodTypes.Ach,
         ];
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
+        string expectedCustomerBusinessName = "customer_business_name";
         string expectedDiscountCode = "discount_code";
         List<string> expectedDiscountCodes = ["string"];
         bool expectedForce3ds = true;
@@ -109,6 +112,7 @@ public class PaymentCreateParamsTest : TestBase
             );
         }
         Assert.Equal(expectedBillingCurrency, parameters.BillingCurrency);
+        Assert.Equal(expectedCustomerBusinessName, parameters.CustomerBusinessName);
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
         Assert.NotNull(parameters.DiscountCodes);
         Assert.Equal(expectedDiscountCodes.Count, parameters.DiscountCodes.Count);
@@ -161,6 +165,7 @@ public class PaymentCreateParamsTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
+            CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
@@ -207,6 +212,7 @@ public class PaymentCreateParamsTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
+            CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
@@ -268,6 +274,8 @@ public class PaymentCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
         Assert.Null(parameters.BillingCurrency);
         Assert.False(parameters.RawBodyData.ContainsKey("billing_currency"));
+        Assert.Null(parameters.CustomerBusinessName);
+        Assert.False(parameters.RawBodyData.ContainsKey("customer_business_name"));
         Assert.Null(parameters.DiscountCode);
         Assert.False(parameters.RawBodyData.ContainsKey("discount_code"));
         Assert.Null(parameters.DiscountCodes);
@@ -317,6 +325,7 @@ public class PaymentCreateParamsTest : TestBase
             AdaptiveCurrencyFeesInclusive = null,
             AllowedPaymentMethodTypes = null,
             BillingCurrency = null,
+            CustomerBusinessName = null,
             DiscountCode = null,
             DiscountCodes = null,
             Force3ds = null,
@@ -333,6 +342,8 @@ public class PaymentCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("allowed_payment_method_types"));
         Assert.Null(parameters.BillingCurrency);
         Assert.True(parameters.RawBodyData.ContainsKey("billing_currency"));
+        Assert.Null(parameters.CustomerBusinessName);
+        Assert.True(parameters.RawBodyData.ContainsKey("customer_business_name"));
         Assert.Null(parameters.DiscountCode);
         Assert.True(parameters.RawBodyData.ContainsKey("discount_code"));
         Assert.Null(parameters.DiscountCodes);
@@ -407,6 +418,7 @@ public class PaymentCreateParamsTest : TestBase
             AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
+            CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
@@ -424,5 +436,146 @@ public class PaymentCreateParamsTest : TestBase
         PaymentCreateParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
+    }
+}
+
+public class ProductCartTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new ProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+            Amount = 0,
+        };
+
+        string expectedProductID = "product_id";
+        int expectedQuantity = 0;
+        int expectedAmount = 0;
+
+        Assert.Equal(expectedProductID, model.ProductID);
+        Assert.Equal(expectedQuantity, model.Quantity);
+        Assert.Equal(expectedAmount, model.Amount);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new ProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+            Amount = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ProductCart>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new ProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+            Amount = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ProductCart>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedProductID = "product_id";
+        int expectedQuantity = 0;
+        int expectedAmount = 0;
+
+        Assert.Equal(expectedProductID, deserialized.ProductID);
+        Assert.Equal(expectedQuantity, deserialized.Quantity);
+        Assert.Equal(expectedAmount, deserialized.Amount);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new ProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+            Amount = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
+
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new ProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+
+            Amount = null,
+        };
+
+        Assert.Null(model.Amount);
+        Assert.True(model.RawData.ContainsKey("amount"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new ProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+
+            Amount = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ProductCart
+        {
+            ProductID = "product_id",
+            Quantity = 0,
+            Amount = 0,
+        };
+
+        ProductCart copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

@@ -217,7 +217,10 @@ public class PaymentTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<ProductCart> expectedProductCart = [new() { ProductID = "product_id", Quantity = 0 }];
+        List<OneTimeProductCartItem> expectedProductCart =
+        [
+            new() { ProductID = "product_id", Quantity = 0 },
+        ];
         ApiEnum<string, PaymentRefundStatus> expectedRefundStatus = PaymentRefundStatus.Partial;
         int expectedSettlementTax = 0;
         ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
@@ -619,7 +622,10 @@ public class PaymentTest : TestBase
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        List<ProductCart> expectedProductCart = [new() { ProductID = "product_id", Quantity = 0 }];
+        List<OneTimeProductCartItem> expectedProductCart =
+        [
+            new() { ProductID = "product_id", Quantity = 0 },
+        ];
         ApiEnum<string, PaymentRefundStatus> expectedRefundStatus = PaymentRefundStatus.Partial;
         int expectedSettlementTax = 0;
         ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
@@ -1321,72 +1327,6 @@ public class PaymentTest : TestBase
         };
 
         Payment copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class ProductCartTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
-
-        string expectedProductID = "product_id";
-        int expectedQuantity = 0;
-
-        Assert.Equal(expectedProductID, model.ProductID);
-        Assert.Equal(expectedQuantity, model.Quantity);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ProductCart>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ProductCart>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedProductID = "product_id";
-        int expectedQuantity = 0;
-
-        Assert.Equal(expectedProductID, deserialized.ProductID);
-        Assert.Equal(expectedQuantity, deserialized.Quantity);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new ProductCart { ProductID = "product_id", Quantity = 0 };
-
-        ProductCart copied = new(model);
 
         Assert.Equal(model, copied);
     }

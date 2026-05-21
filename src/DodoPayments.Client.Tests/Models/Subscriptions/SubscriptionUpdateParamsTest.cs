@@ -46,6 +46,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                     RolloverTimeframeInterval = TimeInterval.Day,
                 },
             ],
+            CustomerBusinessName = "customer_business_name",
             CustomerName = "customer_name",
             DisableOnDemand = new(DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")),
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -85,6 +86,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 RolloverTimeframeInterval = TimeInterval.Day,
             },
         ];
+        string expectedCustomerBusinessName = "customer_business_name";
         string expectedCustomerName = "customer_name";
         DisableOnDemand expectedDisableOnDemand = new(
             DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")
@@ -106,6 +108,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         {
             Assert.Equal(expectedCreditEntitlementCart[i], parameters.CreditEntitlementCart[i]);
         }
+        Assert.Equal(expectedCustomerBusinessName, parameters.CustomerBusinessName);
         Assert.Equal(expectedCustomerName, parameters.CustomerName);
         Assert.Equal(expectedDisableOnDemand, parameters.DisableOnDemand);
         Assert.NotNull(parameters.Metadata);
@@ -138,6 +141,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("cancellation_feedback"));
         Assert.Null(parameters.CreditEntitlementCart);
         Assert.False(parameters.RawBodyData.ContainsKey("credit_entitlement_cart"));
+        Assert.Null(parameters.CustomerBusinessName);
+        Assert.False(parameters.RawBodyData.ContainsKey("customer_business_name"));
         Assert.Null(parameters.CustomerName);
         Assert.False(parameters.RawBodyData.ContainsKey("customer_name"));
         Assert.Null(parameters.DisableOnDemand);
@@ -165,6 +170,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             CancellationComment = null,
             CancellationFeedback = null,
             CreditEntitlementCart = null,
+            CustomerBusinessName = null,
             CustomerName = null,
             DisableOnDemand = null,
             Metadata = null,
@@ -185,6 +191,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("cancellation_feedback"));
         Assert.Null(parameters.CreditEntitlementCart);
         Assert.True(parameters.RawBodyData.ContainsKey("credit_entitlement_cart"));
+        Assert.Null(parameters.CustomerBusinessName);
+        Assert.True(parameters.RawBodyData.ContainsKey("customer_business_name"));
         Assert.Null(parameters.CustomerName);
         Assert.True(parameters.RawBodyData.ContainsKey("customer_name"));
         Assert.Null(parameters.DisableOnDemand);
@@ -249,6 +257,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                     RolloverTimeframeInterval = TimeInterval.Day,
                 },
             ],
+            CustomerBusinessName = "customer_business_name",
             CustomerName = "customer_name",
             DisableOnDemand = new(DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")),
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },

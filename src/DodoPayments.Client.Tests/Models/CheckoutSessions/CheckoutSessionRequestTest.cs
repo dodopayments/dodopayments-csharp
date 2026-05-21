@@ -57,6 +57,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
             ],
             Customer = new AttachExistingCustomer("customer_id"),
+            CustomerBusinessName = "customer_business_name",
             Customization = new()
             {
                 ForceLanguage = "force_language",
@@ -116,6 +117,7 @@ public class CheckoutSessionRequestTest : TestBase
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
+                AllowCustomerEditingBusinessName = true,
                 AllowCustomerEditingCity = true,
                 AllowCustomerEditingCountry = true,
                 AllowCustomerEditingEmail = true,
@@ -201,6 +203,7 @@ public class CheckoutSessionRequestTest : TestBase
             },
         ];
         CustomerRequest expectedCustomer = new AttachExistingCustomer("customer_id");
+        string expectedCustomerBusinessName = "customer_business_name";
         CheckoutSessionCustomization expectedCustomization = new()
         {
             ForceLanguage = "force_language",
@@ -260,6 +263,7 @@ public class CheckoutSessionRequestTest : TestBase
         CheckoutSessionFlags expectedFeatureFlags = new()
         {
             AllowCurrencySelection = true,
+            AllowCustomerEditingBusinessName = true,
             AllowCustomerEditingCity = true,
             AllowCustomerEditingCountry = true,
             AllowCustomerEditingEmail = true,
@@ -323,6 +327,7 @@ public class CheckoutSessionRequestTest : TestBase
             Assert.Equal(expectedCustomFields[i], model.CustomFields[i]);
         }
         Assert.Equal(expectedCustomer, model.Customer);
+        Assert.Equal(expectedCustomerBusinessName, model.CustomerBusinessName);
         Assert.Equal(expectedCustomization, model.Customization);
         Assert.Equal(expectedDiscountCode, model.DiscountCode);
         Assert.NotNull(model.DiscountCodes);
@@ -400,6 +405,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
             ],
             Customer = new AttachExistingCustomer("customer_id"),
+            CustomerBusinessName = "customer_business_name",
             Customization = new()
             {
                 ForceLanguage = "force_language",
@@ -459,6 +465,7 @@ public class CheckoutSessionRequestTest : TestBase
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
+                AllowCustomerEditingBusinessName = true,
                 AllowCustomerEditingCity = true,
                 AllowCustomerEditingCountry = true,
                 AllowCustomerEditingEmail = true,
@@ -555,6 +562,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
             ],
             Customer = new AttachExistingCustomer("customer_id"),
+            CustomerBusinessName = "customer_business_name",
             Customization = new()
             {
                 ForceLanguage = "force_language",
@@ -614,6 +622,7 @@ public class CheckoutSessionRequestTest : TestBase
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
+                AllowCustomerEditingBusinessName = true,
                 AllowCustomerEditingCity = true,
                 AllowCustomerEditingCountry = true,
                 AllowCustomerEditingEmail = true,
@@ -706,6 +715,7 @@ public class CheckoutSessionRequestTest : TestBase
             },
         ];
         CustomerRequest expectedCustomer = new AttachExistingCustomer("customer_id");
+        string expectedCustomerBusinessName = "customer_business_name";
         CheckoutSessionCustomization expectedCustomization = new()
         {
             ForceLanguage = "force_language",
@@ -765,6 +775,7 @@ public class CheckoutSessionRequestTest : TestBase
         CheckoutSessionFlags expectedFeatureFlags = new()
         {
             AllowCurrencySelection = true,
+            AllowCustomerEditingBusinessName = true,
             AllowCustomerEditingCity = true,
             AllowCustomerEditingCountry = true,
             AllowCustomerEditingEmail = true,
@@ -831,6 +842,7 @@ public class CheckoutSessionRequestTest : TestBase
             Assert.Equal(expectedCustomFields[i], deserialized.CustomFields[i]);
         }
         Assert.Equal(expectedCustomer, deserialized.Customer);
+        Assert.Equal(expectedCustomerBusinessName, deserialized.CustomerBusinessName);
         Assert.Equal(expectedCustomization, deserialized.Customization);
         Assert.Equal(expectedDiscountCode, deserialized.DiscountCode);
         Assert.NotNull(deserialized.DiscountCodes);
@@ -908,6 +920,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
             ],
             Customer = new AttachExistingCustomer("customer_id"),
+            CustomerBusinessName = "customer_business_name",
             Customization = new()
             {
                 ForceLanguage = "force_language",
@@ -967,6 +980,7 @@ public class CheckoutSessionRequestTest : TestBase
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
+                AllowCustomerEditingBusinessName = true,
                 AllowCustomerEditingCity = true,
                 AllowCustomerEditingCountry = true,
                 AllowCustomerEditingEmail = true,
@@ -1056,6 +1070,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
             ],
             Customer = new AttachExistingCustomer("customer_id"),
+            CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
@@ -1140,6 +1155,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
             ],
             Customer = new AttachExistingCustomer("customer_id"),
+            CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
@@ -1213,6 +1229,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
             ],
             Customer = new AttachExistingCustomer("customer_id"),
+            CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
@@ -1305,6 +1322,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
             ],
             Customer = new AttachExistingCustomer("customer_id"),
+            CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
@@ -1420,6 +1438,7 @@ public class CheckoutSessionRequestTest : TestBase
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
+                AllowCustomerEditingBusinessName = true,
                 AllowCustomerEditingCity = true,
                 AllowCustomerEditingCountry = true,
                 AllowCustomerEditingEmail = true,
@@ -1452,6 +1471,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.False(model.RawData.ContainsKey("custom_fields"));
         Assert.Null(model.Customer);
         Assert.False(model.RawData.ContainsKey("customer"));
+        Assert.Null(model.CustomerBusinessName);
+        Assert.False(model.RawData.ContainsKey("customer_business_name"));
         Assert.Null(model.DiscountCode);
         Assert.False(model.RawData.ContainsKey("discount_code"));
         Assert.Null(model.DiscountCodes);
@@ -1555,6 +1576,7 @@ public class CheckoutSessionRequestTest : TestBase
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
+                AllowCustomerEditingBusinessName = true,
                 AllowCustomerEditingCity = true,
                 AllowCustomerEditingCountry = true,
                 AllowCustomerEditingEmail = true,
@@ -1659,6 +1681,7 @@ public class CheckoutSessionRequestTest : TestBase
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
+                AllowCustomerEditingBusinessName = true,
                 AllowCustomerEditingCity = true,
                 AllowCustomerEditingCountry = true,
                 AllowCustomerEditingEmail = true,
@@ -1684,6 +1707,7 @@ public class CheckoutSessionRequestTest : TestBase
             CancelUrl = null,
             CustomFields = null,
             Customer = null,
+            CustomerBusinessName = null,
             DiscountCode = null,
             DiscountCodes = null,
             Force3ds = null,
@@ -1708,6 +1732,8 @@ public class CheckoutSessionRequestTest : TestBase
         Assert.True(model.RawData.ContainsKey("custom_fields"));
         Assert.Null(model.Customer);
         Assert.True(model.RawData.ContainsKey("customer"));
+        Assert.Null(model.CustomerBusinessName);
+        Assert.True(model.RawData.ContainsKey("customer_business_name"));
         Assert.Null(model.DiscountCode);
         Assert.True(model.RawData.ContainsKey("discount_code"));
         Assert.Null(model.DiscountCodes);
@@ -1811,6 +1837,7 @@ public class CheckoutSessionRequestTest : TestBase
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
+                AllowCustomerEditingBusinessName = true,
                 AllowCustomerEditingCity = true,
                 AllowCustomerEditingCountry = true,
                 AllowCustomerEditingEmail = true,
@@ -1836,6 +1863,7 @@ public class CheckoutSessionRequestTest : TestBase
             CancelUrl = null,
             CustomFields = null,
             Customer = null,
+            CustomerBusinessName = null,
             DiscountCode = null,
             DiscountCodes = null,
             Force3ds = null,
@@ -1899,6 +1927,7 @@ public class CheckoutSessionRequestTest : TestBase
                 },
             ],
             Customer = new AttachExistingCustomer("customer_id"),
+            CustomerBusinessName = "customer_business_name",
             Customization = new()
             {
                 ForceLanguage = "force_language",
@@ -1958,6 +1987,7 @@ public class CheckoutSessionRequestTest : TestBase
             FeatureFlags = new()
             {
                 AllowCurrencySelection = true,
+                AllowCustomerEditingBusinessName = true,
                 AllowCustomerEditingCity = true,
                 AllowCustomerEditingCountry = true,
                 AllowCustomerEditingEmail = true,

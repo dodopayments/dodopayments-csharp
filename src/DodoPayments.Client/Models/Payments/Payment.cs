@@ -449,16 +449,18 @@ public sealed record class Payment : JsonModel
     /// <summary>
     /// List of products purchased in a one-time payment
     /// </summary>
-    public IReadOnlyList<ProductCart>? ProductCart
+    public IReadOnlyList<OneTimeProductCartItem>? ProductCart
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<ProductCart>>("product_cart");
+            return this._rawData.GetNullableStruct<ImmutableArray<OneTimeProductCartItem>>(
+                "product_cart"
+            );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<ProductCart>?>(
+            this._rawData.Set<ImmutableArray<OneTimeProductCartItem>?>(
                 "product_cart",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -637,69 +639,4 @@ class PaymentFromRaw : IFromRawJson<Payment>
     /// <inheritdoc/>
     public Payment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Payment.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(JsonModelConverter<ProductCart, ProductCartFromRaw>))]
-public sealed record class ProductCart : JsonModel
-{
-    public required string ProductID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("product_id");
-        }
-        init { this._rawData.Set("product_id", value); }
-    }
-
-    public required int Quantity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<int>("quantity");
-        }
-        init { this._rawData.Set("quantity", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.ProductID;
-        _ = this.Quantity;
-    }
-
-    public ProductCart() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public ProductCart(ProductCart productCart)
-        : base(productCart) { }
-#pragma warning restore CS8618
-
-    public ProductCart(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    ProductCart(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="ProductCartFromRaw.FromRawUnchecked"/>
-    public static ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class ProductCartFromRaw : IFromRawJson<ProductCart>
-{
-    /// <inheritdoc/>
-    public ProductCart FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        ProductCart.FromRawUnchecked(rawData);
 }

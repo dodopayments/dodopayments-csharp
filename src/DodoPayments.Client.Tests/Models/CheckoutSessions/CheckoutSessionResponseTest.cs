@@ -13,13 +13,22 @@ public class CheckoutSessionResponseTest : TestBase
         {
             SessionID = "session_id",
             CheckoutUrl = "checkout_url",
+            ClientSecret = "client_secret",
+            PaymentID = "payment_id",
+            PublishableKey = "publishable_key",
         };
 
         string expectedSessionID = "session_id";
         string expectedCheckoutUrl = "checkout_url";
+        string expectedClientSecret = "client_secret";
+        string expectedPaymentID = "payment_id";
+        string expectedPublishableKey = "publishable_key";
 
         Assert.Equal(expectedSessionID, model.SessionID);
         Assert.Equal(expectedCheckoutUrl, model.CheckoutUrl);
+        Assert.Equal(expectedClientSecret, model.ClientSecret);
+        Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedPublishableKey, model.PublishableKey);
     }
 
     [Fact]
@@ -29,6 +38,9 @@ public class CheckoutSessionResponseTest : TestBase
         {
             SessionID = "session_id",
             CheckoutUrl = "checkout_url",
+            ClientSecret = "client_secret",
+            PaymentID = "payment_id",
+            PublishableKey = "publishable_key",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -47,6 +59,9 @@ public class CheckoutSessionResponseTest : TestBase
         {
             SessionID = "session_id",
             CheckoutUrl = "checkout_url",
+            ClientSecret = "client_secret",
+            PaymentID = "payment_id",
+            PublishableKey = "publishable_key",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -58,9 +73,15 @@ public class CheckoutSessionResponseTest : TestBase
 
         string expectedSessionID = "session_id";
         string expectedCheckoutUrl = "checkout_url";
+        string expectedClientSecret = "client_secret";
+        string expectedPaymentID = "payment_id";
+        string expectedPublishableKey = "publishable_key";
 
         Assert.Equal(expectedSessionID, deserialized.SessionID);
         Assert.Equal(expectedCheckoutUrl, deserialized.CheckoutUrl);
+        Assert.Equal(expectedClientSecret, deserialized.ClientSecret);
+        Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedPublishableKey, deserialized.PublishableKey);
     }
 
     [Fact]
@@ -70,6 +91,9 @@ public class CheckoutSessionResponseTest : TestBase
         {
             SessionID = "session_id",
             CheckoutUrl = "checkout_url",
+            ClientSecret = "client_secret",
+            PaymentID = "payment_id",
+            PublishableKey = "publishable_key",
         };
 
         model.Validate();
@@ -82,6 +106,12 @@ public class CheckoutSessionResponseTest : TestBase
 
         Assert.Null(model.CheckoutUrl);
         Assert.False(model.RawData.ContainsKey("checkout_url"));
+        Assert.Null(model.ClientSecret);
+        Assert.False(model.RawData.ContainsKey("client_secret"));
+        Assert.Null(model.PaymentID);
+        Assert.False(model.RawData.ContainsKey("payment_id"));
+        Assert.Null(model.PublishableKey);
+        Assert.False(model.RawData.ContainsKey("publishable_key"));
     }
 
     [Fact]
@@ -100,10 +130,19 @@ public class CheckoutSessionResponseTest : TestBase
             SessionID = "session_id",
 
             CheckoutUrl = null,
+            ClientSecret = null,
+            PaymentID = null,
+            PublishableKey = null,
         };
 
         Assert.Null(model.CheckoutUrl);
         Assert.True(model.RawData.ContainsKey("checkout_url"));
+        Assert.Null(model.ClientSecret);
+        Assert.True(model.RawData.ContainsKey("client_secret"));
+        Assert.Null(model.PaymentID);
+        Assert.True(model.RawData.ContainsKey("payment_id"));
+        Assert.Null(model.PublishableKey);
+        Assert.True(model.RawData.ContainsKey("publishable_key"));
     }
 
     [Fact]
@@ -114,6 +153,9 @@ public class CheckoutSessionResponseTest : TestBase
             SessionID = "session_id",
 
             CheckoutUrl = null,
+            ClientSecret = null,
+            PaymentID = null,
+            PublishableKey = null,
         };
 
         model.Validate();
@@ -126,6 +168,9 @@ public class CheckoutSessionResponseTest : TestBase
         {
             SessionID = "session_id",
             CheckoutUrl = "checkout_url",
+            ClientSecret = "client_secret",
+            PaymentID = "payment_id",
+            PublishableKey = "publishable_key",
         };
 
         CheckoutSessionResponse copied = new(model);

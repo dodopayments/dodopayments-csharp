@@ -33,6 +33,32 @@ public sealed record class CheckoutSessionFlags : JsonModel
         }
     }
 
+    /// <summary>
+    /// If true, the customer can supply or edit the business name associated with
+    /// the tax id during checkout. Works independently of `allow_customer_editing_tax_id`
+    /// — either flag (or `allow_tax_id`) is sufficient to let the customer override
+    /// the session's business name. Typically set together with `allow_customer_editing_tax_id`.
+    ///
+    /// <para>Default is false</para>
+    /// </summary>
+    public bool? AllowCustomerEditingBusinessName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_customer_editing_business_name");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("allow_customer_editing_business_name", value);
+        }
+    }
+
     public bool? AllowCustomerEditingCity
     {
         get
@@ -321,6 +347,7 @@ public sealed record class CheckoutSessionFlags : JsonModel
     public override void Validate()
     {
         _ = this.AllowCurrencySelection;
+        _ = this.AllowCustomerEditingBusinessName;
         _ = this.AllowCustomerEditingCity;
         _ = this.AllowCustomerEditingCountry;
         _ = this.AllowCustomerEditingEmail;

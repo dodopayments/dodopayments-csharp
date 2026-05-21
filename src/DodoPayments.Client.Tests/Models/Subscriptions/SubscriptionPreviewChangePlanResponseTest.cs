@@ -135,6 +135,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+                CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
                 Discounts =
@@ -303,6 +304,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             Discounts =
@@ -479,6 +481,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+                CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
                 Discounts =
@@ -661,6 +664,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+                CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
                 Discounts =
@@ -836,6 +840,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             Discounts =
@@ -1012,6 +1017,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+                CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
                 Discounts =
@@ -1188,6 +1194,7 @@ public class SubscriptionPreviewChangePlanResponseTest : TestBase
                 CancellationFeedback = CancellationFeedback.TooExpensive,
                 CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+                CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
                 Discounts =

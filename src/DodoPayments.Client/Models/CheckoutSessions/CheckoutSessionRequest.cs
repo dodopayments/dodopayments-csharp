@@ -151,6 +151,21 @@ public sealed record class CheckoutSessionRequest : JsonModel
     }
 
     /// <summary>
+    /// Optional business / legal name associated with the tax id. When provided
+    /// together with a valid tax id for a B2B purchase, this name is rendered on
+    /// the invoice instead of the customer's personal name.
+    /// </summary>
+    public string? CustomerBusinessName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("customer_business_name");
+        }
+        init { this._rawData.Set("customer_business_name", value); }
+    }
+
+    /// <summary>
     /// Customization for the checkout session page
     /// </summary>
     public CheckoutSessionCustomization? Customization
@@ -419,6 +434,7 @@ public sealed record class CheckoutSessionRequest : JsonModel
             item.Validate();
         }
         this.Customer?.Validate();
+        _ = this.CustomerBusinessName;
         this.Customization?.Validate();
         _ = this.DiscountCode;
         _ = this.DiscountCodes;

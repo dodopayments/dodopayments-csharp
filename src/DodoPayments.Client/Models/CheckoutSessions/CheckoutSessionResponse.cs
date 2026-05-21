@@ -36,11 +36,58 @@ public sealed record class CheckoutSessionResponse : JsonModel
         init { this._rawData.Set("checkout_url", value); }
     }
 
+    /// <summary>
+    /// Client secret used to load the Dodo Payments checkout SDK. Returned when
+    /// `confirm: true` was passed and a PaymentIntent was created at session-creation
+    /// time. `None` otherwise.
+    /// </summary>
+    public string? ClientSecret
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("client_secret");
+        }
+        init { this._rawData.Set("client_secret", value); }
+    }
+
+    /// <summary>
+    /// Underlying payment id when `confirm: true` was passed and a PaymentIntent
+    /// was created at session-creation time. `None` otherwise.
+    /// </summary>
+    public string? PaymentID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_id");
+        }
+        init { this._rawData.Set("payment_id", value); }
+    }
+
+    /// <summary>
+    /// Publishable key for the Dodo Payments checkout SDK. Returned when `confirm:
+    /// true` was passed and a PaymentIntent was created at session-creation time.
+    /// `None` otherwise.
+    /// </summary>
+    public string? PublishableKey
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("publishable_key");
+        }
+        init { this._rawData.Set("publishable_key", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.SessionID;
         _ = this.CheckoutUrl;
+        _ = this.ClientSecret;
+        _ = this.PaymentID;
+        _ = this.PublishableKey;
     }
 
     public CheckoutSessionResponse() { }

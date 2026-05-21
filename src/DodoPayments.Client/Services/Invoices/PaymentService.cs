@@ -56,6 +56,27 @@ public sealed class PaymentService : IPaymentService
     }
 
     /// <inheritdoc/>
+    public Task<HttpResponse> RetrievePayout(
+        PaymentRetrievePayoutParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.WithRawResponse.RetrievePayout(parameters, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> RetrievePayout(
+        string payoutID,
+        PaymentRetrievePayoutParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrievePayout(parameters with { PayoutID = payoutID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public Task<HttpResponse> RetrieveRefund(
         PaymentRetrieveRefundParams parameters,
         CancellationToken cancellationToken = default
@@ -122,6 +143,37 @@ public sealed class PaymentServiceWithRawResponse : IPaymentServiceWithRawRespon
         parameters ??= new();
 
         return this.Retrieve(parameters with { PaymentID = paymentID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> RetrievePayout(
+        PaymentRetrievePayoutParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.PayoutID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.PayoutID' cannot be null");
+        }
+
+        HttpRequest<PaymentRetrievePayoutParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        return this._client.Execute(request, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse> RetrievePayout(
+        string payoutID,
+        PaymentRetrievePayoutParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrievePayout(parameters with { PayoutID = payoutID }, cancellationToken);
     }
 
     /// <inheritdoc/>

@@ -12,6 +12,7 @@ public class CheckoutSessionFlagsTest : TestBase
         var model = new CheckoutSessionFlags
         {
             AllowCurrencySelection = true,
+            AllowCustomerEditingBusinessName = true,
             AllowCustomerEditingCity = true,
             AllowCustomerEditingCountry = true,
             AllowCustomerEditingEmail = true,
@@ -29,6 +30,7 @@ public class CheckoutSessionFlagsTest : TestBase
         };
 
         bool expectedAllowCurrencySelection = true;
+        bool expectedAllowCustomerEditingBusinessName = true;
         bool expectedAllowCustomerEditingCity = true;
         bool expectedAllowCustomerEditingCountry = true;
         bool expectedAllowCustomerEditingEmail = true;
@@ -45,6 +47,10 @@ public class CheckoutSessionFlagsTest : TestBase
         bool expectedRequirePhoneNumber = true;
 
         Assert.Equal(expectedAllowCurrencySelection, model.AllowCurrencySelection);
+        Assert.Equal(
+            expectedAllowCustomerEditingBusinessName,
+            model.AllowCustomerEditingBusinessName
+        );
         Assert.Equal(expectedAllowCustomerEditingCity, model.AllowCustomerEditingCity);
         Assert.Equal(expectedAllowCustomerEditingCountry, model.AllowCustomerEditingCountry);
         Assert.Equal(expectedAllowCustomerEditingEmail, model.AllowCustomerEditingEmail);
@@ -67,6 +73,7 @@ public class CheckoutSessionFlagsTest : TestBase
         var model = new CheckoutSessionFlags
         {
             AllowCurrencySelection = true,
+            AllowCustomerEditingBusinessName = true,
             AllowCustomerEditingCity = true,
             AllowCustomerEditingCountry = true,
             AllowCustomerEditingEmail = true,
@@ -98,6 +105,7 @@ public class CheckoutSessionFlagsTest : TestBase
         var model = new CheckoutSessionFlags
         {
             AllowCurrencySelection = true,
+            AllowCustomerEditingBusinessName = true,
             AllowCustomerEditingCity = true,
             AllowCustomerEditingCountry = true,
             AllowCustomerEditingEmail = true,
@@ -122,6 +130,7 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.NotNull(deserialized);
 
         bool expectedAllowCurrencySelection = true;
+        bool expectedAllowCustomerEditingBusinessName = true;
         bool expectedAllowCustomerEditingCity = true;
         bool expectedAllowCustomerEditingCountry = true;
         bool expectedAllowCustomerEditingEmail = true;
@@ -138,6 +147,10 @@ public class CheckoutSessionFlagsTest : TestBase
         bool expectedRequirePhoneNumber = true;
 
         Assert.Equal(expectedAllowCurrencySelection, deserialized.AllowCurrencySelection);
+        Assert.Equal(
+            expectedAllowCustomerEditingBusinessName,
+            deserialized.AllowCustomerEditingBusinessName
+        );
         Assert.Equal(expectedAllowCustomerEditingCity, deserialized.AllowCustomerEditingCity);
         Assert.Equal(expectedAllowCustomerEditingCountry, deserialized.AllowCustomerEditingCountry);
         Assert.Equal(expectedAllowCustomerEditingEmail, deserialized.AllowCustomerEditingEmail);
@@ -160,6 +173,7 @@ public class CheckoutSessionFlagsTest : TestBase
         var model = new CheckoutSessionFlags
         {
             AllowCurrencySelection = true,
+            AllowCustomerEditingBusinessName = true,
             AllowCustomerEditingCity = true,
             AllowCustomerEditingCountry = true,
             AllowCustomerEditingEmail = true,
@@ -186,6 +200,8 @@ public class CheckoutSessionFlagsTest : TestBase
 
         Assert.Null(model.AllowCurrencySelection);
         Assert.False(model.RawData.ContainsKey("allow_currency_selection"));
+        Assert.Null(model.AllowCustomerEditingBusinessName);
+        Assert.False(model.RawData.ContainsKey("allow_customer_editing_business_name"));
         Assert.Null(model.AllowCustomerEditingCity);
         Assert.False(model.RawData.ContainsKey("allow_customer_editing_city"));
         Assert.Null(model.AllowCustomerEditingCountry);
@@ -231,6 +247,7 @@ public class CheckoutSessionFlagsTest : TestBase
         {
             // Null should be interpreted as omitted for these properties
             AllowCurrencySelection = null,
+            AllowCustomerEditingBusinessName = null,
             AllowCustomerEditingCity = null,
             AllowCustomerEditingCountry = null,
             AllowCustomerEditingEmail = null,
@@ -249,6 +266,8 @@ public class CheckoutSessionFlagsTest : TestBase
 
         Assert.Null(model.AllowCurrencySelection);
         Assert.False(model.RawData.ContainsKey("allow_currency_selection"));
+        Assert.Null(model.AllowCustomerEditingBusinessName);
+        Assert.False(model.RawData.ContainsKey("allow_customer_editing_business_name"));
         Assert.Null(model.AllowCustomerEditingCity);
         Assert.False(model.RawData.ContainsKey("allow_customer_editing_city"));
         Assert.Null(model.AllowCustomerEditingCountry);
@@ -286,6 +305,7 @@ public class CheckoutSessionFlagsTest : TestBase
         {
             // Null should be interpreted as omitted for these properties
             AllowCurrencySelection = null,
+            AllowCustomerEditingBusinessName = null,
             AllowCustomerEditingCity = null,
             AllowCustomerEditingCountry = null,
             AllowCustomerEditingEmail = null,
@@ -311,6 +331,7 @@ public class CheckoutSessionFlagsTest : TestBase
         var model = new CheckoutSessionFlags
         {
             AllowCurrencySelection = true,
+            AllowCustomerEditingBusinessName = true,
             AllowCustomerEditingCity = true,
             AllowCustomerEditingCountry = true,
             AllowCustomerEditingEmail = true,

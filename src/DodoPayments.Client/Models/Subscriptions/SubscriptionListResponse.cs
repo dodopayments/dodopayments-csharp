@@ -323,6 +323,20 @@ public sealed record class SubscriptionListResponse : JsonModel
     }
 
     /// <summary>
+    /// Business / legal name associated with the tax id (B2B). When set this is
+    /// used on the invoice in place of the customer's personal name.
+    /// </summary>
+    public string? CustomerBusinessName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("customer_business_name");
+        }
+        init { this._rawData.Set("customer_business_name", value); }
+    }
+
+    /// <summary>
     /// DEPRECATED: Use discounts[].cycles_remaining instead.
     /// </summary>
     public int? DiscountCyclesRemaining
@@ -428,6 +442,7 @@ public sealed record class SubscriptionListResponse : JsonModel
         _ = this.TaxInclusive;
         _ = this.TrialPeriodDays;
         _ = this.CancelledAt;
+        _ = this.CustomerBusinessName;
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;
         _ = this.PaymentMethodID;

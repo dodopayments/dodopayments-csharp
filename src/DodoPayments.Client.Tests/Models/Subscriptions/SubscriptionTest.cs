@@ -103,6 +103,7 @@ public class SubscriptionTest : TestBase
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             Discounts =
@@ -243,6 +244,7 @@ public class SubscriptionTest : TestBase
         [
             new() { Key = "key", Value = "value" },
         ];
+        string expectedCustomerBusinessName = "customer_business_name";
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         List<DiscountDetail> expectedDiscounts =
@@ -351,6 +353,7 @@ public class SubscriptionTest : TestBase
         {
             Assert.Equal(expectedCustomFieldResponses[i], model.CustomFieldResponses[i]);
         }
+        Assert.Equal(expectedCustomerBusinessName, model.CustomerBusinessName);
         Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, model.DiscountID);
         Assert.NotNull(model.Discounts);
@@ -456,6 +459,7 @@ public class SubscriptionTest : TestBase
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             Discounts =
@@ -604,6 +608,7 @@ public class SubscriptionTest : TestBase
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             Discounts =
@@ -751,6 +756,7 @@ public class SubscriptionTest : TestBase
         [
             new() { Key = "key", Value = "value" },
         ];
+        string expectedCustomerBusinessName = "customer_business_name";
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
         List<DiscountDetail> expectedDiscounts =
@@ -859,6 +865,7 @@ public class SubscriptionTest : TestBase
         {
             Assert.Equal(expectedCustomFieldResponses[i], deserialized.CustomFieldResponses[i]);
         }
+        Assert.Equal(expectedCustomerBusinessName, deserialized.CustomerBusinessName);
         Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
         Assert.NotNull(deserialized.Discounts);
@@ -964,6 +971,7 @@ public class SubscriptionTest : TestBase
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             Discounts =
@@ -1112,6 +1120,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("cancelled_at"));
         Assert.Null(model.CustomFieldResponses);
         Assert.False(model.RawData.ContainsKey("custom_field_responses"));
+        Assert.Null(model.CustomerBusinessName);
+        Assert.False(model.RawData.ContainsKey("customer_business_name"));
         Assert.Null(model.DiscountCyclesRemaining);
         Assert.False(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
@@ -1312,6 +1322,7 @@ public class SubscriptionTest : TestBase
             CancellationFeedback = null,
             CancelledAt = null,
             CustomFieldResponses = null,
+            CustomerBusinessName = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             Discounts = null,
@@ -1329,6 +1340,8 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("cancelled_at"));
         Assert.Null(model.CustomFieldResponses);
         Assert.True(model.RawData.ContainsKey("custom_field_responses"));
+        Assert.Null(model.CustomerBusinessName);
+        Assert.True(model.RawData.ContainsKey("customer_business_name"));
         Assert.Null(model.DiscountCyclesRemaining);
         Assert.True(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
@@ -1437,6 +1450,7 @@ public class SubscriptionTest : TestBase
             CancellationFeedback = null,
             CancelledAt = null,
             CustomFieldResponses = null,
+            CustomerBusinessName = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
             Discounts = null,
@@ -1540,6 +1554,7 @@ public class SubscriptionTest : TestBase
             CancellationFeedback = CancellationFeedback.TooExpensive,
             CancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomFieldResponses = [new() { Key = "key", Value = "value" }],
+            CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
             Discounts =

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Subscriptions;
 
@@ -14,7 +13,7 @@ public class IntegrationConfigResponseTest : TestBase
     {
         IntegrationConfigResponse value = new IntegrationConfigResponseGitHubConfig()
         {
-            Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+            Permission = GitHubPermission.Pull,
             TargetID = "target_id",
         };
         value.Validate();
@@ -106,7 +105,7 @@ public class IntegrationConfigResponseTest : TestBase
     {
         IntegrationConfigResponse value = new IntegrationConfigResponseGitHubConfig()
         {
-            Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+            Permission = GitHubPermission.Pull,
             TargetID = "target_id",
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
@@ -249,12 +248,11 @@ public class IntegrationConfigResponseGitHubConfigTest : TestBase
     {
         var model = new IntegrationConfigResponseGitHubConfig
         {
-            Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+            Permission = GitHubPermission.Pull,
             TargetID = "target_id",
         };
 
-        ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission> expectedPermission =
-            IntegrationConfigResponseGitHubConfigPermission.Pull;
+        ApiEnum<string, GitHubPermission> expectedPermission = GitHubPermission.Pull;
         string expectedTargetID = "target_id";
 
         Assert.Equal(expectedPermission, model.Permission);
@@ -266,7 +264,7 @@ public class IntegrationConfigResponseGitHubConfigTest : TestBase
     {
         var model = new IntegrationConfigResponseGitHubConfig
         {
-            Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+            Permission = GitHubPermission.Pull,
             TargetID = "target_id",
         };
 
@@ -284,7 +282,7 @@ public class IntegrationConfigResponseGitHubConfigTest : TestBase
     {
         var model = new IntegrationConfigResponseGitHubConfig
         {
-            Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+            Permission = GitHubPermission.Pull,
             TargetID = "target_id",
         };
 
@@ -295,8 +293,7 @@ public class IntegrationConfigResponseGitHubConfigTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission> expectedPermission =
-            IntegrationConfigResponseGitHubConfigPermission.Pull;
+        ApiEnum<string, GitHubPermission> expectedPermission = GitHubPermission.Pull;
         string expectedTargetID = "target_id";
 
         Assert.Equal(expectedPermission, deserialized.Permission);
@@ -308,7 +305,7 @@ public class IntegrationConfigResponseGitHubConfigTest : TestBase
     {
         var model = new IntegrationConfigResponseGitHubConfig
         {
-            Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+            Permission = GitHubPermission.Pull,
             TargetID = "target_id",
         };
 
@@ -320,75 +317,13 @@ public class IntegrationConfigResponseGitHubConfigTest : TestBase
     {
         var model = new IntegrationConfigResponseGitHubConfig
         {
-            Permission = IntegrationConfigResponseGitHubConfigPermission.Pull,
+            Permission = GitHubPermission.Pull,
             TargetID = "target_id",
         };
 
         IntegrationConfigResponseGitHubConfig copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class IntegrationConfigResponseGitHubConfigPermissionTest : TestBase
-{
-    [Theory]
-    [InlineData(IntegrationConfigResponseGitHubConfigPermission.Pull)]
-    [InlineData(IntegrationConfigResponseGitHubConfigPermission.Push)]
-    [InlineData(IntegrationConfigResponseGitHubConfigPermission.Admin)]
-    [InlineData(IntegrationConfigResponseGitHubConfigPermission.Maintain)]
-    [InlineData(IntegrationConfigResponseGitHubConfigPermission.Triage)]
-    public void Validation_Works(IntegrationConfigResponseGitHubConfigPermission rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(IntegrationConfigResponseGitHubConfigPermission.Pull)]
-    [InlineData(IntegrationConfigResponseGitHubConfigPermission.Push)]
-    [InlineData(IntegrationConfigResponseGitHubConfigPermission.Admin)]
-    [InlineData(IntegrationConfigResponseGitHubConfigPermission.Maintain)]
-    [InlineData(IntegrationConfigResponseGitHubConfigPermission.Triage)]
-    public void SerializationRoundtrip_Works(
-        IntegrationConfigResponseGitHubConfigPermission rawValue
-    )
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, IntegrationConfigResponseGitHubConfigPermission>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }
 

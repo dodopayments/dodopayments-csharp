@@ -14,7 +14,7 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = Permission.Pull,
+                Permission = GitHubPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -25,7 +25,7 @@ public class EntitlementCreateParamsTest : TestBase
 
         IntegrationConfig expectedIntegrationConfig = new GitHubConfig()
         {
-            Permission = Permission.Pull,
+            Permission = GitHubPermission.Pull,
             TargetID = "target_id",
         };
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
@@ -55,7 +55,7 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = Permission.Pull,
+                Permission = GitHubPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -74,7 +74,7 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = Permission.Pull,
+                Permission = GitHubPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -96,7 +96,7 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = Permission.Pull,
+                Permission = GitHubPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -115,7 +115,7 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = Permission.Pull,
+                Permission = GitHubPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -136,7 +136,7 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = Permission.Pull,
+                Permission = GitHubPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
@@ -155,7 +155,7 @@ public class EntitlementCreateParamsTest : TestBase
         {
             IntegrationConfig = new GitHubConfig()
             {
-                Permission = Permission.Pull,
+                Permission = GitHubPermission.Pull,
                 TargetID = "target_id",
             },
             IntegrationType = EntitlementIntegrationType.Discord,
