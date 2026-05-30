@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.19.1 (2026-05-30)
+
+Full Changelog: [v6.19.0...v6.19.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.19.0...v6.19.1)
+
+### Bug Fixes
+
+* **csharp:** resolve ambiguity in parsing query strings ([36e7918](https://github.com/dodopayments/dodopayments-csharp/commit/36e7918a392fa8a360637e2d574e654d2c2edea1))
+
 ## 6.19.0 (2026-05-21)
 
 Full Changelog: [v6.18.1...v6.19.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.18.1...v6.19.0)
