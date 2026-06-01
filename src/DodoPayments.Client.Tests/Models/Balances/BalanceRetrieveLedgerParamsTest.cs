@@ -514,6 +514,7 @@ public class EventTypeTest : TestBase
     [InlineData(EventType.CurrencyConversion)]
     [InlineData(EventType.AbandonedCartRecoveryFee)]
     [InlineData(EventType.DunningFees)]
+    [InlineData(EventType.PaymentRetryFee)]
     public void Validation_Works(EventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -554,6 +555,7 @@ public class EventTypeTest : TestBase
     [InlineData(EventType.CurrencyConversion)]
     [InlineData(EventType.AbandonedCartRecoveryFee)]
     [InlineData(EventType.DunningFees)]
+    [InlineData(EventType.PaymentRetryFee)]
     public void SerializationRoundtrip_Works(EventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

@@ -6,7 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.ProductCollections;
 
@@ -52,6 +54,41 @@ public record class ProductCollectionUpdateParams : ParamsBase
     }
 
     /// <summary>
+    /// Effective_at setting for downgrades: Some(Some(val)) = set, Some(None) = clear
+    /// (inherit), None = no change
+    /// </summary>
+    public ApiEnum<
+        string,
+        ProductCollectionUpdateParamsEffectiveAtOnDowngrade
+    >? EffectiveAtOnDowngrade
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, ProductCollectionUpdateParamsEffectiveAtOnDowngrade>
+            >("effective_at_on_downgrade");
+        }
+        init { this._rawBodyData.Set("effective_at_on_downgrade", value); }
+    }
+
+    /// <summary>
+    /// Effective_at setting for upgrades: Some(Some(val)) = set, Some(None) = clear
+    /// (inherit), None = no change
+    /// </summary>
+    public ApiEnum<string, ProductCollectionUpdateParamsEffectiveAtOnUpgrade>? EffectiveAtOnUpgrade
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, ProductCollectionUpdateParamsEffectiveAtOnUpgrade>
+            >("effective_at_on_upgrade");
+        }
+        init { this._rawBodyData.Set("effective_at_on_upgrade", value); }
+    }
+
+    /// <summary>
     /// Optional new order for groups (array of group UUIDs in desired order)
     /// </summary>
     public IReadOnlyList<string>? GroupOrder
@@ -94,6 +131,60 @@ public record class ProductCollectionUpdateParams : ParamsBase
             return this._rawBodyData.GetNullableClass<string>("name");
         }
         init { this._rawBodyData.Set("name", value); }
+    }
+
+    /// <summary>
+    /// On payment failure behavior: Some(Some(val)) = set, Some(None) = clear (inherit),
+    /// None = no change
+    /// </summary>
+    public ApiEnum<string, ProductCollectionUpdateParamsOnPaymentFailure>? OnPaymentFailure
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, ProductCollectionUpdateParamsOnPaymentFailure>
+            >("on_payment_failure");
+        }
+        init { this._rawBodyData.Set("on_payment_failure", value); }
+    }
+
+    /// <summary>
+    /// Proration billing mode for downgrades: Some(Some(val)) = set, Some(None) =
+    /// clear (inherit), None = no change
+    /// </summary>
+    public ApiEnum<
+        string,
+        ProductCollectionUpdateParamsProrationBillingModeOnDowngrade
+    >? ProrationBillingModeOnDowngrade
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, ProductCollectionUpdateParamsProrationBillingModeOnDowngrade>
+            >("proration_billing_mode_on_downgrade");
+        }
+        init { this._rawBodyData.Set("proration_billing_mode_on_downgrade", value); }
+    }
+
+    /// <summary>
+    /// Proration billing mode for upgrades: Some(Some(val)) = set, Some(None) =
+    /// clear (inherit), None = no change
+    /// </summary>
+    public ApiEnum<
+        string,
+        ProductCollectionUpdateParamsProrationBillingModeOnUpgrade
+    >? ProrationBillingModeOnUpgrade
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, ProductCollectionUpdateParamsProrationBillingModeOnUpgrade>
+            >("proration_billing_mode_on_upgrade");
+        }
+        init { this._rawBodyData.Set("proration_billing_mode_on_upgrade", value); }
     }
 
     public ProductCollectionUpdateParams() { }
@@ -216,5 +307,280 @@ public record class ProductCollectionUpdateParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
+    }
+}
+
+/// <summary>
+/// Effective_at setting for downgrades: Some(Some(val)) = set, Some(None) = clear
+/// (inherit), None = no change
+/// </summary>
+[JsonConverter(typeof(ProductCollectionUpdateParamsEffectiveAtOnDowngradeConverter))]
+public enum ProductCollectionUpdateParamsEffectiveAtOnDowngrade
+{
+    Immediately,
+    NextBillingDate,
+}
+
+sealed class ProductCollectionUpdateParamsEffectiveAtOnDowngradeConverter
+    : JsonConverter<ProductCollectionUpdateParamsEffectiveAtOnDowngrade>
+{
+    public override ProductCollectionUpdateParamsEffectiveAtOnDowngrade Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "immediately" => ProductCollectionUpdateParamsEffectiveAtOnDowngrade.Immediately,
+            "next_billing_date" =>
+                ProductCollectionUpdateParamsEffectiveAtOnDowngrade.NextBillingDate,
+            _ => (ProductCollectionUpdateParamsEffectiveAtOnDowngrade)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        ProductCollectionUpdateParamsEffectiveAtOnDowngrade value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                ProductCollectionUpdateParamsEffectiveAtOnDowngrade.Immediately => "immediately",
+                ProductCollectionUpdateParamsEffectiveAtOnDowngrade.NextBillingDate =>
+                    "next_billing_date",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Effective_at setting for upgrades: Some(Some(val)) = set, Some(None) = clear
+/// (inherit), None = no change
+/// </summary>
+[JsonConverter(typeof(ProductCollectionUpdateParamsEffectiveAtOnUpgradeConverter))]
+public enum ProductCollectionUpdateParamsEffectiveAtOnUpgrade
+{
+    Immediately,
+    NextBillingDate,
+}
+
+sealed class ProductCollectionUpdateParamsEffectiveAtOnUpgradeConverter
+    : JsonConverter<ProductCollectionUpdateParamsEffectiveAtOnUpgrade>
+{
+    public override ProductCollectionUpdateParamsEffectiveAtOnUpgrade Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "immediately" => ProductCollectionUpdateParamsEffectiveAtOnUpgrade.Immediately,
+            "next_billing_date" =>
+                ProductCollectionUpdateParamsEffectiveAtOnUpgrade.NextBillingDate,
+            _ => (ProductCollectionUpdateParamsEffectiveAtOnUpgrade)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        ProductCollectionUpdateParamsEffectiveAtOnUpgrade value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                ProductCollectionUpdateParamsEffectiveAtOnUpgrade.Immediately => "immediately",
+                ProductCollectionUpdateParamsEffectiveAtOnUpgrade.NextBillingDate =>
+                    "next_billing_date",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// On payment failure behavior: Some(Some(val)) = set, Some(None) = clear (inherit),
+/// None = no change
+/// </summary>
+[JsonConverter(typeof(ProductCollectionUpdateParamsOnPaymentFailureConverter))]
+public enum ProductCollectionUpdateParamsOnPaymentFailure
+{
+    PreventChange,
+    ApplyChange,
+}
+
+sealed class ProductCollectionUpdateParamsOnPaymentFailureConverter
+    : JsonConverter<ProductCollectionUpdateParamsOnPaymentFailure>
+{
+    public override ProductCollectionUpdateParamsOnPaymentFailure Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "prevent_change" => ProductCollectionUpdateParamsOnPaymentFailure.PreventChange,
+            "apply_change" => ProductCollectionUpdateParamsOnPaymentFailure.ApplyChange,
+            _ => (ProductCollectionUpdateParamsOnPaymentFailure)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        ProductCollectionUpdateParamsOnPaymentFailure value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                ProductCollectionUpdateParamsOnPaymentFailure.PreventChange => "prevent_change",
+                ProductCollectionUpdateParamsOnPaymentFailure.ApplyChange => "apply_change",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Proration billing mode for downgrades: Some(Some(val)) = set, Some(None) = clear
+/// (inherit), None = no change
+/// </summary>
+[JsonConverter(typeof(ProductCollectionUpdateParamsProrationBillingModeOnDowngradeConverter))]
+public enum ProductCollectionUpdateParamsProrationBillingModeOnDowngrade
+{
+    ProratedImmediately,
+    FullImmediately,
+    DifferenceImmediately,
+    DoNotBill,
+}
+
+sealed class ProductCollectionUpdateParamsProrationBillingModeOnDowngradeConverter
+    : JsonConverter<ProductCollectionUpdateParamsProrationBillingModeOnDowngrade>
+{
+    public override ProductCollectionUpdateParamsProrationBillingModeOnDowngrade Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "prorated_immediately" =>
+                ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.ProratedImmediately,
+            "full_immediately" =>
+                ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.FullImmediately,
+            "difference_immediately" =>
+                ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DifferenceImmediately,
+            "do_not_bill" => ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DoNotBill,
+            _ => (ProductCollectionUpdateParamsProrationBillingModeOnDowngrade)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        ProductCollectionUpdateParamsProrationBillingModeOnDowngrade value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.ProratedImmediately =>
+                    "prorated_immediately",
+                ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.FullImmediately =>
+                    "full_immediately",
+                ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DifferenceImmediately =>
+                    "difference_immediately",
+                ProductCollectionUpdateParamsProrationBillingModeOnDowngrade.DoNotBill =>
+                    "do_not_bill",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Proration billing mode for upgrades: Some(Some(val)) = set, Some(None) = clear
+/// (inherit), None = no change
+/// </summary>
+[JsonConverter(typeof(ProductCollectionUpdateParamsProrationBillingModeOnUpgradeConverter))]
+public enum ProductCollectionUpdateParamsProrationBillingModeOnUpgrade
+{
+    ProratedImmediately,
+    FullImmediately,
+    DifferenceImmediately,
+    DoNotBill,
+}
+
+sealed class ProductCollectionUpdateParamsProrationBillingModeOnUpgradeConverter
+    : JsonConverter<ProductCollectionUpdateParamsProrationBillingModeOnUpgrade>
+{
+    public override ProductCollectionUpdateParamsProrationBillingModeOnUpgrade Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "prorated_immediately" =>
+                ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.ProratedImmediately,
+            "full_immediately" =>
+                ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.FullImmediately,
+            "difference_immediately" =>
+                ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DifferenceImmediately,
+            "do_not_bill" => ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DoNotBill,
+            _ => (ProductCollectionUpdateParamsProrationBillingModeOnUpgrade)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        ProductCollectionUpdateParamsProrationBillingModeOnUpgrade value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.ProratedImmediately =>
+                    "prorated_immediately",
+                ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.FullImmediately =>
+                    "full_immediately",
+                ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DifferenceImmediately =>
+                    "difference_immediately",
+                ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.DoNotBill =>
+                    "do_not_bill",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }
