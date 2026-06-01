@@ -177,9 +177,9 @@ public interface ISubscriptionService
     /// configurations change</para>
     ///
     /// <para>## Example Query Patterns: - Get last 3 months:
-    /// <c>?start_date=2024-01-01T00:00:00Z&amp;end_date=2024-03-31T23:59:59Z</c> - Filter by
-    /// meter: <c>?meter_id=mtr_api_requests</c> - Paginate results:
-    /// <c>?page_size=20&amp;page_number=1</c> - Recent usage: <c>?start_date=2024-03-01T00:00:00Z</c>
+    /// `?start_date=2024-01-01T00:00:00Z&amp;end_date=2024-03-31T23:59:59Z` - Filter by
+    /// meter: `?meter_id=mtr_api_requests` - Paginate results:
+    /// `?page_size=20&amp;page_number=1` - Recent usage: `?start_date=2024-03-01T00:00:00Z`
     /// (from March 1st to now)</para>
     /// </summary>
     Task<SubscriptionRetrieveUsageHistoryPage> RetrieveUsageHistory(

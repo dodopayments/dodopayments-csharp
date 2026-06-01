@@ -73,11 +73,11 @@ public interface IUsageEventService
     /// meter's event name</para>
     ///
     /// <para>## Example Queries: - Get all events for a customer:
-    /// <c>?customer_id=cus_abc123</c> - Get API request events: <c>?event_name=api_request</c> -
+    /// `?customer_id=cus_abc123` - Get API request events: `?event_name=api_request` -
     /// Get events from last 24 hours:
-    /// <c>?start=2024-01-14T10:30:00Z&amp;end=2024-01-15T10:30:00Z</c> - Get events with meter
-    /// filtering: <c>?meter_id=mtr_xyz789</c> - Paginate results:
-    /// <c>?page_size=50&amp;page_number=2</c></para>
+    /// `?start=2024-01-14T10:30:00Z&amp;end=2024-01-15T10:30:00Z` - Get events with meter
+    /// filtering: `?meter_id=mtr_xyz789` - Paginate results:
+    /// `?page_size=50&amp;page_number=2`</para>
     /// </summary>
     Task<UsageEventListPage> List(
         UsageEventListParams? parameters = null,
@@ -100,8 +100,9 @@ public interface IUsageEventService
     /// <para>## Example Usage: ```json {   "events": [     {       "event_id":
     /// "api_call_12345",       "customer_id": "cus_abc123",       "event_name":
     /// "api_request",       "timestamp": "2024-01-15T10:30:00Z",       "metadata": {
-    ///       "endpoint": "/api/v1/users",         "method": "GET",
-    /// "tokens_used": "150"       }     }   ] } ```</para>
+    ///
+    ///   "endpoint": "/api/v1/users",         "method": "GET",         "tokens_used":
+    /// "150"       }     }   ] } ```</para>
     /// </summary>
     Task<UsageEventIngestResponse> Ingest(
         UsageEventIngestParams parameters,
