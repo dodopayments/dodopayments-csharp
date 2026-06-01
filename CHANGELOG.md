@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.19.2](https://github.com/dodopayments/dodopayments-csharp/compare/v6.19.1...v6.19.2) (2026-06-01)
+
+
+### Bug Fixes
+
+* **subscriptions:** C# custom code — BodyContent body-unwrap + TaxRate double ([5dc5755](https://github.com/dodopayments/dodopayments-csharp/commit/5dc575557e5dcc1449241232b7e052426bc4f466))
+
 ## 6.19.1 (2026-05-30)
 
 Full Changelog: [v6.19.0...v6.19.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.19.0...v6.19.1)
