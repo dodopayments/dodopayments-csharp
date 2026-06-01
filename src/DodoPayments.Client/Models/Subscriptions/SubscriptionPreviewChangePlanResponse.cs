@@ -305,11 +305,11 @@ public record class LineItem : ModelBase
         }
     }
 
-    public float? TaxRate
+    public double? TaxRate
     {
         get
         {
-            return Match<float?>(
+            return Match<double?>(
                 subscription: (x) => x.TaxRate,
                 addon: (x) => x.TaxRate,
                 meter: (x) => x.TaxRate
@@ -747,12 +747,12 @@ public sealed record class LineItemSubscription : JsonModel
         init { this._rawData.Set("tax", value); }
     }
 
-    public float? TaxRate
+    public double? TaxRate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<float>("tax_rate");
+            return this._rawData.GetNullableStruct<double>("tax_rate");
         }
         init { this._rawData.Set("tax_rate", value); }
     }
@@ -897,12 +897,12 @@ public sealed record class LineItemAddon : JsonModel
         init { this._rawData.Set("tax_inclusive", value); }
     }
 
-    public required float TaxRate
+    public required double TaxRate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<float>("tax_rate");
+            return this._rawData.GetNotNullStruct<double>("tax_rate");
         }
         init { this._rawData.Set("tax_rate", value); }
     }
@@ -1090,12 +1090,12 @@ public sealed record class Meter : JsonModel
         init { this._rawData.Set("tax_inclusive", value); }
     }
 
-    public required float TaxRate
+    public required double TaxRate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<float>("tax_rate");
+            return this._rawData.GetNotNullStruct<double>("tax_rate");
         }
         init { this._rawData.Set("tax_rate", value); }
     }
