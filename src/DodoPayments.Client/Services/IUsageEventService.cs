@@ -75,9 +75,9 @@ public interface IUsageEventService
     /// <para>## Example Queries: - Get all events for a customer:
     /// `?customer_id=cus_abc123` - Get API request events: `?event_name=api_request` -
     /// Get events from last 24 hours:
-    /// `?start=2024-01-14T10:30:00Z&end=2024-01-15T10:30:00Z` - Get events with meter
+    /// `?start=2024-01-14T10:30:00Z&amp;end=2024-01-15T10:30:00Z` - Get events with meter
     /// filtering: `?meter_id=mtr_xyz789` - Paginate results:
-    /// `?page_size=50&page_number=2`</para>
+    /// `?page_size=50&amp;page_number=2`</para>
     /// </summary>
     Task<UsageEventListPage> List(
         UsageEventListParams? parameters = null,

@@ -1,7 +1,5 @@
 using System.Text.Json;
 using DodoPayments.Client.Exceptions;
-using DodoPayments.Client.Models.Brands;
-using DodoPayments.Client.Models.CheckoutSessions;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Customers.Wallets.LedgerEntries;
 using DodoPayments.Client.Models.Discounts;
@@ -14,10 +12,8 @@ using DodoPayments.Client.Models.ProductCollections;
 using DodoPayments.Client.Models.Products;
 using Balances = DodoPayments.Client.Models.Balances;
 using CreditEntitlementsBalances = DodoPayments.Client.Models.CreditEntitlements.Balances;
-using Customers = DodoPayments.Client.Models.Customers;
 using Grants = DodoPayments.Client.Models.Entitlements.Grants;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
-using Payouts = DodoPayments.Client.Models.Payouts;
 using Refunds = DodoPayments.Client.Models.Refunds;
 using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 using WebhookEvents = DodoPayments.Client.Models.WebhookEvents;
@@ -41,10 +37,6 @@ public abstract record class ModelBase
         Converters =
         {
             new FrozenDictionaryConverterFactory(),
-            new ApiEnumConverter<string, Theme>(),
-            new ApiEnumConverter<string, FieldType>(),
-            new ApiEnumConverter<string, FontSize>(),
-            new ApiEnumConverter<string, FontWeight>(),
             new ApiEnumConverter<string, Currency>(),
             new ApiEnumConverter<string, IntentStatus>(),
             new ApiEnumConverter<string, PaymentMethodTypes>(),
@@ -53,15 +45,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::CancellationFeedback>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
             new ApiEnumConverter<string, Subscriptions::TimeInterval>(),
-            new ApiEnumConverter<
-                string,
-                Subscriptions::UpdateSubscriptionPlanReqProrationBillingMode
-            >(),
-            new ApiEnumConverter<string, Subscriptions::UpdateSubscriptionPlanReqEffectiveAt>(),
-            new ApiEnumConverter<
-                string,
-                Subscriptions::UpdateSubscriptionPlanReqOnPaymentFailure
-            >(),
             new ApiEnumConverter<string, Subscriptions::CancelReason>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBillingMode>(),
@@ -79,13 +62,9 @@ public abstract record class ModelBase
                 string,
                 Subscriptions::SubscriptionPreviewChangePlanParamsOnPaymentFailure
             >(),
-            new ApiEnumConverter<string, LicenseKeys::LicenseKeySource>(),
             new ApiEnumConverter<string, LicenseKeys::LicenseKeyStatus>(),
             new ApiEnumConverter<string, LicenseKeys::Source>(),
             new ApiEnumConverter<string, LicenseKeys::Status>(),
-            new ApiEnumConverter<string, Customers::Status>(),
-            new ApiEnumConverter<string, Customers::PaymentMethod>(),
-            new ApiEnumConverter<string, EventType>(),
             new ApiEnumConverter<string, EntryType>(),
             new ApiEnumConverter<string, Refunds::RefundStatus>(),
             new ApiEnumConverter<string, Refunds::Status>(),
@@ -93,38 +72,22 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, DisputeDisputeStatus>(),
             new ApiEnumConverter<string, DisputeStage>(),
             new ApiEnumConverter<string, DisputeStatus>(),
-            new ApiEnumConverter<string, Payouts::Status>(),
             new ApiEnumConverter<string, CbbProrationBehavior>(),
             new ApiEnumConverter<string, TaxCategory>(),
             new ApiEnumConverter<string, CountryCode>(),
             new ApiEnumConverter<string, DiscountType>(),
-            new ApiEnumConverter<string, VerificationStatus>(),
             new ApiEnumConverter<string, WebhookEvents::WebhookEventType>(),
-            new ApiEnumConverter<string, WebhookEvents::AbandonmentReason>(),
-            new ApiEnumConverter<string, WebhookEvents::Status>(),
-            new ApiEnumConverter<string, WebhookEvents::DunningAttemptStatus>(),
-            new ApiEnumConverter<string, WebhookEvents::TriggerState>(),
             new ApiEnumConverter<string, Conjunction>(),
             new ApiEnumConverter<string, FilterOperator>(),
-            new ApiEnumConverter<string, Type>(),
-            new ApiEnumConverter<string, Balances::BalanceLedgerEntryEventType>(),
             new ApiEnumConverter<string, Balances::Currency>(),
             new ApiEnumConverter<string, Balances::EventType>(),
             new ApiEnumConverter<string, CbbOverageBehavior>(),
-            new ApiEnumConverter<string, CreditEntitlementsBalances::TransactionType>(),
             new ApiEnumConverter<string, CreditEntitlementsBalances::LedgerEntryType>(),
-            new ApiEnumConverter<string, CreditEntitlementsBalances::SourceType>(),
             new ApiEnumConverter<string, CreditEntitlementsBalances::Status>(),
             new ApiEnumConverter<string, EntitlementIntegrationType>(),
             new ApiEnumConverter<string, GitHubPermission>(),
             new ApiEnumConverter<string, IntegrationType>(),
-            new ApiEnumConverter<string, Grants::EntitlementGrantStatus>(),
             new ApiEnumConverter<string, Grants::Status>(),
-            new ApiEnumConverter<string, ProductCollectionEffectiveAtOnDowngrade>(),
-            new ApiEnumConverter<string, ProductCollectionEffectiveAtOnUpgrade>(),
-            new ApiEnumConverter<string, ProductCollectionOnPaymentFailure>(),
-            new ApiEnumConverter<string, ProductCollectionProrationBillingModeOnDowngrade>(),
-            new ApiEnumConverter<string, ProductCollectionProrationBillingModeOnUpgrade>(),
             new ApiEnumConverter<string, EffectiveAtOnDowngrade>(),
             new ApiEnumConverter<string, EffectiveAtOnUpgrade>(),
             new ApiEnumConverter<string, OnPaymentFailure>(),

@@ -1,0 +1,133 @@
+using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.CreditEntitlements.Balances;
+
+namespace DodoPayments.Client.Models.Webhooks;
+
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CreditRolloverForfeitedWebhookEvent,
+        CreditRolloverForfeitedWebhookEventFromRaw
+    >)
+)]
+public sealed record class CreditRolloverForfeitedWebhookEvent : JsonModel
+{
+    /// <summary>
+    /// The business identifier
+    /// </summary>
+    public required string BusinessID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
+        init { this._rawData.Set("business_id", value); }
+    }
+
+    /// <summary>
+    /// Response for a ledger entry
+    /// </summary>
+    public required CreditLedgerEntry Data
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<CreditLedgerEntry>("data");
+        }
+        init { this._rawData.Set("data", value); }
+    }
+
+    /// <summary>
+    /// The timestamp of when the event occurred
+    /// </summary>
+    public required DateTimeOffset Timestamp
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp");
+        }
+        init { this._rawData.Set("timestamp", value); }
+    }
+
+    /// <summary>
+    /// The event type
+    /// </summary>
+    public JsonElement Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
+        }
+        init { this._rawData.Set("type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.BusinessID;
+        this.Data.Validate();
+        _ = this.Timestamp;
+        if (
+            !JsonElement.DeepEquals(
+                this.Type,
+                JsonSerializer.SerializeToElement("credit.rollover_forfeited")
+            )
+        )
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
+    }
+
+    public CreditRolloverForfeitedWebhookEvent()
+    {
+        this.Type = JsonSerializer.SerializeToElement("credit.rollover_forfeited");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreditRolloverForfeitedWebhookEvent(
+        CreditRolloverForfeitedWebhookEvent creditRolloverForfeitedWebhookEvent
+    )
+        : base(creditRolloverForfeitedWebhookEvent) { }
+#pragma warning restore CS8618
+
+    public CreditRolloverForfeitedWebhookEvent(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("credit.rollover_forfeited");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreditRolloverForfeitedWebhookEvent(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditRolloverForfeitedWebhookEventFromRaw.FromRawUnchecked"/>
+    public static CreditRolloverForfeitedWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreditRolloverForfeitedWebhookEventFromRaw : IFromRawJson<CreditRolloverForfeitedWebhookEvent>
+{
+    /// <inheritdoc/>
+    public CreditRolloverForfeitedWebhookEvent FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CreditRolloverForfeitedWebhookEvent.FromRawUnchecked(rawData);
+}
