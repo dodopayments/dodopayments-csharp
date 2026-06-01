@@ -1335,6 +1335,21 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Retry attempt number for subscription renewal payments. `0` for the original
+    /// payment, `1`+ for each scheduled off-session retry after a failed renewal.
+    /// Always `0` for non-subscription payments.
+    /// </summary>
+    public required int RetryAttempt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("retry_attempt");
+        }
+        init { this._rawData.Set("retry_attempt", value); }
+    }
+
+    /// <summary>
     /// The amount that will be credited to your Dodo balance after currency conversion
     /// and processing. Especially relevant for adaptive pricing where the customer's
     /// payment currency differs from your settlement currency.
@@ -1746,6 +1761,7 @@ public sealed record class Payment : JsonModel
             Metadata = payment.Metadata,
             PaymentID = payment.PaymentID,
             Refunds = payment.Refunds,
+            RetryAttempt = payment.RetryAttempt,
             SettlementAmount = payment.SettlementAmount,
             SettlementCurrency = payment.SettlementCurrency,
             TotalAmount = payment.TotalAmount,
@@ -1794,6 +1810,7 @@ public sealed record class Payment : JsonModel
         {
             item.Validate();
         }
+        _ = this.RetryAttempt;
         _ = this.SettlementAmount;
         this.SettlementCurrency.Validate();
         _ = this.TotalAmount;

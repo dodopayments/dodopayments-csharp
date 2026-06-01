@@ -17,7 +17,7 @@ namespace DodoPayments.Client.Models.Discounts;
 public sealed record class DiscountDetail : JsonModel
 {
     /// <summary>
-    /// The discount amount (basis points for percentage, USD cents for flat)
+    /// The discount amount in **basis points** (e.g., 540 =&gt; 5.4%).
     /// </summary>
     public required int Amount
     {

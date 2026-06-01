@@ -1,33 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>
-      The official .NET library for the Dodo Payments C# service API.
-    </Description>
-    <AssemblyTitle>SDK Code Generation Dodo Payments C#</AssemblyTitle>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-
-    <Nullable>enable</Nullable>
+    <!-- Metadata -->
+    <AssemblyTitle>Dodo Payments C#</AssemblyTitle>
+    <AssemblyName>DodoPayments.Client</AssemblyName>
     <VersionPrefix>6.19.1</VersionPrefix>
-    <LangVersion>latest</LangVersion>
-
-    <!-- Generate an XML documentation file for the project. -->
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-
-    <RepositoryUrl>https://www.github.com/dodopayments/dodopayments-csharp</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
+    <Description>The official .NET library for the Dodo Payments API.</Description>
     <OutputType>Library</OutputType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="DodoPayments.Client.Tests"/>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
-    <InternalsVisibleTo Include="DodoPayments.Client.Tests"/>
-    <PackageReference Include="System.Text.Json" Version="9.0.9"/>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+    <InternalsVisibleTo Include="DodoPayments.Client.Tests" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <PackageReference Include="System.Text.Json" Version="9.0.9" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.Collections.Immutable" Version="8.0.0"/>
+    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
   </ItemGroup>
 </Project>
