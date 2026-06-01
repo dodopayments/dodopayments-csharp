@@ -28,9 +28,8 @@ public record class DiscountUpdateParams : ParamsBase
     public string? DiscountID { get; init; }
 
     /// <summary>
-    /// If present, update the discount amount: - If `discount_type` is `percentage`,
-    /// this represents **basis points** (e.g., `540` = `5.4%`). - Otherwise, this
-    /// represents **USD cents** (e.g., `100` = `$1.00`).
+    /// If present, update the discount amount in **basis points** (e.g., `540` =
+    /// `5.4%`, `10000` = `100%`).
     ///
     /// <para>Must be at least 1 if provided.</para>
     /// </summary>
@@ -146,7 +145,7 @@ public record class DiscountUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// If present, update the discount type.
+    /// If present, update the discount type. Currently only `percentage` is supported.
     /// </summary>
     public ApiEnum<string, DiscountType>? Type
     {

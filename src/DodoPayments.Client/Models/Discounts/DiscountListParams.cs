@@ -60,7 +60,7 @@ public record class DiscountListParams : ParamsBase
     }
 
     /// <summary>
-    /// Filter by discount type (percentage)
+    /// Filter by discount type
     /// </summary>
     public ApiEnum<string, DiscountType>? DiscountType
     {

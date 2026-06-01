@@ -13,10 +13,7 @@ namespace DodoPayments.Client.Models.Discounts;
 public sealed record class Discount : JsonModel
 {
     /// <summary>
-    /// The discount amount.
-    ///
-    /// <para>- If `discount_type` is `percentage`, this is in **basis points**
-    ///  (e.g., 540 =&gt; 5.4%). - Otherwise, this is **USD cents** (e.g., 100 =&gt; `$1.00`).</para>
+    /// The discount amount in **basis points** (e.g., 540 =&gt; 5.4%).
     /// </summary>
     public required int Amount
     {
@@ -143,7 +140,7 @@ public sealed record class Discount : JsonModel
     }
 
     /// <summary>
-    /// The type of discount, e.g. `percentage`, `flat`, or `flat_per_unit`.
+    /// The type of discount. Currently only `percentage` is supported.
     /// </summary>
     public required ApiEnum<string, DiscountType> Type
     {
