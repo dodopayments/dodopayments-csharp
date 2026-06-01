@@ -180,7 +180,7 @@ public enum FontSize
     Md,
     Lg,
     Xl,
-    V2xl,
+    Size2Xl,
 }
 
 sealed class FontSizeConverter : JsonConverter<FontSize>
@@ -198,7 +198,7 @@ sealed class FontSizeConverter : JsonConverter<FontSize>
             "md" => FontSize.Md,
             "lg" => FontSize.Lg,
             "xl" => FontSize.Xl,
-            "2xl" => FontSize.V2xl,
+            "2xl" => FontSize.Size2Xl,
             _ => (FontSize)(-1),
         };
     }
@@ -214,7 +214,7 @@ sealed class FontSizeConverter : JsonConverter<FontSize>
                 FontSize.Md => "md",
                 FontSize.Lg => "lg",
                 FontSize.Xl => "xl",
-                FontSize.V2xl => "2xl",
+                FontSize.Size2Xl => "2xl",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

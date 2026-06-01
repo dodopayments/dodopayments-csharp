@@ -82,6 +82,7 @@ public class WebhookPayloadTest : TestBase
                         Reason = "reason",
                     },
                 ],
+                RetryAttempt = 0,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -191,6 +192,7 @@ public class WebhookPayloadTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -310,6 +312,7 @@ public class WebhookPayloadTest : TestBase
                         Reason = "reason",
                     },
                 ],
+                RetryAttempt = 0,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -433,6 +436,7 @@ public class WebhookPayloadTest : TestBase
                         Reason = "reason",
                     },
                 ],
+                RetryAttempt = 0,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -549,6 +553,7 @@ public class WebhookPayloadTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -668,6 +673,7 @@ public class WebhookPayloadTest : TestBase
                         Reason = "reason",
                     },
                 ],
+                RetryAttempt = 0,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -785,6 +791,7 @@ public class WebhookPayloadTest : TestBase
                         Reason = "reason",
                     },
                 ],
+                RetryAttempt = 0,
                 SettlementAmount = 0,
                 SettlementCurrency = Currency.Aed,
                 TotalAmount = 0,
@@ -904,6 +911,7 @@ public class DataTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -1355,6 +1363,7 @@ public class DataTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -1839,6 +1848,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -1942,6 +1952,7 @@ public class PaymentTest : TestBase
                 Reason = "reason",
             },
         ];
+        int expectedRetryAttempt = 0;
         int expectedSettlementAmount = 0;
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
         int expectedTotalAmount = 0;
@@ -2023,6 +2034,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedRefunds[i], model.Refunds[i]);
         }
+        Assert.Equal(expectedRetryAttempt, model.RetryAttempt);
         Assert.Equal(expectedSettlementAmount, model.SettlementAmount);
         Assert.Equal(expectedSettlementCurrency, model.SettlementCurrency);
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
@@ -2126,6 +2138,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2240,6 +2253,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2350,6 +2364,7 @@ public class PaymentTest : TestBase
                 Reason = "reason",
             },
         ];
+        int expectedRetryAttempt = 0;
         int expectedSettlementAmount = 0;
         ApiEnum<string, Currency> expectedSettlementCurrency = Currency.Aed;
         int expectedTotalAmount = 0;
@@ -2431,6 +2446,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedRefunds[i], deserialized.Refunds[i]);
         }
+        Assert.Equal(expectedRetryAttempt, deserialized.RetryAttempt);
         Assert.Equal(expectedSettlementAmount, deserialized.SettlementAmount);
         Assert.Equal(expectedSettlementCurrency, deserialized.SettlementCurrency);
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
@@ -2534,6 +2550,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2645,6 +2662,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2758,6 +2776,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2866,6 +2885,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -2984,6 +3004,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -3097,6 +3118,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -3206,6 +3228,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -3276,6 +3299,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -3406,6 +3430,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,
@@ -3497,6 +3522,7 @@ public class PaymentTest : TestBase
                     Reason = "reason",
                 },
             ],
+            RetryAttempt = 0,
             SettlementAmount = 0,
             SettlementCurrency = Currency.Aed,
             TotalAmount = 0,

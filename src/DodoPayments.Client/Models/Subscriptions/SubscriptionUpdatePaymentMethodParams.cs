@@ -135,21 +135,8 @@ public record class SubscriptionUpdatePaymentMethodParams : ParamsBase
 
     internal override HttpContent? BodyContent()
     {
-        // The "body" key wraps the union type; the API expects the union content directly.
-        var rawBody = this.RawBodyData;
-        object content = rawBody;
-        if (
-            rawBody.ValueKind == JsonValueKind.Object
-            && rawBody.TryGetProperty("body", out var bodyElement)
-        )
-        {
-            var enumerator = rawBody.EnumerateObject();
-            enumerator.MoveNext(); // Skip first (we know at least "body" exists)
-            if (!enumerator.MoveNext()) // No second property means count == 1
-                content = bodyElement;
-        }
         return new StringContent(
-            JsonSerializer.Serialize(content, ModelBase.SerializerOptions),
+            JsonSerializer.Serialize(this.RawBodyData, ModelBase.SerializerOptions),
             Encoding.UTF8,
             "application/json"
         );
