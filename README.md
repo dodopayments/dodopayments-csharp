@@ -2,8 +2,6 @@
 
 The Dodo Payments C# SDK provides convenient access to the [Dodo Payments REST API](https://docs.dodopayments.com/api-reference/introduction) from applications written in C#.
 
-It is generated with [Stainless](https://www.stainless.com/).
-
 The REST API documentation can be found on [docs.dodopayments.com](https://docs.dodopayments.com/api-reference/introduction).
 
 ## Installation

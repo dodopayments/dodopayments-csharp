@@ -10,6 +10,7 @@ using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Meters;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
+using DodoPayments.Client.Models.ProductCollections;
 using DodoPayments.Client.Models.Products;
 using Balances = DodoPayments.Client.Models.Balances;
 using CreditEntitlementsBalances = DodoPayments.Client.Models.CreditEntitlements.Balances;
@@ -20,7 +21,6 @@ using Payouts = DodoPayments.Client.Models.Payouts;
 using Refunds = DodoPayments.Client.Models.Refunds;
 using Subscriptions = DodoPayments.Client.Models.Subscriptions;
 using WebhookEvents = DodoPayments.Client.Models.WebhookEvents;
-using Webhooks = DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Core;
 
@@ -99,20 +99,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CountryCode>(),
             new ApiEnumConverter<string, DiscountType>(),
             new ApiEnumConverter<string, VerificationStatus>(),
-            new ApiEnumConverter<string, Webhooks::AbandonmentReason>(),
-            new ApiEnumConverter<string, Webhooks::Status>(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::AbandonedCheckoutRecoveredWebhookEventDataAbandonmentReason
-            >(),
-            new ApiEnumConverter<
-                string,
-                Webhooks::AbandonedCheckoutRecoveredWebhookEventDataStatus
-            >(),
-            new ApiEnumConverter<string, Webhooks::DunningRecoveredWebhookEventDataStatus>(),
-            new ApiEnumConverter<string, Webhooks::TriggerState>(),
-            new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventDataStatus>(),
-            new ApiEnumConverter<string, Webhooks::DunningStartedWebhookEventDataTriggerState>(),
             new ApiEnumConverter<string, WebhookEvents::WebhookEventType>(),
             new ApiEnumConverter<string, WebhookEvents::AbandonmentReason>(),
             new ApiEnumConverter<string, WebhookEvents::Status>(),
@@ -134,6 +120,27 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, IntegrationType>(),
             new ApiEnumConverter<string, Grants::EntitlementGrantStatus>(),
             new ApiEnumConverter<string, Grants::Status>(),
+            new ApiEnumConverter<string, ProductCollectionEffectiveAtOnDowngrade>(),
+            new ApiEnumConverter<string, ProductCollectionEffectiveAtOnUpgrade>(),
+            new ApiEnumConverter<string, ProductCollectionOnPaymentFailure>(),
+            new ApiEnumConverter<string, ProductCollectionProrationBillingModeOnDowngrade>(),
+            new ApiEnumConverter<string, ProductCollectionProrationBillingModeOnUpgrade>(),
+            new ApiEnumConverter<string, EffectiveAtOnDowngrade>(),
+            new ApiEnumConverter<string, EffectiveAtOnUpgrade>(),
+            new ApiEnumConverter<string, OnPaymentFailure>(),
+            new ApiEnumConverter<string, ProrationBillingModeOnDowngrade>(),
+            new ApiEnumConverter<string, ProrationBillingModeOnUpgrade>(),
+            new ApiEnumConverter<string, ProductCollectionUpdateParamsEffectiveAtOnDowngrade>(),
+            new ApiEnumConverter<string, ProductCollectionUpdateParamsEffectiveAtOnUpgrade>(),
+            new ApiEnumConverter<string, ProductCollectionUpdateParamsOnPaymentFailure>(),
+            new ApiEnumConverter<
+                string,
+                ProductCollectionUpdateParamsProrationBillingModeOnDowngrade
+            >(),
+            new ApiEnumConverter<
+                string,
+                ProductCollectionUpdateParamsProrationBillingModeOnUpgrade
+            >(),
         },
     };
 

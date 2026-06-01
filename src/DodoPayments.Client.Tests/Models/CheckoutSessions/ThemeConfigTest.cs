@@ -487,7 +487,7 @@ public class FontSizeTest : TestBase
     [InlineData(FontSize.Md)]
     [InlineData(FontSize.Lg)]
     [InlineData(FontSize.Xl)]
-    [InlineData(FontSize.V2xl)]
+    [InlineData(FontSize.Size2Xl)]
     public void Validation_Works(FontSize rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -513,7 +513,7 @@ public class FontSizeTest : TestBase
     [InlineData(FontSize.Md)]
     [InlineData(FontSize.Lg)]
     [InlineData(FontSize.Xl)]
-    [InlineData(FontSize.V2xl)]
+    [InlineData(FontSize.Size2Xl)]
     public void SerializationRoundtrip_Works(FontSize rawValue)
     {
         // force implicit conversion because Theory can't do that for us
