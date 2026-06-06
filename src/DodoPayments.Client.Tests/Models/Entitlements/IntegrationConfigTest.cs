@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Subscriptions;
 
@@ -76,6 +77,7 @@ public class IntegrationConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = FulfillmentMode.Auto,
         };
         value.Validate();
     }
@@ -190,6 +192,7 @@ public class IntegrationConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = FulfillmentMode.Auto,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<IntegrationConfig>(
@@ -814,17 +817,20 @@ public class LicenseKeyConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = FulfillmentMode.Auto,
         };
 
         string expectedActivationMessage = "activation_message";
         int expectedActivationsLimit = 0;
         int expectedDurationCount = 0;
         ApiEnum<string, TimeInterval> expectedDurationInterval = TimeInterval.Day;
+        ApiEnum<string, FulfillmentMode> expectedFulfillmentMode = FulfillmentMode.Auto;
 
         Assert.Equal(expectedActivationMessage, model.ActivationMessage);
         Assert.Equal(expectedActivationsLimit, model.ActivationsLimit);
         Assert.Equal(expectedDurationCount, model.DurationCount);
         Assert.Equal(expectedDurationInterval, model.DurationInterval);
+        Assert.Equal(expectedFulfillmentMode, model.FulfillmentMode);
     }
 
     [Fact]
@@ -836,6 +842,7 @@ public class LicenseKeyConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = FulfillmentMode.Auto,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -856,6 +863,7 @@ public class LicenseKeyConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = FulfillmentMode.Auto,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -869,11 +877,13 @@ public class LicenseKeyConfigTest : TestBase
         int expectedActivationsLimit = 0;
         int expectedDurationCount = 0;
         ApiEnum<string, TimeInterval> expectedDurationInterval = TimeInterval.Day;
+        ApiEnum<string, FulfillmentMode> expectedFulfillmentMode = FulfillmentMode.Auto;
 
         Assert.Equal(expectedActivationMessage, deserialized.ActivationMessage);
         Assert.Equal(expectedActivationsLimit, deserialized.ActivationsLimit);
         Assert.Equal(expectedDurationCount, deserialized.DurationCount);
         Assert.Equal(expectedDurationInterval, deserialized.DurationInterval);
+        Assert.Equal(expectedFulfillmentMode, deserialized.FulfillmentMode);
     }
 
     [Fact]
@@ -885,6 +895,7 @@ public class LicenseKeyConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = FulfillmentMode.Auto,
         };
 
         model.Validate();
@@ -903,6 +914,8 @@ public class LicenseKeyConfigTest : TestBase
         Assert.False(model.RawData.ContainsKey("duration_count"));
         Assert.Null(model.DurationInterval);
         Assert.False(model.RawData.ContainsKey("duration_interval"));
+        Assert.Null(model.FulfillmentMode);
+        Assert.False(model.RawData.ContainsKey("fulfillment_mode"));
     }
 
     [Fact]
@@ -922,6 +935,7 @@ public class LicenseKeyConfigTest : TestBase
             ActivationsLimit = null,
             DurationCount = null,
             DurationInterval = null,
+            FulfillmentMode = null,
         };
 
         Assert.Null(model.ActivationMessage);
@@ -932,6 +946,8 @@ public class LicenseKeyConfigTest : TestBase
         Assert.True(model.RawData.ContainsKey("duration_count"));
         Assert.Null(model.DurationInterval);
         Assert.True(model.RawData.ContainsKey("duration_interval"));
+        Assert.Null(model.FulfillmentMode);
+        Assert.True(model.RawData.ContainsKey("fulfillment_mode"));
     }
 
     [Fact]
@@ -943,6 +959,7 @@ public class LicenseKeyConfigTest : TestBase
             ActivationsLimit = null,
             DurationCount = null,
             DurationInterval = null,
+            FulfillmentMode = null,
         };
 
         model.Validate();
@@ -957,10 +974,69 @@ public class LicenseKeyConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = FulfillmentMode.Auto,
         };
 
         LicenseKeyConfig copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class FulfillmentModeTest : TestBase
+{
+    [Theory]
+    [InlineData(FulfillmentMode.Auto)]
+    [InlineData(FulfillmentMode.Manual)]
+    public void Validation_Works(FulfillmentMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FulfillmentMode> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, FulfillmentMode>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(FulfillmentMode.Auto)]
+    [InlineData(FulfillmentMode.Manual)]
+    public void SerializationRoundtrip_Works(FulfillmentMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FulfillmentMode> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FulfillmentMode>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, FulfillmentMode>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FulfillmentMode>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

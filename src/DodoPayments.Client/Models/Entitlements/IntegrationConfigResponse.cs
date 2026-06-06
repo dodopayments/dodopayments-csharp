@@ -1522,6 +1522,28 @@ public sealed record class IntegrationConfigResponseLicenseKeyConfig : JsonModel
         init { this._rawData.Set("duration_interval", value); }
     }
 
+    /// <summary>
+    /// Fulfillment mode:
+    ///
+    /// <para>`auto` (default) generate and delivery license keys to customers automatically.
+    /// `manual` creates pending grants, actual key is provided via the fulfillment
+    /// API and delivered to the customer when fulfilled.</para>
+    /// </summary>
+    public ApiEnum<
+        string,
+        IntegrationConfigResponseLicenseKeyConfigFulfillmentMode
+    >? FulfillmentMode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, IntegrationConfigResponseLicenseKeyConfigFulfillmentMode>
+            >("fulfillment_mode");
+        }
+        init { this._rawData.Set("fulfillment_mode", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -1529,6 +1551,7 @@ public sealed record class IntegrationConfigResponseLicenseKeyConfig : JsonModel
         _ = this.ActivationsLimit;
         _ = this.DurationCount;
         this.DurationInterval?.Validate();
+        this.FulfillmentMode?.Validate();
     }
 
     public IntegrationConfigResponseLicenseKeyConfig() { }
@@ -1572,4 +1595,56 @@ class IntegrationConfigResponseLicenseKeyConfigFromRaw
     public IntegrationConfigResponseLicenseKeyConfig FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => IntegrationConfigResponseLicenseKeyConfig.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Fulfillment mode:
+///
+/// <para>`auto` (default) generate and delivery license keys to customers automatically.
+/// `manual` creates pending grants, actual key is provided via the fulfillment API
+/// and delivered to the customer when fulfilled.</para>
+/// </summary>
+[JsonConverter(typeof(IntegrationConfigResponseLicenseKeyConfigFulfillmentModeConverter))]
+public enum IntegrationConfigResponseLicenseKeyConfigFulfillmentMode
+{
+    Auto,
+    Manual,
+}
+
+sealed class IntegrationConfigResponseLicenseKeyConfigFulfillmentModeConverter
+    : JsonConverter<IntegrationConfigResponseLicenseKeyConfigFulfillmentMode>
+{
+    public override IntegrationConfigResponseLicenseKeyConfigFulfillmentMode Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "auto" => IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto,
+            "manual" => IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Manual,
+            _ => (IntegrationConfigResponseLicenseKeyConfigFulfillmentMode)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        IntegrationConfigResponseLicenseKeyConfigFulfillmentMode value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto => "auto",
+                IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Manual => "manual",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

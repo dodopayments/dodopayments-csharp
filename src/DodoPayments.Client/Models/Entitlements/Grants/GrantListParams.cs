@@ -43,6 +43,29 @@ public record class GrantListParams : ParamsBase
     }
 
     /// <summary>
+    /// Filter by integration type
+    /// </summary>
+    public ApiEnum<string, IntegrationType>? IntegrationType
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, IntegrationType>>(
+                "integration_type"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("integration_type", value);
+        }
+    }
+
+    /// <summary>
     /// Page number (default 0)
     /// </summary>
     public int? PageNumber
@@ -204,6 +227,71 @@ public record class GrantListParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
+    }
+}
+
+/// <summary>
+/// Filter by integration type
+/// </summary>
+[JsonConverter(typeof(IntegrationTypeConverter))]
+public enum IntegrationType
+{
+    Discord,
+    Telegram,
+    GitHub,
+    Figma,
+    Framer,
+    Notion,
+    DigitalFiles,
+    LicenseKey,
+}
+
+sealed class IntegrationTypeConverter : JsonConverter<IntegrationType>
+{
+    public override IntegrationType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "discord" => IntegrationType.Discord,
+            "telegram" => IntegrationType.Telegram,
+            "github" => IntegrationType.GitHub,
+            "figma" => IntegrationType.Figma,
+            "framer" => IntegrationType.Framer,
+            "notion" => IntegrationType.Notion,
+            "digital_files" => IntegrationType.DigitalFiles,
+            "license_key" => IntegrationType.LicenseKey,
+            _ => (IntegrationType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        IntegrationType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                IntegrationType.Discord => "discord",
+                IntegrationType.Telegram => "telegram",
+                IntegrationType.GitHub => "github",
+                IntegrationType.Figma => "figma",
+                IntegrationType.Framer => "framer",
+                IntegrationType.Notion => "notion",
+                IntegrationType.DigitalFiles => "digital_files",
+                IntegrationType.LicenseKey => "license_key",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }
 

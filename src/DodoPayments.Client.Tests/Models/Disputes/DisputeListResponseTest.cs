@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 
 namespace DodoPayments.Client.Tests.Models.Disputes;
@@ -20,6 +21,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             IsResolvedByRdr = true,
         };
 
@@ -32,6 +34,7 @@ public class DisputeListResponseTest : TestBase
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, PaymentProvider> expectedPaymentProvider = PaymentProvider.Stripe;
         bool expectedIsResolvedByRdr = true;
 
         Assert.Equal(expectedAmount, model.Amount);
@@ -42,6 +45,7 @@ public class DisputeListResponseTest : TestBase
         Assert.Equal(expectedDisputeStage, model.DisputeStage);
         Assert.Equal(expectedDisputeStatus, model.DisputeStatus);
         Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedPaymentProvider, model.PaymentProvider);
         Assert.Equal(expectedIsResolvedByRdr, model.IsResolvedByRdr);
     }
 
@@ -58,6 +62,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             IsResolvedByRdr = true,
         };
 
@@ -83,6 +88,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             IsResolvedByRdr = true,
         };
 
@@ -102,6 +108,7 @@ public class DisputeListResponseTest : TestBase
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, PaymentProvider> expectedPaymentProvider = PaymentProvider.Stripe;
         bool expectedIsResolvedByRdr = true;
 
         Assert.Equal(expectedAmount, deserialized.Amount);
@@ -112,6 +119,7 @@ public class DisputeListResponseTest : TestBase
         Assert.Equal(expectedDisputeStage, deserialized.DisputeStage);
         Assert.Equal(expectedDisputeStatus, deserialized.DisputeStatus);
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedPaymentProvider, deserialized.PaymentProvider);
         Assert.Equal(expectedIsResolvedByRdr, deserialized.IsResolvedByRdr);
     }
 
@@ -128,6 +136,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             IsResolvedByRdr = true,
         };
 
@@ -147,6 +156,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
         };
 
         Assert.Null(model.IsResolvedByRdr);
@@ -166,6 +176,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
         };
 
         model.Validate();
@@ -184,6 +195,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
 
             IsResolvedByRdr = null,
         };
@@ -205,6 +217,7 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
 
             IsResolvedByRdr = null,
         };
@@ -225,11 +238,72 @@ public class DisputeListResponseTest : TestBase
             DisputeStage = DisputeDisputeStage.PreDispute,
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             IsResolvedByRdr = true,
         };
 
         DisputeListResponse copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class PaymentProviderTest : TestBase
+{
+    [Theory]
+    [InlineData(PaymentProvider.Stripe)]
+    [InlineData(PaymentProvider.Adyen)]
+    [InlineData(PaymentProvider.Dodo)]
+    public void Validation_Works(PaymentProvider rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentProvider> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentProvider>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PaymentProvider.Stripe)]
+    [InlineData(PaymentProvider.Adyen)]
+    [InlineData(PaymentProvider.Dodo)]
+    public void SerializationRoundtrip_Works(PaymentProvider rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentProvider> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PaymentProvider>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentProvider>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PaymentProvider>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

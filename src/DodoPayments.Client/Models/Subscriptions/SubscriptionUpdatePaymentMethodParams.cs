@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -446,6 +448,32 @@ public sealed record class New : JsonModel
         init { this._rawData.Set("type", value); }
     }
 
+    /// <summary>
+    /// List of payment methods allowed during checkout.
+    ///
+    /// <para>Customers will **never** see payment methods that are **not** in this
+    /// list. However, adding a method here **does not guarantee** customers will
+    /// see it. Availability still depends on other factors (e.g., customer location,
+    /// merchant settings).</para>
+    /// </summary>
+    public IReadOnlyList<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, PaymentMethodTypes>>
+            >("allowed_payment_method_types");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<ApiEnum<string, PaymentMethodTypes>>?>(
+                "allowed_payment_method_types",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     public string? ReturnUrl
     {
         get
@@ -462,6 +490,10 @@ public sealed record class New : JsonModel
         if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("new")))
         {
             throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
+        foreach (var item in this.AllowedPaymentMethodTypes ?? [])
+        {
+            item.Validate();
         }
         _ = this.ReturnUrl;
     }

@@ -5,6 +5,7 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Discounts;
+using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.WebhookEvents;
@@ -67,6 +68,7 @@ public class WebhookPayloadTest : TestBase
                 ],
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentID = "payment_id",
+                PaymentProvider = Payments::PaymentProvider.Stripe,
                 Refunds =
                 [
                     new()
@@ -177,6 +179,7 @@ public class WebhookPayloadTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -297,6 +300,7 @@ public class WebhookPayloadTest : TestBase
                 ],
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentID = "payment_id",
+                PaymentProvider = Payments::PaymentProvider.Stripe,
                 Refunds =
                 [
                     new()
@@ -421,6 +425,7 @@ public class WebhookPayloadTest : TestBase
                 ],
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentID = "payment_id",
+                PaymentProvider = Payments::PaymentProvider.Stripe,
                 Refunds =
                 [
                     new()
@@ -538,6 +543,7 @@ public class WebhookPayloadTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -658,6 +664,7 @@ public class WebhookPayloadTest : TestBase
                 ],
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentID = "payment_id",
+                PaymentProvider = Payments::PaymentProvider.Stripe,
                 Refunds =
                 [
                     new()
@@ -776,6 +783,7 @@ public class WebhookPayloadTest : TestBase
                 ],
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentID = "payment_id",
+                PaymentProvider = Payments::PaymentProvider.Stripe,
                 Refunds =
                 [
                     new()
@@ -896,6 +904,7 @@ public class DataTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -1264,6 +1273,7 @@ public class DataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1348,6 +1358,7 @@ public class DataTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -1743,6 +1754,7 @@ public class DataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1833,6 +1845,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -1937,6 +1950,8 @@ public class PaymentTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, Payments::PaymentProvider> expectedPaymentProvider =
+            Payments::PaymentProvider.Stripe;
         List<Payments::RefundListItem> expectedRefunds =
         [
             new()
@@ -2029,6 +2044,7 @@ public class PaymentTest : TestBase
             Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedPaymentProvider, model.PaymentProvider);
         Assert.Equal(expectedRefunds.Count, model.Refunds.Count);
         for (int i = 0; i < expectedRefunds.Count; i++)
         {
@@ -2123,6 +2139,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -2238,6 +2255,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -2349,6 +2367,8 @@ public class PaymentTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, Payments::PaymentProvider> expectedPaymentProvider =
+            Payments::PaymentProvider.Stripe;
         List<Payments::RefundListItem> expectedRefunds =
         [
             new()
@@ -2441,6 +2461,7 @@ public class PaymentTest : TestBase
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedPaymentProvider, deserialized.PaymentProvider);
         Assert.Equal(expectedRefunds.Count, deserialized.Refunds.Count);
         for (int i = 0; i < expectedRefunds.Count; i++)
         {
@@ -2535,6 +2556,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -2647,6 +2669,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -2761,6 +2784,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -2870,6 +2894,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -2989,6 +3014,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -3103,6 +3129,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -3213,6 +3240,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -3284,6 +3312,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -3415,6 +3444,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -3507,6 +3537,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -7982,6 +8013,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8025,6 +8057,8 @@ public class EntitlementGrantTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
         string expectedEntitlementID = "entitlement_id";
+        ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
+            EntitlementIntegrationType.Discord;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, Grants::EntitlementGrantStatus> expectedStatus =
             Grants::EntitlementGrantStatus.Pending;
@@ -8069,6 +8103,7 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedEntitlementID, model.EntitlementID);
+        Assert.Equal(expectedIntegrationType, model.IntegrationType);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -8102,6 +8137,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8159,6 +8195,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8209,6 +8246,8 @@ public class EntitlementGrantTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
         string expectedEntitlementID = "entitlement_id";
+        ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
+            EntitlementIntegrationType.Discord;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, Grants::EntitlementGrantStatus> expectedStatus =
             Grants::EntitlementGrantStatus.Pending;
@@ -8253,6 +8292,7 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedEntitlementID, deserialized.EntitlementID);
+        Assert.Equal(expectedIntegrationType, deserialized.IntegrationType);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -8286,6 +8326,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8337,6 +8378,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8367,6 +8409,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8394,6 +8437,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8428,6 +8472,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8459,6 +8504,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8518,6 +8564,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8560,6 +8607,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8629,6 +8677,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8681,6 +8730,7 @@ public class EntitlementGrantTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
+            IntegrationType = EntitlementIntegrationType.Discord,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
