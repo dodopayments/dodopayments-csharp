@@ -305,6 +305,7 @@ public class BalanceLedgerEntryEventTypeTest : TestBase
     [InlineData(BalanceLedgerEntryEventType.AbandonedCartRecoveryFee)]
     [InlineData(BalanceLedgerEntryEventType.DunningFees)]
     [InlineData(BalanceLedgerEntryEventType.PaymentRetryFee)]
+    [InlineData(BalanceLedgerEntryEventType.ByopFee)]
     public void Validation_Works(BalanceLedgerEntryEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -346,6 +347,7 @@ public class BalanceLedgerEntryEventTypeTest : TestBase
     [InlineData(BalanceLedgerEntryEventType.AbandonedCartRecoveryFee)]
     [InlineData(BalanceLedgerEntryEventType.DunningFees)]
     [InlineData(BalanceLedgerEntryEventType.PaymentRetryFee)]
+    [InlineData(BalanceLedgerEntryEventType.ByopFee)]
     public void SerializationRoundtrip_Works(BalanceLedgerEntryEventType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

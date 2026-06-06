@@ -296,6 +296,7 @@ public class LicenseKeySourceTest : TestBase
     [Theory]
     [InlineData(LicenseKeySource.Auto)]
     [InlineData(LicenseKeySource.Import)]
+    [InlineData(LicenseKeySource.Manual)]
     public void Validation_Works(LicenseKeySource rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -318,6 +319,7 @@ public class LicenseKeySourceTest : TestBase
     [Theory]
     [InlineData(LicenseKeySource.Auto)]
     [InlineData(LicenseKeySource.Import)]
+    [InlineData(LicenseKeySource.Manual)]
     public void SerializationRoundtrip_Works(LicenseKeySource rawValue)
     {
         // force implicit conversion because Theory can't do that for us

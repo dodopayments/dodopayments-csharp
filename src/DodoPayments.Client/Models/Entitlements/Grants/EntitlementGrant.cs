@@ -83,6 +83,21 @@ public sealed record class EntitlementGrant : JsonModel
     }
 
     /// <summary>
+    /// The integration type of the grant's entitlement (e.g. `license_key`).
+    /// </summary>
+    public required ApiEnum<string, EntitlementIntegrationType> IntegrationType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, EntitlementIntegrationType>>(
+                "integration_type"
+            );
+        }
+        init { this._rawData.Set("integration_type", value); }
+    }
+
+    /// <summary>
     /// Arbitrary key-value metadata recorded on the grant.
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
@@ -283,6 +298,7 @@ public sealed record class EntitlementGrant : JsonModel
         _ = this.CreatedAt;
         _ = this.CustomerID;
         _ = this.EntitlementID;
+        this.IntegrationType.Validate();
         _ = this.Metadata;
         this.Status.Validate();
         _ = this.UpdatedAt;

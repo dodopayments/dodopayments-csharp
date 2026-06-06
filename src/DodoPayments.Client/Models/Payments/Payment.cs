@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
@@ -155,6 +156,25 @@ public sealed record class Payment : JsonModel
             return this._rawData.GetNotNullClass<string>("payment_id");
         }
         init { this._rawData.Set("payment_id", value); }
+    }
+
+    /// <summary>
+    /// Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+    /// merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+    /// </summary>
+    public required ApiEnum<
+        string,
+        global::DodoPayments.Client.Models.Payments.PaymentProvider
+    > PaymentProvider
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, global::DodoPayments.Client.Models.Payments.PaymentProvider>
+            >("payment_provider");
+        }
+        init { this._rawData.Set("payment_provider", value); }
     }
 
     /// <summary>
@@ -578,6 +598,7 @@ public sealed record class Payment : JsonModel
         }
         _ = this.Metadata;
         _ = this.PaymentID;
+        this.PaymentProvider.Validate();
         foreach (var item in this.Refunds)
         {
             item.Validate();
@@ -653,6 +674,58 @@ class PaymentFromRaw : IFromRawJson<Payment>
     /// <inheritdoc/>
     public Payment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Payment.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+/// merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+/// </summary>
+[JsonConverter(typeof(global::DodoPayments.Client.Models.Payments.PaymentProviderConverter))]
+public enum PaymentProvider
+{
+    Stripe,
+    Adyen,
+    Dodo,
+}
+
+sealed class PaymentProviderConverter
+    : JsonConverter<global::DodoPayments.Client.Models.Payments.PaymentProvider>
+{
+    public override global::DodoPayments.Client.Models.Payments.PaymentProvider Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "stripe" => global::DodoPayments.Client.Models.Payments.PaymentProvider.Stripe,
+            "adyen" => global::DodoPayments.Client.Models.Payments.PaymentProvider.Adyen,
+            "dodo" => global::DodoPayments.Client.Models.Payments.PaymentProvider.Dodo,
+            _ => (global::DodoPayments.Client.Models.Payments.PaymentProvider)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        global::DodoPayments.Client.Models.Payments.PaymentProvider value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                global::DodoPayments.Client.Models.Payments.PaymentProvider.Stripe => "stripe",
+                global::DodoPayments.Client.Models.Payments.PaymentProvider.Adyen => "adyen",
+                global::DodoPayments.Client.Models.Payments.PaymentProvider.Dodo => "dodo",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 [JsonConverter(typeof(JsonModelConverter<ProductCart, ProductCartFromRaw>))]

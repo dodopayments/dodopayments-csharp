@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
@@ -13,11 +15,19 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
         var parameters = new SubscriptionUpdatePaymentMethodParams
         {
             SubscriptionID = "subscription_id",
-            PaymentMethod = new New() { ReturnUrl = "return_url" },
+            PaymentMethod = new New()
+            {
+                AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+                ReturnUrl = "return_url",
+            },
         };
 
         string expectedSubscriptionID = "subscription_id";
-        PaymentMethod expectedPaymentMethod = new New() { ReturnUrl = "return_url" };
+        PaymentMethod expectedPaymentMethod = new New()
+        {
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            ReturnUrl = "return_url",
+        };
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
         Assert.Equal(expectedPaymentMethod, parameters.PaymentMethod);
@@ -29,7 +39,11 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
         SubscriptionUpdatePaymentMethodParams parameters = new()
         {
             SubscriptionID = "subscription_id",
-            PaymentMethod = new New() { ReturnUrl = "return_url" },
+            PaymentMethod = new New()
+            {
+                AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+                ReturnUrl = "return_url",
+            },
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
@@ -50,7 +64,11 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
         var parameters = new SubscriptionUpdatePaymentMethodParams
         {
             SubscriptionID = "subscription_id",
-            PaymentMethod = new New() { ReturnUrl = "return_url" },
+            PaymentMethod = new New()
+            {
+                AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+                ReturnUrl = "return_url",
+            },
         };
 
         SubscriptionUpdatePaymentMethodParams copied = new(parameters);
@@ -64,7 +82,11 @@ public class PaymentMethodTest : TestBase
     [Fact]
     public void NewValidationWorks()
     {
-        PaymentMethod value = new New() { ReturnUrl = "return_url" };
+        PaymentMethod value = new New()
+        {
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            ReturnUrl = "return_url",
+        };
         value.Validate();
     }
 
@@ -78,7 +100,11 @@ public class PaymentMethodTest : TestBase
     [Fact]
     public void NewSerializationRoundtripWorks()
     {
-        PaymentMethod value = new New() { ReturnUrl = "return_url" };
+        PaymentMethod value = new New()
+        {
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            ReturnUrl = "return_url",
+        };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<PaymentMethod>(
             element,
@@ -107,19 +133,40 @@ public class NewTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new New { ReturnUrl = "return_url" };
+        var model = new New
+        {
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            ReturnUrl = "return_url",
+        };
 
         JsonElement expectedType = JsonSerializer.SerializeToElement("new");
+        List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
+        [
+            PaymentMethodTypes.Ach,
+        ];
         string expectedReturnUrl = "return_url";
 
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
+        Assert.NotNull(model.AllowedPaymentMethodTypes);
+        Assert.Equal(
+            expectedAllowedPaymentMethodTypes.Count,
+            model.AllowedPaymentMethodTypes.Count
+        );
+        for (int i = 0; i < expectedAllowedPaymentMethodTypes.Count; i++)
+        {
+            Assert.Equal(expectedAllowedPaymentMethodTypes[i], model.AllowedPaymentMethodTypes[i]);
+        }
         Assert.Equal(expectedReturnUrl, model.ReturnUrl);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new New { ReturnUrl = "return_url" };
+        var model = new New
+        {
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            ReturnUrl = "return_url",
+        };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<New>(json, ModelBase.SerializerOptions);
@@ -130,23 +177,47 @@ public class NewTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new New { ReturnUrl = "return_url" };
+        var model = new New
+        {
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            ReturnUrl = "return_url",
+        };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<New>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         JsonElement expectedType = JsonSerializer.SerializeToElement("new");
+        List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
+        [
+            PaymentMethodTypes.Ach,
+        ];
         string expectedReturnUrl = "return_url";
 
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
+        Assert.NotNull(deserialized.AllowedPaymentMethodTypes);
+        Assert.Equal(
+            expectedAllowedPaymentMethodTypes.Count,
+            deserialized.AllowedPaymentMethodTypes.Count
+        );
+        for (int i = 0; i < expectedAllowedPaymentMethodTypes.Count; i++)
+        {
+            Assert.Equal(
+                expectedAllowedPaymentMethodTypes[i],
+                deserialized.AllowedPaymentMethodTypes[i]
+            );
+        }
         Assert.Equal(expectedReturnUrl, deserialized.ReturnUrl);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new New { ReturnUrl = "return_url" };
+        var model = new New
+        {
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            ReturnUrl = "return_url",
+        };
 
         model.Validate();
     }
@@ -156,6 +227,8 @@ public class NewTest : TestBase
     {
         var model = new New { };
 
+        Assert.Null(model.AllowedPaymentMethodTypes);
+        Assert.False(model.RawData.ContainsKey("allowed_payment_method_types"));
         Assert.Null(model.ReturnUrl);
         Assert.False(model.RawData.ContainsKey("return_url"));
     }
@@ -171,8 +244,10 @@ public class NewTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new New { ReturnUrl = null };
+        var model = new New { AllowedPaymentMethodTypes = null, ReturnUrl = null };
 
+        Assert.Null(model.AllowedPaymentMethodTypes);
+        Assert.True(model.RawData.ContainsKey("allowed_payment_method_types"));
         Assert.Null(model.ReturnUrl);
         Assert.True(model.RawData.ContainsKey("return_url"));
     }
@@ -180,7 +255,7 @@ public class NewTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new New { ReturnUrl = null };
+        var model = new New { AllowedPaymentMethodTypes = null, ReturnUrl = null };
 
         model.Validate();
     }
@@ -188,7 +263,11 @@ public class NewTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new New { ReturnUrl = "return_url" };
+        var model = new New
+        {
+            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            ReturnUrl = "return_url",
+        };
 
         New copied = new(model);
 
