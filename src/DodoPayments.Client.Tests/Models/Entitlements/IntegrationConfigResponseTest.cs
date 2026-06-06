@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Subscriptions;
 
@@ -96,6 +97,7 @@ public class IntegrationConfigResponseTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto,
         };
         value.Validate();
     }
@@ -230,6 +232,7 @@ public class IntegrationConfigResponseTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<IntegrationConfigResponse>(
@@ -1399,17 +1402,23 @@ public class IntegrationConfigResponseLicenseKeyConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto,
         };
 
         string expectedActivationMessage = "activation_message";
         int expectedActivationsLimit = 0;
         int expectedDurationCount = 0;
         ApiEnum<string, TimeInterval> expectedDurationInterval = TimeInterval.Day;
+        ApiEnum<
+            string,
+            IntegrationConfigResponseLicenseKeyConfigFulfillmentMode
+        > expectedFulfillmentMode = IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto;
 
         Assert.Equal(expectedActivationMessage, model.ActivationMessage);
         Assert.Equal(expectedActivationsLimit, model.ActivationsLimit);
         Assert.Equal(expectedDurationCount, model.DurationCount);
         Assert.Equal(expectedDurationInterval, model.DurationInterval);
+        Assert.Equal(expectedFulfillmentMode, model.FulfillmentMode);
     }
 
     [Fact]
@@ -1421,6 +1430,7 @@ public class IntegrationConfigResponseLicenseKeyConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1441,6 +1451,7 @@ public class IntegrationConfigResponseLicenseKeyConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1454,11 +1465,16 @@ public class IntegrationConfigResponseLicenseKeyConfigTest : TestBase
         int expectedActivationsLimit = 0;
         int expectedDurationCount = 0;
         ApiEnum<string, TimeInterval> expectedDurationInterval = TimeInterval.Day;
+        ApiEnum<
+            string,
+            IntegrationConfigResponseLicenseKeyConfigFulfillmentMode
+        > expectedFulfillmentMode = IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto;
 
         Assert.Equal(expectedActivationMessage, deserialized.ActivationMessage);
         Assert.Equal(expectedActivationsLimit, deserialized.ActivationsLimit);
         Assert.Equal(expectedDurationCount, deserialized.DurationCount);
         Assert.Equal(expectedDurationInterval, deserialized.DurationInterval);
+        Assert.Equal(expectedFulfillmentMode, deserialized.FulfillmentMode);
     }
 
     [Fact]
@@ -1470,6 +1486,7 @@ public class IntegrationConfigResponseLicenseKeyConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto,
         };
 
         model.Validate();
@@ -1488,6 +1505,8 @@ public class IntegrationConfigResponseLicenseKeyConfigTest : TestBase
         Assert.False(model.RawData.ContainsKey("duration_count"));
         Assert.Null(model.DurationInterval);
         Assert.False(model.RawData.ContainsKey("duration_interval"));
+        Assert.Null(model.FulfillmentMode);
+        Assert.False(model.RawData.ContainsKey("fulfillment_mode"));
     }
 
     [Fact]
@@ -1507,6 +1526,7 @@ public class IntegrationConfigResponseLicenseKeyConfigTest : TestBase
             ActivationsLimit = null,
             DurationCount = null,
             DurationInterval = null,
+            FulfillmentMode = null,
         };
 
         Assert.Null(model.ActivationMessage);
@@ -1517,6 +1537,8 @@ public class IntegrationConfigResponseLicenseKeyConfigTest : TestBase
         Assert.True(model.RawData.ContainsKey("duration_count"));
         Assert.Null(model.DurationInterval);
         Assert.True(model.RawData.ContainsKey("duration_interval"));
+        Assert.Null(model.FulfillmentMode);
+        Assert.True(model.RawData.ContainsKey("fulfillment_mode"));
     }
 
     [Fact]
@@ -1528,6 +1550,7 @@ public class IntegrationConfigResponseLicenseKeyConfigTest : TestBase
             ActivationsLimit = null,
             DurationCount = null,
             DurationInterval = null,
+            FulfillmentMode = null,
         };
 
         model.Validate();
@@ -1542,10 +1565,67 @@ public class IntegrationConfigResponseLicenseKeyConfigTest : TestBase
             ActivationsLimit = 0,
             DurationCount = 0,
             DurationInterval = TimeInterval.Day,
+            FulfillmentMode = IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto,
         };
 
         IntegrationConfigResponseLicenseKeyConfig copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class IntegrationConfigResponseLicenseKeyConfigFulfillmentModeTest : TestBase
+{
+    [Theory]
+    [InlineData(IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto)]
+    [InlineData(IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Manual)]
+    public void Validation_Works(IntegrationConfigResponseLicenseKeyConfigFulfillmentMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, IntegrationConfigResponseLicenseKeyConfigFulfillmentMode> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, IntegrationConfigResponseLicenseKeyConfigFulfillmentMode>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Auto)]
+    [InlineData(IntegrationConfigResponseLicenseKeyConfigFulfillmentMode.Manual)]
+    public void SerializationRoundtrip_Works(
+        IntegrationConfigResponseLicenseKeyConfigFulfillmentMode rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, IntegrationConfigResponseLicenseKeyConfigFulfillmentMode> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, IntegrationConfigResponseLicenseKeyConfigFulfillmentMode>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, IntegrationConfigResponseLicenseKeyConfigFulfillmentMode>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, IntegrationConfigResponseLicenseKeyConfigFulfillmentMode>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }
