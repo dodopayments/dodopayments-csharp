@@ -284,6 +284,7 @@ public enum Source
 {
     Auto,
     Import,
+    Manual,
 }
 
 sealed class SourceConverter : JsonConverter<Source>
@@ -298,6 +299,7 @@ sealed class SourceConverter : JsonConverter<Source>
         {
             "auto" => Source.Auto,
             "import" => Source.Import,
+            "manual" => Source.Manual,
             _ => (Source)(-1),
         };
     }
@@ -310,6 +312,7 @@ sealed class SourceConverter : JsonConverter<Source>
             {
                 Source.Auto => "auto",
                 Source.Import => "import",
+                Source.Manual => "manual",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

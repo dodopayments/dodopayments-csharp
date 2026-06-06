@@ -245,6 +245,7 @@ public enum LicenseKeySource
 {
     Auto,
     Import,
+    Manual,
 }
 
 sealed class LicenseKeySourceConverter : JsonConverter<LicenseKeySource>
@@ -259,6 +260,7 @@ sealed class LicenseKeySourceConverter : JsonConverter<LicenseKeySource>
         {
             "auto" => LicenseKeySource.Auto,
             "import" => LicenseKeySource.Import,
+            "manual" => LicenseKeySource.Manual,
             _ => (LicenseKeySource)(-1),
         };
     }
@@ -275,6 +277,7 @@ sealed class LicenseKeySourceConverter : JsonConverter<LicenseKeySource>
             {
                 LicenseKeySource.Auto => "auto",
                 LicenseKeySource.Import => "import",
+                LicenseKeySource.Manual => "manual",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

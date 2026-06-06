@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Discounts;
-using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Refunds;
+using Disputes = DodoPayments.Client.Models.Disputes;
 
 namespace DodoPayments.Client.Tests.Models.Payments;
 
@@ -47,8 +48,8 @@ public class PaymentTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = "currency",
                     DisputeID = "dispute_id",
-                    DisputeStage = DisputeDisputeStage.PreDispute,
-                    DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                    DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                    DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     IsResolvedByRdr = true,
                     Remarks = "remarks",
@@ -56,6 +57,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -142,7 +144,7 @@ public class PaymentTest : TestBase
             PhoneNumber = "phone_number",
         };
         bool expectedDigitalProductsDelivered = true;
-        List<Dispute> expectedDisputes =
+        List<Disputes::Dispute> expectedDisputes =
         [
             new()
             {
@@ -151,8 +153,8 @@ public class PaymentTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Currency = "currency",
                 DisputeID = "dispute_id",
-                DisputeStage = DisputeDisputeStage.PreDispute,
-                DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
                 IsResolvedByRdr = true,
                 Remarks = "remarks",
@@ -160,6 +162,7 @@ public class PaymentTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, PaymentProvider> expectedPaymentProvider = PaymentProvider.Stripe;
         List<RefundListItem> expectedRefunds =
         [
             new()
@@ -247,6 +250,7 @@ public class PaymentTest : TestBase
             Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedPaymentProvider, model.PaymentProvider);
         Assert.Equal(expectedRefunds.Count, model.Refunds.Count);
         for (int i = 0; i < expectedRefunds.Count; i++)
         {
@@ -331,8 +335,8 @@ public class PaymentTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = "currency",
                     DisputeID = "dispute_id",
-                    DisputeStage = DisputeDisputeStage.PreDispute,
-                    DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                    DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                    DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     IsResolvedByRdr = true,
                     Remarks = "remarks",
@@ -340,6 +344,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -446,8 +451,8 @@ public class PaymentTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = "currency",
                     DisputeID = "dispute_id",
-                    DisputeStage = DisputeDisputeStage.PreDispute,
-                    DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                    DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                    DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     IsResolvedByRdr = true,
                     Remarks = "remarks",
@@ -455,6 +460,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -548,7 +554,7 @@ public class PaymentTest : TestBase
             PhoneNumber = "phone_number",
         };
         bool expectedDigitalProductsDelivered = true;
-        List<Dispute> expectedDisputes =
+        List<Disputes::Dispute> expectedDisputes =
         [
             new()
             {
@@ -557,8 +563,8 @@ public class PaymentTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Currency = "currency",
                 DisputeID = "dispute_id",
-                DisputeStage = DisputeDisputeStage.PreDispute,
-                DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                 PaymentID = "payment_id",
                 IsResolvedByRdr = true,
                 Remarks = "remarks",
@@ -566,6 +572,7 @@ public class PaymentTest : TestBase
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, PaymentProvider> expectedPaymentProvider = PaymentProvider.Stripe;
         List<RefundListItem> expectedRefunds =
         [
             new()
@@ -653,6 +660,7 @@ public class PaymentTest : TestBase
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedPaymentProvider, deserialized.PaymentProvider);
         Assert.Equal(expectedRefunds.Count, deserialized.Refunds.Count);
         for (int i = 0; i < expectedRefunds.Count; i++)
         {
@@ -737,8 +745,8 @@ public class PaymentTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = "currency",
                     DisputeID = "dispute_id",
-                    DisputeStage = DisputeDisputeStage.PreDispute,
-                    DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                    DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                    DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     IsResolvedByRdr = true,
                     Remarks = "remarks",
@@ -746,6 +754,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -849,8 +858,8 @@ public class PaymentTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = "currency",
                     DisputeID = "dispute_id",
-                    DisputeStage = DisputeDisputeStage.PreDispute,
-                    DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                    DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                    DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     IsResolvedByRdr = true,
                     Remarks = "remarks",
@@ -858,6 +867,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -962,8 +972,8 @@ public class PaymentTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = "currency",
                     DisputeID = "dispute_id",
-                    DisputeStage = DisputeDisputeStage.PreDispute,
-                    DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                    DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                    DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     IsResolvedByRdr = true,
                     Remarks = "remarks",
@@ -971,6 +981,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -1030,8 +1041,8 @@ public class PaymentTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = "currency",
                     DisputeID = "dispute_id",
-                    DisputeStage = DisputeDisputeStage.PreDispute,
-                    DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                    DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                    DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     IsResolvedByRdr = true,
                     Remarks = "remarks",
@@ -1039,6 +1050,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -1167,8 +1179,8 @@ public class PaymentTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = "currency",
                     DisputeID = "dispute_id",
-                    DisputeStage = DisputeDisputeStage.PreDispute,
-                    DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                    DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                    DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     IsResolvedByRdr = true,
                     Remarks = "remarks",
@@ -1176,6 +1188,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -1259,8 +1272,8 @@ public class PaymentTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Currency = "currency",
                     DisputeID = "dispute_id",
-                    DisputeStage = DisputeDisputeStage.PreDispute,
-                    DisputeStatus = DisputeDisputeStatus.DisputeOpened,
+                    DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
+                    DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
                     PaymentID = "payment_id",
                     IsResolvedByRdr = true,
                     Remarks = "remarks",
@@ -1268,6 +1281,7 @@ public class PaymentTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentProvider.Stripe,
             Refunds =
             [
                 new()
@@ -1336,6 +1350,66 @@ public class PaymentTest : TestBase
         Payment copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class PaymentProviderTest : TestBase
+{
+    [Theory]
+    [InlineData(PaymentProvider.Stripe)]
+    [InlineData(PaymentProvider.Adyen)]
+    [InlineData(PaymentProvider.Dodo)]
+    public void Validation_Works(PaymentProvider rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentProvider> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentProvider>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PaymentProvider.Stripe)]
+    [InlineData(PaymentProvider.Adyen)]
+    [InlineData(PaymentProvider.Dodo)]
+    public void SerializationRoundtrip_Works(PaymentProvider rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentProvider> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PaymentProvider>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentProvider>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PaymentProvider>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 

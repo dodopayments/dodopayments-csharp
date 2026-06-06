@@ -87,6 +87,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, EntitlementIntegrationType>(),
             new ApiEnumConverter<string, GitHubPermission>(),
             new ApiEnumConverter<string, IntegrationType>(),
+            new ApiEnumConverter<string, Grants::IntegrationType>(),
             new ApiEnumConverter<string, Grants::Status>(),
             new ApiEnumConverter<string, EffectiveAtOnDowngrade>(),
             new ApiEnumConverter<string, EffectiveAtOnUpgrade>(),
