@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
 
@@ -99,6 +100,22 @@ public sealed record class PaymentListResponse : JsonModel
         init { this._rawData.Set("payment_id", value); }
     }
 
+    /// <summary>
+    /// Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+    /// merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+    /// </summary>
+    public required ApiEnum<string, PaymentListResponsePaymentProvider> PaymentProvider
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, PaymentListResponsePaymentProvider>
+            >("payment_provider");
+        }
+        init { this._rawData.Set("payment_provider", value); }
+    }
+
     public required int TotalAmount
     {
         get
@@ -107,6 +124,32 @@ public sealed record class PaymentListResponse : JsonModel
             return this._rawData.GetNotNullStruct<int>("total_amount");
         }
         init { this._rawData.Set("total_amount", value); }
+    }
+
+    /// <summary>
+    /// The last four digits of the card
+    /// </summary>
+    public string? CardLastFour
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_last_four");
+        }
+        init { this._rawData.Set("card_last_four", value); }
+    }
+
+    /// <summary>
+    /// Card network like VISA, MASTERCARD etc.
+    /// </summary>
+    public string? CardNetwork
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("card_network");
+        }
+        init { this._rawData.Set("card_network", value); }
     }
 
     /// <summary>
@@ -216,7 +259,10 @@ public sealed record class PaymentListResponse : JsonModel
         _ = this.HasLicenseKey;
         _ = this.Metadata;
         _ = this.PaymentID;
+        this.PaymentProvider.Validate();
         _ = this.TotalAmount;
+        _ = this.CardLastFour;
+        _ = this.CardNetwork;
         this.DisputeStatus?.Validate();
         _ = this.InvoiceID;
         _ = this.InvoiceUrl;
@@ -262,4 +308,56 @@ class PaymentListResponseFromRaw : IFromRawJson<PaymentListResponse>
     /// <inheritdoc/>
     public PaymentListResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         PaymentListResponse.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+/// merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+/// </summary>
+[JsonConverter(typeof(PaymentListResponsePaymentProviderConverter))]
+public enum PaymentListResponsePaymentProvider
+{
+    Stripe,
+    Adyen,
+    Dodo,
+}
+
+sealed class PaymentListResponsePaymentProviderConverter
+    : JsonConverter<PaymentListResponsePaymentProvider>
+{
+    public override PaymentListResponsePaymentProvider Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "stripe" => PaymentListResponsePaymentProvider.Stripe,
+            "adyen" => PaymentListResponsePaymentProvider.Adyen,
+            "dodo" => PaymentListResponsePaymentProvider.Dodo,
+            _ => (PaymentListResponsePaymentProvider)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        PaymentListResponsePaymentProvider value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                PaymentListResponsePaymentProvider.Stripe => "stripe",
+                PaymentListResponsePaymentProvider.Adyen => "adyen",
+                PaymentListResponsePaymentProvider.Dodo => "dodo",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

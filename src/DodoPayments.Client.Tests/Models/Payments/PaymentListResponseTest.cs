@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
@@ -30,7 +31,10 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
+            CardLastFour = "card_last_four",
+            CardNetwork = "card_network",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
@@ -56,7 +60,11 @@ public class PaymentListResponseTest : TestBase
         bool expectedHasLicenseKey = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, PaymentListResponsePaymentProvider> expectedPaymentProvider =
+            PaymentListResponsePaymentProvider.Stripe;
         int expectedTotalAmount = 0;
+        string expectedCardLastFour = "card_last_four";
+        string expectedCardNetwork = "card_network";
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedInvoiceID = "invoice_id";
@@ -81,7 +89,10 @@ public class PaymentListResponseTest : TestBase
             Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedPaymentProvider, model.PaymentProvider);
         Assert.Equal(expectedTotalAmount, model.TotalAmount);
+        Assert.Equal(expectedCardLastFour, model.CardLastFour);
+        Assert.Equal(expectedCardNetwork, model.CardNetwork);
         Assert.Equal(expectedDisputeStatus, model.DisputeStatus);
         Assert.Equal(expectedInvoiceID, model.InvoiceID);
         Assert.Equal(expectedInvoiceUrl, model.InvoiceUrl);
@@ -112,7 +123,10 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
+            CardLastFour = "card_last_four",
+            CardNetwork = "card_network",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
@@ -152,7 +166,10 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
+            CardLastFour = "card_last_four",
+            CardNetwork = "card_network",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
@@ -185,7 +202,11 @@ public class PaymentListResponseTest : TestBase
         bool expectedHasLicenseKey = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, PaymentListResponsePaymentProvider> expectedPaymentProvider =
+            PaymentListResponsePaymentProvider.Stripe;
         int expectedTotalAmount = 0;
+        string expectedCardLastFour = "card_last_four";
+        string expectedCardNetwork = "card_network";
         ApiEnum<string, DisputeDisputeStatus> expectedDisputeStatus =
             DisputeDisputeStatus.DisputeOpened;
         string expectedInvoiceID = "invoice_id";
@@ -210,7 +231,10 @@ public class PaymentListResponseTest : TestBase
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedPaymentProvider, deserialized.PaymentProvider);
         Assert.Equal(expectedTotalAmount, deserialized.TotalAmount);
+        Assert.Equal(expectedCardLastFour, deserialized.CardLastFour);
+        Assert.Equal(expectedCardNetwork, deserialized.CardNetwork);
         Assert.Equal(expectedDisputeStatus, deserialized.DisputeStatus);
         Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
         Assert.Equal(expectedInvoiceUrl, deserialized.InvoiceUrl);
@@ -241,7 +265,10 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
+            CardLastFour = "card_last_four",
+            CardNetwork = "card_network",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
@@ -275,9 +302,14 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
         };
 
+        Assert.Null(model.CardLastFour);
+        Assert.False(model.RawData.ContainsKey("card_last_four"));
+        Assert.Null(model.CardNetwork);
+        Assert.False(model.RawData.ContainsKey("card_network"));
         Assert.Null(model.DisputeStatus);
         Assert.False(model.RawData.ContainsKey("dispute_status"));
         Assert.Null(model.InvoiceID);
@@ -316,6 +348,7 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
         };
 
@@ -342,8 +375,11 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
 
+            CardLastFour = null,
+            CardNetwork = null,
             DisputeStatus = null,
             InvoiceID = null,
             InvoiceUrl = null,
@@ -354,6 +390,10 @@ public class PaymentListResponseTest : TestBase
             SubscriptionID = null,
         };
 
+        Assert.Null(model.CardLastFour);
+        Assert.True(model.RawData.ContainsKey("card_last_four"));
+        Assert.Null(model.CardNetwork);
+        Assert.True(model.RawData.ContainsKey("card_network"));
         Assert.Null(model.DisputeStatus);
         Assert.True(model.RawData.ContainsKey("dispute_status"));
         Assert.Null(model.InvoiceID);
@@ -392,8 +432,11 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
 
+            CardLastFour = null,
+            CardNetwork = null,
             DisputeStatus = null,
             InvoiceID = null,
             InvoiceUrl = null,
@@ -427,7 +470,10 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentID = "payment_id",
+            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
+            CardLastFour = "card_last_four",
+            CardNetwork = "card_network",
             DisputeStatus = DisputeDisputeStatus.DisputeOpened,
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
@@ -441,5 +487,63 @@ public class PaymentListResponseTest : TestBase
         PaymentListResponse copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class PaymentListResponsePaymentProviderTest : TestBase
+{
+    [Theory]
+    [InlineData(PaymentListResponsePaymentProvider.Stripe)]
+    [InlineData(PaymentListResponsePaymentProvider.Adyen)]
+    [InlineData(PaymentListResponsePaymentProvider.Dodo)]
+    public void Validation_Works(PaymentListResponsePaymentProvider rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentListResponsePaymentProvider> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentListResponsePaymentProvider>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PaymentListResponsePaymentProvider.Stripe)]
+    [InlineData(PaymentListResponsePaymentProvider.Adyen)]
+    [InlineData(PaymentListResponsePaymentProvider.Dodo)]
+    public void SerializationRoundtrip_Works(PaymentListResponsePaymentProvider rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PaymentListResponsePaymentProvider> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, PaymentListResponsePaymentProvider>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentListResponsePaymentProvider>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, PaymentListResponsePaymentProvider>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }

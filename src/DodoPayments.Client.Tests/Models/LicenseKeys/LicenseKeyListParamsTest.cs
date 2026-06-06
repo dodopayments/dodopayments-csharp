@@ -152,6 +152,7 @@ public class SourceTest : TestBase
     [Theory]
     [InlineData(Source.Auto)]
     [InlineData(Source.Import)]
+    [InlineData(Source.Manual)]
     public void Validation_Works(Source rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -174,6 +175,7 @@ public class SourceTest : TestBase
     [Theory]
     [InlineData(Source.Auto)]
     [InlineData(Source.Import)]
+    [InlineData(Source.Manual)]
     public void SerializationRoundtrip_Works(Source rawValue)
     {
         // force implicit conversion because Theory can't do that for us

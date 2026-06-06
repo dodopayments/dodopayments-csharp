@@ -1181,6 +1181,22 @@ public sealed record class LicenseKeyConfig : JsonModel
         init { this._rawData.Set("duration_interval", value); }
     }
 
+    /// <summary>
+    /// Fulfillment mode: `auto` (default) generates keys automatically; `manual`
+    /// creates pending grants the merchant fulfills via the `POST /grants/{id}/license-key` endpoint.
+    /// </summary>
+    public ApiEnum<string, FulfillmentMode>? FulfillmentMode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, FulfillmentMode>>(
+                "fulfillment_mode"
+            );
+        }
+        init { this._rawData.Set("fulfillment_mode", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -1188,6 +1204,7 @@ public sealed record class LicenseKeyConfig : JsonModel
         _ = this.ActivationsLimit;
         _ = this.DurationCount;
         this.DurationInterval?.Validate();
+        this.FulfillmentMode?.Validate();
     }
 
     public LicenseKeyConfig() { }
@@ -1225,4 +1242,52 @@ class LicenseKeyConfigFromRaw : IFromRawJson<LicenseKeyConfig>
     /// <inheritdoc/>
     public LicenseKeyConfig FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         LicenseKeyConfig.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Fulfillment mode: `auto` (default) generates keys automatically; `manual` creates
+/// pending grants the merchant fulfills via the `POST /grants/{id}/license-key` endpoint.
+/// </summary>
+[JsonConverter(typeof(FulfillmentModeConverter))]
+public enum FulfillmentMode
+{
+    Auto,
+    Manual,
+}
+
+sealed class FulfillmentModeConverter : JsonConverter<FulfillmentMode>
+{
+    public override FulfillmentMode Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "auto" => FulfillmentMode.Auto,
+            "manual" => FulfillmentMode.Manual,
+            _ => (FulfillmentMode)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        FulfillmentMode value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                FulfillmentMode.Auto => "auto",
+                FulfillmentMode.Manual => "manual",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

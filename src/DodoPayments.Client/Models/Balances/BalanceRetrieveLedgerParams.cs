@@ -774,6 +774,7 @@ public enum EventType
     AbandonedCartRecoveryFee,
     DunningFees,
     PaymentRetryFee,
+    ByopFee,
 }
 
 sealed class EventTypeConverter : JsonConverter<EventType>
@@ -807,6 +808,7 @@ sealed class EventTypeConverter : JsonConverter<EventType>
             "abandoned_cart_recovery_fee" => EventType.AbandonedCartRecoveryFee,
             "dunning_fees" => EventType.DunningFees,
             "payment_retry_fee" => EventType.PaymentRetryFee,
+            "byop_fee" => EventType.ByopFee,
             _ => (EventType)(-1),
         };
     }
@@ -842,6 +844,7 @@ sealed class EventTypeConverter : JsonConverter<EventType>
                 EventType.AbandonedCartRecoveryFee => "abandoned_cart_recovery_fee",
                 EventType.DunningFees => "dunning_fees",
                 EventType.PaymentRetryFee => "payment_retry_fee",
+                EventType.ByopFee => "byop_fee",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

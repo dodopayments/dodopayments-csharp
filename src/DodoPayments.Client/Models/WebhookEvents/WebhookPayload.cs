@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Discounts;
+using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
 using Balances = DodoPayments.Client.Models.CreditEntitlements.Balances;
@@ -1314,6 +1315,22 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
+    /// merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+    /// </summary>
+    public required ApiEnum<string, Payments::PaymentProvider> PaymentProvider
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Payments::PaymentProvider>>(
+                "payment_provider"
+            );
+        }
+        init { this._rawData.Set("payment_provider", value); }
+    }
+
+    /// <summary>
     /// List of refunds issued for this payment
     /// </summary>
     public required IReadOnlyList<Payments::RefundListItem> Refunds
@@ -1760,6 +1777,7 @@ public sealed record class Payment : JsonModel
             Disputes = payment.Disputes,
             Metadata = payment.Metadata,
             PaymentID = payment.PaymentID,
+            PaymentProvider = payment.PaymentProvider,
             Refunds = payment.Refunds,
             RetryAttempt = payment.RetryAttempt,
             SettlementAmount = payment.SettlementAmount,
@@ -1806,6 +1824,7 @@ public sealed record class Payment : JsonModel
         }
         _ = this.Metadata;
         _ = this.PaymentID;
+        this.PaymentProvider.Validate();
         foreach (var item in this.Refunds)
         {
             item.Validate();
@@ -4286,6 +4305,18 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("entitlement_id", value); }
     }
 
+    public required ApiEnum<string, EntitlementIntegrationType> IntegrationType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, EntitlementIntegrationType>>(
+                "integration_type"
+            );
+        }
+        init { this._rawData.Set("integration_type", value); }
+    }
+
     /// <summary>
     /// Arbitrary key-value metadata recorded on the grant.
     /// </summary>
@@ -4516,6 +4547,7 @@ public sealed record class EntitlementGrant : JsonModel
             CreatedAt = entitlementGrant.CreatedAt,
             CustomerID = entitlementGrant.CustomerID,
             EntitlementID = entitlementGrant.EntitlementID,
+            IntegrationType = entitlementGrant.IntegrationType,
             Metadata = entitlementGrant.Metadata,
             Status = entitlementGrant.Status,
             UpdatedAt = entitlementGrant.UpdatedAt,
@@ -4540,6 +4572,7 @@ public sealed record class EntitlementGrant : JsonModel
         _ = this.CreatedAt;
         _ = this.CustomerID;
         _ = this.EntitlementID;
+        this.IntegrationType.Validate();
         _ = this.Metadata;
         this.Status.Validate();
         _ = this.UpdatedAt;
