@@ -137,6 +137,19 @@ class DunningRecoveredWebhookEventFromRaw : IFromRawJson<DunningRecoveredWebhook
 )]
 public sealed record class DunningRecoveredWebhookEventData : JsonModel
 {
+    /// <summary>
+    /// Brand id this dunning attempt belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
+    }
+
     public required DateTimeOffset CreatedAt
     {
         get
@@ -202,6 +215,7 @@ public sealed record class DunningRecoveredWebhookEventData : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.BrandID;
         _ = this.CreatedAt;
         _ = this.CustomerID;
         this.Status.Validate();

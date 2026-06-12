@@ -170,6 +170,19 @@ public sealed record class AbandonedCheckoutRecoveredWebhookEventData : JsonMode
         init { this._rawData.Set("abandonment_reason", value); }
     }
 
+    /// <summary>
+    /// Brand id this abandoned checkout belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
+    }
+
     public required string CustomerID
     {
         get
@@ -217,6 +230,7 @@ public sealed record class AbandonedCheckoutRecoveredWebhookEventData : JsonMode
     {
         _ = this.AbandonedAt;
         this.AbandonmentReason.Validate();
+        _ = this.BrandID;
         _ = this.CustomerID;
         _ = this.PaymentID;
         this.Status.Validate();

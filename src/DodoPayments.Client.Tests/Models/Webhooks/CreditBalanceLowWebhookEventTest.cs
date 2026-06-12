@@ -16,6 +16,7 @@ public class CreditBalanceLowWebhookEventTest : TestBase
             Data = new()
             {
                 AvailableBalance = "available_balance",
+                BrandID = "brand_id",
                 CreditEntitlementID = "credit_entitlement_id",
                 CreditEntitlementName = "credit_entitlement_name",
                 CustomerID = "customer_id",
@@ -31,6 +32,7 @@ public class CreditBalanceLowWebhookEventTest : TestBase
         CreditBalanceLowWebhookEventData expectedData = new()
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -57,6 +59,7 @@ public class CreditBalanceLowWebhookEventTest : TestBase
             Data = new()
             {
                 AvailableBalance = "available_balance",
+                BrandID = "brand_id",
                 CreditEntitlementID = "credit_entitlement_id",
                 CreditEntitlementName = "credit_entitlement_name",
                 CustomerID = "customer_id",
@@ -86,6 +89,7 @@ public class CreditBalanceLowWebhookEventTest : TestBase
             Data = new()
             {
                 AvailableBalance = "available_balance",
+                BrandID = "brand_id",
                 CreditEntitlementID = "credit_entitlement_id",
                 CreditEntitlementName = "credit_entitlement_name",
                 CustomerID = "customer_id",
@@ -108,6 +112,7 @@ public class CreditBalanceLowWebhookEventTest : TestBase
         CreditBalanceLowWebhookEventData expectedData = new()
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -134,6 +139,7 @@ public class CreditBalanceLowWebhookEventTest : TestBase
             Data = new()
             {
                 AvailableBalance = "available_balance",
+                BrandID = "brand_id",
                 CreditEntitlementID = "credit_entitlement_id",
                 CreditEntitlementName = "credit_entitlement_name",
                 CustomerID = "customer_id",
@@ -157,6 +163,7 @@ public class CreditBalanceLowWebhookEventTest : TestBase
             Data = new()
             {
                 AvailableBalance = "available_balance",
+                BrandID = "brand_id",
                 CreditEntitlementID = "credit_entitlement_id",
                 CreditEntitlementName = "credit_entitlement_name",
                 CustomerID = "customer_id",
@@ -182,6 +189,7 @@ public class CreditBalanceLowWebhookEventDataTest : TestBase
         var model = new CreditBalanceLowWebhookEventData
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -192,6 +200,7 @@ public class CreditBalanceLowWebhookEventDataTest : TestBase
         };
 
         string expectedAvailableBalance = "available_balance";
+        string expectedBrandID = "brand_id";
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCreditEntitlementName = "credit_entitlement_name";
         string expectedCustomerID = "customer_id";
@@ -201,6 +210,7 @@ public class CreditBalanceLowWebhookEventDataTest : TestBase
         int expectedThresholdPercent = 0;
 
         Assert.Equal(expectedAvailableBalance, model.AvailableBalance);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCreditEntitlementID, model.CreditEntitlementID);
         Assert.Equal(expectedCreditEntitlementName, model.CreditEntitlementName);
         Assert.Equal(expectedCustomerID, model.CustomerID);
@@ -216,6 +226,7 @@ public class CreditBalanceLowWebhookEventDataTest : TestBase
         var model = new CreditBalanceLowWebhookEventData
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -240,6 +251,7 @@ public class CreditBalanceLowWebhookEventDataTest : TestBase
         var model = new CreditBalanceLowWebhookEventData
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -257,6 +269,7 @@ public class CreditBalanceLowWebhookEventDataTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedAvailableBalance = "available_balance";
+        string expectedBrandID = "brand_id";
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCreditEntitlementName = "credit_entitlement_name";
         string expectedCustomerID = "customer_id";
@@ -266,6 +279,7 @@ public class CreditBalanceLowWebhookEventDataTest : TestBase
         int expectedThresholdPercent = 0;
 
         Assert.Equal(expectedAvailableBalance, deserialized.AvailableBalance);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCreditEntitlementID, deserialized.CreditEntitlementID);
         Assert.Equal(expectedCreditEntitlementName, deserialized.CreditEntitlementName);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
@@ -281,6 +295,7 @@ public class CreditBalanceLowWebhookEventDataTest : TestBase
         var model = new CreditBalanceLowWebhookEventData
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -299,6 +314,7 @@ public class CreditBalanceLowWebhookEventDataTest : TestBase
         var model = new CreditBalanceLowWebhookEventData
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",

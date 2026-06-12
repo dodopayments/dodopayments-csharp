@@ -72,7 +72,8 @@ public sealed record class PaymentCreateResponse : JsonModel
     }
 
     /// <summary>
-    /// Total amount of the payment in smallest currency unit (e.g. cents)
+    /// Total amount of the payment in the currency's smallest unit (cents for USD,
+    /// yen for JPY, fils for KWD)
     /// </summary>
     public required int TotalAmount
     {

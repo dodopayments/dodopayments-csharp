@@ -147,6 +147,19 @@ public sealed record class CreditBalanceLowWebhookEventData : JsonModel
         init { this._rawData.Set("available_balance", value); }
     }
 
+    /// <summary>
+    /// Brand id this credit entitlement belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
+    }
+
     public required string CreditEntitlementID
     {
         get
@@ -221,6 +234,7 @@ public sealed record class CreditBalanceLowWebhookEventData : JsonModel
     public override void Validate()
     {
         _ = this.AvailableBalance;
+        _ = this.BrandID;
         _ = this.CreditEntitlementID;
         _ = this.CreditEntitlementName;
         _ = this.CustomerID;

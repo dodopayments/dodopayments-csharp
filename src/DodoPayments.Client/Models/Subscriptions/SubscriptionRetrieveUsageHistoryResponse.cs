@@ -219,7 +219,8 @@ public sealed record class SubscriptionRetrieveUsageHistoryResponseMeter : JsonM
     }
 
     /// <summary>
-    /// Total price charged for this meter in smallest currency unit (cents)
+    /// Total price charged for this meter in the currency's smallest unit (cents
+    /// for USD, yen for JPY, fils for KWD)
     /// </summary>
     public required int TotalPrice
     {

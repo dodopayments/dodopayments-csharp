@@ -19,6 +19,7 @@ public class EntitlementGrantRevokedWebhookEventTest : TestBase
             Data = new()
             {
                 ID = "id",
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerID = "customer_id",
@@ -68,6 +69,7 @@ public class EntitlementGrantRevokedWebhookEventTest : TestBase
         EntitlementGrant expectedData = new()
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -128,6 +130,7 @@ public class EntitlementGrantRevokedWebhookEventTest : TestBase
             Data = new()
             {
                 ID = "id",
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerID = "customer_id",
@@ -191,6 +194,7 @@ public class EntitlementGrantRevokedWebhookEventTest : TestBase
             Data = new()
             {
                 ID = "id",
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerID = "customer_id",
@@ -247,6 +251,7 @@ public class EntitlementGrantRevokedWebhookEventTest : TestBase
         EntitlementGrant expectedData = new()
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -307,6 +312,7 @@ public class EntitlementGrantRevokedWebhookEventTest : TestBase
             Data = new()
             {
                 ID = "id",
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerID = "customer_id",
@@ -364,6 +370,7 @@ public class EntitlementGrantRevokedWebhookEventTest : TestBase
             Data = new()
             {
                 ID = "id",
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerID = "customer_id",

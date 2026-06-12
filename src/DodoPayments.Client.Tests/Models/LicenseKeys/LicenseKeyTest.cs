@@ -14,6 +14,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -29,6 +30,7 @@ public class LicenseKeyTest : TestBase
         };
 
         string expectedID = "lic_123";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z");
         string expectedCustomerID = "cus_123";
@@ -43,6 +45,7 @@ public class LicenseKeyTest : TestBase
         string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerID, model.CustomerID);
@@ -63,6 +66,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -92,6 +96,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -114,6 +119,7 @@ public class LicenseKeyTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "lic_123";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z");
         string expectedCustomerID = "cus_123";
@@ -128,6 +134,7 @@ public class LicenseKeyTest : TestBase
         string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
@@ -148,6 +155,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -171,6 +179,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -197,6 +206,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -216,6 +226,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -247,6 +258,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -271,6 +283,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",

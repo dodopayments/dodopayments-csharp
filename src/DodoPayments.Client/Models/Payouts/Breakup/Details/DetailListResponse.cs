@@ -55,7 +55,8 @@ public sealed record class DetailListResponse : JsonModel
     }
 
     /// <summary>
-    /// Original amount in the original currency (in smallest currency unit, e.g., cents).
+    /// Original amount in the original currency, in that currency's smallest unit
+    /// (cents for USD, yen for JPY, fils for KWD).
     /// </summary>
     public required long OriginalAmount
     {
@@ -81,8 +82,9 @@ public sealed record class DetailListResponse : JsonModel
     }
 
     /// <summary>
-    /// Amount in the payout's currency (in smallest currency unit). Uses cumulative
-    /// rounding to ensure sum matches payout total exactly.
+    /// Amount in the payout's currency, in that currency's smallest unit (cents for
+    /// USD, yen for JPY, fils for KWD). Uses cumulative rounding to ensure sum matches
+    /// payout total exactly.
     /// </summary>
     public required long PayoutCurrencyAmount
     {

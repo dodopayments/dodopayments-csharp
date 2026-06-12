@@ -15,6 +15,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -35,6 +36,7 @@ public class RefundTest : TestBase
             Reason = "reason",
         };
 
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         CustomerLimitedDetails expectedCustomer = new()
@@ -54,6 +56,7 @@ public class RefundTest : TestBase
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         string expectedReason = "reason";
 
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomer, model.Customer);
@@ -78,6 +81,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -109,6 +113,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -133,6 +138,7 @@ public class RefundTest : TestBase
         var deserialized = JsonSerializer.Deserialize<Refund>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         CustomerLimitedDetails expectedCustomer = new()
@@ -152,6 +158,7 @@ public class RefundTest : TestBase
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         string expectedReason = "reason";
 
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomer, deserialized.Customer);
@@ -176,6 +183,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -204,6 +212,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -234,6 +243,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -259,6 +269,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -293,6 +304,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -322,6 +334,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()

@@ -29,6 +29,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreditEntitlementCart =
@@ -169,6 +170,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -320,6 +322,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreditEntitlementCart =
@@ -474,6 +477,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreditEntitlementCart =
@@ -621,6 +625,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -772,6 +777,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreditEntitlementCart =
@@ -920,6 +926,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
                     Street = "street",
                     Zipcode = "zipcode",
                 },
+                BrandID = "brand_id",
                 CancelAtNextBillingDate = true,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreditEntitlementCart =

@@ -17,6 +17,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -35,6 +36,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedAmount = "amount";
         string expectedBalanceAfter = "balance_after";
         string expectedBalanceBefore = "balance_before";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCreditEntitlementID = "credit_entitlement_id";
@@ -52,6 +54,7 @@ public class CreditLedgerEntryTest : TestBase
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedBalanceAfter, model.BalanceAfter);
         Assert.Equal(expectedBalanceBefore, model.BalanceBefore);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCreditEntitlementID, model.CreditEntitlementID);
@@ -75,6 +78,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -107,6 +111,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -132,6 +137,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedAmount = "amount";
         string expectedBalanceAfter = "balance_after";
         string expectedBalanceBefore = "balance_before";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCreditEntitlementID = "credit_entitlement_id";
@@ -149,6 +155,7 @@ public class CreditLedgerEntryTest : TestBase
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedBalanceAfter, deserialized.BalanceAfter);
         Assert.Equal(expectedBalanceBefore, deserialized.BalanceBefore);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCreditEntitlementID, deserialized.CreditEntitlementID);
@@ -172,6 +179,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -198,6 +206,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -227,6 +236,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -249,6 +259,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -283,6 +294,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -310,6 +322,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",

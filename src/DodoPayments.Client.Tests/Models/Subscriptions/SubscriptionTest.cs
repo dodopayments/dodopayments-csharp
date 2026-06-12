@@ -26,6 +26,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -161,6 +162,7 @@ public class SubscriptionTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
+        string expectedBrandID = "brand_id";
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<CreditEntitlementCartResponse> expectedCreditEntitlementCart =
@@ -298,6 +300,7 @@ public class SubscriptionTest : TestBase
             Assert.Equal(expectedAddons[i], model.Addons[i]);
         }
         Assert.Equal(expectedBilling, model.Billing);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCancelAtNextBillingDate, model.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCreditEntitlementCart.Count, model.CreditEntitlementCart.Count);
@@ -382,6 +385,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -531,6 +535,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -673,6 +678,7 @@ public class SubscriptionTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
+        string expectedBrandID = "brand_id";
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<CreditEntitlementCartResponse> expectedCreditEntitlementCart =
@@ -810,6 +816,7 @@ public class SubscriptionTest : TestBase
             Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
         }
         Assert.Equal(expectedBilling, deserialized.Billing);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCancelAtNextBillingDate, deserialized.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCreditEntitlementCart.Count, deserialized.CreditEntitlementCart.Count);
@@ -894,6 +901,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -1037,6 +1045,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -1152,6 +1161,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -1244,6 +1254,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -1372,6 +1383,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -1477,6 +1489,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
