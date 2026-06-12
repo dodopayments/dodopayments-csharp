@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
@@ -101,6 +102,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
+            PricingMode = ProductPricingMode.ByCurrency,
             ProductCollectionID = "product_collection_id",
         };
 
@@ -192,6 +194,7 @@ public class ProductTest : TestBase
             Interval = TimeInterval.Day,
         };
         string expectedName = "name";
+        ApiEnum<string, ProductPricingMode> expectedPricingMode = ProductPricingMode.ByCurrency;
         string expectedProductCollectionID = "product_collection_id";
 
         Assert.Equal(expectedBrandID, model.BrandID);
@@ -233,6 +236,7 @@ public class ProductTest : TestBase
         Assert.Equal(expectedLicenseKeyActivationsLimit, model.LicenseKeyActivationsLimit);
         Assert.Equal(expectedLicenseKeyDuration, model.LicenseKeyDuration);
         Assert.Equal(expectedName, model.Name);
+        Assert.Equal(expectedPricingMode, model.PricingMode);
         Assert.Equal(expectedProductCollectionID, model.ProductCollectionID);
     }
 
@@ -325,6 +329,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
+            PricingMode = ProductPricingMode.ByCurrency,
             ProductCollectionID = "product_collection_id",
         };
 
@@ -423,6 +428,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
+            PricingMode = ProductPricingMode.ByCurrency,
             ProductCollectionID = "product_collection_id",
         };
 
@@ -521,6 +527,7 @@ public class ProductTest : TestBase
             Interval = TimeInterval.Day,
         };
         string expectedName = "name";
+        ApiEnum<string, ProductPricingMode> expectedPricingMode = ProductPricingMode.ByCurrency;
         string expectedProductCollectionID = "product_collection_id";
 
         Assert.Equal(expectedBrandID, deserialized.BrandID);
@@ -562,6 +569,7 @@ public class ProductTest : TestBase
         Assert.Equal(expectedLicenseKeyActivationsLimit, deserialized.LicenseKeyActivationsLimit);
         Assert.Equal(expectedLicenseKeyDuration, deserialized.LicenseKeyDuration);
         Assert.Equal(expectedName, deserialized.Name);
+        Assert.Equal(expectedPricingMode, deserialized.PricingMode);
         Assert.Equal(expectedProductCollectionID, deserialized.ProductCollectionID);
     }
 
@@ -654,6 +662,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
+            PricingMode = ProductPricingMode.ByCurrency,
             ProductCollectionID = "product_collection_id",
         };
 
@@ -743,6 +752,8 @@ public class ProductTest : TestBase
         Assert.False(model.RawData.ContainsKey("license_key_duration"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
+        Assert.Null(model.PricingMode);
+        Assert.False(model.RawData.ContainsKey("pricing_mode"));
         Assert.Null(model.ProductCollectionID);
         Assert.False(model.RawData.ContainsKey("product_collection_id"));
     }
@@ -891,6 +902,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = null,
             LicenseKeyDuration = null,
             Name = null,
+            PricingMode = null,
             ProductCollectionID = null,
         };
 
@@ -910,6 +922,8 @@ public class ProductTest : TestBase
         Assert.True(model.RawData.ContainsKey("license_key_duration"));
         Assert.Null(model.Name);
         Assert.True(model.RawData.ContainsKey("name"));
+        Assert.Null(model.PricingMode);
+        Assert.True(model.RawData.ContainsKey("pricing_mode"));
         Assert.Null(model.ProductCollectionID);
         Assert.True(model.RawData.ContainsKey("product_collection_id"));
     }
@@ -988,6 +1002,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = null,
             LicenseKeyDuration = null,
             Name = null,
+            PricingMode = null,
             ProductCollectionID = null,
         };
 
@@ -1083,11 +1098,70 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
+            PricingMode = ProductPricingMode.ByCurrency,
             ProductCollectionID = "product_collection_id",
         };
 
         Product copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class ProductPricingModeTest : TestBase
+{
+    [Theory]
+    [InlineData(ProductPricingMode.ByCurrency)]
+    [InlineData(ProductPricingMode.ByCountry)]
+    public void Validation_Works(ProductPricingMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ProductPricingMode> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ProductPricingMode>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(ProductPricingMode.ByCurrency)]
+    [InlineData(ProductPricingMode.ByCountry)]
+    public void SerializationRoundtrip_Works(ProductPricingMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ProductPricingMode> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, ProductPricingMode>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ProductPricingMode>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, ProductPricingMode>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

@@ -51,6 +51,19 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
+    /// Brand id this subscription belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
+    }
+
+    /// <summary>
     /// Indicates if the subscription will cancel at the next billing date
     /// </summary>
     public required bool CancelAtNextBillingDate
@@ -276,8 +289,8 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
-    /// Amount charged before tax for each recurring payment in smallest currency
-    /// unit (e.g. cents)
+    /// Amount charged before tax for each recurring payment in the currency's smallest
+    /// unit (cents for USD, yen for JPY, fils for KWD)
     /// </summary>
     public required int RecurringPreTaxAmount
     {
@@ -550,6 +563,7 @@ public sealed record class Subscription : JsonModel
             item.Validate();
         }
         this.Billing.Validate();
+        _ = this.BrandID;
         _ = this.CancelAtNextBillingDate;
         _ = this.CreatedAt;
         foreach (var item in this.CreditEntitlementCart)

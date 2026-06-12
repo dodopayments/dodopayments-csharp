@@ -22,6 +22,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            IsByop = true,
             ProductCart =
             [
                 new()
@@ -105,6 +106,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalAmount = 0,
             Tax = 0,
         };
+        bool expectedIsByop = true;
         List<ProductCart> expectedProductCart =
         [
             new()
@@ -181,6 +183,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.Equal(expectedBillingCountry, model.BillingCountry);
         Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedCurrentBreakup, model.CurrentBreakup);
+        Assert.Equal(expectedIsByop, model.IsByop);
         Assert.Equal(expectedProductCart.Count, model.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
         {
@@ -206,6 +209,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            IsByop = true,
             ProductCart =
             [
                 new()
@@ -303,6 +307,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            IsByop = true,
             ProductCart =
             [
                 new()
@@ -393,6 +398,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalAmount = 0,
             Tax = 0,
         };
+        bool expectedIsByop = true;
         List<ProductCart> expectedProductCart =
         [
             new()
@@ -469,6 +475,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.Equal(expectedBillingCountry, deserialized.BillingCountry);
         Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedCurrentBreakup, deserialized.CurrentBreakup);
+        Assert.Equal(expectedIsByop, deserialized.IsByop);
         Assert.Equal(expectedProductCart.Count, deserialized.ProductCart.Count);
         for (int i = 0; i < expectedProductCart.Count; i++)
         {
@@ -494,6 +501,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            IsByop = true,
             ProductCart =
             [
                 new()
@@ -585,6 +593,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            IsByop = true,
             ProductCart =
             [
                 new()
@@ -672,6 +681,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            IsByop = true,
             ProductCart =
             [
                 new()
@@ -754,6 +764,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            IsByop = true,
             ProductCart =
             [
                 new()
@@ -845,6 +856,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            IsByop = true,
             ProductCart =
             [
                 new()
@@ -931,6 +943,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            IsByop = true,
             ProductCart =
             [
                 new()

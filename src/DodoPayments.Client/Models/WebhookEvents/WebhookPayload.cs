@@ -158,6 +158,25 @@ public record class Data : ModelBase
         }
     }
 
+    public string BrandID
+    {
+        get
+        {
+            return Match(
+                payment: (x) => x.BrandID,
+                subscription: (x) => x.BrandID,
+                refund: (x) => x.BrandID,
+                dispute: (x) => x.BrandID,
+                licenseKey: (x) => x.BrandID,
+                creditLedgerEntry: (x) => x.BrandID,
+                creditBalanceLow: (x) => x.BrandID,
+                abandonedCheckout: (x) => x.BrandID,
+                dunningAttempt: (x) => x.BrandID,
+                entitlementGrant: (x) => x.BrandID
+            );
+        }
+    }
+
     public string? BusinessID
     {
         get
@@ -1392,8 +1411,8 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// Total amount charged to the customer including tax, in smallest currency unit
-    /// (e.g. cents)
+    /// Total amount charged to the customer including tax, in the currency's smallest
+    /// unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal places)
     /// </summary>
     public required int TotalAmount
     {
@@ -1729,7 +1748,8 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// Amount of tax collected in smallest currency unit (e.g. cents)
+    /// Amount of tax collected in the currency's smallest unit (e.g. cents for USD,
+    /// yen for JPY, fils for KWD)
     /// </summary>
     public int? Tax
     {
@@ -1946,6 +1966,19 @@ public sealed record class Subscription : JsonModel
             return this._rawData.GetNotNullClass<Payments::BillingAddress>("billing");
         }
         init { this._rawData.Set("billing", value); }
+    }
+
+    /// <summary>
+    /// Brand id this subscription belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
     }
 
     /// <summary>
@@ -2167,8 +2200,8 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
-    /// Amount charged before tax for each recurring payment in smallest currency
-    /// unit (e.g. cents)
+    /// Amount charged before tax for each recurring payment in the currency's smallest
+    /// unit (cents for USD, yen for JPY, fils for KWD)
     /// </summary>
     public required int RecurringPreTaxAmount
     {
@@ -2456,6 +2489,7 @@ public sealed record class Subscription : JsonModel
         {
             Addons = subscription.Addons,
             Billing = subscription.Billing,
+            BrandID = subscription.BrandID,
             CancelAtNextBillingDate = subscription.CancelAtNextBillingDate,
             CreatedAt = subscription.CreatedAt,
             CreditEntitlementCart = subscription.CreditEntitlementCart,
@@ -2500,6 +2534,7 @@ public sealed record class Subscription : JsonModel
             item.Validate();
         }
         this.Billing.Validate();
+        _ = this.BrandID;
         _ = this.CancelAtNextBillingDate;
         _ = this.CreatedAt;
         foreach (var item in this.CreditEntitlementCart)
@@ -2603,6 +2638,19 @@ class SubscriptionFromRaw : IFromRawJson<Subscription>
 [JsonConverter(typeof(JsonModelConverter<Refund, RefundFromRaw>))]
 public sealed record class Refund : JsonModel
 {
+    /// <summary>
+    /// Brand id this refund belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
+    }
+
     /// <summary>
     /// The unique identifier of the business issuing the refund.
     /// </summary>
@@ -2764,6 +2812,7 @@ public sealed record class Refund : JsonModel
     public static implicit operator Refunds::Refund(Refund refund) =>
         new()
         {
+            BrandID = refund.BrandID,
             BusinessID = refund.BusinessID,
             CreatedAt = refund.CreatedAt,
             Customer = refund.Customer,
@@ -2780,6 +2829,7 @@ public sealed record class Refund : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.BrandID;
         _ = this.BusinessID;
         _ = this.CreatedAt;
         this.Customer.Validate();
@@ -2851,6 +2901,19 @@ public sealed record class Dispute : JsonModel
             return this._rawData.GetNotNullClass<string>("amount");
         }
         init { this._rawData.Set("amount", value); }
+    }
+
+    /// <summary>
+    /// Brand id this dispute belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
     }
 
     /// <summary>
@@ -2953,6 +3016,23 @@ public sealed record class Dispute : JsonModel
     }
 
     /// <summary>
+    /// Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+    /// routes (the merchant's own Hyperswitch connector); `dodo` for everything
+    /// Dodo processed itself.
+    /// </summary>
+    public required ApiEnum<string, Disputes::PaymentProvider> PaymentProvider
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Disputes::PaymentProvider>>(
+                "payment_provider"
+            );
+        }
+        init { this._rawData.Set("payment_provider", value); }
+    }
+
+    /// <summary>
     /// Whether the dispute was resolved by Rapid Dispute Resolution
     /// </summary>
     public bool? IsResolvedByRdr
@@ -3005,6 +3085,7 @@ public sealed record class Dispute : JsonModel
         new()
         {
             Amount = dispute.Amount,
+            BrandID = dispute.BrandID,
             BusinessID = dispute.BusinessID,
             CreatedAt = dispute.CreatedAt,
             Currency = dispute.Currency,
@@ -3013,6 +3094,7 @@ public sealed record class Dispute : JsonModel
             DisputeStage = dispute.DisputeStage,
             DisputeStatus = dispute.DisputeStatus,
             PaymentID = dispute.PaymentID,
+            PaymentProvider = dispute.PaymentProvider,
             IsResolvedByRdr = dispute.IsResolvedByRdr,
             Reason = dispute.Reason,
             Remarks = dispute.Remarks,
@@ -3022,6 +3104,7 @@ public sealed record class Dispute : JsonModel
     public override void Validate()
     {
         _ = this.Amount;
+        _ = this.BrandID;
         _ = this.BusinessID;
         _ = this.CreatedAt;
         _ = this.Currency;
@@ -3030,6 +3113,7 @@ public sealed record class Dispute : JsonModel
         this.DisputeStage.Validate();
         this.DisputeStatus.Validate();
         _ = this.PaymentID;
+        this.PaymentProvider.Validate();
         _ = this.IsResolvedByRdr;
         _ = this.Reason;
         _ = this.Remarks;
@@ -3093,6 +3177,19 @@ public sealed record class LicenseKey : JsonModel
             return this._rawData.GetNotNullClass<string>("id");
         }
         init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Brand id this license key belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
     }
 
     /// <summary>
@@ -3268,6 +3365,7 @@ public sealed record class LicenseKey : JsonModel
         new()
         {
             ID = licenseKey.ID,
+            BrandID = licenseKey.BrandID,
             BusinessID = licenseKey.BusinessID,
             CreatedAt = licenseKey.CreatedAt,
             CustomerID = licenseKey.CustomerID,
@@ -3286,6 +3384,7 @@ public sealed record class LicenseKey : JsonModel
     public override void Validate()
     {
         _ = this.ID;
+        _ = this.BrandID;
         _ = this.BusinessID;
         _ = this.CreatedAt;
         _ = this.CustomerID;
@@ -3393,6 +3492,19 @@ public sealed record class CreditLedgerEntry : JsonModel
             return this._rawData.GetNotNullClass<string>("balance_before");
         }
         init { this._rawData.Set("balance_before", value); }
+    }
+
+    /// <summary>
+    /// Brand id this credit ledger entry belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
     }
 
     public required string BusinessID
@@ -3536,6 +3648,7 @@ public sealed record class CreditLedgerEntry : JsonModel
             Amount = creditLedgerEntry.Amount,
             BalanceAfter = creditLedgerEntry.BalanceAfter,
             BalanceBefore = creditLedgerEntry.BalanceBefore,
+            BrandID = creditLedgerEntry.BrandID,
             BusinessID = creditLedgerEntry.BusinessID,
             CreatedAt = creditLedgerEntry.CreatedAt,
             CreditEntitlementID = creditLedgerEntry.CreditEntitlementID,
@@ -3557,6 +3670,7 @@ public sealed record class CreditLedgerEntry : JsonModel
         _ = this.Amount;
         _ = this.BalanceAfter;
         _ = this.BalanceBefore;
+        _ = this.BrandID;
         _ = this.BusinessID;
         _ = this.CreatedAt;
         _ = this.CreditEntitlementID;
@@ -3633,6 +3747,19 @@ public sealed record class CreditBalanceLow : JsonModel
             return this._rawData.GetNotNullClass<string>("available_balance");
         }
         init { this._rawData.Set("available_balance", value); }
+    }
+
+    /// <summary>
+    /// Brand id this credit entitlement belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
     }
 
     public required string CreditEntitlementID
@@ -3719,6 +3846,7 @@ public sealed record class CreditBalanceLow : JsonModel
     public override void Validate()
     {
         _ = this.AvailableBalance;
+        _ = this.BrandID;
         _ = this.CreditEntitlementID;
         _ = this.CreditEntitlementName;
         _ = this.CustomerID;
@@ -3804,6 +3932,19 @@ public sealed record class AbandonedCheckout : JsonModel
         init { this._rawData.Set("abandonment_reason", value); }
     }
 
+    /// <summary>
+    /// Brand id this abandoned checkout belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
+    }
+
     public required string CustomerID
     {
         get
@@ -3859,6 +4000,7 @@ public sealed record class AbandonedCheckout : JsonModel
     {
         _ = this.AbandonedAt;
         this.AbandonmentReason.Validate();
+        _ = this.BrandID;
         _ = this.CustomerID;
         if (
             !JsonElement.DeepEquals(
@@ -4012,6 +4154,19 @@ sealed class StatusConverter : JsonConverter<Status>
 [JsonConverter(typeof(JsonModelConverter<DunningAttempt, DunningAttemptFromRaw>))]
 public sealed record class DunningAttempt : JsonModel
 {
+    /// <summary>
+    /// Brand id this dunning attempt belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
+    }
+
     public required DateTimeOffset CreatedAt
     {
         get
@@ -4085,6 +4240,7 @@ public sealed record class DunningAttempt : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.BrandID;
         _ = this.CreatedAt;
         _ = this.CustomerID;
         if (
@@ -4251,6 +4407,19 @@ public sealed record class EntitlementGrant : JsonModel
             return this._rawData.GetNotNullClass<string>("id");
         }
         init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Brand id this grant belongs to.
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
     }
 
     /// <summary>
@@ -4543,6 +4712,7 @@ public sealed record class EntitlementGrant : JsonModel
         new()
         {
             ID = entitlementGrant.ID,
+            BrandID = entitlementGrant.BrandID,
             BusinessID = entitlementGrant.BusinessID,
             CreatedAt = entitlementGrant.CreatedAt,
             CustomerID = entitlementGrant.CustomerID,
@@ -4568,6 +4738,7 @@ public sealed record class EntitlementGrant : JsonModel
     public override void Validate()
     {
         _ = this.ID;
+        _ = this.BrandID;
         _ = this.BusinessID;
         _ = this.CreatedAt;
         _ = this.CustomerID;

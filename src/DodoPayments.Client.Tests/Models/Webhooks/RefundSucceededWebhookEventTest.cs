@@ -18,6 +18,7 @@ public class RefundSucceededWebhookEventTest : TestBase
             BusinessID = "business_id",
             Data = new()
             {
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Customer = new()
@@ -43,6 +44,7 @@ public class RefundSucceededWebhookEventTest : TestBase
         string expectedBusinessID = "business_id";
         Refund expectedData = new()
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -79,6 +81,7 @@ public class RefundSucceededWebhookEventTest : TestBase
             BusinessID = "business_id",
             Data = new()
             {
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Customer = new()
@@ -118,6 +121,7 @@ public class RefundSucceededWebhookEventTest : TestBase
             BusinessID = "business_id",
             Data = new()
             {
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Customer = new()
@@ -150,6 +154,7 @@ public class RefundSucceededWebhookEventTest : TestBase
         string expectedBusinessID = "business_id";
         Refund expectedData = new()
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -186,6 +191,7 @@ public class RefundSucceededWebhookEventTest : TestBase
             BusinessID = "business_id",
             Data = new()
             {
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Customer = new()
@@ -219,6 +225,7 @@ public class RefundSucceededWebhookEventTest : TestBase
             BusinessID = "business_id",
             Data = new()
             {
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Customer = new()

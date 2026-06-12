@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
@@ -65,6 +66,7 @@ public class ProductCreateParamsTest : TestBase
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PricingMode = PricingMode.ByCurrency,
         };
 
         string expectedName = "name";
@@ -120,6 +122,7 @@ public class ProductCreateParamsTest : TestBase
         };
         bool expectedLicenseKeyEnabled = true;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        ApiEnum<string, PricingMode> expectedPricingMode = PricingMode.ByCurrency;
 
         Assert.Equal(expectedName, parameters.Name);
         Assert.Equal(expectedPrice, parameters.Price);
@@ -157,6 +160,7 @@ public class ProductCreateParamsTest : TestBase
 
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
+        Assert.Equal(expectedPricingMode, parameters.PricingMode);
     }
 
     [Fact]
@@ -212,6 +216,7 @@ public class ProductCreateParamsTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             LicenseKeyEnabled = true,
+            PricingMode = PricingMode.ByCurrency,
         };
 
         Assert.Null(parameters.Metadata);
@@ -271,6 +276,7 @@ public class ProductCreateParamsTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             LicenseKeyEnabled = true,
+            PricingMode = PricingMode.ByCurrency,
 
             // Null should be interpreted as omitted for these properties
             Metadata = null,
@@ -320,6 +326,8 @@ public class ProductCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("license_key_duration"));
         Assert.Null(parameters.LicenseKeyEnabled);
         Assert.False(parameters.RawBodyData.ContainsKey("license_key_enabled"));
+        Assert.Null(parameters.PricingMode);
+        Assert.False(parameters.RawBodyData.ContainsKey("pricing_mode"));
     }
 
     [Fact]
@@ -351,6 +359,7 @@ public class ProductCreateParamsTest : TestBase
             LicenseKeyActivationsLimit = null,
             LicenseKeyDuration = null,
             LicenseKeyEnabled = null,
+            PricingMode = null,
         };
 
         Assert.Null(parameters.Addons);
@@ -373,6 +382,8 @@ public class ProductCreateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("license_key_duration"));
         Assert.Null(parameters.LicenseKeyEnabled);
         Assert.True(parameters.RawBodyData.ContainsKey("license_key_enabled"));
+        Assert.Null(parameters.PricingMode);
+        Assert.True(parameters.RawBodyData.ContainsKey("pricing_mode"));
     }
 
     [Fact]
@@ -453,6 +464,7 @@ public class ProductCreateParamsTest : TestBase
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             LicenseKeyEnabled = true,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PricingMode = PricingMode.ByCurrency,
         };
 
         ProductCreateParams copied = new(parameters);
@@ -582,5 +594,63 @@ public class DigitalProductDeliveryTest : TestBase
         DigitalProductDelivery copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class PricingModeTest : TestBase
+{
+    [Theory]
+    [InlineData(PricingMode.ByCurrency)]
+    [InlineData(PricingMode.ByCountry)]
+    public void Validation_Works(PricingMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PricingMode> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PricingMode>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PricingMode.ByCurrency)]
+    [InlineData(PricingMode.ByCountry)]
+    public void SerializationRoundtrip_Works(PricingMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PricingMode> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PricingMode>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PricingMode>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PricingMode>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

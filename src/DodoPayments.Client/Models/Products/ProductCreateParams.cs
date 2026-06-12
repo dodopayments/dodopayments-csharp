@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Products;
@@ -97,7 +98,7 @@ public record class ProductCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Optional credit entitlements to attach (max 3)
+    /// Optional credit entitlements to attach (max 5)
     /// </summary>
     public IReadOnlyList<AttachCreditEntitlement>? CreditEntitlements
     {
@@ -148,7 +149,7 @@ public record class ProductCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Optional entitlements to attach to this product (max 20)
+    /// Optional entitlements to attach to this product (max 50)
     /// </summary>
     public IReadOnlyList<AttachProductEntitlement>? Entitlements
     {
@@ -261,6 +262,20 @@ public record class ProductCreateParams : ParamsBase
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
+    }
+
+    /// <summary>
+    /// Pricing mode for localized pricing. When set, rules from /products/{id}/localized-prices
+    /// apply at checkout. NULL means base-only (existing behavior).
+    /// </summary>
+    public ApiEnum<string, PricingMode>? PricingMode
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, PricingMode>>("pricing_mode");
+        }
+        init { this._rawBodyData.Set("pricing_mode", value); }
     }
 
     public ProductCreateParams() { }
@@ -450,4 +465,52 @@ class DigitalProductDeliveryFromRaw : IFromRawJson<DigitalProductDelivery>
     public DigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => DigitalProductDelivery.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Pricing mode for localized pricing. When set, rules from /products/{id}/localized-prices
+/// apply at checkout. NULL means base-only (existing behavior).
+/// </summary>
+[JsonConverter(typeof(PricingModeConverter))]
+public enum PricingMode
+{
+    ByCurrency,
+    ByCountry,
+}
+
+sealed class PricingModeConverter : JsonConverter<PricingMode>
+{
+    public override PricingMode Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "by_currency" => PricingMode.ByCurrency,
+            "by_country" => PricingMode.ByCountry,
+            _ => (PricingMode)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        PricingMode value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                PricingMode.ByCurrency => "by_currency",
+                PricingMode.ByCountry => "by_country",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

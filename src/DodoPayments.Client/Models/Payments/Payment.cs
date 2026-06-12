@@ -242,8 +242,8 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// Total amount charged to the customer including tax, in smallest currency unit
-    /// (e.g. cents)
+    /// Total amount charged to the customer including tax, in the currency's smallest
+    /// unit (e.g. cents for USD, yen for JPY, fils for KWD — see the currency's decimal places)
     /// </summary>
     public required int TotalAmount
     {
@@ -557,7 +557,8 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// Amount of tax collected in smallest currency unit (e.g. cents)
+    /// Amount of tax collected in the currency's smallest unit (e.g. cents for USD,
+    /// yen for JPY, fils for KWD)
     /// </summary>
     public int? Tax
     {

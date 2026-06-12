@@ -17,6 +17,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -61,6 +62,7 @@ public class EntitlementGrantTest : TestBase
         };
 
         string expectedID = "id";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
@@ -105,6 +107,7 @@ public class EntitlementGrantTest : TestBase
         string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerID, model.CustomerID);
@@ -138,6 +141,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -196,6 +200,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -247,6 +252,7 @@ public class EntitlementGrantTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
@@ -291,6 +297,7 @@ public class EntitlementGrantTest : TestBase
         string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
@@ -324,6 +331,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -376,6 +384,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -416,6 +425,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -435,6 +445,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -487,6 +498,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -518,6 +530,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
