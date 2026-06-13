@@ -102,7 +102,7 @@ public sealed record class PaymentListResponse : JsonModel
 
     /// <summary>
     /// Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
-    /// merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+    /// merchant's own payment connector); `dodo` for everything Dodo processed itself.
     /// </summary>
     public required ApiEnum<string, PaymentListResponsePaymentProvider> PaymentProvider
     {
@@ -312,7 +312,7 @@ class PaymentListResponseFromRaw : IFromRawJson<PaymentListResponse>
 
 /// <summary>
 /// Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
-/// merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+/// merchant's own payment connector); `dodo` for everything Dodo processed itself.
 /// </summary>
 [JsonConverter(typeof(PaymentListResponsePaymentProviderConverter))]
 public enum PaymentListResponsePaymentProvider

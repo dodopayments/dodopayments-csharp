@@ -6,7 +6,7 @@ using DodoPayments.Client.Exceptions;
 namespace DodoPayments.Client.Models.Payments;
 
 /// <summary>
-/// All supported payment method types (from Hyperswitch).
+/// All supported payment method types.
 ///
 /// <para>Used for disabled-payment-methods filtering and validation.</para>
 /// </summary>
