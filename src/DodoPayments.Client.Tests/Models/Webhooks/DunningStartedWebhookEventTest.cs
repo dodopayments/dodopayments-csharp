@@ -16,6 +16,7 @@ public class DunningStartedWebhookEventTest : TestBase
             BusinessID = "business_id",
             Data = new()
             {
+                BrandID = "brand_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerID = "customer_id",
                 Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -29,6 +30,7 @@ public class DunningStartedWebhookEventTest : TestBase
         string expectedBusinessID = "business_id";
         DunningStartedWebhookEventData expectedData = new()
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -53,6 +55,7 @@ public class DunningStartedWebhookEventTest : TestBase
             BusinessID = "business_id",
             Data = new()
             {
+                BrandID = "brand_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerID = "customer_id",
                 Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -80,6 +83,7 @@ public class DunningStartedWebhookEventTest : TestBase
             BusinessID = "business_id",
             Data = new()
             {
+                BrandID = "brand_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerID = "customer_id",
                 Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -100,6 +104,7 @@ public class DunningStartedWebhookEventTest : TestBase
         string expectedBusinessID = "business_id";
         DunningStartedWebhookEventData expectedData = new()
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -124,6 +129,7 @@ public class DunningStartedWebhookEventTest : TestBase
             BusinessID = "business_id",
             Data = new()
             {
+                BrandID = "brand_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerID = "customer_id",
                 Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -145,6 +151,7 @@ public class DunningStartedWebhookEventTest : TestBase
             BusinessID = "business_id",
             Data = new()
             {
+                BrandID = "brand_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerID = "customer_id",
                 Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -168,6 +175,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
     {
         var model = new DunningStartedWebhookEventData
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -176,6 +184,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
             PaymentID = "payment_id",
         };
 
+        string expectedBrandID = "brand_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
         ApiEnum<string, DunningStartedWebhookEventDataStatus> expectedStatus =
@@ -185,6 +194,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
             DunningStartedWebhookEventDataTriggerState.OnHold;
         string expectedPaymentID = "payment_id";
 
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedStatus, model.Status);
@@ -198,6 +208,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
     {
         var model = new DunningStartedWebhookEventData
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -220,6 +231,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
     {
         var model = new DunningStartedWebhookEventData
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -235,6 +247,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
         );
         Assert.NotNull(deserialized);
 
+        string expectedBrandID = "brand_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
         ApiEnum<string, DunningStartedWebhookEventDataStatus> expectedStatus =
@@ -244,6 +257,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
             DunningStartedWebhookEventDataTriggerState.OnHold;
         string expectedPaymentID = "payment_id";
 
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedStatus, deserialized.Status);
@@ -257,6 +271,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
     {
         var model = new DunningStartedWebhookEventData
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -273,6 +288,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
     {
         var model = new DunningStartedWebhookEventData
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -289,6 +305,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
     {
         var model = new DunningStartedWebhookEventData
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -304,6 +321,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
     {
         var model = new DunningStartedWebhookEventData
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -322,6 +340,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
     {
         var model = new DunningStartedWebhookEventData
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,
@@ -339,6 +358,7 @@ public class DunningStartedWebhookEventDataTest : TestBase
     {
         var model = new DunningStartedWebhookEventData
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningStartedWebhookEventDataStatus.Recovering,

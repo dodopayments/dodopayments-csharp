@@ -125,14 +125,14 @@ public sealed record class DisputeListResponse : JsonModel
     /// routes (the merchant's own Hyperswitch connector); `dodo` for everything
     /// Dodo processed itself.
     /// </summary>
-    public required ApiEnum<string, PaymentProvider> PaymentProvider
+    public required ApiEnum<string, DisputeListResponsePaymentProvider> PaymentProvider
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, PaymentProvider>>(
-                "payment_provider"
-            );
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, DisputeListResponsePaymentProvider>
+            >("payment_provider");
         }
         init { this._rawData.Set("payment_provider", value); }
     }
@@ -206,17 +206,18 @@ class DisputeListResponseFromRaw : IFromRawJson<DisputeListResponse>
 /// Which processor handled the underlying payment. `stripe` / `adyen` for BYOP routes
 /// (the merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
 /// </summary>
-[JsonConverter(typeof(PaymentProviderConverter))]
-public enum PaymentProvider
+[JsonConverter(typeof(DisputeListResponsePaymentProviderConverter))]
+public enum DisputeListResponsePaymentProvider
 {
     Stripe,
     Adyen,
     Dodo,
 }
 
-sealed class PaymentProviderConverter : JsonConverter<PaymentProvider>
+sealed class DisputeListResponsePaymentProviderConverter
+    : JsonConverter<DisputeListResponsePaymentProvider>
 {
-    public override PaymentProvider Read(
+    public override DisputeListResponsePaymentProvider Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -224,16 +225,16 @@ sealed class PaymentProviderConverter : JsonConverter<PaymentProvider>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "stripe" => PaymentProvider.Stripe,
-            "adyen" => PaymentProvider.Adyen,
-            "dodo" => PaymentProvider.Dodo,
-            _ => (PaymentProvider)(-1),
+            "stripe" => DisputeListResponsePaymentProvider.Stripe,
+            "adyen" => DisputeListResponsePaymentProvider.Adyen,
+            "dodo" => DisputeListResponsePaymentProvider.Dodo,
+            _ => (DisputeListResponsePaymentProvider)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PaymentProvider value,
+        DisputeListResponsePaymentProvider value,
         JsonSerializerOptions options
     )
     {
@@ -241,9 +242,9 @@ sealed class PaymentProviderConverter : JsonConverter<PaymentProvider>
             writer,
             value switch
             {
-                PaymentProvider.Stripe => "stripe",
-                PaymentProvider.Adyen => "adyen",
-                PaymentProvider.Dodo => "dodo",
+                DisputeListResponsePaymentProvider.Stripe => "stripe",
+                DisputeListResponsePaymentProvider.Adyen => "adyen",
+                DisputeListResponsePaymentProvider.Dodo => "dodo",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

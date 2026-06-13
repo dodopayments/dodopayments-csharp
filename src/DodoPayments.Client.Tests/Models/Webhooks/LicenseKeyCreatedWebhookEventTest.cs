@@ -17,6 +17,7 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
             Data = new()
             {
                 ID = "lic_123",
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
                 CustomerID = "cus_123",
@@ -37,6 +38,7 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
         LicenseKey expectedData = new()
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -68,6 +70,7 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
             Data = new()
             {
                 ID = "lic_123",
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
                 CustomerID = "cus_123",
@@ -102,6 +105,7 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
             Data = new()
             {
                 ID = "lic_123",
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
                 CustomerID = "cus_123",
@@ -129,6 +133,7 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
         LicenseKey expectedData = new()
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -160,6 +165,7 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
             Data = new()
             {
                 ID = "lic_123",
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
                 CustomerID = "cus_123",
@@ -188,6 +194,7 @@ public class LicenseKeyCreatedWebhookEventTest : TestBase
             Data = new()
             {
                 ID = "lic_123",
+                BrandID = "brand_id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
                 CustomerID = "cus_123",

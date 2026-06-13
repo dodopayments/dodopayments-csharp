@@ -27,8 +27,8 @@ public sealed record class BreakupRetrieveResponse : JsonModel
     }
 
     /// <summary>
-    /// Total amount for this event type in the payout's currency (in smallest currency
-    /// unit, e.g., cents).
+    /// Total amount for this event type in the payout's currency, in that currency's
+    /// smallest unit (cents for USD, yen for JPY, fils for KWD).
     /// </summary>
     public required long Total
     {

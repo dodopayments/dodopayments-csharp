@@ -26,6 +26,19 @@ public sealed record class LicenseKey : JsonModel
     }
 
     /// <summary>
+    /// Brand id this license key belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
+    }
+
+    /// <summary>
     /// The unique identifier of the business associated with the license key.
     /// </summary>
     public required string BusinessID
@@ -187,6 +200,7 @@ public sealed record class LicenseKey : JsonModel
     public override void Validate()
     {
         _ = this.ID;
+        _ = this.BrandID;
         _ = this.BusinessID;
         _ = this.CreatedAt;
         _ = this.CustomerID;

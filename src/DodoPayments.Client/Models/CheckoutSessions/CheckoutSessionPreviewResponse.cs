@@ -60,6 +60,22 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
     }
 
     /// <summary>
+    /// Whether the payment will be routed through the merchant's own processor (BYOP).
+    /// True when the session's business has a BYOP route configured for the billing
+    /// country; in that case the quoted amounts exclude Dodo-computed tax because
+    /// the merchant is MoR and owns tax.
+    /// </summary>
+    public required bool IsByop
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("is_byop");
+        }
+        init { this._rawData.Set("is_byop", value); }
+    }
+
+    /// <summary>
     /// The total product cart
     /// </summary>
     public required IReadOnlyList<ProductCart> ProductCart
@@ -136,6 +152,7 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
         this.BillingCountry.Validate();
         this.Currency.Validate();
         this.CurrentBreakup.Validate();
+        _ = this.IsByop;
         foreach (var item in this.ProductCart)
         {
             item.Validate();

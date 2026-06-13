@@ -18,6 +18,7 @@ public class AbandonedCheckoutDetectedWebhookEventTest : TestBase
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 AbandonmentReason = AbandonmentReason.PaymentFailed,
+                BrandID = "brand_id",
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
                 Status = Status.Abandoned,
@@ -31,6 +32,7 @@ public class AbandonedCheckoutDetectedWebhookEventTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -55,6 +57,7 @@ public class AbandonedCheckoutDetectedWebhookEventTest : TestBase
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 AbandonmentReason = AbandonmentReason.PaymentFailed,
+                BrandID = "brand_id",
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
                 Status = Status.Abandoned,
@@ -82,6 +85,7 @@ public class AbandonedCheckoutDetectedWebhookEventTest : TestBase
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 AbandonmentReason = AbandonmentReason.PaymentFailed,
+                BrandID = "brand_id",
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
                 Status = Status.Abandoned,
@@ -102,6 +106,7 @@ public class AbandonedCheckoutDetectedWebhookEventTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -126,6 +131,7 @@ public class AbandonedCheckoutDetectedWebhookEventTest : TestBase
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 AbandonmentReason = AbandonmentReason.PaymentFailed,
+                BrandID = "brand_id",
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
                 Status = Status.Abandoned,
@@ -147,6 +153,7 @@ public class AbandonedCheckoutDetectedWebhookEventTest : TestBase
             {
                 AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 AbandonmentReason = AbandonmentReason.PaymentFailed,
+                BrandID = "brand_id",
                 CustomerID = "customer_id",
                 PaymentID = "payment_id",
                 Status = Status.Abandoned,
@@ -170,6 +177,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -179,6 +187,7 @@ public class DataTest : TestBase
         DateTimeOffset expectedAbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, AbandonmentReason> expectedAbandonmentReason =
             AbandonmentReason.PaymentFailed;
+        string expectedBrandID = "brand_id";
         string expectedCustomerID = "customer_id";
         string expectedPaymentID = "payment_id";
         ApiEnum<string, Status> expectedStatus = Status.Abandoned;
@@ -186,6 +195,7 @@ public class DataTest : TestBase
 
         Assert.Equal(expectedAbandonedAt, model.AbandonedAt);
         Assert.Equal(expectedAbandonmentReason, model.AbandonmentReason);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedPaymentID, model.PaymentID);
         Assert.Equal(expectedStatus, model.Status);
@@ -199,6 +209,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -218,6 +229,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -231,6 +243,7 @@ public class DataTest : TestBase
         DateTimeOffset expectedAbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, AbandonmentReason> expectedAbandonmentReason =
             AbandonmentReason.PaymentFailed;
+        string expectedBrandID = "brand_id";
         string expectedCustomerID = "customer_id";
         string expectedPaymentID = "payment_id";
         ApiEnum<string, Status> expectedStatus = Status.Abandoned;
@@ -238,6 +251,7 @@ public class DataTest : TestBase
 
         Assert.Equal(expectedAbandonedAt, deserialized.AbandonedAt);
         Assert.Equal(expectedAbandonmentReason, deserialized.AbandonmentReason);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
         Assert.Equal(expectedStatus, deserialized.Status);
@@ -251,6 +265,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -267,6 +282,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -283,6 +299,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -298,6 +315,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -316,6 +334,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -333,6 +352,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,

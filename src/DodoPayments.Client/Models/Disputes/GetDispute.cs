@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Disputes;
@@ -23,6 +24,19 @@ public sealed record class GetDispute : JsonModel
             return this._rawData.GetNotNullClass<string>("amount");
         }
         init { this._rawData.Set("amount", value); }
+    }
+
+    /// <summary>
+    /// Brand id this dispute belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
     }
 
     /// <summary>
@@ -134,6 +148,26 @@ public sealed record class GetDispute : JsonModel
     }
 
     /// <summary>
+    /// Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
+    /// routes (the merchant's own Hyperswitch connector); `dodo` for everything
+    /// Dodo processed itself.
+    /// </summary>
+    public required ApiEnum<
+        string,
+        global::DodoPayments.Client.Models.Disputes.PaymentProvider
+    > PaymentProvider
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, global::DodoPayments.Client.Models.Disputes.PaymentProvider>
+            >("payment_provider");
+        }
+        init { this._rawData.Set("payment_provider", value); }
+    }
+
+    /// <summary>
     /// Whether the dispute was resolved by Rapid Dispute Resolution
     /// </summary>
     public bool? IsResolvedByRdr
@@ -176,6 +210,7 @@ public sealed record class GetDispute : JsonModel
     public override void Validate()
     {
         _ = this.Amount;
+        _ = this.BrandID;
         _ = this.BusinessID;
         _ = this.CreatedAt;
         _ = this.Currency;
@@ -184,6 +219,7 @@ public sealed record class GetDispute : JsonModel
         this.DisputeStage.Validate();
         this.DisputeStatus.Validate();
         _ = this.PaymentID;
+        this.PaymentProvider.Validate();
         _ = this.IsResolvedByRdr;
         _ = this.Reason;
         _ = this.Remarks;
@@ -222,4 +258,56 @@ class GetDisputeFromRaw : IFromRawJson<GetDispute>
     /// <inheritdoc/>
     public GetDispute FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         GetDispute.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Which processor handled the underlying payment. `stripe` / `adyen` for BYOP routes
+/// (the merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+/// </summary>
+[JsonConverter(typeof(global::DodoPayments.Client.Models.Disputes.PaymentProviderConverter))]
+public enum PaymentProvider
+{
+    Stripe,
+    Adyen,
+    Dodo,
+}
+
+sealed class PaymentProviderConverter
+    : JsonConverter<global::DodoPayments.Client.Models.Disputes.PaymentProvider>
+{
+    public override global::DodoPayments.Client.Models.Disputes.PaymentProvider Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "stripe" => global::DodoPayments.Client.Models.Disputes.PaymentProvider.Stripe,
+            "adyen" => global::DodoPayments.Client.Models.Disputes.PaymentProvider.Adyen,
+            "dodo" => global::DodoPayments.Client.Models.Disputes.PaymentProvider.Dodo,
+            _ => (global::DodoPayments.Client.Models.Disputes.PaymentProvider)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        global::DodoPayments.Client.Models.Disputes.PaymentProvider value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                global::DodoPayments.Client.Models.Disputes.PaymentProvider.Stripe => "stripe",
+                global::DodoPayments.Client.Models.Disputes.PaymentProvider.Adyen => "adyen",
+                global::DodoPayments.Client.Models.Disputes.PaymentProvider.Dodo => "dodo",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

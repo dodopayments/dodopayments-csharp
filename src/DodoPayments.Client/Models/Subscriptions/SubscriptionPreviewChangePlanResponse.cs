@@ -1214,6 +1214,13 @@ public sealed record class Summary : JsonModel
         init { this._rawData.Set("currency", value); }
     }
 
+    /// <summary>
+    /// Net credit movement in the smallest currency unit (e.g. cents). **Negative**
+    /// – credits were deducted from the customer's balance to offset the charge (typical
+    /// on upgrades). **Positive** – credits were added to the customer's balance,
+    /// either from a downgrade proration refund or from topping-up the wallet to
+    /// meet a gateway minimum-charge threshold. **Zero** – no credit movement occurred.
+    /// </summary>
     public required long CustomerCredits
     {
         get

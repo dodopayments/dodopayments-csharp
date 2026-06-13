@@ -986,6 +986,7 @@ public class DataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -1119,6 +1120,7 @@ public class DataTest : TestBase
     {
         Data value = new Refund()
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -1147,6 +1149,7 @@ public class DataTest : TestBase
         Data value = new Dispute()
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -1162,6 +1165,7 @@ public class DataTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
@@ -1175,6 +1179,7 @@ public class DataTest : TestBase
         Data value = new LicenseKey()
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -1200,6 +1205,7 @@ public class DataTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -1222,6 +1228,7 @@ public class DataTest : TestBase
         Data value = new CreditBalanceLow()
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -1240,6 +1247,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -1253,6 +1261,7 @@ public class DataTest : TestBase
     {
         Data value = new DunningAttempt()
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -1269,6 +1278,7 @@ public class DataTest : TestBase
         Data value = new EntitlementGrant()
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -1443,6 +1453,7 @@ public class DataTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -1579,6 +1590,7 @@ public class DataTest : TestBase
     {
         Data value = new Refund()
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -1610,6 +1622,7 @@ public class DataTest : TestBase
         Data value = new Dispute()
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -1625,6 +1638,7 @@ public class DataTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
@@ -1641,6 +1655,7 @@ public class DataTest : TestBase
         Data value = new LicenseKey()
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -1669,6 +1684,7 @@ public class DataTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -1694,6 +1710,7 @@ public class DataTest : TestBase
         Data value = new CreditBalanceLow()
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -1715,6 +1732,7 @@ public class DataTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -1731,6 +1749,7 @@ public class DataTest : TestBase
     {
         Data value = new DunningAttempt()
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -1750,6 +1769,7 @@ public class DataTest : TestBase
         Data value = new EntitlementGrant()
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -3625,6 +3645,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -3763,6 +3784,7 @@ public class SubscriptionTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
+        string expectedBrandID = "brand_id";
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<Subscriptions::CreditEntitlementCartResponse> expectedCreditEntitlementCart =
@@ -3904,6 +3926,7 @@ public class SubscriptionTest : TestBase
             Assert.Equal(expectedAddons[i], model.Addons[i]);
         }
         Assert.Equal(expectedBilling, model.Billing);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCancelAtNextBillingDate, model.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCreditEntitlementCart.Count, model.CreditEntitlementCart.Count);
@@ -3989,6 +4012,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -4138,6 +4162,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -4283,6 +4308,7 @@ public class SubscriptionTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
+        string expectedBrandID = "brand_id";
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<Subscriptions::CreditEntitlementCartResponse> expectedCreditEntitlementCart =
@@ -4424,6 +4450,7 @@ public class SubscriptionTest : TestBase
             Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
         }
         Assert.Equal(expectedBilling, deserialized.Billing);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCancelAtNextBillingDate, deserialized.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCreditEntitlementCart.Count, deserialized.CreditEntitlementCart.Count);
@@ -4509,6 +4536,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -4652,6 +4680,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -4778,6 +4807,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -4901,6 +4931,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -5031,6 +5062,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -5158,6 +5190,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -5289,6 +5322,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -5401,6 +5435,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -5543,6 +5578,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -5666,6 +5702,7 @@ public class SubscriptionTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
+            BrandID = "brand_id",
             CancelAtNextBillingDate = true,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementCart =
@@ -5805,6 +5842,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -5825,6 +5863,7 @@ public class RefundTest : TestBase
             Reason = "reason",
         };
 
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         Payments::CustomerLimitedDetails expectedCustomer = new()
@@ -5845,6 +5884,7 @@ public class RefundTest : TestBase
         string expectedReason = "reason";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Refund");
 
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomer, model.Customer);
@@ -5870,6 +5910,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -5901,6 +5942,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -5925,6 +5967,7 @@ public class RefundTest : TestBase
         var deserialized = JsonSerializer.Deserialize<Refund>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         Payments::CustomerLimitedDetails expectedCustomer = new()
@@ -5945,6 +5988,7 @@ public class RefundTest : TestBase
         string expectedReason = "reason";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Refund");
 
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomer, deserialized.Customer);
@@ -5970,6 +6014,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -5998,6 +6043,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -6026,6 +6072,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -6053,6 +6100,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -6084,6 +6132,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -6114,6 +6163,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -6143,6 +6193,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -6169,6 +6220,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -6201,6 +6253,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -6230,6 +6283,7 @@ public class RefundTest : TestBase
     {
         var model = new Refund
         {
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Customer = new()
@@ -6264,6 +6318,7 @@ public class DisputeTest : TestBase
         var model = new Dispute
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -6279,12 +6334,14 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
         };
 
         string expectedAmount = "amount";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCurrency = "currency";
@@ -6302,12 +6359,15 @@ public class DisputeTest : TestBase
         ApiEnum<string, Disputes::DisputeDisputeStatus> expectedDisputeStatus =
             Disputes::DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, Disputes::PaymentProvider> expectedPaymentProvider =
+            Disputes::PaymentProvider.Stripe;
         bool expectedIsResolvedByRdr = true;
         string expectedReason = "reason";
         string expectedRemarks = "remarks";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Dispute");
 
         Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCurrency, model.Currency);
@@ -6316,6 +6376,7 @@ public class DisputeTest : TestBase
         Assert.Equal(expectedDisputeStage, model.DisputeStage);
         Assert.Equal(expectedDisputeStatus, model.DisputeStatus);
         Assert.Equal(expectedPaymentID, model.PaymentID);
+        Assert.Equal(expectedPaymentProvider, model.PaymentProvider);
         Assert.Equal(expectedIsResolvedByRdr, model.IsResolvedByRdr);
         Assert.Equal(expectedReason, model.Reason);
         Assert.Equal(expectedRemarks, model.Remarks);
@@ -6328,6 +6389,7 @@ public class DisputeTest : TestBase
         var model = new Dispute
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -6343,6 +6405,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
@@ -6360,6 +6423,7 @@ public class DisputeTest : TestBase
         var model = new Dispute
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -6375,6 +6439,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
@@ -6388,6 +6453,7 @@ public class DisputeTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedAmount = "amount";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCurrency = "currency";
@@ -6405,12 +6471,15 @@ public class DisputeTest : TestBase
         ApiEnum<string, Disputes::DisputeDisputeStatus> expectedDisputeStatus =
             Disputes::DisputeDisputeStatus.DisputeOpened;
         string expectedPaymentID = "payment_id";
+        ApiEnum<string, Disputes::PaymentProvider> expectedPaymentProvider =
+            Disputes::PaymentProvider.Stripe;
         bool expectedIsResolvedByRdr = true;
         string expectedReason = "reason";
         string expectedRemarks = "remarks";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Dispute");
 
         Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCurrency, deserialized.Currency);
@@ -6419,6 +6488,7 @@ public class DisputeTest : TestBase
         Assert.Equal(expectedDisputeStage, deserialized.DisputeStage);
         Assert.Equal(expectedDisputeStatus, deserialized.DisputeStatus);
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
+        Assert.Equal(expectedPaymentProvider, deserialized.PaymentProvider);
         Assert.Equal(expectedIsResolvedByRdr, deserialized.IsResolvedByRdr);
         Assert.Equal(expectedReason, deserialized.Reason);
         Assert.Equal(expectedRemarks, deserialized.Remarks);
@@ -6431,6 +6501,7 @@ public class DisputeTest : TestBase
         var model = new Dispute
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -6446,6 +6517,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
@@ -6460,6 +6532,7 @@ public class DisputeTest : TestBase
         var model = new Dispute
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -6475,6 +6548,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
         };
 
         Assert.Null(model.IsResolvedByRdr);
@@ -6491,6 +6565,7 @@ public class DisputeTest : TestBase
         var model = new Dispute
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -6506,6 +6581,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
         };
 
         model.Validate();
@@ -6517,6 +6593,7 @@ public class DisputeTest : TestBase
         var model = new Dispute
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -6532,6 +6609,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
 
             IsResolvedByRdr = null,
             Reason = null,
@@ -6552,6 +6630,7 @@ public class DisputeTest : TestBase
         var model = new Dispute
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -6567,6 +6646,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
 
             IsResolvedByRdr = null,
             Reason = null,
@@ -6582,6 +6662,7 @@ public class DisputeTest : TestBase
         var model = new Dispute
         {
             Amount = "amount",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Currency = "currency",
@@ -6597,6 +6678,7 @@ public class DisputeTest : TestBase
             DisputeStage = Disputes::DisputeDisputeStage.PreDispute,
             DisputeStatus = Disputes::DisputeDisputeStatus.DisputeOpened,
             PaymentID = "payment_id",
+            PaymentProvider = Disputes::PaymentProvider.Stripe,
             IsResolvedByRdr = true,
             Reason = "reason",
             Remarks = "remarks",
@@ -6616,6 +6698,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -6631,6 +6714,7 @@ public class LicenseKeyTest : TestBase
         };
 
         string expectedID = "lic_123";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z");
         string expectedCustomerID = "cus_123";
@@ -6648,6 +6732,7 @@ public class LicenseKeyTest : TestBase
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("LicenseKey");
 
         Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerID, model.CustomerID);
@@ -6669,6 +6754,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -6698,6 +6784,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -6720,6 +6807,7 @@ public class LicenseKeyTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "lic_123";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z");
         string expectedCustomerID = "cus_123";
@@ -6737,6 +6825,7 @@ public class LicenseKeyTest : TestBase
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("LicenseKey");
 
         Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
@@ -6758,6 +6847,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -6781,6 +6871,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -6807,6 +6898,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -6826,6 +6918,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -6857,6 +6950,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -6881,6 +6975,7 @@ public class LicenseKeyTest : TestBase
         var model = new LicenseKey
         {
             ID = "lic_123",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2024-01-01T00:00:00Z"),
             CustomerID = "cus_123",
@@ -6912,6 +7007,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -6930,6 +7026,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedAmount = "amount";
         string expectedBalanceAfter = "balance_after";
         string expectedBalanceBefore = "balance_before";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCreditEntitlementID = "credit_entitlement_id";
@@ -6949,6 +7046,7 @@ public class CreditLedgerEntryTest : TestBase
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedBalanceAfter, model.BalanceAfter);
         Assert.Equal(expectedBalanceBefore, model.BalanceBefore);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCreditEntitlementID, model.CreditEntitlementID);
@@ -6973,6 +7071,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -7005,6 +7104,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -7030,6 +7130,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedAmount = "amount";
         string expectedBalanceAfter = "balance_after";
         string expectedBalanceBefore = "balance_before";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCreditEntitlementID = "credit_entitlement_id";
@@ -7049,6 +7150,7 @@ public class CreditLedgerEntryTest : TestBase
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedBalanceAfter, deserialized.BalanceAfter);
         Assert.Equal(expectedBalanceBefore, deserialized.BalanceBefore);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCreditEntitlementID, deserialized.CreditEntitlementID);
@@ -7073,6 +7175,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -7099,6 +7202,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -7128,6 +7232,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -7150,6 +7255,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -7184,6 +7290,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -7211,6 +7318,7 @@ public class CreditLedgerEntryTest : TestBase
             Amount = "amount",
             BalanceAfter = "balance_after",
             BalanceBefore = "balance_before",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreditEntitlementID = "credit_entitlement_id",
@@ -7239,6 +7347,7 @@ public class CreditBalanceLowTest : TestBase
         var model = new CreditBalanceLow
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -7249,6 +7358,7 @@ public class CreditBalanceLowTest : TestBase
         };
 
         string expectedAvailableBalance = "available_balance";
+        string expectedBrandID = "brand_id";
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCreditEntitlementName = "credit_entitlement_name";
         string expectedCustomerID = "customer_id";
@@ -7259,6 +7369,7 @@ public class CreditBalanceLowTest : TestBase
         int expectedThresholdPercent = 0;
 
         Assert.Equal(expectedAvailableBalance, model.AvailableBalance);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCreditEntitlementID, model.CreditEntitlementID);
         Assert.Equal(expectedCreditEntitlementName, model.CreditEntitlementName);
         Assert.Equal(expectedCustomerID, model.CustomerID);
@@ -7275,6 +7386,7 @@ public class CreditBalanceLowTest : TestBase
         var model = new CreditBalanceLow
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -7299,6 +7411,7 @@ public class CreditBalanceLowTest : TestBase
         var model = new CreditBalanceLow
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -7316,6 +7429,7 @@ public class CreditBalanceLowTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedAvailableBalance = "available_balance";
+        string expectedBrandID = "brand_id";
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCreditEntitlementName = "credit_entitlement_name";
         string expectedCustomerID = "customer_id";
@@ -7326,6 +7440,7 @@ public class CreditBalanceLowTest : TestBase
         int expectedThresholdPercent = 0;
 
         Assert.Equal(expectedAvailableBalance, deserialized.AvailableBalance);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCreditEntitlementID, deserialized.CreditEntitlementID);
         Assert.Equal(expectedCreditEntitlementName, deserialized.CreditEntitlementName);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
@@ -7342,6 +7457,7 @@ public class CreditBalanceLowTest : TestBase
         var model = new CreditBalanceLow
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -7360,6 +7476,7 @@ public class CreditBalanceLowTest : TestBase
         var model = new CreditBalanceLow
         {
             AvailableBalance = "available_balance",
+            BrandID = "brand_id",
             CreditEntitlementID = "credit_entitlement_id",
             CreditEntitlementName = "credit_entitlement_name",
             CustomerID = "customer_id",
@@ -7384,6 +7501,7 @@ public class AbandonedCheckoutTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -7393,6 +7511,7 @@ public class AbandonedCheckoutTest : TestBase
         DateTimeOffset expectedAbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, AbandonmentReason> expectedAbandonmentReason =
             AbandonmentReason.PaymentFailed;
+        string expectedBrandID = "brand_id";
         string expectedCustomerID = "customer_id";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("AbandonedCheckout");
         string expectedPaymentID = "payment_id";
@@ -7401,6 +7520,7 @@ public class AbandonedCheckoutTest : TestBase
 
         Assert.Equal(expectedAbandonedAt, model.AbandonedAt);
         Assert.Equal(expectedAbandonmentReason, model.AbandonmentReason);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
         Assert.Equal(expectedPaymentID, model.PaymentID);
@@ -7415,6 +7535,7 @@ public class AbandonedCheckoutTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -7437,6 +7558,7 @@ public class AbandonedCheckoutTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -7453,6 +7575,7 @@ public class AbandonedCheckoutTest : TestBase
         DateTimeOffset expectedAbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, AbandonmentReason> expectedAbandonmentReason =
             AbandonmentReason.PaymentFailed;
+        string expectedBrandID = "brand_id";
         string expectedCustomerID = "customer_id";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("AbandonedCheckout");
         string expectedPaymentID = "payment_id";
@@ -7461,6 +7584,7 @@ public class AbandonedCheckoutTest : TestBase
 
         Assert.Equal(expectedAbandonedAt, deserialized.AbandonedAt);
         Assert.Equal(expectedAbandonmentReason, deserialized.AbandonmentReason);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
         Assert.Equal(expectedPaymentID, deserialized.PaymentID);
@@ -7475,6 +7599,7 @@ public class AbandonedCheckoutTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -7491,6 +7616,7 @@ public class AbandonedCheckoutTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -7507,6 +7633,7 @@ public class AbandonedCheckoutTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -7522,6 +7649,7 @@ public class AbandonedCheckoutTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -7540,6 +7668,7 @@ public class AbandonedCheckoutTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -7557,6 +7686,7 @@ public class AbandonedCheckoutTest : TestBase
         {
             AbandonedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AbandonmentReason = AbandonmentReason.PaymentFailed,
+            BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
             Status = Status.Abandoned,
@@ -7698,6 +7828,7 @@ public class DunningAttemptTest : TestBase
     {
         var model = new DunningAttempt
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -7706,6 +7837,7 @@ public class DunningAttemptTest : TestBase
             PaymentID = "payment_id",
         };
 
+        string expectedBrandID = "brand_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("DunningAttempt");
@@ -7714,6 +7846,7 @@ public class DunningAttemptTest : TestBase
         ApiEnum<string, TriggerState> expectedTriggerState = TriggerState.OnHold;
         string expectedPaymentID = "payment_id";
 
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
@@ -7728,6 +7861,7 @@ public class DunningAttemptTest : TestBase
     {
         var model = new DunningAttempt
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -7750,6 +7884,7 @@ public class DunningAttemptTest : TestBase
     {
         var model = new DunningAttempt
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -7765,6 +7900,7 @@ public class DunningAttemptTest : TestBase
         );
         Assert.NotNull(deserialized);
 
+        string expectedBrandID = "brand_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("DunningAttempt");
@@ -7773,6 +7909,7 @@ public class DunningAttemptTest : TestBase
         ApiEnum<string, TriggerState> expectedTriggerState = TriggerState.OnHold;
         string expectedPaymentID = "payment_id";
 
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
@@ -7787,6 +7924,7 @@ public class DunningAttemptTest : TestBase
     {
         var model = new DunningAttempt
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -7803,6 +7941,7 @@ public class DunningAttemptTest : TestBase
     {
         var model = new DunningAttempt
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -7819,6 +7958,7 @@ public class DunningAttemptTest : TestBase
     {
         var model = new DunningAttempt
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -7834,6 +7974,7 @@ public class DunningAttemptTest : TestBase
     {
         var model = new DunningAttempt
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -7852,6 +7993,7 @@ public class DunningAttemptTest : TestBase
     {
         var model = new DunningAttempt
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -7869,6 +8011,7 @@ public class DunningAttemptTest : TestBase
     {
         var model = new DunningAttempt
         {
+            BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
             Status = DunningAttemptStatus.Recovering,
@@ -8009,6 +8152,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8053,6 +8197,7 @@ public class EntitlementGrantTest : TestBase
         };
 
         string expectedID = "id";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
@@ -8099,6 +8244,7 @@ public class EntitlementGrantTest : TestBase
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("EntitlementGrant");
 
         Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedBrandID, model.BrandID);
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerID, model.CustomerID);
@@ -8133,6 +8279,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8191,6 +8338,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8242,6 +8390,7 @@ public class EntitlementGrantTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
+        string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
@@ -8288,6 +8437,7 @@ public class EntitlementGrantTest : TestBase
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("EntitlementGrant");
 
         Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedBrandID, deserialized.BrandID);
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
@@ -8322,6 +8472,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8374,6 +8525,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8405,6 +8557,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8433,6 +8586,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8468,6 +8622,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8500,6 +8655,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8560,6 +8716,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8603,6 +8760,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8673,6 +8831,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -8726,6 +8885,7 @@ public class EntitlementGrantTest : TestBase
         var model = new EntitlementGrant
         {
             ID = "id",
+            BrandID = "brand_id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",

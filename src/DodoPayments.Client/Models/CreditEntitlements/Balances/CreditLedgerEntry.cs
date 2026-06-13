@@ -55,6 +55,19 @@ public sealed record class CreditLedgerEntry : JsonModel
         init { this._rawData.Set("balance_before", value); }
     }
 
+    /// <summary>
+    /// Brand id this credit ledger entry belongs to
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
+    }
+
     public required string BusinessID
     {
         get
@@ -184,6 +197,7 @@ public sealed record class CreditLedgerEntry : JsonModel
         _ = this.Amount;
         _ = this.BalanceAfter;
         _ = this.BalanceBefore;
+        _ = this.BrandID;
         _ = this.BusinessID;
         _ = this.CreatedAt;
         _ = this.CreditEntitlementID;

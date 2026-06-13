@@ -31,6 +31,19 @@ public sealed record class EntitlementGrant : JsonModel
     }
 
     /// <summary>
+    /// Brand id this grant belongs to.
+    /// </summary>
+    public required string BrandID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("brand_id");
+        }
+        init { this._rawData.Set("brand_id", value); }
+    }
+
+    /// <summary>
     /// Identifier of the business that owns the grant.
     /// </summary>
     public required string BusinessID
@@ -294,6 +307,7 @@ public sealed record class EntitlementGrant : JsonModel
     public override void Validate()
     {
         _ = this.ID;
+        _ = this.BrandID;
         _ = this.BusinessID;
         _ = this.CreatedAt;
         _ = this.CustomerID;
