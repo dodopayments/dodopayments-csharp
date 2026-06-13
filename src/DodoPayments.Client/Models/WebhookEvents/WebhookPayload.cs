@@ -1335,7 +1335,7 @@ public sealed record class Payment : JsonModel
 
     /// <summary>
     /// Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
-    /// merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+    /// merchant's own payment connector); `dodo` for everything Dodo processed itself.
     /// </summary>
     public required ApiEnum<string, Payments::PaymentProvider> PaymentProvider
     {
@@ -3017,8 +3017,8 @@ public sealed record class Dispute : JsonModel
 
     /// <summary>
     /// Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-    /// routes (the merchant's own Hyperswitch connector); `dodo` for everything
-    /// Dodo processed itself.
+    /// routes (the merchant's own payment connector); `dodo` for everything Dodo
+    /// processed itself.
     /// </summary>
     public required ApiEnum<string, Disputes::PaymentProvider> PaymentProvider
     {
