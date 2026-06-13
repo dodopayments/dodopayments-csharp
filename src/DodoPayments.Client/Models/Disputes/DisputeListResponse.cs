@@ -122,8 +122,8 @@ public sealed record class DisputeListResponse : JsonModel
 
     /// <summary>
     /// Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-    /// routes (the merchant's own Hyperswitch connector); `dodo` for everything
-    /// Dodo processed itself.
+    /// routes (the merchant's own payment connector); `dodo` for everything Dodo
+    /// processed itself.
     /// </summary>
     public required ApiEnum<string, DisputeListResponsePaymentProvider> PaymentProvider
     {
@@ -204,7 +204,7 @@ class DisputeListResponseFromRaw : IFromRawJson<DisputeListResponse>
 
 /// <summary>
 /// Which processor handled the underlying payment. `stripe` / `adyen` for BYOP routes
-/// (the merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+/// (the merchant's own payment connector); `dodo` for everything Dodo processed itself.
 /// </summary>
 [JsonConverter(typeof(DisputeListResponsePaymentProviderConverter))]
 public enum DisputeListResponsePaymentProvider

@@ -149,8 +149,8 @@ public sealed record class GetDispute : JsonModel
 
     /// <summary>
     /// Which processor handled the underlying payment. `stripe` / `adyen` for BYOP
-    /// routes (the merchant's own Hyperswitch connector); `dodo` for everything
-    /// Dodo processed itself.
+    /// routes (the merchant's own payment connector); `dodo` for everything Dodo
+    /// processed itself.
     /// </summary>
     public required ApiEnum<
         string,
@@ -262,7 +262,7 @@ class GetDisputeFromRaw : IFromRawJson<GetDispute>
 
 /// <summary>
 /// Which processor handled the underlying payment. `stripe` / `adyen` for BYOP routes
-/// (the merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+/// (the merchant's own payment connector); `dodo` for everything Dodo processed itself.
 /// </summary>
 [JsonConverter(typeof(global::DodoPayments.Client.Models.Disputes.PaymentProviderConverter))]
 public enum PaymentProvider

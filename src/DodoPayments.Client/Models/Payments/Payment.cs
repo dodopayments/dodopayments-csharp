@@ -160,7 +160,7 @@ public sealed record class Payment : JsonModel
 
     /// <summary>
     /// Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
-    /// merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+    /// merchant's own payment connector); `dodo` for everything Dodo processed itself.
     /// </summary>
     public required ApiEnum<
         string,
@@ -679,7 +679,7 @@ class PaymentFromRaw : IFromRawJson<Payment>
 
 /// <summary>
 /// Which processor handled this payment. `stripe` / `adyen` for BYOP routes (the
-/// merchant's own Hyperswitch connector); `dodo` for everything Dodo processed itself.
+/// merchant's own payment connector); `dodo` for everything Dodo processed itself.
 /// </summary>
 [JsonConverter(typeof(global::DodoPayments.Client.Models.Payments.PaymentProviderConverter))]
 public enum PaymentProvider
