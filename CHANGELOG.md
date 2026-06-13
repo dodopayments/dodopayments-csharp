@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.21.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.20.0...v6.21.0) (2026-06-13)
+
+
+### Features
+
+* **spec:** update OpenAPI to 1.104.0 — product localized prices ([d03be25](https://github.com/dodopayments/dodopayments-csharp/commit/d03be2580b5302aed7db729cb1b699cae4894d7a))
+* **spec:** update OpenAPI to 1.104.0 — product localized prices ([90b11f7](https://github.com/dodopayments/dodopayments-csharp/commit/90b11f76d4e9a7b3ecc8bc203c3a762625f3f9f1))
+* **spec:** update OpenAPI to 1.104.0 — product localized prices ([#68](https://github.com/dodopayments/dodopayments-csharp/issues/68)) ([d03be25](https://github.com/dodopayments/dodopayments-csharp/commit/d03be2580b5302aed7db729cb1b699cae4894d7a))
+
 ## [6.19.2](https://github.com/dodopayments/dodopayments-csharp/compare/v6.19.1...v6.19.2) (2026-06-01)
 
 
