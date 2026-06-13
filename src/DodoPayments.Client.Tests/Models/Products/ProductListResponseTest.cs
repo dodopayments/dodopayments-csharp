@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
@@ -52,6 +53,7 @@ public class ProductListResponseTest : TestBase
                 SuggestedPrice = 0,
                 TaxInclusive = true,
             },
+            PricingMode = ProductListResponsePricingMode.ByCurrency,
             TaxInclusive = true,
         };
 
@@ -92,6 +94,8 @@ public class ProductListResponseTest : TestBase
             SuggestedPrice = 0,
             TaxInclusive = true,
         };
+        ApiEnum<string, ProductListResponsePricingMode> expectedPricingMode =
+            ProductListResponsePricingMode.ByCurrency;
         bool expectedTaxInclusive = true;
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -118,6 +122,7 @@ public class ProductListResponseTest : TestBase
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedPrice, model.Price);
         Assert.Equal(expectedPriceDetail, model.PriceDetail);
+        Assert.Equal(expectedPricingMode, model.PricingMode);
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
     }
 
@@ -163,6 +168,7 @@ public class ProductListResponseTest : TestBase
                 SuggestedPrice = 0,
                 TaxInclusive = true,
             },
+            PricingMode = ProductListResponsePricingMode.ByCurrency,
             TaxInclusive = true,
         };
 
@@ -217,6 +223,7 @@ public class ProductListResponseTest : TestBase
                 SuggestedPrice = 0,
                 TaxInclusive = true,
             },
+            PricingMode = ProductListResponsePricingMode.ByCurrency,
             TaxInclusive = true,
         };
 
@@ -264,6 +271,8 @@ public class ProductListResponseTest : TestBase
             SuggestedPrice = 0,
             TaxInclusive = true,
         };
+        ApiEnum<string, ProductListResponsePricingMode> expectedPricingMode =
+            ProductListResponsePricingMode.ByCurrency;
         bool expectedTaxInclusive = true;
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -290,6 +299,7 @@ public class ProductListResponseTest : TestBase
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedPrice, deserialized.Price);
         Assert.Equal(expectedPriceDetail, deserialized.PriceDetail);
+        Assert.Equal(expectedPricingMode, deserialized.PricingMode);
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
     }
 
@@ -335,6 +345,7 @@ public class ProductListResponseTest : TestBase
                 SuggestedPrice = 0,
                 TaxInclusive = true,
             },
+            PricingMode = ProductListResponsePricingMode.ByCurrency,
             TaxInclusive = true,
         };
 
@@ -382,6 +393,8 @@ public class ProductListResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("price"));
         Assert.Null(model.PriceDetail);
         Assert.False(model.RawData.ContainsKey("price_detail"));
+        Assert.Null(model.PricingMode);
+        Assert.False(model.RawData.ContainsKey("pricing_mode"));
         Assert.Null(model.TaxInclusive);
         Assert.False(model.RawData.ContainsKey("tax_inclusive"));
     }
@@ -452,6 +465,7 @@ public class ProductListResponseTest : TestBase
             Name = null,
             Price = null,
             PriceDetail = null,
+            PricingMode = null,
             TaxInclusive = null,
         };
 
@@ -467,6 +481,8 @@ public class ProductListResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("price"));
         Assert.Null(model.PriceDetail);
         Assert.True(model.RawData.ContainsKey("price_detail"));
+        Assert.Null(model.PricingMode);
+        Assert.True(model.RawData.ContainsKey("pricing_mode"));
         Assert.Null(model.TaxInclusive);
         Assert.True(model.RawData.ContainsKey("tax_inclusive"));
     }
@@ -505,6 +521,7 @@ public class ProductListResponseTest : TestBase
             Name = null,
             Price = null,
             PriceDetail = null,
+            PricingMode = null,
             TaxInclusive = null,
         };
 
@@ -553,11 +570,68 @@ public class ProductListResponseTest : TestBase
                 SuggestedPrice = 0,
                 TaxInclusive = true,
             },
+            PricingMode = ProductListResponsePricingMode.ByCurrency,
             TaxInclusive = true,
         };
 
         ProductListResponse copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class ProductListResponsePricingModeTest : TestBase
+{
+    [Theory]
+    [InlineData(ProductListResponsePricingMode.ByCurrency)]
+    [InlineData(ProductListResponsePricingMode.ByCountry)]
+    public void Validation_Works(ProductListResponsePricingMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ProductListResponsePricingMode> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ProductListResponsePricingMode>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(ProductListResponsePricingMode.ByCurrency)]
+    [InlineData(ProductListResponsePricingMode.ByCountry)]
+    public void SerializationRoundtrip_Works(ProductListResponsePricingMode rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ProductListResponsePricingMode> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListResponsePricingMode>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ProductListResponsePricingMode>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListResponsePricingMode>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }

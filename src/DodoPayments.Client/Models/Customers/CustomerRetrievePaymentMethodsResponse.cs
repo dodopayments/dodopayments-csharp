@@ -146,7 +146,7 @@ public sealed record class CustomerRetrievePaymentMethodsResponseItem : JsonMode
     }
 
     /// <summary>
-    /// All supported payment method types (from Hyperswitch).
+    /// All supported payment method types.
     ///
     /// <para>Used for disabled-payment-methods filtering and validation.</para>
     /// </summary>
