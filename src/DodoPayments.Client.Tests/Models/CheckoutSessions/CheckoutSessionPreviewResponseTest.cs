@@ -93,7 +93,9 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            TaxIDBusinessName = "tax_id_business_name",
             TaxIDErrMsg = "tax_id_err_msg",
+            TaxIDFormatName = "tax_id_format_name",
             TotalTax = 0,
         };
 
@@ -177,7 +179,9 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalAmount = 0,
             Tax = 0,
         };
+        string expectedTaxIDBusinessName = "tax_id_business_name";
         string expectedTaxIDErrMsg = "tax_id_err_msg";
+        string expectedTaxIDFormatName = "tax_id_format_name";
         int expectedTotalTax = 0;
 
         Assert.Equal(expectedBillingCountry, model.BillingCountry);
@@ -191,7 +195,9 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         }
         Assert.Equal(expectedTotalPrice, model.TotalPrice);
         Assert.Equal(expectedRecurringBreakup, model.RecurringBreakup);
+        Assert.Equal(expectedTaxIDBusinessName, model.TaxIDBusinessName);
         Assert.Equal(expectedTaxIDErrMsg, model.TaxIDErrMsg);
+        Assert.Equal(expectedTaxIDFormatName, model.TaxIDFormatName);
         Assert.Equal(expectedTotalTax, model.TotalTax);
     }
 
@@ -280,7 +286,9 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            TaxIDBusinessName = "tax_id_business_name",
             TaxIDErrMsg = "tax_id_err_msg",
+            TaxIDFormatName = "tax_id_format_name",
             TotalTax = 0,
         };
 
@@ -378,7 +386,9 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            TaxIDBusinessName = "tax_id_business_name",
             TaxIDErrMsg = "tax_id_err_msg",
+            TaxIDFormatName = "tax_id_format_name",
             TotalTax = 0,
         };
 
@@ -469,7 +479,9 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalAmount = 0,
             Tax = 0,
         };
+        string expectedTaxIDBusinessName = "tax_id_business_name";
         string expectedTaxIDErrMsg = "tax_id_err_msg";
+        string expectedTaxIDFormatName = "tax_id_format_name";
         int expectedTotalTax = 0;
 
         Assert.Equal(expectedBillingCountry, deserialized.BillingCountry);
@@ -483,7 +495,9 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         }
         Assert.Equal(expectedTotalPrice, deserialized.TotalPrice);
         Assert.Equal(expectedRecurringBreakup, deserialized.RecurringBreakup);
+        Assert.Equal(expectedTaxIDBusinessName, deserialized.TaxIDBusinessName);
         Assert.Equal(expectedTaxIDErrMsg, deserialized.TaxIDErrMsg);
+        Assert.Equal(expectedTaxIDFormatName, deserialized.TaxIDFormatName);
         Assert.Equal(expectedTotalTax, deserialized.TotalTax);
     }
 
@@ -572,7 +586,9 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            TaxIDBusinessName = "tax_id_business_name",
             TaxIDErrMsg = "tax_id_err_msg",
+            TaxIDFormatName = "tax_id_format_name",
             TotalTax = 0,
         };
 
@@ -661,8 +677,12 @@ public class CheckoutSessionPreviewResponseTest : TestBase
 
         Assert.Null(model.RecurringBreakup);
         Assert.False(model.RawData.ContainsKey("recurring_breakup"));
+        Assert.Null(model.TaxIDBusinessName);
+        Assert.False(model.RawData.ContainsKey("tax_id_business_name"));
         Assert.Null(model.TaxIDErrMsg);
         Assert.False(model.RawData.ContainsKey("tax_id_err_msg"));
+        Assert.Null(model.TaxIDFormatName);
+        Assert.False(model.RawData.ContainsKey("tax_id_format_name"));
         Assert.Null(model.TotalTax);
         Assert.False(model.RawData.ContainsKey("total_tax"));
     }
@@ -830,14 +850,20 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalPrice = 0,
 
             RecurringBreakup = null,
+            TaxIDBusinessName = null,
             TaxIDErrMsg = null,
+            TaxIDFormatName = null,
             TotalTax = null,
         };
 
         Assert.Null(model.RecurringBreakup);
         Assert.True(model.RawData.ContainsKey("recurring_breakup"));
+        Assert.Null(model.TaxIDBusinessName);
+        Assert.True(model.RawData.ContainsKey("tax_id_business_name"));
         Assert.Null(model.TaxIDErrMsg);
         Assert.True(model.RawData.ContainsKey("tax_id_err_msg"));
+        Assert.Null(model.TaxIDFormatName);
+        Assert.True(model.RawData.ContainsKey("tax_id_format_name"));
         Assert.Null(model.TotalTax);
         Assert.True(model.RawData.ContainsKey("total_tax"));
     }
@@ -922,7 +948,9 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalPrice = 0,
 
             RecurringBreakup = null,
+            TaxIDBusinessName = null,
             TaxIDErrMsg = null,
+            TaxIDFormatName = null,
             TotalTax = null,
         };
 
@@ -1014,7 +1042,9 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 TotalAmount = 0,
                 Tax = 0,
             },
+            TaxIDBusinessName = "tax_id_business_name",
             TaxIDErrMsg = "tax_id_err_msg",
+            TaxIDFormatName = "tax_id_format_name",
             TotalTax = 0,
         };
 
