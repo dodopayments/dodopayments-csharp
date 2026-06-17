@@ -11,12 +11,12 @@ public class ShortLinkCreateParamsTest : TestBase
     {
         var parameters = new ShortLinkCreateParams
         {
-            ID = "id",
+            ID = "pdt_R8AWMPiV8RyJElcCKvAID",
             Slug = "slug",
             StaticCheckoutParams = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
-        string expectedID = "id";
+        string expectedID = "pdt_R8AWMPiV8RyJElcCKvAID";
         string expectedSlug = "slug";
         Dictionary<string, string> expectedStaticCheckoutParams = new() { { "foo", "string" } };
 
@@ -35,7 +35,11 @@ public class ShortLinkCreateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new ShortLinkCreateParams { ID = "id", Slug = "slug" };
+        var parameters = new ShortLinkCreateParams
+        {
+            ID = "pdt_R8AWMPiV8RyJElcCKvAID",
+            Slug = "slug",
+        };
 
         Assert.Null(parameters.StaticCheckoutParams);
         Assert.False(parameters.RawBodyData.ContainsKey("static_checkout_params"));
@@ -46,7 +50,7 @@ public class ShortLinkCreateParamsTest : TestBase
     {
         var parameters = new ShortLinkCreateParams
         {
-            ID = "id",
+            ID = "pdt_R8AWMPiV8RyJElcCKvAID",
             Slug = "slug",
 
             StaticCheckoutParams = null,
@@ -59,13 +63,19 @@ public class ShortLinkCreateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        ShortLinkCreateParams parameters = new() { ID = "id", Slug = "slug" };
+        ShortLinkCreateParams parameters = new()
+        {
+            ID = "pdt_R8AWMPiV8RyJElcCKvAID",
+            Slug = "slug",
+        };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/products/id/short_links"),
+                new Uri(
+                    "https://live.dodopayments.com/products/pdt_R8AWMPiV8RyJElcCKvAID/short_links"
+                ),
                 url
             )
         );
@@ -76,7 +86,7 @@ public class ShortLinkCreateParamsTest : TestBase
     {
         var parameters = new ShortLinkCreateParams
         {
-            ID = "id",
+            ID = "pdt_R8AWMPiV8RyJElcCKvAID",
             Slug = "slug",
             StaticCheckoutParams = new Dictionary<string, string>() { { "foo", "string" } },
         };

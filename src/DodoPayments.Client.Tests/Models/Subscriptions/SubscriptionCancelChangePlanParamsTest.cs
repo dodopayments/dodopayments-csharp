@@ -10,10 +10,10 @@ public class SubscriptionCancelChangePlanParamsTest : TestBase
     {
         var parameters = new SubscriptionCancelChangePlanParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
         };
 
-        string expectedSubscriptionID = "subscription_id";
+        string expectedSubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv";
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
     }
@@ -23,7 +23,7 @@ public class SubscriptionCancelChangePlanParamsTest : TestBase
     {
         SubscriptionCancelChangePlanParams parameters = new()
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
@@ -31,7 +31,7 @@ public class SubscriptionCancelChangePlanParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/subscriptions/subscription_id/change-plan/scheduled"
+                    "https://live.dodopayments.com/subscriptions/sub_Iuaq622bbmmfOGrVTqdXv/change-plan/scheduled"
                 ),
                 url
             )
@@ -43,7 +43,7 @@ public class SubscriptionCancelChangePlanParamsTest : TestBase
     {
         var parameters = new SubscriptionCancelChangePlanParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
         };
 
         SubscriptionCancelChangePlanParams copied = new(parameters);

@@ -34,7 +34,7 @@ public class ProductServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var product = await this.client.Products.Retrieve(
-            "id",
+            "pdt_R8AWMPiV8RyJElcCKvAID",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -44,7 +44,11 @@ public class ProductServiceTest : TestBase
     [Fact]
     public async Task Update_Works()
     {
-        await this.client.Products.Update("id", new(), TestContext.Current.CancellationToken);
+        await this.client.Products.Update(
+            "pdt_R8AWMPiV8RyJElcCKvAID",
+            new(),
+            TestContext.Current.CancellationToken
+        );
     }
 
     [Fact]
@@ -57,20 +61,28 @@ public class ProductServiceTest : TestBase
     [Fact]
     public async Task Archive_Works()
     {
-        await this.client.Products.Archive("id", new(), TestContext.Current.CancellationToken);
+        await this.client.Products.Archive(
+            "pdt_R8AWMPiV8RyJElcCKvAID",
+            new(),
+            TestContext.Current.CancellationToken
+        );
     }
 
     [Fact]
     public async Task Unarchive_Works()
     {
-        await this.client.Products.Unarchive("id", new(), TestContext.Current.CancellationToken);
+        await this.client.Products.Unarchive(
+            "pdt_R8AWMPiV8RyJElcCKvAID",
+            new(),
+            TestContext.Current.CancellationToken
+        );
     }
 
     [Fact]
     public async Task UpdateFiles_Works()
     {
         var response = await this.client.Products.UpdateFiles(
-            "id",
+            "pdt_R8AWMPiV8RyJElcCKvAID",
             new() { FileName = "file_name" },
             TestContext.Current.CancellationToken
         );

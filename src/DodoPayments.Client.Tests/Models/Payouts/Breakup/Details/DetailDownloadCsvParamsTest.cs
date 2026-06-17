@@ -8,9 +8,9 @@ public class DetailDownloadCsvParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new DetailDownloadCsvParams { PayoutID = "payout_id" };
+        var parameters = new DetailDownloadCsvParams { PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T" };
 
-        string expectedPayoutID = "payout_id";
+        string expectedPayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T";
 
         Assert.Equal(expectedPayoutID, parameters.PayoutID);
     }
@@ -18,13 +18,15 @@ public class DetailDownloadCsvParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        DetailDownloadCsvParams parameters = new() { PayoutID = "payout_id" };
+        DetailDownloadCsvParams parameters = new() { PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/payouts/payout_id/breakup/details/csv"),
+                new Uri(
+                    "https://live.dodopayments.com/payouts/pyt_zFTrrn4sk3x3y2vjDBW3T/breakup/details/csv"
+                ),
                 url
             )
         );
@@ -33,7 +35,7 @@ public class DetailDownloadCsvParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new DetailDownloadCsvParams { PayoutID = "payout_id" };
+        var parameters = new DetailDownloadCsvParams { PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T" };
 
         DetailDownloadCsvParams copied = new(parameters);
 

@@ -38,7 +38,7 @@ public class CheckoutSessionServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var checkoutSessionStatus = await this.client.CheckoutSessions.Retrieve(
-            "id",
+            "cks_n010SZaY4NXc7F1ck3Tq1",
             new(),
             TestContext.Current.CancellationToken
         );

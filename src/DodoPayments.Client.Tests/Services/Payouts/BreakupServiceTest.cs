@@ -8,7 +8,7 @@ public class BreakupServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var breakups = await this.client.Payouts.Breakup.Retrieve(
-            "payout_id",
+            "pyt_zFTrrn4sk3x3y2vjDBW3T",
             new(),
             TestContext.Current.CancellationToken
         );

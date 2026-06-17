@@ -8,9 +8,12 @@ public class WebhookRetrieveSecretParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new WebhookRetrieveSecretParams { WebhookID = "webhook_id" };
+        var parameters = new WebhookRetrieveSecretParams
+        {
+            WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab",
+        };
 
-        string expectedWebhookID = "webhook_id";
+        string expectedWebhookID = "whk_YdWqVEGKmSYKbsIyDxEab";
 
         Assert.Equal(expectedWebhookID, parameters.WebhookID);
     }
@@ -18,13 +21,13 @@ public class WebhookRetrieveSecretParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        WebhookRetrieveSecretParams parameters = new() { WebhookID = "webhook_id" };
+        WebhookRetrieveSecretParams parameters = new() { WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/webhooks/webhook_id/secret"),
+                new Uri("https://live.dodopayments.com/webhooks/whk_YdWqVEGKmSYKbsIyDxEab/secret"),
                 url
             )
         );
@@ -33,7 +36,10 @@ public class WebhookRetrieveSecretParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new WebhookRetrieveSecretParams { WebhookID = "webhook_id" };
+        var parameters = new WebhookRetrieveSecretParams
+        {
+            WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab",
+        };
 
         WebhookRetrieveSecretParams copied = new(parameters);
 

@@ -8,9 +8,9 @@ public class WebhookDeleteParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new WebhookDeleteParams { WebhookID = "webhook_id" };
+        var parameters = new WebhookDeleteParams { WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab" };
 
-        string expectedWebhookID = "webhook_id";
+        string expectedWebhookID = "whk_YdWqVEGKmSYKbsIyDxEab";
 
         Assert.Equal(expectedWebhookID, parameters.WebhookID);
     }
@@ -18,19 +18,22 @@ public class WebhookDeleteParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        WebhookDeleteParams parameters = new() { WebhookID = "webhook_id" };
+        WebhookDeleteParams parameters = new() { WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/webhooks/webhook_id"), url)
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/webhooks/whk_YdWqVEGKmSYKbsIyDxEab"),
+                url
+            )
         );
     }
 
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new WebhookDeleteParams { WebhookID = "webhook_id" };
+        var parameters = new WebhookDeleteParams { WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab" };
 
         WebhookDeleteParams copied = new(parameters);
 
