@@ -11,14 +11,14 @@ public class CustomerUpdateParamsTest : TestBase
     {
         var parameters = new CustomerUpdateParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Email = "email",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             PhoneNumber = "phone_number",
         };
 
-        string expectedCustomerID = "customer_id";
+        string expectedCustomerID = "cus_TV52uJWWXt2yIoBBxpjaa";
         string expectedEmail = "email";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
@@ -41,7 +41,7 @@ public class CustomerUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new CustomerUpdateParams { CustomerID = "customer_id" };
+        var parameters = new CustomerUpdateParams { CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa" };
 
         Assert.Null(parameters.Email);
         Assert.False(parameters.RawBodyData.ContainsKey("email"));
@@ -58,7 +58,7 @@ public class CustomerUpdateParamsTest : TestBase
     {
         var parameters = new CustomerUpdateParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
 
             Email = null,
             Metadata = null,
@@ -79,12 +79,15 @@ public class CustomerUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        CustomerUpdateParams parameters = new() { CustomerID = "customer_id" };
+        CustomerUpdateParams parameters = new() { CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/customers/customer_id"), url)
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/customers/cus_TV52uJWWXt2yIoBBxpjaa"),
+                url
+            )
         );
     }
 
@@ -93,7 +96,7 @@ public class CustomerUpdateParamsTest : TestBase
     {
         var parameters = new CustomerUpdateParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Email = "email",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",

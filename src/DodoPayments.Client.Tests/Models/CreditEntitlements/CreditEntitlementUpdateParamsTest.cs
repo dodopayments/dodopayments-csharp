@@ -13,7 +13,7 @@ public class CreditEntitlementUpdateParamsTest : TestBase
     {
         var parameters = new CreditEntitlementUpdateParams
         {
-            ID = "id",
+            ID = "cde_ztxm5XJsKxWucRWA3rjdM",
             Currency = Currency.Aed,
             Description = "description",
             ExpiresAfterDays = 0,
@@ -30,7 +30,7 @@ public class CreditEntitlementUpdateParamsTest : TestBase
             Unit = "unit",
         };
 
-        string expectedID = "id";
+        string expectedID = "cde_ztxm5XJsKxWucRWA3rjdM";
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         string expectedDescription = "description";
         int expectedExpiresAfterDays = 0;
@@ -67,7 +67,7 @@ public class CreditEntitlementUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new CreditEntitlementUpdateParams { ID = "id" };
+        var parameters = new CreditEntitlementUpdateParams { ID = "cde_ztxm5XJsKxWucRWA3rjdM" };
 
         Assert.Null(parameters.Currency);
         Assert.False(parameters.RawBodyData.ContainsKey("currency"));
@@ -104,7 +104,7 @@ public class CreditEntitlementUpdateParamsTest : TestBase
     {
         var parameters = new CreditEntitlementUpdateParams
         {
-            ID = "id",
+            ID = "cde_ztxm5XJsKxWucRWA3rjdM",
 
             Currency = null,
             Description = null,
@@ -155,12 +155,17 @@ public class CreditEntitlementUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        CreditEntitlementUpdateParams parameters = new() { ID = "id" };
+        CreditEntitlementUpdateParams parameters = new() { ID = "cde_ztxm5XJsKxWucRWA3rjdM" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/credit-entitlements/id"), url)
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://live.dodopayments.com/credit-entitlements/cde_ztxm5XJsKxWucRWA3rjdM"
+                ),
+                url
+            )
         );
     }
 
@@ -169,7 +174,7 @@ public class CreditEntitlementUpdateParamsTest : TestBase
     {
         var parameters = new CreditEntitlementUpdateParams
         {
-            ID = "id",
+            ID = "cde_ztxm5XJsKxWucRWA3rjdM",
             Currency = Currency.Aed,
             Description = "description",
             ExpiresAfterDays = 0,

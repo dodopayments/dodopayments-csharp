@@ -11,11 +11,11 @@ public class HeaderUpdateParamsTest : TestBase
     {
         var parameters = new HeaderUpdateParams
         {
-            WebhookID = "webhook_id",
+            WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab",
             Headers = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
-        string expectedWebhookID = "webhook_id";
+        string expectedWebhookID = "whk_YdWqVEGKmSYKbsIyDxEab";
         Dictionary<string, string> expectedHeaders = new() { { "foo", "string" } };
 
         Assert.Equal(expectedWebhookID, parameters.WebhookID);
@@ -33,7 +33,7 @@ public class HeaderUpdateParamsTest : TestBase
     {
         HeaderUpdateParams parameters = new()
         {
-            WebhookID = "webhook_id",
+            WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab",
             Headers = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
@@ -41,7 +41,7 @@ public class HeaderUpdateParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/webhooks/webhook_id/headers"),
+                new Uri("https://live.dodopayments.com/webhooks/whk_YdWqVEGKmSYKbsIyDxEab/headers"),
                 url
             )
         );
@@ -52,7 +52,7 @@ public class HeaderUpdateParamsTest : TestBase
     {
         var parameters = new HeaderUpdateParams
         {
-            WebhookID = "webhook_id",
+            WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab",
             Headers = new Dictionary<string, string>() { { "foo", "string" } },
         };
 

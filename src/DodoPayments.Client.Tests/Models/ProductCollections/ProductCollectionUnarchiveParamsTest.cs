@@ -8,9 +8,9 @@ public class ProductCollectionUnarchiveParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new ProductCollectionUnarchiveParams { ID = "id" };
+        var parameters = new ProductCollectionUnarchiveParams { ID = "pdc_8BWv0hojwUH7iCDabr0NI" };
 
-        string expectedID = "id";
+        string expectedID = "pdc_8BWv0hojwUH7iCDabr0NI";
 
         Assert.Equal(expectedID, parameters.ID);
     }
@@ -18,13 +18,15 @@ public class ProductCollectionUnarchiveParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        ProductCollectionUnarchiveParams parameters = new() { ID = "id" };
+        ProductCollectionUnarchiveParams parameters = new() { ID = "pdc_8BWv0hojwUH7iCDabr0NI" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/product-collections/id/unarchive"),
+                new Uri(
+                    "https://live.dodopayments.com/product-collections/pdc_8BWv0hojwUH7iCDabr0NI/unarchive"
+                ),
                 url
             )
         );
@@ -33,7 +35,7 @@ public class ProductCollectionUnarchiveParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new ProductCollectionUnarchiveParams { ID = "id" };
+        var parameters = new ProductCollectionUnarchiveParams { ID = "pdc_8BWv0hojwUH7iCDabr0NI" };
 
         ProductCollectionUnarchiveParams copied = new(parameters);
 
