@@ -8,9 +8,13 @@ public class LicenseKeyInstanceUpdateParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new LicenseKeyInstanceUpdateParams { ID = "lki_123", Name = "name" };
+        var parameters = new LicenseKeyInstanceUpdateParams
+        {
+            ID = "lki_EeWORStkMc7z0KycI31VS",
+            Name = "name",
+        };
 
-        string expectedID = "lki_123";
+        string expectedID = "lki_EeWORStkMc7z0KycI31VS";
         string expectedName = "name";
 
         Assert.Equal(expectedID, parameters.ID);
@@ -20,13 +24,19 @@ public class LicenseKeyInstanceUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        LicenseKeyInstanceUpdateParams parameters = new() { ID = "lki_123", Name = "name" };
+        LicenseKeyInstanceUpdateParams parameters = new()
+        {
+            ID = "lki_EeWORStkMc7z0KycI31VS",
+            Name = "name",
+        };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/license_key_instances/lki_123"),
+                new Uri(
+                    "https://live.dodopayments.com/license_key_instances/lki_EeWORStkMc7z0KycI31VS"
+                ),
                 url
             )
         );
@@ -35,7 +45,11 @@ public class LicenseKeyInstanceUpdateParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new LicenseKeyInstanceUpdateParams { ID = "lki_123", Name = "name" };
+        var parameters = new LicenseKeyInstanceUpdateParams
+        {
+            ID = "lki_EeWORStkMc7z0KycI31VS",
+            Name = "name",
+        };
 
         LicenseKeyInstanceUpdateParams copied = new(parameters);
 

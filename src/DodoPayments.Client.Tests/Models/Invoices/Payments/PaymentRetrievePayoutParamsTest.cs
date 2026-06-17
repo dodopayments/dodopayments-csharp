@@ -8,9 +8,9 @@ public class PaymentRetrievePayoutParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new PaymentRetrievePayoutParams { PayoutID = "payout_id" };
+        var parameters = new PaymentRetrievePayoutParams { PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T" };
 
-        string expectedPayoutID = "payout_id";
+        string expectedPayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T";
 
         Assert.Equal(expectedPayoutID, parameters.PayoutID);
     }
@@ -18,13 +18,13 @@ public class PaymentRetrievePayoutParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        PaymentRetrievePayoutParams parameters = new() { PayoutID = "payout_id" };
+        PaymentRetrievePayoutParams parameters = new() { PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/invoices/payouts/payout_id"),
+                new Uri("https://live.dodopayments.com/invoices/payouts/pyt_zFTrrn4sk3x3y2vjDBW3T"),
                 url
             )
         );
@@ -33,7 +33,7 @@ public class PaymentRetrievePayoutParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new PaymentRetrievePayoutParams { PayoutID = "payout_id" };
+        var parameters = new PaymentRetrievePayoutParams { PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T" };
 
         PaymentRetrievePayoutParams copied = new(parameters);
 

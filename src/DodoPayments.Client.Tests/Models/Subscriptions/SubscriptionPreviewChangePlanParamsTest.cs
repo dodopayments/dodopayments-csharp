@@ -14,7 +14,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
     {
         var parameters = new SubscriptionPreviewChangePlanParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductID = "product_id",
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
@@ -28,7 +28,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
         };
 
-        string expectedSubscriptionID = "subscription_id";
+        string expectedSubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv";
         string expectedProductID = "product_id";
         ApiEnum<
             string,
@@ -87,7 +87,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
     {
         var parameters = new SubscriptionPreviewChangePlanParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductID = "product_id",
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
@@ -109,7 +109,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
     {
         var parameters = new SubscriptionPreviewChangePlanParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductID = "product_id",
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
@@ -134,7 +134,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
     {
         var parameters = new SubscriptionPreviewChangePlanParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductID = "product_id",
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
@@ -161,7 +161,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
     {
         var parameters = new SubscriptionPreviewChangePlanParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductID = "product_id",
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
@@ -195,7 +195,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
     {
         SubscriptionPreviewChangePlanParams parameters = new()
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductID = "product_id",
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
@@ -207,7 +207,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/subscriptions/subscription_id/change-plan/preview"
+                    "https://live.dodopayments.com/subscriptions/sub_Iuaq622bbmmfOGrVTqdXv/change-plan/preview"
                 ),
                 url
             )
@@ -219,7 +219,7 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
     {
         var parameters = new SubscriptionPreviewChangePlanParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductID = "product_id",
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,

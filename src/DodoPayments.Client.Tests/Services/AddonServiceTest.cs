@@ -25,7 +25,7 @@ public class AddonServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var addonResponse = await this.client.Addons.Retrieve(
-            "id",
+            "adn_NX1zdqW4Hbivsqz8vI9dc",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -36,7 +36,7 @@ public class AddonServiceTest : TestBase
     public async Task Update_Works()
     {
         var addonResponse = await this.client.Addons.Update(
-            "id",
+            "adn_NX1zdqW4Hbivsqz8vI9dc",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -54,7 +54,7 @@ public class AddonServiceTest : TestBase
     public async Task UpdateImages_Works()
     {
         var response = await this.client.Addons.UpdateImages(
-            "id",
+            "adn_NX1zdqW4Hbivsqz8vI9dc",
             new(),
             TestContext.Current.CancellationToken
         );

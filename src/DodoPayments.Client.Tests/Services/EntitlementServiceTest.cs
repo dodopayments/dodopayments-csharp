@@ -28,7 +28,7 @@ public class EntitlementServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var entitlement = await this.client.Entitlements.Retrieve(
-            "id",
+            "ent_jt7jcvI79Xh8eehqgWdcm",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -39,7 +39,7 @@ public class EntitlementServiceTest : TestBase
     public async Task Update_Works()
     {
         var entitlement = await this.client.Entitlements.Update(
-            "id",
+            "ent_jt7jcvI79Xh8eehqgWdcm",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -59,6 +59,10 @@ public class EntitlementServiceTest : TestBase
     [Fact]
     public async Task Delete_Works()
     {
-        await this.client.Entitlements.Delete("id", new(), TestContext.Current.CancellationToken);
+        await this.client.Entitlements.Delete(
+            "ent_jt7jcvI79Xh8eehqgWdcm",
+            new(),
+            TestContext.Current.CancellationToken
+        );
     }
 }

@@ -12,13 +12,13 @@ public class LedgerEntryListParamsTest : TestBase
     {
         var parameters = new LedgerEntryListParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Currency = Currency.Aed,
             PageNumber = 0,
             PageSize = 0,
         };
 
-        string expectedCustomerID = "customer_id";
+        string expectedCustomerID = "cus_TV52uJWWXt2yIoBBxpjaa";
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
@@ -32,7 +32,7 @@ public class LedgerEntryListParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new LedgerEntryListParams { CustomerID = "customer_id" };
+        var parameters = new LedgerEntryListParams { CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa" };
 
         Assert.Null(parameters.Currency);
         Assert.False(parameters.RawQueryData.ContainsKey("currency"));
@@ -47,7 +47,7 @@ public class LedgerEntryListParamsTest : TestBase
     {
         var parameters = new LedgerEntryListParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
 
             // Null should be interpreted as omitted for these properties
             Currency = null,
@@ -68,7 +68,7 @@ public class LedgerEntryListParamsTest : TestBase
     {
         LedgerEntryListParams parameters = new()
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Currency = Currency.Aed,
             PageNumber = 0,
             PageSize = 0,
@@ -79,7 +79,7 @@ public class LedgerEntryListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/customers/customer_id/wallets/ledger-entries?currency=AED&page_number=0&page_size=0"
+                    "https://live.dodopayments.com/customers/cus_TV52uJWWXt2yIoBBxpjaa/wallets/ledger-entries?currency=AED&page_number=0&page_size=0"
                 ),
                 url
             )
@@ -91,7 +91,7 @@ public class LedgerEntryListParamsTest : TestBase
     {
         var parameters = new LedgerEntryListParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Currency = Currency.Aed,
             PageNumber = 0,
             PageSize = 0,

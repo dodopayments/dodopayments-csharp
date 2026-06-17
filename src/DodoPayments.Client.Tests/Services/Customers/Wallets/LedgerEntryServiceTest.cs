@@ -10,7 +10,7 @@ public class LedgerEntryServiceTest : TestBase
     public async Task Create_Works()
     {
         var customerWallet = await this.client.Customers.Wallets.LedgerEntries.Create(
-            "customer_id",
+            "cus_TV52uJWWXt2yIoBBxpjaa",
             new()
             {
                 Amount = 0,
@@ -26,7 +26,7 @@ public class LedgerEntryServiceTest : TestBase
     public async Task List_Works()
     {
         var page = await this.client.Customers.Wallets.LedgerEntries.List(
-            "customer_id",
+            "cus_TV52uJWWXt2yIoBBxpjaa",
             new(),
             TestContext.Current.CancellationToken
         );

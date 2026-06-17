@@ -18,7 +18,7 @@ public class CustomerServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var customer = await this.client.Customers.Retrieve(
-            "customer_id",
+            "cus_TV52uJWWXt2yIoBBxpjaa",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -29,7 +29,7 @@ public class CustomerServiceTest : TestBase
     public async Task Update_Works()
     {
         var customer = await this.client.Customers.Update(
-            "customer_id",
+            "cus_TV52uJWWXt2yIoBBxpjaa",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -48,7 +48,7 @@ public class CustomerServiceTest : TestBase
     {
         await this.client.Customers.DeletePaymentMethod(
             "payment_method_id",
-            new() { CustomerID = "customer_id" },
+            new() { CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa" },
             TestContext.Current.CancellationToken
         );
     }
@@ -57,7 +57,7 @@ public class CustomerServiceTest : TestBase
     public async Task ListCreditEntitlements_Works()
     {
         var response = await this.client.Customers.ListCreditEntitlements(
-            "customer_id",
+            "cus_TV52uJWWXt2yIoBBxpjaa",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -68,7 +68,7 @@ public class CustomerServiceTest : TestBase
     public async Task ListEntitlements_Works()
     {
         var response = await this.client.Customers.ListEntitlements(
-            "customer_id",
+            "cus_TV52uJWWXt2yIoBBxpjaa",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -79,7 +79,7 @@ public class CustomerServiceTest : TestBase
     public async Task RetrievePaymentMethods_Works()
     {
         var response = await this.client.Customers.RetrievePaymentMethods(
-            "customer_id",
+            "cus_TV52uJWWXt2yIoBBxpjaa",
             new(),
             TestContext.Current.CancellationToken
         );
