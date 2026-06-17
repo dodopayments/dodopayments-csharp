@@ -1,12 +1,5 @@
 # Changelog
 
-## [6.23.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.22.0...v6.23.0) (2026-06-16)
-
-
-### Features
-
-* **api:** add tax_id_business_name and tax_id_format_name to CalculateSessionResponse ([235dd3a](https://github.com/dodopayments/dodopayments-csharp/commit/235dd3a83629199e47bd55934219aedb874fdd23))
-
 ## [6.21.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.20.0...v6.21.0) (2026-06-13)
 
 
