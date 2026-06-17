@@ -11,7 +11,7 @@ public class EntitlementUpdateParamsTest : TestBase
     {
         var parameters = new EntitlementUpdateParams
         {
-            ID = "id",
+            ID = "ent_jt7jcvI79Xh8eehqgWdcm",
             Description = "description",
             IntegrationConfig = new GitHubConfig()
             {
@@ -22,7 +22,7 @@ public class EntitlementUpdateParamsTest : TestBase
             Name = "name",
         };
 
-        string expectedID = "id";
+        string expectedID = "ent_jt7jcvI79Xh8eehqgWdcm";
         string expectedDescription = "description";
         IntegrationConfig expectedIntegrationConfig = new GitHubConfig()
         {
@@ -49,7 +49,7 @@ public class EntitlementUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new EntitlementUpdateParams { ID = "id" };
+        var parameters = new EntitlementUpdateParams { ID = "ent_jt7jcvI79Xh8eehqgWdcm" };
 
         Assert.Null(parameters.Description);
         Assert.False(parameters.RawBodyData.ContainsKey("description"));
@@ -66,7 +66,7 @@ public class EntitlementUpdateParamsTest : TestBase
     {
         var parameters = new EntitlementUpdateParams
         {
-            ID = "id",
+            ID = "ent_jt7jcvI79Xh8eehqgWdcm",
 
             Description = null,
             IntegrationConfig = null,
@@ -87,12 +87,15 @@ public class EntitlementUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        EntitlementUpdateParams parameters = new() { ID = "id" };
+        EntitlementUpdateParams parameters = new() { ID = "ent_jt7jcvI79Xh8eehqgWdcm" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/entitlements/id"), url)
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/entitlements/ent_jt7jcvI79Xh8eehqgWdcm"),
+                url
+            )
         );
     }
 
@@ -101,7 +104,7 @@ public class EntitlementUpdateParamsTest : TestBase
     {
         var parameters = new EntitlementUpdateParams
         {
-            ID = "id",
+            ID = "ent_jt7jcvI79Xh8eehqgWdcm",
             Description = "description",
             IntegrationConfig = new GitHubConfig()
             {

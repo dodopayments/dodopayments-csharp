@@ -40,7 +40,7 @@ public class PaymentServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var payment = await this.client.Payments.Retrieve(
-            "payment_id",
+            "pay_gr4RizvMOXFJ6xca3y2tU",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -58,7 +58,7 @@ public class PaymentServiceTest : TestBase
     public async Task RetrieveLineItems_Works()
     {
         var response = await this.client.Payments.RetrieveLineItems(
-            "payment_id",
+            "pay_gr4RizvMOXFJ6xca3y2tU",
             new(),
             TestContext.Current.CancellationToken
         );

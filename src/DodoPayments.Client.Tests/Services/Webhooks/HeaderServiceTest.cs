@@ -9,7 +9,7 @@ public class HeaderServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var header = await this.client.Webhooks.Headers.Retrieve(
-            "webhook_id",
+            "whk_YdWqVEGKmSYKbsIyDxEab",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -20,7 +20,7 @@ public class HeaderServiceTest : TestBase
     public async Task Update_Works()
     {
         await this.client.Webhooks.Headers.Update(
-            "webhook_id",
+            "whk_YdWqVEGKmSYKbsIyDxEab",
             new() { Headers = new Dictionary<string, string>() { { "foo", "string" } } },
             TestContext.Current.CancellationToken
         );

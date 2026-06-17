@@ -8,9 +8,12 @@ public class SubscriptionRetrieveParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new SubscriptionRetrieveParams { SubscriptionID = "subscription_id" };
+        var parameters = new SubscriptionRetrieveParams
+        {
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
+        };
 
-        string expectedSubscriptionID = "subscription_id";
+        string expectedSubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv";
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
     }
@@ -18,13 +21,16 @@ public class SubscriptionRetrieveParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        SubscriptionRetrieveParams parameters = new() { SubscriptionID = "subscription_id" };
+        SubscriptionRetrieveParams parameters = new()
+        {
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
+        };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/subscriptions/subscription_id"),
+                new Uri("https://live.dodopayments.com/subscriptions/sub_Iuaq622bbmmfOGrVTqdXv"),
                 url
             )
         );
@@ -33,7 +39,10 @@ public class SubscriptionRetrieveParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new SubscriptionRetrieveParams { SubscriptionID = "subscription_id" };
+        var parameters = new SubscriptionRetrieveParams
+        {
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
+        };
 
         SubscriptionRetrieveParams copied = new(parameters);
 

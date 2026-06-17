@@ -10,11 +10,11 @@ public class GroupDeleteParamsTest : TestBase
     {
         var parameters = new GroupDeleteParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
-        string expectedID = "id";
+        string expectedID = "pdc_8BWv0hojwUH7iCDabr0NI";
         string expectedGroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
 
         Assert.Equal(expectedID, parameters.ID);
@@ -26,7 +26,7 @@ public class GroupDeleteParamsTest : TestBase
     {
         GroupDeleteParams parameters = new()
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
@@ -35,7 +35,7 @@ public class GroupDeleteParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/product-collections/id/groups/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"
+                    "https://live.dodopayments.com/product-collections/pdc_8BWv0hojwUH7iCDabr0NI/groups/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"
                 ),
                 url
             )
@@ -47,7 +47,7 @@ public class GroupDeleteParamsTest : TestBase
     {
         var parameters = new GroupDeleteParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 

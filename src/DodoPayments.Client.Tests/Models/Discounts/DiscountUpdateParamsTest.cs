@@ -12,7 +12,7 @@ public class DiscountUpdateParamsTest : TestBase
     {
         var parameters = new DiscountUpdateParams
         {
-            DiscountID = "discount_id",
+            DiscountID = "dsc_qxxEmg5PuM1uNTE0LgkP9",
             Amount = 0,
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -25,7 +25,7 @@ public class DiscountUpdateParamsTest : TestBase
             UsageLimit = 0,
         };
 
-        string expectedDiscountID = "discount_id";
+        string expectedDiscountID = "dsc_qxxEmg5PuM1uNTE0LgkP9";
         int expectedAmount = 0;
         string expectedCode = "code";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -65,7 +65,7 @@ public class DiscountUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new DiscountUpdateParams { DiscountID = "discount_id" };
+        var parameters = new DiscountUpdateParams { DiscountID = "dsc_qxxEmg5PuM1uNTE0LgkP9" };
 
         Assert.Null(parameters.Amount);
         Assert.False(parameters.RawBodyData.ContainsKey("amount"));
@@ -94,7 +94,7 @@ public class DiscountUpdateParamsTest : TestBase
     {
         var parameters = new DiscountUpdateParams
         {
-            DiscountID = "discount_id",
+            DiscountID = "dsc_qxxEmg5PuM1uNTE0LgkP9",
 
             Amount = null,
             Code = null,
@@ -133,12 +133,15 @@ public class DiscountUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        DiscountUpdateParams parameters = new() { DiscountID = "discount_id" };
+        DiscountUpdateParams parameters = new() { DiscountID = "dsc_qxxEmg5PuM1uNTE0LgkP9" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/discounts/discount_id"), url)
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/discounts/dsc_qxxEmg5PuM1uNTE0LgkP9"),
+                url
+            )
         );
     }
 
@@ -147,7 +150,7 @@ public class DiscountUpdateParamsTest : TestBase
     {
         var parameters = new DiscountUpdateParams
         {
-            DiscountID = "discount_id",
+            DiscountID = "dsc_qxxEmg5PuM1uNTE0LgkP9",
             Amount = 0,
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

@@ -10,10 +10,10 @@ public class SubscriptionRetrieveCreditUsageParamsTest : TestBase
     {
         var parameters = new SubscriptionRetrieveCreditUsageParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
         };
 
-        string expectedSubscriptionID = "subscription_id";
+        string expectedSubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv";
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
     }
@@ -23,14 +23,16 @@ public class SubscriptionRetrieveCreditUsageParamsTest : TestBase
     {
         SubscriptionRetrieveCreditUsageParams parameters = new()
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/subscriptions/subscription_id/credit-usage"),
+                new Uri(
+                    "https://live.dodopayments.com/subscriptions/sub_Iuaq622bbmmfOGrVTqdXv/credit-usage"
+                ),
                 url
             )
         );
@@ -41,7 +43,7 @@ public class SubscriptionRetrieveCreditUsageParamsTest : TestBase
     {
         var parameters = new SubscriptionRetrieveCreditUsageParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
         };
 
         SubscriptionRetrieveCreditUsageParams copied = new(parameters);

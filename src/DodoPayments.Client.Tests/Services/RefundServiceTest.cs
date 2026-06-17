@@ -18,7 +18,7 @@ public class RefundServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var refund = await this.client.Refunds.Retrieve(
-            "refund_id",
+            "ref_F0gZetLvTxxBrMU2CZcmy",
             new(),
             TestContext.Current.CancellationToken
         );

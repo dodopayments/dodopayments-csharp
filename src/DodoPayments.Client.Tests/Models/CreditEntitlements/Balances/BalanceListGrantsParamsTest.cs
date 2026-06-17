@@ -13,15 +13,15 @@ public class BalanceListGrantsParamsTest : TestBase
     {
         var parameters = new BalanceListGrantsParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             PageNumber = 0,
             PageSize = 0,
             Status = Status.Active,
         };
 
-        string expectedCreditEntitlementID = "credit_entitlement_id";
-        string expectedCustomerID = "customer_id";
+        string expectedCreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM";
+        string expectedCustomerID = "cus_TV52uJWWXt2yIoBBxpjaa";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
         ApiEnum<string, Status> expectedStatus = Status.Active;
@@ -38,8 +38,8 @@ public class BalanceListGrantsParamsTest : TestBase
     {
         var parameters = new BalanceListGrantsParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
         };
 
         Assert.Null(parameters.PageNumber);
@@ -55,8 +55,8 @@ public class BalanceListGrantsParamsTest : TestBase
     {
         var parameters = new BalanceListGrantsParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
 
             // Null should be interpreted as omitted for these properties
             PageNumber = null,
@@ -77,8 +77,8 @@ public class BalanceListGrantsParamsTest : TestBase
     {
         BalanceListGrantsParams parameters = new()
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             PageNumber = 0,
             PageSize = 0,
             Status = Status.Active,
@@ -89,7 +89,7 @@ public class BalanceListGrantsParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/credit-entitlements/credit_entitlement_id/balances/customer_id/grants?page_number=0&page_size=0&status=active"
+                    "https://live.dodopayments.com/credit-entitlements/cde_ztxm5XJsKxWucRWA3rjdM/balances/cus_TV52uJWWXt2yIoBBxpjaa/grants?page_number=0&page_size=0&status=active"
                 ),
                 url
             )
@@ -101,8 +101,8 @@ public class BalanceListGrantsParamsTest : TestBase
     {
         var parameters = new BalanceListGrantsParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             PageNumber = 0,
             PageSize = 0,
             Status = Status.Active,

@@ -25,7 +25,7 @@ public class CreditEntitlementServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var creditEntitlement = await this.client.CreditEntitlements.Retrieve(
-            "id",
+            "cde_ztxm5XJsKxWucRWA3rjdM",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -36,7 +36,7 @@ public class CreditEntitlementServiceTest : TestBase
     public async Task Update_Works()
     {
         await this.client.CreditEntitlements.Update(
-            "id",
+            "cde_ztxm5XJsKxWucRWA3rjdM",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -56,7 +56,7 @@ public class CreditEntitlementServiceTest : TestBase
     public async Task Delete_Works()
     {
         await this.client.CreditEntitlements.Delete(
-            "id",
+            "cde_ztxm5XJsKxWucRWA3rjdM",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -66,7 +66,7 @@ public class CreditEntitlementServiceTest : TestBase
     public async Task Undelete_Works()
     {
         await this.client.CreditEntitlements.Undelete(
-            "id",
+            "cde_ztxm5XJsKxWucRWA3rjdM",
             new(),
             TestContext.Current.CancellationToken
         );

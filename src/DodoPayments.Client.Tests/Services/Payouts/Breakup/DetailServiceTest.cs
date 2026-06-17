@@ -8,7 +8,7 @@ public class DetailServiceTest : TestBase
     public async Task List_Works()
     {
         var page = await this.client.Payouts.Breakup.Details.List(
-            "payout_id",
+            "pyt_zFTrrn4sk3x3y2vjDBW3T",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -19,7 +19,7 @@ public class DetailServiceTest : TestBase
     public async Task DownloadCsv_Works()
     {
         await this.client.Payouts.Breakup.Details.DownloadCsv(
-            "payout_id",
+            "pyt_zFTrrn4sk3x3y2vjDBW3T",
             new(),
             TestContext.Current.CancellationToken
         );

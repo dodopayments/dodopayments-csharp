@@ -11,14 +11,14 @@ public class GroupUpdateParamsTest : TestBase
     {
         var parameters = new GroupUpdateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             GroupName = "group_name",
             ProductOrder = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             Status = true,
         };
 
-        string expectedID = "id";
+        string expectedID = "pdc_8BWv0hojwUH7iCDabr0NI";
         string expectedGroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         string expectedGroupName = "group_name";
         List<string> expectedProductOrder = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"];
@@ -41,7 +41,7 @@ public class GroupUpdateParamsTest : TestBase
     {
         var parameters = new GroupUpdateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
@@ -58,7 +58,7 @@ public class GroupUpdateParamsTest : TestBase
     {
         var parameters = new GroupUpdateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 
             GroupName = null,
@@ -79,7 +79,7 @@ public class GroupUpdateParamsTest : TestBase
     {
         GroupUpdateParams parameters = new()
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
@@ -88,7 +88,7 @@ public class GroupUpdateParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/product-collections/id/groups/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"
+                    "https://live.dodopayments.com/product-collections/pdc_8BWv0hojwUH7iCDabr0NI/groups/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"
                 ),
                 url
             )
@@ -100,7 +100,7 @@ public class GroupUpdateParamsTest : TestBase
     {
         var parameters = new GroupUpdateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             GroupName = "group_name",
             ProductOrder = ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],

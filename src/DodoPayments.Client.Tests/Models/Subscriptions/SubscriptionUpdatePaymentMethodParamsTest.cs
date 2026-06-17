@@ -14,7 +14,7 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
     {
         var parameters = new SubscriptionUpdatePaymentMethodParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             PaymentMethod = new New()
             {
                 AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
@@ -22,7 +22,7 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
             },
         };
 
-        string expectedSubscriptionID = "subscription_id";
+        string expectedSubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv";
         PaymentMethod expectedPaymentMethod = new New()
         {
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
@@ -38,7 +38,7 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
     {
         SubscriptionUpdatePaymentMethodParams parameters = new()
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             PaymentMethod = new New()
             {
                 AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
@@ -51,7 +51,7 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/subscriptions/subscription_id/update-payment-method"
+                    "https://live.dodopayments.com/subscriptions/sub_Iuaq622bbmmfOGrVTqdXv/update-payment-method"
                 ),
                 url
             )
@@ -63,7 +63,7 @@ public class SubscriptionUpdatePaymentMethodParamsTest : TestBase
     {
         var parameters = new SubscriptionUpdatePaymentMethodParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             PaymentMethod = new New()
             {
                 AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],

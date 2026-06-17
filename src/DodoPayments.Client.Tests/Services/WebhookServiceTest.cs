@@ -18,7 +18,7 @@ public class WebhookServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var webhookDetails = await this.client.Webhooks.Retrieve(
-            "webhook_id",
+            "whk_YdWqVEGKmSYKbsIyDxEab",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -29,7 +29,7 @@ public class WebhookServiceTest : TestBase
     public async Task Update_Works()
     {
         var webhookDetails = await this.client.Webhooks.Update(
-            "webhook_id",
+            "whk_YdWqVEGKmSYKbsIyDxEab",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -47,7 +47,7 @@ public class WebhookServiceTest : TestBase
     public async Task Delete_Works()
     {
         await this.client.Webhooks.Delete(
-            "webhook_id",
+            "whk_YdWqVEGKmSYKbsIyDxEab",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -57,7 +57,7 @@ public class WebhookServiceTest : TestBase
     public async Task RetrieveSecret_Works()
     {
         var response = await this.client.Webhooks.RetrieveSecret(
-            "webhook_id",
+            "whk_YdWqVEGKmSYKbsIyDxEab",
             new(),
             TestContext.Current.CancellationToken
         );
