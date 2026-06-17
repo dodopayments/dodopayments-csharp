@@ -121,6 +121,19 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
     }
 
     /// <summary>
+    /// Registered business name from the official registry (EU/GB/AU) when found
+    /// </summary>
+    public string? TaxIDBusinessName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("tax_id_business_name");
+        }
+        init { this._rawData.Set("tax_id_business_name", value); }
+    }
+
+    /// <summary>
     /// Error message if tax ID validation failed
     /// </summary>
     public string? TaxIDErrMsg
@@ -131,6 +144,19 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
             return this._rawData.GetNullableClass<string>("tax_id_err_msg");
         }
         init { this._rawData.Set("tax_id_err_msg", value); }
+    }
+
+    /// <summary>
+    /// The matched tax ID notation (e.g. "VAT Number", "GSTIN") when valid
+    /// </summary>
+    public string? TaxIDFormatName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("tax_id_format_name");
+        }
+        init { this._rawData.Set("tax_id_format_name", value); }
     }
 
     /// <summary>
@@ -159,7 +185,9 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
         }
         _ = this.TotalPrice;
         this.RecurringBreakup?.Validate();
+        _ = this.TaxIDBusinessName;
         _ = this.TaxIDErrMsg;
+        _ = this.TaxIDFormatName;
         _ = this.TotalTax;
     }
 
