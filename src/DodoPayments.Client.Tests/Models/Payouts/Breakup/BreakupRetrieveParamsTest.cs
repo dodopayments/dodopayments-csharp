@@ -8,9 +8,9 @@ public class BreakupRetrieveParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new BreakupRetrieveParams { PayoutID = "payout_id" };
+        var parameters = new BreakupRetrieveParams { PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T" };
 
-        string expectedPayoutID = "payout_id";
+        string expectedPayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T";
 
         Assert.Equal(expectedPayoutID, parameters.PayoutID);
     }
@@ -18,13 +18,13 @@ public class BreakupRetrieveParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        BreakupRetrieveParams parameters = new() { PayoutID = "payout_id" };
+        BreakupRetrieveParams parameters = new() { PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/payouts/payout_id/breakup"),
+                new Uri("https://live.dodopayments.com/payouts/pyt_zFTrrn4sk3x3y2vjDBW3T/breakup"),
                 url
             )
         );
@@ -33,7 +33,7 @@ public class BreakupRetrieveParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new BreakupRetrieveParams { PayoutID = "payout_id" };
+        var parameters = new BreakupRetrieveParams { PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T" };
 
         BreakupRetrieveParams copied = new(parameters);
 

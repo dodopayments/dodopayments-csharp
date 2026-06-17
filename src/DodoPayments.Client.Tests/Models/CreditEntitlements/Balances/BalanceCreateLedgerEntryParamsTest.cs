@@ -12,8 +12,8 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
     {
         var parameters = new BalanceCreateLedgerEntryParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Amount = "amount",
             EntryType = LedgerEntryType.Credit,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -22,8 +22,8 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
             Reason = "reason",
         };
 
-        string expectedCreditEntitlementID = "credit_entitlement_id";
-        string expectedCustomerID = "customer_id";
+        string expectedCreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM";
+        string expectedCustomerID = "cus_TV52uJWWXt2yIoBBxpjaa";
         string expectedAmount = "amount";
         ApiEnum<string, LedgerEntryType> expectedEntryType = LedgerEntryType.Credit;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -53,8 +53,8 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
     {
         var parameters = new BalanceCreateLedgerEntryParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Amount = "amount",
             EntryType = LedgerEntryType.Credit,
         };
@@ -74,8 +74,8 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
     {
         var parameters = new BalanceCreateLedgerEntryParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Amount = "amount",
             EntryType = LedgerEntryType.Credit,
 
@@ -100,8 +100,8 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
     {
         BalanceCreateLedgerEntryParams parameters = new()
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Amount = "amount",
             EntryType = LedgerEntryType.Credit,
         };
@@ -111,7 +111,7 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/credit-entitlements/credit_entitlement_id/balances/customer_id/ledger-entries"
+                    "https://live.dodopayments.com/credit-entitlements/cde_ztxm5XJsKxWucRWA3rjdM/balances/cus_TV52uJWWXt2yIoBBxpjaa/ledger-entries"
                 ),
                 url
             )
@@ -123,8 +123,8 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
     {
         var parameters = new BalanceCreateLedgerEntryParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Amount = "amount",
             EntryType = LedgerEntryType.Credit,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

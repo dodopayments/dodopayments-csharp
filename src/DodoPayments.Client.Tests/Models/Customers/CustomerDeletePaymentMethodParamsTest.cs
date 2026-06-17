@@ -10,11 +10,11 @@ public class CustomerDeletePaymentMethodParamsTest : TestBase
     {
         var parameters = new CustomerDeletePaymentMethodParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             PaymentMethodID = "payment_method_id",
         };
 
-        string expectedCustomerID = "customer_id";
+        string expectedCustomerID = "cus_TV52uJWWXt2yIoBBxpjaa";
         string expectedPaymentMethodID = "payment_method_id";
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
@@ -26,7 +26,7 @@ public class CustomerDeletePaymentMethodParamsTest : TestBase
     {
         CustomerDeletePaymentMethodParams parameters = new()
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             PaymentMethodID = "payment_method_id",
         };
 
@@ -35,7 +35,7 @@ public class CustomerDeletePaymentMethodParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/customers/customer_id/payment-methods/payment_method_id"
+                    "https://live.dodopayments.com/customers/cus_TV52uJWWXt2yIoBBxpjaa/payment-methods/payment_method_id"
                 ),
                 url
             )
@@ -47,7 +47,7 @@ public class CustomerDeletePaymentMethodParamsTest : TestBase
     {
         var parameters = new CustomerDeletePaymentMethodParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             PaymentMethodID = "payment_method_id",
         };
 

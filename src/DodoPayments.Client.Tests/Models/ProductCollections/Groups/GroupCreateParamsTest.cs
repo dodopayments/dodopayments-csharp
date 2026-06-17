@@ -11,13 +11,13 @@ public class GroupCreateParamsTest : TestBase
     {
         var parameters = new GroupCreateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             Products = [new() { ProductID = "product_id", Status = true }],
             GroupName = "group_name",
             Status = true,
         };
 
-        string expectedID = "id";
+        string expectedID = "pdc_8BWv0hojwUH7iCDabr0NI";
         List<GroupProduct> expectedProducts = [new() { ProductID = "product_id", Status = true }];
         string expectedGroupName = "group_name";
         bool expectedStatus = true;
@@ -37,7 +37,7 @@ public class GroupCreateParamsTest : TestBase
     {
         var parameters = new GroupCreateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             Products = [new() { ProductID = "product_id", Status = true }],
         };
 
@@ -52,7 +52,7 @@ public class GroupCreateParamsTest : TestBase
     {
         var parameters = new GroupCreateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             Products = [new() { ProductID = "product_id", Status = true }],
 
             GroupName = null,
@@ -70,7 +70,7 @@ public class GroupCreateParamsTest : TestBase
     {
         GroupCreateParams parameters = new()
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             Products = [new() { ProductID = "product_id", Status = true }],
         };
 
@@ -78,7 +78,9 @@ public class GroupCreateParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/product-collections/id/groups"),
+                new Uri(
+                    "https://live.dodopayments.com/product-collections/pdc_8BWv0hojwUH7iCDabr0NI/groups"
+                ),
                 url
             )
         );
@@ -89,7 +91,7 @@ public class GroupCreateParamsTest : TestBase
     {
         var parameters = new GroupCreateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             Products = [new() { ProductID = "product_id", Status = true }],
             GroupName = "group_name",
             Status = true,

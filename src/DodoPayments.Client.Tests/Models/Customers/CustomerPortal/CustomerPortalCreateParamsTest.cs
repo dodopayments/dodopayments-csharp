@@ -10,12 +10,12 @@ public class CustomerPortalCreateParamsTest : TestBase
     {
         var parameters = new CustomerPortalCreateParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             ReturnUrl = "return_url",
             SendEmail = true,
         };
 
-        string expectedCustomerID = "customer_id";
+        string expectedCustomerID = "cus_TV52uJWWXt2yIoBBxpjaa";
         string expectedReturnUrl = "return_url";
         bool expectedSendEmail = true;
 
@@ -27,7 +27,10 @@ public class CustomerPortalCreateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new CustomerPortalCreateParams { CustomerID = "customer_id" };
+        var parameters = new CustomerPortalCreateParams
+        {
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
+        };
 
         Assert.Null(parameters.ReturnUrl);
         Assert.False(parameters.RawQueryData.ContainsKey("return_url"));
@@ -40,7 +43,7 @@ public class CustomerPortalCreateParamsTest : TestBase
     {
         var parameters = new CustomerPortalCreateParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
 
             // Null should be interpreted as omitted for these properties
             ReturnUrl = null,
@@ -58,7 +61,7 @@ public class CustomerPortalCreateParamsTest : TestBase
     {
         CustomerPortalCreateParams parameters = new()
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             ReturnUrl = "return_url",
             SendEmail = true,
         };
@@ -68,7 +71,7 @@ public class CustomerPortalCreateParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/customers/customer_id/customer-portal/session?return_url=return_url&send_email=true"
+                    "https://live.dodopayments.com/customers/cus_TV52uJWWXt2yIoBBxpjaa/customer-portal/session?return_url=return_url&send_email=true"
                 ),
                 url
             )
@@ -80,7 +83,7 @@ public class CustomerPortalCreateParamsTest : TestBase
     {
         var parameters = new CustomerPortalCreateParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             ReturnUrl = "return_url",
             SendEmail = true,
         };

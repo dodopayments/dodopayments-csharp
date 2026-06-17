@@ -15,7 +15,7 @@ public class BrandServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var brand = await this.client.Brands.Retrieve(
-            "id",
+            "brnd_8dFiAW42v28JzhlVSocjq",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -26,7 +26,7 @@ public class BrandServiceTest : TestBase
     public async Task Update_Works()
     {
         var brand = await this.client.Brands.Update(
-            "id",
+            "brnd_8dFiAW42v28JzhlVSocjq",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -44,7 +44,7 @@ public class BrandServiceTest : TestBase
     public async Task UpdateImages_Works()
     {
         var response = await this.client.Brands.UpdateImages(
-            "id",
+            "brnd_8dFiAW42v28JzhlVSocjq",
             new(),
             TestContext.Current.CancellationToken
         );
