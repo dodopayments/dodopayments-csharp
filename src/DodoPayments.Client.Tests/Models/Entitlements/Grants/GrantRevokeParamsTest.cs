@@ -8,10 +8,14 @@ public class GrantRevokeParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new GrantRevokeParams { ID = "id", GrantID = "grant_id" };
+        var parameters = new GrantRevokeParams
+        {
+            ID = "ent_jt7jcvI79Xh8eehqgWdcm",
+            GrantID = "entg_w0ZCJZgNXuNDdMVzvja6p",
+        };
 
-        string expectedID = "id";
-        string expectedGrantID = "grant_id";
+        string expectedID = "ent_jt7jcvI79Xh8eehqgWdcm";
+        string expectedGrantID = "entg_w0ZCJZgNXuNDdMVzvja6p";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedGrantID, parameters.GrantID);
@@ -20,13 +24,19 @@ public class GrantRevokeParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        GrantRevokeParams parameters = new() { ID = "id", GrantID = "grant_id" };
+        GrantRevokeParams parameters = new()
+        {
+            ID = "ent_jt7jcvI79Xh8eehqgWdcm",
+            GrantID = "entg_w0ZCJZgNXuNDdMVzvja6p",
+        };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/entitlements/id/grants/grant_id"),
+                new Uri(
+                    "https://live.dodopayments.com/entitlements/ent_jt7jcvI79Xh8eehqgWdcm/grants/entg_w0ZCJZgNXuNDdMVzvja6p"
+                ),
                 url
             )
         );
@@ -35,7 +45,11 @@ public class GrantRevokeParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new GrantRevokeParams { ID = "id", GrantID = "grant_id" };
+        var parameters = new GrantRevokeParams
+        {
+            ID = "ent_jt7jcvI79Xh8eehqgWdcm",
+            GrantID = "entg_w0ZCJZgNXuNDdMVzvja6p",
+        };
 
         GrantRevokeParams copied = new(parameters);
 

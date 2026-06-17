@@ -14,7 +14,7 @@ public class ProductCollectionUpdateParamsTest : TestBase
     {
         var parameters = new ProductCollectionUpdateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             BrandID = "brand_id",
             Description = "description",
             EffectiveAtOnDowngrade =
@@ -30,7 +30,7 @@ public class ProductCollectionUpdateParamsTest : TestBase
                 ProductCollectionUpdateParamsProrationBillingModeOnUpgrade.ProratedImmediately,
         };
 
-        string expectedID = "id";
+        string expectedID = "pdc_8BWv0hojwUH7iCDabr0NI";
         string expectedBrandID = "brand_id";
         string expectedDescription = "description";
         ApiEnum<
@@ -86,7 +86,7 @@ public class ProductCollectionUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new ProductCollectionUpdateParams { ID = "id" };
+        var parameters = new ProductCollectionUpdateParams { ID = "pdc_8BWv0hojwUH7iCDabr0NI" };
 
         Assert.Null(parameters.BrandID);
         Assert.False(parameters.RawBodyData.ContainsKey("brand_id"));
@@ -115,7 +115,7 @@ public class ProductCollectionUpdateParamsTest : TestBase
     {
         var parameters = new ProductCollectionUpdateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
 
             BrandID = null,
             Description = null,
@@ -154,12 +154,17 @@ public class ProductCollectionUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        ProductCollectionUpdateParams parameters = new() { ID = "id" };
+        ProductCollectionUpdateParams parameters = new() { ID = "pdc_8BWv0hojwUH7iCDabr0NI" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/product-collections/id"), url)
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://live.dodopayments.com/product-collections/pdc_8BWv0hojwUH7iCDabr0NI"
+                ),
+                url
+            )
         );
     }
 
@@ -168,7 +173,7 @@ public class ProductCollectionUpdateParamsTest : TestBase
     {
         var parameters = new ProductCollectionUpdateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             BrandID = "brand_id",
             Description = "description",
             EffectiveAtOnDowngrade =

@@ -23,7 +23,7 @@ public class LicenseKeyServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var licenseKey = await this.client.LicenseKeys.Retrieve(
-            "lic_123",
+            "lic_7namTC0VcgrnzrF3GTSwB",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -34,7 +34,7 @@ public class LicenseKeyServiceTest : TestBase
     public async Task Update_Works()
     {
         var licenseKey = await this.client.LicenseKeys.Update(
-            "lic_123",
+            "lic_7namTC0VcgrnzrF3GTSwB",
             new(),
             TestContext.Current.CancellationToken
         );

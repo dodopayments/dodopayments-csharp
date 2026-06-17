@@ -14,7 +14,7 @@ public class LedgerEntryCreateParamsTest : TestBase
     {
         var parameters = new LedgerEntryCreateParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Amount = 0,
             Currency = Currency.Aed,
             EntryType = EntryType.Credit,
@@ -22,7 +22,7 @@ public class LedgerEntryCreateParamsTest : TestBase
             Reason = "reason",
         };
 
-        string expectedCustomerID = "customer_id";
+        string expectedCustomerID = "cus_TV52uJWWXt2yIoBBxpjaa";
         long expectedAmount = 0;
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         ApiEnum<string, EntryType> expectedEntryType = EntryType.Credit;
@@ -42,7 +42,7 @@ public class LedgerEntryCreateParamsTest : TestBase
     {
         var parameters = new LedgerEntryCreateParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Amount = 0,
             Currency = Currency.Aed,
             EntryType = EntryType.Credit,
@@ -59,7 +59,7 @@ public class LedgerEntryCreateParamsTest : TestBase
     {
         var parameters = new LedgerEntryCreateParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Amount = 0,
             Currency = Currency.Aed,
             EntryType = EntryType.Credit,
@@ -79,7 +79,7 @@ public class LedgerEntryCreateParamsTest : TestBase
     {
         LedgerEntryCreateParams parameters = new()
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Amount = 0,
             Currency = Currency.Aed,
             EntryType = EntryType.Credit,
@@ -90,7 +90,7 @@ public class LedgerEntryCreateParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/customers/customer_id/wallets/ledger-entries"
+                    "https://live.dodopayments.com/customers/cus_TV52uJWWXt2yIoBBxpjaa/wallets/ledger-entries"
                 ),
                 url
             )
@@ -102,7 +102,7 @@ public class LedgerEntryCreateParamsTest : TestBase
     {
         var parameters = new LedgerEntryCreateParams
         {
-            CustomerID = "customer_id",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Amount = 0,
             Currency = Currency.Aed,
             EntryType = EntryType.Credit,

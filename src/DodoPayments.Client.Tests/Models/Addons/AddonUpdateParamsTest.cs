@@ -12,7 +12,7 @@ public class AddonUpdateParamsTest : TestBase
     {
         var parameters = new AddonUpdateParams
         {
-            ID = "id",
+            ID = "adn_NX1zdqW4Hbivsqz8vI9dc",
             Currency = Currency.Aed,
             Description = "description",
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -21,7 +21,7 @@ public class AddonUpdateParamsTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
         };
 
-        string expectedID = "id";
+        string expectedID = "adn_NX1zdqW4Hbivsqz8vI9dc";
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
         string expectedDescription = "description";
         string expectedImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
@@ -41,7 +41,7 @@ public class AddonUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new AddonUpdateParams { ID = "id" };
+        var parameters = new AddonUpdateParams { ID = "adn_NX1zdqW4Hbivsqz8vI9dc" };
 
         Assert.Null(parameters.Currency);
         Assert.False(parameters.RawBodyData.ContainsKey("currency"));
@@ -62,7 +62,7 @@ public class AddonUpdateParamsTest : TestBase
     {
         var parameters = new AddonUpdateParams
         {
-            ID = "id",
+            ID = "adn_NX1zdqW4Hbivsqz8vI9dc",
 
             Currency = null,
             Description = null,
@@ -89,11 +89,16 @@ public class AddonUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        AddonUpdateParams parameters = new() { ID = "id" };
+        AddonUpdateParams parameters = new() { ID = "adn_NX1zdqW4Hbivsqz8vI9dc" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.True(TestBase.UrisEqual(new Uri("https://live.dodopayments.com/addons/id"), url));
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/addons/adn_NX1zdqW4Hbivsqz8vI9dc"),
+                url
+            )
+        );
     }
 
     [Fact]
@@ -101,7 +106,7 @@ public class AddonUpdateParamsTest : TestBase
     {
         var parameters = new AddonUpdateParams
         {
-            ID = "id",
+            ID = "adn_NX1zdqW4Hbivsqz8vI9dc",
             Currency = Currency.Aed,
             Description = "description",
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",

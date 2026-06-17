@@ -9,7 +9,7 @@ public class FileServiceTest : TestBase
     {
         await this.client.Entitlements.Files.Delete(
             "file_id",
-            new() { ID = "id" },
+            new() { ID = "ent_jt7jcvI79Xh8eehqgWdcm" },
             TestContext.Current.CancellationToken
         );
     }
@@ -18,7 +18,7 @@ public class FileServiceTest : TestBase
     public async Task Upload_Works()
     {
         var response = await this.client.Entitlements.Files.Upload(
-            "id",
+            "ent_jt7jcvI79Xh8eehqgWdcm",
             new(),
             TestContext.Current.CancellationToken
         );

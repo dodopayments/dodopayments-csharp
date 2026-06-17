@@ -14,7 +14,7 @@ public class SubscriptionChargeParamsTest : TestBase
     {
         var parameters = new SubscriptionChargeParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductPrice = 0,
             AdaptiveCurrencyFeesInclusive = true,
             CustomerBalanceConfig = new()
@@ -27,7 +27,7 @@ public class SubscriptionChargeParamsTest : TestBase
             ProductDescription = "product_description",
         };
 
-        string expectedSubscriptionID = "subscription_id";
+        string expectedSubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv";
         int expectedProductPrice = 0;
         bool expectedAdaptiveCurrencyFeesInclusive = true;
         CustomerBalanceConfig expectedCustomerBalanceConfig = new()
@@ -63,7 +63,7 @@ public class SubscriptionChargeParamsTest : TestBase
     {
         var parameters = new SubscriptionChargeParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductPrice = 0,
         };
 
@@ -84,7 +84,7 @@ public class SubscriptionChargeParamsTest : TestBase
     {
         var parameters = new SubscriptionChargeParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductPrice = 0,
 
             AdaptiveCurrencyFeesInclusive = null,
@@ -111,7 +111,7 @@ public class SubscriptionChargeParamsTest : TestBase
     {
         SubscriptionChargeParams parameters = new()
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductPrice = 0,
         };
 
@@ -119,7 +119,9 @@ public class SubscriptionChargeParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/subscriptions/subscription_id/charge"),
+                new Uri(
+                    "https://live.dodopayments.com/subscriptions/sub_Iuaq622bbmmfOGrVTqdXv/charge"
+                ),
                 url
             )
         );
@@ -130,7 +132,7 @@ public class SubscriptionChargeParamsTest : TestBase
     {
         var parameters = new SubscriptionChargeParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             ProductPrice = 0,
             AdaptiveCurrencyFeesInclusive = true,
             CustomerBalanceConfig = new()
