@@ -8,9 +8,9 @@ public class ProductArchiveParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new ProductArchiveParams { ID = "id" };
+        var parameters = new ProductArchiveParams { ID = "pdt_R8AWMPiV8RyJElcCKvAID" };
 
-        string expectedID = "id";
+        string expectedID = "pdt_R8AWMPiV8RyJElcCKvAID";
 
         Assert.Equal(expectedID, parameters.ID);
     }
@@ -18,17 +18,22 @@ public class ProductArchiveParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        ProductArchiveParams parameters = new() { ID = "id" };
+        ProductArchiveParams parameters = new() { ID = "pdt_R8AWMPiV8RyJElcCKvAID" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.True(TestBase.UrisEqual(new Uri("https://live.dodopayments.com/products/id"), url));
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/products/pdt_R8AWMPiV8RyJElcCKvAID"),
+                url
+            )
+        );
     }
 
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new ProductArchiveParams { ID = "id" };
+        var parameters = new ProductArchiveParams { ID = "pdt_R8AWMPiV8RyJElcCKvAID" };
 
         ProductArchiveParams copied = new(parameters);
 

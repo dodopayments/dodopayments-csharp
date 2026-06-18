@@ -16,7 +16,7 @@ public class SubscriptionUpdateParamsTest : TestBase
     {
         var parameters = new SubscriptionUpdateParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             Billing = new()
             {
                 Country = CountryCode.Af,
@@ -55,7 +55,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             TaxID = "tax_id",
         };
 
-        string expectedSubscriptionID = "subscription_id";
+        string expectedSubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv";
         BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
@@ -127,7 +127,10 @@ public class SubscriptionUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new SubscriptionUpdateParams { SubscriptionID = "subscription_id" };
+        var parameters = new SubscriptionUpdateParams
+        {
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
+        };
 
         Assert.Null(parameters.Billing);
         Assert.False(parameters.RawBodyData.ContainsKey("billing"));
@@ -162,7 +165,7 @@ public class SubscriptionUpdateParamsTest : TestBase
     {
         var parameters = new SubscriptionUpdateParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
 
             Billing = null,
             CancelAtNextBillingDate = null,
@@ -210,13 +213,16 @@ public class SubscriptionUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        SubscriptionUpdateParams parameters = new() { SubscriptionID = "subscription_id" };
+        SubscriptionUpdateParams parameters = new()
+        {
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
+        };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/subscriptions/subscription_id"),
+                new Uri("https://live.dodopayments.com/subscriptions/sub_Iuaq622bbmmfOGrVTqdXv"),
                 url
             )
         );
@@ -227,7 +233,7 @@ public class SubscriptionUpdateParamsTest : TestBase
     {
         var parameters = new SubscriptionUpdateParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             Billing = new()
             {
                 Country = CountryCode.Af,

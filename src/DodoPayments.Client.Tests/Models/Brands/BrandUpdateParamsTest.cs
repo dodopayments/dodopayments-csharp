@@ -10,7 +10,7 @@ public class BrandUpdateParamsTest : TestBase
     {
         var parameters = new BrandUpdateParams
         {
-            ID = "id",
+            ID = "brnd_8dFiAW42v28JzhlVSocjq",
             Description = "description",
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Name = "name",
@@ -19,7 +19,7 @@ public class BrandUpdateParamsTest : TestBase
             UrlValue = "url",
         };
 
-        string expectedID = "id";
+        string expectedID = "brnd_8dFiAW42v28JzhlVSocjq";
         string expectedDescription = "description";
         string expectedImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         string expectedName = "name";
@@ -39,7 +39,7 @@ public class BrandUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new BrandUpdateParams { ID = "id" };
+        var parameters = new BrandUpdateParams { ID = "brnd_8dFiAW42v28JzhlVSocjq" };
 
         Assert.Null(parameters.Description);
         Assert.False(parameters.RawBodyData.ContainsKey("description"));
@@ -60,7 +60,7 @@ public class BrandUpdateParamsTest : TestBase
     {
         var parameters = new BrandUpdateParams
         {
-            ID = "id",
+            ID = "brnd_8dFiAW42v28JzhlVSocjq",
 
             Description = null,
             ImageID = null,
@@ -87,11 +87,16 @@ public class BrandUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        BrandUpdateParams parameters = new() { ID = "id" };
+        BrandUpdateParams parameters = new() { ID = "brnd_8dFiAW42v28JzhlVSocjq" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.True(TestBase.UrisEqual(new Uri("https://live.dodopayments.com/brands/id"), url));
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/brands/brnd_8dFiAW42v28JzhlVSocjq"),
+                url
+            )
+        );
     }
 
     [Fact]
@@ -99,7 +104,7 @@ public class BrandUpdateParamsTest : TestBase
     {
         var parameters = new BrandUpdateParams
         {
-            ID = "id",
+            ID = "brnd_8dFiAW42v28JzhlVSocjq",
             Description = "description",
             ImageID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Name = "name",

@@ -25,7 +25,7 @@ public class MeterServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var meter = await this.client.Meters.Retrieve(
-            "id",
+            "mtr_h5tgTWL55OyMO0L2Q9w9v",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -42,12 +42,20 @@ public class MeterServiceTest : TestBase
     [Fact]
     public async Task Archive_Works()
     {
-        await this.client.Meters.Archive("id", new(), TestContext.Current.CancellationToken);
+        await this.client.Meters.Archive(
+            "mtr_h5tgTWL55OyMO0L2Q9w9v",
+            new(),
+            TestContext.Current.CancellationToken
+        );
     }
 
     [Fact]
     public async Task Unarchive_Works()
     {
-        await this.client.Meters.Unarchive("id", new(), TestContext.Current.CancellationToken);
+        await this.client.Meters.Unarchive(
+            "mtr_h5tgTWL55OyMO0L2Q9w9v",
+            new(),
+            TestContext.Current.CancellationToken
+        );
     }
 }

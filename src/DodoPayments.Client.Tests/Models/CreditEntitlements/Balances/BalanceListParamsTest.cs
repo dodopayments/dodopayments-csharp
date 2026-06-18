@@ -10,13 +10,13 @@ public class BalanceListParamsTest : TestBase
     {
         var parameters = new BalanceListParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
         };
 
-        string expectedCreditEntitlementID = "credit_entitlement_id";
+        string expectedCreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM";
         string expectedCustomerID = "customer_id";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
@@ -30,7 +30,10 @@ public class BalanceListParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new BalanceListParams { CreditEntitlementID = "credit_entitlement_id" };
+        var parameters = new BalanceListParams
+        {
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+        };
 
         Assert.Null(parameters.CustomerID);
         Assert.False(parameters.RawQueryData.ContainsKey("customer_id"));
@@ -45,7 +48,7 @@ public class BalanceListParamsTest : TestBase
     {
         var parameters = new BalanceListParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
 
             // Null should be interpreted as omitted for these properties
             CustomerID = null,
@@ -66,7 +69,7 @@ public class BalanceListParamsTest : TestBase
     {
         BalanceListParams parameters = new()
         {
-            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
@@ -77,7 +80,7 @@ public class BalanceListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/credit-entitlements/credit_entitlement_id/balances?customer_id=customer_id&page_number=0&page_size=0"
+                    "https://live.dodopayments.com/credit-entitlements/cde_ztxm5XJsKxWucRWA3rjdM/balances?customer_id=customer_id&page_number=0&page_size=0"
                 ),
                 url
             )
@@ -89,7 +92,7 @@ public class BalanceListParamsTest : TestBase
     {
         var parameters = new BalanceListParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,

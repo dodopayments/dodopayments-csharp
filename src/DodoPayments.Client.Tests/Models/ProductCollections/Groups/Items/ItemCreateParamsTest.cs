@@ -12,12 +12,12 @@ public class ItemCreateParamsTest : TestBase
     {
         var parameters = new ItemCreateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Products = [new() { ProductID = "product_id", Status = true }],
         };
 
-        string expectedID = "id";
+        string expectedID = "pdc_8BWv0hojwUH7iCDabr0NI";
         string expectedGroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         List<GroupProduct> expectedProducts = [new() { ProductID = "product_id", Status = true }];
 
@@ -35,7 +35,7 @@ public class ItemCreateParamsTest : TestBase
     {
         ItemCreateParams parameters = new()
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Products = [new() { ProductID = "product_id", Status = true }],
         };
@@ -45,7 +45,7 @@ public class ItemCreateParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/product-collections/id/groups/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/items"
+                    "https://live.dodopayments.com/product-collections/pdc_8BWv0hojwUH7iCDabr0NI/groups/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/items"
                 ),
                 url
             )
@@ -57,7 +57,7 @@ public class ItemCreateParamsTest : TestBase
     {
         var parameters = new ItemCreateParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
             GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Products = [new() { ProductID = "product_id", Status = true }],
         };

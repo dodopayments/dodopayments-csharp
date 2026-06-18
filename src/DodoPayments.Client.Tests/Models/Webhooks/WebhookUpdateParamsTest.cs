@@ -13,7 +13,7 @@ public class WebhookUpdateParamsTest : TestBase
     {
         var parameters = new WebhookUpdateParams
         {
-            WebhookID = "webhook_id",
+            WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab",
             Description = "description",
             Disabled = true,
             FilterTypes = [WebhookEventType.PaymentSucceeded],
@@ -22,7 +22,7 @@ public class WebhookUpdateParamsTest : TestBase
             UrlValue = "url",
         };
 
-        string expectedWebhookID = "webhook_id";
+        string expectedWebhookID = "whk_YdWqVEGKmSYKbsIyDxEab";
         string expectedDescription = "description";
         bool expectedDisabled = true;
         List<ApiEnum<string, WebhookEventType>> expectedFilterTypes =
@@ -57,7 +57,7 @@ public class WebhookUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new WebhookUpdateParams { WebhookID = "webhook_id" };
+        var parameters = new WebhookUpdateParams { WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab" };
 
         Assert.Null(parameters.Description);
         Assert.False(parameters.RawBodyData.ContainsKey("description"));
@@ -78,7 +78,7 @@ public class WebhookUpdateParamsTest : TestBase
     {
         var parameters = new WebhookUpdateParams
         {
-            WebhookID = "webhook_id",
+            WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab",
 
             Description = null,
             Disabled = null,
@@ -105,12 +105,15 @@ public class WebhookUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        WebhookUpdateParams parameters = new() { WebhookID = "webhook_id" };
+        WebhookUpdateParams parameters = new() { WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/webhooks/webhook_id"), url)
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/webhooks/whk_YdWqVEGKmSYKbsIyDxEab"),
+                url
+            )
         );
     }
 
@@ -119,7 +122,7 @@ public class WebhookUpdateParamsTest : TestBase
     {
         var parameters = new WebhookUpdateParams
         {
-            WebhookID = "webhook_id",
+            WebhookID = "whk_YdWqVEGKmSYKbsIyDxEab",
             Description = "description",
             Disabled = true,
             FilterTypes = [WebhookEventType.PaymentSucceeded],

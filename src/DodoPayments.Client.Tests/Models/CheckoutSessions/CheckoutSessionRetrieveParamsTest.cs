@@ -8,9 +8,9 @@ public class CheckoutSessionRetrieveParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new CheckoutSessionRetrieveParams { ID = "id" };
+        var parameters = new CheckoutSessionRetrieveParams { ID = "cks_n010SZaY4NXc7F1ck3Tq1" };
 
-        string expectedID = "id";
+        string expectedID = "cks_n010SZaY4NXc7F1ck3Tq1";
 
         Assert.Equal(expectedID, parameters.ID);
     }
@@ -18,17 +18,22 @@ public class CheckoutSessionRetrieveParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        CheckoutSessionRetrieveParams parameters = new() { ID = "id" };
+        CheckoutSessionRetrieveParams parameters = new() { ID = "cks_n010SZaY4NXc7F1ck3Tq1" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.True(TestBase.UrisEqual(new Uri("https://live.dodopayments.com/checkouts/id"), url));
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/checkouts/cks_n010SZaY4NXc7F1ck3Tq1"),
+                url
+            )
+        );
     }
 
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new CheckoutSessionRetrieveParams { ID = "id" };
+        var parameters = new CheckoutSessionRetrieveParams { ID = "cks_n010SZaY4NXc7F1ck3Tq1" };
 
         CheckoutSessionRetrieveParams copied = new(parameters);
 

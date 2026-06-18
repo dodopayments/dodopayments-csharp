@@ -9,7 +9,11 @@ public class ItemServiceTest : TestBase
     {
         var productCollectionProducts = await this.client.ProductCollections.Groups.Items.Create(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            new() { ID = "id", Products = [new() { ProductID = "product_id", Status = true }] },
+            new()
+            {
+                ID = "pdc_8BWv0hojwUH7iCDabr0NI",
+                Products = [new() { ProductID = "product_id", Status = true }],
+            },
             TestContext.Current.CancellationToken
         );
         foreach (var item in productCollectionProducts)
@@ -25,7 +29,7 @@ public class ItemServiceTest : TestBase
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             new()
             {
-                ID = "id",
+                ID = "pdc_8BWv0hojwUH7iCDabr0NI",
                 GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 Status = true,
             },
@@ -38,7 +42,11 @@ public class ItemServiceTest : TestBase
     {
         await this.client.ProductCollections.Groups.Items.Delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            new() { ID = "id", GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e" },
+            new()
+            {
+                ID = "pdc_8BWv0hojwUH7iCDabr0NI",
+                GroupID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
             TestContext.Current.CancellationToken
         );
     }
