@@ -34,7 +34,7 @@ public class SubscriptionServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var subscription = await this.client.Subscriptions.Retrieve(
-            "subscription_id",
+            "sub_Iuaq622bbmmfOGrVTqdXv",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -45,7 +45,7 @@ public class SubscriptionServiceTest : TestBase
     public async Task Update_Works()
     {
         var subscription = await this.client.Subscriptions.Update(
-            "subscription_id",
+            "sub_Iuaq622bbmmfOGrVTqdXv",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -66,7 +66,7 @@ public class SubscriptionServiceTest : TestBase
     public async Task CancelChangePlan_Works()
     {
         await this.client.Subscriptions.CancelChangePlan(
-            "subscription_id",
+            "sub_Iuaq622bbmmfOGrVTqdXv",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -76,7 +76,7 @@ public class SubscriptionServiceTest : TestBase
     public async Task ChangePlan_Works()
     {
         await this.client.Subscriptions.ChangePlan(
-            "subscription_id",
+            "sub_Iuaq622bbmmfOGrVTqdXv",
             new()
             {
                 ProductID = "product_id",
@@ -91,7 +91,7 @@ public class SubscriptionServiceTest : TestBase
     public async Task Charge_Works()
     {
         var response = await this.client.Subscriptions.Charge(
-            "subscription_id",
+            "sub_Iuaq622bbmmfOGrVTqdXv",
             new() { ProductPrice = 0 },
             TestContext.Current.CancellationToken
         );
@@ -102,7 +102,7 @@ public class SubscriptionServiceTest : TestBase
     public async Task PreviewChangePlan_Works()
     {
         var response = await this.client.Subscriptions.PreviewChangePlan(
-            "subscription_id",
+            "sub_Iuaq622bbmmfOGrVTqdXv",
             new()
             {
                 ProductID = "product_id",
@@ -119,7 +119,7 @@ public class SubscriptionServiceTest : TestBase
     public async Task RetrieveCreditUsage_Works()
     {
         var response = await this.client.Subscriptions.RetrieveCreditUsage(
-            "subscription_id",
+            "sub_Iuaq622bbmmfOGrVTqdXv",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -130,7 +130,7 @@ public class SubscriptionServiceTest : TestBase
     public async Task RetrieveUsageHistory_Works()
     {
         var page = await this.client.Subscriptions.RetrieveUsageHistory(
-            "subscription_id",
+            "sub_Iuaq622bbmmfOGrVTqdXv",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -141,7 +141,7 @@ public class SubscriptionServiceTest : TestBase
     public async Task UpdatePaymentMethod_Works()
     {
         var response = await this.client.Subscriptions.UpdatePaymentMethod(
-            "subscription_id",
+            "sub_Iuaq622bbmmfOGrVTqdXv",
             new()
             {
                 PaymentMethod = new New()

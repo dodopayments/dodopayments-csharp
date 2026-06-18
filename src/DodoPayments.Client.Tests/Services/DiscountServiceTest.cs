@@ -19,7 +19,7 @@ public class DiscountServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var discount = await this.client.Discounts.Retrieve(
-            "discount_id",
+            "dsc_qxxEmg5PuM1uNTE0LgkP9",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -30,7 +30,7 @@ public class DiscountServiceTest : TestBase
     public async Task Update_Works()
     {
         var discount = await this.client.Discounts.Update(
-            "discount_id",
+            "dsc_qxxEmg5PuM1uNTE0LgkP9",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -48,7 +48,7 @@ public class DiscountServiceTest : TestBase
     public async Task Delete_Works()
     {
         await this.client.Discounts.Delete(
-            "discount_id",
+            "dsc_qxxEmg5PuM1uNTE0LgkP9",
             new(),
             TestContext.Current.CancellationToken
         );

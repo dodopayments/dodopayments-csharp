@@ -8,7 +8,7 @@ public class GroupServiceTest : TestBase
     public async Task Create_Works()
     {
         var productCollectionGroupResponse = await this.client.ProductCollections.Groups.Create(
-            "id",
+            "pdc_8BWv0hojwUH7iCDabr0NI",
             new() { Products = [new() { ProductID = "product_id", Status = true }] },
             TestContext.Current.CancellationToken
         );
@@ -20,7 +20,7 @@ public class GroupServiceTest : TestBase
     {
         await this.client.ProductCollections.Groups.Update(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            new() { ID = "id" },
+            new() { ID = "pdc_8BWv0hojwUH7iCDabr0NI" },
             TestContext.Current.CancellationToken
         );
     }
@@ -30,7 +30,7 @@ public class GroupServiceTest : TestBase
     {
         await this.client.ProductCollections.Groups.Delete(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            new() { ID = "id" },
+            new() { ID = "pdc_8BWv0hojwUH7iCDabr0NI" },
             TestContext.Current.CancellationToken
         );
     }

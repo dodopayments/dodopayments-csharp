@@ -113,7 +113,10 @@ These methods return `HttpResponse`:
 using System;
 using DodoPayments.Client.Models.Invoices.Payments;
 
-PaymentRetrieveParams parameters = new() { PaymentID = "payment_id" };
+PaymentRetrieveParams parameters = new()
+{
+    PaymentID = "pay_gr4RizvMOXFJ6xca3y2tU"
+};
 
 var payment = await client.Invoices.Payments.Retrieve(parameters);
 

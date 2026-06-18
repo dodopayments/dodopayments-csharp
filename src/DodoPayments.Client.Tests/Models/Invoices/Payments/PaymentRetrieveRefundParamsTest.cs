@@ -8,9 +8,9 @@ public class PaymentRetrieveRefundParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new PaymentRetrieveRefundParams { RefundID = "refund_id" };
+        var parameters = new PaymentRetrieveRefundParams { RefundID = "ref_F0gZetLvTxxBrMU2CZcmy" };
 
-        string expectedRefundID = "refund_id";
+        string expectedRefundID = "ref_F0gZetLvTxxBrMU2CZcmy";
 
         Assert.Equal(expectedRefundID, parameters.RefundID);
     }
@@ -18,13 +18,13 @@ public class PaymentRetrieveRefundParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        PaymentRetrieveRefundParams parameters = new() { RefundID = "refund_id" };
+        PaymentRetrieveRefundParams parameters = new() { RefundID = "ref_F0gZetLvTxxBrMU2CZcmy" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://live.dodopayments.com/invoices/refunds/refund_id"),
+                new Uri("https://live.dodopayments.com/invoices/refunds/ref_F0gZetLvTxxBrMU2CZcmy"),
                 url
             )
         );
@@ -33,7 +33,7 @@ public class PaymentRetrieveRefundParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new PaymentRetrieveRefundParams { RefundID = "refund_id" };
+        var parameters = new PaymentRetrieveRefundParams { RefundID = "ref_F0gZetLvTxxBrMU2CZcmy" };
 
         PaymentRetrieveRefundParams copied = new(parameters);
 
