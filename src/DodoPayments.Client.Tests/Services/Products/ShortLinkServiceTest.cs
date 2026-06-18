@@ -8,7 +8,7 @@ public class ShortLinkServiceTest : TestBase
     public async Task Create_Works()
     {
         var shortLink = await this.client.Products.ShortLinks.Create(
-            "id",
+            "pdt_R8AWMPiV8RyJElcCKvAID",
             new() { Slug = "slug" },
             TestContext.Current.CancellationToken
         );

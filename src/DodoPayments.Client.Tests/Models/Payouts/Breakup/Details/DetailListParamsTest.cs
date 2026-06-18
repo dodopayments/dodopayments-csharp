@@ -10,12 +10,12 @@ public class DetailListParamsTest : TestBase
     {
         var parameters = new DetailListParams
         {
-            PayoutID = "payout_id",
+            PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T",
             PageNumber = 0,
             PageSize = 0,
         };
 
-        string expectedPayoutID = "payout_id";
+        string expectedPayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
 
@@ -27,7 +27,7 @@ public class DetailListParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new DetailListParams { PayoutID = "payout_id" };
+        var parameters = new DetailListParams { PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T" };
 
         Assert.Null(parameters.PageNumber);
         Assert.False(parameters.RawQueryData.ContainsKey("page_number"));
@@ -40,7 +40,7 @@ public class DetailListParamsTest : TestBase
     {
         var parameters = new DetailListParams
         {
-            PayoutID = "payout_id",
+            PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T",
 
             // Null should be interpreted as omitted for these properties
             PageNumber = null,
@@ -58,7 +58,7 @@ public class DetailListParamsTest : TestBase
     {
         DetailListParams parameters = new()
         {
-            PayoutID = "payout_id",
+            PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T",
             PageNumber = 0,
             PageSize = 0,
         };
@@ -68,7 +68,7 @@ public class DetailListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/payouts/payout_id/breakup/details?page_number=0&page_size=0"
+                    "https://live.dodopayments.com/payouts/pyt_zFTrrn4sk3x3y2vjDBW3T/breakup/details?page_number=0&page_size=0"
                 ),
                 url
             )
@@ -80,7 +80,7 @@ public class DetailListParamsTest : TestBase
     {
         var parameters = new DetailListParams
         {
-            PayoutID = "payout_id",
+            PayoutID = "pyt_zFTrrn4sk3x3y2vjDBW3T",
             PageNumber = 0,
             PageSize = 0,
         };

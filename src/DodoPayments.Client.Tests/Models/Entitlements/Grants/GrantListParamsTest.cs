@@ -13,14 +13,14 @@ public class GrantListParamsTest : TestBase
     {
         var parameters = new GrantListParams
         {
-            ID = "id",
+            ID = "ent_jt7jcvI79Xh8eehqgWdcm",
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
             Status = Status.Pending,
         };
 
-        string expectedID = "id";
+        string expectedID = "ent_jt7jcvI79Xh8eehqgWdcm";
         string expectedCustomerID = "customer_id";
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
@@ -36,7 +36,7 @@ public class GrantListParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new GrantListParams { ID = "id" };
+        var parameters = new GrantListParams { ID = "ent_jt7jcvI79Xh8eehqgWdcm" };
 
         Assert.Null(parameters.CustomerID);
         Assert.False(parameters.RawQueryData.ContainsKey("customer_id"));
@@ -53,7 +53,7 @@ public class GrantListParamsTest : TestBase
     {
         var parameters = new GrantListParams
         {
-            ID = "id",
+            ID = "ent_jt7jcvI79Xh8eehqgWdcm",
 
             // Null should be interpreted as omitted for these properties
             CustomerID = null,
@@ -77,7 +77,7 @@ public class GrantListParamsTest : TestBase
     {
         GrantListParams parameters = new()
         {
-            ID = "id",
+            ID = "ent_jt7jcvI79Xh8eehqgWdcm",
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,
@@ -89,7 +89,7 @@ public class GrantListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/entitlements/id/grants?customer_id=customer_id&page_number=0&page_size=0&status=Pending"
+                    "https://live.dodopayments.com/entitlements/ent_jt7jcvI79Xh8eehqgWdcm/grants?customer_id=customer_id&page_number=0&page_size=0&status=Pending"
                 ),
                 url
             )
@@ -101,7 +101,7 @@ public class GrantListParamsTest : TestBase
     {
         var parameters = new GrantListParams
         {
-            ID = "id",
+            ID = "ent_jt7jcvI79Xh8eehqgWdcm",
             CustomerID = "customer_id",
             PageNumber = 0,
             PageSize = 0,

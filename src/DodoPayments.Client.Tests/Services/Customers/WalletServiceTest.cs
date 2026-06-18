@@ -8,7 +8,7 @@ public class WalletServiceTest : TestBase
     public async Task List_Works()
     {
         var wallets = await this.client.Customers.Wallets.List(
-            "customer_id",
+            "cus_TV52uJWWXt2yIoBBxpjaa",
             new(),
             TestContext.Current.CancellationToken
         );
