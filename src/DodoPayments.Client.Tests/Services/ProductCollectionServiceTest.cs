@@ -30,7 +30,7 @@ public class ProductCollectionServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var productCollection = await this.client.ProductCollections.Retrieve(
-            "id",
+            "pdc_8BWv0hojwUH7iCDabr0NI",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -41,7 +41,7 @@ public class ProductCollectionServiceTest : TestBase
     public async Task Update_Works()
     {
         await this.client.ProductCollections.Update(
-            "id",
+            "pdc_8BWv0hojwUH7iCDabr0NI",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -61,7 +61,7 @@ public class ProductCollectionServiceTest : TestBase
     public async Task Delete_Works()
     {
         await this.client.ProductCollections.Delete(
-            "id",
+            "pdc_8BWv0hojwUH7iCDabr0NI",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -71,7 +71,7 @@ public class ProductCollectionServiceTest : TestBase
     public async Task Unarchive_Works()
     {
         var response = await this.client.ProductCollections.Unarchive(
-            "id",
+            "pdc_8BWv0hojwUH7iCDabr0NI",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -82,7 +82,7 @@ public class ProductCollectionServiceTest : TestBase
     public async Task UpdateImages_Works()
     {
         var response = await this.client.ProductCollections.UpdateImages(
-            "id",
+            "pdc_8BWv0hojwUH7iCDabr0NI",
             new(),
             TestContext.Current.CancellationToken
         );

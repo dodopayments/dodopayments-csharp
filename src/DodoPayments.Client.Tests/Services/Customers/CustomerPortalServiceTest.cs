@@ -8,7 +8,7 @@ public class CustomerPortalServiceTest : TestBase
     public async Task Create_Works()
     {
         var customerPortalSession = await this.client.Customers.CustomerPortal.Create(
-            "customer_id",
+            "cus_TV52uJWWXt2yIoBBxpjaa",
             new(),
             TestContext.Current.CancellationToken
         );

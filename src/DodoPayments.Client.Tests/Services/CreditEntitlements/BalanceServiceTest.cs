@@ -9,8 +9,8 @@ public class BalanceServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         var customerCreditBalance = await this.client.CreditEntitlements.Balances.Retrieve(
-            "customer_id",
-            new() { CreditEntitlementID = "credit_entitlement_id" },
+            "cus_TV52uJWWXt2yIoBBxpjaa",
+            new() { CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM" },
             TestContext.Current.CancellationToken
         );
         customerCreditBalance.Validate();
@@ -20,7 +20,7 @@ public class BalanceServiceTest : TestBase
     public async Task List_Works()
     {
         var page = await this.client.CreditEntitlements.Balances.List(
-            "credit_entitlement_id",
+            "cde_ztxm5XJsKxWucRWA3rjdM",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -31,10 +31,10 @@ public class BalanceServiceTest : TestBase
     public async Task CreateLedgerEntry_Works()
     {
         var response = await this.client.CreditEntitlements.Balances.CreateLedgerEntry(
-            "customer_id",
+            "cus_TV52uJWWXt2yIoBBxpjaa",
             new()
             {
-                CreditEntitlementID = "credit_entitlement_id",
+                CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
                 Amount = "amount",
                 EntryType = LedgerEntryType.Credit,
             },
@@ -47,8 +47,8 @@ public class BalanceServiceTest : TestBase
     public async Task ListGrants_Works()
     {
         var page = await this.client.CreditEntitlements.Balances.ListGrants(
-            "customer_id",
-            new() { CreditEntitlementID = "credit_entitlement_id" },
+            "cus_TV52uJWWXt2yIoBBxpjaa",
+            new() { CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM" },
             TestContext.Current.CancellationToken
         );
         page.Validate();
@@ -58,8 +58,8 @@ public class BalanceServiceTest : TestBase
     public async Task ListLedger_Works()
     {
         var page = await this.client.CreditEntitlements.Balances.ListLedger(
-            "customer_id",
-            new() { CreditEntitlementID = "credit_entitlement_id" },
+            "cus_TV52uJWWXt2yIoBBxpjaa",
+            new() { CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM" },
             TestContext.Current.CancellationToken
         );
         page.Validate();

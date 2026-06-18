@@ -10,7 +10,7 @@ public class SubscriptionRetrieveUsageHistoryParamsTest : TestBase
     {
         var parameters = new SubscriptionRetrieveUsageHistoryParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             MeterID = "meter_id",
             PageNumber = 0,
@@ -18,7 +18,7 @@ public class SubscriptionRetrieveUsageHistoryParamsTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        string expectedSubscriptionID = "subscription_id";
+        string expectedSubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv";
         DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedMeterID = "meter_id";
         int expectedPageNumber = 0;
@@ -38,7 +38,7 @@ public class SubscriptionRetrieveUsageHistoryParamsTest : TestBase
     {
         var parameters = new SubscriptionRetrieveUsageHistoryParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
         };
 
         Assert.Null(parameters.EndDate);
@@ -58,7 +58,7 @@ public class SubscriptionRetrieveUsageHistoryParamsTest : TestBase
     {
         var parameters = new SubscriptionRetrieveUsageHistoryParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
 
             EndDate = null,
             MeterID = null,
@@ -84,7 +84,7 @@ public class SubscriptionRetrieveUsageHistoryParamsTest : TestBase
     {
         SubscriptionRetrieveUsageHistoryParams parameters = new()
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             MeterID = "meter_id",
             PageNumber = 0,
@@ -97,7 +97,7 @@ public class SubscriptionRetrieveUsageHistoryParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/subscriptions/subscription_id/usage-history?end_date=2019-12-27T18%3a11%3a19.117%2b00%3a00&meter_id=meter_id&page_number=0&page_size=0&start_date=2019-12-27T18%3a11%3a19.117%2b00%3a00"
+                    "https://live.dodopayments.com/subscriptions/sub_Iuaq622bbmmfOGrVTqdXv/usage-history?end_date=2019-12-27T18%3a11%3a19.117%2b00%3a00&meter_id=meter_id&page_number=0&page_size=0&start_date=2019-12-27T18%3a11%3a19.117%2b00%3a00"
                 ),
                 url
             )
@@ -109,7 +109,7 @@ public class SubscriptionRetrieveUsageHistoryParamsTest : TestBase
     {
         var parameters = new SubscriptionRetrieveUsageHistoryParams
         {
-            SubscriptionID = "subscription_id",
+            SubscriptionID = "sub_Iuaq622bbmmfOGrVTqdXv",
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             MeterID = "meter_id",
             PageNumber = 0,

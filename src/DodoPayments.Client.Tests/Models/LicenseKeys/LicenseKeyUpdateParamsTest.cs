@@ -10,13 +10,13 @@ public class LicenseKeyUpdateParamsTest : TestBase
     {
         var parameters = new LicenseKeyUpdateParams
         {
-            ID = "lic_123",
+            ID = "lic_7namTC0VcgrnzrF3GTSwB",
             ActivationsLimit = 0,
             Disabled = true,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        string expectedID = "lic_123";
+        string expectedID = "lic_7namTC0VcgrnzrF3GTSwB";
         int expectedActivationsLimit = 0;
         bool expectedDisabled = true;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -30,7 +30,7 @@ public class LicenseKeyUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new LicenseKeyUpdateParams { ID = "lic_123" };
+        var parameters = new LicenseKeyUpdateParams { ID = "lic_7namTC0VcgrnzrF3GTSwB" };
 
         Assert.Null(parameters.ActivationsLimit);
         Assert.False(parameters.RawBodyData.ContainsKey("activations_limit"));
@@ -45,7 +45,7 @@ public class LicenseKeyUpdateParamsTest : TestBase
     {
         var parameters = new LicenseKeyUpdateParams
         {
-            ID = "lic_123",
+            ID = "lic_7namTC0VcgrnzrF3GTSwB",
 
             ActivationsLimit = null,
             Disabled = null,
@@ -63,12 +63,15 @@ public class LicenseKeyUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        LicenseKeyUpdateParams parameters = new() { ID = "lic_123" };
+        LicenseKeyUpdateParams parameters = new() { ID = "lic_7namTC0VcgrnzrF3GTSwB" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://live.dodopayments.com/license_keys/lic_123"), url)
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/license_keys/lic_7namTC0VcgrnzrF3GTSwB"),
+                url
+            )
         );
     }
 
@@ -77,7 +80,7 @@ public class LicenseKeyUpdateParamsTest : TestBase
     {
         var parameters = new LicenseKeyUpdateParams
         {
-            ID = "lic_123",
+            ID = "lic_7namTC0VcgrnzrF3GTSwB",
             ActivationsLimit = 0,
             Disabled = true,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

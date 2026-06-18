@@ -8,7 +8,7 @@ public class PaymentServiceTest : TestBase
     public async Task Retrieve_Works()
     {
         await this.client.Invoices.Payments.Retrieve(
-            "payment_id",
+            "pay_gr4RizvMOXFJ6xca3y2tU",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -18,7 +18,7 @@ public class PaymentServiceTest : TestBase
     public async Task RetrievePayout_Works()
     {
         await this.client.Invoices.Payments.RetrievePayout(
-            "payout_id",
+            "pyt_zFTrrn4sk3x3y2vjDBW3T",
             new(),
             TestContext.Current.CancellationToken
         );
@@ -28,7 +28,7 @@ public class PaymentServiceTest : TestBase
     public async Task RetrieveRefund_Works()
     {
         await this.client.Invoices.Payments.RetrieveRefund(
-            "refund_id",
+            "ref_F0gZetLvTxxBrMU2CZcmy",
             new(),
             TestContext.Current.CancellationToken
         );

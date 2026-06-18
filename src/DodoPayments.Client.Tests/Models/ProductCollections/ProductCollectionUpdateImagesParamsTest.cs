@@ -8,9 +8,13 @@ public class ProductCollectionUpdateImagesParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new ProductCollectionUpdateImagesParams { ID = "id", ForceUpdate = true };
+        var parameters = new ProductCollectionUpdateImagesParams
+        {
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
+            ForceUpdate = true,
+        };
 
-        string expectedID = "id";
+        string expectedID = "pdc_8BWv0hojwUH7iCDabr0NI";
         bool expectedForceUpdate = true;
 
         Assert.Equal(expectedID, parameters.ID);
@@ -20,7 +24,10 @@ public class ProductCollectionUpdateImagesParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new ProductCollectionUpdateImagesParams { ID = "id" };
+        var parameters = new ProductCollectionUpdateImagesParams
+        {
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
+        };
 
         Assert.Null(parameters.ForceUpdate);
         Assert.False(parameters.RawQueryData.ContainsKey("force_update"));
@@ -31,7 +38,7 @@ public class ProductCollectionUpdateImagesParamsTest : TestBase
     {
         var parameters = new ProductCollectionUpdateImagesParams
         {
-            ID = "id",
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
 
             ForceUpdate = null,
         };
@@ -43,14 +50,18 @@ public class ProductCollectionUpdateImagesParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        ProductCollectionUpdateImagesParams parameters = new() { ID = "id", ForceUpdate = true };
+        ProductCollectionUpdateImagesParams parameters = new()
+        {
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
+            ForceUpdate = true,
+        };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/product-collections/id/images?force_update=true"
+                    "https://live.dodopayments.com/product-collections/pdc_8BWv0hojwUH7iCDabr0NI/images?force_update=true"
                 ),
                 url
             )
@@ -60,7 +71,11 @@ public class ProductCollectionUpdateImagesParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new ProductCollectionUpdateImagesParams { ID = "id", ForceUpdate = true };
+        var parameters = new ProductCollectionUpdateImagesParams
+        {
+            ID = "pdc_8BWv0hojwUH7iCDabr0NI",
+            ForceUpdate = true,
+        };
 
         ProductCollectionUpdateImagesParams copied = new(parameters);
 

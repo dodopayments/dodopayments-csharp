@@ -17,7 +17,7 @@ public class ProductUpdateParamsTest : TestBase
     {
         var parameters = new ProductUpdateParams
         {
-            ID = "id",
+            ID = "pdt_R8AWMPiV8RyJElcCKvAID",
             Addons = ["string"],
             BrandID = "brand_id",
             CreditEntitlements =
@@ -72,7 +72,7 @@ public class ProductUpdateParamsTest : TestBase
             TaxCategory = TaxCategory.DigitalProducts,
         };
 
-        string expectedID = "id";
+        string expectedID = "pdt_R8AWMPiV8RyJElcCKvAID";
         List<string> expectedAddons = ["string"];
         string expectedBrandID = "brand_id";
         List<AttachCreditEntitlement> expectedCreditEntitlements =
@@ -175,7 +175,7 @@ public class ProductUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new ProductUpdateParams { ID = "id" };
+        var parameters = new ProductUpdateParams { ID = "pdt_R8AWMPiV8RyJElcCKvAID" };
 
         Assert.Null(parameters.Addons);
         Assert.False(parameters.RawBodyData.ContainsKey("addons"));
@@ -216,7 +216,7 @@ public class ProductUpdateParamsTest : TestBase
     {
         var parameters = new ProductUpdateParams
         {
-            ID = "id",
+            ID = "pdt_R8AWMPiV8RyJElcCKvAID",
 
             Addons = null,
             BrandID = null,
@@ -273,11 +273,16 @@ public class ProductUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        ProductUpdateParams parameters = new() { ID = "id" };
+        ProductUpdateParams parameters = new() { ID = "pdt_R8AWMPiV8RyJElcCKvAID" };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
 
-        Assert.True(TestBase.UrisEqual(new Uri("https://live.dodopayments.com/products/id"), url));
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://live.dodopayments.com/products/pdt_R8AWMPiV8RyJElcCKvAID"),
+                url
+            )
+        );
     }
 
     [Fact]
@@ -285,7 +290,7 @@ public class ProductUpdateParamsTest : TestBase
     {
         var parameters = new ProductUpdateParams
         {
-            ID = "id",
+            ID = "pdt_R8AWMPiV8RyJElcCKvAID",
             Addons = ["string"],
             BrandID = "brand_id",
             CreditEntitlements =

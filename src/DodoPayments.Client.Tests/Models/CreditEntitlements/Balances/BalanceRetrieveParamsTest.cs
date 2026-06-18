@@ -10,12 +10,12 @@ public class BalanceRetrieveParamsTest : TestBase
     {
         var parameters = new BalanceRetrieveParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
         };
 
-        string expectedCreditEntitlementID = "credit_entitlement_id";
-        string expectedCustomerID = "customer_id";
+        string expectedCreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM";
+        string expectedCustomerID = "cus_TV52uJWWXt2yIoBBxpjaa";
 
         Assert.Equal(expectedCreditEntitlementID, parameters.CreditEntitlementID);
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
@@ -26,8 +26,8 @@ public class BalanceRetrieveParamsTest : TestBase
     {
         BalanceRetrieveParams parameters = new()
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
         };
 
         var url = parameters.Url(new() { BearerToken = "My Bearer Token" });
@@ -35,7 +35,7 @@ public class BalanceRetrieveParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/credit-entitlements/credit_entitlement_id/balances/customer_id"
+                    "https://live.dodopayments.com/credit-entitlements/cde_ztxm5XJsKxWucRWA3rjdM/balances/cus_TV52uJWWXt2yIoBBxpjaa"
                 ),
                 url
             )
@@ -47,8 +47,8 @@ public class BalanceRetrieveParamsTest : TestBase
     {
         var parameters = new BalanceRetrieveParams
         {
-            CreditEntitlementID = "credit_entitlement_id",
-            CustomerID = "customer_id",
+            CreditEntitlementID = "cde_ztxm5XJsKxWucRWA3rjdM",
+            CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
         };
 
         BalanceRetrieveParams copied = new(parameters);
