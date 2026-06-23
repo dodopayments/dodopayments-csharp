@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements.Balances;
@@ -26,6 +27,7 @@ public class CreditRolledOverWebhookEventTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
@@ -50,6 +52,7 @@ public class CreditRolledOverWebhookEventTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -85,6 +88,7 @@ public class CreditRolledOverWebhookEventTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
@@ -123,6 +127,7 @@ public class CreditRolledOverWebhookEventTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
@@ -154,6 +159,7 @@ public class CreditRolledOverWebhookEventTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -189,6 +195,7 @@ public class CreditRolledOverWebhookEventTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
@@ -221,6 +228,7 @@ public class CreditRolledOverWebhookEventTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
