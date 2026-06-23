@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
+using DodoPayments.Client.Models.Products.LocalizedPrices;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Products;
@@ -68,7 +68,7 @@ public class ProductUpdateParamsTest : TestBase
                 SuggestedPrice = 0,
                 TaxInclusive = true,
             },
-            PricingMode = ProductUpdateParamsPricingMode.ByCurrency,
+            PricingMode = PricingMode.ByCurrency,
             TaxCategory = TaxCategory.DigitalProducts,
         };
 
@@ -127,8 +127,7 @@ public class ProductUpdateParamsTest : TestBase
             SuggestedPrice = 0,
             TaxInclusive = true,
         };
-        ApiEnum<string, ProductUpdateParamsPricingMode> expectedPricingMode =
-            ProductUpdateParamsPricingMode.ByCurrency;
+        ApiEnum<string, PricingMode> expectedPricingMode = PricingMode.ByCurrency;
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
 
         Assert.Equal(expectedID, parameters.ID);
@@ -341,7 +340,7 @@ public class ProductUpdateParamsTest : TestBase
                 SuggestedPrice = 0,
                 TaxInclusive = true,
             },
-            PricingMode = ProductUpdateParamsPricingMode.ByCurrency,
+            PricingMode = PricingMode.ByCurrency,
             TaxCategory = TaxCategory.DigitalProducts,
         };
 
@@ -505,61 +504,5 @@ public class ProductUpdateParamsDigitalProductDeliveryTest : TestBase
         ProductUpdateParamsDigitalProductDelivery copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class ProductUpdateParamsPricingModeTest : TestBase
-{
-    [Theory]
-    [InlineData(ProductUpdateParamsPricingMode.ByCurrency)]
-    [InlineData(ProductUpdateParamsPricingMode.ByCountry)]
-    public void Validation_Works(ProductUpdateParamsPricingMode rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, ProductUpdateParamsPricingMode> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, ProductUpdateParamsPricingMode>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(ProductUpdateParamsPricingMode.ByCurrency)]
-    [InlineData(ProductUpdateParamsPricingMode.ByCountry)]
-    public void SerializationRoundtrip_Works(ProductUpdateParamsPricingMode rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, ProductUpdateParamsPricingMode> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, ProductUpdateParamsPricingMode>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, ProductUpdateParamsPricingMode>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, ProductUpdateParamsPricingMode>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }
