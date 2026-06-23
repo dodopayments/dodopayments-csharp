@@ -59,6 +59,28 @@ public sealed class GrantService : IGrantService
     }
 
     /// <inheritdoc/>
+    public async Task<EntitlementGrant> FulfillLicenseKey(
+        GrantFulfillLicenseKeyParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.FulfillLicenseKey(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<EntitlementGrant> FulfillLicenseKey(
+        string grantID,
+        GrantFulfillLicenseKeyParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.FulfillLicenseKey(parameters with { GrantID = grantID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<EntitlementGrant> Revoke(
         GrantRevokeParams parameters,
         CancellationToken cancellationToken = default
@@ -140,6 +162,49 @@ public sealed class GrantServiceWithRawResponse : IGrantServiceWithRawResponse
         parameters ??= new();
 
         return this.List(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<EntitlementGrant>> FulfillLicenseKey(
+        GrantFulfillLicenseKeyParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.GrantID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.GrantID' cannot be null");
+        }
+
+        HttpRequest<GrantFulfillLicenseKeyParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var entitlementGrant = await response
+                    .Deserialize<EntitlementGrant>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    entitlementGrant.Validate();
+                }
+                return entitlementGrant;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<EntitlementGrant>> FulfillLicenseKey(
+        string grantID,
+        GrantFulfillLicenseKeyParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.FulfillLicenseKey(parameters with { GrantID = grantID }, cancellationToken);
     }
 
     /// <inheritdoc/>

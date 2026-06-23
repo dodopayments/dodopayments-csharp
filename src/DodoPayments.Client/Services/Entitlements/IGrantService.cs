@@ -42,6 +42,24 @@ public interface IGrantService
     );
 
     /// <summary>
+    /// For entitlements whose license-key config uses `manual` fulfillment, grants are
+    /// created in the `pending` state without a key. Call this endpoint to deliver the
+    /// key: the grant moves to `delivered`, the customer is emailed the key, and the
+    /// `license_key.created` and `entitlement_grant.delivered` webhook events are sent.
+    /// </summary>
+    Task<EntitlementGrant> FulfillLicenseKey(
+        GrantFulfillLicenseKeyParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="FulfillLicenseKey(GrantFulfillLicenseKeyParams, CancellationToken)"/>
+    Task<EntitlementGrant> FulfillLicenseKey(
+        string grantID,
+        GrantFulfillLicenseKeyParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Revoke a single grant. Idempotent: re-revoking an already-revoked grant returns
     /// the grant in its current state.
     /// </summary>
@@ -84,6 +102,22 @@ public interface IGrantServiceWithRawResponse
     Task<HttpResponse<GrantListPage>> List(
         string id,
         GrantListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /grants/{grant_id}/license-key</c>, but is otherwise the
+    /// same as <see cref="IGrantService.FulfillLicenseKey(GrantFulfillLicenseKeyParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<EntitlementGrant>> FulfillLicenseKey(
+        GrantFulfillLicenseKeyParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="FulfillLicenseKey(GrantFulfillLicenseKeyParams, CancellationToken)"/>
+    Task<HttpResponse<EntitlementGrant>> FulfillLicenseKey(
+        string grantID,
+        GrantFulfillLicenseKeyParams parameters,
         CancellationToken cancellationToken = default
     );
 

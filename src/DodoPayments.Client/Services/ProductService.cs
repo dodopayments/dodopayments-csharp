@@ -35,6 +35,7 @@ public sealed class ProductService : IProductService
         _withRawResponse = new(() => new ProductServiceWithRawResponse(client.WithRawResponse));
         _images = new(() => new ImageService(client));
         _shortLinks = new(() => new ShortLinkService(client));
+        _localizedPrices = new(() => new LocalizedPriceService(client));
     }
 
     readonly Lazy<IImageService> _images;
@@ -47,6 +48,12 @@ public sealed class ProductService : IProductService
     public IShortLinkService ShortLinks
     {
         get { return _shortLinks.Value; }
+    }
+
+    readonly Lazy<ILocalizedPriceService> _localizedPrices;
+    public ILocalizedPriceService LocalizedPrices
+    {
+        get { return _localizedPrices.Value; }
     }
 
     /// <inheritdoc/>
@@ -200,6 +207,7 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
 
         _images = new(() => new ImageServiceWithRawResponse(client));
         _shortLinks = new(() => new ShortLinkServiceWithRawResponse(client));
+        _localizedPrices = new(() => new LocalizedPriceServiceWithRawResponse(client));
     }
 
     readonly Lazy<IImageServiceWithRawResponse> _images;
@@ -212,6 +220,12 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
     public IShortLinkServiceWithRawResponse ShortLinks
     {
         get { return _shortLinks.Value; }
+    }
+
+    readonly Lazy<ILocalizedPriceServiceWithRawResponse> _localizedPrices;
+    public ILocalizedPriceServiceWithRawResponse LocalizedPrices
+    {
+        get { return _localizedPrices.Value; }
     }
 
     /// <inheritdoc/>

@@ -234,6 +234,25 @@ public record class Data : ModelBase
         }
     }
 
+    public IReadOnlyDictionary<string, string>? Metadata
+    {
+        get
+        {
+            return Match<IReadOnlyDictionary<string, string>?>(
+                payment: (x) => x.Metadata,
+                subscription: (x) => x.Metadata,
+                refund: (x) => x.Metadata,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                creditLedgerEntry: (x) => x.Metadata,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (x) => x.Metadata
+            );
+        }
+    }
+
     public string? PaymentID
     {
         get
@@ -1301,9 +1320,6 @@ public sealed record class Payment : JsonModel
         }
     }
 
-    /// <summary>
-    /// Additional custom data associated with the payment
-    /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
         get
@@ -2048,9 +2064,6 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("customer", value); }
     }
 
-    /// <summary>
-    /// Additional custom data associated with the subscription
-    /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
         get
@@ -2700,9 +2713,6 @@ public sealed record class Refund : JsonModel
         init { this._rawData.Set("is_partial", value); }
     }
 
-    /// <summary>
-    /// Additional metadata stored with the refund.
-    /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
         get
@@ -3557,6 +3567,22 @@ public sealed record class CreditLedgerEntry : JsonModel
         init { this._rawData.Set("is_credit", value); }
     }
 
+    public required IReadOnlyDictionary<string, string> Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
     public required string OverageAfter
     {
         get
@@ -3654,6 +3680,7 @@ public sealed record class CreditLedgerEntry : JsonModel
             CreditEntitlementID = creditLedgerEntry.CreditEntitlementID,
             CustomerID = creditLedgerEntry.CustomerID,
             IsCredit = creditLedgerEntry.IsCredit,
+            Metadata = creditLedgerEntry.Metadata,
             OverageAfter = creditLedgerEntry.OverageAfter,
             OverageBefore = creditLedgerEntry.OverageBefore,
             TransactionType = creditLedgerEntry.TransactionType,
@@ -3676,6 +3703,7 @@ public sealed record class CreditLedgerEntry : JsonModel
         _ = this.CreditEntitlementID;
         _ = this.CustomerID;
         _ = this.IsCredit;
+        _ = this.Metadata;
         _ = this.OverageAfter;
         _ = this.OverageBefore;
         this.TransactionType.Validate();
@@ -4486,9 +4514,6 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("integration_type", value); }
     }
 
-    /// <summary>
-    /// Arbitrary key-value metadata recorded on the grant.
-    /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
     {
         get

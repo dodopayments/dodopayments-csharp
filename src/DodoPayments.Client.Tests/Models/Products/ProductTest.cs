@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
+using DodoPayments.Client.Models.Products.LocalizedPrices;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Products;
@@ -102,7 +102,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
-            PricingMode = ProductPricingMode.ByCurrency,
+            PricingMode = PricingMode.ByCurrency,
             ProductCollectionID = "product_collection_id",
         };
 
@@ -194,7 +194,7 @@ public class ProductTest : TestBase
             Interval = TimeInterval.Day,
         };
         string expectedName = "name";
-        ApiEnum<string, ProductPricingMode> expectedPricingMode = ProductPricingMode.ByCurrency;
+        ApiEnum<string, PricingMode> expectedPricingMode = PricingMode.ByCurrency;
         string expectedProductCollectionID = "product_collection_id";
 
         Assert.Equal(expectedBrandID, model.BrandID);
@@ -329,7 +329,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
-            PricingMode = ProductPricingMode.ByCurrency,
+            PricingMode = PricingMode.ByCurrency,
             ProductCollectionID = "product_collection_id",
         };
 
@@ -428,7 +428,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
-            PricingMode = ProductPricingMode.ByCurrency,
+            PricingMode = PricingMode.ByCurrency,
             ProductCollectionID = "product_collection_id",
         };
 
@@ -527,7 +527,7 @@ public class ProductTest : TestBase
             Interval = TimeInterval.Day,
         };
         string expectedName = "name";
-        ApiEnum<string, ProductPricingMode> expectedPricingMode = ProductPricingMode.ByCurrency;
+        ApiEnum<string, PricingMode> expectedPricingMode = PricingMode.ByCurrency;
         string expectedProductCollectionID = "product_collection_id";
 
         Assert.Equal(expectedBrandID, deserialized.BrandID);
@@ -662,7 +662,7 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
-            PricingMode = ProductPricingMode.ByCurrency,
+            PricingMode = PricingMode.ByCurrency,
             ProductCollectionID = "product_collection_id",
         };
 
@@ -1098,70 +1098,12 @@ public class ProductTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             Name = "name",
-            PricingMode = ProductPricingMode.ByCurrency,
+            PricingMode = PricingMode.ByCurrency,
             ProductCollectionID = "product_collection_id",
         };
 
         Product copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class ProductPricingModeTest : TestBase
-{
-    [Theory]
-    [InlineData(ProductPricingMode.ByCurrency)]
-    [InlineData(ProductPricingMode.ByCountry)]
-    public void Validation_Works(ProductPricingMode rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, ProductPricingMode> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, ProductPricingMode>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(ProductPricingMode.ByCurrency)]
-    [InlineData(ProductPricingMode.ByCountry)]
-    public void SerializationRoundtrip_Works(ProductPricingMode rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, ProductPricingMode> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, ProductPricingMode>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, ProductPricingMode>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, ProductPricingMode>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }

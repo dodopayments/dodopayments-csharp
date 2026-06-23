@@ -6,8 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Products.LocalizedPrices;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -220,14 +220,12 @@ public sealed record class ProductListResponse : JsonModel
     /// <summary>
     /// Pricing mode for localized pricing. NULL means base-only (no localized rules apply).
     /// </summary>
-    public ApiEnum<string, ProductListResponsePricingMode>? PricingMode
+    public ApiEnum<string, PricingMode>? PricingMode
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, ProductListResponsePricingMode>>(
-                "pricing_mode"
-            );
+            return this._rawData.GetNullableClass<ApiEnum<string, PricingMode>>("pricing_mode");
         }
         init { this._rawData.Set("pricing_mode", value); }
     }
@@ -304,51 +302,4 @@ class ProductListResponseFromRaw : IFromRawJson<ProductListResponse>
     /// <inheritdoc/>
     public ProductListResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         ProductListResponse.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Pricing mode for localized pricing. NULL means base-only (no localized rules apply).
-/// </summary>
-[JsonConverter(typeof(ProductListResponsePricingModeConverter))]
-public enum ProductListResponsePricingMode
-{
-    ByCurrency,
-    ByCountry,
-}
-
-sealed class ProductListResponsePricingModeConverter : JsonConverter<ProductListResponsePricingMode>
-{
-    public override ProductListResponsePricingMode Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "by_currency" => ProductListResponsePricingMode.ByCurrency,
-            "by_country" => ProductListResponsePricingMode.ByCountry,
-            _ => (ProductListResponsePricingMode)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ProductListResponsePricingMode value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ProductListResponsePricingMode.ByCurrency => "by_currency",
-                ProductListResponsePricingMode.ByCountry => "by_country",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
