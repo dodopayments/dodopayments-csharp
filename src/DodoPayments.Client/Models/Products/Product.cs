@@ -6,8 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Products.LocalizedPrices;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -308,14 +308,12 @@ public sealed record class Product : JsonModel
     /// <summary>
     /// Pricing mode for localized pricing. NULL means base-only (no localized rules apply).
     /// </summary>
-    public ApiEnum<string, ProductPricingMode>? PricingMode
+    public ApiEnum<string, PricingMode>? PricingMode
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, ProductPricingMode>>(
-                "pricing_mode"
-            );
+            return this._rawData.GetNullableClass<ApiEnum<string, PricingMode>>("pricing_mode");
         }
         init { this._rawData.Set("pricing_mode", value); }
     }
@@ -403,51 +401,4 @@ class ProductFromRaw : IFromRawJson<Product>
     /// <inheritdoc/>
     public Product FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Product.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Pricing mode for localized pricing. NULL means base-only (no localized rules apply).
-/// </summary>
-[JsonConverter(typeof(ProductPricingModeConverter))]
-public enum ProductPricingMode
-{
-    ByCurrency,
-    ByCountry,
-}
-
-sealed class ProductPricingModeConverter : JsonConverter<ProductPricingMode>
-{
-    public override ProductPricingMode Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "by_currency" => ProductPricingMode.ByCurrency,
-            "by_country" => ProductPricingMode.ByCountry,
-            _ => (ProductPricingMode)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ProductPricingMode value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ProductPricingMode.ByCurrency => "by_currency",
-                ProductPricingMode.ByCountry => "by_country",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }

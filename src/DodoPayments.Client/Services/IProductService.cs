@@ -31,6 +31,8 @@ public interface IProductService
 
     IShortLinkService ShortLinks { get; }
 
+    ILocalizedPriceService LocalizedPrices { get; }
+
     /// <summary>
     /// Sends a request to <c>post /products</c>.
     /// </summary>
@@ -133,6 +135,8 @@ public interface IProductServiceWithRawResponse
     IImageServiceWithRawResponse Images { get; }
 
     IShortLinkServiceWithRawResponse ShortLinks { get; }
+
+    ILocalizedPriceServiceWithRawResponse LocalizedPrices { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /products</c>, but is otherwise the

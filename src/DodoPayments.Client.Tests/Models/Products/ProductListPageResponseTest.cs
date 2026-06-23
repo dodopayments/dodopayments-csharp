@@ -5,6 +5,7 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
+using DodoPayments.Client.Models.Products.LocalizedPrices;
 
 namespace DodoPayments.Client.Tests.Models.Products;
 
@@ -56,7 +57,7 @@ public class ProductListPageResponseTest : TestBase
                         SuggestedPrice = 0,
                         TaxInclusive = true,
                     },
-                    PricingMode = ProductListResponsePricingMode.ByCurrency,
+                    PricingMode = PricingMode.ByCurrency,
                     TaxInclusive = true,
                 },
             ],
@@ -103,7 +104,7 @@ public class ProductListPageResponseTest : TestBase
                     SuggestedPrice = 0,
                     TaxInclusive = true,
                 },
-                PricingMode = ProductListResponsePricingMode.ByCurrency,
+                PricingMode = PricingMode.ByCurrency,
                 TaxInclusive = true,
             },
         ];
@@ -161,7 +162,7 @@ public class ProductListPageResponseTest : TestBase
                         SuggestedPrice = 0,
                         TaxInclusive = true,
                     },
-                    PricingMode = ProductListResponsePricingMode.ByCurrency,
+                    PricingMode = PricingMode.ByCurrency,
                     TaxInclusive = true,
                 },
             ],
@@ -222,7 +223,7 @@ public class ProductListPageResponseTest : TestBase
                         SuggestedPrice = 0,
                         TaxInclusive = true,
                     },
-                    PricingMode = ProductListResponsePricingMode.ByCurrency,
+                    PricingMode = PricingMode.ByCurrency,
                     TaxInclusive = true,
                 },
             ],
@@ -276,7 +277,7 @@ public class ProductListPageResponseTest : TestBase
                     SuggestedPrice = 0,
                     TaxInclusive = true,
                 },
-                PricingMode = ProductListResponsePricingMode.ByCurrency,
+                PricingMode = PricingMode.ByCurrency,
                 TaxInclusive = true,
             },
         ];
@@ -334,7 +335,7 @@ public class ProductListPageResponseTest : TestBase
                         SuggestedPrice = 0,
                         TaxInclusive = true,
                     },
-                    PricingMode = ProductListResponsePricingMode.ByCurrency,
+                    PricingMode = PricingMode.ByCurrency,
                     TaxInclusive = true,
                 },
             ],
@@ -389,7 +390,7 @@ public class ProductListPageResponseTest : TestBase
                         SuggestedPrice = 0,
                         TaxInclusive = true,
                     },
-                    PricingMode = ProductListResponsePricingMode.ByCurrency,
+                    PricingMode = PricingMode.ByCurrency,
                     TaxInclusive = true,
                 },
             ],

@@ -118,6 +118,27 @@ public sealed record class CreditLedgerEntry : JsonModel
         init { this._rawData.Set("is_credit", value); }
     }
 
+    /// <summary>
+    /// Metadata associated with the credit grant's source (the subscription or payment
+    /// created at checkout). Empty when the grant has no resolvable source (e.g.
+    /// credits granted directly via the API).
+    /// </summary>
+    public required IReadOnlyDictionary<string, string> Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
     public required string OverageAfter
     {
         get
@@ -203,6 +224,7 @@ public sealed record class CreditLedgerEntry : JsonModel
         _ = this.CreditEntitlementID;
         _ = this.CustomerID;
         _ = this.IsCredit;
+        _ = this.Metadata;
         _ = this.OverageAfter;
         _ = this.OverageBefore;
         this.TransactionType.Validate();

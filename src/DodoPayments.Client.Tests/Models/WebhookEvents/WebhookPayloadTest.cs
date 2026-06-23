@@ -1211,6 +1211,7 @@ public class DataTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -1690,6 +1691,7 @@ public class DataTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7013,6 +7015,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7032,6 +7035,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCustomerID = "customer_id";
         bool expectedIsCredit = true;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedOverageAfter = "overage_after";
         string expectedOverageBefore = "overage_before";
         ApiEnum<string, Balances::TransactionType> expectedTransactionType =
@@ -7052,6 +7056,13 @@ public class CreditLedgerEntryTest : TestBase
         Assert.Equal(expectedCreditEntitlementID, model.CreditEntitlementID);
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedIsCredit, model.IsCredit);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
         Assert.Equal(expectedOverageAfter, model.OverageAfter);
         Assert.Equal(expectedOverageBefore, model.OverageBefore);
         Assert.Equal(expectedTransactionType, model.TransactionType);
@@ -7077,6 +7088,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7110,6 +7122,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7136,6 +7149,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCustomerID = "customer_id";
         bool expectedIsCredit = true;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedOverageAfter = "overage_after";
         string expectedOverageBefore = "overage_before";
         ApiEnum<string, Balances::TransactionType> expectedTransactionType =
@@ -7156,6 +7170,13 @@ public class CreditLedgerEntryTest : TestBase
         Assert.Equal(expectedCreditEntitlementID, deserialized.CreditEntitlementID);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedIsCredit, deserialized.IsCredit);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
         Assert.Equal(expectedOverageAfter, deserialized.OverageAfter);
         Assert.Equal(expectedOverageBefore, deserialized.OverageBefore);
         Assert.Equal(expectedTransactionType, deserialized.TransactionType);
@@ -7181,6 +7202,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7208,6 +7230,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7238,6 +7261,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7261,6 +7285,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7296,6 +7321,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7324,6 +7350,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
