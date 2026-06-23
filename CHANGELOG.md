@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.24.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.23.0...v6.24.0) (2026-06-23)
+
+
+### Features
+
+* **api:** regenerate SDK from latest OpenAPI spec ([7325137](https://github.com/dodopayments/dodopayments-csharp/commit/73251373021272d77f3436fe7ff2910299eb12d5))
+* **api:** regenerate SDK from latest OpenAPI spec ([62581ad](https://github.com/dodopayments/dodopayments-csharp/commit/62581ad31aee4ca49978194aed5b02926a046e61))
+
 ## [6.23.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.22.0...v6.23.0) (2026-06-16)
 
 
