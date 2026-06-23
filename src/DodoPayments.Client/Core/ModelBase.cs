@@ -10,6 +10,7 @@ using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.ProductCollections;
 using DodoPayments.Client.Models.Products;
+using DodoPayments.Client.Models.Products.LocalizedPrices;
 using Balances = DodoPayments.Client.Models.Balances;
 using CreditEntitlementsBalances = DodoPayments.Client.Models.CreditEntitlements.Balances;
 using Grants = DodoPayments.Client.Models.Entitlements.Grants;
@@ -75,7 +76,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CbbProrationBehavior>(),
             new ApiEnumConverter<string, TaxCategory>(),
             new ApiEnumConverter<string, PricingMode>(),
-            new ApiEnumConverter<string, ProductUpdateParamsPricingMode>(),
             new ApiEnumConverter<string, CountryCode>(),
             new ApiEnumConverter<string, DiscountType>(),
             new ApiEnumConverter<string, WebhookEvents::WebhookEventType>(),

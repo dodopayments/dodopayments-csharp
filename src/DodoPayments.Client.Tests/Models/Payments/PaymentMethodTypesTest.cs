@@ -113,6 +113,7 @@ public class PaymentMethodTypesTest : TestBase
     [InlineData(PaymentMethodTypes.RevolutPay)]
     [InlineData(PaymentMethodTypes.NaverPay)]
     [InlineData(PaymentMethodTypes.Payco)]
+    [InlineData(PaymentMethodTypes.Satispay)]
     public void Validation_Works(PaymentMethodTypes rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -238,6 +239,7 @@ public class PaymentMethodTypesTest : TestBase
     [InlineData(PaymentMethodTypes.RevolutPay)]
     [InlineData(PaymentMethodTypes.NaverPay)]
     [InlineData(PaymentMethodTypes.Payco)]
+    [InlineData(PaymentMethodTypes.Satispay)]
     public void SerializationRoundtrip_Works(PaymentMethodTypes rawValue)
     {
         // force implicit conversion because Theory can't do that for us
