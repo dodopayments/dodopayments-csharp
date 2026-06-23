@@ -8,8 +8,8 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
+using DodoPayments.Client.Models.Products.LocalizedPrices;
 
 namespace DodoPayments.Client.Models.Products;
 
@@ -269,14 +269,12 @@ public record class ProductUpdateParams : ParamsBase
     /// archives all active localized rules for this product). Changing to a different
     /// non-null mode also archives any rules whose mode doesn't match the new mode.
     /// </summary>
-    public ApiEnum<string, ProductUpdateParamsPricingMode>? PricingMode
+    public ApiEnum<string, PricingMode>? PricingMode
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<
-                ApiEnum<string, ProductUpdateParamsPricingMode>
-            >("pricing_mode");
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, PricingMode>>("pricing_mode");
         }
         init { this._rawBodyData.Set("pricing_mode", value); }
     }
@@ -521,53 +519,4 @@ class ProductUpdateParamsDigitalProductDeliveryFromRaw
     public ProductUpdateParamsDigitalProductDelivery FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ProductUpdateParamsDigitalProductDelivery.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Update the pricing mode. Omit to leave unchanged; set to null to clear (which
-/// archives all active localized rules for this product). Changing to a different
-/// non-null mode also archives any rules whose mode doesn't match the new mode.
-/// </summary>
-[JsonConverter(typeof(ProductUpdateParamsPricingModeConverter))]
-public enum ProductUpdateParamsPricingMode
-{
-    ByCurrency,
-    ByCountry,
-}
-
-sealed class ProductUpdateParamsPricingModeConverter : JsonConverter<ProductUpdateParamsPricingMode>
-{
-    public override ProductUpdateParamsPricingMode Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "by_currency" => ProductUpdateParamsPricingMode.ByCurrency,
-            "by_country" => ProductUpdateParamsPricingMode.ByCountry,
-            _ => (ProductUpdateParamsPricingMode)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ProductUpdateParamsPricingMode value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ProductUpdateParamsPricingMode.ByCurrency => "by_currency",
-                ProductUpdateParamsPricingMode.ByCountry => "by_country",
-                _ => throw new DodoPaymentsInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
