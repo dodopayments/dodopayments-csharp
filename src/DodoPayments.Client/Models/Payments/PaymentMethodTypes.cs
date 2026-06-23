@@ -118,6 +118,7 @@ public enum PaymentMethodTypes
     RevolutPay,
     NaverPay,
     Payco,
+    Satispay,
 }
 
 sealed class PaymentMethodTypesConverter : JsonConverter<PaymentMethodTypes>
@@ -235,6 +236,7 @@ sealed class PaymentMethodTypesConverter : JsonConverter<PaymentMethodTypes>
             "revolut_pay" => PaymentMethodTypes.RevolutPay,
             "naver_pay" => PaymentMethodTypes.NaverPay,
             "payco" => PaymentMethodTypes.Payco,
+            "satispay" => PaymentMethodTypes.Satispay,
             _ => (PaymentMethodTypes)(-1),
         };
     }
@@ -354,6 +356,7 @@ sealed class PaymentMethodTypesConverter : JsonConverter<PaymentMethodTypes>
                 PaymentMethodTypes.RevolutPay => "revolut_pay",
                 PaymentMethodTypes.NaverPay => "naver_pay",
                 PaymentMethodTypes.Payco => "payco",
+                PaymentMethodTypes.Satispay => "satispay",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
