@@ -201,6 +201,9 @@ public sealed record class CreditEntitlement : JsonModel
         init { this._rawData.Set("rollover_timeframe_count", value); }
     }
 
+    /// <summary>
+    /// Unit of a duration count (e.g. license-key validity period).
+    /// </summary>
     public ApiEnum<string, TimeInterval>? RolloverTimeframeInterval
     {
         get

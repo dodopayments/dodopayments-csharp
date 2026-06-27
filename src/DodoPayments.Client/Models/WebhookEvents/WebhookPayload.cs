@@ -1289,7 +1289,7 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// brand id this payment belongs to
+    /// Whether the digital products purchased in this payment have been delivered.
     /// </summary>
     public required bool DigitalProductsDelivered
     {
@@ -2161,6 +2161,9 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("payment_frequency_count", value); }
     }
 
+    /// <summary>
+    /// Unit of a duration count (e.g. license-key validity period).
+    /// </summary>
     public required ApiEnum<string, Subscriptions::TimeInterval> PaymentFrequencyInterval
     {
         get
@@ -2264,6 +2267,9 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("subscription_period_count", value); }
     }
 
+    /// <summary>
+    /// Unit of a duration count (e.g. license-key validity period).
+    /// </summary>
     public required ApiEnum<string, Subscriptions::TimeInterval> SubscriptionPeriodInterval
     {
         get
