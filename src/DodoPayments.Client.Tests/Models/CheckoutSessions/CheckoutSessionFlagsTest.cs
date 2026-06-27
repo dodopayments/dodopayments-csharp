@@ -22,6 +22,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
+            AllowEditingAddons = true,
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
@@ -40,6 +41,7 @@ public class CheckoutSessionFlagsTest : TestBase
         bool expectedAllowCustomerEditingTaxID = true;
         bool expectedAllowCustomerEditingZipcode = true;
         bool expectedAllowDiscountCode = true;
+        bool expectedAllowEditingAddons = true;
         bool expectedAllowPhoneNumberCollection = true;
         bool expectedAllowTaxID = true;
         bool expectedAlwaysCreateNewCustomer = true;
@@ -60,6 +62,7 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.Equal(expectedAllowCustomerEditingTaxID, model.AllowCustomerEditingTaxID);
         Assert.Equal(expectedAllowCustomerEditingZipcode, model.AllowCustomerEditingZipcode);
         Assert.Equal(expectedAllowDiscountCode, model.AllowDiscountCode);
+        Assert.Equal(expectedAllowEditingAddons, model.AllowEditingAddons);
         Assert.Equal(expectedAllowPhoneNumberCollection, model.AllowPhoneNumberCollection);
         Assert.Equal(expectedAllowTaxID, model.AllowTaxID);
         Assert.Equal(expectedAlwaysCreateNewCustomer, model.AlwaysCreateNewCustomer);
@@ -83,6 +86,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
+            AllowEditingAddons = true,
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
@@ -115,6 +119,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
+            AllowEditingAddons = true,
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
@@ -140,6 +145,7 @@ public class CheckoutSessionFlagsTest : TestBase
         bool expectedAllowCustomerEditingTaxID = true;
         bool expectedAllowCustomerEditingZipcode = true;
         bool expectedAllowDiscountCode = true;
+        bool expectedAllowEditingAddons = true;
         bool expectedAllowPhoneNumberCollection = true;
         bool expectedAllowTaxID = true;
         bool expectedAlwaysCreateNewCustomer = true;
@@ -160,6 +166,7 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.Equal(expectedAllowCustomerEditingTaxID, deserialized.AllowCustomerEditingTaxID);
         Assert.Equal(expectedAllowCustomerEditingZipcode, deserialized.AllowCustomerEditingZipcode);
         Assert.Equal(expectedAllowDiscountCode, deserialized.AllowDiscountCode);
+        Assert.Equal(expectedAllowEditingAddons, deserialized.AllowEditingAddons);
         Assert.Equal(expectedAllowPhoneNumberCollection, deserialized.AllowPhoneNumberCollection);
         Assert.Equal(expectedAllowTaxID, deserialized.AllowTaxID);
         Assert.Equal(expectedAlwaysCreateNewCustomer, deserialized.AlwaysCreateNewCustomer);
@@ -183,6 +190,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
+            AllowEditingAddons = true,
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,
@@ -220,6 +228,8 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.False(model.RawData.ContainsKey("allow_customer_editing_zipcode"));
         Assert.Null(model.AllowDiscountCode);
         Assert.False(model.RawData.ContainsKey("allow_discount_code"));
+        Assert.Null(model.AllowEditingAddons);
+        Assert.False(model.RawData.ContainsKey("allow_editing_addons"));
         Assert.Null(model.AllowPhoneNumberCollection);
         Assert.False(model.RawData.ContainsKey("allow_phone_number_collection"));
         Assert.Null(model.AllowTaxID);
@@ -257,6 +267,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingTaxID = null,
             AllowCustomerEditingZipcode = null,
             AllowDiscountCode = null,
+            AllowEditingAddons = null,
             AllowPhoneNumberCollection = null,
             AllowTaxID = null,
             AlwaysCreateNewCustomer = null,
@@ -286,6 +297,8 @@ public class CheckoutSessionFlagsTest : TestBase
         Assert.False(model.RawData.ContainsKey("allow_customer_editing_zipcode"));
         Assert.Null(model.AllowDiscountCode);
         Assert.False(model.RawData.ContainsKey("allow_discount_code"));
+        Assert.Null(model.AllowEditingAddons);
+        Assert.False(model.RawData.ContainsKey("allow_editing_addons"));
         Assert.Null(model.AllowPhoneNumberCollection);
         Assert.False(model.RawData.ContainsKey("allow_phone_number_collection"));
         Assert.Null(model.AllowTaxID);
@@ -315,6 +328,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingTaxID = null,
             AllowCustomerEditingZipcode = null,
             AllowDiscountCode = null,
+            AllowEditingAddons = null,
             AllowPhoneNumberCollection = null,
             AllowTaxID = null,
             AlwaysCreateNewCustomer = null,
@@ -341,6 +355,7 @@ public class CheckoutSessionFlagsTest : TestBase
             AllowCustomerEditingTaxID = true,
             AllowCustomerEditingZipcode = true,
             AllowDiscountCode = true,
+            AllowEditingAddons = true,
             AllowPhoneNumberCollection = true,
             AllowTaxID = true,
             AlwaysCreateNewCustomer = true,

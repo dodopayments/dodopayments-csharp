@@ -95,7 +95,7 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// brand id this payment belongs to
+    /// Whether the digital products purchased in this payment have been delivered.
     /// </summary>
     public required bool DigitalProductsDelivered
     {

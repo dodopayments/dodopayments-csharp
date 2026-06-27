@@ -20,6 +20,9 @@ public sealed record class AttachAddon : JsonModel
         init { this._rawData.Set("addon_id", value); }
     }
 
+    /// <summary>
+    /// Number of units of this addon.
+    /// </summary>
     public required int Quantity
     {
         get

@@ -21,6 +21,9 @@ public sealed record class LicenseKeyDuration : JsonModel
         init { this._rawData.Set("count", value); }
     }
 
+    /// <summary>
+    /// Unit of a duration count (e.g. license-key validity period).
+    /// </summary>
     public required ApiEnum<string, TimeInterval> Interval
     {
         get
