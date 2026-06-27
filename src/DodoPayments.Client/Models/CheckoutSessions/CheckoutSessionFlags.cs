@@ -227,6 +227,29 @@ public sealed record class CheckoutSessionFlags : JsonModel
     }
 
     /// <summary>
+    /// If true, the customer can add or remove addons on a subscription product during checkout.
+    ///
+    /// <para>Default is false</para>
+    /// </summary>
+    public bool? AllowEditingAddons
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("allow_editing_addons");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("allow_editing_addons", value);
+        }
+    }
+
+    /// <summary>
     /// If phone number is collected from customer, set it to rue
     ///
     /// <para>Default is true</para>
@@ -357,6 +380,7 @@ public sealed record class CheckoutSessionFlags : JsonModel
         _ = this.AllowCustomerEditingTaxID;
         _ = this.AllowCustomerEditingZipcode;
         _ = this.AllowDiscountCode;
+        _ = this.AllowEditingAddons;
         _ = this.AllowPhoneNumberCollection;
         _ = this.AllowTaxID;
         _ = this.AlwaysCreateNewCustomer;
