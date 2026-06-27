@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.24.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.24.0...v6.24.1) (2026-06-27)
+
+
+### Bug Fixes
+
+* **api:** add allow_editing_addons checkout flag and refine schema descriptions ([a4039a0](https://github.com/dodopayments/dodopayments-csharp/commit/a4039a0f4a88acd68eb405be214d34b3014bde40))
+* **api:** add allow_editing_addons checkout flag and refine schema descriptions ([5c5d3c3](https://github.com/dodopayments/dodopayments-csharp/commit/5c5d3c352806edae980bc2302365862fe42f7450))
+
 ## [6.24.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.23.0...v6.24.0) (2026-06-23)
 
 
