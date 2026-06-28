@@ -5,6 +5,9 @@ using DodoPayments.Client.Exceptions;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
+/// <summary>
+/// Unit of a duration count (e.g. license-key validity period).
+/// </summary>
 [JsonConverter(typeof(TimeIntervalConverter))]
 public enum TimeInterval
 {
