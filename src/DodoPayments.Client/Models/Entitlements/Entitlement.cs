@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Entitlements;
 
@@ -100,16 +101,18 @@ public sealed record class Entitlement : JsonModel
     /// <summary>
     /// Arbitrary key-value metadata supplied at creation or via PATCH.
     /// </summary>
-    public required IReadOnlyDictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -164,7 +167,10 @@ public sealed record class Entitlement : JsonModel
         this.IntegrationConfig.Validate();
         this.IntegrationType.Validate();
         _ = this.IsActive;
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         _ = this.Name;
         _ = this.UpdatedAt;
         _ = this.Description;

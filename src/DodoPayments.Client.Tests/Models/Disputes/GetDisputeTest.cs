@@ -4,6 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
+using DodoPayments.Client.Models.Misc;
 using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Disputes;
@@ -25,7 +26,7 @@ public class GetDisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -48,7 +49,7 @@ public class GetDisputeTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         string expectedDisputeID = "dispute_id";
@@ -92,7 +93,7 @@ public class GetDisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -129,7 +130,7 @@ public class GetDisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -159,7 +160,7 @@ public class GetDisputeTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         string expectedDisputeID = "dispute_id";
@@ -203,7 +204,7 @@ public class GetDisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -234,7 +235,7 @@ public class GetDisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -267,7 +268,7 @@ public class GetDisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -295,7 +296,7 @@ public class GetDisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -332,7 +333,7 @@ public class GetDisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -364,7 +365,7 @@ public class GetDisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",

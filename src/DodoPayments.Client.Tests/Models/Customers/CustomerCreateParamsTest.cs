@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Models.Customers;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Customers;
 
@@ -13,13 +14,13 @@ public class CustomerCreateParamsTest : TestBase
         {
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
 
         string expectedEmail = "email";
         string expectedName = "name";
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPhoneNumber = "phone_number";
 
         Assert.Equal(expectedEmail, parameters.Email);
@@ -73,7 +74,7 @@ public class CustomerCreateParamsTest : TestBase
         {
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
         };
 
         Assert.Null(parameters.PhoneNumber);
@@ -87,7 +88,7 @@ public class CustomerCreateParamsTest : TestBase
         {
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
 
             PhoneNumber = null,
         };
@@ -113,7 +114,7 @@ public class CustomerCreateParamsTest : TestBase
         {
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
 

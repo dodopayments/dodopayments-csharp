@@ -122,16 +122,18 @@ public sealed record class Product : JsonModel
     /// <summary>
     /// Additional custom data associated with the product
     /// </summary>
-    public required IReadOnlyDictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -347,7 +349,10 @@ public sealed record class Product : JsonModel
         }
         _ = this.IsRecurring;
         _ = this.LicenseKeyEnabled;
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         this.Price.Validate();
         _ = this.ProductID;
         this.TaxCategory.Validate();

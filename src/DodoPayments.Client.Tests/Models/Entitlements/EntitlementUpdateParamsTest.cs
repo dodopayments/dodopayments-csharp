@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Models.Entitlements;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Entitlements;
 
@@ -13,23 +14,23 @@ public class EntitlementUpdateParamsTest : TestBase
         {
             ID = "ent_jt7jcvI79Xh8eehqgWdcm",
             Description = "description",
-            IntegrationConfig = new GitHubConfig()
+            IntegrationConfig = new FeatureFlagConfig()
             {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
+                FeatureID = "feature_id",
+                FeatureType = FeatureType.Boolean,
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
         };
 
         string expectedID = "ent_jt7jcvI79Xh8eehqgWdcm";
         string expectedDescription = "description";
-        IntegrationConfig expectedIntegrationConfig = new GitHubConfig()
+        IntegrationConfig expectedIntegrationConfig = new FeatureFlagConfig()
         {
-            Permission = GitHubPermission.Pull,
-            TargetID = "target_id",
+            FeatureID = "feature_id",
+            FeatureType = FeatureType.Boolean,
         };
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
 
         Assert.Equal(expectedID, parameters.ID);
@@ -106,12 +107,12 @@ public class EntitlementUpdateParamsTest : TestBase
         {
             ID = "ent_jt7jcvI79Xh8eehqgWdcm",
             Description = "description",
-            IntegrationConfig = new GitHubConfig()
+            IntegrationConfig = new FeatureFlagConfig()
             {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
+                FeatureID = "feature_id",
+                FeatureType = FeatureType.Boolean,
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
         };
 

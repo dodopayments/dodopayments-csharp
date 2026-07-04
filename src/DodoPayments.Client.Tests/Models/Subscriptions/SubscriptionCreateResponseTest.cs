@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
 
@@ -20,10 +21,10 @@ public class SubscriptionCreateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
@@ -41,10 +42,10 @@ public class SubscriptionCreateResponseTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         int expectedRecurringPreTaxAmount = 0;
         string expectedSubscriptionID = "subscription_id";
@@ -103,10 +104,10 @@ public class SubscriptionCreateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
@@ -138,10 +139,10 @@ public class SubscriptionCreateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
@@ -166,10 +167,10 @@ public class SubscriptionCreateResponseTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         int expectedRecurringPreTaxAmount = 0;
         string expectedSubscriptionID = "subscription_id";
@@ -228,10 +229,10 @@ public class SubscriptionCreateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
@@ -257,10 +258,10 @@ public class SubscriptionCreateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
@@ -291,10 +292,10 @@ public class SubscriptionCreateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
@@ -314,10 +315,10 @@ public class SubscriptionCreateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
@@ -355,10 +356,10 @@ public class SubscriptionCreateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",
@@ -385,10 +386,10 @@ public class SubscriptionCreateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RecurringPreTaxAmount = 0,
             SubscriptionID = "subscription_id",

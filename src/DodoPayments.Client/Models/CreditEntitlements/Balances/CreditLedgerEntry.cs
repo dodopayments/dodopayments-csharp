@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.CreditEntitlements.Balances;
 
@@ -123,16 +124,18 @@ public sealed record class CreditLedgerEntry : JsonModel
     /// created at checkout). Empty when the grant has no resolvable source (e.g.
     /// credits granted directly via the API).
     /// </summary>
-    public required IReadOnlyDictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -224,7 +227,10 @@ public sealed record class CreditLedgerEntry : JsonModel
         _ = this.CreditEntitlementID;
         _ = this.CustomerID;
         _ = this.IsCredit;
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         _ = this.OverageAfter;
         _ = this.OverageBefore;
         this.TransactionType.Validate();

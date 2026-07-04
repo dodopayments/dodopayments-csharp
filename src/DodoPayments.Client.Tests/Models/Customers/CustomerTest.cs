@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Customers;
 
@@ -18,7 +19,7 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
 
@@ -27,7 +28,7 @@ public class CustomerTest : TestBase
         string expectedCustomerID = "customer_id";
         string expectedEmail = "email";
         string expectedName = "name";
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPhoneNumber = "phone_number";
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -56,7 +57,7 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
 
@@ -76,7 +77,7 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
 
@@ -92,7 +93,7 @@ public class CustomerTest : TestBase
         string expectedCustomerID = "customer_id";
         string expectedEmail = "email";
         string expectedName = "name";
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPhoneNumber = "phone_number";
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -121,7 +122,7 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
 
@@ -210,7 +211,7 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
         };
 
         Assert.Null(model.PhoneNumber);
@@ -227,7 +228,7 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
         };
 
         model.Validate();
@@ -243,7 +244,7 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
 
             PhoneNumber = null,
         };
@@ -262,7 +263,7 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
 
             PhoneNumber = null,
         };
@@ -280,7 +281,7 @@ public class CustomerTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
 

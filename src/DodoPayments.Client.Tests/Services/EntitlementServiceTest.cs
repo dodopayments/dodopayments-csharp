@@ -11,10 +11,10 @@ public class EntitlementServiceTest : TestBase
         var entitlement = await this.client.Entitlements.Create(
             new()
             {
-                IntegrationConfig = new GitHubConfig()
+                IntegrationConfig = new FeatureFlagConfig()
                 {
-                    Permission = GitHubPermission.Pull,
-                    TargetID = "target_id",
+                    FeatureID = "feature_id",
+                    FeatureType = FeatureType.Boolean,
                 },
                 IntegrationType = EntitlementIntegrationType.Discord,
                 Name = "name",

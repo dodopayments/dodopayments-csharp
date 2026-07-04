@@ -58,10 +58,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -116,7 +116,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -194,10 +194,10 @@ public class SubscriptionTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         List<MeterCreditEntitlementCartResponse> expectedMeterCreditEntitlementCart =
         [
             new()
@@ -258,7 +258,7 @@ public class SubscriptionTest : TestBase
                 Code = "code",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DiscountID = "discount_id",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Position = 0,
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
@@ -417,10 +417,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -475,7 +475,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -567,10 +567,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -625,7 +625,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -710,10 +710,10 @@ public class SubscriptionTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         List<MeterCreditEntitlementCartResponse> expectedMeterCreditEntitlementCart =
         [
             new()
@@ -774,7 +774,7 @@ public class SubscriptionTest : TestBase
                 Code = "code",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DiscountID = "discount_id",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Position = 0,
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
@@ -933,10 +933,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -991,7 +991,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -1077,10 +1077,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -1193,10 +1193,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -1286,10 +1286,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -1415,10 +1415,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -1521,10 +1521,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -1579,7 +1579,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
