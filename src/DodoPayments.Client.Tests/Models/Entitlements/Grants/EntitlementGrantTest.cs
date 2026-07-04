@@ -5,6 +5,7 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Entitlements.Grants;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Tests.Models.Entitlements.Grants;
@@ -23,7 +24,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -46,6 +47,7 @@ public class EntitlementGrantTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -69,7 +71,7 @@ public class EntitlementGrantTest : TestBase
         string expectedEntitlementID = "entitlement_id";
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -92,6 +94,11 @@ public class EntitlementGrantTest : TestBase
         };
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
+        Feature expectedFeature = new()
+        {
+            FeatureID = "feature_id",
+            FeatureType = FeatureType.Boolean,
+        };
         LicenseKeyGrant expectedLicenseKey = new()
         {
             ActivationsUsed = 0,
@@ -126,6 +133,7 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedDigitalProductDelivery, model.DigitalProductDelivery);
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
+        Assert.Equal(expectedFeature, model.Feature);
         Assert.Equal(expectedLicenseKey, model.LicenseKey);
         Assert.Equal(expectedOAuthExpiresAt, model.OAuthExpiresAt);
         Assert.Equal(expectedOAuthUrl, model.OAuthUrl);
@@ -147,7 +155,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -170,6 +178,7 @@ public class EntitlementGrantTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -206,7 +215,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -229,6 +238,7 @@ public class EntitlementGrantTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -259,7 +269,7 @@ public class EntitlementGrantTest : TestBase
         string expectedEntitlementID = "entitlement_id";
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, EntitlementGrantStatus> expectedStatus = EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -282,6 +292,11 @@ public class EntitlementGrantTest : TestBase
         };
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
+        Feature expectedFeature = new()
+        {
+            FeatureID = "feature_id",
+            FeatureType = FeatureType.Boolean,
+        };
         LicenseKeyGrant expectedLicenseKey = new()
         {
             ActivationsUsed = 0,
@@ -316,6 +331,7 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedDigitalProductDelivery, deserialized.DigitalProductDelivery);
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
+        Assert.Equal(expectedFeature, deserialized.Feature);
         Assert.Equal(expectedLicenseKey, deserialized.LicenseKey);
         Assert.Equal(expectedOAuthExpiresAt, deserialized.OAuthExpiresAt);
         Assert.Equal(expectedOAuthUrl, deserialized.OAuthUrl);
@@ -337,7 +353,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -360,6 +376,7 @@ public class EntitlementGrantTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -390,7 +407,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -403,6 +420,8 @@ public class EntitlementGrantTest : TestBase
         Assert.False(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.False(model.RawData.ContainsKey("error_message"));
+        Assert.Null(model.Feature);
+        Assert.False(model.RawData.ContainsKey("feature"));
         Assert.Null(model.LicenseKey);
         Assert.False(model.RawData.ContainsKey("license_key"));
         Assert.Null(model.OAuthExpiresAt);
@@ -431,7 +450,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -451,7 +470,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
@@ -459,6 +478,7 @@ public class EntitlementGrantTest : TestBase
             DigitalProductDelivery = null,
             ErrorCode = null,
             ErrorMessage = null,
+            Feature = null,
             LicenseKey = null,
             OAuthExpiresAt = null,
             OAuthUrl = null,
@@ -476,6 +496,8 @@ public class EntitlementGrantTest : TestBase
         Assert.True(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.True(model.RawData.ContainsKey("error_message"));
+        Assert.Null(model.Feature);
+        Assert.True(model.RawData.ContainsKey("feature"));
         Assert.Null(model.LicenseKey);
         Assert.True(model.RawData.ContainsKey("license_key"));
         Assert.Null(model.OAuthExpiresAt);
@@ -504,7 +526,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
@@ -512,6 +534,7 @@ public class EntitlementGrantTest : TestBase
             DigitalProductDelivery = null,
             ErrorCode = null,
             ErrorMessage = null,
+            Feature = null,
             LicenseKey = null,
             OAuthExpiresAt = null,
             OAuthUrl = null,
@@ -536,7 +559,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -559,6 +582,7 @@ public class EntitlementGrantTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
                 ActivationsUsed = 0,

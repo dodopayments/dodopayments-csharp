@@ -56,7 +56,7 @@ public class ProductUpdateParamsTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             Price = new OneTimePrice()
             {
@@ -115,7 +115,7 @@ public class ProductUpdateParamsTest : TestBase
             Interval = TimeInterval.Day,
         };
         bool expectedLicenseKeyEnabled = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         Price expectedPrice = new OneTimePrice()
         {
@@ -328,7 +328,7 @@ public class ProductUpdateParamsTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             Price = new OneTimePrice()
             {

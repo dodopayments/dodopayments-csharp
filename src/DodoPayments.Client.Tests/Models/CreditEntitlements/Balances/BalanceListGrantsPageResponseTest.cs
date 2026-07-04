@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements.Balances;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.CreditEntitlements.Balances;
 
@@ -29,7 +30,7 @@ public class BalanceListGrantsPageResponseTest : TestBase
                     SourceType = SourceType.Subscription,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     ParentGrantID = "parent_grant_id",
                     SourceID = "source_id",
                 },
@@ -52,7 +53,7 @@ public class BalanceListGrantsPageResponseTest : TestBase
                 SourceType = SourceType.Subscription,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 ParentGrantID = "parent_grant_id",
                 SourceID = "source_id",
             },
@@ -86,7 +87,7 @@ public class BalanceListGrantsPageResponseTest : TestBase
                     SourceType = SourceType.Subscription,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     ParentGrantID = "parent_grant_id",
                     SourceID = "source_id",
                 },
@@ -123,7 +124,7 @@ public class BalanceListGrantsPageResponseTest : TestBase
                     SourceType = SourceType.Subscription,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     ParentGrantID = "parent_grant_id",
                     SourceID = "source_id",
                 },
@@ -153,7 +154,7 @@ public class BalanceListGrantsPageResponseTest : TestBase
                 SourceType = SourceType.Subscription,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 ParentGrantID = "parent_grant_id",
                 SourceID = "source_id",
             },
@@ -187,7 +188,7 @@ public class BalanceListGrantsPageResponseTest : TestBase
                     SourceType = SourceType.Subscription,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     ParentGrantID = "parent_grant_id",
                     SourceID = "source_id",
                 },
@@ -218,7 +219,7 @@ public class BalanceListGrantsPageResponseTest : TestBase
                     SourceType = SourceType.Subscription,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     ParentGrantID = "parent_grant_id",
                     SourceID = "source_id",
                 },

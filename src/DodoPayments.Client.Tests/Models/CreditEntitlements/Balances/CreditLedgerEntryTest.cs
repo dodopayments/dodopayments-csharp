@@ -4,6 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.CreditEntitlements.Balances;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.CreditEntitlements.Balances;
 
@@ -24,7 +25,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -44,7 +45,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCustomerID = "customer_id";
         bool expectedIsCredit = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedOverageAfter = "overage_after";
         string expectedOverageBefore = "overage_before";
         ApiEnum<string, TransactionType> expectedTransactionType = TransactionType.CreditAdded;
@@ -94,7 +95,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -128,7 +129,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -155,7 +156,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCustomerID = "customer_id";
         bool expectedIsCredit = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedOverageAfter = "overage_after";
         string expectedOverageBefore = "overage_before";
         ApiEnum<string, TransactionType> expectedTransactionType = TransactionType.CreditAdded;
@@ -205,7 +206,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -233,7 +234,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -264,7 +265,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -288,7 +289,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -324,7 +325,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -353,7 +354,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,

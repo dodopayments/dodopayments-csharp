@@ -188,6 +188,7 @@ public enum IntegrationType
     Notion,
     DigitalFiles,
     LicenseKey,
+    FeatureFlag,
 }
 
 sealed class IntegrationTypeConverter : JsonConverter<IntegrationType>
@@ -208,6 +209,7 @@ sealed class IntegrationTypeConverter : JsonConverter<IntegrationType>
             "notion" => IntegrationType.Notion,
             "digital_files" => IntegrationType.DigitalFiles,
             "license_key" => IntegrationType.LicenseKey,
+            "feature_flag" => IntegrationType.FeatureFlag,
             _ => (IntegrationType)(-1),
         };
     }
@@ -230,6 +232,7 @@ sealed class IntegrationTypeConverter : JsonConverter<IntegrationType>
                 IntegrationType.Notion => "notion",
                 IntegrationType.DigitalFiles => "digital_files",
                 IntegrationType.LicenseKey => "license_key",
+                IntegrationType.FeatureFlag => "feature_flag",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -81,16 +81,18 @@ public sealed record class Refund : JsonModel
     /// <summary>
     /// Additional metadata stored with the refund.
     /// </summary>
-    public required IReadOnlyDictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -183,7 +185,10 @@ public sealed record class Refund : JsonModel
         _ = this.CreatedAt;
         this.Customer.Validate();
         _ = this.IsPartial;
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         _ = this.PaymentID;
         _ = this.RefundID;
         this.Status.Validate();

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Refunds;
 
 namespace DodoPayments.Client.Tests.Models.Refunds;
@@ -23,7 +24,7 @@ public class RefundCreateParamsTest : TestBase
                     TaxInclusive = true,
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Reason = "reason",
         };
 
@@ -37,7 +38,7 @@ public class RefundCreateParamsTest : TestBase
                 TaxInclusive = true,
             },
         ];
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedReason = "reason";
 
         Assert.Equal(expectedPaymentID, parameters.PaymentID);
@@ -111,7 +112,7 @@ public class RefundCreateParamsTest : TestBase
         var parameters = new RefundCreateParams
         {
             PaymentID = "payment_id",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
         };
 
         Assert.Null(parameters.Items);
@@ -126,7 +127,7 @@ public class RefundCreateParamsTest : TestBase
         var parameters = new RefundCreateParams
         {
             PaymentID = "payment_id",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
 
             Items = null,
             Reason = null,
@@ -163,7 +164,7 @@ public class RefundCreateParamsTest : TestBase
                     TaxInclusive = true,
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Reason = "reason",
         };
 

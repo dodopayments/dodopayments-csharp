@@ -13,6 +13,7 @@ using DodoPayments.Client.Models.Products;
 using DodoPayments.Client.Models.Products.LocalizedPrices;
 using Balances = DodoPayments.Client.Models.Balances;
 using CreditEntitlementsBalances = DodoPayments.Client.Models.CreditEntitlements.Balances;
+using Customers = DodoPayments.Client.Models.Customers;
 using Grants = DodoPayments.Client.Models.Entitlements.Grants;
 using LicenseKeys = DodoPayments.Client.Models.LicenseKeys;
 using Refunds = DodoPayments.Client.Models.Refunds;
@@ -66,6 +67,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, LicenseKeys::LicenseKeyStatus>(),
             new ApiEnumConverter<string, LicenseKeys::Source>(),
             new ApiEnumConverter<string, LicenseKeys::Status>(),
+            new ApiEnumConverter<string, Customers::IntegrationType>(),
+            new ApiEnumConverter<string, Customers::Status>(),
             new ApiEnumConverter<string, EntryType>(),
             new ApiEnumConverter<string, Refunds::RefundStatus>(),
             new ApiEnumConverter<string, Refunds::Status>(),
@@ -87,6 +90,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CreditEntitlementsBalances::LedgerEntryType>(),
             new ApiEnumConverter<string, CreditEntitlementsBalances::Status>(),
             new ApiEnumConverter<string, EntitlementIntegrationType>(),
+            new ApiEnumConverter<string, FeatureType>(),
             new ApiEnumConverter<string, GitHubPermission>(),
             new ApiEnumConverter<string, IntegrationType>(),
             new ApiEnumConverter<string, Grants::Status>(),

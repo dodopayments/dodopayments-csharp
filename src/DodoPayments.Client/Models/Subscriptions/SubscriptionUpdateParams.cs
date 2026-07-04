@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
@@ -148,16 +149,21 @@ public record class SubscriptionUpdateParams : ParamsBase
         init { this._rawBodyData.Set("disable_on_demand", value); }
     }
 
-    public IReadOnlyDictionary<string, string>? Metadata
+    /// <summary>
+    /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+    /// </summary>
+    public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+            this._rawBodyData.Set<FrozenDictionary<string, MetadataItem>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );

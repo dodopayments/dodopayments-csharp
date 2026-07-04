@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Entitlements;
 
@@ -39,6 +40,9 @@ public record class EntitlementUpdateParams : ParamsBase
     /// <summary>
     /// Integration-specific configuration supplied when creating or updating an
     /// entitlement. The shape required matches the entitlement's `integration_type`.
+    ///
+    /// <para>Untagged enum: variants are matched in order. `FeatureFlag` must precede
+    /// `LicenseKey`, whose fields are all optional and would otherwise match a `feature_flag` config.</para>
     /// </summary>
     public IntegrationConfig? IntegrationConfig
     {
@@ -50,16 +54,21 @@ public record class EntitlementUpdateParams : ParamsBase
         init { this._rawBodyData.Set("integration_config", value); }
     }
 
-    public IReadOnlyDictionary<string, string>? Metadata
+    /// <summary>
+    /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+    /// </summary>
+    public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+            this._rawBodyData.Set<FrozenDictionary<string, MetadataItem>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );

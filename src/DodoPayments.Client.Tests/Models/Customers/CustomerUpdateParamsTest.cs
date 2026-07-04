@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Models.Customers;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Customers;
 
@@ -13,14 +14,14 @@ public class CustomerUpdateParamsTest : TestBase
         {
             CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Email = "email",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             PhoneNumber = "phone_number",
         };
 
         string expectedCustomerID = "cus_TV52uJWWXt2yIoBBxpjaa";
         string expectedEmail = "email";
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         string expectedPhoneNumber = "phone_number";
 
@@ -98,7 +99,7 @@ public class CustomerUpdateParamsTest : TestBase
         {
             CustomerID = "cus_TV52uJWWXt2yIoBBxpjaa",
             Email = "email",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             PhoneNumber = "phone_number",
         };

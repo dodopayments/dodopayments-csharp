@@ -38,7 +38,7 @@ public class PaymentCreateParamsTest : TestBase
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,
@@ -77,7 +77,7 @@ public class PaymentCreateParamsTest : TestBase
         string expectedDiscountCode = "discount_code";
         List<string> expectedDiscountCodes = ["string"];
         bool expectedForce3ds = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         bool expectedPaymentLink = true;
         string expectedPaymentMethodID = "payment_method_id";
         bool expectedRedirectImmediately = true;
@@ -261,7 +261,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             RedirectImmediately = true,
             RequirePhoneNumber = true,
             ShowSavedPaymentMethods = true,
@@ -316,7 +316,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             RedirectImmediately = true,
             RequirePhoneNumber = true,
             ShowSavedPaymentMethods = true,
@@ -421,7 +421,7 @@ public class PaymentCreateParamsTest : TestBase
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,

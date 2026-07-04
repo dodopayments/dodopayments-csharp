@@ -271,16 +271,18 @@ public sealed record class CheckoutSessionRequest : JsonModel
     /// <summary>
     /// Additional metadata associated with the payment. Defaults to empty if not provided.
     /// </summary>
-    public IReadOnlyDictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNullableClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>?>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -441,7 +443,13 @@ public sealed record class CheckoutSessionRequest : JsonModel
         this.FeatureFlags?.Validate();
         _ = this.Force3ds;
         _ = this.MandateMinAmountInrPaise;
-        _ = this.Metadata;
+        if (this.Metadata != null)
+        {
+            foreach (var item in this.Metadata.Values)
+            {
+                item.Validate();
+            }
+        }
         _ = this.MinimalAddress;
         _ = this.PaymentMethodID;
         _ = this.ProductCollectionID;

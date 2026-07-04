@@ -10,6 +10,17 @@ namespace DodoPayments.Client.Tests.Models.Entitlements;
 public class IntegrationConfigTest : TestBase
 {
     [Fact]
+    public void FeatureFlagValidationWorks()
+    {
+        IntegrationConfig value = new FeatureFlagConfig()
+        {
+            FeatureID = "feature_id",
+            FeatureType = FeatureType.Boolean,
+        };
+        value.Validate();
+    }
+
+    [Fact]
     public void GitHubValidationWorks()
     {
         IntegrationConfig value = new GitHubConfig()
@@ -80,6 +91,23 @@ public class IntegrationConfigTest : TestBase
             FulfillmentMode = FulfillmentMode.Auto,
         };
         value.Validate();
+    }
+
+    [Fact]
+    public void FeatureFlagSerializationRoundtripWorks()
+    {
+        IntegrationConfig value = new FeatureFlagConfig()
+        {
+            FeatureID = "feature_id",
+            FeatureType = FeatureType.Boolean,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IntegrationConfig>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 
     [Fact]
@@ -201,6 +229,92 @@ public class IntegrationConfigTest : TestBase
         );
 
         Assert.Equal(value, deserialized);
+    }
+}
+
+public class FeatureFlagConfigTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new FeatureFlagConfig
+        {
+            FeatureID = "feature_id",
+            FeatureType = FeatureType.Boolean,
+        };
+
+        string expectedFeatureID = "feature_id";
+        ApiEnum<string, FeatureType> expectedFeatureType = FeatureType.Boolean;
+
+        Assert.Equal(expectedFeatureID, model.FeatureID);
+        Assert.Equal(expectedFeatureType, model.FeatureType);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new FeatureFlagConfig
+        {
+            FeatureID = "feature_id",
+            FeatureType = FeatureType.Boolean,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureFlagConfig>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new FeatureFlagConfig
+        {
+            FeatureID = "feature_id",
+            FeatureType = FeatureType.Boolean,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureFlagConfig>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedFeatureID = "feature_id";
+        ApiEnum<string, FeatureType> expectedFeatureType = FeatureType.Boolean;
+
+        Assert.Equal(expectedFeatureID, deserialized.FeatureID);
+        Assert.Equal(expectedFeatureType, deserialized.FeatureType);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new FeatureFlagConfig
+        {
+            FeatureID = "feature_id",
+            FeatureType = FeatureType.Boolean,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FeatureFlagConfig
+        {
+            FeatureID = "feature_id",
+            FeatureType = FeatureType.Boolean,
+        };
+
+        FeatureFlagConfig copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
