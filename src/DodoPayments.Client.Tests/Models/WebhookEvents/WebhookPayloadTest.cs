@@ -46,7 +46,7 @@ public class WebhookPayloadTest : TestBase
                     CustomerID = "customer_id",
                     Email = "email",
                     Name = "name",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
                 DigitalProductsDelivered = true,
@@ -66,7 +66,7 @@ public class WebhookPayloadTest : TestBase
                         Remarks = "remarks",
                     },
                 ],
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PaymentID = "payment_id",
                 PaymentProvider = Payments::PaymentProvider.Stripe,
                 Refunds =
@@ -105,7 +105,7 @@ public class WebhookPayloadTest : TestBase
                         Code = "code",
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         DiscountID = "discount_id",
-                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                         Position = 0,
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
@@ -157,7 +157,7 @@ public class WebhookPayloadTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -177,7 +177,7 @@ public class WebhookPayloadTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -216,7 +216,7 @@ public class WebhookPayloadTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -278,7 +278,7 @@ public class WebhookPayloadTest : TestBase
                     CustomerID = "customer_id",
                     Email = "email",
                     Name = "name",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
                 DigitalProductsDelivered = true,
@@ -298,7 +298,7 @@ public class WebhookPayloadTest : TestBase
                         Remarks = "remarks",
                     },
                 ],
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PaymentID = "payment_id",
                 PaymentProvider = Payments::PaymentProvider.Stripe,
                 Refunds =
@@ -337,7 +337,7 @@ public class WebhookPayloadTest : TestBase
                         Code = "code",
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         DiscountID = "discount_id",
-                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                         Position = 0,
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
@@ -403,7 +403,7 @@ public class WebhookPayloadTest : TestBase
                     CustomerID = "customer_id",
                     Email = "email",
                     Name = "name",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
                 DigitalProductsDelivered = true,
@@ -423,7 +423,7 @@ public class WebhookPayloadTest : TestBase
                         Remarks = "remarks",
                     },
                 ],
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PaymentID = "payment_id",
                 PaymentProvider = Payments::PaymentProvider.Stripe,
                 Refunds =
@@ -462,7 +462,7 @@ public class WebhookPayloadTest : TestBase
                         Code = "code",
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         DiscountID = "discount_id",
-                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                         Position = 0,
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
@@ -521,7 +521,7 @@ public class WebhookPayloadTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -541,7 +541,7 @@ public class WebhookPayloadTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -580,7 +580,7 @@ public class WebhookPayloadTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -642,7 +642,7 @@ public class WebhookPayloadTest : TestBase
                     CustomerID = "customer_id",
                     Email = "email",
                     Name = "name",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
                 DigitalProductsDelivered = true,
@@ -662,7 +662,7 @@ public class WebhookPayloadTest : TestBase
                         Remarks = "remarks",
                     },
                 ],
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PaymentID = "payment_id",
                 PaymentProvider = Payments::PaymentProvider.Stripe,
                 Refunds =
@@ -701,7 +701,7 @@ public class WebhookPayloadTest : TestBase
                         Code = "code",
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         DiscountID = "discount_id",
-                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                         Position = 0,
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
@@ -761,7 +761,7 @@ public class WebhookPayloadTest : TestBase
                     CustomerID = "customer_id",
                     Email = "email",
                     Name = "name",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
                 DigitalProductsDelivered = true,
@@ -781,7 +781,7 @@ public class WebhookPayloadTest : TestBase
                         Remarks = "remarks",
                     },
                 ],
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PaymentID = "payment_id",
                 PaymentProvider = Payments::PaymentProvider.Stripe,
                 Refunds =
@@ -820,7 +820,7 @@ public class WebhookPayloadTest : TestBase
                         Code = "code",
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         DiscountID = "discount_id",
-                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                         Position = 0,
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
@@ -882,7 +882,7 @@ public class DataTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -902,7 +902,7 @@ public class DataTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -941,7 +941,7 @@ public class DataTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -1018,10 +1018,10 @@ public class DataTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -1076,7 +1076,7 @@ public class DataTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -1128,11 +1128,11 @@ public class DataTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -1158,7 +1158,7 @@ public class DataTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -1211,7 +1211,7 @@ public class DataTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -1285,7 +1285,7 @@ public class DataTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1308,6 +1308,7 @@ public class DataTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -1347,7 +1348,7 @@ public class DataTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -1367,7 +1368,7 @@ public class DataTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -1406,7 +1407,7 @@ public class DataTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -1486,10 +1487,10 @@ public class DataTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -1544,7 +1545,7 @@ public class DataTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -1599,11 +1600,11 @@ public class DataTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -1632,7 +1633,7 @@ public class DataTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -1691,7 +1692,7 @@ public class DataTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -1777,7 +1778,7 @@ public class DataTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1800,6 +1801,7 @@ public class DataTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -1845,7 +1847,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -1865,7 +1867,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -1904,7 +1906,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -1950,7 +1952,7 @@ public class PaymentTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         bool expectedDigitalProductsDelivered = true;
@@ -1970,7 +1972,7 @@ public class PaymentTest : TestBase
                 Remarks = "remarks",
             },
         ];
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         ApiEnum<string, Payments::PaymentProvider> expectedPaymentProvider =
             Payments::PaymentProvider.Stripe;
@@ -2013,7 +2015,7 @@ public class PaymentTest : TestBase
                 Code = "code",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DiscountID = "discount_id",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Position = 0,
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
@@ -2139,7 +2141,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -2159,7 +2161,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -2198,7 +2200,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -2255,7 +2257,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -2275,7 +2277,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -2314,7 +2316,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -2367,7 +2369,7 @@ public class PaymentTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         bool expectedDigitalProductsDelivered = true;
@@ -2387,7 +2389,7 @@ public class PaymentTest : TestBase
                 Remarks = "remarks",
             },
         ];
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         ApiEnum<string, Payments::PaymentProvider> expectedPaymentProvider =
             Payments::PaymentProvider.Stripe;
@@ -2430,7 +2432,7 @@ public class PaymentTest : TestBase
                 Code = "code",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DiscountID = "discount_id",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Position = 0,
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
@@ -2556,7 +2558,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -2576,7 +2578,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -2615,7 +2617,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -2669,7 +2671,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -2689,7 +2691,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -2727,7 +2729,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -2784,7 +2786,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -2804,7 +2806,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -2842,7 +2844,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -2894,7 +2896,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -2914,7 +2916,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -2952,7 +2954,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -3014,7 +3016,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -3034,7 +3036,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -3072,7 +3074,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -3129,7 +3131,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -3149,7 +3151,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -3240,7 +3242,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -3260,7 +3262,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -3312,7 +3314,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -3332,7 +3334,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -3444,7 +3446,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -3464,7 +3466,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -3537,7 +3539,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -3557,7 +3559,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = Payments::PaymentProvider.Stripe,
             Refunds =
@@ -3596,7 +3598,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -3679,10 +3681,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -3737,7 +3739,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -3818,10 +3820,10 @@ public class SubscriptionTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         List<Subscriptions::MeterCreditEntitlementCartResponse> expectedMeterCreditEntitlementCart =
         [
             new()
@@ -3885,7 +3887,7 @@ public class SubscriptionTest : TestBase
                 Code = "code",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DiscountID = "discount_id",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Position = 0,
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
@@ -4046,10 +4048,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -4104,7 +4106,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -4196,10 +4198,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -4254,7 +4256,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -4342,10 +4344,10 @@ public class SubscriptionTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         List<Subscriptions::MeterCreditEntitlementCartResponse> expectedMeterCreditEntitlementCart =
         [
             new()
@@ -4409,7 +4411,7 @@ public class SubscriptionTest : TestBase
                 Code = "code",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DiscountID = "discount_id",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Position = 0,
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
@@ -4570,10 +4572,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -4628,7 +4630,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -4714,10 +4716,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -4771,7 +4773,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -4841,10 +4843,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -4898,7 +4900,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -4965,10 +4967,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -5022,7 +5024,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -5096,10 +5098,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -5153,7 +5155,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -5224,10 +5226,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -5356,10 +5358,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -5469,10 +5471,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -5612,10 +5614,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -5736,10 +5738,10 @@ public class SubscriptionTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MeterCreditEntitlementCart =
             [
                 new()
@@ -5794,7 +5796,7 @@ public class SubscriptionTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -5852,11 +5854,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -5873,11 +5875,11 @@ public class RefundTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         bool expectedIsPartial = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         string expectedRefundID = "refund_id";
         ApiEnum<string, Refunds::RefundStatus> expectedStatus = Refunds::RefundStatus.Succeeded;
@@ -5920,11 +5922,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -5952,11 +5954,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -5977,11 +5979,11 @@ public class RefundTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         bool expectedIsPartial = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         string expectedRefundID = "refund_id";
         ApiEnum<string, Refunds::RefundStatus> expectedStatus = Refunds::RefundStatus.Succeeded;
@@ -6024,11 +6026,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -6053,11 +6055,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -6082,11 +6084,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -6110,11 +6112,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -6142,11 +6144,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -6173,11 +6175,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -6203,11 +6205,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -6230,11 +6232,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -6263,11 +6265,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -6293,11 +6295,11 @@ public class RefundTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             IsPartial = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             RefundID = "refund_id",
             Status = Refunds::RefundStatus.Succeeded,
@@ -6329,7 +6331,7 @@ public class DisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -6352,7 +6354,7 @@ public class DisputeTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         string expectedDisputeID = "dispute_id";
@@ -6400,7 +6402,7 @@ public class DisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -6434,7 +6436,7 @@ public class DisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -6464,7 +6466,7 @@ public class DisputeTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         string expectedDisputeID = "dispute_id";
@@ -6512,7 +6514,7 @@ public class DisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -6543,7 +6545,7 @@ public class DisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -6576,7 +6578,7 @@ public class DisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -6604,7 +6606,7 @@ public class DisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -6641,7 +6643,7 @@ public class DisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -6673,7 +6675,7 @@ public class DisputeTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DisputeID = "dispute_id",
@@ -7015,7 +7017,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7035,7 +7037,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCustomerID = "customer_id";
         bool expectedIsCredit = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedOverageAfter = "overage_after";
         string expectedOverageBefore = "overage_before";
         ApiEnum<string, Balances::TransactionType> expectedTransactionType =
@@ -7088,7 +7090,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7122,7 +7124,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7149,7 +7151,7 @@ public class CreditLedgerEntryTest : TestBase
         string expectedCreditEntitlementID = "credit_entitlement_id";
         string expectedCustomerID = "customer_id";
         bool expectedIsCredit = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedOverageAfter = "overage_after";
         string expectedOverageBefore = "overage_before";
         ApiEnum<string, Balances::TransactionType> expectedTransactionType =
@@ -7202,7 +7204,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7230,7 +7232,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7261,7 +7263,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7285,7 +7287,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7321,7 +7323,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -7350,7 +7352,7 @@ public class CreditLedgerEntryTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = Balances::TransactionType.CreditAdded,
@@ -8185,7 +8187,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8208,6 +8210,7 @@ public class EntitlementGrantTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -8231,7 +8234,7 @@ public class EntitlementGrantTest : TestBase
         string expectedEntitlementID = "entitlement_id";
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, Grants::EntitlementGrantStatus> expectedStatus =
             Grants::EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -8255,6 +8258,7 @@ public class EntitlementGrantTest : TestBase
         };
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
+        Grants::Feature expectedFeature = new("feature_id");
         Grants::LicenseKeyGrant expectedLicenseKey = new()
         {
             ActivationsUsed = 0,
@@ -8290,6 +8294,7 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedDigitalProductDelivery, model.DigitalProductDelivery);
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
+        Assert.Equal(expectedFeature, model.Feature);
         Assert.Equal(expectedLicenseKey, model.LicenseKey);
         Assert.Equal(expectedOAuthExpiresAt, model.OAuthExpiresAt);
         Assert.Equal(expectedOAuthUrl, model.OAuthUrl);
@@ -8312,7 +8317,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8335,6 +8340,7 @@ public class EntitlementGrantTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -8371,7 +8377,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8394,6 +8400,7 @@ public class EntitlementGrantTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -8424,7 +8431,7 @@ public class EntitlementGrantTest : TestBase
         string expectedEntitlementID = "entitlement_id";
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, Grants::EntitlementGrantStatus> expectedStatus =
             Grants::EntitlementGrantStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -8448,6 +8455,7 @@ public class EntitlementGrantTest : TestBase
         };
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
+        Grants::Feature expectedFeature = new("feature_id");
         Grants::LicenseKeyGrant expectedLicenseKey = new()
         {
             ActivationsUsed = 0,
@@ -8483,6 +8491,7 @@ public class EntitlementGrantTest : TestBase
         Assert.Equal(expectedDigitalProductDelivery, deserialized.DigitalProductDelivery);
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
+        Assert.Equal(expectedFeature, deserialized.Feature);
         Assert.Equal(expectedLicenseKey, deserialized.LicenseKey);
         Assert.Equal(expectedOAuthExpiresAt, deserialized.OAuthExpiresAt);
         Assert.Equal(expectedOAuthUrl, deserialized.OAuthUrl);
@@ -8505,7 +8514,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8528,6 +8537,7 @@ public class EntitlementGrantTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -8558,12 +8568,13 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -8590,12 +8601,13 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -8619,12 +8631,13 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -8655,12 +8668,13 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             OAuthExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OAuthUrl = "oauth_url",
             PaymentID = "payment_id",
@@ -8688,7 +8702,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -8723,6 +8737,8 @@ public class EntitlementGrantTest : TestBase
         Assert.False(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.False(model.RawData.ContainsKey("error_message"));
+        Assert.Null(model.Feature);
+        Assert.False(model.RawData.ContainsKey("feature"));
         Assert.Null(model.OAuthExpiresAt);
         Assert.False(model.RawData.ContainsKey("oauth_expires_at"));
         Assert.Null(model.OAuthUrl);
@@ -8749,7 +8765,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -8793,7 +8809,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -8824,6 +8840,7 @@ public class EntitlementGrantTest : TestBase
             DeliveredAt = null,
             ErrorCode = null,
             ErrorMessage = null,
+            Feature = null,
             OAuthExpiresAt = null,
             OAuthUrl = null,
             PaymentID = null,
@@ -8838,6 +8855,8 @@ public class EntitlementGrantTest : TestBase
         Assert.True(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.True(model.RawData.ContainsKey("error_message"));
+        Assert.Null(model.Feature);
+        Assert.True(model.RawData.ContainsKey("feature"));
         Assert.Null(model.OAuthExpiresAt);
         Assert.True(model.RawData.ContainsKey("oauth_expires_at"));
         Assert.Null(model.OAuthUrl);
@@ -8864,7 +8883,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DigitalProductDelivery = new()
@@ -8895,6 +8914,7 @@ public class EntitlementGrantTest : TestBase
             DeliveredAt = null,
             ErrorCode = null,
             ErrorMessage = null,
+            Feature = null,
             OAuthExpiresAt = null,
             OAuthUrl = null,
             PaymentID = null,
@@ -8918,7 +8938,7 @@ public class EntitlementGrantTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = Grants::EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -8941,6 +8961,7 @@ public class EntitlementGrantTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             LicenseKey = new()
             {
                 ActivationsUsed = 0,

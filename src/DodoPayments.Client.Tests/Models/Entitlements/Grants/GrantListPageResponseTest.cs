@@ -4,6 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Entitlements.Grants;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Entitlements.Grants;
 
@@ -25,7 +26,7 @@ public class GrantListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     EntitlementID = "entitlement_id",
                     IntegrationType = EntitlementIntegrationType.Discord,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Status = EntitlementGrantStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -48,6 +49,7 @@ public class GrantListPageResponseTest : TestBase
                     },
                     ErrorCode = "error_code",
                     ErrorMessage = "error_message",
+                    Feature = new("feature_id"),
                     LicenseKey = new()
                     {
                         ActivationsUsed = 0,
@@ -76,7 +78,7 @@ public class GrantListPageResponseTest : TestBase
                 CustomerID = "customer_id",
                 EntitlementID = "entitlement_id",
                 IntegrationType = EntitlementIntegrationType.Discord,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Status = EntitlementGrantStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -99,6 +101,7 @@ public class GrantListPageResponseTest : TestBase
                 },
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                Feature = new("feature_id"),
                 LicenseKey = new()
                 {
                     ActivationsUsed = 0,
@@ -138,7 +141,7 @@ public class GrantListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     EntitlementID = "entitlement_id",
                     IntegrationType = EntitlementIntegrationType.Discord,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Status = EntitlementGrantStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -161,6 +164,7 @@ public class GrantListPageResponseTest : TestBase
                     },
                     ErrorCode = "error_code",
                     ErrorMessage = "error_message",
+                    Feature = new("feature_id"),
                     LicenseKey = new()
                     {
                         ActivationsUsed = 0,
@@ -203,7 +207,7 @@ public class GrantListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     EntitlementID = "entitlement_id",
                     IntegrationType = EntitlementIntegrationType.Discord,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Status = EntitlementGrantStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -226,6 +230,7 @@ public class GrantListPageResponseTest : TestBase
                     },
                     ErrorCode = "error_code",
                     ErrorMessage = "error_message",
+                    Feature = new("feature_id"),
                     LicenseKey = new()
                     {
                         ActivationsUsed = 0,
@@ -261,7 +266,7 @@ public class GrantListPageResponseTest : TestBase
                 CustomerID = "customer_id",
                 EntitlementID = "entitlement_id",
                 IntegrationType = EntitlementIntegrationType.Discord,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Status = EntitlementGrantStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -284,6 +289,7 @@ public class GrantListPageResponseTest : TestBase
                 },
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                Feature = new("feature_id"),
                 LicenseKey = new()
                 {
                     ActivationsUsed = 0,
@@ -323,7 +329,7 @@ public class GrantListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     EntitlementID = "entitlement_id",
                     IntegrationType = EntitlementIntegrationType.Discord,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Status = EntitlementGrantStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -346,6 +352,7 @@ public class GrantListPageResponseTest : TestBase
                     },
                     ErrorCode = "error_code",
                     ErrorMessage = "error_message",
+                    Feature = new("feature_id"),
                     LicenseKey = new()
                     {
                         ActivationsUsed = 0,
@@ -382,7 +389,7 @@ public class GrantListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     EntitlementID = "entitlement_id",
                     IntegrationType = EntitlementIntegrationType.Discord,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Status = EntitlementGrantStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -405,6 +412,7 @@ public class GrantListPageResponseTest : TestBase
                     },
                     ErrorCode = "error_code",
                     ErrorMessage = "error_message",
+                    Feature = new("feature_id"),
                     LicenseKey = new()
                     {
                         ActivationsUsed = 0,

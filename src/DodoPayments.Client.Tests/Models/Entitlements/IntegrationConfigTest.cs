@@ -10,6 +10,13 @@ namespace DodoPayments.Client.Tests.Models.Entitlements;
 public class IntegrationConfigTest : TestBase
 {
     [Fact]
+    public void FeatureFlagValidationWorks()
+    {
+        IntegrationConfig value = new FeatureFlagConfig("feature_id");
+        value.Validate();
+    }
+
+    [Fact]
     public void GitHubValidationWorks()
     {
         IntegrationConfig value = new GitHubConfig()
@@ -80,6 +87,19 @@ public class IntegrationConfigTest : TestBase
             FulfillmentMode = FulfillmentMode.Auto,
         };
         value.Validate();
+    }
+
+    [Fact]
+    public void FeatureFlagSerializationRoundtripWorks()
+    {
+        IntegrationConfig value = new FeatureFlagConfig("feature_id");
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<IntegrationConfig>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 
     [Fact]
@@ -201,6 +221,72 @@ public class IntegrationConfigTest : TestBase
         );
 
         Assert.Equal(value, deserialized);
+    }
+}
+
+public class FeatureFlagConfigTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new FeatureFlagConfig { FeatureID = "feature_id" };
+
+        string expectedFeatureID = "feature_id";
+        JsonElement expectedFeatureType = JsonSerializer.SerializeToElement("boolean");
+
+        Assert.Equal(expectedFeatureID, model.FeatureID);
+        Assert.True(JsonElement.DeepEquals(expectedFeatureType, model.FeatureType));
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new FeatureFlagConfig { FeatureID = "feature_id" };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureFlagConfig>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new FeatureFlagConfig { FeatureID = "feature_id" };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureFlagConfig>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedFeatureID = "feature_id";
+        JsonElement expectedFeatureType = JsonSerializer.SerializeToElement("boolean");
+
+        Assert.Equal(expectedFeatureID, deserialized.FeatureID);
+        Assert.True(JsonElement.DeepEquals(expectedFeatureType, deserialized.FeatureType));
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new FeatureFlagConfig { FeatureID = "feature_id" };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FeatureFlagConfig { FeatureID = "feature_id" };
+
+        FeatureFlagConfig copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

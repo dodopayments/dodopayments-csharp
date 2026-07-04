@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Entitlements;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Entitlements;
 
@@ -12,27 +13,19 @@ public class EntitlementCreateParamsTest : TestBase
     {
         var parameters = new EntitlementCreateParams
         {
-            IntegrationConfig = new GitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new FeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
             Description = "description",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
         };
 
-        IntegrationConfig expectedIntegrationConfig = new GitHubConfig()
-        {
-            Permission = GitHubPermission.Pull,
-            TargetID = "target_id",
-        };
+        IntegrationConfig expectedIntegrationConfig = new FeatureFlagConfig("feature_id");
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
         string expectedName = "name";
         string expectedDescription = "description";
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
 
         Assert.Equal(expectedIntegrationConfig, parameters.IntegrationConfig);
         Assert.Equal(expectedIntegrationType, parameters.IntegrationType);
@@ -53,11 +46,7 @@ public class EntitlementCreateParamsTest : TestBase
     {
         var parameters = new EntitlementCreateParams
         {
-            IntegrationConfig = new GitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new FeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
             Description = "description",
@@ -72,11 +61,7 @@ public class EntitlementCreateParamsTest : TestBase
     {
         var parameters = new EntitlementCreateParams
         {
-            IntegrationConfig = new GitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new FeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
             Description = "description",
@@ -94,14 +79,10 @@ public class EntitlementCreateParamsTest : TestBase
     {
         var parameters = new EntitlementCreateParams
         {
-            IntegrationConfig = new GitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new FeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
         };
 
         Assert.Null(parameters.Description);
@@ -113,14 +94,10 @@ public class EntitlementCreateParamsTest : TestBase
     {
         var parameters = new EntitlementCreateParams
         {
-            IntegrationConfig = new GitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new FeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
 
             Description = null,
         };
@@ -134,11 +111,7 @@ public class EntitlementCreateParamsTest : TestBase
     {
         EntitlementCreateParams parameters = new()
         {
-            IntegrationConfig = new GitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new FeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
         };
@@ -153,15 +126,11 @@ public class EntitlementCreateParamsTest : TestBase
     {
         var parameters = new EntitlementCreateParams
         {
-            IntegrationConfig = new GitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new FeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
             Description = "description",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
         };
 
         EntitlementCreateParams copied = new(parameters);

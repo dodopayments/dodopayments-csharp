@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -52,12 +53,14 @@ public sealed record class CustomerLimitedDetails : JsonModel
     /// <summary>
     /// Additional metadata associated with the customer
     /// </summary>
-    public IReadOnlyDictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNullableClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
@@ -66,7 +69,7 @@ public sealed record class CustomerLimitedDetails : JsonModel
                 return;
             }
 
-            this._rawData.Set<FrozenDictionary<string, string>?>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -92,7 +95,13 @@ public sealed record class CustomerLimitedDetails : JsonModel
         _ = this.CustomerID;
         _ = this.Email;
         _ = this.Name;
-        _ = this.Metadata;
+        if (this.Metadata != null)
+        {
+            foreach (var item in this.Metadata.Values)
+            {
+                item.Validate();
+            }
+        }
         _ = this.PhoneNumber;
     }
 

@@ -234,11 +234,11 @@ public record class Data : ModelBase
         }
     }
 
-    public IReadOnlyDictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {
         get
         {
-            return Match<IReadOnlyDictionary<string, string>?>(
+            return Match<IReadOnlyDictionary<string, MetadataItem>?>(
                 payment: (x) => x.Metadata,
                 subscription: (x) => x.Metadata,
                 refund: (x) => x.Metadata,
@@ -1320,16 +1320,21 @@ public sealed record class Payment : JsonModel
         }
     }
 
-    public required IReadOnlyDictionary<string, string> Metadata
+    /// <summary>
+    /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+    /// </summary>
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -1858,7 +1863,10 @@ public sealed record class Payment : JsonModel
         {
             item.Validate();
         }
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         _ = this.PaymentID;
         this.PaymentProvider.Validate();
         foreach (var item in this.Refunds)
@@ -2064,16 +2072,21 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("customer", value); }
     }
 
-    public required IReadOnlyDictionary<string, string> Metadata
+    /// <summary>
+    /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+    /// </summary>
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -2562,7 +2575,10 @@ public sealed record class Subscription : JsonModel
         }
         this.Currency.Validate();
         this.Customer.Validate();
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         foreach (var item in this.MeterCreditEntitlementCart)
         {
             item.Validate();
@@ -2719,16 +2735,21 @@ public sealed record class Refund : JsonModel
         init { this._rawData.Set("is_partial", value); }
     }
 
-    public required IReadOnlyDictionary<string, string> Metadata
+    /// <summary>
+    /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+    /// </summary>
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -2850,7 +2871,10 @@ public sealed record class Refund : JsonModel
         _ = this.CreatedAt;
         this.Customer.Validate();
         _ = this.IsPartial;
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         _ = this.PaymentID;
         _ = this.RefundID;
         this.Status.Validate();
@@ -3573,16 +3597,21 @@ public sealed record class CreditLedgerEntry : JsonModel
         init { this._rawData.Set("is_credit", value); }
     }
 
-    public required IReadOnlyDictionary<string, string> Metadata
+    /// <summary>
+    /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+    /// </summary>
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -3709,7 +3738,10 @@ public sealed record class CreditLedgerEntry : JsonModel
         _ = this.CreditEntitlementID;
         _ = this.CustomerID;
         _ = this.IsCredit;
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         _ = this.OverageAfter;
         _ = this.OverageBefore;
         this.TransactionType.Validate();
@@ -4520,16 +4552,21 @@ public sealed record class EntitlementGrant : JsonModel
         init { this._rawData.Set("integration_type", value); }
     }
 
-    public required IReadOnlyDictionary<string, string> Metadata
+    /// <summary>
+    /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+    /// </summary>
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -4625,6 +4662,20 @@ public sealed record class EntitlementGrant : JsonModel
             return this._rawData.GetNullableClass<string>("error_message");
         }
         init { this._rawData.Set("error_message", value); }
+    }
+
+    /// <summary>
+    /// Typed feature payload, present only when the entitlement integration is `feature_flag`;
+    /// `null` for every other integration type.
+    /// </summary>
+    public Grants::Feature? Feature
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Grants::Feature>("feature");
+        }
+        init { this._rawData.Set("feature", value); }
     }
 
     /// <summary>
@@ -4756,6 +4807,7 @@ public sealed record class EntitlementGrant : JsonModel
             DigitalProductDelivery = entitlementGrant.DigitalProductDelivery,
             ErrorCode = entitlementGrant.ErrorCode,
             ErrorMessage = entitlementGrant.ErrorMessage,
+            Feature = entitlementGrant.Feature,
             LicenseKey = entitlementGrant.LicenseKey,
             OAuthExpiresAt = entitlementGrant.OAuthExpiresAt,
             OAuthUrl = entitlementGrant.OAuthUrl,
@@ -4775,13 +4827,17 @@ public sealed record class EntitlementGrant : JsonModel
         _ = this.CustomerID;
         _ = this.EntitlementID;
         this.IntegrationType.Validate();
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         this.Status.Validate();
         _ = this.UpdatedAt;
         _ = this.DeliveredAt;
         this.DigitalProductDelivery?.Validate();
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
+        this.Feature?.Validate();
         this.LicenseKey?.Validate();
         _ = this.OAuthExpiresAt;
         _ = this.OAuthUrl;

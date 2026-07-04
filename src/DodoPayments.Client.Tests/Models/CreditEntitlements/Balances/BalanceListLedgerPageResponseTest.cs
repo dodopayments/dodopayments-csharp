@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements.Balances;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.CreditEntitlements.Balances;
 
@@ -27,7 +28,7 @@ public class BalanceListLedgerPageResponseTest : TestBase
                     CreditEntitlementID = "credit_entitlement_id",
                     CustomerID = "customer_id",
                     IsCredit = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     OverageAfter = "overage_after",
                     OverageBefore = "overage_before",
                     TransactionType = TransactionType.CreditAdded,
@@ -53,7 +54,7 @@ public class BalanceListLedgerPageResponseTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
@@ -90,7 +91,7 @@ public class BalanceListLedgerPageResponseTest : TestBase
                     CreditEntitlementID = "credit_entitlement_id",
                     CustomerID = "customer_id",
                     IsCredit = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     OverageAfter = "overage_after",
                     OverageBefore = "overage_before",
                     TransactionType = TransactionType.CreditAdded,
@@ -130,7 +131,7 @@ public class BalanceListLedgerPageResponseTest : TestBase
                     CreditEntitlementID = "credit_entitlement_id",
                     CustomerID = "customer_id",
                     IsCredit = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     OverageAfter = "overage_after",
                     OverageBefore = "overage_before",
                     TransactionType = TransactionType.CreditAdded,
@@ -163,7 +164,7 @@ public class BalanceListLedgerPageResponseTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
@@ -200,7 +201,7 @@ public class BalanceListLedgerPageResponseTest : TestBase
                     CreditEntitlementID = "credit_entitlement_id",
                     CustomerID = "customer_id",
                     IsCredit = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     OverageAfter = "overage_after",
                     OverageBefore = "overage_before",
                     TransactionType = TransactionType.CreditAdded,
@@ -234,7 +235,7 @@ public class BalanceListLedgerPageResponseTest : TestBase
                     CreditEntitlementID = "credit_entitlement_id",
                     CustomerID = "customer_id",
                     IsCredit = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     OverageAfter = "overage_after",
                     OverageBefore = "overage_before",
                     TransactionType = TransactionType.CreditAdded,

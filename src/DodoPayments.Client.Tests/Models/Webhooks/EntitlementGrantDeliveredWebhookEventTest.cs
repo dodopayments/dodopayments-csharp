@@ -4,6 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Entitlements.Grants;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
@@ -25,7 +26,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
                 CustomerID = "customer_id",
                 EntitlementID = "entitlement_id",
                 IntegrationType = EntitlementIntegrationType.Discord,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Status = EntitlementGrantStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -48,6 +49,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
                 },
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                Feature = new("feature_id"),
                 LicenseKey = new()
                 {
                     ActivationsUsed = 0,
@@ -75,7 +77,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -98,6 +100,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -136,7 +139,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
                 CustomerID = "customer_id",
                 EntitlementID = "entitlement_id",
                 IntegrationType = EntitlementIntegrationType.Discord,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Status = EntitlementGrantStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -159,6 +162,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
                 },
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                Feature = new("feature_id"),
                 LicenseKey = new()
                 {
                     ActivationsUsed = 0,
@@ -200,7 +204,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
                 CustomerID = "customer_id",
                 EntitlementID = "entitlement_id",
                 IntegrationType = EntitlementIntegrationType.Discord,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Status = EntitlementGrantStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -223,6 +227,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
                 },
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                Feature = new("feature_id"),
                 LicenseKey = new()
                 {
                     ActivationsUsed = 0,
@@ -257,7 +262,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
             CustomerID = "customer_id",
             EntitlementID = "entitlement_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Status = EntitlementGrantStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -280,6 +285,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
             },
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            Feature = new("feature_id"),
             LicenseKey = new()
             {
                 ActivationsUsed = 0,
@@ -318,7 +324,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
                 CustomerID = "customer_id",
                 EntitlementID = "entitlement_id",
                 IntegrationType = EntitlementIntegrationType.Discord,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Status = EntitlementGrantStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -341,6 +347,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
                 },
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                Feature = new("feature_id"),
                 LicenseKey = new()
                 {
                     ActivationsUsed = 0,
@@ -376,7 +383,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
                 CustomerID = "customer_id",
                 EntitlementID = "entitlement_id",
                 IntegrationType = EntitlementIntegrationType.Discord,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Status = EntitlementGrantStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -399,6 +406,7 @@ public class EntitlementGrantDeliveredWebhookEventTest : TestBase
                 },
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                Feature = new("feature_id"),
                 LicenseKey = new()
                 {
                     ActivationsUsed = 0,

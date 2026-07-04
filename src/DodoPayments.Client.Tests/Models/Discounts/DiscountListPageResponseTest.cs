@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Discounts;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Discounts;
 
@@ -22,7 +23,7 @@ public class DiscountListPageResponseTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
@@ -44,7 +45,7 @@ public class DiscountListPageResponseTest : TestBase
                 Code = "code",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DiscountID = "discount_id",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
                 TimesUsed = 0,
@@ -77,7 +78,7 @@ public class DiscountListPageResponseTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
@@ -113,7 +114,7 @@ public class DiscountListPageResponseTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
@@ -142,7 +143,7 @@ public class DiscountListPageResponseTest : TestBase
                 Code = "code",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DiscountID = "discount_id",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
                 TimesUsed = 0,
@@ -175,7 +176,7 @@ public class DiscountListPageResponseTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
@@ -205,7 +206,7 @@ public class DiscountListPageResponseTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,

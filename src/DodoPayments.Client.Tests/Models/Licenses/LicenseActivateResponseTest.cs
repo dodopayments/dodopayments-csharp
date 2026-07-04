@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Licenses;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Licenses;
@@ -22,7 +23,7 @@ public class LicenseActivateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             LicenseKeyID = "lic_123",
@@ -38,7 +39,7 @@ public class LicenseActivateResponseTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         string expectedLicenseKeyID = "lic_123";
@@ -67,7 +68,7 @@ public class LicenseActivateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             LicenseKeyID = "lic_123",
@@ -97,7 +98,7 @@ public class LicenseActivateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             LicenseKeyID = "lic_123",
@@ -120,7 +121,7 @@ public class LicenseActivateResponseTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         string expectedLicenseKeyID = "lic_123";
@@ -149,7 +150,7 @@ public class LicenseActivateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             LicenseKeyID = "lic_123",
@@ -173,7 +174,7 @@ public class LicenseActivateResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             LicenseKeyID = "lic_123",
