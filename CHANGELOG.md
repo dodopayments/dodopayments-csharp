@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.25.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.24.1...v6.25.0) (2026-07-04)
+
+
+### Features
+
+* **api:** register Feature/FeatureType models and expose customer entitlement-grants list endpoint ([f332deb](https://github.com/dodopayments/dodopayments-csharp/commit/f332debcddd539f9623810977e12d79b456a7d40))
+* **api:** register Feature/FeatureType models and expose customer entitlement-grants list endpoint ([4bb90ee](https://github.com/dodopayments/dodopayments-csharp/commit/4bb90ee3c59320fdd5c43bacabff9fcb9168eb63))
+
 ## [6.24.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.23.0...v6.24.0) (2026-06-23)
 
 
