@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Models.Entitlements.Grants;
@@ -113,16 +114,18 @@ public sealed record class EntitlementGrant : JsonModel
     /// <summary>
     /// Arbitrary key-value metadata recorded on the grant.
     /// </summary>
-    public required IReadOnlyDictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -208,6 +211,20 @@ public sealed record class EntitlementGrant : JsonModel
             return this._rawData.GetNullableClass<string>("error_message");
         }
         init { this._rawData.Set("error_message", value); }
+    }
+
+    /// <summary>
+    /// Typed feature payload, present only when the entitlement integration is `feature_flag`;
+    /// `null` for every other integration type.
+    /// </summary>
+    public Feature? Feature
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Feature>("feature");
+        }
+        init { this._rawData.Set("feature", value); }
     }
 
     /// <summary>
@@ -313,13 +330,17 @@ public sealed record class EntitlementGrant : JsonModel
         _ = this.CustomerID;
         _ = this.EntitlementID;
         this.IntegrationType.Validate();
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         this.Status.Validate();
         _ = this.UpdatedAt;
         _ = this.DeliveredAt;
         this.DigitalProductDelivery?.Validate();
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
+        this.Feature?.Validate();
         this.LicenseKey?.Validate();
         _ = this.OAuthExpiresAt;
         _ = this.OAuthUrl;
@@ -417,4 +438,94 @@ sealed class EntitlementGrantStatusConverter : JsonConverter<EntitlementGrantSta
             options
         );
     }
+}
+
+/// <summary>
+/// Typed feature payload, present only when the entitlement integration is `feature_flag`;
+/// `null` for every other integration type.
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Feature, FeatureFromRaw>))]
+public sealed record class Feature : JsonModel
+{
+    /// <summary>
+    /// Identifier of the capability this grant confers.
+    /// </summary>
+    public required string FeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("feature_id");
+        }
+        init { this._rawData.Set("feature_id", value); }
+    }
+
+    /// <summary>
+    /// Type of capability conferred.
+    /// </summary>
+    public JsonElement FeatureType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("feature_type");
+        }
+        init { this._rawData.Set("feature_type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.FeatureID;
+        if (!JsonElement.DeepEquals(this.FeatureType, JsonSerializer.SerializeToElement("boolean")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
+    }
+
+    public Feature()
+    {
+        this.FeatureType = JsonSerializer.SerializeToElement("boolean");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Feature(Feature feature)
+        : base(feature) { }
+#pragma warning restore CS8618
+
+    public Feature(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.FeatureType = JsonSerializer.SerializeToElement("boolean");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Feature(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="FeatureFromRaw.FromRawUnchecked"/>
+    public static Feature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public Feature(string featureID)
+        : this()
+    {
+        this.FeatureID = featureID;
+    }
+}
+
+class FeatureFromRaw : IFromRawJson<Feature>
+{
+    /// <inheritdoc/>
+    public Feature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Feature.FromRawUnchecked(rawData);
 }

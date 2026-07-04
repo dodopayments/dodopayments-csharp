@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Customers;
 
@@ -22,7 +23,7 @@ public class CustomerListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     Email = "email",
                     Name = "name",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
             ],
@@ -37,7 +38,7 @@ public class CustomerListPageResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
         ];
@@ -63,7 +64,7 @@ public class CustomerListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     Email = "email",
                     Name = "name",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
             ],
@@ -92,7 +93,7 @@ public class CustomerListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     Email = "email",
                     Name = "name",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
             ],
@@ -114,7 +115,7 @@ public class CustomerListPageResponseTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
         ];
@@ -140,7 +141,7 @@ public class CustomerListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     Email = "email",
                     Name = "name",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
             ],
@@ -163,7 +164,7 @@ public class CustomerListPageResponseTest : TestBase
                     CustomerID = "customer_id",
                     Email = "email",
                     Name = "name",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PhoneNumber = "phone_number",
                 },
             ],

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
@@ -23,7 +24,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = EffectiveAt.Immediately,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
         };
 
@@ -37,7 +38,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
         string expectedDiscountCode = "discount_code";
         List<string> expectedDiscountCodes = ["string"];
         ApiEnum<string, EffectiveAt> expectedEffectiveAt = EffectiveAt.Immediately;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, OnPaymentFailure> expectedOnPaymentFailure = OnPaymentFailure.PreventChange;
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
@@ -86,7 +87,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
         };
 
@@ -107,7 +108,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
 
             // Null should be interpreted as omitted for these properties
@@ -214,7 +215,7 @@ public class SubscriptionChangePlanParamsTest : TestBase
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = EffectiveAt.Immediately,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = OnPaymentFailure.PreventChange,
         };
 

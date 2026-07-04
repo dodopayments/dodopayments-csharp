@@ -74,16 +74,21 @@ public sealed record class PaymentListResponse : JsonModel
         init { this._rawData.Set("has_license_key", value); }
     }
 
-    public required IReadOnlyDictionary<string, string> Metadata
+    /// <summary>
+    /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+    /// </summary>
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -257,7 +262,10 @@ public sealed record class PaymentListResponse : JsonModel
         this.Customer.Validate();
         _ = this.DigitalProductsDelivered;
         _ = this.HasLicenseKey;
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         _ = this.PaymentID;
         this.PaymentProvider.Validate();
         _ = this.TotalAmount;

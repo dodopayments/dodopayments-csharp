@@ -33,7 +33,7 @@ public class SubscriptionCreateParamsTest : TestBase
             DiscountCodes = ["string"],
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnDemand = new()
             {
                 MandateOnly = true,
@@ -84,7 +84,7 @@ public class SubscriptionCreateParamsTest : TestBase
         List<string> expectedDiscountCodes = ["string"];
         bool expectedForce3ds = true;
         int expectedMandateMinAmountInrPaise = 0;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         OnDemandSubscription expectedOnDemand = new()
         {
             MandateOnly = true,
@@ -311,7 +311,7 @@ public class SubscriptionCreateParamsTest : TestBase
             Customer = new AttachExistingCustomer("customer_id"),
             ProductID = "product_id",
             Quantity = 0,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             RedirectImmediately = true,
             RequirePhoneNumber = true,
             ShowSavedPaymentMethods = true,
@@ -367,7 +367,7 @@ public class SubscriptionCreateParamsTest : TestBase
             Customer = new AttachExistingCustomer("customer_id"),
             ProductID = "product_id",
             Quantity = 0,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             RedirectImmediately = true,
             RequirePhoneNumber = true,
             ShowSavedPaymentMethods = true,
@@ -473,7 +473,7 @@ public class SubscriptionCreateParamsTest : TestBase
             DiscountCodes = ["string"],
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnDemand = new()
             {
                 MandateOnly = true,

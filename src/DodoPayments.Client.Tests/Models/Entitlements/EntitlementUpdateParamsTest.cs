@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Models.Entitlements;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Entitlements;
 
@@ -13,23 +14,15 @@ public class EntitlementUpdateParamsTest : TestBase
         {
             ID = "ent_jt7jcvI79Xh8eehqgWdcm",
             Description = "description",
-            IntegrationConfig = new GitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            IntegrationConfig = new FeatureFlagConfig("feature_id"),
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
         };
 
         string expectedID = "ent_jt7jcvI79Xh8eehqgWdcm";
         string expectedDescription = "description";
-        IntegrationConfig expectedIntegrationConfig = new GitHubConfig()
-        {
-            Permission = GitHubPermission.Pull,
-            TargetID = "target_id",
-        };
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        IntegrationConfig expectedIntegrationConfig = new FeatureFlagConfig("feature_id");
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
 
         Assert.Equal(expectedID, parameters.ID);
@@ -106,12 +99,8 @@ public class EntitlementUpdateParamsTest : TestBase
         {
             ID = "ent_jt7jcvI79Xh8eehqgWdcm",
             Description = "description",
-            IntegrationConfig = new GitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            IntegrationConfig = new FeatureFlagConfig("feature_id"),
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
         };
 

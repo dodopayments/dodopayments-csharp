@@ -13,11 +13,7 @@ public class ProductEntitlementSummaryTest : TestBase
         var model = new ProductEntitlementSummary
         {
             ID = "id",
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
             Description = "description",
@@ -25,11 +21,7 @@ public class ProductEntitlementSummaryTest : TestBase
 
         string expectedID = "id";
         IntegrationConfigResponse expectedIntegrationConfig =
-            new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            };
+            new IntegrationConfigResponseFeatureFlagConfig("feature_id");
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
         string expectedName = "name";
@@ -48,11 +40,7 @@ public class ProductEntitlementSummaryTest : TestBase
         var model = new ProductEntitlementSummary
         {
             ID = "id",
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
             Description = "description",
@@ -73,11 +61,7 @@ public class ProductEntitlementSummaryTest : TestBase
         var model = new ProductEntitlementSummary
         {
             ID = "id",
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
             Description = "description",
@@ -92,11 +76,7 @@ public class ProductEntitlementSummaryTest : TestBase
 
         string expectedID = "id";
         IntegrationConfigResponse expectedIntegrationConfig =
-            new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            };
+            new IntegrationConfigResponseFeatureFlagConfig("feature_id");
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
         string expectedName = "name";
@@ -115,11 +95,7 @@ public class ProductEntitlementSummaryTest : TestBase
         var model = new ProductEntitlementSummary
         {
             ID = "id",
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
             Description = "description",
@@ -134,11 +110,7 @@ public class ProductEntitlementSummaryTest : TestBase
         var model = new ProductEntitlementSummary
         {
             ID = "id",
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
         };
@@ -153,11 +125,7 @@ public class ProductEntitlementSummaryTest : TestBase
         var model = new ProductEntitlementSummary
         {
             ID = "id",
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
         };
@@ -171,11 +139,7 @@ public class ProductEntitlementSummaryTest : TestBase
         var model = new ProductEntitlementSummary
         {
             ID = "id",
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
 
@@ -192,11 +156,7 @@ public class ProductEntitlementSummaryTest : TestBase
         var model = new ProductEntitlementSummary
         {
             ID = "id",
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
 
@@ -212,11 +172,7 @@ public class ProductEntitlementSummaryTest : TestBase
         var model = new ProductEntitlementSummary
         {
             ID = "id",
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             Name = "name",
             Description = "description",

@@ -108,6 +108,7 @@ public class IntegrationTypeTest : TestBase
     [InlineData(IntegrationType.Notion)]
     [InlineData(IntegrationType.DigitalFiles)]
     [InlineData(IntegrationType.LicenseKey)]
+    [InlineData(IntegrationType.FeatureFlag)]
     public void Validation_Works(IntegrationType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -136,6 +137,7 @@ public class IntegrationTypeTest : TestBase
     [InlineData(IntegrationType.Notion)]
     [InlineData(IntegrationType.DigitalFiles)]
     [InlineData(IntegrationType.LicenseKey)]
+    [InlineData(IntegrationType.FeatureFlag)]
     public void SerializationRoundtrip_Works(IntegrationType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

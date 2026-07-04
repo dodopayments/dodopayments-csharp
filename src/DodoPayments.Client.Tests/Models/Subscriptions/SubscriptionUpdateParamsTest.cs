@@ -49,7 +49,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             CustomerBusinessName = "customer_business_name",
             CustomerName = "customer_name",
             DisableOnDemand = new(DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")),
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionStatus.Pending,
             TaxID = "tax_id",
@@ -91,7 +91,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         DisableOnDemand expectedDisableOnDemand = new(
             DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")
         );
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, SubscriptionStatus> expectedStatus = SubscriptionStatus.Pending;
         string expectedTaxID = "tax_id";
@@ -266,7 +266,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             CustomerBusinessName = "customer_business_name",
             CustomerName = "customer_name",
             DisableOnDemand = new(DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")),
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionStatus.Pending,
             TaxID = "tax_id",

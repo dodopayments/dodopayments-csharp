@@ -136,7 +136,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             },
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
@@ -283,7 +283,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
         };
         bool expectedForce3ds = true;
         int expectedMandateMinAmountInrPaise = 0;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMinimalAddress = true;
         string expectedPaymentMethodID = "payment_method_id";
         string expectedProductCollectionID = "product_collection_id";
@@ -414,7 +414,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             DiscountCodes = ["string"],
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
@@ -499,7 +499,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             DiscountCodes = ["string"],
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",
             ReturnUrl = "return_url",
@@ -993,7 +993,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
             },
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             MinimalAddress = true,
             PaymentMethodID = "payment_method_id",
             ProductCollectionID = "product_collection_id",

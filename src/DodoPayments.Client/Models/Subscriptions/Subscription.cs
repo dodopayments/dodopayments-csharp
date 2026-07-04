@@ -139,16 +139,18 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Additional custom data associated with the subscription
     /// </summary>
-    public required IReadOnlyDictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -572,7 +574,10 @@ public sealed record class Subscription : JsonModel
         }
         this.Currency.Validate();
         this.Customer.Validate();
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         foreach (var item in this.MeterCreditEntitlementCart)
         {
             item.Validate();

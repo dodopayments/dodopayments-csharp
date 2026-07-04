@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Entitlements;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Entitlements;
 
@@ -16,14 +17,10 @@ public class EntitlementTest : TestBase
             ID = "id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -33,15 +30,11 @@ public class EntitlementTest : TestBase
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         IntegrationConfigResponse expectedIntegrationConfig =
-            new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            };
+            new IntegrationConfigResponseFeatureFlagConfig("feature_id");
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
         bool expectedIsActive = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
@@ -72,14 +65,10 @@ public class EntitlementTest : TestBase
             ID = "id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -102,14 +91,10 @@ public class EntitlementTest : TestBase
             ID = "id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -126,15 +111,11 @@ public class EntitlementTest : TestBase
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         IntegrationConfigResponse expectedIntegrationConfig =
-            new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            };
+            new IntegrationConfigResponseFeatureFlagConfig("feature_id");
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
         bool expectedIsActive = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
@@ -165,14 +146,10 @@ public class EntitlementTest : TestBase
             ID = "id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -189,14 +166,10 @@ public class EntitlementTest : TestBase
             ID = "id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -213,14 +186,10 @@ public class EntitlementTest : TestBase
             ID = "id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -236,14 +205,10 @@ public class EntitlementTest : TestBase
             ID = "id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
@@ -262,14 +227,10 @@ public class EntitlementTest : TestBase
             ID = "id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
@@ -287,14 +248,10 @@ public class EntitlementTest : TestBase
             ID = "id",
             BusinessID = "business_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-            {
-                Permission = GitHubPermission.Pull,
-                TargetID = "target_id",
-            },
+            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig("feature_id"),
             IntegrationType = EntitlementIntegrationType.Discord,
             IsActive = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",

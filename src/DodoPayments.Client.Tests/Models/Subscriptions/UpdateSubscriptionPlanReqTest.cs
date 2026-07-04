@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Subscriptions;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
@@ -22,7 +23,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
 
@@ -39,7 +40,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         List<string> expectedDiscountCodes = ["string"];
         ApiEnum<string, UpdateSubscriptionPlanReqEffectiveAt> expectedEffectiveAt =
             UpdateSubscriptionPlanReqEffectiveAt.Immediately;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, UpdateSubscriptionPlanReqOnPaymentFailure> expectedOnPaymentFailure =
             UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange;
 
@@ -86,7 +87,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
 
@@ -113,7 +114,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
 
@@ -137,7 +138,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         List<string> expectedDiscountCodes = ["string"];
         ApiEnum<string, UpdateSubscriptionPlanReqEffectiveAt> expectedEffectiveAt =
             UpdateSubscriptionPlanReqEffectiveAt.Immediately;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, UpdateSubscriptionPlanReqOnPaymentFailure> expectedOnPaymentFailure =
             UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange;
 
@@ -187,7 +188,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
 
@@ -207,7 +208,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
 
@@ -228,7 +229,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
 
@@ -248,7 +249,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
 
             // Null should be interpreted as omitted for these properties
@@ -272,7 +273,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
 
             // Null should be interpreted as omitted for these properties
@@ -392,7 +393,7 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
 

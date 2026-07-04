@@ -27,18 +27,16 @@ public class ProductListPageResponseTest : TestBase
                         new()
                         {
                             ID = "id",
-                            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-                            {
-                                Permission = GitHubPermission.Pull,
-                                TargetID = "target_id",
-                            },
+                            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig(
+                                "feature_id"
+                            ),
                             IntegrationType = EntitlementIntegrationType.Discord,
                             Name = "name",
                             Description = "description",
                         },
                     ],
                     IsRecurring = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     ProductID = "product_id",
                     TaxCategory = TaxCategory.DigitalProducts,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -74,18 +72,16 @@ public class ProductListPageResponseTest : TestBase
                     new()
                     {
                         ID = "id",
-                        IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-                        {
-                            Permission = GitHubPermission.Pull,
-                            TargetID = "target_id",
-                        },
+                        IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig(
+                            "feature_id"
+                        ),
                         IntegrationType = EntitlementIntegrationType.Discord,
                         Name = "name",
                         Description = "description",
                     },
                 ],
                 IsRecurring = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 ProductID = "product_id",
                 TaxCategory = TaxCategory.DigitalProducts,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -132,18 +128,16 @@ public class ProductListPageResponseTest : TestBase
                         new()
                         {
                             ID = "id",
-                            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-                            {
-                                Permission = GitHubPermission.Pull,
-                                TargetID = "target_id",
-                            },
+                            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig(
+                                "feature_id"
+                            ),
                             IntegrationType = EntitlementIntegrationType.Discord,
                             Name = "name",
                             Description = "description",
                         },
                     ],
                     IsRecurring = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     ProductID = "product_id",
                     TaxCategory = TaxCategory.DigitalProducts,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -193,18 +187,16 @@ public class ProductListPageResponseTest : TestBase
                         new()
                         {
                             ID = "id",
-                            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-                            {
-                                Permission = GitHubPermission.Pull,
-                                TargetID = "target_id",
-                            },
+                            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig(
+                                "feature_id"
+                            ),
                             IntegrationType = EntitlementIntegrationType.Discord,
                             Name = "name",
                             Description = "description",
                         },
                     ],
                     IsRecurring = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     ProductID = "product_id",
                     TaxCategory = TaxCategory.DigitalProducts,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -247,18 +239,16 @@ public class ProductListPageResponseTest : TestBase
                     new()
                     {
                         ID = "id",
-                        IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-                        {
-                            Permission = GitHubPermission.Pull,
-                            TargetID = "target_id",
-                        },
+                        IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig(
+                            "feature_id"
+                        ),
                         IntegrationType = EntitlementIntegrationType.Discord,
                         Name = "name",
                         Description = "description",
                     },
                 ],
                 IsRecurring = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 ProductID = "product_id",
                 TaxCategory = TaxCategory.DigitalProducts,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -305,18 +295,16 @@ public class ProductListPageResponseTest : TestBase
                         new()
                         {
                             ID = "id",
-                            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-                            {
-                                Permission = GitHubPermission.Pull,
-                                TargetID = "target_id",
-                            },
+                            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig(
+                                "feature_id"
+                            ),
                             IntegrationType = EntitlementIntegrationType.Discord,
                             Name = "name",
                             Description = "description",
                         },
                     ],
                     IsRecurring = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     ProductID = "product_id",
                     TaxCategory = TaxCategory.DigitalProducts,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -360,18 +348,16 @@ public class ProductListPageResponseTest : TestBase
                         new()
                         {
                             ID = "id",
-                            IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
-                            {
-                                Permission = GitHubPermission.Pull,
-                                TargetID = "target_id",
-                            },
+                            IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig(
+                                "feature_id"
+                            ),
                             IntegrationType = EntitlementIntegrationType.Discord,
                             Name = "name",
                             Description = "description",
                         },
                     ],
                     IsRecurring = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     ProductID = "product_id",
                     TaxCategory = TaxCategory.DigitalProducts,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

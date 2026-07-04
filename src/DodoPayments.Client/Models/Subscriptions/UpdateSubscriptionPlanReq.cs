@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -157,16 +158,18 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
     /// Metadata for the payment. If not passed, the metadata of the subscription
     /// will be taken
     /// </summary>
-    public IReadOnlyDictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNullableClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>?>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -206,7 +209,13 @@ public sealed record class UpdateSubscriptionPlanReq : JsonModel
         _ = this.DiscountCode;
         _ = this.DiscountCodes;
         this.EffectiveAt?.Validate();
-        _ = this.Metadata;
+        if (this.Metadata != null)
+        {
+            foreach (var item in this.Metadata.Values)
+            {
+                item.Validate();
+            }
+        }
         this.OnPaymentFailure?.Validate();
     }
 
