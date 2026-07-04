@@ -36,6 +36,15 @@ public record class IntegrationConfigResponse : ModelBase
     }
 
     public IntegrationConfigResponse(
+        IntegrationConfigResponseFeatureFlagConfig value,
+        JsonElement? element = null
+    )
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public IntegrationConfigResponse(
         IntegrationConfigResponseGitHubConfig value,
         JsonElement? element = null
     )
@@ -110,6 +119,29 @@ public record class IntegrationConfigResponse : ModelBase
     public IntegrationConfigResponse(JsonElement element)
     {
         this._element = element;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="IntegrationConfigResponseFeatureFlagConfig"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickFeatureFlagConfig(out var value)) {
+    ///     // `value` is of type `IntegrationConfigResponseFeatureFlagConfig`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickFeatureFlagConfig(
+        [NotNullWhen(true)] out IntegrationConfigResponseFeatureFlagConfig? value
+    )
+    {
+        value = this.Value as IntegrationConfigResponseFeatureFlagConfig;
+        return value != null;
     }
 
     /// <summary>
@@ -310,6 +342,7 @@ public record class IntegrationConfigResponse : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
+    ///     (IntegrationConfigResponseFeatureFlagConfig value) =&gt; {...},
     ///     (IntegrationConfigResponseGitHubConfig value) =&gt; {...},
     ///     (IntegrationConfigResponseDiscordConfig value) =&gt; {...},
     ///     (IntegrationConfigResponseTelegramConfig value) =&gt; {...},
@@ -323,6 +356,7 @@ public record class IntegrationConfigResponse : ModelBase
     /// </example>
     /// </summary>
     public void Switch(
+        Action<IntegrationConfigResponseFeatureFlagConfig> featureFlagConfig,
         Action<IntegrationConfigResponseGitHubConfig> githubConfig,
         Action<IntegrationConfigResponseDiscordConfig> discordConfig,
         Action<IntegrationConfigResponseTelegramConfig> telegramConfig,
@@ -335,6 +369,9 @@ public record class IntegrationConfigResponse : ModelBase
     {
         switch (this.Value)
         {
+            case IntegrationConfigResponseFeatureFlagConfig value:
+                featureFlagConfig(value);
+                break;
             case IntegrationConfigResponseGitHubConfig value:
                 githubConfig(value);
                 break;
@@ -381,6 +418,7 @@ public record class IntegrationConfigResponse : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
+    ///     (IntegrationConfigResponseFeatureFlagConfig value) =&gt; {...},
     ///     (IntegrationConfigResponseGitHubConfig value) =&gt; {...},
     ///     (IntegrationConfigResponseDiscordConfig value) =&gt; {...},
     ///     (IntegrationConfigResponseTelegramConfig value) =&gt; {...},
@@ -394,6 +432,7 @@ public record class IntegrationConfigResponse : ModelBase
     /// </example>
     /// </summary>
     public T Match<T>(
+        Func<IntegrationConfigResponseFeatureFlagConfig, T> featureFlagConfig,
         Func<IntegrationConfigResponseGitHubConfig, T> githubConfig,
         Func<IntegrationConfigResponseDiscordConfig, T> discordConfig,
         Func<IntegrationConfigResponseTelegramConfig, T> telegramConfig,
@@ -406,6 +445,7 @@ public record class IntegrationConfigResponse : ModelBase
     {
         return this.Value switch
         {
+            IntegrationConfigResponseFeatureFlagConfig value => featureFlagConfig(value),
             IntegrationConfigResponseGitHubConfig value => githubConfig(value),
             IntegrationConfigResponseDiscordConfig value => discordConfig(value),
             IntegrationConfigResponseTelegramConfig value => telegramConfig(value),
@@ -419,6 +459,10 @@ public record class IntegrationConfigResponse : ModelBase
             ),
         };
     }
+
+    public static implicit operator IntegrationConfigResponse(
+        IntegrationConfigResponseFeatureFlagConfig value
+    ) => new(value);
 
     public static implicit operator IntegrationConfigResponse(
         IntegrationConfigResponseGitHubConfig value
@@ -471,6 +515,7 @@ public record class IntegrationConfigResponse : ModelBase
             );
         }
         this.Switch(
+            (featureFlagConfig) => featureFlagConfig.Validate(),
             (githubConfig) => githubConfig.Validate(),
             (discordConfig) => discordConfig.Validate(),
             (telegramConfig) => telegramConfig.Validate(),
@@ -502,14 +547,15 @@ public record class IntegrationConfigResponse : ModelBase
     {
         return this.Value switch
         {
-            IntegrationConfigResponseGitHubConfig _ => 0,
-            IntegrationConfigResponseDiscordConfig _ => 1,
-            IntegrationConfigResponseTelegramConfig _ => 2,
-            IntegrationConfigResponseFigmaConfig _ => 3,
-            IntegrationConfigResponseFramerConfig _ => 4,
-            IntegrationConfigResponseNotionConfig _ => 5,
-            IntegrationConfigResponseDigitalFilesConfig _ => 6,
-            IntegrationConfigResponseLicenseKeyConfig _ => 7,
+            IntegrationConfigResponseFeatureFlagConfig _ => 0,
+            IntegrationConfigResponseGitHubConfig _ => 1,
+            IntegrationConfigResponseDiscordConfig _ => 2,
+            IntegrationConfigResponseTelegramConfig _ => 3,
+            IntegrationConfigResponseFigmaConfig _ => 4,
+            IntegrationConfigResponseFramerConfig _ => 5,
+            IntegrationConfigResponseNotionConfig _ => 6,
+            IntegrationConfigResponseDigitalFilesConfig _ => 7,
+            IntegrationConfigResponseLicenseKeyConfig _ => 8,
             _ => -1,
         };
     }
@@ -524,6 +570,24 @@ sealed class IntegrationConfigResponseConverter : JsonConverter<IntegrationConfi
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        try
+        {
+            var deserialized =
+                JsonSerializer.Deserialize<IntegrationConfigResponseFeatureFlagConfig>(
+                    element,
+                    options
+                );
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
         try
         {
             var deserialized = JsonSerializer.Deserialize<IntegrationConfigResponseGitHubConfig>(
@@ -673,6 +737,90 @@ sealed class IntegrationConfigResponseConverter : JsonConverter<IntegrationConfi
     {
         JsonSerializer.Serialize(writer, value.Json, options);
     }
+}
+
+[JsonConverter(
+    typeof(JsonModelConverter<
+        IntegrationConfigResponseFeatureFlagConfig,
+        IntegrationConfigResponseFeatureFlagConfigFromRaw
+    >)
+)]
+public sealed record class IntegrationConfigResponseFeatureFlagConfig : JsonModel
+{
+    /// <summary>
+    /// Merchant-chosen identifier for the capability this entitlement unlocks.
+    /// </summary>
+    public required string FeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("feature_id");
+        }
+        init { this._rawData.Set("feature_id", value); }
+    }
+
+    /// <summary>
+    /// Type of capability conferred. Only `boolean` is supported today.
+    /// </summary>
+    public required ApiEnum<string, FeatureType> FeatureType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, FeatureType>>("feature_type");
+        }
+        init { this._rawData.Set("feature_type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.FeatureID;
+        this.FeatureType.Validate();
+    }
+
+    public IntegrationConfigResponseFeatureFlagConfig() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public IntegrationConfigResponseFeatureFlagConfig(
+        IntegrationConfigResponseFeatureFlagConfig integrationConfigResponseFeatureFlagConfig
+    )
+        : base(integrationConfigResponseFeatureFlagConfig) { }
+#pragma warning restore CS8618
+
+    public IntegrationConfigResponseFeatureFlagConfig(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    IntegrationConfigResponseFeatureFlagConfig(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="IntegrationConfigResponseFeatureFlagConfigFromRaw.FromRawUnchecked"/>
+    public static IntegrationConfigResponseFeatureFlagConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class IntegrationConfigResponseFeatureFlagConfigFromRaw
+    : IFromRawJson<IntegrationConfigResponseFeatureFlagConfig>
+{
+    /// <inheritdoc/>
+    public IntegrationConfigResponseFeatureFlagConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => IntegrationConfigResponseFeatureFlagConfig.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(

@@ -22,7 +22,7 @@ public class SubscriptionChargeParamsTest : TestBase
                 AllowCustomerCreditsPurchase = true,
                 AllowCustomerCreditsUsage = true,
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             ProductCurrency = Currency.Aed,
             ProductDescription = "product_description",
         };
@@ -35,7 +35,7 @@ public class SubscriptionChargeParamsTest : TestBase
             AllowCustomerCreditsPurchase = true,
             AllowCustomerCreditsUsage = true,
         };
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, Currency> expectedProductCurrency = Currency.Aed;
         string expectedProductDescription = "product_description";
 
@@ -140,7 +140,7 @@ public class SubscriptionChargeParamsTest : TestBase
                 AllowCustomerCreditsPurchase = true,
                 AllowCustomerCreditsUsage = true,
             },
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             ProductCurrency = Currency.Aed,
             ProductDescription = "product_description",
         };

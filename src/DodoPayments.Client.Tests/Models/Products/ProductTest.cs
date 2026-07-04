@@ -52,10 +52,10 @@ public class ProductTest : TestBase
                 new()
                 {
                     ID = "id",
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     Name = "name",
@@ -64,7 +64,7 @@ public class ProductTest : TestBase
             ],
             IsRecurring = true,
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
@@ -140,10 +140,10 @@ public class ProductTest : TestBase
             new()
             {
                 ID = "id",
-                IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                 {
-                    Permission = GitHubPermission.Pull,
-                    TargetID = "target_id",
+                    FeatureID = "feature_id",
+                    FeatureType = FeatureType.Boolean,
                 },
                 IntegrationType = EntitlementIntegrationType.Discord,
                 Name = "name",
@@ -152,7 +152,7 @@ public class ProductTest : TestBase
         ];
         bool expectedIsRecurring = true;
         bool expectedLicenseKeyEnabled = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         Price expectedPrice = new OneTimePrice()
         {
             Currency = Currency.Aed,
@@ -279,10 +279,10 @@ public class ProductTest : TestBase
                 new()
                 {
                     ID = "id",
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     Name = "name",
@@ -291,7 +291,7 @@ public class ProductTest : TestBase
             ],
             IsRecurring = true,
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
@@ -378,10 +378,10 @@ public class ProductTest : TestBase
                 new()
                 {
                     ID = "id",
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     Name = "name",
@@ -390,7 +390,7 @@ public class ProductTest : TestBase
             ],
             IsRecurring = true,
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
@@ -473,10 +473,10 @@ public class ProductTest : TestBase
             new()
             {
                 ID = "id",
-                IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                 {
-                    Permission = GitHubPermission.Pull,
-                    TargetID = "target_id",
+                    FeatureID = "feature_id",
+                    FeatureType = FeatureType.Boolean,
                 },
                 IntegrationType = EntitlementIntegrationType.Discord,
                 Name = "name",
@@ -485,7 +485,7 @@ public class ProductTest : TestBase
         ];
         bool expectedIsRecurring = true;
         bool expectedLicenseKeyEnabled = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         Price expectedPrice = new OneTimePrice()
         {
             Currency = Currency.Aed,
@@ -612,10 +612,10 @@ public class ProductTest : TestBase
                 new()
                 {
                     ID = "id",
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     Name = "name",
@@ -624,7 +624,7 @@ public class ProductTest : TestBase
             ],
             IsRecurring = true,
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
@@ -708,10 +708,10 @@ public class ProductTest : TestBase
                 new()
                 {
                     ID = "id",
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     Name = "name",
@@ -720,7 +720,7 @@ public class ProductTest : TestBase
             ],
             IsRecurring = true,
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
@@ -797,10 +797,10 @@ public class ProductTest : TestBase
                 new()
                 {
                     ID = "id",
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     Name = "name",
@@ -809,7 +809,7 @@ public class ProductTest : TestBase
             ],
             IsRecurring = true,
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
@@ -867,10 +867,10 @@ public class ProductTest : TestBase
                 new()
                 {
                     ID = "id",
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     Name = "name",
@@ -879,7 +879,7 @@ public class ProductTest : TestBase
             ],
             IsRecurring = true,
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
@@ -967,10 +967,10 @@ public class ProductTest : TestBase
                 new()
                 {
                     ID = "id",
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     Name = "name",
@@ -979,7 +979,7 @@ public class ProductTest : TestBase
             ],
             IsRecurring = true,
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,
@@ -1048,10 +1048,10 @@ public class ProductTest : TestBase
                 new()
                 {
                     ID = "id",
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     Name = "name",
@@ -1060,7 +1060,7 @@ public class ProductTest : TestBase
             ],
             IsRecurring = true,
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Price = new OneTimePrice()
             {
                 Currency = Currency.Aed,

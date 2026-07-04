@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements.Balances;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.CreditEntitlements.Balances;
 
@@ -18,7 +19,7 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
             EntryType = LedgerEntryType.Credit,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IdempotencyKey = "idempotency_key",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Reason = "reason",
         };
 
@@ -28,7 +29,7 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
         ApiEnum<string, LedgerEntryType> expectedEntryType = LedgerEntryType.Credit;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedIdempotencyKey = "idempotency_key";
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedReason = "reason";
 
         Assert.Equal(expectedCreditEntitlementID, parameters.CreditEntitlementID);
@@ -129,7 +130,7 @@ public class BalanceCreateLedgerEntryParamsTest : TestBase
             EntryType = LedgerEntryType.Credit,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             IdempotencyKey = "idempotency_key",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Reason = "reason",
         };
 

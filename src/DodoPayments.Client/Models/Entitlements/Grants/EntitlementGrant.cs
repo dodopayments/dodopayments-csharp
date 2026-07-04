@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
 
 namespace DodoPayments.Client.Models.Entitlements.Grants;
@@ -113,16 +114,18 @@ public sealed record class EntitlementGrant : JsonModel
     /// <summary>
     /// Arbitrary key-value metadata recorded on the grant.
     /// </summary>
-    public required IReadOnlyDictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -208,6 +211,20 @@ public sealed record class EntitlementGrant : JsonModel
             return this._rawData.GetNullableClass<string>("error_message");
         }
         init { this._rawData.Set("error_message", value); }
+    }
+
+    /// <summary>
+    /// Typed feature payload, present only when the entitlement integration is `feature_flag`;
+    /// `null` for every other integration type.
+    /// </summary>
+    public Feature? Feature
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Feature>("feature");
+        }
+        init { this._rawData.Set("feature", value); }
     }
 
     /// <summary>
@@ -313,13 +330,17 @@ public sealed record class EntitlementGrant : JsonModel
         _ = this.CustomerID;
         _ = this.EntitlementID;
         this.IntegrationType.Validate();
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         this.Status.Validate();
         _ = this.UpdatedAt;
         _ = this.DeliveredAt;
         this.DigitalProductDelivery?.Validate();
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
+        this.Feature?.Validate();
         this.LicenseKey?.Validate();
         _ = this.OAuthExpiresAt;
         _ = this.OAuthUrl;

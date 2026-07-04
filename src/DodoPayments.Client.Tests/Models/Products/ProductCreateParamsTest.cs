@@ -65,7 +65,7 @@ public class ProductCreateParamsTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PricingMode = PricingMode.ByCurrency,
         };
 
@@ -121,7 +121,7 @@ public class ProductCreateParamsTest : TestBase
             Interval = TimeInterval.Day,
         };
         bool expectedLicenseKeyEnabled = true;
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, PricingMode> expectedPricingMode = PricingMode.ByCurrency;
 
         Assert.Equal(expectedName, parameters.Name);
@@ -303,7 +303,7 @@ public class ProductCreateParamsTest : TestBase
                 TaxInclusive = true,
             },
             TaxCategory = TaxCategory.DigitalProducts,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
         };
 
         Assert.Null(parameters.Addons);
@@ -347,7 +347,7 @@ public class ProductCreateParamsTest : TestBase
                 TaxInclusive = true,
             },
             TaxCategory = TaxCategory.DigitalProducts,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
 
             Addons = null,
             BrandID = null,
@@ -463,7 +463,7 @@ public class ProductCreateParamsTest : TestBase
             LicenseKeyActivationsLimit = 0,
             LicenseKeyDuration = new() { Count = 0, Interval = TimeInterval.Day },
             LicenseKeyEnabled = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PricingMode = PricingMode.ByCurrency,
         };
 

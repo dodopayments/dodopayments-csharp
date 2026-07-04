@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Entitlements;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Entitlements;
 
@@ -20,14 +21,14 @@ public class EntitlementListPageResponseTest : TestBase
                     ID = "id",
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -42,14 +43,14 @@ public class EntitlementListPageResponseTest : TestBase
                 ID = "id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                 {
-                    Permission = GitHubPermission.Pull,
-                    TargetID = "target_id",
+                    FeatureID = "feature_id",
+                    FeatureType = FeatureType.Boolean,
                 },
                 IntegrationType = EntitlementIntegrationType.Discord,
                 IsActive = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Name = "name",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
@@ -75,14 +76,14 @@ public class EntitlementListPageResponseTest : TestBase
                     ID = "id",
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -111,14 +112,14 @@ public class EntitlementListPageResponseTest : TestBase
                     ID = "id",
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -140,14 +141,14 @@ public class EntitlementListPageResponseTest : TestBase
                 ID = "id",
                 BusinessID = "business_id",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                 {
-                    Permission = GitHubPermission.Pull,
-                    TargetID = "target_id",
+                    FeatureID = "feature_id",
+                    FeatureType = FeatureType.Boolean,
                 },
                 IntegrationType = EntitlementIntegrationType.Discord,
                 IsActive = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Name = "name",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
@@ -173,14 +174,14 @@ public class EntitlementListPageResponseTest : TestBase
                     ID = "id",
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -203,14 +204,14 @@ public class EntitlementListPageResponseTest : TestBase
                     ID = "id",
                     BusinessID = "business_id",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    IntegrationConfig = new IntegrationConfigResponseGitHubConfig()
+                    IntegrationConfig = new IntegrationConfigResponseFeatureFlagConfig()
                     {
-                        Permission = GitHubPermission.Pull,
-                        TargetID = "target_id",
+                        FeatureID = "feature_id",
+                        FeatureType = FeatureType.Boolean,
                     },
                     IntegrationType = EntitlementIntegrationType.Discord,
                     IsActive = true,
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",

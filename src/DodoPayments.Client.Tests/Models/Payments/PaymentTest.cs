@@ -35,7 +35,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -55,7 +55,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
             Refunds =
@@ -94,7 +94,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -140,7 +140,7 @@ public class PaymentTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         bool expectedDigitalProductsDelivered = true;
@@ -160,7 +160,7 @@ public class PaymentTest : TestBase
                 Remarks = "remarks",
             },
         ];
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         ApiEnum<string, PaymentProvider> expectedPaymentProvider = PaymentProvider.Stripe;
         List<RefundListItem> expectedRefunds =
@@ -202,7 +202,7 @@ public class PaymentTest : TestBase
                 Code = "code",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DiscountID = "discount_id",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Position = 0,
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
@@ -322,7 +322,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -342,7 +342,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
             Refunds =
@@ -381,7 +381,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -438,7 +438,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -458,7 +458,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
             Refunds =
@@ -497,7 +497,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -550,7 +550,7 @@ public class PaymentTest : TestBase
             CustomerID = "customer_id",
             Email = "email",
             Name = "name",
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PhoneNumber = "phone_number",
         };
         bool expectedDigitalProductsDelivered = true;
@@ -570,7 +570,7 @@ public class PaymentTest : TestBase
                 Remarks = "remarks",
             },
         ];
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         ApiEnum<string, PaymentProvider> expectedPaymentProvider = PaymentProvider.Stripe;
         List<RefundListItem> expectedRefunds =
@@ -612,7 +612,7 @@ public class PaymentTest : TestBase
                 Code = "code",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DiscountID = "discount_id",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 Position = 0,
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
@@ -732,7 +732,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -752,7 +752,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
             Refunds =
@@ -791,7 +791,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
@@ -845,7 +845,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -865,7 +865,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
             Refunds =
@@ -959,7 +959,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -979,7 +979,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
             Refunds =
@@ -1028,7 +1028,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -1048,7 +1048,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
             Refunds =
@@ -1166,7 +1166,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -1186,7 +1186,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
             Refunds =
@@ -1259,7 +1259,7 @@ public class PaymentTest : TestBase
                 CustomerID = "customer_id",
                 Email = "email",
                 Name = "name",
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PhoneNumber = "phone_number",
             },
             DigitalProductsDelivered = true,
@@ -1279,7 +1279,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
             Refunds =
@@ -1318,7 +1318,7 @@ public class PaymentTest : TestBase
                     Code = "code",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DiscountID = "discount_id",
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     Position = 0,
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],

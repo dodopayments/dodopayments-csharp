@@ -14,6 +14,9 @@ namespace DodoPayments.Client.Models.Entitlements;
 /// <summary>
 /// Integration-specific configuration supplied when creating or updating an entitlement.
 /// The shape required matches the entitlement's `integration_type`.
+///
+/// <para>Untagged enum: variants are matched in order. `FeatureFlag` must precede
+/// `LicenseKey`, whose fields are all optional and would otherwise match a `feature_flag` config.</para>
 /// </summary>
 [JsonConverter(typeof(IntegrationConfigConverter))]
 public record class IntegrationConfig : ModelBase
@@ -31,6 +34,12 @@ public record class IntegrationConfig : ModelBase
                 ModelBase.SerializerOptions
             );
         }
+    }
+
+    public IntegrationConfig(FeatureFlagConfig value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
     }
 
     public IntegrationConfig(GitHubConfig value, JsonElement? element = null)
@@ -84,6 +93,27 @@ public record class IntegrationConfig : ModelBase
     public IntegrationConfig(JsonElement element)
     {
         this._element = element;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="FeatureFlagConfig"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickFeatureFlag(out var value)) {
+    ///     // `value` is of type `FeatureFlagConfig`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickFeatureFlag([NotNullWhen(true)] out FeatureFlagConfig? value)
+    {
+        value = this.Value as FeatureFlagConfig;
+        return value != null;
     }
 
     /// <summary>
@@ -268,6 +298,7 @@ public record class IntegrationConfig : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
+    ///     (FeatureFlagConfig value) =&gt; {...},
     ///     (GitHubConfig value) =&gt; {...},
     ///     (DiscordConfig value) =&gt; {...},
     ///     (TelegramConfig value) =&gt; {...},
@@ -281,6 +312,7 @@ public record class IntegrationConfig : ModelBase
     /// </example>
     /// </summary>
     public void Switch(
+        Action<FeatureFlagConfig> featureFlag,
         Action<GitHubConfig> github,
         Action<DiscordConfig> discord,
         Action<TelegramConfig> telegram,
@@ -293,6 +325,9 @@ public record class IntegrationConfig : ModelBase
     {
         switch (this.Value)
         {
+            case FeatureFlagConfig value:
+                featureFlag(value);
+                break;
             case GitHubConfig value:
                 github(value);
                 break;
@@ -339,6 +374,7 @@ public record class IntegrationConfig : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
+    ///     (FeatureFlagConfig value) =&gt; {...},
     ///     (GitHubConfig value) =&gt; {...},
     ///     (DiscordConfig value) =&gt; {...},
     ///     (TelegramConfig value) =&gt; {...},
@@ -352,6 +388,7 @@ public record class IntegrationConfig : ModelBase
     /// </example>
     /// </summary>
     public T Match<T>(
+        Func<FeatureFlagConfig, T> featureFlag,
         Func<GitHubConfig, T> github,
         Func<DiscordConfig, T> discord,
         Func<TelegramConfig, T> telegram,
@@ -364,6 +401,7 @@ public record class IntegrationConfig : ModelBase
     {
         return this.Value switch
         {
+            FeatureFlagConfig value => featureFlag(value),
             GitHubConfig value => github(value),
             DiscordConfig value => discord(value),
             TelegramConfig value => telegram(value),
@@ -377,6 +415,8 @@ public record class IntegrationConfig : ModelBase
             ),
         };
     }
+
+    public static implicit operator IntegrationConfig(FeatureFlagConfig value) => new(value);
 
     public static implicit operator IntegrationConfig(GitHubConfig value) => new(value);
 
@@ -413,6 +453,7 @@ public record class IntegrationConfig : ModelBase
             );
         }
         this.Switch(
+            (featureFlag) => featureFlag.Validate(),
             (github) => github.Validate(),
             (discord) => discord.Validate(),
             (telegram) => telegram.Validate(),
@@ -444,14 +485,15 @@ public record class IntegrationConfig : ModelBase
     {
         return this.Value switch
         {
-            GitHubConfig _ => 0,
-            DiscordConfig _ => 1,
-            TelegramConfig _ => 2,
-            FigmaConfig _ => 3,
-            FramerConfig _ => 4,
-            NotionConfig _ => 5,
-            DigitalFilesConfig _ => 6,
-            LicenseKeyConfig _ => 7,
+            FeatureFlagConfig _ => 0,
+            GitHubConfig _ => 1,
+            DiscordConfig _ => 2,
+            TelegramConfig _ => 3,
+            FigmaConfig _ => 4,
+            FramerConfig _ => 5,
+            NotionConfig _ => 6,
+            DigitalFilesConfig _ => 7,
+            LicenseKeyConfig _ => 8,
             _ => -1,
         };
     }
@@ -466,6 +508,20 @@ sealed class IntegrationConfigConverter : JsonConverter<IntegrationConfig>
     )
     {
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        try
+        {
+            var deserialized = JsonSerializer.Deserialize<FeatureFlagConfig>(element, options);
+            if (deserialized != null)
+            {
+                deserialized.Validate();
+                return new(deserialized, element);
+            }
+        }
+        catch (Exception e) when (e is JsonException || e is DodoPaymentsInvalidDataException)
+        {
+            // ignore
+        }
+
         try
         {
             var deserialized = JsonSerializer.Deserialize<GitHubConfig>(element, options);
@@ -589,6 +645,80 @@ sealed class IntegrationConfigConverter : JsonConverter<IntegrationConfig>
     {
         JsonSerializer.Serialize(writer, value.Json, options);
     }
+}
+
+[JsonConverter(typeof(JsonModelConverter<FeatureFlagConfig, FeatureFlagConfigFromRaw>))]
+public sealed record class FeatureFlagConfig : JsonModel
+{
+    /// <summary>
+    /// Merchant-chosen identifier for the capability this entitlement unlocks. Not
+    /// unique across entitlements.
+    /// </summary>
+    public required string FeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("feature_id");
+        }
+        init { this._rawData.Set("feature_id", value); }
+    }
+
+    /// <summary>
+    /// Type of capability conferred.
+    /// </summary>
+    public required ApiEnum<string, FeatureType> FeatureType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, FeatureType>>("feature_type");
+        }
+        init { this._rawData.Set("feature_type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.FeatureID;
+        this.FeatureType.Validate();
+    }
+
+    public FeatureFlagConfig() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public FeatureFlagConfig(FeatureFlagConfig featureFlagConfig)
+        : base(featureFlagConfig) { }
+#pragma warning restore CS8618
+
+    public FeatureFlagConfig(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    FeatureFlagConfig(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="FeatureFlagConfigFromRaw.FromRawUnchecked"/>
+    public static FeatureFlagConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class FeatureFlagConfigFromRaw : IFromRawJson<FeatureFlagConfig>
+{
+    /// <inheritdoc/>
+    public FeatureFlagConfig FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        FeatureFlagConfig.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(JsonModelConverter<GitHubConfig, GitHubConfigFromRaw>))]

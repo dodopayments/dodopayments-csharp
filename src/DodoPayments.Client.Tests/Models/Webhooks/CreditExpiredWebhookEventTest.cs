@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements.Balances;
+using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
@@ -27,7 +28,7 @@ public class CreditExpiredWebhookEventTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
@@ -52,7 +53,7 @@ public class CreditExpiredWebhookEventTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -88,7 +89,7 @@ public class CreditExpiredWebhookEventTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
@@ -127,7 +128,7 @@ public class CreditExpiredWebhookEventTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
@@ -159,7 +160,7 @@ public class CreditExpiredWebhookEventTest : TestBase
             CreditEntitlementID = "credit_entitlement_id",
             CustomerID = "customer_id",
             IsCredit = true,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             OverageAfter = "overage_after",
             OverageBefore = "overage_before",
             TransactionType = TransactionType.CreditAdded,
@@ -195,7 +196,7 @@ public class CreditExpiredWebhookEventTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,
@@ -228,7 +229,7 @@ public class CreditExpiredWebhookEventTest : TestBase
                 CreditEntitlementID = "credit_entitlement_id",
                 CustomerID = "customer_id",
                 IsCredit = true,
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 OverageAfter = "overage_after",
                 OverageBefore = "overage_before",
                 TransactionType = TransactionType.CreditAdded,

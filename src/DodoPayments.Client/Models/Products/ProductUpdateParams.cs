@@ -222,16 +222,18 @@ public record class ProductUpdateParams : ParamsBase
     /// <summary>
     /// Additional metadata for the product
     /// </summary>
-    public IReadOnlyDictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+            this._rawBodyData.Set<FrozenDictionary<string, MetadataItem>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
