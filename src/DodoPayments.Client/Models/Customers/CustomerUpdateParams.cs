@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Customers;
 
@@ -37,16 +38,18 @@ public record class CustomerUpdateParams : ParamsBase
     /// <summary>
     /// Additional metadata for the customer
     /// </summary>
-    public IReadOnlyDictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+            this._rawBodyData.Set<FrozenDictionary<string, MetadataItem>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );

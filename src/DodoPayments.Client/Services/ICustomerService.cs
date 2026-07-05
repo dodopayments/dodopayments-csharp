@@ -108,6 +108,22 @@ public interface ICustomerService
     );
 
     /// <summary>
+    /// List all of a customer's entitlement grants across every entitlement. One row
+    /// per grant.
+    /// </summary>
+    Task<CustomerListEntitlementGrantsPage> ListEntitlementGrants(
+        CustomerListEntitlementGrantsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListEntitlementGrants(CustomerListEntitlementGrantsParams, CancellationToken)"/>
+    Task<CustomerListEntitlementGrantsPage> ListEntitlementGrants(
+        string customerID,
+        CustomerListEntitlementGrantsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// List all entitlement grants delivered (or in flight) to a customer.
     /// </summary>
     Task<CustomerListEntitlementsResponse> ListEntitlements(
@@ -234,6 +250,22 @@ public interface ICustomerServiceWithRawResponse
     Task<HttpResponse<CustomerListCreditEntitlementsResponse>> ListCreditEntitlements(
         string customerID,
         CustomerListCreditEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /customers/{customer_id}/entitlement-grants</c>, but is otherwise the
+    /// same as <see cref="ICustomerService.ListEntitlementGrants(CustomerListEntitlementGrantsParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerListEntitlementGrantsPage>> ListEntitlementGrants(
+        CustomerListEntitlementGrantsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListEntitlementGrants(CustomerListEntitlementGrantsParams, CancellationToken)"/>
+    Task<HttpResponse<CustomerListEntitlementGrantsPage>> ListEntitlementGrants(
+        string customerID,
+        CustomerListEntitlementGrantsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

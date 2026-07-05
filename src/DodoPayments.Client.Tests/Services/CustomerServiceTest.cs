@@ -65,6 +65,17 @@ public class CustomerServiceTest : TestBase
     }
 
     [Fact]
+    public async Task ListEntitlementGrants_Works()
+    {
+        var page = await this.client.Customers.ListEntitlementGrants(
+            "cus_TV52uJWWXt2yIoBBxpjaa",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        page.Validate();
+    }
+
+    [Fact]
     public async Task ListEntitlements_Works()
     {
         var response = await this.client.Customers.ListEntitlements(

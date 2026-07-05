@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Discounts;
 
@@ -84,16 +85,18 @@ public sealed record class DiscountDetail : JsonModel
     /// <summary>
     /// Additional metadata
     /// </summary>
-    public required IReadOnlyDictionary<string, string> Metadata
+    public required IReadOnlyDictionary<string, MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -245,7 +248,10 @@ public sealed record class DiscountDetail : JsonModel
         _ = this.Code;
         _ = this.CreatedAt;
         _ = this.DiscountID;
-        _ = this.Metadata;
+        foreach (var item in this.Metadata.Values)
+        {
+            item.Validate();
+        }
         _ = this.Position;
         _ = this.PreserveOnPlanChange;
         _ = this.RestrictedTo;

@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -164,16 +165,18 @@ public record class SubscriptionChangePlanParams : ParamsBase
     /// Metadata for the payment. If not passed, the metadata of the subscription
     /// will be taken
     /// </summary>
-    public IReadOnlyDictionary<string, string>? Metadata
+    public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+            this._rawBodyData.Set<FrozenDictionary<string, MetadataItem>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );

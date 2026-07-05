@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Discounts;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Discounts;
 
@@ -16,7 +17,7 @@ public class DiscountCreateParamsTest : TestBase
             Type = DiscountType.Percentage,
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
@@ -28,7 +29,7 @@ public class DiscountCreateParamsTest : TestBase
         ApiEnum<string, DiscountType> expectedType = DiscountType.Percentage;
         string expectedCode = "code";
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
@@ -112,7 +113,7 @@ public class DiscountCreateParamsTest : TestBase
         {
             Amount = 0,
             Type = DiscountType.Percentage,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
         };
 
@@ -137,7 +138,7 @@ public class DiscountCreateParamsTest : TestBase
         {
             Amount = 0,
             Type = DiscountType.Percentage,
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PreserveOnPlanChange = true,
 
             Code = null,
@@ -181,7 +182,7 @@ public class DiscountCreateParamsTest : TestBase
             Type = DiscountType.Percentage,
             Code = "code",
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             Name = "name",
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],

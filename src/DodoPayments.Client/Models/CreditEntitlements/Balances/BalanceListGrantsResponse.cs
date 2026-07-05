@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
+using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.CreditEntitlements.Balances;
 
@@ -137,16 +138,21 @@ public sealed record class BalanceListGrantsResponse : JsonModel
         init { this._rawData.Set("expires_at", value); }
     }
 
-    public IReadOnlyDictionary<string, string>? Metadata
+    /// <summary>
+    /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
+    /// </summary>
+    public IReadOnlyDictionary<string, MetadataItem>? Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+            return this._rawData.GetNullableClass<FrozenDictionary<string, MetadataItem>>(
+                "metadata"
+            );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, string>?>(
+            this._rawData.Set<FrozenDictionary<string, MetadataItem>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -188,7 +194,13 @@ public sealed record class BalanceListGrantsResponse : JsonModel
         this.SourceType.Validate();
         _ = this.UpdatedAt;
         _ = this.ExpiresAt;
-        _ = this.Metadata;
+        if (this.Metadata != null)
+        {
+            foreach (var item in this.Metadata.Values)
+            {
+                item.Validate();
+            }
+        }
         _ = this.ParentGrantID;
         _ = this.SourceID;
     }

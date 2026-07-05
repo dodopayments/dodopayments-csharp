@@ -16,6 +16,7 @@ public class EntitlementIntegrationTypeTest : TestBase
     [InlineData(EntitlementIntegrationType.Notion)]
     [InlineData(EntitlementIntegrationType.DigitalFiles)]
     [InlineData(EntitlementIntegrationType.LicenseKey)]
+    [InlineData(EntitlementIntegrationType.FeatureFlag)]
     public void Validation_Works(EntitlementIntegrationType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -44,6 +45,7 @@ public class EntitlementIntegrationTypeTest : TestBase
     [InlineData(EntitlementIntegrationType.Notion)]
     [InlineData(EntitlementIntegrationType.DigitalFiles)]
     [InlineData(EntitlementIntegrationType.LicenseKey)]
+    [InlineData(EntitlementIntegrationType.FeatureFlag)]
     public void SerializationRoundtrip_Works(EntitlementIntegrationType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

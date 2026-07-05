@@ -24,7 +24,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                     EntitlementName = "entitlement_name",
                     GrantID = "grant_id",
                     IntegrationType = EntitlementIntegrationType.Discord,
-                    Status = Status.Pending,
+                    Status = CustomerListEntitlementsResponseItemStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EntitlementDescription = "entitlement_description",
@@ -42,7 +42,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                 EntitlementName = "entitlement_name",
                 GrantID = "grant_id",
                 IntegrationType = EntitlementIntegrationType.Discord,
-                Status = Status.Pending,
+                Status = CustomerListEntitlementsResponseItemStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EntitlementDescription = "entitlement_description",
@@ -71,7 +71,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                     EntitlementName = "entitlement_name",
                     GrantID = "grant_id",
                     IntegrationType = EntitlementIntegrationType.Discord,
-                    Status = Status.Pending,
+                    Status = CustomerListEntitlementsResponseItemStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EntitlementDescription = "entitlement_description",
@@ -103,7 +103,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                     EntitlementName = "entitlement_name",
                     GrantID = "grant_id",
                     IntegrationType = EntitlementIntegrationType.Discord,
-                    Status = Status.Pending,
+                    Status = CustomerListEntitlementsResponseItemStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EntitlementDescription = "entitlement_description",
@@ -128,7 +128,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                 EntitlementName = "entitlement_name",
                 GrantID = "grant_id",
                 IntegrationType = EntitlementIntegrationType.Discord,
-                Status = Status.Pending,
+                Status = CustomerListEntitlementsResponseItemStatus.Pending,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EntitlementDescription = "entitlement_description",
@@ -157,7 +157,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                     EntitlementName = "entitlement_name",
                     GrantID = "grant_id",
                     IntegrationType = EntitlementIntegrationType.Discord,
-                    Status = Status.Pending,
+                    Status = CustomerListEntitlementsResponseItemStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EntitlementDescription = "entitlement_description",
@@ -183,7 +183,7 @@ public class CustomerListEntitlementsResponseTest : TestBase
                     EntitlementName = "entitlement_name",
                     GrantID = "grant_id",
                     IntegrationType = EntitlementIntegrationType.Discord,
-                    Status = Status.Pending,
+                    Status = CustomerListEntitlementsResponseItemStatus.Pending,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EntitlementDescription = "entitlement_description",
@@ -210,7 +210,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Status = Status.Pending,
+            Status = CustomerListEntitlementsResponseItemStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementDescription = "entitlement_description",
@@ -223,7 +223,8 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
         string expectedGrantID = "grant_id";
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
-        ApiEnum<string, Status> expectedStatus = Status.Pending;
+        ApiEnum<string, CustomerListEntitlementsResponseItemStatus> expectedStatus =
+            CustomerListEntitlementsResponseItemStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEntitlementDescription = "entitlement_description";
@@ -251,7 +252,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Status = Status.Pending,
+            Status = CustomerListEntitlementsResponseItemStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementDescription = "entitlement_description",
@@ -277,7 +278,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Status = Status.Pending,
+            Status = CustomerListEntitlementsResponseItemStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementDescription = "entitlement_description",
@@ -297,7 +298,8 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
         string expectedGrantID = "grant_id";
         ApiEnum<string, EntitlementIntegrationType> expectedIntegrationType =
             EntitlementIntegrationType.Discord;
-        ApiEnum<string, Status> expectedStatus = Status.Pending;
+        ApiEnum<string, CustomerListEntitlementsResponseItemStatus> expectedStatus =
+            CustomerListEntitlementsResponseItemStatus.Pending;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedDeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEntitlementDescription = "entitlement_description";
@@ -325,7 +327,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Status = Status.Pending,
+            Status = CustomerListEntitlementsResponseItemStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementDescription = "entitlement_description",
@@ -345,7 +347,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Status = Status.Pending,
+            Status = CustomerListEntitlementsResponseItemStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -367,7 +369,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Status = Status.Pending,
+            Status = CustomerListEntitlementsResponseItemStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -384,7 +386,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Status = Status.Pending,
+            Status = CustomerListEntitlementsResponseItemStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             DeliveredAt = null,
@@ -410,7 +412,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Status = Status.Pending,
+            Status = CustomerListEntitlementsResponseItemStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             DeliveredAt = null,
@@ -431,7 +433,7 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
             EntitlementName = "entitlement_name",
             GrantID = "grant_id",
             IntegrationType = EntitlementIntegrationType.Discord,
-            Status = Status.Pending,
+            Status = CustomerListEntitlementsResponseItemStatus.Pending,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DeliveredAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementDescription = "entitlement_description",
@@ -444,47 +446,45 @@ public class CustomerListEntitlementsResponseItemTest : TestBase
     }
 }
 
-public class StatusTest : TestBase
+public class CustomerListEntitlementsResponseItemStatusTest : TestBase
 {
     [Theory]
-    [InlineData(Status.Pending)]
-    [InlineData(Status.Delivered)]
-    [InlineData(Status.Failed)]
-    [InlineData(Status.Revoked)]
-    public void Validation_Works(Status rawValue)
+    [InlineData(CustomerListEntitlementsResponseItemStatus.Pending)]
+    [InlineData(CustomerListEntitlementsResponseItemStatus.Delivered)]
+    [InlineData(CustomerListEntitlementsResponseItemStatus.Failed)]
+    [InlineData(CustomerListEntitlementsResponseItemStatus.Revoked)]
+    public void Validation_Works(CustomerListEntitlementsResponseItemStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, CustomerListEntitlementsResponseItemStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerListEntitlementsResponseItemStatus>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(Status.Pending)]
-    [InlineData(Status.Delivered)]
-    [InlineData(Status.Failed)]
-    [InlineData(Status.Revoked)]
-    public void SerializationRoundtrip_Works(Status rawValue)
+    [InlineData(CustomerListEntitlementsResponseItemStatus.Pending)]
+    [InlineData(CustomerListEntitlementsResponseItemStatus.Delivered)]
+    [InlineData(CustomerListEntitlementsResponseItemStatus.Failed)]
+    [InlineData(CustomerListEntitlementsResponseItemStatus.Revoked)]
+    public void SerializationRoundtrip_Works(CustomerListEntitlementsResponseItemStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, CustomerListEntitlementsResponseItemStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerListEntitlementsResponseItemStatus>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -492,15 +492,13 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerListEntitlementsResponseItemStatus>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerListEntitlementsResponseItemStatus>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
