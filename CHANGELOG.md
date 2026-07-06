@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.26.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.25.0...v6.26.0) (2026-07-06)
+
+
+### Features
+
+* **api:** add subscription period override fields to subscription update ([21a12d2](https://github.com/dodopayments/dodopayments-csharp/commit/21a12d228667e18b8e274973e0fc37b20a181916))
+* **api:** add subscription period override fields to subscription update ([f99a4d4](https://github.com/dodopayments/dodopayments-csharp/commit/f99a4d4aee0de9974f38e4d80a7d624db1594ae7))
+
 ## [6.25.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.24.1...v6.25.0) (2026-07-04)
 
 
