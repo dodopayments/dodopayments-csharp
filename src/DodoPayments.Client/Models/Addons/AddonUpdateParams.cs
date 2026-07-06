@@ -52,7 +52,8 @@ public record class AddonUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Addon image id after its uploaded to S3
+    /// Addon image id after its uploaded to S3. Pass `null` to remove the existing
+    /// image, omit to keep it unchanged.
     /// </summary>
     public string? ImageID
     {
