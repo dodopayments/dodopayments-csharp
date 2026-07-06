@@ -52,6 +52,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionStatus.Pending,
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
             TaxID = "tax_id",
         };
 
@@ -94,6 +96,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, SubscriptionStatus> expectedStatus = SubscriptionStatus.Pending;
+        int expectedSubscriptionPeriodCount = 0;
+        ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
         string expectedTaxID = "tax_id";
 
         Assert.Equal(expectedSubscriptionID, parameters.SubscriptionID);
@@ -121,6 +125,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         }
         Assert.Equal(expectedNextBillingDate, parameters.NextBillingDate);
         Assert.Equal(expectedStatus, parameters.Status);
+        Assert.Equal(expectedSubscriptionPeriodCount, parameters.SubscriptionPeriodCount);
+        Assert.Equal(expectedSubscriptionPeriodInterval, parameters.SubscriptionPeriodInterval);
         Assert.Equal(expectedTaxID, parameters.TaxID);
     }
 
@@ -156,6 +162,10 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("next_billing_date"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawBodyData.ContainsKey("status"));
+        Assert.Null(parameters.SubscriptionPeriodCount);
+        Assert.False(parameters.RawBodyData.ContainsKey("subscription_period_count"));
+        Assert.Null(parameters.SubscriptionPeriodInterval);
+        Assert.False(parameters.RawBodyData.ContainsKey("subscription_period_interval"));
         Assert.Null(parameters.TaxID);
         Assert.False(parameters.RawBodyData.ContainsKey("tax_id"));
     }
@@ -179,6 +189,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             Metadata = null,
             NextBillingDate = null,
             Status = null,
+            SubscriptionPeriodCount = null,
+            SubscriptionPeriodInterval = null,
             TaxID = null,
         };
 
@@ -206,6 +218,10 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("next_billing_date"));
         Assert.Null(parameters.Status);
         Assert.True(parameters.RawBodyData.ContainsKey("status"));
+        Assert.Null(parameters.SubscriptionPeriodCount);
+        Assert.True(parameters.RawBodyData.ContainsKey("subscription_period_count"));
+        Assert.Null(parameters.SubscriptionPeriodInterval);
+        Assert.True(parameters.RawBodyData.ContainsKey("subscription_period_interval"));
         Assert.Null(parameters.TaxID);
         Assert.True(parameters.RawBodyData.ContainsKey("tax_id"));
     }
@@ -269,6 +285,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionStatus.Pending,
+            SubscriptionPeriodCount = 0,
+            SubscriptionPeriodInterval = TimeInterval.Day,
             TaxID = "tax_id",
         };
 
