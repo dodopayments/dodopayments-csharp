@@ -192,6 +192,39 @@ public record class SubscriptionUpdateParams : ParamsBase
         init { this._rawBodyData.Set("status", value); }
     }
 
+    /// <summary>
+    /// New number of `subscription_period_interval` units the subscription entitlement
+    /// should span. Used together with `subscription_period_interval` to extend
+    /// the subscription period. The resulting period must not be shorter than the
+    /// current one (this endpoint only extends).
+    /// </summary>
+    public int? SubscriptionPeriodCount
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("subscription_period_count");
+        }
+        init { this._rawBodyData.Set("subscription_period_count", value); }
+    }
+
+    /// <summary>
+    /// New interval unit for the subscription period. When changing the period, this
+    /// may be supplied alongside `subscription_period_count`; if omitted the existing
+    /// interval is retained.
+    /// </summary>
+    public ApiEnum<string, TimeInterval>? SubscriptionPeriodInterval
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, TimeInterval>>(
+                "subscription_period_interval"
+            );
+        }
+        init { this._rawBodyData.Set("subscription_period_interval", value); }
+    }
+
     public string? TaxID
     {
         get
