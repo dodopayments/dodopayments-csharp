@@ -329,6 +329,25 @@ public record class Data : ModelBase
         }
     }
 
+    public string? PaymentMethodID
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (x) => x.PaymentMethodID,
+                subscription: (x) => x.PaymentMethodID,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null
+            );
+        }
+    }
+
     public string? SubscriptionID
     {
         get
@@ -1321,6 +1340,20 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Whether this payment was created solely to update a subscription's payment
+    /// method (a zero-/setup-amount charge). `false` for normal charges.
+    /// </summary>
+    public required bool IsUpdatePaymentMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("is_update_payment_method");
+        }
+        init { this._rawData.Set("is_update_payment_method", value); }
+    }
+
+    /// <summary>
     /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
     /// </summary>
     public required IReadOnlyDictionary<string, MetadataItem> Metadata
@@ -1667,6 +1700,19 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Identifier of the saved payment method used for this payment, if any.
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method_id");
+        }
+        init { this._rawData.Set("payment_method_id", value); }
+    }
+
+    /// <summary>
     /// Specific type of payment method (e.g. "visa", "mastercard")
     /// </summary>
     public string? PaymentMethodType
@@ -1816,6 +1862,7 @@ public sealed record class Payment : JsonModel
             Customer = payment.Customer,
             DigitalProductsDelivered = payment.DigitalProductsDelivered,
             Disputes = payment.Disputes,
+            IsUpdatePaymentMethod = payment.IsUpdatePaymentMethod,
             Metadata = payment.Metadata,
             PaymentID = payment.PaymentID,
             PaymentProvider = payment.PaymentProvider,
@@ -1839,6 +1886,7 @@ public sealed record class Payment : JsonModel
             InvoiceUrl = payment.InvoiceUrl,
             PaymentLink = payment.PaymentLink,
             PaymentMethod = payment.PaymentMethod,
+            PaymentMethodID = payment.PaymentMethodID,
             PaymentMethodType = payment.PaymentMethodType,
             ProductCart = payment.ProductCart,
             RefundStatus = payment.RefundStatus,
@@ -1863,6 +1911,7 @@ public sealed record class Payment : JsonModel
         {
             item.Validate();
         }
+        _ = this.IsUpdatePaymentMethod;
         foreach (var item in this.Metadata.Values)
         {
             item.Validate();
@@ -1898,6 +1947,7 @@ public sealed record class Payment : JsonModel
         _ = this.InvoiceUrl;
         _ = this.PaymentLink;
         _ = this.PaymentMethod;
+        _ = this.PaymentMethodID;
         _ = this.PaymentMethodType;
         foreach (var item in this.ProductCart ?? [])
         {

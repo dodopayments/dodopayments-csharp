@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -108,6 +109,22 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
     }
 
     /// <summary>
+    /// The upcoming billing date for subscriptions, computed relative to now: with
+    /// a trial it is `now + trial_period_days`, otherwise `now + payment frequency`.
+    /// `None` for one-time-only carts. This is a preview estimate; the authoritative
+    /// value is set when the subscription activates.
+    /// </summary>
+    public DateTimeOffset? NextBillingDate
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("next_billing_date");
+        }
+        init { this._rawData.Set("next_billing_date", value); }
+    }
+
+    /// <summary>
     /// Breakup of recurring payments (None for one-time only)
     /// </summary>
     public RecurringBreakup? RecurringBreakup
@@ -184,6 +201,7 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
             item.Validate();
         }
         _ = this.TotalPrice;
+        _ = this.NextBillingDate;
         this.RecurringBreakup?.Validate();
         _ = this.TaxIDBusinessName;
         _ = this.TaxIDErrMsg;

@@ -39,6 +39,27 @@ public record class SubscriptionListParams : ParamsBase
     }
 
     /// <summary>
+    /// Filter by cancel_at_next_billing_date (subscriptions scheduled for cancellation)
+    /// </summary>
+    public bool? CancelAtNextBillingDate
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<bool>("cancel_at_next_billing_date");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("cancel_at_next_billing_date", value);
+        }
+    }
+
+    /// <summary>
     /// Get events after this created time
     /// </summary>
     public DateTimeOffset? CreatedAtGte
