@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.26.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.26.0...v6.26.1) (2026-07-09)
+
+
+### Bug Fixes
+
+* **api:** add subscription.update_payment_method webhook and payment-method fields ([117134d](https://github.com/dodopayments/dodopayments-csharp/commit/117134d08b17a83c4b333e0661119af706b76630))
+* **api:** add subscription.update_payment_method webhook and payment-method fields ([8441e50](https://github.com/dodopayments/dodopayments-csharp/commit/8441e50ccd1e50ced9a13ab26705cb9b9e2a5f40))
+
 ## [6.25.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.24.1...v6.25.0) (2026-07-04)
 
 
