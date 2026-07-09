@@ -55,6 +55,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
@@ -113,6 +114,7 @@ public class PaymentTest : TestBase
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
+            PaymentMethodID = "payment_method_id",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             RefundStatus = PaymentRefundStatus.Partial,
@@ -160,6 +162,7 @@ public class PaymentTest : TestBase
                 Remarks = "remarks",
             },
         ];
+        bool expectedIsUpdatePaymentMethod = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         ApiEnum<string, PaymentProvider> expectedPaymentProvider = PaymentProvider.Stripe;
@@ -221,6 +224,7 @@ public class PaymentTest : TestBase
         string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
+        string expectedPaymentMethodID = "payment_method_id";
         string expectedPaymentMethodType = "payment_method_type";
         List<ProductCart> expectedProductCart = [new() { ProductID = "product_id", Quantity = 0 }];
         ApiEnum<string, PaymentRefundStatus> expectedRefundStatus = PaymentRefundStatus.Partial;
@@ -242,6 +246,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedDisputes[i], model.Disputes[i]);
         }
+        Assert.Equal(expectedIsUpdatePaymentMethod, model.IsUpdatePaymentMethod);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -285,6 +290,7 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedInvoiceUrl, model.InvoiceUrl);
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
         Assert.Equal(expectedPaymentMethod, model.PaymentMethod);
+        Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
         Assert.Equal(expectedPaymentMethodType, model.PaymentMethodType);
         Assert.NotNull(model.ProductCart);
         Assert.Equal(expectedProductCart.Count, model.ProductCart.Count);
@@ -342,6 +348,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
@@ -400,6 +407,7 @@ public class PaymentTest : TestBase
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
+            PaymentMethodID = "payment_method_id",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             RefundStatus = PaymentRefundStatus.Partial,
@@ -458,6 +466,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
@@ -516,6 +525,7 @@ public class PaymentTest : TestBase
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
+            PaymentMethodID = "payment_method_id",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             RefundStatus = PaymentRefundStatus.Partial,
@@ -570,6 +580,7 @@ public class PaymentTest : TestBase
                 Remarks = "remarks",
             },
         ];
+        bool expectedIsUpdatePaymentMethod = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
         ApiEnum<string, PaymentProvider> expectedPaymentProvider = PaymentProvider.Stripe;
@@ -631,6 +642,7 @@ public class PaymentTest : TestBase
         string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentLink = "payment_link";
         string expectedPaymentMethod = "payment_method";
+        string expectedPaymentMethodID = "payment_method_id";
         string expectedPaymentMethodType = "payment_method_type";
         List<ProductCart> expectedProductCart = [new() { ProductID = "product_id", Quantity = 0 }];
         ApiEnum<string, PaymentRefundStatus> expectedRefundStatus = PaymentRefundStatus.Partial;
@@ -652,6 +664,7 @@ public class PaymentTest : TestBase
         {
             Assert.Equal(expectedDisputes[i], deserialized.Disputes[i]);
         }
+        Assert.Equal(expectedIsUpdatePaymentMethod, deserialized.IsUpdatePaymentMethod);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
         {
@@ -695,6 +708,7 @@ public class PaymentTest : TestBase
         Assert.Equal(expectedInvoiceUrl, deserialized.InvoiceUrl);
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
         Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
+        Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
         Assert.Equal(expectedPaymentMethodType, deserialized.PaymentMethodType);
         Assert.NotNull(deserialized.ProductCart);
         Assert.Equal(expectedProductCart.Count, deserialized.ProductCart.Count);
@@ -752,6 +766,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
@@ -810,6 +825,7 @@ public class PaymentTest : TestBase
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
+            PaymentMethodID = "payment_method_id",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             RefundStatus = PaymentRefundStatus.Partial,
@@ -865,6 +881,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
@@ -919,6 +936,8 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("payment_link"));
         Assert.Null(model.PaymentMethod);
         Assert.False(model.RawData.ContainsKey("payment_method"));
+        Assert.Null(model.PaymentMethodID);
+        Assert.False(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.PaymentMethodType);
         Assert.False(model.RawData.ContainsKey("payment_method_type"));
         Assert.Null(model.ProductCart);
@@ -979,6 +998,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
@@ -1048,6 +1068,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
@@ -1086,6 +1107,7 @@ public class PaymentTest : TestBase
             InvoiceUrl = null,
             PaymentLink = null,
             PaymentMethod = null,
+            PaymentMethodID = null,
             PaymentMethodType = null,
             ProductCart = null,
             RefundStatus = null,
@@ -1126,6 +1148,8 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("payment_link"));
         Assert.Null(model.PaymentMethod);
         Assert.True(model.RawData.ContainsKey("payment_method"));
+        Assert.Null(model.PaymentMethodID);
+        Assert.True(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.PaymentMethodType);
         Assert.True(model.RawData.ContainsKey("payment_method_type"));
         Assert.Null(model.ProductCart);
@@ -1186,6 +1210,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
@@ -1224,6 +1249,7 @@ public class PaymentTest : TestBase
             InvoiceUrl = null,
             PaymentLink = null,
             PaymentMethod = null,
+            PaymentMethodID = null,
             PaymentMethodType = null,
             ProductCart = null,
             RefundStatus = null,
@@ -1279,6 +1305,7 @@ public class PaymentTest : TestBase
                     Remarks = "remarks",
                 },
             ],
+            IsUpdatePaymentMethod = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
             PaymentProvider = PaymentProvider.Stripe,
@@ -1337,6 +1364,7 @@ public class PaymentTest : TestBase
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
             PaymentMethod = "payment_method",
+            PaymentMethodID = "payment_method_id",
             PaymentMethodType = "payment_method_type",
             ProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             RefundStatus = PaymentRefundStatus.Partial,
