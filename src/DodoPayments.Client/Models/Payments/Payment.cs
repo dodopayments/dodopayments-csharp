@@ -127,6 +127,20 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Whether this payment was created solely to update a subscription's payment
+    /// method (a zero-/setup-amount charge). `false` for normal charges.
+    /// </summary>
+    public required bool IsUpdatePaymentMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("is_update_payment_method");
+        }
+        init { this._rawData.Set("is_update_payment_method", value); }
+    }
+
+    /// <summary>
     /// Additional custom data associated with the payment
     /// </summary>
     public required IReadOnlyDictionary<string, MetadataItem> Metadata
@@ -471,6 +485,19 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Identifier of the saved payment method used for this payment, if any.
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payment_method_id");
+        }
+        init { this._rawData.Set("payment_method_id", value); }
+    }
+
+    /// <summary>
     /// Specific type of payment method (e.g. "visa", "mastercard")
     /// </summary>
     public string? PaymentMethodType
@@ -599,6 +626,7 @@ public sealed record class Payment : JsonModel
         {
             item.Validate();
         }
+        _ = this.IsUpdatePaymentMethod;
         foreach (var item in this.Metadata.Values)
         {
             item.Validate();
@@ -634,6 +662,7 @@ public sealed record class Payment : JsonModel
         _ = this.InvoiceUrl;
         _ = this.PaymentLink;
         _ = this.PaymentMethod;
+        _ = this.PaymentMethodID;
         _ = this.PaymentMethodType;
         foreach (var item in this.ProductCart ?? [])
         {

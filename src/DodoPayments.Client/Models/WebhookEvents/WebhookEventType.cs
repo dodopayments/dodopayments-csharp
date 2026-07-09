@@ -33,6 +33,7 @@ public enum WebhookEventType
     SubscriptionExpired,
     SubscriptionPlanChanged,
     SubscriptionUpdated,
+    SubscriptionUpdatePaymentMethod,
     LicenseKeyCreated,
     PayoutNotInitiated,
     PayoutOnHold,
@@ -90,6 +91,8 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
             "subscription.expired" => WebhookEventType.SubscriptionExpired,
             "subscription.plan_changed" => WebhookEventType.SubscriptionPlanChanged,
             "subscription.updated" => WebhookEventType.SubscriptionUpdated,
+            "subscription.update_payment_method" =>
+                WebhookEventType.SubscriptionUpdatePaymentMethod,
             "license_key.created" => WebhookEventType.LicenseKeyCreated,
             "payout.not_initiated" => WebhookEventType.PayoutNotInitiated,
             "payout.on_hold" => WebhookEventType.PayoutOnHold,
@@ -149,6 +152,8 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
                 WebhookEventType.SubscriptionExpired => "subscription.expired",
                 WebhookEventType.SubscriptionPlanChanged => "subscription.plan_changed",
                 WebhookEventType.SubscriptionUpdated => "subscription.updated",
+                WebhookEventType.SubscriptionUpdatePaymentMethod =>
+                    "subscription.update_payment_method",
                 WebhookEventType.LicenseKeyCreated => "license_key.created",
                 WebhookEventType.PayoutNotInitiated => "payout.not_initiated",
                 WebhookEventType.PayoutOnHold => "payout.on_hold",

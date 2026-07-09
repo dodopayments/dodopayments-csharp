@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
@@ -86,6 +87,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 },
             ],
             TotalPrice = 0,
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RecurringBreakup = new()
             {
                 Discount = 0,
@@ -172,6 +174,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             },
         ];
         int expectedTotalPrice = 0;
+        DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         RecurringBreakup expectedRecurringBreakup = new()
         {
             Discount = 0,
@@ -194,6 +197,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             Assert.Equal(expectedProductCart[i], model.ProductCart[i]);
         }
         Assert.Equal(expectedTotalPrice, model.TotalPrice);
+        Assert.Equal(expectedNextBillingDate, model.NextBillingDate);
         Assert.Equal(expectedRecurringBreakup, model.RecurringBreakup);
         Assert.Equal(expectedTaxIDBusinessName, model.TaxIDBusinessName);
         Assert.Equal(expectedTaxIDErrMsg, model.TaxIDErrMsg);
@@ -279,6 +283,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 },
             ],
             TotalPrice = 0,
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RecurringBreakup = new()
             {
                 Discount = 0,
@@ -379,6 +384,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 },
             ],
             TotalPrice = 0,
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RecurringBreakup = new()
             {
                 Discount = 0,
@@ -472,6 +478,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             },
         ];
         int expectedTotalPrice = 0;
+        DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         RecurringBreakup expectedRecurringBreakup = new()
         {
             Discount = 0,
@@ -494,6 +501,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             Assert.Equal(expectedProductCart[i], deserialized.ProductCart[i]);
         }
         Assert.Equal(expectedTotalPrice, deserialized.TotalPrice);
+        Assert.Equal(expectedNextBillingDate, deserialized.NextBillingDate);
         Assert.Equal(expectedRecurringBreakup, deserialized.RecurringBreakup);
         Assert.Equal(expectedTaxIDBusinessName, deserialized.TaxIDBusinessName);
         Assert.Equal(expectedTaxIDErrMsg, deserialized.TaxIDErrMsg);
@@ -579,6 +587,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 },
             ],
             TotalPrice = 0,
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RecurringBreakup = new()
             {
                 Discount = 0,
@@ -675,6 +684,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalPrice = 0,
         };
 
+        Assert.Null(model.NextBillingDate);
+        Assert.False(model.RawData.ContainsKey("next_billing_date"));
         Assert.Null(model.RecurringBreakup);
         Assert.False(model.RawData.ContainsKey("recurring_breakup"));
         Assert.Null(model.TaxIDBusinessName);
@@ -849,6 +860,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             ],
             TotalPrice = 0,
 
+            NextBillingDate = null,
             RecurringBreakup = null,
             TaxIDBusinessName = null,
             TaxIDErrMsg = null,
@@ -856,6 +868,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TotalTax = null,
         };
 
+        Assert.Null(model.NextBillingDate);
+        Assert.True(model.RawData.ContainsKey("next_billing_date"));
         Assert.Null(model.RecurringBreakup);
         Assert.True(model.RawData.ContainsKey("recurring_breakup"));
         Assert.Null(model.TaxIDBusinessName);
@@ -947,6 +961,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             ],
             TotalPrice = 0,
 
+            NextBillingDate = null,
             RecurringBreakup = null,
             TaxIDBusinessName = null,
             TaxIDErrMsg = null,
@@ -1035,6 +1050,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                 },
             ],
             TotalPrice = 0,
+            NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RecurringBreakup = new()
             {
                 Discount = 0,

@@ -14,6 +14,7 @@ public class SubscriptionListParamsTest : TestBase
         var parameters = new SubscriptionListParams
         {
             BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
             CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
@@ -24,6 +25,7 @@ public class SubscriptionListParamsTest : TestBase
         };
 
         string expectedBrandID = "brand_id";
+        bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customer_id";
@@ -33,6 +35,7 @@ public class SubscriptionListParamsTest : TestBase
         ApiEnum<string, Status> expectedStatus = Status.Pending;
 
         Assert.Equal(expectedBrandID, parameters.BrandID);
+        Assert.Equal(expectedCancelAtNextBillingDate, parameters.CancelAtNextBillingDate);
         Assert.Equal(expectedCreatedAtGte, parameters.CreatedAtGte);
         Assert.Equal(expectedCreatedAtLte, parameters.CreatedAtLte);
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
@@ -49,6 +52,8 @@ public class SubscriptionListParamsTest : TestBase
 
         Assert.Null(parameters.BrandID);
         Assert.False(parameters.RawQueryData.ContainsKey("brand_id"));
+        Assert.Null(parameters.CancelAtNextBillingDate);
+        Assert.False(parameters.RawQueryData.ContainsKey("cancel_at_next_billing_date"));
         Assert.Null(parameters.CreatedAtGte);
         Assert.False(parameters.RawQueryData.ContainsKey("created_at_gte"));
         Assert.Null(parameters.CreatedAtLte);
@@ -72,6 +77,7 @@ public class SubscriptionListParamsTest : TestBase
         {
             // Null should be interpreted as omitted for these properties
             BrandID = null,
+            CancelAtNextBillingDate = null,
             CreatedAtGte = null,
             CreatedAtLte = null,
             CustomerID = null,
@@ -83,6 +89,8 @@ public class SubscriptionListParamsTest : TestBase
 
         Assert.Null(parameters.BrandID);
         Assert.False(parameters.RawQueryData.ContainsKey("brand_id"));
+        Assert.Null(parameters.CancelAtNextBillingDate);
+        Assert.False(parameters.RawQueryData.ContainsKey("cancel_at_next_billing_date"));
         Assert.Null(parameters.CreatedAtGte);
         Assert.False(parameters.RawQueryData.ContainsKey("created_at_gte"));
         Assert.Null(parameters.CreatedAtLte);
@@ -105,6 +113,7 @@ public class SubscriptionListParamsTest : TestBase
         SubscriptionListParams parameters = new()
         {
             BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
             CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             CustomerID = "customer_id",
@@ -119,7 +128,7 @@ public class SubscriptionListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/subscriptions?brand_id=brand_id&created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&product_id=product_id&status=pending"
+                    "https://live.dodopayments.com/subscriptions?brand_id=brand_id&cancel_at_next_billing_date=true&created_at_gte=2019-12-27T18%3a11%3a19.117%2b00%3a00&created_at_lte=2019-12-27T18%3a11%3a19.117%2b00%3a00&customer_id=customer_id&page_number=0&page_size=0&product_id=product_id&status=pending"
                 ),
                 url
             )
@@ -132,6 +141,7 @@ public class SubscriptionListParamsTest : TestBase
         var parameters = new SubscriptionListParams
         {
             BrandID = "brand_id",
+            CancelAtNextBillingDate = true,
             CreatedAtGte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAtLte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customer_id",
