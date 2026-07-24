@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
+using Misc = DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Payments;
 
@@ -15,7 +15,7 @@ public class PaymentCreateParamsTest : TestBase
         {
             Billing = new()
             {
-                Country = CountryCode.Af,
+                Country = Misc::CountryCode.Af,
                 City = "city",
                 State = "state",
                 Street = "street",
@@ -33,12 +33,12 @@ public class PaymentCreateParamsTest : TestBase
             ],
             AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
-            BillingCurrency = Currency.Aed,
+            BillingCurrency = Misc::Currency.Aed,
             CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
-            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, Misc::MetadataItem>() { { "foo", "string" } },
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,
@@ -51,7 +51,7 @@ public class PaymentCreateParamsTest : TestBase
 
         BillingAddress expectedBilling = new()
         {
-            Country = CountryCode.Af,
+            Country = Misc::CountryCode.Af,
             City = "city",
             State = "state",
             Street = "street",
@@ -72,12 +72,12 @@ public class PaymentCreateParamsTest : TestBase
         [
             PaymentMethodTypes.Ach,
         ];
-        ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
+        ApiEnum<string, Misc::Currency> expectedBillingCurrency = Misc::Currency.Aed;
         string expectedCustomerBusinessName = "customer_business_name";
         string expectedDiscountCode = "discount_code";
         List<string> expectedDiscountCodes = ["string"];
         bool expectedForce3ds = true;
-        Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
+        Dictionary<string, Misc::MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         bool expectedPaymentLink = true;
         string expectedPaymentMethodID = "payment_method_id";
         bool expectedRedirectImmediately = true;
@@ -145,7 +145,7 @@ public class PaymentCreateParamsTest : TestBase
         {
             Billing = new()
             {
-                Country = CountryCode.Af,
+                Country = Misc::CountryCode.Af,
                 City = "city",
                 State = "state",
                 Street = "street",
@@ -163,7 +163,7 @@ public class PaymentCreateParamsTest : TestBase
             ],
             AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
-            BillingCurrency = Currency.Aed,
+            BillingCurrency = Misc::Currency.Aed,
             CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
@@ -192,7 +192,7 @@ public class PaymentCreateParamsTest : TestBase
         {
             Billing = new()
             {
-                Country = CountryCode.Af,
+                Country = Misc::CountryCode.Af,
                 City = "city",
                 State = "state",
                 Street = "street",
@@ -210,7 +210,7 @@ public class PaymentCreateParamsTest : TestBase
             ],
             AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
-            BillingCurrency = Currency.Aed,
+            BillingCurrency = Misc::Currency.Aed,
             CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
@@ -245,7 +245,7 @@ public class PaymentCreateParamsTest : TestBase
         {
             Billing = new()
             {
-                Country = CountryCode.Af,
+                Country = Misc::CountryCode.Af,
                 City = "city",
                 State = "state",
                 Street = "street",
@@ -261,7 +261,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, Misc::MetadataItem>() { { "foo", "string" } },
             RedirectImmediately = true,
             RequirePhoneNumber = true,
             ShowSavedPaymentMethods = true,
@@ -300,7 +300,7 @@ public class PaymentCreateParamsTest : TestBase
         {
             Billing = new()
             {
-                Country = CountryCode.Af,
+                Country = Misc::CountryCode.Af,
                 City = "city",
                 State = "state",
                 Street = "street",
@@ -316,7 +316,7 @@ public class PaymentCreateParamsTest : TestBase
                     Amount = 0,
                 },
             ],
-            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, Misc::MetadataItem>() { { "foo", "string" } },
             RedirectImmediately = true,
             RequirePhoneNumber = true,
             ShowSavedPaymentMethods = true,
@@ -368,7 +368,7 @@ public class PaymentCreateParamsTest : TestBase
         {
             Billing = new()
             {
-                Country = CountryCode.Af,
+                Country = Misc::CountryCode.Af,
                 City = "city",
                 State = "state",
                 Street = "street",
@@ -398,7 +398,7 @@ public class PaymentCreateParamsTest : TestBase
         {
             Billing = new()
             {
-                Country = CountryCode.Af,
+                Country = Misc::CountryCode.Af,
                 City = "city",
                 State = "state",
                 Street = "street",
@@ -416,12 +416,12 @@ public class PaymentCreateParamsTest : TestBase
             ],
             AdaptiveCurrencyFeesInclusive = true,
             AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
-            BillingCurrency = Currency.Aed,
+            BillingCurrency = Misc::Currency.Aed,
             CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             Force3ds = true,
-            Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
+            Metadata = new Dictionary<string, Misc::MetadataItem>() { { "foo", "string" } },
             PaymentLink = true,
             PaymentMethodID = "payment_method_id",
             RedirectImmediately = true,

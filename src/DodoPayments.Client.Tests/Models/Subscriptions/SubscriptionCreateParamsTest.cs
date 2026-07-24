@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
@@ -22,11 +22,11 @@ public class SubscriptionCreateParamsTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             ProductID = "product_id",
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
@@ -62,7 +62,7 @@ public class SubscriptionCreateParamsTest : TestBase
             TrialPeriodDays = 0,
         };
 
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -70,13 +70,15 @@ public class SubscriptionCreateParamsTest : TestBase
             Street = "street",
             Zipcode = "zipcode",
         };
-        CustomerRequest expectedCustomer = new AttachExistingCustomer("customer_id");
+        Payments::CustomerRequest expectedCustomer = new Payments::AttachExistingCustomer(
+            "customer_id"
+        );
         string expectedProductID = "product_id";
         int expectedQuantity = 0;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
-        List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
+        List<ApiEnum<string, Payments::PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
         [
-            PaymentMethodTypes.Ach,
+            Payments::PaymentMethodTypes.Ach,
         ];
         ApiEnum<string, Currency> expectedBillingCurrency = Currency.Aed;
         string expectedCustomerBusinessName = "customer_business_name";
@@ -93,7 +95,7 @@ public class SubscriptionCreateParamsTest : TestBase
             ProductDescription = "product_description",
             ProductPrice = 0,
         };
-        List<OneTimeProductCartItem> expectedOneTimeProductCart =
+        List<Payments::OneTimeProductCartItem> expectedOneTimeProductCart =
         [
             new()
             {
@@ -184,11 +186,11 @@ public class SubscriptionCreateParamsTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             ProductID = "product_id",
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
@@ -243,11 +245,11 @@ public class SubscriptionCreateParamsTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             ProductID = "product_id",
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
@@ -308,7 +310,7 @@ public class SubscriptionCreateParamsTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             ProductID = "product_id",
             Quantity = 0,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -364,7 +366,7 @@ public class SubscriptionCreateParamsTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             ProductID = "product_id",
             Quantity = 0,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
@@ -437,7 +439,7 @@ public class SubscriptionCreateParamsTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             ProductID = "product_id",
             Quantity = 0,
         };
@@ -462,11 +464,11 @@ public class SubscriptionCreateParamsTest : TestBase
                 Street = "street",
                 Zipcode = "zipcode",
             },
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             ProductID = "product_id",
             Quantity = 0,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingCurrency = Currency.Aed,
             CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",

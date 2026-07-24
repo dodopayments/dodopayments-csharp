@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -40,12 +40,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Billing address details for payments
     /// </summary>
-    public required BillingAddress Billing
+    public required Payments::BillingAddress Billing
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<BillingAddress>("billing");
+            return this._rawData.GetNotNullClass<Payments::BillingAddress>("billing");
         }
         init { this._rawData.Set("billing", value); }
     }
@@ -126,12 +126,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Customer details associated with the subscription
     /// </summary>
-    public required CustomerLimitedDetails Customer
+    public required Payments::CustomerLimitedDetails Customer
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer");
+            return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer");
         }
         init { this._rawData.Set("customer", value); }
     }
@@ -428,18 +428,18 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Customer's responses to custom fields collected during checkout
     /// </summary>
-    public IReadOnlyList<CustomFieldResponse>? CustomFieldResponses
+    public IReadOnlyList<Payments::CustomFieldResponse>? CustomFieldResponses
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<CustomFieldResponse>>(
+            return this._rawData.GetNullableStruct<ImmutableArray<Payments::CustomFieldResponse>>(
                 "custom_field_responses"
             );
         }
         init
         {
-            this._rawData.Set<ImmutableArray<CustomFieldResponse>?>(
+            this._rawData.Set<ImmutableArray<Payments::CustomFieldResponse>?>(
                 "custom_field_responses",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -557,6 +557,21 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("tax_id", value); }
     }
 
+    /// <summary>
+    /// Per-unit trial amount after discounts, snapshotted at subscription creation
+    /// (price currency minor units, pre-quantity, pre-tax). Null for a free trial
+    /// or no trial.
+    /// </summary>
+    public int? TrialAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("trial_amount");
+        }
+        init { this._rawData.Set("trial_amount", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -618,6 +633,7 @@ public sealed record class Subscription : JsonModel
         _ = this.PaymentMethodID;
         this.ScheduledChange?.Validate();
         _ = this.TaxID;
+        _ = this.TrialAmount;
     }
 
     public Subscription() { }

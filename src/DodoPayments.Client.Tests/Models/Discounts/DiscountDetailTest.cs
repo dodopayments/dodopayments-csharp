@@ -24,7 +24,7 @@ public class DiscountDetailTest : TestBase
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
-            Type = DiscountType.Percentage,
+            Type = DiscountType.Flat,
             CyclesRemaining = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
@@ -42,7 +42,7 @@ public class DiscountDetailTest : TestBase
         bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
         int expectedTimesUsed = 0;
-        ApiEnum<string, DiscountType> expectedType = DiscountType.Percentage;
+        ApiEnum<string, DiscountType> expectedType = DiscountType.Flat;
         int expectedCyclesRemaining = 0;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedName = "name";
@@ -92,7 +92,7 @@ public class DiscountDetailTest : TestBase
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
-            Type = DiscountType.Percentage,
+            Type = DiscountType.Flat,
             CyclesRemaining = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
@@ -124,7 +124,7 @@ public class DiscountDetailTest : TestBase
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
-            Type = DiscountType.Percentage,
+            Type = DiscountType.Flat,
             CyclesRemaining = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
@@ -149,7 +149,7 @@ public class DiscountDetailTest : TestBase
         bool expectedPreserveOnPlanChange = true;
         List<string> expectedRestrictedTo = ["string"];
         int expectedTimesUsed = 0;
-        ApiEnum<string, DiscountType> expectedType = DiscountType.Percentage;
+        ApiEnum<string, DiscountType> expectedType = DiscountType.Flat;
         int expectedCyclesRemaining = 0;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedName = "name";
@@ -199,7 +199,7 @@ public class DiscountDetailTest : TestBase
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
-            Type = DiscountType.Percentage,
+            Type = DiscountType.Flat,
             CyclesRemaining = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",
@@ -225,7 +225,7 @@ public class DiscountDetailTest : TestBase
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
-            Type = DiscountType.Percentage,
+            Type = DiscountType.Flat,
         };
 
         Assert.Null(model.CyclesRemaining);
@@ -255,7 +255,7 @@ public class DiscountDetailTest : TestBase
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
-            Type = DiscountType.Percentage,
+            Type = DiscountType.Flat,
         };
 
         model.Validate();
@@ -276,7 +276,7 @@ public class DiscountDetailTest : TestBase
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
-            Type = DiscountType.Percentage,
+            Type = DiscountType.Flat,
 
             CyclesRemaining = null,
             ExpiresAt = null,
@@ -312,7 +312,7 @@ public class DiscountDetailTest : TestBase
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
-            Type = DiscountType.Percentage,
+            Type = DiscountType.Flat,
 
             CyclesRemaining = null,
             ExpiresAt = null,
@@ -339,7 +339,7 @@ public class DiscountDetailTest : TestBase
             PreserveOnPlanChange = true,
             RestrictedTo = ["string"],
             TimesUsed = 0,
-            Type = DiscountType.Percentage,
+            Type = DiscountType.Flat,
             CyclesRemaining = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Name = "name",

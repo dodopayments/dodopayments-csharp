@@ -34,6 +34,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
+            TrialAmount = 0,
         };
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
@@ -58,6 +59,7 @@ public class SubscriptionCreateResponseTest : TestBase
             new() { ProductID = "product_id", Quantity = 0 },
         ];
         string expectedPaymentLink = "payment_link";
+        int expectedTrialAmount = 0;
 
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -91,6 +93,7 @@ public class SubscriptionCreateResponseTest : TestBase
             Assert.Equal(expectedOneTimeProductCart[i], model.OneTimeProductCart[i]);
         }
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
+        Assert.Equal(expectedTrialAmount, model.TrialAmount);
     }
 
     [Fact]
@@ -117,6 +120,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
+            TrialAmount = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -152,6 +156,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
+            TrialAmount = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -183,6 +188,7 @@ public class SubscriptionCreateResponseTest : TestBase
             new() { ProductID = "product_id", Quantity = 0 },
         ];
         string expectedPaymentLink = "payment_link";
+        int expectedTrialAmount = 0;
 
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -216,6 +222,7 @@ public class SubscriptionCreateResponseTest : TestBase
             Assert.Equal(expectedOneTimeProductCart[i], deserialized.OneTimeProductCart[i]);
         }
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
+        Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
     }
 
     [Fact]
@@ -242,6 +249,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
+            TrialAmount = 0,
         };
 
         model.Validate();
@@ -279,6 +287,8 @@ public class SubscriptionCreateResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("one_time_product_cart"));
         Assert.Null(model.PaymentLink);
         Assert.False(model.RawData.ContainsKey("payment_link"));
+        Assert.Null(model.TrialAmount);
+        Assert.False(model.RawData.ContainsKey("trial_amount"));
     }
 
     [Fact]
@@ -329,6 +339,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ExpiresOn = null,
             OneTimeProductCart = null,
             PaymentLink = null,
+            TrialAmount = null,
         };
 
         Assert.Null(model.ClientSecret);
@@ -343,6 +354,8 @@ public class SubscriptionCreateResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("one_time_product_cart"));
         Assert.Null(model.PaymentLink);
         Assert.True(model.RawData.ContainsKey("payment_link"));
+        Assert.Null(model.TrialAmount);
+        Assert.True(model.RawData.ContainsKey("trial_amount"));
     }
 
     [Fact]
@@ -370,6 +383,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ExpiresOn = null,
             OneTimeProductCart = null,
             PaymentLink = null,
+            TrialAmount = null,
         };
 
         model.Validate();
@@ -399,6 +413,7 @@ public class SubscriptionCreateResponseTest : TestBase
             ExpiresOn = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             OneTimeProductCart = [new() { ProductID = "product_id", Quantity = 0 }],
             PaymentLink = "payment_link",
+            TrialAmount = 0,
         };
 
         SubscriptionCreateResponse copied = new(model);

@@ -4,7 +4,7 @@ using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Payments;
 
@@ -13,7 +13,7 @@ public class PaymentListPageResponseTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new PaymentListPageResponse
+        var model = new Payments::PaymentListPageResponse
         {
             Items =
             [
@@ -34,7 +34,7 @@ public class PaymentListPageResponseTest : TestBase
                     HasLicenseKey = true,
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PaymentID = "payment_id",
-                    PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+                    PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
                     TotalAmount = 0,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -43,14 +43,14 @@ public class PaymentListPageResponseTest : TestBase
                     InvoiceUrl = "invoice_url",
                     PaymentMethod = "payment_method",
                     PaymentMethodType = "payment_method_type",
-                    RefundStatus = PaymentRefundStatus.Partial,
-                    Status = IntentStatus.Succeeded,
+                    RefundStatus = Payments::PaymentRefundStatus.Partial,
+                    Status = Payments::IntentStatus.Succeeded,
                     SubscriptionID = "subscription_id",
                 },
             ],
         };
 
-        List<PaymentListResponse> expectedItems =
+        List<Payments::PaymentListResponse> expectedItems =
         [
             new()
             {
@@ -69,7 +69,7 @@ public class PaymentListPageResponseTest : TestBase
                 HasLicenseKey = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PaymentID = "payment_id",
-                PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+                PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
                 TotalAmount = 0,
                 CardLastFour = "card_last_four",
                 CardNetwork = "card_network",
@@ -78,8 +78,8 @@ public class PaymentListPageResponseTest : TestBase
                 InvoiceUrl = "invoice_url",
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
-                RefundStatus = PaymentRefundStatus.Partial,
-                Status = IntentStatus.Succeeded,
+                RefundStatus = Payments::PaymentRefundStatus.Partial,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
             },
         ];
@@ -94,7 +94,7 @@ public class PaymentListPageResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new PaymentListPageResponse
+        var model = new Payments::PaymentListPageResponse
         {
             Items =
             [
@@ -115,7 +115,7 @@ public class PaymentListPageResponseTest : TestBase
                     HasLicenseKey = true,
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PaymentID = "payment_id",
-                    PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+                    PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
                     TotalAmount = 0,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -124,15 +124,15 @@ public class PaymentListPageResponseTest : TestBase
                     InvoiceUrl = "invoice_url",
                     PaymentMethod = "payment_method",
                     PaymentMethodType = "payment_method_type",
-                    RefundStatus = PaymentRefundStatus.Partial,
-                    Status = IntentStatus.Succeeded,
+                    RefundStatus = Payments::PaymentRefundStatus.Partial,
+                    Status = Payments::IntentStatus.Succeeded,
                     SubscriptionID = "subscription_id",
                 },
             ],
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<PaymentListPageResponse>(
+        var deserialized = JsonSerializer.Deserialize<Payments::PaymentListPageResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -143,7 +143,7 @@ public class PaymentListPageResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new PaymentListPageResponse
+        var model = new Payments::PaymentListPageResponse
         {
             Items =
             [
@@ -164,7 +164,7 @@ public class PaymentListPageResponseTest : TestBase
                     HasLicenseKey = true,
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PaymentID = "payment_id",
-                    PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+                    PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
                     TotalAmount = 0,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -173,21 +173,21 @@ public class PaymentListPageResponseTest : TestBase
                     InvoiceUrl = "invoice_url",
                     PaymentMethod = "payment_method",
                     PaymentMethodType = "payment_method_type",
-                    RefundStatus = PaymentRefundStatus.Partial,
-                    Status = IntentStatus.Succeeded,
+                    RefundStatus = Payments::PaymentRefundStatus.Partial,
+                    Status = Payments::IntentStatus.Succeeded,
                     SubscriptionID = "subscription_id",
                 },
             ],
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<PaymentListPageResponse>(
+        var deserialized = JsonSerializer.Deserialize<Payments::PaymentListPageResponse>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        List<PaymentListResponse> expectedItems =
+        List<Payments::PaymentListResponse> expectedItems =
         [
             new()
             {
@@ -206,7 +206,7 @@ public class PaymentListPageResponseTest : TestBase
                 HasLicenseKey = true,
                 Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                 PaymentID = "payment_id",
-                PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+                PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
                 TotalAmount = 0,
                 CardLastFour = "card_last_four",
                 CardNetwork = "card_network",
@@ -215,8 +215,8 @@ public class PaymentListPageResponseTest : TestBase
                 InvoiceUrl = "invoice_url",
                 PaymentMethod = "payment_method",
                 PaymentMethodType = "payment_method_type",
-                RefundStatus = PaymentRefundStatus.Partial,
-                Status = IntentStatus.Succeeded,
+                RefundStatus = Payments::PaymentRefundStatus.Partial,
+                Status = Payments::IntentStatus.Succeeded,
                 SubscriptionID = "subscription_id",
             },
         ];
@@ -231,7 +231,7 @@ public class PaymentListPageResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new PaymentListPageResponse
+        var model = new Payments::PaymentListPageResponse
         {
             Items =
             [
@@ -252,7 +252,7 @@ public class PaymentListPageResponseTest : TestBase
                     HasLicenseKey = true,
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PaymentID = "payment_id",
-                    PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+                    PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
                     TotalAmount = 0,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -261,8 +261,8 @@ public class PaymentListPageResponseTest : TestBase
                     InvoiceUrl = "invoice_url",
                     PaymentMethod = "payment_method",
                     PaymentMethodType = "payment_method_type",
-                    RefundStatus = PaymentRefundStatus.Partial,
-                    Status = IntentStatus.Succeeded,
+                    RefundStatus = Payments::PaymentRefundStatus.Partial,
+                    Status = Payments::IntentStatus.Succeeded,
                     SubscriptionID = "subscription_id",
                 },
             ],
@@ -274,7 +274,7 @@ public class PaymentListPageResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new PaymentListPageResponse
+        var model = new Payments::PaymentListPageResponse
         {
             Items =
             [
@@ -295,7 +295,7 @@ public class PaymentListPageResponseTest : TestBase
                     HasLicenseKey = true,
                     Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
                     PaymentID = "payment_id",
-                    PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+                    PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
                     TotalAmount = 0,
                     CardLastFour = "card_last_four",
                     CardNetwork = "card_network",
@@ -304,14 +304,14 @@ public class PaymentListPageResponseTest : TestBase
                     InvoiceUrl = "invoice_url",
                     PaymentMethod = "payment_method",
                     PaymentMethodType = "payment_method_type",
-                    RefundStatus = PaymentRefundStatus.Partial,
-                    Status = IntentStatus.Succeeded,
+                    RefundStatus = Payments::PaymentRefundStatus.Partial,
+                    Status = Payments::IntentStatus.Succeeded,
                     SubscriptionID = "subscription_id",
                 },
             ],
         };
 
-        PaymentListPageResponse copied = new(model);
+        Payments::PaymentListPageResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }

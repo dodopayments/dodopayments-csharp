@@ -18,7 +18,9 @@ namespace DodoPayments.Client.Models.Discounts;
 public record class DiscountListParams : ParamsBase
 {
     /// <summary>
-    /// Filter by active status (true = not expired, false = expired)
+    /// Filter by active status. `true` = currently redeemable (started, not expired,
+    /// not usage-exhausted). `false` = not currently redeemable (expired, usage-exhausted,
+    /// or pending a future `starts_at`).
     /// </summary>
     public bool? Active
     {
