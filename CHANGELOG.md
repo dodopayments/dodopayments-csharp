@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.27.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.26.1...v6.27.0) (2026-07-24)
+
+
+### Features
+
+* **api:** add discount customers endpoints, trial support, currency options, and failure details ([f34d739](https://github.com/dodopayments/dodopayments-csharp/commit/f34d739d064a01c876ae37d3aff2cf24603426c2))
+* **api:** add discount customers endpoints, trial support, currency options, and failure details ([0db2acb](https://github.com/dodopayments/dodopayments-csharp/commit/0db2acb892f87766d3966f283b44209c6ee63542))
+
 ## [6.26.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.26.0...v6.26.1) (2026-07-09)
 
 
