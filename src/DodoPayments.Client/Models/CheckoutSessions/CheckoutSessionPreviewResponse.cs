@@ -189,6 +189,35 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
         init { this._rawData.Set("total_tax", value); }
     }
 
+    /// <summary>
+    /// Per-unit trial amount after discounts, in the price currency's minor units
+    /// (pre-quantity, pre-tax; see `current_breakup` for the taxed total due today).
+    /// Only present for a paid trial; `None` for a free trial or no trial.
+    /// </summary>
+    public int? TrialAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("trial_amount");
+        }
+        init { this._rawData.Set("trial_amount", value); }
+    }
+
+    /// <summary>
+    /// Effective trial duration in days for the subscription line, when there's a
+    /// trial (free or paid). `None` if no subscription or no trial.
+    /// </summary>
+    public int? TrialPeriodDays
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("trial_period_days");
+        }
+        init { this._rawData.Set("trial_period_days", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -207,6 +236,8 @@ public sealed record class CheckoutSessionPreviewResponse : JsonModel
         _ = this.TaxIDErrMsg;
         _ = this.TaxIDFormatName;
         _ = this.TotalTax;
+        _ = this.TrialAmount;
+        _ = this.TrialPeriodDays;
     }
 
     public CheckoutSessionPreviewResponse() { }
@@ -558,7 +589,8 @@ public sealed record class ProductCart : JsonModel
     }
 
     /// <summary>
-    /// discount percentage
+    /// Percentage rate (basis points) of the applicable percentage code; null for
+    /// flat codes (their deduction is `og_price - discounted_price`).
     /// </summary>
     public int? DiscountAmount
     {
@@ -1000,6 +1032,10 @@ public sealed record class Addon : JsonModel
         init { this._rawData.Set("description", value); }
     }
 
+    /// <summary>
+    /// Percentage rate (basis points) of the applicable percentage code; null for
+    /// flat codes (their deduction is `og_price - discounted_price`).
+    /// </summary>
     public int? DiscountAmount
     {
         get

@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Misc;
+using Misc = DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -17,12 +17,12 @@ namespace DodoPayments.Client.Models.Payments;
 )]
 public sealed record class PaymentRetrieveLineItemsResponse : JsonModel
 {
-    public required ApiEnum<string, Currency> Currency
+    public required ApiEnum<string, Misc::Currency> Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+            return this._rawData.GetNotNullClass<ApiEnum<string, Misc::Currency>>("currency");
         }
         init { this._rawData.Set("currency", value); }
     }

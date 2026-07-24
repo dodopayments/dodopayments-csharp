@@ -1648,6 +1648,23 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
+    /// Purpose-built failure messaging for the merchant and the customer, derived
+    /// from `error_code`. Present whenever `error_code` is set, regardless of payment
+    /// status; unrecognised codes still resolve via a generic fallback rather than
+    /// being omitted. The customer copy is always generic for fraud-sensitive declines
+    /// (lost/stolen/pickup/fraudulent) so the true reason is never leaked.
+    /// </summary>
+    public Payments::FailureDetails? FailureDetails
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Payments::FailureDetails>("failure_details");
+        }
+        init { this._rawData.Set("failure_details", value); }
+    }
+
+    /// <summary>
     /// Invoice ID for this payment. Uses India-specific invoice ID if available.
     /// </summary>
     public string? InvoiceID
@@ -1882,6 +1899,7 @@ public sealed record class Payment : JsonModel
             Discounts = payment.Discounts,
             ErrorCode = payment.ErrorCode,
             ErrorMessage = payment.ErrorMessage,
+            FailureDetails = payment.FailureDetails,
             InvoiceID = payment.InvoiceID,
             InvoiceUrl = payment.InvoiceUrl,
             PaymentLink = payment.PaymentLink,
@@ -1943,6 +1961,7 @@ public sealed record class Payment : JsonModel
         }
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
+        this.FailureDetails?.Validate();
         _ = this.InvoiceID;
         _ = this.InvoiceUrl;
         _ = this.PaymentLink;
@@ -2556,6 +2575,21 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("tax_id", value); }
     }
 
+    /// <summary>
+    /// Per-unit trial amount after discounts, snapshotted at subscription creation
+    /// (price currency minor units, pre-quantity, pre-tax). Null for a free trial
+    /// or no trial.
+    /// </summary>
+    public int? TrialAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("trial_amount");
+        }
+        init { this._rawData.Set("trial_amount", value); }
+    }
+
     public JsonElement PayloadType
     {
         get
@@ -2606,6 +2640,7 @@ public sealed record class Subscription : JsonModel
             PaymentMethodID = subscription.PaymentMethodID,
             ScheduledChange = subscription.ScheduledChange,
             TaxID = subscription.TaxID,
+            TrialAmount = subscription.TrialAmount,
         };
 
     /// <inheritdoc/>
@@ -2669,6 +2704,7 @@ public sealed record class Subscription : JsonModel
         _ = this.PaymentMethodID;
         this.ScheduledChange?.Validate();
         _ = this.TaxID;
+        _ = this.TrialAmount;
         if (
             !JsonElement.DeepEquals(
                 this.PayloadType,

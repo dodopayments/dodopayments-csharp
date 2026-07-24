@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Subscriptions;
 
@@ -29,12 +29,12 @@ public record class SubscriptionCreateParams : ParamsBase
     /// <summary>
     /// Billing address information for the subscription
     /// </summary>
-    public required BillingAddress Billing
+    public required Payments::BillingAddress Billing
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<BillingAddress>("billing");
+            return this._rawBodyData.GetNotNullClass<Payments::BillingAddress>("billing");
         }
         init { this._rawBodyData.Set("billing", value); }
     }
@@ -42,12 +42,12 @@ public record class SubscriptionCreateParams : ParamsBase
     /// <summary>
     /// Customer details for the subscription
     /// </summary>
-    public required CustomerRequest Customer
+    public required Payments::CustomerRequest Customer
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<CustomerRequest>("customer");
+            return this._rawBodyData.GetNotNullClass<Payments::CustomerRequest>("customer");
         }
         init { this._rawBodyData.Set("customer", value); }
     }
@@ -105,18 +105,18 @@ public record class SubscriptionCreateParams : ParamsBase
     /// see it. Availability still depends on other factors (e.g., customer location,
     /// merchant settings).</para>
     /// </summary>
-    public IReadOnlyList<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
+    public IReadOnlyList<ApiEnum<string, Payments::PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
         get
         {
             this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableStruct<
-                ImmutableArray<ApiEnum<string, PaymentMethodTypes>>
+                ImmutableArray<ApiEnum<string, Payments::PaymentMethodTypes>>
             >("allowed_payment_method_types");
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<ApiEnum<string, PaymentMethodTypes>>?>(
+            this._rawBodyData.Set<ImmutableArray<ApiEnum<string, Payments::PaymentMethodTypes>>?>(
                 "allowed_payment_method_types",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -258,18 +258,18 @@ public record class SubscriptionCreateParams : ParamsBase
     /// List of one time products that will be bundled with the first payment for
     /// this subscription
     /// </summary>
-    public IReadOnlyList<OneTimeProductCartItem>? OneTimeProductCart
+    public IReadOnlyList<Payments::OneTimeProductCartItem>? OneTimeProductCart
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<ImmutableArray<OneTimeProductCartItem>>(
-                "one_time_product_cart"
-            );
+            return this._rawBodyData.GetNullableStruct<
+                ImmutableArray<Payments::OneTimeProductCartItem>
+            >("one_time_product_cart");
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<OneTimeProductCartItem>?>(
+            this._rawBodyData.Set<ImmutableArray<Payments::OneTimeProductCartItem>?>(
                 "one_time_product_cart",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );

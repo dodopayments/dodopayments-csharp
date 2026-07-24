@@ -8,6 +8,7 @@ namespace DodoPayments.Client.Models.Discounts;
 [JsonConverter(typeof(DiscountTypeConverter))]
 public enum DiscountType
 {
+    Flat,
     Percentage,
 }
 
@@ -21,6 +22,7 @@ sealed class DiscountTypeConverter : JsonConverter<DiscountType>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
+            "flat" => DiscountType.Flat,
             "percentage" => DiscountType.Percentage,
             _ => (DiscountType)(-1),
         };
@@ -36,6 +38,7 @@ sealed class DiscountTypeConverter : JsonConverter<DiscountType>
             writer,
             value switch
             {
+                DiscountType.Flat => "flat",
                 DiscountType.Percentage => "percentage",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
