@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
@@ -76,9 +76,10 @@ public class SubscriptionListResponseTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -89,7 +90,7 @@ public class SubscriptionListResponseTest : TestBase
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -144,6 +145,7 @@ public class SubscriptionListResponseTest : TestBase
             ProductName = "product_name",
         };
         string expectedTaxID = "tax_id";
+        int expectedTrialAmount = 0;
 
         Assert.Equal(expectedBilling, model.Billing);
         Assert.Equal(expectedCancelAtNextBillingDate, model.CancelAtNextBillingDate);
@@ -184,6 +186,7 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedProductName, model.ProductName);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
         Assert.Equal(expectedTaxID, model.TaxID);
+        Assert.Equal(expectedTrialAmount, model.TrialAmount);
     }
 
     [Fact]
@@ -252,6 +255,7 @@ public class SubscriptionListResponseTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -329,6 +333,7 @@ public class SubscriptionListResponseTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -338,7 +343,7 @@ public class SubscriptionListResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -349,7 +354,7 @@ public class SubscriptionListResponseTest : TestBase
         bool expectedCancelAtNextBillingDate = true;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -404,6 +409,7 @@ public class SubscriptionListResponseTest : TestBase
             ProductName = "product_name",
         };
         string expectedTaxID = "tax_id";
+        int expectedTrialAmount = 0;
 
         Assert.Equal(expectedBilling, deserialized.Billing);
         Assert.Equal(expectedCancelAtNextBillingDate, deserialized.CancelAtNextBillingDate);
@@ -444,6 +450,7 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedProductName, deserialized.ProductName);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
         Assert.Equal(expectedTaxID, deserialized.TaxID);
+        Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
     }
 
     [Fact]
@@ -512,6 +519,7 @@ public class SubscriptionListResponseTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         model.Validate();
@@ -575,6 +583,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("scheduled_change"));
         Assert.Null(model.TaxID);
         Assert.False(model.RawData.ContainsKey("tax_id"));
+        Assert.Null(model.TrialAmount);
+        Assert.False(model.RawData.ContainsKey("trial_amount"));
     }
 
     [Fact]
@@ -671,6 +681,7 @@ public class SubscriptionListResponseTest : TestBase
             ProductName = null,
             ScheduledChange = null,
             TaxID = null,
+            TrialAmount = null,
         };
 
         Assert.Null(model.CancelledAt);
@@ -689,6 +700,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("scheduled_change"));
         Assert.Null(model.TaxID);
         Assert.True(model.RawData.ContainsKey("tax_id"));
+        Assert.Null(model.TrialAmount);
+        Assert.True(model.RawData.ContainsKey("trial_amount"));
     }
 
     [Fact]
@@ -740,6 +753,7 @@ public class SubscriptionListResponseTest : TestBase
             ProductName = null,
             ScheduledChange = null,
             TaxID = null,
+            TrialAmount = null,
         };
 
         model.Validate();
@@ -811,6 +825,7 @@ public class SubscriptionListResponseTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         SubscriptionListResponse copied = new(model);

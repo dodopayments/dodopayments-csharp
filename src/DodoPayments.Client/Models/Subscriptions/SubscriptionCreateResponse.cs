@@ -202,6 +202,20 @@ public sealed record class SubscriptionCreateResponse : JsonModel
         init { this._rawData.Set("payment_link", value); }
     }
 
+    /// <summary>
+    /// Per-unit trial amount after discounts, in the price currency's minor units
+    /// (pre-quantity, pre-tax). Null for a free trial or no trial.
+    /// </summary>
+    public int? TrialAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("trial_amount");
+        }
+        init { this._rawData.Set("trial_amount", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -226,6 +240,7 @@ public sealed record class SubscriptionCreateResponse : JsonModel
             item.Validate();
         }
         _ = this.PaymentLink;
+        _ = this.TrialAmount;
     }
 
     public SubscriptionCreateResponse() { }

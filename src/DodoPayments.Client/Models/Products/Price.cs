@@ -788,6 +788,34 @@ public sealed record class RecurringPrice : JsonModel
     }
 
     /// <summary>
+    /// Amount charged today for a paid trial, in the price currency's minor units.
+    /// Requires `trial_period_days &gt; 0`. Omit or null for a free trial (the default).
+    /// </summary>
+    public int? TrialAmount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("trial_amount");
+        }
+        init { this._rawData.Set("trial_amount", value); }
+    }
+
+    /// <summary>
+    /// Whether discount codes reduce the trial charge. Defaults to false. Only meaningful
+    /// when a paid trial is configured.
+    /// </summary>
+    public bool? TrialApplyDiscounts
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("trial_apply_discounts");
+        }
+        init { this._rawData.Set("trial_apply_discounts", value); }
+    }
+
+    /// <summary>
     /// Number of days for the trial period. A value of `0` indicates no trial period.
     /// </summary>
     public int? TrialPeriodDays
@@ -826,6 +854,8 @@ public sealed record class RecurringPrice : JsonModel
             throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
         }
         _ = this.TaxInclusive;
+        _ = this.TrialAmount;
+        _ = this.TrialApplyDiscounts;
         _ = this.TrialPeriodDays;
     }
 

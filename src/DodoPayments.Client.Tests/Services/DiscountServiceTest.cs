@@ -9,7 +9,7 @@ public class DiscountServiceTest : TestBase
     public async Task Create_Works()
     {
         var discount = await this.client.Discounts.Create(
-            new() { Amount = 0, Type = DiscountType.Percentage },
+            new() { Amount = 0, Type = DiscountType.Flat },
             TestContext.Current.CancellationToken
         );
         discount.Validate();

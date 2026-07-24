@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.CheckoutSessions;
 
@@ -51,18 +51,18 @@ public record class CheckoutSessionPreviewParams : ParamsBase
     /// <para>Disclaimar: Always provide 'credit' and 'debit' as a fallback. If all
     /// payment methods are unavailable, checkout session will fail.</para>
     /// </summary>
-    public IReadOnlyList<ApiEnum<string, PaymentMethodTypes>>? AllowedPaymentMethodTypes
+    public IReadOnlyList<ApiEnum<string, Payments::PaymentMethodTypes>>? AllowedPaymentMethodTypes
     {
         get
         {
             this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableStruct<
-                ImmutableArray<ApiEnum<string, PaymentMethodTypes>>
+                ImmutableArray<ApiEnum<string, Payments::PaymentMethodTypes>>
             >("allowed_payment_method_types");
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<ApiEnum<string, PaymentMethodTypes>>?>(
+            this._rawBodyData.Set<ImmutableArray<ApiEnum<string, Payments::PaymentMethodTypes>>?>(
                 "allowed_payment_method_types",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -159,12 +159,12 @@ public record class CheckoutSessionPreviewParams : ParamsBase
     /// <summary>
     /// Customer details for the session
     /// </summary>
-    public CustomerRequest? Customer
+    public Payments::CustomerRequest? Customer
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<CustomerRequest>("customer");
+            return this._rawBodyData.GetNullableClass<Payments::CustomerRequest>("customer");
         }
         init { this._rawBodyData.Set("customer", value); }
     }

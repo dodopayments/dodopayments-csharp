@@ -6,7 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Discounts;
@@ -44,7 +46,7 @@ public record class DiscountCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// The discount type. Currently only `percentage` is supported.
+    /// The discount type: `percentage` or `flat` (`flat_per_unit` stays blocked).
     /// </summary>
     public required ApiEnum<string, DiscountType> Type
     {
@@ -68,6 +70,47 @@ public record class DiscountCreateParams : ParamsBase
             return this._rawBodyData.GetNullableClass<string>("code");
         }
         init { this._rawBodyData.Set("code", value); }
+    }
+
+    /// <summary>
+    /// Per-currency options (flat deduction / percentage cap + minimum subtotal).
+    /// Required for `flat` codes (must include a resolvable default); optional per-currency
+    /// caps for `percentage` codes. Per-row invariants are checked in `normalize_currency_options`,
+    /// not via `#[validate(nested)]`.
+    /// </summary>
+    public IReadOnlyList<CurrencyOption>? CurrencyOptions
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<CurrencyOption>>(
+                "currency_options"
+            );
+        }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<CurrencyOption>?>(
+                "currency_options",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Who may redeem this discount code. Defaults to `any` (unrestricted). `specific`
+    /// starts with zero attached customers (fails closed) until customers are attached
+    /// via `POST /discounts/{id}/customers`.
+    /// </summary>
+    public ApiEnum<string, CustomerEligibility>? CustomerEligibility
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, CustomerEligibility>>(
+                "customer_eligibility"
+            );
+        }
+        init { this._rawBodyData.Set("customer_eligibility", value); }
     }
 
     /// <summary>
@@ -120,6 +163,20 @@ public record class DiscountCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Maximum number of times a single customer may redeem this discount. Must
+    /// be `&lt;= usage_limit` when both are set.
+    /// </summary>
+    public int? PerCustomerUsageLimit
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("per_customer_usage_limit");
+        }
+        init { this._rawBodyData.Set("per_customer_usage_limit", value); }
+    }
+
+    /// <summary>
     /// Whether this discount should be preserved when a subscription changes plans.
     /// Default: false (discount is removed on plan change)
     /// </summary>
@@ -158,6 +215,20 @@ public record class DiscountCreateParams : ParamsBase
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
         }
+    }
+
+    /// <summary>
+    /// When the discount becomes active, if scheduled for the future. NULL = active
+    /// immediately. Must be strictly before `expires_at` when both are set.
+    /// </summary>
+    public DateTimeOffset? StartsAt
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<DateTimeOffset>("starts_at");
+        }
+        init { this._rawBodyData.Set("starts_at", value); }
     }
 
     /// <summary>
@@ -295,5 +366,192 @@ public record class DiscountCreateParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
+    }
+}
+
+/// <summary>
+/// A per-currency discount option (request shape).
+///
+/// <para>`max_amount_possible` is the most this code discounts in this currency
+/// — the flat deduction for `flat` codes, or the max-discount cap for `percentage`
+/// codes. Maps to the DB column of the same name.</para>
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<CurrencyOption, CurrencyOptionFromRaw>))]
+public sealed record class CurrencyOption : JsonModel
+{
+    /// <summary>
+    /// The currency this option applies to.
+    /// </summary>
+    public required ApiEnum<string, Currency> Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
+        init { this._rawData.Set("currency", value); }
+    }
+
+    /// <summary>
+    /// Whether this row is the default to convert from for unconfigured currencies.
+    /// At most one row per discount may be default.
+    /// </summary>
+    public bool? IsDefault
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("is_default");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("is_default", value);
+        }
+    }
+
+    /// <summary>
+    /// The most this code discounts in this currency's subunits. For `flat` codes
+    /// this is the deduction; for `percentage` codes it is the max-discount cap.
+    /// Must be &gt; 0 if provided.
+    /// </summary>
+    public int? MaxAmountPossible
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("max_amount_possible");
+        }
+        init { this._rawData.Set("max_amount_possible", value); }
+    }
+
+    /// <summary>
+    /// Eligible-cart threshold in this currency's subunits (0 = no minimum).
+    /// </summary>
+    public int? MinimumSubtotal
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("minimum_subtotal");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("minimum_subtotal", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Currency.Validate();
+        _ = this.IsDefault;
+        _ = this.MaxAmountPossible;
+        _ = this.MinimumSubtotal;
+    }
+
+    public CurrencyOption() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CurrencyOption(CurrencyOption currencyOption)
+        : base(currencyOption) { }
+#pragma warning restore CS8618
+
+    public CurrencyOption(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CurrencyOption(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CurrencyOptionFromRaw.FromRawUnchecked"/>
+    public static CurrencyOption FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public CurrencyOption(ApiEnum<string, Currency> currency)
+        : this()
+    {
+        this.Currency = currency;
+    }
+}
+
+class CurrencyOptionFromRaw : IFromRawJson<CurrencyOption>
+{
+    /// <inheritdoc/>
+    public CurrencyOption FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CurrencyOption.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Who may redeem this discount code. Defaults to `any` (unrestricted). `specific`
+/// starts with zero attached customers (fails closed) until customers are attached
+/// via `POST /discounts/{id}/customers`.
+/// </summary>
+[JsonConverter(typeof(CustomerEligibilityConverter))]
+public enum CustomerEligibility
+{
+    Any,
+    FirstTime,
+    Existing,
+    Specific,
+}
+
+sealed class CustomerEligibilityConverter : JsonConverter<CustomerEligibility>
+{
+    public override CustomerEligibility Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "any" => CustomerEligibility.Any,
+            "first_time" => CustomerEligibility.FirstTime,
+            "existing" => CustomerEligibility.Existing,
+            "specific" => CustomerEligibility.Specific,
+            _ => (CustomerEligibility)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        CustomerEligibility value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CustomerEligibility.Any => "any",
+                CustomerEligibility.FirstTime => "first_time",
+                CustomerEligibility.Existing => "existing",
+                CustomerEligibility.Specific => "specific",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

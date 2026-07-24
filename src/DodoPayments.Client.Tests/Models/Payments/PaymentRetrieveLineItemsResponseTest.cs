@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
+using Misc = DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Payments;
 
@@ -13,7 +13,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
     {
         var model = new PaymentRetrieveLineItemsResponse
         {
-            Currency = Currency.Aed,
+            Currency = Misc::Currency.Aed,
             Items =
             [
                 new()
@@ -28,7 +28,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
             ],
         };
 
-        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        ApiEnum<string, Misc::Currency> expectedCurrency = Misc::Currency.Aed;
         List<Item> expectedItems =
         [
             new()
@@ -55,7 +55,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
     {
         var model = new PaymentRetrieveLineItemsResponse
         {
-            Currency = Currency.Aed,
+            Currency = Misc::Currency.Aed,
             Items =
             [
                 new()
@@ -84,7 +84,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
     {
         var model = new PaymentRetrieveLineItemsResponse
         {
-            Currency = Currency.Aed,
+            Currency = Misc::Currency.Aed,
             Items =
             [
                 new()
@@ -106,7 +106,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        ApiEnum<string, Misc::Currency> expectedCurrency = Misc::Currency.Aed;
         List<Item> expectedItems =
         [
             new()
@@ -133,7 +133,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
     {
         var model = new PaymentRetrieveLineItemsResponse
         {
-            Currency = Currency.Aed,
+            Currency = Misc::Currency.Aed,
             Items =
             [
                 new()
@@ -156,7 +156,7 @@ public class PaymentRetrieveLineItemsResponseTest : TestBase
     {
         var model = new PaymentRetrieveLineItemsResponse
         {
-            Currency = Currency.Aed,
+            Currency = Misc::Currency.Aed,
             Items =
             [
                 new()

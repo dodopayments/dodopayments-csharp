@@ -5,8 +5,8 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CreditEntitlements;
 using DodoPayments.Client.Models.Discounts;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Subscriptions;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Subscriptions;
 
@@ -121,7 +121,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -151,10 +151,11 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -189,7 +190,7 @@ public class SubscriptionTest : TestBase
             },
         ];
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -242,7 +243,7 @@ public class SubscriptionTest : TestBase
         ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
             CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<CustomFieldResponse> expectedCustomFieldResponses =
+        List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
         ];
@@ -263,7 +264,7 @@ public class SubscriptionTest : TestBase
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
                 TimesUsed = 0,
-                Type = DiscountType.Percentage,
+                Type = DiscountType.Flat,
                 CyclesRemaining = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Name = "name",
@@ -293,6 +294,7 @@ public class SubscriptionTest : TestBase
             ProductName = "product_name",
         };
         string expectedTaxID = "tax_id";
+        int expectedTrialAmount = 0;
 
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -369,6 +371,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
         Assert.Equal(expectedTaxID, model.TaxID);
+        Assert.Equal(expectedTrialAmount, model.TrialAmount);
     }
 
     [Fact]
@@ -480,7 +483,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -510,6 +513,7 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -630,7 +634,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -660,6 +664,7 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -670,7 +675,7 @@ public class SubscriptionTest : TestBase
         Assert.NotNull(deserialized);
 
         List<AddonCartResponseItem> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
-        BillingAddress expectedBilling = new()
+        Payments::BillingAddress expectedBilling = new()
         {
             Country = CountryCode.Af,
             City = "city",
@@ -705,7 +710,7 @@ public class SubscriptionTest : TestBase
             },
         ];
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -758,7 +763,7 @@ public class SubscriptionTest : TestBase
         ApiEnum<string, CancellationFeedback> expectedCancellationFeedback =
             CancellationFeedback.TooExpensive;
         DateTimeOffset expectedCancelledAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<CustomFieldResponse> expectedCustomFieldResponses =
+        List<Payments::CustomFieldResponse> expectedCustomFieldResponses =
         [
             new() { Key = "key", Value = "value" },
         ];
@@ -779,7 +784,7 @@ public class SubscriptionTest : TestBase
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
                 TimesUsed = 0,
-                Type = DiscountType.Percentage,
+                Type = DiscountType.Flat,
                 CyclesRemaining = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Name = "name",
@@ -809,6 +814,7 @@ public class SubscriptionTest : TestBase
             ProductName = "product_name",
         };
         string expectedTaxID = "tax_id";
+        int expectedTrialAmount = 0;
 
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
         for (int i = 0; i < expectedAddons.Count; i++)
@@ -885,6 +891,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
         Assert.Equal(expectedTaxID, deserialized.TaxID);
+        Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
     }
 
     [Fact]
@@ -996,7 +1003,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -1026,6 +1033,7 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         model.Validate();
@@ -1145,6 +1153,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("scheduled_change"));
         Assert.Null(model.TaxID);
         Assert.False(model.RawData.ContainsKey("tax_id"));
+        Assert.Null(model.TrialAmount);
+        Assert.False(model.RawData.ContainsKey("trial_amount"));
     }
 
     [Fact]
@@ -1341,6 +1351,7 @@ public class SubscriptionTest : TestBase
             PaymentMethodID = null,
             ScheduledChange = null,
             TaxID = null,
+            TrialAmount = null,
         };
 
         Assert.Null(model.CancellationComment);
@@ -1367,6 +1378,8 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("scheduled_change"));
         Assert.Null(model.TaxID);
         Assert.True(model.RawData.ContainsKey("tax_id"));
+        Assert.Null(model.TrialAmount);
+        Assert.True(model.RawData.ContainsKey("trial_amount"));
     }
 
     [Fact]
@@ -1470,6 +1483,7 @@ public class SubscriptionTest : TestBase
             PaymentMethodID = null,
             ScheduledChange = null,
             TaxID = null,
+            TrialAmount = null,
         };
 
         model.Validate();
@@ -1584,7 +1598,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -1614,6 +1628,7 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         Subscription copied = new(model);

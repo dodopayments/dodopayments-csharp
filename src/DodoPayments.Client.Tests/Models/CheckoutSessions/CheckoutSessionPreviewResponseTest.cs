@@ -99,6 +99,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TaxIDErrMsg = "tax_id_err_msg",
             TaxIDFormatName = "tax_id_format_name",
             TotalTax = 0,
+            TrialAmount = 0,
+            TrialPeriodDays = 0,
         };
 
         ApiEnum<string, CountryCode> expectedBillingCountry = CountryCode.Af;
@@ -186,6 +188,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         string expectedTaxIDErrMsg = "tax_id_err_msg";
         string expectedTaxIDFormatName = "tax_id_format_name";
         int expectedTotalTax = 0;
+        int expectedTrialAmount = 0;
+        int expectedTrialPeriodDays = 0;
 
         Assert.Equal(expectedBillingCountry, model.BillingCountry);
         Assert.Equal(expectedCurrency, model.Currency);
@@ -203,6 +207,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.Equal(expectedTaxIDErrMsg, model.TaxIDErrMsg);
         Assert.Equal(expectedTaxIDFormatName, model.TaxIDFormatName);
         Assert.Equal(expectedTotalTax, model.TotalTax);
+        Assert.Equal(expectedTrialAmount, model.TrialAmount);
+        Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
     }
 
     [Fact]
@@ -295,6 +301,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TaxIDErrMsg = "tax_id_err_msg",
             TaxIDFormatName = "tax_id_format_name",
             TotalTax = 0,
+            TrialAmount = 0,
+            TrialPeriodDays = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -396,6 +404,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TaxIDErrMsg = "tax_id_err_msg",
             TaxIDFormatName = "tax_id_format_name",
             TotalTax = 0,
+            TrialAmount = 0,
+            TrialPeriodDays = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -490,6 +500,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         string expectedTaxIDErrMsg = "tax_id_err_msg";
         string expectedTaxIDFormatName = "tax_id_format_name";
         int expectedTotalTax = 0;
+        int expectedTrialAmount = 0;
+        int expectedTrialPeriodDays = 0;
 
         Assert.Equal(expectedBillingCountry, deserialized.BillingCountry);
         Assert.Equal(expectedCurrency, deserialized.Currency);
@@ -507,6 +519,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.Equal(expectedTaxIDErrMsg, deserialized.TaxIDErrMsg);
         Assert.Equal(expectedTaxIDFormatName, deserialized.TaxIDFormatName);
         Assert.Equal(expectedTotalTax, deserialized.TotalTax);
+        Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
+        Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
     }
 
     [Fact]
@@ -599,6 +613,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TaxIDErrMsg = "tax_id_err_msg",
             TaxIDFormatName = "tax_id_format_name",
             TotalTax = 0,
+            TrialAmount = 0,
+            TrialPeriodDays = 0,
         };
 
         model.Validate();
@@ -696,6 +712,10 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("tax_id_format_name"));
         Assert.Null(model.TotalTax);
         Assert.False(model.RawData.ContainsKey("total_tax"));
+        Assert.Null(model.TrialAmount);
+        Assert.False(model.RawData.ContainsKey("trial_amount"));
+        Assert.Null(model.TrialPeriodDays);
+        Assert.False(model.RawData.ContainsKey("trial_period_days"));
     }
 
     [Fact]
@@ -866,6 +886,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TaxIDErrMsg = null,
             TaxIDFormatName = null,
             TotalTax = null,
+            TrialAmount = null,
+            TrialPeriodDays = null,
         };
 
         Assert.Null(model.NextBillingDate);
@@ -880,6 +902,10 @@ public class CheckoutSessionPreviewResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("tax_id_format_name"));
         Assert.Null(model.TotalTax);
         Assert.True(model.RawData.ContainsKey("total_tax"));
+        Assert.Null(model.TrialAmount);
+        Assert.True(model.RawData.ContainsKey("trial_amount"));
+        Assert.Null(model.TrialPeriodDays);
+        Assert.True(model.RawData.ContainsKey("trial_period_days"));
     }
 
     [Fact]
@@ -967,6 +993,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TaxIDErrMsg = null,
             TaxIDFormatName = null,
             TotalTax = null,
+            TrialAmount = null,
+            TrialPeriodDays = null,
         };
 
         model.Validate();
@@ -1062,6 +1090,8 @@ public class CheckoutSessionPreviewResponseTest : TestBase
             TaxIDErrMsg = "tax_id_err_msg",
             TaxIDFormatName = "tax_id_format_name",
             TotalTax = 0,
+            TrialAmount = 0,
+            TrialPeriodDays = 0,
         };
 
         CheckoutSessionPreviewResponse copied = new(model);

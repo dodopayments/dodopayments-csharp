@@ -13,7 +13,7 @@ public class DiscountListParamsTest : TestBase
         {
             Active = true,
             Code = "code",
-            DiscountType = DiscountType.Percentage,
+            DiscountType = DiscountType.Flat,
             PageNumber = 0,
             PageSize = 0,
             ProductID = "product_id",
@@ -21,7 +21,7 @@ public class DiscountListParamsTest : TestBase
 
         bool expectedActive = true;
         string expectedCode = "code";
-        ApiEnum<string, DiscountType> expectedDiscountType = DiscountType.Percentage;
+        ApiEnum<string, DiscountType> expectedDiscountType = DiscountType.Flat;
         int expectedPageNumber = 0;
         int expectedPageSize = 0;
         string expectedProductID = "product_id";
@@ -88,7 +88,7 @@ public class DiscountListParamsTest : TestBase
         {
             Active = true,
             Code = "code",
-            DiscountType = DiscountType.Percentage,
+            DiscountType = DiscountType.Flat,
             PageNumber = 0,
             PageSize = 0,
             ProductID = "product_id",
@@ -99,7 +99,7 @@ public class DiscountListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://live.dodopayments.com/discounts?active=true&code=code&discount_type=percentage&page_number=0&page_size=0&product_id=product_id"
+                    "https://live.dodopayments.com/discounts?active=true&code=code&discount_type=flat&page_number=0&page_size=0&product_id=product_id"
                 ),
                 url
             )
@@ -113,7 +113,7 @@ public class DiscountListParamsTest : TestBase
         {
             Active = true,
             Code = "code",
-            DiscountType = DiscountType.Percentage,
+            DiscountType = DiscountType.Flat,
             PageNumber = 0,
             PageSize = 0,
             ProductID = "product_id",
