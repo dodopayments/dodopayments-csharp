@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Refunds;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Refunds;
 
@@ -39,7 +39,7 @@ public class RefundTest : TestBase
         string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -141,7 +141,7 @@ public class RefundTest : TestBase
         string expectedBrandID = "brand_id";
         string expectedBusinessID = "business_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
