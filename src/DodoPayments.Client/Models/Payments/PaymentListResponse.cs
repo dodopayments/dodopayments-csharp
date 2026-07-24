@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
-using DodoPayments.Client.Models.Misc;
+using Misc = DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -34,12 +34,12 @@ public sealed record class PaymentListResponse : JsonModel
         init { this._rawData.Set("created_at", value); }
     }
 
-    public required ApiEnum<string, Currency> Currency
+    public required ApiEnum<string, Misc::Currency> Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+            return this._rawData.GetNotNullClass<ApiEnum<string, Misc::Currency>>("currency");
         }
         init { this._rawData.Set("currency", value); }
     }
@@ -77,18 +77,18 @@ public sealed record class PaymentListResponse : JsonModel
     /// <summary>
     /// Arbitrary key-value metadata. Values can be string, integer, number, or boolean.
     /// </summary>
-    public required IReadOnlyDictionary<string, MetadataItem> Metadata
+    public required IReadOnlyDictionary<string, Misc::MetadataItem> Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<FrozenDictionary<string, MetadataItem>>(
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, Misc::MetadataItem>>(
                 "metadata"
             );
         }
         init
         {
-            this._rawData.Set<FrozenDictionary<string, MetadataItem>>(
+            this._rawData.Set<FrozenDictionary<string, Misc::MetadataItem>>(
                 "metadata",
                 FrozenDictionary.ToFrozenDictionary(value)
             );

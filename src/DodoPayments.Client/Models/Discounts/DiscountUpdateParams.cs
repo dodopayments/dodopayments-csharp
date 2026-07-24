@@ -6,7 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Discounts;
@@ -57,6 +59,45 @@ public record class DiscountUpdateParams : ParamsBase
         init { this._rawBodyData.Set("code", value); }
     }
 
+    /// <summary>
+    /// If present, fully replaces the discount's currency options (replace-set semantics,
+    /// like `restricted_to`). Send an empty array to clear them.
+    /// </summary>
+    public IReadOnlyList<DiscountUpdateParamsCurrencyOption>? CurrencyOptions
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<
+                ImmutableArray<DiscountUpdateParamsCurrencyOption>
+            >("currency_options");
+        }
+        init
+        {
+            this._rawBodyData.Set<ImmutableArray<DiscountUpdateParamsCurrencyOption>?>(
+                "currency_options",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// If present, update who may redeem this discount. Plain field (not double-option):
+    /// the DB column is `NOT NULL`, so it can never be cleared back to unset, only
+    /// changed to another `CustomerEligibility` value.
+    /// </summary>
+    public ApiEnum<string, DiscountUpdateParamsCustomerEligibility>? CustomerEligibility
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, DiscountUpdateParamsCustomerEligibility>
+            >("customer_eligibility");
+        }
+        init { this._rawBodyData.Set("customer_eligibility", value); }
+    }
+
     public DateTimeOffset? ExpiresAt
     {
         get
@@ -99,6 +140,21 @@ public record class DiscountUpdateParams : ParamsBase
     }
 
     /// <summary>
+    /// If present, update the per-customer usage limit (double-option: send `null`
+    /// to clear it back to unlimited). Must be `&lt;= usage_limit` (the value in
+    /// effect after this patch) when both are set.
+    /// </summary>
+    public int? PerCustomerUsageLimit
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<int>("per_customer_usage_limit");
+        }
+        init { this._rawBodyData.Set("per_customer_usage_limit", value); }
+    }
+
+    /// <summary>
     /// Whether this discount should be preserved when a subscription changes plans.
     /// If not provided, the existing value is kept.
     /// </summary>
@@ -133,6 +189,19 @@ public record class DiscountUpdateParams : ParamsBase
     }
 
     /// <summary>
+    /// If present, update `starts_at` (double-option: send `null` to clear it).
+    /// </summary>
+    public DateTimeOffset? StartsAt
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<DateTimeOffset>("starts_at");
+        }
+        init { this._rawBodyData.Set("starts_at", value); }
+    }
+
+    /// <summary>
     /// Number of subscription billing cycles this discount is valid for. If not
     /// provided, the discount will be applied indefinitely to all recurring payments
     /// related to the subscription.
@@ -148,7 +217,7 @@ public record class DiscountUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// If present, update the discount type. Currently only `percentage` is supported.
+    /// If present, update the discount type (`percentage` or `flat`).
     /// </summary>
     public ApiEnum<string, DiscountType>? Type
     {
@@ -288,5 +357,203 @@ public record class DiscountUpdateParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
+    }
+}
+
+/// <summary>
+/// A per-currency discount option (request shape).
+///
+/// <para>`max_amount_possible` is the most this code discounts in this currency
+/// — the flat deduction for `flat` codes, or the max-discount cap for `percentage`
+/// codes. Maps to the DB column of the same name.</para>
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        DiscountUpdateParamsCurrencyOption,
+        DiscountUpdateParamsCurrencyOptionFromRaw
+    >)
+)]
+public sealed record class DiscountUpdateParamsCurrencyOption : JsonModel
+{
+    /// <summary>
+    /// The currency this option applies to.
+    /// </summary>
+    public required ApiEnum<string, Currency> Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
+        init { this._rawData.Set("currency", value); }
+    }
+
+    /// <summary>
+    /// Whether this row is the default to convert from for unconfigured currencies.
+    /// At most one row per discount may be default.
+    /// </summary>
+    public bool? IsDefault
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("is_default");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("is_default", value);
+        }
+    }
+
+    /// <summary>
+    /// The most this code discounts in this currency's subunits. For `flat` codes
+    /// this is the deduction; for `percentage` codes it is the max-discount cap.
+    /// Must be &gt; 0 if provided.
+    /// </summary>
+    public int? MaxAmountPossible
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("max_amount_possible");
+        }
+        init { this._rawData.Set("max_amount_possible", value); }
+    }
+
+    /// <summary>
+    /// Eligible-cart threshold in this currency's subunits (0 = no minimum).
+    /// </summary>
+    public int? MinimumSubtotal
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<int>("minimum_subtotal");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("minimum_subtotal", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Currency.Validate();
+        _ = this.IsDefault;
+        _ = this.MaxAmountPossible;
+        _ = this.MinimumSubtotal;
+    }
+
+    public DiscountUpdateParamsCurrencyOption() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DiscountUpdateParamsCurrencyOption(
+        DiscountUpdateParamsCurrencyOption discountUpdateParamsCurrencyOption
+    )
+        : base(discountUpdateParamsCurrencyOption) { }
+#pragma warning restore CS8618
+
+    public DiscountUpdateParamsCurrencyOption(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DiscountUpdateParamsCurrencyOption(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DiscountUpdateParamsCurrencyOptionFromRaw.FromRawUnchecked"/>
+    public static DiscountUpdateParamsCurrencyOption FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public DiscountUpdateParamsCurrencyOption(ApiEnum<string, Currency> currency)
+        : this()
+    {
+        this.Currency = currency;
+    }
+}
+
+class DiscountUpdateParamsCurrencyOptionFromRaw : IFromRawJson<DiscountUpdateParamsCurrencyOption>
+{
+    /// <inheritdoc/>
+    public DiscountUpdateParamsCurrencyOption FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DiscountUpdateParamsCurrencyOption.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// If present, update who may redeem this discount. Plain field (not double-option):
+/// the DB column is `NOT NULL`, so it can never be cleared back to unset, only changed
+/// to another `CustomerEligibility` value.
+/// </summary>
+[JsonConverter(typeof(DiscountUpdateParamsCustomerEligibilityConverter))]
+public enum DiscountUpdateParamsCustomerEligibility
+{
+    Any,
+    FirstTime,
+    Existing,
+    Specific,
+}
+
+sealed class DiscountUpdateParamsCustomerEligibilityConverter
+    : JsonConverter<DiscountUpdateParamsCustomerEligibility>
+{
+    public override DiscountUpdateParamsCustomerEligibility Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "any" => DiscountUpdateParamsCustomerEligibility.Any,
+            "first_time" => DiscountUpdateParamsCustomerEligibility.FirstTime,
+            "existing" => DiscountUpdateParamsCustomerEligibility.Existing,
+            "specific" => DiscountUpdateParamsCustomerEligibility.Specific,
+            _ => (DiscountUpdateParamsCustomerEligibility)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DiscountUpdateParamsCustomerEligibility value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DiscountUpdateParamsCustomerEligibility.Any => "any",
+                DiscountUpdateParamsCustomerEligibility.FirstTime => "first_time",
+                DiscountUpdateParamsCustomerEligibility.Existing => "existing",
+                DiscountUpdateParamsCustomerEligibility.Specific => "specific",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

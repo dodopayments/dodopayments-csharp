@@ -8,6 +8,7 @@ namespace DodoPayments.Client.Tests.Models.Discounts;
 public class DiscountTypeTest : TestBase
 {
     [Theory]
+    [InlineData(DiscountType.Flat)]
     [InlineData(DiscountType.Percentage)]
     public void Validation_Works(DiscountType rawValue)
     {
@@ -29,6 +30,7 @@ public class DiscountTypeTest : TestBase
     }
 
     [Theory]
+    [InlineData(DiscountType.Flat)]
     [InlineData(DiscountType.Percentage)]
     public void SerializationRoundtrip_Works(DiscountType rawValue)
     {

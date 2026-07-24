@@ -111,7 +111,7 @@ public class WebhookPayloadTest : TestBase
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
                         TimesUsed = 0,
-                        Type = DiscountType.Percentage,
+                        Type = DiscountType.Flat,
                         CyclesRemaining = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Name = "name",
@@ -121,6 +121,16 @@ public class WebhookPayloadTest : TestBase
                 ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                FailureDetails = new()
+                {
+                    Code = "code",
+                    CustomerCta = Payments::CustomerCta.EditAndRetry,
+                    CustomerFixable = true,
+                    CustomerMessage = "customer_message",
+                    CustomerTemplate = Payments::CustomerTemplate.C1,
+                    DeclineType = Payments::DeclineType.Soft,
+                    MerchantMessage = "merchant_message",
+                },
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
                 PaymentLink = "payment_link",
@@ -224,7 +234,7 @@ public class WebhookPayloadTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -234,6 +244,16 @@ public class WebhookPayloadTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -347,7 +367,7 @@ public class WebhookPayloadTest : TestBase
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
                         TimesUsed = 0,
-                        Type = DiscountType.Percentage,
+                        Type = DiscountType.Flat,
                         CyclesRemaining = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Name = "name",
@@ -357,6 +377,16 @@ public class WebhookPayloadTest : TestBase
                 ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                FailureDetails = new()
+                {
+                    Code = "code",
+                    CustomerCta = Payments::CustomerCta.EditAndRetry,
+                    CustomerFixable = true,
+                    CustomerMessage = "customer_message",
+                    CustomerTemplate = Payments::CustomerTemplate.C1,
+                    DeclineType = Payments::DeclineType.Soft,
+                    MerchantMessage = "merchant_message",
+                },
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
                 PaymentLink = "payment_link",
@@ -474,7 +504,7 @@ public class WebhookPayloadTest : TestBase
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
                         TimesUsed = 0,
-                        Type = DiscountType.Percentage,
+                        Type = DiscountType.Flat,
                         CyclesRemaining = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Name = "name",
@@ -484,6 +514,16 @@ public class WebhookPayloadTest : TestBase
                 ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                FailureDetails = new()
+                {
+                    Code = "code",
+                    CustomerCta = Payments::CustomerCta.EditAndRetry,
+                    CustomerFixable = true,
+                    CustomerMessage = "customer_message",
+                    CustomerTemplate = Payments::CustomerTemplate.C1,
+                    DeclineType = Payments::DeclineType.Soft,
+                    MerchantMessage = "merchant_message",
+                },
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
                 PaymentLink = "payment_link",
@@ -594,7 +634,7 @@ public class WebhookPayloadTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -604,6 +644,16 @@ public class WebhookPayloadTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -717,7 +767,7 @@ public class WebhookPayloadTest : TestBase
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
                         TimesUsed = 0,
-                        Type = DiscountType.Percentage,
+                        Type = DiscountType.Flat,
                         CyclesRemaining = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Name = "name",
@@ -727,6 +777,16 @@ public class WebhookPayloadTest : TestBase
                 ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                FailureDetails = new()
+                {
+                    Code = "code",
+                    CustomerCta = Payments::CustomerCta.EditAndRetry,
+                    CustomerFixable = true,
+                    CustomerMessage = "customer_message",
+                    CustomerTemplate = Payments::CustomerTemplate.C1,
+                    DeclineType = Payments::DeclineType.Soft,
+                    MerchantMessage = "merchant_message",
+                },
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
                 PaymentLink = "payment_link",
@@ -838,7 +898,7 @@ public class WebhookPayloadTest : TestBase
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
                         TimesUsed = 0,
-                        Type = DiscountType.Percentage,
+                        Type = DiscountType.Flat,
                         CyclesRemaining = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Name = "name",
@@ -848,6 +908,16 @@ public class WebhookPayloadTest : TestBase
                 ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
+                FailureDetails = new()
+                {
+                    Code = "code",
+                    CustomerCta = Payments::CustomerCta.EditAndRetry,
+                    CustomerFixable = true,
+                    CustomerMessage = "customer_message",
+                    CustomerTemplate = Payments::CustomerTemplate.C1,
+                    DeclineType = Payments::DeclineType.Soft,
+                    MerchantMessage = "merchant_message",
+                },
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
                 PaymentLink = "payment_link",
@@ -961,7 +1031,7 @@ public class DataTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -971,6 +1041,16 @@ public class DataTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -1097,7 +1177,7 @@ public class DataTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -1127,6 +1207,7 @@ public class DataTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
         value.Validate();
     }
@@ -1429,7 +1510,7 @@ public class DataTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -1439,6 +1520,16 @@ public class DataTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -1568,7 +1659,7 @@ public class DataTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -1598,6 +1689,7 @@ public class DataTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
@@ -1930,7 +2022,7 @@ public class PaymentTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -1940,6 +2032,16 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -2041,7 +2143,7 @@ public class PaymentTest : TestBase
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
                 TimesUsed = 0,
-                Type = DiscountType.Percentage,
+                Type = DiscountType.Flat,
                 CyclesRemaining = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Name = "name",
@@ -2051,6 +2153,16 @@ public class PaymentTest : TestBase
         ];
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
+        Payments::FailureDetails expectedFailureDetails = new()
+        {
+            Code = "code",
+            CustomerCta = Payments::CustomerCta.EditAndRetry,
+            CustomerFixable = true,
+            CustomerMessage = "customer_message",
+            CustomerTemplate = Payments::CustomerTemplate.C1,
+            DeclineType = Payments::DeclineType.Soft,
+            MerchantMessage = "merchant_message",
+        };
         string expectedInvoiceID = "invoice_id";
         string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentLink = "payment_link";
@@ -2122,6 +2234,7 @@ public class PaymentTest : TestBase
         }
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
+        Assert.Equal(expectedFailureDetails, model.FailureDetails);
         Assert.Equal(expectedInvoiceID, model.InvoiceID);
         Assert.Equal(expectedInvoiceUrl, model.InvoiceUrl);
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
@@ -2230,7 +2343,7 @@ public class PaymentTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -2240,6 +2353,16 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -2348,7 +2471,7 @@ public class PaymentTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -2358,6 +2481,16 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -2466,7 +2599,7 @@ public class PaymentTest : TestBase
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
                 TimesUsed = 0,
-                Type = DiscountType.Percentage,
+                Type = DiscountType.Flat,
                 CyclesRemaining = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Name = "name",
@@ -2476,6 +2609,16 @@ public class PaymentTest : TestBase
         ];
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
+        Payments::FailureDetails expectedFailureDetails = new()
+        {
+            Code = "code",
+            CustomerCta = Payments::CustomerCta.EditAndRetry,
+            CustomerFixable = true,
+            CustomerMessage = "customer_message",
+            CustomerTemplate = Payments::CustomerTemplate.C1,
+            DeclineType = Payments::DeclineType.Soft,
+            MerchantMessage = "merchant_message",
+        };
         string expectedInvoiceID = "invoice_id";
         string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentLink = "payment_link";
@@ -2547,6 +2690,7 @@ public class PaymentTest : TestBase
         }
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
+        Assert.Equal(expectedFailureDetails, deserialized.FailureDetails);
         Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
         Assert.Equal(expectedInvoiceUrl, deserialized.InvoiceUrl);
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
@@ -2655,7 +2799,7 @@ public class PaymentTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -2665,6 +2809,16 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -2769,7 +2923,7 @@ public class PaymentTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -2779,6 +2933,16 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -2886,7 +3050,7 @@ public class PaymentTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -2896,6 +3060,16 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -2998,7 +3172,7 @@ public class PaymentTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -3008,6 +3182,16 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -3120,7 +3304,7 @@ public class PaymentTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -3130,6 +3314,16 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -3241,6 +3435,8 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.False(model.RawData.ContainsKey("error_message"));
+        Assert.Null(model.FailureDetails);
+        Assert.False(model.RawData.ContainsKey("failure_details"));
         Assert.Null(model.InvoiceID);
         Assert.False(model.RawData.ContainsKey("invoice_id"));
         Assert.Null(model.InvoiceUrl);
@@ -3417,6 +3613,7 @@ public class PaymentTest : TestBase
             Discounts = null,
             ErrorCode = null,
             ErrorMessage = null,
+            FailureDetails = null,
             InvoiceID = null,
             InvoiceUrl = null,
             PaymentLink = null,
@@ -3450,6 +3647,8 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.True(model.RawData.ContainsKey("error_message"));
+        Assert.Null(model.FailureDetails);
+        Assert.True(model.RawData.ContainsKey("failure_details"));
         Assert.Null(model.InvoiceID);
         Assert.True(model.RawData.ContainsKey("invoice_id"));
         Assert.Null(model.InvoiceUrl);
@@ -3553,6 +3752,7 @@ public class PaymentTest : TestBase
             Discounts = null,
             ErrorCode = null,
             ErrorMessage = null,
+            FailureDetails = null,
             InvoiceID = null,
             InvoiceUrl = null,
             PaymentLink = null,
@@ -3656,7 +3856,7 @@ public class PaymentTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -3666,6 +3866,16 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
+            FailureDetails = new()
+            {
+                Code = "code",
+                CustomerCta = Payments::CustomerCta.EditAndRetry,
+                CustomerFixable = true,
+                CustomerMessage = "customer_message",
+                CustomerTemplate = Payments::CustomerTemplate.C1,
+                DeclineType = Payments::DeclineType.Soft,
+                MerchantMessage = "merchant_message",
+            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -3798,7 +4008,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -3828,6 +4038,7 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         List<Subscriptions::AddonCartResponseItem> expectedAddons =
@@ -3946,7 +4157,7 @@ public class SubscriptionTest : TestBase
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
                 TimesUsed = 0,
-                Type = DiscountType.Percentage,
+                Type = DiscountType.Flat,
                 CyclesRemaining = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Name = "name",
@@ -3976,6 +4187,7 @@ public class SubscriptionTest : TestBase
             ProductName = "product_name",
         };
         string expectedTaxID = "tax_id";
+        int expectedTrialAmount = 0;
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Subscription");
 
         Assert.Equal(expectedAddons.Count, model.Addons.Count);
@@ -4053,6 +4265,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
         Assert.Equal(expectedTaxID, model.TaxID);
+        Assert.Equal(expectedTrialAmount, model.TrialAmount);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
     }
 
@@ -4165,7 +4378,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -4195,6 +4408,7 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -4315,7 +4529,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -4345,6 +4559,7 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -4470,7 +4685,7 @@ public class SubscriptionTest : TestBase
                 PreserveOnPlanChange = true,
                 RestrictedTo = ["string"],
                 TimesUsed = 0,
-                Type = DiscountType.Percentage,
+                Type = DiscountType.Flat,
                 CyclesRemaining = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Name = "name",
@@ -4500,6 +4715,7 @@ public class SubscriptionTest : TestBase
             ProductName = "product_name",
         };
         string expectedTaxID = "tax_id";
+        int expectedTrialAmount = 0;
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Subscription");
 
         Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
@@ -4577,6 +4793,7 @@ public class SubscriptionTest : TestBase
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
         Assert.Equal(expectedTaxID, deserialized.TaxID);
+        Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
         Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
     }
 
@@ -4689,7 +4906,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -4719,6 +4936,7 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         model.Validate();
@@ -4832,7 +5050,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -4843,6 +5061,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         Assert.Null(model.CancellationFeedback);
@@ -4959,7 +5178,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -4970,6 +5189,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         model.Validate();
@@ -5083,7 +5303,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -5094,6 +5314,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
+            TrialAmount = 0,
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
@@ -5214,7 +5435,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -5225,6 +5446,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
+            TrialAmount = 0,
 
             // Null should be interpreted as omitted for these properties
             CancellationFeedback = null,
@@ -5364,6 +5586,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.TaxID);
         Assert.False(model.RawData.ContainsKey("tax_id"));
+        Assert.Null(model.TrialAmount);
+        Assert.False(model.RawData.ContainsKey("trial_amount"));
     }
 
     [Fact]
@@ -5598,6 +5822,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = null,
             PaymentMethodID = null,
             TaxID = null,
+            TrialAmount = null,
         };
 
         Assert.Null(model.CancellationComment);
@@ -5620,6 +5845,8 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.TaxID);
         Assert.True(model.RawData.ContainsKey("tax_id"));
+        Assert.Null(model.TrialAmount);
+        Assert.True(model.RawData.ContainsKey("trial_amount"));
     }
 
     [Fact]
@@ -5741,6 +5968,7 @@ public class SubscriptionTest : TestBase
             ExpiresAt = null,
             PaymentMethodID = null,
             TaxID = null,
+            TrialAmount = null,
         };
 
         model.Validate();
@@ -5855,7 +6083,7 @@ public class SubscriptionTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -5885,6 +6113,7 @@ public class SubscriptionTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
 
         Subscription copied = new(model);

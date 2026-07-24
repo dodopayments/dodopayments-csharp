@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Models.Refunds;
 
@@ -55,12 +55,12 @@ public sealed record class Refund : JsonModel
     /// <summary>
     /// Details about the customer for this refund (from the associated payment)
     /// </summary>
-    public required CustomerLimitedDetails Customer
+    public required Payments::CustomerLimitedDetails Customer
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<CustomerLimitedDetails>("customer");
+            return this._rawData.GetNotNullClass<Payments::CustomerLimitedDetails>("customer");
         }
         init { this._rawData.Set("customer", value); }
     }
