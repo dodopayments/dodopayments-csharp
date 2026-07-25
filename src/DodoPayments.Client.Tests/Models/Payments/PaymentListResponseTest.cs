@@ -5,7 +5,7 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Disputes;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.Payments;
 
@@ -14,7 +14,7 @@ public class PaymentListResponseTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new PaymentListResponse
+        var model = new Payments::PaymentListResponse
         {
             BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -31,7 +31,7 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
-            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+            PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -40,15 +40,15 @@ public class PaymentListResponseTest : TestBase
             InvoiceUrl = "invoice_url",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
-            RefundStatus = PaymentRefundStatus.Partial,
-            Status = IntentStatus.Succeeded,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
         };
 
         string expectedBrandID = "brand_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -60,8 +60,8 @@ public class PaymentListResponseTest : TestBase
         bool expectedHasLicenseKey = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
-        ApiEnum<string, PaymentListResponsePaymentProvider> expectedPaymentProvider =
-            PaymentListResponsePaymentProvider.Stripe;
+        ApiEnum<string, Payments::PaymentListResponsePaymentProvider> expectedPaymentProvider =
+            Payments::PaymentListResponsePaymentProvider.Stripe;
         int expectedTotalAmount = 0;
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
@@ -71,8 +71,9 @@ public class PaymentListResponseTest : TestBase
         string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        ApiEnum<string, PaymentRefundStatus> expectedRefundStatus = PaymentRefundStatus.Partial;
-        ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
+        ApiEnum<string, Payments::PaymentRefundStatus> expectedRefundStatus =
+            Payments::PaymentRefundStatus.Partial;
+        ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedBrandID, model.BrandID);
@@ -106,7 +107,7 @@ public class PaymentListResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new PaymentListResponse
+        var model = new Payments::PaymentListResponse
         {
             BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -123,7 +124,7 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
-            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+            PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -132,13 +133,13 @@ public class PaymentListResponseTest : TestBase
             InvoiceUrl = "invoice_url",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
-            RefundStatus = PaymentRefundStatus.Partial,
-            Status = IntentStatus.Succeeded,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<PaymentListResponse>(
+        var deserialized = JsonSerializer.Deserialize<Payments::PaymentListResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -149,7 +150,7 @@ public class PaymentListResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new PaymentListResponse
+        var model = new Payments::PaymentListResponse
         {
             BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -166,7 +167,7 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
-            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+            PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -175,13 +176,13 @@ public class PaymentListResponseTest : TestBase
             InvoiceUrl = "invoice_url",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
-            RefundStatus = PaymentRefundStatus.Partial,
-            Status = IntentStatus.Succeeded,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<PaymentListResponse>(
+        var deserialized = JsonSerializer.Deserialize<Payments::PaymentListResponse>(
             element,
             ModelBase.SerializerOptions
         );
@@ -190,7 +191,7 @@ public class PaymentListResponseTest : TestBase
         string expectedBrandID = "brand_id";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
-        CustomerLimitedDetails expectedCustomer = new()
+        Payments::CustomerLimitedDetails expectedCustomer = new()
         {
             CustomerID = "customer_id",
             Email = "email",
@@ -202,8 +203,8 @@ public class PaymentListResponseTest : TestBase
         bool expectedHasLicenseKey = true;
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentID = "payment_id";
-        ApiEnum<string, PaymentListResponsePaymentProvider> expectedPaymentProvider =
-            PaymentListResponsePaymentProvider.Stripe;
+        ApiEnum<string, Payments::PaymentListResponsePaymentProvider> expectedPaymentProvider =
+            Payments::PaymentListResponsePaymentProvider.Stripe;
         int expectedTotalAmount = 0;
         string expectedCardLastFour = "card_last_four";
         string expectedCardNetwork = "card_network";
@@ -213,8 +214,9 @@ public class PaymentListResponseTest : TestBase
         string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentMethod = "payment_method";
         string expectedPaymentMethodType = "payment_method_type";
-        ApiEnum<string, PaymentRefundStatus> expectedRefundStatus = PaymentRefundStatus.Partial;
-        ApiEnum<string, IntentStatus> expectedStatus = IntentStatus.Succeeded;
+        ApiEnum<string, Payments::PaymentRefundStatus> expectedRefundStatus =
+            Payments::PaymentRefundStatus.Partial;
+        ApiEnum<string, Payments::IntentStatus> expectedStatus = Payments::IntentStatus.Succeeded;
         string expectedSubscriptionID = "subscription_id";
 
         Assert.Equal(expectedBrandID, deserialized.BrandID);
@@ -248,7 +250,7 @@ public class PaymentListResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new PaymentListResponse
+        var model = new Payments::PaymentListResponse
         {
             BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -265,7 +267,7 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
-            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+            PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -274,8 +276,8 @@ public class PaymentListResponseTest : TestBase
             InvoiceUrl = "invoice_url",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
-            RefundStatus = PaymentRefundStatus.Partial,
-            Status = IntentStatus.Succeeded,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
         };
 
@@ -285,7 +287,7 @@ public class PaymentListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new PaymentListResponse
+        var model = new Payments::PaymentListResponse
         {
             BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -302,7 +304,7 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
-            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+            PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
         };
 
@@ -331,7 +333,7 @@ public class PaymentListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new PaymentListResponse
+        var model = new Payments::PaymentListResponse
         {
             BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -348,7 +350,7 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
-            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+            PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
         };
 
@@ -358,7 +360,7 @@ public class PaymentListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new PaymentListResponse
+        var model = new Payments::PaymentListResponse
         {
             BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -375,7 +377,7 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
-            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+            PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
 
             CardLastFour = null,
@@ -415,7 +417,7 @@ public class PaymentListResponseTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new PaymentListResponse
+        var model = new Payments::PaymentListResponse
         {
             BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -432,7 +434,7 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
-            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+            PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
 
             CardLastFour = null,
@@ -453,7 +455,7 @@ public class PaymentListResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new PaymentListResponse
+        var model = new Payments::PaymentListResponse
         {
             BrandID = "brand_id",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -470,7 +472,7 @@ public class PaymentListResponseTest : TestBase
             HasLicenseKey = true,
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             PaymentID = "payment_id",
-            PaymentProvider = PaymentListResponsePaymentProvider.Stripe,
+            PaymentProvider = Payments::PaymentListResponsePaymentProvider.Stripe,
             TotalAmount = 0,
             CardLastFour = "card_last_four",
             CardNetwork = "card_network",
@@ -479,12 +481,12 @@ public class PaymentListResponseTest : TestBase
             InvoiceUrl = "invoice_url",
             PaymentMethod = "payment_method",
             PaymentMethodType = "payment_method_type",
-            RefundStatus = PaymentRefundStatus.Partial,
-            Status = IntentStatus.Succeeded,
+            RefundStatus = Payments::PaymentRefundStatus.Partial,
+            Status = Payments::IntentStatus.Succeeded,
             SubscriptionID = "subscription_id",
         };
 
-        PaymentListResponse copied = new(model);
+        Payments::PaymentListResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -493,40 +495,39 @@ public class PaymentListResponseTest : TestBase
 public class PaymentListResponsePaymentProviderTest : TestBase
 {
     [Theory]
-    [InlineData(PaymentListResponsePaymentProvider.Stripe)]
-    [InlineData(PaymentListResponsePaymentProvider.Adyen)]
-    [InlineData(PaymentListResponsePaymentProvider.Dodo)]
-    public void Validation_Works(PaymentListResponsePaymentProvider rawValue)
+    [InlineData(Payments::PaymentListResponsePaymentProvider.Stripe)]
+    [InlineData(Payments::PaymentListResponsePaymentProvider.Adyen)]
+    [InlineData(Payments::PaymentListResponsePaymentProvider.Dodo)]
+    public void Validation_Works(Payments::PaymentListResponsePaymentProvider rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PaymentListResponsePaymentProvider> value = rawValue;
+        ApiEnum<string, Payments::PaymentListResponsePaymentProvider> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentListResponsePaymentProvider>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, Payments::PaymentListResponsePaymentProvider>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(PaymentListResponsePaymentProvider.Stripe)]
-    [InlineData(PaymentListResponsePaymentProvider.Adyen)]
-    [InlineData(PaymentListResponsePaymentProvider.Dodo)]
-    public void SerializationRoundtrip_Works(PaymentListResponsePaymentProvider rawValue)
+    [InlineData(Payments::PaymentListResponsePaymentProvider.Stripe)]
+    [InlineData(Payments::PaymentListResponsePaymentProvider.Adyen)]
+    [InlineData(Payments::PaymentListResponsePaymentProvider.Dodo)]
+    public void SerializationRoundtrip_Works(Payments::PaymentListResponsePaymentProvider rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PaymentListResponsePaymentProvider> value = rawValue;
+        ApiEnum<string, Payments::PaymentListResponsePaymentProvider> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, PaymentListResponsePaymentProvider>
+            ApiEnum<string, Payments::PaymentListResponsePaymentProvider>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -535,13 +536,12 @@ public class PaymentListResponsePaymentProviderTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PaymentListResponsePaymentProvider>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, Payments::PaymentListResponsePaymentProvider>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, PaymentListResponsePaymentProvider>
+            ApiEnum<string, Payments::PaymentListResponsePaymentProvider>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

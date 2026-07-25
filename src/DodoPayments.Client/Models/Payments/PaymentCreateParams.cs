@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Misc;
+using Misc = DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -116,12 +116,12 @@ public record class PaymentCreateParams : ParamsBase
     /// Fix the currency in which the end customer is billed. If Dodo Payments cannot
     /// support that currency for this transaction, it will not proceed
     /// </summary>
-    public ApiEnum<string, Currency>? BillingCurrency
+    public ApiEnum<string, Misc::Currency>? BillingCurrency
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<ApiEnum<string, Currency>>(
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, Misc::Currency>>(
                 "billing_currency"
             );
         }
@@ -193,12 +193,12 @@ public record class PaymentCreateParams : ParamsBase
     /// <summary>
     /// Additional metadata associated with the payment. Defaults to empty if not provided.
     /// </summary>
-    public IReadOnlyDictionary<string, MetadataItem>? Metadata
+    public IReadOnlyDictionary<string, Misc::MetadataItem>? Metadata
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, MetadataItem>>(
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, Misc::MetadataItem>>(
                 "metadata"
             );
         }
@@ -209,7 +209,7 @@ public record class PaymentCreateParams : ParamsBase
                 return;
             }
 
-            this._rawBodyData.Set<FrozenDictionary<string, MetadataItem>?>(
+            this._rawBodyData.Set<FrozenDictionary<string, Misc::MetadataItem>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );

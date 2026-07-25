@@ -79,6 +79,7 @@ public class SubscriptionListPageResponseTest : TestBase
                         ProductName = "product_name",
                     },
                     TaxID = "tax_id",
+                    TrialAmount = 0,
                 },
             ],
         };
@@ -148,6 +149,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     ProductName = "product_name",
                 },
                 TaxID = "tax_id",
+                TrialAmount = 0,
             },
         ];
 
@@ -228,6 +230,7 @@ public class SubscriptionListPageResponseTest : TestBase
                         ProductName = "product_name",
                     },
                     TaxID = "tax_id",
+                    TrialAmount = 0,
                 },
             ],
         };
@@ -311,6 +314,7 @@ public class SubscriptionListPageResponseTest : TestBase
                         ProductName = "product_name",
                     },
                     TaxID = "tax_id",
+                    TrialAmount = 0,
                 },
             ],
         };
@@ -387,6 +391,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     ProductName = "product_name",
                 },
                 TaxID = "tax_id",
+                TrialAmount = 0,
             },
         ];
 
@@ -467,6 +472,7 @@ public class SubscriptionListPageResponseTest : TestBase
                         ProductName = "product_name",
                     },
                     TaxID = "tax_id",
+                    TrialAmount = 0,
                 },
             ],
         };
@@ -544,6 +550,7 @@ public class SubscriptionListPageResponseTest : TestBase
                         ProductName = "product_name",
                     },
                     TaxID = "tax_id",
+                    TrialAmount = 0,
                 },
             ],
         };

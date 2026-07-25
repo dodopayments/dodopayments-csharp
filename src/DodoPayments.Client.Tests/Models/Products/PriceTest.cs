@@ -39,6 +39,8 @@ public class PriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
             TrialPeriodDays = 0,
         };
         value.Validate();
@@ -109,6 +111,8 @@ public class PriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
             TrialPeriodDays = 0,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
@@ -448,6 +452,8 @@ public class RecurringPriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
             TrialPeriodDays = 0,
         };
 
@@ -461,6 +467,8 @@ public class RecurringPriceTest : TestBase
         ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
         JsonElement expectedType = JsonSerializer.SerializeToElement("recurring_price");
         bool expectedTaxInclusive = true;
+        int expectedTrialAmount = 0;
+        bool expectedTrialApplyDiscounts = true;
         int expectedTrialPeriodDays = 0;
 
         Assert.Equal(expectedCurrency, model.Currency);
@@ -473,6 +481,8 @@ public class RecurringPriceTest : TestBase
         Assert.Equal(expectedSubscriptionPeriodInterval, model.SubscriptionPeriodInterval);
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
+        Assert.Equal(expectedTrialAmount, model.TrialAmount);
+        Assert.Equal(expectedTrialApplyDiscounts, model.TrialApplyDiscounts);
         Assert.Equal(expectedTrialPeriodDays, model.TrialPeriodDays);
     }
 
@@ -490,6 +500,8 @@ public class RecurringPriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
             TrialPeriodDays = 0,
         };
 
@@ -516,6 +528,8 @@ public class RecurringPriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
             TrialPeriodDays = 0,
         };
 
@@ -536,6 +550,8 @@ public class RecurringPriceTest : TestBase
         ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
         JsonElement expectedType = JsonSerializer.SerializeToElement("recurring_price");
         bool expectedTaxInclusive = true;
+        int expectedTrialAmount = 0;
+        bool expectedTrialApplyDiscounts = true;
         int expectedTrialPeriodDays = 0;
 
         Assert.Equal(expectedCurrency, deserialized.Currency);
@@ -548,6 +564,8 @@ public class RecurringPriceTest : TestBase
         Assert.Equal(expectedSubscriptionPeriodInterval, deserialized.SubscriptionPeriodInterval);
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
+        Assert.Equal(expectedTrialAmount, deserialized.TrialAmount);
+        Assert.Equal(expectedTrialApplyDiscounts, deserialized.TrialApplyDiscounts);
         Assert.Equal(expectedTrialPeriodDays, deserialized.TrialPeriodDays);
     }
 
@@ -565,6 +583,8 @@ public class RecurringPriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
             TrialPeriodDays = 0,
         };
 
@@ -585,6 +605,8 @@ public class RecurringPriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
         };
 
         Assert.Null(model.TrialPeriodDays);
@@ -605,6 +627,8 @@ public class RecurringPriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
         };
 
         model.Validate();
@@ -624,6 +648,8 @@ public class RecurringPriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
 
             // Null should be interpreted as omitted for these properties
             TrialPeriodDays = null,
@@ -647,6 +673,8 @@ public class RecurringPriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
 
             // Null should be interpreted as omitted for these properties
             TrialPeriodDays = null,
@@ -673,6 +701,10 @@ public class RecurringPriceTest : TestBase
 
         Assert.Null(model.TaxInclusive);
         Assert.False(model.RawData.ContainsKey("tax_inclusive"));
+        Assert.Null(model.TrialAmount);
+        Assert.False(model.RawData.ContainsKey("trial_amount"));
+        Assert.Null(model.TrialApplyDiscounts);
+        Assert.False(model.RawData.ContainsKey("trial_apply_discounts"));
     }
 
     [Fact]
@@ -710,10 +742,16 @@ public class RecurringPriceTest : TestBase
             TrialPeriodDays = 0,
 
             TaxInclusive = null,
+            TrialAmount = null,
+            TrialApplyDiscounts = null,
         };
 
         Assert.Null(model.TaxInclusive);
         Assert.True(model.RawData.ContainsKey("tax_inclusive"));
+        Assert.Null(model.TrialAmount);
+        Assert.True(model.RawData.ContainsKey("trial_amount"));
+        Assert.Null(model.TrialApplyDiscounts);
+        Assert.True(model.RawData.ContainsKey("trial_apply_discounts"));
     }
 
     [Fact]
@@ -732,6 +770,8 @@ public class RecurringPriceTest : TestBase
             TrialPeriodDays = 0,
 
             TaxInclusive = null,
+            TrialAmount = null,
+            TrialApplyDiscounts = null,
         };
 
         model.Validate();
@@ -751,6 +791,8 @@ public class RecurringPriceTest : TestBase
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
             TaxInclusive = true,
+            TrialAmount = 0,
+            TrialApplyDiscounts = true,
             TrialPeriodDays = 0,
         };
 

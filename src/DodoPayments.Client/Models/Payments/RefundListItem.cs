@@ -5,8 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Refunds;
+using Misc = DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Models.Payments;
 
@@ -107,12 +107,12 @@ public sealed record class RefundListItem : JsonModel
     /// <summary>
     /// The currency of the refund, represented as an ISO 4217 currency code.
     /// </summary>
-    public ApiEnum<string, Currency>? Currency
+    public ApiEnum<string, Misc::Currency>? Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency");
+            return this._rawData.GetNullableClass<ApiEnum<string, Misc::Currency>>("currency");
         }
         init { this._rawData.Set("currency", value); }
     }

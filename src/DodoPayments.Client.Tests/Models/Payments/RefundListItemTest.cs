@@ -1,9 +1,9 @@
 using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
-using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Payments;
 using DodoPayments.Client.Models.Refunds;
+using Misc = DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Payments;
 
@@ -21,7 +21,7 @@ public class RefundListItemTest : TestBase
             RefundID = "refund_id",
             Status = RefundStatus.Succeeded,
             Amount = 0,
-            Currency = Currency.Aed,
+            Currency = Misc::Currency.Aed,
             Reason = "reason",
         };
 
@@ -32,7 +32,7 @@ public class RefundListItemTest : TestBase
         string expectedRefundID = "refund_id";
         ApiEnum<string, RefundStatus> expectedStatus = RefundStatus.Succeeded;
         int expectedAmount = 0;
-        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        ApiEnum<string, Misc::Currency> expectedCurrency = Misc::Currency.Aed;
         string expectedReason = "reason";
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
@@ -58,7 +58,7 @@ public class RefundListItemTest : TestBase
             RefundID = "refund_id",
             Status = RefundStatus.Succeeded,
             Amount = 0,
-            Currency = Currency.Aed,
+            Currency = Misc::Currency.Aed,
             Reason = "reason",
         };
 
@@ -83,7 +83,7 @@ public class RefundListItemTest : TestBase
             RefundID = "refund_id",
             Status = RefundStatus.Succeeded,
             Amount = 0,
-            Currency = Currency.Aed,
+            Currency = Misc::Currency.Aed,
             Reason = "reason",
         };
 
@@ -101,7 +101,7 @@ public class RefundListItemTest : TestBase
         string expectedRefundID = "refund_id";
         ApiEnum<string, RefundStatus> expectedStatus = RefundStatus.Succeeded;
         int expectedAmount = 0;
-        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        ApiEnum<string, Misc::Currency> expectedCurrency = Misc::Currency.Aed;
         string expectedReason = "reason";
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
@@ -127,7 +127,7 @@ public class RefundListItemTest : TestBase
             RefundID = "refund_id",
             Status = RefundStatus.Succeeded,
             Amount = 0,
-            Currency = Currency.Aed,
+            Currency = Misc::Currency.Aed,
             Reason = "reason",
         };
 
@@ -228,7 +228,7 @@ public class RefundListItemTest : TestBase
             RefundID = "refund_id",
             Status = RefundStatus.Succeeded,
             Amount = 0,
-            Currency = Currency.Aed,
+            Currency = Misc::Currency.Aed,
             Reason = "reason",
         };
 

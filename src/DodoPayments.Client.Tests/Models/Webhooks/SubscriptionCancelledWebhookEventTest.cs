@@ -124,7 +124,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
                         TimesUsed = 0,
-                        Type = DiscountType.Percentage,
+                        Type = DiscountType.Flat,
                         CyclesRemaining = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Name = "name",
@@ -154,6 +154,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                     ProductName = "product_name",
                 },
                 TaxID = "tax_id",
+                TrialAmount = 0,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -265,7 +266,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -295,6 +296,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.cancelled");
@@ -417,7 +419,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
                         TimesUsed = 0,
-                        Type = DiscountType.Percentage,
+                        Type = DiscountType.Flat,
                         CyclesRemaining = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Name = "name",
@@ -447,6 +449,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                     ProductName = "product_name",
                 },
                 TaxID = "tax_id",
+                TrialAmount = 0,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -572,7 +575,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
                         TimesUsed = 0,
-                        Type = DiscountType.Percentage,
+                        Type = DiscountType.Flat,
                         CyclesRemaining = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Name = "name",
@@ -602,6 +605,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                     ProductName = "product_name",
                 },
                 TaxID = "tax_id",
+                TrialAmount = 0,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -720,7 +724,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                     PreserveOnPlanChange = true,
                     RestrictedTo = ["string"],
                     TimesUsed = 0,
-                    Type = DiscountType.Percentage,
+                    Type = DiscountType.Flat,
                     CyclesRemaining = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Name = "name",
@@ -750,6 +754,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                 ProductName = "product_name",
             },
             TaxID = "tax_id",
+            TrialAmount = 0,
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.cancelled");
@@ -872,7 +877,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
                         TimesUsed = 0,
-                        Type = DiscountType.Percentage,
+                        Type = DiscountType.Flat,
                         CyclesRemaining = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Name = "name",
@@ -902,6 +907,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                     ProductName = "product_name",
                 },
                 TaxID = "tax_id",
+                TrialAmount = 0,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1021,7 +1027,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                         PreserveOnPlanChange = true,
                         RestrictedTo = ["string"],
                         TimesUsed = 0,
-                        Type = DiscountType.Percentage,
+                        Type = DiscountType.Flat,
                         CyclesRemaining = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Name = "name",
@@ -1051,6 +1057,7 @@ public class SubscriptionCancelledWebhookEventTest : TestBase
                     ProductName = "product_name",
                 },
                 TaxID = "tax_id",
+                TrialAmount = 0,
             },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };

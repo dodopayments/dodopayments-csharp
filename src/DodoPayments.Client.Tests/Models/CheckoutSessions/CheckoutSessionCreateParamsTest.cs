@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.CheckoutSessions;
 using DodoPayments.Client.Models.Misc;
-using DodoPayments.Client.Models.Payments;
+using Payments = DodoPayments.Client.Models.Payments;
 
 namespace DodoPayments.Client.Tests.Models.CheckoutSessions;
 
@@ -32,7 +32,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     ],
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -56,7 +56,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Required = true,
                 },
             ],
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             CustomerBusinessName = "customer_business_name",
             Customization = new()
             {
@@ -176,9 +176,9 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 ],
             },
         ];
-        List<ApiEnum<string, PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
+        List<ApiEnum<string, Payments::PaymentMethodTypes>> expectedAllowedPaymentMethodTypes =
         [
-            PaymentMethodTypes.Ach,
+            Payments::PaymentMethodTypes.Ach,
         ];
         CheckoutSessionBillingAddress expectedBillingAddress = new()
         {
@@ -203,7 +203,9 @@ public class CheckoutSessionCreateParamsTest : TestBase
                 Required = true,
             },
         ];
-        CustomerRequest expectedCustomer = new AttachExistingCustomer("customer_id");
+        Payments::CustomerRequest expectedCustomer = new Payments::AttachExistingCustomer(
+            "customer_id"
+        );
         string expectedCustomerBusinessName = "customer_business_name";
         CheckoutSessionCustomization expectedCustomization = new()
         {
@@ -385,7 +387,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     ],
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -408,7 +410,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Required = true,
                 },
             ],
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
@@ -470,7 +472,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     ],
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -493,7 +495,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Required = true,
                 },
             ],
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             CustomerBusinessName = "customer_business_name",
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
@@ -889,7 +891,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     ],
                 },
             ],
-            AllowedPaymentMethodTypes = [PaymentMethodTypes.Ach],
+            AllowedPaymentMethodTypes = [Payments::PaymentMethodTypes.Ach],
             BillingAddress = new()
             {
                 Country = CountryCode.Af,
@@ -913,7 +915,7 @@ public class CheckoutSessionCreateParamsTest : TestBase
                     Required = true,
                 },
             ],
-            Customer = new AttachExistingCustomer("customer_id"),
+            Customer = new Payments::AttachExistingCustomer("customer_id"),
             CustomerBusinessName = "customer_business_name",
             Customization = new()
             {
