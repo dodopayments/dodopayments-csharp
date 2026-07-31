@@ -110,16 +110,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -231,16 +221,6 @@ public class PaymentTest : TestBase
         ];
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
-        Payments::FailureDetails expectedFailureDetails = new()
-        {
-            Code = "code",
-            CustomerCta = Payments::CustomerCta.EditAndRetry,
-            CustomerFixable = true,
-            CustomerMessage = "customer_message",
-            CustomerTemplate = Payments::CustomerTemplate.C1,
-            DeclineType = Payments::DeclineType.Soft,
-            MerchantMessage = "merchant_message",
-        };
         string expectedInvoiceID = "invoice_id";
         string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentLink = "payment_link";
@@ -311,7 +291,6 @@ public class PaymentTest : TestBase
         }
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
-        Assert.Equal(expectedFailureDetails, model.FailureDetails);
         Assert.Equal(expectedInvoiceID, model.InvoiceID);
         Assert.Equal(expectedInvoiceUrl, model.InvoiceUrl);
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
@@ -429,16 +408,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -560,16 +529,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -688,16 +647,6 @@ public class PaymentTest : TestBase
         ];
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
-        Payments::FailureDetails expectedFailureDetails = new()
-        {
-            Code = "code",
-            CustomerCta = Payments::CustomerCta.EditAndRetry,
-            CustomerFixable = true,
-            CustomerMessage = "customer_message",
-            CustomerTemplate = Payments::CustomerTemplate.C1,
-            DeclineType = Payments::DeclineType.Soft,
-            MerchantMessage = "merchant_message",
-        };
         string expectedInvoiceID = "invoice_id";
         string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentLink = "payment_link";
@@ -768,7 +717,6 @@ public class PaymentTest : TestBase
         }
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
-        Assert.Equal(expectedFailureDetails, deserialized.FailureDetails);
         Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
         Assert.Equal(expectedInvoiceUrl, deserialized.InvoiceUrl);
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
@@ -886,16 +834,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -1003,8 +941,6 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.False(model.RawData.ContainsKey("error_message"));
-        Assert.Null(model.FailureDetails);
-        Assert.False(model.RawData.ContainsKey("failure_details"));
         Assert.Null(model.InvoiceID);
         Assert.False(model.RawData.ContainsKey("invoice_id"));
         Assert.Null(model.InvoiceUrl);
@@ -1180,7 +1116,6 @@ public class PaymentTest : TestBase
             Discounts = null,
             ErrorCode = null,
             ErrorMessage = null,
-            FailureDetails = null,
             InvoiceID = null,
             InvoiceUrl = null,
             PaymentLink = null,
@@ -1218,8 +1153,6 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.True(model.RawData.ContainsKey("error_message"));
-        Assert.Null(model.FailureDetails);
-        Assert.True(model.RawData.ContainsKey("failure_details"));
         Assert.Null(model.InvoiceID);
         Assert.True(model.RawData.ContainsKey("invoice_id"));
         Assert.Null(model.InvoiceUrl);
@@ -1325,7 +1258,6 @@ public class PaymentTest : TestBase
             Discounts = null,
             ErrorCode = null,
             ErrorMessage = null,
-            FailureDetails = null,
             InvoiceID = null,
             InvoiceUrl = null,
             PaymentLink = null,
@@ -1441,16 +1373,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -1524,361 +1446,6 @@ public class PaymentProviderTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Payments::PaymentProvider>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class FailureDetailsTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new Payments::FailureDetails
-        {
-            Code = "code",
-            CustomerCta = Payments::CustomerCta.EditAndRetry,
-            CustomerFixable = true,
-            CustomerMessage = "customer_message",
-            CustomerTemplate = Payments::CustomerTemplate.C1,
-            DeclineType = Payments::DeclineType.Soft,
-            MerchantMessage = "merchant_message",
-        };
-
-        string expectedCode = "code";
-        ApiEnum<string, Payments::CustomerCta> expectedCustomerCta =
-            Payments::CustomerCta.EditAndRetry;
-        bool expectedCustomerFixable = true;
-        string expectedCustomerMessage = "customer_message";
-        ApiEnum<string, Payments::CustomerTemplate> expectedCustomerTemplate =
-            Payments::CustomerTemplate.C1;
-        ApiEnum<string, Payments::DeclineType> expectedDeclineType = Payments::DeclineType.Soft;
-        string expectedMerchantMessage = "merchant_message";
-
-        Assert.Equal(expectedCode, model.Code);
-        Assert.Equal(expectedCustomerCta, model.CustomerCta);
-        Assert.Equal(expectedCustomerFixable, model.CustomerFixable);
-        Assert.Equal(expectedCustomerMessage, model.CustomerMessage);
-        Assert.Equal(expectedCustomerTemplate, model.CustomerTemplate);
-        Assert.Equal(expectedDeclineType, model.DeclineType);
-        Assert.Equal(expectedMerchantMessage, model.MerchantMessage);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new Payments::FailureDetails
-        {
-            Code = "code",
-            CustomerCta = Payments::CustomerCta.EditAndRetry,
-            CustomerFixable = true,
-            CustomerMessage = "customer_message",
-            CustomerTemplate = Payments::CustomerTemplate.C1,
-            DeclineType = Payments::DeclineType.Soft,
-            MerchantMessage = "merchant_message",
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Payments::FailureDetails>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new Payments::FailureDetails
-        {
-            Code = "code",
-            CustomerCta = Payments::CustomerCta.EditAndRetry,
-            CustomerFixable = true,
-            CustomerMessage = "customer_message",
-            CustomerTemplate = Payments::CustomerTemplate.C1,
-            DeclineType = Payments::DeclineType.Soft,
-            MerchantMessage = "merchant_message",
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Payments::FailureDetails>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedCode = "code";
-        ApiEnum<string, Payments::CustomerCta> expectedCustomerCta =
-            Payments::CustomerCta.EditAndRetry;
-        bool expectedCustomerFixable = true;
-        string expectedCustomerMessage = "customer_message";
-        ApiEnum<string, Payments::CustomerTemplate> expectedCustomerTemplate =
-            Payments::CustomerTemplate.C1;
-        ApiEnum<string, Payments::DeclineType> expectedDeclineType = Payments::DeclineType.Soft;
-        string expectedMerchantMessage = "merchant_message";
-
-        Assert.Equal(expectedCode, deserialized.Code);
-        Assert.Equal(expectedCustomerCta, deserialized.CustomerCta);
-        Assert.Equal(expectedCustomerFixable, deserialized.CustomerFixable);
-        Assert.Equal(expectedCustomerMessage, deserialized.CustomerMessage);
-        Assert.Equal(expectedCustomerTemplate, deserialized.CustomerTemplate);
-        Assert.Equal(expectedDeclineType, deserialized.DeclineType);
-        Assert.Equal(expectedMerchantMessage, deserialized.MerchantMessage);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new Payments::FailureDetails
-        {
-            Code = "code",
-            CustomerCta = Payments::CustomerCta.EditAndRetry,
-            CustomerFixable = true,
-            CustomerMessage = "customer_message",
-            CustomerTemplate = Payments::CustomerTemplate.C1,
-            DeclineType = Payments::DeclineType.Soft,
-            MerchantMessage = "merchant_message",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new Payments::FailureDetails
-        {
-            Code = "code",
-            CustomerCta = Payments::CustomerCta.EditAndRetry,
-            CustomerFixable = true,
-            CustomerMessage = "customer_message",
-            CustomerTemplate = Payments::CustomerTemplate.C1,
-            DeclineType = Payments::DeclineType.Soft,
-            MerchantMessage = "merchant_message",
-        };
-
-        Payments::FailureDetails copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class CustomerCtaTest : TestBase
-{
-    [Theory]
-    [InlineData(Payments::CustomerCta.EditAndRetry)]
-    [InlineData(Payments::CustomerCta.UseAnotherMethod)]
-    [InlineData(Payments::CustomerCta.TryAgain)]
-    [InlineData(Payments::CustomerCta.TryLater)]
-    [InlineData(Payments::CustomerCta.RetryAndVerify)]
-    [InlineData(Payments::CustomerCta.Restart)]
-    [InlineData(Payments::CustomerCta.UpdateMethod)]
-    public void Validation_Works(Payments::CustomerCta rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Payments::CustomerCta> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Payments::CustomerCta>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Payments::CustomerCta.EditAndRetry)]
-    [InlineData(Payments::CustomerCta.UseAnotherMethod)]
-    [InlineData(Payments::CustomerCta.TryAgain)]
-    [InlineData(Payments::CustomerCta.TryLater)]
-    [InlineData(Payments::CustomerCta.RetryAndVerify)]
-    [InlineData(Payments::CustomerCta.Restart)]
-    [InlineData(Payments::CustomerCta.UpdateMethod)]
-    public void SerializationRoundtrip_Works(Payments::CustomerCta rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Payments::CustomerCta> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Payments::CustomerCta>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Payments::CustomerCta>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Payments::CustomerCta>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class CustomerTemplateTest : TestBase
-{
-    [Theory]
-    [InlineData(Payments::CustomerTemplate.C1)]
-    [InlineData(Payments::CustomerTemplate.C2)]
-    [InlineData(Payments::CustomerTemplate.C3)]
-    [InlineData(Payments::CustomerTemplate.C4)]
-    [InlineData(Payments::CustomerTemplate.C5)]
-    [InlineData(Payments::CustomerTemplate.C6)]
-    [InlineData(Payments::CustomerTemplate.C7)]
-    [InlineData(Payments::CustomerTemplate.C8)]
-    [InlineData(Payments::CustomerTemplate.C9)]
-    [InlineData(Payments::CustomerTemplate.C10)]
-    [InlineData(Payments::CustomerTemplate.C11)]
-    [InlineData(Payments::CustomerTemplate.C12)]
-    [InlineData(Payments::CustomerTemplate.C13)]
-    [InlineData(Payments::CustomerTemplate.C14)]
-    [InlineData(Payments::CustomerTemplate.C15)]
-    [InlineData(Payments::CustomerTemplate.C16)]
-    [InlineData(Payments::CustomerTemplate.C17)]
-    [InlineData(Payments::CustomerTemplate.C18)]
-    [InlineData(Payments::CustomerTemplate.C19)]
-    [InlineData(Payments::CustomerTemplate.C20)]
-    public void Validation_Works(Payments::CustomerTemplate rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Payments::CustomerTemplate> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Payments::CustomerTemplate>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Payments::CustomerTemplate.C1)]
-    [InlineData(Payments::CustomerTemplate.C2)]
-    [InlineData(Payments::CustomerTemplate.C3)]
-    [InlineData(Payments::CustomerTemplate.C4)]
-    [InlineData(Payments::CustomerTemplate.C5)]
-    [InlineData(Payments::CustomerTemplate.C6)]
-    [InlineData(Payments::CustomerTemplate.C7)]
-    [InlineData(Payments::CustomerTemplate.C8)]
-    [InlineData(Payments::CustomerTemplate.C9)]
-    [InlineData(Payments::CustomerTemplate.C10)]
-    [InlineData(Payments::CustomerTemplate.C11)]
-    [InlineData(Payments::CustomerTemplate.C12)]
-    [InlineData(Payments::CustomerTemplate.C13)]
-    [InlineData(Payments::CustomerTemplate.C14)]
-    [InlineData(Payments::CustomerTemplate.C15)]
-    [InlineData(Payments::CustomerTemplate.C16)]
-    [InlineData(Payments::CustomerTemplate.C17)]
-    [InlineData(Payments::CustomerTemplate.C18)]
-    [InlineData(Payments::CustomerTemplate.C19)]
-    [InlineData(Payments::CustomerTemplate.C20)]
-    public void SerializationRoundtrip_Works(Payments::CustomerTemplate rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Payments::CustomerTemplate> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Payments::CustomerTemplate>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Payments::CustomerTemplate>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Payments::CustomerTemplate>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class DeclineTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(Payments::DeclineType.Soft)]
-    [InlineData(Payments::DeclineType.Hard)]
-    public void Validation_Works(Payments::DeclineType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Payments::DeclineType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Payments::DeclineType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Payments::DeclineType.Soft)]
-    [InlineData(Payments::DeclineType.Hard)]
-    public void SerializationRoundtrip_Works(Payments::DeclineType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Payments::DeclineType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Payments::DeclineType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Payments::DeclineType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Payments::DeclineType>>(
             json,
             ModelBase.SerializerOptions
         );
