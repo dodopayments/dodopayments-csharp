@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.28.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.27.0...v6.28.0) (2026-07-31)
+
+
+### Features
+
+* **api:** add payout webhook events and remove payment failure_details ([fe2c0b1](https://github.com/dodopayments/dodopayments-csharp/commit/fe2c0b1b56f42f95b5c4da986715e68854c55328))
+* **api:** add payout webhook events and remove payment failure_details ([1e49b88](https://github.com/dodopayments/dodopayments-csharp/commit/1e49b88728589893e8c42e64735541e435274c4e))
+
 ## [6.26.1](https://github.com/dodopayments/dodopayments-csharp/compare/v6.26.0...v6.26.1) (2026-07-09)
 
 
