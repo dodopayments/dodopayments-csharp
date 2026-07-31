@@ -149,6 +149,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (_) => null,
+                payout: (_) => null,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -158,16 +159,17 @@ public record class Data : ModelBase
         }
     }
 
-    public string BrandID
+    public string? BrandID
     {
         get
         {
-            return Match(
+            return Match<string?>(
                 payment: (x) => x.BrandID,
                 subscription: (x) => x.BrandID,
                 refund: (x) => x.BrandID,
                 dispute: (x) => x.BrandID,
                 licenseKey: (x) => x.BrandID,
+                payout: (_) => null,
                 creditLedgerEntry: (x) => x.BrandID,
                 creditBalanceLow: (x) => x.BrandID,
                 abandonedCheckout: (x) => x.BrandID,
@@ -187,6 +189,7 @@ public record class Data : ModelBase
                 refund: (x) => x.BusinessID,
                 dispute: (x) => x.BusinessID,
                 licenseKey: (x) => x.BusinessID,
+                payout: (x) => x.BusinessID,
                 creditLedgerEntry: (x) => x.BusinessID,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -206,6 +209,7 @@ public record class Data : ModelBase
                 refund: (x) => x.CreatedAt,
                 dispute: (x) => x.CreatedAt,
                 licenseKey: (x) => x.CreatedAt,
+                payout: (x) => x.CreatedAt,
                 creditLedgerEntry: (x) => x.CreatedAt,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -225,6 +229,7 @@ public record class Data : ModelBase
                 refund: (x) => x.Customer,
                 dispute: (x) => x.Customer,
                 licenseKey: (_) => null,
+                payout: (_) => null,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -244,6 +249,7 @@ public record class Data : ModelBase
                 refund: (x) => x.Metadata,
                 dispute: (_) => null,
                 licenseKey: (_) => null,
+                payout: (_) => null,
                 creditLedgerEntry: (x) => x.Metadata,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -263,6 +269,7 @@ public record class Data : ModelBase
                 refund: (x) => x.PaymentID,
                 dispute: (x) => x.PaymentID,
                 licenseKey: (x) => x.PaymentID,
+                payout: (_) => null,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (x) => x.PaymentID,
@@ -282,6 +289,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (_) => null,
+                payout: (_) => null,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -301,6 +309,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (_) => null,
+                payout: (_) => null,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -320,11 +329,32 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (_) => null,
+                payout: (_) => null,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
                 dunningAttempt: (_) => null,
                 entitlementGrant: (x) => x.ErrorMessage
+            );
+        }
+    }
+
+    public string? PaymentMethod
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (x) => x.PaymentMethod,
+                subscription: (_) => null,
+                refund: (_) => null,
+                dispute: (_) => null,
+                licenseKey: (_) => null,
+                payout: (x) => x.PaymentMethod,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null
             );
         }
     }
@@ -339,6 +369,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (_) => null,
+                payout: (_) => null,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -358,6 +389,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (x) => x.SubscriptionID,
+                payout: (_) => null,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (x) => x.SubscriptionID,
                 abandonedCheckout: (_) => null,
@@ -377,6 +409,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (_) => null,
+                payout: (x) => x.UpdatedAt,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -396,6 +429,7 @@ public record class Data : ModelBase
                 refund: (x) => x.PayloadType,
                 dispute: (x) => x.PayloadType,
                 licenseKey: (x) => x.PayloadType,
+                payout: (x) => x.PayloadType,
                 creditLedgerEntry: (x) => x.PayloadType,
                 creditBalanceLow: (x) => x.PayloadType,
                 abandonedCheckout: (x) => x.PayloadType,
@@ -415,6 +449,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (x) => x.ProductID,
+                payout: (_) => null,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -434,6 +469,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (x) => x.ExpiresAt,
+                payout: (_) => null,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -453,6 +489,27 @@ public record class Data : ModelBase
                 refund: (x) => x.Reason,
                 dispute: (x) => x.Reason,
                 licenseKey: (_) => null,
+                payout: (_) => null,
+                creditLedgerEntry: (_) => null,
+                creditBalanceLow: (_) => null,
+                abandonedCheckout: (_) => null,
+                dunningAttempt: (_) => null,
+                entitlementGrant: (_) => null
+            );
+        }
+    }
+
+    public string? Remarks
+    {
+        get
+        {
+            return Match<string?>(
+                payment: (_) => null,
+                subscription: (_) => null,
+                refund: (_) => null,
+                dispute: (x) => x.Remarks,
+                licenseKey: (_) => null,
+                payout: (x) => x.Remarks,
                 creditLedgerEntry: (_) => null,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -472,6 +529,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (x) => x.ID,
+                payout: (_) => null,
                 creditLedgerEntry: (x) => x.ID,
                 creditBalanceLow: (_) => null,
                 abandonedCheckout: (_) => null,
@@ -491,6 +549,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (x) => x.CustomerID,
+                payout: (_) => null,
                 creditLedgerEntry: (x) => x.CustomerID,
                 creditBalanceLow: (x) => x.CustomerID,
                 abandonedCheckout: (x) => x.CustomerID,
@@ -510,6 +569,7 @@ public record class Data : ModelBase
                 refund: (_) => null,
                 dispute: (_) => null,
                 licenseKey: (_) => null,
+                payout: (_) => null,
                 creditLedgerEntry: (x) => x.CreditEntitlementID,
                 creditBalanceLow: (x) => x.CreditEntitlementID,
                 abandonedCheckout: (_) => null,
@@ -544,6 +604,12 @@ public record class Data : ModelBase
     }
 
     public Data(LicenseKey value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Data(Payout value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -691,6 +757,27 @@ public record class Data : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Payout"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickPayout(out var value)) {
+    ///     // `value` is of type `Payout`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickPayout([NotNullWhen(true)] out Payout? value)
+    {
+        value = this.Value as Payout;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="CreditLedgerEntry"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
@@ -813,6 +900,7 @@ public record class Data : ModelBase
     ///     (Refund value) =&gt; {...},
     ///     (Dispute value) =&gt; {...},
     ///     (LicenseKey value) =&gt; {...},
+    ///     (Payout value) =&gt; {...},
     ///     (CreditLedgerEntry value) =&gt; {...},
     ///     (CreditBalanceLow value) =&gt; {...},
     ///     (AbandonedCheckout value) =&gt; {...},
@@ -828,6 +916,7 @@ public record class Data : ModelBase
         Action<Refund> refund,
         Action<Dispute> dispute,
         Action<LicenseKey> licenseKey,
+        Action<Payout> payout,
         Action<CreditLedgerEntry> creditLedgerEntry,
         Action<CreditBalanceLow> creditBalanceLow,
         Action<AbandonedCheckout> abandonedCheckout,
@@ -851,6 +940,9 @@ public record class Data : ModelBase
                 break;
             case LicenseKey value:
                 licenseKey(value);
+                break;
+            case Payout value:
+                payout(value);
                 break;
             case CreditLedgerEntry value:
                 creditLedgerEntry(value);
@@ -894,6 +986,7 @@ public record class Data : ModelBase
     ///     (Refund value) =&gt; {...},
     ///     (Dispute value) =&gt; {...},
     ///     (LicenseKey value) =&gt; {...},
+    ///     (Payout value) =&gt; {...},
     ///     (CreditLedgerEntry value) =&gt; {...},
     ///     (CreditBalanceLow value) =&gt; {...},
     ///     (AbandonedCheckout value) =&gt; {...},
@@ -909,6 +1002,7 @@ public record class Data : ModelBase
         Func<Refund, T> refund,
         Func<Dispute, T> dispute,
         Func<LicenseKey, T> licenseKey,
+        Func<Payout, T> payout,
         Func<CreditLedgerEntry, T> creditLedgerEntry,
         Func<CreditBalanceLow, T> creditBalanceLow,
         Func<AbandonedCheckout, T> abandonedCheckout,
@@ -923,6 +1017,7 @@ public record class Data : ModelBase
             Refund value => refund(value),
             Dispute value => dispute(value),
             LicenseKey value => licenseKey(value),
+            Payout value => payout(value),
             CreditLedgerEntry value => creditLedgerEntry(value),
             CreditBalanceLow value => creditBalanceLow(value),
             AbandonedCheckout value => abandonedCheckout(value),
@@ -943,6 +1038,8 @@ public record class Data : ModelBase
     public static implicit operator Data(Dispute value) => new(value);
 
     public static implicit operator Data(LicenseKey value) => new(value);
+
+    public static implicit operator Data(Payout value) => new(value);
 
     public static implicit operator Data(CreditLedgerEntry value) => new(value);
 
@@ -976,6 +1073,7 @@ public record class Data : ModelBase
             (refund) => refund.Validate(),
             (dispute) => dispute.Validate(),
             (licenseKey) => licenseKey.Validate(),
+            (payout) => payout.Validate(),
             (creditLedgerEntry) => creditLedgerEntry.Validate(),
             (creditBalanceLow) => creditBalanceLow.Validate(),
             (abandonedCheckout) => abandonedCheckout.Validate(),
@@ -1009,11 +1107,12 @@ public record class Data : ModelBase
             Refund _ => 2,
             Dispute _ => 3,
             LicenseKey _ => 4,
-            CreditLedgerEntry _ => 5,
-            CreditBalanceLow _ => 6,
-            AbandonedCheckout _ => 7,
-            DunningAttempt _ => 8,
-            EntitlementGrant _ => 9,
+            Payout _ => 5,
+            CreditLedgerEntry _ => 6,
+            CreditBalanceLow _ => 7,
+            AbandonedCheckout _ => 8,
+            DunningAttempt _ => 9,
+            EntitlementGrant _ => 10,
             _ => -1,
         };
     }
@@ -1113,6 +1212,23 @@ sealed class DataConverter : JsonConverter<Data>
                 try
                 {
                     var deserialized = JsonSerializer.Deserialize<LicenseKey>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "Payout":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Payout>(element, options);
                     if (deserialized != null)
                     {
                         return new(deserialized, element);
@@ -1635,7 +1751,9 @@ public sealed record class Payment : JsonModel
     }
 
     /// <summary>
-    /// An error message if the payment failed
+    /// An error message if the payment failed. When `error_code` is a recognised
+    /// unified code, this is the merchant-facing headline + recommended action (Payment
+    /// Details copy) rather than the raw connector text.
     /// </summary>
     public string? ErrorMessage
     {
@@ -1645,23 +1763,6 @@ public sealed record class Payment : JsonModel
             return this._rawData.GetNullableClass<string>("error_message");
         }
         init { this._rawData.Set("error_message", value); }
-    }
-
-    /// <summary>
-    /// Purpose-built failure messaging for the merchant and the customer, derived
-    /// from `error_code`. Present whenever `error_code` is set, regardless of payment
-    /// status; unrecognised codes still resolve via a generic fallback rather than
-    /// being omitted. The customer copy is always generic for fraud-sensitive declines
-    /// (lost/stolen/pickup/fraudulent) so the true reason is never leaked.
-    /// </summary>
-    public Payments::FailureDetails? FailureDetails
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Payments::FailureDetails>("failure_details");
-        }
-        init { this._rawData.Set("failure_details", value); }
     }
 
     /// <summary>
@@ -1899,7 +2000,6 @@ public sealed record class Payment : JsonModel
             Discounts = payment.Discounts,
             ErrorCode = payment.ErrorCode,
             ErrorMessage = payment.ErrorMessage,
-            FailureDetails = payment.FailureDetails,
             InvoiceID = payment.InvoiceID,
             InvoiceUrl = payment.InvoiceUrl,
             PaymentLink = payment.PaymentLink,
@@ -1961,7 +2061,6 @@ public sealed record class Payment : JsonModel
         }
         _ = this.ErrorCode;
         _ = this.ErrorMessage;
-        this.FailureDetails?.Validate();
         _ = this.InvoiceID;
         _ = this.InvoiceUrl;
         _ = this.PaymentLink;
@@ -3574,6 +3673,337 @@ class LicenseKeyFromRaw : IFromRawJson<LicenseKey>
         LicenseKey.FromRawUnchecked(rawData);
 }
 
+[JsonConverter(typeof(JsonModelConverter<Payout, PayoutFromRaw>))]
+public sealed record class Payout : JsonModel
+{
+    /// <summary>
+    /// The total amount of the payout.
+    /// </summary>
+    public required long Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("amount");
+        }
+        init { this._rawData.Set("amount", value); }
+    }
+
+    /// <summary>
+    /// The unique identifier of the business associated with the payout.
+    /// </summary>
+    public required string BusinessID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("business_id");
+        }
+        init { this._rawData.Set("business_id", value); }
+    }
+
+    /// <summary>
+    /// The total value of chargebacks associated with the payout.
+    /// </summary>
+    [Obsolete("Use the v3 payout breakup endpoints instead. Will be removed in a future release.")]
+    public required long Chargebacks
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("chargebacks");
+        }
+        init { this._rawData.Set("chargebacks", value); }
+    }
+
+    /// <summary>
+    /// The timestamp when the payout was created, in UTC.
+    /// </summary>
+    public required DateTimeOffset CreatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("created_at");
+        }
+        init { this._rawData.Set("created_at", value); }
+    }
+
+    /// <summary>
+    /// The currency of the payout, represented as an ISO 4217 currency code.
+    /// </summary>
+    public required ApiEnum<string, Currency> Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+        }
+        init { this._rawData.Set("currency", value); }
+    }
+
+    /// <summary>
+    /// The fee charged for processing the payout.
+    /// </summary>
+    public required long Fee
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("fee");
+        }
+        init { this._rawData.Set("fee", value); }
+    }
+
+    public JsonElement PayloadType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("payload_type");
+        }
+        init { this._rawData.Set("payload_type", value); }
+    }
+
+    /// <summary>
+    /// The payment method used for the payout (e.g., bank transfer, card, etc.).
+    /// </summary>
+    public required string PaymentMethod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payment_method");
+        }
+        init { this._rawData.Set("payment_method", value); }
+    }
+
+    /// <summary>
+    /// The unique identifier of the payout.
+    /// </summary>
+    public required string PayoutID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("payout_id");
+        }
+        init { this._rawData.Set("payout_id", value); }
+    }
+
+    /// <summary>
+    /// The total value of refunds associated with the payout.
+    /// </summary>
+    [Obsolete("Use the v3 payout breakup endpoints instead. Will be removed in a future release.")]
+    public required long Refunds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("refunds");
+        }
+        init { this._rawData.Set("refunds", value); }
+    }
+
+    /// <summary>
+    /// The current status of the payout.
+    /// </summary>
+    public required ApiEnum<string, Status> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    /// <summary>
+    /// The tax applied to the payout.
+    /// </summary>
+    [Obsolete("Use the v3 payout breakup endpoints instead. Will be removed in a future release.")]
+    public required long Tax
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("tax");
+        }
+        init { this._rawData.Set("tax", value); }
+    }
+
+    /// <summary>
+    /// The timestamp when the payout was last updated, in UTC.
+    /// </summary>
+    public required DateTimeOffset UpdatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("updated_at");
+        }
+        init { this._rawData.Set("updated_at", value); }
+    }
+
+    /// <summary>
+    /// The name of the payout recipient or purpose.
+    /// </summary>
+    public string? Name
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
+        init { this._rawData.Set("name", value); }
+    }
+
+    /// <summary>
+    /// The URL of the document associated with the payout.
+    /// </summary>
+    public string? PayoutDocumentUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("payout_document_url");
+        }
+        init { this._rawData.Set("payout_document_url", value); }
+    }
+
+    /// <summary>
+    /// Any additional remarks or notes associated with the payout.
+    /// </summary>
+    public string? Remarks
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("remarks");
+        }
+        init { this._rawData.Set("remarks", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Amount;
+        _ = this.BusinessID;
+        _ = this.Chargebacks;
+        _ = this.CreatedAt;
+        this.Currency.Validate();
+        _ = this.Fee;
+        if (!JsonElement.DeepEquals(this.PayloadType, JsonSerializer.SerializeToElement("Payout")))
+        {
+            throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
+        }
+        _ = this.PaymentMethod;
+        _ = this.PayoutID;
+        _ = this.Refunds;
+        this.Status.Validate();
+        _ = this.Tax;
+        _ = this.UpdatedAt;
+        _ = this.Name;
+        _ = this.PayoutDocumentUrl;
+        _ = this.Remarks;
+    }
+
+    [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
+    public Payout()
+    {
+        this.PayloadType = JsonSerializer.SerializeToElement("Payout");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
+    public Payout(Payout payout)
+        : base(payout) { }
+#pragma warning restore CS8618
+
+    [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
+    public Payout(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.PayloadType = JsonSerializer.SerializeToElement("Payout");
+    }
+
+#pragma warning disable CS8618
+    [Obsolete("Required properties are deprecated: chargebacks, refunds, tax")]
+    [SetsRequiredMembers]
+    Payout(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="PayoutFromRaw.FromRawUnchecked"/>
+    public static Payout FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class PayoutFromRaw : IFromRawJson<Payout>
+{
+    /// <inheritdoc/>
+    public Payout FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Payout.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The current status of the payout.
+/// </summary>
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    NotInitiated,
+    InProgress,
+    OnHold,
+    Failed,
+    Success,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "not_initiated" => Status.NotInitiated,
+            "in_progress" => Status.InProgress,
+            "on_hold" => Status.OnHold,
+            "failed" => Status.Failed,
+            "success" => Status.Success,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.NotInitiated => "not_initiated",
+                Status.InProgress => "in_progress",
+                Status.OnHold => "on_hold",
+                Status.Failed => "failed",
+                Status.Success => "success",
+                _ => throw new DodoPaymentsInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
 /// <summary>
 /// Response for a ledger entry
 /// </summary>
@@ -4127,12 +4557,14 @@ public sealed record class AbandonedCheckout : JsonModel
         init { this._rawData.Set("payment_id", value); }
     }
 
-    public required ApiEnum<string, Status> Status
+    public required ApiEnum<string, AbandonedCheckoutStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+            return this._rawData.GetNotNullClass<ApiEnum<string, AbandonedCheckoutStatus>>(
+                "status"
+            );
         }
         init { this._rawData.Set("status", value); }
     }
@@ -4254,8 +4686,8 @@ sealed class AbandonmentReasonConverter : JsonConverter<AbandonmentReason>
     }
 }
 
-[JsonConverter(typeof(StatusConverter))]
-public enum Status
+[JsonConverter(typeof(AbandonedCheckoutStatusConverter))]
+public enum AbandonedCheckoutStatus
 {
     Abandoned,
     Recovering,
@@ -4264,9 +4696,9 @@ public enum Status
     OptedOut,
 }
 
-sealed class StatusConverter : JsonConverter<Status>
+sealed class AbandonedCheckoutStatusConverter : JsonConverter<AbandonedCheckoutStatus>
 {
-    public override Status Read(
+    public override AbandonedCheckoutStatus Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -4274,26 +4706,30 @@ sealed class StatusConverter : JsonConverter<Status>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "abandoned" => Status.Abandoned,
-            "recovering" => Status.Recovering,
-            "recovered" => Status.Recovered,
-            "exhausted" => Status.Exhausted,
-            "opted_out" => Status.OptedOut,
-            _ => (Status)(-1),
+            "abandoned" => AbandonedCheckoutStatus.Abandoned,
+            "recovering" => AbandonedCheckoutStatus.Recovering,
+            "recovered" => AbandonedCheckoutStatus.Recovered,
+            "exhausted" => AbandonedCheckoutStatus.Exhausted,
+            "opted_out" => AbandonedCheckoutStatus.OptedOut,
+            _ => (AbandonedCheckoutStatus)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        AbandonedCheckoutStatus value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Status.Abandoned => "abandoned",
-                Status.Recovering => "recovering",
-                Status.Recovered => "recovered",
-                Status.Exhausted => "exhausted",
-                Status.OptedOut => "opted_out",
+                AbandonedCheckoutStatus.Abandoned => "abandoned",
+                AbandonedCheckoutStatus.Recovering => "recovering",
+                AbandonedCheckoutStatus.Recovered => "recovered",
+                AbandonedCheckoutStatus.Exhausted => "exhausted",
+                AbandonedCheckoutStatus.OptedOut => "opted_out",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

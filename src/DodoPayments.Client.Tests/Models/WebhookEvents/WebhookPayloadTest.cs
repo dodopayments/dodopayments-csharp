@@ -121,16 +121,6 @@ public class WebhookPayloadTest : TestBase
                 ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
-                FailureDetails = new()
-                {
-                    Code = "code",
-                    CustomerCta = Payments::CustomerCta.EditAndRetry,
-                    CustomerFixable = true,
-                    CustomerMessage = "customer_message",
-                    CustomerTemplate = Payments::CustomerTemplate.C1,
-                    DeclineType = Payments::DeclineType.Soft,
-                    MerchantMessage = "merchant_message",
-                },
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
                 PaymentLink = "payment_link",
@@ -244,16 +234,6 @@ public class WebhookPayloadTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -377,16 +357,6 @@ public class WebhookPayloadTest : TestBase
                 ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
-                FailureDetails = new()
-                {
-                    Code = "code",
-                    CustomerCta = Payments::CustomerCta.EditAndRetry,
-                    CustomerFixable = true,
-                    CustomerMessage = "customer_message",
-                    CustomerTemplate = Payments::CustomerTemplate.C1,
-                    DeclineType = Payments::DeclineType.Soft,
-                    MerchantMessage = "merchant_message",
-                },
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
                 PaymentLink = "payment_link",
@@ -514,16 +484,6 @@ public class WebhookPayloadTest : TestBase
                 ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
-                FailureDetails = new()
-                {
-                    Code = "code",
-                    CustomerCta = Payments::CustomerCta.EditAndRetry,
-                    CustomerFixable = true,
-                    CustomerMessage = "customer_message",
-                    CustomerTemplate = Payments::CustomerTemplate.C1,
-                    DeclineType = Payments::DeclineType.Soft,
-                    MerchantMessage = "merchant_message",
-                },
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
                 PaymentLink = "payment_link",
@@ -644,16 +604,6 @@ public class WebhookPayloadTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -777,16 +727,6 @@ public class WebhookPayloadTest : TestBase
                 ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
-                FailureDetails = new()
-                {
-                    Code = "code",
-                    CustomerCta = Payments::CustomerCta.EditAndRetry,
-                    CustomerFixable = true,
-                    CustomerMessage = "customer_message",
-                    CustomerTemplate = Payments::CustomerTemplate.C1,
-                    DeclineType = Payments::DeclineType.Soft,
-                    MerchantMessage = "merchant_message",
-                },
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
                 PaymentLink = "payment_link",
@@ -908,16 +848,6 @@ public class WebhookPayloadTest : TestBase
                 ],
                 ErrorCode = "error_code",
                 ErrorMessage = "error_message",
-                FailureDetails = new()
-                {
-                    Code = "code",
-                    CustomerCta = Payments::CustomerCta.EditAndRetry,
-                    CustomerFixable = true,
-                    CustomerMessage = "customer_message",
-                    CustomerTemplate = Payments::CustomerTemplate.C1,
-                    DeclineType = Payments::DeclineType.Soft,
-                    MerchantMessage = "merchant_message",
-                },
                 InvoiceID = "invoice_id",
                 InvoiceUrl = "invoice_url",
                 PaymentLink = "payment_link",
@@ -1041,16 +971,6 @@ public class DataTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -1294,6 +1214,30 @@ public class DataTest : TestBase
     }
 
     [Fact]
+    public void PayoutValidationWorks()
+    {
+        Data value = new Payout()
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            PayoutDocumentUrl = "payout_document_url",
+            Remarks = "remarks",
+        };
+        value.Validate();
+    }
+
+    [Fact]
     public void CreditLedgerEntryValidationWorks()
     {
         Data value = new CreditLedgerEntry()
@@ -1348,7 +1292,7 @@ public class DataTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
         value.Validate();
@@ -1520,16 +1464,6 @@ public class DataTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -1788,6 +1722,33 @@ public class DataTest : TestBase
     }
 
     [Fact]
+    public void PayoutSerializationRoundtripWorks()
+    {
+        Data value = new Payout()
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            PayoutDocumentUrl = "payout_document_url",
+            Remarks = "remarks",
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
     public void CreditLedgerEntrySerializationRoundtripWorks()
     {
         Data value = new CreditLedgerEntry()
@@ -1848,7 +1809,7 @@ public class DataTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
@@ -2032,16 +1993,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -2153,16 +2104,6 @@ public class PaymentTest : TestBase
         ];
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
-        Payments::FailureDetails expectedFailureDetails = new()
-        {
-            Code = "code",
-            CustomerCta = Payments::CustomerCta.EditAndRetry,
-            CustomerFixable = true,
-            CustomerMessage = "customer_message",
-            CustomerTemplate = Payments::CustomerTemplate.C1,
-            DeclineType = Payments::DeclineType.Soft,
-            MerchantMessage = "merchant_message",
-        };
         string expectedInvoiceID = "invoice_id";
         string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentLink = "payment_link";
@@ -2234,7 +2175,6 @@ public class PaymentTest : TestBase
         }
         Assert.Equal(expectedErrorCode, model.ErrorCode);
         Assert.Equal(expectedErrorMessage, model.ErrorMessage);
-        Assert.Equal(expectedFailureDetails, model.FailureDetails);
         Assert.Equal(expectedInvoiceID, model.InvoiceID);
         Assert.Equal(expectedInvoiceUrl, model.InvoiceUrl);
         Assert.Equal(expectedPaymentLink, model.PaymentLink);
@@ -2353,16 +2293,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -2481,16 +2411,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -2609,16 +2529,6 @@ public class PaymentTest : TestBase
         ];
         string expectedErrorCode = "error_code";
         string expectedErrorMessage = "error_message";
-        Payments::FailureDetails expectedFailureDetails = new()
-        {
-            Code = "code",
-            CustomerCta = Payments::CustomerCta.EditAndRetry,
-            CustomerFixable = true,
-            CustomerMessage = "customer_message",
-            CustomerTemplate = Payments::CustomerTemplate.C1,
-            DeclineType = Payments::DeclineType.Soft,
-            MerchantMessage = "merchant_message",
-        };
         string expectedInvoiceID = "invoice_id";
         string expectedInvoiceUrl = "invoice_url";
         string expectedPaymentLink = "payment_link";
@@ -2690,7 +2600,6 @@ public class PaymentTest : TestBase
         }
         Assert.Equal(expectedErrorCode, deserialized.ErrorCode);
         Assert.Equal(expectedErrorMessage, deserialized.ErrorMessage);
-        Assert.Equal(expectedFailureDetails, deserialized.FailureDetails);
         Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
         Assert.Equal(expectedInvoiceUrl, deserialized.InvoiceUrl);
         Assert.Equal(expectedPaymentLink, deserialized.PaymentLink);
@@ -2809,16 +2718,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -2933,16 +2832,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -3060,16 +2949,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -3182,16 +3061,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -3314,16 +3183,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -3435,8 +3294,6 @@ public class PaymentTest : TestBase
         Assert.False(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.False(model.RawData.ContainsKey("error_message"));
-        Assert.Null(model.FailureDetails);
-        Assert.False(model.RawData.ContainsKey("failure_details"));
         Assert.Null(model.InvoiceID);
         Assert.False(model.RawData.ContainsKey("invoice_id"));
         Assert.Null(model.InvoiceUrl);
@@ -3613,7 +3470,6 @@ public class PaymentTest : TestBase
             Discounts = null,
             ErrorCode = null,
             ErrorMessage = null,
-            FailureDetails = null,
             InvoiceID = null,
             InvoiceUrl = null,
             PaymentLink = null,
@@ -3647,8 +3503,6 @@ public class PaymentTest : TestBase
         Assert.True(model.RawData.ContainsKey("error_code"));
         Assert.Null(model.ErrorMessage);
         Assert.True(model.RawData.ContainsKey("error_message"));
-        Assert.Null(model.FailureDetails);
-        Assert.True(model.RawData.ContainsKey("failure_details"));
         Assert.Null(model.InvoiceID);
         Assert.True(model.RawData.ContainsKey("invoice_id"));
         Assert.Null(model.InvoiceUrl);
@@ -3752,7 +3606,6 @@ public class PaymentTest : TestBase
             Discounts = null,
             ErrorCode = null,
             ErrorMessage = null,
-            FailureDetails = null,
             InvoiceID = null,
             InvoiceUrl = null,
             PaymentLink = null,
@@ -3866,16 +3719,6 @@ public class PaymentTest : TestBase
             ],
             ErrorCode = "error_code",
             ErrorMessage = "error_message",
-            FailureDetails = new()
-            {
-                Code = "code",
-                CustomerCta = Payments::CustomerCta.EditAndRetry,
-                CustomerFixable = true,
-                CustomerMessage = "customer_message",
-                CustomerTemplate = Payments::CustomerTemplate.C1,
-                DeclineType = Payments::DeclineType.Soft,
-                MerchantMessage = "merchant_message",
-            },
             InvoiceID = "invoice_id",
             InvoiceUrl = "invoice_url",
             PaymentLink = "payment_link",
@@ -7283,6 +7126,377 @@ public class LicenseKeyTest : TestBase
     }
 }
 
+public class PayoutTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Payout
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            PayoutDocumentUrl = "payout_document_url",
+            Remarks = "remarks",
+        };
+
+        long expectedAmount = 0;
+        string expectedBusinessID = "business_id";
+        long expectedChargebacks = 0;
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        long expectedFee = 0;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Payout");
+        string expectedPaymentMethod = "payment_method";
+        string expectedPayoutID = "payout_id";
+        long expectedRefunds = 0;
+        ApiEnum<string, Status> expectedStatus = Status.NotInitiated;
+        long expectedTax = 0;
+        DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedName = "name";
+        string expectedPayoutDocumentUrl = "payout_document_url";
+        string expectedRemarks = "remarks";
+
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedBusinessID, model.BusinessID);
+        Assert.Equal(expectedChargebacks, model.Chargebacks);
+        Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedCurrency, model.Currency);
+        Assert.Equal(expectedFee, model.Fee);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, model.PayloadType));
+        Assert.Equal(expectedPaymentMethod, model.PaymentMethod);
+        Assert.Equal(expectedPayoutID, model.PayoutID);
+        Assert.Equal(expectedRefunds, model.Refunds);
+        Assert.Equal(expectedStatus, model.Status);
+        Assert.Equal(expectedTax, model.Tax);
+        Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
+        Assert.Equal(expectedName, model.Name);
+        Assert.Equal(expectedPayoutDocumentUrl, model.PayoutDocumentUrl);
+        Assert.Equal(expectedRemarks, model.Remarks);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Payout
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            PayoutDocumentUrl = "payout_document_url",
+            Remarks = "remarks",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Payout>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Payout
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            PayoutDocumentUrl = "payout_document_url",
+            Remarks = "remarks",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Payout>(element, ModelBase.SerializerOptions);
+        Assert.NotNull(deserialized);
+
+        long expectedAmount = 0;
+        string expectedBusinessID = "business_id";
+        long expectedChargebacks = 0;
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, Currency> expectedCurrency = Currency.Aed;
+        long expectedFee = 0;
+        JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("Payout");
+        string expectedPaymentMethod = "payment_method";
+        string expectedPayoutID = "payout_id";
+        long expectedRefunds = 0;
+        ApiEnum<string, Status> expectedStatus = Status.NotInitiated;
+        long expectedTax = 0;
+        DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedName = "name";
+        string expectedPayoutDocumentUrl = "payout_document_url";
+        string expectedRemarks = "remarks";
+
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedBusinessID, deserialized.BusinessID);
+        Assert.Equal(expectedChargebacks, deserialized.Chargebacks);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedFee, deserialized.Fee);
+        Assert.True(JsonElement.DeepEquals(expectedPayloadType, deserialized.PayloadType));
+        Assert.Equal(expectedPaymentMethod, deserialized.PaymentMethod);
+        Assert.Equal(expectedPayoutID, deserialized.PayoutID);
+        Assert.Equal(expectedRefunds, deserialized.Refunds);
+        Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.Equal(expectedTax, deserialized.Tax);
+        Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+        Assert.Equal(expectedName, deserialized.Name);
+        Assert.Equal(expectedPayoutDocumentUrl, deserialized.PayoutDocumentUrl);
+        Assert.Equal(expectedRemarks, deserialized.Remarks);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Payout
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            PayoutDocumentUrl = "payout_document_url",
+            Remarks = "remarks",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Payout
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Assert.Null(model.Name);
+        Assert.False(model.RawData.ContainsKey("name"));
+        Assert.Null(model.PayoutDocumentUrl);
+        Assert.False(model.RawData.ContainsKey("payout_document_url"));
+        Assert.Null(model.Remarks);
+        Assert.False(model.RawData.ContainsKey("remarks"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Payout
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new Payout
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            Name = null,
+            PayoutDocumentUrl = null,
+            Remarks = null,
+        };
+
+        Assert.Null(model.Name);
+        Assert.True(model.RawData.ContainsKey("name"));
+        Assert.Null(model.PayoutDocumentUrl);
+        Assert.True(model.RawData.ContainsKey("payout_document_url"));
+        Assert.Null(model.Remarks);
+        Assert.True(model.RawData.ContainsKey("remarks"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Payout
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            Name = null,
+            PayoutDocumentUrl = null,
+            Remarks = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Payout
+        {
+            Amount = 0,
+            BusinessID = "business_id",
+            Chargebacks = 0,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Currency = Currency.Aed,
+            Fee = 0,
+            PaymentMethod = "payment_method",
+            PayoutID = "payout_id",
+            Refunds = 0,
+            Status = Status.NotInitiated,
+            Tax = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Name = "name",
+            PayoutDocumentUrl = "payout_document_url",
+            Remarks = "remarks",
+        };
+
+        Payout copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class StatusTest : TestBase
+{
+    [Theory]
+    [InlineData(Status.NotInitiated)]
+    [InlineData(Status.InProgress)]
+    [InlineData(Status.OnHold)]
+    [InlineData(Status.Failed)]
+    [InlineData(Status.Success)]
+    public void Validation_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<DodoPaymentsInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Status.NotInitiated)]
+    [InlineData(Status.InProgress)]
+    [InlineData(Status.OnHold)]
+    [InlineData(Status.Failed)]
+    [InlineData(Status.Success)]
+    public void SerializationRoundtrip_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class CreditLedgerEntryTest : TestBase
 {
     [Fact]
@@ -7816,7 +8030,7 @@ public class AbandonedCheckoutTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
 
@@ -7827,7 +8041,7 @@ public class AbandonedCheckoutTest : TestBase
         string expectedCustomerID = "customer_id";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("AbandonedCheckout");
         string expectedPaymentID = "payment_id";
-        ApiEnum<string, Status> expectedStatus = Status.Abandoned;
+        ApiEnum<string, AbandonedCheckoutStatus> expectedStatus = AbandonedCheckoutStatus.Abandoned;
         string expectedRecoveredPaymentID = "recovered_payment_id";
 
         Assert.Equal(expectedAbandonedAt, model.AbandonedAt);
@@ -7850,7 +8064,7 @@ public class AbandonedCheckoutTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
 
@@ -7873,7 +8087,7 @@ public class AbandonedCheckoutTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
 
@@ -7891,7 +8105,7 @@ public class AbandonedCheckoutTest : TestBase
         string expectedCustomerID = "customer_id";
         JsonElement expectedPayloadType = JsonSerializer.SerializeToElement("AbandonedCheckout");
         string expectedPaymentID = "payment_id";
-        ApiEnum<string, Status> expectedStatus = Status.Abandoned;
+        ApiEnum<string, AbandonedCheckoutStatus> expectedStatus = AbandonedCheckoutStatus.Abandoned;
         string expectedRecoveredPaymentID = "recovered_payment_id";
 
         Assert.Equal(expectedAbandonedAt, deserialized.AbandonedAt);
@@ -7914,7 +8128,7 @@ public class AbandonedCheckoutTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
 
@@ -7931,7 +8145,7 @@ public class AbandonedCheckoutTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
         };
 
         Assert.Null(model.RecoveredPaymentID);
@@ -7948,7 +8162,7 @@ public class AbandonedCheckoutTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
         };
 
         model.Validate();
@@ -7964,7 +8178,7 @@ public class AbandonedCheckoutTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
 
             RecoveredPaymentID = null,
         };
@@ -7983,7 +8197,7 @@ public class AbandonedCheckoutTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
 
             RecoveredPaymentID = null,
         };
@@ -8001,7 +8215,7 @@ public class AbandonedCheckoutTest : TestBase
             BrandID = "brand_id",
             CustomerID = "customer_id",
             PaymentID = "payment_id",
-            Status = Status.Abandoned,
+            Status = AbandonedCheckoutStatus.Abandoned,
             RecoveredPaymentID = "recovered_payment_id",
         };
 
@@ -8069,25 +8283,25 @@ public class AbandonmentReasonTest : TestBase
     }
 }
 
-public class StatusTest : TestBase
+public class AbandonedCheckoutStatusTest : TestBase
 {
     [Theory]
-    [InlineData(Status.Abandoned)]
-    [InlineData(Status.Recovering)]
-    [InlineData(Status.Recovered)]
-    [InlineData(Status.Exhausted)]
-    [InlineData(Status.OptedOut)]
-    public void Validation_Works(Status rawValue)
+    [InlineData(AbandonedCheckoutStatus.Abandoned)]
+    [InlineData(AbandonedCheckoutStatus.Recovering)]
+    [InlineData(AbandonedCheckoutStatus.Recovered)]
+    [InlineData(AbandonedCheckoutStatus.Exhausted)]
+    [InlineData(AbandonedCheckoutStatus.OptedOut)]
+    public void Validation_Works(AbandonedCheckoutStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, AbandonedCheckoutStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AbandonedCheckoutStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -8097,18 +8311,18 @@ public class StatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(Status.Abandoned)]
-    [InlineData(Status.Recovering)]
-    [InlineData(Status.Recovered)]
-    [InlineData(Status.Exhausted)]
-    [InlineData(Status.OptedOut)]
-    public void SerializationRoundtrip_Works(Status rawValue)
+    [InlineData(AbandonedCheckoutStatus.Abandoned)]
+    [InlineData(AbandonedCheckoutStatus.Recovering)]
+    [InlineData(AbandonedCheckoutStatus.Recovered)]
+    [InlineData(AbandonedCheckoutStatus.Exhausted)]
+    [InlineData(AbandonedCheckoutStatus.OptedOut)]
+    public void SerializationRoundtrip_Works(AbandonedCheckoutStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, AbandonedCheckoutStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AbandonedCheckoutStatus>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -8119,12 +8333,12 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AbandonedCheckoutStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AbandonedCheckoutStatus>>(
             json,
             ModelBase.SerializerOptions
         );
