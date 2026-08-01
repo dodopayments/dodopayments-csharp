@@ -35,7 +35,7 @@ public enum WebhookEventType
     SubscriptionUpdated,
     SubscriptionUpdatePaymentMethod,
     LicenseKeyCreated,
-    PayoutNotInitiated,
+    PayoutCreated,
     PayoutOnHold,
     PayoutInProgress,
     PayoutFailed,
@@ -94,7 +94,7 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
             "subscription.update_payment_method" =>
                 WebhookEventType.SubscriptionUpdatePaymentMethod,
             "license_key.created" => WebhookEventType.LicenseKeyCreated,
-            "payout.not_initiated" => WebhookEventType.PayoutNotInitiated,
+            "payout.created" => WebhookEventType.PayoutCreated,
             "payout.on_hold" => WebhookEventType.PayoutOnHold,
             "payout.in_progress" => WebhookEventType.PayoutInProgress,
             "payout.failed" => WebhookEventType.PayoutFailed,
@@ -155,7 +155,7 @@ sealed class WebhookEventTypeConverter : JsonConverter<WebhookEventType>
                 WebhookEventType.SubscriptionUpdatePaymentMethod =>
                     "subscription.update_payment_method",
                 WebhookEventType.LicenseKeyCreated => "license_key.created",
-                WebhookEventType.PayoutNotInitiated => "payout.not_initiated",
+                WebhookEventType.PayoutCreated => "payout.created",
                 WebhookEventType.PayoutOnHold => "payout.on_hold",
                 WebhookEventType.PayoutInProgress => "payout.in_progress",
                 WebhookEventType.PayoutFailed => "payout.failed",
