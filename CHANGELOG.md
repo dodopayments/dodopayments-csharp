@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.29.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.28.0...v6.29.0) (2026-08-05)
+
+
+### Features
+
+* **api:** add addon single_quantity_price and live_tutoring tax category ([4b1b4d9](https://github.com/dodopayments/dodopayments-csharp/commit/4b1b4d98530c36367adb6994366709b86fa5f78e))
+* **api:** add addon single_quantity_price and live_tutoring tax category ([b45e55d](https://github.com/dodopayments/dodopayments-csharp/commit/b45e55da0884660d89f9a4bea9722926f0e2e8ea))
+
 ## [6.28.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.27.0...v6.28.0) (2026-07-31)
 
 
