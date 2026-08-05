@@ -12,6 +12,7 @@ public class TaxCategoryTest : TestBase
     [InlineData(TaxCategory.Saas)]
     [InlineData(TaxCategory.EBook)]
     [InlineData(TaxCategory.Edtech)]
+    [InlineData(TaxCategory.LiveTutoring)]
     public void Validation_Works(TaxCategory rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -36,6 +37,7 @@ public class TaxCategoryTest : TestBase
     [InlineData(TaxCategory.Saas)]
     [InlineData(TaxCategory.EBook)]
     [InlineData(TaxCategory.Edtech)]
+    [InlineData(TaxCategory.LiveTutoring)]
     public void SerializationRoundtrip_Works(TaxCategory rawValue)
     {
         // force implicit conversion because Theory can't do that for us

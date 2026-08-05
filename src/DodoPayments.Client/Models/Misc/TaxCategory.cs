@@ -16,6 +16,7 @@ public enum TaxCategory
     Saas,
     EBook,
     Edtech,
+    LiveTutoring,
 }
 
 sealed class TaxCategoryConverter : JsonConverter<TaxCategory>
@@ -32,6 +33,7 @@ sealed class TaxCategoryConverter : JsonConverter<TaxCategory>
             "saas" => TaxCategory.Saas,
             "e_book" => TaxCategory.EBook,
             "edtech" => TaxCategory.Edtech,
+            "live_tutoring" => TaxCategory.LiveTutoring,
             _ => (TaxCategory)(-1),
         };
     }
@@ -50,6 +52,7 @@ sealed class TaxCategoryConverter : JsonConverter<TaxCategory>
                 TaxCategory.Saas => "saas",
                 TaxCategory.EBook => "e_book",
                 TaxCategory.Edtech => "edtech",
+                TaxCategory.LiveTutoring => "live_tutoring",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

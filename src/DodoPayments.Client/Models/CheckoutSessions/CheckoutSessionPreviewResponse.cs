@@ -989,6 +989,22 @@ public sealed record class Addon : JsonModel
     }
 
     /// <summary>
+    /// Per-unit price in `currency`, converted and adaptive-priced but pre-tax and
+    /// pre-discount (both depend on quantity and the rest of the cart). Set even
+    /// when `quantity` is 0, so the checkout page can price the addon before the
+    /// buyer has selected any.
+    /// </summary>
+    public required int SingleQuantityPrice
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<int>("single_quantity_price");
+        }
+        init { this._rawData.Set("single_quantity_price", value); }
+    }
+
+    /// <summary>
     /// Represents the different categories of taxation applicable to various products
     /// and services.
     /// </summary>
@@ -1066,6 +1082,7 @@ public sealed record class Addon : JsonModel
         this.OgCurrency.Validate();
         _ = this.OgPrice;
         _ = this.Quantity;
+        _ = this.SingleQuantityPrice;
         this.TaxCategory.Validate();
         _ = this.TaxInclusive;
         _ = this.TaxRate;
