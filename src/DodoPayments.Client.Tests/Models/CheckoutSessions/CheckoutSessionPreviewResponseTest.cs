@@ -71,6 +71,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
                             Quantity = 0,
+                            SingleQuantityPrice = 0,
                             TaxCategory = TaxCategory.DigitalProducts,
                             TaxInclusive = true,
                             TaxRate = 0,
@@ -160,6 +161,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                         OgCurrency = Currency.Aed,
                         OgPrice = 0,
                         Quantity = 0,
+                        SingleQuantityPrice = 0,
                         TaxCategory = TaxCategory.DigitalProducts,
                         TaxInclusive = true,
                         TaxRate = 0,
@@ -273,6 +275,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
                             Quantity = 0,
+                            SingleQuantityPrice = 0,
                             TaxCategory = TaxCategory.DigitalProducts,
                             TaxInclusive = true,
                             TaxRate = 0,
@@ -376,6 +379,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
                             Quantity = 0,
+                            SingleQuantityPrice = 0,
                             TaxCategory = TaxCategory.DigitalProducts,
                             TaxInclusive = true,
                             TaxRate = 0,
@@ -472,6 +476,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                         OgCurrency = Currency.Aed,
                         OgPrice = 0,
                         Quantity = 0,
+                        SingleQuantityPrice = 0,
                         TaxCategory = TaxCategory.DigitalProducts,
                         TaxInclusive = true,
                         TaxRate = 0,
@@ -585,6 +590,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
                             Quantity = 0,
+                            SingleQuantityPrice = 0,
                             TaxCategory = TaxCategory.DigitalProducts,
                             TaxInclusive = true,
                             TaxRate = 0,
@@ -682,6 +688,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
                             Quantity = 0,
+                            SingleQuantityPrice = 0,
                             TaxCategory = TaxCategory.DigitalProducts,
                             TaxInclusive = true,
                             TaxRate = 0,
@@ -780,6 +787,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
                             Quantity = 0,
+                            SingleQuantityPrice = 0,
                             TaxCategory = TaxCategory.DigitalProducts,
                             TaxInclusive = true,
                             TaxRate = 0,
@@ -863,6 +871,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
                             Quantity = 0,
+                            SingleQuantityPrice = 0,
                             TaxCategory = TaxCategory.DigitalProducts,
                             TaxInclusive = true,
                             TaxRate = 0,
@@ -970,6 +979,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
                             Quantity = 0,
+                            SingleQuantityPrice = 0,
                             TaxCategory = TaxCategory.DigitalProducts,
                             TaxInclusive = true,
                             TaxRate = 0,
@@ -1062,6 +1072,7 @@ public class CheckoutSessionPreviewResponseTest : TestBase
                             OgCurrency = Currency.Aed,
                             OgPrice = 0,
                             Quantity = 0,
+                            SingleQuantityPrice = 0,
                             TaxCategory = TaxCategory.DigitalProducts,
                             TaxInclusive = true,
                             TaxRate = 0,
@@ -1312,6 +1323,7 @@ public class ProductCartTest : TestBase
                     OgCurrency = Currency.Aed,
                     OgPrice = 0,
                     Quantity = 0,
+                    SingleQuantityPrice = 0,
                     TaxCategory = TaxCategory.DigitalProducts,
                     TaxInclusive = true,
                     TaxRate = 0,
@@ -1370,6 +1382,7 @@ public class ProductCartTest : TestBase
                 OgCurrency = Currency.Aed,
                 OgPrice = 0,
                 Quantity = 0,
+                SingleQuantityPrice = 0,
                 TaxCategory = TaxCategory.DigitalProducts,
                 TaxInclusive = true,
                 TaxRate = 0,
@@ -1466,6 +1479,7 @@ public class ProductCartTest : TestBase
                     OgCurrency = Currency.Aed,
                     OgPrice = 0,
                     Quantity = 0,
+                    SingleQuantityPrice = 0,
                     TaxCategory = TaxCategory.DigitalProducts,
                     TaxInclusive = true,
                     TaxRate = 0,
@@ -1538,6 +1552,7 @@ public class ProductCartTest : TestBase
                     OgCurrency = Currency.Aed,
                     OgPrice = 0,
                     Quantity = 0,
+                    SingleQuantityPrice = 0,
                     TaxCategory = TaxCategory.DigitalProducts,
                     TaxInclusive = true,
                     TaxRate = 0,
@@ -1603,6 +1618,7 @@ public class ProductCartTest : TestBase
                 OgCurrency = Currency.Aed,
                 OgPrice = 0,
                 Quantity = 0,
+                SingleQuantityPrice = 0,
                 TaxCategory = TaxCategory.DigitalProducts,
                 TaxInclusive = true,
                 TaxRate = 0,
@@ -1699,6 +1715,7 @@ public class ProductCartTest : TestBase
                     OgCurrency = Currency.Aed,
                     OgPrice = 0,
                     Quantity = 0,
+                    SingleQuantityPrice = 0,
                     TaxCategory = TaxCategory.DigitalProducts,
                     TaxInclusive = true,
                     TaxRate = 0,
@@ -1969,6 +1986,7 @@ public class ProductCartTest : TestBase
                     OgCurrency = Currency.Aed,
                     OgPrice = 0,
                     Quantity = 0,
+                    SingleQuantityPrice = 0,
                     TaxCategory = TaxCategory.DigitalProducts,
                     TaxInclusive = true,
                     TaxRate = 0,
@@ -2279,6 +2297,7 @@ public class AddonTest : TestBase
             OgCurrency = Currency.Aed,
             OgPrice = 0,
             Quantity = 0,
+            SingleQuantityPrice = 0,
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
@@ -2294,6 +2313,7 @@ public class AddonTest : TestBase
         ApiEnum<string, Currency> expectedOgCurrency = Currency.Aed;
         int expectedOgPrice = 0;
         int expectedQuantity = 0;
+        int expectedSingleQuantityPrice = 0;
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         bool expectedTaxInclusive = true;
         int expectedTaxRate = 0;
@@ -2308,6 +2328,7 @@ public class AddonTest : TestBase
         Assert.Equal(expectedOgCurrency, model.OgCurrency);
         Assert.Equal(expectedOgPrice, model.OgPrice);
         Assert.Equal(expectedQuantity, model.Quantity);
+        Assert.Equal(expectedSingleQuantityPrice, model.SingleQuantityPrice);
         Assert.Equal(expectedTaxCategory, model.TaxCategory);
         Assert.Equal(expectedTaxInclusive, model.TaxInclusive);
         Assert.Equal(expectedTaxRate, model.TaxRate);
@@ -2328,6 +2349,7 @@ public class AddonTest : TestBase
             OgCurrency = Currency.Aed,
             OgPrice = 0,
             Quantity = 0,
+            SingleQuantityPrice = 0,
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
@@ -2354,6 +2376,7 @@ public class AddonTest : TestBase
             OgCurrency = Currency.Aed,
             OgPrice = 0,
             Quantity = 0,
+            SingleQuantityPrice = 0,
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
@@ -2373,6 +2396,7 @@ public class AddonTest : TestBase
         ApiEnum<string, Currency> expectedOgCurrency = Currency.Aed;
         int expectedOgPrice = 0;
         int expectedQuantity = 0;
+        int expectedSingleQuantityPrice = 0;
         ApiEnum<string, TaxCategory> expectedTaxCategory = TaxCategory.DigitalProducts;
         bool expectedTaxInclusive = true;
         int expectedTaxRate = 0;
@@ -2387,6 +2411,7 @@ public class AddonTest : TestBase
         Assert.Equal(expectedOgCurrency, deserialized.OgCurrency);
         Assert.Equal(expectedOgPrice, deserialized.OgPrice);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
+        Assert.Equal(expectedSingleQuantityPrice, deserialized.SingleQuantityPrice);
         Assert.Equal(expectedTaxCategory, deserialized.TaxCategory);
         Assert.Equal(expectedTaxInclusive, deserialized.TaxInclusive);
         Assert.Equal(expectedTaxRate, deserialized.TaxRate);
@@ -2407,6 +2432,7 @@ public class AddonTest : TestBase
             OgCurrency = Currency.Aed,
             OgPrice = 0,
             Quantity = 0,
+            SingleQuantityPrice = 0,
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
@@ -2430,6 +2456,7 @@ public class AddonTest : TestBase
             OgCurrency = Currency.Aed,
             OgPrice = 0,
             Quantity = 0,
+            SingleQuantityPrice = 0,
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
@@ -2455,6 +2482,7 @@ public class AddonTest : TestBase
             OgCurrency = Currency.Aed,
             OgPrice = 0,
             Quantity = 0,
+            SingleQuantityPrice = 0,
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
@@ -2475,6 +2503,7 @@ public class AddonTest : TestBase
             OgCurrency = Currency.Aed,
             OgPrice = 0,
             Quantity = 0,
+            SingleQuantityPrice = 0,
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
@@ -2504,6 +2533,7 @@ public class AddonTest : TestBase
             OgCurrency = Currency.Aed,
             OgPrice = 0,
             Quantity = 0,
+            SingleQuantityPrice = 0,
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
@@ -2528,6 +2558,7 @@ public class AddonTest : TestBase
             OgCurrency = Currency.Aed,
             OgPrice = 0,
             Quantity = 0,
+            SingleQuantityPrice = 0,
             TaxCategory = TaxCategory.DigitalProducts,
             TaxInclusive = true,
             TaxRate = 0,
