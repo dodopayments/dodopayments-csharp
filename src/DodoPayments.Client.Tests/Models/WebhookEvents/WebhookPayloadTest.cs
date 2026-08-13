@@ -1106,6 +1106,7 @@ public class DataTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
             {
@@ -1602,6 +1603,7 @@ public class DataTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
             {
@@ -3860,6 +3862,7 @@ public class SubscriptionTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
             {
@@ -4009,6 +4012,7 @@ public class SubscriptionTest : TestBase
             },
         ];
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
         Subscriptions::ScheduledPlanChange expectedScheduledChange = new()
         {
@@ -4105,6 +4109,7 @@ public class SubscriptionTest : TestBase
             Assert.Equal(expectedDiscounts[i], model.Discounts[i]);
         }
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
+        Assert.Equal(expectedPausedAt, model.PausedAt);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
         Assert.Equal(expectedTaxID, model.TaxID);
@@ -4230,6 +4235,7 @@ public class SubscriptionTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
             {
@@ -4381,6 +4387,7 @@ public class SubscriptionTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
             {
@@ -4537,6 +4544,7 @@ public class SubscriptionTest : TestBase
             },
         ];
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
         Subscriptions::ScheduledPlanChange expectedScheduledChange = new()
         {
@@ -4633,6 +4641,7 @@ public class SubscriptionTest : TestBase
             Assert.Equal(expectedDiscounts[i], deserialized.Discounts[i]);
         }
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
+        Assert.Equal(expectedPausedAt, deserialized.PausedAt);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
         Assert.Equal(expectedTaxID, deserialized.TaxID);
@@ -4758,6 +4767,7 @@ public class SubscriptionTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
             {
@@ -4902,6 +4912,7 @@ public class SubscriptionTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
             TrialAmount = 0,
@@ -5030,6 +5041,7 @@ public class SubscriptionTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
             TrialAmount = 0,
@@ -5155,6 +5167,7 @@ public class SubscriptionTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
             TrialAmount = 0,
@@ -5287,6 +5300,7 @@ public class SubscriptionTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             TaxID = "tax_id",
             TrialAmount = 0,
@@ -5425,6 +5439,8 @@ public class SubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("discounts"));
         Assert.Null(model.ExpiresAt);
         Assert.False(model.RawData.ContainsKey("expires_at"));
+        Assert.Null(model.PausedAt);
+        Assert.False(model.RawData.ContainsKey("paused_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.TaxID);
@@ -5663,6 +5679,7 @@ public class SubscriptionTest : TestBase
             DiscountID = null,
             Discounts = null,
             ExpiresAt = null,
+            PausedAt = null,
             PaymentMethodID = null,
             TaxID = null,
             TrialAmount = null,
@@ -5684,6 +5701,8 @@ public class SubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("discounts"));
         Assert.Null(model.ExpiresAt);
         Assert.True(model.RawData.ContainsKey("expires_at"));
+        Assert.Null(model.PausedAt);
+        Assert.True(model.RawData.ContainsKey("paused_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.TaxID);
@@ -5809,6 +5828,7 @@ public class SubscriptionTest : TestBase
             DiscountID = null,
             Discounts = null,
             ExpiresAt = null,
+            PausedAt = null,
             PaymentMethodID = null,
             TaxID = null,
             TrialAmount = null,
@@ -5935,6 +5955,7 @@ public class SubscriptionTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
             {
