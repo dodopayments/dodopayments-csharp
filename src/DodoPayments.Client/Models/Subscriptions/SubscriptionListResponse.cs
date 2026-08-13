@@ -365,6 +365,20 @@ public sealed record class SubscriptionListResponse : JsonModel
     }
 
     /// <summary>
+    /// Timestamp when the subscription was paused, if it currently is (or is `OnHold`
+    /// due to an unresolved pause settlement). `null` otherwise.
+    /// </summary>
+    public DateTimeOffset? PausedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("paused_at");
+        }
+        init { this._rawData.Set("paused_at", value); }
+    }
+
+    /// <summary>
     /// Saved payment method id used for recurring charges
     /// </summary>
     public string? PaymentMethodID
@@ -465,6 +479,7 @@ public sealed record class SubscriptionListResponse : JsonModel
         _ = this.CustomerBusinessName;
         _ = this.DiscountCyclesRemaining;
         _ = this.DiscountID;
+        _ = this.PausedAt;
         _ = this.PaymentMethodID;
         _ = this.ProductName;
         this.ScheduledChange?.Validate();

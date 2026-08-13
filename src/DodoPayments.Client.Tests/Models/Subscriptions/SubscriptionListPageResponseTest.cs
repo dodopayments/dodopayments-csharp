@@ -57,6 +57,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
+                    PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     ProductName = "product_name",
                     ScheduledChange = new()
@@ -127,6 +128,7 @@ public class SubscriptionListPageResponseTest : TestBase
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ProductName = "product_name",
                 ScheduledChange = new()
@@ -208,6 +210,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
+                    PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     ProductName = "product_name",
                     ScheduledChange = new()
@@ -292,6 +295,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
+                    PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     ProductName = "product_name",
                     ScheduledChange = new()
@@ -369,6 +373,7 @@ public class SubscriptionListPageResponseTest : TestBase
                 CustomerBusinessName = "customer_business_name",
                 DiscountCyclesRemaining = 0,
                 DiscountID = "discount_id",
+                PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ProductName = "product_name",
                 ScheduledChange = new()
@@ -450,6 +455,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
+                    PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     ProductName = "product_name",
                     ScheduledChange = new()
@@ -528,6 +534,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     CustomerBusinessName = "customer_business_name",
                     DiscountCyclesRemaining = 0,
                     DiscountID = "discount_id",
+                    PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PaymentMethodID = "payment_method_id",
                     ProductName = "product_name",
                     ScheduledChange = new()
