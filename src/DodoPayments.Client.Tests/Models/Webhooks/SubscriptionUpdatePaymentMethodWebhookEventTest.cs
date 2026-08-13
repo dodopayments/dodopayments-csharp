@@ -133,6 +133,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                     },
                 ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
                 {
@@ -275,6 +276,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
             {
@@ -430,6 +432,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                     },
                 ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
                 {
@@ -586,6 +589,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                     },
                 ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
                 {
@@ -735,6 +739,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                 },
             ],
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ScheduledChange = new()
             {
@@ -890,6 +895,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                     },
                 ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
                 {
@@ -1040,6 +1046,7 @@ public class SubscriptionUpdatePaymentMethodWebhookEventTest : TestBase
                     },
                 ],
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PaymentMethodID = "payment_method_id",
                 ScheduledChange = new()
                 {

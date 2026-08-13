@@ -54,6 +54,7 @@ public class SubscriptionListResponseTest : TestBase
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ProductName = "product_name",
             ScheduledChange = new()
@@ -123,6 +124,7 @@ public class SubscriptionListResponseTest : TestBase
         string expectedCustomerBusinessName = "customer_business_name";
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
+        DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
         string expectedProductName = "product_name";
         ScheduledPlanChange expectedScheduledChange = new()
@@ -182,6 +184,7 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedCustomerBusinessName, model.CustomerBusinessName);
         Assert.Equal(expectedDiscountCyclesRemaining, model.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, model.DiscountID);
+        Assert.Equal(expectedPausedAt, model.PausedAt);
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
         Assert.Equal(expectedProductName, model.ProductName);
         Assert.Equal(expectedScheduledChange, model.ScheduledChange);
@@ -233,6 +236,7 @@ public class SubscriptionListResponseTest : TestBase
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ProductName = "product_name",
             ScheduledChange = new()
@@ -311,6 +315,7 @@ public class SubscriptionListResponseTest : TestBase
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ProductName = "product_name",
             ScheduledChange = new()
@@ -387,6 +392,7 @@ public class SubscriptionListResponseTest : TestBase
         string expectedCustomerBusinessName = "customer_business_name";
         int expectedDiscountCyclesRemaining = 0;
         string expectedDiscountID = "discount_id";
+        DateTimeOffset expectedPausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedPaymentMethodID = "payment_method_id";
         string expectedProductName = "product_name";
         ScheduledPlanChange expectedScheduledChange = new()
@@ -446,6 +452,7 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedCustomerBusinessName, deserialized.CustomerBusinessName);
         Assert.Equal(expectedDiscountCyclesRemaining, deserialized.DiscountCyclesRemaining);
         Assert.Equal(expectedDiscountID, deserialized.DiscountID);
+        Assert.Equal(expectedPausedAt, deserialized.PausedAt);
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
         Assert.Equal(expectedProductName, deserialized.ProductName);
         Assert.Equal(expectedScheduledChange, deserialized.ScheduledChange);
@@ -497,6 +504,7 @@ public class SubscriptionListResponseTest : TestBase
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ProductName = "product_name",
             ScheduledChange = new()
@@ -575,6 +583,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
         Assert.False(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.PausedAt);
+        Assert.False(model.RawData.ContainsKey("paused_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.ProductName);
@@ -677,6 +687,7 @@ public class SubscriptionListResponseTest : TestBase
             CustomerBusinessName = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
+            PausedAt = null,
             PaymentMethodID = null,
             ProductName = null,
             ScheduledChange = null,
@@ -692,6 +703,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("discount_cycles_remaining"));
         Assert.Null(model.DiscountID);
         Assert.True(model.RawData.ContainsKey("discount_id"));
+        Assert.Null(model.PausedAt);
+        Assert.True(model.RawData.ContainsKey("paused_at"));
         Assert.Null(model.PaymentMethodID);
         Assert.True(model.RawData.ContainsKey("payment_method_id"));
         Assert.Null(model.ProductName);
@@ -749,6 +762,7 @@ public class SubscriptionListResponseTest : TestBase
             CustomerBusinessName = null,
             DiscountCyclesRemaining = null,
             DiscountID = null,
+            PausedAt = null,
             PaymentMethodID = null,
             ProductName = null,
             ScheduledChange = null,
@@ -803,6 +817,7 @@ public class SubscriptionListResponseTest : TestBase
             CustomerBusinessName = "customer_business_name",
             DiscountCyclesRemaining = 0,
             DiscountID = "discount_id",
+            PausedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PaymentMethodID = "payment_method_id",
             ProductName = "product_name",
             ScheduledChange = new()

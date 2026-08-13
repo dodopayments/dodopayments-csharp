@@ -10,12 +10,12 @@ using DodoPayments.Client.Models.Webhooks;
 
 namespace DodoPayments.Client.Tests.Models.Webhooks;
 
-public class SubscriptionRenewedWebhookEventTest : TestBase
+public class SubscriptionUnpausedWebhookEventTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionRenewedWebhookEvent
+        var model = new SubscriptionUnpausedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -301,7 +301,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
             TrialAmount = 0,
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.renewed");
+        JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.unpaused");
 
         Assert.Equal(expectedBusinessID, model.BusinessID);
         Assert.Equal(expectedData, model.Data);
@@ -312,7 +312,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionRenewedWebhookEvent
+        var model = new SubscriptionUnpausedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -458,7 +458,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionRenewedWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionUnpausedWebhookEvent>(
             json,
             ModelBase.SerializerOptions
         );
@@ -469,7 +469,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionRenewedWebhookEvent
+        var model = new SubscriptionUnpausedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -615,7 +615,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionRenewedWebhookEvent>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionUnpausedWebhookEvent>(
             element,
             ModelBase.SerializerOptions
         );
@@ -762,7 +762,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
             TrialAmount = 0,
         };
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.renewed");
+        JsonElement expectedType = JsonSerializer.SerializeToElement("subscription.unpaused");
 
         Assert.Equal(expectedBusinessID, deserialized.BusinessID);
         Assert.Equal(expectedData, deserialized.Data);
@@ -773,7 +773,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionRenewedWebhookEvent
+        var model = new SubscriptionUnpausedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -924,7 +924,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionRenewedWebhookEvent
+        var model = new SubscriptionUnpausedWebhookEvent
         {
             BusinessID = "business_id",
             Data = new()
@@ -1069,7 +1069,7 @@ public class SubscriptionRenewedWebhookEventTest : TestBase
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        SubscriptionRenewedWebhookEvent copied = new(model);
+        SubscriptionUnpausedWebhookEvent copied = new(model);
 
         Assert.Equal(model, copied);
     }

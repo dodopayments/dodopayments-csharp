@@ -51,6 +51,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             DisableOnDemand = new(DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")),
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Pause = true,
             Status = SubscriptionStatus.Pending,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
@@ -95,6 +96,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         );
         Dictionary<string, MetadataItem> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedNextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        bool expectedPause = true;
         ApiEnum<string, SubscriptionStatus> expectedStatus = SubscriptionStatus.Pending;
         int expectedSubscriptionPeriodCount = 0;
         ApiEnum<string, TimeInterval> expectedSubscriptionPeriodInterval = TimeInterval.Day;
@@ -124,6 +126,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
         Assert.Equal(expectedNextBillingDate, parameters.NextBillingDate);
+        Assert.Equal(expectedPause, parameters.Pause);
         Assert.Equal(expectedStatus, parameters.Status);
         Assert.Equal(expectedSubscriptionPeriodCount, parameters.SubscriptionPeriodCount);
         Assert.Equal(expectedSubscriptionPeriodInterval, parameters.SubscriptionPeriodInterval);
@@ -160,6 +163,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.NextBillingDate);
         Assert.False(parameters.RawBodyData.ContainsKey("next_billing_date"));
+        Assert.Null(parameters.Pause);
+        Assert.False(parameters.RawBodyData.ContainsKey("pause"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawBodyData.ContainsKey("status"));
         Assert.Null(parameters.SubscriptionPeriodCount);
@@ -188,6 +193,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             DisableOnDemand = null,
             Metadata = null,
             NextBillingDate = null,
+            Pause = null,
             Status = null,
             SubscriptionPeriodCount = null,
             SubscriptionPeriodInterval = null,
@@ -216,6 +222,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.NextBillingDate);
         Assert.True(parameters.RawBodyData.ContainsKey("next_billing_date"));
+        Assert.Null(parameters.Pause);
+        Assert.True(parameters.RawBodyData.ContainsKey("pause"));
         Assert.Null(parameters.Status);
         Assert.True(parameters.RawBodyData.ContainsKey("status"));
         Assert.Null(parameters.SubscriptionPeriodCount);
@@ -284,6 +292,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             DisableOnDemand = new(DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")),
             Metadata = new Dictionary<string, MetadataItem>() { { "foo", "string" } },
             NextBillingDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Pause = true,
             Status = SubscriptionStatus.Pending,
             SubscriptionPeriodCount = 0,
             SubscriptionPeriodInterval = TimeInterval.Day,
