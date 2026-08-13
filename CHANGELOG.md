@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.30.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.29.0...v6.30.0) (2026-08-13)
+
+
+### Features
+
+* **api:** add subscription pause/unpause ([5b5b3f9](https://github.com/dodopayments/dodopayments-csharp/commit/5b5b3f95fcd472a5fc5012e7a6e6396fa0a451e8))
+* **api:** add subscription pause/unpause ([c1a5c57](https://github.com/dodopayments/dodopayments-csharp/commit/c1a5c57b893e49e17ced1aa7ed60ca6a0e752237))
+
 ## [6.28.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.27.0...v6.28.0) (2026-07-31)
 
 
