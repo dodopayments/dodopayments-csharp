@@ -180,6 +180,20 @@ public record class SubscriptionUpdateParams : ParamsBase
         init { this._rawBodyData.Set("next_billing_date", value); }
     }
 
+    /// <summary>
+    /// `Some(true)` pauses an active subscription; `Some(false)` unpauses a `Paused`
+    /// (or abandoned `OnHold`) subscription. Exclusive of every other field.
+    /// </summary>
+    public bool? Pause
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("pause");
+        }
+        init { this._rawBodyData.Set("pause", value); }
+    }
+
     public ApiEnum<string, SubscriptionStatus>? Status
     {
         get
