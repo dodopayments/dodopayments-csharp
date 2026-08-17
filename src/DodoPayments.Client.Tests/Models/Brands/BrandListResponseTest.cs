@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using DodoPayments.Client.Core;
@@ -22,6 +23,7 @@ public class BrandListResponseTest : TestBase
                     StatementDescriptor = "statement_descriptor",
                     VerificationEnabled = true,
                     VerificationStatus = VerificationStatus.Success,
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
                     Image = "image",
                     Name = "name",
@@ -42,6 +44,7 @@ public class BrandListResponseTest : TestBase
                 StatementDescriptor = "statement_descriptor",
                 VerificationEnabled = true,
                 VerificationStatus = VerificationStatus.Success,
+                ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
                 Image = "image",
                 Name = "name",
@@ -73,6 +76,7 @@ public class BrandListResponseTest : TestBase
                     StatementDescriptor = "statement_descriptor",
                     VerificationEnabled = true,
                     VerificationStatus = VerificationStatus.Success,
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
                     Image = "image",
                     Name = "name",
@@ -107,6 +111,7 @@ public class BrandListResponseTest : TestBase
                     StatementDescriptor = "statement_descriptor",
                     VerificationEnabled = true,
                     VerificationStatus = VerificationStatus.Success,
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
                     Image = "image",
                     Name = "name",
@@ -134,6 +139,7 @@ public class BrandListResponseTest : TestBase
                 StatementDescriptor = "statement_descriptor",
                 VerificationEnabled = true,
                 VerificationStatus = VerificationStatus.Success,
+                ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
                 Image = "image",
                 Name = "name",
@@ -165,6 +171,7 @@ public class BrandListResponseTest : TestBase
                     StatementDescriptor = "statement_descriptor",
                     VerificationEnabled = true,
                     VerificationStatus = VerificationStatus.Success,
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
                     Image = "image",
                     Name = "name",
@@ -193,6 +200,7 @@ public class BrandListResponseTest : TestBase
                     StatementDescriptor = "statement_descriptor",
                     VerificationEnabled = true,
                     VerificationStatus = VerificationStatus.Success,
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
                     Image = "image",
                     Name = "name",
