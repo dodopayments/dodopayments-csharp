@@ -366,6 +366,30 @@ public sealed record class CheckoutSessionFlags : JsonModel
         }
     }
 
+    /// <summary>
+    /// If true, the session uses the single-page checkout flow: the page initializes
+    /// the payment at load time and confirms it in place, with no separate payment page.
+    ///
+    /// <para>Default is false</para>
+    /// </summary>
+    public bool? SinglePage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("single_page");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("single_page", value);
+        }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -386,6 +410,7 @@ public sealed record class CheckoutSessionFlags : JsonModel
         _ = this.AlwaysCreateNewCustomer;
         _ = this.RedirectImmediately;
         _ = this.RequirePhoneNumber;
+        _ = this.SinglePage;
     }
 
     public CheckoutSessionFlags() { }
