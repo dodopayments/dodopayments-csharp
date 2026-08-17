@@ -41,6 +41,17 @@ public class BrandServiceTest : TestBase
     }
 
     [Fact]
+    public async Task Archive_Works()
+    {
+        var response = await this.client.Brands.Archive(
+            "brnd_8dFiAW42v28JzhlVSocjq",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact]
     public async Task UpdateImages_Works()
     {
         var response = await this.client.Brands.UpdateImages(

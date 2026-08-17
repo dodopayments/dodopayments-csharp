@@ -15,6 +15,27 @@ namespace DodoPayments.Client.Models.Brands;
 /// </summary>
 public record class BrandListParams : ParamsBase
 {
+    /// <summary>
+    /// Set to true to also list archived brands. Default false.
+    /// </summary>
+    public bool? IncludeArchived
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<bool>("include_archived");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("include_archived", value);
+        }
+    }
+
     public BrandListParams() { }
 
 #pragma warning disable CS8618

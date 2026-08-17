@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
@@ -18,6 +19,7 @@ public class BrandTest : TestBase
             StatementDescriptor = "statement_descriptor",
             VerificationEnabled = true,
             VerificationStatus = VerificationStatus.Success,
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             Image = "image",
             Name = "name",
@@ -32,6 +34,7 @@ public class BrandTest : TestBase
         string expectedStatementDescriptor = "statement_descriptor";
         bool expectedVerificationEnabled = true;
         ApiEnum<string, VerificationStatus> expectedVerificationStatus = VerificationStatus.Success;
+        DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
         string expectedImage = "image";
         string expectedName = "name";
@@ -45,6 +48,7 @@ public class BrandTest : TestBase
         Assert.Equal(expectedStatementDescriptor, model.StatementDescriptor);
         Assert.Equal(expectedVerificationEnabled, model.VerificationEnabled);
         Assert.Equal(expectedVerificationStatus, model.VerificationStatus);
+        Assert.Equal(expectedArchivedAt, model.ArchivedAt);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedImage, model.Image);
         Assert.Equal(expectedName, model.Name);
@@ -64,6 +68,7 @@ public class BrandTest : TestBase
             StatementDescriptor = "statement_descriptor",
             VerificationEnabled = true,
             VerificationStatus = VerificationStatus.Success,
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             Image = "image",
             Name = "name",
@@ -89,6 +94,7 @@ public class BrandTest : TestBase
             StatementDescriptor = "statement_descriptor",
             VerificationEnabled = true,
             VerificationStatus = VerificationStatus.Success,
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             Image = "image",
             Name = "name",
@@ -107,6 +113,7 @@ public class BrandTest : TestBase
         string expectedStatementDescriptor = "statement_descriptor";
         bool expectedVerificationEnabled = true;
         ApiEnum<string, VerificationStatus> expectedVerificationStatus = VerificationStatus.Success;
+        DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
         string expectedImage = "image";
         string expectedName = "name";
@@ -120,6 +127,7 @@ public class BrandTest : TestBase
         Assert.Equal(expectedStatementDescriptor, deserialized.StatementDescriptor);
         Assert.Equal(expectedVerificationEnabled, deserialized.VerificationEnabled);
         Assert.Equal(expectedVerificationStatus, deserialized.VerificationStatus);
+        Assert.Equal(expectedArchivedAt, deserialized.ArchivedAt);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedImage, deserialized.Image);
         Assert.Equal(expectedName, deserialized.Name);
@@ -139,6 +147,7 @@ public class BrandTest : TestBase
             StatementDescriptor = "statement_descriptor",
             VerificationEnabled = true,
             VerificationStatus = VerificationStatus.Success,
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             Image = "image",
             Name = "name",
@@ -163,6 +172,8 @@ public class BrandTest : TestBase
             VerificationStatus = VerificationStatus.Success,
         };
 
+        Assert.Null(model.ArchivedAt);
+        Assert.False(model.RawData.ContainsKey("archived_at"));
         Assert.Null(model.Description);
         Assert.False(model.RawData.ContainsKey("description"));
         Assert.Null(model.Image);
@@ -205,6 +216,7 @@ public class BrandTest : TestBase
             VerificationEnabled = true,
             VerificationStatus = VerificationStatus.Success,
 
+            ArchivedAt = null,
             Description = null,
             Image = null,
             Name = null,
@@ -213,6 +225,8 @@ public class BrandTest : TestBase
             Url = null,
         };
 
+        Assert.Null(model.ArchivedAt);
+        Assert.True(model.RawData.ContainsKey("archived_at"));
         Assert.Null(model.Description);
         Assert.True(model.RawData.ContainsKey("description"));
         Assert.Null(model.Image);
@@ -239,6 +253,7 @@ public class BrandTest : TestBase
             VerificationEnabled = true,
             VerificationStatus = VerificationStatus.Success,
 
+            ArchivedAt = null,
             Description = null,
             Image = null,
             Name = null,
@@ -261,6 +276,7 @@ public class BrandTest : TestBase
             StatementDescriptor = "statement_descriptor",
             VerificationEnabled = true,
             VerificationStatus = VerificationStatus.Success,
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             Image = "image",
             Name = "name",

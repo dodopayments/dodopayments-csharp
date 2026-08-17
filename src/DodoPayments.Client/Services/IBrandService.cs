@@ -70,6 +70,22 @@ public interface IBrandService
     );
 
     /// <summary>
+    /// Archive a brand. Its products, live subscriptions, and product collections move
+    /// to the `move_products_to` brand. Archive is permanent.
+    /// </summary>
+    Task<BrandArchiveResponse> Archive(
+        BrandArchiveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Archive(BrandArchiveParams, CancellationToken)"/>
+    Task<BrandArchiveResponse> Archive(
+        string id,
+        BrandArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Sends a request to <c>put /brands/{id}/images</c>.
     /// </summary>
     Task<BrandUpdateImagesResponse> UpdateImages(
@@ -145,6 +161,22 @@ public interface IBrandServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<BrandListResponse>> List(
         BrandListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /brands/{id}/archive</c>, but is otherwise the
+    /// same as <see cref="IBrandService.Archive(BrandArchiveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<BrandArchiveResponse>> Archive(
+        BrandArchiveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Archive(BrandArchiveParams, CancellationToken)"/>
+    Task<HttpResponse<BrandArchiveResponse>> Archive(
+        string id,
+        BrandArchiveParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
