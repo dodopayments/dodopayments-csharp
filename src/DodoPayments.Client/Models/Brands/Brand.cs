@@ -74,6 +74,19 @@ public sealed record class Brand : JsonModel
         init { this._rawData.Set("verification_status", value); }
     }
 
+    /// <summary>
+    /// Time the brand was archived. Null for an active brand.
+    /// </summary>
+    public DateTimeOffset? ArchivedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("archived_at");
+        }
+        init { this._rawData.Set("archived_at", value); }
+    }
+
     public string? Description
     {
         get
@@ -146,6 +159,7 @@ public sealed record class Brand : JsonModel
         _ = this.StatementDescriptor;
         _ = this.VerificationEnabled;
         this.VerificationStatus.Validate();
+        _ = this.ArchivedAt;
         _ = this.Description;
         _ = this.Image;
         _ = this.Name;

@@ -133,6 +133,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
                 RequirePhoneNumber = true,
+                SinglePage = true,
             },
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
@@ -282,6 +283,7 @@ public class CheckoutSessionRequestTest : TestBase
             AlwaysCreateNewCustomer = true,
             RedirectImmediately = true,
             RequirePhoneNumber = true,
+            SinglePage = true,
         };
         bool expectedForce3ds = true;
         int expectedMandateMinAmountInrPaise = 0;
@@ -485,6 +487,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
                 RequirePhoneNumber = true,
+                SinglePage = true,
             },
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
@@ -643,6 +646,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
                 RequirePhoneNumber = true,
+                SinglePage = true,
             },
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
@@ -799,6 +803,7 @@ public class CheckoutSessionRequestTest : TestBase
             AlwaysCreateNewCustomer = true,
             RedirectImmediately = true,
             RequirePhoneNumber = true,
+            SinglePage = true,
         };
         bool expectedForce3ds = true;
         int expectedMandateMinAmountInrPaise = 0;
@@ -1005,6 +1010,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
                 RequirePhoneNumber = true,
+                SinglePage = true,
             },
             Force3ds = true,
             MandateMinAmountInrPaise = 0,
@@ -1464,6 +1470,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
                 RequirePhoneNumber = true,
+                SinglePage = true,
             },
             MinimalAddress = true,
             ShortLink = true,
@@ -1603,6 +1610,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
                 RequirePhoneNumber = true,
+                SinglePage = true,
             },
             MinimalAddress = true,
             ShortLink = true,
@@ -1709,6 +1717,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
                 RequirePhoneNumber = true,
+                SinglePage = true,
             },
             MinimalAddress = true,
             ShortLink = true,
@@ -1866,6 +1875,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
                 RequirePhoneNumber = true,
+                SinglePage = true,
             },
             MinimalAddress = true,
             ShortLink = true,
@@ -2017,6 +2027,7 @@ public class CheckoutSessionRequestTest : TestBase
                 AlwaysCreateNewCustomer = true,
                 RedirectImmediately = true,
                 RequirePhoneNumber = true,
+                SinglePage = true,
             },
             Force3ds = true,
             MandateMinAmountInrPaise = 0,

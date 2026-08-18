@@ -107,6 +107,30 @@ public sealed class BrandService : IBrandService
     }
 
     /// <inheritdoc/>
+    public async Task<BrandArchiveResponse> Archive(
+        BrandArchiveParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Archive(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<BrandArchiveResponse> Archive(
+        string id,
+        BrandArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Archive(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<BrandUpdateImagesResponse> UpdateImages(
         BrandUpdateImagesParams parameters,
         CancellationToken cancellationToken = default
@@ -289,6 +313,51 @@ public sealed class BrandServiceWithRawResponse : IBrandServiceWithRawResponse
                 return brands;
             }
         );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<BrandArchiveResponse>> Archive(
+        BrandArchiveParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new DodoPaymentsInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<BrandArchiveParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<BrandArchiveResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<BrandArchiveResponse>> Archive(
+        string id,
+        BrandArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Archive(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>
