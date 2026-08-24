@@ -5,6 +5,7 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Exceptions;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Entitlements.Grants;
+using DodoPayments.Client.Models.LicenseKeys;
 using DodoPayments.Client.Models.Misc;
 using DodoPayments.Client.Models.Products;
 
@@ -50,8 +51,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -101,8 +104,10 @@ public class EntitlementGrantTest : TestBase
         };
         LicenseKeyGrant expectedLicenseKey = new()
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeyStatus.Active,
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -181,8 +186,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -241,8 +248,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -299,8 +308,10 @@ public class EntitlementGrantTest : TestBase
         };
         LicenseKeyGrant expectedLicenseKey = new()
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeyStatus.Active,
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -379,8 +390,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -585,8 +598,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },

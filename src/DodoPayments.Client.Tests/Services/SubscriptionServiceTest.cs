@@ -75,7 +75,7 @@ public class SubscriptionServiceTest : TestBase
     [Fact]
     public async Task ChangePlan_Works()
     {
-        await this.client.Subscriptions.ChangePlan(
+        var response = await this.client.Subscriptions.ChangePlan(
             "sub_Iuaq622bbmmfOGrVTqdXv",
             new()
             {
@@ -85,6 +85,7 @@ public class SubscriptionServiceTest : TestBase
             },
             TestContext.Current.CancellationToken
         );
+        response.Validate();
     }
 
     [Fact]

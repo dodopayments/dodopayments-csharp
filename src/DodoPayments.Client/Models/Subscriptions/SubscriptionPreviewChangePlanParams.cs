@@ -106,6 +106,65 @@ public record class SubscriptionPreviewChangePlanParams : ParamsBase
     }
 
     /// <summary>
+    /// Replace a scheduled plan change with this one.
+    ///
+    /// <para>The scheduled change is cancelled by the transaction that applies this
+    /// change. A change that never applies leaves the schedule in place.</para>
+    ///
+    /// <para>`effective_at: next_billing_date` is allowed. The new schedule then
+    /// replaces the old one in the request transaction.</para>
+    ///
+    /// <para>A pending plan change still gets a `409`. This field does not affect it.</para>
+    ///
+    /// <para>The preview route shares this request body, so a preview that sets
+    /// this field also passes the scheduled-change `409`.</para>
+    /// </summary>
+    public bool? CancelScheduledChangePlan
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("cancel_scheduled_change_plan");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("cancel_scheduled_change_plan", value);
+        }
+    }
+
+    /// <summary>
+    /// Collect the plan-change amount with a payment link. The customer then pays
+    /// on a checkout page.
+    ///
+    /// <para>The business needs the `allow_plan_change_via_payment_link` capability.
+    /// The request needs `effective_at: immediately`. The request also needs `on_payment_failure: prevent_change`.</para>
+    ///
+    /// <para>The preview route shares this request body and ignores this field.</para>
+    /// </summary>
+    public bool? CollectViaPaymentLink
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<bool>("collect_via_payment_link");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("collect_via_payment_link", value);
+        }
+    }
+
+    /// <summary>
     /// DEPRECATED: Use discount_codes instead. Cannot be used together with discount_codes.
     /// </summary>
     [Obsolete("Use `discount_id` instead.")]

@@ -1,13 +1,5 @@
 # Changelog
 
-## [6.31.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.30.0...v6.31.0) (2026-08-17)
-
-
-### Features
-
-* **api:** add brand archive endpoint ([fb2a733](https://github.com/dodopayments/dodopayments-csharp/commit/fb2a7338531c64bc1857f4d22971abf3c82fe2b9))
-* **api:** add brand archive endpoint ([9a0942d](https://github.com/dodopayments/dodopayments-csharp/commit/9a0942df64467d5084fa1d5165cfbf8c642daa90))
-
 ## [6.30.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.29.0...v6.30.0) (2026-08-13)
 
 
