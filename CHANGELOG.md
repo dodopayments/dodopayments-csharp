@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.32.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.31.0...v6.32.0) (2026-08-24)
+
+
+### Features
+
+* **api:** return checkout handles from subscription change-plan ([9d404a6](https://github.com/dodopayments/dodopayments-csharp/commit/9d404a61671bdba69f8df429ec1f1af7ccd45c53))
+* **api:** return checkout handles from subscription change-plan ([ff93942](https://github.com/dodopayments/dodopayments-csharp/commit/ff939425b108999f77b52e2e8fd8e012816d4084))
+
 ## [6.30.0](https://github.com/dodopayments/dodopayments-csharp/compare/v6.29.0...v6.30.0) (2026-08-13)
 
 
