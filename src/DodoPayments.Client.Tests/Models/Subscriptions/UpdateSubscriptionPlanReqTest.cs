@@ -20,6 +20,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -36,6 +38,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         int expectedQuantity = 0;
         bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        bool expectedCancelScheduledChangePlan = true;
+        bool expectedCollectViaPaymentLink = true;
         string expectedDiscountCode = "discount_code";
         List<string> expectedDiscountCodes = ["string"];
         ApiEnum<string, UpdateSubscriptionPlanReqEffectiveAt> expectedEffectiveAt =
@@ -54,6 +58,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         {
             Assert.Equal(expectedAddons[i], model.Addons[i]);
         }
+        Assert.Equal(expectedCancelScheduledChangePlan, model.CancelScheduledChangePlan);
+        Assert.Equal(expectedCollectViaPaymentLink, model.CollectViaPaymentLink);
         Assert.Equal(expectedDiscountCode, model.DiscountCode);
         Assert.NotNull(model.DiscountCodes);
         Assert.Equal(expectedDiscountCodes.Count, model.DiscountCodes.Count);
@@ -84,6 +90,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -111,6 +119,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -134,6 +144,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         int expectedQuantity = 0;
         bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        bool expectedCancelScheduledChangePlan = true;
+        bool expectedCollectViaPaymentLink = true;
         string expectedDiscountCode = "discount_code";
         List<string> expectedDiscountCodes = ["string"];
         ApiEnum<string, UpdateSubscriptionPlanReqEffectiveAt> expectedEffectiveAt =
@@ -155,6 +167,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
         {
             Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
         }
+        Assert.Equal(expectedCancelScheduledChangePlan, deserialized.CancelScheduledChangePlan);
+        Assert.Equal(expectedCollectViaPaymentLink, deserialized.CollectViaPaymentLink);
         Assert.Equal(expectedDiscountCode, deserialized.DiscountCode);
         Assert.NotNull(deserialized.DiscountCodes);
         Assert.Equal(expectedDiscountCodes.Count, deserialized.DiscountCodes.Count);
@@ -185,6 +199,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
@@ -212,6 +228,10 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
         };
 
+        Assert.Null(model.CancelScheduledChangePlan);
+        Assert.False(model.RawData.ContainsKey("cancel_scheduled_change_plan"));
+        Assert.Null(model.CollectViaPaymentLink);
+        Assert.False(model.RawData.ContainsKey("collect_via_payment_link"));
         Assert.Null(model.EffectiveAt);
         Assert.False(model.RawData.ContainsKey("effective_at"));
     }
@@ -253,9 +273,15 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
 
             // Null should be interpreted as omitted for these properties
+            CancelScheduledChangePlan = null,
+            CollectViaPaymentLink = null,
             EffectiveAt = null,
         };
 
+        Assert.Null(model.CancelScheduledChangePlan);
+        Assert.False(model.RawData.ContainsKey("cancel_scheduled_change_plan"));
+        Assert.Null(model.CollectViaPaymentLink);
+        Assert.False(model.RawData.ContainsKey("collect_via_payment_link"));
         Assert.Null(model.EffectiveAt);
         Assert.False(model.RawData.ContainsKey("effective_at"));
     }
@@ -277,6 +303,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             OnPaymentFailure = UpdateSubscriptionPlanReqOnPaymentFailure.PreventChange,
 
             // Null should be interpreted as omitted for these properties
+            CancelScheduledChangePlan = null,
+            CollectViaPaymentLink = null,
             EffectiveAt = null,
         };
 
@@ -292,6 +320,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
         };
 
@@ -318,6 +348,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
         };
 
@@ -333,6 +365,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
 
             AdaptiveCurrencyFeesInclusive = null,
@@ -366,6 +400,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             ProrationBillingMode =
                 UpdateSubscriptionPlanReqProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,
 
             AdaptiveCurrencyFeesInclusive = null,
@@ -390,6 +426,8 @@ public class UpdateSubscriptionPlanReqTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = UpdateSubscriptionPlanReqEffectiveAt.Immediately,

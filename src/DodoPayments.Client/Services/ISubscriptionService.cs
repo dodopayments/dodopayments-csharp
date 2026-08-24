@@ -91,13 +91,13 @@ public interface ISubscriptionService
     /// <summary>
     /// Sends a request to <c>post /subscriptions/{subscription_id}/change-plan</c>.
     /// </summary>
-    Task ChangePlan(
+    Task<SubscriptionChangePlanResponse> ChangePlan(
         SubscriptionChangePlanParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="ChangePlan(SubscriptionChangePlanParams, CancellationToken)"/>
-    Task ChangePlan(
+    Task<SubscriptionChangePlanResponse> ChangePlan(
         string subscriptionID,
         SubscriptionChangePlanParams parameters,
         CancellationToken cancellationToken = default
@@ -294,13 +294,13 @@ public interface ISubscriptionServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /subscriptions/{subscription_id}/change-plan</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.ChangePlan(SubscriptionChangePlanParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse> ChangePlan(
+    Task<HttpResponse<SubscriptionChangePlanResponse>> ChangePlan(
         SubscriptionChangePlanParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="ChangePlan(SubscriptionChangePlanParams, CancellationToken)"/>
-    Task<HttpResponse> ChangePlan(
+    Task<HttpResponse<SubscriptionChangePlanResponse>> ChangePlan(
         string subscriptionID,
         SubscriptionChangePlanParams parameters,
         CancellationToken cancellationToken = default

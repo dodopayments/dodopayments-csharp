@@ -2,6 +2,7 @@ using System;
 using System.Text.Json;
 using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Entitlements.Grants;
+using DodoPayments.Client.Models.LicenseKeys;
 
 namespace DodoPayments.Client.Tests.Models.Entitlements.Grants;
 
@@ -12,19 +13,25 @@ public class LicenseKeyGrantTest : TestBase
     {
         var model = new LicenseKeyGrant
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeyStatus.Active,
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
+        string expectedID = "id";
         int expectedActivationsUsed = 0;
         string expectedKey = "key";
+        ApiEnum<string, LicenseKeyStatus> expectedStatus = LicenseKeyStatus.Active;
         int expectedActivationsLimit = 0;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
+        Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedActivationsUsed, model.ActivationsUsed);
         Assert.Equal(expectedKey, model.Key);
+        Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedActivationsLimit, model.ActivationsLimit);
         Assert.Equal(expectedExpiresAt, model.ExpiresAt);
     }
@@ -34,8 +41,10 @@ public class LicenseKeyGrantTest : TestBase
     {
         var model = new LicenseKeyGrant
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeyStatus.Active,
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -54,8 +63,10 @@ public class LicenseKeyGrantTest : TestBase
     {
         var model = new LicenseKeyGrant
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeyStatus.Active,
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -67,13 +78,17 @@ public class LicenseKeyGrantTest : TestBase
         );
         Assert.NotNull(deserialized);
 
+        string expectedID = "id";
         int expectedActivationsUsed = 0;
         string expectedKey = "key";
+        ApiEnum<string, LicenseKeyStatus> expectedStatus = LicenseKeyStatus.Active;
         int expectedActivationsLimit = 0;
         DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
+        Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedActivationsUsed, deserialized.ActivationsUsed);
         Assert.Equal(expectedKey, deserialized.Key);
+        Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedActivationsLimit, deserialized.ActivationsLimit);
         Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
     }
@@ -83,8 +98,10 @@ public class LicenseKeyGrantTest : TestBase
     {
         var model = new LicenseKeyGrant
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeyStatus.Active,
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -95,7 +112,13 @@ public class LicenseKeyGrantTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new LicenseKeyGrant { ActivationsUsed = 0, Key = "key" };
+        var model = new LicenseKeyGrant
+        {
+            ID = "id",
+            ActivationsUsed = 0,
+            Key = "key",
+            Status = LicenseKeyStatus.Active,
+        };
 
         Assert.Null(model.ActivationsLimit);
         Assert.False(model.RawData.ContainsKey("activations_limit"));
@@ -106,7 +129,13 @@ public class LicenseKeyGrantTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new LicenseKeyGrant { ActivationsUsed = 0, Key = "key" };
+        var model = new LicenseKeyGrant
+        {
+            ID = "id",
+            ActivationsUsed = 0,
+            Key = "key",
+            Status = LicenseKeyStatus.Active,
+        };
 
         model.Validate();
     }
@@ -116,8 +145,10 @@ public class LicenseKeyGrantTest : TestBase
     {
         var model = new LicenseKeyGrant
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeyStatus.Active,
 
             ActivationsLimit = null,
             ExpiresAt = null,
@@ -134,8 +165,10 @@ public class LicenseKeyGrantTest : TestBase
     {
         var model = new LicenseKeyGrant
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeyStatus.Active,
 
             ActivationsLimit = null,
             ExpiresAt = null,
@@ -149,8 +182,10 @@ public class LicenseKeyGrantTest : TestBase
     {
         var model = new LicenseKeyGrant
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeyStatus.Active,
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
