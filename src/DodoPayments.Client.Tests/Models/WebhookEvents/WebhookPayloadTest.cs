@@ -1353,8 +1353,10 @@ public class DataTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -1877,8 +1879,10 @@ public class DataTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -8731,8 +8735,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -8783,8 +8789,10 @@ public class EntitlementGrantTest : TestBase
         };
         Grants::LicenseKeyGrant expectedLicenseKey = new()
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeys::LicenseKeyStatus.Active,
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -8865,8 +8873,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -8925,8 +8935,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -8984,8 +8996,10 @@ public class EntitlementGrantTest : TestBase
         };
         Grants::LicenseKeyGrant expectedLicenseKey = new()
         {
+            ID = "id",
             ActivationsUsed = 0,
             Key = "key",
+            Status = LicenseKeys::LicenseKeyStatus.Active,
             ActivationsLimit = 0,
             ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -9066,8 +9080,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -9253,8 +9269,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -9315,8 +9333,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -9360,8 +9380,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -9432,8 +9454,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -9490,8 +9514,10 @@ public class EntitlementGrantTest : TestBase
             Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
             LicenseKey = new()
             {
+                ID = "id",
                 ActivationsUsed = 0,
                 Key = "key",
+                Status = LicenseKeys::LicenseKeyStatus.Active,
                 ActivationsLimit = 0,
                 ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },

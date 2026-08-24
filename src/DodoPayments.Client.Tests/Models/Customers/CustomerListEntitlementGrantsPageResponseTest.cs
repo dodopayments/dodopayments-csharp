@@ -5,6 +5,7 @@ using DodoPayments.Client.Core;
 using DodoPayments.Client.Models.Customers;
 using DodoPayments.Client.Models.Entitlements;
 using DodoPayments.Client.Models.Entitlements.Grants;
+using DodoPayments.Client.Models.LicenseKeys;
 using DodoPayments.Client.Models.Misc;
 
 namespace DodoPayments.Client.Tests.Models.Customers;
@@ -53,8 +54,10 @@ public class CustomerListEntitlementGrantsPageResponseTest : TestBase
                     Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
                     LicenseKey = new()
                     {
+                        ID = "id",
                         ActivationsUsed = 0,
                         Key = "key",
+                        Status = LicenseKeyStatus.Active,
                         ActivationsLimit = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
@@ -105,8 +108,10 @@ public class CustomerListEntitlementGrantsPageResponseTest : TestBase
                 Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
                 LicenseKey = new()
                 {
+                    ID = "id",
                     ActivationsUsed = 0,
                     Key = "key",
+                    Status = LicenseKeyStatus.Active,
                     ActivationsLimit = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -168,8 +173,10 @@ public class CustomerListEntitlementGrantsPageResponseTest : TestBase
                     Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
                     LicenseKey = new()
                     {
+                        ID = "id",
                         ActivationsUsed = 0,
                         Key = "key",
+                        Status = LicenseKeyStatus.Active,
                         ActivationsLimit = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
@@ -234,8 +241,10 @@ public class CustomerListEntitlementGrantsPageResponseTest : TestBase
                     Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
                     LicenseKey = new()
                     {
+                        ID = "id",
                         ActivationsUsed = 0,
                         Key = "key",
+                        Status = LicenseKeyStatus.Active,
                         ActivationsLimit = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
@@ -293,8 +302,10 @@ public class CustomerListEntitlementGrantsPageResponseTest : TestBase
                 Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
                 LicenseKey = new()
                 {
+                    ID = "id",
                     ActivationsUsed = 0,
                     Key = "key",
+                    Status = LicenseKeyStatus.Active,
                     ActivationsLimit = 0,
                     ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -356,8 +367,10 @@ public class CustomerListEntitlementGrantsPageResponseTest : TestBase
                     Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
                     LicenseKey = new()
                     {
+                        ID = "id",
                         ActivationsUsed = 0,
                         Key = "key",
+                        Status = LicenseKeyStatus.Active,
                         ActivationsLimit = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
@@ -416,8 +429,10 @@ public class CustomerListEntitlementGrantsPageResponseTest : TestBase
                     Feature = new() { FeatureID = "feature_id", FeatureType = FeatureType.Boolean },
                     LicenseKey = new()
                     {
+                        ID = "id",
                         ActivationsUsed = 0,
                         Key = "key",
+                        Status = LicenseKeyStatus.Active,
                         ActivationsLimit = 0,
                         ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },

@@ -22,6 +22,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
@@ -39,6 +41,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         int expectedQuantity = 0;
         bool expectedAdaptiveCurrencyFeesInclusive = true;
         List<AttachAddon> expectedAddons = [new() { AddonID = "addon_id", Quantity = 0 }];
+        bool expectedCancelScheduledChangePlan = true;
+        bool expectedCollectViaPaymentLink = true;
         string expectedDiscountCode = "discount_code";
         List<string> expectedDiscountCodes = ["string"];
         ApiEnum<string, SubscriptionPreviewChangePlanParamsEffectiveAt> expectedEffectiveAt =
@@ -64,6 +68,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
         {
             Assert.Equal(expectedAddons[i], parameters.Addons[i]);
         }
+        Assert.Equal(expectedCancelScheduledChangePlan, parameters.CancelScheduledChangePlan);
+        Assert.Equal(expectedCollectViaPaymentLink, parameters.CollectViaPaymentLink);
         Assert.Equal(expectedDiscountCode, parameters.DiscountCode);
         Assert.NotNull(parameters.DiscountCodes);
         Assert.Equal(expectedDiscountCodes.Count, parameters.DiscountCodes.Count);
@@ -101,6 +107,10 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
         };
 
+        Assert.Null(parameters.CancelScheduledChangePlan);
+        Assert.False(parameters.RawBodyData.ContainsKey("cancel_scheduled_change_plan"));
+        Assert.Null(parameters.CollectViaPaymentLink);
+        Assert.False(parameters.RawBodyData.ContainsKey("collect_via_payment_link"));
         Assert.Null(parameters.EffectiveAt);
         Assert.False(parameters.RawBodyData.ContainsKey("effective_at"));
     }
@@ -123,9 +133,15 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             OnPaymentFailure = SubscriptionPreviewChangePlanParamsOnPaymentFailure.PreventChange,
 
             // Null should be interpreted as omitted for these properties
+            CancelScheduledChangePlan = null,
+            CollectViaPaymentLink = null,
             EffectiveAt = null,
         };
 
+        Assert.Null(parameters.CancelScheduledChangePlan);
+        Assert.False(parameters.RawBodyData.ContainsKey("cancel_scheduled_change_plan"));
+        Assert.Null(parameters.CollectViaPaymentLink);
+        Assert.False(parameters.RawBodyData.ContainsKey("collect_via_payment_link"));
         Assert.Null(parameters.EffectiveAt);
         Assert.False(parameters.RawBodyData.ContainsKey("effective_at"));
     }
@@ -140,6 +156,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
         };
 
@@ -167,6 +185,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             ProrationBillingMode =
                 SubscriptionPreviewChangePlanParamsProrationBillingMode.ProratedImmediately,
             Quantity = 0,
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,
 
             AdaptiveCurrencyFeesInclusive = null,
@@ -227,6 +247,8 @@ public class SubscriptionPreviewChangePlanParamsTest : TestBase
             Quantity = 0,
             AdaptiveCurrencyFeesInclusive = true,
             Addons = [new() { AddonID = "addon_id", Quantity = 0 }],
+            CancelScheduledChangePlan = true,
+            CollectViaPaymentLink = true,
             DiscountCode = "discount_code",
             DiscountCodes = ["string"],
             EffectiveAt = SubscriptionPreviewChangePlanParamsEffectiveAt.Immediately,

@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DodoPayments.Client.Core;
+using DodoPayments.Client.Models.LicenseKeys;
 
 namespace DodoPayments.Client.Models.Entitlements.Grants;
 
@@ -16,7 +17,21 @@ namespace DodoPayments.Client.Models.Entitlements.Grants;
 public sealed record class LicenseKeyGrant : JsonModel
 {
     /// <summary>
-    /// Number of activations consumed so far.
+    /// Identifier of the issued license key.
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Number of instances currently active. Activation increments it and deactivation
+    /// decrements it, so it is a live count and not a total.
     /// </summary>
     public required int ActivationsUsed
     {
@@ -39,6 +54,20 @@ public sealed record class LicenseKeyGrant : JsonModel
             return this._rawData.GetNotNullClass<string>("key");
         }
         init { this._rawData.Set("key", value); }
+    }
+
+    /// <summary>
+    /// Current status of the license key. Activation fails unless it is `active`,
+    /// so a client can warn before the customer tries.
+    /// </summary>
+    public required ApiEnum<string, LicenseKeyStatus> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, LicenseKeyStatus>>("status");
+        }
+        init { this._rawData.Set("status", value); }
     }
 
     /// <summary>
@@ -70,8 +99,10 @@ public sealed record class LicenseKeyGrant : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.ID;
         _ = this.ActivationsUsed;
         _ = this.Key;
+        this.Status.Validate();
         _ = this.ActivationsLimit;
         _ = this.ExpiresAt;
     }

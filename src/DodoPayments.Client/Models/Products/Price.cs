@@ -69,18 +69,6 @@ public record class Price : ModelBase
         }
     }
 
-    public bool PurchasingPowerParity
-    {
-        get
-        {
-            return Match(
-                oneTime: (x) => x.PurchasingPowerParity,
-                recurring: (x) => x.PurchasingPowerParity,
-                usageBased: (x) => x.PurchasingPowerParity
-            );
-        }
-    }
-
     public JsonElement Type
     {
         get
@@ -89,6 +77,18 @@ public record class Price : ModelBase
                 oneTime: (x) => x.Type,
                 recurring: (x) => x.Type,
                 usageBased: (x) => x.Type
+            );
+        }
+    }
+
+    public bool? PurchasingPowerParity
+    {
+        get
+        {
+            return Match<bool?>(
+                oneTime: (x) => x.PurchasingPowerParity,
+                recurring: (x) => x.PurchasingPowerParity,
+                usageBased: (x) => x.PurchasingPowerParity
             );
         }
     }
@@ -517,20 +517,6 @@ public sealed record class OneTimePrice : JsonModel
         init { this._rawData.Set("price", value); }
     }
 
-    /// <summary>
-    /// Indicates if purchasing power parity adjustments are applied to the price.
-    /// Purchasing power parity feature is not available as of now.
-    /// </summary>
-    public required bool PurchasingPowerParity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<bool>("purchasing_power_parity");
-        }
-        init { this._rawData.Set("purchasing_power_parity", value); }
-    }
-
     public JsonElement Type
     {
         get
@@ -560,6 +546,29 @@ public sealed record class OneTimePrice : JsonModel
             }
 
             this._rawData.Set("pay_what_you_want", value);
+        }
+    }
+
+    /// <summary>
+    /// Opts this price in to purchasing power parity. The business must also enable
+    /// purchasing power parity. The discount percentage per country is always business-wide.
+    /// Defaults to `false`.
+    /// </summary>
+    public bool? PurchasingPowerParity
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("purchasing_power_parity");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("purchasing_power_parity", value);
         }
     }
 
@@ -596,12 +605,12 @@ public sealed record class OneTimePrice : JsonModel
         this.Currency.Validate();
         _ = this.Discount;
         _ = this.PriceValue;
-        _ = this.PurchasingPowerParity;
         if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("one_time_price")))
         {
             throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
         }
         _ = this.PayWhatYouWant;
+        _ = this.PurchasingPowerParity;
         _ = this.SuggestedPrice;
         _ = this.TaxInclusive;
     }
@@ -722,20 +731,6 @@ public sealed record class RecurringPrice : JsonModel
     }
 
     /// <summary>
-    /// Indicates if purchasing power parity adjustments are applied to the price.
-    /// Purchasing power parity feature is not available as of now
-    /// </summary>
-    public required bool PurchasingPowerParity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<bool>("purchasing_power_parity");
-        }
-        init { this._rawData.Set("purchasing_power_parity", value); }
-    }
-
-    /// <summary>
     /// Number of units for the subscription period. For example, a value of `12`
     /// with a `subscription_period_interval` of `month` represents a one-year subscription.
     /// </summary>
@@ -772,6 +767,29 @@ public sealed record class RecurringPrice : JsonModel
             return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
         init { this._rawData.Set("type", value); }
+    }
+
+    /// <summary>
+    /// Opts this price in to purchasing power parity. The business must also enable
+    /// purchasing power parity. The discount percentage per country is always business-wide.
+    /// Defaults to `false`.
+    /// </summary>
+    public bool? PurchasingPowerParity
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("purchasing_power_parity");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("purchasing_power_parity", value);
+        }
     }
 
     /// <summary>
@@ -844,7 +862,6 @@ public sealed record class RecurringPrice : JsonModel
         _ = this.PaymentFrequencyCount;
         this.PaymentFrequencyInterval.Validate();
         _ = this.Price;
-        _ = this.PurchasingPowerParity;
         _ = this.SubscriptionPeriodCount;
         this.SubscriptionPeriodInterval.Validate();
         if (
@@ -853,6 +870,7 @@ public sealed record class RecurringPrice : JsonModel
         {
             throw new DodoPaymentsInvalidDataException("Invalid value given for constant");
         }
+        _ = this.PurchasingPowerParity;
         _ = this.TaxInclusive;
         _ = this.TrialAmount;
         _ = this.TrialApplyDiscounts;
@@ -975,20 +993,6 @@ public sealed record class UsageBasedPrice : JsonModel
     }
 
     /// <summary>
-    /// Indicates if purchasing power parity adjustments are applied to the price.
-    /// Purchasing power parity feature is not available as of now
-    /// </summary>
-    public required bool PurchasingPowerParity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<bool>("purchasing_power_parity");
-        }
-        init { this._rawData.Set("purchasing_power_parity", value); }
-    }
-
-    /// <summary>
     /// Number of units for the subscription period. For example, a value of `12`
     /// with a `subscription_period_interval` of `month` represents a one-year subscription.
     /// </summary>
@@ -1044,6 +1048,29 @@ public sealed record class UsageBasedPrice : JsonModel
     }
 
     /// <summary>
+    /// Opts this price in to purchasing power parity. The business must also enable
+    /// purchasing power parity. The discount percentage per country is always business-wide.
+    /// Applies to the fixed fee only, never to metered usage. Defaults to `false`.
+    /// </summary>
+    public bool? PurchasingPowerParity
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("purchasing_power_parity");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("purchasing_power_parity", value);
+        }
+    }
+
+    /// <summary>
     /// Indicates if the price is tax inclusive
     /// </summary>
     public bool? TaxInclusive
@@ -1064,7 +1091,6 @@ public sealed record class UsageBasedPrice : JsonModel
         _ = this.FixedPrice;
         _ = this.PaymentFrequencyCount;
         this.PaymentFrequencyInterval.Validate();
-        _ = this.PurchasingPowerParity;
         _ = this.SubscriptionPeriodCount;
         this.SubscriptionPeriodInterval.Validate();
         if (
@@ -1080,6 +1106,7 @@ public sealed record class UsageBasedPrice : JsonModel
         {
             item.Validate();
         }
+        _ = this.PurchasingPowerParity;
         _ = this.TaxInclusive;
     }
 
