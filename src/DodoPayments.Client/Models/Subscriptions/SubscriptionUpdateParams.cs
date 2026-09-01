@@ -389,6 +389,7 @@ public enum CancelReason
     CancelledByCustomer,
     CancelledByMerchant,
     CancelledByMerchantSendDunning,
+    CancelledByMerchantGracePeriodExpired,
     DodoTeam,
 }
 
@@ -405,6 +406,8 @@ sealed class CancelReasonConverter : JsonConverter<CancelReason>
             "cancelled_by_customer" => CancelReason.CancelledByCustomer,
             "cancelled_by_merchant" => CancelReason.CancelledByMerchant,
             "cancelled_by_merchant_send_dunning" => CancelReason.CancelledByMerchantSendDunning,
+            "cancelled_by_merchant_grace_period_expired" =>
+                CancelReason.CancelledByMerchantGracePeriodExpired,
             "dodo_team" => CancelReason.DodoTeam,
             _ => (CancelReason)(-1),
         };
@@ -423,6 +426,8 @@ sealed class CancelReasonConverter : JsonConverter<CancelReason>
                 CancelReason.CancelledByCustomer => "cancelled_by_customer",
                 CancelReason.CancelledByMerchant => "cancelled_by_merchant",
                 CancelReason.CancelledByMerchantSendDunning => "cancelled_by_merchant_send_dunning",
+                CancelReason.CancelledByMerchantGracePeriodExpired =>
+                    "cancelled_by_merchant_grace_period_expired",
                 CancelReason.DodoTeam => "dodo_team",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
