@@ -309,6 +309,7 @@ public enum Status
     Cancelled,
     Failed,
     Expired,
+    PastDue,
 }
 
 sealed class StatusConverter : JsonConverter<Status>
@@ -328,6 +329,7 @@ sealed class StatusConverter : JsonConverter<Status>
             "cancelled" => Status.Cancelled,
             "failed" => Status.Failed,
             "expired" => Status.Expired,
+            "past_due" => Status.PastDue,
             _ => (Status)(-1),
         };
     }
@@ -345,6 +347,7 @@ sealed class StatusConverter : JsonConverter<Status>
                 Status.Cancelled => "cancelled",
                 Status.Failed => "failed",
                 Status.Expired => "expired",
+                Status.PastDue => "past_due",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

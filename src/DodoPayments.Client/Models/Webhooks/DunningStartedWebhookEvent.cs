@@ -316,6 +316,7 @@ public enum DunningStartedWebhookEventDataTriggerState
 {
     OnHold,
     Cancelled,
+    PastDue,
 }
 
 sealed class DunningStartedWebhookEventDataTriggerStateConverter
@@ -331,6 +332,7 @@ sealed class DunningStartedWebhookEventDataTriggerStateConverter
         {
             "on_hold" => DunningStartedWebhookEventDataTriggerState.OnHold,
             "cancelled" => DunningStartedWebhookEventDataTriggerState.Cancelled,
+            "past_due" => DunningStartedWebhookEventDataTriggerState.PastDue,
             _ => (DunningStartedWebhookEventDataTriggerState)(-1),
         };
     }
@@ -347,6 +349,7 @@ sealed class DunningStartedWebhookEventDataTriggerStateConverter
             {
                 DunningStartedWebhookEventDataTriggerState.OnHold => "on_hold",
                 DunningStartedWebhookEventDataTriggerState.Cancelled => "cancelled",
+                DunningStartedWebhookEventDataTriggerState.PastDue => "past_due",
                 _ => throw new DodoPaymentsInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
